@@ -24,5 +24,5 @@ export const router = createBrowserRouter([
       { path: 'contact', element: <ContactPage /> },
     ],
   },
-])
+], { basename: import.meta.env.BASE_URL })
 
