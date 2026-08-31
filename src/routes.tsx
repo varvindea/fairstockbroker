@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createHashRouter } from 'react-router-dom'
 import App from './App'
 import { AboutPage } from './pages/AboutPage'
 import { BrokersPage } from './pages/BrokersPage'
@@ -9,7 +9,7 @@ import { IPOPage } from './pages/IPOPage'
 import { PricingPage } from './pages/PricingPage'
 import { ServicesPage } from './pages/ServicesPage'
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: '/',
     element: <App />,
@@ -24,5 +24,5 @@ export const router = createBrowserRouter([
       { path: 'contact', element: <ContactPage /> },
     ],
   },
-], { basename: import.meta.env.BASE_URL })
+])
 
