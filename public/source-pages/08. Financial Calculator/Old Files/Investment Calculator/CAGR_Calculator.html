@@ -1,0 +1,2988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="CAGR Calculator — Compound Annual Growth Rate"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#6c3de4" media="(prefers-color-scheme: light)"/>
+<meta name="theme-color" content="#4c1d95" media="(prefers-color-scheme: dark)"/>
+<meta name="format-detection" content="telephone=no,date=no,address=no,email=no"/>
+<meta name="HandheldFriendly" content="true"/>
+<meta name="MobileOptimized" content="width"/>
+<meta name="color-scheme" content="light"/>
+<meta name="description" content="Free CAGR Calculator — Calculate compound annual growth rate of any investment. Find how fast your money is growing."/>
+<title>CAGR Calculator — Compound Annual Growth Rate | Mission Wealth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap&font-display=swap" rel="stylesheet"/>
+<style>
+
+/* ═══ ROOT ═══ */
+:root{
+  --p50:#faf5ff;--p100:#f3e8ff;--p200:#e9d5ff;--p300:#d8b4fe;
+  --p400:#c084fc;--p500:#a855f7;--p600:#9333ea;--p700:#7c3aed;
+  --p800:#6d28d9;--p900:#5b21b6;--p950:#4c1d95;
+  --g50:#f0fdf4;--g100:#dcfce7;--g200:#bbf7d0;--g300:#86efac;
+  --g400:#4ade80;--g500:#22c55e;--g600:#16a34a;--g700:#15803d;
+  --n0:#fff;--n50:#f9fafb;--n100:#f3f4f6;--n150:#eeeef0;
+  --n200:#e5e7eb;--n300:#d1d5db;--n400:#9ca3af;--n500:#6b7280;
+  --n600:#4b5563;--n700:#374151;--n800:#1f2937;--n900:#111827;
+  --amber:#f59e0b;--amberBg:#fffbeb;--amberBdr:#fde68a;
+  --blue:#3b82f6;--blueBg:#eff6ff;--blueBdr:#bfdbfe;
+  --sh-sm:0 1px 3px rgba(0,0,0,.08);
+  --sh-md:0 4px 20px rgba(109,40,217,.1),0 1px 4px rgba(0,0,0,.05);
+  --sh-lg:0 12px 40px rgba(109,40,217,.14),0 4px 12px rgba(0,0,0,.07);
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;
+  --font:'DM Sans',sans-serif;
+  --mnav-h:60px;
+}
+
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;font-size:16px;overscroll-behavior-y:none;overscroll-behavior-x:none}
+body{font-family:var(--font);background:#faf8ff;color:var(--n800);min-height:100vh;min-height:-webkit-fill-available;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+@supports(-webkit-touch-callout:none){body{min-height:-webkit-fill-available}}
+@supports(height:100dvh){body{min-height:100dvh}}
+img{max-width:100%;display:block}
+a{color:inherit;-webkit-tap-highlight-color:transparent}
+button{font-family:var(--font);cursor:pointer;border:none;touch-action:manipulation;-webkit-appearance:none;appearance:none}
+input,select,textarea{font-family:var(--font)}
+@media(max-width:767px){
+  input,select,textarea,input[type="number"],input[type="text"],input[type="email"],input[type="tel"],input[type="search"]{font-size:16px!important}
+}
+input[type="range"]{-webkit-appearance:none;appearance:none;touch-action:pan-x;user-select:none;-webkit-user-select:none}
+:focus-visible{outline:2px solid #7c3aed;outline-offset:2px}
+:focus:not(:focus-visible){outline:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ── Breadcrumb ── */
+.hero-topbar{display:flex;align-items:center;gap:10px;margin-bottom:28px;position:relative;z-index:2}
+.home-btn{display:inline-flex;align-items:center;gap:7px;padding:7px 14px 7px 10px;background:var(--n0);border:1.5px solid var(--n200);border-radius:100px;font-size:12.5px;font-weight:700;color:var(--n700);text-decoration:none;box-shadow:0 1px 4px rgba(0,0,0,.07);transition:border-color .18s,box-shadow .18s,color .18s}
+.home-btn:hover{border-color:var(--p300);color:var(--p700);box-shadow:0 2px 8px rgba(108,61,228,.12)}
+.hero-breadcrumb{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500}
+.hero-breadcrumb>span:not(.hero-breadcrumb-sep):not(.hero-breadcrumb-current){color:var(--n600);padding:5px 12px;background:var(--n50);border:1.5px solid var(--n200);border-radius:100px;font-weight:600;font-size:12px}
+.hero-breadcrumb-sep{color:var(--n300);font-size:14px;font-weight:400;flex-shrink:0}
+.hero-breadcrumb-current{display:inline-flex;color:var(--p700);font-weight:800;background:var(--p50);border:1.5px solid var(--p300);padding:5px 14px;border-radius:100px;font-size:12px;box-shadow:0 1px 6px rgba(108,61,228,.12)}
+@media(max-width:640px){.hero-breadcrumb>span:not(.hero-breadcrumb-sep):not(.hero-breadcrumb-current){display:none}.hero-breadcrumb-sep:first-of-type{display:none}}
+@media(max-width:480px){.hero-breadcrumb-current{display:none}}
+@media(max-width:360px){.hero-breadcrumb{display:none}}
+
+/* ── Hero ── */
+.hero{background:#faf8ff;position:relative;overflow:hidden;padding:38px 0 32px}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(224,216,248,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(224,216,248,.5) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
+.hero::after{content:'';position:absolute;top:-80px;right:-80px;width:600px;height:600px;background:radial-gradient(ellipse,rgba(108,61,228,.09),transparent 65%);pointer-events:none;z-index:0}
+.hero-deco{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hero-deco::before{content:'';position:absolute;bottom:-80px;left:-60px;width:500px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(30,168,81,.055),transparent 65%)}
+.hero-deco::after{content:'';position:absolute;top:28%;right:28%;width:280px;height:280px;border-radius:50%;border:1px solid rgba(108,61,228,.08);animation:floatBob 8s ease-in-out infinite}
+@keyframes floatBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.hero-inner{position:relative;z-index:2;max-width:1260px;margin:0 auto;padding:0 max(20px,env(safe-area-inset-left,20px))}
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:20px}}
+.hero h1{font-size:clamp(26px,4vw,50px);font-weight:900;color:var(--n800);letter-spacing:-2px;line-height:1.08;margin-bottom:14px;animation:fadeUp .55s .06s ease both}
+.hero-hl{background:linear-gradient(90deg,var(--p600),var(--p400),var(--g500));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 4s ease infinite}
+.hero-sub{font-size:clamp(13.5px,1.6vw,16px);color:var(--n500);line-height:1.75;margin-bottom:22px;max-width:500px;animation:fadeUp .55s .12s ease both}
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px;animation:fadeUp .55s .18s ease both}
+.hpill{display:inline-flex;align-items:center;gap:5px;background:var(--n0);border:1.5px solid var(--n200);border-radius:100px;padding:5px 13px;font-size:11.5px;font-weight:600;color:var(--n600);box-shadow:0 1px 4px rgba(0,0,0,.05);transition:border-color .18s,color .18s}
+.hpill:hover{border-color:var(--p300);color:var(--p700)}
+@media(max-width:860px){.hero{padding:24px 0 20px}}
+@media(max-width:480px){.hero{padding:20px 0 16px}.hero h1{letter-spacing:-1px}}
+
+/* ── Hero Panel ── */
+.hero-panel{background:rgba(255,255,255,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1.5px solid rgba(255,255,255,.9);border-radius:22px;padding:18px;box-shadow:0 8px 40px rgba(108,61,228,.12),0 2px 8px rgba(108,61,228,.06);position:relative;z-index:1;overflow:hidden;animation:fadeUp .6s .22s ease both}
+.hero-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,#7c3aed,#8b5cf6,#10b981);border-radius:22px 22px 0 0}
+.panel-title{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:2.5px;color:var(--n500);margin-bottom:10px;display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+.panel-title::before{content:'';width:16px;height:2px;flex-shrink:0;border-radius:2px;background:linear-gradient(90deg,#7c3aed,#10b981)}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.hstat{border-radius:12px;padding:11px 12px;text-align:left;cursor:default;transition:transform .22s cubic-bezier(.34,1.56,.64,1);overflow:hidden;position:relative;display:flex;align-items:center;gap:9px}
+.hstat:hover{transform:translateY(-2px) scale(1.01)}
+.hstat-icon-wrap{width:32px;height:32px;min-width:32px;border-radius:9px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:15px;position:relative;z-index:1;flex-shrink:0}
+.hstat-text{position:relative;z-index:1;min-width:0}
+.hstat-num{font-size:17px;font-weight:900;color:#fff;display:block;line-height:1;letter-spacing:-0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hstat-lbl{font-size:7.5px;font-weight:700;color:rgba(255,255,255,.78);text-transform:uppercase;letter-spacing:.8px;display:block;margin-top:2px;white-space:nowrap}
+.hstat-purple{background:linear-gradient(135deg,#5b21b6,#7c3aed,#8b5cf6);box-shadow:0 5px 18px rgba(91,33,182,.4)}
+.hstat-green{background:linear-gradient(135deg,#065f46,#059669,#10b981);box-shadow:0 5px 18px rgba(6,95,70,.4)}
+.hstat-amber{background:linear-gradient(135deg,#92400e,#d97706,#f59e0b);box-shadow:0 5px 18px rgba(146,64,14,.4)}
+.hstat-blue{background:linear-gradient(135deg,#1e3a8a,#2563eb,#3b82f6);box-shadow:0 5px 18px rgba(30,58,138,.4)}
+.hero-minicharts{display:flex;flex-direction:column;gap:5px;position:relative;z-index:1}
+.minichart-card{background:var(--n50);border-radius:10px;padding:9px 12px;border:1px solid var(--n150);display:flex;align-items:center;gap:9px;transition:background .18s,transform .18s;cursor:default}
+.minichart-card:hover{background:#fff;border-color:var(--p200);transform:translateX(3px)}
+.mc-icon{width:32px;height:32px;min-width:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;border:1px solid rgba(0,0,0,.06)}
+.mc-body{flex:1;min-width:0}
+.mc-label{font-size:9.5px;font-weight:600;color:var(--n400);margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mc-val{font-size:14px;font-weight:900;color:var(--n800);letter-spacing:-.3px;line-height:1}
+.mc-badge{margin-left:auto;flex-shrink:0;padding:2px 9px;border-radius:100px;font-size:9.5px;font-weight:800;white-space:nowrap}
+
+/* ── Page Layout ── */
+.page-wrap{max-width:1260px;margin:0 auto;padding:20px max(14px,env(safe-area-inset-right,14px)) 80px max(14px,env(safe-area-inset-left,14px));display:grid;grid-template-columns:1fr;gap:20px;align-items:start;overflow-x:clip}
+.sidebar{display:none}
+.main-col{display:flex;flex-direction:column;gap:28px;min-width:0;overflow-x:hidden}
+
+/* ── Sidebar ── */
+.sidebar{position:sticky;top:16px;display:none;flex-direction:column;gap:14px;height:calc(100vh - 32px);max-height:calc(100vh - 32px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(108,61,228,.2) transparent}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(108,61,228,.2);border-radius:3px}
+.sidebar-card{background:var(--n0);border-radius:var(--r-lg);border:1.5px solid var(--n200);box-shadow:var(--sh-sm);overflow:hidden}
+.sb-head{padding:12px 16px 8px;border-bottom:1px solid var(--n100);display:flex;align-items:center;gap:8px}
+.sb-head-icon{width:28px;height:28px;border-radius:8px;background:var(--p100);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.sb-head-title{font-size:11px;font-weight:800;color:var(--n700);text-transform:uppercase;letter-spacing:.8px}
+.sb-list{padding:8px 0}
+.sb-item{display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;transition:all .18s;text-decoration:none;border-left:3px solid transparent}
+.sb-item:hover{background:var(--p50);border-left-color:var(--p400)}
+.sb-item.active{background:var(--p50);border-left-color:var(--p700)}
+.sb-item-icon{font-size:15px;width:26px;text-align:center;flex-shrink:0}
+.sb-item-text{flex:1;min-width:0}
+.sb-item-name{font-size:12.5px;font-weight:600;color:var(--n700);line-height:1.2}
+.sb-item.active .sb-item-name{color:var(--p700);font-weight:700}
+.sb-item-hint{font-size:10px;color:var(--n400);margin-top:1px}
+.sb-item-badge{font-size:8.5px;font-weight:800;padding:2px 6px;border-radius:100px;background:var(--p100);color:var(--p700);flex-shrink:0}
+.sb-divider{height:1px;background:var(--n100);margin:3px 0}
+.sb-home{display:flex;align-items:center;gap:10px;padding:12px 14px;margin:4px 8px;border-radius:14px;background:linear-gradient(135deg,var(--p50),rgba(240,253,246,.8));border:1.5px solid var(--p200);text-decoration:none;transition:all .22s cubic-bezier(.34,1.56,.64,1);box-shadow:0 2px 8px rgba(108,61,228,.08)}
+.sb-home:hover{background:linear-gradient(135deg,var(--p100),var(--g50));border-color:var(--p400);transform:translateY(-2px);box-shadow:0 6px 20px rgba(108,61,228,.15)}
+.sb-home-icon{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#4f46e5);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(124,58,237,.35);flex-shrink:0}
+.sb-home-label{font-size:12.5px;font-weight:800;color:var(--p800)}
+.sb-home-sub{font-size:10px;color:var(--n500);margin-top:1px}
+.sb-qstat{padding:12px 16px;background:linear-gradient(135deg,var(--p50),var(--g50));border-top:1px solid var(--n100)}
+.sq-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.sq-label{font-size:10.5px;color:var(--n500);font-weight:600}
+.sq-val{font-size:12.5px;font-weight:800;color:var(--p700)}
+
+/* ── Section Dividers ── */
+section{min-width:0;overflow-x:hidden}
+.section-divider{display:flex;align-items:center;gap:14px;margin:8px 0 22px;padding:0;min-width:0}
+.sd-icon{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:transform .22s cubic-bezier(.34,1.56,.64,1)}
+.sd-icon:hover{transform:scale(1.08) rotate(-3deg)}
+.sd-text h2{font-size:clamp(18px,3vw,22px);font-weight:900;color:var(--n900);line-height:1.2}
+.sd-text p{font-size:13px;color:var(--n500);margin-top:2px}
+.sd-line{flex:1;height:1.5px;background:linear-gradient(to right,var(--p200),transparent);border-radius:1px}
+
+/* ── Card Base ── */
+.card{background:var(--n0);border-radius:var(--r-lg);border:1.5px solid rgba(124,58,237,.09);box-shadow:var(--sh-md);overflow:hidden;min-width:0}
+.card-head{padding:18px 24px 14px;border-bottom:1px solid var(--n100);display:flex;align-items:center;gap:12px}
+.ch-icon{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(108,61,228,.2);transition:transform .22s cubic-bezier(.34,1.56,.64,1)}
+.ch-icon:hover{transform:scale(1.1) rotate(-4deg)}
+.ch-icon.purple{background:linear-gradient(135deg,#7c3aed,#4f46e5);box-shadow:0 4px 14px rgba(124,58,237,.35)}
+.ch-icon.green{background:linear-gradient(135deg,#059669,#047857);box-shadow:0 4px 14px rgba(5,150,105,.35)}
+.ch-icon.amber{background:linear-gradient(135deg,#d97706,#b45309);box-shadow:0 4px 14px rgba(217,119,6,.35)}
+.ch-icon.blue{background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 4px 14px rgba(37,99,235,.35)}
+.ch-title{font-size:16px;font-weight:800;color:var(--n800);line-height:1.2}
+.ch-sub{font-size:12px;color:var(--n400);margin-top:2px}
+.card-body{padding:24px;min-width:0;overflow-x:hidden}
+@media(max-width:480px){.card-body{padding:16px}.card-head{padding:14px 16px}}
+
+/* ── Calculator Inputs ── */
+.params-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:20px}
+.param-card{background:var(--n0);border-radius:var(--r-md);border:1.5px solid var(--n200);box-shadow:var(--sh-sm);padding:14px 12px;transition:border-color .2s,box-shadow .2s;min-width:0;width:100%;box-sizing:border-box;overflow:hidden}
+.param-card:focus-within{border-color:var(--p400);box-shadow:0 0 0 3px rgba(168,85,247,.1),var(--sh-sm)}
+.param-card.green:focus-within{border-color:var(--g400);box-shadow:0 0 0 3px rgba(34,197,94,.1),var(--sh-sm)}
+.pc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:4px;margin-bottom:10px;flex-wrap:wrap;row-gap:4px;min-width:0}
+.pc-label{font-size:11px;font-weight:700;color:var(--n500);text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:4px;line-height:1.3}
+.pc-label.green{color:var(--g600)}
+.pc-value{font-size:13px;font-weight:800;color:var(--p800);background:var(--p50);border:1.5px solid var(--p200);padding:2px 7px;border-radius:6px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.pc-value.green{color:var(--g700);background:var(--g50);border-color:var(--g200)}
+.pc-input-row{display:flex;align-items:center;gap:6px;margin-bottom:7px;min-width:0;overflow:visible}
+.range-wrap{flex:1;min-width:0;overflow:visible;padding:6px 0 4px}
+.num-input{width:60px;min-width:50px;flex-shrink:0;padding:6px 4px;border:1.5px solid var(--n200);border-radius:9px;font-family:var(--font);font-size:13px;font-weight:700;color:var(--n800);background:var(--n0);outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;-moz-appearance:textfield;text-align:center}
+.num-input:focus{border-color:var(--p400);box-shadow:0 0 0 3px rgba(168,85,247,.12)}
+.num-input::-webkit-inner-spin-button,.num-input::-webkit-outer-spin-button{opacity:1;height:26px}
+.slider{-webkit-appearance:none;appearance:none;width:100%;max-width:100%;height:6px;border-radius:100px;background:var(--n200);outline:none;cursor:pointer;display:block;margin:10px 0 4px;vertical-align:middle;box-sizing:border-box}
+.slider::-webkit-slider-runnable-track{height:6px;border-radius:100px;background:transparent;cursor:pointer}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--n0);border:3px solid var(--p700);box-shadow:0 2px 8px rgba(109,40,217,.28);cursor:pointer;margin-top:-7px;transition:transform .15s,box-shadow .15s}
+.slider:active::-webkit-slider-thumb{transform:scale(1.15);box-shadow:0 3px 14px rgba(109,40,217,.4)}
+.slider::-moz-range-track{height:6px;border-radius:100px;background:var(--n200);border:none;cursor:pointer}
+.slider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--n0);border:3px solid var(--p700);box-shadow:0 2px 8px rgba(109,40,217,.28);cursor:pointer;-moz-appearance:none}
+.slider::-moz-range-progress{height:6px;border-radius:100px;background:var(--p400)}
+.slider.green::-webkit-slider-thumb{border-color:var(--g600);box-shadow:0 2px 8px rgba(22,163,74,.28)}
+.slider.green::-moz-range-thumb{border-color:var(--g600)}
+.slider.green::-moz-range-progress{background:var(--g400)}
+.range-marks{display:flex;justify-content:space-between;padding:0 2px}
+.rm{font-size:10px;color:var(--n400);font-weight:500}
+.presets{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.preset{flex-shrink:0;padding:3px 9px;border-radius:100px;border:1.5px solid var(--p200);background:var(--p50);color:var(--p700);font-family:var(--font);font-size:11px;font-weight:600;cursor:pointer;transition:all .18s;white-space:nowrap}
+.preset:hover,.preset.on{background:var(--p700);border-color:var(--p700);color:var(--n0)}
+.preset.green-preset{border-color:var(--g200);background:var(--g50);color:var(--g700)}
+.preset.green-preset:hover,.preset.green-preset.on{background:var(--g700);border-color:var(--g700);color:var(--n0)}
+.btn-calc{width:100%;padding:15px;background:linear-gradient(135deg,var(--p950),var(--p700),var(--p600));color:var(--n0);border:none;border-radius:13px;font-family:var(--font);font-size:15px;font-weight:800;cursor:pointer;transition:all .25s;box-shadow:0 4px 18px rgba(109,40,217,.3);display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.2px}
+.btn-calc:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(109,40,217,.4)}
+.btn-calc:active{transform:translateY(0)}
+.btn-reset{width:100%;padding:11px;background:transparent;border:1.5px solid var(--n200);border-radius:12px;font-family:var(--font);font-size:14px;font-weight:600;color:var(--n500);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px}
+.btn-reset:hover{background:var(--n50);border-color:var(--n300);color:var(--n700)}
+
+/* ── Results ── */
+.results-area{margin-top:22px;display:none}
+.results-area.show{display:block;animation:fadeUp .35s ease both}
+.results-grid{display:grid;grid-template-columns:1fr;gap:22px;align-items:start;margin-bottom:22px;min-width:0}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:400px){.stats-grid{grid-template-columns:1fr}}
+.stat-tile{padding:16px;border-radius:14px;border:1.5px solid;transition:transform .2s}
+.stat-tile:hover{transform:translateY(-2px)}
+.stat-tile.purple{background:var(--p50);border-color:var(--p200)}
+.stat-tile.green{background:var(--g50);border-color:var(--g200)}
+.stat-tile.amber{background:var(--amberBg);border-color:var(--amberBdr)}
+.stat-tile.blue{background:var(--blueBg);border-color:var(--blueBdr)}
+.st-label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--n500);margin-bottom:6px}
+.st-val{font-size:clamp(18px,3vw,26px);font-weight:900;line-height:1.05}
+.st-val.purple{color:var(--p800)}.st-val.green{color:var(--g700)}.st-val.amber{color:#b45309}.st-val.blue{color:#1d4ed8}
+.st-sub{font-size:11px;color:var(--n400);margin-top:4px}
+
+/* ── Donut ── */
+.donut-row{display:flex;align-items:center;gap:20px}
+@media(max-width:480px){.donut-row{flex-direction:column;align-items:flex-start}}
+.donut-svg{flex-shrink:0}
+.donut-legend{flex:1}
+.dl-item{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--n100)}
+.dl-item:last-child{border-bottom:none}
+.dl-dot{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+.dl-name{font-size:13px;color:var(--n600);font-weight:500;flex:1}
+.dl-val{font-size:14px;font-weight:700;color:var(--n800)}
+.dl-pct{font-size:11px;color:var(--n400);margin-top:1px}
+
+/* ── Bar Charts ── */
+.bar-chart-wrap{margin-top:16px}
+.bchart-row{margin-bottom:10px}
+.bchart-label{display:flex;justify-content:space-between;margin-bottom:4px;font-size:12.5px;font-weight:600}
+.bchart-track{height:30px;background:var(--n100);border-radius:8px;overflow:hidden;position:relative}
+.bchart-fill{height:100%;border-radius:8px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:800;color:#fff;min-width:40px;transition:width 1s cubic-bezier(.34,1.56,.64,1)}
+.bchart-fill.invested{background:linear-gradient(90deg,var(--p700),var(--p400))}
+.bchart-fill.returns{background:linear-gradient(90deg,var(--g700),var(--g400))}
+.bchart-fill.total{background:linear-gradient(90deg,var(--p800),var(--g600))}
+.bchart-fill.interest{background:linear-gradient(90deg,#d97706,#f59e0b)}
+.bchart-fill.maturity{background:linear-gradient(90deg,#1d4ed8,#3b82f6)}
+
+/* ── Yearly Table ── */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px;border:1px solid var(--n200)}
+table{width:100%;border-collapse:collapse;min-width:460px;font-size:13px}
+thead th{padding:11px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--n500);background:var(--n50);border-bottom:1px solid var(--n200);text-align:right;white-space:nowrap}
+thead th:first-child{text-align:center}
+tbody tr{transition:background .12s}
+tbody tr:hover{background:var(--p50)}
+tbody tr:not(:last-child) td{border-bottom:1px solid var(--n100)}
+tbody td{padding:10px 14px;text-align:right;color:var(--n700);font-weight:500}
+tbody td:first-child{text-align:center;color:var(--n500);font-weight:700;font-size:12px}
+.td-g{color:var(--g700);font-weight:700}.td-p{color:var(--p700);font-weight:700}.td-b{font-weight:800;color:var(--n800)}
+
+/* ── Infographic Tiles ── */
+.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.info-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.info-grid{grid-template-columns:1fr 1fr}}
+.itile{border-radius:18px;padding:20px 16px;text-align:center;position:relative;overflow:hidden;border:1.5px solid;transition:transform .25s,box-shadow .25s;cursor:default}
+.itile:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+.itile::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3.5px}
+.it1{background:linear-gradient(145deg,var(--p50),#fff);border-color:rgba(124,58,237,.18)}.it1::after{background:linear-gradient(90deg,var(--p700),var(--p400))}
+.it2{background:linear-gradient(145deg,var(--g50),#fff);border-color:rgba(34,197,94,.18)}.it2::after{background:linear-gradient(90deg,var(--g700),var(--g400))}
+.it3{background:linear-gradient(145deg,var(--amberBg),#fff);border-color:rgba(245,158,11,.18)}.it3::after{background:linear-gradient(90deg,#b45309,var(--amber))}
+.it4{background:linear-gradient(145deg,var(--blueBg),#fff);border-color:rgba(59,130,246,.18)}.it4::after{background:linear-gradient(90deg,#1d4ed8,var(--blue))}
+.it5{background:linear-gradient(145deg,#fdf2f8,#fff);border-color:rgba(236,72,153,.18)}.it5::after{background:linear-gradient(90deg,#be185d,#ec4899)}
+.it6{background:linear-gradient(145deg,#fff7ed,#fff);border-color:rgba(249,115,22,.18)}.it6::after{background:linear-gradient(90deg,#c2410c,#f97316)}
+.it-emoji{font-size:26px;margin-bottom:8px;display:block}
+.it-val{font-size:22px;font-weight:900;margin-bottom:4px;line-height:1;letter-spacing:-.5px}
+.it1 .it-val{color:var(--p700)}.it2 .it-val{color:var(--g700)}.it3 .it-val{color:#b45309}.it4 .it-val{color:#1d4ed8}.it5 .it-val{color:#be185d}.it6 .it-val{color:#c2410c}
+.it-label{font-size:11px;color:var(--n600);font-weight:600;line-height:1.4}
+.it-sub{font-size:10px;color:var(--n400);margin-top:3px}
+
+/* ── Guide Cards ── */
+.guide-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:22px}
+@media(max-width:700px){.guide-grid{grid-template-columns:1fr}}
+.gc{background:var(--n0);border-radius:var(--r-md);padding:22px;border:1.5px solid var(--n150);box-shadow:var(--sh-sm);transition:transform .2s,box-shadow .2s}
+.gc:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+.gc.full{grid-column:1/-1}
+.gc.purple-border{border-top:3px solid var(--p500)}
+.gc.green-border{border-top:3px solid var(--g500)}
+.gc.amber-border{border-top:3px solid var(--amber)}
+.gc.blue-border{border-top:3px solid var(--blue)}
+.gc-icon{font-size:28px;margin-bottom:12px}
+.gc h3{font-size:15px;font-weight:700;color:var(--n800);margin-bottom:8px}
+.gc p,.gc li{font-size:13.5px;color:var(--n600);line-height:1.7}
+.gc ul{padding-left:18px}
+.gc li{margin-bottom:5px}
+
+/* ── Formula Box ── */
+.formula-box{background:var(--p50);border:1.5px solid var(--p200);border-radius:12px;padding:20px;margin:14px 0}
+.formula-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--p700);margin-bottom:10px}
+.formula-code{font-family:'Courier New',monospace;font-size:13px;color:var(--n800);background:var(--p100);padding:10px 14px;border-radius:8px;margin:6px 0;line-height:1.8}
+.formula-note{font-size:12px;color:var(--n500);margin-top:8px}
+
+/* ── Step Flow ── */
+.step-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+@media(max-width:700px){.step-flow{grid-template-columns:repeat(2,1fr)}}
+.step-card{background:var(--n0);border-radius:var(--r-md);padding:18px 16px;border:1.5px solid var(--n150);box-shadow:var(--sh-sm);text-align:center}
+.step-num{width:32px;height:32px;background:linear-gradient(135deg,var(--p800),var(--p600));color:var(--n0);border-radius:50%;font-size:14px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px}
+.step-icon{font-size:24px;display:block;margin-bottom:8px}
+.step-card h4{font-size:13px;font-weight:700;color:var(--n800);margin-bottom:6px}
+.step-card p{font-size:12px;color:var(--n500);line-height:1.5}
+
+/* ── Taxation ── */
+.tax-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px}
+@media(max-width:700px){.tax-grid{grid-template-columns:1fr}}
+.tax-card{background:var(--n0);border-radius:var(--r-md);overflow:hidden;border:1.5px solid var(--n200);box-shadow:var(--sh-sm)}
+.tc-head{padding:14px 18px;font-size:14px;font-weight:800;color:var(--n0)}
+.tc-head.purple{background:linear-gradient(135deg,var(--p950),var(--p700))}
+.tc-head.green{background:linear-gradient(135deg,var(--g700),var(--g500))}
+.tc-head.amber{background:linear-gradient(135deg,#92400e,#d97706)}
+.tc-row{display:flex;justify-content:space-between;align-items:center;padding:11px 18px;border-bottom:1px solid var(--n100)}
+.tc-row:last-child{border-bottom:none}
+.tc-label{font-size:13px;color:var(--n600);font-weight:500}
+.tc-val{font-size:13px;font-weight:700;color:var(--n800)}
+.tc-val.highlight{color:var(--p700);font-weight:800}
+.tc-val.green{color:var(--g700);font-weight:800}
+.tc-val.red{color:#dc2626;font-weight:800}
+.tax-timeline{background:linear-gradient(135deg,var(--p50),var(--g50));border-radius:var(--r-md);padding:20px;border:1.5px solid var(--p200);margin-bottom:18px}
+.tt-title{font-size:14px;font-weight:800;color:var(--n800);margin-bottom:14px}
+.tt-steps{display:flex;flex-direction:column;gap:10px}
+.tt-step{display:flex;gap:14px;align-items:flex-start}
+.tt-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;color:#fff}
+.tt-dot.p{background:linear-gradient(135deg,var(--p700),var(--p500))}
+.tt-dot.g{background:linear-gradient(135deg,var(--g700),var(--g500))}
+.tt-dot.a{background:linear-gradient(135deg,#b45309,var(--amber))}
+.tt-content h4{font-size:13px;font-weight:700;color:var(--n800);margin-bottom:2px}
+.tt-content p{font-size:12.5px;color:var(--n500);line-height:1.6}
+
+/* ── Pro Tips ── */
+.tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:700px){.tips-grid{grid-template-columns:1fr}}
+.tip-card{border-radius:var(--r-md);padding:20px;border:1.5px solid;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.tip-card:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+.tip-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.tc1{background:linear-gradient(145deg,var(--p50),#fff);border-color:rgba(124,58,237,.2)}.tc1::before{background:linear-gradient(90deg,var(--p700),var(--p400))}
+.tc2{background:linear-gradient(145deg,var(--g50),#fff);border-color:rgba(34,197,94,.2)}.tc2::before{background:linear-gradient(90deg,var(--g700),var(--g400))}
+.tc3{background:linear-gradient(145deg,var(--amberBg),#fff);border-color:rgba(245,158,11,.2)}.tc3::before{background:linear-gradient(90deg,#b45309,var(--amber))}
+.tc4{background:linear-gradient(145deg,var(--blueBg),#fff);border-color:rgba(59,130,246,.2)}.tc4::before{background:linear-gradient(90deg,#1d4ed8,var(--blue))}
+.tc5{background:linear-gradient(145deg,#fdf2f8,#fff);border-color:rgba(236,72,153,.2)}.tc5::before{background:linear-gradient(90deg,#be185d,#ec4899)}
+.tc6{background:linear-gradient(145deg,#f0f9ff,#fff);border-color:rgba(6,182,212,.2)}.tc6::before{background:linear-gradient(90deg,#0e7490,#06b6d4)}
+.tip-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;padding:3px 10px;border-radius:100px;margin-bottom:10px}
+.tb-purple{background:var(--p100);color:var(--p700)}.tb-green{background:var(--g100);color:var(--g700)}.tb-amber{background:var(--amberBg);color:#b45309}.tb-blue{background:var(--blueBg);color:#1d4ed8}.tb-pink{background:#fdf2f8;color:#be185d}.tb-teal{background:#f0f9ff;color:#0e7490}
+.tip-icon{font-size:28px;margin-bottom:10px}
+.tip-card h4{font-size:14px;font-weight:800;color:var(--n800);margin-bottom:8px;line-height:1.3}
+.tip-card p{font-size:13px;color:var(--n600);line-height:1.7}
+.tip-highlight{background:rgba(0,0,0,.04);border-radius:8px;padding:10px 12px;margin-top:12px;font-size:12.5px;font-weight:600;color:var(--n700)}
+
+/* ── Goal Planner ── */
+.goal-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
+.goal-tabs::-webkit-scrollbar{display:none}
+.goal-tab{display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:100px;border:1.5px solid var(--n200);background:var(--n0);font-family:var(--font);font-size:13px;font-weight:600;color:var(--n600);cursor:pointer;transition:all .2s;white-space:nowrap;touch-action:manipulation}
+.goal-tab:hover{border-color:var(--p300);color:var(--p600);background:var(--p50)}
+.goal-tab.active{background:linear-gradient(135deg,var(--p700),var(--p500));border-color:transparent;color:#fff;box-shadow:0 4px 14px rgba(109,40,217,.3)}
+.goal-content{background:linear-gradient(135deg,var(--p50),var(--g50));border-radius:var(--r-lg);padding:24px;border:1.5px solid var(--p200)}
+.goal-result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:480px){.goal-result-grid{grid-template-columns:1fr}}
+.gr-tile{background:var(--n0);border-radius:12px;padding:14px;border:1px solid var(--n150);text-align:center}
+.grt-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--n400);margin-bottom:5px}
+.grt-val{font-size:20px;font-weight:900;color:var(--p800)}
+.grt-val.green{color:var(--g700)}.grt-val.amber{color:#b45309}.grt-val.blue{color:#1d4ed8}
+.grt-sub{font-size:11px;color:var(--n400);margin-top:3px}
+.fund-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.fund-chip{background:var(--p50);border:1px solid var(--p200);border-radius:100px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--p800)}
+
+/* ── FAQ ── */
+.faq-wrap{max-width:100%}
+.faq-item{border:1.5px solid var(--n200);border-radius:14px;overflow:hidden;margin-bottom:10px;background:var(--n0);transition:border-color .2s,box-shadow .2s}
+.faq-item:hover{border-color:var(--p300);box-shadow:var(--sh-sm)}
+.faq-item.open{border-color:var(--p300);box-shadow:0 4px 16px rgba(109,40,217,.08)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;cursor:pointer;font-size:14px;font-weight:700;color:var(--p700);user-select:none;-webkit-user-select:none;gap:12px;min-height:56px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:color .2s}
+.faq-item.open .faq-q{color:var(--p800)}
+.faq-icon{width:26px;height:26px;min-width:26px;border-radius:50%;background:var(--p100);display:flex;align-items:center;justify-content:center;color:var(--p700);font-size:16px;flex-shrink:0;transition:transform .3s,background .2s,color .2s;font-weight:900;line-height:1}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--p700);color:#fff}
+.faq-a{display:none;padding:0 20px 18px;font-size:13px;color:var(--n500);line-height:1.8}
+.faq-item.open .faq-a{display:block}
+.faq-lead{display:block;font-size:13.5px;font-weight:700;color:var(--n800);margin-bottom:10px;line-height:1.5}
+.faq-points{list-style:none;display:flex;flex-direction:column;gap:7px;margin:10px 0}
+.faq-points li{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.7}
+.fp-bul{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;margin-top:2px;font-weight:800}
+.fp-bul.gr{background:var(--g100);color:var(--g700)}.fp-bul.pu{background:var(--p100);color:var(--p700)}.fp-bul.or{background:#fff7ed;color:#c2410c}.fp-bul.bl{background:var(--blueBg);color:#1d4ed8}
+.faq-chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.faq-chip{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;padding:4px 11px;border-radius:100px}
+.faq-chip.gr{background:var(--g100);color:var(--g700);border:1px solid var(--g200)}
+.faq-chip.pu{background:var(--p100);color:var(--p700);border:1px solid var(--p200)}
+.faq-chip.or{background:#fff7ed;color:#c2410c;border:1px solid #fdba74}
+.faq-chip.bl{background:var(--blueBg);color:#1e40af;border:1px solid var(--blueBdr)}
+.faq-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.faq-stat{background:var(--n50);border-radius:10px;padding:10px;text-align:center;border:1px solid var(--n150)}
+.faq-stat-val{display:block;font-size:16px;font-weight:900;color:var(--p700);line-height:1.1;margin-bottom:3px}
+.faq-stat-lbl{display:block;font-size:9px;font-weight:700;color:var(--n400);text-transform:uppercase;letter-spacing:.4px}
+.faq-note{margin-top:12px;padding:10px 14px;background:var(--n50);border-left:3px solid var(--p500);border-radius:0 8px 8px 0;font-size:12px;color:var(--n700);line-height:1.65;font-weight:500}
+
+/* ── Disclaimer ── */
+.disclaimer{background:var(--amberBg);border:1px solid var(--amberBdr);border-radius:12px;padding:14px 18px;font-size:12px;color:#92400e;line-height:1.7;margin-top:18px}
+.disclaimer strong{font-weight:800}
+
+/* ── Power table ── */
+.power-table-wrap{background:linear-gradient(135deg,var(--p50),var(--g50));border-radius:var(--r-lg);padding:22px;border:1.5px solid var(--p200);margin-bottom:22px;overflow:hidden}
+.pt-title{font-size:15px;font-weight:800;color:var(--n800);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.pt-title::after{content:'';flex:1;height:1.5px;background:linear-gradient(to right,var(--p200),transparent);border-radius:1px}
+.power-rows{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.power-row{background:var(--n0);border-radius:12px;padding:14px;border:1px solid var(--n150)}
+.pr-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--n100)}
+.pr-year{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--n500)}
+.pr-badge{font-size:10px;font-weight:800;padding:2px 8px;border-radius:100px;background:var(--p100);color:var(--p700)}
+.pr-main{font-size:20px;font-weight:900;color:var(--g700);margin-bottom:3px}
+.pr-invested{font-size:12px;color:var(--n500)}
+.pr-gain{font-size:11px;color:var(--p600);font-weight:700;margin-top:3px}
+
+/* ── Mobile Chips ── */
+.mobile-section-chips{display:none;flex-wrap:wrap;overflow:visible;padding:10px max(14px,env(safe-area-inset-left,14px));gap:7px;background:rgba(255,255,255,.97);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--n150);position:sticky;top:0;z-index:600;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+@supports not(backdrop-filter:blur(1px)){.mobile-section-chips{background:#fff}}
+.mobile-section-chips::-webkit-scrollbar{display:none}
+.mchip{flex-shrink:0;padding:6px 12px;border-radius:100px;border:1.5px solid var(--n200);background:var(--n0);font-size:12px;font-weight:600;color:var(--n600);cursor:pointer;transition:all .18s;white-space:nowrap;text-decoration:none;touch-action:manipulation;font-family:var(--font);display:inline-flex;align-items:center;gap:4px}
+.mchip:active,.mchip.on{background:var(--p700);border-color:var(--p700);color:#fff;box-shadow:0 2px 10px rgba(124,58,237,.28)}
+
+/* ── Mobile Nav ── */
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--n150);z-index:700;padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -2px 16px rgba(0,0,0,.07)}
+@supports not(backdrop-filter:blur(1px)){.mobile-nav{background:#fff}}
+.mnav-items{display:flex;width:100%}
+.mnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 2px 6px;min-height:max(var(--mnav-h),44px);cursor:pointer;text-decoration:none;touch-action:manipulation;background:none;user-select:none;-webkit-user-select:none;transition:background .15s;position:relative}
+.mnav-item:active{background:var(--p50)}
+.mnav-icon{font-size:22px;line-height:1;display:block;margin-bottom:3px;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.mnav-label{font-size:10px;font-weight:600;color:var(--n500);letter-spacing:.1px;line-height:1;transition:color .15s}
+.mnav-item.active .mnav-icon{transform:scale(1.15)}
+.mnav-item.active .mnav-label{color:var(--p700);font-weight:800}
+.mnav-dot{width:4px;height:4px;border-radius:50%;background:var(--p600);margin:2px auto 0;opacity:0;transition:opacity .2s}
+.mnav-item.active .mnav-dot{opacity:1}
+.mnav-item.active::before{content:'';position:absolute;top:0;left:25%;right:25%;height:2.5px;border-radius:0 0 3px 3px;background:var(--p600)}
+
+/* ── FAB ── */
+.fab-calc{position:fixed;bottom:calc(var(--mnav-h) + 14px + env(safe-area-inset-bottom,0px));left:16px;width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#5b21b6,#7c3aed,#059669);color:#fff;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 6px 24px rgba(91,33,182,.5),0 2px 6px rgba(0,0,0,.2);z-index:850;transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;font-family:var(--font)}
+.fab-calc:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(91,33,182,.65)}
+.fab-calc:active{transform:scale(.95)}
+.fab-icon{width:24px;height:24px;display:block;line-height:0;font-size:0}
+.fab-icon svg{width:24px;height:24px;display:block}
+.fab-label{font-size:8px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:rgba(255,255,255,.88);line-height:1;margin-top:2px}
+@media(min-width:1025px){.fab-calc{display:none}}
+@media(max-width:480px){.fab-calc{width:48px;height:48px;border-radius:14px;bottom:calc(var(--mnav-h) + 12px + env(safe-area-inset-bottom,0px))}}
+
+/* ── Drawer ── */
+.drawer-backdrop{position:fixed;inset:0;background:rgba(10,2,30,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:1000;opacity:0;pointer-events:none;transition:opacity .28s ease}
+.drawer-backdrop.open{opacity:1;pointer-events:auto}
+.calc-drawer{position:fixed;bottom:0;left:0;right:0;max-height:92vh;max-height:92dvh;background:#fff;border-radius:24px 24px 0 0;z-index:1001;transform:translateY(100%);transition:transform .35s cubic-bezier(.32,.72,0,1);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 -8px 40px rgba(0,0,0,.18);padding-bottom:env(safe-area-inset-bottom,0px)}
+.calc-drawer.open{transform:translateY(0)}
+@media(min-width:641px) and (max-width:1024px){.calc-drawer{left:0;right:auto;top:0;bottom:0;max-height:100vh;max-height:100dvh;height:100%;width:min(360px,90vw);border-radius:0 20px 20px 0;transform:translateX(-100%);padding-bottom:0}.calc-drawer.open{transform:translateX(0)}}
+.drawer-handle{width:40px;height:4px;border-radius:2px;background:var(--n300);margin:12px auto 0;flex-shrink:0}
+@media(min-width:641px){.drawer-handle{display:none}}
+.drawer-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 14px;background:linear-gradient(135deg,var(--p950),var(--p800),var(--g700));flex-shrink:0;position:relative}
+.drawer-header::before{content:'';position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.07),transparent 70%);pointer-events:none}
+.drawer-title{font-size:16px;font-weight:900;color:#fff;display:flex;align-items:center;gap:10px;text-shadow:0 1px 4px rgba(0,0,0,.2)}
+.drawer-title-icon{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.drawer-close{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .18s,transform .25s;touch-action:manipulation;font-family:var(--font)}
+.drawer-close:hover{background:rgba(255,255,255,.3);transform:rotate(90deg)}
+.drawer-home-link{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:linear-gradient(135deg,var(--p50),var(--g50));border:1.5px solid var(--p200);margin-bottom:14px;text-decoration:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:all .22s cubic-bezier(.34,1.56,.64,1);position:relative;overflow:hidden}
+.drawer-home-link:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 6px 20px rgba(108,61,228,.14);border-color:var(--p400)}
+.drawer-home-link:active{transform:scale(.97)}
+.drawer-home-icon{width:38px;height:38px;border-radius:11px;min-width:38px;background:linear-gradient(135deg,var(--p700),var(--p500));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(124,58,237,.35)}
+.drawer-home-label{font-size:13.5px;font-weight:800;color:var(--p800);line-height:1.2}
+.drawer-home-sub{font-size:11px;color:var(--n500);margin-top:2px}
+.drawer-home-arrow{margin-left:auto;flex-shrink:0}
+.drawer-body{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;flex:1;padding:12px 12px 20px;padding-bottom:max(20px,calc(env(safe-area-inset-bottom,0px) + 16px))}
+.drawer-search{display:flex;align-items:center;gap:8px;background:var(--n50);border:1.5px solid var(--n200);border-radius:12px;padding:10px 14px;margin-bottom:14px;transition:border-color .2s,box-shadow .2s}
+.drawer-search:focus-within{border-color:var(--p400);box-shadow:0 0 0 3px rgba(124,58,237,.1)}
+.drawer-search-icon{font-size:15px;flex-shrink:0;color:var(--n400)}
+.drawer-search-input{border:none;background:transparent;outline:none;font-family:var(--font);font-size:14px;font-weight:500;color:var(--n800);width:100%}
+.drawer-search-input::placeholder{color:var(--n400)}
+.drawer-cat{margin-bottom:16px}
+.drawer-cat-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:var(--n400);padding:0 8px;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.drawer-cat-title::after{content:'';flex:1;height:1px;background:var(--n150)}
+.drawer-items{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+@media(max-width:360px){.drawer-items{grid-template-columns:1fr}}
+.drawer-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--n150);background:#fff;cursor:pointer;text-decoration:none;transition:all .18s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;overflow:hidden}
+.drawer-item:hover,.drawer-item:active{background:var(--p50);border-color:var(--p200)}
+.drawer-item.active-calc{background:var(--p100);border-color:var(--p400)}
+.drawer-item-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.drawer-item-text{flex:1;min-width:0}
+.drawer-item-name{font-size:12.5px;font-weight:700;color:var(--n800);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drawer-item.active-calc .drawer-item-name{color:var(--p700)}
+.drawer-item-sub{font-size:10px;color:var(--n400);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drawer-item-arrow{color:var(--n300);font-size:12px;flex-shrink:0;font-weight:700}
+.drawer-badge{font-size:8px;font-weight:800;padding:2px 6px;border-radius:100px;white-space:nowrap;flex-shrink:0}
+.drawer-badge.active{background:var(--p100);color:var(--p700)}
+.drawer-badge.popular{background:var(--g100);color:var(--g700)}
+.drawer-badge.new{background:var(--amberBg);color:var(--amber)}
+
+/* ── Scroll Top ── */
+#scrollTop{position:fixed;bottom:calc(var(--mnav-h) + 14px + env(safe-area-inset-bottom,0px));right:16px;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 18px rgba(109,40,217,.4);z-index:900;display:none;align-items:center;justify-content:center;transition:.25s;font-family:var(--font);touch-action:manipulation}
+@media(min-width:1025px){#scrollTop{bottom:20px;right:20px}}
+
+/* ── Demat Banner ── */
+.demat-banner{padding:28px max(20px,env(safe-area-inset-left));background:linear-gradient(135deg,var(--p950),var(--p800),var(--g700));border-radius:var(--r-lg);position:relative;overflow:hidden;text-align:center;box-shadow:0 8px 32px rgba(109,40,217,.22)}
+.demat-banner::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);border-radius:50%;pointer-events:none}
+.db-inner{max-width:620px;margin:0 auto;position:relative;z-index:1}
+.db-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:800;color:#fff;letter-spacing:.8px;text-transform:uppercase;margin-bottom:12px}
+.db-title{font-size:clamp(17px,3.5vw,24px);font-weight:900;color:#fff;letter-spacing:-.4px;margin-bottom:8px;line-height:1.2}
+.db-sub{font-size:13px;color:rgba(255,255,255,.82);margin-bottom:20px;line-height:1.6}
+.db-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-db-pri{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;border-radius:12px;font-family:var(--font);font-size:14px;font-weight:800;color:var(--p800);background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.18);border:none;min-height:46px;white-space:nowrap;transition:transform .2s,box-shadow .2s;cursor:pointer;touch-action:manipulation}
+.btn-db-pri:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.25)}
+.btn-db-sec{display:inline-flex;align-items:center;gap:6px;padding:12px 20px;border-radius:12px;font-family:var(--font);font-size:13px;font-weight:700;color:#fff;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);min-height:46px;white-space:nowrap;transition:background .2s;cursor:pointer;touch-action:manipulation}
+.btn-db-sec:hover{background:rgba(255,255,255,.25)}
+@media(max-width:479px){.btn-db-pri,.btn-db-sec{width:100%;justify-content:center}}
+
+/* ── Responsive ── */
+@media(max-width:1024px){.mobile-section-chips{display:flex}.mobile-nav{display:flex}body{padding-bottom:calc(var(--mnav-h) + env(safe-area-inset-bottom,0px))}}
+@media(min-width:1025px){.page-wrap{grid-template-columns:264px 1fr;padding:28px 24px 80px}.sidebar{display:flex}.mobile-section-chips{display:none}.mobile-nav{display:none}.params-grid{grid-template-columns:repeat(3,1fr)}.results-grid{grid-template-columns:1fr 1fr}.guide-grid{grid-template-columns:repeat(2,1fr)}.step-flow{grid-template-columns:repeat(4,1fr)}.tips-grid{grid-template-columns:repeat(2,1fr)}.info-grid{grid-template-columns:repeat(4,1fr)}.power-rows{grid-template-columns:repeat(3,1fr)}.tax-grid{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr auto}.hero-stats{grid-template-columns:repeat(2,1fr);min-width:260px}}
+@media(min-width:641px) and (max-width:1024px){.page-wrap{grid-template-columns:1fr;padding:16px 16px calc(var(--mnav-h) + env(safe-area-inset-bottom,0px) + 16px);gap:18px}.sidebar{display:none}.params-grid{grid-template-columns:repeat(3,1fr);gap:12px}.results-grid{grid-template-columns:1fr 1fr;gap:16px}.stats-grid{grid-template-columns:repeat(2,1fr)}.guide-grid{grid-template-columns:repeat(2,1fr)}.step-flow{grid-template-columns:repeat(4,1fr)}.tips-grid{grid-template-columns:repeat(2,1fr)}.info-grid{grid-template-columns:repeat(4,1fr)}.power-rows{grid-template-columns:repeat(3,1fr)}.tax-grid{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:repeat(4,1fr);min-width:unset}.card-body{padding:20px}.card-head{padding:16px 20px 12px}}
+@media(min-width:481px) and (max-width:640px){.page-wrap{grid-template-columns:1fr;padding:12px 12px calc(var(--mnav-h) + env(safe-area-inset-bottom,0px) + 12px);gap:14px}.sidebar{display:none}.params-grid{grid-template-columns:1fr 1fr;gap:10px}.results-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.guide-grid{grid-template-columns:1fr}.step-flow{grid-template-columns:1fr 1fr}.tips-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr 1fr}.power-rows{grid-template-columns:1fr 1fr}.tax-grid{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:repeat(2,1fr);min-width:unset}.card-body{padding:14px}.card-head{padding:12px 14px}.main-col{gap:18px}.faq-stat-row{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:361px) and (max-width:480px){.page-wrap{grid-template-columns:1fr;padding:12px 12px calc(var(--mnav-h) + env(safe-area-inset-bottom,0px) + 12px);gap:13px}.sidebar{display:none}.params-grid{grid-template-columns:1fr;gap:10px}.results-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.guide-grid{grid-template-columns:1fr}.step-flow{grid-template-columns:1fr 1fr}.tips-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr 1fr}.power-rows{grid-template-columns:1fr}.tax-grid{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:1fr 1fr;min-width:unset}.card-body{padding:14px}.card-head{padding:12px 14px}.hero{padding:22px 0 16px}.hero h1{font-size:clamp(24px,7vw,34px);letter-spacing:-.8px}.main-col{gap:18px}.faq-q{font-size:13px;padding:13px 14px;min-height:52px}.faq-a{padding:0 14px 16px;font-size:12.5px}.tip-card{padding:16px}.ch-title{font-size:15px}}
+@media(max-width:360px){.page-wrap{grid-template-columns:1fr;padding:10px 10px calc(var(--mnav-h) + env(safe-area-inset-bottom,0px) + 10px);gap:12px}.sidebar{display:none}.params-grid{grid-template-columns:1fr;gap:8px}.results-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.guide-grid{grid-template-columns:1fr}.step-flow{grid-template-columns:1fr 1fr}.tips-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr 1fr}.power-rows{grid-template-columns:1fr}.tax-grid{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:1fr 1fr;min-width:unset}.card-body{padding:12px}.card-head{padding:11px 12px}.hero{padding:18px 0 14px}.hero h1{font-size:22px;letter-spacing:-.5px}.hero-inner{padding:0 14px}.mchip{font-size:11.5px;padding:6px 11px}.faq-q{font-size:12.5px;padding:12px}.faq-a{padding:0 12px 14px;font-size:12px}.tip-card{padding:14px}.ch-title{font-size:14px}.goal-content{padding:16px}.power-table-wrap{padding:16px}}
+@media(max-height:500px) and (orientation:landscape){.hero{padding:12px 0!important}.hero h1{font-size:20px!important}.mobile-section-chips{display:none!important}}
+@media(forced-colors:active){.btn-calc,.fab-calc,.mnav-item.active{forced-color-adjust:none}}
+@media(-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){body{-webkit-font-smoothing:antialiased}}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(108,61,228,.22);border-radius:4px}
+
+</style>
+</head>
+
+<style>
+/* ═══ CROSS-PLATFORM COMPATIBILITY ═══ */
+html{-moz-text-size-adjust:100%;overscroll-behavior-x:none;overscroll-behavior-y:none}
+body{min-height:100vh;min-height:-webkit-fill-available;text-rendering:optimizeLegibility}
+@supports(-webkit-touch-callout:none){body{min-height:-webkit-fill-available}}
+@supports(height:100dvh){body{min-height:100dvh}}
+@media(max-width:767px){input,select,textarea,input[type="number"],input[type="text"],input[type="email"],input[type="tel"],input[type="search"]{font-size:16px!important}}
+:focus-visible{outline:2px solid #7c3aed;outline-offset:2px}
+:focus:not(:focus-visible){outline:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+@media(max-height:500px) and (orientation:landscape){.hero{padding:14px 0!important}.hero h1{font-size:20px!important}.mobile-section-chips{display:none!important}.fab-calc{bottom:calc(60px + 10px + env(safe-area-inset-bottom,0px))!important}}
+@media(forced-colors:active){.btn-calc,.fab-calc,.mnav-item.active{forced-color-adjust:none}}
+@supports not(backdrop-filter:blur(1px)){.mobile-nav{background:#fff!important}.mobile-section-chips{background:#fff!important}.calc-drawer{background:#fff!important}}
+.calc-drawer{max-height:92dvh}
+@media(-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){body{-webkit-font-smoothing:antialiased}}
+
+.db-pills{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:14px}
+.db-pill{font-size:11.5px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:100px;padding:4px 12px}
+@media(max-width:479px){.btn-db-pri,.btn-db-sec{width:100%;justify-content:center}}
+
+hrink:0;
+}
+.sb-home-label{font-size:13px;font-weight:800;color:var(--p800)}
+.sb-home-sub{font-size:10.5px;color:var(--n500);margin-top:1px}
+
+/* ═══ Demat Modal — Fixed ═══ */
+
+
+/* ── Demat close button ── */
+#demat-close{
+  display:none;
+  position:absolute;
+  top:-14px;
+  right:-14px;
+  width:36px;height:36px;
+  border-radius:50%;
+  background:#fff;
+  border:2px solid #e5e7eb;
+  color:#374151;
+  font-size:16px;line-height:1;
+  cursor:pointer;
+  align-items:center;justify-content:center;
+  box-shadow:0 2px 10px rgba(0,0,0,.15);
+  transition:background .18s,color .18s,border-color .18s,transform .2s;
+  font-family:inherit;
+  z-index:100002;
+}
+#demat-overlay.open #demat-close{display:flex}
+#demat-close:hover{
+  background:#7c3aed;color:#fff;border-color:#7c3aed;
+  transform:rotate(90deg) scale(1.08);
+  box-shadow:0 4px 16px rgba(124,58,237,.4);
+}
+/* ── Demat form CSS variables ── */
+#demat-inner{
+  --purple:#7c3aed;
+  --purple-mid:#8b5cf6;
+  --purple-light:#a78bfa;
+  --purple-pale:#ede9fe;
+  --purple-glow:rgba(124,58,237,0.14);
+  --purple-shadow:rgba(124,58,237,0.28);
+  --green:#16a34a;
+  --green-mid:#22c55e;
+  --green-light:#4ade80;
+  --green-pale:#dcfce7;
+  --green-glow:rgba(22,163,74,0.14);
+  --red:#dc2626;
+  --white:#ffffff;
+  --text-dark:#111827;
+  --text-mid:#374151;
+  --text-soft:#6b7280;
+  --text-muted:#9ca3af;
+  --bg-page:#ffffff;
+  --bg-input:#f9fafb;
+  --bg-focus:#faf5ff;
+  --bg-footer:#fafafa;
+  --border:#e5e7eb;
+  --border-soft:#f3f4f6;
+  --font:'DM Sans',sans-serif;
+}
+/* Force white card background */
+#demat-inner .card{
+  background:#ffffff !important;
+  color:#111827 !important;
+}
+#demat-inner .card-header{
+  background:#ffffff !important;
+}
+#demat-inner .card-body{
+  background:#ffffff !important;
+}
+#demat-inner .card-footer{
+  background:#f9fafb !important;
+}
+/* Fix label visibility */
+#demat-inner label,
+#demat-inner .field label{
+  color:#374151 !important;
+  font-size:13px !important;
+  font-weight:600 !important;
+  display:block !important;
+  margin-bottom:6px !important;
+}
+#demat-inner .card-title{
+  color:#111827 !important;
+  font-size:24px !important;
+  font-weight:800 !important;
+  letter-spacing:-0.5px !important;
+}
+#demat-inner .card-desc{
+  color:#6b7280 !important;
+  font-size:13.5px !important;
+  line-height:1.65 !important;
+}
+#demat-inner .header-label{
+  color:#7c3aed !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  letter-spacing:1.5px !important;
+  text-transform:uppercase !important;
+}
+#demat-inner .footer-sebi{color:#7c3aed !important;font-size:11px !important;font-weight:700 !important}
+#demat-inner .footer-exchanges span{color:#8b5cf6 !important;font-size:11px !important;font-weight:700 !important}
+
+
+/* ── Demat close button — always visible ── */
+#demat-overlay.open @media(max-width:540px){
+  }
+
+/* ── Demat close button ── */
+#demat-overlay.open 
+/* ── Demat close button — top-right of overlay ── */
+#demat-overlay.open @media(max-width:540px){
+  }
+#demat-overlay{
+  display:none;position:fixed;inset:0;z-index:99999;
+  background:rgba(10,2,30,0.75);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:40px 16px 40px;
+  box-sizing:border-box;
+  align-items:flex-start;
+  justify-content:center;
+}
+#demat-overlay.open{display:flex}
+
+#demat-inner{
+  position:relative;
+  width:100%;max-width:540px;
+  margin:0 auto;
+  border-radius:20px;
+  box-shadow:0 24px 80px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.08);
+  animation:dematFadeUp .38s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes dematFadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+
+
+/* Card inside modal */
+#demat-inner .page{
+  min-height:unset !important;padding:0 !important;
+  background:transparent !important;overflow:visible !important;
+  display:block !important;position:static !important;
+}
+#demat-inner .deco{display:none !important}
+#demat-inner .card{
+  animation:none !important;width:100% !important;
+  max-width:100% !important;min-height:unset !important;
+  border-radius:0 !important;
+  box-sizing:border-box !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+}
+#demat-inner .card-header{padding:28px 32px 22px !important}
+#demat-inner .card-body{padding:24px 32px 28px !important}
+#demat-inner .card-footer{padding:14px 32px !important}
+#demat-inner .card-title{font-size:24px !important;letter-spacing:-0.5px}
+#demat-inner .card-desc{font-size:13.5px !important;line-height:1.65}
+
+/* Fix inputs — add border-radius */
+#demat-inner input,#demat-inner select{
+  border-radius:10px !important;
+  padding:12px 14px !important;
+  font-size:14px !important;
+  border:1.5px solid #e5e7eb !important;
+  background:#f9fafb !important;
+  transition:border-color .18s,box-shadow .18s,background .18s !important;
+  width:100% !important;
+  box-sizing:border-box !important;
+}
+#demat-inner input:focus,#demat-inner select:focus{
+  border-color:#7c3aed !important;
+  background:#fff !important;
+  box-shadow:0 0 0 3px rgba(124,58,237,.12) !important;
+  outline:none !important;
+}
+#demat-inner input.has-prefix{padding-left:58px !important}
+#demat-inner .btn-submit{
+  border-radius:12px !important;
+  padding:14px 24px !important;
+  font-size:15px !important;
+  font-weight:700 !important;
+  letter-spacing:0.2px !important;
+}
+#demat-inner .field{margin-bottom:18px !important}
+#demat-inner .field label{
+  font-size:13px !important;font-weight:600 !important;
+  color:#374151 !important;margin-bottom:6px !important;
+}
+
+/* Mobile */
+@media(max-width:540px){
+  #demat-overlay{padding:0 !important}
+  #demat-inner{
+    max-width:100% !important;border-radius:0 !important;
+    min-height:100dvh;
+  }
+  #demat-inner .card-header{padding:24px 18px 18px !important}
+  #demat-inner .card-body{padding:20px 18px 24px !important}
+  #demat-inner .card-footer{padding:12px 18px !important}
+  }
+.modal-open{overflow:hidden !important;width:100%}
+/* ── Sidebar Investment Calcs scrollbar ── */
+.sb-list-scroll{}
+
+
+
+
+/* ── Demat Banner ── */
+.demat-banner{padding:28px max(20px,env(safe-area-inset-left));background:linear-gradient(135deg,var(--p950) 0%,var(--p800) 45%,var(--g700) 100%);border-radius:var(--r-lg);position:relative;overflow:hidden;text-align:center;box-shadow:0 8px 32px rgba(109,40,217,.22)}
+.demat-banner::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.db-inner{max-width:620px;margin:0 auto;position:relative;z-index:1}
+.db-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:800;color:#fff;letter-spacing:.8px;text-transform:uppercase;margin-bottom:12px}
+.db-title{font-size:clamp(17px,3.5vw,24px);font-weight:900;color:#fff;letter-spacing:-.4px;margin-bottom:8px;line-height:1.2}
+.db-sub{font-size:13px;color:rgba(255,255,255,.82);margin-bottom:20px;line-height:1.6}
+.db-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-db-pri{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;border-radius:12px;font-family:var(--font);font-size:14px;font-weight:800;color:var(--p800);background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.18);border:none;min-height:46px;white-space:nowrap;transition:transform .2s,box-shadow .2s;cursor:pointer;touch-action:manipulation}
+.btn-db-pri:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.25)}
+.btn-db-sec{display:inline-flex;align-items:center;gap:6px;padding:12px 20px;border-radius:12px;font-family:var(--font);font-size:13px;font-weight:700;color:#fff;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);min-height:46px;white-space:nowrap;transition:background .2s;cursor:pointer;touch-action:manipulation}
+.btn-db-sec:hover{background:rgba(255,255,255,.25)}
+.db-pills{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:14px}
+.db-pill{font-size:11.5px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:100px;padding:4px 12px}
+@media(max-width:479px){.btn-db-pri,.btn-db-sec{width:100%;justify-content:center}}
+/* ── Demat Modal ── */
+
+/* ═══ DEMAT FORM MODAL OVERLAY ═══ */
+#demat-inner {
+  position: relative; width: 100%; max-width: 560px;
+  margin: 0 auto; padding: 0 0 20px;
+  animation: dematFadeUp .38s cubic-bezier(0.22,1,0.36,1) both;
+}
+ to{opacity:1;transform:translateY(0)} }
+@media(max-width:480px){
+    #demat-inner { max-width: 100%; }
+  }
+/* Scope form styles inside modal to avoid conflicts with calculator page */
+#demat-inner .page {
+  min-height: unset !important; padding: 0 !important;
+  background: transparent !important; overflow: visible !important;
+  display: block !important; position: static !important;
+}
+#demat-inner .deco { display: none !important; }
+#demat-inner .card {
+  animation: none !important; width: 100% !important;
+  max-width: 100% !important; border-radius: 16px !important;
+  box-sizing: border-box !important;
+}
+
+/* ── Demat Form ── */
+
+    /* ── Reset ──────────────────────────────── */
+    
+
+    
+
+    
+
+    /* ── Page ───────────────────────────────── */
+    
+
+    /* Decorative shapes */
+    
+    
+    
+    
+
+    /* ── Card ───────────────────────────────── */
+    #demat-inner .card{
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 520px;
+      background: var(--white);
+      box-shadow:
+        0 0 0 1px rgba(124,58,237,0.08),
+        0 8px 48px rgba(124,58,237,0.12),
+        0 2px 12px rgba(0,0,0,0.05);
+      overflow: hidden;
+      animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Accent bar ─────────────────────────── */
+    #demat-inner .accent-bar{
+      height: 5px;
+      background: linear-gradient(90deg, #7c3aed 0%, #a78bfa 55%, #22c55e 100%);
+    }
+
+
+    /* ── Header ─────────────────────────────── */
+    #demat-inner .card-header{
+      padding: 36px 44px 26px;
+      border-bottom: 1px solid var(--border-soft);
+      position: relative;
+    }
+
+
+    #demat-inner .header-top{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+
+    #demat-inner .logo-icon{
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-mid) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px var(--purple-shadow);
+    }
+
+
+    #demat-inner .header-label{
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--purple);
+      text-transform: uppercase;
+    }
+
+
+    #demat-inner .card-title{
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+
+    #demat-inner .title-highlight{
+      color: var(--purple);
+    }
+
+
+    #demat-inner .card-desc{
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+
+    /* Trust pills */
+    #demat-inner .trust-pills{
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+
+    #demat-inner .pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--green);
+      background: var(--green-pale);
+      border: 1px solid rgba(22,163,74,0.20);
+      padding: 4px 10px;
+      letter-spacing: 0.01em;
+    }
+
+
+    #demat-inner .pill svg{ flex-shrink: 0; }
+
+
+    /* ── Form body ──────────────────────────── */
+    #demat-inner .card-body{
+      padding: 30px 44px 38px;
+    }
+
+
+    /* ── Field ──────────────────────────────── */
+    #demat-inner .field{
+      margin-bottom: 20px;
+    }
+
+
+    #demat-inner .field label{
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-mid);
+      margin-bottom: 7px;
+      letter-spacing: 0.01em;
+    }
+
+
+    #demat-inner .field label .req{ color: var(--purple); margin-left: 2px; }
+
+
+    #demat-inner .input-wrap{ position: relative; }
+
+
+    #demat-inner .prefix{
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: var(--purple-mid);
+      font-weight: 600;
+      border-right: 1.5px solid var(--border);
+      padding-right: 11px;
+      pointer-events: none;
+      line-height: 1;
+    }
+
+
+    #demat-inner input, #demat-inner select{
+      width: 100%;
+      padding: 13px 14px;
+      font-size: 14px;
+      font-family: var(--font);
+      font-weight: 400;
+      color: var(--text-dark);
+      background: var(--bg-input);
+      border: 1.5px solid var(--border);
+      border-radius: 0;
+      outline: none;
+      transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+
+    #demat-inner input::placeholder{ color: var(--text-muted); font-weight: 400; }
+
+
+    #demat-inner input:focus, #demat-inner select:focus{
+      border-color: var(--purple);
+      background: var(--bg-focus);
+      box-shadow: 0 0 0 3px var(--purple-glow);
+    }
+
+
+    #demat-inner input.error, #demat-inner select.error{
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(220,38,38,0.10);
+    }
+
+
+    #demat-inner input.has-prefix{ padding-left: 58px; }
+
+
+    #demat-inner select{ cursor: pointer; color: var(--text-dark); }
+
+    #demat-inner select.placeholder{ color: var(--text-muted); }
+
+
+    #demat-inner .select-arrow{
+      position: absolute;
+      right: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+
+    #demat-inner .error-msg{
+      margin-top: 5px;
+      font-size: 12px;
+      color: var(--red);
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+
+    /* ── Submit button ──────────────────────── */
+    #demat-inner .btn-submit{
+      width: 100%;
+      margin-top: 10px;
+      padding: 15px 24px;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-mid) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 0;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--font);
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      box-shadow: 0 4px 20px var(--purple-shadow);
+      transition: opacity 0.18s, transform 0.12s, box-shadow 0.18s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+
+    #demat-inner .btn-submit:hover{
+      opacity: 0.92;
+      box-shadow: 0 6px 28px var(--purple-shadow);
+    }
+
+    #demat-inner .btn-submit:active{ transform: scale(0.985); }
+
+
+    /* Green divider line on button */
+    #demat-inner .btn-submit::after{
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green-mid), var(--green-light));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    #demat-inner .btn-submit{ position: relative; overflow: hidden; }
+
+    #demat-inner .btn-submit:hover::after{ opacity: 1; }
+
+
+    #demat-inner .security-note{
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 14px;
+      font-family: var(--font);
+    }
+
+
+    /* ── Success ────────────────────────────── */
+    #demat-inner .success{
+      display: none;
+      text-align: center;
+      padding: 12px 0 8px;
+      animation: fadeUp 0.4s ease both;
+    }
+
+
+    #demat-inner .success-ring{
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 6px 28px var(--green-glow);
+    }
+
+
+    #demat-inner .success h2{
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+
+    #demat-inner .success p{
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+
+    #demat-inner .success p strong{ color: var(--text-dark); }
+
+    #demat-inner .success p strong.accent{ color: var(--purple); }
+
+
+    #demat-inner .btn-reset{
+      padding: 11px 28px;
+      background: transparent;
+      border: 1.5px solid var(--purple);
+      color: var(--purple);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 0;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+    }
+
+    #demat-inner .btn-reset:hover{ background: var(--purple); color: #fff; }
+
+
+    /* ── Footer ─────────────────────────────── */
+    #demat-inner .card-footer{
+      padding: 14px 44px;
+      background: var(--bg-footer);
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+
+    #demat-inner .footer-sebi{
+      font-size: 11px;
+      color: var(--purple-mid);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+
+    #demat-inner .footer-exchanges{
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+
+    #demat-inner .footer-exchanges span{
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--purple-light);
+      letter-spacing: 0.08em;
+    }
+
+
+    /* ── Responsive ─────────────────────────── */
+
+    /* Tablet (≤ 640px) */
+    @media (max-width: 640px) {
+      
+      #demat-inner .card-header{ padding: 28px 28px 22px; }
+
+      #demat-inner .card-body{ padding: 24px 28px 30px; }
+
+      #demat-inner .card-footer{ padding: 12px 28px; }
+
+      #demat-inner .card-title{ font-size: 22px; }
+
+      #demat-inner .card-desc{ font-size: 13px; }
+
+      #demat-inner .trust-pills{ gap: 6px; }
+
+    }
+
+    /* Mobile (≤ 420px) */
+    @media (max-width: 420px) {
+      
+
+      #demat-inner .card{
+        max-width: 100%;
+        min-height: 100vh;
+        box-shadow: none;
+      }
+
+
+      #demat-inner .card-header{ padding: 22px 18px 18px; }
+
+      #demat-inner .card-body{ padding: 20px 18px 30px; }
+
+      #demat-inner .card-footer{ padding: 14px 18px; }
+
+
+      #demat-inner .card-title{ font-size: 20px; }
+
+      #demat-inner .logo-icon{ width: 36px; height: 36px; }
+
+
+      /* Prevent iOS zoom on focus */
+      #demat-inner input, #demat-inner select{ font-size: 16px; }
+
+
+      #demat-inner .btn-submit{ font-size: 15px; padding: 14px 18px; }
+
+      #demat-inner .footer-exchanges{ gap: 10px; }
+
+      #demat-inner .trust-pills{ gap: 5px; }
+
+      #demat-inner .pill{ font-size: 10px; padding: 3px 8px; }
+
+    }
+
+    /* Large desktop (≥ 1024px) */
+    @media (min-width: 1024px) {
+      #demat-inner .card{ max-width: 540px; }
+
+      #demat-inner .card-title{ font-size: 28px; }
+
+    }
+  
+
+
+
+
+
+
+
+
+
+/* Firefox */
+
+
+
+
+/* ── Sidebar calc card scroll ── */
+.sidebar-calc-card{
+  overflow-y:scroll;
+  overflow-x:hidden;
+  flex:1;
+  min-height:0;
+  border-radius:var(--r-lg);
+  border:1.5px solid var(--n200);
+  box-shadow:var(--sh-sm);
+  background:var(--n0);
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+  scrollbar-color:var(--p400) var(--n150);
+}
+.sidebar-calc-card::-webkit-scrollbar{width:6px}
+.sidebar-calc-card::-webkit-scrollbar-track{background:var(--n150);border-radius:0 var(--r-lg) var(--r-lg) 0}
+.sidebar-calc-card::-webkit-scrollbar-thumb{background:var(--p400);border-radius:100px;min-height:48px}
+.sidebar-calc-card::-webkit-scrollbar-thumb:hover{background:var(--p600)}
+.sidebar-calc-card::-webkit-scrollbar-thumb:active{background:var(--p800)}
+
+
+.sb-item-icon{
+  font-size:15px;
+  width:30px;height:30px;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  text-align:center;
+  background:var(--p50);
+  border:1px solid var(--p200);
+}
+.sb-item.active .sb-item-icon{background:var(--p100);border-color:var(--p300)}
+
+/* Section-specific icon colors */
+[data-section="investment"] .sb-item-icon{background:var(--p50);border-color:var(--p200)}
+[data-section="retirement"] .sb-item-icon{background:var(--g50);border-color:var(--g200)}
+[data-section="loan"] .sb-item-icon{background:var(--amberBg);border-color:var(--amberBdr)}
+[data-section="tax"] .sb-item-icon{background:var(--g50);border-color:var(--g200)}
+[data-section="savings"] .sb-item-icon{background:var(--blueBg);border-color:var(--blueBdr)}
+[data-section="insurance"] .sb-item-icon{background:#fdf2f8;border-color:#f5d0fe}
+
+/* Hero stats sober style */
+
+
+/* ═══ Drawer Header & Home redesign ═══ */
+.drawer-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 20px 14px;
+  border-bottom:1px solid var(--n150);
+  flex-shrink:0;
+  background:linear-gradient(135deg,#5b21b6 0%,#7c3aed 50%,#059669 100%);
+  position:relative;overflow:hidden;
+}
+.drawer-header::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:24px 24px;pointer-events:none;
+}
+.drawer-title{
+  font-size:16px;font-weight:900;color:#fff;
+  display:flex;align-items:center;gap:12px;
+  position:relative;z-index:1;
+}
+.drawer-title-icon{
+  width:40px;height:40px;border-radius:12px;
+  background:rgba(255,255,255,.18);
+  border:1.5px solid rgba(255,255,255,.3);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+  backdrop-filter:blur(4px);
+}
+.drawer-close{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.15);
+  border:1.5px solid rgba(255,255,255,.3);
+  color:#fff;font-size:16px;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .18s,transform .2s;
+  position:relative;z-index:1;
+}
+.drawer-close:hover{background:rgba(255,255,255,.3);transform:rotate(90deg)}
+
+/* Home button redesign */
+.drawer-home-link{
+  display:flex;align-items:center;gap:12px;
+  padding:13px 16px;border-radius:14px;
+  background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 50%,#059669 100%);
+  border:none;margin-bottom:14px;
+  text-decoration:none;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s;
+  box-shadow:0 4px 16px rgba(124,58,237,.35),inset 0 1px 0 rgba(255,255,255,.15);
+  position:relative;overflow:hidden;
+}
+.drawer-home-link::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
+  background-size:20px 20px;pointer-events:none;
+}
+.drawer-home-link:hover{
+  transform:translateY(-2px) scale(1.01);
+  box-shadow:0 8px 24px rgba(124,58,237,.45),inset 0 1px 0 rgba(255,255,255,.2);
+}
+.drawer-home-link:active{transform:scale(.97)}
+.drawer-home-icon{
+  width:38px;height:38px;min-width:38px;border-radius:11px;
+  background:rgba(255,255,255,.18);
+  border:1.5px solid rgba(255,255,255,.3);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;backdrop-filter:blur(4px);
+}
+.drawer-home-label{font-size:13.5px;font-weight:800;color:#fff;line-height:1.2}
+.drawer-home-sub{font-size:11px;color:rgba(255,255,255,.72);margin-top:2px}
+.drawer-home-arrow{margin-left:auto;flex-shrink:0}
+
+
+@media(min-width:1025px){}
+@media(max-width:1024px){}
+@media(max-width:480px){}
+
+@media(min-width:1025px){}
+@media(max-width:480px){}
+
+@media(min-width:1025px){}
+@media(max-width:1024px){}
+@media(max-width:480px){}
+
+@media(min-width:1025px){}
+@media(max-width:1024px){
+  }
+@media(max-width:480px){
+  }
+
+/* Floating Action Button */
+.fab-calc{
+  position:fixed;
+  bottom:calc(var(--mnav-h) + 14px + env(safe-area-inset-bottom,0px));
+  left:16px;
+  width:52px;height:52px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#5b21b6 0%,#7c3aed 55%,#059669 100%);
+  color:#fff;
+  border:none;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  box-shadow:0 6px 24px rgba(91,33,182,.5),0 2px 6px rgba(0,0,0,.2);
+  z-index:850;
+  transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  font-family:var(--font);
+}
+.fab-calc:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(91,33,182,.65)}
+.fab-calc:active{transform:scale(.95)}
+.fab-icon{width:24px;height:24px;display:block;line-height:0;font-size:0}
+.fab-icon svg{width:24px;height:24px;display:block}
+.fab-label{font-size:8px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:rgba(255,255,255,.88);line-height:1;margin-top:2px}
+@media(min-width:1025px){.fab-calc{display:none}}
+@media(max-width:1024px){
+  .fab-calc{
+    bottom:calc(var(--mnav-h) + 14px + env(safe-area-inset-bottom,0px));
+    left:16px;
+  }
+}
+@media(max-width:480px){
+  .fab-calc{width:48px;height:48px;border-radius:14px;bottom:calc(var(--mnav-h) + 12px + env(safe-area-inset-bottom,0px))}
+}
+
+
+/* ── Sidebar Scrollable Card (matches Lumsum exactly) ── */
+.sidebar-calc-card{
+  overflow-y:scroll;
+  overflow-x:hidden;
+  flex:1;
+  min-height:0;
+  border-radius:var(--r-lg);
+  border:1.5px solid var(--n200);
+  box-shadow:var(--sh-sm);
+  background:var(--n0);
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+  scrollbar-color:var(--p400) var(--n150);
+}
+.sidebar-calc-card::-webkit-scrollbar{width:6px}
+.sidebar-calc-card::-webkit-scrollbar-track{background:var(--n150);border-radius:0 var(--r-lg) var(--r-lg) 0}
+.sidebar-calc-card::-webkit-scrollbar-thumb{background:var(--p400);border-radius:100px;min-height:48px}
+.sidebar-calc-card::-webkit-scrollbar-thumb:hover{background:var(--p600)}
+.sidebar-calc-card::-webkit-scrollbar-thumb:active{background:var(--p800)}
+
+/* ── Drawer Body Scrollbar (purple, always visible) ── */
+.drawer-body{
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  flex:1;
+  padding:12px 12px 20px;
+  padding-bottom:max(20px,calc(env(safe-area-inset-bottom,0px) + 16px));
+  scrollbar-width:thin;
+  scrollbar-color:var(--p400) var(--n150);
+}
+.drawer-body::-webkit-scrollbar{width:6px}
+.drawer-body::-webkit-scrollbar-track{background:var(--n150);border-radius:6px}
+.drawer-body::-webkit-scrollbar-thumb{background:var(--p400);border-radius:100px;min-height:48px}
+.drawer-body::-webkit-scrollbar-thumb:hover{background:var(--p600)}
+.drawer-body::-webkit-scrollbar-thumb:active{background:var(--p800)}
+
+/* ── Sidebar icon box (Lumsum style) ── */
+.sb-item-icon{
+  font-size:16px;
+  width:30px;height:30px;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  border:1px solid rgba(0,0,0,.05);
+}
+</style>
+
+<style>
+/* ══════════════════════════════════════════
+   MOBILE · TABLET · DESKTOP COMPATIBILITY
+   Full platform patch — all breakpoints
+══════════════════════════════════════════ */
+
+/* ── Formula box mobile overflow ── */
+.formula-box{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.formula-code{
+  white-space:pre-wrap;word-break:break-all;overflow-wrap:break-word;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  font-size:clamp(11px,2.5vw,13px);
+}
+
+/* ── FAQ inline grids — stack on small screens ── */
+@media(max-width:480px){
+  .faq-a [style*="grid-template-columns:1fr 1fr"],
+  .faq-a [style*="grid-template-columns: 1fr 1fr"],
+  .faq-a [style*="grid-template-columns:repeat(2"]{
+    grid-template-columns:1fr!important;
+  }
+  .faq-stat-row{grid-template-columns:repeat(3,1fr)}
+  .faq-a{padding:0 14px 16px;font-size:12.5px}
+  .faq-q{font-size:13px;padding:13px 14px;min-height:52px}
+}
+@media(max-width:360px){
+  .faq-stat-row{grid-template-columns:1fr 1fr}
+  .faq-a{padding:0 12px 14px;font-size:12px}
+  .faq-q{font-size:12.5px;padding:12px;min-height:48px}
+  .faq-chips{gap:4px}
+  .faq-chip{font-size:10px;padding:3px 8px}
+}
+
+/* ── Hero panel — mobile stacking ── */
+@media(max-width:640px){
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .hero-minicharts{gap:4px}
+  .hstat-num{font-size:15px}
+  .hstat-lbl{font-size:7px}
+  .mc-val{font-size:13px}
+}
+@media(max-width:400px){
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .hstat{padding:9px 10px;gap:7px}
+  .hstat-num{font-size:14px}
+}
+
+/* ── Info grid responsive ── */
+@media(max-width:480px){
+  .info-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .itile{padding:16px 12px}
+  .it-emoji{font-size:22px}
+  .it-val{font-size:18px}
+  .it-label{font-size:10.5px}
+}
+@media(max-width:360px){
+  .info-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .itile{padding:14px 10px}
+  .it-val{font-size:16px}
+}
+
+/* ── Power rows — scenario cards ── */
+@media(max-width:640px){.power-rows{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.power-rows{grid-template-columns:1fr}}
+
+/* ── Stat tiles — result section ── */
+@media(max-width:360px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .st-val{font-size:16px}
+  .st-label{font-size:10px}
+}
+
+/* ── Table — horizontal scroll on all mobiles ── */
+.table-scroll{
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
+  border-radius:12px;
+}
+@media(max-width:640px){
+  table{font-size:12px}
+  thead th{padding:9px 10px;font-size:10px}
+  tbody td{padding:8px 10px}
+}
+@media(max-width:400px){
+  table{font-size:11.5px;min-width:380px}
+  thead th{padding:8px 8px;font-size:9.5px}
+  tbody td{padding:7px 8px}
+}
+
+/* ── Donut chart row — stack on tiny screens ── */
+@media(max-width:380px){
+  .donut-row{flex-direction:column;align-items:center}
+  .donut-svg{width:120px;height:120px}
+}
+
+/* ── Bar chart labels — prevent overflow ── */
+.bchart-label span{
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:55%
+}
+.bchart-label span:last-child{text-align:right;flex-shrink:0;max-width:40%}
+
+/* ── Goal tabs — horizontal scroll ── */
+.goal-tabs{
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;-ms-overflow-style:none;
+  padding-bottom:4px;
+}
+.goal-tabs::-webkit-scrollbar{display:none}
+@media(max-width:480px){
+  .goal-tab{font-size:12px;padding:8px 12px}
+  .goal-tab-icon{font-size:14px}
+  .goal-result-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:360px){
+  .goal-tab{font-size:11px;padding:7px 10px}
+  .goal-result-grid{grid-template-columns:1fr}
+  .grt-val{font-size:17px}
+}
+
+/* ── Tip cards — full width on mobile ── */
+@media(max-width:480px){
+  .tip-card{padding:16px}
+  .tip-icon{font-size:24px}
+  .tip-card h4{font-size:13.5px}
+  .tip-card p{font-size:12.5px}
+  .tip-highlight{font-size:12px;padding:8px 10px}
+}
+@media(max-width:360px){
+  .tip-card{padding:14px}
+  .tip-badge{font-size:9px;padding:2px 8px}
+}
+
+/* ── Demat banner — mobile buttons full width ── */
+@media(max-width:479px){
+  .btn-db-pri,.btn-db-sec{width:100%;justify-content:center}
+  .db-pills{gap:5px}
+  .db-pill{font-size:10.5px;padding:3px 9px}
+}
+
+/* ── Drawer items — single col on tiny screens ── */
+@media(max-width:360px){
+  .drawer-items{grid-template-columns:1fr}
+}
+
+/* ── Section divider — compact on mobile ── */
+@media(max-width:480px){
+  .section-divider{gap:10px;margin:4px 0 16px}
+  .section-divider .sd-text h2{font-size:17px}
+  .sd-icon{width:38px;height:38px;font-size:18px}
+}
+@media(max-width:360px){
+  .section-divider .sd-text h2{font-size:15px}
+  .section-divider .sd-text p{font-size:11.5px}
+}
+
+/* ── Card head icon — mobile size ── */
+@media(max-width:480px){
+  .ch-icon{width:38px;height:38px;font-size:18px;border-radius:11px}
+  .ch-title{font-size:15px}
+  .ch-sub{font-size:11px}
+}
+
+/* ── Slider — better touch target ── */
+@media(max-width:767px){
+  .slider::-webkit-slider-thumb{width:24px;height:24px;margin-top:-9px}
+  .slider{height:8px;margin:12px 0 6px}
+}
+
+/* ── Preset buttons — wrap properly ── */
+.presets{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+@media(max-width:360px){
+  .preset{font-size:10.5px;padding:3px 8px}
+}
+
+/* ── Number input — readable on all screens ── */
+@media(max-width:360px){
+  .num-input{width:52px;min-width:44px;font-size:12px;padding:5px 3px}
+}
+
+/* ── Hero pills — scroll on tiny screens ── */
+.hero-pills{flex-wrap:wrap}
+@media(max-width:360px){
+  .hpill{font-size:10.5px;padding:4px 10px}
+}
+
+/* ── Breadcrumb — hide on tiny ── */
+@media(max-width:360px){
+  .hero-breadcrumb{display:none}
+}
+
+/* ── sb-item icon size ── */
+@media(max-width:1260px){
+  .sb-item-icon{font-size:15px;width:26px;height:26px}
+  .sb-item-name{font-size:12px}
+  .sb-item-hint{font-size:9.5px}
+}
+
+/* ── Landscape phone: compact hero ── */
+@media(max-height:480px) and (orientation:landscape){
+  .hero{padding:10px 0 8px!important}
+  .hero h1{font-size:clamp(18px,4vw,24px)!important;margin-bottom:8px}
+  .hero-sub{font-size:12px!important;margin-bottom:10px}
+  .hero-panel{display:none}
+  .mobile-section-chips{top:0}
+}
+
+/* ── Print styles ── */
+@media print{
+  .mobile-nav,.fab-calc,.calc-drawer,.drawer-backdrop,
+  .mobile-section-chips,.btn-calc,.btn-reset,.demat-banner{display:none!important}
+  .page-wrap{padding:0!important}
+  .sidebar{display:none!important}
+  .card{box-shadow:none!important;border:1px solid #ccc!important}
+  body{padding-bottom:0!important}
+}
+</style>
+<body>
+<header class="hero">
+  <div class="hero-deco"></div>
+  <div class="hero-inner">
+    <div class="hero-topbar">
+      <a class="home-btn" href="/"><span class="home-btn-icon">🏠</span>Home</a>
+      <div class="hero-breadcrumb">
+        <span class="hero-breadcrumb-sep">›</span><span>Calculators</span>
+        <span class="hero-breadcrumb-sep">›</span>
+        <span class="hero-breadcrumb-current">CAGR Calculator</span>
+      </div>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <h1>CAGR Calculator<br><span class="hero-hl">Measure True</span><br>Investment Growth</h1>
+        <p class="hero-sub">Compound Annual Growth Rate tells you exactly how fast your investment grew annually, smoothing out all volatility. The investor's single most important metric.</p>
+        <div class="hero-pills">
+          <span class="hpill">📐 CAGR Formula</span>
+          <span class="hpill">🔄 Reverse CAGR</span>
+          <span class="hpill">📊 Sector Compare</span>
+          <span class="hpill">🆓 Free</span>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="panel-title">CAGR Reference</div>
+        <div class="hero-stats">
+          <div class="hstat hstat-purple"><div class="hstat-icon-wrap">📈</div><div class="hstat-text"><span class="hstat-num">15.8%</span><span class="hstat-lbl">Nifty 50 10yr CAGR</span></div></div>
+          <div class="hstat hstat-green"><div class="hstat-icon-wrap">🌍</div><div class="hstat-text"><span class="hstat-num">10.7%</span><span class="hstat-lbl">S&P 500 10yr CAGR</span></div></div>
+          <div class="hstat hstat-amber"><div class="hstat-icon-wrap">🪙</div><div class="hstat-text"><span class="hstat-num">14.2%</span><span class="hstat-lbl">Gold 10yr CAGR (INR)</span></div></div>
+          <div class="hstat hstat-blue"><div class="hstat-icon-wrap">🏦</div><div class="hstat-text"><span class="hstat-num">6.5–7%</span><span class="hstat-lbl">FD CAGR (post-tax)</span></div></div>
+        </div>
+        <div class="hero-minicharts">
+          <div class="minichart-card"><div class="mc-icon" style="background:var(--p100)">📐</div><div class="mc-body"><div class="mc-label">₹1L → ₹5L in 10 years</div><div class="mc-val">CAGR = 17.5%</div></div><div class="mc-badge" style="background:var(--g100);color:var(--g700)">Excellent</div></div>
+          <div class="minichart-card"><div class="mc-icon" style="background:var(--g50)">🎯</div><div class="mc-body"><div class="mc-label">12% CAGR target in 5yr</div><div class="mc-val">₹1L → ₹1.76L</div></div><div class="mc-badge" style="background:var(--p100);color:var(--p700)">Achievable</div></div>
+          <div class="minichart-card"><div class="mc-icon" style="background:#fff7ed">🔄</div><div class="mc-body"><div class="mc-label">Reverse: FD at 7.5% for 10yr</div><div class="mc-val">₹1L → ₹2.06L</div></div><div class="mc-badge" style="background:#fffbeb;color:#b45309">Safe</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-section-chips">
+  <a class="mchip" href="/" style="background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;border-color:transparent">🏠 Home</a>
+  <a class="mchip on" href="#calculator">📐 Calculator</a>
+  <a class="mchip" href="#reverse">🔄 Reverse</a>
+  <a class="mchip" href="#infographics">📊 Benchmarks</a>
+  <a class="mchip" href="#guide">📖 Guide</a>
+  <a class="mchip" href="#tips">💡 Tips</a>
+  <a class="mchip" href="#faq">❓ FAQ</a>
+</div>
+
+<div class="page-wrap">
+
+<aside class="sidebar">
+    <!-- Home button -->
+    <a class="sb-home" href="/" aria-label="Back to Home" style="flex-shrink:0">
+      <div class="sb-home-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 3l9 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sb-home-text"><div class="sb-home-label">← Back to Home</div><div class="sb-home-sub">Mission Wealth</div></div>
+    </a>
+
+    <div class="sidebar-card sidebar-calc-card">
+      <div class="sb-head">
+        <div class="sb-head-icon" style="background:var(--p100)">📈</div>
+        <div class="sb-head-title">Investment Calcs</div>
+      </div>
+      <div class="sb-list" data-section="investment">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📊</span>
+          <div class="sb-item-text"><div class="sb-item-name">SIP Calculator</div><div class="sb-item-hint">Monthly investment planner</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">⬆️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Step-Up SIP</div><div class="sb-item-hint">Annual top-up calculator</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💰</span>
+          <div class="sb-item-text"><div class="sb-item-name">Lumpsum</div><div class="sb-item-hint">One-time investment</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💸</span>
+          <div class="sb-item-text"><div class="sb-item-name">SWP Calculator</div><div class="sb-item-hint">Systematic withdrawal</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📉</span>
+          <div class="sb-item-text"><div class="sb-item-name">Step-Up SWP</div><div class="sb-item-hint">Growing withdrawals</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏦</span>
+          <div class="sb-item-text"><div class="sb-item-name">FD Calculator</div><div class="sb-item-hint">Fixed deposit returns</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🪙</span>
+          <div class="sb-item-text"><div class="sb-item-name">RD Calculator</div><div class="sb-item-hint">Recurring deposit</div></div>
+          
+        </a>
+        <a class="sb-item active" href="#">
+          <span class="sb-item-icon">📐</span>
+          <div class="sb-item-text"><div class="sb-item-name">CAGR Calculator</div><div class="sb-item-hint">Annualised growth rate</div></div>
+          
+        <span class="sb-item-badge">Active</span></a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">⚡</span>
+          <div class="sb-item-text"><div class="sb-item-name">Rule of 72</div><div class="sb-item-hint">Doubling time</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🎯</span>
+          <div class="sb-item-text"><div class="sb-item-name">Goal Planner</div><div class="sb-item-hint">Target corpus planner</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏆</span>
+          <div class="sb-item-text"><div class="sb-item-name">Mutual Fund Returns</div><div class="sb-item-hint">Compare fund performance</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🔄</span>
+          <div class="sb-item-text"><div class="sb-item-name">SIP vs Lumpsum</div><div class="sb-item-hint">Which is better?</div></div>
+          
+        </a>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-head" style="border:none;padding-top:6px;padding-bottom:6px">
+        <div class="sb-head-icon" style="background:var(--p100)">👴</div>
+        <div class="sb-head-title">Retirement Calcs</div>
+      </div>
+      <div class="sb-list" data-section="retirement">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏖️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Retirement Planner</div><div class="sb-item-hint">Corpus needed at retirement</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🔐</span>
+          <div class="sb-item-text"><div class="sb-item-name">NPS Calculator</div><div class="sb-item-hint">National Pension Scheme</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📒</span>
+          <div class="sb-item-text"><div class="sb-item-name">PPF Calculator</div><div class="sb-item-hint">EEE · 7.1% p.a.</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏛️</span>
+          <div class="sb-item-text"><div class="sb-item-name">EPF Calculator</div><div class="sb-item-hint">Employee provident fund</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💎</span>
+          <div class="sb-item-text"><div class="sb-item-name">Gratuity Calculator</div><div class="sb-item-hint">Retirement gratuity</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🛡️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Annuity Calculator</div><div class="sb-item-hint">Pension income planner</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">👴</span>
+          <div class="sb-item-text"><div class="sb-item-name">Senior Citizen FD</div><div class="sb-item-hint">Special rate deposits</div></div>
+          
+        </a>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-head" style="border:none;padding-top:6px;padding-bottom:6px">
+        <div class="sb-head-icon" style="background:var(--amberBg)">🏦</div>
+        <div class="sb-head-title">Loan Calcs</div>
+      </div>
+      <div class="sb-list" data-section="loan">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏠</span>
+          <div class="sb-item-text"><div class="sb-item-name">EMI Calculator</div><div class="sb-item-hint">Home, car & personal</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏡</span>
+          <div class="sb-item-text"><div class="sb-item-name">Home Loan Elig.</div><div class="sb-item-hint">Max loan amount</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💳</span>
+          <div class="sb-item-text"><div class="sb-item-name">Credit Card Payoff</div><div class="sb-item-hint">Debt elimination</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🚗</span>
+          <div class="sb-item-text"><div class="sb-item-name">Car Loan EMI</div><div class="sb-item-hint">Auto finance planner</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🎓</span>
+          <div class="sb-item-text"><div class="sb-item-name">Education Loan</div><div class="sb-item-hint">Student loan EMI</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📊</span>
+          <div class="sb-item-text"><div class="sb-item-name">Loan Comparison</div><div class="sb-item-hint">Compare loan offers</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💹</span>
+          <div class="sb-item-text"><div class="sb-item-name">Prepayment Savings</div><div class="sb-item-hint">Early repayment benefit</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🔃</span>
+          <div class="sb-item-text"><div class="sb-item-name">Balance Transfer</div><div class="sb-item-hint">Switch & save on interest</div></div>
+          
+        </a>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-head" style="border:none;padding-top:6px;padding-bottom:6px">
+        <div class="sb-head-icon" style="background:var(--g100)">📋</div>
+        <div class="sb-head-title">Tax Calcs</div>
+      </div>
+      <div class="sb-list" data-section="tax">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏛️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Income Tax</div><div class="sb-item-hint">New vs Old Regime</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📈</span>
+          <div class="sb-item-text"><div class="sb-item-name">LTCG Calculator</div><div class="sb-item-hint">12.5% Budget 2024</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📉</span>
+          <div class="sb-item-text"><div class="sb-item-name">STCG Calculator</div><div class="sb-item-hint">Short-term capital gains</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏠</span>
+          <div class="sb-item-text"><div class="sb-item-name">Home Loan Tax</div><div class="sb-item-hint">80C & 24B deductions</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💼</span>
+          <div class="sb-item-text"><div class="sb-item-name">HRA Calculator</div><div class="sb-item-hint">House rent allowance</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🧾</span>
+          <div class="sb-item-text"><div class="sb-item-name">TDS Calculator</div><div class="sb-item-hint">Tax deducted at source</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🎁</span>
+          <div class="sb-item-text"><div class="sb-item-name">Gift Tax Guide</div><div class="sb-item-hint">Taxable gift checker</div></div>
+          
+        </a>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-head" style="border:none;padding-top:6px;padding-bottom:6px">
+        <div class="sb-head-icon" style="background:var(--g100)">💰</div>
+        <div class="sb-head-title">Savings & Others</div>
+      </div>
+      <div class="sb-list" data-section="savings">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏧</span>
+          <div class="sb-item-text"><div class="sb-item-name">Savings Goal</div><div class="sb-item-hint">Reach your target amount</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">⚖️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Inflation Calculator</div><div class="sb-item-hint">Purchasing power erosion</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏅</span>
+          <div class="sb-item-text"><div class="sb-item-name">Gold Calculator</div><div class="sb-item-hint">Gold investment returns</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏗️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Real Estate ROI</div><div class="sb-item-hint">Property return estimator</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💱</span>
+          <div class="sb-item-text"><div class="sb-item-name">Currency Converter</div><div class="sb-item-hint">Live forex rates</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📆</span>
+          <div class="sb-item-text"><div class="sb-item-name">Daily Savings</div><div class="sb-item-hint">Daily saving to big goal</div></div>
+          
+        </a>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-head" style="border:none;padding-top:6px;padding-bottom:6px">
+        <div class="sb-head-icon" style="background:var(--blueBg)">🛡️</div>
+        <div class="sb-head-title">Insurance Calcs</div>
+      </div>
+      <div class="sb-list" data-section="insurance">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🫀</span>
+          <div class="sb-item-text"><div class="sb-item-name">Life Cover Needed</div><div class="sb-item-hint">Human life value method</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏥</span>
+          <div class="sb-item-text"><div class="sb-item-name">Health Premium Est.</div><div class="sb-item-hint">Mediclaim estimator</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🚗</span>
+          <div class="sb-item-text"><div class="sb-item-name">Motor Insurance</div><div class="sb-item-hint">Own damage premium</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏠</span>
+          <div class="sb-item-text"><div class="sb-item-name">Home Insurance</div><div class="sb-item-hint">Property cover estimator</div></div>
+          
+        </a>
+      </div>
+    </div>
+
+    <div class="sidebar-card" style="flex-shrink:0">
+      <div class="sb-head"><div class="sb-head-icon" style="background:var(--g100)">📊</div><div class="sb-head-title">Quick Stats</div></div>
+      <div class="sb-qstat">
+        <div class="sq-row"><span class="sq-label">Nifty 50 10yr CAGR</span><span class="sq-val">15.8%</span></div>
+        <div class="sq-row"><span class="sq-label">Gold INR 10yr CAGR</span><span class="sq-val">14.2%</span></div>
+        <div class="sq-row"><span class="sq-label">FD after-tax CAGR</span><span class="sq-val">~5.2%</span></div>
+      </div>
+    </div>
+</aside>
+  <div class="main-col">
+
+    <section id="calculator">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,var(--p700),var(--p400))">📐</div>
+        <div class="sd-text"><h2>CAGR Calculator</h2><p>Find your investment's true annual growth rate</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="ch-icon purple">📐</div><div><div class="ch-title">Calculate CAGR</div><div class="ch-sub">Enter initial value, final value and time period</div></div></div>
+        <div class="card-body">
+          <div class="params-grid">
+            <div class="param-card">
+              <div class="pc-top"><span class="pc-label">💰 Initial Investment</span><span class="pc-value" id="init-disp">₹1,00,000</span></div>
+              <div class="pc-input-row"><input class="num-input" type="number" id="init-n" min="1" max="1000000000" step="1000" value="100000" oninput="syncFromNum('init')"/><div class="range-wrap"><input class="slider" type="range" id="init-r" min="1000" max="10000000" step="1000" value="100000" oninput="syncFromSlider('init')"/></div></div>
+              <div class="presets">
+                <button class="preset" onclick="setVal('init',10000)">₹10K</button>
+                <button class="preset" onclick="setVal('init',50000)">₹50K</button>
+                <button class="preset on" onclick="setVal('init',100000)">₹1L</button>
+                <button class="preset" onclick="setVal('init',500000)">₹5L</button>
+                <button class="preset" onclick="setVal('init',1000000)">₹10L</button>
+              </div>
+            </div>
+            <div class="param-card">
+              <div class="pc-top"><span class="pc-label">🏆 Final Value</span><span class="pc-value" id="final-disp">₹2,50,000</span></div>
+              <div class="pc-input-row"><input class="num-input" type="number" id="final-n" min="1" max="1000000000" step="1000" value="250000" oninput="syncFromNum('final')"/><div class="range-wrap"><input class="slider" type="range" id="final-r" min="1000" max="50000000" step="1000" value="250000" oninput="syncFromSlider('final')"/></div></div>
+              <div class="presets">
+                <button class="preset" onclick="setVal('final',150000)">₹1.5L</button>
+                <button class="preset" onclick="setVal('final',200000)">₹2L</button>
+                <button class="preset on" onclick="setVal('final',250000)">₹2.5L</button>
+                <button class="preset" onclick="setVal('final',500000)">₹5L</button>
+                <button class="preset" onclick="setVal('final',1000000)">₹10L</button>
+              </div>
+            </div>
+            <div class="param-card green">
+              <div class="pc-top"><span class="pc-label green">⏳ Number of Years</span><span class="pc-value green" id="cagryr-disp">5 Yrs</span></div>
+              <div class="pc-input-row"><input class="num-input" type="number" id="cagryr-n" min="1" max="50" step="1" value="5" oninput="syncFromNum('cagryr')"/><div class="range-wrap"><input class="slider green" type="range" id="cagryr-r" min="1" max="50" step="1" value="5" oninput="syncFromSlider('cagryr')"/></div></div>
+              <div class="range-marks"><span class="rm">1yr</span><span class="rm">25yr</span><span class="rm">50yr</span></div>
+              <div class="presets">
+                <button class="preset green-preset" onclick="setVal('cagryr',3)">3yr</button>
+                <button class="preset green-preset on" onclick="setVal('cagryr',5)">5yr</button>
+                <button class="preset green-preset" onclick="setVal('cagryr',7)">7yr</button>
+                <button class="preset green-preset" onclick="setVal('cagryr',10)">10yr</button>
+                <button class="preset green-preset" onclick="setVal('cagryr',20)">20yr</button>
+              </div>
+            </div>
+          </div>
+          <button class="btn-calc" onclick="calculate(true)">✨ Calculate CAGR</button>
+          <button class="btn-reset" onclick="resetCalc()">↺ Reset</button>
+
+          <div class="results-area show" id="results">
+            <div style="height:18px"></div>
+            <div id="cagr-result-banner" style="border-radius:14px;padding:20px 24px;margin-bottom:18px;border:1.5px solid;position:relative;overflow:hidden"></div>
+            <div class="results-grid">
+              <div>
+                <div class="stats-grid">
+                  <div class="stat-tile purple"><div class="st-label">CAGR</div><div class="st-val purple" id="r-cagr">—</div><div class="st-sub" id="r-cagr-sub"></div></div>
+                  <div class="stat-tile green"><div class="st-label">Total Gain</div><div class="st-val green" id="r-gain">—</div><div class="st-sub" id="r-gain-sub"></div></div>
+                  <div class="stat-tile amber"><div class="st-label">Absolute Return</div><div class="st-val amber" id="r-abs">—</div><div class="st-sub">Total % gain</div></div>
+                  <div class="stat-tile blue"><div class="st-label">Money Multiplier</div><div class="st-val blue" id="r-mult">—</div><div class="st-sub">Times your money grew</div></div>
+                </div>
+                <div style="background:var(--n0);border-radius:14px;border:1px solid var(--n150);padding:18px;box-shadow:var(--sh-sm)">
+                  <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--n400);margin-bottom:14px">Growth Breakdown</div>
+                  <div class="donut-row">
+                    <svg class="donut-svg" width="140" height="140" viewBox="0 0 140 140">
+                      <circle cx="70" cy="70" r="54" fill="none" stroke="#f3f4f6" stroke-width="22"/>
+                      <circle id="d-inv-c" cx="70" cy="70" r="54" fill="none" stroke="url(#cagrg1)" stroke-width="22" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="0" transform="rotate(-90 70 70)" style="transition:stroke-dashoffset 1.2s cubic-bezier(.34,1.56,.64,1)"/>
+                      <circle id="d-gain-c" cx="70" cy="70" r="54" fill="none" stroke="url(#cagrg2)" stroke-width="22" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="339.3" transform="rotate(-90 70 70)" style="transition:stroke-dashoffset 1.2s cubic-bezier(.34,1.56,.64,1) .1s"/>
+                      <defs><linearGradient id="cagrg1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#6d28d9"/><stop offset="100%" stop-color="#a855f7"/></linearGradient><linearGradient id="cagrg2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#15803d"/><stop offset="100%" stop-color="#22c55e"/></linearGradient></defs>
+                      <text id="d-center-cagr" x="70" y="65" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="900" fill="#6d28d9">—</text>
+                      <text x="70" y="81" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#9ca3af">CAGR</text>
+                    </svg>
+                    <div class="donut-legend">
+                      <div class="dl-item"><div class="dl-dot" style="background:linear-gradient(135deg,#6d28d9,#a855f7)"></div><span class="dl-name">Initial Investment</span><div><div class="dl-val" id="dl-inv-c">—</div></div></div>
+                      <div class="dl-item"><div class="dl-dot" style="background:linear-gradient(135deg,#15803d,#22c55e)"></div><span class="dl-name">Total Gain</span><div><div class="dl-val" id="dl-gain-c">—</div></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div style="background:var(--n0);border-radius:14px;border:1px solid var(--n150);padding:18px;box-shadow:var(--sh-sm)">
+                  <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--n400);margin-bottom:14px">Your CAGR vs Benchmarks</div>
+                  <div id="cagr-bench"></div>
+                </div>
+                <div style="background:var(--n0);border-radius:14px;border:1px solid var(--n150);padding:18px;box-shadow:var(--sh-sm);margin-top:14px">
+                  <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--n400);margin-bottom:14px">Year-by-Year Growth</div>
+                  <div id="cagr-yearly"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="margin-top:0">
+              <div class="card-head"><div class="ch-icon purple">📅</div><div><div class="ch-title">Year-by-Year Compounding</div><div class="ch-sub">How the investment grew at your CAGR</div></div></div>
+              <div class="card-body" style="padding:0">
+                <div class="table-scroll">
+                  <table>
+                    <thead><tr><th>Year</th><th>Value at CAGR</th><th>Annual Gain</th><th>Cumulative Gain</th><th>Absolute Return</th></tr></thead>
+                    <tbody id="cagr-table"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<div class="demat-banner">
+  <div class="db-inner">
+    <div class="db-tag">🏠 Open a Demat Account</div>
+    <div class="db-title">Start Investing Today — Zero Account Opening Fee</div>
+    <div class="db-sub">₹0 equity delivery · ₹20 flat F&amp;O · Instant eKYC · Trusted by millions of Indian investors.</div>
+    <div class="db-btns">
+      <button type="button" class="btn-db-pri" onclick="dematOpen()">
+        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 10h18" stroke="currentColor" stroke-width="2"/><circle cx="7.5" cy="15" r="1.1" fill="currentColor"/></svg>
+        Open Demat Account
+      </button>
+    </div>
+    <div class="db-pills">
+      <span class="db-pill">✓ SEBI Registered</span>
+      <span class="db-pill">Top Discount Brokers</span>
+      <span class="db-pill">₹0 Account Opening</span>
+      <span class="db-pill">Instant eKYC</span>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Reverse CAGR -->
+    <section id="reverse">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,var(--g700),var(--g400))">🔄</div>
+        <div class="sd-text"><h2>Reverse CAGR Calculator</h2><p>What final value will you get at a target CAGR?</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="ch-icon green">🎯</div><div><div class="ch-title">Target CAGR → Final Value</div><div class="ch-sub">Enter initial value, target CAGR and years to find future value</div></div></div>
+        <div class="card-body">
+          <div class="params-grid">
+            <div class="param-card">
+              <div class="pc-top"><span class="pc-label">💰 Investment Amount</span><span class="pc-value" id="rinit-disp">₹1,00,000</span></div>
+              <div class="pc-input-row"><input class="num-input" type="number" id="rinit-n" min="1000" max="100000000" step="1000" value="100000" oninput="syncFromNum('rinit')"/><div class="range-wrap"><input class="slider" type="range" id="rinit-r" min="1000" max="10000000" step="1000" value="100000" oninput="syncFromSlider('rinit')"/></div></div>
+              <div class="presets"><button class="preset" onclick="setVal('rinit',50000)">₹50K</button><button class="preset on" onclick="setVal('rinit',100000)">₹1L</button><button class="preset" onclick="setVal('rinit',500000)">₹5L</button><button class="preset" onclick="setVal('rinit',1000000)">₹10L</button></div>
+            </div>
+            <div class="param-card">
+              <div class="pc-top"><span class="pc-label">📈 Target CAGR (%)</span><span class="pc-value" id="rtarget-disp">12%</span></div>
+              <div class="pc-input-row"><input class="num-input" type="number" id="rtarget-n" min="1" max="50" step="0.5" value="12" oninput="syncFromNum('rtarget')"/><div class="range-wrap"><input class="slider" type="range" id="rtarget-r" min="1" max="50" step="0.5" value="12" oninput="syncFromSlider('rtarget')"/></div></div>
+              <div class="presets"><button class="preset" onclick="setVal('rtarget',7.5)">7.5% FD</button><button class="preset on" onclick="setVal('rtarget',12)">12% MF</button><button class="preset" onclick="setVal('rtarget',15)">15%</button><button class="preset" onclick="setVal('rtarget',20)">20%</button></div>
+            </div>
+            <div class="param-card green">
+              <div class="pc-top"><span class="pc-label green">⏳ Years</span><span class="pc-value green" id="ryrs-disp">10 Yrs</span></div>
+              <div class="pc-input-row"><input class="num-input" type="number" id="ryrs-n" min="1" max="50" step="1" value="10" oninput="syncFromNum('ryrs')"/><div class="range-wrap"><input class="slider green" type="range" id="ryrs-r" min="1" max="50" step="1" value="10" oninput="syncFromSlider('ryrs')"/></div></div>
+              <div class="presets"><button class="preset green-preset" onclick="setVal('ryrs',5)">5yr</button><button class="preset green-preset on" onclick="setVal('ryrs',10)">10yr</button><button class="preset green-preset" onclick="setVal('ryrs',15)">15yr</button><button class="preset green-preset" onclick="setVal('ryrs',20)">20yr</button></div>
+            </div>
+          </div>
+          <button class="btn-calc" onclick="calcReverse()">✨ Find Future Value</button>
+          <div class="results-area show" id="rev-results" style="margin-top:18px">
+            <div class="stats-grid">
+              <div class="stat-tile purple"><div class="st-label">Future Value</div><div class="st-val purple" id="rev-fv">—</div><div class="st-sub" id="rev-fv-sub"></div></div>
+              <div class="stat-tile green"><div class="st-label">Total Gain</div><div class="st-val green" id="rev-gain">—</div></div>
+              <div class="stat-tile amber"><div class="st-label">Multiplier</div><div class="st-val amber" id="rev-mult">—</div><div class="st-sub">times your money</div></div>
+              <div class="stat-tile blue"><div class="st-label">Monthly SIP Equiv.</div><div class="st-val blue" id="rev-sip">—</div><div class="st-sub">To reach this corpus</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="infographics">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6)">📊</div>
+        <div class="sd-text"><h2>CAGR Benchmarks</h2><p>Compare your returns to leading asset classes</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="info-grid">
+        <div class="itile it1"><span class="it-emoji">📈</span><div class="it-val">15.8%</div><div class="it-label">Nifty 50 (10yr)</div><div class="it-sub">India's benchmark index</div></div>
+        <div class="itile it2"><span class="it-emoji">🌍</span><div class="it-val">10.7%</div><div class="it-label">S&P 500 (10yr)</div><div class="it-sub">US equity benchmark</div></div>
+        <div class="itile it3"><span class="it-emoji">🪙</span><div class="it-val">14.2%</div><div class="it-label">Gold (INR, 10yr)</div><div class="it-sub">Hedge against inflation</div></div>
+        <div class="itile it4"><span class="it-emoji">🏦</span><div class="it-val">7–7.5%</div><div class="it-label">Bank FD</div><div class="it-sub">Safe but inflation-beating?</div></div>
+        <div class="itile it5"><span class="it-emoji">🏠</span><div class="it-val">8–10%</div><div class="it-label">Real Estate (10yr)</div><div class="it-sub">City-dependent, illiquid</div></div>
+        <div class="itile it6"><span class="it-emoji">🚀</span><div class="it-val">18–22%</div><div class="it-label">Small Cap MF (10yr)</div><div class="it-sub">High risk, high reward</div></div>
+      </div>
+      <div class="power-table-wrap" style="margin-top:22px">
+        <div class="pt-title">💡 What ₹1 Lakh becomes at different CAGRs</div>
+        <div class="power-rows" id="cagr-scenarios"></div>
+      </div>
+    </section>
+
+    <section id="guide">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,#be185d,#ec4899)">📖</div>
+        <div class="sd-text"><h2>CAGR Complete Guide</h2><p>Master the most important return metric in investing</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="guide-grid">
+        <div class="gc purple-border"><div class="gc-icon">📐</div><h3>What is CAGR?</h3><p>CAGR (Compound Annual Growth Rate) is the rate at which an investment grows from its beginning value to ending value, assuming profits are reinvested each year. It smooths out volatility to show a single, consistent annual growth rate.</p><div class="formula-box" style="margin-top:12px"><div class="formula-code">CAGR = (Final / Initial)^(1/Years) - 1</div></div></div>
+        <div class="gc green-border"><div class="gc-icon">⚖️</div><h3>CAGR vs Absolute Return</h3><ul><li><strong>Absolute Return:</strong> (Final-Initial)/Initial × 100% — ignores time</li><li><strong>CAGR:</strong> Annualizes the return — time-adjusted comparison</li><li>Example: 100% absolute return in 2yr = 41.4% CAGR</li><li>100% absolute return in 10yr = 7.2% CAGR</li><li>Always use CAGR to compare investments of different durations</li></ul></div>
+        <div class="gc amber-border"><div class="gc-icon">⚠️</div><h3>Limitations of CAGR</h3><ul><li>Assumes smooth growth — ignores actual volatility year by year</li><li>Doesn't account for additional investments or withdrawals</li><li>For SIP returns, use XIRR instead of CAGR</li><li>Two investments with same CAGR may have different risk profiles</li><li>Always check volatility (standard deviation) alongside CAGR</li></ul></div>
+        <div class="gc blue-border"><div class="gc-icon">🔄</div><h3>CAGR vs XIRR</h3><ul><li><strong>CAGR:</strong> For lumpsum investments (single initial amount)</li><li><strong>XIRR:</strong> For SIP/multiple cash flows at different dates</li><li>Mutual fund factsheets show CAGR (lumpsum) returns</li><li>Your SIP returns shown in portfolio = XIRR</li><li>Both matter — CAGR for fund quality, XIRR for your actual return</li></ul></div>
+      </div>
+      <div class="step-flow">
+        <div class="step-card"><div class="step-num">1</div><span class="step-icon">📊</span><h4>Find Initial Value</h4><p>Your purchase price or NAV on investment date</p></div>
+        <div class="step-card"><div class="step-num">2</div><span class="step-icon">🏆</span><h4>Get Current/Final Value</h4><p>Current market value or redemption value</p></div>
+        <div class="step-card"><div class="step-num">3</div><span class="step-icon">📅</span><h4>Count the Years</h4><p>Exact number of years (can be decimal like 3.5)</p></div>
+        <div class="step-card"><div class="step-num">4</div><span class="step-icon">📐</span><h4>Apply Formula</h4><p>(Final/Initial)^(1/Years) - 1 = CAGR</p></div>
+      </div>
+    </section>
+
+<div class="demat-banner">
+  <div class="db-inner">
+    <div class="db-tag">🏠 Open a Demat Account</div>
+    <div class="db-title">Start Investing Today — Zero Account Opening Fee</div>
+    <div class="db-sub">₹0 equity delivery · ₹20 flat F&amp;O · Instant eKYC · Trusted by millions of Indian investors.</div>
+    <div class="db-btns">
+      <button type="button" class="btn-db-pri" onclick="dematOpen()">
+        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 10h18" stroke="currentColor" stroke-width="2"/><circle cx="7.5" cy="15" r="1.1" fill="currentColor"/></svg>
+        Open Demat Account
+      </button>
+    </div>
+    <div class="db-pills">
+      <span class="db-pill">✓ SEBI Registered</span>
+      <span class="db-pill">Top Discount Brokers</span>
+      <span class="db-pill">₹0 Account Opening</span>
+      <span class="db-pill">Instant eKYC</span>
+    </div>
+  </div>
+</div>
+
+<section id="tips">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,var(--g700),var(--g500))">💡</div>
+        <div class="sd-text"><h2>CAGR Pro Tips</h2><p>How smart investors use CAGR to make better decisions</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="tips-grid">
+        <div class="tip-card tc1"><span class="tip-badge tb-purple">⭐ Key Insight</span><div class="tip-icon">📐</div><h4>Inflation CAGR is Your Real Benchmark</h4><p>India's CPI inflation averages 6% CAGR. If your investment CAGR is below 6%, you're actually losing purchasing power. Your real goal: CAGR > Inflation + Tax rate.</p><div class="tip-highlight">💡 Real CAGR needed = Inflation (6%) + Tax (2–4%) = 8–10% minimum</div></div>
+        <div class="tip-card tc2"><span class="tip-badge tb-green">📊 Analysis</span><div class="tip-icon">🔍</div><h4>Compare Funds Using 5yr and 10yr CAGR</h4><p>Always check both 5-year and 10-year CAGR before choosing a mutual fund. A fund with high 1-year CAGR may be a lucky streak. Consistent 10-year CAGR of 15%+ is truly excellent fund management.</p><div class="tip-highlight">💡 Check 5yr, 10yr CAGR consistency — avoid one-year wonder funds</div></div>
+        <div class="tip-card tc3"><span class="tip-badge tb-amber">⚠️ Warning</span><div class="tip-icon">🚨</div><h4>Use XIRR for SIP — Not CAGR</h4><p>CAGR only works for lumpsum. If you've been doing SIP, your actual return is the XIRR (Extended Internal Rate of Return). Most portfolio apps show this correctly. Don't compare SIP XIRR with fund CAGR directly.</p><div class="tip-highlight">💡 Lumpsum → CAGR. SIP → XIRR. They're different metrics.</div></div>
+        <div class="tip-card tc4"><span class="tip-badge tb-blue">🎯 Strategy</span><div class="tip-icon">🎯</div><h4>Rule of 72 Uses CAGR Directly</h4><p>To estimate doubling time: 72 ÷ CAGR = Years to double. At 12% CAGR, money doubles in 6 years. At 15% CAGR, doubles in ~5 years. This quick mental math helps you instantly judge any investment's power.</p><div class="tip-highlight">💡 Nifty at 15.8% CAGR → doubles every 4.5 years</div></div>
+        <div class="tip-card tc5"><span class="tip-badge tb-pink">💎 Alpha</span><div class="tip-icon">🚀</div><h4>Alpha = Your Fund's CAGR Minus Benchmark CAGR</h4><p>If Nifty gave 15% CAGR and your fund gave 18% CAGR, the fund generated +3% alpha. This is the fund manager's true value-add. Good alpha: 2–3%+. Negative alpha means index funds would have done better.</p><div class="tip-highlight">💡 Fund CAGR (18%) - Nifty CAGR (15%) = +3% Alpha → Good fund</div></div>
+        <div class="tip-card tc6"><span class="tip-badge tb-teal">🔢 Math</span><div class="tip-icon">⚡</div><h4>The Power of Small CAGR Differences</h4><p>Over 20 years, the difference between 12% and 15% CAGR is staggering. ₹1L at 12% = ₹9.6L. ₹1L at 15% = ₹16.4L. That 3% difference = 71% more wealth over 20 years!</p><div class="tip-highlight">💡 Even 1–2% higher CAGR over 20yr creates massive wealth difference</div></div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,var(--p700),var(--p500))">❓</div>
+        <div class="sd-text"><h2>CAGR FAQs</h2><p>All your compound annual growth rate questions answered</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="faq-wrap" id="faq-container"></div>
+    </section>
+
+<button class="fab-calc" onclick="openDrawer()" aria-label="Browse all calculators" title="All Calculators">
+  <span class="fab-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" fill="white" fill-opacity=".95"/><rect x="13" y="3" width="8" height="8" rx="2" fill="white" fill-opacity=".95"/><rect x="3" y="13" width="8" height="8" rx="2" fill="white" fill-opacity=".95"/><rect x="13" y="16" width="8" height="2.5" rx="1.25" fill="white" fill-opacity=".95"/><rect x="16" y="13" width="2.5" height="8" rx="1.25" fill="white" fill-opacity=".95"/></svg></span>
+  <span class="fab-label">Calcs</span>
+</button>
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
+<aside class="calc-drawer" id="calcDrawer" role="dialog" aria-modal="true" aria-label="All Calculators">
+  <div class="drawer-handle"></div>
+  <div class="drawer-header">
+    <div class="drawer-title"><div class="drawer-title-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="4" fill="rgba(255,255,255,0.95)"/><path d="M7 7h4v4H7zM13 7h4v4h-4zM7 13h4v4H7zM13 15h4" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>All Calculators</div>
+    <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">✕</button>
+  </div>
+    <div class="drawer-body">
+    <a class="drawer-home-link" href="/" onmouseenter="this.style.transform='translateY(-2px) scale(1.01)'" onmouseleave="this.style.transform=''">
+      <div class="drawer-home-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 3l9 9" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="drawer-home-label">← Back to Home</div><div class="drawer-home-sub">Mission Wealth · All Tools</div></div>
+      <div class="drawer-home-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+    <div class="drawer-search">
+      <span class="drawer-search-icon">🔍</span>
+      <input class="drawer-search-input" type="search" id="drawerSearch" placeholder="Search calculators…" oninput="filterDrawer(this.value)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+    </div>
+    <div class="drawer-cat" data-cat="investment">
+      <div class="drawer-cat-title">📈 Investment</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p100)">📊</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">SIP Calculator</div><div class="drawer-item-sub">Monthly planner</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">⬆️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Step-Up SIP</div><div class="drawer-item-sub">Annual top-up</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">💰</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Lumpsum</div><div class="drawer-item-sub">One-time invest</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">💸</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">SWP Calculator</div><div class="drawer-item-sub">Withdrawal plan</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">📉</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Step-Up SWP</div><div class="drawer-item-sub">Growing withdrawals</div></div>
+          <span class="drawer-badge new">New</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fffbeb">🏦</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">FD Calculator</div><div class="drawer-item-sub">Fixed deposit</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#f0f9ff">🪙</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">RD Calculator</div><div class="drawer-item-sub">Recurring deposit</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item active-calc" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">📐</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">CAGR Calculator</div><div class="drawer-item-sub">Annual growth rate</div></div>
+          <span class="drawer-badge active">Active</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fdf2f8">⚡</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Rule of 72</div><div class="drawer-item-sub">Doubling time</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">🎯</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Goal Planner</div><div class="drawer-item-sub">Target corpus</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">🏆</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Mutual Fund Returns</div><div class="drawer-item-sub">Compare performance</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#f0f9ff">🔄</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">SIP vs Lumpsum</div><div class="drawer-item-sub">Which is better?</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+    <div class="drawer-cat" data-cat="retirement">
+      <div class="drawer-cat-title">👴 Retirement</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏖️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Retirement Planner</div><div class="drawer-item-sub">Corpus needed</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🔐</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">NPS Calculator</div><div class="drawer-item-sub">National Pension Scheme</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">📒</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">PPF Calculator</div><div class="drawer-item-sub">EEE · 7.1% p.a.</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏛️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">EPF Calculator</div><div class="drawer-item-sub">Provident fund</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">💎</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Gratuity Calculator</div><div class="drawer-item-sub">Retirement gratuity</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🛡️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Annuity Calculator</div><div class="drawer-item-sub">Pension income</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">👴</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Senior Citizen FD</div><div class="drawer-item-sub">Special rate deposits</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+    <div class="drawer-cat" data-cat="loan">
+      <div class="drawer-cat-title">🏦 Loans & EMI</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏠</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">EMI Calculator</div><div class="drawer-item-sub">Home, car, personal</div></div>
+          <span class="drawer-badge popular">Popular</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏡</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Home Loan Elig.</div><div class="drawer-item-sub">Max loan amount</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">💳</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Credit Card Payoff</div><div class="drawer-item-sub">Debt elimination</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🚗</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Car Loan EMI</div><div class="drawer-item-sub">Auto finance planner</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🎓</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Education Loan</div><div class="drawer-item-sub">Student loan EMI</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">📊</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Loan Comparison</div><div class="drawer-item-sub">Compare loan offers</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">💹</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Prepayment Savings</div><div class="drawer-item-sub">Early repayment benefit</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🔃</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Balance Transfer</div><div class="drawer-item-sub">Switch & save interest</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+    <div class="drawer-cat" data-cat="tax">
+      <div class="drawer-cat-title">📋 Tax Calculators</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏛️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Income Tax</div><div class="drawer-item-sub">New vs Old Regime</div></div>
+          <span class="drawer-badge popular">Popular</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">📈</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">LTCG Calculator</div><div class="drawer-item-sub">12.5% Budget 2024</div></div>
+          <span class="drawer-badge new">New</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">📉</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">STCG Calculator</div><div class="drawer-item-sub">Short-term gains</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏠</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Home Loan Tax</div><div class="drawer-item-sub">80C & 24B deductions</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">💼</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">HRA Calculator</div><div class="drawer-item-sub">House rent allowance</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🧾</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">TDS Calculator</div><div class="drawer-item-sub">Tax deducted at source</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🎁</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Gift Tax Guide</div><div class="drawer-item-sub">Taxable gift checker</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+    <div class="drawer-cat" data-cat="savings">
+      <div class="drawer-cat-title">💰 Savings & Others</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏧</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Savings Goal</div><div class="drawer-item-sub">Reach your target</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">⚖️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Inflation Calculator</div><div class="drawer-item-sub">Purchasing power</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏅</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Gold Calculator</div><div class="drawer-item-sub">Gold investment returns</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏗️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Real Estate ROI</div><div class="drawer-item-sub">Property return est.</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">💱</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Currency Converter</div><div class="drawer-item-sub">Live forex rates</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">📆</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Daily Savings</div><div class="drawer-item-sub">Daily saving to goal</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+    <div class="drawer-cat" data-cat="insurance">
+      <div class="drawer-cat-title">🛡️ Insurance</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🫀</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Life Cover Needed</div><div class="drawer-item-sub">Human life value method</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏥</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Health Premium Est.</div><div class="drawer-item-sub">Mediclaim estimator</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🚗</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Motor Insurance</div><div class="drawer-item-sub">Own damage premium</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏠</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Home Insurance</div><div class="drawer-item-sub">Property cover est.</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>
+<nav class="mobile-nav" role="navigation">
+  <div class="mnav-items">
+    <a class="mnav-item" href="/"><span class="mnav-icon">🏠</span><span class="mnav-label">Home</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item active" href="#calculator"><span class="mnav-icon">📐</span><span class="mnav-label">CAGR</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item" href="#reverse"><span class="mnav-icon">🔄</span><span class="mnav-label">Reverse</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item" href="#infographics"><span class="mnav-icon">📊</span><span class="mnav-label">Bench</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item" href="#faq"><span class="mnav-icon">❓</span><span class="mnav-label">FAQ</span><span class="mnav-dot"></span></a>
+  </div>
+</nav>
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+<script>
+
+'use strict';
+/* ── INR Formatter ── */
+const INR = n => { const a=Math.abs(n); if(a>=1e7) return '₹'+(n/1e7).toFixed(2)+' Cr'; if(a>=1e5) return '₹'+(n/1e5).toFixed(2)+' L'; if(a>=1000) return '₹'+Math.round(n).toLocaleString('en-IN'); return '₹'+Math.round(n); };
+const INR2 = n => '₹'+Math.round(n).toLocaleString('en-IN');
+const PCT = n => n.toFixed(2)+'%';
+
+/* ── Slider Fill ── */
+function updateSliderFill(s){ const min=parseFloat(s.min)||0,max=parseFloat(s.max)||100,val=Math.max(min,Math.min(max,parseFloat(s.value)||0)),pct=((val-min)/(max-min))*100,c=s.classList.contains('green')?'var(--g600)':'var(--p700)'; s.style.background=`linear-gradient(to right,${c} ${pct}%,var(--n200) ${pct}%)`; }
+function initSliders(){ document.querySelectorAll('.slider').forEach(s=>{ updateSliderFill(s); s.addEventListener('input',()=>updateSliderFill(s),{passive:true}); }); }
+
+/* ── Sync Slider/Number ── */
+function syncFromSlider(id){ const r=document.getElementById(id+'-r'),n=document.getElementById(id+'-n'),d=document.getElementById(id+'-disp'); if(!r||!n) return; n.value=r.value; if(d) d.textContent=formatDisp(id,r.value); updateSliderFill(r); debCalc(); }
+function syncFromNum(id){ const r=document.getElementById(id+'-r'),n=document.getElementById(id+'-n'),d=document.getElementById(id+'-disp'); if(!r||!n) return; let v=parseFloat(n.value)||0; v=Math.max(parseFloat(n.min)||0,Math.min(parseFloat(n.max)||1e9,v)); r.value=v; n.value=v; if(d) d.textContent=formatDisp(id,v); updateSliderFill(r); debCalc(); }
+function setVal(id,v){ const r=document.getElementById(id+'-r'),n=document.getElementById(id+'-n'),d=document.getElementById(id+'-disp'); if(r) r.value=v; if(n) n.value=v; if(d) d.textContent=formatDisp(id,v); if(r) updateSliderFill(r); document.querySelectorAll(`[onclick*="setVal('${id}"]`).forEach(b=>b.classList.remove('on')); document.querySelectorAll(`[onclick="setVal('${id}',${v})"]`).forEach(b=>b.classList.add('on')); debCalc(); }
+
+/* ── Debounced Calculate ── */
+let calcTimer;
+function debCalc(){ clearTimeout(calcTimer); calcTimer=setTimeout(()=>calculate(false),400); }
+
+/* ── FAB / Drawer ── */
+const drawerEl=document.getElementById('calcDrawer'),backdropEl=document.getElementById('drawerBackdrop');
+function openDrawer(){ drawerEl.classList.add('open');backdropEl.classList.add('open');document.body.style.overflow='hidden'; setTimeout(()=>{ const s=document.getElementById('drawerSearch'); if(s&&window.innerWidth>480) s.focus(); },350); }
+function closeDrawer(){ drawerEl.classList.remove('open');backdropEl.classList.remove('open');document.body.style.overflow=''; const s=document.getElementById('drawerSearch'); if(s){s.value='';filterDrawer('');} }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&drawerEl.classList.contains('open')) closeDrawer(); });
+function filterDrawer(q){ const query=q.trim().toLowerCase(); drawerEl.querySelectorAll('.drawer-cat').forEach(cat=>{ let any=false; cat.querySelectorAll('.drawer-item').forEach(item=>{ const match=!query||item.textContent.toLowerCase().includes(query); item.style.display=match?'':'none'; if(match) any=true; }); cat.style.display=any?'':'none'; }); }
+
+/* ── Swipe to close drawer ── */
+let touchStartY=0;
+drawerEl.addEventListener('touchstart',e=>{ touchStartY=e.touches[0].clientY; },{passive:true});
+drawerEl.addEventListener('touchmove',e=>{ const dy=e.touches[0].clientY-touchStartY; if(window.innerWidth<641&&dy>0){ drawerEl.style.transform=`translateY(${dy}px)`;drawerEl.style.transition='none'; } },{passive:true});
+drawerEl.addEventListener('touchend',e=>{ const dy=e.changedTouches[0].clientY-touchStartY; drawerEl.style.transition='';drawerEl.style.transform=''; if(window.innerWidth<641&&dy>80) closeDrawer(); },{passive:true});
+
+/* ── Scroll Top ── */
+const stBtn=document.getElementById('scrollTop');
+window.addEventListener('scroll',()=>{ stBtn.style.display=window.scrollY>400?'flex':'none'; },{passive:true});
+
+/* ── Section Nav Sync ── */
+function syncNav(activeId){ document.querySelectorAll('.mchip').forEach(c=>{ const href=(c.getAttribute('href')||'').replace('#',''); c.classList.toggle('on',href===activeId); }); document.querySelectorAll('.mnav-item').forEach(n=>{ const href=(n.getAttribute('href')||'').replace('#',''); n.classList.toggle('active',href===activeId); }); }
+
+function formatDisp(id,v){v=parseFloat(v);if(['init','final','rinit'].includes(id))return INR(v);if(['cagryr','ryrs'].includes(id))return v+' Yrs';if(['rtarget'].includes(id))return v+'%';return v;}
+function calculate(btn){
+  const init=parseFloat(document.getElementById('init-n').value)||100000;
+  const fin=parseFloat(document.getElementById('final-n').value)||250000;
+  const yrs=parseFloat(document.getElementById('cagryr-n').value)||5;
+  if(fin<=0||init<=0||yrs<=0)return;
+  const cagr=(Math.pow(fin/init,1/yrs)-1)*100;
+  const gain=fin-init;
+  const absRet=(fin-init)/init*100;
+  const mult=fin/init;
+  document.getElementById('r-cagr').textContent=cagr.toFixed(2)+'%';
+  document.getElementById('r-cagr-sub').textContent='Per year, compounded';
+  document.getElementById('r-gain').textContent=INR(gain);
+  document.getElementById('r-gain-sub').textContent=INR(init)+' → '+INR(fin);
+  document.getElementById('r-abs').textContent=absRet.toFixed(1)+'%';
+  document.getElementById('r-mult').textContent=mult.toFixed(2)+'x';
+  // Banner
+  const banner=document.getElementById('cagr-result-banner');
+  let color,bg,label;
+  if(cagr>=18){color='var(--g700)';bg='linear-gradient(135deg,var(--g50),#fff)';label='🏆 Outstanding Returns! Top-tier performance.'}
+  else if(cagr>=12){color='var(--p700)';bg='linear-gradient(135deg,var(--p50),#fff)';label='✅ Excellent! Market-beating CAGR.'}
+  else if(cagr>=7){color='#b45309';bg='linear-gradient(135deg,var(--amberBg),#fff)';label='⚠️ Moderate — beating FD but below equity average.'}
+  else if(cagr>=0){color='#1d4ed8';bg='linear-gradient(135deg,var(--blueBg),#fff)';label='📉 Low — barely keeping up with inflation.'}
+  else{color='#dc2626';bg='linear-gradient(135deg,#fff0f0,#fff)';label='❌ Negative CAGR — investment lost value.'}
+  banner.style.background=bg; banner.style.borderColor=color+'40';
+  banner.innerHTML=`<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap"><div style="text-align:center;min-width:80px"><div style="font-size:38px;font-weight:900;color:${color};letter-spacing:-1.5px">${cagr.toFixed(2)}%</div><div style="font-size:11px;color:var(--n400);font-weight:700;text-transform:uppercase;letter-spacing:.5px">CAGR</div></div><div><div style="font-size:15px;font-weight:800;color:var(--n800);margin-bottom:4px">${label}</div><div style="font-size:13px;color:var(--n600)">${INR(init)} grew to ${INR(fin)} over ${yrs} years = ${mult.toFixed(2)}x your money</div></div></div>`;
+  // Donut
+  const CIRC=339.3, invPct=init/fin;
+  document.getElementById('d-inv-c').style.strokeDashoffset=CIRC*(1-invPct);
+  document.getElementById('d-gain-c').style.strokeDashoffset=CIRC*(1-(1-invPct));
+  document.getElementById('d-center-cagr').textContent=cagr.toFixed(1)+'%';
+  document.getElementById('dl-inv-c').textContent=INR(init);
+  document.getElementById('dl-gain-c').textContent=INR(gain);
+  // Benchmarks
+  const benchmarks=[
+    {label:'Your Investment',val:cagr,color:'var(--p600)',highlight:true},
+    {label:'Nifty 50 (10yr avg)',val:15.8,color:'var(--g600)'},
+    {label:'Gold INR (10yr)',val:14.2,color:'#d97706'},
+    {label:'S&P 500 (10yr)',val:10.7,color:'#2563eb'},
+    {label:'Inflation (CPI)',val:6,color:'#dc2626'},
+    {label:'Bank FD',val:7.5,color:'#9ca3af'},
+  ].sort((a,b)=>b.val-a.val);
+  const maxB=Math.max(...benchmarks.map(b=>b.val));
+  document.getElementById('cagr-bench').innerHTML=benchmarks.map(b=>`<div class="bchart-row"><div class="bchart-label" style="${b.highlight?'font-weight:800':''}"><span>${b.label}</span><span style="color:${b.color}">${b.val.toFixed(1)}%</span></div><div class="bchart-track"><div style="height:100%;border-radius:8px;background:${b.color};width:${(b.val/maxB*100).toFixed(1)}%;transition:width 1s;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;min-width:30px"></div></div></div>`).join('');
+  // Yearly growth
+  const maxY=fin;
+  document.getElementById('cagr-yearly').innerHTML=Array.from({length:Math.min(Math.round(yrs),10)},(_,idx)=>{
+    const y=idx+1, v=init*Math.pow(1+cagr/100,y);
+    return `<div class="bchart-row"><div class="bchart-label"><span>Year ${y}</span><span>${INR(v)}</span></div><div class="bchart-track"><div class="bchart-fill returns" style="width:${(v/Math.max(maxY,v)*100).toFixed(1)}%"></div></div></div>`;
+  }).join('');
+  // Table
+  let rows='';
+  for(let y=1;y<=Math.min(Math.round(yrs),30);y++){
+    const v=init*Math.pow(1+cagr/100,y), annGain=v-init*Math.pow(1+cagr/100,y-1), cumGain=v-init;
+    rows+=`<tr><td><strong>${y}</strong></td><td class="td-b">${INR(v)}</td><td class="td-g">${INR(annGain)}</td><td class="td-p">${INR(cumGain)}</td><td>${((v-init)/init*100).toFixed(1)}%</td></tr>`;
+  }
+  document.getElementById('cagr-table').innerHTML=rows;
+  document.getElementById('results').classList.add('show');
+}
+function calcReverse(){
+  const init=parseFloat(document.getElementById('rinit-n').value)||100000;
+  const cagr=parseFloat(document.getElementById('rtarget-n').value)||12;
+  const yrs=parseFloat(document.getElementById('ryrs-n').value)||10;
+  const fv=init*Math.pow(1+cagr/100,yrs);
+  const gain=fv-init;
+  const mult=fv/init;
+  const sipR=cagr/100/12,sipN=yrs*12;
+  const sipNeeded=fv/(((Math.pow(1+sipR,sipN)-1)/sipR)*(1+sipR));
+  document.getElementById('rev-fv').textContent=INR(fv);
+  document.getElementById('rev-fv-sub').textContent='In '+yrs+' years at '+cagr+'% CAGR';
+  document.getElementById('rev-gain').textContent=INR(gain);
+  document.getElementById('rev-mult').textContent=mult.toFixed(2)+'x';
+  document.getElementById('rev-sip').textContent=INR(Math.round(sipNeeded))+'/mo';
+  document.getElementById('rev-results').classList.add('show');
+}
+function buildScenarios(){
+  const rates=[7,10,12,15,18,20];
+  document.getElementById('cagr-scenarios').innerHTML=rates.map((r,i)=>{
+    const fin=100000*Math.pow(1+r/100,10),gain=fin-100000;
+    const cls=['tc1','tc2','tc3','tc4','tc5','tc6'][i%6];
+    return `<div class="power-row"><div class="pr-header"><span class="pr-year">${r}% CAGR</span><span class="pr-badge">10 Years</span></div><div class="pr-main">${INR(fin)}</div><div class="pr-invested">Initial: ₹1 Lakh</div><div class="pr-gain">+${INR(gain)} gain (+${(gain/100000*100).toFixed(0)}%)</div></div>`;
+  }).join('');
+}
+const FAQS_CAGR = [
+  { q:'What is CAGR and why does it matter?', a:`<span class="faq-lead">CAGR (Compound Annual Growth Rate) measures the steady annual growth rate of an investment, assuming profits are reinvested. It's the most important return metric for comparing investments.</span>
+<div class="formula-box" style="margin:10px 0"><div class="formula-code">CAGR = (Final Value / Initial Value)^(1/Years) - 1</div></div>
+<div class="faq-stat-row"><div class="faq-stat"><span class="faq-stat-val">7–9%</span><span class="faq-stat-lbl">FD CAGR</span></div><div class="faq-stat"><span class="faq-stat-val">12–15%</span><span class="faq-stat-lbl">Equity MF CAGR</span></div><div class="faq-stat"><span class="faq-stat-val">15.8%</span><span class="faq-stat-lbl">Nifty 50 10yr CAGR</span></div></div>` },
+  { q:'What is a good CAGR for mutual funds?', a:`<span class="faq-lead">For equity mutual funds, a CAGR of 12–15%+ over 5–10 years is considered excellent. Always compare against the relevant benchmark, not just an absolute number.</span>
+<div class="faq-chips"><span class="faq-chip or">Below 10%: Underperforming</span><span class="faq-chip bl">10–12%: Decent</span><span class="faq-chip pu">12–15%: Good</span><span class="faq-chip gr">15%+: Excellent</span></div>
+<div class="faq-note">A fund with 14% CAGR beating Nifty's 15% CAGR is actually underperforming. Always compare against the category benchmark, not just absolute numbers.</div>` },
+  { q:'What is the difference between CAGR and absolute return?', a:`<span class="faq-lead">Absolute return is the total % gain ignoring time. CAGR is the time-adjusted annual growth rate. Always use CAGR to compare investments of different durations.</span>
+<ul class="faq-points">
+<li><span class="fp-bul pu">→</span>100% absolute return in 2 years = 41.4% CAGR (impressive)</li>
+<li><span class="fp-bul or">→</span>100% absolute return in 10 years = 7.2% CAGR (mediocre)</li>
+<li><span class="fp-bul gr">✓</span>CAGR allows fair comparison across different time periods</li>
+</ul>
+<div class="faq-note">Fund advertisements often highlight "absolute returns since inception" — always convert to CAGR for true performance evaluation.</div>` },
+  { q:'Why use XIRR instead of CAGR for SIP returns?', a:`<span class="faq-lead">CAGR works only for single lumpsum investments. SIP involves multiple cash flows at different dates — XIRR (Extended Internal Rate of Return) gives the accurate annualised return for these.</span>
+<div class="faq-stat-row"><div class="faq-stat"><span class="faq-stat-val">CAGR</span><span class="faq-stat-lbl">Lumpsum Only</span></div><div class="faq-stat"><span class="faq-stat-val">XIRR</span><span class="faq-stat-lbl">SIP/Multiple Flows</span></div><div class="faq-stat"><span class="faq-stat-val">IRR</span><span class="faq-stat-lbl">Multiple Periods</span></div></div>
+<div class="faq-note">Your portfolio app (Groww, Zerodha, Kuvera) shows XIRR for SIP investments. Don't compare your SIP XIRR directly against fund CAGR — they're calculated differently.</div>` },
+  { q:'What CAGR beats inflation in India?', a:`<span class="faq-lead">India's CPI inflation averages 5–6% CAGR. To actually grow real wealth, your CAGR must exceed inflation + applicable tax rate.</span>
+<div class="faq-stat-row"><div class="faq-stat"><span class="faq-stat-val">6%</span><span class="faq-stat-lbl">India CPI Inflation</span></div><div class="faq-stat"><span class="faq-stat-val">8–10%</span><span class="faq-stat-lbl">Minimum Needed CAGR</span></div><div class="faq-stat"><span class="faq-stat-val">5.25%</span><span class="faq-stat-lbl">FD Post-Tax (30% slab)</span></div></div>
+<div class="faq-note">FD at 7.5% pre-tax → 5.25% post-tax (30% bracket) → CAGR barely beating 6% inflation. After tax, FD investors may actually be losing real purchasing power every year.</div>` },
+  { q:'How to calculate CAGR manually?', a:`<span class="faq-lead">CAGR can be calculated with a simple formula or using the ^ (power) function in Excel or Google Sheets.</span>
+<div class="formula-box" style="margin:10px 0"><div class="formula-code">CAGR = (Final / Initial)^(1/n) - 1<br>Example: ₹1L → ₹2.5L in 5yr<br>= (2.5)^(1/5) - 1 = 0.201 = 20.1% CAGR</div></div>
+<div class="faq-note">In Excel: =((Final/Initial)^(1/Years))-1. In Google Sheets: =RATE(Years,0,-Initial,Final). Both give the same result.</div>` },
+  { q:"What is the Nifty 50's historical CAGR?", a:`<span class="faq-lead">Nifty 50 has delivered approximately 13–16% CAGR over long periods (10–20 years), making it one of the best-performing major indices globally.</span>
+<div class="faq-stat-row"><div class="faq-stat"><span class="faq-stat-val">15.8%</span><span class="faq-stat-lbl">Nifty 10yr CAGR</span></div><div class="faq-stat"><span class="faq-stat-val">13.5%</span><span class="faq-stat-lbl">Nifty 20yr CAGR</span></div><div class="faq-stat"><span class="faq-stat-val">16.2%</span><span class="faq-stat-lbl">Sensex 30yr CAGR</span></div></div>
+<div class="faq-note">Past CAGR doesn't guarantee future returns. But India's structural growth story (demographics, urbanisation, formalisation) suggests equity remains the best long-term wealth creator.</div>` },
+  { q:'What is negative CAGR and what does it mean?', a:`<span class="faq-lead">Negative CAGR means the investment's final value is less than the initial value — you've lost money in annualised terms.</span>
+<ul class="faq-points">
+<li><span class="fp-bul or">!</span>₹1L → ₹80,000 in 3 years = -7.3% CAGR (lost 20% total)</li>
+<li><span class="fp-bul or">!</span>Common in short-term equity investing during bear markets</li>
+<li><span class="fp-bul gr">✓</span>Negative CAGR often becomes positive with longer holding periods</li>
+<li><span class="fp-bul gr">✓</span>Nifty has never given negative returns over any 7-year rolling period historically</li>
+</ul>` },
+  { q:'What is the difference between CAGR and CQGR?', a:`<span class="faq-lead">CAGR measures annual compound growth. CQGR (Compound Quarterly Growth Rate) measures quarterly compound growth. They measure the same thing over different periods.</span>
+<div class="faq-note">In investing, CAGR is the standard metric. CQGR is occasionally used in business reporting for revenue analysis. To convert: CAGR = (1+CQGR)^4 - 1.</div>` },
+  { q:'Why do fund houses report trailing CAGR?', a:`<span class="faq-lead">Trailing CAGR is calculated from a fixed past date to today — like 1yr, 3yr, 5yr, 10yr trailing returns. It's the most common way fund performance is reported.</span>
+<ul class="faq-points">
+<li><span class="fp-bul pu">→</span>1yr trailing CAGR: From 1 year ago to today</li>
+<li><span class="fp-bul pu">→</span>3yr trailing CAGR: From 3 years ago to today</li>
+<li><span class="fp-bul or">!</span>Limitation: Trailing returns are point-in-time and can be misleading</li>
+<li><span class="fp-bul gr">✓</span>Better: Use rolling returns (CAGR over all possible periods) for comprehensive evaluation</li>
+</ul>` },
+  { q:'How does CAGR factor in dividends?', a:`<span class="faq-lead">Total Return CAGR includes both price appreciation AND dividends/distributions reinvested. Price CAGR only considers price change — always compare Total Return CAGR for fair assessment.</span>
+<div class="faq-stat-row"><div class="faq-stat"><span class="faq-stat-val">Price CAGR</span><span class="faq-stat-lbl">Price Only</span></div><div class="faq-stat"><span class="faq-stat-val">Total Return</span><span class="faq-stat-lbl">Price + Dividends</span></div><div class="faq-stat"><span class="faq-stat-val">+1–3%</span><span class="faq-stat-lbl">Dividend Adds Approx.</span></div></div>
+<div class="faq-note">Mutual fund NAV already includes dividends reinvested (growth option). So NAV-based CAGR is the total return CAGR — no adjustment needed for growth option MF holdings.</div>` },
+  { q:'What is alpha in relation to CAGR?', a:`<span class="faq-lead">Alpha is the difference between a fund's CAGR and its benchmark CAGR — it measures the fund manager's skill in generating excess returns above the market.</span>
+<div class="faq-note">Fund CAGR (18%) - Nifty CAGR (15%) = +3% Alpha. Positive alpha means the fund beat the market. Consistent positive alpha over 5+ years is the hallmark of a genuinely skilled fund manager — most funds don't deliver this consistently.</div>` },
+  { q:'Can CAGR be used for SIP performance measurement?', a:`<span class="faq-lead">CAGR is not appropriate for SIP because it assumes a single lumpsum investment. For SIP with multiple cash flows, use XIRR for accurate annualised return calculation.</span>
+<div class="faq-chips"><span class="faq-chip or">Wrong: CAGR for SIP</span><span class="faq-chip gr">Right: XIRR for SIP</span><span class="faq-chip pu">Use CAGR for Lumpsum</span></div>
+<div class="faq-note">If you manually calculate CAGR on your SIP portfolio, you'll get a misleadingly high or low number. Always use XIRR — Excel's =XIRR() function handles multiple cash flows with different dates correctly.</div>` },
+  { q:'What is rolling CAGR and why is it better?', a:`<span class="faq-lead">Rolling CAGR calculates returns over all possible overlapping periods (e.g., every 1-day starting point for a 5-year window) — giving a distribution of returns that's far more comprehensive than a single trailing CAGR.</span>
+<ul class="faq-points">
+<li><span class="fp-bul gr">✓</span>Rolling CAGR eliminates start-date and end-date bias of trailing CAGR</li>
+<li><span class="fp-bul gr">✓</span>Shows worst-case, median, and best-case returns across all entry points</li>
+<li><span class="fp-bul pu">✓</span>Nifty 50's 7yr rolling CAGR has never been negative — powerful long-term signal</li>
+<li><span class="fp-bul bl">→</span>Tools: ValueResearch, MFLamb, Freefincal offer rolling return calculators</li>
+</ul>` },
+  { q:'How should I compare CAGR across different asset classes?', a:`<span class="faq-lead">When comparing CAGR across assets, always adjust for risk (volatility), tax, and inflation to get the true apples-to-apples comparison.</span>
+<div class="faq-stat-row"><div class="faq-stat"><span class="faq-stat-val">15.8%</span><span class="faq-stat-lbl">Nifty (Gross)</span></div><div class="faq-stat"><span class="faq-stat-val">14.2%</span><span class="faq-stat-lbl">Gold INR</span></div><div class="faq-stat"><span class="faq-stat-val">5.25%</span><span class="faq-stat-lbl">FD (Post-tax, 30%)</span></div></div>
+<div class="faq-note">True comparison: Nifty post-LTCG (12.5% on gains): ~14.5% net. Gold post-tax: ~12.5%. FD post-tax (30%): ~5.25%. Equity wins decisively on post-tax, post-inflation real returns over 10+ years.</div>` }
+];
+function buildFAQ(){const cont=document.getElementById('faq-container');if(!cont)return;FAQS_CAGR.forEach(f=>{const d=document.createElement('div');d.className='faq-item';d.innerHTML=`<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">${f.q}<div class="faq-icon">+</div></div><div class="faq-a">${f.a}</div>`;cont.appendChild(d);});}
+function resetCalc(){setVal('init',100000);setVal('final',250000);setVal('cagryr',5);calculate(false);}
+const SECTIONS=['calculator','reverse','infographics','guide','tips','faq'];
+if('IntersectionObserver' in window){let lastId='calculator';const obs=new IntersectionObserver(entries=>{const vis=entries.filter(e=>e.isIntersecting);if(vis.length){vis.sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top);const id=vis[0].target.id;if(id&&SECTIONS.includes(id)&&id!==lastId){lastId=id;syncNav(id);}}},{rootMargin:'-15% 0px -55% 0px',threshold:0});SECTIONS.forEach(id=>{const el=document.getElementById(id);if(el)obs.observe(el);});}
+initSliders();['init','final','cagryr','rinit','rtarget','ryrs'].forEach(id=>{const el=document.getElementById(id+'-disp'),n=document.getElementById(id+'-n');if(el&&n)el.textContent=formatDisp(id,n.value);});
+buildScenarios();buildFAQ();calcReverse();calculate(false);
+
+/* ── Demat Modal Functions ── */
+window.dematOpen = function() {
+  var o = document.getElementById('demat-overlay');
+  if (!o) return;
+  var sy = window.pageYOffset || 0;
+  document.body.style.top = '-' + sy + 'px';
+  document.body.classList.add('modal-open');
+  o.classList.add('open');
+  var fs = document.getElementById('form-section'), ss = document.getElementById('success-section');
+  if (fs) fs.style.display = 'block';
+  if (ss) ss.style.display = 'none';
+  ['name','email','mobile'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.value = '';
+  });
+  var at = document.getElementById('accountType'); if (at) at.value = 'individual';
+  var br = document.getElementById('broker'); if (br) br.value = '';
+  ['name','email','mobile','accountType','broker'].forEach(function(id) {
+    var e = document.getElementById('err-' + id); if (e) e.textContent = '';
+    var i = document.getElementById(id); if (i) i.classList.remove('error');
+  });
+  setTimeout(function() { var n = document.getElementById('name'); if (n) n.focus(); }, 140);
+};
+window.dematClose = function() {
+  var o = document.getElementById('demat-overlay');
+  if (!o) return;
+  var sy = Math.abs(parseInt(document.body.style.top || '0'));
+  o.classList.remove('open');
+  document.body.classList.remove('modal-open');
+  document.body.style.top = '';
+  window.scrollTo({ top: sy, behavior: 'instant' });
+};
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') window.dematClose();
+});
+</script>
+
+
+<!-- DEMAT MODAL -->
+<div id="demat-overlay" role="dialog" aria-modal="true" aria-label="Open Demat Account">
+  <div id="demat-inner">
+    <button id="demat-close" onclick="dematClose()" aria-label="Close">&#10005;</button>
+<div class="page">
+  <div class="deco deco-1"></div>
+  <div class="deco deco-2"></div>
+  <div class="deco deco-3"></div>
+
+  <div class="card" role="main">
+
+    <!-- Accent bar -->
+    <div class="accent-bar"></div>
+
+    <!-- ── Header ── -->
+    <div class="card-header">
+      <div class="header-top">
+        <div class="logo-icon" aria-hidden="true">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+            <rect x="3" y="6" width="18" height="13" rx="2" stroke="white" stroke-width="1.8"/>
+            <path d="M3 10h18" stroke="white" stroke-width="1.8"/>
+            <circle cx="7.5" cy="15" r="1.1" fill="white"/>
+            <circle cx="11" cy="15" r="1.1" fill="rgba(255,255,255,0.5)"/>
+          </svg>
+        </div>
+        <span class="header-label">Demat Account</span>
+      </div>
+
+      <h1 class="card-title">Open Your <span class="title-highlight">Demat Account</span></h1>
+      <p class="card-desc">Start investing smarter. Fill in your details and we'll get back to you within 24 hours.</p>
+
+      <div class="trust-pills">
+        <span class="pill">
+          <svg width="11" height="11" fill="none" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Zero Account Opening Fee
+        </span>
+        <span class="pill">
+          <svg width="11" height="11" fill="none" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          SEBI Registered
+        </span>
+        <span class="pill">
+          <svg width="11" height="11" fill="none" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Instant e-KYC
+        </span>
+      </div>
+    </div>
+
+    <!-- ── Body ── -->
+    <div class="card-body">
+
+      <div id="form-section">
+
+        <!-- Name -->
+        <div class="field">
+          <label for="name">Full Name <span class="req">*</span></label>
+          <input type="text" id="name" placeholder="e.g. Rahul Sharma" autocomplete="name" />
+          <p class="error-msg" id="err-name" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Email -->
+        <div class="field">
+          <label for="email">Email Address <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="e.g. rahul@example.com" autocomplete="email" />
+          <p class="error-msg" id="err-email" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Mobile -->
+        <div class="field">
+          <label for="mobile">Mobile Number <span class="req">*</span></label>
+          <div class="input-wrap">
+            <span class="prefix" aria-hidden="true">+91</span>
+            <input type="tel" id="mobile" placeholder="98765 43210" maxlength="10"
+                   class="has-prefix" autocomplete="tel" inputmode="numeric" />
+          </div>
+          <p class="error-msg" id="err-mobile" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Account Type -->
+        <div class="field">
+          <label for="accountType">Type of Account <span class="req">*</span></label>
+          <div class="input-wrap">
+            <select id="accountType" aria-required="true">
+              <option value="individual" selected>Individual</option>
+              <option value="huf">HUF (Hindu Undivided Family)</option>
+              <option value="nri">NRI (Non-Resident Indian)</option>
+              <option value="corporate">Corporate</option>
+              <option value="partnership">Partnership Firm</option>
+              <option value="llp">LLP (Limited Liability Partnership)</option>
+            </select>
+            <svg class="select-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="error-msg" id="err-accountType" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Preferred Broker -->
+        <div class="field">
+          <label for="broker">Preferred Broker <span class="req">*</span></label>
+          <div class="input-wrap">
+            <select id="broker" aria-required="true">
+              <option value="" disabled selected>— Select a broker —</option>
+              <optgroup label="🔥 Discount Brokers">
+                <option value="Groww">Groww</option>
+                <option value="Zerodha">Zerodha</option>
+                <option value="Angel One">Angel One</option>
+                <option value="Upstox">Upstox</option>
+                <option value="Dhan">Dhan</option>
+                <option value="Alice Blue">Alice Blue</option>
+                <option value="Paytm Money">Paytm Money</option>
+                <option value="FYERS">FYERS</option>
+                <option value="5paisa">5paisa</option>
+                <option value="SAMCO">SAMCO</option>
+                <option value="Shoonya (Finvasia)">Shoonya (Finvasia)</option>
+                <option value="Bajaj Broking">Bajaj Broking</option>
+                <option value="mStock by Mirae">mStock by Mirae</option>
+              </optgroup>
+              <optgroup label="🏦 Full-Service Brokers">
+                <option value="ICICI Direct">ICICI Direct</option>
+                <option value="HDFC Securities">HDFC Securities</option>
+                <option value="Kotak Securities">Kotak Securities</option>
+                <option value="Motilal Oswal">Motilal Oswal</option>
+                <option value="SBI Securities">SBI Securities</option>
+                <option value="Mirae Sharekhan">Mirae Sharekhan</option>
+                <option value="IIFL Securities">IIFL Securities</option>
+                <option value="Axis Direct">Axis Direct</option>
+                <option value="Geojit Financial">Geojit Financial</option>
+                <option value="Nuvama Wealth">Nuvama Wealth</option>
+                <option value="Choice Broking">Choice Broking</option>
+                <option value="JM Financial">JM Financial</option>
+              </optgroup>
+            </select>
+            <svg class="select-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="error-msg" id="err-broker" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Submit -->
+        <button class="btn-submit" id="submitBtn" type="button">
+          Submit Application
+          <svg width="17" height="17" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <p class="security-note">🔒 256-bit encrypted &amp; secure submission</p>
+      </div>
+
+      <!-- Success state -->
+      <div class="success" id="success-section" aria-live="polite">
+        <div class="success-ring" aria-hidden="true">
+          <svg width="34" height="34" fill="none" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2>Application Received!</h2>
+        <p id="success-msg"></p>
+        <button class="btn-reset" id="resetBtn" type="button">Submit Another</button>
+      </div>
+
+    </div><!-- /card-body -->
+
+    <!-- ── Footer ── -->
+    <div class="card-footer">
+      <span class="footer-sebi">SEBI Registered Broker</span>
+      <div class="footer-exchanges">
+        <span>NSE</span>
+        <span>BSE</span>
+        <span>MCX</span>
+      </div>
+    </div>
+
+  </div><!-- /card -->
+</div><!-- /page -->
+  </div>
+</div>
+
+</body>
+</html>

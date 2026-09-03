@@ -1,0 +1,3046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="FD Calculator — Fixed Deposit Returns"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#6c3de4" media="(prefers-color-scheme: light)"/>
+<meta name="theme-color" content="#4c1d95" media="(prefers-color-scheme: dark)"/>
+<meta name="format-detection" content="telephone=no,date=no,address=no,email=no"/>
+<meta name="HandheldFriendly" content="true"/>
+<meta name="MobileOptimized" content="width"/>
+<meta name="color-scheme" content="light"/>
+<meta name="description" content="Free FD Calculator — Calculate fixed deposit maturity value, interest earned and compare FD vs MF returns."/>
+<title>FD Calculator — Fixed Deposit Returns | Mission Wealth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap&font-display=swap" rel="stylesheet"/>
+<style>
+
+/* ═══ ROOT ═══ */
+:root{
+  --p50:#faf5ff;--p100:#f3e8ff;--p200:#e9d5ff;--p300:#d8b4fe;
+  --p400:#c084fc;--p500:#a855f7;--p600:#9333ea;--p700:#7c3aed;
+  --p800:#6d28d9;--p900:#5b21b6;--p950:#4c1d95;
+  --g50:#f0fdf4;--g100:#dcfce7;--g200:#bbf7d0;--g300:#86efac;
+  --g400:#4ade80;--g500:#22c55e;--g600:#16a34a;--g700:#15803d;
+  --n0:#fff;--n50:#f9fafb;--n100:#f3f4f6;--n150:#eeeef0;
+  --n200:#e5e7eb;--n300:#d1d5db;--n400:#9ca3af;--n500:#6b7280;
+  --n600:#4b5563;--n700:#374151;--n800:#1f2937;--n900:#111827;
+  --amber:#f59e0b;--amberBg:#fffbeb;--amberBdr:#fde68a;
+  --blue:#3b82f6;--blueBg:#eff6ff;--blueBdr:#bfdbfe;
+  --sh-sm:0 1px 3px rgba(0,0,0,.08);
+  --sh-md:0 4px 20px rgba(109,40,217,.1),0 1px 4px rgba(0,0,0,.05);
+  --sh-lg:0 12px 40px rgba(109,40,217,.14),0 4px 12px rgba(0,0,0,.07);
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;
+  --font:'DM Sans',sans-serif;
+  --mnav-h:60px;
+}
+
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;font-size:16px;overscroll-behavior-y:none;overscroll-behavior-x:none}
+body{font-family:var(--font);background:#faf8ff;color:var(--n800);min-height:100vh;min-height:-webkit-fill-available;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+@supports(-webkit-touch-callout:none){body{min-height:-webkit-fill-available}}
+@supports(height:100dvh){body{min-height:100dvh}}
+img{max-width:100%;display:block}
+a{color:inherit;-webkit-tap-highlight-color:transparent}
+button{font-family:var(--font);cursor:pointer;border:none;touch-action:manipulation;-webkit-appearance:none;appearance:none}
+input,select,textarea{font-family:var(--font)}
+@media(max-width:767px){
+  input,select,textarea,input[type="number"],input[type="text"],input[type="email"],input[type="tel"],input[type="search"]{font-size:16px!important}
+}
+input[type="range"]{-webkit-appearance:none;appearance:none;touch-action:pan-x;user-select:none;-webkit-user-select:none}
+:focus-visible{outline:2px solid #7c3aed;outline-offset:2px}
+:focus:not(:focus-visible){outline:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ── Breadcrumb ── */
+.hero-topbar{display:flex;align-items:center;gap:10px;margin-bottom:28px;position:relative;z-index:2}
+.home-btn{display:inline-flex;align-items:center;gap:7px;padding:7px 14px 7px 10px;background:var(--n0);border:1.5px solid var(--n200);border-radius:100px;font-size:12.5px;font-weight:700;color:var(--n700);text-decoration:none;box-shadow:0 1px 4px rgba(0,0,0,.07);transition:border-color .18s,box-shadow .18s,color .18s}
+.home-btn:hover{border-color:var(--p300);color:var(--p700);box-shadow:0 2px 8px rgba(108,61,228,.12)}
+.hero-breadcrumb{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500}
+.hero-breadcrumb>span:not(.hero-breadcrumb-sep):not(.hero-breadcrumb-current){color:var(--n600);padding:5px 12px;background:var(--n50);border:1.5px solid var(--n200);border-radius:100px;font-weight:600;font-size:12px}
+.hero-breadcrumb-sep{color:var(--n300);font-size:14px;font-weight:400;flex-shrink:0}
+.hero-breadcrumb-current{display:inline-flex;color:var(--p700);font-weight:800;background:var(--p50);border:1.5px solid var(--p300);padding:5px 14px;border-radius:100px;font-size:12px;box-shadow:0 1px 6px rgba(108,61,228,.12)}
+@media(max-width:640px){.hero-breadcrumb>span:not(.hero-breadcrumb-sep):not(.hero-breadcrumb-current){display:none}.hero-breadcrumb-sep:first-of-type{display:none}}
+@media(max-width:480px){.hero-breadcrumb-current{display:none}}
+@media(max-width:360px){.hero-breadcrumb{display:none}}
+
+/* ── Hero ── */
+.hero{background:#faf8ff;position:relative;overflow:hidden;padding:38px 0 32px}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(224,216,248,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(224,216,248,.5) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
+.hero::after{content:'';position:absolute;top:-80px;right:-80px;width:600px;height:600px;background:radial-gradient(ellipse,rgba(108,61,228,.09),transparent 65%);pointer-events:none;z-index:0}
+.hero-deco{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hero-deco::before{content:'';position:absolute;bottom:-80px;left:-60px;width:500px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(30,168,81,.055),transparent 65%)}
+.hero-deco::after{content:'';position:absolute;top:28%;right:28%;width:280px;height:280px;border-radius:50%;border:1px solid rgba(108,61,228,.08);animation:floatBob 8s ease-in-out infinite}
+@keyframes floatBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.hero-inner{position:relative;z-index:2;max-width:1260px;margin:0 auto;padding:0 max(20px,env(safe-area-inset-left,20px))}
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:20px}}
+.hero h1{font-size:clamp(26px,4vw,50px);font-weight:900;color:var(--n800);letter-spacing:-2px;line-height:1.08;margin-bottom:14px;animation:fadeUp .55s .06s ease both}
+.hero-hl{background:linear-gradient(90deg,var(--p600),var(--p400),var(--g500));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 4s ease infinite}
+.hero-sub{font-size:clamp(13.5px,1.6vw,16px);color:var(--n500);line-height:1.75;margin-bottom:22px;max-width:500px;animation:fadeUp .55s .12s ease both}
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px;animation:fadeUp .55s .18s ease both}
+.hpill{display:inline-flex;align-items:center;gap:5px;background:var(--n0);border:1.5px solid var(--n200);border-radius:100px;padding:5px 13px;font-size:11.5px;font-weight:600;color:var(--n600);box-shadow:0 1px 4px rgba(0,0,0,.05);transition:border-color .18s,color .18s}
+.hpill:hover{border-color:var(--p300);color:var(--p700)}
+@media(max-width:860px){.hero{padding:24px 0 20px}}
+@media(max-width:480px){.hero{padding:20px 0 16px}.hero h1{letter-spacing:-1px}}
+
+/* ── Hero Panel ── */
+.hero-panel{background:rgba(255,255,255,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1.5px solid rgba(255,255,255,.9);border-radius:22px;padding:18px;box-shadow:0 8px 40px rgba(108,61,228,.12),0 2px 8px rgba(108,61,228,.06);position:relative;z-index:1;overflow:hidden;animation:fadeUp .6s .22s ease both}
+.hero-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,#7c3aed,#8b5cf6,#10b981);border-radius:22px 22px 0 0}
+.panel-title{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:2.5px;color:var(--n500);margin-bottom:10px;display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+.panel-title::before{content:'';width:16px;height:2px;flex-shrink:0;border-radius:2px;background:linear-gradient(90deg,#7c3aed,#10b981)}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.hstat{border-radius:12px;padding:11px 12px;text-align:left;cursor:default;transition:transform .22s cubic-bezier(.34,1.56,.64,1);overflow:hidden;position:relative;display:flex;align-items:center;gap:9px}
+.hstat:hover{transform:translateY(-2px) scale(1.01)}
+.hstat-icon-wrap{width:32px;height:32px;min-width:32px;border-radius:9px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:15px;position:relative;z-index:1;flex-shrink:0}
+.hstat-text{position:relative;z-index:1;min-width:0}
+.hstat-num{font-size:17px;font-weight:900;color:#fff;display:block;line-height:1;letter-spacing:-0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hstat-lbl{font-size:7.5px;font-weight:700;color:rgba(255,255,255,.78);text-transform:uppercase;letter-spacing:.8px;display:block;margin-top:2px;white-space:nowrap}
+.hstat-purple{background:linear-gradient(135deg,#5b21b6,#7c3aed,#8b5cf6);box-shadow:0 5px 18px rgba(91,33,182,.4)}
+.hstat-green{background:linear-gradient(135deg,#065f46,#059669,#10b981);box-shadow:0 5px 18px rgba(6,95,70,.4)}
+.hstat-amber{background:linear-gradient(135deg,#92400e,#d97706,#f59e0b);box-shadow:0 5px 18px rgba(146,64,14,.4)}
+.hstat-blue{background:linear-gradient(135deg,#1e3a8a,#2563eb,#3b82f6);box-shadow:0 5px 18px rgba(30,58,138,.4)}
+.hero-minicharts{display:flex;flex-direction:column;gap:5px;position:relative;z-index:1}
+.minichart-card{background:var(--n50);border-radius:10px;padding:9px 12px;border:1px solid var(--n150);display:flex;align-items:center;gap:9px;transition:background .18s,transform .18s;cursor:default}
+.minichart-card:hover{background:#fff;border-color:var(--p200);transform:translateX(3px)}
+.mc-icon{width:32px;height:32px;min-width:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;border:1px solid rgba(0,0,0,.06)}
+.mc-body{flex:1;min-width:0}
+.mc-label{font-size:9.5px;font-weight:600;color:var(--n400);margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mc-val{font-size:14px;font-weight:900;color:var(--n800);letter-spacing:-.3px;line-height:1}
+.mc-badge{margin-left:auto;flex-shrink:0;padding:2px 9px;border-radius:100px;font-size:9.5px;font-weight:800;white-space:nowrap}
+
+/* ── Page Layout ── */
+.page-wrap{max-width:1260px;margin:0 auto;padding:20px max(14px,env(safe-area-inset-right,14px)) 80px max(14px,env(safe-area-inset-left,14px));display:grid;grid-template-columns:1fr;gap:20px;align-items:start;overflow-x:clip}
+.sidebar{display:none}
+.main-col{display:flex;flex-direction:column;gap:28px;min-width:0;overflow-x:hidden}
+
+/* ── Sidebar ── */
+.sidebar{position:sticky;top:16px;display:none;flex-direction:column;gap:14px;height:calc(100vh - 32px);max-height:calc(100vh - 32px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(108,61,228,.2) transparent}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(108,61,228,.2);border-radius:3px}
+.sidebar-card{background:var(--n0);border-radius:var(--r-lg);border:1.5px solid var(--n200);box-shadow:var(--sh-sm);overflow:hidden}
+.sb-head{padding:12px 16px 8px;border-bottom:1px solid var(--n100);display:flex;align-items:center;gap:8px}
+.sb-head-icon{width:28px;height:28px;border-radius:8px;background:var(--p100);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.sb-head-title{font-size:11px;font-weight:800;color:var(--n700);text-transform:uppercase;letter-spacing:.8px}
+.sb-list{padding:8px 0}
+.sb-item{display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;transition:all .18s;text-decoration:none;border-left:3px solid transparent}
+.sb-item:hover{background:var(--p50);border-left-color:var(--p400)}
+.sb-item.active{background:var(--p50);border-left-color:var(--p700)}
+.sb-item-icon{font-size:15px;width:26px;text-align:center;flex-shrink:0}
+.sb-item-text{flex:1;min-width:0}
+.sb-item-name{font-size:12.5px;font-weight:600;color:var(--n700);line-height:1.2}
+.sb-item.active .sb-item-name{color:var(--p700);font-weight:700}
+.sb-item-hint{font-size:10px;color:var(--n400);margin-top:1px}
+.sb-item-badge{font-size:8.5px;font-weight:800;padding:2px 6px;border-radius:100px;background:var(--p100);color:var(--p700);flex-shrink:0}
+.sb-divider{height:1px;background:var(--n100);margin:3px 0}
+.sb-home{display:flex;align-items:center;gap:10px;padding:12px 14px;margin:4px 8px;border-radius:14px;background:linear-gradient(135deg,var(--p50),rgba(240,253,246,.8));border:1.5px solid var(--p200);text-decoration:none;transition:all .22s cubic-bezier(.34,1.56,.64,1);box-shadow:0 2px 8px rgba(108,61,228,.08)}
+.sb-home:hover{background:linear-gradient(135deg,var(--p100),var(--g50));border-color:var(--p400);transform:translateY(-2px);box-shadow:0 6px 20px rgba(108,61,228,.15)}
+.sb-home-icon{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#4f46e5);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(124,58,237,.35);flex-shrink:0}
+.sb-home-label{font-size:12.5px;font-weight:800;color:var(--p800)}
+.sb-home-sub{font-size:10px;color:var(--n500);margin-top:1px}
+.sb-qstat{padding:12px 16px;background:linear-gradient(135deg,var(--p50),var(--g50));border-top:1px solid var(--n100)}
+.sq-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.sq-label{font-size:10.5px;color:var(--n500);font-weight:600}
+.sq-val{font-size:12.5px;font-weight:800;color:var(--p700)}
+
+/* ── Section Dividers ── */
+section{min-width:0;overflow-x:hidden}
+.section-divider{display:flex;align-items:center;gap:14px;margin:8px 0 22px;padding:0;min-width:0}
+.sd-icon{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:transform .22s cubic-bezier(.34,1.56,.64,1)}
+.sd-icon:hover{transform:scale(1.08) rotate(-3deg)}
+.sd-text h2{font-size:clamp(18px,3vw,22px);font-weight:900;color:var(--n900);line-height:1.2}
+.sd-text p{font-size:13px;color:var(--n500);margin-top:2px}
+.sd-line{flex:1;height:1.5px;background:linear-gradient(to right,var(--p200),transparent);border-radius:1px}
+
+/* ── Card Base ── */
+.card{background:var(--n0);border-radius:var(--r-lg);border:1.5px solid rgba(124,58,237,.09);box-shadow:var(--sh-md);overflow:hidden;min-width:0}
+.card-head{padding:18px 24px 14px;border-bottom:1px solid var(--n100);display:flex;align-items:center;gap:12px}
+.ch-icon{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(108,61,228,.2);transition:transform .22s cubic-bezier(.34,1.56,.64,1)}
+.ch-icon:hover{transform:scale(1.1) rotate(-4deg)}
+.ch-icon.purple{background:linear-gradient(135deg,#7c3aed,#4f46e5);box-shadow:0 4px 14px rgba(124,58,237,.35)}
+.ch-icon.green{background:linear-gradient(135deg,#059669,#047857);box-shadow:0 4px 14px rgba(5,150,105,.35)}
+.ch-icon.amber{background:linear-gradient(135deg,#d97706,#b45309);box-shadow:0 4px 14px rgba(217,119,6,.35)}
+.ch-icon.blue{background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 4px 14px rgba(37,99,235,.35)}
+.ch-title{font-size:16px;font-weight:800;color:var(--n800);line-height:1.2}
+.ch-sub{font-size:12px;color:var(--n400);margin-top:2px}
+.card-body{padding:24px;min-width:0;overflow-x:hidden}
+@media(max-width:480px){.card-body{padding:16px}.card-head{padding:14px 16px}}
+
+/* ── Calculator Inputs ── */
+.params-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:20px}
+.param-card{background:var(--n0);border-radius:var(--r-md);border:1.5px solid var(--n200);box-shadow:var(--sh-sm);padding:14px 12px;transition:border-color .2s,box-shadow .2s;min-width:0;width:100%;box-sizing:border-box;overflow:hidden}
+.param-card:focus-within{border-color:var(--p400);box-shadow:0 0 0 3px rgba(168,85,247,.1),var(--sh-sm)}
+.param-card.green:focus-within{border-color:var(--g400);box-shadow:0 0 0 3px rgba(34,197,94,.1),var(--sh-sm)}
+.pc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:4px;margin-bottom:10px;flex-wrap:wrap;row-gap:4px;min-width:0}
+.pc-label{font-size:11px;font-weight:700;color:var(--n500);text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:4px;line-height:1.3}
+.pc-label.green{color:var(--g600)}
+.pc-value{font-size:13px;font-weight:800;color:var(--p800);background:var(--p50);border:1.5px solid var(--p200);padding:2px 7px;border-radius:6px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.pc-value.green{color:var(--g700);background:var(--g50);border-color:var(--g200)}
+.pc-input-row{display:flex;align-items:center;gap:6px;margin-bottom:7px;min-width:0;overflow:visible}
+.range-wrap{flex:1;min-width:0;overflow:visible;padding:6px 0 4px}
+.num-input{width:60px;min-width:50px;flex-shrink:0;padding:6px 4px;border:1.5px solid var(--n200);border-radius:9px;font-family:var(--font);font-size:13px;font-weight:700;color:var(--n800);background:var(--n0);outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;-moz-appearance:textfield;text-align:center}
+.num-input:focus{border-color:var(--p400);box-shadow:0 0 0 3px rgba(168,85,247,.12)}
+.num-input::-webkit-inner-spin-button,.num-input::-webkit-outer-spin-button{opacity:1;height:26px}
+.slider{-webkit-appearance:none;appearance:none;width:100%;max-width:100%;height:6px;border-radius:100px;background:var(--n200);outline:none;cursor:pointer;display:block;margin:10px 0 4px;vertical-align:middle;box-sizing:border-box}
+.slider::-webkit-slider-runnable-track{height:6px;border-radius:100px;background:transparent;cursor:pointer}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--n0);border:3px solid var(--p700);box-shadow:0 2px 8px rgba(109,40,217,.28);cursor:pointer;margin-top:-7px;transition:transform .15s,box-shadow .15s}
+.slider:active::-webkit-slider-thumb{transform:scale(1.15);box-shadow:0 3px 14px rgba(109,40,217,.4)}
+.slider::-moz-range-track{height:6px;border-radius:100px;background:var(--n200);border:none;cursor:pointer}
+.slider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--n0);border:3px solid var(--p700);box-shadow:0 2px 8px rgba(109,40,217,.28);cursor:pointer;-moz-appearance:none}
+.slider::-moz-range-progress{height:6px;border-radius:100px;background:var(--p400)}
+.slider.green::-webkit-slider-thumb{border-color:var(--g600);box-shadow:0 2px 8px rgba(22,163,74,.28)}
+.slider.green::-moz-range-thumb{border-color:var(--g600)}
+.slider.green::-moz-range-progress{background:var(--g400)}
+.range-marks{display:flex;justify-content:space-between;padding:0 2px}
+.rm{font-size:10px;color:var(--n400);font-weight:500}
+.presets{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.preset{flex-shrink:0;padding:3px 9px;border-radius:100px;border:1.5px solid var(--p200);background:var(--p50);color:var(--p700);font-family:var(--font);font-size:11px;font-weight:600;cursor:pointer;transition:all .18s;white-space:nowrap}
+.preset:hover,.preset.on{background:var(--p700);border-color:var(--p700);color:var(--n0)}
+.preset.green-preset{border-color:var(--g200);background:var(--g50);color:var(--g700)}
+.preset.green-preset:hover,.preset.green-preset.on{background:var(--g700);border-color:var(--g700);color:var(--n0)}
+.btn-calc{width:100%;padding:15px;background:linear-gradient(135deg,var(--p950),var(--p700),var(--p600));color:var(--n0);border:none;border-radius:13px;font-family:var(--font);font-size:15px;font-weight:800;cursor:pointer;transition:all .25s;box-shadow:0 4px 18px rgba(109,40,217,.3);display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.2px}
+.btn-calc:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(109,40,217,.4)}
+.btn-calc:active{transform:translateY(0)}
+.btn-reset{width:100%;padding:11px;background:transparent;border:1.5px solid var(--n200);border-radius:12px;font-family:var(--font);font-size:14px;font-weight:600;color:var(--n500);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px}
+.btn-reset:hover{background:var(--n50);border-color:var(--n300);color:var(--n700)}
+
+/* ── Results ── */
+.results-area{margin-top:22px;display:none}
+.results-area.show{display:block;animation:fadeUp .35s ease both}
+.results-grid{display:grid;grid-template-columns:1fr;gap:22px;align-items:start;margin-bottom:22px;min-width:0}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:400px){.stats-grid{grid-template-columns:1fr}}
+.stat-tile{padding:16px;border-radius:14px;border:1.5px solid;transition:transform .2s}
+.stat-tile:hover{transform:translateY(-2px)}
+.stat-tile.purple{background:var(--p50);border-color:var(--p200)}
+.stat-tile.green{background:var(--g50);border-color:var(--g200)}
+.stat-tile.amber{background:var(--amberBg);border-color:var(--amberBdr)}
+.stat-tile.blue{background:var(--blueBg);border-color:var(--blueBdr)}
+.st-label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--n500);margin-bottom:6px}
+.st-val{font-size:clamp(18px,3vw,26px);font-weight:900;line-height:1.05}
+.st-val.purple{color:var(--p800)}.st-val.green{color:var(--g700)}.st-val.amber{color:#b45309}.st-val.blue{color:#1d4ed8}
+.st-sub{font-size:11px;color:var(--n400);margin-top:4px}
+
+/* ── Donut ── */
+.donut-row{display:flex;align-items:center;gap:20px}
+@media(max-width:480px){.donut-row{flex-direction:column;align-items:flex-start}}
+.donut-svg{flex-shrink:0}
+.donut-legend{flex:1}
+.dl-item{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--n100)}
+.dl-item:last-child{border-bottom:none}
+.dl-dot{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+.dl-name{font-size:13px;color:var(--n600);font-weight:500;flex:1}
+.dl-val{font-size:14px;font-weight:700;color:var(--n800)}
+.dl-pct{font-size:11px;color:var(--n400);margin-top:1px}
+
+/* ── Bar Charts ── */
+.bar-chart-wrap{margin-top:16px}
+.bchart-row{margin-bottom:10px}
+.bchart-label{display:flex;justify-content:space-between;margin-bottom:4px;font-size:12.5px;font-weight:600}
+.bchart-track{height:30px;background:var(--n100);border-radius:8px;overflow:hidden;position:relative}
+.bchart-fill{height:100%;border-radius:8px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:800;color:#fff;min-width:40px;transition:width 1s cubic-bezier(.34,1.56,.64,1)}
+.bchart-fill.invested{background:linear-gradient(90deg,var(--p700),var(--p400))}
+.bchart-fill.returns{background:linear-gradient(90deg,var(--g700),var(--g400))}
+.bchart-fill.total{background:linear-gradient(90deg,var(--p800),var(--g600))}
+.bchart-fill.interest{background:linear-gradient(90deg,#d97706,#f59e0b)}
+.bchart-fill.maturity{background:linear-gradient(90deg,#1d4ed8,#3b82f6)}
+
+/* ── Yearly Table ── */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px;border:1px solid var(--n200)}
+table{width:100%;border-collapse:collapse;min-width:460px;font-size:13px}
+thead th{padding:11px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--n500);background:var(--n50);border-bottom:1px solid var(--n200);text-align:right;white-space:nowrap}
+thead th:first-child{text-align:center}
+tbody tr{transition:background .12s}
+tbody tr:hover{background:var(--p50)}
+tbody tr:not(:last-child) td{border-bottom:1px solid var(--n100)}
+tbody td{padding:10px 14px;text-align:right;color:var(--n700);font-weight:500}
+tbody td:first-child{text-align:center;color:var(--n500);font-weight:700;font-size:12px}
+.td-g{color:var(--g700);font-weight:700}.td-p{color:var(--p700);font-weight:700}.td-b{font-weight:800;color:var(--n800)}
+
+/* ── Infographic Tiles ── */
+.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.info-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.info-grid{grid-template-columns:1fr 1fr}}
+.itile{border-radius:18px;padding:20px 16px;text-align:center;position:relative;overflow:hidden;border:1.5px solid;transition:transform .25s,box-shadow .25s;cursor:default}
+.itile:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+.itile::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3.5px}
+.it1{background:linear-gradient(145deg,var(--p50),#fff);border-color:rgba(124,58,237,.18)}.it1::after{background:linear-gradient(90deg,var(--p700),var(--p400))}
+.it2{background:linear-gradient(145deg,var(--g50),#fff);border-color:rgba(34,197,94,.18)}.it2::after{background:linear-gradient(90deg,var(--g700),var(--g400))}
+.it3{background:linear-gradient(145deg,var(--amberBg),#fff);border-color:rgba(245,158,11,.18)}.it3::after{background:linear-gradient(90deg,#b45309,var(--amber))}
+.it4{background:linear-gradient(145deg,var(--blueBg),#fff);border-color:rgba(59,130,246,.18)}.it4::after{background:linear-gradient(90deg,#1d4ed8,var(--blue))}
+.it5{background:linear-gradient(145deg,#fdf2f8,#fff);border-color:rgba(236,72,153,.18)}.it5::after{background:linear-gradient(90deg,#be185d,#ec4899)}
+.it6{background:linear-gradient(145deg,#fff7ed,#fff);border-color:rgba(249,115,22,.18)}.it6::after{background:linear-gradient(90deg,#c2410c,#f97316)}
+.it-emoji{font-size:26px;margin-bottom:8px;display:block}
+.it-val{font-size:22px;font-weight:900;margin-bottom:4px;line-height:1;letter-spacing:-.5px}
+.it1 .it-val{color:var(--p700)}.it2 .it-val{color:var(--g700)}.it3 .it-val{color:#b45309}.it4 .it-val{color:#1d4ed8}.it5 .it-val{color:#be185d}.it6 .it-val{color:#c2410c}
+.it-label{font-size:11px;color:var(--n600);font-weight:600;line-height:1.4}
+.it-sub{font-size:10px;color:var(--n400);margin-top:3px}
+
+/* ── Guide Cards ── */
+.guide-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:22px}
+@media(max-width:700px){.guide-grid{grid-template-columns:1fr}}
+.gc{background:var(--n0);border-radius:var(--r-md);padding:22px;border:1.5px solid var(--n150);box-shadow:var(--sh-sm);transition:transform .2s,box-shadow .2s}
+.gc:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+.gc.full{grid-column:1/-1}
+.gc.purple-border{border-top:3px solid var(--p500)}
+.gc.green-border{border-top:3px solid var(--g500)}
+.gc.amber-border{border-top:3px solid var(--amber)}
+.gc.blue-border{border-top:3px solid var(--blue)}
+.gc-icon{font-size:28px;margin-bottom:12px}
+.gc h3{font-size:15px;font-weight:700;color:var(--n800);margin-bottom:8px}
+.gc p,.gc li{font-size:13.5px;color:var(--n600);line-height:1.7}
+.gc ul{padding-left:18px}
+.gc li{margin-bottom:5px}
+
+/* ── Formula Box ── */
+.formula-box{background:var(--p50);border:1.5px solid var(--p200);border-radius:12px;padding:20px;margin:14px 0}
+.formula-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--p700);margin-bottom:10px}
+.formula-code{font-family:'Courier New',monospace;font-size:13px;color:var(--n800);background:var(--p100);padding:10px 14px;border-radius:8px;margin:6px 0;line-height:1.8}
+.formula-note{font-size:12px;color:var(--n500);margin-top:8px}
+
+/* ── Step Flow ── */
+.step-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+@media(max-width:700px){.step-flow{grid-template-columns:repeat(2,1fr)}}
+.step-card{background:var(--n0);border-radius:var(--r-md);padding:18px 16px;border:1.5px solid var(--n150);box-shadow:var(--sh-sm);text-align:center}
+.step-num{width:32px;height:32px;background:linear-gradient(135deg,var(--p800),var(--p600));color:var(--n0);border-radius:50%;font-size:14px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px}
+.step-icon{font-size:24px;display:block;margin-bottom:8px}
+.step-card h4{font-size:13px;font-weight:700;color:var(--n800);margin-bottom:6px}
+.step-card p{font-size:12px;color:var(--n500);line-height:1.5}
+
+/* ── Taxation ── */
+.tax-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px}
+@media(max-width:700px){.tax-grid{grid-template-columns:1fr}}
+.tax-card{background:var(--n0);border-radius:var(--r-md);overflow:hidden;border:1.5px solid var(--n200);box-shadow:var(--sh-sm)}
+.tc-head{padding:14px 18px;font-size:14px;font-weight:800;color:var(--n0)}
+.tc-head.purple{background:linear-gradient(135deg,var(--p950),var(--p700))}
+.tc-head.green{background:linear-gradient(135deg,var(--g700),var(--g500))}
+.tc-head.amber{background:linear-gradient(135deg,#92400e,#d97706)}
+.tc-row{display:flex;justify-content:space-between;align-items:center;padding:11px 18px;border-bottom:1px solid var(--n100)}
+.tc-row:last-child{border-bottom:none}
+.tc-label{font-size:13px;color:var(--n600);font-weight:500}
+.tc-val{font-size:13px;font-weight:700;color:var(--n800)}
+.tc-val.highlight{color:var(--p700);font-weight:800}
+.tc-val.green{color:var(--g700);font-weight:800}
+.tc-val.red{color:#dc2626;font-weight:800}
+.tax-timeline{background:linear-gradient(135deg,var(--p50),var(--g50));border-radius:var(--r-md);padding:20px;border:1.5px solid var(--p200);margin-bottom:18px}
+.tt-title{font-size:14px;font-weight:800;color:var(--n800);margin-bottom:14px}
+.tt-steps{display:flex;flex-direction:column;gap:10px}
+.tt-step{display:flex;gap:14px;align-items:flex-start}
+.tt-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;color:#fff}
+.tt-dot.p{background:linear-gradient(135deg,var(--p700),var(--p500))}
+.tt-dot.g{background:linear-gradient(135deg,var(--g700),var(--g500))}
+.tt-dot.a{background:linear-gradient(135deg,#b45309,var(--amber))}
+.tt-content h4{font-size:13px;font-weight:700;color:var(--n800);margin-bottom:2px}
+.tt-content p{font-size:12.5px;color:var(--n500);line-height:1.6}
+
+/* ── Pro Tips ── */
+.tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:700px){.tips-grid{grid-template-columns:1fr}}
+.tip-card{border-radius:var(--r-md);padding:20px;border:1.5px solid;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.tip-card:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+.tip-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.tc1{background:linear-gradient(145deg,var(--p50),#fff);border-color:rgba(124,58,237,.2)}.tc1::before{background:linear-gradient(90deg,var(--p700),var(--p400))}
+.tc2{background:linear-gradient(145deg,var(--g50),#fff);border-color:rgba(34,197,94,.2)}.tc2::before{background:linear-gradient(90deg,var(--g700),var(--g400))}
+.tc3{background:linear-gradient(145deg,var(--amberBg),#fff);border-color:rgba(245,158,11,.2)}.tc3::before{background:linear-gradient(90deg,#b45309,var(--amber))}
+.tc4{background:linear-gradient(145deg,var(--blueBg),#fff);border-color:rgba(59,130,246,.2)}.tc4::before{background:linear-gradient(90deg,#1d4ed8,var(--blue))}
+.tc5{background:linear-gradient(145deg,#fdf2f8,#fff);border-color:rgba(236,72,153,.2)}.tc5::before{background:linear-gradient(90deg,#be185d,#ec4899)}
+.tc6{background:linear-gradient(145deg,#f0f9ff,#fff);border-color:rgba(6,182,212,.2)}.tc6::before{background:linear-gradient(90deg,#0e7490,#06b6d4)}
+.tip-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;padding:3px 10px;border-radius:100px;margin-bottom:10px}
+.tb-purple{background:var(--p100);color:var(--p700)}.tb-green{background:var(--g100);color:var(--g700)}.tb-amber{background:var(--amberBg);color:#b45309}.tb-blue{background:var(--blueBg);color:#1d4ed8}.tb-pink{background:#fdf2f8;color:#be185d}.tb-teal{background:#f0f9ff;color:#0e7490}
+.tip-icon{font-size:28px;margin-bottom:10px}
+.tip-card h4{font-size:14px;font-weight:800;color:var(--n800);margin-bottom:8px;line-height:1.3}
+.tip-card p{font-size:13px;color:var(--n600);line-height:1.7}
+.tip-highlight{background:rgba(0,0,0,.04);border-radius:8px;padding:10px 12px;margin-top:12px;font-size:12.5px;font-weight:600;color:var(--n700)}
+
+/* ── Goal Planner ── */
+.goal-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
+.goal-tabs::-webkit-scrollbar{display:none}
+.goal-tab{display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:100px;border:1.5px solid var(--n200);background:var(--n0);font-family:var(--font);font-size:13px;font-weight:600;color:var(--n600);cursor:pointer;transition:all .2s;white-space:nowrap;touch-action:manipulation}
+.goal-tab:hover{border-color:var(--p300);color:var(--p600);background:var(--p50)}
+.goal-tab.active{background:linear-gradient(135deg,var(--p700),var(--p500));border-color:transparent;color:#fff;box-shadow:0 4px 14px rgba(109,40,217,.3)}
+.goal-content{background:linear-gradient(135deg,var(--p50),var(--g50));border-radius:var(--r-lg);padding:24px;border:1.5px solid var(--p200)}
+.goal-result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:480px){.goal-result-grid{grid-template-columns:1fr}}
+.gr-tile{background:var(--n0);border-radius:12px;padding:14px;border:1px solid var(--n150);text-align:center}
+.grt-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--n400);margin-bottom:5px}
+.grt-val{font-size:20px;font-weight:900;color:var(--p800)}
+.grt-val.green{color:var(--g700)}.grt-val.amber{color:#b45309}.grt-val.blue{color:#1d4ed8}
+.grt-sub{font-size:11px;color:var(--n400);margin-top:3px}
+.fund-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.fund-chip{background:var(--p50);border:1px solid var(--p200);border-radius:100px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--p800)}
+
+/* ── FAQ ── */
+.faq-wrap{max-width:100%}
+.faq-item{border:1.5px solid var(--n200);border-radius:14px;overflow:hidden;margin-bottom:10px;background:var(--n0);transition:border-color .2s,box-shadow .2s}
+.faq-item:hover{border-color:var(--p300);box-shadow:var(--sh-sm)}
+.faq-item.open{border-color:var(--p300);box-shadow:0 4px 16px rgba(109,40,217,.08)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;cursor:pointer;font-size:14px;font-weight:700;color:var(--p700);user-select:none;-webkit-user-select:none;gap:12px;min-height:56px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:color .2s}
+.faq-item.open .faq-q{color:var(--p800)}
+.faq-icon{width:26px;height:26px;min-width:26px;border-radius:50%;background:var(--p100);display:flex;align-items:center;justify-content:center;color:var(--p700);font-size:16px;flex-shrink:0;transition:transform .3s,background .2s,color .2s;font-weight:900;line-height:1}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--p700);color:#fff}
+.faq-a{display:none;padding:0 20px 18px;font-size:13px;color:var(--n500);line-height:1.8}
+.faq-item.open .faq-a{display:block}
+.faq-lead{display:block;font-size:13.5px;font-weight:700;color:var(--n800);margin-bottom:10px;line-height:1.5}
+.faq-points{list-style:none;display:flex;flex-direction:column;gap:7px;margin:10px 0}
+.faq-points li{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.7}
+.fp-bul{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;margin-top:2px;font-weight:800}
+.fp-bul.gr{background:var(--g100);color:var(--g700)}.fp-bul.pu{background:var(--p100);color:var(--p700)}.fp-bul.or{background:#fff7ed;color:#c2410c}.fp-bul.bl{background:var(--blueBg);color:#1d4ed8}
+.faq-chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.faq-chip{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;padding:4px 11px;border-radius:100px}
+.faq-chip.gr{background:var(--g100);color:var(--g700);border:1px solid var(--g200)}
+.faq-chip.pu{background:var(--p100);color:var(--p700);border:1px solid var(--p200)}
+.faq-chip.or{background:#fff7ed;color:#c2410c;border:1px solid #fdba74}
+.faq-chip.bl{background:var(--blueBg);color:#1e40af;border:1px solid var(--blueBdr)}
+.faq-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.faq-stat{background:var(--n50);border-radius:10px;padding:10px;text-align:center;border:1px solid var(--n150)}
+.faq-stat-val{display:block;font-size:16px;font-weight:900;color:var(--p700);line-height:1.1;margin-bottom:3px}
+.faq-stat-lbl{display:block;font-size:9px;font-weight:700;color:var(--n400);text-transform:uppercase;letter-spacing:.4px}
+.faq-note{margin-top:12px;padding:10px 14px;background:var(--n50);border-left:3px solid var(--p500);border-radius:0 8px 8px 0;font-size:12px;color:var(--n700);line-height:1.65;font-weight:500}
+
+/* ── Disclaimer ── */
+.disclaimer{background:var(--amberBg);border:1px solid var(--amberBdr);border-radius:12px;padding:14px 18px;font-size:12px;color:#92400e;line-height:1.7;margin-top:18px}
+.disclaimer strong{font-weight:800}
+
+/* ── Power table ── */
+.power-table-wrap{background:linear-gradient(135deg,var(--p50),var(--g50));border-radius:var(--r-lg);padding:22px;border:1.5px solid var(--p200);margin-bottom:22px;overflow:hidden}
+.pt-title{font-size:15px;font-weight:800;color:var(--n800);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.pt-title::after{content:'';flex:1;height:1.5px;background:linear-gradient(to right,var(--p200),transparent);border-radius:1px}
+.power-rows{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.power-row{background:var(--n0);border-radius:12px;padding:14px;border:1px solid var(--n150)}
+.pr-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--n100)}
+.pr-year{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--n500)}
+.pr-badge{font-size:10px;font-weight:800;padding:2px 8px;border-radius:100px;background:var(--p100);color:var(--p700)}
+.pr-main{font-size:20px;font-weight:900;color:var(--g700);margin-bottom:3px}
+.pr-invested{font-size:12px;color:var(--n500)}
+.pr-gain{font-size:11px;color:var(--p600);font-weight:700;margin-top:3px}
+
+/* ── Mobile Chips ── */
+.mobile-section-chips{display:none;flex-wrap:wrap;overflow:visible;padding:10px max(14px,env(safe-area-inset-left,14px));gap:7px;background:rgba(255,255,255,.97);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--n150);position:sticky;top:0;z-index:600;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+@supports not(backdrop-filter:blur(1px)){.mobile-section-chips{background:#fff}}
+.mobile-section-chips::-webkit-scrollbar{display:none}
+.mchip{flex-shrink:0;padding:6px 12px;border-radius:100px;border:1.5px solid var(--n200);background:var(--n0);font-size:12px;font-weight:600;color:var(--n600);cursor:pointer;transition:all .18s;white-space:nowrap;text-decoration:none;touch-action:manipulation;font-family:var(--font);display:inline-flex;align-items:center;gap:4px}
+.mchip:active,.mchip.on{background:var(--p700);border-color:var(--p700);color:#fff;box-shadow:0 2px 10px rgba(124,58,237,.28)}
+
+/* ── Mobile Nav ── */
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--n150);z-index:700;padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -2px 16px rgba(0,0,0,.07)}
+@supports not(backdrop-filter:blur(1px)){.mobile-nav{background:#fff}}
+.mnav-items{display:flex;width:100%}
+.mnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 2px 6px;min-height:max(var(--mnav-h),44px);cursor:pointer;text-decoration:none;touch-action:manipulation;background:none;user-select:none;-webkit-user-select:none;transition:background .15s;position:relative}
+.mnav-item:active{background:var(--p50)}
+.mnav-icon{font-size:22px;line-height:1;display:block;margin-bottom:3px;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.mnav-label{font-size:10px;font-weight:600;color:var(--n500);letter-spacing:.1px;line-height:1;transition:color .15s}
+.mnav-item.active .mnav-icon{transform:scale(1.15)}
+.mnav-item.active .mnav-label{color:var(--p700);font-weight:800}
+.mnav-dot{width:4px;height:4px;border-radius:50%;background:var(--p600);margin:2px auto 0;opacity:0;transition:opacity .2s}
+.mnav-item.active .mnav-dot{opacity:1}
+.mnav-item.active::before{content:'';position:absolute;top:0;left:25%;right:25%;height:2.5px;border-radius:0 0 3px 3px;background:var(--p600)}
+
+/* ── FAB ── */
+.fab-calc{position:fixed;bottom:calc(var(--mnav-h) + 14px + env(safe-area-inset-bottom,0px));left:16px;width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#5b21b6,#7c3aed,#059669);color:#fff;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 6px 24px rgba(91,33,182,.5),0 2px 6px rgba(0,0,0,.2);z-index:850;transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;font-family:var(--font)}
+.fab-calc:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(91,33,182,.65)}
+.fab-calc:active{transform:scale(.95)}
+.fab-icon{width:24px;height:24px;display:block;line-height:0;font-size:0}
+.fab-icon svg{width:24px;height:24px;display:block}
+.fab-label{font-size:8px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:rgba(255,255,255,.88);line-height:1;margin-top:2px}
+@media(min-width:1025px){.fab-calc{display:none}}
+@media(max-width:480px){.fab-calc{width:48px;height:48px;border-radius:14px;bottom:calc(var(--mnav-h) + 12px + env(safe-area-inset-bottom,0px))}}
+
+/* ── Drawer ── */
+.drawer-backdrop{position:fixed;inset:0;background:rgba(10,2,30,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:1000;opacity:0;pointer-events:none;transition:opacity .28s ease}
+.drawer-backdrop.open{opacity:1;pointer-events:auto}
+.calc-drawer{position:fixed;bottom:0;left:0;right:0;max-height:92vh;max-height:92dvh;background:#fff;border-radius:24px 24px 0 0;z-index:1001;transform:translateY(100%);transition:transform .35s cubic-bezier(.32,.72,0,1);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 -8px 40px rgba(0,0,0,.18);padding-bottom:env(safe-area-inset-bottom,0px)}
+.calc-drawer.open{transform:translateY(0)}
+@media(min-width:641px) and (max-width:1024px){.calc-drawer{left:0;right:auto;top:0;bottom:0;max-height:100vh;max-height:100dvh;height:100%;width:min(360px,90vw);border-radius:0 20px 20px 0;transform:translateX(-100%);padding-bottom:0}.calc-drawer.open{transform:translateX(0)}}
+.drawer-handle{width:40px;height:4px;border-radius:2px;background:var(--n300);margin:12px auto 0;flex-shrink:0}
+@media(min-width:641px){.drawer-handle{display:none}}
+.drawer-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 14px;background:linear-gradient(135deg,var(--p950),var(--p800),var(--g700));flex-shrink:0;position:relative}
+.drawer-header::before{content:'';position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.07),transparent 70%);pointer-events:none}
+.drawer-title{font-size:16px;font-weight:900;color:#fff;display:flex;align-items:center;gap:10px;text-shadow:0 1px 4px rgba(0,0,0,.2)}
+.drawer-title-icon{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.drawer-close{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .18s,transform .25s;touch-action:manipulation;font-family:var(--font)}
+.drawer-close:hover{background:rgba(255,255,255,.3);transform:rotate(90deg)}
+.drawer-home-link{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:linear-gradient(135deg,var(--p50),var(--g50));border:1.5px solid var(--p200);margin-bottom:14px;text-decoration:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:all .22s cubic-bezier(.34,1.56,.64,1);position:relative;overflow:hidden}
+.drawer-home-link:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 6px 20px rgba(108,61,228,.14);border-color:var(--p400)}
+.drawer-home-link:active{transform:scale(.97)}
+.drawer-home-icon{width:38px;height:38px;border-radius:11px;min-width:38px;background:linear-gradient(135deg,var(--p700),var(--p500));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(124,58,237,.35)}
+.drawer-home-label{font-size:13.5px;font-weight:800;color:var(--p800);line-height:1.2}
+.drawer-home-sub{font-size:11px;color:var(--n500);margin-top:2px}
+.drawer-home-arrow{margin-left:auto;flex-shrink:0}
+.drawer-body{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;flex:1;padding:12px 12px 20px;padding-bottom:max(20px,calc(env(safe-area-inset-bottom,0px) + 16px))}
+.drawer-search{display:flex;align-items:center;gap:8px;background:var(--n50);border:1.5px solid var(--n200);border-radius:12px;padding:10px 14px;margin-bottom:14px;transition:border-color .2s,box-shadow .2s}
+.drawer-search:focus-within{border-color:var(--p400);box-shadow:0 0 0 3px rgba(124,58,237,.1)}
+.drawer-search-icon{font-size:15px;flex-shrink:0;color:var(--n400)}
+.drawer-search-input{border:none;background:transparent;outline:none;font-family:var(--font);font-size:14px;font-weight:500;color:var(--n800);width:100%}
+.drawer-search-input::placeholder{color:var(--n400)}
+.drawer-cat{margin-bottom:16px}
+.drawer-cat-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:var(--n400);padding:0 8px;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.drawer-cat-title::after{content:'';flex:1;height:1px;background:var(--n150)}
+.drawer-items{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+@media(max-width:360px){.drawer-items{grid-template-columns:1fr}}
+.drawer-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--n150);background:#fff;cursor:pointer;text-decoration:none;transition:all .18s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;overflow:hidden}
+.drawer-item:hover,.drawer-item:active{background:var(--p50);border-color:var(--p200)}
+.drawer-item.active-calc{background:var(--p100);border-color:var(--p400)}
+.drawer-item-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.drawer-item-text{flex:1;min-width:0}
+.drawer-item-name{font-size:12.5px;font-weight:700;color:var(--n800);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drawer-item.active-calc .drawer-item-name{color:var(--p700)}
+.drawer-item-sub{font-size:10px;color:var(--n400);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drawer-item-arrow{color:var(--n300);font-size:12px;flex-shrink:0;font-weight:700}
+.drawer-badge{font-size:8px;font-weight:800;padding:2px 6px;border-radius:100px;white-space:nowrap;flex-shrink:0}
+.drawer-badge.active{background:var(--p100);color:var(--p700)}
+.drawer-badge.popular{background:var(--g100);color:var(--g700)}
+.drawer-badge.new{background:var(--amberBg);color:var(--amber)}
+
+/* ── Scroll Top ── */
+#scrollTop{position:fixed;bottom:calc(var(--mnav-h) + 14px + env(safe-area-inset-bottom,0px));right:16px;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 18px rgba(109,40,217,.4);z-index:900;display:none;align-items:center;justify-content:center;transition:.25s;font-family:var(--font);touch-action:manipulation}
+@media(min-width:1025px){#scrollTop{bottom:20px;right:20px}}
+
+/* ── Demat Banner ── */
+.demat-banner{padding:28px max(20px,env(safe-area-inset-left));background:linear-gradient(135deg,var(--p950),var(--p800),var(--g700));border-radius:var(--r-lg);position:relative;overflow:hidden;text-align:center;box-shadow:0 8px 32px rgba(109,40,217,.22)}
+.demat-banner::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);border-radius:50%;pointer-events:none}
+.db-inner{max-width:620px;margin:0 auto;position:relative;z-index:1}
+.db-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:800;color:#fff;letter-spacing:.8px;text-transform:uppercase;margin-bottom:12px}
+.db-title{font-size:clamp(17px,3.5vw,24px);font-weight:900;color:#fff;letter-spacing:-.4px;margin-bottom:8px;line-height:1.2}
+.db-sub{font-size:13px;color:rgba(255,255,255,.82);margin-bottom:20px;line-height:1.6}
+.db-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-db-pri{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;border-radius:12px;font-family:var(--font);font-size:14px;font-weight:800;color:var(--p800);background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.18);border:none;min-height:46px;white-space:nowrap;transition:transform .2s,box-shadow .2s;cursor:pointer;touch-action:manipulation}
+.btn-db-pri:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.25)}
+.btn-db-sec{display:inline-flex;align-items:center;gap:6px;padding:12px 20px;border-radius:12px;font-family:var(--font);font-size:13px;font-weight:700;color:#fff;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);min-height:46px;white-space:nowrap;transition:background .2s;cursor:pointer;touch-action:manipulation}
+.btn-db-sec:hover{background:rgba(255,255,255,.25)}
+@media(max-width:479px){.btn-db-pri,.btn-db-sec{width:100%;justify-content:center}}
+
+/* ── Responsive ── */
+@media(max-width:1024px){.mobile-section-chips{display:flex}.mobile-nav{display:flex}body{padding-bottom:calc(var(--mnav-h) + env(safe-area-inset-bottom,0px))}}
+@media(min-width:1025px){.page-wrap{grid-template-columns:264px 1fr;padding:28px 24px 80px}.sidebar{display:flex}.mobile-section-chips{display:none}.mobile-nav{display:none}.params-grid{grid-template-columns:repeat(3,1fr)}.results-grid{grid-template-columns:1fr 1fr}.guide-grid{grid-template-columns:repeat(2,1fr)}.step-flow{grid-template-columns:repeat(4,1fr)}.tips-grid{grid-template-columns:repeat(2,1fr)}.info-grid{grid-template-columns:repeat(4,1fr)}.power-rows{grid-template-columns:repeat(3,1fr)}.tax-grid{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr auto}.hero-stats{grid-template-columns:repeat(2,1fr);min-width:260px}}
+@media(min-width:641px) and (max-width:1024px){.page-wrap{grid-template-columns:1fr;padding:16px 16px calc(var(--mnav-h) + env(safe-area-inset-bottom,0px) + 16px);gap:18px}.sidebar{display:none}.params-grid{grid-template-columns:repeat(3,1fr);gap:12px}.results-grid{grid-template-columns:1fr 1fr;gap:16px}.stats-grid{grid-template-columns:repeat(2,1fr)}.guide-grid{grid-template-columns:repeat(2,1fr)}.step-flow{grid-template-columns:repeat(4,1fr)}.tips-grid{grid-template-columns:repeat(2,1fr)}.info-grid{grid-template-columns:repeat(4,1fr)}.power-rows{grid-template-columns:repeat(3,1fr)}.tax-grid{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:repeat(4,1fr);min-width:unset}.card-body{padding:20px}.card-head{padding:16px 20px 12px}}
+@media(min-width:481px) and (max-width:640px){.page-wrap{grid-template-columns:1fr;padding:12px 12px calc(var(--mnav-h) + env(safe-area-inset-bottom,0px) + 12px);gap:14px}.sidebar{display:none}.params-grid{grid-template-columns:1fr 1fr;gap:10px}.results-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.guide-grid{grid-template-columns:1fr}.step-flow{grid-template-columns:1fr 1fr}.tips-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr 1fr}.power-rows{grid-template-columns:1fr 1fr}.tax-grid{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:repeat(2,1fr);min-width:unset}.card-body{padding:14px}.card-head{padding:12px 14px}.main-col{gap:18px}.faq-stat-row{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:361px) and (max-width:480px){.page-wrap{grid-template-columns:1fr;padding:12px 12px calc(var(--mnav-h) + env(safe-area-inset-bottom,0px) + 12px);gap:13px}.sidebar{display:none}.params-grid{grid-template-columns:1fr;gap:10px}.results-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.guide-grid{grid-template-columns:1fr}.step-flow{grid-template-columns:1fr 1fr}.tips-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr 1fr}.power-rows{grid-template-columns:1fr}.tax-grid{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:1fr 1fr;min-width:unset}.card-body{padding:14px}.card-head{padding:12px 14px}.hero{padding:22px 0 16px}.hero h1{font-size:clamp(24px,7vw,34px);letter-spacing:-.8px}.main-col{gap:18px}.faq-q{font-size:13px;padding:13px 14px;min-height:52px}.faq-a{padding:0 14px 16px;font-size:12.5px}.tip-card{padding:16px}.ch-title{font-size:15px}}
+@media(max-width:360px){.page-wrap{grid-template-columns:1fr;padding:10px 10px calc(var(--mnav-h) + env(safe-area-inset-bottom,0px) + 10px);gap:12px}.sidebar{display:none}.params-grid{grid-template-columns:1fr;gap:8px}.results-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.guide-grid{grid-template-columns:1fr}.step-flow{grid-template-columns:1fr 1fr}.tips-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr 1fr}.power-rows{grid-template-columns:1fr}.tax-grid{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:1fr 1fr;min-width:unset}.card-body{padding:12px}.card-head{padding:11px 12px}.hero{padding:18px 0 14px}.hero h1{font-size:22px;letter-spacing:-.5px}.hero-inner{padding:0 14px}.mchip{font-size:11.5px;padding:6px 11px}.faq-q{font-size:12.5px;padding:12px}.faq-a{padding:0 12px 14px;font-size:12px}.tip-card{padding:14px}.ch-title{font-size:14px}.goal-content{padding:16px}.power-table-wrap{padding:16px}}
+@media(max-height:500px) and (orientation:landscape){.hero{padding:12px 0!important}.hero h1{font-size:20px!important}.mobile-section-chips{display:none!important}}
+@media(forced-colors:active){.btn-calc,.fab-calc,.mnav-item.active{forced-color-adjust:none}}
+@media(-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){body{-webkit-font-smoothing:antialiased}}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(108,61,228,.22);border-radius:4px}
+
+</style>
+</head>
+
+<style>
+/* ═══ CROSS-PLATFORM COMPATIBILITY ═══ */
+html{-moz-text-size-adjust:100%;overscroll-behavior-x:none;overscroll-behavior-y:none}
+body{min-height:100vh;min-height:-webkit-fill-available;text-rendering:optimizeLegibility}
+@supports(-webkit-touch-callout:none){body{min-height:-webkit-fill-available}}
+@supports(height:100dvh){body{min-height:100dvh}}
+@media(max-width:767px){input,select,textarea,input[type="number"],input[type="text"],input[type="email"],input[type="tel"],input[type="search"]{font-size:16px!important}}
+:focus-visible{outline:2px solid #7c3aed;outline-offset:2px}
+:focus:not(:focus-visible){outline:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+@media(max-height:500px) and (orientation:landscape){.hero{padding:14px 0!important}.hero h1{font-size:20px!important}.mobile-section-chips{display:none!important}.fab-calc{bottom:calc(60px + 10px + env(safe-area-inset-bottom,0px))!important}}
+@media(forced-colors:active){.btn-calc,.fab-calc,.mnav-item.active{forced-color-adjust:none}}
+@supports not(backdrop-filter:blur(1px)){.mobile-nav{background:#fff!important}.mobile-section-chips{background:#fff!important}.calc-drawer{background:#fff!important}}
+.calc-drawer{max-height:92dvh}
+@media(-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){body{-webkit-font-smoothing:antialiased}}
+
+.db-pills{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:14px}
+.db-pill{font-size:11.5px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:100px;padding:4px 12px}
+@media(max-width:479px){.btn-db-pri,.btn-db-sec{width:100%;justify-content:center}}
+
+hrink:0;
+}
+.sb-home-label{font-size:13px;font-weight:800;color:var(--p800)}
+.sb-home-sub{font-size:10.5px;color:var(--n500);margin-top:1px}
+
+/* ═══ Demat Modal — Fixed ═══ */
+
+
+/* ── Demat close button ── */
+#demat-close{
+  display:none;
+  position:absolute;
+  top:-14px;
+  right:-14px;
+  width:36px;height:36px;
+  border-radius:50%;
+  background:#fff;
+  border:2px solid #e5e7eb;
+  color:#374151;
+  font-size:16px;line-height:1;
+  cursor:pointer;
+  align-items:center;justify-content:center;
+  box-shadow:0 2px 10px rgba(0,0,0,.15);
+  transition:background .18s,color .18s,border-color .18s,transform .2s;
+  font-family:inherit;
+  z-index:100002;
+}
+#demat-overlay.open #demat-close{display:flex}
+#demat-close:hover{
+  background:#7c3aed;color:#fff;border-color:#7c3aed;
+  transform:rotate(90deg) scale(1.08);
+  box-shadow:0 4px 16px rgba(124,58,237,.4);
+}
+/* ── Demat form CSS variables ── */
+#demat-inner{
+  --purple:#7c3aed;
+  --purple-mid:#8b5cf6;
+  --purple-light:#a78bfa;
+  --purple-pale:#ede9fe;
+  --purple-glow:rgba(124,58,237,0.14);
+  --purple-shadow:rgba(124,58,237,0.28);
+  --green:#16a34a;
+  --green-mid:#22c55e;
+  --green-light:#4ade80;
+  --green-pale:#dcfce7;
+  --green-glow:rgba(22,163,74,0.14);
+  --red:#dc2626;
+  --white:#ffffff;
+  --text-dark:#111827;
+  --text-mid:#374151;
+  --text-soft:#6b7280;
+  --text-muted:#9ca3af;
+  --bg-page:#ffffff;
+  --bg-input:#f9fafb;
+  --bg-focus:#faf5ff;
+  --bg-footer:#fafafa;
+  --border:#e5e7eb;
+  --border-soft:#f3f4f6;
+  --font:'DM Sans',sans-serif;
+}
+/* Force white card background */
+#demat-inner .card{
+  background:#ffffff !important;
+  color:#111827 !important;
+}
+#demat-inner .card-header{
+  background:#ffffff !important;
+}
+#demat-inner .card-body{
+  background:#ffffff !important;
+}
+#demat-inner .card-footer{
+  background:#f9fafb !important;
+}
+/* Fix label visibility */
+#demat-inner label,
+#demat-inner .field label{
+  color:#374151 !important;
+  font-size:13px !important;
+  font-weight:600 !important;
+  display:block !important;
+  margin-bottom:6px !important;
+}
+#demat-inner .card-title{
+  color:#111827 !important;
+  font-size:24px !important;
+  font-weight:800 !important;
+  letter-spacing:-0.5px !important;
+}
+#demat-inner .card-desc{
+  color:#6b7280 !important;
+  font-size:13.5px !important;
+  line-height:1.65 !important;
+}
+#demat-inner .header-label{
+  color:#7c3aed !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  letter-spacing:1.5px !important;
+  text-transform:uppercase !important;
+}
+#demat-inner .footer-sebi{color:#7c3aed !important;font-size:11px !important;font-weight:700 !important}
+#demat-inner .footer-exchanges span{color:#8b5cf6 !important;font-size:11px !important;font-weight:700 !important}
+
+
+/* ── Demat close button — always visible ── */
+#demat-overlay.open @media(max-width:540px){
+  }
+
+/* ── Demat close button ── */
+#demat-overlay.open 
+/* ── Demat close button — top-right of overlay ── */
+#demat-overlay.open @media(max-width:540px){
+  }
+#demat-overlay{
+  display:none;position:fixed;inset:0;z-index:99999;
+  background:rgba(10,2,30,0.75);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:40px 16px 40px;
+  box-sizing:border-box;
+  align-items:flex-start;
+  justify-content:center;
+}
+#demat-overlay.open{display:flex}
+
+#demat-inner{
+  position:relative;
+  width:100%;max-width:540px;
+  margin:0 auto;
+  border-radius:20px;
+  box-shadow:0 24px 80px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.08);
+  animation:dematFadeUp .38s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes dematFadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+
+
+/* Card inside modal */
+#demat-inner .page{
+  min-height:unset !important;padding:0 !important;
+  background:transparent !important;overflow:visible !important;
+  display:block !important;position:static !important;
+}
+#demat-inner .deco{display:none !important}
+#demat-inner .card{
+  animation:none !important;width:100% !important;
+  max-width:100% !important;min-height:unset !important;
+  border-radius:0 !important;
+  box-sizing:border-box !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+}
+#demat-inner .card-header{padding:28px 32px 22px !important}
+#demat-inner .card-body{padding:24px 32px 28px !important}
+#demat-inner .card-footer{padding:14px 32px !important}
+#demat-inner .card-title{font-size:24px !important;letter-spacing:-0.5px}
+#demat-inner .card-desc{font-size:13.5px !important;line-height:1.65}
+
+/* Fix inputs — add border-radius */
+#demat-inner input,#demat-inner select{
+  border-radius:10px !important;
+  padding:12px 14px !important;
+  font-size:14px !important;
+  border:1.5px solid #e5e7eb !important;
+  background:#f9fafb !important;
+  transition:border-color .18s,box-shadow .18s,background .18s !important;
+  width:100% !important;
+  box-sizing:border-box !important;
+}
+#demat-inner input:focus,#demat-inner select:focus{
+  border-color:#7c3aed !important;
+  background:#fff !important;
+  box-shadow:0 0 0 3px rgba(124,58,237,.12) !important;
+  outline:none !important;
+}
+#demat-inner input.has-prefix{padding-left:58px !important}
+#demat-inner .btn-submit{
+  border-radius:12px !important;
+  padding:14px 24px !important;
+  font-size:15px !important;
+  font-weight:700 !important;
+  letter-spacing:0.2px !important;
+}
+#demat-inner .field{margin-bottom:18px !important}
+#demat-inner .field label{
+  font-size:13px !important;font-weight:600 !important;
+  color:#374151 !important;margin-bottom:6px !important;
+}
+
+/* Mobile */
+@media(max-width:540px){
+  #demat-overlay{padding:0 !important}
+  #demat-inner{
+    max-width:100% !important;border-radius:0 !important;
+    min-height:100dvh;
+  }
+  #demat-inner .card-header{padding:24px 18px 18px !important}
+  #demat-inner .card-body{padding:20px 18px 24px !important}
+  #demat-inner .card-footer{padding:12px 18px !important}
+  }
+.modal-open{overflow:hidden !important;width:100%}
+/* ── Sidebar Investment Calcs scrollbar ── */
+.sb-list-scroll{}
+
+
+
+
+/* ── Demat Banner ── */
+.demat-banner{padding:28px max(20px,env(safe-area-inset-left));background:linear-gradient(135deg,var(--p950) 0%,var(--p800) 45%,var(--g700) 100%);border-radius:var(--r-lg);position:relative;overflow:hidden;text-align:center;box-shadow:0 8px 32px rgba(109,40,217,.22)}
+.demat-banner::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.db-inner{max-width:620px;margin:0 auto;position:relative;z-index:1}
+.db-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:800;color:#fff;letter-spacing:.8px;text-transform:uppercase;margin-bottom:12px}
+.db-title{font-size:clamp(17px,3.5vw,24px);font-weight:900;color:#fff;letter-spacing:-.4px;margin-bottom:8px;line-height:1.2}
+.db-sub{font-size:13px;color:rgba(255,255,255,.82);margin-bottom:20px;line-height:1.6}
+.db-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-db-pri{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;border-radius:12px;font-family:var(--font);font-size:14px;font-weight:800;color:var(--p800);background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.18);border:none;min-height:46px;white-space:nowrap;transition:transform .2s,box-shadow .2s;cursor:pointer;touch-action:manipulation}
+.btn-db-pri:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.25)}
+.btn-db-sec{display:inline-flex;align-items:center;gap:6px;padding:12px 20px;border-radius:12px;font-family:var(--font);font-size:13px;font-weight:700;color:#fff;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);min-height:46px;white-space:nowrap;transition:background .2s;cursor:pointer;touch-action:manipulation}
+.btn-db-sec:hover{background:rgba(255,255,255,.25)}
+.db-pills{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:14px}
+.db-pill{font-size:11.5px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:100px;padding:4px 12px}
+@media(max-width:479px){.btn-db-pri,.btn-db-sec{width:100%;justify-content:center}}
+/* ── Demat Modal ── */
+
+/* ═══ DEMAT FORM MODAL OVERLAY ═══ */
+#demat-inner {
+  position: relative; width: 100%; max-width: 560px;
+  margin: 0 auto; padding: 0 0 20px;
+  animation: dematFadeUp .38s cubic-bezier(0.22,1,0.36,1) both;
+}
+ to{opacity:1;transform:translateY(0)} }
+@media(max-width:480px){
+    #demat-inner { max-width: 100%; }
+  }
+/* Scope form styles inside modal to avoid conflicts with calculator page */
+#demat-inner .page {
+  min-height: unset !important; padding: 0 !important;
+  background: transparent !important; overflow: visible !important;
+  display: block !important; position: static !important;
+}
+#demat-inner .deco { display: none !important; }
+#demat-inner .card {
+  animation: none !important; width: 100% !important;
+  max-width: 100% !important; border-radius: 16px !important;
+  box-sizing: border-box !important;
+}
+
+/* ── Demat Form ── */
+
+    /* ── Reset ──────────────────────────────── */
+    
+
+    
+
+    
+
+    /* ── Page ───────────────────────────────── */
+    
+
+    /* Decorative shapes */
+    
+    
+    
+    
+
+    /* ── Card ───────────────────────────────── */
+    #demat-inner .card{
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 520px;
+      background: var(--white);
+      box-shadow:
+        0 0 0 1px rgba(124,58,237,0.08),
+        0 8px 48px rgba(124,58,237,0.12),
+        0 2px 12px rgba(0,0,0,0.05);
+      overflow: hidden;
+      animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Accent bar ─────────────────────────── */
+    #demat-inner .accent-bar{
+      height: 5px;
+      background: linear-gradient(90deg, #7c3aed 0%, #a78bfa 55%, #22c55e 100%);
+    }
+
+
+    /* ── Header ─────────────────────────────── */
+    #demat-inner .card-header{
+      padding: 36px 44px 26px;
+      border-bottom: 1px solid var(--border-soft);
+      position: relative;
+    }
+
+
+    #demat-inner .header-top{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+
+    #demat-inner .logo-icon{
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-mid) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px var(--purple-shadow);
+    }
+
+
+    #demat-inner .header-label{
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--purple);
+      text-transform: uppercase;
+    }
+
+
+    #demat-inner .card-title{
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+
+    #demat-inner .title-highlight{
+      color: var(--purple);
+    }
+
+
+    #demat-inner .card-desc{
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+
+    /* Trust pills */
+    #demat-inner .trust-pills{
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+
+    #demat-inner .pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--green);
+      background: var(--green-pale);
+      border: 1px solid rgba(22,163,74,0.20);
+      padding: 4px 10px;
+      letter-spacing: 0.01em;
+    }
+
+
+    #demat-inner .pill svg{ flex-shrink: 0; }
+
+
+    /* ── Form body ──────────────────────────── */
+    #demat-inner .card-body{
+      padding: 30px 44px 38px;
+    }
+
+
+    /* ── Field ──────────────────────────────── */
+    #demat-inner .field{
+      margin-bottom: 20px;
+    }
+
+
+    #demat-inner .field label{
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-mid);
+      margin-bottom: 7px;
+      letter-spacing: 0.01em;
+    }
+
+
+    #demat-inner .field label .req{ color: var(--purple); margin-left: 2px; }
+
+
+    #demat-inner .input-wrap{ position: relative; }
+
+
+    #demat-inner .prefix{
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: var(--purple-mid);
+      font-weight: 600;
+      border-right: 1.5px solid var(--border);
+      padding-right: 11px;
+      pointer-events: none;
+      line-height: 1;
+    }
+
+
+    #demat-inner input, #demat-inner select{
+      width: 100%;
+      padding: 13px 14px;
+      font-size: 14px;
+      font-family: var(--font);
+      font-weight: 400;
+      color: var(--text-dark);
+      background: var(--bg-input);
+      border: 1.5px solid var(--border);
+      border-radius: 0;
+      outline: none;
+      transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+
+    #demat-inner input::placeholder{ color: var(--text-muted); font-weight: 400; }
+
+
+    #demat-inner input:focus, #demat-inner select:focus{
+      border-color: var(--purple);
+      background: var(--bg-focus);
+      box-shadow: 0 0 0 3px var(--purple-glow);
+    }
+
+
+    #demat-inner input.error, #demat-inner select.error{
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(220,38,38,0.10);
+    }
+
+
+    #demat-inner input.has-prefix{ padding-left: 58px; }
+
+
+    #demat-inner select{ cursor: pointer; color: var(--text-dark); }
+
+    #demat-inner select.placeholder{ color: var(--text-muted); }
+
+
+    #demat-inner .select-arrow{
+      position: absolute;
+      right: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+
+    #demat-inner .error-msg{
+      margin-top: 5px;
+      font-size: 12px;
+      color: var(--red);
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+
+    /* ── Submit button ──────────────────────── */
+    #demat-inner .btn-submit{
+      width: 100%;
+      margin-top: 10px;
+      padding: 15px 24px;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-mid) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 0;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--font);
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      box-shadow: 0 4px 20px var(--purple-shadow);
+      transition: opacity 0.18s, transform 0.12s, box-shadow 0.18s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+
+    #demat-inner .btn-submit:hover{
+      opacity: 0.92;
+      box-shadow: 0 6px 28px var(--purple-shadow);
+    }
+
+    #demat-inner .btn-submit:active{ transform: scale(0.985); }
+
+
+    /* Green divider line on button */
+    #demat-inner .btn-submit::after{
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green-mid), var(--green-light));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    #demat-inner .btn-submit{ position: relative; overflow: hidden; }
+
+    #demat-inner .btn-submit:hover::after{ opacity: 1; }
+
+
+    #demat-inner .security-note{
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 14px;
+      font-family: var(--font);
+    }
+
+
+    /* ── Success ────────────────────────────── */
+    #demat-inner .success{
+      display: none;
+      text-align: center;
+      padding: 12px 0 8px;
+      animation: fadeUp 0.4s ease both;
+    }
+
+
+    #demat-inner .success-ring{
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 6px 28px var(--green-glow);
+    }
+
+
+    #demat-inner .success h2{
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+
+    #demat-inner .success p{
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+
+    #demat-inner .success p strong{ color: var(--text-dark); }
+
+    #demat-inner .success p strong.accent{ color: var(--purple); }
+
+
+    #demat-inner .btn-reset{
+      padding: 11px 28px;
+      background: transparent;
+      border: 1.5px solid var(--purple);
+      color: var(--purple);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 0;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+    }
+
+    #demat-inner .btn-reset:hover{ background: var(--purple); color: #fff; }
+
+
+    /* ── Footer ─────────────────────────────── */
+    #demat-inner .card-footer{
+      padding: 14px 44px;
+      background: var(--bg-footer);
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+
+    #demat-inner .footer-sebi{
+      font-size: 11px;
+      color: var(--purple-mid);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+
+    #demat-inner .footer-exchanges{
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+
+    #demat-inner .footer-exchanges span{
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--purple-light);
+      letter-spacing: 0.08em;
+    }
+
+
+    /* ── Responsive ─────────────────────────── */
+
+    /* Tablet (≤ 640px) */
+    @media (max-width: 640px) {
+      
+      #demat-inner .card-header{ padding: 28px 28px 22px; }
+
+      #demat-inner .card-body{ padding: 24px 28px 30px; }
+
+      #demat-inner .card-footer{ padding: 12px 28px; }
+
+      #demat-inner .card-title{ font-size: 22px; }
+
+      #demat-inner .card-desc{ font-size: 13px; }
+
+      #demat-inner .trust-pills{ gap: 6px; }
+
+    }
+
+    /* Mobile (≤ 420px) */
+    @media (max-width: 420px) {
+      
+
+      #demat-inner .card{
+        max-width: 100%;
+        min-height: 100vh;
+        box-shadow: none;
+      }
+
+
+      #demat-inner .card-header{ padding: 22px 18px 18px; }
+
+      #demat-inner .card-body{ padding: 20px 18px 30px; }
+
+      #demat-inner .card-footer{ padding: 14px 18px; }
+
+
+      #demat-inner .card-title{ font-size: 20px; }
+
+      #demat-inner .logo-icon{ width: 36px; height: 36px; }
+
+
+      /* Prevent iOS zoom on focus */
+      #demat-inner input, #demat-inner select{ font-size: 16px; }
+
+
+      #demat-inner .btn-submit{ font-size: 15px; padding: 14px 18px; }
+
+      #demat-inner .footer-exchanges{ gap: 10px; }
+
+      #demat-inner .trust-pills{ gap: 5px; }
+
+      #demat-inner .pill{ font-size: 10px; padding: 3px 8px; }
+
+    }
+
+    /* Large desktop (≥ 1024px) */
+    @media (min-width: 1024px) {
+      #demat-inner .card{ max-width: 540px; }
+
+      #demat-inner .card-title{ font-size: 28px; }
+
+    }
+  
+
+
+
+
+
+
+
+
+
+/* Firefox */
+
+
+
+
+/* ── Sidebar calc card scroll ── */
+.sidebar-calc-card{
+  overflow-y:scroll;
+  overflow-x:hidden;
+  flex:1;
+  min-height:0;
+  border-radius:var(--r-lg);
+  border:1.5px solid var(--n200);
+  box-shadow:var(--sh-sm);
+  background:var(--n0);
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+  scrollbar-color:var(--p400) var(--n150);
+}
+.sidebar-calc-card::-webkit-scrollbar{width:6px}
+.sidebar-calc-card::-webkit-scrollbar-track{background:var(--n150);border-radius:0 var(--r-lg) var(--r-lg) 0}
+.sidebar-calc-card::-webkit-scrollbar-thumb{background:var(--p400);border-radius:100px;min-height:48px}
+.sidebar-calc-card::-webkit-scrollbar-thumb:hover{background:var(--p600)}
+.sidebar-calc-card::-webkit-scrollbar-thumb:active{background:var(--p800)}
+
+
+.sb-item-icon{
+  font-size:15px;
+  width:30px;height:30px;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  text-align:center;
+  background:var(--p50);
+  border:1px solid var(--p200);
+}
+.sb-item.active .sb-item-icon{background:var(--p100);border-color:var(--p300)}
+
+/* Section-specific icon colors */
+[data-section="investment"] .sb-item-icon{background:var(--p50);border-color:var(--p200)}
+[data-section="retirement"] .sb-item-icon{background:var(--g50);border-color:var(--g200)}
+[data-section="loan"] .sb-item-icon{background:var(--amberBg);border-color:var(--amberBdr)}
+[data-section="tax"] .sb-item-icon{background:var(--g50);border-color:var(--g200)}
+[data-section="savings"] .sb-item-icon{background:var(--blueBg);border-color:var(--blueBdr)}
+[data-section="insurance"] .sb-item-icon{background:#fdf2f8;border-color:#f5d0fe}
+
+/* Hero stats sober style */
+
+
+/* ═══ Drawer Header & Home redesign ═══ */
+.drawer-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 20px 14px;
+  border-bottom:1px solid var(--n150);
+  flex-shrink:0;
+  background:linear-gradient(135deg,#5b21b6 0%,#7c3aed 50%,#059669 100%);
+  position:relative;overflow:hidden;
+}
+.drawer-header::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:24px 24px;pointer-events:none;
+}
+.drawer-title{
+  font-size:16px;font-weight:900;color:#fff;
+  display:flex;align-items:center;gap:12px;
+  position:relative;z-index:1;
+}
+.drawer-title-icon{
+  width:40px;height:40px;border-radius:12px;
+  background:rgba(255,255,255,.18);
+  border:1.5px solid rgba(255,255,255,.3);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+  backdrop-filter:blur(4px);
+}
+.drawer-close{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.15);
+  border:1.5px solid rgba(255,255,255,.3);
+  color:#fff;font-size:16px;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .18s,transform .2s;
+  position:relative;z-index:1;
+}
+.drawer-close:hover{background:rgba(255,255,255,.3);transform:rotate(90deg)}
+
+/* Home button redesign */
+.drawer-home-link{
+  display:flex;align-items:center;gap:12px;
+  padding:13px 16px;border-radius:14px;
+  background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 50%,#059669 100%);
+  border:none;margin-bottom:14px;
+  text-decoration:none;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s;
+  box-shadow:0 4px 16px rgba(124,58,237,.35),inset 0 1px 0 rgba(255,255,255,.15);
+  position:relative;overflow:hidden;
+}
+.drawer-home-link::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
+  background-size:20px 20px;pointer-events:none;
+}
+.drawer-home-link:hover{
+  transform:translateY(-2px) scale(1.01);
+  box-shadow:0 8px 24px rgba(124,58,237,.45),inset 0 1px 0 rgba(255,255,255,.2);
+}
+.drawer-home-link:active{transform:scale(.97)}
+.drawer-home-icon{
+  width:38px;height:38px;min-width:38px;border-radius:11px;
+  background:rgba(255,255,255,.18);
+  border:1.5px solid rgba(255,255,255,.3);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;backdrop-filter:blur(4px);
+}
+.drawer-home-label{font-size:13.5px;font-weight:800;color:#fff;line-height:1.2}
+.drawer-home-sub{font-size:11px;color:rgba(255,255,255,.72);margin-top:2px}
+.drawer-home-arrow{margin-left:auto;flex-shrink:0}
+
+
+@media(min-width:1025px){}
+@media(max-width:1024px){}
+@media(max-width:480px){}
+
+@media(min-width:1025px){}
+@media(max-width:480px){}
+
+@media(min-width:1025px){}
+@media(max-width:1024px){}
+@media(max-width:480px){}
+
+@media(min-width:1025px){}
+@media(max-width:1024px){
+  }
+@media(max-width:480px){
+  }
+
+/* Floating Action Button */
+.fab-calc{
+  position:fixed;
+  bottom:calc(var(--mnav-h) + 14px + env(safe-area-inset-bottom,0px));
+  left:16px;
+  width:52px;height:52px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#5b21b6 0%,#7c3aed 55%,#059669 100%);
+  color:#fff;
+  border:none;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  box-shadow:0 6px 24px rgba(91,33,182,.5),0 2px 6px rgba(0,0,0,.2);
+  z-index:850;
+  transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  font-family:var(--font);
+}
+.fab-calc:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(91,33,182,.65)}
+.fab-calc:active{transform:scale(.95)}
+.fab-icon{width:24px;height:24px;display:block;line-height:0;font-size:0}
+.fab-icon svg{width:24px;height:24px;display:block}
+.fab-label{font-size:8px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:rgba(255,255,255,.88);line-height:1;margin-top:2px}
+@media(min-width:1025px){.fab-calc{display:none}}
+@media(max-width:1024px){
+  .fab-calc{
+    bottom:calc(var(--mnav-h) + 14px + env(safe-area-inset-bottom,0px));
+    left:16px;
+  }
+}
+@media(max-width:480px){
+  .fab-calc{width:48px;height:48px;border-radius:14px;bottom:calc(var(--mnav-h) + 12px + env(safe-area-inset-bottom,0px))}
+}
+
+
+/* ── Sidebar Scrollable Card (matches Lumsum exactly) ── */
+.sidebar-calc-card{
+  overflow-y:scroll;
+  overflow-x:hidden;
+  flex:1;
+  min-height:0;
+  border-radius:var(--r-lg);
+  border:1.5px solid var(--n200);
+  box-shadow:var(--sh-sm);
+  background:var(--n0);
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+  scrollbar-color:var(--p400) var(--n150);
+}
+.sidebar-calc-card::-webkit-scrollbar{width:6px}
+.sidebar-calc-card::-webkit-scrollbar-track{background:var(--n150);border-radius:0 var(--r-lg) var(--r-lg) 0}
+.sidebar-calc-card::-webkit-scrollbar-thumb{background:var(--p400);border-radius:100px;min-height:48px}
+.sidebar-calc-card::-webkit-scrollbar-thumb:hover{background:var(--p600)}
+.sidebar-calc-card::-webkit-scrollbar-thumb:active{background:var(--p800)}
+
+/* ── Drawer Body Scrollbar (purple, always visible) ── */
+.drawer-body{
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  flex:1;
+  padding:12px 12px 20px;
+  padding-bottom:max(20px,calc(env(safe-area-inset-bottom,0px) + 16px));
+  scrollbar-width:thin;
+  scrollbar-color:var(--p400) var(--n150);
+}
+.drawer-body::-webkit-scrollbar{width:6px}
+.drawer-body::-webkit-scrollbar-track{background:var(--n150);border-radius:6px}
+.drawer-body::-webkit-scrollbar-thumb{background:var(--p400);border-radius:100px;min-height:48px}
+.drawer-body::-webkit-scrollbar-thumb:hover{background:var(--p600)}
+.drawer-body::-webkit-scrollbar-thumb:active{background:var(--p800)}
+
+/* ── Sidebar icon box (Lumsum style) ── */
+.sb-item-icon{
+  font-size:16px;
+  width:30px;height:30px;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  border:1px solid rgba(0,0,0,.05);
+}
+</style>
+
+<style>
+/* ══════════════════════════════════════════
+   MOBILE · TABLET · DESKTOP COMPATIBILITY
+   Full platform patch — all breakpoints
+══════════════════════════════════════════ */
+
+/* ── Formula box mobile overflow ── */
+.formula-box{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.formula-code{
+  white-space:pre-wrap;word-break:break-all;overflow-wrap:break-word;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  font-size:clamp(11px,2.5vw,13px);
+}
+
+/* ── FAQ inline grids — stack on small screens ── */
+@media(max-width:480px){
+  .faq-a [style*="grid-template-columns:1fr 1fr"],
+  .faq-a [style*="grid-template-columns: 1fr 1fr"],
+  .faq-a [style*="grid-template-columns:repeat(2"]{
+    grid-template-columns:1fr!important;
+  }
+  .faq-stat-row{grid-template-columns:repeat(3,1fr)}
+  .faq-a{padding:0 14px 16px;font-size:12.5px}
+  .faq-q{font-size:13px;padding:13px 14px;min-height:52px}
+}
+@media(max-width:360px){
+  .faq-stat-row{grid-template-columns:1fr 1fr}
+  .faq-a{padding:0 12px 14px;font-size:12px}
+  .faq-q{font-size:12.5px;padding:12px;min-height:48px}
+  .faq-chips{gap:4px}
+  .faq-chip{font-size:10px;padding:3px 8px}
+}
+
+/* ── Hero panel — mobile stacking ── */
+@media(max-width:640px){
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .hero-minicharts{gap:4px}
+  .hstat-num{font-size:15px}
+  .hstat-lbl{font-size:7px}
+  .mc-val{font-size:13px}
+}
+@media(max-width:400px){
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .hstat{padding:9px 10px;gap:7px}
+  .hstat-num{font-size:14px}
+}
+
+/* ── Info grid responsive ── */
+@media(max-width:480px){
+  .info-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .itile{padding:16px 12px}
+  .it-emoji{font-size:22px}
+  .it-val{font-size:18px}
+  .it-label{font-size:10.5px}
+}
+@media(max-width:360px){
+  .info-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .itile{padding:14px 10px}
+  .it-val{font-size:16px}
+}
+
+/* ── Power rows — scenario cards ── */
+@media(max-width:640px){.power-rows{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.power-rows{grid-template-columns:1fr}}
+
+/* ── Stat tiles — result section ── */
+@media(max-width:360px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .st-val{font-size:16px}
+  .st-label{font-size:10px}
+}
+
+/* ── Table — horizontal scroll on all mobiles ── */
+.table-scroll{
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
+  border-radius:12px;
+}
+@media(max-width:640px){
+  table{font-size:12px}
+  thead th{padding:9px 10px;font-size:10px}
+  tbody td{padding:8px 10px}
+}
+@media(max-width:400px){
+  table{font-size:11.5px;min-width:380px}
+  thead th{padding:8px 8px;font-size:9.5px}
+  tbody td{padding:7px 8px}
+}
+
+/* ── Donut chart row — stack on tiny screens ── */
+@media(max-width:380px){
+  .donut-row{flex-direction:column;align-items:center}
+  .donut-svg{width:120px;height:120px}
+}
+
+/* ── Bar chart labels — prevent overflow ── */
+.bchart-label span{
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:55%
+}
+.bchart-label span:last-child{text-align:right;flex-shrink:0;max-width:40%}
+
+/* ── Goal tabs — horizontal scroll ── */
+.goal-tabs{
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;-ms-overflow-style:none;
+  padding-bottom:4px;
+}
+.goal-tabs::-webkit-scrollbar{display:none}
+@media(max-width:480px){
+  .goal-tab{font-size:12px;padding:8px 12px}
+  .goal-tab-icon{font-size:14px}
+  .goal-result-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:360px){
+  .goal-tab{font-size:11px;padding:7px 10px}
+  .goal-result-grid{grid-template-columns:1fr}
+  .grt-val{font-size:17px}
+}
+
+/* ── Tip cards — full width on mobile ── */
+@media(max-width:480px){
+  .tip-card{padding:16px}
+  .tip-icon{font-size:24px}
+  .tip-card h4{font-size:13.5px}
+  .tip-card p{font-size:12.5px}
+  .tip-highlight{font-size:12px;padding:8px 10px}
+}
+@media(max-width:360px){
+  .tip-card{padding:14px}
+  .tip-badge{font-size:9px;padding:2px 8px}
+}
+
+/* ── Demat banner — mobile buttons full width ── */
+@media(max-width:479px){
+  .btn-db-pri,.btn-db-sec{width:100%;justify-content:center}
+  .db-pills{gap:5px}
+  .db-pill{font-size:10.5px;padding:3px 9px}
+}
+
+/* ── Drawer items — single col on tiny screens ── */
+@media(max-width:360px){
+  .drawer-items{grid-template-columns:1fr}
+}
+
+/* ── Section divider — compact on mobile ── */
+@media(max-width:480px){
+  .section-divider{gap:10px;margin:4px 0 16px}
+  .section-divider .sd-text h2{font-size:17px}
+  .sd-icon{width:38px;height:38px;font-size:18px}
+}
+@media(max-width:360px){
+  .section-divider .sd-text h2{font-size:15px}
+  .section-divider .sd-text p{font-size:11.5px}
+}
+
+/* ── Card head icon — mobile size ── */
+@media(max-width:480px){
+  .ch-icon{width:38px;height:38px;font-size:18px;border-radius:11px}
+  .ch-title{font-size:15px}
+  .ch-sub{font-size:11px}
+}
+
+/* ── Slider — better touch target ── */
+@media(max-width:767px){
+  .slider::-webkit-slider-thumb{width:24px;height:24px;margin-top:-9px}
+  .slider{height:8px;margin:12px 0 6px}
+}
+
+/* ── Preset buttons — wrap properly ── */
+.presets{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+@media(max-width:360px){
+  .preset{font-size:10.5px;padding:3px 8px}
+}
+
+/* ── Number input — readable on all screens ── */
+@media(max-width:360px){
+  .num-input{width:52px;min-width:44px;font-size:12px;padding:5px 3px}
+}
+
+/* ── Hero pills — scroll on tiny screens ── */
+.hero-pills{flex-wrap:wrap}
+@media(max-width:360px){
+  .hpill{font-size:10.5px;padding:4px 10px}
+}
+
+/* ── Breadcrumb — hide on tiny ── */
+@media(max-width:360px){
+  .hero-breadcrumb{display:none}
+}
+
+/* ── sb-item icon size ── */
+@media(max-width:1260px){
+  .sb-item-icon{font-size:15px;width:26px;height:26px}
+  .sb-item-name{font-size:12px}
+  .sb-item-hint{font-size:9.5px}
+}
+
+/* ── Landscape phone: compact hero ── */
+@media(max-height:480px) and (orientation:landscape){
+  .hero{padding:10px 0 8px!important}
+  .hero h1{font-size:clamp(18px,4vw,24px)!important;margin-bottom:8px}
+  .hero-sub{font-size:12px!important;margin-bottom:10px}
+  .hero-panel{display:none}
+  .mobile-section-chips{top:0}
+}
+
+/* ── Print styles ── */
+@media print{
+  .mobile-nav,.fab-calc,.calc-drawer,.drawer-backdrop,
+  .mobile-section-chips,.btn-calc,.btn-reset,.demat-banner{display:none!important}
+  .page-wrap{padding:0!important}
+  .sidebar{display:none!important}
+  .card{box-shadow:none!important;border:1px solid #ccc!important}
+  body{padding-bottom:0!important}
+}
+</style>
+<body>
+<header class="hero">
+  <div class="hero-deco"></div>
+  <div class="hero-inner">
+    <div class="hero-topbar">
+      <a class="home-btn" href="/"><span class="home-btn-icon">🏠</span>Home</a>
+      <div class="hero-breadcrumb">
+        <span class="hero-breadcrumb-sep">›</span><span>Calculators</span>
+        <span class="hero-breadcrumb-sep">›</span>
+        <span class="hero-breadcrumb-current">FD Calculator</span>
+      </div>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <h1>FD Calculator<br><span class="hero-hl">Fixed Returns,</span><br>Zero Surprises</h1>
+        <p class="hero-sub">Calculate your Fixed Deposit maturity value with compound interest. Compare FD vs Mutual Funds and plan your safe investment.</p>
+        <div class="hero-pills">
+          <span class="hpill">🏦 FD Maturity Value</span>
+          <span class="hpill">📊 FD vs MF Compare</span>
+          <span class="hpill">🏛️ Tax Impact</span>
+          <span class="hpill">🆓 Free</span>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="panel-title">FD Highlights</div>
+        <div class="hero-stats">
+          <div class="hstat hstat-purple"><div class="hstat-icon-wrap">🏦</div><div class="hstat-text"><span class="hstat-num">7.5%</span><span class="hstat-lbl">Avg Bank FD Rate</span></div></div>
+          <div class="hstat hstat-green"><div class="hstat-icon-wrap">🔒</div><div class="hstat-text"><span class="hstat-num">₹5L</span><span class="hstat-lbl">DICGC Insurance Cover</span></div></div>
+          <div class="hstat hstat-amber"><div class="hstat-icon-wrap">📅</div><div class="hstat-text"><span class="hstat-num">7 days</span><span class="hstat-lbl">Min FD Tenure</span></div></div>
+          <div class="hstat hstat-blue"><div class="hstat-icon-wrap">👴</div><div class="hstat-text"><span class="hstat-num">0.5%</span><span class="hstat-lbl">Extra for Senior Citizens</span></div></div>
+        </div>
+        <div class="hero-minicharts">
+          <div class="minichart-card"><div class="mc-icon" style="background:var(--p100)">💰</div><div class="mc-body"><div class="mc-label">₹5L @ 7.5% for 5 Years</div><div class="mc-val">₹7.19 Lakh</div></div><div class="mc-badge" style="background:var(--g100);color:var(--g700)">+43.8%</div></div>
+          <div class="minichart-card"><div class="mc-icon" style="background:#fff7ed">🧾</div><div class="mc-body"><div class="mc-label">Tax at 30% slab on ₹2.19L gains</div><div class="mc-val">₹65,700 Tax</div></div><div class="mc-badge" style="background:#fffbeb;color:#b45309">TDS @10%</div></div>
+          <div class="minichart-card"><div class="mc-icon" style="background:var(--g50)">📊</div><div class="mc-body"><div class="mc-label">Best FD Rate (Small Finance)</div><div class="mc-val">Up to 9.5% p.a.</div></div><div class="mc-badge" style="background:var(--p100);color:var(--p700)">Limited</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-section-chips">
+  <a class="mchip" href="/" style="background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;border-color:transparent">🏠 Home</a>
+  <a class="mchip on" href="#calculator">🏦 Calculator</a>
+  <a class="mchip" href="#infographics">📊 Key Stats</a>
+  <a class="mchip" href="#guide">📖 Guide</a>
+  <a class="mchip" href="#taxation">🏛️ Tax</a>
+  <a class="mchip" href="#tips">💡 Tips</a>
+  <a class="mchip" href="#goals">🎯 Goals</a>
+  <a class="mchip" href="#faq">❓ FAQ</a>
+</div>
+
+<div class="page-wrap">
+
+<aside class="sidebar">
+    <!-- Home button -->
+    <a class="sb-home" href="/" aria-label="Back to Home" style="flex-shrink:0">
+      <div class="sb-home-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 3l9 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sb-home-text"><div class="sb-home-label">← Back to Home</div><div class="sb-home-sub">Mission Wealth</div></div>
+    </a>
+
+    <div class="sidebar-card sidebar-calc-card">
+      <div class="sb-head">
+        <div class="sb-head-icon" style="background:var(--p100)">📈</div>
+        <div class="sb-head-title">Investment Calcs</div>
+      </div>
+      <div class="sb-list" data-section="investment">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📊</span>
+          <div class="sb-item-text"><div class="sb-item-name">SIP Calculator</div><div class="sb-item-hint">Monthly investment planner</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">⬆️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Step-Up SIP</div><div class="sb-item-hint">Annual top-up calculator</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💰</span>
+          <div class="sb-item-text"><div class="sb-item-name">Lumpsum</div><div class="sb-item-hint">One-time investment</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💸</span>
+          <div class="sb-item-text"><div class="sb-item-name">SWP Calculator</div><div class="sb-item-hint">Systematic withdrawal</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📉</span>
+          <div class="sb-item-text"><div class="sb-item-name">Step-Up SWP</div><div class="sb-item-hint">Growing withdrawals</div></div>
+          
+        </a>
+        <a class="sb-item active" href="#">
+          <span class="sb-item-icon">🏦</span>
+          <div class="sb-item-text"><div class="sb-item-name">FD Calculator</div><div class="sb-item-hint">Fixed deposit returns</div></div>
+          
+        <span class="sb-item-badge">Active</span></a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🪙</span>
+          <div class="sb-item-text"><div class="sb-item-name">RD Calculator</div><div class="sb-item-hint">Recurring deposit</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📐</span>
+          <div class="sb-item-text"><div class="sb-item-name">CAGR Calculator</div><div class="sb-item-hint">Annualised growth rate</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">⚡</span>
+          <div class="sb-item-text"><div class="sb-item-name">Rule of 72</div><div class="sb-item-hint">Doubling time</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🎯</span>
+          <div class="sb-item-text"><div class="sb-item-name">Goal Planner</div><div class="sb-item-hint">Target corpus planner</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏆</span>
+          <div class="sb-item-text"><div class="sb-item-name">Mutual Fund Returns</div><div class="sb-item-hint">Compare fund performance</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🔄</span>
+          <div class="sb-item-text"><div class="sb-item-name">SIP vs Lumpsum</div><div class="sb-item-hint">Which is better?</div></div>
+          
+        </a>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-head" style="border:none;padding-top:6px;padding-bottom:6px">
+        <div class="sb-head-icon" style="background:var(--p100)">👴</div>
+        <div class="sb-head-title">Retirement Calcs</div>
+      </div>
+      <div class="sb-list" data-section="retirement">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏖️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Retirement Planner</div><div class="sb-item-hint">Corpus needed at retirement</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🔐</span>
+          <div class="sb-item-text"><div class="sb-item-name">NPS Calculator</div><div class="sb-item-hint">National Pension Scheme</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📒</span>
+          <div class="sb-item-text"><div class="sb-item-name">PPF Calculator</div><div class="sb-item-hint">EEE · 7.1% p.a.</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏛️</span>
+          <div class="sb-item-text"><div class="sb-item-name">EPF Calculator</div><div class="sb-item-hint">Employee provident fund</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💎</span>
+          <div class="sb-item-text"><div class="sb-item-name">Gratuity Calculator</div><div class="sb-item-hint">Retirement gratuity</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🛡️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Annuity Calculator</div><div class="sb-item-hint">Pension income planner</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">👴</span>
+          <div class="sb-item-text"><div class="sb-item-name">Senior Citizen FD</div><div class="sb-item-hint">Special rate deposits</div></div>
+          
+        </a>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-head" style="border:none;padding-top:6px;padding-bottom:6px">
+        <div class="sb-head-icon" style="background:var(--amberBg)">🏦</div>
+        <div class="sb-head-title">Loan Calcs</div>
+      </div>
+      <div class="sb-list" data-section="loan">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏠</span>
+          <div class="sb-item-text"><div class="sb-item-name">EMI Calculator</div><div class="sb-item-hint">Home, car & personal</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏡</span>
+          <div class="sb-item-text"><div class="sb-item-name">Home Loan Elig.</div><div class="sb-item-hint">Max loan amount</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💳</span>
+          <div class="sb-item-text"><div class="sb-item-name">Credit Card Payoff</div><div class="sb-item-hint">Debt elimination</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🚗</span>
+          <div class="sb-item-text"><div class="sb-item-name">Car Loan EMI</div><div class="sb-item-hint">Auto finance planner</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🎓</span>
+          <div class="sb-item-text"><div class="sb-item-name">Education Loan</div><div class="sb-item-hint">Student loan EMI</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📊</span>
+          <div class="sb-item-text"><div class="sb-item-name">Loan Comparison</div><div class="sb-item-hint">Compare loan offers</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💹</span>
+          <div class="sb-item-text"><div class="sb-item-name">Prepayment Savings</div><div class="sb-item-hint">Early repayment benefit</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🔃</span>
+          <div class="sb-item-text"><div class="sb-item-name">Balance Transfer</div><div class="sb-item-hint">Switch & save on interest</div></div>
+          
+        </a>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-head" style="border:none;padding-top:6px;padding-bottom:6px">
+        <div class="sb-head-icon" style="background:var(--g100)">📋</div>
+        <div class="sb-head-title">Tax Calcs</div>
+      </div>
+      <div class="sb-list" data-section="tax">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏛️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Income Tax</div><div class="sb-item-hint">New vs Old Regime</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📈</span>
+          <div class="sb-item-text"><div class="sb-item-name">LTCG Calculator</div><div class="sb-item-hint">12.5% Budget 2024</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📉</span>
+          <div class="sb-item-text"><div class="sb-item-name">STCG Calculator</div><div class="sb-item-hint">Short-term capital gains</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏠</span>
+          <div class="sb-item-text"><div class="sb-item-name">Home Loan Tax</div><div class="sb-item-hint">80C & 24B deductions</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💼</span>
+          <div class="sb-item-text"><div class="sb-item-name">HRA Calculator</div><div class="sb-item-hint">House rent allowance</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🧾</span>
+          <div class="sb-item-text"><div class="sb-item-name">TDS Calculator</div><div class="sb-item-hint">Tax deducted at source</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🎁</span>
+          <div class="sb-item-text"><div class="sb-item-name">Gift Tax Guide</div><div class="sb-item-hint">Taxable gift checker</div></div>
+          
+        </a>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-head" style="border:none;padding-top:6px;padding-bottom:6px">
+        <div class="sb-head-icon" style="background:var(--g100)">💰</div>
+        <div class="sb-head-title">Savings & Others</div>
+      </div>
+      <div class="sb-list" data-section="savings">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏧</span>
+          <div class="sb-item-text"><div class="sb-item-name">Savings Goal</div><div class="sb-item-hint">Reach your target amount</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">⚖️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Inflation Calculator</div><div class="sb-item-hint">Purchasing power erosion</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏅</span>
+          <div class="sb-item-text"><div class="sb-item-name">Gold Calculator</div><div class="sb-item-hint">Gold investment returns</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏗️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Real Estate ROI</div><div class="sb-item-hint">Property return estimator</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💱</span>
+          <div class="sb-item-text"><div class="sb-item-name">Currency Converter</div><div class="sb-item-hint">Live forex rates</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📆</span>
+          <div class="sb-item-text"><div class="sb-item-name">Daily Savings</div><div class="sb-item-hint">Daily saving to big goal</div></div>
+          
+        </a>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-head" style="border:none;padding-top:6px;padding-bottom:6px">
+        <div class="sb-head-icon" style="background:var(--blueBg)">🛡️</div>
+        <div class="sb-head-title">Insurance Calcs</div>
+      </div>
+      <div class="sb-list" data-section="insurance">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🫀</span>
+          <div class="sb-item-text"><div class="sb-item-name">Life Cover Needed</div><div class="sb-item-hint">Human life value method</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏥</span>
+          <div class="sb-item-text"><div class="sb-item-name">Health Premium Est.</div><div class="sb-item-hint">Mediclaim estimator</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🚗</span>
+          <div class="sb-item-text"><div class="sb-item-name">Motor Insurance</div><div class="sb-item-hint">Own damage premium</div></div>
+          
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏠</span>
+          <div class="sb-item-text"><div class="sb-item-name">Home Insurance</div><div class="sb-item-hint">Property cover estimator</div></div>
+          
+        </a>
+      </div>
+    </div>
+
+    <div class="sidebar-card" style="flex-shrink:0">
+      <div class="sb-head"><div class="sb-head-icon" style="background:var(--g100)">📊</div><div class="sb-head-title">Quick Stats</div></div>
+      <div class="sb-qstat">
+        <div class="sq-row"><span class="sq-label">₹5L @ 7.5% for 5yr</span><span class="sq-val">₹7.19L</span></div>
+        <div class="sq-row"><span class="sq-label">₹10L @ 8% for 10yr</span><span class="sq-val">₹21.6L</span></div>
+        <div class="sq-row"><span class="sq-label">Small Finance Bank rate</span><span class="sq-val">9.5%</span></div>
+      </div>
+    </div>
+</aside>
+  <div class="main-col">
+
+    <section id="calculator">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,#d97706,#f59e0b)">🏦</div>
+        <div class="sd-text"><h2>FD Calculator</h2><p>Calculate maturity value of your Fixed Deposit with compound interest</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div class="ch-icon amber">🏦</div>
+          <div><div class="ch-title">Enter Your FD Details</div><div class="ch-sub">Results update instantly — try different tenures</div></div>
+        </div>
+        <div class="card-body">
+          <div class="params-grid">
+            <div class="param-card">
+              <div class="pc-top"><span class="pc-label">💰 Principal Amount</span><span class="pc-value" id="prin-disp">₹5,00,000</span></div>
+              <div class="pc-input-row"><input class="num-input" type="number" id="prin-n" min="1000" max="100000000" step="1000" value="500000" oninput="syncFromNum('prin')"/><div class="range-wrap"><input class="slider" type="range" id="prin-r" min="1000" max="100000000" step="1000" value="500000" oninput="syncFromSlider('prin')"/></div></div>
+              <div class="range-marks"><span class="rm">₹1K</span><span class="rm">₹50L</span><span class="rm">₹10Cr</span></div>
+              <div class="presets">
+                <button class="preset" onclick="setVal('prin',100000)">₹1L</button>
+                <button class="preset" onclick="setVal('prin',250000)">₹2.5L</button>
+                <button class="preset on" onclick="setVal('prin',500000)">₹5L</button>
+                <button class="preset" onclick="setVal('prin',1000000)">₹10L</button>
+                <button class="preset" onclick="setVal('prin',5000000)">₹50L</button>
+              </div>
+            </div>
+            <div class="param-card">
+              <div class="pc-top"><span class="pc-label">📈 Interest Rate (p.a.)</span><span class="pc-value" id="rate-disp">7.5%</span></div>
+              <div class="pc-input-row"><input class="num-input" type="number" id="rate-n" min="1" max="15" step="0.25" value="7.5" oninput="syncFromNum('rate')"/><div class="range-wrap"><input class="slider" type="range" id="rate-r" min="1" max="15" step="0.25" value="7.5" oninput="syncFromSlider('rate')"/></div></div>
+              <div class="range-marks"><span class="rm">1%</span><span class="rm">7.5%</span><span class="rm">15%</span></div>
+              <div class="presets">
+                <button class="preset" onclick="setVal('rate',6.5)">6.5%</button>
+                <button class="preset" onclick="setVal('rate',7)">7%</button>
+                <button class="preset on" onclick="setVal('rate',7.5)">7.5%</button>
+                <button class="preset" onclick="setVal('rate',8)">8%</button>
+                <button class="preset" onclick="setVal('rate',9)">9%</button>
+              </div>
+            </div>
+            <div class="param-card green">
+              <div class="pc-top"><span class="pc-label green">⏳ Tenure</span><span class="pc-value green" id="ten-disp">5 Yrs</span></div>
+              <div class="pc-input-row"><input class="num-input" type="number" id="ten-n" min="1" max="30" step="1" value="5" oninput="syncFromNum('ten')"/><div class="range-wrap"><input class="slider green" type="range" id="ten-r" min="1" max="30" step="1" value="5" oninput="syncFromSlider('ten')"/></div></div>
+              <div class="range-marks"><span class="rm">1yr</span><span class="rm">15yr</span><span class="rm">30yr</span></div>
+              <div class="presets">
+                <button class="preset green-preset" onclick="setVal('ten',1)">1yr</button>
+                <button class="preset green-preset" onclick="setVal('ten',2)">2yr</button>
+                <button class="preset green-preset" onclick="setVal('ten',3)">3yr</button>
+                <button class="preset green-preset on" onclick="setVal('ten',5)">5yr</button>
+                <button class="preset green-preset" onclick="setVal('ten',10)">10yr</button>
+              </div>
+            </div>
+            <div class="param-card">
+              <div class="pc-top"><span class="pc-label">🔄 Compounding</span><span class="pc-value" id="comp-disp">Quarterly</span></div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px">
+                <button class="preset" id="comp-m" onclick="setComp('Monthly',12)">Monthly</button>
+                <button class="preset on" id="comp-q" onclick="setComp('Quarterly',4)">Quarterly</button>
+                <button class="preset" id="comp-h" onclick="setComp('Half-Yearly',2)">Half-Yearly</button>
+                <button class="preset" id="comp-y" onclick="setComp('Yearly',1)">Yearly</button>
+              </div>
+              <div style="margin-top:10px;padding:10px;background:var(--amberBg);border-radius:8px;font-size:11.5px;color:#92400e"><strong>Note:</strong> Most Indian banks compound quarterly. Small finance banks may offer monthly compounding.</div>
+            </div>
+          </div>
+
+          <button class="btn-calc" onclick="calculate(true)">✨ Calculate FD Returns</button>
+          <button class="btn-reset" onclick="resetCalc()">↺ Reset to defaults</button>
+
+          <div class="results-area show" id="results">
+            <div style="height:18px"></div>
+            <div class="results-grid">
+              <div>
+                <div class="stats-grid">
+                  <div class="stat-tile purple"><div class="st-label">Maturity Value</div><div class="st-val purple" id="r-maturity">—</div><div class="st-sub" id="r-mat-sub"></div></div>
+                  <div class="stat-tile green"><div class="st-label">Principal Invested</div><div class="st-val green" id="r-principal">—</div><div class="st-sub" id="r-prin-sub"></div></div>
+                  <div class="stat-tile amber"><div class="st-label">Interest Earned</div><div class="st-val amber" id="r-interest">—</div><div class="st-sub" id="r-int-sub"></div></div>
+                  <div class="stat-tile blue"><div class="st-label">Effective Annual Yield</div><div class="st-val blue" id="r-yield">—</div><div class="st-sub">After compounding effect</div></div>
+                </div>
+                <div style="background:var(--n0);border-radius:14px;border:1px solid var(--n150);padding:18px;box-shadow:var(--sh-sm)">
+                  <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--n400);margin-bottom:14px">Investment Breakdown</div>
+                  <div class="donut-row">
+                    <svg class="donut-svg" width="140" height="140" viewBox="0 0 140 140">
+                      <circle cx="70" cy="70" r="54" fill="none" stroke="#f3f4f6" stroke-width="22"/>
+                      <circle id="d-prin" cx="70" cy="70" r="54" fill="none" stroke="url(#fdg1)" stroke-width="22" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="0" transform="rotate(-90 70 70)" style="transition:stroke-dashoffset 1.2s cubic-bezier(.34,1.56,.64,1)"/>
+                      <circle id="d-int" cx="70" cy="70" r="54" fill="none" stroke="url(#fdg2)" stroke-width="22" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="339.3" transform="rotate(-90 70 70)" style="transition:stroke-dashoffset 1.2s cubic-bezier(.34,1.56,.64,1) .1s"/>
+                      <defs>
+                        <linearGradient id="fdg1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#6d28d9"/><stop offset="100%" stop-color="#a855f7"/></linearGradient>
+                        <linearGradient id="fdg2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d97706"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient>
+                      </defs>
+                      <text id="d-center-fd" x="70" y="65" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="#1f2937">—</text>
+                      <text x="70" y="81" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#9ca3af">maturity</text>
+                    </svg>
+                    <div class="donut-legend">
+                      <div class="dl-item"><div class="dl-dot" style="background:linear-gradient(135deg,#6d28d9,#a855f7)"></div><span class="dl-name">Principal</span><div><div class="dl-val" id="dl-prin">—</div><div class="dl-pct" id="dl-prin-pct"></div></div></div>
+                      <div class="dl-item"><div class="dl-dot" style="background:linear-gradient(135deg,#d97706,#f59e0b)"></div><span class="dl-name">Interest Earned</span><div><div class="dl-val" id="dl-int-fd">—</div><div class="dl-pct" id="dl-int-pct"></div></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div style="background:var(--n0);border-radius:14px;border:1px solid var(--n150);padding:18px;box-shadow:var(--sh-sm);margin-bottom:14px">
+                  <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--n400);margin-bottom:14px">Growth Milestones</div>
+                  <div id="fd-bars"></div>
+                </div>
+                <div style="background:var(--n0);border-radius:14px;border:1px solid var(--n150);padding:18px;box-shadow:var(--sh-sm)">
+                  <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--n400);margin-bottom:14px">FD vs Mutual Fund Comparison</div>
+                  <div id="fd-compare"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="margin-top:0">
+              <div class="card-head"><div class="ch-icon amber">📅</div><div><div class="ch-title">Year-by-Year Growth</div><div class="ch-sub">Watch your FD compound over time</div></div></div>
+              <div class="card-body" style="padding:0">
+                <div class="table-scroll">
+                  <table>
+                    <thead><tr><th>Year</th><th>Opening Balance</th><th>Interest Earned</th><th>Closing Balance</th><th>Growth %</th></tr></thead>
+                    <tbody id="fd-table"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="disclaimer"><strong>⚠️ Disclaimer:</strong> FD rates change frequently. Check with your bank for current rates. Interest is fully taxable as per your income tax slab. TDS @ 10% is deducted if annual interest exceeds ₹40,000 (₹50,000 for senior citizens).</div>
+<div class="demat-banner">
+  <div class="db-inner">
+    <div class="db-tag">🏠 Open a Demat Account</div>
+    <div class="db-title">Start Investing Today — Zero Account Opening Fee</div>
+    <div class="db-sub">₹0 equity delivery · ₹20 flat F&amp;O · Instant eKYC · Trusted by millions of Indian investors.</div>
+    <div class="db-btns">
+      <button type="button" class="btn-db-pri" onclick="dematOpen()">
+        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 10h18" stroke="currentColor" stroke-width="2"/><circle cx="7.5" cy="15" r="1.1" fill="currentColor"/></svg>
+        Open Demat Account
+      </button>
+    </div>
+    <div class="db-pills">
+      <span class="db-pill">✓ SEBI Registered</span>
+      <span class="db-pill">Top Discount Brokers</span>
+      <span class="db-pill">₹0 Account Opening</span>
+      <span class="db-pill">Instant eKYC</span>
+    </div>
+  </div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="infographics">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,var(--g600),var(--g400))">📊</div>
+        <div class="sd-text"><h2>FD Key Insights</h2><p>Important numbers every FD investor must know</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="info-grid">
+        <div class="itile it1"><span class="it-emoji">🏦</span><div class="it-val">7.5%</div><div class="it-label">Top Bank FD Rate</div><div class="it-sub">SBI/HDFC/ICICI 5yr</div></div>
+        <div class="itile it2"><span class="it-emoji">🔒</span><div class="it-val">₹5L</div><div class="it-label">DICGC Insurance</div><div class="it-sub">Per bank per depositor</div></div>
+        <div class="itile it3"><span class="it-emoji">📅</span><div class="it-val">7 days</div><div class="it-label">Minimum Tenure</div><div class="it-sub">To 10 years typically</div></div>
+        <div class="itile it4"><span class="it-emoji">👴</span><div class="it-val">+0.5%</div><div class="it-label">Senior Citizen Benefit</div><div class="it-sub">Extra rate for 60+ years</div></div>
+        <div class="itile it5"><span class="it-emoji">💸</span><div class="it-val">9.5%</div><div class="it-label">Small Finance Bank Max</div><div class="it-sub">Higher risk, higher rate</div></div>
+        <div class="itile it6"><span class="it-emoji">🧾</span><div class="it-val">10%</div><div class="it-label">TDS Rate on FD</div><div class="it-sub">If interest > ₹40K/yr</div></div>
+      </div>
+
+      <div class="power-table-wrap" style="margin-top:22px">
+        <div class="pt-title">📊 FD Growth Scenarios — ₹10 Lakh Principal</div>
+        <div class="power-rows" id="fd-scenarios"></div>
+      </div>
+    </section>
+
+    <section id="guide">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6)">📖</div>
+        <div class="sd-text"><h2>FD Complete Guide</h2><p>Everything about Fixed Deposits in India</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="guide-grid">
+        <div class="gc purple-border">
+          <div class="gc-icon">🏦</div>
+          <h3>What is an FD?</h3>
+          <p>A Fixed Deposit (FD) is a financial instrument where you deposit a lump sum with a bank for a fixed period at a pre-agreed interest rate. Unlike savings accounts, FDs offer higher interest with guaranteed returns regardless of market conditions.</p>
+        </div>
+        <div class="gc green-border">
+          <div class="gc-icon">🔄</div>
+          <h3>Compounding in FD</h3>
+          <p>Most Indian banks compound interest quarterly. Monthly compounding gives slightly more returns. The formula: A = P × (1 + r/n)^(nt) where n = compounding frequency per year. Quarterly compounding slightly increases the effective annual rate.</p>
+          <div class="formula-box" style="margin:0;margin-top:12px">
+            <div class="formula-code">A = P × (1 + r/n)^(n×t)<br>P=Principal, r=Rate, n=Freq, t=Years</div>
+          </div>
+        </div>
+        <div class="gc amber-border">
+          <div class="gc-icon">🏅</div>
+          <h3>Types of FDs in India</h3>
+          <ul>
+            <li><strong>Regular FD:</strong> Standard deposit, fully taxable interest</li>
+            <li><strong>Tax-Saver FD:</strong> 5yr lock-in, ₹1.5L deduction under 80C</li>
+            <li><strong>Senior Citizen FD:</strong> Extra 0.25–0.5% rate benefit</li>
+            <li><strong>Corporate FD:</strong> Higher rates, higher risk than bank FDs</li>
+            <li><strong>NRE/NRO FD:</strong> For non-resident Indians, NRE is tax-free</li>
+          </ul>
+        </div>
+        <div class="gc blue-border">
+          <div class="gc-icon">⚡</div>
+          <h3>FD vs Mutual Funds</h3>
+          <ul>
+            <li><strong>FD Returns:</strong> 6.5–9.5% (guaranteed, fixed)</li>
+            <li><strong>MF Returns:</strong> 10–15% (market-linked, not guaranteed)</li>
+            <li><strong>FD Tax:</strong> Full interest taxed at slab rate</li>
+            <li><strong>MF Tax:</strong> LTCG 12.5% only on gains (equity)</li>
+            <li><strong>FD:</strong> Best for capital protection, near-term goals</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step-flow">
+        <div class="step-card"><div class="step-num">1</div><span class="step-icon">🎯</span><h4>Define Goal</h4><p>Set tenure based on when you need the money</p></div>
+        <div class="step-card"><div class="step-num">2</div><span class="step-icon">🔍</span><h4>Compare Rates</h4><p>Check FD rates across banks online before booking</p></div>
+        <div class="step-card"><div class="step-num">3</div><span class="step-icon">🏦</span><h4>Book Online</h4><p>Bank net banking offers same rates as branch</p></div>
+        <div class="step-card"><div class="step-num">4</div><span class="step-icon">🔄</span><h4>Auto-Renew</h4><p>Set auto-renewal to avoid losing interest on maturity</p></div>
+      </div>
+    </section>
+
+    <section id="taxation">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,#d97706,#f59e0b)">🏛️</div>
+        <div class="sd-text"><h2>FD Taxation</h2><p>Understand TDS and tax impact on FD returns</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="tax-grid">
+        <div class="tax-card">
+          <div class="tc-head purple">FD Interest Taxation</div>
+          <div class="tc-row"><span class="tc-label">Tax Treatment</span><span class="tc-val highlight">Income from Other Sources</span></div>
+          <div class="tc-row"><span class="tc-label">Tax Rate</span><span class="tc-val red">As per Income Slab</span></div>
+          <div class="tc-row"><span class="tc-label">TDS Threshold</span><span class="tc-val">₹40,000/yr (₹50K seniors)</span></div>
+          <div class="tc-row"><span class="tc-label">TDS Rate</span><span class="tc-val">10% (if PAN submitted)</span></div>
+          <div class="tc-row"><span class="tc-label">Without PAN</span><span class="tc-val red">20% TDS deducted</span></div>
+        </div>
+        <div class="tax-card">
+          <div class="tc-head green">Tax-Saving Strategies</div>
+          <div class="tc-row"><span class="tc-label">Tax-Saver FD (80C)</span><span class="tc-val green">₹1.5L Deduction</span></div>
+          <div class="tc-row"><span class="tc-label">Lock-in Period</span><span class="tc-val">5 Years (mandatory)</span></div>
+          <div class="tc-row"><span class="tc-label">Submit Form 15G/15H</span><span class="tc-val green">No TDS if income < slab</span></div>
+          <div class="tc-row"><span class="tc-label">Spread Across Banks</span><span class="tc-val green">Each bank's ₹40K TDS limit</span></div>
+          <div class="tc-row"><span class="tc-label">HUF/Family FDs</span><span class="tc-val">Splits income across members</span></div>
+        </div>
+      </div>
+      <div class="tax-timeline">
+        <div class="tt-title">🎯 FD Tax Optimization</div>
+        <div class="tt-steps">
+          <div class="tt-step"><div class="tt-dot p">1</div><div class="tt-content"><h4>Submit Form 15G / 15H</h4><p>If your total income is below taxable limit, submit Form 15G (below 60) or 15H (senior citizen) at start of year — bank won't deduct TDS</p></div></div>
+          <div class="tt-step"><div class="tt-dot g">2</div><div class="tt-content"><h4>Spread FDs Across Banks</h4><p>Each bank applies TDS threshold separately. ₹40K limit per bank — spread ₹10L across 3 banks to stay under threshold per bank</p></div></div>
+          <div class="tt-step"><div class="tt-dot a">3</div><div class="tt-content"><h4>Tax-Saver FD for 80C</h4><p>If you need FD + tax saving, use Tax-Saver FD. ₹1.5L investment saves up to ₹46,800 in tax (30% bracket). 5-year lock-in applies.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+<div class="demat-banner">
+  <div class="db-inner">
+    <div class="db-tag">🏠 Open a Demat Account</div>
+    <div class="db-title">Start Investing Today — Zero Account Opening Fee</div>
+    <div class="db-sub">₹0 equity delivery · ₹20 flat F&amp;O · Instant eKYC · Trusted by millions of Indian investors.</div>
+    <div class="db-btns">
+      <button type="button" class="btn-db-pri" onclick="dematOpen()">
+        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 10h18" stroke="currentColor" stroke-width="2"/><circle cx="7.5" cy="15" r="1.1" fill="currentColor"/></svg>
+        Open Demat Account
+      </button>
+    </div>
+    <div class="db-pills">
+      <span class="db-pill">✓ SEBI Registered</span>
+      <span class="db-pill">Top Discount Brokers</span>
+      <span class="db-pill">₹0 Account Opening</span>
+      <span class="db-pill">Instant eKYC</span>
+    </div>
+  </div>
+</div>
+
+<section id="tips">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,#be185d,#ec4899)">💡</div>
+        <div class="sd-text"><h2>FD Pro Tips</h2><p>Maximize your Fixed Deposit returns</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="tips-grid">
+        <div class="tip-card tc1"><span class="tip-badge tb-purple">⭐ Golden Rule</span><div class="tip-icon">🔗</div><h4>FD Laddering Strategy</h4><p>Instead of one 5-year FD, create multiple FDs maturing each year (1yr, 2yr, 3yr, 4yr, 5yr). This ensures annual liquidity and lets you reinvest at higher rates if interest rates rise.</p><div class="tip-highlight">💡 ₹5L split into 5 FDs of ₹1L each — one matures every year</div></div>
+        <div class="tip-card tc2"><span class="tip-badge tb-green">📅 Timing</span><div class="tip-icon">📊</div><h4>Book FD at Year-End When Rates Peak</h4><p>Banks often raise FD rates in Q4 (Jan–Mar) to meet deposit targets. Monitor rates and book during this window to lock in higher rates for longer tenures.</p><div class="tip-highlight">💡 Jan–March is historically the best time to book FDs in India</div></div>
+        <div class="tip-card tc3"><span class="tip-badge tb-amber">🏦 Safety</span><div class="tip-icon">🛡️</div><h4>Stay Within ₹5L DICGC Limit per Bank</h4><p>DICGC insures only ₹5L per depositor per bank. For large amounts, spread across multiple banks to ensure full insurance coverage even if a bank fails.</p><div class="tip-highlight">💡 Keep < ₹5L per bank — use multiple banks for safety</div></div>
+        <div class="tip-card tc4"><span class="tip-badge tb-blue">📈 Returns</span><div class="tip-icon">🎯</div><h4>Small Finance Banks for Higher Rates</h4><p>Small Finance Banks (Jana, AU, ESAF, Suryoday) offer 8.5–9.5% FD rates vs 7–7.5% from large banks. They're RBI-regulated and DICGC-covered up to ₹5L.</p><div class="tip-highlight">💡 Earn 1.5–2% more — just keep within ₹5L DICGC limit</div></div>
+        <div class="tip-card tc5"><span class="tip-badge tb-pink">💰 Tax</span><div class="tip-icon">🧾</div><h4>Submit 15G/15H Before April 1st</h4><p>Submit Form 15G (below 60) or Form 15H (senior citizens) at the start of each financial year. This prevents TDS deduction if your total income is below taxable threshold.</p><div class="tip-highlight">💡 Submit by April 1 — otherwise TDS deducted for entire year</div></div>
+        <div class="tip-card tc6"><span class="tip-badge tb-teal">🔄 Smart</span><div class="tip-icon">💡</div><h4>Cumulative vs Non-Cumulative FD</h4><p>Cumulative: Interest compounded and paid at maturity — ideal for wealth building. Non-cumulative: Monthly/quarterly interest payout — ideal for regular income retirees who don't need SWP.</p><div class="tip-highlight">💡 Building wealth? Choose cumulative. Need monthly income? Non-cumulative.</div></div>
+      </div>
+    </section>
+
+    <section id="goals">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,var(--g700),var(--g500))">🎯</div>
+        <div class="sd-text"><h2>Goal-Based FD Planning</h2><p>How much to invest today for your future goal</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="ch-icon amber">🎯</div><div><div class="ch-title">FD Goal Calculator</div><div class="ch-sub">Find the FD amount needed for your target</div></div></div>
+        <div class="card-body">
+          <div class="goal-tabs">
+            <button class="goal-tab active" onclick="selectGoal(this,'emergency')"><span class="goal-tab-icon">🛡️</span>Emergency Fund</button>
+            <button class="goal-tab" onclick="selectGoal(this,'car')"><span class="goal-tab-icon">🚗</span>Car Purchase</button>
+            <button class="goal-tab" onclick="selectGoal(this,'home')"><span class="goal-tab-icon">🏠</span>Home Down Payment</button>
+            <button class="goal-tab" onclick="selectGoal(this,'wedding')"><span class="goal-tab-icon">💍</span>Wedding Fund</button>
+            <button class="goal-tab" onclick="selectGoal(this,'edu')"><span class="goal-tab-icon">🎓</span>Education Fund</button>
+          </div>
+          <div class="goal-content" id="goal-content"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,var(--p700),var(--p500))">❓</div>
+        <div class="sd-text"><h2>Frequently Asked Questions</h2><p>Common questions about Fixed Deposits answered</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="faq-wrap" id="faq-container"></div>
+    </section>
+
+<button class="fab-calc" onclick="openDrawer()" aria-label="Browse all calculators" title="All Calculators">
+  <span class="fab-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" fill="white" fill-opacity=".95"/><rect x="13" y="3" width="8" height="8" rx="2" fill="white" fill-opacity=".95"/><rect x="3" y="13" width="8" height="8" rx="2" fill="white" fill-opacity=".95"/><rect x="13" y="16" width="8" height="2.5" rx="1.25" fill="white" fill-opacity=".95"/><rect x="16" y="13" width="2.5" height="8" rx="1.25" fill="white" fill-opacity=".95"/></svg></span>
+  <span class="fab-label">Calcs</span>
+</button>
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
+<aside class="calc-drawer" id="calcDrawer" role="dialog" aria-modal="true" aria-label="All Calculators">
+  <div class="drawer-handle"></div>
+  <div class="drawer-header">
+    <div class="drawer-title"><div class="drawer-title-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="4" fill="rgba(255,255,255,0.95)"/><path d="M7 7h4v4H7zM13 7h4v4h-4zM7 13h4v4H7zM13 15h4" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>All Calculators</div>
+    <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">✕</button>
+  </div>
+    <div class="drawer-body">
+    <a class="drawer-home-link" href="/" onmouseenter="this.style.transform='translateY(-2px) scale(1.01)'" onmouseleave="this.style.transform=''">
+      <div class="drawer-home-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 3l9 9" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="drawer-home-label">← Back to Home</div><div class="drawer-home-sub">Mission Wealth · All Tools</div></div>
+      <div class="drawer-home-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+    <div class="drawer-search">
+      <span class="drawer-search-icon">🔍</span>
+      <input class="drawer-search-input" type="search" id="drawerSearch" placeholder="Search calculators…" oninput="filterDrawer(this.value)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+    </div>
+    <div class="drawer-cat" data-cat="investment">
+      <div class="drawer-cat-title">📈 Investment</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p100)">📊</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">SIP Calculator</div><div class="drawer-item-sub">Monthly planner</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">⬆️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Step-Up SIP</div><div class="drawer-item-sub">Annual top-up</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">💰</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Lumpsum</div><div class="drawer-item-sub">One-time invest</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">💸</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">SWP Calculator</div><div class="drawer-item-sub">Withdrawal plan</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">📉</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Step-Up SWP</div><div class="drawer-item-sub">Growing withdrawals</div></div>
+          <span class="drawer-badge new">New</span>
+        </a>
+        <a class="drawer-item active-calc" href="#">
+          <div class="drawer-item-icon" style="background:#fffbeb">🏦</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">FD Calculator</div><div class="drawer-item-sub">Fixed deposit</div></div>
+          <span class="drawer-badge active">Active</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#f0f9ff">🪙</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">RD Calculator</div><div class="drawer-item-sub">Recurring deposit</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">📐</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">CAGR Calculator</div><div class="drawer-item-sub">Annual growth rate</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fdf2f8">⚡</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Rule of 72</div><div class="drawer-item-sub">Doubling time</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">🎯</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Goal Planner</div><div class="drawer-item-sub">Target corpus</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">🏆</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Mutual Fund Returns</div><div class="drawer-item-sub">Compare performance</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#f0f9ff">🔄</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">SIP vs Lumpsum</div><div class="drawer-item-sub">Which is better?</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+    <div class="drawer-cat" data-cat="retirement">
+      <div class="drawer-cat-title">👴 Retirement</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏖️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Retirement Planner</div><div class="drawer-item-sub">Corpus needed</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🔐</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">NPS Calculator</div><div class="drawer-item-sub">National Pension Scheme</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">📒</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">PPF Calculator</div><div class="drawer-item-sub">EEE · 7.1% p.a.</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏛️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">EPF Calculator</div><div class="drawer-item-sub">Provident fund</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">💎</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Gratuity Calculator</div><div class="drawer-item-sub">Retirement gratuity</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🛡️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Annuity Calculator</div><div class="drawer-item-sub">Pension income</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">👴</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Senior Citizen FD</div><div class="drawer-item-sub">Special rate deposits</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+    <div class="drawer-cat" data-cat="loan">
+      <div class="drawer-cat-title">🏦 Loans & EMI</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏠</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">EMI Calculator</div><div class="drawer-item-sub">Home, car, personal</div></div>
+          <span class="drawer-badge popular">Popular</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏡</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Home Loan Elig.</div><div class="drawer-item-sub">Max loan amount</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">💳</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Credit Card Payoff</div><div class="drawer-item-sub">Debt elimination</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🚗</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Car Loan EMI</div><div class="drawer-item-sub">Auto finance planner</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🎓</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Education Loan</div><div class="drawer-item-sub">Student loan EMI</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">📊</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Loan Comparison</div><div class="drawer-item-sub">Compare loan offers</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">💹</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Prepayment Savings</div><div class="drawer-item-sub">Early repayment benefit</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🔃</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Balance Transfer</div><div class="drawer-item-sub">Switch & save interest</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+    <div class="drawer-cat" data-cat="tax">
+      <div class="drawer-cat-title">📋 Tax Calculators</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏛️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Income Tax</div><div class="drawer-item-sub">New vs Old Regime</div></div>
+          <span class="drawer-badge popular">Popular</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">📈</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">LTCG Calculator</div><div class="drawer-item-sub">12.5% Budget 2024</div></div>
+          <span class="drawer-badge new">New</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">📉</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">STCG Calculator</div><div class="drawer-item-sub">Short-term gains</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏠</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Home Loan Tax</div><div class="drawer-item-sub">80C & 24B deductions</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">💼</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">HRA Calculator</div><div class="drawer-item-sub">House rent allowance</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🧾</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">TDS Calculator</div><div class="drawer-item-sub">Tax deducted at source</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🎁</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Gift Tax Guide</div><div class="drawer-item-sub">Taxable gift checker</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+    <div class="drawer-cat" data-cat="savings">
+      <div class="drawer-cat-title">💰 Savings & Others</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏧</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Savings Goal</div><div class="drawer-item-sub">Reach your target</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">⚖️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Inflation Calculator</div><div class="drawer-item-sub">Purchasing power</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏅</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Gold Calculator</div><div class="drawer-item-sub">Gold investment returns</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏗️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Real Estate ROI</div><div class="drawer-item-sub">Property return est.</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">💱</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Currency Converter</div><div class="drawer-item-sub">Live forex rates</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">📆</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Daily Savings</div><div class="drawer-item-sub">Daily saving to goal</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+    <div class="drawer-cat" data-cat="insurance">
+      <div class="drawer-cat-title">🛡️ Insurance</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🫀</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Life Cover Needed</div><div class="drawer-item-sub">Human life value method</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏥</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Health Premium Est.</div><div class="drawer-item-sub">Mediclaim estimator</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🚗</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Motor Insurance</div><div class="drawer-item-sub">Own damage premium</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--n50)">🏠</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Home Insurance</div><div class="drawer-item-sub">Property cover est.</div></div>
+          <span class="drawer-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>
+<nav class="mobile-nav" role="navigation">
+  <div class="mnav-items">
+    <a class="mnav-item" href="/"><span class="mnav-icon">🏠</span><span class="mnav-label">Home</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item active" href="#calculator"><span class="mnav-icon">🏦</span><span class="mnav-label">Calc</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item" href="#guide"><span class="mnav-icon">📖</span><span class="mnav-label">Guide</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item" href="#goals"><span class="mnav-icon">🎯</span><span class="mnav-label">Goals</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item" href="#faq"><span class="mnav-icon">❓</span><span class="mnav-label">FAQ</span><span class="mnav-dot"></span></a>
+  </div>
+</nav>
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<script>
+
+'use strict';
+/* ── INR Formatter ── */
+const INR = n => { const a=Math.abs(n); if(a>=1e7) return '₹'+(n/1e7).toFixed(2)+' Cr'; if(a>=1e5) return '₹'+(n/1e5).toFixed(2)+' L'; if(a>=1000) return '₹'+Math.round(n).toLocaleString('en-IN'); return '₹'+Math.round(n); };
+const INR2 = n => '₹'+Math.round(n).toLocaleString('en-IN');
+const PCT = n => n.toFixed(2)+'%';
+
+/* ── Slider Fill ── */
+function updateSliderFill(s){ const min=parseFloat(s.min)||0,max=parseFloat(s.max)||100,val=Math.max(min,Math.min(max,parseFloat(s.value)||0)),pct=((val-min)/(max-min))*100,c=s.classList.contains('green')?'var(--g600)':'var(--p700)'; s.style.background=`linear-gradient(to right,${c} ${pct}%,var(--n200) ${pct}%)`; }
+function initSliders(){ document.querySelectorAll('.slider').forEach(s=>{ updateSliderFill(s); s.addEventListener('input',()=>updateSliderFill(s),{passive:true}); }); }
+
+/* ── Sync Slider/Number ── */
+function syncFromSlider(id){ const r=document.getElementById(id+'-r'),n=document.getElementById(id+'-n'),d=document.getElementById(id+'-disp'); if(!r||!n) return; n.value=r.value; if(d) d.textContent=formatDisp(id,r.value); updateSliderFill(r); debCalc(); }
+function syncFromNum(id){ const r=document.getElementById(id+'-r'),n=document.getElementById(id+'-n'),d=document.getElementById(id+'-disp'); if(!r||!n) return; let v=parseFloat(n.value)||0; v=Math.max(parseFloat(n.min)||0,Math.min(parseFloat(n.max)||1e9,v)); r.value=v; n.value=v; if(d) d.textContent=formatDisp(id,v); updateSliderFill(r); debCalc(); }
+function setVal(id,v){ const r=document.getElementById(id+'-r'),n=document.getElementById(id+'-n'),d=document.getElementById(id+'-disp'); if(r) r.value=v; if(n) n.value=v; if(d) d.textContent=formatDisp(id,v); if(r) updateSliderFill(r); document.querySelectorAll(`[onclick*="setVal('${id}"]`).forEach(b=>b.classList.remove('on')); document.querySelectorAll(`[onclick="setVal('${id}',${v})"]`).forEach(b=>b.classList.add('on')); debCalc(); }
+
+/* ── Debounced Calculate ── */
+let calcTimer;
+function debCalc(){ clearTimeout(calcTimer); calcTimer=setTimeout(()=>calculate(false),400); }
+
+/* ── FAB / Drawer ── */
+const drawerEl=document.getElementById('calcDrawer'),backdropEl=document.getElementById('drawerBackdrop');
+function openDrawer(){ drawerEl.classList.add('open');backdropEl.classList.add('open');document.body.style.overflow='hidden'; setTimeout(()=>{ const s=document.getElementById('drawerSearch'); if(s&&window.innerWidth>480) s.focus(); },350); }
+function closeDrawer(){ drawerEl.classList.remove('open');backdropEl.classList.remove('open');document.body.style.overflow=''; const s=document.getElementById('drawerSearch'); if(s){s.value='';filterDrawer('');} }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&drawerEl.classList.contains('open')) closeDrawer(); });
+function filterDrawer(q){ const query=q.trim().toLowerCase(); drawerEl.querySelectorAll('.drawer-cat').forEach(cat=>{ let any=false; cat.querySelectorAll('.drawer-item').forEach(item=>{ const match=!query||item.textContent.toLowerCase().includes(query); item.style.display=match?'':'none'; if(match) any=true; }); cat.style.display=any?'':'none'; }); }
+
+/* ── Swipe to close drawer ── */
+let touchStartY=0;
+drawerEl.addEventListener('touchstart',e=>{ touchStartY=e.touches[0].clientY; },{passive:true});
+drawerEl.addEventListener('touchmove',e=>{ const dy=e.touches[0].clientY-touchStartY; if(window.innerWidth<641&&dy>0){ drawerEl.style.transform=`translateY(${dy}px)`;drawerEl.style.transition='none'; } },{passive:true});
+drawerEl.addEventListener('touchend',e=>{ const dy=e.changedTouches[0].clientY-touchStartY; drawerEl.style.transition='';drawerEl.style.transform=''; if(window.innerWidth<641&&dy>80) closeDrawer(); },{passive:true});
+
+/* ── Scroll Top ── */
+const stBtn=document.getElementById('scrollTop');
+window.addEventListener('scroll',()=>{ stBtn.style.display=window.scrollY>400?'flex':'none'; },{passive:true});
+
+/* ── Section Nav Sync ── */
+function syncNav(activeId){ document.querySelectorAll('.mchip').forEach(c=>{ const href=(c.getAttribute('href')||'').replace('#',''); c.classList.toggle('on',href===activeId); }); document.querySelectorAll('.mnav-item').forEach(n=>{ const href=(n.getAttribute('href')||'').replace('#',''); n.classList.toggle('active',href===activeId); }); }
+
+let compFreq = 4;
+function setComp(label, n) {
+  compFreq = n;
+  document.getElementById('comp-disp').textContent = label;
+  ['m','q','h','y'].forEach(x => document.getElementById('comp-'+x).classList.remove('on'));
+  const map = {12:'m',4:'q',2:'h',1:'y'};
+  if(map[n]) document.getElementById('comp-'+map[n]).classList.add('on');
+  calculate(false);
+}
+function formatDisp(id, v) {
+  v=parseFloat(v);
+  if(id==='prin') return INR(v);
+  if(id==='rate') return v+'%';
+  if(id==='ten') return v+' Yrs';
+  return v;
+}
+function calculate(btn) {
+  const P = parseFloat(document.getElementById('prin-n').value)||500000;
+  const r = parseFloat(document.getElementById('rate-n').value)||7.5;
+  const t = parseInt(document.getElementById('ten-n').value)||5;
+  const n = compFreq;
+  const maturity = P * Math.pow(1 + (r/100)/n, n*t);
+  const interest = maturity - P;
+  const effectiveRate = (Math.pow(1+(r/100)/n,n)-1)*100;
+  document.getElementById('r-maturity').textContent = INR(maturity);
+  document.getElementById('r-mat-sub').textContent = 'After '+t+' years';
+  document.getElementById('r-principal').textContent = INR(P);
+  document.getElementById('r-prin-sub').textContent = 'Initial deposit';
+  document.getElementById('r-interest').textContent = INR(interest);
+  document.getElementById('r-int-sub').textContent = (interest/P*100).toFixed(1)+'% gain on principal';
+  document.getElementById('r-yield').textContent = effectiveRate.toFixed(2)+'%';
+  const CIRC=339.3, prinPct=P/maturity;
+  document.getElementById('d-prin').style.strokeDashoffset = CIRC*(1-prinPct);
+  document.getElementById('d-int').style.strokeDashoffset = CIRC*(1-(1-prinPct));
+  document.getElementById('d-center-fd').textContent = INR(maturity);
+  document.getElementById('dl-prin').textContent = INR(P);
+  document.getElementById('dl-prin-pct').textContent = (prinPct*100).toFixed(1)+'% of maturity';
+  document.getElementById('dl-int-fd').textContent = INR(interest);
+  document.getElementById('dl-int-pct').textContent = ((1-prinPct)*100).toFixed(1)+'% of maturity';
+  // Bars
+  const milestones = [1,2,3,5,10].filter(y=>y<=t).map(y=>({ label:y+'yr', val:P*Math.pow(1+(r/100)/n,n*y) }));
+  milestones.push({ label:t+'yr ✓', val:maturity });
+  const maxB = maturity;
+  document.getElementById('fd-bars').innerHTML = milestones.map(m=>`<div class="bchart-row"><div class="bchart-label"><span>${m.label}</span><span>${INR(m.val)}</span></div><div class="bchart-track"><div class="bchart-fill invested" style="width:${(m.val/maxB*100).toFixed(1)}%"></div></div></div>`).join('');
+  // Compare FD vs MF
+  const mfReturn = 12;
+  const mfVal = P * Math.pow(1+mfReturn/100, t);
+  const fdNetTax = maturity - interest*0.3;
+  const mfGains = mfVal - P;
+  const mfTax = mfGains > 125000 ? (mfGains-125000)*0.125 : 0;
+  const mfNet = mfVal - mfTax;
+  document.getElementById('fd-compare').innerHTML = `
+    <div class="bchart-row"><div class="bchart-label"><span>FD Maturity (${r}% p.a.)</span><span>${INR(maturity)}</span></div><div class="bchart-track"><div class="bchart-fill invested" style="width:${(maturity/Math.max(maturity,mfVal)*100).toFixed(1)}%"></div></div></div>
+    <div class="bchart-row"><div class="bchart-label"><span>MF Estimate (12% CAGR)</span><span>${INR(mfVal)}</span></div><div class="bchart-track"><div class="bchart-fill returns" style="width:${(mfVal/Math.max(maturity,mfVal)*100).toFixed(1)}%"></div></div></div>
+    <div class="bchart-row"><div class="bchart-label"><span>FD After Tax (30% slab)</span><span>${INR(fdNetTax)}</span></div><div class="bchart-track"><div class="bchart-fill interest" style="width:${(fdNetTax/Math.max(maturity,mfVal)*100).toFixed(1)}%"></div></div></div>
+    <div class="bchart-row"><div class="bchart-label"><span>MF After LTCG Tax</span><span>${INR(mfNet)}</span></div><div class="bchart-track"><div class="bchart-fill maturity" style="width:${(mfNet/Math.max(maturity,mfVal)*100).toFixed(1)}%"></div></div></div>`;
+  // Table
+  let rows='';
+  for(let y=1;y<=Math.min(t,30);y++){
+    const open=P*Math.pow(1+(r/100)/n,n*(y-1)), close=P*Math.pow(1+(r/100)/n,n*y), yInt=close-open;
+    rows+=`<tr><td><strong>${y}</strong></td><td>${INR(open)}</td><td class="td-g">${INR(yInt)}</td><td class="td-b">${INR(close)}</td><td><span style="background:var(--p50);color:var(--p700);padding:2px 8px;border-radius:100px;font-size:11px;font-weight:800">${((close/P-1)*100).toFixed(1)}%</span></td></tr>`;
+  }
+  document.getElementById('fd-table').innerHTML = rows;
+  document.getElementById('results').classList.add('show');
+}
+function buildScenarios() {
+  const configs=[{rate:7,yrs:5,label:'Conservative'},{rate:7.5,yrs:5,label:'Moderate'},{rate:9,yrs:5,label:'Aggressive'}];
+  const P=1000000;
+  document.getElementById('fd-scenarios').innerHTML=configs.map(c=>{
+    const mat=P*Math.pow(1+(c.rate/100)/4,4*c.yrs), gain=mat-P;
+    return `<div class="power-row"><div class="pr-header"><span class="pr-year">${c.label}</span><span class="pr-badge">${c.yrs}yr @ ${c.rate}%</span></div><div class="pr-main">${INR(mat)}</div><div class="pr-invested">Principal: ₹10 Lakh</div><div class="pr-gain">+${INR(gain)} interest (${(gain/P*100).toFixed(1)}% total gain)</div></div>`;
+  }).join('');
+}
+const FD_GOALS={
+  emergency:{target:600000,rate:7.5,yrs:1,label:'6 Months Emergency Fund',icon:'🛡️',desc:'Park in FD for safety + returns. Better than savings account.'},
+  car:{target:1500000,rate:7.5,yrs:3,label:'Car Purchase Fund',icon:'🚗',desc:'FD is ideal for medium-term goals. Lock 3yr FD now.'},
+  home:{target:5000000,rate:7.5,yrs:5,label:'Home Down Payment (₹50L)',icon:'🏠',desc:'5yr Tax-Saver FD with 80C benefit. Laddering strategy ideal.'},
+  wedding:{target:2000000,rate:7.5,yrs:4,label:'Wedding Fund',icon:'💍',desc:'4yr FD now. Consider laddering with 1yr, 2yr, 3yr, 4yr FDs.'},
+  edu:{target:3000000,rate:7.5,yrs:10,label:'Child Education Fund',icon:'🎓',desc:'For 10yr goals, combine FD + MF (SIP). Pure FD may lose to inflation.'},
+};
+function selectGoal(el, id){
+  document.querySelectorAll('.goal-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  const g=FD_GOALS[id];
+  const n=4, r=g.rate/100, t=g.yrs;
+  const prinNeeded=g.target/Math.pow(1+r/n,n*t);
+  const fdGain=g.target-prinNeeded;
+  document.getElementById('goal-content').innerHTML=`
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px"><div style="font-size:36px">${g.icon}</div><div><div style="font-size:17px;font-weight:900;color:var(--n800)">${g.label}</div><div style="font-size:13px;color:var(--n400)">${g.desc}</div></div></div>
+    <div class="goal-result-grid">
+      <div class="gr-tile"><div class="grt-label">FD Amount Needed Today</div><div class="grt-val">${INR(prinNeeded)}</div><div class="grt-sub">At ${g.rate}% for ${g.yrs} years</div></div>
+      <div class="gr-tile"><div class="grt-label">Target Corpus</div><div class="grt-val green">${INR(g.target)}</div><div class="grt-sub">At maturity</div></div>
+      <div class="gr-tile"><div class="grt-label">Interest Earned</div><div class="grt-val amber">${INR(fdGain)}</div><div class="grt-sub">Quarterly compounding</div></div>
+      <div class="gr-tile"><div class="grt-label">Tenure</div><div class="grt-val blue">${g.yrs} Years</div><div class="grt-sub">Fixed deposit period</div></div>
+    </div>
+    <div class="fund-chips"><span class="fund-chip">SBI FD</span><span class="fund-chip">HDFC FD</span><span class="fund-chip">ICICI FD</span><span class="fund-chip">Small Finance Banks</span><span class="fund-chip">Tax-Saver FD (80C)</span></div>`;
+}
+function buildFAQ(faqs, containerId) {
+  const cont = document.getElementById(containerId || 'faq-container');
+  if (!cont || !faqs) return;
+  cont.innerHTML = '';
+  faqs.forEach(f => {
+    const div = document.createElement('div');
+    div.className = 'faq-item';
+    div.innerHTML = `<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">${f.q}<div class="faq-icon">+</div></div><div class="faq-a">${f.a}</div>`;
+    cont.appendChild(div);
+  });
+}
+
+const FD_FAQS = [
+  {q:"How is FD interest calculated?",a:`<span class="faq-lead">FD interest uses compound interest with quarterly compounding at most banks.</span><div class="formula-box" style="margin:10px 0"><div class="formula-code">A = P × (1 + r/n)^(n×t)
+P = Principal | r = Annual Rate | n = 4 (quarterly) | t = Years
+₹1L @ 7.5% for 3yr = ₹1,25,023 maturity</div></div><div class="faq-stat-row"><div class="faq-stat"><span class="faq-stat-val">Quarterly</span><span class="faq-stat-lbl">Compounding Frequency</span></div><div class="faq-stat"><span class="faq-stat-val">7–9.5%</span><span class="faq-stat-lbl">Current FD Rates</span></div><div class="faq-stat"><span class="faq-stat-val">₹5L</span><span class="faq-stat-lbl">DICGC Insurance</span></div></div>`},
+  {q:"Is FD interest taxable?",a:`<span class="faq-lead">Yes — FD interest is fully taxable as "Income from Other Sources" at your income slab rate.</span><div class="faq-stat-row"><div class="faq-stat"><span class="faq-stat-val">30% slab</span><span class="faq-stat-lbl">Effective Return: 5.25%</span></div><div class="faq-stat"><span class="faq-stat-val">₹40K</span><span class="faq-stat-lbl">TDS Threshold/yr</span></div><div class="faq-stat"><span class="faq-stat-val">10%</span><span class="faq-stat-lbl">TDS Rate (with PAN)</span></div></div><div class="faq-note">At 30% bracket: 7.5% FD → only 5.25% post-tax. Minus 6% inflation = negative real return!</div>`},
+  {q:"How to avoid TDS on FD?",a:`<span class="faq-lead">Submit Form 15G (below 60, income below taxable limit) or Form 15H (60+) at the start of each financial year. Alternatively, spread FDs across multiple banks.</span><div class="faq-chips"><span class="faq-chip gr">Form 15G: Below 60</span><span class="faq-chip pu">Form 15H: Senior Citizens</span><span class="faq-chip bl">Split across banks: Each ₹40K threshold</span></div>`},
+  {q:"Can I break FD before maturity?",a:`<span class="faq-lead">Yes — most FDs can be prematurely broken with 0.5–1% penalty on interest rate. Tax-Saving FDs cannot be broken before mandatory 5-year lock-in.</span><ul class="faq-points"><li><span class="fp-bul or">!</span>Penalty: 0.5–1% interest rate reduction on premature closure</li><li><span class="fp-bul gr">✓</span>Alternative: Overdraft against FD (up to 90%) at FD rate + 1–2%</li><li><span class="fp-bul gr">✓</span>Often cheaper to take OD than break FD prematurely</li></ul>`},
+  {q:"What is the DICGC insurance on FD?",a:`<span class="faq-lead">DICGC insures bank deposits up to ₹5 lakh per depositor per bank (savings + FD + RD combined).</span><div class="faq-stat-row"><div class="faq-stat"><span class="faq-stat-val">₹5 Lakh</span><span class="faq-stat-lbl">DICGC Coverage</span></div><div class="faq-stat"><span class="faq-stat-val">Per Bank</span><span class="faq-stat-lbl">Limit Applies</span></div><div class="faq-stat"><span class="faq-stat-val">Not Covered</span><span class="faq-stat-lbl">Corporate FDs, NBFCs</span></div></div><div class="faq-note">For amounts above ₹5L: Spread across 4–5 banks to maintain full insurance coverage.</div>`},
+  {q:"FD vs Savings Account \u2014 which gives more?",a:`<span class="faq-lead">FD gives 2–3× more than savings accounts. ₹5L idle in savings = ₹17,500/year. Same in 1-year FD at 7.5% = ₹37,500 — ₹20,000 more for zero extra effort.</span><div class="faq-chips"><span class="faq-chip or">Savings: 3–4% p.a.</span><span class="faq-chip gr">FD: 7–9.5% p.a.</span><span class="faq-chip pu">Difference: 3–6% per year</span></div>`},
+  {q:"What is a Tax-Saving FD?",a:`<span class="faq-lead">Tax-Saving FD: Deposit up to ₹1.5L per year, claim 80C deduction. Mandatory 5-year lock-in. Interest is taxable at slab rate.</span><div class="faq-note">Effective only under Old Tax Regime — not applicable under New Tax Regime. Consider ELSS (3yr lock-in, 12–15% returns) before choosing Tax FD.</div>`},
+  {q:"Which bank offers highest FD rates?",a:`<span class="faq-lead">Small Finance Banks (SFBs) consistently offer highest rates. All are DICGC insured up to ₹5L per bank.</span><div class="faq-stat-row"><div class="faq-stat"><span class="faq-stat-val">9–9.5%</span><span class="faq-stat-lbl">SFBs (Jana, Unity, ESAF)</span></div><div class="faq-stat"><span class="faq-stat-val">8–8.5%</span><span class="faq-stat-lbl">Private Banks (IDFC, IndusInd)</span></div><div class="faq-stat"><span class="faq-stat-val">7–7.5%</span><span class="faq-stat-lbl">PSU Banks (SBI, BOB)</span></div></div>`},
+  {q:"Cumulative vs non-cumulative FD \u2014 which to choose?",a:`<span class="faq-lead">Cumulative: Interest compounds and paid at maturity (better for wealth building). Non-cumulative: Interest paid monthly/quarterly (better for regular income).</span><div class="faq-chips"><span class="faq-chip gr">Working professionals: Cumulative</span><span class="faq-chip pu">Retirees: Non-cumulative</span><span class="faq-chip bl">Both: Same interest rate</span></div>`},
+  {q:"What is FD laddering strategy?",a:`<span class="faq-lead">Divide lumpsum across FDs with different maturities (1yr, 2yr, 3yr, 4yr, 5yr). One FD matures annually — providing liquidity while the rest keeps earning.</span><ul class="faq-points"><li><span class="fp-bul gr">✓</span>Annual liquidity without breaking any FD</li><li><span class="fp-bul gr">✓</span>Can reinvest at higher rates if rates rise</li><li><span class="fp-bul gr">✓</span>TDS stays below ₹40K threshold per FD</li></ul>`},
+  {q:"Can senior citizens get higher FD rates?",a:`<span class="faq-lead">Yes — most banks offer 0.25–0.5% extra rate to senior citizens (60+). Some banks offer up to 0.75% extra. TDS threshold is also higher at ₹50,000.</span>`},
+  {q:"What happens to FD when account holder dies?",a:`<span class="faq-lead">With nominee: Funds transferred after KYC verification — typically within 2–4 weeks. Without nominee: Legal heirs must present succession certificate — much more complex. Always add a nominee.</span>`},
+  {q:"FD vs PPF vs ELSS \u2014 which is better for tax saving?",a:`<span class="faq-lead">Priority: ELSS → PPF → Tax FD. Tax FD has the weakest combination of returns and lock-in.</span><div class="faq-stat-row"><div class="faq-stat"><span class="faq-stat-val">ELSS</span><span class="faq-stat-lbl">12–16% / 3yr lock</span></div><div class="faq-stat"><span class="faq-stat-val">PPF</span><span class="faq-stat-lbl">7.1% tax-free / 15yr</span></div><div class="faq-stat"><span class="faq-stat-val">Tax FD</span><span class="faq-stat-lbl">7.5% taxable / 5yr</span></div></div>`},
+  {q:"What is the real return on FD after inflation?",a:`<span class="faq-lead">After tax and inflation, FD often gives negative real returns for investors in higher tax brackets.</span><div class="formula-box" style="margin:10px 0"><div class="formula-code">Real Return = FD Rate – Tax – Inflation
+7.5% FD – 30% tax – 6% inflation = –0.75%
+You are LOSING purchasing power!</div></div>`},
+  {q:"Should I book FD online or at branch?",a:`<span class="faq-lead">Online is better: same rates, instant booking, 24/7 availability, easy tracking. Some banks offer 0.1% extra for online FDs. Branch only for very large amounts requiring physical documentation.</span>`}
+];
+buildFAQ(FD_FAQS);
+
+
+function resetCalc(){setVal('prin',500000);setVal('rate',7.5);setVal('ten',5);setComp('Quarterly',4);calculate(false);}
+const SECTIONS=['calculator','infographics','guide','taxation','tips','goals','faq'];
+if('IntersectionObserver' in window){let lastId='calculator';const obs=new IntersectionObserver(entries=>{const vis=entries.filter(e=>e.isIntersecting);if(vis.length){vis.sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top);const id=vis[0].target.id;if(id&&SECTIONS.includes(id)&&id!==lastId){lastId=id;syncNav(id);}}},{rootMargin:'-15% 0px -55% 0px',threshold:0});SECTIONS.forEach(id=>{const el=document.getElementById(id);if(el)obs.observe(el);});}
+initSliders();
+['prin','rate','ten'].forEach(id=>{const el=document.getElementById(id+'-disp'),n=document.getElementById(id+'-n');if(el&&n)el.textContent=formatDisp(id,n.value);});
+buildScenarios();
+selectGoal(document.querySelector('.goal-tab.active'),'emergency');
+calculate(false);
+
+/* ── Demat Modal Functions ── */
+window.dematOpen = function() {
+  var o = document.getElementById('demat-overlay');
+  if (!o) return;
+  var sy = window.pageYOffset || 0;
+  document.body.style.top = '-' + sy + 'px';
+  document.body.classList.add('modal-open');
+  o.classList.add('open');
+  var fs = document.getElementById('form-section'), ss = document.getElementById('success-section');
+  if (fs) fs.style.display = 'block';
+  if (ss) ss.style.display = 'none';
+  ['name','email','mobile'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.value = '';
+  });
+  var at = document.getElementById('accountType'); if (at) at.value = 'individual';
+  var br = document.getElementById('broker'); if (br) br.value = '';
+  ['name','email','mobile','accountType','broker'].forEach(function(id) {
+    var e = document.getElementById('err-' + id); if (e) e.textContent = '';
+    var i = document.getElementById(id); if (i) i.classList.remove('error');
+  });
+  setTimeout(function() { var n = document.getElementById('name'); if (n) n.focus(); }, 140);
+};
+window.dematClose = function() {
+  var o = document.getElementById('demat-overlay');
+  if (!o) return;
+  var sy = Math.abs(parseInt(document.body.style.top || '0'));
+  o.classList.remove('open');
+  document.body.classList.remove('modal-open');
+  document.body.style.top = '';
+  window.scrollTo({ top: sy, behavior: 'instant' });
+};
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') window.dematClose();
+});
+</script>
+
+
+<!-- DEMAT MODAL -->
+<div id="demat-overlay" role="dialog" aria-modal="true" aria-label="Open Demat Account">
+  <div id="demat-inner">
+    <button id="demat-close" onclick="dematClose()" aria-label="Close">&#10005;</button>
+<div class="page">
+  <div class="deco deco-1"></div>
+  <div class="deco deco-2"></div>
+  <div class="deco deco-3"></div>
+
+  <div class="card" role="main">
+
+    <!-- Accent bar -->
+    <div class="accent-bar"></div>
+
+    <!-- ── Header ── -->
+    <div class="card-header">
+      <div class="header-top">
+        <div class="logo-icon" aria-hidden="true">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+            <rect x="3" y="6" width="18" height="13" rx="2" stroke="white" stroke-width="1.8"/>
+            <path d="M3 10h18" stroke="white" stroke-width="1.8"/>
+            <circle cx="7.5" cy="15" r="1.1" fill="white"/>
+            <circle cx="11" cy="15" r="1.1" fill="rgba(255,255,255,0.5)"/>
+          </svg>
+        </div>
+        <span class="header-label">Demat Account</span>
+      </div>
+
+      <h1 class="card-title">Open Your <span class="title-highlight">Demat Account</span></h1>
+      <p class="card-desc">Start investing smarter. Fill in your details and we'll get back to you within 24 hours.</p>
+
+      <div class="trust-pills">
+        <span class="pill">
+          <svg width="11" height="11" fill="none" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Zero Account Opening Fee
+        </span>
+        <span class="pill">
+          <svg width="11" height="11" fill="none" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          SEBI Registered
+        </span>
+        <span class="pill">
+          <svg width="11" height="11" fill="none" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Instant e-KYC
+        </span>
+      </div>
+    </div>
+
+    <!-- ── Body ── -->
+    <div class="card-body">
+
+      <div id="form-section">
+
+        <!-- Name -->
+        <div class="field">
+          <label for="name">Full Name <span class="req">*</span></label>
+          <input type="text" id="name" placeholder="e.g. Rahul Sharma" autocomplete="name" />
+          <p class="error-msg" id="err-name" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Email -->
+        <div class="field">
+          <label for="email">Email Address <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="e.g. rahul@example.com" autocomplete="email" />
+          <p class="error-msg" id="err-email" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Mobile -->
+        <div class="field">
+          <label for="mobile">Mobile Number <span class="req">*</span></label>
+          <div class="input-wrap">
+            <span class="prefix" aria-hidden="true">+91</span>
+            <input type="tel" id="mobile" placeholder="98765 43210" maxlength="10"
+                   class="has-prefix" autocomplete="tel" inputmode="numeric" />
+          </div>
+          <p class="error-msg" id="err-mobile" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Account Type -->
+        <div class="field">
+          <label for="accountType">Type of Account <span class="req">*</span></label>
+          <div class="input-wrap">
+            <select id="accountType" aria-required="true">
+              <option value="individual" selected>Individual</option>
+              <option value="huf">HUF (Hindu Undivided Family)</option>
+              <option value="nri">NRI (Non-Resident Indian)</option>
+              <option value="corporate">Corporate</option>
+              <option value="partnership">Partnership Firm</option>
+              <option value="llp">LLP (Limited Liability Partnership)</option>
+            </select>
+            <svg class="select-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="error-msg" id="err-accountType" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Preferred Broker -->
+        <div class="field">
+          <label for="broker">Preferred Broker <span class="req">*</span></label>
+          <div class="input-wrap">
+            <select id="broker" aria-required="true">
+              <option value="" disabled selected>— Select a broker —</option>
+              <optgroup label="🔥 Discount Brokers">
+                <option value="Groww">Groww</option>
+                <option value="Zerodha">Zerodha</option>
+                <option value="Angel One">Angel One</option>
+                <option value="Upstox">Upstox</option>
+                <option value="Dhan">Dhan</option>
+                <option value="Alice Blue">Alice Blue</option>
+                <option value="Paytm Money">Paytm Money</option>
+                <option value="FYERS">FYERS</option>
+                <option value="5paisa">5paisa</option>
+                <option value="SAMCO">SAMCO</option>
+                <option value="Shoonya (Finvasia)">Shoonya (Finvasia)</option>
+                <option value="Bajaj Broking">Bajaj Broking</option>
+                <option value="mStock by Mirae">mStock by Mirae</option>
+              </optgroup>
+              <optgroup label="🏦 Full-Service Brokers">
+                <option value="ICICI Direct">ICICI Direct</option>
+                <option value="HDFC Securities">HDFC Securities</option>
+                <option value="Kotak Securities">Kotak Securities</option>
+                <option value="Motilal Oswal">Motilal Oswal</option>
+                <option value="SBI Securities">SBI Securities</option>
+                <option value="Mirae Sharekhan">Mirae Sharekhan</option>
+                <option value="IIFL Securities">IIFL Securities</option>
+                <option value="Axis Direct">Axis Direct</option>
+                <option value="Geojit Financial">Geojit Financial</option>
+                <option value="Nuvama Wealth">Nuvama Wealth</option>
+                <option value="Choice Broking">Choice Broking</option>
+                <option value="JM Financial">JM Financial</option>
+              </optgroup>
+            </select>
+            <svg class="select-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="error-msg" id="err-broker" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Submit -->
+        <button class="btn-submit" id="submitBtn" type="button">
+          Submit Application
+          <svg width="17" height="17" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <p class="security-note">🔒 256-bit encrypted &amp; secure submission</p>
+      </div>
+
+      <!-- Success state -->
+      <div class="success" id="success-section" aria-live="polite">
+        <div class="success-ring" aria-hidden="true">
+          <svg width="34" height="34" fill="none" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2>Application Received!</h2>
+        <p id="success-msg"></p>
+        <button class="btn-reset" id="resetBtn" type="button">Submit Another</button>
+      </div>
+
+    </div><!-- /card-body -->
+
+    <!-- ── Footer ── -->
+    <div class="card-footer">
+      <span class="footer-sebi">SEBI Registered Broker</span>
+      <div class="footer-exchanges">
+        <span>NSE</span>
+        <span>BSE</span>
+        <span>MCX</span>
+      </div>
+    </div>
+
+  </div><!-- /card -->
+</div><!-- /page -->
+  </div>
+</div>
+
+</body>
+</html>

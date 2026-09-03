@@ -1,0 +1,3210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="Rule of 72 Calculator — How Long to Double Your Money"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#6c3de4" media="(prefers-color-scheme: light)"/>
+<meta name="theme-color" content="#4c1d95" media="(prefers-color-scheme: dark)"/>
+<meta name="format-detection" content="telephone=no,date=no,address=no,email=no"/>
+<meta name="HandheldFriendly" content="true"/>
+<meta name="MobileOptimized" content="width"/>
+<meta name="color-scheme" content="light"/>
+<meta name="description" content="Free Rule of 72 Calculator — Find how many years to double your investment. Enter interest rate or years to double."/>
+<title>Rule of 72 Calculator — How Long to Double Your Money | Mission Wealth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap&font-display=swap" rel="stylesheet"/>
+<style>
+
+/* ═══ ROOT ═══ */
+:root{
+  --p50:#faf5ff;--p100:#f3e8ff;--p200:#e9d5ff;--p300:#d8b4fe;
+  --p400:#c084fc;--p500:#a855f7;--p600:#9333ea;--p700:#7c3aed;
+  --p800:#6d28d9;--p900:#5b21b6;--p950:#4c1d95;
+  --g50:#f0fdf4;--g100:#dcfce7;--g200:#bbf7d0;--g300:#86efac;
+  --g400:#4ade80;--g500:#22c55e;--g600:#16a34a;--g700:#15803d;
+  --n0:#fff;--n50:#f9fafb;--n100:#f3f4f6;--n150:#eeeef0;
+  --n200:#e5e7eb;--n300:#d1d5db;--n400:#9ca3af;--n500:#6b7280;
+  --n600:#4b5563;--n700:#374151;--n800:#1f2937;--n900:#111827;
+  --amber:#f59e0b;--amberBg:#fffbeb;--amberBdr:#fde68a;
+  --blue:#3b82f6;--blueBg:#eff6ff;--blueBdr:#bfdbfe;
+  --sh-sm:0 1px 3px rgba(0,0,0,.08);
+  --sh-md:0 4px 20px rgba(109,40,217,.1),0 1px 4px rgba(0,0,0,.05);
+  --sh-lg:0 12px 40px rgba(109,40,217,.14),0 4px 12px rgba(0,0,0,.07);
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;
+  --font:'DM Sans',sans-serif;
+  --mnav-h:60px;
+}
+
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;font-size:16px;overscroll-behavior-y:none;overscroll-behavior-x:none}
+body{font-family:var(--font);background:#faf8ff;color:var(--n800);min-height:100vh;min-height:-webkit-fill-available;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+@supports(-webkit-touch-callout:none){body{min-height:-webkit-fill-available}}
+@supports(height:100dvh){body{min-height:100dvh}}
+img{max-width:100%;display:block}
+a{color:inherit;-webkit-tap-highlight-color:transparent}
+button{font-family:var(--font);cursor:pointer;border:none;touch-action:manipulation;-webkit-appearance:none;appearance:none}
+input,select,textarea{font-family:var(--font)}
+@media(max-width:767px){
+  input,select,textarea,input[type="number"],input[type="text"],input[type="email"],input[type="tel"],input[type="search"]{font-size:16px!important}
+}
+input[type="range"]{-webkit-appearance:none;appearance:none;touch-action:pan-x;user-select:none;-webkit-user-select:none}
+:focus-visible{outline:2px solid #7c3aed;outline-offset:2px}
+:focus:not(:focus-visible){outline:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ── Breadcrumb ── */
+.hero-topbar{display:flex;align-items:center;gap:10px;margin-bottom:28px;position:relative;z-index:2}
+.home-btn{display:inline-flex;align-items:center;gap:7px;padding:7px 14px 7px 10px;background:var(--n0);border:1.5px solid var(--n200);border-radius:100px;font-size:12.5px;font-weight:700;color:var(--n700);text-decoration:none;box-shadow:0 1px 4px rgba(0,0,0,.07);transition:border-color .18s,box-shadow .18s,color .18s}
+.home-btn:hover{border-color:var(--p300);color:var(--p700);box-shadow:0 2px 8px rgba(108,61,228,.12)}
+.hero-breadcrumb{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500}
+.hero-breadcrumb>span:not(.hero-breadcrumb-sep):not(.hero-breadcrumb-current){color:var(--n600);padding:5px 12px;background:var(--n50);border:1.5px solid var(--n200);border-radius:100px;font-weight:600;font-size:12px}
+.hero-breadcrumb-sep{color:var(--n300);font-size:14px;font-weight:400;flex-shrink:0}
+.hero-breadcrumb-current{display:inline-flex;color:var(--p700);font-weight:800;background:var(--p50);border:1.5px solid var(--p300);padding:5px 14px;border-radius:100px;font-size:12px;box-shadow:0 1px 6px rgba(108,61,228,.12)}
+@media(max-width:640px){.hero-breadcrumb>span:not(.hero-breadcrumb-sep):not(.hero-breadcrumb-current){display:none}.hero-breadcrumb-sep:first-of-type{display:none}}
+@media(max-width:480px){.hero-breadcrumb-current{display:none}}
+@media(max-width:360px){.hero-breadcrumb{display:none}}
+
+/* ── Hero ── */
+.hero{background:#faf8ff;position:relative;overflow:hidden;padding:38px 0 32px}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(224,216,248,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(224,216,248,.5) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
+.hero::after{content:'';position:absolute;top:-80px;right:-80px;width:600px;height:600px;background:radial-gradient(ellipse,rgba(108,61,228,.09),transparent 65%);pointer-events:none;z-index:0}
+.hero-deco{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hero-deco::before{content:'';position:absolute;bottom:-80px;left:-60px;width:500px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(30,168,81,.055),transparent 65%)}
+.hero-deco::after{content:'';position:absolute;top:28%;right:28%;width:280px;height:280px;border-radius:50%;border:1px solid rgba(108,61,228,.08);animation:floatBob 8s ease-in-out infinite}
+@keyframes floatBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.hero-inner{position:relative;z-index:2;max-width:1260px;margin:0 auto;padding:0 max(20px,env(safe-area-inset-left,20px))}
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:20px}}
+.hero h1{font-size:clamp(26px,4vw,50px);font-weight:900;color:var(--n800);letter-spacing:-2px;line-height:1.08;margin-bottom:14px;animation:fadeUp .55s .06s ease both}
+.hero-hl{background:linear-gradient(90deg,var(--p600),var(--p400),var(--g500));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 4s ease infinite}
+.hero-sub{font-size:clamp(13.5px,1.6vw,16px);color:var(--n500);line-height:1.75;margin-bottom:22px;max-width:500px;animation:fadeUp .55s .12s ease both}
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px;animation:fadeUp .55s .18s ease both}
+.hpill{display:inline-flex;align-items:center;gap:5px;background:var(--n0);border:1.5px solid var(--n200);border-radius:100px;padding:5px 13px;font-size:11.5px;font-weight:600;color:var(--n600);box-shadow:0 1px 4px rgba(0,0,0,.05);transition:border-color .18s,color .18s}
+.hpill:hover{border-color:var(--p300);color:var(--p700)}
+@media(max-width:860px){.hero{padding:24px 0 20px}}
+@media(max-width:480px){.hero{padding:20px 0 16px}.hero h1{letter-spacing:-1px}}
+
+/* ── Hero Panel ── */
+.hero-panel{background:rgba(255,255,255,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1.5px solid rgba(255,255,255,.9);border-radius:22px;padding:18px;box-shadow:0 8px 40px rgba(108,61,228,.12),0 2px 8px rgba(108,61,228,.06);position:relative;z-index:1;overflow:hidden;animation:fadeUp .6s .22s ease both}
+.hero-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,#7c3aed,#8b5cf6,#10b981);border-radius:22px 22px 0 0}
+.panel-title{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:2.5px;color:var(--n500);margin-bottom:10px;display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+.panel-title::before{content:'';width:16px;height:2px;flex-shrink:0;border-radius:2px;background:linear-gradient(90deg,#7c3aed,#10b981)}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.hstat{border-radius:12px;padding:11px 12px;text-align:left;cursor:default;transition:transform .22s cubic-bezier(.34,1.56,.64,1);overflow:hidden;position:relative;display:flex;align-items:center;gap:9px}
+.hstat:hover{transform:translateY(-2px) scale(1.01)}
+.hstat-icon-wrap{width:32px;height:32px;min-width:32px;border-radius:9px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:15px;position:relative;z-index:1;flex-shrink:0}
+.hstat-text{position:relative;z-index:1;min-width:0}
+.hstat-num{font-size:17px;font-weight:900;color:#fff;display:block;line-height:1;letter-spacing:-0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hstat-lbl{font-size:7.5px;font-weight:700;color:rgba(255,255,255,.78);text-transform:uppercase;letter-spacing:.8px;display:block;margin-top:2px;white-space:nowrap}
+.hstat-purple{background:linear-gradient(135deg,#5b21b6,#7c3aed,#8b5cf6);box-shadow:0 5px 18px rgba(91,33,182,.4)}
+.hstat-green{background:linear-gradient(135deg,#065f46,#059669,#10b981);box-shadow:0 5px 18px rgba(6,95,70,.4)}
+.hstat-amber{background:linear-gradient(135deg,#92400e,#d97706,#f59e0b);box-shadow:0 5px 18px rgba(146,64,14,.4)}
+.hstat-blue{background:linear-gradient(135deg,#1e3a8a,#2563eb,#3b82f6);box-shadow:0 5px 18px rgba(30,58,138,.4)}
+.hero-minicharts{display:flex;flex-direction:column;gap:5px;position:relative;z-index:1}
+.minichart-card{background:var(--n50);border-radius:10px;padding:9px 12px;border:1px solid var(--n150);display:flex;align-items:center;gap:9px;transition:background .18s,transform .18s;cursor:default}
+.minichart-card:hover{background:#fff;border-color:var(--p200);transform:translateX(3px)}
+.mc-icon{width:32px;height:32px;min-width:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;border:1px solid rgba(0,0,0,.06)}
+.mc-body{flex:1;min-width:0}
+.mc-label{font-size:9.5px;font-weight:600;color:var(--n400);margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mc-val{font-size:14px;font-weight:900;color:var(--n800);letter-spacing:-.3px;line-height:1}
+.mc-badge{margin-left:auto;flex-shrink:0;padding:2px 9px;border-radius:100px;font-size:9.5px;font-weight:800;white-space:nowrap}
+
+/* ── Page Layout ── */
+.page-wrap{max-width:1260px;margin:0 auto;padding:20px max(14px,env(safe-area-inset-right,14px)) 80px max(14px,env(safe-area-inset-left,14px));display:grid;grid-template-columns:1fr;gap:20px;align-items:start;overflow-x:clip}
+.sidebar{display:none}
+.main-col{display:flex;flex-direction:column;gap:28px;min-width:0;overflow-x:hidden}
+
+/* ── Sidebar ── */
+.sidebar{position:sticky;top:16px;display:none;flex-direction:column;gap:14px;height:calc(100vh - 32px);max-height:calc(100vh - 32px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(108,61,228,.2) transparent}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(108,61,228,.2);border-radius:3px}
+.sidebar-card{background:var(--n0);border-radius:var(--r-lg);border:1.5px solid var(--n200);box-shadow:var(--sh-sm);overflow:hidden}
+.sb-head{padding:12px 16px 8px;border-bottom:1px solid var(--n100);display:flex;align-items:center;gap:8px}
+.sb-head-icon{width:28px;height:28px;border-radius:8px;background:var(--p100);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.sb-head-title{font-size:11px;font-weight:800;color:var(--n700);text-transform:uppercase;letter-spacing:.8px}
+.sb-list{padding:8px 0}
+.sb-item{display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;transition:all .18s;text-decoration:none;border-left:3px solid transparent}
+.sb-item:hover{background:var(--p50);border-left-color:var(--p400)}
+.sb-item.active{background:linear-gradient(90deg,var(--p100),var(--p50));border-left:3px solid var(--p700);position:relative;}
+.sb-item.active::after{content:'';position:absolute;right:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--p400),var(--p600));border-radius:2px 0 0 2px;}
+.sb-item-icon{font-size:15px;width:26px;text-align:center;flex-shrink:0}
+.sb-item-text{flex:1;min-width:0}
+.sb-item-name{font-size:12.5px;font-weight:600;color:var(--n700);line-height:1.2}
+.sb-item.active .sb-item-name{color:var(--p800);font-weight:800;}
+.sb-item-hint{font-size:10px;color:var(--n400);margin-top:1px}
+.sb-item-badge{font-size:8.5px;font-weight:800;padding:2px 6px;border-radius:100px;background:var(--p100);color:var(--p700);flex-shrink:0}
+.sb-divider{height:1px;background:var(--n100);margin:3px 0}
+.sb-home{display:flex;align-items:center;gap:10px;padding:12px 14px;margin:4px 8px;border-radius:14px;background:linear-gradient(135deg,var(--p50),rgba(240,253,246,.8));border:1.5px solid var(--p200);text-decoration:none;transition:all .22s cubic-bezier(.34,1.56,.64,1);box-shadow:0 2px 8px rgba(108,61,228,.08)}
+.sb-home:hover{background:linear-gradient(135deg,var(--p100),var(--g50));border-color:var(--p400);transform:translateY(-2px);box-shadow:0 6px 20px rgba(108,61,228,.15)}
+.sb-home-icon{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#4f46e5);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(124,58,237,.35);flex-shrink:0}
+.sb-home-label{font-size:12.5px;font-weight:800;color:var(--p800)}
+.sb-home-sub{font-size:10px;color:var(--n500);margin-top:1px}
+.sb-qstat{padding:12px 16px;background:linear-gradient(135deg,var(--p50),var(--g50));border-top:1px solid var(--n100)}
+.sq-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.sq-label{font-size:10.5px;color:var(--n500);font-weight:600}
+.sq-val{font-size:12.5px;font-weight:800;color:var(--p700)}
+
+/* ── Section Dividers ── */
+section{min-width:0;overflow-x:hidden}
+.section-divider{display:flex;align-items:center;gap:14px;margin:8px 0 22px;padding:0;min-width:0}
+.sd-icon{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:transform .22s cubic-bezier(.34,1.56,.64,1)}
+.sd-icon:hover{transform:scale(1.08) rotate(-3deg)}
+.sd-text h2{font-size:clamp(18px,3vw,22px);font-weight:900;color:var(--n900);line-height:1.2}
+.sd-text p{font-size:13px;color:var(--n500);margin-top:2px}
+.sd-line{flex:1;height:1.5px;background:linear-gradient(to right,var(--p200),transparent);border-radius:1px}
+
+/* ── Card Base ── */
+.card{background:var(--n0);border-radius:var(--r-lg);border:1.5px solid rgba(124,58,237,.09);box-shadow:var(--sh-md);overflow:hidden;min-width:0}
+.card-head{padding:18px 24px 14px;border-bottom:1px solid var(--n100);display:flex;align-items:center;gap:12px}
+.ch-icon{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(108,61,228,.2);transition:transform .22s cubic-bezier(.34,1.56,.64,1)}
+.ch-icon:hover{transform:scale(1.1) rotate(-4deg)}
+.ch-icon.purple{background:linear-gradient(135deg,#7c3aed,#4f46e5);box-shadow:0 4px 14px rgba(124,58,237,.35)}
+.ch-icon.green{background:linear-gradient(135deg,#059669,#047857);box-shadow:0 4px 14px rgba(5,150,105,.35)}
+.ch-icon.amber{background:linear-gradient(135deg,#d97706,#b45309);box-shadow:0 4px 14px rgba(217,119,6,.35)}
+.ch-icon.blue{background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 4px 14px rgba(37,99,235,.35)}
+.ch-title{font-size:16px;font-weight:800;color:var(--n800);line-height:1.2}
+.ch-sub{font-size:12px;color:var(--n400);margin-top:2px}
+.card-body{padding:24px;min-width:0;overflow-x:hidden}
+@media(max-width:480px){.card-body{padding:16px}.card-head{padding:14px 16px}}
+
+/* ── Calculator Inputs ── */
+.params-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:20px}
+.param-card{background:var(--n0);border-radius:var(--r-md);border:1.5px solid var(--n200);box-shadow:var(--sh-sm);padding:14px 12px;transition:border-color .2s,box-shadow .2s;min-width:0;width:100%;box-sizing:border-box;overflow:hidden}
+.param-card:focus-within{border-color:var(--p400);box-shadow:0 0 0 3px rgba(168,85,247,.1),var(--sh-sm)}
+.param-card.green:focus-within{border-color:var(--g400);box-shadow:0 0 0 3px rgba(34,197,94,.1),var(--sh-sm)}
+.pc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:4px;margin-bottom:10px;flex-wrap:wrap;row-gap:4px;min-width:0}
+.pc-label{font-size:11px;font-weight:700;color:var(--n500);text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:4px;line-height:1.3}
+.pc-label.green{color:var(--g600)}
+.pc-value{font-size:13px;font-weight:800;color:var(--p800);background:var(--p50);border:1.5px solid var(--p200);padding:2px 7px;border-radius:6px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.pc-value.green{color:var(--g700);background:var(--g50);border-color:var(--g200)}
+.pc-input-row{display:flex;align-items:center;gap:6px;margin-bottom:7px;min-width:0;overflow:visible}
+.range-wrap{flex:1;min-width:0;overflow:visible;padding:6px 0 4px}
+.num-input{width:60px;min-width:50px;flex-shrink:0;padding:6px 4px;border:1.5px solid var(--n200);border-radius:9px;font-family:var(--font);font-size:13px;font-weight:700;color:var(--n800);background:var(--n0);outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;-moz-appearance:textfield;text-align:center}
+.num-input:focus{border-color:var(--p400);box-shadow:0 0 0 3px rgba(168,85,247,.12)}
+.num-input::-webkit-inner-spin-button,.num-input::-webkit-outer-spin-button{opacity:1;height:26px}
+.slider{-webkit-appearance:none;appearance:none;width:100%;max-width:100%;height:6px;border-radius:100px;background:var(--n200);outline:none;cursor:pointer;display:block;margin:10px 0 4px;vertical-align:middle;box-sizing:border-box}
+.slider::-webkit-slider-runnable-track{height:6px;border-radius:100px;background:transparent;cursor:pointer}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--n0);border:3px solid var(--p700);box-shadow:0 2px 8px rgba(109,40,217,.28);cursor:pointer;margin-top:-7px;transition:transform .15s,box-shadow .15s}
+.slider:active::-webkit-slider-thumb{transform:scale(1.15);box-shadow:0 3px 14px rgba(109,40,217,.4)}
+.slider::-moz-range-track{height:6px;border-radius:100px;background:var(--n200);border:none;cursor:pointer}
+.slider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--n0);border:3px solid var(--p700);box-shadow:0 2px 8px rgba(109,40,217,.28);cursor:pointer;-moz-appearance:none}
+.slider::-moz-range-progress{height:6px;border-radius:100px;background:var(--p400)}
+.slider.green::-webkit-slider-thumb{border-color:var(--g600);box-shadow:0 2px 8px rgba(22,163,74,.28)}
+.slider.green::-moz-range-thumb{border-color:var(--g600)}
+.slider.green::-moz-range-progress{background:var(--g400)}
+.range-marks{display:flex;justify-content:space-between;padding:0 2px}
+.rm{font-size:10px;color:var(--n400);font-weight:500}
+.presets{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.preset{flex-shrink:0;padding:3px 9px;border-radius:100px;border:1.5px solid var(--p200);background:var(--p50);color:var(--p700);font-family:var(--font);font-size:11px;font-weight:600;cursor:pointer;transition:all .18s;white-space:nowrap}
+.preset:hover,.preset.on{background:var(--p700);border-color:var(--p700);color:var(--n0)}
+.preset.green-preset{border-color:var(--g200);background:var(--g50);color:var(--g700)}
+.preset.green-preset:hover,.preset.green-preset.on{background:var(--g700);border-color:var(--g700);color:var(--n0)}
+.btn-calc{width:100%;padding:15px;background:linear-gradient(135deg,var(--p950),var(--p700),var(--p600));color:var(--n0);border:none;border-radius:13px;font-family:var(--font);font-size:15px;font-weight:800;cursor:pointer;transition:all .25s;box-shadow:0 4px 18px rgba(109,40,217,.3);display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.2px}
+.btn-calc:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(109,40,217,.4)}
+.btn-calc:active{transform:translateY(0)}
+.btn-reset{width:100%;padding:11px;background:transparent;border:1.5px solid var(--n200);border-radius:12px;font-family:var(--font);font-size:14px;font-weight:600;color:var(--n500);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px}
+.btn-reset:hover{background:var(--n50);border-color:var(--n300);color:var(--n700)}
+
+/* ── Results ── */
+.results-area{margin-top:22px;display:none}
+.results-area.show{display:block;animation:fadeUp .35s ease both}
+.results-grid{display:grid;grid-template-columns:1fr;gap:22px;align-items:start;margin-bottom:22px;min-width:0}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:400px){.stats-grid{grid-template-columns:1fr}}
+.stat-tile{padding:16px;border-radius:14px;border:1.5px solid;transition:transform .2s}
+.stat-tile:hover{transform:translateY(-2px)}
+.stat-tile.purple{background:var(--p50);border-color:var(--p200)}
+.stat-tile.green{background:var(--g50);border-color:var(--g200)}
+.stat-tile.amber{background:var(--amberBg);border-color:var(--amberBdr)}
+.stat-tile.blue{background:var(--blueBg);border-color:var(--blueBdr)}
+.st-label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--n500);margin-bottom:6px}
+.st-val{font-size:clamp(18px,3vw,26px);font-weight:900;line-height:1.05}
+.st-val.purple{color:var(--p800)}.st-val.green{color:var(--g700)}.st-val.amber{color:#b45309}.st-val.blue{color:#1d4ed8}
+.st-sub{font-size:11px;color:var(--n400);margin-top:4px}
+
+/* ── Donut ── */
+.donut-row{display:flex;align-items:center;gap:20px}
+@media(max-width:480px){.donut-row{flex-direction:column;align-items:flex-start}}
+.donut-svg{flex-shrink:0}
+.donut-legend{flex:1}
+.dl-item{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--n100)}
+.dl-item:last-child{border-bottom:none}
+.dl-dot{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+.dl-name{font-size:13px;color:var(--n600);font-weight:500;flex:1}
+.dl-val{font-size:14px;font-weight:700;color:var(--n800)}
+.dl-pct{font-size:11px;color:var(--n400);margin-top:1px}
+
+/* ── Bar Charts ── */
+.bar-chart-wrap{margin-top:16px}
+.bchart-row{margin-bottom:10px}
+.bchart-label{display:flex;justify-content:space-between;margin-bottom:4px;font-size:12.5px;font-weight:600}
+.bchart-track{height:30px;background:var(--n100);border-radius:8px;overflow:hidden;position:relative}
+.bchart-fill{height:100%;border-radius:8px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:800;color:#fff;min-width:40px;transition:width 1s cubic-bezier(.34,1.56,.64,1)}
+.bchart-fill.invested{background:linear-gradient(90deg,var(--p700),var(--p400))}
+.bchart-fill.returns{background:linear-gradient(90deg,var(--g700),var(--g400))}
+.bchart-fill.total{background:linear-gradient(90deg,var(--p800),var(--g600))}
+.bchart-fill.interest{background:linear-gradient(90deg,#d97706,#f59e0b)}
+.bchart-fill.maturity{background:linear-gradient(90deg,#1d4ed8,#3b82f6)}
+
+/* ── Yearly Table ── */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px;border:1px solid var(--n200)}
+table{width:100%;border-collapse:collapse;min-width:460px;font-size:13px}
+thead th{padding:11px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--n500);background:var(--n50);border-bottom:1px solid var(--n200);text-align:right;white-space:nowrap}
+thead th:first-child{text-align:center}
+tbody tr{transition:background .12s}
+tbody tr:hover{background:var(--p50)}
+tbody tr:not(:last-child) td{border-bottom:1px solid var(--n100)}
+tbody td{padding:10px 14px;text-align:right;color:var(--n700);font-weight:500}
+tbody td:first-child{text-align:center;color:var(--n500);font-weight:700;font-size:12px}
+.td-g{color:var(--g700);font-weight:700}.td-p{color:var(--p700);font-weight:700}.td-b{font-weight:800;color:var(--n800)}
+
+/* ── Infographic Tiles ── */
+.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.info-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.info-grid{grid-template-columns:1fr 1fr}}
+.itile{border-radius:18px;padding:20px 16px;text-align:center;position:relative;overflow:hidden;border:1.5px solid;transition:transform .25s,box-shadow .25s;cursor:default}
+.itile:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+.itile::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3.5px}
+.it1{background:linear-gradient(145deg,var(--p50),#fff);border-color:rgba(124,58,237,.18)}.it1::after{background:linear-gradient(90deg,var(--p700),var(--p400))}
+.it2{background:linear-gradient(145deg,var(--g50),#fff);border-color:rgba(34,197,94,.18)}.it2::after{background:linear-gradient(90deg,var(--g700),var(--g400))}
+.it3{background:linear-gradient(145deg,var(--amberBg),#fff);border-color:rgba(245,158,11,.18)}.it3::after{background:linear-gradient(90deg,#b45309,var(--amber))}
+.it4{background:linear-gradient(145deg,var(--blueBg),#fff);border-color:rgba(59,130,246,.18)}.it4::after{background:linear-gradient(90deg,#1d4ed8,var(--blue))}
+.it5{background:linear-gradient(145deg,#fdf2f8,#fff);border-color:rgba(236,72,153,.18)}.it5::after{background:linear-gradient(90deg,#be185d,#ec4899)}
+.it6{background:linear-gradient(145deg,#fff7ed,#fff);border-color:rgba(249,115,22,.18)}.it6::after{background:linear-gradient(90deg,#c2410c,#f97316)}
+.it-emoji{font-size:26px;margin-bottom:8px;display:block}
+.it-val{font-size:22px;font-weight:900;margin-bottom:4px;line-height:1;letter-spacing:-.5px}
+.it1 .it-val{color:var(--p700)}.it2 .it-val{color:var(--g700)}.it3 .it-val{color:#b45309}.it4 .it-val{color:#1d4ed8}.it5 .it-val{color:#be185d}.it6 .it-val{color:#c2410c}
+.it-label{font-size:11px;color:var(--n600);font-weight:600;line-height:1.4}
+.it-sub{font-size:10px;color:var(--n400);margin-top:3px}
+
+/* ── Guide Cards ── */
+.guide-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:22px}
+@media(max-width:700px){.guide-grid{grid-template-columns:1fr}}
+.gc{background:var(--n0);border-radius:var(--r-md);padding:22px;border:1.5px solid var(--n150);box-shadow:var(--sh-sm);transition:transform .2s,box-shadow .2s}
+.gc:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+.gc.full{grid-column:1/-1}
+.gc.purple-border{border-top:3px solid var(--p500)}
+.gc.green-border{border-top:3px solid var(--g500)}
+.gc.amber-border{border-top:3px solid var(--amber)}
+.gc.blue-border{border-top:3px solid var(--blue)}
+.gc-icon{font-size:28px;margin-bottom:12px}
+.gc h3{font-size:15px;font-weight:700;color:var(--n800);margin-bottom:8px}
+.gc p,.gc li{font-size:13.5px;color:var(--n600);line-height:1.7}
+.gc ul{padding-left:18px}
+.gc li{margin-bottom:5px}
+
+/* ── Formula Box ── */
+.formula-box{background:linear-gradient(135deg,var(--p50) 0%,#f5f3ff 100%);border:0 none;border-left:4px solid var(--p500);border-radius:0 14px 14px 0;padding:18px 20px;margin:14px 0;position:relative;box-shadow:0 2px 12px rgba(109,40,217,.08)}
+.formula-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--p500),var(--p300),transparent);border-radius:0 14px 0 0}
+.formula-title{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--p600);margin-bottom:12px;background:var(--p100);padding:3px 10px;border-radius:100px}
+.formula-code{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--p800);background:linear-gradient(135deg,#ffffff 0%,var(--p50) 100%);border:1.5px solid var(--p200);border-left:4px solid var(--p500);padding:0;border-radius:4px 12px 12px 4px;margin:8px 0;line-height:1;overflow:hidden;box-shadow:inset 0 1px 3px rgba(109,40,217,.06),0 2px 8px rgba(109,40,217,.08)}
+/* ── Enhanced formula-code rows ── */
+.fc-row{display:flex;align-items:flex-start;gap:0;padding:0;line-height:1}
+.fc-row:first-child{border-top:none}
+.fc-icon{width:36px;min-width:36px;display:flex;align-items:center;justify-content:center;font-size:13px;padding:11px 0;background:var(--p100);color:var(--p600);align-self:stretch;flex-shrink:0}
+.fc-text{padding:10px 14px;font-size:13px;font-weight:600;color:var(--p800);line-height:1.6;flex:1;border-bottom:1px solid var(--p100)}
+.fc-row:last-child .fc-text{border-bottom:none}
+.fc-row.fc-example .fc-icon{background:var(--g100);color:var(--g700)}
+.fc-row.fc-example .fc-text{color:var(--n600);font-weight:500;font-size:12.5px;font-style:italic}
+.fc-row.fc-result .fc-icon{background:linear-gradient(135deg,var(--p600),var(--p400));color:#fff}
+.fc-row.fc-result .fc-text{color:var(--p800);font-weight:800}
+.fc-row.fc-note .fc-icon{background:#fff7ed;color:#c2410c}
+.fc-row.fc-note .fc-text{color:#92400e;font-size:12px;font-weight:500}
+.fc-row.fc-step .fc-icon{background:var(--p600);color:#fff;font-weight:900;font-size:11px}
+.fc-row.fc-slab .fc-icon{background:var(--n100);color:var(--n600);font-size:11px;font-weight:700}
+.fc-row.fc-slab .fc-text{color:var(--n700);font-weight:500;font-size:12.5px}
+.formula-note{font-size:12px;color:var(--n600);margin-top:10px;line-height:1.7;padding-top:10px;border-top:1px dashed var(--p200)}
+
+/* ── Step Flow ── */
+.step-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+@media(max-width:700px){.step-flow{grid-template-columns:repeat(2,1fr)}}
+.step-card{background:var(--n0);border-radius:var(--r-md);padding:18px 16px;border:1.5px solid var(--n150);box-shadow:var(--sh-sm);text-align:center}
+.step-num{width:32px;height:32px;background:linear-gradient(135deg,var(--p800),var(--p600));color:var(--n0);border-radius:50%;font-size:14px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px}
+.step-icon{font-size:24px;display:block;margin-bottom:8px}
+.step-card h4{font-size:13px;font-weight:700;color:var(--n800);margin-bottom:6px}
+.step-card p{font-size:12px;color:var(--n500);line-height:1.5}
+
+/* ── Taxation ── */
+.tax-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px}
+@media(max-width:700px){.tax-grid{grid-template-columns:1fr}}
+.tax-card{background:var(--n0);border-radius:var(--r-md);overflow:hidden;border:1.5px solid var(--n200);box-shadow:var(--sh-sm)}
+.tc-head{padding:14px 18px;font-size:14px;font-weight:800;color:var(--n0)}
+.tc-head.purple{background:linear-gradient(135deg,var(--p950),var(--p700))}
+.tc-head.green{background:linear-gradient(135deg,var(--g700),var(--g500))}
+.tc-head.amber{background:linear-gradient(135deg,#92400e,#d97706)}
+.tc-row{display:flex;justify-content:space-between;align-items:center;padding:11px 18px;border-bottom:1px solid var(--n100)}
+.tc-row:last-child{border-bottom:none}
+.tc-label{font-size:13px;color:var(--n600);font-weight:500}
+.tc-val{font-size:13px;font-weight:700;color:var(--n800)}
+.tc-val.highlight{color:var(--p700);font-weight:800}
+.tc-val.green{color:var(--g700);font-weight:800}
+.tc-val.red{color:#dc2626;font-weight:800}
+.tax-timeline{background:linear-gradient(135deg,var(--p50),var(--g50));border-radius:var(--r-md);padding:20px;border:1.5px solid var(--p200);margin-bottom:18px}
+.tt-title{font-size:14px;font-weight:800;color:var(--n800);margin-bottom:14px}
+.tt-steps{display:flex;flex-direction:column;gap:10px}
+.tt-step{display:flex;gap:14px;align-items:flex-start}
+.tt-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;color:#fff}
+.tt-dot.p{background:linear-gradient(135deg,var(--p700),var(--p500))}
+.tt-dot.g{background:linear-gradient(135deg,var(--g700),var(--g500))}
+.tt-dot.a{background:linear-gradient(135deg,#b45309,var(--amber))}
+.tt-content h4{font-size:13px;font-weight:700;color:var(--n800);margin-bottom:2px}
+.tt-content p{font-size:12.5px;color:var(--n500);line-height:1.6}
+
+/* ── Pro Tips ── */
+.tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:700px){.tips-grid{grid-template-columns:1fr}}
+.tip-card{border-radius:var(--r-md);padding:20px;border:1.5px solid;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.tip-card:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+.tip-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.tc1{background:linear-gradient(145deg,var(--p50),#fff);border-color:rgba(124,58,237,.2)}.tc1::before{background:linear-gradient(90deg,var(--p700),var(--p400))}
+.tc2{background:linear-gradient(145deg,var(--g50),#fff);border-color:rgba(34,197,94,.2)}.tc2::before{background:linear-gradient(90deg,var(--g700),var(--g400))}
+.tc3{background:linear-gradient(145deg,var(--amberBg),#fff);border-color:rgba(245,158,11,.2)}.tc3::before{background:linear-gradient(90deg,#b45309,var(--amber))}
+.tc4{background:linear-gradient(145deg,var(--blueBg),#fff);border-color:rgba(59,130,246,.2)}.tc4::before{background:linear-gradient(90deg,#1d4ed8,var(--blue))}
+.tc5{background:linear-gradient(145deg,#fdf2f8,#fff);border-color:rgba(236,72,153,.2)}.tc5::before{background:linear-gradient(90deg,#be185d,#ec4899)}
+.tc6{background:linear-gradient(145deg,#f0f9ff,#fff);border-color:rgba(6,182,212,.2)}.tc6::before{background:linear-gradient(90deg,#0e7490,#06b6d4)}
+.tip-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;padding:3px 10px;border-radius:100px;margin-bottom:10px}
+.tb-purple{background:var(--p100);color:var(--p700)}.tb-green{background:var(--g100);color:var(--g700)}.tb-amber{background:var(--amberBg);color:#b45309}.tb-blue{background:var(--blueBg);color:#1d4ed8}.tb-pink{background:#fdf2f8;color:#be185d}.tb-teal{background:#f0f9ff;color:#0e7490}
+.tip-icon{font-size:28px;margin-bottom:10px}
+.tip-card h4{font-size:14px;font-weight:800;color:var(--n800);margin-bottom:8px;line-height:1.3}
+.tip-card p{font-size:13px;color:var(--n600);line-height:1.7}
+.tip-highlight{background:rgba(0,0,0,.04);border-radius:8px;padding:10px 12px;margin-top:12px;font-size:12.5px;font-weight:600;color:var(--n700)}
+
+/* ── Goal Planner ── */
+.goal-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
+.goal-tabs::-webkit-scrollbar{display:none}
+.goal-tab{display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:100px;border:1.5px solid var(--n200);background:var(--n0);font-family:var(--font);font-size:13px;font-weight:600;color:var(--n600);cursor:pointer;transition:all .2s;white-space:nowrap;touch-action:manipulation}
+.goal-tab:hover{border-color:var(--p300);color:var(--p600);background:var(--p50)}
+.goal-tab.active{background:linear-gradient(135deg,var(--p700),var(--p500));border-color:transparent;color:#fff;box-shadow:0 4px 14px rgba(109,40,217,.3)}
+.goal-content{background:linear-gradient(135deg,var(--p50),var(--g50));border-radius:var(--r-lg);padding:24px;border:1.5px solid var(--p200)}
+.goal-result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:480px){.goal-result-grid{grid-template-columns:1fr}}
+.gr-tile{background:var(--n0);border-radius:12px;padding:14px;border:1px solid var(--n150);text-align:center}
+.grt-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--n400);margin-bottom:5px}
+.grt-val{font-size:20px;font-weight:900;color:var(--p800)}
+.grt-val.green{color:var(--g700)}.grt-val.amber{color:#b45309}.grt-val.blue{color:#1d4ed8}
+.grt-sub{font-size:11px;color:var(--n400);margin-top:3px}
+.fund-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.fund-chip{background:var(--p50);border:1px solid var(--p200);border-radius:100px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--p800)}
+
+/* ── FAQ ── */
+.faq-wrap{max-width:100%}
+.faq-item{border:1.5px solid var(--n200);border-radius:14px;overflow:hidden;margin-bottom:10px;background:var(--n0);transition:border-color .2s,box-shadow .2s}
+.faq-item:hover{border-color:var(--p300);box-shadow:var(--sh-sm)}
+.faq-item.open{border-color:var(--p300);box-shadow:0 4px 16px rgba(109,40,217,.08)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;cursor:pointer;font-size:14px;font-weight:700;color:var(--p700);user-select:none;-webkit-user-select:none;gap:12px;min-height:56px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:color .2s}
+.faq-item.open .faq-q{color:var(--p800)}
+.faq-icon{width:26px;height:26px;min-width:26px;border-radius:50%;background:var(--p100);display:flex;align-items:center;justify-content:center;color:var(--p700);font-size:16px;flex-shrink:0;transition:transform .3s,background .2s,color .2s;font-weight:900;line-height:1}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--p700);color:#fff}
+.faq-a{display:none;padding:0 20px 18px;font-size:13px;color:var(--n500);line-height:1.8}
+.faq-item.open .faq-a{display:block}
+.faq-lead{display:block;font-size:13.5px;font-weight:700;color:var(--n800);margin-bottom:10px;line-height:1.5}
+.faq-points{list-style:none;display:flex;flex-direction:column;gap:7px;margin:10px 0}
+.faq-points li{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.7}
+.fp-bul{min-width:20px;height:20px;border-radius:100px;display:inline-flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;margin-top:2px;font-weight:800;padding:0 5px;white-space:nowrap}
+.fp-bul.gr{background:var(--g100);color:var(--g700)}.fp-bul.pu{background:var(--p100);color:var(--p700)}.fp-bul.or{background:#fff7ed;color:#c2410c}.fp-bul.bl{background:var(--blueBg);color:#1d4ed8}
+.faq-chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.faq-chip{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;padding:4px 11px;border-radius:100px}
+.faq-chip.gr{background:var(--g100);color:var(--g700);border:1px solid var(--g200)}
+.faq-chip.pu{background:var(--p100);color:var(--p700);border:1px solid var(--p200)}
+.faq-chip.or{background:#fff7ed;color:#c2410c;border:1px solid #fdba74}
+.faq-chip.bl{background:var(--blueBg);color:#1e40af;border:1px solid var(--blueBdr)}
+.faq-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.faq-stat{background:var(--n50);border-radius:10px;padding:10px;text-align:center;border:1px solid var(--n150)}
+.faq-stat-val{display:block;font-size:16px;font-weight:900;color:var(--p700);line-height:1.1;margin-bottom:3px}
+.faq-stat-lbl{display:block;font-size:9px;font-weight:700;color:var(--n400);text-transform:uppercase;letter-spacing:.4px}
+.faq-note{margin-top:12px;padding:10px 14px;background:var(--n50);border-left:3px solid var(--p500);border-radius:0 8px 8px 0;font-size:12px;color:var(--n700);line-height:1.65;font-weight:500}
+
+/* ── Disclaimer ── */
+.disclaimer{background:var(--amberBg);border:1px solid var(--amberBdr);border-radius:12px;padding:14px 18px;font-size:12px;color:#92400e;line-height:1.7;margin-top:18px}
+.disclaimer strong{font-weight:800}
+
+/* ── Power table ── */
+.power-table-wrap{background:linear-gradient(135deg,var(--p50),var(--g50));border-radius:var(--r-lg);padding:22px;border:1.5px solid var(--p200);margin-bottom:22px;overflow:hidden}
+.pt-title{font-size:15px;font-weight:800;color:var(--n800);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.pt-title::after{content:'';flex:1;height:1.5px;background:linear-gradient(to right,var(--p200),transparent);border-radius:1px}
+.power-rows{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.power-row{background:var(--n0);border-radius:12px;padding:14px;border:1px solid var(--n150)}
+.pr-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--n100)}
+.pr-year{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--n500)}
+.pr-badge{font-size:10px;font-weight:800;padding:2px 8px;border-radius:100px;background:var(--p100);color:var(--p700)}
+.pr-main{font-size:20px;font-weight:900;color:var(--g700);margin-bottom:3px}
+.pr-invested{font-size:12px;color:var(--n500)}
+.pr-gain{font-size:11px;color:var(--p600);font-weight:700;margin-top:3px}
+
+/* ── Mobile Chips ── */
+.mobile-section-chips{display:none;flex-wrap:wrap;overflow:visible;padding:10px max(14px,env(safe-area-inset-left,14px));gap:7px;background:rgba(255,255,255,.97);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--n150);position:sticky;top:0;z-index:600;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+@supports not(backdrop-filter:blur(1px)){.mobile-section-chips{background:#fff}}
+.mobile-section-chips::-webkit-scrollbar{display:none}
+.mchip{flex-shrink:0;padding:6px 12px;border-radius:100px;border:1.5px solid var(--n200);background:var(--n0);font-size:12px;font-weight:600;color:var(--n600);cursor:pointer;transition:all .18s;white-space:nowrap;text-decoration:none;touch-action:manipulation;font-family:var(--font);display:inline-flex;align-items:center;gap:4px}
+.mchip:active,.mchip.on{background:var(--p700);border-color:var(--p700);color:#fff;box-shadow:0 2px 10px rgba(124,58,237,.28)}
+
+/* ── Mobile Nav ── */
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--n150);z-index:700;padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -2px 16px rgba(0,0,0,.07)}
+@supports not(backdrop-filter:blur(1px)){.mobile-nav{background:#fff}}
+.mnav-items{display:flex;width:100%}
+.mnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 2px 6px;min-height:max(var(--mnav-h),44px);cursor:pointer;text-decoration:none;touch-action:manipulation;background:none;user-select:none;-webkit-user-select:none;transition:background .15s;position:relative}
+.mnav-item:active{background:var(--p50)}
+.mnav-icon{font-size:22px;line-height:1;display:block;margin-bottom:3px;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.mnav-label{font-size:10px;font-weight:600;color:var(--n500);letter-spacing:.1px;line-height:1;transition:color .15s}
+.mnav-item.active .mnav-icon{transform:scale(1.15)}
+.mnav-item.active .mnav-label{color:var(--p700);font-weight:800}
+.mnav-dot{width:4px;height:4px;border-radius:50%;background:var(--p600);margin:2px auto 0;opacity:0;transition:opacity .2s}
+.mnav-item.active .mnav-dot{opacity:1}
+.mnav-item.active::before{content:'';position:absolute;top:0;left:25%;right:25%;height:2.5px;border-radius:0 0 3px 3px;background:var(--p600)}
+
+/* ── FAB ── */
+.fab-calc{position:fixed;bottom:calc(var(--mnav-h) + 14px + env(safe-area-inset-bottom,0px));left:16px;width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#5b21b6,#7c3aed,#059669);color:#fff;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 6px 24px rgba(91,33,182,.5),0 2px 6px rgba(0,0,0,.2);z-index:850;transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;font-family:var(--font)}
+.fab-calc:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(91,33,182,.65)}
+.fab-calc:active{transform:scale(.95)}
+.fab-icon{width:24px;height:24px;display:block;line-height:0;font-size:0}
+.fab-icon svg{width:24px;height:24px;display:block}
+.fab-label{font-size:8px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:rgba(255,255,255,.88);line-height:1;margin-top:2px}
+@media(min-width:1025px){.fab-calc{display:none}}
+@media(max-width:480px){.fab-calc{width:48px;height:48px;border-radius:14px;bottom:calc(var(--mnav-h) + 12px + env(safe-area-inset-bottom,0px))}}
+
+/* ── Drawer ── */
+.drawer-backdrop{position:fixed;inset:0;background:rgba(10,2,30,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:1000;opacity:0;pointer-events:none;transition:opacity .28s ease}
+.drawer-backdrop.open{opacity:1;pointer-events:auto}
+.calc-drawer{position:fixed;bottom:0;left:0;right:0;max-height:92vh;max-height:92dvh;background:#fff;border-radius:24px 24px 0 0;z-index:1001;transform:translateY(100%);transition:transform .35s cubic-bezier(.32,.72,0,1);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 -8px 40px rgba(0,0,0,.18);padding-bottom:env(safe-area-inset-bottom,0px)}
+.calc-drawer.open{transform:translateY(0)}
+@media(min-width:641px) and (max-width:1024px){.calc-drawer{left:0;right:auto;top:0;bottom:0;max-height:100vh;max-height:100dvh;height:100%;width:min(360px,90vw);border-radius:0 20px 20px 0;transform:translateX(-100%);padding-bottom:0}.calc-drawer.open{transform:translateX(0)}}
+.drawer-handle{width:40px;height:4px;border-radius:2px;background:var(--n300);margin:12px auto 0;flex-shrink:0}
+@media(min-width:641px){.drawer-handle{display:none}}
+.drawer-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 14px;background:linear-gradient(135deg,var(--p950),var(--p800),var(--g700));flex-shrink:0;position:relative}
+.drawer-header::before{content:'';position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.07),transparent 70%);pointer-events:none}
+.drawer-title{font-size:16px;font-weight:900;color:#fff;display:flex;align-items:center;gap:10px;text-shadow:0 1px 4px rgba(0,0,0,.2)}
+.drawer-title-icon{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.drawer-close{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .18s,transform .25s;touch-action:manipulation;font-family:var(--font)}
+.drawer-close:hover{background:rgba(255,255,255,.3);transform:rotate(90deg)}
+.drawer-home-link{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:linear-gradient(135deg,var(--p50),var(--g50));border:1.5px solid var(--p200);margin-bottom:14px;text-decoration:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:all .22s cubic-bezier(.34,1.56,.64,1);position:relative;overflow:hidden}
+.drawer-home-link:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 6px 20px rgba(108,61,228,.14);border-color:var(--p400)}
+.drawer-home-link:active{transform:scale(.97)}
+.drawer-home-icon{width:38px;height:38px;border-radius:11px;min-width:38px;background:linear-gradient(135deg,var(--p700),var(--p500));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(124,58,237,.35)}
+.drawer-home-label{font-size:13.5px;font-weight:800;color:var(--p800);line-height:1.2}
+.drawer-home-sub{font-size:11px;color:var(--n500);margin-top:2px}
+.drawer-home-arrow{margin-left:auto;flex-shrink:0}
+.drawer-body{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;flex:1;padding:12px 12px 20px;padding-bottom:max(20px,calc(env(safe-area-inset-bottom,0px) + 16px))}
+.drawer-search{display:flex;align-items:center;gap:8px;background:var(--n50);border:1.5px solid var(--n200);border-radius:12px;padding:10px 14px;margin-bottom:14px;transition:border-color .2s,box-shadow .2s}
+.drawer-search:focus-within{border-color:var(--p400);box-shadow:0 0 0 3px rgba(124,58,237,.1)}
+.drawer-search-icon{font-size:15px;flex-shrink:0;color:var(--n400)}
+.drawer-search-input{border:none;background:transparent;outline:none;font-family:var(--font);font-size:14px;font-weight:500;color:var(--n800);width:100%}
+.drawer-search-input::placeholder{color:var(--n400)}
+.drawer-cat{margin-bottom:16px}
+.drawer-cat-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:var(--n400);padding:0 8px;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.drawer-cat-title::after{content:'';flex:1;height:1px;background:var(--n150)}
+.drawer-items{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+@media(max-width:360px){.drawer-items{grid-template-columns:1fr}}
+.drawer-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--n150);background:#fff;cursor:pointer;text-decoration:none;transition:all .18s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;overflow:hidden}
+.drawer-item:hover,.drawer-item:active{background:var(--p50);border-color:var(--p200)}
+.drawer-item.active-calc{background:var(--p100);border-color:var(--p400)}
+.drawer-item-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.drawer-item-text{flex:1;min-width:0}
+.drawer-item-name{font-size:12.5px;font-weight:700;color:var(--n800);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drawer-item.active-calc .drawer-item-name{color:var(--p700)}
+.drawer-item-sub{font-size:10px;color:var(--n400);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drawer-item-arrow{color:var(--n300);font-size:12px;flex-shrink:0;font-weight:700}
+.drawer-badge{font-size:8px;font-weight:800;padding:2px 6px;border-radius:100px;white-space:nowrap;flex-shrink:0}
+.drawer-badge.active{background:var(--p100);color:var(--p700)}
+.drawer-badge.popular{background:var(--g100);color:var(--g700)}
+.drawer-badge.new{background:var(--amberBg);color:var(--amber)}
+
+/* ── Scroll Top ── */
+#scrollTop{position:fixed;bottom:calc(var(--mnav-h) + 14px + env(safe-area-inset-bottom,0px));right:16px;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 18px rgba(109,40,217,.4);z-index:900;display:none;align-items:center;justify-content:center;transition:.25s;font-family:var(--font);touch-action:manipulation}
+@media(min-width:1025px){#scrollTop{bottom:20px;right:20px}}
+
+/* ── Demat Banner ── */
+.demat-banner{padding:28px max(20px,env(safe-area-inset-left));background:linear-gradient(135deg,var(--p950),var(--p800),var(--g700));border-radius:var(--r-lg);position:relative;overflow:hidden;text-align:center;box-shadow:0 8px 32px rgba(109,40,217,.22)}
+.demat-banner::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);border-radius:50%;pointer-events:none}
+.db-inner{max-width:620px;margin:0 auto;position:relative;z-index:1}
+.db-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:800;color:#fff;letter-spacing:.8px;text-transform:uppercase;margin-bottom:12px}
+.db-title{font-size:clamp(17px,3.5vw,24px);font-weight:900;color:#fff;letter-spacing:-.4px;margin-bottom:8px;line-height:1.2}
+.db-sub{font-size:13px;color:rgba(255,255,255,.82);margin-bottom:20px;line-height:1.6}
+.db-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-db-pri{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;border-radius:12px;font-family:var(--font);font-size:14px;font-weight:800;color:var(--p800);background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.18);border:none;min-height:46px;white-space:nowrap;transition:transform .2s,box-shadow .2s;cursor:pointer;touch-action:manipulation}
+.btn-db-pri:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.25)}
+.btn-db-sec{display:inline-flex;align-items:center;gap:6px;padding:12px 20px;border-radius:12px;font-family:var(--font);font-size:13px;font-weight:700;color:#fff;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);min-height:46px;white-space:nowrap;transition:background .2s;cursor:pointer;touch-action:manipulation}
+.btn-db-sec:hover{background:rgba(255,255,255,.25)}
+@media(max-width:479px){.btn-db-pri,.btn-db-sec{width:100%;justify-content:center}}
+
+/* ── Responsive ── */
+@media(max-width:1024px){.mobile-section-chips{display:flex}.mobile-nav{display:flex}body{padding-bottom:calc(var(--mnav-h) + env(safe-area-inset-bottom,0px))}}
+@media(min-width:1025px){.page-wrap{grid-template-columns:264px 1fr;padding:28px 24px 80px}.sidebar{display:flex}.mobile-section-chips{display:none}.mobile-nav{display:none}.params-grid{grid-template-columns:repeat(3,1fr)}.results-grid{grid-template-columns:1fr 1fr}.guide-grid{grid-template-columns:repeat(2,1fr)}.step-flow{grid-template-columns:repeat(4,1fr)}.tips-grid{grid-template-columns:repeat(2,1fr)}.info-grid{grid-template-columns:repeat(4,1fr)}.power-rows{grid-template-columns:repeat(3,1fr)}.tax-grid{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr auto}.hero-stats{grid-template-columns:repeat(2,1fr);min-width:260px}}
+@media(min-width:641px) and (max-width:1024px){.page-wrap{grid-template-columns:1fr;padding:16px 16px calc(var(--mnav-h) + env(safe-area-inset-bottom,0px) + 16px);gap:18px}.sidebar{display:none}.params-grid{grid-template-columns:repeat(3,1fr);gap:12px}.results-grid{grid-template-columns:1fr 1fr;gap:16px}.stats-grid{grid-template-columns:repeat(2,1fr)}.guide-grid{grid-template-columns:repeat(2,1fr)}.step-flow{grid-template-columns:repeat(4,1fr)}.tips-grid{grid-template-columns:repeat(2,1fr)}.info-grid{grid-template-columns:repeat(4,1fr)}.power-rows{grid-template-columns:repeat(3,1fr)}.tax-grid{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:repeat(4,1fr);min-width:unset}.card-body{padding:20px}.card-head{padding:16px 20px 12px}}
+@media(min-width:481px) and (max-width:640px){.page-wrap{grid-template-columns:1fr;padding:12px 12px calc(var(--mnav-h) + env(safe-area-inset-bottom,0px) + 12px);gap:14px}.sidebar{display:none}.params-grid{grid-template-columns:1fr 1fr;gap:10px}.results-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.guide-grid{grid-template-columns:1fr}.step-flow{grid-template-columns:1fr 1fr}.tips-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr 1fr}.power-rows{grid-template-columns:1fr 1fr}.tax-grid{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:repeat(2,1fr);min-width:unset}.card-body{padding:14px}.card-head{padding:12px 14px}.main-col{gap:18px}.faq-stat-row{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:361px) and (max-width:480px){.page-wrap{grid-template-columns:1fr;padding:12px 12px calc(var(--mnav-h) + env(safe-area-inset-bottom,0px) + 12px);gap:13px}.sidebar{display:none}.params-grid{grid-template-columns:1fr;gap:10px}.results-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.guide-grid{grid-template-columns:1fr}.step-flow{grid-template-columns:1fr 1fr}.tips-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr 1fr}.power-rows{grid-template-columns:1fr}.tax-grid{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:1fr 1fr;min-width:unset}.card-body{padding:14px}.card-head{padding:12px 14px}.hero{padding:22px 0 16px}.hero h1{font-size:clamp(24px,7vw,34px);letter-spacing:-.8px}.main-col{gap:18px}.faq-q{font-size:13px;padding:13px 14px;min-height:52px}.faq-a{padding:0 14px 16px;font-size:12.5px}.tip-card{padding:16px}.ch-title{font-size:15px}}
+@media(max-width:360px){.page-wrap{grid-template-columns:1fr;padding:10px 10px calc(var(--mnav-h) + env(safe-area-inset-bottom,0px) + 10px);gap:12px}.sidebar{display:none}.params-grid{grid-template-columns:1fr;gap:8px}.results-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.guide-grid{grid-template-columns:1fr}.step-flow{grid-template-columns:1fr 1fr}.tips-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr 1fr}.power-rows{grid-template-columns:1fr}.tax-grid{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:1fr 1fr;min-width:unset}.card-body{padding:12px}.card-head{padding:11px 12px}.hero{padding:18px 0 14px}.hero h1{font-size:22px;letter-spacing:-.5px}.hero-inner{padding:0 14px}.mchip{font-size:11.5px;padding:6px 11px}.faq-q{font-size:12.5px;padding:12px}.faq-a{padding:0 12px 14px;font-size:12px}.tip-card{padding:14px}.ch-title{font-size:14px}.goal-content{padding:16px}.power-table-wrap{padding:16px}}
+@media(max-height:500px) and (orientation:landscape){.hero{padding:12px 0!important}.hero h1{font-size:20px!important}.mobile-section-chips{display:none!important}}
+@media(forced-colors:active){.btn-calc,.fab-calc,.mnav-item.active{forced-color-adjust:none}}
+@media(-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){body{-webkit-font-smoothing:antialiased}}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(108,61,228,.22);border-radius:4px}
+
+</style>
+</head>
+
+<style>
+/* ═══ CROSS-PLATFORM COMPATIBILITY ═══ */
+html{-moz-text-size-adjust:100%;overscroll-behavior-x:none;overscroll-behavior-y:none}
+body{min-height:100vh;min-height:-webkit-fill-available;text-rendering:optimizeLegibility}
+@supports(-webkit-touch-callout:none){body{min-height:-webkit-fill-available}}
+@supports(height:100dvh){body{min-height:100dvh}}
+@media(max-width:767px){input,select,textarea,input[type="number"],input[type="text"],input[type="email"],input[type="tel"],input[type="search"]{font-size:16px!important}}
+:focus-visible{outline:2px solid #7c3aed;outline-offset:2px}
+:focus:not(:focus-visible){outline:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+@media(max-height:500px) and (orientation:landscape){.hero{padding:14px 0!important}.hero h1{font-size:20px!important}.mobile-section-chips{display:none!important}.fab-calc{bottom:calc(60px + 10px + env(safe-area-inset-bottom,0px))!important}}
+@media(forced-colors:active){.btn-calc,.fab-calc,.mnav-item.active{forced-color-adjust:none}}
+@supports not(backdrop-filter:blur(1px)){.mobile-nav{background:#fff!important}.mobile-section-chips{background:#fff!important}.calc-drawer{background:#fff!important}}
+.calc-drawer{max-height:92dvh}
+@media(-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){body{-webkit-font-smoothing:antialiased}}
+
+.db-pills{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:14px}
+.db-pill{font-size:11.5px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:100px;padding:4px 12px}
+@media(max-width:479px){.btn-db-pri,.btn-db-sec{width:100%;justify-content:center}}
+
+hrink:0;
+}
+.sb-home-label{font-size:13px;font-weight:800;color:var(--p800)}
+.sb-home-sub{font-size:10.5px;color:var(--n500);margin-top:1px}
+
+/* ═══ Demat Modal — Fixed ═══ */
+
+
+/* ── Demat close button ── */
+#demat-close{
+  display:none;
+  position:absolute;
+  top:-14px;
+  right:-14px;
+  width:36px;height:36px;
+  border-radius:50%;
+  background:#fff;
+  border:2px solid #e5e7eb;
+  color:#374151;
+  font-size:16px;line-height:1;
+  cursor:pointer;
+  align-items:center;justify-content:center;
+  box-shadow:0 2px 10px rgba(0,0,0,.15);
+  transition:background .18s,color .18s,border-color .18s,transform .2s;
+  font-family:inherit;
+  z-index:100002;
+}
+#demat-overlay.open #demat-close{display:flex}
+#demat-close:hover{
+  background:#7c3aed;color:#fff;border-color:#7c3aed;
+  transform:rotate(90deg) scale(1.08);
+  box-shadow:0 4px 16px rgba(124,58,237,.4);
+}
+/* ── Demat form CSS variables ── */
+#demat-inner{
+  --purple:#7c3aed;
+  --purple-mid:#8b5cf6;
+  --purple-light:#a78bfa;
+  --purple-pale:#ede9fe;
+  --purple-glow:rgba(124,58,237,0.14);
+  --purple-shadow:rgba(124,58,237,0.28);
+  --green:#16a34a;
+  --green-mid:#22c55e;
+  --green-light:#4ade80;
+  --green-pale:#dcfce7;
+  --green-glow:rgba(22,163,74,0.14);
+  --red:#dc2626;
+  --white:#ffffff;
+  --text-dark:#111827;
+  --text-mid:#374151;
+  --text-soft:#6b7280;
+  --text-muted:#9ca3af;
+  --bg-page:#ffffff;
+  --bg-input:#f9fafb;
+  --bg-focus:#faf5ff;
+  --bg-footer:#fafafa;
+  --border:#e5e7eb;
+  --border-soft:#f3f4f6;
+  --font:'DM Sans',sans-serif;
+}
+/* Force white card background */
+#demat-inner .card{
+  background:#ffffff !important;
+  color:#111827 !important;
+}
+#demat-inner .card-header{
+  background:#ffffff !important;
+}
+#demat-inner .card-body{
+  background:#ffffff !important;
+}
+#demat-inner .card-footer{
+  background:#f9fafb !important;
+}
+/* Fix label visibility */
+#demat-inner label,
+#demat-inner .field label{
+  color:#374151 !important;
+  font-size:13px !important;
+  font-weight:600 !important;
+  display:block !important;
+  margin-bottom:6px !important;
+}
+#demat-inner .card-title{
+  color:#111827 !important;
+  font-size:24px !important;
+  font-weight:800 !important;
+  letter-spacing:-0.5px !important;
+}
+#demat-inner .card-desc{
+  color:#6b7280 !important;
+  font-size:13.5px !important;
+  line-height:1.65 !important;
+}
+#demat-inner .header-label{
+  color:#7c3aed !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  letter-spacing:1.5px !important;
+  text-transform:uppercase !important;
+}
+#demat-inner .footer-sebi{color:#7c3aed !important;font-size:11px !important;font-weight:700 !important}
+#demat-inner .footer-exchanges span{color:#8b5cf6 !important;font-size:11px !important;font-weight:700 !important}
+
+
+/* ── Demat close button — always visible ── */
+#demat-overlay.open @media(max-width:540px){
+  }
+
+/* ── Demat close button ── */
+#demat-overlay.open 
+/* ── Demat close button — top-right of overlay ── */
+#demat-overlay.open @media(max-width:540px){
+  }
+#demat-overlay{
+  display:none;position:fixed;inset:0;z-index:99999;
+  background:rgba(10,2,30,0.75);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:40px 16px 40px;
+  box-sizing:border-box;
+  align-items:flex-start;
+  justify-content:center;
+}
+#demat-overlay.open{display:flex}
+
+#demat-inner{
+  position:relative;
+  width:100%;max-width:540px;
+  margin:0 auto;
+  border-radius:20px;
+  box-shadow:0 24px 80px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.08);
+  animation:dematFadeUp .38s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes dematFadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+
+
+/* Card inside modal */
+#demat-inner .page{
+  min-height:unset !important;padding:0 !important;
+  background:transparent !important;overflow:visible !important;
+  display:block !important;position:static !important;
+}
+#demat-inner .deco{display:none !important}
+#demat-inner .card{
+  animation:none !important;width:100% !important;
+  max-width:100% !important;min-height:unset !important;
+  border-radius:0 !important;
+  box-sizing:border-box !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+}
+#demat-inner .card-header{padding:28px 32px 22px !important}
+#demat-inner .card-body{padding:24px 32px 28px !important}
+#demat-inner .card-footer{padding:14px 32px !important}
+#demat-inner .card-title{font-size:24px !important;letter-spacing:-0.5px}
+#demat-inner .card-desc{font-size:13.5px !important;line-height:1.65}
+
+/* Fix inputs — add border-radius */
+#demat-inner input,#demat-inner select{
+  border-radius:10px !important;
+  padding:12px 14px !important;
+  font-size:14px !important;
+  border:1.5px solid #e5e7eb !important;
+  background:#f9fafb !important;
+  transition:border-color .18s,box-shadow .18s,background .18s !important;
+  width:100% !important;
+  box-sizing:border-box !important;
+}
+#demat-inner input:focus,#demat-inner select:focus{
+  border-color:#7c3aed !important;
+  background:#fff !important;
+  box-shadow:0 0 0 3px rgba(124,58,237,.12) !important;
+  outline:none !important;
+}
+#demat-inner input.has-prefix{padding-left:58px !important}
+#demat-inner .btn-submit{
+  border-radius:12px !important;
+  padding:14px 24px !important;
+  font-size:15px !important;
+  font-weight:700 !important;
+  letter-spacing:0.2px !important;
+}
+#demat-inner .field{margin-bottom:18px !important}
+#demat-inner .field label{
+  font-size:13px !important;font-weight:600 !important;
+  color:#374151 !important;margin-bottom:6px !important;
+}
+
+/* Mobile */
+@media(max-width:540px){
+  #demat-overlay{padding:0 !important}
+  #demat-inner{
+    max-width:100% !important;border-radius:0 !important;
+    min-height:100dvh;
+  }
+  #demat-inner .card-header{padding:24px 18px 18px !important}
+  #demat-inner .card-body{padding:20px 18px 24px !important}
+  #demat-inner .card-footer{padding:12px 18px !important}
+  }
+.modal-open{overflow:hidden !important;width:100%}
+/* ── Sidebar Investment Calcs scrollbar ── */
+.sb-list-scroll{}
+
+
+
+
+/* ── Demat Banner ── */
+.demat-banner{padding:28px max(20px,env(safe-area-inset-left));background:linear-gradient(135deg,var(--p950) 0%,var(--p800) 45%,var(--g700) 100%);border-radius:var(--r-lg);position:relative;overflow:hidden;text-align:center;box-shadow:0 8px 32px rgba(109,40,217,.22)}
+.demat-banner::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.db-inner{max-width:620px;margin:0 auto;position:relative;z-index:1}
+.db-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:800;color:#fff;letter-spacing:.8px;text-transform:uppercase;margin-bottom:12px}
+.db-title{font-size:clamp(17px,3.5vw,24px);font-weight:900;color:#fff;letter-spacing:-.4px;margin-bottom:8px;line-height:1.2}
+.db-sub{font-size:13px;color:rgba(255,255,255,.82);margin-bottom:20px;line-height:1.6}
+.db-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-db-pri{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;border-radius:12px;font-family:var(--font);font-size:14px;font-weight:800;color:var(--p800);background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.18);border:none;min-height:46px;white-space:nowrap;transition:transform .2s,box-shadow .2s;cursor:pointer;touch-action:manipulation}
+.btn-db-pri:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.25)}
+.btn-db-sec{display:inline-flex;align-items:center;gap:6px;padding:12px 20px;border-radius:12px;font-family:var(--font);font-size:13px;font-weight:700;color:#fff;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);min-height:46px;white-space:nowrap;transition:background .2s;cursor:pointer;touch-action:manipulation}
+.btn-db-sec:hover{background:rgba(255,255,255,.25)}
+.db-pills{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:14px}
+.db-pill{font-size:11.5px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:100px;padding:4px 12px}
+@media(max-width:479px){.btn-db-pri,.btn-db-sec{width:100%;justify-content:center}}
+/* ── Demat Modal ── */
+
+/* ═══ DEMAT FORM MODAL OVERLAY ═══ */
+#demat-inner {
+  position: relative; width: 100%; max-width: 560px;
+  margin: 0 auto; padding: 0 0 20px;
+  animation: dematFadeUp .38s cubic-bezier(0.22,1,0.36,1) both;
+}
+ to{opacity:1;transform:translateY(0)} }
+@media(max-width:480px){
+    #demat-inner { max-width: 100%; }
+  }
+/* Scope form styles inside modal to avoid conflicts with calculator page */
+#demat-inner .page {
+  min-height: unset !important; padding: 0 !important;
+  background: transparent !important; overflow: visible !important;
+  display: block !important; position: static !important;
+}
+#demat-inner .deco { display: none !important; }
+#demat-inner .card {
+  animation: none !important; width: 100% !important;
+  max-width: 100% !important; border-radius: 16px !important;
+  box-sizing: border-box !important;
+}
+
+/* ── Demat Form ── */
+
+    /* ── Reset ──────────────────────────────── */
+    
+
+    
+
+    
+
+    /* ── Page ───────────────────────────────── */
+    
+
+    /* Decorative shapes */
+    
+    
+    
+    
+
+    /* ── Card ───────────────────────────────── */
+    #demat-inner .card{
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 520px;
+      background: var(--white);
+      box-shadow:
+        0 0 0 1px rgba(124,58,237,0.08),
+        0 8px 48px rgba(124,58,237,0.12),
+        0 2px 12px rgba(0,0,0,0.05);
+      overflow: hidden;
+      animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Accent bar ─────────────────────────── */
+    #demat-inner .accent-bar{
+      height: 5px;
+      background: linear-gradient(90deg, #7c3aed 0%, #a78bfa 55%, #22c55e 100%);
+    }
+
+
+    /* ── Header ─────────────────────────────── */
+    #demat-inner .card-header{
+      padding: 36px 44px 26px;
+      border-bottom: 1px solid var(--border-soft);
+      position: relative;
+    }
+
+
+    #demat-inner .header-top{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+
+    #demat-inner .logo-icon{
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-mid) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px var(--purple-shadow);
+    }
+
+
+    #demat-inner .header-label{
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--purple);
+      text-transform: uppercase;
+    }
+
+
+    #demat-inner .card-title{
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+
+    #demat-inner .title-highlight{
+      color: var(--purple);
+    }
+
+
+    #demat-inner .card-desc{
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+
+    /* Trust pills */
+    #demat-inner .trust-pills{
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+
+    #demat-inner .pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--green);
+      background: var(--green-pale);
+      border: 1px solid rgba(22,163,74,0.20);
+      padding: 4px 10px;
+      letter-spacing: 0.01em;
+    }
+
+
+    #demat-inner .pill svg{ flex-shrink: 0; }
+
+
+    /* ── Form body ──────────────────────────── */
+    #demat-inner .card-body{
+      padding: 30px 44px 38px;
+    }
+
+
+    /* ── Field ──────────────────────────────── */
+    #demat-inner .field{
+      margin-bottom: 20px;
+    }
+
+
+    #demat-inner .field label{
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-mid);
+      margin-bottom: 7px;
+      letter-spacing: 0.01em;
+    }
+
+
+    #demat-inner .field label .req{ color: var(--purple); margin-left: 2px; }
+
+
+    #demat-inner .input-wrap{ position: relative; }
+
+
+    #demat-inner .prefix{
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: var(--purple-mid);
+      font-weight: 600;
+      border-right: 1.5px solid var(--border);
+      padding-right: 11px;
+      pointer-events: none;
+      line-height: 1;
+    }
+
+
+    #demat-inner input, #demat-inner select{
+      width: 100%;
+      padding: 13px 14px;
+      font-size: 14px;
+      font-family: var(--font);
+      font-weight: 400;
+      color: var(--text-dark);
+      background: var(--bg-input);
+      border: 1.5px solid var(--border);
+      border-radius: 0;
+      outline: none;
+      transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+
+    #demat-inner input::placeholder{ color: var(--text-muted); font-weight: 400; }
+
+
+    #demat-inner input:focus, #demat-inner select:focus{
+      border-color: var(--purple);
+      background: var(--bg-focus);
+      box-shadow: 0 0 0 3px var(--purple-glow);
+    }
+
+
+    #demat-inner input.error, #demat-inner select.error{
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(220,38,38,0.10);
+    }
+
+
+    #demat-inner input.has-prefix{ padding-left: 58px; }
+
+
+    #demat-inner select{ cursor: pointer; color: var(--text-dark); }
+
+    #demat-inner select.placeholder{ color: var(--text-muted); }
+
+
+    #demat-inner .select-arrow{
+      position: absolute;
+      right: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+
+    #demat-inner .error-msg{
+      margin-top: 5px;
+      font-size: 12px;
+      color: var(--red);
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+
+    /* ── Submit button ──────────────────────── */
+    #demat-inner .btn-submit{
+      width: 100%;
+      margin-top: 10px;
+      padding: 15px 24px;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-mid) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 0;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--font);
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      box-shadow: 0 4px 20px var(--purple-shadow);
+      transition: opacity 0.18s, transform 0.12s, box-shadow 0.18s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+
+    #demat-inner .btn-submit:hover{
+      opacity: 0.92;
+      box-shadow: 0 6px 28px var(--purple-shadow);
+    }
+
+    #demat-inner .btn-submit:active{ transform: scale(0.985); }
+
+
+    /* Green divider line on button */
+    #demat-inner .btn-submit::after{
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green-mid), var(--green-light));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    #demat-inner .btn-submit{ position: relative; overflow: hidden; }
+
+    #demat-inner .btn-submit:hover::after{ opacity: 1; }
+
+
+    #demat-inner .security-note{
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 14px;
+      font-family: var(--font);
+    }
+
+
+    /* ── Success ────────────────────────────── */
+    #demat-inner .success{
+      display: none;
+      text-align: center;
+      padding: 12px 0 8px;
+      animation: fadeUp 0.4s ease both;
+    }
+
+
+    #demat-inner .success-ring{
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 6px 28px var(--green-glow);
+    }
+
+
+    #demat-inner .success h2{
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+
+    #demat-inner .success p{
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+
+    #demat-inner .success p strong{ color: var(--text-dark); }
+
+    #demat-inner .success p strong.accent{ color: var(--purple); }
+
+
+    #demat-inner .btn-reset{
+      padding: 11px 28px;
+      background: transparent;
+      border: 1.5px solid var(--purple);
+      color: var(--purple);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 0;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+    }
+
+    #demat-inner .btn-reset:hover{ background: var(--purple); color: #fff; }
+
+
+    /* ── Footer ─────────────────────────────── */
+    #demat-inner .card-footer{
+      padding: 14px 44px;
+      background: var(--bg-footer);
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+
+    #demat-inner .footer-sebi{
+      font-size: 11px;
+      color: var(--purple-mid);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+
+    #demat-inner .footer-exchanges{
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+
+    #demat-inner .footer-exchanges span{
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--purple-light);
+      letter-spacing: 0.08em;
+    }
+
+
+    /* ── Responsive ─────────────────────────── */
+
+    /* Tablet (≤ 640px) */
+    @media (max-width: 640px) {
+      
+      #demat-inner .card-header{ padding: 28px 28px 22px; }
+
+      #demat-inner .card-body{ padding: 24px 28px 30px; }
+
+      #demat-inner .card-footer{ padding: 12px 28px; }
+
+      #demat-inner .card-title{ font-size: 22px; }
+
+      #demat-inner .card-desc{ font-size: 13px; }
+
+      #demat-inner .trust-pills{ gap: 6px; }
+
+    }
+
+    /* Mobile (≤ 420px) */
+    @media (max-width: 420px) {
+      
+
+      #demat-inner .card{
+        max-width: 100%;
+        min-height: 100vh;
+        box-shadow: none;
+      }
+
+
+      #demat-inner .card-header{ padding: 22px 18px 18px; }
+
+      #demat-inner .card-body{ padding: 20px 18px 30px; }
+
+      #demat-inner .card-footer{ padding: 14px 18px; }
+
+
+      #demat-inner .card-title{ font-size: 20px; }
+
+      #demat-inner .logo-icon{ width: 36px; height: 36px; }
+
+
+      /* Prevent iOS zoom on focus */
+      #demat-inner input, #demat-inner select{ font-size: 16px; }
+
+
+      #demat-inner .btn-submit{ font-size: 15px; padding: 14px 18px; }
+
+      #demat-inner .footer-exchanges{ gap: 10px; }
+
+      #demat-inner .trust-pills{ gap: 5px; }
+
+      #demat-inner .pill{ font-size: 10px; padding: 3px 8px; }
+
+    }
+
+    /* Large desktop (≥ 1024px) */
+    @media (min-width: 1024px) {
+      #demat-inner .card{ max-width: 540px; }
+
+      #demat-inner .card-title{ font-size: 28px; }
+
+    }
+  
+
+
+
+
+
+
+
+
+
+/* Firefox */
+
+
+
+
+/* ── Sidebar calc card scroll ── */
+.sidebar-calc-card{
+  overflow-y:scroll;
+  overflow-x:hidden;
+  flex:1;
+  min-height:0;
+  border-radius:var(--r-lg);
+  border:1.5px solid var(--n200);
+  box-shadow:var(--sh-sm);
+  background:var(--n0);
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+  scrollbar-color:var(--p400) var(--n150);
+}
+.sidebar-calc-card::-webkit-scrollbar{width:6px}
+.sidebar-calc-card::-webkit-scrollbar-track{background:var(--n150);border-radius:0 var(--r-lg) var(--r-lg) 0}
+.sidebar-calc-card::-webkit-scrollbar-thumb{background:var(--p400);border-radius:100px;min-height:48px}
+.sidebar-calc-card::-webkit-scrollbar-thumb:hover{background:var(--p600)}
+.sidebar-calc-card::-webkit-scrollbar-thumb:active{background:var(--p800)}
+
+
+.sb-item-icon{
+  font-size:15px;
+  width:30px;height:30px;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  text-align:center;
+  background:var(--p50);
+  border:1px solid var(--p200);
+}
+.sb-item.active .sb-item-icon{background:var(--p100);border-color:var(--p300)}
+
+/* Section-specific icon colors */
+[data-section="investment"] .sb-item-icon{background:var(--p50);border-color:var(--p200)}
+[data-section="retirement"] .sb-item-icon{background:var(--g50);border-color:var(--g200)}
+[data-section="loan"] .sb-item-icon{background:var(--amberBg);border-color:var(--amberBdr)}
+[data-section="tax"] .sb-item-icon{background:var(--g50);border-color:var(--g200)}
+[data-section="savings"] .sb-item-icon{background:var(--blueBg);border-color:var(--blueBdr)}
+[data-section="insurance"] .sb-item-icon{background:#fdf2f8;border-color:#f5d0fe}
+
+/* Hero stats sober style */
+
+
+/* ═══ Drawer Header & Home redesign ═══ */
+.drawer-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 20px 14px;
+  border-bottom:1px solid var(--n150);
+  flex-shrink:0;
+  background:linear-gradient(135deg,#5b21b6 0%,#7c3aed 50%,#059669 100%);
+  position:relative;overflow:hidden;
+}
+.drawer-header::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:24px 24px;pointer-events:none;
+}
+.drawer-title{
+  font-size:16px;font-weight:900;color:#fff;
+  display:flex;align-items:center;gap:12px;
+  position:relative;z-index:1;
+}
+.drawer-title-icon{
+  width:40px;height:40px;border-radius:12px;
+  background:rgba(255,255,255,.18);
+  border:1.5px solid rgba(255,255,255,.3);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+  backdrop-filter:blur(4px);
+}
+.drawer-close{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.15);
+  border:1.5px solid rgba(255,255,255,.3);
+  color:#fff;font-size:16px;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .18s,transform .2s;
+  position:relative;z-index:1;
+}
+.drawer-close:hover{background:rgba(255,255,255,.3);transform:rotate(90deg)}
+
+/* Home button redesign */
+.drawer-home-link{
+  display:flex;align-items:center;gap:12px;
+  padding:13px 16px;border-radius:14px;
+  background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 50%,#059669 100%);
+  border:none;margin-bottom:14px;
+  text-decoration:none;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s;
+  box-shadow:0 4px 16px rgba(124,58,237,.35),inset 0 1px 0 rgba(255,255,255,.15);
+  position:relative;overflow:hidden;
+}
+.drawer-home-link::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
+  background-size:20px 20px;pointer-events:none;
+}
+.drawer-home-link:hover{
+  transform:translateY(-2px) scale(1.01);
+  box-shadow:0 8px 24px rgba(124,58,237,.45),inset 0 1px 0 rgba(255,255,255,.2);
+}
+.drawer-home-link:active{transform:scale(.97)}
+.drawer-home-icon{
+  width:38px;height:38px;min-width:38px;border-radius:11px;
+  background:rgba(255,255,255,.18);
+  border:1.5px solid rgba(255,255,255,.3);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;backdrop-filter:blur(4px);
+}
+.drawer-home-label{font-size:13.5px;font-weight:800;color:#fff;line-height:1.2}
+.drawer-home-sub{font-size:11px;color:rgba(255,255,255,.72);margin-top:2px}
+.drawer-home-arrow{margin-left:auto;flex-shrink:0}
+
+
+@media(min-width:1025px){}
+@media(max-width:1024px){}
+@media(max-width:480px){}
+
+@media(min-width:1025px){}
+@media(max-width:480px){}
+
+@media(min-width:1025px){}
+@media(max-width:1024px){}
+@media(max-width:480px){}
+
+@media(min-width:1025px){}
+@media(max-width:1024px){
+  }
+@media(max-width:480px){
+  }
+
+/* Floating Action Button */
+.fab-calc{
+  position:fixed;
+  bottom:calc(var(--mnav-h) + 14px + env(safe-area-inset-bottom,0px));
+  left:16px;
+  width:52px;height:52px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#5b21b6 0%,#7c3aed 55%,#059669 100%);
+  color:#fff;
+  border:none;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  box-shadow:0 6px 24px rgba(91,33,182,.5),0 2px 6px rgba(0,0,0,.2);
+  z-index:850;
+  transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  font-family:var(--font);
+}
+.fab-calc:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(91,33,182,.65)}
+.fab-calc:active{transform:scale(.95)}
+.fab-icon{width:24px;height:24px;display:block;line-height:0;font-size:0}
+.fab-icon svg{width:24px;height:24px;display:block}
+.fab-label{font-size:8px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:rgba(255,255,255,.88);line-height:1;margin-top:2px}
+@media(min-width:1025px){.fab-calc{display:none}}
+@media(max-width:1024px){
+  .fab-calc{
+    bottom:calc(var(--mnav-h) + 14px + env(safe-area-inset-bottom,0px));
+    left:16px;
+  }
+}
+@media(max-width:480px){
+  .fab-calc{width:48px;height:48px;border-radius:14px;bottom:calc(var(--mnav-h) + 12px + env(safe-area-inset-bottom,0px))}
+}
+
+
+/* ── Sidebar Scrollable Card (matches Lumsum exactly) ── */
+.sidebar-calc-card{
+  overflow-y:scroll;
+  overflow-x:hidden;
+  flex:1;
+  min-height:0;
+  border-radius:var(--r-lg);
+  border:1.5px solid var(--n200);
+  box-shadow:var(--sh-sm);
+  background:var(--n0);
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+  scrollbar-color:var(--p400) var(--n150);
+}
+.sidebar-calc-card::-webkit-scrollbar{width:6px}
+.sidebar-calc-card::-webkit-scrollbar-track{background:var(--n150);border-radius:0 var(--r-lg) var(--r-lg) 0}
+.sidebar-calc-card::-webkit-scrollbar-thumb{background:var(--p400);border-radius:100px;min-height:48px}
+.sidebar-calc-card::-webkit-scrollbar-thumb:hover{background:var(--p600)}
+.sidebar-calc-card::-webkit-scrollbar-thumb:active{background:var(--p800)}
+
+/* ── Drawer Body Scrollbar (purple, always visible) ── */
+.drawer-body{
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  flex:1;
+  padding:12px 12px 20px;
+  padding-bottom:max(20px,calc(env(safe-area-inset-bottom,0px) + 16px));
+  scrollbar-width:thin;
+  scrollbar-color:var(--p400) var(--n150);
+}
+.drawer-body::-webkit-scrollbar{width:6px}
+.drawer-body::-webkit-scrollbar-track{background:var(--n150);border-radius:6px}
+.drawer-body::-webkit-scrollbar-thumb{background:var(--p400);border-radius:100px;min-height:48px}
+.drawer-body::-webkit-scrollbar-thumb:hover{background:var(--p600)}
+.drawer-body::-webkit-scrollbar-thumb:active{background:var(--p800)}
+
+/* ── Sidebar icon box (Lumsum style) ── */
+.sb-item-icon{
+  font-size:16px;
+  width:30px;height:30px;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  border:1px solid rgba(0,0,0,.05);
+}
+</style>
+
+<style>
+/* ══════════════════════════════════════════
+   MOBILE · TABLET · DESKTOP COMPATIBILITY
+   Full platform patch — all breakpoints
+══════════════════════════════════════════ */
+
+/* ── Formula box mobile overflow ── */
+.formula-box{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.formula-code{
+  white-space:pre-wrap;word-break:break-all;overflow-wrap:break-word;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  font-size:clamp(11px,2.5vw,13px);
+}
+
+/* ── FAQ inline grids — stack on small screens ── */
+@media(max-width:480px){
+  .faq-a [style*="grid-template-columns:1fr 1fr"],
+  .faq-a [style*="grid-template-columns: 1fr 1fr"],
+  .faq-a [style*="grid-template-columns:repeat(2"]{
+    grid-template-columns:1fr!important;
+  }
+  .faq-stat-row{grid-template-columns:repeat(3,1fr)}
+  .faq-a{padding:0 14px 16px;font-size:12.5px}
+  .faq-q{font-size:13px;padding:13px 14px;min-height:52px}
+}
+@media(max-width:360px){
+  .faq-stat-row{grid-template-columns:1fr 1fr}
+  .faq-a{padding:0 12px 14px;font-size:12px}
+  .faq-q{font-size:12.5px;padding:12px;min-height:48px}
+  .faq-chips{gap:4px}
+  .faq-chip{font-size:10px;padding:3px 8px}
+}
+
+/* ── Hero panel — mobile stacking ── */
+@media(max-width:640px){
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .hero-minicharts{gap:4px}
+  .hstat-num{font-size:15px}
+  .hstat-lbl{font-size:7px}
+  .mc-val{font-size:13px}
+}
+@media(max-width:400px){
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .hstat{padding:9px 10px;gap:7px}
+  .hstat-num{font-size:14px}
+}
+
+/* ── Info grid responsive ── */
+@media(max-width:480px){
+  .info-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .itile{padding:16px 12px}
+  .it-emoji{font-size:22px}
+  .it-val{font-size:18px}
+  .it-label{font-size:10.5px}
+}
+@media(max-width:360px){
+  .info-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .itile{padding:14px 10px}
+  .it-val{font-size:16px}
+}
+
+/* ── Power rows — scenario cards ── */
+@media(max-width:640px){.power-rows{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.power-rows{grid-template-columns:1fr}}
+
+/* ── Stat tiles — result section ── */
+@media(max-width:360px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .st-val{font-size:16px}
+  .st-label{font-size:10px}
+}
+
+/* ── Table — horizontal scroll on all mobiles ── */
+.table-scroll{
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
+  border-radius:12px;
+}
+@media(max-width:640px){
+  table{font-size:12px}
+  thead th{padding:9px 10px;font-size:10px}
+  tbody td{padding:8px 10px}
+}
+@media(max-width:400px){
+  table{font-size:11.5px;min-width:380px}
+  thead th{padding:8px 8px;font-size:9.5px}
+  tbody td{padding:7px 8px}
+}
+
+/* ── Donut chart row — stack on tiny screens ── */
+@media(max-width:380px){
+  .donut-row{flex-direction:column;align-items:center}
+  .donut-svg{width:120px;height:120px}
+}
+
+/* ── Bar chart labels — prevent overflow ── */
+.bchart-label span{
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:55%
+}
+.bchart-label span:last-child{text-align:right;flex-shrink:0;max-width:40%}
+
+/* ── Goal tabs — horizontal scroll ── */
+.goal-tabs{
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;-ms-overflow-style:none;
+  padding-bottom:4px;
+}
+.goal-tabs::-webkit-scrollbar{display:none}
+@media(max-width:480px){
+  .goal-tab{font-size:12px;padding:8px 12px}
+  .goal-tab-icon{font-size:14px}
+  .goal-result-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:360px){
+  .goal-tab{font-size:11px;padding:7px 10px}
+  .goal-result-grid{grid-template-columns:1fr}
+  .grt-val{font-size:17px}
+}
+
+/* ── Tip cards — full width on mobile ── */
+@media(max-width:480px){
+  .tip-card{padding:16px}
+  .tip-icon{font-size:24px}
+  .tip-card h4{font-size:13.5px}
+  .tip-card p{font-size:12.5px}
+  .tip-highlight{font-size:12px;padding:8px 10px}
+}
+@media(max-width:360px){
+  .tip-card{padding:14px}
+  .tip-badge{font-size:9px;padding:2px 8px}
+}
+
+/* ── Demat banner — mobile buttons full width ── */
+@media(max-width:479px){
+  .btn-db-pri,.btn-db-sec{width:100%;justify-content:center}
+  .db-pills{gap:5px}
+  .db-pill{font-size:10.5px;padding:3px 9px}
+}
+
+/* ── Drawer items — single col on tiny screens ── */
+@media(max-width:360px){
+  .drawer-items{grid-template-columns:1fr}
+}
+
+/* ── Section divider — compact on mobile ── */
+@media(max-width:480px){
+  .section-divider{gap:10px;margin:4px 0 16px}
+  .section-divider .sd-text h2{font-size:17px}
+  .sd-icon{width:38px;height:38px;font-size:18px}
+}
+@media(max-width:360px){
+  .section-divider .sd-text h2{font-size:15px}
+  .section-divider .sd-text p{font-size:11.5px}
+}
+
+/* ── Card head icon — mobile size ── */
+@media(max-width:480px){
+  .ch-icon{width:38px;height:38px;font-size:18px;border-radius:11px}
+  .ch-title{font-size:15px}
+  .ch-sub{font-size:11px}
+}
+
+/* ── Slider — better touch target ── */
+@media(max-width:767px){
+  .slider::-webkit-slider-thumb{width:24px;height:24px;margin-top:-9px}
+  .slider{height:8px;margin:12px 0 6px}
+}
+
+/* ── Preset buttons — wrap properly ── */
+.presets{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+@media(max-width:360px){
+  .preset{font-size:10.5px;padding:3px 8px}
+}
+
+/* ── Number input — readable on all screens ── */
+@media(max-width:360px){
+  .num-input{width:52px;min-width:44px;font-size:12px;padding:5px 3px}
+}
+
+/* ── Hero pills — scroll on tiny screens ── */
+.hero-pills{flex-wrap:wrap}
+@media(max-width:360px){
+  .hpill{font-size:10.5px;padding:4px 10px}
+}
+
+/* ── Breadcrumb — hide on tiny ── */
+@media(max-width:360px){
+  .hero-breadcrumb{display:none}
+}
+
+/* ── sb-item icon size ── */
+@media(max-width:1260px){
+  .sb-item-icon{font-size:15px;width:26px;height:26px}
+  .sb-item-name{font-size:12px}
+  .sb-item-hint{font-size:9.5px}
+}
+
+/* ── Landscape phone: compact hero ── */
+@media(max-height:480px) and (orientation:landscape){
+  .hero{padding:10px 0 8px!important}
+  .hero h1{font-size:clamp(18px,4vw,24px)!important;margin-bottom:8px}
+  .hero-sub{font-size:12px!important;margin-bottom:10px}
+  .hero-panel{display:none}
+  .mobile-section-chips{top:0}
+}
+
+/* ── Print styles ── */
+@media print{
+  .mobile-nav,.fab-calc,.calc-drawer,.drawer-backdrop,
+  .mobile-section-chips,.btn-calc,.btn-reset,.demat-banner{display:none!important}
+  .page-wrap{padding:0!important}
+  .sidebar{display:none!important}
+  .card{box-shadow:none!important;border:1px solid #ccc!important}
+  body{padding-bottom:0!important}
+}
+
+/* ═══════════════════════════════════════════════════════
+   FULL CROSS-PLATFORM RESPONSIVE — Mobile · Tablet · Web
+   iOS Safari · Android Chrome · Mobile Web · PWA
+   ═══════════════════════════════════════════════════════ */
+
+/* ── iOS Safari input zoom prevention ── */
+@media(max-width:767px){
+  input,select,textarea{font-size:16px!important;-webkit-text-size-adjust:100%}
+  input[type="range"]{height:36px;-webkit-appearance:none}
+}
+
+/* ── Formula code — mobile optimised ── */
+@media(max-width:640px){
+  .formula-box{padding:0;border-radius:0 10px 10px 0}
+  .fc-icon{width:28px;min-width:28px;font-size:11px;padding:9px 0}
+  .fc-text{padding:9px 10px;font-size:12px;line-height:1.55}
+  .fc-row.fc-slab .fc-text{font-size:11.5px}
+  .formula-title{font-size:9.5px;padding:2px 8px}
+  .formula-note{font-size:11px;padding-top:8px;margin-top:8px}
+}
+@media(max-width:360px){
+  .fc-icon{width:24px;min-width:24px;font-size:10px}
+  .fc-text{padding:8px 8px;font-size:11.5px}
+}
+
+/* ── Compare table — scroll on mobile ── */
+@media(max-width:640px){
+  .compare-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px}
+  .compare-table{min-width:480px;font-size:11.5px}
+  .compare-table th,.compare-table td{padding:8px 10px}
+}
+
+/* ── Stat tiles — 2-col on small mobile ── */
+@media(max-width:400px){
+  .stats-grid{grid-template-columns:1fr 1fr!important;gap:8px}
+  .stat-tile{padding:12px 10px}
+  .st-val{font-size:18px!important}
+  .st-label{font-size:10px}
+  .st-sub{font-size:10px}
+}
+
+/* ── FAQs — tighter on mobile ── */
+@media(max-width:480px){
+  .faq-q{padding:13px 14px;font-size:13px;gap:10px;min-height:50px}
+  .faq-a{padding:0 14px 14px;font-size:12.5px}
+  .faq-icon{width:22px;height:22px;min-width:22px;font-size:14px}
+  .faq-stat-row{grid-template-columns:1fr 1fr;gap:6px}
+  .faq-stat{padding:8px}
+  .faq-stat-val{font-size:14px}
+  .faq-stat-lbl{font-size:8px}
+  .faq-chips{gap:4px}
+  .faq-chip{font-size:9.5px;padding:3px 8px}
+}
+
+/* ── Info grid — 2 col on small screens ── */
+@media(max-width:400px){
+  .info-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px}
+  .itile{padding:12px 8px}
+  .it-val{font-size:18px}
+  .it-label{font-size:10px}
+  .it-sub{font-size:9.5px}
+}
+
+/* ── Bar chart labels — wrap nicely ── */
+@media(max-width:480px){
+  .bchart-label{flex-direction:column;align-items:flex-start;gap:1px;margin-bottom:4px}
+  .bchart-label span{font-size:11.5px}
+  .bchart-label strong{font-size:12px}
+  .bchart-row{margin-bottom:14px!important}
+}
+
+/* ── Step flow — single col on mobile ── */
+@media(max-width:480px){
+  .step-flow{grid-template-columns:1fr 1fr;gap:10px}
+  .step-card{padding:14px 10px;border-radius:12px}
+  .step-card h4{font-size:12px}
+  .step-card p{font-size:11px}
+  .step-icon{font-size:20px}
+  .step-num{width:20px;height:20px;font-size:10px}
+}
+@media(max-width:320px){
+  .step-flow{grid-template-columns:1fr}
+}
+
+/* ── Guide cards — full-width on mobile ── */
+@media(max-width:540px){
+  .guide-grid{grid-template-columns:1fr!important}
+  .gc{padding:16px}
+  .gc-icon{font-size:22px;margin-bottom:8px}
+  .gc h3{font-size:14px}
+  .gc p,.gc li{font-size:12.5px}
+}
+
+/* ── Tip cards — single col on mobile ── */
+@media(max-width:540px){
+  .tips-grid{grid-template-columns:1fr!important}
+  .tip-card{padding:18px 16px}
+  .tip-icon{font-size:28px}
+  .tip-highlight{font-size:11.5px;padding:8px 10px}
+}
+
+/* ── Hero panel stats — 4-col on tablet ── */
+@media(min-width:541px) and (max-width:860px){
+  .hero-stats{grid-template-columns:repeat(4,1fr)}
+  .hero-minicharts{grid-template-columns:repeat(3,1fr)}
+}
+
+/* ── hstat cards ── */
+@media(max-width:400px){
+  .hstat{padding:10px 10px;border-radius:12px}
+  .hstat-num{font-size:18px!important}
+  .hstat-lbl{font-size:8.5px!important;letter-spacing:.3px}
+  .hstat-icon-wrap{width:30px;height:30px;font-size:16px}
+}
+
+/* ── Minichart cards ── */
+@media(max-width:400px){
+  .minichart-card{padding:10px 12px;gap:8px}
+  .mc-icon{width:32px;height:32px;font-size:16px}
+  .mc-label{font-size:10px}
+  .mc-val{font-size:14px}
+  .mc-badge{font-size:9px;padding:2px 7px}
+}
+
+/* ── Demat banner — mobile ── */
+@media(max-width:480px){
+  .db-title{font-size:14px}
+  .db-sub{font-size:11.5px}
+  .db-pills{gap:4px}
+  .db-pill{font-size:10px;padding:3px 8px}
+  .btn-db-pri{font-size:12.5px;padding:10px 16px}
+}
+
+/* ── Param card presets — wrap on mobile ── */
+@media(max-width:400px){
+  .presets{gap:4px}
+  .preset{font-size:10.5px;padding:4px 9px}
+  .range-marks .rm{font-size:9.5px}
+}
+
+/* ── Section divider ── */
+@media(max-width:480px){
+  .section-divider{gap:10px;margin:6px 0 18px}
+  .sd-text h2{font-size:17px}
+  .sd-text p{font-size:11.5px}
+  .sd-icon{width:34px;height:34px;min-width:34px}
+}
+
+/* ── Card headers ── */
+@media(max-width:480px){
+  .card-head{padding:12px 14px}
+  .ch-title{font-size:14px}
+  .ch-sub{font-size:11px}
+  .ch-icon{width:32px;height:32px;font-size:16px;border-radius:8px}
+}
+
+/* ── faq-points ── */
+@media(max-width:480px){
+  .faq-points li{font-size:12px}
+  .fp-bul{font-size:8px}
+}
+
+/* ── Insurer / feature grids ── */
+@media(max-width:540px){
+  .insurer-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px}
+  .insurer-card{padding:10px}
+  .ic-csr{font-size:17px}
+  .ic-name{font-size:12px}
+}
+
+/* ── Tablet layout (641px–1024px) ── */
+@media(min-width:641px) and (max-width:1024px){
+  .page-wrap{padding:16px 20px 80px}
+  .card-body{padding:20px}
+  .params-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .guide-grid{grid-template-columns:1fr 1fr}
+  .tips-grid{grid-template-columns:1fr 1fr}
+  .step-flow{grid-template-columns:repeat(4,1fr)}
+  .info-grid{grid-template-columns:repeat(4,1fr)}
+}
+
+/* ── Wide desktop (1025px+) ── */
+@media(min-width:1025px){
+  .page-wrap{grid-template-columns:280px 1fr;gap:24px;padding:24px 24px 60px}
+  .sidebar{display:flex}
+  .params-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:repeat(4,1fr)}
+}
+
+/* ── iOS notch safe areas ── */
+@supports(padding:max(0px)){
+  .hero-inner{
+    padding-left:max(20px,env(safe-area-inset-left));
+    padding-right:max(20px,env(safe-area-inset-right));
+  }
+  .mobile-nav{
+    padding-bottom:max(8px,env(safe-area-inset-bottom));
+    height:calc(60px + env(safe-area-inset-bottom));
+  }
+  .page-wrap{
+    padding-left:max(14px,env(safe-area-inset-left));
+    padding-right:max(14px,env(safe-area-inset-right));
+  }
+}
+
+/* ── Android Chrome address bar / dynamic viewport ── */
+@supports(min-height:100dvh){
+  .calc-drawer{max-height:100dvh}
+  .sidebar{max-height:calc(100dvh - 32px)}
+}
+
+/* ── Touch device optimisations ── */
+@media(hover:none) and (pointer:coarse){
+  .btn-calc{min-height:48px;font-size:15px}
+  .btn-reset{min-height:40px}
+  .preset{min-height:34px;padding:6px 12px}
+  .faq-q{min-height:52px}
+  .sb-item{padding:11px 18px}
+  .slider{height:6px}
+  input[type="range"]::-webkit-slider-thumb{width:24px;height:24px}
+  input[type="range"]::-moz-range-thumb{width:24px;height:24px}
+  .num-input{min-height:40px}
+  a,button,[onclick]{-webkit-tap-highlight-color:transparent}
+}
+
+/* ── High-DPI / Retina screens ── */
+@media(-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){
+  .formula-box{border-left-width:3px}
+  .fc-icon{border-right:0.5px solid var(--p200)}
+}
+
+/* ── Landscape mobile ── */
+@media(max-height:500px) and (orientation:landscape){
+  .hero{padding:20px 0 18px}
+  .hero h1{font-size:22px;margin-bottom:8px}
+  .hero-sub{display:none}
+  .hero-pills{display:none}
+  .hero-panel{display:none}
+  .mobile-nav{display:none}
+}
+
+/* ── Reduced motion ── */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* ── Dark mode respects system (neutral, no forced dark) ── */
+@media(prefers-color-scheme:dark){
+  /* Calculator intentionally uses light design — no forced invert */
+  :root{color-scheme:light}
+}
+</style>
+<body>
+<header class="hero">
+  <div class="hero-deco"></div>
+  <div class="hero-inner">
+    <div class="hero-topbar">
+      <a class="home-btn" href="/"><span class="home-btn-icon">🏠</span>Home</a>
+      <div class="hero-breadcrumb">
+        <span class="hero-breadcrumb-sep">›</span><span>Calculators</span>
+        <span class="hero-breadcrumb-sep">›</span>
+        <span class="hero-breadcrumb-current">Rule of 72</span>
+      </div>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <h1>Rule of 72<br><span class="hero-hl">How Fast Does</span><br>Your Money Double?</h1>
+        <p class="hero-sub">The Rule of 72 is the simplest mental math trick in investing — divide 72 by your annual return to find exactly how many years it takes to double your money.</p>
+        <div class="hero-pills">
+          <span class="hpill">⚡ Instant Doubling Time</span>
+          <span class="hpill">🔄 Reverse Calculator</span>
+          <span class="hpill">📊 All Asset Classes</span>
+          <span class="hpill">🆓 Free</span>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="panel-title">Quick Reference</div>
+        <div class="hero-stats">
+          <div class="hstat hstat-purple"><div class="hstat-icon-wrap">⚡</div><div class="hstat-text"><span class="hstat-num">72÷12=6</span><span class="hstat-lbl">Years to Double @ 12%</span></div></div>
+          <div class="hstat hstat-green"><div class="hstat-icon-wrap">🏦</div><div class="hstat-text"><span class="hstat-num">72÷7=10</span><span class="hstat-lbl">Years to Double via FD</span></div></div>
+          <div class="hstat hstat-amber"><div class="hstat-icon-wrap">📉</div><div class="hstat-text"><span class="hstat-num">72÷6=12</span><span class="hstat-lbl">Years for Inflation to Halve Money</span></div></div>
+          <div class="hstat hstat-blue"><div class="hstat-icon-wrap">🚀</div><div class="hstat-text"><span class="hstat-num">72÷15=4.8</span><span class="hstat-lbl">Years via Top MF</span></div></div>
+        </div>
+        <div class="hero-minicharts">
+          <div class="minichart-card"><div class="mc-icon" style="background:var(--g50)">📈</div><div class="mc-body"><div class="mc-label">Nifty 50 @ 15.8% CAGR</div><div class="mc-val">Doubles every 4.6yr</div></div><div class="mc-badge" style="background:var(--g100);color:var(--g700)">Fast!</div></div>
+          <div class="minichart-card"><div class="mc-icon" style="background:var(--p100)">🪙</div><div class="mc-body"><div class="mc-label">Gold @ 14.2% CAGR</div><div class="mc-val">Doubles every 5.1yr</div></div><div class="mc-badge" style="background:var(--p100);color:var(--p700)">Good</div></div>
+          <div class="minichart-card"><div class="mc-icon" style="background:#fff7ed">🏦</div><div class="mc-body"><div class="mc-label">FD @ 7.5% → doubles in?</div><div class="mc-val">9.6 years</div></div><div class="mc-badge" style="background:#fffbeb;color:#b45309">Slow</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-section-chips">
+  <a class="mchip" href="/" style="background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;border-color:transparent">🏠 Home</a>
+  <a class="mchip on" href="#calculator">⚡ Calculator</a>
+  <a class="mchip" href="#reverse">🔄 Reverse</a>
+  <a class="mchip" href="#infographics">📊 All Assets</a>
+  <a class="mchip" href="#guide">📖 Guide</a>
+  <a class="mchip" href="#tips">💡 Tips</a>
+  <a class="mchip" href="#faq">❓ FAQ</a>
+</div>
+
+<div class="page-wrap">
+
+<aside class="sidebar">
+
+    <!-- Home button -->
+    <a class="sb-home" href="/" aria-label="Back to Home">
+      <div class="sb-home-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+  <path d="M3 12L12 3l9 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></div>
+      <div class="sb-home-text">
+        <div class="sb-home-label">← Back to Home</div>
+        <div class="sb-home-sub">Mission Wealth</div>
+      </div>
+    </a>
+
+        <div class="sidebar-card sidebar-calc-card">
+      <div class="sb-head">
+        <div class="sb-head-icon" style="background:var(--p100)">🧮</div>
+        <div class="sb-head-title">Investment Calcs</div>
+      </div>
+      <div class="sb-list" data-section="investment" data-section="investment">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📊</span>
+          <div class="sb-item-text"><div class="sb-item-name">SIP Calculator</div><div class="sb-item-hint">Monthly investment planner</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">⬆️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Step-Up SIP</div><div class="sb-item-hint">Annual top-up calculator</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💰</span>
+          <div class="sb-item-text"><div class="sb-item-name">Lumpsum</div><div class="sb-item-hint">One-time investment</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💸</span>
+          <div class="sb-item-text"><div class="sb-item-name">SWP Calculator</div><div class="sb-item-hint">Systematic withdrawal</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📉</span>
+          <div class="sb-item-text"><div class="sb-item-name">Step-Up SWP</div><div class="sb-item-hint">Growing withdrawals</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏦</span>
+          <div class="sb-item-text"><div class="sb-item-name">FD Calculator</div><div class="sb-item-hint">Fixed deposit returns</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🪙</span>
+          <div class="sb-item-text"><div class="sb-item-name">RD Calculator</div><div class="sb-item-hint">Recurring deposit</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📐</span>
+          <div class="sb-item-text"><div class="sb-item-name">CAGR Calculator</div><div class="sb-item-hint">Annualised growth rate</div></div>
+        </a>
+        <a class="sb-item active" href="#">
+          <span class="sb-item-icon">⚡</span>
+          <div class="sb-item-text"><div class="sb-item-name">Rule of 72</div><div class="sb-item-hint">Doubling time</div></div>
+          <span class="sb-item-badge">Active</span>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🎯</span>
+          <div class="sb-item-text"><div class="sb-item-name">Goal Planner</div><div class="sb-item-hint">Target corpus planner</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏆</span>
+          <div class="sb-item-text"><div class="sb-item-name">Mutual Fund Returns</div><div class="sb-item-hint">Compare fund performance</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🔄</span>
+          <div class="sb-item-text"><div class="sb-item-name">SIP vs Lumpsum</div><div class="sb-item-hint">Which is better?</div></div>
+        </a>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-head" style="border:none;padding-top:6px;padding-bottom:6px">
+        <div class="sb-head-icon" style="background:var(--p100)">👴</div>
+        <div class="sb-head-title">Retirement Calcs</div>
+      </div>
+      <div class="sb-list" data-section="retirement" data-section="retirement">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏖️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Retirement Planner</div><div class="sb-item-hint">Corpus needed at retirement</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🔐</span>
+          <div class="sb-item-text"><div class="sb-item-name">NPS Calculator</div><div class="sb-item-hint">National Pension Scheme</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📒</span>
+          <div class="sb-item-text"><div class="sb-item-name">PPF Calculator</div><div class="sb-item-hint">EEE · 7.1% p.a.</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📮</span>
+          <div class="sb-item-text"><div class="sb-item-name">NSC Calculator</div><div class="sb-item-hint">7.7% · 5-year savings cert</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏛️</span>
+          <div class="sb-item-text"><div class="sb-item-name">EPF Calculator</div><div class="sb-item-hint">Employee provident fund</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💎</span>
+          <div class="sb-item-text"><div class="sb-item-name">Gratuity Calculator</div><div class="sb-item-hint">Retirement gratuity</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🛡️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Annuity Calculator</div><div class="sb-item-hint">Pension income planner</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">👴</span>
+          <div class="sb-item-text"><div class="sb-item-name">Senior Citizen FD</div><div class="sb-item-hint">Special rate deposits</div></div>
+        </a>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-head" style="border:none;padding-top:6px;padding-bottom:6px">
+        <div class="sb-head-icon" style="background:var(--amberBg)">🏦</div>
+        <div class="sb-head-title">Loan Calcs</div>
+      </div>
+      <div class="sb-list" data-section="loan" data-section="loan">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏠</span>
+          <div class="sb-item-text"><div class="sb-item-name">EMI Calculator</div><div class="sb-item-hint">Home, car & personal</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏡</span>
+          <div class="sb-item-text"><div class="sb-item-name">Home Loan Elig.</div><div class="sb-item-hint">Max loan amount</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💳</span>
+          <div class="sb-item-text"><div class="sb-item-name">Credit Card Payoff</div><div class="sb-item-hint">Debt elimination</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🚗</span>
+          <div class="sb-item-text"><div class="sb-item-name">Car Loan EMI</div><div class="sb-item-hint">Auto finance planner</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💼</span>
+          <div class="sb-item-text"><div class="sb-item-name">Personal Loan EMI</div><div class="sb-item-hint">Unsecured loan planner</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🎓</span>
+          <div class="sb-item-text"><div class="sb-item-name">Education Loan</div><div class="sb-item-hint">Student loan EMI</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📊</span>
+          <div class="sb-item-text"><div class="sb-item-name">Loan Comparison</div><div class="sb-item-hint">Compare loan offers</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💹</span>
+          <div class="sb-item-text"><div class="sb-item-name">Prepayment Savings</div><div class="sb-item-hint">Early repayment benefit</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🔃</span>
+          <div class="sb-item-text"><div class="sb-item-name">Balance Transfer</div><div class="sb-item-hint">Switch & save on interest</div></div>
+        </a>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-head" style="border:none;padding-top:6px;padding-bottom:6px">
+        <div class="sb-head-icon" style="background:var(--g100)">📋</div>
+        <div class="sb-head-title">Tax Calcs</div>
+      </div>
+      <div class="sb-list" data-section="tax" data-section="tax">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏛️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Income Tax</div><div class="sb-item-hint">New vs Old Regime</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📈</span>
+          <div class="sb-item-text"><div class="sb-item-name">LTCG Calculator</div><div class="sb-item-hint">12.5% Budget 2024</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📉</span>
+          <div class="sb-item-text"><div class="sb-item-name">STCG Calculator</div><div class="sb-item-hint">Short-term capital gains</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏠</span>
+          <div class="sb-item-text"><div class="sb-item-name">Home Loan Tax</div><div class="sb-item-hint">80C & 24B deductions</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💼</span>
+          <div class="sb-item-text"><div class="sb-item-name">HRA Calculator</div><div class="sb-item-hint">House rent allowance</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🧾</span>
+          <div class="sb-item-text"><div class="sb-item-name">TDS Calculator</div><div class="sb-item-hint">Tax deducted at source</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🎁</span>
+          <div class="sb-item-text"><div class="sb-item-name">Gift Tax Guide</div><div class="sb-item-hint">Taxable gift checker</div></div>
+        </a>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-head" style="border:none;padding-top:6px;padding-bottom:6px">
+        <div class="sb-head-icon" style="background:var(--g100)">💰</div>
+        <div class="sb-head-title">Savings & Others</div>
+      </div>
+      <div class="sb-list" data-section="savings">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏧</span>
+          <div class="sb-item-text"><div class="sb-item-name">Savings Goal</div><div class="sb-item-hint">Reach your target amount</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">⚖️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Inflation Calculator</div><div class="sb-item-hint">Purchasing power erosion</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏅</span>
+          <div class="sb-item-text"><div class="sb-item-name">Gold Calculator</div><div class="sb-item-hint">Gold investment returns</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏗️</span>
+          <div class="sb-item-text"><div class="sb-item-name">Real Estate ROI</div><div class="sb-item-hint">Property return estimator</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">💱</span>
+          <div class="sb-item-text"><div class="sb-item-name">Currency Converter</div><div class="sb-item-hint">Live forex rates</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">📆</span>
+          <div class="sb-item-text"><div class="sb-item-name">Daily Savings</div><div class="sb-item-hint">Daily saving to big goal</div></div>
+        </a>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-head" style="border:none;padding-top:6px;padding-bottom:6px">
+        <div class="sb-head-icon" style="background:var(--blueBg)">🛡️</div>
+        <div class="sb-head-title">Insurance Calcs</div>
+      </div>
+      <div class="sb-list" data-section="insurance">
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🫀</span>
+          <div class="sb-item-text"><div class="sb-item-name">Life Cover Needed</div><div class="sb-item-hint">Human life value method</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏥</span>
+          <div class="sb-item-text"><div class="sb-item-name">Health Premium Est.</div><div class="sb-item-hint">Mediclaim estimator</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🚗</span>
+          <div class="sb-item-text"><div class="sb-item-name">Motor Insurance</div><div class="sb-item-hint">Own damage premium</div></div>
+        </a>
+        <a class="sb-item" href="#">
+          <span class="sb-item-icon">🏠</span>
+          <div class="sb-item-text"><div class="sb-item-name">Home Insurance</div><div class="sb-item-hint">Property cover estimator</div></div>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Quick stat widget -->
+    <div class="sidebar-card">
+      <div class="sb-head"><div class="sb-head-icon" style="background:var(--g100)">📊</div><div class="sb-head-title">SIP Quick Stats</div></div>
+      <div class="sb-qstat">
+        <div class="sq-row"><span class="sq-label">₹5K/mo × 10yr @ 12%</span><span class="sq-val">₹11.6L</span></div>
+        <div class="sq-row"><span class="sq-label">₹10K/mo × 20yr @ 12%</span><span class="sq-val">₹99.9L</span></div>
+        <div class="sq-row"><span class="sq-label">₹20K/mo × 25yr @ 12%</span><span class="sq-val">₹3.8 Cr</span></div>
+        <div class="sq-row" style="margin:0"><span class="sq-label">₹50K/mo × 30yr @ 12%</span><span class="sq-val">₹17.6 Cr</span></div>
+      </div>
+    </div>
+  </aside>
+  <div class="main-col">
+
+    <section id="calculator">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,var(--p800),var(--p500))">⚡</div>
+        <div class="sd-text"><h2>Rule of 72 Calculator</h2><p>Enter interest rate → get doubling time. Instant!</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="ch-icon purple">⚡</div><div><div class="ch-title">Find Your Doubling Time</div><div class="ch-sub">72 ÷ Interest Rate = Years to Double</div></div></div>
+        <div class="card-body">
+          <div class="params-grid">
+            <div class="param-card">
+              <div class="pc-top"><span class="pc-label">📈 Annual Interest Rate (%)</span><span class="pc-value" id="r72rate-disp">12%</span></div>
+              <div class="pc-input-row"><input class="num-input" type="number" id="r72rate-n" min="0.5" max="50" step="0.5" value="12" oninput="syncFromNum('r72rate')"/><div class="range-wrap"><input class="slider" type="range" id="r72rate-r" min="0.5" max="50" step="0.5" value="12" oninput="syncFromSlider('r72rate')"/></div></div>
+              <div class="range-marks"><span class="rm">0.5%</span><span class="rm">25%</span><span class="rm">50%</span></div>
+              <div class="presets">
+                <button class="preset" onclick="setVal('r72rate',4)">4% Savings</button>
+                <button class="preset" onclick="setVal('r72rate',7.5)">7.5% FD</button>
+                <button class="preset on" onclick="setVal('r72rate',12)">12% MF</button>
+                <button class="preset" onclick="setVal('r72rate',15)">15% Equity</button>
+                <button class="preset" onclick="setVal('r72rate',20)">20% Target</button>
+              </div>
+            </div>
+            <div class="param-card">
+              <div class="pc-top"><span class="pc-label">💰 Initial Investment</span><span class="pc-value" id="r72amt-disp">₹1,00,000</span></div>
+              <div class="pc-input-row"><input class="num-input" type="number" id="r72amt-n" min="1000" max="100000000" step="1000" value="100000" oninput="syncFromNum('r72amt')"/><div class="range-wrap"><input class="slider" type="range" id="r72amt-r" min="1000" max="10000000" step="1000" value="100000" oninput="syncFromSlider('r72amt')"/></div></div>
+              <div class="presets">
+                <button class="preset" onclick="setVal('r72amt',10000)">₹10K</button>
+                <button class="preset on" onclick="setVal('r72amt',100000)">₹1L</button>
+                <button class="preset" onclick="setVal('r72amt',500000)">₹5L</button>
+                <button class="preset" onclick="setVal('r72amt',1000000)">₹10L</button>
+              </div>
+            </div>
+          </div>
+          <button class="btn-calc" onclick="calculate(true)">⚡ Calculate Doubling Time</button>
+          <button class="btn-reset" onclick="resetCalc()">↺ Reset</button>
+
+          <div class="results-area show" id="results">
+            <div style="height:18px"></div>
+            <!-- Big Result Display -->
+            <div id="r72-main-result" style="background:linear-gradient(135deg,var(--p50),var(--g50));border:1.5px solid var(--p200);border-radius:20px;padding:28px;text-align:center;margin-bottom:18px;position:relative;overflow:hidden">
+              <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--n400);margin-bottom:10px">Rule of 72 Result</div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap">
+                <div><div style="font-size:12px;color:var(--n400);font-weight:600;margin-bottom:4px">72 ÷ <span id="r72-rate-label">12</span>% =</div><div id="r72-years-big" style="font-size:64px;font-weight:900;color:var(--p700);line-height:1;letter-spacing:-3px">6</div><div style="font-size:14px;color:var(--n500);font-weight:600">Years to Double</div></div>
+                <div style="width:2px;height:80px;background:var(--p200);border-radius:2px"></div>
+                <div><div style="font-size:12px;color:var(--n400);font-weight:600;margin-bottom:4px">Exact Formula</div><div id="r72-exact-big" style="font-size:36px;font-weight:900;color:var(--g700);line-height:1;letter-spacing:-1px">6.0</div><div style="font-size:14px;color:var(--n500);font-weight:600">Years (Exact)</div></div>
+              </div>
+              <div id="r72-money-display" style="margin-top:18px;background:white;border-radius:14px;padding:14px;display:flex;justify-content:center;gap:30px;flex-wrap:wrap"></div>
+            </div>
+
+            <div class="results-grid">
+              <div>
+                <div class="stats-grid">
+                  <div class="stat-tile purple"><div class="st-label">Rule of 72</div><div class="st-val purple" id="r-r72">—</div><div class="st-sub">Years (approximate)</div></div>
+                  <div class="stat-tile green"><div class="st-label">Exact Years</div><div class="st-val green" id="r-exact">—</div><div class="st-sub">log(2)/log(1+rate)</div></div>
+                  <div class="stat-tile amber"><div class="st-label">Doubled Amount</div><div class="st-val amber" id="r-doubled">—</div><div class="st-sub" id="r-doubled-sub"></div></div>
+                  <div class="stat-tile blue"><div class="st-label">4x in</div><div class="st-val blue" id="r-4x">—</div><div class="st-sub">Double the doubling time</div></div>
+                </div>
+                <div style="background:var(--n0);border-radius:14px;border:1px solid var(--n150);padding:18px;box-shadow:var(--sh-sm)">
+                  <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--n400);margin-bottom:14px">Money Doubling Journey</div>
+                  <div id="r72-doublings"></div>
+                </div>
+              </div>
+              <div>
+                <div style="background:var(--n0);border-radius:14px;border:1px solid var(--n150);padding:18px;box-shadow:var(--sh-sm)">
+                  <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--n400);margin-bottom:14px">Compare Rates — Years to Double</div>
+                  <div id="r72-rate-compare"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:0">
+              <div class="card-head"><div class="ch-icon purple">📅</div><div><div class="ch-title">Your Investment Journey</div><div class="ch-sub">Track every doubling of your corpus</div></div></div>
+              <div class="card-body" style="padding:0">
+                <div class="table-scroll">
+                  <table>
+                    <thead><tr><th>Year</th><th>Amount</th><th>Doubles</th><th>Multiplier</th><th>Growth %</th></tr></thead>
+                    <tbody id="r72-table"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="disclaimer"><strong>📌 Note:</strong> Rule of 72 is an approximation. It's most accurate for rates between 6–10%. For higher rates, some use Rule of 69.3 or Rule of 70 for more precision.</div>
+<div class="demat-banner">
+  <div class="db-inner">
+    <div class="db-tag">🏠 Open a Demat Account</div>
+    <div class="db-title">Start Investing Today — Zero Account Opening Fee</div>
+    <div class="db-sub">₹0 equity delivery · ₹20 flat F&amp;O · Instant eKYC · Trusted by millions of Indian investors.</div>
+    <div class="db-btns">
+      <button type="button" class="btn-db-pri" onclick="dematOpen()">
+        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 10h18" stroke="currentColor" stroke-width="2"/><circle cx="7.5" cy="15" r="1.1" fill="currentColor"/></svg>
+        Open Demat Account
+      </button>
+    </div>
+    <div class="db-pills">
+      <span class="db-pill">✓ SEBI Registered</span>
+      <span class="db-pill">Top Discount Brokers</span>
+      <span class="db-pill">₹0 Account Opening</span>
+      <span class="db-pill">Instant eKYC</span>
+    </div>
+  </div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reverse: Enter Years → Get Rate -->
+    <section id="reverse">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,var(--g700),var(--g400))">🔄</div>
+        <div class="sd-text"><h2>Reverse Calculator</h2><p>I want to double in N years — what rate do I need?</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="ch-icon green">🎯</div><div><div class="ch-title">Target Years → Required Rate</div><div class="ch-sub">72 ÷ Years = Required Interest Rate</div></div></div>
+        <div class="card-body">
+          <div class="params-grid">
+            <div class="param-card green">
+              <div class="pc-top"><span class="pc-label green">⏳ Years to Double</span><span class="pc-value green" id="r72yrs-disp">5 Yrs</span></div>
+              <div class="pc-input-row"><input class="num-input" type="number" id="r72yrs-n" min="1" max="50" step="1" value="5" oninput="syncFromNum('r72yrs')"/><div class="range-wrap"><input class="slider green" type="range" id="r72yrs-r" min="1" max="50" step="1" value="5" oninput="syncFromSlider('r72yrs')"/></div></div>
+              <div class="presets">
+                <button class="preset green-preset" onclick="setVal('r72yrs',3)">3yr</button>
+                <button class="preset green-preset on" onclick="setVal('r72yrs',5)">5yr</button>
+                <button class="preset green-preset" onclick="setVal('r72yrs',7)">7yr</button>
+                <button class="preset green-preset" onclick="setVal('r72yrs',10)">10yr</button>
+                <button class="preset green-preset" onclick="setVal('r72yrs',15)">15yr</button>
+              </div>
+            </div>
+            <div class="param-card">
+              <div class="pc-top"><span class="pc-label">💰 Investment Amount</span><span class="pc-value" id="r72amt2-disp">₹1,00,000</span></div>
+              <div class="pc-input-row"><input class="num-input" type="number" id="r72amt2-n" min="1000" max="100000000" step="1000" value="100000" oninput="syncFromNum('r72amt2')"/><div class="range-wrap"><input class="slider" type="range" id="r72amt2-r" min="1000" max="10000000" step="1000" value="100000" oninput="syncFromSlider('r72amt2')"/></div></div>
+              <div class="presets"><button class="preset on" onclick="setVal('r72amt2',100000)">₹1L</button><button class="preset" onclick="setVal('r72amt2',500000)">₹5L</button><button class="preset" onclick="setVal('r72amt2',1000000)">₹10L</button></div>
+            </div>
+          </div>
+          <button class="btn-calc" onclick="calcReverse()">🔄 Find Required Rate</button>
+          <div class="results-area show" id="rev-results" style="margin-top:18px">
+            <div id="rev-banner" style="background:linear-gradient(135deg,var(--g50),#fff);border:1.5px solid var(--g200);border-radius:16px;padding:20px 24px;margin-bottom:14px;display:flex;align-items:center;gap:20px;flex-wrap:wrap"></div>
+            <div class="stats-grid">
+              <div class="stat-tile purple"><div class="st-label">Rate Needed (Rule of 72)</div><div class="st-val purple" id="rev-rate72">—</div><div class="st-sub">72 ÷ years</div></div>
+              <div class="stat-tile green"><div class="st-label">Exact Rate Required</div><div class="st-val green" id="rev-rate-exact">—</div><div class="st-sub">2^(1/n) - 1</div></div>
+              <div class="stat-tile amber"><div class="st-label">Investment at Start</div><div class="st-val amber" id="rev-init">—</div></div>
+              <div class="stat-tile blue"><div class="st-label">Value After Doubling</div><div class="st-val blue" id="rev-final">—</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="infographics">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,var(--g600),var(--g400))">📊</div>
+        <div class="sd-text"><h2>Doubling Time Across Asset Classes</h2><p>How fast do different investments double your money?</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="info-grid">
+        <div class="itile it1"><span class="it-emoji">📈</span><div class="it-val">4.6yr</div><div class="it-label">Nifty 50 @15.8%</div><div class="it-sub">Historical 10yr avg</div></div>
+        <div class="itile it2"><span class="it-emoji">🚀</span><div class="it-val">4yr</div><div class="it-label">Small Cap MF @18%</div><div class="it-sub">High risk, high reward</div></div>
+        <div class="itile it3"><span class="it-emoji">🪙</span><div class="it-val">5.1yr</div><div class="it-label">Gold INR @14.2%</div><div class="it-sub">Safe haven asset</div></div>
+        <div class="itile it4"><span class="it-emoji">🌍</span><div class="it-val">6.7yr</div><div class="it-label">S&P 500 @10.7%</div><div class="it-sub">US equity market</div></div>
+        <div class="itile it5"><span class="it-emoji">🏦</span><div class="it-val">9.6yr</div><div class="it-label">Bank FD @7.5%</div><div class="it-sub">Safe but slow</div></div>
+        <div class="itile it6"><span class="it-emoji">💸</span><div class="it-val">12yr</div><div class="it-label">Inflation @6%</div><div class="it-sub">Halves your money!</div></div>
+      </div>
+      <div class="power-table-wrap" style="margin-top:22px">
+        <div class="pt-title">⚡ Rate → Doubling Time Quick Reference Table</div>
+        <div class="power-rows" id="r72-table-quick"></div>
+      </div>
+    </section>
+
+    <section id="guide">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6)">📖</div>
+        <div class="sd-text"><h2>Rule of 72 — Complete Guide</h2><p>The most powerful mental math trick in investing</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="guide-grid">
+        <div class="gc purple-border"><div class="gc-icon">⚡</div><h3>The Rule of 72</h3><p>Divide 72 by your annual interest rate to get the approximate number of years it takes to double your money. It works for any investment — FD, mutual fund, real estate, or even inflation eroding your savings.</p><div class="formula-box" style="margin-top:12px"><div class="formula-code"><div class="fc-row fc-row"><div class="fc-icon">𝑓</div><div class="fc-text">Years to Double = 72 ÷ Annual Rate (%)</div></div>
+<div class="fc-row fc-row"><div class="fc-icon">𝑓</div><div class="fc-text">Rate Required = 72 ÷ Target Years</div></div></div></div></div>
+        <div class="gc green-border"><div class="gc-icon">🔬</div><h3>Why 72? The Math Behind It</h3><p>The exact formula for doubling time is ln(2)/ln(1+r) ≈ 0.693/r. Multiplying by 100 gives 69.3/rate%. The number 72 is used because it's divisible by many small numbers (2,3,4,6,8,9,12) — making mental math easy. For rates 6–10%, the error is less than 1%.</p></div>
+        <div class="gc amber-border"><div class="gc-icon">📉</div><h3>Rule of 72 for Inflation</h3><p>The rule works in reverse for inflation — it shows how quickly inflation halves your purchasing power. At 6% inflation: 72÷6 = 12 years for your money to lose half its value. This is why investing beats hoarding cash!</p><div class="formula-box" style="margin-top:10px"><div class="formula-code"><div class="fc-row fc-slab"><div class="fc-icon">▸</div><div class="fc-text">72 ÷ 6% inflation = 12yr</div></div>
+<div class="fc-row fc-result"><div class="fc-icon">✓</div><div class="fc-text">₹1L today = ₹50K value in 12yr</div></div></div></div></div>
+        <div class="gc blue-border"><div class="gc-icon">🔢</div><h3>Rule of 70 vs Rule of 72</h3><ul><li><strong>Rule of 72:</strong> Most widely used, best for 6–10% rates</li><li><strong>Rule of 70:</strong> Slightly more accurate for continuous compounding</li><li><strong>Rule of 69.3:</strong> Mathematically exact (ln 2 × 100)</li><li>For practical investing decisions: Rule of 72 is always accurate enough</li></ul></div>
+        <div class="gc full purple-border"><div class="gc-icon">🧮</div><h3>Compound Doubling — The 8th Wonder of the World</h3><p>What makes the Rule of 72 so powerful is understanding how multiple doublings multiply wealth. At 12% CAGR (doubling every 6 years): ₹1 lakh → ₹2L (6yr) → ₹4L (12yr) → ₹8L (18yr) → ₹16L (24yr) → ₹32L (30yr). Start investing early — every 6-year delay costs you 50% of your final wealth!</p></div>
+      </div>
+      <div class="step-flow">
+        <div class="step-card"><div class="step-num">1</div><span class="step-icon">📈</span><h4>Know Your CAGR</h4><p>Find your investment's historical/expected annual return</p></div>
+        <div class="step-card"><div class="step-num">2</div><span class="step-icon">⚡</span><h4>Divide 72 by Rate</h4><p>72 ÷ 12% = 6 years. That's it!</p></div>
+        <div class="step-card"><div class="step-num">3</div><span class="step-icon">🎯</span><h4>Plan Multiple Doublings</h4><p>How many doublings fit in your investment horizon?</p></div>
+        <div class="step-card"><div class="step-num">4</div><span class="step-icon">🚀</span><h4>Maximize Rate</h4><p>Higher rate → faster doubling → more final wealth</p></div>
+      </div>
+    </section>
+
+<div class="demat-banner">
+  <div class="db-inner">
+    <div class="db-tag">🏠 Open a Demat Account</div>
+    <div class="db-title">Start Investing Today — Zero Account Opening Fee</div>
+    <div class="db-sub">₹0 equity delivery · ₹20 flat F&amp;O · Instant eKYC · Trusted by millions of Indian investors.</div>
+    <div class="db-btns">
+      <button type="button" class="btn-db-pri" onclick="dematOpen()">
+        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 10h18" stroke="currentColor" stroke-width="2"/><circle cx="7.5" cy="15" r="1.1" fill="currentColor"/></svg>
+        Open Demat Account
+      </button>
+    </div>
+    <div class="db-pills">
+      <span class="db-pill">✓ SEBI Registered</span>
+      <span class="db-pill">Top Discount Brokers</span>
+      <span class="db-pill">₹0 Account Opening</span>
+      <span class="db-pill">Instant eKYC</span>
+    </div>
+  </div>
+</div>
+
+<section id="tips">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,#be185d,#ec4899)">💡</div>
+        <div class="sd-text"><h2>Rule of 72 Insights</h2><p>How to use this rule to transform your investment thinking</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="tips-grid">
+        <div class="tip-card tc1"><span class="tip-badge tb-purple">⭐ Most Powerful</span><div class="tip-icon">⏰</div><h4>Early Start = More Doublings = 10x More Wealth</h4><p>Starting at 25 vs 35 gives 10 extra years at 12% CAGR. That's nearly 2 extra doubling cycles. Your corpus at 60 is 4x more if you start at 25 vs 35. Time is your most powerful asset.</p><div class="tip-highlight">💡 25yr start: 5 doublings. 35yr start: 3 doublings. That's 4× less wealth!</div></div>
+        <div class="tip-card tc2"><span class="tip-badge tb-green">📊 Strategy</span><div class="tip-icon">📉</div><h4>Use Rule of 72 for Inflation Planning</h4><p>At 6% inflation, your ₹1 lakh loses half its purchasing power in 12 years. If you hold cash or keep money in savings account (4%), you're barely keeping up. This is why equity investment (12%+) is essential.</p><div class="tip-highlight">💡 Cash at 0% → 72÷0 = ∞ years to double. Inflation already halves it!</div></div>
+        <div class="tip-card tc3"><span class="tip-badge tb-amber">🎯 Goal</span><div class="tip-icon">🎯</div><h4>Reverse Rule: Target Doubling Time → Required Rate</h4><p>Want to double money in 5 years? Need 72÷5 = 14.4% annual return. Want to do it in 4 years? Need 18% CAGR. This tells you which asset class is realistic for your timeline.</p><div class="tip-highlight">💡 5yr doubling needs 14.4% — achievable via small/mid-cap equity SIP</div></div>
+        <div class="tip-card tc4"><span class="tip-badge tb-blue">🔢 Math</span><div class="tip-icon">⚡</div><h4>The Cost of Fees in Doubling Time</h4><p>1% extra fund expense ratio might seem small, but it's devastating over time. At 15% gross returns: 15% net → doubles in 4.8yr. 14% net (1% expense) → doubles in 5.1yr. Over 30 years, you lose nearly one full doubling cycle.</p><div class="tip-highlight">💡 Choose Direct Mutual Funds — save 0.5–1% expense ratio, gain one full doubling!</div></div>
+        <div class="tip-card tc5"><span class="tip-badge tb-pink">💡 Insight</span><div class="tip-icon">🏦</div><h4>FD Doubles in 10 Years. Inflation Halves in 12.</h4><p>At 7.5% FD rate, money doubles in ~10 years. But at 6% inflation, purchasing power halves in 12 years. FD barely beats inflation in nominal terms. After tax (30% bracket), FD at 5.25% post-tax barely keeps pace.</p><div class="tip-highlight">💡 FD: Real doubling takes 20+ years after inflation. Equity: 6–8 years.</div></div>
+        <div class="tip-card tc6"><span class="tip-badge tb-teal">🔄 Compare</span><div class="tip-icon">💎</div><h4>Compare Any Two Investments in Seconds</h4><p>Rule of 72 lets you compare investments without any calculator. "This fund gives 15% vs that one at 12%." → 15%: doubles in 4.8yr. 12%: doubles in 6yr. Over 24 years: 15% = 5 doublings (32x). 12% = 4 doublings (16x). 2× more wealth!</p><div class="tip-highlight">💡 3% rate difference = 2× more wealth over 24 years. Huge compounding effect.</div></div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="section-divider">
+        <div class="sd-icon" style="background:linear-gradient(135deg,var(--p700),var(--p500))">❓</div>
+        <div class="sd-text"><h2>Frequently Asked Questions</h2><p>Answers to common questions about the doubling rule</p></div>
+        <div class="sd-line"></div>
+      </div>
+      <div class="faq-wrap" id="faq-container"></div>
+    </section>
+
+<button class="fab-calc" onclick="openDrawer()" aria-label="Browse all calculators" title="All Calculators">
+  <span class="fab-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" fill="white" fill-opacity=".95"/><rect x="13" y="3" width="8" height="8" rx="2" fill="white" fill-opacity=".95"/><rect x="3" y="13" width="8" height="8" rx="2" fill="white" fill-opacity=".95"/><rect x="13" y="16" width="8" height="2.5" rx="1.25" fill="white" fill-opacity=".95"/><rect x="16" y="13" width="2.5" height="8" rx="1.25" fill="white" fill-opacity=".95"/></svg></span>
+  <span class="fab-label">Calcs</span>
+</button>
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
+<aside class="calc-drawer" id="calcDrawer" role="dialog" aria-modal="true" aria-label="All Calculators">
+  <div class="drawer-handle"></div>
+
+  <!-- Header -->
+  <div class="drawer-header">
+    <div class="drawer-title">
+      <div class="drawer-title-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="4" fill="rgba(255,255,255,0.95)"/><path d="M7 7h4v4H7zM13 7h4v4h-4zM7 13h4v4H7zM13 15h4" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      All Calculators
+    </div>
+    <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">✕</button>
+  </div>
+
+  <!-- Body -->
+  <div class="drawer-body">
+
+    <!-- Home link -->
+    <a class="drawer-home-link" href="/" onmouseenter="this.style.transform='translateY(-2px) scale(1.01)'" onmouseleave="this.style.transform=''">
+      <div class="drawer-home-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 3l9 9" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div>
+        <div class="drawer-home-label">&#8592; Back to Home</div>
+        <div class="drawer-home-sub">Mission Wealth &middot; All Tools</div>
+      </div>
+      <div class="drawer-home-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+    <!-- Search -->
+    <div class="drawer-search">
+      <span class="drawer-search-icon">&#128269;</span>
+      <input class="drawer-search-input" type="search" id="drawerSearch" placeholder="Search calculators&#8230;" oninput="filterDrawer(this.value)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+    </div>
+
+    <div class="drawer-cat" data-cat="investment">
+      <div class="drawer-cat-title">📈 Investment</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p100)">📊</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">SIP Calculator</div><div class="drawer-item-sub">Monthly planner</div></div>
+          <span class="drawer-badge active">Active</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">⬆️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Step-Up SIP</div><div class="drawer-item-sub">Annual top-up</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">💰</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Lumpsum</div><div class="drawer-item-sub">One-time invest</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">💸</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">SWP Calculator</div><div class="drawer-item-sub">Withdrawal plan</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">📉</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Step-Up SWP</div><div class="drawer-item-sub">Growing withdrawals</div></div>
+          <span class="drawer-badge new">New</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fffbeb">🏦</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">FD Calculator</div><div class="drawer-item-sub">Fixed deposit</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#f0f9ff">🪙</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">RD Calculator</div><div class="drawer-item-sub">Recurring deposit</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">📐</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">CAGR Calculator</div><div class="drawer-item-sub">Annual growth rate</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item active-calc" href="#">
+          <div class="drawer-item-icon" style="background:#fdf2f8">⚡</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Rule of 72</div><div class="drawer-item-sub">Doubling time</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">🎯</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Goal Planner</div><div class="drawer-item-sub">Target corpus</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">🏆</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Mutual Fund Returns</div><div class="drawer-item-sub">Compare performance</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#f0f9ff">🔄</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">SIP vs Lumpsum</div><div class="drawer-item-sub">Which is better?</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="drawer-cat" data-cat="retirement">
+      <div class="drawer-cat-title">👴 Retirement</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">🏖️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Retirement Planner</div><div class="drawer-item-sub">Corpus needed</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">🔐</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">NPS Calculator</div><div class="drawer-item-sub">National Pension Scheme</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">📒</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">PPF Calculator</div><div class="drawer-item-sub">EEE · 7.1% p.a.</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#eff6ff">📮</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">NSC Calculator</div><div class="drawer-item-sub">7.7% · 5-year savings cert</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fffbeb">🏛️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">EPF Calculator</div><div class="drawer-item-sub">Provident fund</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">💎</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Gratuity Calculator</div><div class="drawer-item-sub">Retirement gratuity</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#f0f9ff">🛡️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Annuity Calculator</div><div class="drawer-item-sub">Pension income</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fffbeb">👴</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Senior Citizen FD</div><div class="drawer-item-sub">Special rate deposits</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="drawer-cat" data-cat="loan">
+      <div class="drawer-cat-title">🏦 Loans & EMI</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fff7ed">🏠</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">EMI Calculator</div><div class="drawer-item-sub">Home, car, personal</div></div>
+          <span class="drawer-badge popular">Popular</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fff7ed">🏡</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Home Loan Elig.</div><div class="drawer-item-sub">Max loan amount</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fdf2f8">💳</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Credit Card Payoff</div><div class="drawer-item-sub">Debt elimination</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fff7ed">🚗</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Car Loan EMI</div><div class="drawer-item-sub">Auto finance planner</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#eff6ff">💼</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Personal Loan EMI</div><div class="drawer-item-sub">Unsecured loan planner</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">🎓</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Education Loan</div><div class="drawer-item-sub">Student loan EMI</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">📊</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Loan Comparison</div><div class="drawer-item-sub">Compare loan offers</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fffbeb">💹</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Prepayment Savings</div><div class="drawer-item-sub">Early repayment benefit</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#f0f9ff">🔃</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Balance Transfer</div><div class="drawer-item-sub">Switch & save interest</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="drawer-cat" data-cat="tax">
+      <div class="drawer-cat-title">📋 Tax Calculators</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">🏛️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Income Tax</div><div class="drawer-item-sub">New vs Old Regime</div></div>
+          <span class="drawer-badge popular">Popular</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">📈</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">LTCG Calculator</div><div class="drawer-item-sub">12.5% Budget 2024</div></div>
+          <span class="drawer-badge new">New</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">📉</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">STCG Calculator</div><div class="drawer-item-sub">Short-term gains</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">🏠</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Home Loan Tax</div><div class="drawer-item-sub">80C & 24B deductions</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">💼</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">HRA Calculator</div><div class="drawer-item-sub">House rent allowance</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fffbeb">🧾</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">TDS Calculator</div><div class="drawer-item-sub">Tax deducted at source</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fdf2f8">🎁</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Gift Tax Guide</div><div class="drawer-item-sub">Taxable gift checker</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="drawer-cat" data-cat="savings">
+      <div class="drawer-cat-title">💰 Savings & Others</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">🏧</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Savings Goal</div><div class="drawer-item-sub">Reach your target</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fffbeb">⚖️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Inflation Calculator</div><div class="drawer-item-sub">Purchasing power</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fffbeb">🏅</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Gold Calculator</div><div class="drawer-item-sub">Gold investment returns</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--p50)">🏗️</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Real Estate ROI</div><div class="drawer-item-sub">Property return est.</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#f0f9ff">💱</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Currency Converter</div><div class="drawer-item-sub">Live forex rates</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">📆</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Daily Savings</div><div class="drawer-item-sub">Daily saving to goal</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="drawer-cat" data-cat="insurance">
+      <div class="drawer-cat-title">🛡️ Insurance</div>
+      <div class="drawer-items">
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fdf2f8">🫀</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Life Cover Needed</div><div class="drawer-item-sub">Human life value method</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:var(--g50)">🏥</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Health Premium Est.</div><div class="drawer-item-sub">Mediclaim estimator</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fff7ed">🚗</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Motor Insurance</div><div class="drawer-item-sub">Own damage premium</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+        <a class="drawer-item" href="#">
+          <div class="drawer-item-icon" style="background:#fff7ed">🏠</div>
+          <div class="drawer-item-text"><div class="drawer-item-name">Home Insurance</div><div class="drawer-item-sub">Property cover est.</div></div>
+          <span class="drawer-item-arrow">&#8250;</span>
+        </a>
+      </div>
+    </div>
+
+  </div><!-- end drawer-body --><!-- end drawer-body -->
+</aside>
+<nav class="mobile-nav" role="navigation">
+  <div class="mnav-items">
+    <a class="mnav-item" href="/"><span class="mnav-icon">🏠</span><span class="mnav-label">Home</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item active" href="#calculator"><span class="mnav-icon">⚡</span><span class="mnav-label">Calc</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item" href="#reverse"><span class="mnav-icon">🔄</span><span class="mnav-label">Reverse</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item" href="#infographics"><span class="mnav-icon">📊</span><span class="mnav-label">Assets</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item" href="#faq"><span class="mnav-icon">❓</span><span class="mnav-label">FAQ</span><span class="mnav-dot"></span></a>
+  </div>
+</nav>
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+<script>
+
+'use strict';
+/* ── INR Formatter ── */
+const INR = n => { const a=Math.abs(n); if(a>=1e7) return '₹'+(n/1e7).toFixed(2)+' Cr'; if(a>=1e5) return '₹'+(n/1e5).toFixed(2)+' L'; if(a>=1000) return '₹'+Math.round(n).toLocaleString('en-IN'); return '₹'+Math.round(n); };
+const INR2 = n => '₹'+Math.round(n).toLocaleString('en-IN');
+const PCT = n => n.toFixed(2)+'%';
+
+/* ── Slider Fill ── */
+function updateSliderFill(s){ const min=parseFloat(s.min)||0,max=parseFloat(s.max)||100,val=Math.max(min,Math.min(max,parseFloat(s.value)||0)),pct=((val-min)/(max-min))*100,c=s.classList.contains('green')?'var(--g600)':'var(--p700)'; s.style.background=`linear-gradient(to right,${c} ${pct}%,var(--n200) ${pct}%)`; }
+function initSliders(){ document.querySelectorAll('.slider').forEach(s=>{ updateSliderFill(s); s.addEventListener('input',()=>updateSliderFill(s),{passive:true}); }); }
+
+/* ── Sync Slider/Number ── */
+function syncFromSlider(id){ const r=document.getElementById(id+'-r'),n=document.getElementById(id+'-n'),d=document.getElementById(id+'-disp'); if(!r||!n) return; n.value=r.value; if(d) d.textContent=formatDisp(id,r.value); updateSliderFill(r); debCalc(); }
+function syncFromNum(id){ const r=document.getElementById(id+'-r'),n=document.getElementById(id+'-n'),d=document.getElementById(id+'-disp'); if(!r||!n) return; let v=parseFloat(n.value)||0; v=Math.max(parseFloat(n.min)||0,Math.min(parseFloat(n.max)||1e9,v)); r.value=v; n.value=v; if(d) d.textContent=formatDisp(id,v); updateSliderFill(r); debCalc(); }
+function setVal(id,v){ const r=document.getElementById(id+'-r'),n=document.getElementById(id+'-n'),d=document.getElementById(id+'-disp'); if(r) r.value=v; if(n) n.value=v; if(d) d.textContent=formatDisp(id,v); if(r) updateSliderFill(r); document.querySelectorAll(`[onclick*="setVal('${id}"]`).forEach(b=>b.classList.remove('on')); document.querySelectorAll(`[onclick="setVal('${id}',${v})"]`).forEach(b=>b.classList.add('on')); debCalc(); }
+
+/* ── Debounced Calculate ── */
+let calcTimer;
+function debCalc(){ clearTimeout(calcTimer); calcTimer=setTimeout(()=>calculate(false),400); }
+
+/* ── FAB / Drawer ── */
+const drawerEl=document.getElementById('calcDrawer'),backdropEl=document.getElementById('drawerBackdrop');
+function openDrawer(){ drawerEl.classList.add('open');backdropEl.classList.add('open');document.body.style.overflow='hidden'; setTimeout(()=>{ const s=document.getElementById('drawerSearch'); if(s&&window.innerWidth>480) s.focus(); },350); }
+function closeDrawer(){ drawerEl.classList.remove('open');backdropEl.classList.remove('open');document.body.style.overflow=''; const s=document.getElementById('drawerSearch'); if(s){s.value='';filterDrawer('');} }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&drawerEl.classList.contains('open')) closeDrawer(); });
+function filterDrawer(q){ const query=q.trim().toLowerCase(); drawerEl.querySelectorAll('.drawer-cat').forEach(cat=>{ let any=false; cat.querySelectorAll('.drawer-item').forEach(item=>{ const match=!query||item.textContent.toLowerCase().includes(query); item.style.display=match?'':'none'; if(match) any=true; }); cat.style.display=any?'':'none'; }); }
+
+/* ── Swipe to close drawer ── */
+let touchStartY=0;
+drawerEl.addEventListener('touchstart',e=>{ touchStartY=e.touches[0].clientY; },{passive:true});
+drawerEl.addEventListener('touchmove',e=>{ const dy=e.touches[0].clientY-touchStartY; if(window.innerWidth<641&&dy>0){ drawerEl.style.transform=`translateY(${dy}px)`;drawerEl.style.transition='none'; } },{passive:true});
+drawerEl.addEventListener('touchend',e=>{ const dy=e.changedTouches[0].clientY-touchStartY; drawerEl.style.transition='';drawerEl.style.transform=''; if(window.innerWidth<641&&dy>80) closeDrawer(); },{passive:true});
+
+/* ── Scroll Top ── */
+const stBtn=document.getElementById('scrollTop');
+window.addEventListener('scroll',()=>{ stBtn.style.display=window.scrollY>400?'flex':'none'; },{passive:true});
+
+/* ── Section Nav Sync ── */
+function syncNav(activeId){ document.querySelectorAll('.mchip').forEach(c=>{ const href=(c.getAttribute('href')||'').replace('#',''); c.classList.toggle('on',href===activeId); }); document.querySelectorAll('.mnav-item').forEach(n=>{ const href=(n.getAttribute('href')||'').replace('#',''); n.classList.toggle('active',href===activeId); }); }
+
+function formatDisp(id,v){v=parseFloat(v);if(['r72rate','rtarget'].includes(id))return v+'%';if(['r72amt','r72amt2'].includes(id))return INR(v);if(['r72yrs','cagryr'].includes(id))return v+' Yrs';return v;}
+function calculate(btn){
+  const rate=parseFloat(document.getElementById('r72rate-n').value)||12;
+  const amt=parseFloat(document.getElementById('r72amt-n').value)||100000;
+  const yr72=72/rate;
+  const yrExact=Math.log(2)/Math.log(1+rate/100);
+  const doubled=amt*2, x4=amt*4;
+  document.getElementById('r72-rate-label').textContent=rate;
+  document.getElementById('r72-years-big').textContent=yr72.toFixed(1);
+  document.getElementById('r72-exact-big').textContent=yrExact.toFixed(1);
+  document.getElementById('r72-money-display').innerHTML=`
+    <div style="text-align:center"><div style="font-size:11px;color:var(--n400);font-weight:600">Start</div><div style="font-size:18px;font-weight:900;color:var(--n800)">${INR(amt)}</div></div>
+    <div style="font-size:24px;color:var(--p400)">→</div>
+    <div style="text-align:center"><div style="font-size:11px;color:var(--g600);font-weight:600">After ${yr72.toFixed(1)}yr</div><div style="font-size:18px;font-weight:900;color:var(--g700)">${INR(doubled)}</div></div>
+    <div style="font-size:24px;color:var(--p400)">→</div>
+    <div style="text-align:center"><div style="font-size:11px;color:var(--p600);font-weight:600">After ${(yr72*2).toFixed(0)}yr</div><div style="font-size:18px;font-weight:900;color:var(--p700)">${INR(x4)}</div></div>`;
+  document.getElementById('r-r72').textContent=yr72.toFixed(1)+' yrs';
+  document.getElementById('r-exact').textContent=yrExact.toFixed(2)+' yrs';
+  document.getElementById('r-doubled').textContent=INR(doubled);
+  document.getElementById('r-doubled-sub').textContent=INR(amt)+' × 2';
+  document.getElementById('r-4x').textContent=(yrExact*2).toFixed(1)+' yrs';
+  // Multiple doublings
+  let doublings='';
+  for(let d=1;d<=5;d++){
+    const val=amt*Math.pow(2,d), yr=(yrExact*d).toFixed(1);
+    doublings+=`<div class="bchart-row"><div class="bchart-label"><span>×${Math.pow(2,d)} in ${yr}yr</span><span style="color:var(--g700)">${INR(val)}</span></div><div class="bchart-track"><div class="bchart-fill returns" style="width:${(Math.pow(2,d)/32*100).toFixed(1)}%;transition:width ${1+d*0.2}s"></div></div></div>`;
+  }
+  document.getElementById('r72-doublings').innerHTML=doublings;
+  // Compare rates
+  const rates=[4,6,7.5,10,12,15,18,rate].filter((r,i,arr)=>arr.indexOf(r)===i).sort((a,b)=>a-b);
+  const maxYr=72/4;
+  document.getElementById('r72-rate-compare').innerHTML=rates.map(r=>{
+    const yrs=72/r; const isYour=r===rate;
+    return `<div class="bchart-row"><div class="bchart-label" style="${isYour?'font-weight:800':''}"><span>${r}% p.a.${isYour?' ←':''}  </span><span style="color:${isYour?'var(--p700)':'var(--n600)'}">${yrs.toFixed(1)}yr</span></div><div class="bchart-track"><div style="height:100%;border-radius:8px;width:${((maxYr-yrs)/maxYr*100+15).toFixed(1)}%;background:${isYour?'linear-gradient(90deg,var(--p600),var(--p400))':'linear-gradient(90deg,var(--g600),var(--g400))'};transition:width 1s"></div></div></div>`;
+  }).join('');
+  // Table
+  let rows='';
+  const showYears=Math.ceil(yrExact*5);
+  const stepY=Math.max(1,Math.floor(showYears/20));
+  for(let y=stepY;y<=Math.min(showYears,60);y+=stepY){
+    const val=amt*Math.pow(1+rate/100,y), doublesCount=Math.log2(val/amt).toFixed(1);
+    const isDouble=y%Math.round(yrExact)<stepY;
+    rows+=`<tr ${isDouble?'style="background:var(--g50)"':''}><td><strong>${y}</strong></td><td class="td-b">${INR(val)}</td><td>${isDouble?'✅ Doubled!':''}</td><td>${(val/amt).toFixed(1)}×</td><td>${((val-amt)/amt*100).toFixed(0)}%</td></tr>`;
+  }
+  document.getElementById('r72-table').innerHTML=rows;
+  document.getElementById('results').classList.add('show');
+}
+function calcReverse(){
+  const yrs=parseFloat(document.getElementById('r72yrs-n').value)||5;
+  const amt=parseFloat(document.getElementById('r72amt2-n').value)||100000;
+  const rate72=72/yrs;
+  const rateExact=(Math.pow(2,1/yrs)-1)*100;
+  document.getElementById('rev-rate72').textContent=rate72.toFixed(1)+'%';
+  document.getElementById('rev-rate-exact').textContent=rateExact.toFixed(2)+'%';
+  document.getElementById('rev-init').textContent=INR(amt);
+  document.getElementById('rev-final').textContent=INR(amt*2);
+  // Banner with feasibility
+  let msg, cls;
+  if(rateExact>25){msg='🚨 Very difficult — requires >25% annual return, not sustainably achievable. Consider extending your timeline.';cls='#fffbeb;color:#b45309;border-color:#fde68a'}
+  else if(rateExact>18){msg='⚠️ Challenging — requires aggressive small-cap equity investment. Possible but with high volatility.';cls='var(--amberBg);color:#92400e;border-color:var(--amberBdr)'}
+  else if(rateExact>12){msg='✅ Achievable — requires good mid/small-cap equity mutual fund. Start SIP today.';cls='var(--g50);color:var(--g700);border-color:var(--g200)'}
+  else{msg='🏆 Easily achievable — even large-cap equity mutual funds have delivered this historically.';cls='var(--p50);color:var(--p700);border-color:var(--p200)'}
+  document.getElementById('rev-banner').style.background=cls.split(';')[0];
+  document.getElementById('rev-banner').style.color=cls.split(';')[1]?.replace('color:','');
+  document.getElementById('rev-banner').style.borderColor=cls.split(';')[2]?.replace('border-color:','');
+  document.getElementById('rev-banner').innerHTML=`<div style="font-size:28px">💡</div><div><div style="font-size:15px;font-weight:800;margin-bottom:4px">Need ${rate72.toFixed(1)}% annually to double in ${yrs} years</div><div style="font-size:13px;opacity:.9">${msg}</div></div>`;
+  document.getElementById('rev-results').classList.add('show');
+}
+function buildQuickTable(){
+  const rates=[2,4,6,8,10,12,15,18,20,24];
+  document.getElementById('r72-table-quick').innerHTML=rates.map(r=>`<div class="power-row"><div class="pr-header"><span class="pr-year">${r}% Rate</span><span class="pr-badge">Rule of 72</span></div><div class="pr-main">${(72/r).toFixed(1)} Years</div><div class="pr-invested">Exact: ${(Math.log(2)/Math.log(1+r/100)).toFixed(2)} years</div><div class="pr-gain">₹1L → ₹2L in ${(72/r).toFixed(1)} years</div></div>`).join('');
+}
+function buildFAQ(faqs, containerId) {
+  const cont = document.getElementById(containerId || 'faq-container');
+  if (!cont || !faqs) return;
+  cont.innerHTML = '';
+  faqs.forEach(f => {
+    const div = document.createElement('div');
+    div.className = 'faq-item';
+    div.innerHTML = `<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">${f.q}<div class="faq-icon">+</div></div><div class="faq-a">${f.a}</div>`;
+    cont.appendChild(div);
+  });
+}
+
+const R72_FAQS = [
+  {q:"What is the Rule of 72?",a:`<span class="faq-lead">The Rule of 72 is a mental math shortcut: divide 72 by your annual interest rate to find how many years it takes to double your money.</span><div class="formula-box" style="margin:10px 0"><div class="formula-code"><div class="fc-row fc-row"><div class="fc-icon">𝑓</div><div class="fc-text">Years to double = 72 ÷ Annual Rate</div></div>
+<div class="fc-row fc-slab"><div class="fc-icon">▸</div><div class="fc-text">72 ÷ 8% = 9 years | 72 ÷ 12% = 6 years | 72 ÷ 6% = 12 years</div></div></div></div>`},
+  {q:"Why 72 specifically? Why not 70 or 69?",a:`<span class="faq-lead">The mathematically exact number is ln(2) = 69.3. But 72 is used because it's divisible by 1, 2, 3, 4, 6, 8, 9, 12, 18, 24, 36 — covering all common interest rates cleanly with simple mental math.</span>`},
+  {q:"How does the Rule of 72 apply to inflation?",a:`<span class="faq-lead">Rule of 72 works in reverse for inflation — showing how fast money loses value.</span><div class="faq-stat-row"><div class="faq-stat"><span class="faq-stat-val">6% inflation</span><span class="faq-stat-lbl">Halves in 12 years</span></div><div class="faq-stat"><span class="faq-stat-val">₹1L today</span><span class="faq-stat-lbl">= ₹50K power in 12yr</span></div><div class="faq-stat"><span class="faq-stat-val">Savings @4%</span><span class="faq-stat-lbl">Still losing real value!</span></div></div>`},
+  {q:"Is the Rule of 72 accurate?",a:`<span class="faq-lead">Very accurate for rates between 6–10%. Error is less than 1% for these rates. At 20%+, error increases to 3–4%.</span><div class="faq-chips"><span class="faq-chip gr">5%: Error &lt;0.2%</span><span class="faq-chip pu">10%: Error ~1%</span><span class="faq-chip or">20%: Error ~3%</span></div>`},
+  {q:"How many times can \u20b91 lakh double in 30 years?",a:`<span class="faq-lead">Number of doublings = 30 ÷ doubling time. At 12% (equity): doubles every 6 years = 5 doublings in 30 years = ₹1L × 2^5 = ₹32L.</span><div class="faq-stat-row"><div class="faq-stat"><span class="faq-stat-val">₹32L</span><span class="faq-stat-lbl">Equity 12% (5 doublings)</span></div><div class="faq-stat"><span class="faq-stat-val">₹8.6L</span><span class="faq-stat-lbl">FD 7.5% (3.1 doublings)</span></div><div class="faq-stat"><span class="faq-stat-val">3.7×</span><span class="faq-stat-lbl">Equity Advantage</span></div></div>`},
+  {q:"What rate do I need to double money in 5 years?",a:`<span class="faq-lead">Rate needed = 72 ÷ target years = 72 ÷ 5 = 14.4% per year. Exact answer: 14.87%. Achievable through mid-cap equity mutual funds historically.</span><div class="faq-note">Avoid "guaranteed doubling in 5 years" schemes — they promise 14.4% guaranteed, which no safe instrument delivers in India.</div>`},
+  {q:"How does Rule of 72 apply to debt/loans?",a:`<span class="faq-lead">Debt doubles with the same rule — but works against you!</span><div class="faq-stat-row"><div class="faq-stat"><span class="faq-stat-val">Credit Card 36%</span><span class="faq-stat-lbl">Doubles in 2 years!</span></div><div class="faq-stat"><span class="faq-stat-val">Personal Loan 18%</span><span class="faq-stat-lbl">Doubles in 4 years</span></div><div class="faq-stat"><span class="faq-stat-val">Home Loan 9%</span><span class="faq-stat-lbl">Doubles in 8 years</span></div></div>`},
+  {q:"What are the limitations of Rule of 72?",a:`<span class="faq-lead">Assumes constant return rate — real investments fluctuate. Ignores taxes and inflation. Best used as quick estimate, not precise calculation.</span><ul class="faq-points"><li><span class="fp-bul or">!</span>Assumes constant rate — real returns vary year to year</li><li><span class="fp-bul or">!</span>Ignores taxes — your real doubling time is longer after tax</li><li><span class="fp-bul or">!</span>Assumes compounding — simple interest takes longer</li></ul>`},
+  {q:"How does Rule of 72 demonstrate the cost of starting late?",a:`<span class="faq-lead">Every 6 years of delay at 12% CAGR cuts your final corpus in half. Starting 10 years earlier creates 3× more wealth.</span><div class="faq-stat-row"><div class="faq-stat"><span class="faq-stat-val">Age 25</span><span class="faq-stat-lbl">₹1L → ₹57L by 60 (12%)</span></div><div class="faq-stat"><span class="faq-stat-val">Age 35</span><span class="faq-stat-lbl">₹1L → ₹18.4L by 60</span></div><div class="faq-stat"><span class="faq-stat-val">3×</span><span class="faq-stat-lbl">Less wealth by waiting</span></div></div>`},
+  {q:"How fast does inflation erode savings?",a:`<span class="faq-lead">At 6% inflation: purchasing power halves in 12 years. Money in a savings account (3.5%) is still losing real value — just slower.</span>`},
+  {q:"Can Rule of 72 be applied to GDP growth?",a:`<span class="faq-lead">Yes — widely used in economics. India at 7% GDP growth: economy doubles in about 10 years, explaining India's superior equity market returns over long periods.</span>`},
+  {q:"Rule of 72 for monthly rates?",a:`<span class="faq-lead">For monthly rates: 72 ÷ monthly rate = months to double. Credit card at 3%/month: 72 ÷ 3 = 24 months = 2 years for debt to double!</span>`},
+  {q:"How to use Rule of 72 for retirement planning?",a:`<span class="faq-lead">Count how many doublings your investment gets before retirement. Each doubling cycle missed by starting late halves your final wealth.</span><div class="faq-note">Age 30, retire at 60, 12% CAGR: 5 doublings. ₹1L today → ₹32L. Age 40: Only 3.3 doublings → ₹10L. Start early!</div>`},
+  {q:"What is the Rule of 69 vs Rule of 70 vs Rule of 72?",a:`<span class="faq-lead">All are approximations of ln(2) = 69.3. Rule of 72 is most practical for mental math due to more divisors. Rule of 69.3 is most mathematically accurate.</span><div class="faq-chips"><span class="faq-chip gr">Rule of 72: Best for mental math</span><span class="faq-chip pu">Rule of 70: Good compromise</span><span class="faq-chip bl">Rule of 69.3: Most accurate</span></div>`},
+  {q:"Rule of 72 for very high returns (crypto)?",a:`<span class="faq-lead">Rule of 72 works mathematically at any rate, but error increases. At 50%: Rule gives 1.44 years, exact is 1.71 years (18% error). More importantly: very high returns come with very high failure rates.</span><div class="faq-note">Survivorship bias makes crypto historical returns misleading — you only hear about the winners, not the thousands of failed projects.</div>`}
+];
+buildFAQ(R72_FAQS);
+
+
+function resetCalc(){setVal('r72rate',12);setVal('r72amt',100000);calculate(false);}
+const SECTIONS=['calculator','reverse','infographics','guide','tips','faq'];
+if('IntersectionObserver' in window){let lastId='calculator';const obs=new IntersectionObserver(entries=>{const vis=entries.filter(e=>e.isIntersecting);if(vis.length){vis.sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top);const id=vis[0].target.id;if(id&&SECTIONS.includes(id)&&id!==lastId){lastId=id;syncNav(id);}}},{rootMargin:'-15% 0px -55% 0px',threshold:0});SECTIONS.forEach(id=>{const el=document.getElementById(id);if(el)obs.observe(el);});}
+initSliders();['r72rate','r72amt','r72yrs','r72amt2'].forEach(id=>{const el=document.getElementById(id+'-disp'),n=document.getElementById(id+'-n');if(el&&n)el.textContent=formatDisp(id,n.value);});
+buildQuickTable();calcReverse();calculate(false);
+
+/* ── Demat Modal Functions ── */
+window.dematOpen = function() {
+  var o = document.getElementById('demat-overlay');
+  if (!o) return;
+  var sy = window.pageYOffset || 0;
+  document.body.style.top = '-' + sy + 'px';
+  document.body.classList.add('modal-open');
+  o.classList.add('open');
+  var fs = document.getElementById('form-section'), ss = document.getElementById('success-section');
+  if (fs) fs.style.display = 'block';
+  if (ss) ss.style.display = 'none';
+  ['name','email','mobile'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.value = '';
+  });
+  var at = document.getElementById('accountType'); if (at) at.value = 'individual';
+  var br = document.getElementById('broker'); if (br) br.value = '';
+  ['name','email','mobile','accountType','broker'].forEach(function(id) {
+    var e = document.getElementById('err-' + id); if (e) e.textContent = '';
+    var i = document.getElementById(id); if (i) i.classList.remove('error');
+  });
+  setTimeout(function() { var n = document.getElementById('name'); if (n) n.focus(); }, 140);
+};
+window.dematClose = function() {
+  var o = document.getElementById('demat-overlay');
+  if (!o) return;
+  var sy = Math.abs(parseInt(document.body.style.top || '0'));
+  o.classList.remove('open');
+  document.body.classList.remove('modal-open');
+  document.body.style.top = '';
+  window.scrollTo({ top: sy, behavior: 'instant' });
+};
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') window.dematClose();
+});
+</script>
+
+
+<!-- DEMAT MODAL -->
+<div id="demat-overlay" role="dialog" aria-modal="true" aria-label="Open Demat Account">
+  <div id="demat-inner">
+    <button id="demat-close" onclick="dematClose()" aria-label="Close">&#10005;</button>
+<div class="page">
+  <div class="deco deco-1"></div>
+  <div class="deco deco-2"></div>
+  <div class="deco deco-3"></div>
+
+  <div class="card" role="main">
+
+    <!-- Accent bar -->
+    <div class="accent-bar"></div>
+
+    <!-- ── Header ── -->
+    <div class="card-header">
+      <div class="header-top">
+        <div class="logo-icon" aria-hidden="true">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+            <rect x="3" y="6" width="18" height="13" rx="2" stroke="white" stroke-width="1.8"/>
+            <path d="M3 10h18" stroke="white" stroke-width="1.8"/>
+            <circle cx="7.5" cy="15" r="1.1" fill="white"/>
+            <circle cx="11" cy="15" r="1.1" fill="rgba(255,255,255,0.5)"/>
+          </svg>
+        </div>
+        <span class="header-label">Demat Account</span>
+      </div>
+
+      <h1 class="card-title">Open Your <span class="title-highlight">Demat Account</span></h1>
+      <p class="card-desc">Start investing smarter. Fill in your details and we'll get back to you within 24 hours.</p>
+
+      <div class="trust-pills">
+        <span class="pill">
+          <svg width="11" height="11" fill="none" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Zero Account Opening Fee
+        </span>
+        <span class="pill">
+          <svg width="11" height="11" fill="none" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          SEBI Registered
+        </span>
+        <span class="pill">
+          <svg width="11" height="11" fill="none" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Instant e-KYC
+        </span>
+      </div>
+    </div>
+
+    <!-- ── Body ── -->
+    <div class="card-body">
+
+      <div id="form-section">
+
+        <!-- Name -->
+        <div class="field">
+          <label for="name">Full Name <span class="req">*</span></label>
+          <input type="text" id="name" placeholder="e.g. Rahul Sharma" autocomplete="name" />
+          <p class="error-msg" id="err-name" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Email -->
+        <div class="field">
+          <label for="email">Email Address <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="e.g. rahul@example.com" autocomplete="email" />
+          <p class="error-msg" id="err-email" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Mobile -->
+        <div class="field">
+          <label for="mobile">Mobile Number <span class="req">*</span></label>
+          <div class="input-wrap">
+            <span class="prefix" aria-hidden="true">+91</span>
+            <input type="tel" id="mobile" placeholder="98765 43210" maxlength="10"
+                   class="has-prefix" autocomplete="tel" inputmode="numeric" />
+          </div>
+          <p class="error-msg" id="err-mobile" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Account Type -->
+        <div class="field">
+          <label for="accountType">Type of Account <span class="req">*</span></label>
+          <div class="input-wrap">
+            <select id="accountType" aria-required="true">
+              <option value="individual" selected>Individual</option>
+              <option value="huf">HUF (Hindu Undivided Family)</option>
+              <option value="nri">NRI (Non-Resident Indian)</option>
+              <option value="corporate">Corporate</option>
+              <option value="partnership">Partnership Firm</option>
+              <option value="llp">LLP (Limited Liability Partnership)</option>
+            </select>
+            <svg class="select-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="error-msg" id="err-accountType" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Preferred Broker -->
+        <div class="field">
+          <label for="broker">Preferred Broker <span class="req">*</span></label>
+          <div class="input-wrap">
+            <select id="broker" aria-required="true">
+              <option value="" disabled selected>— Select a broker —</option>
+              <optgroup label="🔥 Discount Brokers">
+                <option value="Groww">Groww</option>
+                <option value="Zerodha">Zerodha</option>
+                <option value="Angel One">Angel One</option>
+                <option value="Upstox">Upstox</option>
+                <option value="Dhan">Dhan</option>
+                <option value="Alice Blue">Alice Blue</option>
+                <option value="Paytm Money">Paytm Money</option>
+                <option value="FYERS">FYERS</option>
+                <option value="5paisa">5paisa</option>
+                <option value="SAMCO">SAMCO</option>
+                <option value="Shoonya (Finvasia)">Shoonya (Finvasia)</option>
+                <option value="Bajaj Broking">Bajaj Broking</option>
+                <option value="mStock by Mirae">mStock by Mirae</option>
+              </optgroup>
+              <optgroup label="🏦 Full-Service Brokers">
+                <option value="ICICI Direct">ICICI Direct</option>
+                <option value="HDFC Securities">HDFC Securities</option>
+                <option value="Kotak Securities">Kotak Securities</option>
+                <option value="Motilal Oswal">Motilal Oswal</option>
+                <option value="SBI Securities">SBI Securities</option>
+                <option value="Mirae Sharekhan">Mirae Sharekhan</option>
+                <option value="IIFL Securities">IIFL Securities</option>
+                <option value="Axis Direct">Axis Direct</option>
+                <option value="Geojit Financial">Geojit Financial</option>
+                <option value="Nuvama Wealth">Nuvama Wealth</option>
+                <option value="Choice Broking">Choice Broking</option>
+                <option value="JM Financial">JM Financial</option>
+              </optgroup>
+            </select>
+            <svg class="select-arrow" width="18" height="18" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="error-msg" id="err-broker" role="alert" aria-live="polite"></p>
+        </div>
+
+        <!-- Submit -->
+        <button class="btn-submit" id="submitBtn" type="button">
+          Submit Application
+          <svg width="17" height="17" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <p class="security-note">🔒 256-bit encrypted &amp; secure submission</p>
+      </div>
+
+      <!-- Success state -->
+      <div class="success" id="success-section" aria-live="polite">
+        <div class="success-ring" aria-hidden="true">
+          <svg width="34" height="34" fill="none" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2>Application Received!</h2>
+        <p id="success-msg"></p>
+        <button class="btn-reset" id="resetBtn" type="button">Submit Another</button>
+      </div>
+
+    </div><!-- /card-body -->
+
+    <!-- ── Footer ── -->
+    <div class="card-footer">
+      <span class="footer-sebi">SEBI Registered Broker</span>
+      <div class="footer-exchanges">
+        <span>NSE</span>
+        <span>BSE</span>
+        <span>MCX</span>
+      </div>
+    </div>
+
+  </div><!-- /card -->
+</div><!-- /page -->
+  </div>
+</div>
+
+</body>
+</html>

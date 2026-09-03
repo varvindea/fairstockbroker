@@ -1,0 +1,3574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#6c3de4" media="(prefers-color-scheme: light)"/>
+<meta name="theme-color" content="#4c1d95" media="(prefers-color-scheme: dark)"/>
+<meta name="format-detection" content="telephone=no,date=no,address=no,email=no"/>
+<meta name="HandheldFriendly" content="true"/>
+<meta name="MobileOptimized" content="width"/>
+<meta name="color-scheme" content="light"/>
+<meta name="description" content="India's most complete financial calculator hub — SIP, EMI, Tax, Insurance & Retirement tools for Indian investors. FY 2026–27 updated."/>
+<title>Financial Calculators — Mission Wealth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{
+  /* ── Purple scale (Primary) ── */
+  --p950:#0a021e;--p900:#150438;--p800:#21085a;
+  --p700:#331280;--p600:#4c1eb0;--p500:#6c3de4;
+  --p400:#8f65f0;--p300:#bda3f8;--p200:#ddd0fc;
+  --p150:#ece5fd;--p100:#f4f0fe;--p50:#faf8ff;
+  /* ── Green scale ── */
+  --g700:#0f5c30;--g600:#157a3e;--g500:#1ea851;
+  --g400:#3dc96e;--g300:#79dfa0;--g200:#b8f0cf;
+  --g100:#e0f8eb;--g50:#f3fdf6;
+  /* ── Accent ── */
+  --amber:#c47c10;--amber-bg:#fffaec;--amber-border:#f9d98a;
+  --red:#e03c3c;--red-bg:#fff0f0;--red-border:#fbc8c8;
+  --blue:#2563eb;--blue-bg:#eff6ff;--blue-border:#bfdbfe;
+  --teal:#0d9488;--teal-bg:#f0fdfa;--teal-border:#99f6e4;
+  --orange:#ea580c;--orange-bg:#fff7ed;--orange-border:#fed7aa;
+  --fuchsia:#a21caf;--fuchsia-bg:#fdf2ff;--fuchsia-border:#f5d0fe;
+  /* ── Ink / Surface ── */
+  --ink:#100428;--ink2:#32205a;--ink3:#7b6598;--ink4:#b8a8d4;
+  --white:#fff;--surf1:#faf8ff;--surf2:#f4f0fe;--surf3:#ece5fd;
+  --border:#e0d8f8;--border2:#cfc3f2;
+  /* ── Shadows ── */
+  --sh1:0 1px 6px rgba(108,61,228,.07);
+  --sh2:0 4px 20px rgba(108,61,228,.11);
+  --sh3:0 12px 44px rgba(108,61,228,.16);
+  --sh4:0 24px 72px rgba(108,61,228,.22);
+  --r:14px;
+}
+
+/* ── Hero upgrades from SWP reference ── */
+.hero{
+  background:#faf8ff;
+  position:relative;overflow:hidden;
+  padding:64px 0 56px;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(224,216,248,.5) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(224,216,248,.5) 1px,transparent 1px);
+  background-size:44px 44px;
+  pointer-events:none;z-index:0;
+}
+.hero::after{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:600px;height:600px;
+  background:radial-gradient(ellipse,rgba(108,61,228,.09),transparent 65%);
+  pointer-events:none;z-index:0;
+}
+.hero-deco{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hero-deco::before{
+  content:'';position:absolute;bottom:-80px;left:-60px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(30,168,81,.055),transparent 65%);
+}
+.hero-deco::after{
+  content:'';position:absolute;top:28%;right:28%;
+  width:280px;height:280px;border-radius:50%;
+  border:1px solid rgba(108,61,228,.08);
+  animation:floatBob 8s ease-in-out infinite;
+}
+@keyframes floatBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes pulseDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.7);opacity:.6}}
+
+.hero .container{position:relative;z-index:2}
+.hero-grid{
+  display:grid;grid-template-columns:1.1fr 1fr;
+  gap:48px;align-items:center;
+}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:32px}}
+
+/* Badge */
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 14px 5px 8px;
+  background:#fff;border:1.5px solid var(--border2);
+  border-radius:100px;margin-bottom:20px;
+  font-size:11.5px;font-weight:700;color:var(--p600);
+  box-shadow:0 1px 6px rgba(108,61,228,.08);
+  animation:fadeUp .5s ease both;
+}
+.hero-badge span{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--g500);display:inline-block;
+  animation:pulseDot 1.6s ease infinite;flex-shrink:0;
+}
+
+/* H1 */
+.hero h1{
+  font-size:clamp(30px,4.5vw,56px);font-weight:900;
+  color:var(--ink);letter-spacing:-2px;line-height:1.07;
+  margin-bottom:18px;
+  animation:fadeUp .55s .06s ease both;
+}
+.hero-hl{
+  background:linear-gradient(90deg,var(--p500),var(--p400),var(--g500));
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:gradShift 4s ease infinite;
+}
+
+/* Sub text */
+.hero-sub,.hero-desc{
+  font-size:clamp(14px,1.6vw,16.5px);color:var(--ink3);
+  line-height:1.75;margin-bottom:28px;max-width:520px;
+  animation:fadeUp .55s .12s ease both;
+}
+
+/* CTA buttons */
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .55s .18s ease both}
+.btn-primary{
+  padding:13px 28px;border-radius:12px;font-size:15px;font-weight:700;
+  color:#fff;background:linear-gradient(135deg,var(--p500),var(--p700));
+  box-shadow:0 8px 26px rgba(108,61,228,.38);
+  transition:.22s;display:inline-flex;align-items:center;gap:8px;
+  border:none;cursor:pointer;font-family:inherit;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(108,61,228,.48)}
+.btn-secondary{
+  padding:12px 24px;border-radius:12px;font-size:15px;font-weight:700;
+  color:var(--g700);background:var(--g50);
+  border:1.5px solid var(--g200);transition:.22s;
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+  font-family:inherit;
+}
+.btn-secondary:hover{background:var(--g100);border-color:var(--g400)}
+
+/* Panel */
+.hero-panel{
+  background:rgba(255,255,255,0.82);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1.5px solid rgba(255,255,255,.9);
+  border-radius:22px;padding:22px;
+  box-shadow:0 8px 40px rgba(108,61,228,.12),0 2px 8px rgba(108,61,228,.06);
+  position:relative;z-index:1;overflow:hidden;
+  animation:fadeUp .6s .22s ease both;
+}
+.hero-panel::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#7c3aed,#8b5cf6,#10b981);
+  border-radius:22px 22px 0 0;
+}
+.hero-panel::after{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:linear-gradient(135deg,rgba(124,58,237,.03) 0%,transparent 60%);
+  pointer-events:none;border-radius:22px;
+}
+.panel-title{
+  font-size:9.5px;font-weight:800;text-transform:uppercase;
+  letter-spacing:2.2px;color:var(--ink3);margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;position:relative;z-index:1;
+}
+.panel-title::before{
+  content:'';width:16px;height:2px;flex-shrink:0;border-radius:2px;
+  background:linear-gradient(90deg,var(--p500),var(--g500));
+}
+
+/* Stats grid */
+.hero-stats,.hstat-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:9px;margin-bottom:13px;
+}
+.hstat{
+  border-radius:13px;padding:13px 14px;
+  text-align:left;cursor:default;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s;
+  overflow:hidden;position:relative;
+  display:flex;align-items:center;gap:10px;
+}
+.hstat::before{
+  content:'';position:absolute;
+  top:0;left:-75%;width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+  transform:skewX(-20deg);transition:left .5s ease;pointer-events:none;
+}
+.hstat:hover::before{left:130%}
+.hstat::after{
+  content:'';position:absolute;top:-20px;right:-20px;
+  width:70px;height:70px;border-radius:50%;
+  background:rgba(255,255,255,.1);pointer-events:none;
+}
+.hstat:hover{transform:translateY(-3px) scale(1.02)}
+.hstat-icon,.hstat-icon-wrap{
+  width:36px;height:36px;min-width:36px;border-radius:10px;
+  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;position:relative;z-index:1;flex-shrink:0;
+}
+.hstat-text{position:relative;z-index:1;min-width:0}
+.hstat-num{
+  font-size:19px;font-weight:900;color:#fff;
+  display:block;line-height:1;letter-spacing:-0.8px;
+  text-shadow:0 1px 6px rgba(0,0,0,.15);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.hstat-lbl{
+  font-size:8.5px;font-weight:700;color:rgba(255,255,255,.78);
+  text-transform:uppercase;letter-spacing:.9px;
+  display:block;margin-top:3px;white-space:nowrap;
+}
+.hstat-purple{
+  background:linear-gradient(135deg,#5b21b6 0%,#7c3aed 60%,#8b5cf6 100%);
+  box-shadow:0 6px 20px rgba(91,33,182,.45),inset 0 1px 0 rgba(255,255,255,.2);
+}
+.hstat-green{
+  background:linear-gradient(135deg,#065f46 0%,#059669 60%,#10b981 100%);
+  box-shadow:0 6px 20px rgba(6,95,70,.45),inset 0 1px 0 rgba(255,255,255,.2);
+}
+.hstat-amber{
+  background:linear-gradient(135deg,#92400e 0%,#d97706 60%,#f59e0b 100%);
+  box-shadow:0 6px 20px rgba(146,64,14,.45),inset 0 1px 0 rgba(255,255,255,.2);
+}
+.hstat-blue{
+  background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#3b82f6 100%);
+  box-shadow:0 6px 20px rgba(30,58,138,.45),inset 0 1px 0 rgba(255,255,255,.2);
+}
+
+/* Minichart cards */
+.hero-minicharts{display:flex;flex-direction:column;gap:7px;position:relative;z-index:1}
+.minichart-card{
+  background:var(--surf1);border-radius:12px;padding:10px 13px;
+  border:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+  transition:background .18s,border-color .18s,transform .18s;cursor:default;
+}
+.minichart-card:hover{background:#fff;border-color:var(--border2);transform:translateX(3px)}
+.mc-icon{
+  width:34px;height:34px;min-width:34px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;border:1px solid rgba(0,0,0,.06);
+}
+.mc-body{flex:1;min-width:0}
+.mc-label{font-size:10px;font-weight:600;color:var(--ink3);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mc-val{font-size:15px;font-weight:900;color:var(--ink);letter-spacing:-.4px;line-height:1}
+.mc-badge{
+  margin-left:auto;flex-shrink:0;
+  padding:3px 9px;border-radius:100px;
+  font-size:10px;font-weight:800;white-space:nowrap;letter-spacing:.2px;
+}
+
+/* Responsive */
+@media(max-width:640px){
+  .hero{padding:36px 0 28px}
+  .hero-stats,.hstat-grid{gap:7px}
+  .hstat{padding:10px 11px;gap:8px}
+  .hstat-num{font-size:17px}
+  .hstat-lbl{font-size:7.5px}
+  .hstat-icon,.hstat-icon-wrap{width:30px;height:30px;min-width:30px;font-size:14px;border-radius:8px}
+}
+@media(max-width:480px){
+  .hero{padding:24px 0 20px}
+  .hero h1{font-size:clamp(24px,8vw,36px);letter-spacing:-1px}
+  .hero-sub,.hero-desc{font-size:13.5px;margin-bottom:18px}
+  .hero-ctas{gap:8px}
+  .btn-primary,.btn-secondary{padding:11px 18px;font-size:14px}
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'DM Sans',sans-serif;background:var(--surf1);color:var(--ink);line-height:1.6;font-size:14px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ══════════════════════════════════
+   HERO — FSB Design System
+══════════════════════════════════ */
+to{opacity:1;transform:translateY(0)}}
+50%{background-position:100% 50%}100%{background-position:0% 50%}}
+50%{transform:translateY(-8px)}}
+50%{transform:scale(1.5);opacity:.5}}
+50%{opacity:.3}}
+
+
+/* Grid texture */
+
+/* Radial purple glow */
+
+
+
+
+
+/* ── Top Nav ── */
+.hero-topbar{
+  display:flex;align-items:center;justify-content:flex-end;
+  position:relative;z-index:2;margin-bottom:48px;
+}
+.brand{display:flex;align-items:center;gap:11px}
+.brand-mark{
+  width:42px;height:42px;border-radius:12px;
+  background:linear-gradient(135deg,var(--p800),var(--p500));
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+  box-shadow:0 4px 14px rgba(108,61,228,.35);flex-shrink:0;
+}
+.brand-text{font-size:13px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--p900);line-height:1}
+.brand-sub{font-size:11px;color:var(--ink3);margin-top:2px}
+.hero-topnav{display:flex;align-items:center;gap:8px}
+.topnav-link{font-size:12.5px;font-weight:600;color:var(--ink3);padding:6px 14px;border-radius:8px;transition:.18s}
+.topnav-link:hover{color:var(--p500);background:var(--p50)}
+.topnav-cta{
+  font-size:12.5px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,var(--p500),var(--p700));
+  padding:8px 18px;border-radius:10px;
+  box-shadow:0 4px 14px rgba(108,61,228,.3);transition:.2s;
+}
+.topnav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(108,61,228,.4)}
+@media(max-width:640px){.hero-topnav{display:none}}
+
+/* ── Hero Grid ── */
+.hero-grid{
+  display:grid;grid-template-columns:1.15fr 1fr;gap:56px;
+  align-items:center;position:relative;z-index:1;
+}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:36px}}
+
+/* ── Hero Badge ── */
+
+
+
+/* ── H1 ── */
+.hero h1{
+  font-size:clamp(32px,4.5vw,62px);font-weight:900;
+  color:var(--ink);letter-spacing:-2.5px;line-height:1.06;
+  margin-bottom:20px;
+  animation:fadeUp .6s .08s ease both;
+}
+@media(max-width:768px){.hero h1{font-size:clamp(28px,7vw,46px);letter-spacing:-1.6px}}
+@media(max-width:480px){.hero h1{font-size:clamp(24px,8vw,36px);letter-spacing:-1px}}
+.hero h1 .hl{
+  background:linear-gradient(90deg,var(--p500),var(--p400),var(--g500));
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:gradShift 4s ease infinite;
+}
+
+
+@media(max-width:768px){}
+
+/* ── CTA buttons ── */
+
+
+
+
+
+
+/* ── Hero Stats Panel ── */
+
+
+
+
+
+
+/* Stats 2×2 grid */
+
+
+@media(hover:hover){}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Mini visual cards below stats */
+
+
+
+
+
+
+
+/* ══ TICKER ══ */
+.ticker{
+  background:var(--p900);padding:9px 0;overflow:hidden;
+  border-top:1px solid rgba(143,101,240,.2);
+  border-bottom:1px solid rgba(143,101,240,.2);
+}
+.ticker-track{display:flex;gap:56px;white-space:nowrap;animation:scrollX 35s linear infinite}
+.ticker-item{font-size:11px;font-weight:600;color:rgba(255,255,255,.8);display:inline-flex;align-items:center;gap:8px;flex-shrink:0}
+.ticker-item b{color:var(--p300)}
+.ticker-sep{color:rgba(255,255,255,.18)}
+@keyframes scrollX{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ══ INFOGRAPHIC STRIP ══ */
+.info-strip{padding:48px 0 40px;background:var(--white);border-bottom:1px solid var(--border)}
+.info-strip-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media(max-width:860px){.info-strip-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.info-strip-grid{grid-template-columns:1fr 1fr}}
+.infotile{
+  border-radius:18px;padding:22px 20px;position:relative;overflow:hidden;
+  transition:transform .25s,box-shadow .25s;
+}
+@media(hover:hover){.infotile:hover{transform:translateY(-4px);box-shadow:var(--sh3)}}
+.infotile.purple{background:linear-gradient(145deg,var(--p600),var(--p400));border:none;box-shadow:0 8px 32px rgba(108,61,228,.35)}
+.infotile.green{background:linear-gradient(145deg,var(--g700),var(--g400));border:none;box-shadow:0 8px 32px rgba(30,168,81,.35)}
+.infotile.amber{background:linear-gradient(145deg,#b45309,#f59e0b);border:none;box-shadow:0 8px 32px rgba(196,124,16,.35)}
+.infotile.blue{background:linear-gradient(145deg,#1d4ed8,#38bdf8);border:none;box-shadow:0 8px 32px rgba(37,99,235,.35)}
+.it-emoji{font-size:32px;margin-bottom:12px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.2))}
+.it-val{font-size:28px;font-weight:900;line-height:1;letter-spacing:-1px;margin-bottom:4px}
+.infotile.purple .it-val{color:#fff}
+.infotile.green .it-val{color:#fff}
+.infotile.amber .it-val{color:#fff}
+.infotile.blue .it-val{color:#fff}
+.it-label{font-size:12px;font-weight:700;color:rgba(255,255,255,.95)}
+.it-sub{font-size:11px;color:rgba(255,255,255,.7);margin-top:3px}
+/* Mini bar indicator */
+.it-bar{height:5px;border-radius:3px;margin-top:14px;background:rgba(255,255,255,.25);overflow:hidden}
+.it-bar-fill{height:100%;border-radius:3px}
+.infotile.purple .it-bar-fill{background:rgba(255,255,255,.7)}
+.infotile.green .it-bar-fill{background:rgba(255,255,255,.7)}
+.infotile.amber .it-bar-fill{background:rgba(255,255,255,.7)}
+.infotile.blue .it-bar-fill{background:rgba(255,255,255,.7)}
+
+/* ══ STICKY NAV ══ */
+.sticky-nav{
+  background:rgba(250,248,255,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);position:sticky;top:0;z-index:500;
+}
+.nav-inner{max-width:1240px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:12px;flex-wrap:nowrap}
+.search-wrap{
+  flex-shrink:0;display:flex;align-items:center;gap:8px;
+  background:var(--white);border:1.5px solid var(--border2);
+  border-radius:12px;padding:9px 14px;min-width:180px;max-width:260px;
+  transition:border-color .2s,box-shadow .2s;
+}
+.search-wrap:focus-within{border-color:var(--p400);box-shadow:0 0 0 3px rgba(108,61,228,.1)}
+.search-wrap svg{flex-shrink:0;color:var(--ink4)}
+.search-input{border:none;background:transparent;outline:none;font-size:13.5px;font-weight:500;color:var(--ink);width:100%;min-width:0;font-family:'DM Sans',sans-serif}
+.search-input::placeholder{color:var(--ink4)}
+.filter-scroll{flex:1;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.filter-scroll::-webkit-scrollbar{display:none}
+.ftab{
+  flex-shrink:0;padding:7px 15px;border-radius:100px;
+  border:1.5px solid var(--border);background:var(--white);
+  font-size:12.5px;font-weight:600;color:var(--ink3);
+  transition:all .18s;white-space:nowrap;display:flex;align-items:center;gap:5px;
+  cursor:pointer;font-family:'DM Sans',sans-serif;
+}
+.ftab:hover{border-color:var(--p300);color:var(--p600);background:var(--p50)}
+.ftab.on{background:var(--p500);border-color:var(--p500);color:#fff;box-shadow:0 2px 10px rgba(108,61,228,.3)}
+@media(max-width:480px){
+  .search-wrap{min-width:120px;max-width:150px;padding:8px 10px}
+  .ftab{padding:6px 10px;font-size:11.5px}
+}
+
+/* ══ MAIN GRID ══ */
+.page{max-width:1240px;margin:0 auto;padding:36px 24px 100px}
+@media(max-width:600px){.page{padding:20px 14px 80px}}
+
+/* ══ CATEGORY ══ */
+.cat-section{margin-bottom:52px;animation:fadeUp .45s ease both}
+.cat-section:nth-child(1){animation-delay:.05s}
+.cat-section:nth-child(2){animation-delay:.1s}
+.cat-section:nth-child(3){animation-delay:.15s}
+.cat-section:nth-child(4){animation-delay:.2s}
+.cat-section:nth-child(5){animation-delay:.25s}
+.cat-section:nth-child(6){animation-delay:.3s}
+to{opacity:1;transform:translateY(0)}}
+.cat-section.hidden-cat{display:none}
+
+.cat-header{
+  display:flex;align-items:center;gap:16px;margin-bottom:22px;
+  padding:18px 20px;border-radius:16px;
+  position:relative;overflow:hidden;
+}
+/* Category header backgrounds */
+.cat--invest .cat-header{background:linear-gradient(135deg,var(--p600),var(--p400));border:none;box-shadow:0 6px 24px rgba(108,61,228,.3)}
+.cat--loans  .cat-header{background:linear-gradient(135deg,#c2410c,#fb923c);border:none;box-shadow:0 6px 24px rgba(234,88,12,.3)}
+.cat--tax    .cat-header{background:linear-gradient(135deg,var(--g700),var(--g400));border:none;box-shadow:0 6px 24px rgba(30,168,81,.3)}
+.cat--insur  .cat-header{background:linear-gradient(135deg,#1d4ed8,#38bdf8);border:none;box-shadow:0 6px 24px rgba(37,99,235,.3)}
+.cat--retire .cat-header{background:linear-gradient(135deg,#86198f,#e879f9);border:none;box-shadow:0 6px 24px rgba(162,28,175,.3)}
+.cat--personal .cat-header{background:linear-gradient(135deg,#0f766e,#2dd4bf);border:none;box-shadow:0 6px 24px rgba(13,148,136,.3)}
+
+.cat-icon-wrap{
+  width:52px;height:52px;border-radius:15px;
+  display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;
+}
+.cat--invest .cat-icon-wrap{background:rgba(255,255,255,.2);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.cat--loans  .cat-icon-wrap{background:rgba(255,255,255,.2);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.cat--tax    .cat-icon-wrap{background:rgba(255,255,255,.2);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.cat--insur  .cat-icon-wrap{background:rgba(255,255,255,.2);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.cat--retire .cat-icon-wrap{background:rgba(255,255,255,.2);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.cat--personal .cat-icon-wrap{background:rgba(255,255,255,.2);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+
+.cat-text{flex:1}
+.cat-name{font-size:clamp(15px,2.2vw,19px);font-weight:800;color:#fff;line-height:1.2}
+.cat-desc{font-size:12px;color:rgba(255,255,255,.8);margin-top:2px}
+.cat-badge{
+  flex-shrink:0;padding:5px 14px;border-radius:100px;font-size:11px;font-weight:800;
+  letter-spacing:.3px;
+}
+.cat--invest .cat-badge{background:rgba(255,255,255,.22);color:#fff}
+.cat--loans  .cat-badge{background:rgba(255,255,255,.22);color:#fff}
+.cat--tax    .cat-badge{background:rgba(255,255,255,.22);color:#fff}
+.cat--insur  .cat-badge{background:rgba(255,255,255,.22);color:#fff}
+.cat--retire .cat-badge{background:rgba(255,255,255,.22);color:#fff}
+.cat--personal .cat-badge{background:rgba(255,255,255,.22);color:#fff}
+
+/* ══ CARDS GRID ══ */
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.cards-grid{grid-template-columns:repeat(2,1fr);gap:12px}}
+@media(max-width:480px){.cards-grid{grid-template-columns:1fr;gap:10px}}
+
+/* ══ CALCULATOR CARD ══ */
+.calc-card{
+  background:var(--white);
+  border-radius:18px;
+  border:1.5px solid var(--border);
+  box-shadow:var(--sh1);
+  cursor:pointer;overflow:hidden;
+  display:flex;flex-direction:column;
+  position:relative;
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,border-color .2s;
+  -webkit-user-select:none;user-select:none;
+  min-height:190px;
+}
+.calc-card:hover{transform:translateY(-5px) scale(1.01);box-shadow:var(--sh3)}
+.calc-card:active{transform:translateY(-2px)}
+/* Colored top accent */
+.calc-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .22s}
+.calc-card:hover::after{opacity:1}
+.cat--invest .calc-card::after{background:linear-gradient(90deg,var(--p500),var(--p400))}
+.cat--loans  .calc-card::after{background:linear-gradient(90deg,var(--orange),#fbbf24)}
+.cat--tax    .calc-card::after{background:linear-gradient(90deg,var(--g600),var(--g400))}
+.cat--insur  .calc-card::after{background:linear-gradient(90deg,var(--blue),#60a5fa)}
+.cat--retire .calc-card::after{background:linear-gradient(90deg,var(--fuchsia),#e879f9)}
+.cat--personal .calc-card::after{background:linear-gradient(90deg,var(--teal),var(--g500))}
+
+.card-body{padding:18px 18px 0;display:flex;flex-direction:column;flex:1}
+.card-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;margin-bottom:10px;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1);
+}
+.calc-card:hover .card-icon{transform:scale(1.12) rotate(-4deg)}
+.cat--invest .card-icon{background:var(--p50);border:1.5px solid var(--p200)}
+.cat--loans  .card-icon{background:var(--orange-bg);border:1.5px solid var(--orange-border)}
+.cat--tax    .card-icon{background:var(--g50);border:1.5px solid var(--g200)}
+.cat--insur  .card-icon{background:var(--blue-bg);border:1.5px solid var(--blue-border)}
+.cat--retire .card-icon{background:var(--fuchsia-bg);border:1.5px solid var(--fuchsia-border)}
+.cat--personal .card-icon{background:var(--teal-bg);border:1.5px solid var(--teal-border)}
+
+.card-pill{
+  display:inline-flex;align-items:center;gap:5px;padding:3px 10px;
+  border-radius:100px;font-size:10px;font-weight:700;letter-spacing:.3px;
+  margin-bottom:9px;width:fit-content;
+}
+.pill--hot{background:#fff0f0;color:#dc2626}
+.pill--star{background:var(--g100);color:var(--g700)}
+.pill--new{background:var(--p100);color:var(--p700)}
+.pill--fy{background:var(--amber-bg);color:var(--amber)}
+
+.card-title{font-size:14px;font-weight:800;color:var(--ink);line-height:1.25;margin-bottom:6px}
+.card-desc{font-size:11.5px;color:var(--ink3);line-height:1.7;flex:1}
+.card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.ctag{padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600;color:var(--ink3);background:var(--surf2)}
+
+.card-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 18px 16px;margin-top:10px;
+  border-top:1px solid var(--border);
+}
+.card-cta{font-size:12.5px;font-weight:700;color:var(--p500);display:flex;align-items:center;gap:3px;transition:gap .18s}
+.calc-card:hover .card-cta{gap:7px}
+.btn-calc{background:none;border:none;padding:0;cursor:pointer;font-family:inherit;text-decoration:none;}
+.card-level{
+  font-size:9.5px;font-weight:700;color:var(--ink3);
+  background:var(--surf2);border:1px solid var(--border);
+  padding:3px 9px;border-radius:0 16px 0 10px;
+  position:absolute;top:0;right:0;z-index:2;
+  letter-spacing:.2px;
+}
+.card-level.lvl-inter{background:var(--amber-bg);color:var(--amber);border-color:var(--amber-border)}
+.card-level.lvl-adv{background:var(--fuchsia-bg);color:var(--fuchsia);border-color:var(--fuchsia-border)}
+.card-foot-right{display:flex;align-items:center;gap:7px}
+.btn-detail{
+  font-size:11px;font-weight:700;
+  color:var(--g700);
+  background:linear-gradient(135deg,var(--g50),var(--g100));
+  border:1.5px solid var(--g300);
+  border-radius:8px;padding:4px 12px;cursor:pointer;
+  font-family:inherit;
+  display:inline-flex;align-items:center;gap:4px;
+  transition:all .22s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 1px 4px rgba(30,168,81,.15);
+  line-height:1.5;
+  position:relative;overflow:hidden;
+}
+.btn-detail::before{
+  content:'ℹ';font-size:10px;opacity:.8;
+}
+.btn-detail:hover{
+  background:linear-gradient(135deg,var(--g400),var(--g500));
+  color:#fff;border-color:var(--g500);
+  transform:translateY(-1px) scale(1.04);
+  box-shadow:0 4px 14px rgba(30,168,81,.35);
+}
+.calc-card:hover .btn-detail{
+  background:linear-gradient(135deg,var(--g100),var(--g200));
+  border-color:var(--g400);color:var(--g700);
+}
+.detail-panel{
+  position:absolute;bottom:calc(100% + 8px);left:12px;right:12px;
+  background:var(--white);border:1.5px solid var(--border2);
+  border-radius:14px;padding:14px 16px;z-index:100;
+  box-shadow:var(--sh4);pointer-events:none;
+  opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s;
+}
+.detail-panel.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+.dp-title{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:6px;}
+.dp-desc{font-size:11.5px;color:var(--ink3);line-height:1.65;margin-bottom:10px;}
+.dp-meta{display:flex;flex-wrap:wrap;gap:5px;align-items:center;}
+.dp-level{font-size:10px;font-weight:700;color:var(--p600);background:var(--p100);padding:2px 9px;border-radius:6px;}
+.dp-tag{font-size:10px;font-weight:600;color:var(--ink3);background:var(--surf2);padding:2px 8px;border-radius:6px;}
+
+@media(max-width:520px){
+  .card-body{padding:14px 14px 0}
+  .card-foot{padding:10px 14px 14px}
+  .card-icon{width:38px;height:38px;font-size:18px;margin-bottom:8px}
+  .card-title{font-size:13px}
+  .calc-card{min-height:160px}
+}
+
+/* ══ EMPTY STATE ══ */
+.empty{text-align:center;padding:64px 20px;display:none}
+.empty.show{display:block}
+.empty-em{font-size:52px;margin-bottom:14px}
+.empty-t{font-size:18px;font-weight:800;color:var(--ink);margin-bottom:7px}
+.empty-s{font-size:13px;color:var(--ink3)}
+
+/* ══ MODAL ══ */
+.overlay{
+  position:fixed;inset:0;background:rgba(15,7,40,.55);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  z-index:900;display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.overlay.open{opacity:1;pointer-events:all}
+@media(min-width:640px){.overlay{align-items:center}}
+.modal{
+  background:var(--white);width:100%;max-width:600px;max-height:94vh;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  border-radius:24px 24px 0 0;box-shadow:var(--sh4);
+  transform:translateY(40px);opacity:0;
+  transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .3s;position:relative;
+}
+.overlay.open .modal{transform:translateY(0);opacity:1}
+@media(min-width:640px){
+  .modal{border-radius:24px;transform:scale(.94) translateY(16px);max-height:90vh}
+  .overlay.open .modal{transform:scale(1) translateY(0)}
+}
+.modal-pill{width:40px;height:4px;border-radius:2px;background:var(--border2);margin:14px auto 0;display:block}
+@media(min-width:640px){.modal-pill{display:none}}
+.modal-head{
+  display:flex;align-items:center;gap:12px;padding:18px 22px 16px;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;background:var(--white);z-index:10;
+}
+.modal-head::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--p500),var(--g500));
+}
+.modal-head-icon{
+  width:42px;height:42px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;background:var(--p100);
+}
+.modal-title{font-size:16px;font-weight:800;color:var(--ink)}
+.modal-sub{font-size:12px;color:var(--ink3);margin-top:1px}
+.modal-close{
+  margin-left:auto;width:32px;height:32px;border-radius:50%;
+  background:var(--surf2);color:var(--ink3);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:17px;
+  transition:all .18s;flex-shrink:0;font-family:'DM Sans',sans-serif;
+}
+.modal-close:hover{background:var(--border2);color:var(--ink)}
+.modal-body{padding:22px}
+@media(max-width:520px){.modal-body{padding:16px}}
+
+/* ══ CALCULATOR WIDGET ══ */
+.cw-row{margin-bottom:18px}
+.cw-lbl{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.cw-lbl-text{font-size:13px;font-weight:600;color:var(--ink2)}
+.cw-badge{
+  font-size:13px;font-weight:800;padding:2px 10px;border-radius:7px;
+  background:var(--p50);border:1.5px solid var(--p200);color:var(--p700);white-space:nowrap;
+}
+.cw-badge.g{background:var(--g50);border-color:var(--g200);color:var(--g700)}
+.cw-ctrl{display:flex;align-items:center;gap:10px}
+.cw-num{
+  width:106px;flex-shrink:0;padding:8px 10px;border:1.5px solid var(--border2);border-radius:10px;
+  font-size:13.5px;font-weight:700;color:var(--ink);outline:none;background:var(--white);
+  transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;
+  font-family:'DM Sans',sans-serif;
+}
+.cw-num:focus{border-color:var(--p400);box-shadow:0 0 0 3px rgba(108,61,228,.12)}
+.cw-num::-webkit-inner-spin-button,.cw-num::-webkit-outer-spin-button{opacity:1;height:26px}
+.cw-slider{
+  flex:1;-webkit-appearance:none;appearance:none;height:5px;border-radius:100px;
+  background:var(--border);outline:none;cursor:pointer;display:block;
+}
+.cw-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;width:22px;height:22px;border-radius:50%;
+  background:var(--white);border:3px solid var(--p500);
+  box-shadow:0 2px 8px rgba(108,61,228,.3);cursor:pointer;margin-top:-8.5px;
+  transition:transform .15s,box-shadow .15s;
+}
+.cw-slider:active::-webkit-slider-thumb{transform:scale(1.18);box-shadow:0 3px 12px rgba(108,61,228,.42)}
+.cw-slider::-moz-range-thumb{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--white);border:3px solid var(--p500);
+  box-shadow:0 2px 8px rgba(108,61,228,.3);cursor:pointer;
+}
+.cw-slider.g::-webkit-slider-thumb{border-color:var(--g500);box-shadow:0 2px 8px rgba(30,168,81,.3)}
+.cw-slider.g::-moz-range-thumb{border-color:var(--g500)}
+.cw-marks{display:flex;justify-content:space-between;padding:2px 2px 0;margin-top:6px;gap:4px}
+.cw-mark{
+  font-size:10px;color:var(--ink3);font-weight:600;
+  padding:3px 9px;border-radius:20px;border:1.5px solid var(--border);background:var(--surf1);
+  cursor:pointer;transition:all .15s;white-space:nowrap;flex:1;text-align:center;
+}
+.cw-mark:hover{border-color:var(--p300);color:var(--p600);background:var(--p50)}
+.cw-mark.active{border-color:var(--p500);color:var(--p700);background:var(--p100);font-weight:700}
+.cw-select{
+  width:100%;padding:10px 12px;border:1.5px solid var(--border2);border-radius:10px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--ink);
+  background:var(--white);-webkit-appearance:none;appearance:none;outline:none;cursor:pointer;
+  transition:border-color .2s;
+}
+.cw-select:focus{border-color:var(--p400)}
+.cw-btn{
+  width:100%;margin-top:6px;padding:14px;
+  background:linear-gradient(135deg,var(--p800),var(--p600),var(--p500));
+  color:#fff;border-radius:13px;font-size:15px;font-weight:800;border:none;cursor:pointer;
+  box-shadow:0 4px 18px rgba(108,61,228,.3);
+  transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:8px;
+  font-family:'DM Sans',sans-serif;
+}
+.cw-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(108,61,228,.42)}
+.cw-btn:active{transform:translateY(0)}
+.cw-results{
+  margin-top:18px;border-radius:16px;padding:18px;
+  background:linear-gradient(145deg,var(--p50),var(--g50));
+  border:1.5px solid var(--p200);display:none;
+  animation:popIn .35s cubic-bezier(.34,1.56,.64,1) both;
+}
+.cw-results.show{display:block}
+@keyframes popIn{from{opacity:0;transform:scale(.94) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.res-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:400px){.res-grid{grid-template-columns:1fr}}
+.res-tile{background:var(--white);border-radius:12px;border:1px solid var(--border);padding:13px;box-shadow:var(--sh1)}
+.rt-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);margin-bottom:5px}
+.rt-val{font-size:clamp(16px,3vw,22px);font-weight:900;line-height:1.1}
+.rt-val.p{color:var(--p600)}.rt-val.g{color:var(--g700)}.rt-val.a{color:var(--amber)}
+.rt-val.b{color:var(--blue)}.rt-val.r{color:var(--red)}
+.rt-sub{font-size:10.5px;color:var(--ink3);margin-top:3px}
+.res-bar-wrap{margin-top:14px}
+.res-bar-label{display:flex;justify-content:space-between;font-size:11px;font-weight:600;color:var(--ink2);margin-bottom:4px}
+.res-bar-track{height:10px;border-radius:100px;background:var(--border);overflow:hidden}
+.res-bar-fill{height:100%;border-radius:100px;transition:width 1s cubic-bezier(.4,0,.2,1)}
+.cw-disc{
+  margin-top:14px;padding:10px 13px;border-radius:10px;
+  background:var(--amber-bg);border:1px solid var(--amber-border);
+  font-size:11px;color:var(--amber);font-weight:500;line-height:1.6;
+}
+
+/* ══ DISCLAIMER SECTION ══ */
+.disclaimer-section{
+  background:linear-gradient(135deg,#0a021e 0%,#150438 50%,#1a0550 100%);
+  position:relative;overflow:hidden;
+  padding:52px 24px 48px;
+}
+.disclaimer-section::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(108,61,228,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(108,61,228,.08) 1px,transparent 1px);
+  background-size:40px 40px;pointer-events:none;
+}
+.disclaimer-section::after{
+  content:'';position:absolute;top:-120px;right:-120px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(108,61,228,.12),transparent 65%);
+  pointer-events:none;
+}
+.disc-inner{
+  max-width:900px;margin:0 auto;position:relative;z-index:1;
+}
+.disc-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,193,7,.12);border:1px solid rgba(255,193,7,.3);
+  border-radius:100px;padding:5px 14px 5px 10px;
+  font-size:11px;font-weight:700;color:#fbbf24;
+  letter-spacing:.3px;margin-bottom:20px;
+}
+.disc-badge-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:#fbbf24;flex-shrink:0;
+  box-shadow:0 0 6px rgba(251,191,36,.6);
+  animation:pulseDot 1.8s ease infinite;
+}
+.disc-heading{
+  font-size:clamp(18px,3vw,26px);font-weight:800;
+  color:#fff;letter-spacing:-.5px;margin-bottom:8px;
+}
+.disc-heading span{
+  background:linear-gradient(90deg,#fbbf24,#f59e0b);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.disc-sub{
+  font-size:13px;color:rgba(255,255,255,.45);margin-bottom:32px;line-height:1.6;
+}
+.disc-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;
+}
+@media(max-width:700px){.disc-cards{grid-template-columns:1fr;gap:10px}}
+@media(min-width:481px) and (max-width:700px){.disc-cards{grid-template-columns:1fr 1fr}}
+.disc-card{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;padding:18px 16px;
+  transition:background .2s,border-color .2s;
+}
+.disc-card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18)}
+.disc-card-icon{font-size:22px;margin-bottom:10px;display:block}
+.disc-card-title{
+  font-size:12.5px;font-weight:700;color:rgba(255,255,255,.9);
+  margin-bottom:6px;line-height:1.3;
+}
+.disc-card-text{
+  font-size:11.5px;color:rgba(255,255,255,.45);line-height:1.65;
+}
+.disc-divider{
+  border:none;border-top:1px solid rgba(255,255,255,.08);margin:24px 0;
+}
+.disc-full{
+  background:rgba(255,193,7,.07);border:1px solid rgba(255,193,7,.2);
+  border-radius:14px;padding:18px 20px;margin-bottom:24px;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.disc-full-icon{
+  font-size:20px;flex-shrink:0;margin-top:1px;
+  filter:drop-shadow(0 0 6px rgba(251,191,36,.4));
+}
+.disc-full-text{
+  font-size:12px;color:rgba(255,255,255,.55);line-height:1.75;
+}
+.disc-full-text strong{color:rgba(255,255,255,.85);font-weight:700}
+.disc-meta{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+}
+.disc-tag{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:100px;padding:4px 12px;
+  font-size:10.5px;font-weight:600;color:rgba(255,255,255,.45);
+}
+.disc-tag-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+
+/* ══ FOOTER ══ */
+.footer{
+  background:var(--p950);color:rgba(255,255,255,.5);
+  text-align:center;padding:36px 20px;font-size:12px;line-height:1.9;
+}
+.footer strong{color:rgba(255,255,255,.85)}
+.footer-links{display:flex;justify-content:center;gap:20px;margin-top:10px}
+.footer-link{color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s;font-weight:500}
+.footer-link:hover{color:rgba(255,255,255,.8)}
+.footer-brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px}
+.footer-mark{
+  width:38px;height:38px;border-radius:10px;
+  background:linear-gradient(135deg,var(--p600),var(--p400));
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+
+/* ══ SCROLL TOP ══ */
+#scrollTop{
+  position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));right:20px;
+  width:48px;height:48px;border-radius:50%;
+  background:linear-gradient(135deg,var(--p600),var(--p400));
+  color:#fff;border:none;cursor:pointer;font-size:20px;
+  box-shadow:0 4px 20px rgba(108,61,228,.4);z-index:999;
+  display:none;align-items:center;justify-content:center;
+  transition:.25s;touch-action:manipulation;
+}
+
+/* ══ CATEGORY COLORS ── */
+.orange-bg{--orange-bg:#fff7ed}
+.teal-bg{--teal-bg:#f0fdfa}
+</style>
+
+<style>
+/* ═══════════════════════════════════════════════════
+   CROSS-PLATFORM COMPATIBILITY — iOS · Android · Web
+═══════════════════════════════════════════════════ */
+
+/* ── Base Reset ── */
+*,*::before,*::after{
+  box-sizing:border-box;margin:0;padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
+html{
+  scroll-behavior:smooth;
+  -webkit-text-size-adjust:100%;
+  -ms-text-size-adjust:100%;
+  -moz-text-size-adjust:100%;
+  font-size:16px;
+  overscroll-behavior-y:none;
+  /* Prevent pull-to-refresh on Android Chrome */
+  overscroll-behavior-x:none;
+  /* Smooth scrolling on iOS */
+  -webkit-overflow-scrolling:touch;
+}
+body{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+  /* Full height on iOS Safari */
+  min-height:100vh;
+  min-height:-webkit-fill-available;
+}
+
+/* ── iOS Input Zoom Prevention (font-size must be ≥16px) ── */
+@media(max-width:767px){
+  input,select,textarea,
+  input[type="number"],
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="search"],
+  input[type="range"]{
+    font-size:16px!important;
+  }
+}
+
+/* ── Touch & Interaction ── */
+button,a,[role="button"]{
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  cursor:pointer;
+}
+
+/* ── Input / Form Base ── */
+input,select,textarea{
+  -webkit-appearance:none;
+  appearance:none;
+  border-radius:0;
+}
+input[type="range"]{
+  -webkit-appearance:none;
+  appearance:none;
+  touch-action:pan-x;
+  user-select:none;
+  -webkit-user-select:none;
+}
+button{
+  font-family:inherit;
+  -webkit-appearance:none;
+  appearance:none;
+  border:none;
+}
+
+/* ── Scrollbar Styling (WebKit & Firefox) ── */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(108,61,228,.25);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:rgba(108,61,228,.45)}
+@supports (scrollbar-width:thin){
+  *{scrollbar-width:thin;scrollbar-color:rgba(108,61,228,.25) transparent}
+}
+
+/* ── Focus Accessibility ── */
+:focus-visible{
+  outline:2px solid #7c3aed;
+  outline-offset:2px;
+}
+:focus:not(:focus-visible){outline:none}
+
+/* ── Reduced Motion ── */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+
+/* ── Safe Area (Notch / Dynamic Island / Home Indicator) ── */
+.page-wrap,.main-col,.sidebar,.hero-inner,.container{
+  padding-left:max(16px,env(safe-area-inset-left,16px));
+  padding-right:max(16px,env(safe-area-inset-right,16px));
+}
+.mobile-nav,.mobile-section-chips{
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+
+/* ── Backdrop-filter Fallback (Android WebView / older browsers) ── */
+@supports not (backdrop-filter:blur(1px)){
+  .mobile-nav{background:#fff!important}
+  .mobile-section-chips{background:#fff!important}
+  .hero-panel{background:rgba(255,255,255,.98)!important}
+}
+
+/* ── Text Selection ── */
+p,h1,h2,h3,h4,h5,h6,span,li,td,th{
+  user-select:text;
+  -webkit-user-select:text;
+}
+
+/* ── Image Rendering ── */
+img,svg{
+  max-width:100%;
+  display:block;
+  image-rendering:-webkit-optimize-contrast;
+}
+
+/* ── Tablet (641–1024px) Padding Fix ── */
+@media(min-width:641px) and (max-width:1024px){
+  .container{padding:0 max(20px,env(safe-area-inset-left,20px))}
+}
+
+/* ── Mobile Large (481–640px) ── */
+@media(max-width:640px){
+  table{font-size:12px}
+  th,td{padding:8px 10px!important}
+}
+
+/* ── iOS Safari 100vh fix ── */
+@supports(-webkit-touch-callout:none){
+  body{min-height:-webkit-fill-available}
+}
+
+/* ── Android Chrome address bar compensation ── */
+@supports(height:100dvh){
+  body{min-height:100dvh}
+  .mobile-nav{height:auto}
+}
+
+/* ── High-DPI / Retina display ── */
+@media(-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){
+  body{-webkit-font-smoothing:subpixel-antialiased}
+}
+
+/* ── Landscape Mobile ── */
+@media(max-height:500px) and (orientation:landscape){
+  .hero{padding:16px 0 14px!important}
+  .hero h1{font-size:22px!important}
+  .mobile-section-chips{display:none}
+}
+
+/* ── Windows High Contrast ── */
+@media(forced-colors:active){
+  .btn-calc,.mnav-item.active{
+    forced-color-adjust:none;
+  }
+}
+</style>
+<style id="lp-compat-patch">
+/* ── Standard breakpoint aliases ── */
+@media(min-width:1025px){
+  .lp-desktop-only{display:block}
+  .lp-mobile-only{display:none}
+}
+@media(max-width:481px){
+  input,select,textarea{font-size:16px!important} /* iOS zoom fix */
+}
+@media(max-width:360px){
+  body{font-size:14px}
+}
+/* ── Print styles ── */
+@media print{
+  nav,.mobile-nav,.cta-section{display:none!important}
+  body{background:#fff!important;color:#000!important}
+  .hero{background:#f3f4f6!important}
+  a{color:#000!important;text-decoration:underline}
+}
+</style>
+<style id="lp-mobile-chips">
+.mobile-section-chips{display:flex;gap:8px;overflow-x:auto;padding:12px 16px;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;white-space:nowrap}
+.mobile-section-chips::-webkit-scrollbar{display:none}
+</style>
+
+<style>
+/* ═══════════════════════════════════════════════════
+   CROSS-PLATFORM COMPATIBILITY — iOS · Android · Web
+═══════════════════════════════════════════════════ */
+
+/* ── Reset Hardening ── */
+html{
+  -moz-text-size-adjust:100%;
+  overscroll-behavior-x:none;
+  overscroll-behavior-y:none;
+}
+body{
+  min-height:100vh;
+  min-height:-webkit-fill-available;
+  text-rendering:optimizeLegibility;
+}
+
+/* ── iOS Safari 100vh fix ── */
+@supports(-webkit-touch-callout:none){
+  body{min-height:-webkit-fill-available}
+}
+
+/* ── Android Chrome dvh support ── */
+@supports(height:100dvh){
+  body{min-height:100dvh}
+}
+
+/* ── iOS Input Zoom Prevention (must be ≥16px) ── */
+@media(max-width:767px){
+  input,select,textarea,
+  input[type="number"],input[type="text"],
+  input[type="email"],input[type="tel"],
+  input[type="search"]{font-size:16px!important}
+}
+
+/* ── Focus Accessibility ── */
+:focus-visible{outline:2px solid #7c3aed;outline-offset:2px}
+:focus:not(:focus-visible){outline:none}
+
+/* ── Reduced Motion ── */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+
+/* ── Landscape Mobile ── */
+@media(max-height:500px) and (orientation:landscape){
+  .hero{padding:16px 0 14px!important}
+  .hero h1{font-size:22px!important}
+  .mobile-section-chips{display:none!important}
+}
+
+/* ── Windows High Contrast ── */
+@media(forced-colors:active){
+  .btn-calc,.mnav-item.active{forced-color-adjust:none}
+}
+
+/* ── Backdrop-filter Fallback (Android WebView) ── */
+@supports not (backdrop-filter:blur(1px)){
+  .mobile-nav,.mobile-section-chips{background:#fff!important}
+}
+
+/* ── Scrollbar Polish ── */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(108,61,228,.22);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:rgba(108,61,228,.42)}
+
+/* ── High-DPI Retina Antialiasing ── */
+@media(-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){
+  body{-webkit-font-smoothing:antialiased}
+}
+
+/* ── Landing page specific ── */
+@media(max-height:500px) and (orientation:landscape){
+  .hero-section,.hero{padding-top:16px!important;padding-bottom:12px!important}
+}
+@media(max-width:480px){
+  input,select,textarea{font-size:16px!important}
+}
+
+/* ═══════════════════════════════════════════════════════
+   FULL CROSS-PLATFORM RESPONSIVE — Mobile · Tablet · Web
+   iOS Safari · Android Chrome · Mobile Web · PWA
+   ═══════════════════════════════════════════════════════ */
+
+/* ── iOS Safari input zoom prevention ── */
+@media(max-width:767px){
+  input,select,textarea{font-size:16px!important;-webkit-text-size-adjust:100%}
+  input[type="range"]{height:36px;-webkit-appearance:none}
+}
+
+/* ── Formula code — mobile optimised ── */
+@media(max-width:640px){
+  .formula-box{padding:0;border-radius:0 10px 10px 0}
+  .fc-icon{width:28px;min-width:28px;font-size:11px;padding:9px 0}
+  .fc-text{padding:9px 10px;font-size:12px;line-height:1.55}
+  .fc-row.fc-slab .fc-text{font-size:11.5px}
+  .formula-title{font-size:9.5px;padding:2px 8px}
+  .formula-note{font-size:11px;padding-top:8px;margin-top:8px}
+}
+@media(max-width:360px){
+  .fc-icon{width:24px;min-width:24px;font-size:10px}
+  .fc-text{padding:8px 8px;font-size:11.5px}
+}
+
+/* ── Compare table — scroll on mobile ── */
+@media(max-width:640px){
+  .compare-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px}
+  .compare-table{min-width:480px;font-size:11.5px}
+  .compare-table th,.compare-table td{padding:8px 10px}
+}
+
+/* ── Stat tiles — 2-col on small mobile ── */
+@media(max-width:400px){
+  .stats-grid{grid-template-columns:1fr 1fr!important;gap:8px}
+  .stat-tile{padding:12px 10px}
+  .st-val{font-size:18px!important}
+  .st-label{font-size:10px}
+  .st-sub{font-size:10px}
+}
+
+/* ── FAQs — tighter on mobile ── */
+@media(max-width:480px){
+  .faq-q{padding:13px 14px;font-size:13px;gap:10px;min-height:50px}
+  .faq-a{padding:0 14px 14px;font-size:12.5px}
+  .faq-icon{width:22px;height:22px;min-width:22px;font-size:14px}
+  .faq-stat-row{grid-template-columns:1fr 1fr;gap:6px}
+  .faq-stat{padding:8px}
+  .faq-stat-val{font-size:14px}
+  .faq-stat-lbl{font-size:8px}
+  .faq-chips{gap:4px}
+  .faq-chip{font-size:9.5px;padding:3px 8px}
+}
+
+/* ── Info grid — 2 col on small screens ── */
+@media(max-width:400px){
+  .info-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px}
+  .itile{padding:12px 8px}
+  .it-val{font-size:18px}
+  .it-label{font-size:10px}
+  .it-sub{font-size:9.5px}
+}
+
+/* ── Bar chart labels — wrap nicely ── */
+@media(max-width:480px){
+  .bchart-label{flex-direction:column;align-items:flex-start;gap:1px;margin-bottom:4px}
+  .bchart-label span{font-size:11.5px}
+  .bchart-label strong{font-size:12px}
+  .bchart-row{margin-bottom:14px!important}
+}
+
+/* ── Step flow — single col on mobile ── */
+@media(max-width:480px){
+  .step-flow{grid-template-columns:1fr 1fr;gap:10px}
+  .step-card{padding:14px 10px;border-radius:12px}
+  .step-card h4{font-size:12px}
+  .step-card p{font-size:11px}
+  .step-icon{font-size:20px}
+  .step-num{width:20px;height:20px;font-size:10px}
+}
+@media(max-width:320px){
+  .step-flow{grid-template-columns:1fr}
+}
+
+/* ── Guide cards — full-width on mobile ── */
+@media(max-width:540px){
+  .guide-grid{grid-template-columns:1fr!important}
+  .gc{padding:16px}
+  .gc-icon{font-size:22px;margin-bottom:8px}
+  .gc h3{font-size:14px}
+  .gc p,.gc li{font-size:12.5px}
+}
+
+/* ── Tip cards — single col on mobile ── */
+@media(max-width:540px){
+  .tips-grid{grid-template-columns:1fr!important}
+  .tip-card{padding:18px 16px}
+  .tip-icon{font-size:28px}
+  .tip-highlight{font-size:11.5px;padding:8px 10px}
+}
+
+/* ── Hero panel stats — 4-col on tablet ── */
+@media(min-width:541px) and (max-width:860px){
+  .hero-stats{grid-template-columns:repeat(4,1fr)}
+  .hero-minicharts{grid-template-columns:repeat(3,1fr)}
+}
+
+/* ── hstat cards ── */
+@media(max-width:400px){
+  .hstat{padding:10px 10px;border-radius:12px}
+  .hstat-num{font-size:18px!important}
+  .hstat-lbl{font-size:8.5px!important;letter-spacing:.3px}
+  .hstat-icon-wrap{width:30px;height:30px;font-size:16px}
+}
+
+/* ── Minichart cards ── */
+@media(max-width:400px){
+  .minichart-card{padding:10px 12px;gap:8px}
+  .mc-icon{width:32px;height:32px;font-size:16px}
+  .mc-label{font-size:10px}
+  .mc-val{font-size:14px}
+  .mc-badge{font-size:9px;padding:2px 7px}
+}
+
+/* ── Demat banner — mobile ── */
+@media(max-width:480px){
+  .db-title{font-size:14px}
+  .db-sub{font-size:11.5px}
+  .db-pills{gap:4px}
+  .db-pill{font-size:10px;padding:3px 8px}
+  .btn-db-pri{font-size:12.5px;padding:10px 16px}
+}
+
+/* ── Param card presets — wrap on mobile ── */
+@media(max-width:400px){
+  .presets{gap:4px}
+  .preset{font-size:10.5px;padding:4px 9px}
+  .range-marks .rm{font-size:9.5px}
+}
+
+/* ── Section divider ── */
+@media(max-width:480px){
+  .section-divider{gap:10px;margin:6px 0 18px}
+  .sd-text h2{font-size:17px}
+  .sd-text p{font-size:11.5px}
+  .sd-icon{width:34px;height:34px;min-width:34px}
+}
+
+/* ── Card headers ── */
+@media(max-width:480px){
+  .card-head{padding:12px 14px}
+  .ch-title{font-size:14px}
+  .ch-sub{font-size:11px}
+  .ch-icon{width:32px;height:32px;font-size:16px;border-radius:8px}
+}
+
+/* ── faq-points ── */
+@media(max-width:480px){
+  .faq-points li{font-size:12px}
+  .fp-bul{font-size:8px}
+}
+
+/* ── Insurer / feature grids ── */
+@media(max-width:540px){
+  .insurer-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px}
+  .insurer-card{padding:10px}
+  .ic-csr{font-size:17px}
+  .ic-name{font-size:12px}
+}
+
+/* ── Tablet layout (641px–1024px) ── */
+@media(min-width:641px) and (max-width:1024px){
+  .page-wrap{padding:16px 20px 80px}
+  .card-body{padding:20px}
+  .params-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .guide-grid{grid-template-columns:1fr 1fr}
+  .tips-grid{grid-template-columns:1fr 1fr}
+  .step-flow{grid-template-columns:repeat(4,1fr)}
+  .info-grid{grid-template-columns:repeat(4,1fr)}
+}
+
+/* ── Wide desktop (1025px+) ── */
+@media(min-width:1025px){
+  .page-wrap{grid-template-columns:280px 1fr;gap:24px;padding:24px 24px 60px}
+  .sidebar{display:flex}
+  .params-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:repeat(4,1fr)}
+}
+
+/* ── iOS notch safe areas ── */
+@supports(padding:max(0px)){
+  .hero-inner{
+    padding-left:max(20px,env(safe-area-inset-left));
+    padding-right:max(20px,env(safe-area-inset-right));
+  }
+  .mobile-nav{
+    padding-bottom:max(8px,env(safe-area-inset-bottom));
+    height:calc(60px + env(safe-area-inset-bottom));
+  }
+  .page-wrap{
+    padding-left:max(14px,env(safe-area-inset-left));
+    padding-right:max(14px,env(safe-area-inset-right));
+  }
+}
+
+/* ── Android Chrome address bar / dynamic viewport ── */
+@supports(min-height:100dvh){
+  .sidebar{max-height:calc(100dvh - 32px)}
+}
+
+/* ── Touch device optimisations ── */
+@media(hover:none) and (pointer:coarse){
+  .btn-calc{min-height:48px;font-size:15px}
+  .btn-reset{min-height:40px}
+  .preset{min-height:34px;padding:6px 12px}
+  .faq-q{min-height:52px}
+  .sb-item{padding:11px 18px}
+  .slider{height:6px}
+  input[type="range"]::-webkit-slider-thumb{width:24px;height:24px}
+  input[type="range"]::-moz-range-thumb{width:24px;height:24px}
+  .num-input{min-height:40px}
+  a,button,[onclick]{-webkit-tap-highlight-color:transparent}
+}
+
+/* ── High-DPI / Retina screens ── */
+@media(-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){
+  .formula-box{border-left-width:3px}
+  .fc-icon{border-right:0.5px solid var(--p200)}
+}
+
+/* ── Landscape mobile ── */
+@media(max-height:500px) and (orientation:landscape){
+  .hero{padding:20px 0 18px}
+  .hero h1{font-size:22px;margin-bottom:8px}
+  .hero-sub{display:none}
+  .hero-pills{display:none}
+  .hero-panel{display:none}
+  .mobile-nav{display:none}
+}
+
+/* ── Reduced motion ── */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* ── Dark mode respects system (neutral, no forced dark) ── */
+@media(prefers-color-scheme:dark){
+  /* Calculator intentionally uses light design — no forced invert */
+  :root{color-scheme:light}
+}
+
+/* ═══════════════════════════════════════════════════
+   MOBILE BOTTOM NAV
+═══════════════════════════════════════════════════ */
+.mobile-nav{
+  position:fixed;left:0;right:0;bottom:0;
+  z-index:996;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-top:1px solid var(--border);
+  height:60px;
+  box-shadow:0 -4px 20px rgba(108,61,228,.08);
+}
+.mnav-items{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  height:100%;align-items:center;
+}
+.mnav-item{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  text-decoration:none;color:var(--ink3);
+  font-size:10px;font-weight:600;
+  position:relative;
+  transition:.2s;
+  padding:6px 2px;
+}
+.mnav-icon{font-size:20px;line-height:1}
+.mnav-label{font-size:10px;letter-spacing:.1px}
+.mnav-item.active{color:var(--p600)}
+.mnav-item:hover{color:var(--p500)}
+.mnav-dot{
+  position:absolute;top:4px;left:50%;transform:translateX(-50%);
+  width:4px;height:4px;border-radius:50%;
+  background:transparent;
+}
+.mnav-item.active .mnav-dot{background:var(--p500)}
+
+@media(min-width:901px){
+  .mobile-nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-deco"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">
+          <span></span>
+          FY 2026–27 &middot; Free &middot; SEBI-aware Calculators
+        </div>
+        <h1>Every Calculator<br>for <span class="hero-hl">Smart Indian</span><br>Investors</h1>
+        <p class="hero-sub">SIP, EMI, Tax, Insurance &amp; Retirement &#8212; 55+ financial tools designed to help you make better money decisions. No login. 100% free.</p>
+        <div class="hero-ctas">
+          <button class="btn-primary" onclick="document.querySelector('.page').scrollIntoView({behavior:'smooth'})">
+            &#129518; Explore Calculators
+          </button>
+          <button class="btn-secondary" onclick="document.getElementById('search').focus();document.querySelector('.sticky-nav').scrollIntoView({behavior:'smooth'})">
+            &#128269; Search Tools
+          </button>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="panel-title">Platform Highlights</div>
+        <div class="hero-stats">
+          <div class="hstat hstat-purple">
+            <div class="hstat-icon-wrap">&#129518;</div>
+            <div class="hstat-text"><span class="hstat-num">55+</span><span class="hstat-lbl">CALCULATORS</span></div>
+          </div>
+          <div class="hstat hstat-green">
+            <div class="hstat-icon-wrap">&#127359;</div>
+            <div class="hstat-text"><span class="hstat-num">100%</span><span class="hstat-lbl">FREE FOREVER</span></div>
+          </div>
+          <div class="hstat hstat-amber">
+            <div class="hstat-icon-wrap">&#128197;</div>
+            <div class="hstat-text"><span class="hstat-num">FY26</span><span class="hstat-lbl">UPDATED</span></div>
+          </div>
+          <div class="hstat hstat-blue">
+            <div class="hstat-icon-wrap">&#128202;</div>
+            <div class="hstat-text"><span class="hstat-num">6</span><span class="hstat-lbl">CATEGORIES</span></div>
+          </div>
+        </div>
+        <div class="hero-minicharts">
+          <div class="minichart-card">
+            <div class="mc-icon" style="background:var(--p100)">&#128200;</div>
+            <div class="mc-body"><div class="mc-label">SIP Returns (20yr @ 12%)</div><div class="mc-val">&#8377;1.76 Cr</div></div>
+            <div class="mc-badge" style="background:var(--g100);color:var(--g700)">+340%</div>
+          </div>
+          <div class="minichart-card">
+            <div class="mc-icon" style="background:#fff7ed">&#127968;</div>
+            <div class="mc-body"><div class="mc-label">Home Loan EMI (&#8377;50L, 20yr)</div><div class="mc-val">&#8377;48,251</div></div>
+            <div class="mc-badge" style="background:var(--p100);color:var(--p700)">8.5%</div>
+          </div>
+          <div class="minichart-card">
+            <div class="mc-icon" style="background:#fffbeb">&#129534;</div>
+            <div class="mc-body"><div class="mc-label">Tax Saved via 80C</div><div class="mc-val">&#8377;46,800</div></div>
+            <div class="mc-badge" style="background:#fff7ed;color:#b45309">New Regime</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ TICKER ══ -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">📊 SIP <b>₹20K/mo @ 12%</b> → <b>₹2 Cr in 20 yrs</b></span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">🏠 Home Loan EMI <b>₹50L, 8.5%, 20yr</b> → <b>₹43,391/mo</b></span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">🧾 Income Tax <b>₹15L Income, New Regime</b> → <b>₹1.5L Tax</b></span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">🎯 Retirement <b>₹50K/mo expenses today</b> → <b>₹5.2 Cr corpus needed</b></span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">📈 LTCG <b>₹5L gains</b> → <b>₹46,250 tax</b></span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">💰 FIRE <b>₹1L/mo expenses</b> → <b>₹3 Cr FIRE number</b></span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">📊 SIP <b>₹20K/mo @ 12%</b> → <b>₹2 Cr in 20 yrs</b></span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">🏠 Home Loan EMI <b>₹50L, 8.5%, 20yr</b> → <b>₹43,391/mo</b></span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">🧾 Income Tax <b>₹15L Income, New Regime</b> → <b>₹1.5L Tax</b></span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">🎯 Retirement <b>₹50K/mo expenses today</b> → <b>₹5.2 Cr corpus needed</b></span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">📈 LTCG <b>₹5L gains</b> → <b>₹46,250 tax</b></span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">💰 FIRE <b>₹1L/mo expenses</b> → <b>₹3 Cr FIRE number</b></span>
+    <span class="ticker-sep">·</span>
+  </div>
+</div>
+
+<!-- ══ INFOGRAPHIC STRIP ══ -->
+<section class="info-strip">
+  <div class="container">
+    <div class="info-strip-grid">
+      <div class="infotile purple">
+        <div class="it-emoji">📈</div>
+        <div class="it-val">12–15%</div>
+        <div class="it-label">Equity Long-Term CAGR</div>
+        <div class="it-sub">Historical Nifty 50 average</div>
+        <div class="it-bar"><div class="it-bar-fill" style="width:78%"></div></div>
+      </div>
+      <div class="infotile green">
+        <div class="it-emoji">🏦</div>
+        <div class="it-val">8.5%</div>
+        <div class="it-label">Avg Home Loan Rate</div>
+        <div class="it-sub">Current market range</div>
+        <div class="it-bar"><div class="it-bar-fill" style="width:56%"></div></div>
+      </div>
+      <div class="infotile amber">
+        <div class="it-emoji">🧾</div>
+        <div class="it-val">₹7L</div>
+        <div class="it-label">New Regime Zero Tax</div>
+        <div class="it-sub">Standard deduction included</div>
+        <div class="it-bar"><div class="it-bar-fill" style="width:47%"></div></div>
+      </div>
+      <div class="infotile blue">
+        <div class="it-emoji">🛡️</div>
+        <div class="it-val">10–15×</div>
+        <div class="it-label">Life Cover Thumb Rule</div>
+        <div class="it-sub">Annual income × multiplier</div>
+        <div class="it-bar"><div class="it-bar-fill" style="width:65%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STICKY NAV ══ -->
+<nav class="sticky-nav">
+  <div class="nav-inner">
+    <div class="search-wrap">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="search-input" type="search" placeholder="Search calculators…" id="search" oninput="doSearch()" autocomplete="off"/>
+    </div>
+    <div class="filter-scroll" id="filters">
+      <button class="ftab on" onclick="filterBy('all',this)">All</button>
+      <button class="ftab" onclick="filterBy('invest',this)">📈 Investments</button>
+      <button class="ftab" onclick="filterBy('loans',this)">🏦 Loans</button>
+      <button class="ftab" onclick="filterBy('tax',this)">📋 Tax</button>
+      <button class="ftab" onclick="filterBy('insur',this)">🛡️ Insurance</button>
+      <button class="ftab" onclick="filterBy('retire',this)">🏡 Retirement</button>
+      <button class="ftab" onclick="filterBy('personal',this)">🎯 Personal</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ CALCULATORS ══ -->
+<main class="page" id="main">
+
+  <!-- INVESTMENTS -->
+  <section class="cat-section cat--invest" data-cat="invest">
+    <div class="cat-header">
+      <div class="cat-icon-wrap">📈</div>
+      <div class="cat-text">
+        <div class="cat-name">Investment Calculators</div>
+        <div class="cat-desc">SIP, Lumpsum, FD, RD, CAGR & wealth compounding tools</div>
+      </div>
+      <span class="cat-badge">12 Tools</span>
+    </div>
+    <div class="cards-grid">
+
+      <div class="calc-card" data-calc="sip" data-kw="sip calculator mutual fund monthly compounding">
+        <div class="card-body">
+          <div class="card-icon">📊</div>
+          <div class="card-pill pill--hot">🔥 Most Popular</div>
+          <div class="card-title">SIP Calculator</div>
+          <div class="card-desc">Calculate mutual fund SIP maturity, total returns, and wealth multiplier with rupee-cost averaging.</div>
+          <div class="card-tags"><span class="ctag">Mutual Fund</span><span class="ctag">Monthly SIP</span><span class="ctag">Compounding</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/sip-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="stepup" data-kw="step-up sip top-up annual increase">
+        <div class="card-body">
+          <div class="card-icon">⬆️</div>
+          <div class="card-pill pill--star">⭐ Top Pick</div>
+          <div class="card-title">Step-Up SIP</div>
+          <div class="card-desc">Boost your SIP yearly — see the massive wealth difference a 10% annual step-up creates.</div>
+          <div class="card-tags"><span class="ctag">Top-Up</span><span class="ctag">Step-Up</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/stepup-sip-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="lumpsum" data-kw="lumpsum one-time investment returns">
+        <div class="card-body">
+          <div class="card-icon">💰</div>
+          <div class="card-title">Lumpsum Calculator</div>
+          <div class="card-desc">Returns on a one-time investment at a compounded rate over any tenure.</div>
+          <div class="card-tags"><span class="ctag">One-Time</span><span class="ctag">Lumpsum</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/lumsum-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="fd" data-kw="fd fixed deposit bank maturity">
+        <div class="card-body">
+          <div class="card-icon">🏛️</div>
+          <div class="card-title">FD Calculator</div>
+          <div class="card-desc">Fixed deposit maturity with quarterly compounding and effective yield.</div>
+          <div class="card-tags"><span class="ctag">Fixed Deposit</span><span class="ctag">Bank</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/fd-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="rd" data-kw="rd recurring deposit monthly savings">
+        <div class="card-body">
+          <div class="card-icon">🪙</div>
+          <div class="card-title">RD Calculator</div>
+          <div class="card-desc">Recurring deposit maturity and interest earned on monthly instalments.</div>
+          <div class="card-tags"><span class="ctag">Recurring</span><span class="ctag">Monthly</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/rd-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="swp" data-kw="swp withdrawal systematic monthly income">
+        <div class="card-body">
+          <div class="card-icon">💸</div>
+          <div class="card-title">SWP Calculator</div>
+          <div class="card-desc">Plan monthly withdrawals from your corpus — see how long it lasts.</div>
+          <div class="card-tags"><span class="ctag">Withdrawal</span><span class="ctag">Income</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/swp-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Intermediate</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="cagr" data-kw="cagr annualised growth rate returns">
+        <div class="card-body">
+          <div class="card-icon">📐</div>
+          <div class="card-title">CAGR Calculator</div>
+          <div class="card-desc">Find the true annualised growth rate between any start and end value.</div>
+          <div class="card-tags"><span class="ctag">CAGR</span><span class="ctag">Returns</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/cagr-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="rule72" data-kw="rule of 72 doubling time quick math">
+        <div class="card-body">
+          <div class="card-icon">⚡</div>
+          <div class="card-title">Rule of 72</div>
+          <div class="card-desc">Instantly estimate how long it takes to double your money at any rate.</div>
+          <div class="card-tags"><span class="ctag">Quick Math</span><span class="ctag">Doubling</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/rule-of-72-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="stepupswp" data-kw="step up swp growing withdrawal systematic plan">
+        <div class="card-body">
+          <div class="card-icon">📉</div>
+          <div class="card-title">Step-Up SWP</div>
+          <div class="card-desc">Plan growing withdrawals that increase annually — ideal for rising post-retirement expenses.</div>
+          <div class="card-tags"><span class="ctag">Step-Up</span><span class="ctag">Withdrawal</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/stepup-swp-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Intermediate</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="goalplanner" data-kw="goal planner target corpus future value lumpsum sip">
+        <div class="card-body">
+          <div class="card-icon">🎯</div>
+          <div class="card-title">Goal Planner</div>
+          <div class="card-desc">Work backwards from a future financial goal to find the SIP or lumpsum needed today.</div>
+          <div class="card-tags"><span class="ctag">Goal</span><span class="ctag">Target Corpus</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/goal-planner-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="mfreturns" data-kw="mutual fund returns performance comparison xirr absolute">
+        <div class="card-body">
+          <div class="card-icon">🏆</div>
+          <div class="card-title">Mutual Fund Returns</div>
+          <div class="card-desc">Calculate absolute and annualised returns on any mutual fund investment over a period.</div>
+          <div class="card-tags"><span class="ctag">Mutual Fund</span><span class="ctag">XIRR</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/mutual-fund-returns-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Intermediate</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="sipvslumpsum" data-kw="sip vs lumpsum compare which is better investment">
+        <div class="card-body">
+          <div class="card-icon">🔄</div>
+          <div class="card-title">SIP vs Lumpsum</div>
+          <div class="card-desc">Compare wealth created by monthly SIP versus a one-time lumpsum at the same rate.</div>
+          <div class="card-tags"><span class="ctag">SIP</span><span class="ctag">Lumpsum</span><span class="ctag">Compare</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/sip-vs-lumsum-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LOANS -->
+  <section class="cat-section cat--loans" data-cat="loans">
+    <div class="cat-header">
+      <div class="cat-icon-wrap">🏦</div>
+      <div class="cat-text">
+        <div class="cat-name">Loan & EMI Calculators</div>
+        <div class="cat-desc">Home loan, car loan, personal loan & prepayment planning</div>
+      </div>
+      <span class="cat-badge">9 Tools</span>
+    </div>
+    <div class="cards-grid">
+
+      <div class="calc-card" data-calc="emi" data-kw="emi calculator home loan car personal">
+        <div class="card-body">
+          <div class="card-icon">🏠</div>
+          <div class="card-pill pill--hot">⭐ Most Used</div>
+          <div class="card-title">EMI Calculator</div>
+          <div class="card-desc">Monthly EMI, total interest, and full amortization for home, car, or personal loans.</div>
+          <div class="card-tags"><span class="ctag">Home Loan</span><span class="ctag">Car Loan</span><span class="ctag">Personal</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/emi-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="homeloan-elig" data-kw="home loan eligibility salary income housing">
+        <div class="card-body">
+          <div class="card-icon">🏡</div>
+          <div class="card-title">Home Loan Eligibility</div>
+          <div class="card-desc">Maximum loan amount you qualify for based on salary and existing obligations.</div>
+          <div class="card-tags"><span class="ctag">Eligibility</span><span class="ctag">Housing</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/home-loan-eligibility-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="prepayment" data-kw="loan prepayment savings interest outstanding">
+        <div class="card-body">
+          <div class="card-icon">⚡</div>
+          <div class="card-title">Loan Prepayment Savings</div>
+          <div class="card-desc">See exactly how much interest you save by making a lump-sum prepayment.</div>
+          <div class="card-tags"><span class="ctag">Prepayment</span><span class="ctag">Savings</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/loan-prepayment-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Intermediate</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="creditcard" data-kw="credit card payoff debt interest monthly">
+        <div class="card-body">
+          <div class="card-icon">💳</div>
+          <div class="card-title">Credit Card Payoff</div>
+          <div class="card-desc">Time & total cost to clear credit card debt. Eye-opening reality check.</div>
+          <div class="card-tags"><span class="ctag">Credit Card</span><span class="ctag">Debt</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/credit-card-payoff-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="bt" data-kw="balance transfer lender switch savings rate">
+        <div class="card-body">
+          <div class="card-icon">🔀</div>
+          <div class="card-title">Balance Transfer Savings</div>
+          <div class="card-desc">Savings from switching lender — see if a lower rate justifies the transfer cost.</div>
+          <div class="card-tags"><span class="ctag">Balance Transfer</span><span class="ctag">Refinance</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/balance-transfer-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Intermediate</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="educationloan" data-kw="education loan student emi moratorium college fee">
+        <div class="card-body">
+          <div class="card-icon">🎓</div>
+          <div class="card-title">Education Loan</div>
+          <div class="card-desc">Student loan EMI with moratorium period — see actual repayment after course completion.</div>
+          <div class="card-tags"><span class="ctag">Education</span><span class="ctag">Moratorium</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/education-loan-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="loancomparison" data-kw="loan comparison two offers interest rate tenure emi">
+        <div class="card-body">
+          <div class="card-icon">📊</div>
+          <div class="card-title">Loan Comparison</div>
+          <div class="card-desc">Compare two loan offers side by side — EMI, total interest, and true cost of each.</div>
+          <div class="card-tags"><span class="ctag">Compare</span><span class="ctag">Loan Offers</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/loan-comparison-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Intermediate</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="carloan" data-kw="car loan vehicle emi down payment on-road price">
+        <div class="card-body">
+          <div class="card-icon">🚗</div>
+          <div class="card-title">Car Loan Calculator</div>
+          <div class="card-desc">EMI with down payment for new or used car — full on-road price breakdown.</div>
+          <div class="card-tags"><span class="ctag">Car Loan</span><span class="ctag">Vehicle</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/car-loan-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="personalloan" data-kw="personal loan emi unsecured interest burden instant">
+        <div class="card-body">
+          <div class="card-icon">🧾</div>
+          <div class="card-title">Personal Loan EMI</div>
+          <div class="card-desc">Unsecured loan cost calculator with total interest burden analysis.</div>
+          <div class="card-tags"><span class="ctag">Personal Loan</span><span class="ctag">Unsecured</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/personal-loan-emi-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TAX -->
+  <section class="cat-section cat--tax" data-cat="tax">
+    <div class="cat-header">
+      <div class="cat-icon-wrap">📋</div>
+      <div class="cat-text">
+        <div class="cat-name">Tax Calculators</div>
+        <div class="cat-desc">Income tax, capital gains, HRA & 80C planning — FY 2026–27</div>
+      </div>
+      <span class="cat-badge">9 Tools</span>
+    </div>
+    <div class="cards-grid">
+
+      <div class="calc-card" data-calc="incometax" data-kw="income tax new old regime 80c deduction">
+        <div class="card-body">
+          <div class="card-icon">🏛️</div>
+          <div class="card-pill pill--fy">📅 FY 2026–27</div>
+          <div class="card-title">Income Tax Calculator</div>
+          <div class="card-desc">New vs Old regime comparison with 80C, 80D, HRA for FY 2026–27.</div>
+          <div class="card-tags"><span class="ctag">New Regime</span><span class="ctag">Old Regime</span><span class="ctag">80C</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/income-tax-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Intermediate</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="ltcg" data-kw="ltcg tax 12.5% equity budget 2024">
+        <div class="card-body">
+          <div class="card-icon">📈</div>
+          <div class="card-pill pill--fy">Budget 2024</div>
+          <div class="card-title">LTCG Tax Calculator</div>
+          <div class="card-desc">Equity/fund LTCG tax with ₹1.25L annual exemption at 12.5% flat rate.</div>
+          <div class="card-tags"><span class="ctag">LTCG</span><span class="ctag">12.5%</span><span class="ctag">Equity</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/ltcg-tax-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Intermediate</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="stcg" data-kw="stcg 20% short term capital gains equity">
+        <div class="card-body">
+          <div class="card-icon">📉</div>
+          <div class="card-pill pill--fy">Budget 2024</div>
+          <div class="card-title">STCG Tax Calculator</div>
+          <div class="card-desc">Tax on short-term capital gains from equity and debt at 20% flat rate.</div>
+          <div class="card-tags"><span class="ctag">STCG</span><span class="ctag">20%</span><span class="ctag">Equity</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/stcg-tax-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Intermediate</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="hra" data-kw="hra exemption 10(13a) rent basic salary city">
+        <div class="card-body">
+          <div class="card-icon">🏠</div>
+          <div class="card-title">HRA Exemption</div>
+          <div class="card-desc">HRA exemption under Sec 10(13A) based on salary, rent paid, and city.</div>
+          <div class="card-tags"><span class="ctag">HRA</span><span class="ctag">Sec 10(13A)</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/hra-exemption-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Intermediate</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="ppf-tax" data-kw="ppf public provident fund 7.1% eee tax free">
+        <div class="card-body">
+          <div class="card-icon">📙</div>
+          <div class="card-title">PPF Calculator</div>
+          <div class="card-desc">Tax-free PPF maturity at 7.1% p.a. with annual deposits over 15 years.</div>
+          <div class="card-tags"><span class="ctag">PPF</span><span class="ctag">EEE</span><span class="ctag">7.1%</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/ppf-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="nsc" data-kw="nsc national savings certificate post office 80c">
+        <div class="card-body">
+          <div class="card-icon">📜</div>
+          <div class="card-title">NSC Calculator</div>
+          <div class="card-desc">National Savings Certificate maturity and interest with 80C deduction benefit.</div>
+          <div class="card-tags"><span class="ctag">NSC</span><span class="ctag">Post Office</span><span class="ctag">80C</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/nsc-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="tds" data-kw="tds estimator salary fd rent professional fees">
+        <div class="card-body">
+          <div class="card-icon">🔎</div>
+          <div class="card-title">TDS Estimator</div>
+          <div class="card-desc">Estimate TDS on salary, FD interest, rent, and professional fees.</div>
+          <div class="card-tags"><span class="ctag">TDS</span><span class="ctag">Sec 194A</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/tds-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="homeloantax" data-kw="home loan tax benefit 80c 24b interest principal deduction">
+        <div class="card-body">
+          <div class="card-icon">🏠</div>
+          <div class="card-title">Home Loan Tax Benefits</div>
+          <div class="card-desc">Calculate 80C (principal) and 24B (interest) deductions on your home loan EMI.</div>
+          <div class="card-tags"><span class="ctag">80C</span><span class="ctag">Sec 24B</span><span class="ctag">Home Loan</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/home-loan-tax-benefits" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="gifttax" data-kw="gift tax exemption taxable gift relative occasion">
+        <div class="card-body">
+          <div class="card-icon">🎁</div>
+          <div class="card-title">Gift Tax Guide</div>
+          <div class="card-desc">Check if a gift is taxable — exemption limits by relation, occasion, and amount.</div>
+          <div class="card-tags"><span class="ctag">Gift Tax</span><span class="ctag">Exemption</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/gift-tax-guide" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INSURANCE -->
+  <section class="cat-section cat--insur" data-cat="insur">
+    <div class="cat-header">
+      <div class="cat-icon-wrap">🛡️</div>
+      <div class="cat-text">
+        <div class="cat-name">Insurance Calculators</div>
+        <div class="cat-desc">Life cover, health premium, gratuity & critical illness estimators</div>
+      </div>
+      <span class="cat-badge">7 Tools</span>
+    </div>
+    <div class="cards-grid">
+
+      <div class="calc-card" data-calc="life-cover" data-kw="life cover term plan hlv income replacement">
+        <div class="card-body">
+          <div class="card-icon">❤️</div>
+          <div class="card-pill pill--star">⭐ Essential</div>
+          <div class="card-title">Life Cover Estimator</div>
+          <div class="card-desc">How much term insurance you actually need based on income, loans & dependants.</div>
+          <div class="card-tags"><span class="ctag">Term Plan</span><span class="ctag">HLV</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/life-cover-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="gratuity" data-kw="gratuity calculator employment years basic salary">
+        <div class="card-body">
+          <div class="card-icon">🏆</div>
+          <div class="card-title">Gratuity Calculator</div>
+          <div class="card-desc">Statutory gratuity payable based on your years of service and last drawn salary.</div>
+          <div class="card-tags"><span class="ctag">Gratuity</span><span class="ctag">Employment</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/gratuity-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="childplan" data-kw="child education plan sip cost college inflation">
+        <div class="card-body">
+          <div class="card-icon">👧</div>
+          <div class="card-title">Child Education Plan</div>
+          <div class="card-desc">SIP needed today to fund your child's education goal, adjusted for inflation.</div>
+          <div class="card-tags"><span class="ctag">Education</span><span class="ctag">Child Plan</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/child-education-loan-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Intermediate</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="ulip" data-kw="ulip vs term mutual fund comparison wealth insurance">
+        <div class="card-body">
+          <div class="card-icon">🔁</div>
+          <div class="card-title">ULIP vs Term + MF</div>
+          <div class="card-desc">Which gives better wealth? Compare ULIP vs buying term insurance + investing the rest.</div>
+          <div class="card-tags"><span class="ctag">ULIP</span><span class="ctag">Comparison</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/term-premium-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Advanced</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="termpremium" data-kw="term insurance premium estimate age sum assured annual">
+        <div class="card-body">
+          <div class="card-icon">📝</div>
+          <div class="card-title">Term Premium Estimator</div>
+          <div class="card-desc">Approximate annual premium for your desired term insurance cover by age and amount.</div>
+          <div class="card-tags"><span class="ctag">Term Plan</span><span class="ctag">Premium</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/term-premium-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="criticalillness" data-kw="critical illness cover ci rider income medical age">
+        <div class="card-body">
+          <div class="card-icon">🏥</div>
+          <div class="card-title">Critical Illness Cover</div>
+          <div class="card-desc">Recommended CI cover amount based on your age, income, and annual medical costs.</div>
+          <div class="card-tags"><span class="ctag">Critical Illness</span><span class="ctag">CI Rider</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/critical-illness-cover-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Intermediate</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="healthpremium" data-kw="health insurance premium mediclaim estimate age family floater">
+        <div class="card-body">
+          <div class="card-icon">💊</div>
+          <div class="card-title">Health Premium Estimator</div>
+          <div class="card-desc">Estimate mediclaim premium for self or family floater based on age and cover amount.</div>
+          <div class="card-tags"><span class="ctag">Mediclaim</span><span class="ctag">Health</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/health-premium-estimator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RETIREMENT -->
+  <section class="cat-section cat--retire" data-cat="retire">
+    <div class="cat-header">
+      <div class="cat-icon-wrap">🏡</div>
+      <div class="cat-text">
+        <div class="cat-name">Retirement & Savings</div>
+        <div class="cat-desc">Corpus planner, NPS, EPF, SSY, SCSS & FIRE calculators</div>
+      </div>
+      <span class="cat-badge">9 Tools</span>
+    </div>
+    <div class="cards-grid">
+
+      <div class="calc-card" data-calc="retirement" data-kw="retirement corpus planner inflation goal pension">
+        <div class="card-body">
+          <div class="card-icon">🎯</div>
+          <div class="card-pill pill--star">⭐ Top Pick</div>
+          <div class="card-title">Retirement Planner</div>
+          <div class="card-desc">Goal-based retirement corpus calculation accounting for inflation and life expectancy.</div>
+          <div class="card-tags"><span class="ctag">Retirement</span><span class="ctag">Inflation</span><span class="ctag">Goal-Based</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/retirement-planner" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Intermediate</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="nps" data-kw="nps national pension system tier1 annuity">
+        <div class="card-body">
+          <div class="card-icon">🏛️</div>
+          <div class="card-title">NPS Calculator</div>
+          <div class="card-desc">NPS Tier-1 corpus and monthly pension from annuity at retirement age.</div>
+          <div class="card-tags"><span class="ctag">NPS</span><span class="ctag">Pension</span><span class="ctag">Annuity</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/nps-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="epf" data-kw="epf employee provident fund pf basic salary">
+        <div class="card-body">
+          <div class="card-icon">🏢</div>
+          <div class="card-title">EPF Calculator</div>
+          <div class="card-desc">Employee Provident Fund corpus at retirement with current balance and contributions.</div>
+          <div class="card-tags"><span class="ctag">EPF / PF</span><span class="ctag">Employee</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/epf-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="ssy" data-kw="sukanya samriddhi ssy 8.2% eee daughter">
+        <div class="card-body">
+          <div class="card-icon">🌸</div>
+          <div class="card-title">Sukanya Samriddhi (SSY)</div>
+          <div class="card-desc">SSY maturity at 8.2% p.a. — the best government scheme for a girl child's future.</div>
+          <div class="card-tags"><span class="ctag">SSY</span><span class="ctag">8.2%</span><span class="ctag">EEE</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/sukanya-samriddhi-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="fire" data-kw="fire number 4% rule early retirement financial independence">
+        <div class="card-body">
+          <div class="card-icon">🔥</div>
+          <div class="card-pill pill--new">✨ New</div>
+          <div class="card-title">FIRE Number Calculator</div>
+          <div class="card-desc">Your Financial Independence number using the 4% withdrawal rule + years to achieve it.</div>
+          <div class="card-tags"><span class="ctag">FIRE</span><span class="ctag">4% Rule</span><span class="ctag">Early Retire</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/fire-number-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Advanced</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="scss" data-kw="scss senior citizen savings 8.2% post office quarterly">
+        <div class="card-body">
+          <div class="card-icon">👴</div>
+          <div class="card-title">Senior Citizen Savings (SCSS)</div>
+          <div class="card-desc">SCSS interest and quarterly payouts at 8.2% p.a. for post-retirement income.</div>
+          <div class="card-tags"><span class="ctag">SCSS</span><span class="ctag">8.2%</span><span class="ctag">Post Office</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/senior-citizen-saving" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="wealthdrawdown" data-kw="wealth drawdown corpus monthly withdrawal retire sustainable">
+        <div class="card-body">
+          <div class="card-icon">🌊</div>
+          <div class="card-title">Wealth Drawdown Planner</div>
+          <div class="card-desc">How long does your retirement corpus last? Find a sustainable monthly withdrawal amount.</div>
+          <div class="card-tags"><span class="ctag">Drawdown</span><span class="ctag">Corpus</span><span class="ctag">Withdraw</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/wealth-drawdown-planner" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Intermediate</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="annuity" data-kw="annuity pension income plan monthly payout retirement">
+        <div class="card-body">
+          <div class="card-icon">🛡️</div>
+          <div class="card-title">Annuity Calculator</div>
+          <div class="card-desc">Estimate monthly pension income from an annuity plan based on corpus and annuity rate.</div>
+          <div class="card-tags"><span class="ctag">Annuity</span><span class="ctag">Pension</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/annuity-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Intermediate</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="seniorfd" data-kw="senior citizen fd fixed deposit higher interest rate bank">
+        <div class="card-body">
+          <div class="card-icon">🏦</div>
+          <div class="card-title">Senior Citizen FD</div>
+          <div class="card-desc">FD maturity for senior citizens with higher interest rates (typically 0.25–0.50% extra).</div>
+          <div class="card-tags"><span class="ctag">Senior FD</span><span class="ctag">Higher Rate</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/senior-citizen-fd-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+  </div>
+  </section>
+
+  <!-- PERSONAL FINANCE -->
+  <section class="cat-section cat--personal" data-cat="personal">
+    <div class="cat-header">
+      <div class="cat-icon-wrap">🎯</div>
+      <div class="cat-text">
+        <div class="cat-name">Personal Finance Tools</div>
+        <div class="cat-desc">Budgeting, goals, emergency fund, inflation & net worth tools</div>
+      </div>
+      <span class="cat-badge">9 Tools</span>
+    </div>
+    <div class="cards-grid">
+
+      <div class="calc-card" data-calc="goal" data-kw="wealth goal tracker target sip milestone">
+        <div class="card-body">
+          <div class="card-icon">🏆</div>
+          <div class="card-pill pill--hot">🔥 Popular</div>
+          <div class="card-title">Wealth Goal Tracker</div>
+          <div class="card-desc">Monthly SIP amount needed to hit a specific wealth milestone in X years.</div>
+          <div class="card-tags"><span class="ctag">Wealth Goal</span><span class="ctag">Milestone</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/wealth-goal-tracker" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="inflation" data-kw="inflation calculator purchasing power erosion future value">
+        <div class="card-body">
+          <div class="card-icon">📊</div>
+          <div class="card-title">Inflation Calculator</div>
+          <div class="card-desc">What your money will actually be worth in 10–20 years after inflation erodes it.</div>
+          <div class="card-tags"><span class="ctag">Inflation</span><span class="ctag">Purchasing Power</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculator/inflation-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="emergency" data-kw="emergency fund liquid savings months expenses">
+        <div class="card-body">
+          <div class="card-icon">🆘</div>
+          <div class="card-title">Emergency Fund Calculator</div>
+          <div class="card-desc">How large your emergency fund should be and how far you are from the target.</div>
+          <div class="card-tags"><span class="ctag">Emergency Fund</span><span class="ctag">Liquid</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/emergency-fund-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="budget" data-kw="budget 50 30 20 planner needs wants savings">
+        <div class="card-body">
+          <div class="card-icon">📋</div>
+          <div class="card-title">Budget Planner (50/30/20)</div>
+          <div class="card-desc">Apply the 50/30/20 rule — needs, wants, and savings at a glance.</div>
+          <div class="card-tags"><span class="ctag">50/30/20</span><span class="ctag">Budgeting</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/budget-planner" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="networth" data-kw="net worth assets liabilities wealth snapshot">
+        <div class="card-body">
+          <div class="card-icon">💎</div>
+          <div class="card-title">Net Worth Calculator</div>
+          <div class="card-desc">Assets minus liabilities — your true financial snapshot in seconds.</div>
+          <div class="card-tags"><span class="ctag">Net Worth</span><span class="ctag">Assets</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/net-worth-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="savingsrate" data-kw="savings rate financial independence fire timeline income expenses">
+        <div class="card-body">
+          <div class="card-icon">🐖</div>
+          <div class="card-title">Savings Rate Calculator</div>
+          <div class="card-desc">Your savings rate determines your FIRE timeline — see the math behind the number.</div>
+          <div class="card-tags"><span class="ctag">Savings Rate</span><span class="ctag">FIRE</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/saving-rate-calculator" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="salaryhike" data-kw="salary hike increment take home ctc tax pf deduction">
+        <div class="card-body">
+          <div class="card-icon">💼</div>
+          <div class="card-title">Salary Hike Planner</div>
+          <div class="card-desc">How an increment changes your take-home pay after income tax and PF deductions.</div>
+          <div class="card-tags"><span class="ctag">Increment</span><span class="ctag">Take-Home</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/salary-hike-planner" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="savingsgoal" data-kw="savings goal target amount monthly how long reach">
+        <div class="card-body">
+          <div class="card-icon">🏧</div>
+          <div class="card-title">Savings Goal</div>
+          <div class="card-desc">How much to save monthly — or how long it takes — to reach a specific savings target.</div>
+          <div class="card-tags"><span class="ctag">Savings</span><span class="ctag">Target</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/saving-goal" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+      <div class="calc-card" data-calc="dailysavings" data-kw="daily savings small amount habit big goal compounding">
+        <div class="card-body">
+          <div class="card-icon">📆</div>
+          <div class="card-title">Daily Savings</div>
+          <div class="card-desc">How saving a small amount daily compounds into a big goal over time.</div>
+          <div class="card-tags"><span class="ctag">Daily Habit</span><span class="ctag">Small Savings</span></div>
+        </div>
+        <div class="card-foot"><a href="https://fairstockbrokers.com/calculators/daily-saving" class="card-cta btn-calc">Calculate →</a><div class="card-foot-right"><button class="btn-detail">Detail Calculation</button><span class="card-level">Beginner</span></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="empty" id="empty">
+    <div class="empty-em">🔍</div>
+    <div class="empty-t">No calculators found</div>
+    <div class="empty-s">Try a different search term or clear your filters</div>
+  </div>
+
+</main>
+
+<!-- ══ MODAL ══ -->
+<div class="overlay" id="overlay" onclick="overlayClick(event)">
+  <div class="modal" id="modal">
+    <span class="modal-pill"></span>
+    <div class="modal-head">
+      <div class="modal-head-icon" id="m-icon">📊</div>
+      <div>
+        <div class="modal-title" id="m-title">Calculator</div>
+        <div class="modal-sub" id="m-sub">Enter values below</div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="m-body"></div>
+  </div>
+</div>
+
+<!-- ══ DISCLAIMER ══ -->
+<section class="disclaimer-section">
+  <div class="disc-inner">
+
+    <div class="disc-badge">
+      <span class="disc-badge-dot"></span>
+      IMPORTANT DISCLAIMER
+    </div>
+
+    <div class="disc-heading">Read Before You <span>Invest or Decide</span></div>
+    <div class="disc-sub">All calculators on this platform are for educational and illustrative purposes only. Please read the details below carefully.</div>
+
+    <div class="disc-cards">
+      <div class="disc-card">
+        <span class="disc-card-icon">📊</span>
+        <div class="disc-card-title">Illustrative Projections Only</div>
+        <div class="disc-card-text">All returns, maturity values, and corpus estimates shown are hypothetical projections based on assumed rates. Actual results will vary based on market conditions, fund performance, and individual circumstances.</div>
+      </div>
+      <div class="disc-card">
+        <span class="disc-card-icon">🏛️</span>
+        <div class="disc-card-title">Not SEBI-Registered Advice</div>
+        <div class="disc-card-text">Fairstockbrokers.com is not a SEBI-registered investment advisor. Nothing on this platform constitutes personalised financial, tax, or legal advice. Always consult a qualified, registered professional before making investment decisions.</div>
+      </div>
+      <div class="disc-card">
+        <span class="disc-card-icon">📉</span>
+        <div class="disc-card-title">Market Risk Applies</div>
+        <div class="disc-card-text">Mutual fund investments, equity, and market-linked instruments are subject to market risk. Past performance is not indicative of future results. Please read all scheme-related documents carefully before investing.</div>
+      </div>
+      <div class="disc-card">
+        <span class="disc-card-icon">🧾</span>
+        <div class="disc-card-title">Tax Laws Change</div>
+        <div class="disc-card-text">Tax calculations are based on FY 2026–27 rules as publicly available. Tax laws are subject to amendments by the government. Verify all tax-related figures with a chartered accountant before filing or planning.</div>
+      </div>
+      <div class="disc-card">
+        <span class="disc-card-icon">🔢</span>
+        <div class="disc-card-title">Calculator Accuracy</div>
+        <div class="disc-card-text">While we strive for accuracy, calculator results may not account for all real-world variables — processing fees, exit loads, inflation adjustments, or product-specific terms. Use as a starting point, not a final number.</div>
+      </div>
+      <div class="disc-card">
+        <span class="disc-card-icon">🔒</span>
+        <div class="disc-card-title">No Data Stored</div>
+        <div class="disc-card-text">All calculations happen locally in your browser. We do not collect, store, or transmit any personal financial data you enter in these calculators. Your inputs stay private.</div>
+      </div>
+    </div>
+
+    <div class="disc-full">
+      <span class="disc-full-icon">⚠️</span>
+      <div class="disc-full-text">
+        <strong>Full Disclaimer:</strong> The information, tools, and calculators provided on Fairstockbrokers.com are solely for general informational and educational purposes. They do not constitute an offer to buy or sell any security, financial product, or instrument. Fairstockbrokers.com makes no representations or warranties — express or implied — about the completeness, accuracy, reliability, or suitability of any information. Any reliance you place on such information is strictly at your own risk. Fairstockbrokers.com will not be liable for any loss or damage, including indirect or consequential loss, arising from use of this platform. <strong>Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Returns are not guaranteed.</strong>
+      </div>
+    </div>
+
+    <div class="disc-meta">
+      <span class="disc-tag"><span class="disc-tag-dot" style="background:#34d399"></span>FY 2026–27 Updated</span>
+      <span class="disc-tag"><span class="disc-tag-dot" style="background:#60a5fa"></span>No Login Required</span>
+      <span class="disc-tag"><span class="disc-tag-dot" style="background:#a78bfa"></span>Browser-Only Calculations</span>
+      <span class="disc-tag"><span class="disc-tag-dot" style="background:#fbbf24"></span>Not Financial Advice</span>
+      <span class="disc-tag"><span class="disc-tag-dot" style="background:#f87171"></span>Market Risk Applies</span>
+      <span class="disc-tag"><span class="disc-tag-dot" style="background:#34d399"></span>Educational Use Only</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">↑</button>
+
+<script>
+/* ═══ FORMAT HELPERS ═══ */
+const INR = n => {
+  const a = Math.abs(n);
+  if (a >= 1e7) return '₹' + (n/1e7).toFixed(2) + ' Cr';
+  if (a >= 1e5) return '₹' + (n/1e5).toFixed(2) + ' L';
+  if (a >= 1e3) return '₹' + (n/1e3).toFixed(1) + 'K';
+  return '₹' + Math.round(n).toLocaleString('en-IN');
+};
+const PCT = n => n.toFixed(2) + '%';
+const gv = id => parseFloat(document.getElementById(id)?.value) || 0;
+const sl = (id,mn,mx,v,st,g) =>
+  `<input type="range" class="cw-slider${g?' g':''}" id="${id}_r" min="${mn}" max="${mx}" step="${st||1}" value="${v}" oninput="syncS('${id}')">`;
+const ni = (id,mn,mx,v,st) =>
+  `<input type="number" class="cw-num" id="${id}_n" min="${mn}" max="999999999" step="${st||1}" value="${v}" data-slmax="${mx}" inputmode="numeric" oninput="syncN('${id}')">`;
+
+function syncS(id){
+  const r=document.getElementById(id+'_r'),n=document.getElementById(id+'_n'),b=document.getElementById(id+'_b');
+  if(n) n.value=r.value;
+  if(b) updateBadge(id,r.value);
+  highlightMark(id,r.value);
+}
+function syncN(id){
+  const r=document.getElementById(id+'_r'),n=document.getElementById(id+'_n'),b=document.getElementById(id+'_b');
+  if(r){const lo=parseFloat(r.min)||0,hi=parseFloat(r.max),v=parseFloat(n.value)||0;r.value=Math.min(hi,Math.max(lo,v));}
+  if(b) updateBadge(id,n.value);
+  highlightMark(id,n.value);
+}
+function snapTo(id,val){
+  const r=document.getElementById(id+'_r'),n=document.getElementById(id+'_n'),b=document.getElementById(id+'_b');
+  const numVal=parseFloat(val);
+  if(n) n.value=numVal;
+  if(r){const lo=parseFloat(r.min)||0,hi=parseFloat(r.max);r.value=Math.min(hi,Math.max(lo,numVal));}
+  if(b) updateBadge(id,numVal);
+  highlightMark(id,numVal);
+}
+function highlightMark(id,val){
+  const container=document.getElementById(id+'_marks');
+  if(!container) return;
+  const numVal=parseFloat(val);
+  container.querySelectorAll('.cw-mark').forEach(m=>{
+    const mv=parseFloat(m.dataset.val);
+    m.classList.toggle('active',Math.abs(mv-numVal)<0.001);
+  });
+}
+const badges={};
+function updateBadge(id,val){
+  const b=document.getElementById(id+'_b');
+  if(!b) return;
+  const fmt=badges[id];
+  b.textContent=fmt?fmt(val):val;
+}
+function autoMarks(mn,mx,bfmt){
+  const fmt=v=>bfmt?bfmt(v):(v>=10000000?(v/10000000).toFixed(1)+'Cr':v>=100000?(v/100000).toFixed(1)+'L':v>=1000?(v/1000).toFixed(0)+'K':String(v));
+  const range=mx-mn;
+  return [0,0.25,0.5,0.75,1].map(f=>{const v=Math.round((mn+range*f)*100)/100;return {l:fmt(v),v};});
+}
+const row=(id,label,mn,mx,v,st,bfmt,isGreen,marks)=>{
+  badges[id]=bfmt;
+  const formattedV=bfmt?bfmt(v):v;
+  const markObjs=marks&&marks.length?marks:autoMarks(mn,mx,bfmt);
+  const marksHtml=`<div class="cw-marks" id="${id}_marks">${
+    markObjs.map(m=>`<span class="cw-mark" data-val="${m.v}" onclick="snapTo('${id}',${m.v})">${m.l}</span>`).join('')
+  }</div>`;
+  return `<div class="cw-row">
+    <div class="cw-lbl"><span class="cw-lbl-text">${label}</span><span class="cw-badge${isGreen?' g':''}" id="${id}_b">${formattedV}</span></div>
+    <div class="cw-ctrl">${ni(id,mn,mx,v,st)}${sl(id,mn,mx,v,st,isGreen)}</div>
+    ${marksHtml}
+  </div>`;
+};
+const resTiles=(tiles,bar)=>`
+  <div class="cw-results show">
+    <div class="res-grid">${tiles.map(t=>`
+      <div class="res-tile">
+        <div class="rt-lbl">${t.l}</div>
+        <div class="rt-val ${t.c||'p'}">${t.v}</div>
+        ${t.s?`<div class="rt-sub">${t.s}</div>`:''}
+      </div>`).join('')}</div>
+    ${bar?`<div class="res-bar-wrap">
+      <div class="res-bar-label"><span>${bar.l1}</span><span>${bar.l2}</span></div>
+      <div class="res-bar-track"><div class="res-bar-fill" style="width:${bar.w}%;background:linear-gradient(90deg,var(--p500),var(--g500));"></div></div>
+    </div>`:''}
+    <div class="cw-disc">⚠️ For illustrative purposes only. Returns are not guaranteed. Consult a SEBI-registered advisor before investing.</div>
+  </div>`;
+const btn=(fn,label)=>`<button class="cw-btn" onclick="${fn}()">✨ ${label}</button>`;
+
+/* ═══ CALCULATOR DEFINITIONS ═══ */
+const CALCS = {
+  sip:{icon:'📊',title:'SIP Calculator',sub:'Systematic Investment Plan returns',
+    html:()=>
+      row('sip','Monthly SIP (₹)',500,500000,20000,500,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹20K',v:20000},{l:'₹50K',v:50000},{l:'₹1L',v:100000}])+
+      row('sipr','Expected Return (% p.a.)',1,30,12,0.5,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      row('sipy','Tenure (Years)',1,40,15,1,v=>v+' Yrs',true,[{l:'10yr',v:10},{l:'15yr',v:15},{l:'20yr',v:20}])+
+      btn('calcSIP','Calculate SIP Returns')+`<div id="sip_res"></div>`},
+
+  stepup:{icon:'⬆️',title:'Step-Up SIP Calculator',sub:'Annual SIP increase power',
+    html:()=>
+      row('su','Monthly SIP (₹)',500,500000,20000,500,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹20K',v:20000},{l:'₹50K',v:50000},{l:'₹1L',v:100000}])+
+      row('sust','Annual Step-Up (%)',0,50,8,1,v=>v+'%',true,[{l:'5%',v:5},{l:'8%',v:8},{l:'12%',v:12}])+
+      row('sur','Expected Return (% p.a.)',1,30,12,0.5,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      row('suy','Tenure (Years)',1,40,15,1,v=>v+' Yrs',true,[{l:'10yr',v:10},{l:'15yr',v:15},{l:'20yr',v:20}])+
+      btn('calcStepUp','Calculate Step-Up Returns')+`<div id="su_res"></div>`},
+
+  lumpsum:{icon:'💰',title:'Lumpsum Calculator',sub:'One-time investment returns',
+    html:()=>
+      row('ls','Investment Amount (₹)',1000,100000000,2000000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹20L',v:2000000},{l:'₹50L',v:5000000},{l:'₹1Cr',v:10000000}])+
+      row('lsr','Expected Return (% p.a.)',1,30,12,0.5,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      row('lsy','Tenure (Years)',1,40,15,1,v=>v+' Yrs',true,[{l:'10yr',v:10},{l:'15yr',v:15},{l:'20yr',v:20}])+
+      btn('calcLumpsum','Calculate Returns')+`<div id="ls_res"></div>`},
+
+  swp:{icon:'💸',title:'SWP Calculator',sub:'Systematic Withdrawal Plan',
+    html:()=>
+      row('swpi','Total Corpus (₹)',10000,200000000,10000000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹50L',v:5000000},{l:'₹1Cr',v:10000000},{l:'₹2Cr',v:20000000}])+
+      row('swpw','Monthly Withdrawal (₹)',500,1000000,50000,500,v=>'₹'+Number(v).toLocaleString('en-IN'),true,[{l:'₹50K',v:50000},{l:'₹1L',v:100000},{l:'₹2L',v:200000}])+
+      row('swpr','Expected Return (% p.a.)',1,20,8,0.5,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      btn('calcSWP','Calculate SWP')+`<div id="swp_res"></div>`},
+
+  fd:{icon:'🏛️',title:'FD Calculator',sub:'Fixed Deposit maturity value',
+    html:()=>
+      row('fd','FD Amount (₹)',1000,100000000,1000000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹10L',v:1000000},{l:'₹25L',v:2500000},{l:'₹50L',v:5000000}])+
+      row('fdr','Interest Rate (% p.a.)',1,15,7,0.1,v=>v+'%',false,[{l:'6%',v:6},{l:'8%',v:8},{l:'10%',v:10}])+
+      row('fdy','Tenure (Years)',1,10,3,1,v=>v+' Yrs',true,[{l:'1yr',v:1},{l:'5yr',v:5},{l:'10yr',v:10}])+
+      btn('calcFD','Calculate FD Maturity')+`<div id="fd_res"></div>`},
+
+  rd:{icon:'🪙',title:'RD Calculator',sub:'Recurring Deposit maturity',
+    html:()=>
+      row('rd','Monthly Deposit (₹)',100,500000,10000,100,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹10K',v:10000},{l:'₹25K',v:25000},{l:'₹50K',v:50000}])+
+      row('rdr','Interest Rate (% p.a.)',1,15,7,0.1,v=>v+'%',false,[{l:'6%',v:6},{l:'8%',v:8},{l:'10%',v:10}])+
+      row('rdy','Tenure (Years)',1,10,3,1,v=>v+' Yrs',true,[{l:'1yr',v:1},{l:'5yr',v:5},{l:'10yr',v:10}])+
+      btn('calcRD','Calculate RD Maturity')+`<div id="rd_res"></div>`},
+
+  cagr:{icon:'📐',title:'CAGR Calculator',sub:'Compounded Annual Growth Rate',
+    html:()=>
+      row('ci','Initial Value (₹)',100,100000000,1000000,100,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹10L',v:1000000},{l:'₹25L',v:2500000},{l:'₹50L',v:5000000}])+
+      row('cf','Final Value (₹)',100,1000000000,2500000,100,v=>'₹'+Number(v).toLocaleString('en-IN'),true,[{l:'₹25L',v:2500000},{l:'₹50L',v:5000000},{l:'₹1Cr',v:10000000}])+
+      row('cy','Years',1,40,10,1,v=>v+' Yrs',false,[{l:'10yr',v:10},{l:'15yr',v:15},{l:'20yr',v:20}])+
+      btn('calcCAGR','Calculate CAGR')+`<div id="cagr_res"></div>`},
+
+  rule72:{icon:'⚡',title:'Rule of 72',sub:'Estimate doubling time instantly',
+    html:()=>
+      row('r72','Annual Return Rate (%)',0.5,50,12,0.5,v=>v+'%',true,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      btn('calcRule72','Calculate Doubling Time')+`<div id="r72_res"></div>`},
+
+  emi:{icon:'🏠',title:'EMI Calculator',sub:'Monthly loan repayment & interest',
+    html:()=>
+      row('em','Loan Amount (₹)',10000,200000000,2500000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹25L',v:2500000},{l:'₹50L',v:5000000},{l:'₹1Cr',v:10000000}])+
+      row('emr','Interest Rate (% p.a.)',1,30,8.5,0.1,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      row('emy','Loan Tenure (Years)',1,30,20,1,v=>v+' Yrs',true,[{l:'10yr',v:10},{l:'15yr',v:15},{l:'20yr',v:20}])+
+      btn('calcEMI','Calculate EMI')+`<div id="emi_res"></div>`},
+
+  'homeloan-elig':{icon:'🏡',title:'Home Loan Eligibility',sub:'Max loan based on income',
+    html:()=>
+      row('hle','Net Monthly Income (₹)',5000,5000000,50000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹50K',v:50000},{l:'₹1L',v:100000},{l:'₹2L',v:200000}])+
+      row('hlo','Monthly Obligations (₹)',0,500000,25000,500,v=>'₹'+Number(v).toLocaleString('en-IN'),true,[{l:'₹25K',v:25000},{l:'₹50K',v:50000},{l:'₹1L',v:100000}])+
+      row('hlr','Interest Rate (% p.a.)',6,20,8.5,0.1,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      row('hlt','Loan Tenure (Years)',5,30,20,1,v=>v+' Yrs',true,[{l:'10yr',v:10},{l:'15yr',v:15},{l:'20yr',v:20}])+
+      btn('calcHLE','Calculate Eligibility')+`<div id="hle_res"></div>`},
+
+  prepayment:{icon:'⚡',title:'Loan Prepayment Savings',sub:'Interest saved by prepaying',
+    html:()=>
+      row('pp','Outstanding Loan (₹)',10000,200000000,2500000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹25L',v:2500000},{l:'₹50L',v:5000000},{l:'₹1Cr',v:10000000}])+
+      row('ppr','Interest Rate (% p.a.)',1,30,8.5,0.1,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      row('ppt','Remaining Tenure (Years)',1,30,15,1,v=>v+' Yrs',true,[{l:'10yr',v:10},{l:'15yr',v:15},{l:'20yr',v:20}])+
+      row('ppamt','Prepayment Amount (₹)',10000,50000000,500000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),true)+
+      btn('calcPrepayment','Calculate Savings')+`<div id="pp_res"></div>`},
+
+  carloan:{icon:'🚗',title:'Car Loan Calculator',sub:'EMI with down payment',
+    html:()=>
+      row('cl','Car Ex-Showroom Price (₹)',50000,20000000,800000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹8L',v:800000},{l:'₹12L',v:1200000},{l:'₹20L',v:2000000}])+
+      row('cld','Down Payment (₹)',0,5000000,200000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),true)+
+      row('clr','Interest Rate (% p.a.)',6,24,9,0.1,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      row('cly','Loan Tenure (Years)',1,15,5,1,v=>v+' Yrs',true,[{l:'5yr',v:5},{l:'10yr',v:10},{l:'15yr',v:15}])+
+      btn('calcCarLoan','Calculate Car Loan EMI')+`<div id="cl_res"></div>`},
+
+  creditcard:{icon:'💳',title:'Credit Card Payoff',sub:'Time & cost to clear CC debt',
+    html:()=>
+      row('cc','Outstanding Balance (₹)',100,5000000,50000,500,v=>'₹'+Number(v).toLocaleString('en-IN'),false)+
+      row('ccr','Annual Interest Rate (%)',10,60,36,0.5,v=>v+'%',false,[{l:'18%',v:18},{l:'24%',v:24},{l:'36%',v:36}])+
+      row('ccp','Monthly Payment (₹)',100,5000000,5000,100,v=>'₹'+Number(v).toLocaleString('en-IN'),true,[{l:'₹5K',v:5000},{l:'₹10K',v:10000},{l:'₹25K',v:25000}])+
+      btn('calcCC','Calculate Payoff')+`<div id="cc_res"></div>`},
+
+  personalloan:{icon:'🧾',title:'Personal Loan EMI',sub:'Unsecured loan cost',
+    html:()=>
+      row('pla','Loan Amount (₹)',10000,5000000,500000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹5L',v:500000},{l:'₹10L',v:1000000},{l:'₹25L',v:2500000}])+
+      row('plr','Interest Rate (% p.a.)',8,36,12,0.5,v=>v+'%',false,[{l:'10%',v:10},{l:'12%',v:12},{l:'18%',v:18}])+
+      row('ply','Tenure (Years)',1,7,3,1,v=>v+' Yrs',true,[{l:'1yr',v:1},{l:'3yr',v:3},{l:'5yr',v:5}])+
+      btn('calcPL','Calculate Personal Loan EMI')+`<div id="pl_res"></div>`},
+
+  bt:{icon:'🔀',title:'Balance Transfer Savings',sub:'Savings from switching lender',
+    html:()=>
+      row('bt','Outstanding Loan (₹)',10000,200000000,1000000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹10L',v:1000000},{l:'₹25L',v:2500000},{l:'₹50L',v:5000000}])+
+      row('bto','Current Rate (% p.a.)',1,30,10,0.1,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      row('btn','New Rate (% p.a.)',1,30,8,0.1,v=>v+'%',true,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      row('btt','Remaining Tenure (Years)',1,30,15,1,v=>v+' Yrs',false,[{l:'10yr',v:10},{l:'15yr',v:15},{l:'20yr',v:20}])+
+      btn('calcBT','Calculate Savings')+`<div id="bt_res"></div>`},
+
+  incometax:{icon:'🏛️',title:'Income Tax Calculator',sub:'FY 2026–27 · New vs Old Regime',
+    html:()=>
+      row('it','Gross Annual Income (₹)',100000,100000000,1000000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),false)+
+      row('it80c','Section 80C Investments (₹)',0,150000,150000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),true)+
+      row('it80d','Section 80D Premium (₹)',0,100000,25000,500,v=>'₹'+Number(v).toLocaleString('en-IN'),false)+
+      row('ithra','Annual HRA Received (₹)',0,2000000,0,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),true)+
+      row('itrp','Annual Rent Paid (₹)',0,2000000,0,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),false)+
+      btn('calcIT','Compare Tax Regimes')+`<div id="it_res"></div>`},
+
+  ltcg:{icon:'📈',title:'LTCG Tax Calculator',sub:'12.5% above ₹1.25L — Budget 2024',
+    html:()=>
+      row('ltcg','Total LTCG Gains this FY (₹)',0,100000000,2500000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹25L',v:2500000},{l:'₹50L',v:5000000},{l:'₹1Cr',v:10000000}])+
+      btn('calcLTCG','Calculate LTCG Tax')+`<div id="ltcg_res"></div>`},
+
+  stcg:{icon:'📉',title:'STCG Tax Calculator',sub:'20% flat — Budget 2024',
+    html:()=>
+      row('stcg','Total STCG Gains this FY (₹)',0,100000000,500000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹5L',v:500000},{l:'₹10L',v:1000000},{l:'₹25L',v:2500000}])+
+      btn('calcSTCG','Calculate STCG Tax')+`<div id="stcg_res"></div>`},
+
+  hra:{icon:'🏠',title:'HRA Exemption',sub:'Section 10(13A) calculation',
+    html:()=>
+      row('hrab','Basic + DA (Annual ₹)',10000,10000000,600000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),false)+
+      row('hrah','HRA Received (Annual ₹)',0,5000000,240000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),true)+
+      row('hrar','Rent Paid (Annual ₹)',0,5000000,180000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),false)+
+      `<div class="cw-row"><div class="cw-lbl"><span class="cw-lbl-text">City Category</span></div>
+      <select class="cw-select" id="hra_city"><option value="0.5">Metro (Delhi/Mumbai/Kolkata/Chennai)</option><option value="0.4">Non-Metro</option></select></div>`+
+      btn('calcHRA','Calculate HRA Exemption')+`<div id="hra_res"></div>`},
+
+  'ppf-tax':{icon:'📙',title:'PPF Calculator',sub:'7.1% p.a. — EEE Tax-Free',
+    html:()=>
+      row('ppfa','Annual Deposit (₹)',500,500000,150000,500,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹1.5L',v:150000},{l:'₹3L',v:300000},{l:'₹5L',v:500000}])+
+      row('ppfy','Tenure (Years, min 15)',15,50,15,5,v=>v+' Yrs',true,[{l:'15yr',v:15},{l:'20yr',v:20},{l:'30yr',v:30}])+
+      btn('calcPPF','Calculate PPF Maturity')+`<div id="ppf_res"></div>`},
+
+  nsc:{icon:'📜',title:'NSC Calculator',sub:'Post Office — 7.7% p.a.',
+    html:()=>
+      row('nsca','Investment Amount (₹)',1000,100000000,500000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹5L',v:500000},{l:'₹10L',v:1000000},{l:'₹25L',v:2500000}])+
+      btn('calcNSC','Calculate NSC Maturity')+`<div id="nsc_res"></div>`},
+
+  tds:{icon:'🔎',title:'TDS Estimator',sub:'Tax Deducted at Source',
+    html:()=>
+      `<div class="cw-row"><div class="cw-lbl"><span class="cw-lbl-text">Income Type</span></div>
+      <select class="cw-select" id="tds_type"><option value="0.1">FD Interest (10%)</option><option value="0.02">Rent (2%)</option><option value="0.1">Professional Fees (10%)</option></select></div>`+
+      row('tdsa','Annual Amount (₹)',0,50000000,100000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),false)+
+      btn('calcTDS','Calculate TDS')+`<div id="tds_res"></div>`},
+
+  'life-cover':{icon:'❤️',title:'Life Cover Estimator',sub:'How much term insurance you need',
+    html:()=>
+      row('lca','Annual Income (₹)',100000,50000000,1200000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹12L',v:1200000},{l:'₹25L',v:2500000},{l:'₹50L',v:5000000}])+
+      row('lcd','Outstanding Loans (₹)',0,100000000,2500000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),true)+
+      row('lcn','Dependants (Number)',0,10,2,1,v=>v+' persons',false,[{l:'1',v:1},{l:'2',v:2},{l:'3',v:3},{l:'5',v:5}])+
+      row('lcy','Years to Support (yrs)',5,40,20,1,v=>v+' yrs',true,[{l:'10yr',v:10},{l:'20yr',v:20},{l:'30yr',v:30}])+
+      btn('calcLC','Calculate Life Cover Needed')+`<div id="lc_res"></div>`},
+
+  gratuity:{icon:'🏆',title:'Gratuity Calculator',sub:'Statutory gratuity payable',
+    html:()=>
+      row('grb','Monthly Basic + DA (₹)',5000,1000000,25000,500,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹25K',v:25000},{l:'₹50K',v:50000},{l:'₹1L',v:100000}])+
+      row('gry','Years of Service',1,40,10,1,v=>v+' yrs',true,[{l:'5yr',v:5},{l:'10yr',v:10},{l:'15yr',v:15}])+
+      btn('calcGratuity','Calculate Gratuity')+`<div id="gr_res"></div>`},
+
+  ulip:{icon:'🔁',title:'ULIP vs Term + MF',sub:'Which gives better wealth?',
+    html:()=>
+      row('ua','Annual Premium (₹)',10000,2000000,100000,5000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹1L',v:100000},{l:'₹2L',v:200000},{l:'₹5L',v:500000}])+
+      row('uy','Policy Tenure (Years)',5,30,10,1,v=>v+' Yrs',true,[{l:'10yr',v:10},{l:'12yr',v:12},{l:'15yr',v:15}])+
+      row('ur','Expected MF Return (% p.a.)',8,20,12,0.5,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      btn('calcULIP','Compare ULIP vs Term+MF')+`<div id="ulip_res"></div>`},
+
+  termpremium:{icon:'📝',title:'Term Premium Estimator',sub:'Approximate annual term premium',
+    html:()=>
+      row('tpa','Current Age (Years)',18,60,30,1,v=>v+' yrs',false,[{l:'25',v:25},{l:'30',v:30},{l:'35',v:35},{l:'40',v:40}])+
+      row('tpsa','Sum Assured (Cr)',1,20,2,0.5,v=>v+' Cr',true,[{l:'1 Cr',v:1},{l:'2 Cr',v:2},{l:'5 Cr',v:5}])+
+      row('tpten','Policy Tenure (Years)',10,40,30,1,v=>v+' yrs',false,[{l:'20yr',v:20},{l:'30yr',v:30},{l:'40yr',v:40}])+
+      btn('calcTP','Estimate Term Premium')+`<div id="tp_res"></div>`},
+
+  criticalillness:{icon:'🏥',title:'Critical Illness Cover',sub:'Recommended CI cover amount',
+    html:()=>
+      row('ciage','Current Age (Years)',18,70,35,1,v=>v+' yrs',false,[{l:'30',v:30},{l:'35',v:35},{l:'40',v:40},{l:'45',v:45}])+
+      row('ciinc','Annual Income (₹)',100000,20000000,600000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),true)+
+      row('cimed','Annual Medical Cost (₹)',10000,2000000,50000,5000,v=>'₹'+Number(v).toLocaleString('en-IN'),false)+
+      btn('calcCI','Calculate CI Cover')+`<div id="ci_res"></div>`},
+
+  childplan:{icon:'👧',title:'Child Education Plan',sub:'SIP needed for education goal',
+    html:()=>
+      row('cpage','Child Current Age (Years)',0,15,3,1,v=>v+' yrs',false,[{l:'3yrs',v:3},{l:'5yrs',v:5},{l:'8yrs',v:8}])+
+      row('cpcost','Education Cost Today (₹)',100000,20000000,2000000,100000,v=>'₹'+Number(v).toLocaleString('en-IN'),true,[{l:'₹20L',v:2000000},{l:'₹50L',v:5000000},{l:'₹1Cr',v:10000000}])+
+      row('cpinf','Education Inflation (%)',5,20,8,0.5,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      row('cprr','Expected Return (% p.a.)',8,20,12,0.5,v=>v+'%',true,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      btn('calcCP','Calculate SIP for Child Plan')+`<div id="cp_res"></div>`},
+
+  retirement:{icon:'🎯',title:'Retirement Corpus Planner',sub:'Goal-based retirement planning',
+    html:()=>
+      row('rta','Current Age (Years)',18,60,30,1,v=>v+' yrs',false,[{l:'25',v:25},{l:'30',v:30},{l:'35',v:35},{l:'40',v:40}])+
+      row('rtre','Retirement Age (Years)',40,75,60,1,v=>v+' yrs',true,[{l:'50',v:50},{l:'60',v:60},{l:'65',v:65}])+
+      row('rtle','Life Expectancy (Years)',60,100,85,1,v=>v+' yrs',false)+
+      row('rtme','Monthly Expenses Today (₹)',5000,1000000,50000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),true,[{l:'₹50K',v:50000},{l:'₹1L',v:100000},{l:'₹2L',v:200000}])+
+      row('rtinf','Inflation Rate (%)',3,12,6,0.5,v=>v+'%',false,[{l:'5%',v:5},{l:'6%',v:6},{l:'7%',v:7}])+
+      row('rtr','Expected Return Pre-Retirement (%)',8,20,12,0.5,v=>v+'%',true,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      btn('calcRetirement','Calculate Retirement Corpus')+`<div id="ret_res"></div>`},
+
+  nps:{icon:'🏛️',title:'NPS Calculator',sub:'National Pension System Tier-1',
+    html:()=>
+      row('npsm','Monthly Contribution (₹)',500,500000,5000,500,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹1K',v:1000},{l:'₹5K',v:5000},{l:'₹10K',v:10000}])+
+      row('npsy','Contribution Tenure (Years)',5,40,25,1,v=>v+' Yrs',true,[{l:'10yr',v:10},{l:'20yr',v:20},{l:'30yr',v:30}])+
+      row('npsr','Expected Return (% p.a.)',8,14,10,0.5,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      row('npsa','Annuity Rate (%)',4,10,6,0.5,v=>v+'%',true)+
+      btn('calcNPS','Calculate NPS Pension')+`<div id="nps_res"></div>`},
+
+  epf:{icon:'🏢',title:'EPF Calculator',sub:'Employee Provident Fund corpus',
+    html:()=>
+      row('epfb','Monthly Basic + DA (₹)',5000,1000000,25000,500,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹25K',v:25000},{l:'₹50K',v:50000},{l:'₹1L',v:100000}])+
+      row('epfc','Current EPF Balance (₹)',0,100000000,50000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),true)+
+      row('epfy','Years to Retirement',1,40,25,1,v=>v+' Yrs',false,[{l:'10yr',v:10},{l:'20yr',v:20},{l:'30yr',v:30}])+
+      btn('calcEPF','Calculate EPF Corpus')+`<div id="epf_res"></div>`},
+
+  ssy:{icon:'🌸',title:'Sukanya Samriddhi (SSY)',sub:'8.2% p.a. — EEE Tax-Free',
+    html:()=>
+      row('ssya2','Annual Deposit (₹)',250,150000,50000,250,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹50K',v:50000},{l:'₹1L',v:100000},{l:'₹1.5L',v:150000}])+
+      row('ssyage','Daughter\'s Current Age (Years)',0,10,3,1,v=>v+' yrs',true,[{l:'3yrs',v:3},{l:'5yrs',v:5},{l:'8yrs',v:8}])+
+      btn('calcSSY','Calculate SSY Maturity')+`<div id="ssy_res"></div>`},
+
+  fire:{icon:'🔥',title:'FIRE Number Calculator',sub:'Your Financial Independence Number',
+    html:()=>
+      row('fme','Monthly Expenses (₹)',5000,1000000,50000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹50K',v:50000},{l:'₹1L',v:100000},{l:'₹2L',v:200000}])+
+      row('finf','Expected Inflation (%)',3,12,6,0.5,v=>v+'%',false,[{l:'5%',v:5},{l:'6%',v:6},{l:'7%',v:7}])+
+      row('fwr','Safe Withdrawal Rate (%)',2,6,4,0.25,v=>v+'%',true,[{l:'3%',v:3},{l:'4%',v:4},{l:'5%',v:5}])+
+      row('fcr','Current Corpus (₹)',0,100000000,1000000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),false)+
+      row('fret','Expected Return (%)',8,20,12,0.5,v=>v+'%',true,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      btn('calcFIRE','Calculate My FIRE Number')+`<div id="fire_res"></div>`},
+
+
+  seniorfd:{icon:'🏦',title:'Senior Citizen FD',sub:'Higher FD rates for 60+ investors',
+    html:()=>
+      row('scfd','FD Amount (₹)',1000,100000000,1000000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹10L',v:1000000},{l:'₹25L',v:2500000},{l:'₹50L',v:5000000}])+
+      row('scfdr','Interest Rate (% p.a.)',1,15,7.5,0.1,v=>v+'%',false,[{l:'7%',v:7},{l:'7.5%',v:7.5},{l:'8%',v:8}])+
+      row('scfdy','Tenure (Years)',1,10,3,1,v=>v+' Yrs',true,[{l:'1yr',v:1},{l:'3yr',v:3},{l:'5yr',v:5}])+
+      btn('calcSeniorFD','Calculate Senior Citizen FD')+`<div id="scfd_res"></div>`},
+  scss:{icon:'👴',title:'Senior Citizen Savings (SCSS)',sub:'8.2% p.a. — Quarterly Payouts',
+    html:()=>
+      row('scssd','Deposit Amount (₹)',10000,1500000,1000000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹5L',v:500000},{l:'₹10L',v:1000000},{l:'₹15L',v:1500000}])+
+      row('scssy','Tenure (Years)',1,5,5,1,v=>v+' Yrs',true,[{l:'1yr',v:1},{l:'3yr',v:3},{l:'5yr',v:5}])+
+      btn('calcSCSS','Calculate SCSS Returns')+`<div id="scss_res"></div>`},
+
+  wealthdrawdown:{icon:'🌊',title:'Wealth Drawdown Planner',sub:'Corpus sustainability check',
+    html:()=>
+      row('wdcorpus','Starting Corpus (₹)',100000,500000000,10000000,100000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹1Cr',v:10000000},{l:'₹2Cr',v:20000000},{l:'₹5Cr',v:50000000}])+
+      row('wdmt','Monthly Withdrawal (₹)',5000,1000000,50000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),true,[{l:'₹50K',v:50000},{l:'₹1L',v:100000},{l:'₹2L',v:200000}])+
+      row('wdr','Expected Return (% p.a.)',1,20,8,0.5,v=>v+'%',false,[{l:'6%',v:6},{l:'8%',v:8},{l:'10%',v:10}])+
+      row('wdinf','Inflation Rate (%)',0,12,6,0.5,v=>v+'%',false)+
+      btn('calcWD','Calculate Drawdown Plan')+`<div id="wd_res"></div>`},
+
+  goal:{icon:'🏆',title:'Wealth Goal Tracker',sub:'SIP needed to hit your target',
+    html:()=>
+      row('glt','Target Amount (₹)',10000,1000000000,10000000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹1Cr',v:10000000},{l:'₹2Cr',v:20000000},{l:'₹5Cr',v:50000000}])+
+      row('glr','Expected Return (% p.a.)',1,30,12,0.5,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      row('gly','Time to Goal (Years)',1,40,15,1,v=>v+' Yrs',true,[{l:'10yr',v:10},{l:'15yr',v:15},{l:'20yr',v:20}])+
+      btn('calcGoal','Calculate Required SIP')+`<div id="goal_res"></div>`},
+
+  inflation:{icon:'📊',title:'Inflation Calculator',sub:'Purchasing power erosion',
+    html:()=>
+      row('infv','Current Amount (₹)',100,100000000,100000,100,v=>'₹'+Number(v).toLocaleString('en-IN'),false)+
+      row('infr','Annual Inflation Rate (%)',1,20,6,0.5,v=>v+'%',false)+
+      row('infy','Years',1,40,10,1,v=>v+' Yrs',true,[{l:'10yr',v:10},{l:'15yr',v:15},{l:'20yr',v:20}])+
+      btn('calcInflation','Calculate Future Value')+`<div id="inf_res"></div>`},
+
+  emergency:{icon:'🆘',title:'Emergency Fund Calculator',sub:'How much you need & the gap',
+    html:()=>
+      row('efexp','Monthly Expenses (₹)',5000,1000000,40000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹40K',v:40000},{l:'₹80K',v:80000},{l:'₹1.5L',v:150000}])+
+      row('efmos','Months of Buffer',3,24,6,1,v=>v+' months',true,[{l:'3mo',v:3},{l:'6mo',v:6},{l:'12mo',v:12}])+
+      row('efcur','Current Emergency Fund (₹)',0,10000000,0,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),false)+
+      btn('calcEF','Check Emergency Fund Status')+`<div id="ef_res"></div>`},
+
+  budget:{icon:'📋',title:'Budget Planner (50/30/20)',sub:'Needs, Wants & Savings',
+    html:()=>
+      row('bgtinc','Monthly Income (₹)',5000,5000000,60000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹60K',v:60000},{l:'₹1L',v:100000},{l:'₹2L',v:200000}])+
+      row('bgtneed','Needs Spending (₹)',0,5000000,30000,500,v=>'₹'+Number(v).toLocaleString('en-IN'),true)+
+      row('bgtwant','Wants Spending (₹)',0,5000000,15000,500,v=>'₹'+Number(v).toLocaleString('en-IN'),false)+
+      btn('calcBudget','Analyse Budget')+`<div id="bgt_res"></div>`},
+
+  networth:{icon:'💎',title:'Net Worth Calculator',sub:'Assets minus liabilities',
+    html:()=>`
+      <div class="cw-row"><div class="cw-lbl"><span class="cw-lbl-text">Total Assets (₹)</span></div>
+      <input type="number" class="cw-num" id="nwa" value="2000000" style="width:100%;max-width:100%" inputmode="numeric" placeholder="Enter total assets"></div>
+      <div class="cw-row"><div class="cw-lbl"><span class="cw-lbl-text">Total Liabilities (₹)</span></div>
+      <input type="number" class="cw-num" id="nwl" value="800000" style="width:100%;max-width:100%" inputmode="numeric" placeholder="Enter total liabilities"></div>
+      ${btn('calcNW','Calculate Net Worth')}<div id="nw_res"></div>`},
+
+  savingsrate:{icon:'🐖',title:'Savings Rate Calculator',sub:'FIRE timeline based on savings',
+    html:()=>
+      row('sri','Monthly Income (₹)',5000,5000000,50000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹50K',v:50000},{l:'₹1L',v:100000},{l:'₹2L',v:200000}])+
+      row('sre','Monthly Expenses (₹)',1000,5000000,35000,1000,v=>'₹'+Number(v).toLocaleString('en-IN'),true)+
+      row('srr','Return on Savings (% p.a.)',4,20,8,0.5,v=>v+'%',false)+
+      btn('calcSR','Calculate Savings Rate')+`<div id="sr_res"></div>`},
+
+  salaryhike:{icon:'💼',title:'Salary Hike Planner',sub:'New take-home after increment',
+    html:()=>
+      row('shctc','Current Annual CTC (₹)',100000,50000000,1200000,10000,v=>'₹'+Number(v).toLocaleString('en-IN'),false,[{l:'₹12L',v:1200000},{l:'₹25L',v:2500000},{l:'₹50L',v:5000000}])+
+      row('shhike','Hike Percentage (%)',1,50,15,0.5,v=>v+'%',true,[{l:'10%',v:10},{l:'15%',v:15},{l:'25%',v:25}])+
+      row('shtax','Tax Rate (Approx %)',0,40,20,1,v=>v+'%',false,[{l:'10%',v:10},{l:'20%',v:20},{l:'30%',v:30}])+
+      btn('calcSH','Calculate New Take-Home')+`<div id="sh_res"></div>`},
+
+  stepupswp:{icon:'📉',title:'Step-Up SWP',sub:'Growing systematic withdrawal plan',
+    html:()=>
+      row('susw','Corpus (₹)',100000,100000000,5000000,50000,v=>INR(v),false,[{l:'₹50L',v:5000000},{l:'₹1Cr',v:10000000},{l:'₹2Cr',v:20000000}])+
+      row('suswm','Initial Monthly Withdrawal (₹)',1000,500000,30000,1000,v=>INR(v),true,[{l:'₹20K',v:20000},{l:'₹30K',v:30000},{l:'₹50K',v:50000}])+
+      row('suswi','Annual Increase (%)',0,30,5,0.5,v=>v+'%',false,[{l:'3%',v:3},{l:'5%',v:5},{l:'8%',v:8}])+
+      row('suswr','Expected Return (% p.a.)',1,20,10,0.5,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      btn('calcStepUpSWP','Calculate Step-Up SWP')+`<div id="susw_res"></div>`},
+
+  goalplanner:{icon:'🎯',title:'Goal Planner',sub:'SIP needed to reach a target corpus',
+    html:()=>
+      row('gp','Target Amount (₹)',100000,100000000,2000000,50000,v=>INR(v),false,[{l:'₹20L',v:2000000},{l:'₹50L',v:5000000},{l:'₹1Cr',v:10000000}])+
+      row('gpr','Expected Return (% p.a.)',1,30,12,0.5,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      row('gpy','Years to Goal',1,40,10,1,v=>v+' Yrs',true,[{l:'5yr',v:5},{l:'10yr',v:10},{l:'20yr',v:20}])+
+      btn('calcGoalPlanner','Calculate Monthly SIP Needed')+`<div id="gp_res"></div>`},
+
+  mfreturns:{icon:'🏆',title:'Mutual Fund Returns',sub:'Absolute & annualised return calculator',
+    html:()=>
+      row('mfi','Invested Amount (₹)',1000,100000000,100000,1000,v=>INR(v),false,[{l:'₹1L',v:100000},{l:'₹5L',v:500000},{l:'₹10L',v:1000000}])+
+      row('mfv','Current Value (₹)',1000,100000000,180000,1000,v=>INR(v),true,[{l:'₹2L',v:200000},{l:'₹5L',v:500000},{l:'₹10L',v:1000000}])+
+      row('mfy','Holding Period (Years)',0.5,30,3,0.5,v=>v+' Yrs',false,[{l:'1yr',v:1},{l:'3yr',v:3},{l:'5yr',v:5}])+
+      btn('calcMFReturns','Calculate Returns')+`<div id="mf_res"></div>`},
+
+  sipvslumpsum:{icon:'🔄',title:'SIP vs Lumpsum',sub:'Which strategy builds more wealth?',
+    html:()=>
+      row('svl','Investment Amount (₹)',1000,10000000,100000,1000,v=>INR(v),false,[{l:'₹1L',v:100000},{l:'₹5L',v:500000},{l:'₹10L',v:1000000}])+
+      row('svlr','Expected Return (% p.a.)',1,30,12,0.5,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'12%',v:12}])+
+      row('svly','Tenure (Years)',1,40,10,1,v=>v+' Yrs',true,[{l:'5yr',v:5},{l:'10yr',v:10},{l:'20yr',v:20}])+
+      btn('calcSIPvsLumpsum','Compare Both')+`<div id="svl_res"></div>`},
+
+  educationloan:{icon:'🎓',title:'Education Loan',sub:'Student loan EMI with moratorium',
+    html:()=>
+      row('el','Loan Amount (₹)',10000,10000000,1000000,10000,v=>INR(v),false,[{l:'₹5L',v:500000},{l:'₹10L',v:1000000},{l:'₹25L',v:2500000}])+
+      row('elr','Interest Rate (% p.a.)',6,18,10,0.25,v=>v+'%',false,[{l:'8%',v:8},{l:'10%',v:10},{l:'13%',v:13}])+
+      row('elm','Moratorium (Months)',0,60,24,6,v=>v+' Months',true,[{l:'0',v:0},{l:'24',v:24},{l:'48',v:48}])+
+      row('ely','Repayment Tenure (Years)',1,15,7,1,v=>v+' Yrs',false,[{l:'5yr',v:5},{l:'7yr',v:7},{l:'10yr',v:10}])+
+      btn('calcEducationLoan','Calculate EMI')+`<div id="el_res"></div>`},
+
+  loancomparison:{icon:'📊',title:'Loan Comparison',sub:'Compare two loan offers side by side',
+    html:()=>
+      row('lc1a','Loan A — Amount (₹)',10000,100000000,2000000,10000,v=>INR(v),false,[{l:'₹20L',v:2000000},{l:'₹50L',v:5000000},{l:'₹1Cr',v:10000000}])+
+      row('lc1r','Loan A — Rate (% p.a.)',1,24,8.5,0.1,v=>v+'%',false,[{l:'7%',v:7},{l:'8.5%',v:8.5},{l:'10%',v:10}])+
+      row('lc1y','Loan A — Tenure (Years)',1,30,20,1,v=>v+' Yrs',false,[{l:'10yr',v:10},{l:'20yr',v:20},{l:'30yr',v:30}])+
+      row('lc2r','Loan B — Rate (% p.a.)',1,24,9.5,0.1,v=>v+'%',true,[{l:'8%',v:8},{l:'9.5%',v:9.5},{l:'11%',v:11}])+
+      row('lc2y','Loan B — Tenure (Years)',1,30,15,1,v=>v+' Yrs',false,[{l:'10yr',v:10},{l:'15yr',v:15},{l:'20yr',v:20}])+
+      btn('calcLoanComparison','Compare Loans')+`<div id="lc_res"></div>`},
+
+  homeloantax:{icon:'🏠',title:'Home Loan Tax Benefits',sub:'80C principal + 24B interest deductions',
+    html:()=>
+      row('hlt','Annual EMI Paid (₹)',12000,3600000,360000,12000,v=>INR(v),false,[{l:'₹3L',v:300000},{l:'₹6L',v:600000},{l:'₹12L',v:1200000}])+
+      row('hltp','Principal Repaid This Year (₹)',0,1500000,100000,5000,v=>INR(v),false,[{l:'₹50K',v:50000},{l:'₹1L',v:100000},{l:'₹1.5L',v:150000}])+
+      row('hlti','Interest Paid This Year (₹)',0,3000000,250000,5000,v=>INR(v),true,[{l:'₹1L',v:100000},{l:'₹2L',v:200000},{l:'₹3L',v:300000}])+
+      row('hltsl','Is Self-Occupied? (1=Yes, 0=Rented)',0,1,1,1,v=>v==1?'Self-Occupied':'Rented',false,[{l:'Yes',v:1},{l:'No',v:0}])+
+      btn('calcHomeLoanTax','Calculate Tax Benefit')+`<div id="hlt_res"></div>`},
+
+  gifttax:{icon:'🎁',title:'Gift Tax Guide',sub:'Is your gift taxable?',
+    html:()=>
+      row('gt','Gift Amount (₹)',1,10000000,75000,1000,v=>INR(v),false,[{l:'₹25K',v:25000},{l:'₹75K',v:75000},{l:'₹2L',v:200000}])+
+      row('gtr','Relation (1=Relative, 0=Non-Relative)',0,1,1,1,v=>v==1?'Relative':'Non-Relative',true,[{l:'Relative',v:1},{l:'Non-Relative',v:0}])+
+      row('gto','Occasion (1=Marriage/Will, 0=Other)',0,1,0,1,v=>v==1?'Exempt Occasion':'Other',false,[{l:'Marriage/Will',v:1},{l:'Other',v:0}])+
+      btn('calcGiftTax','Check Tax Liability')+`<div id="gt_res"></div>`},
+
+  healthpremium:{icon:'💊',title:'Health Premium Estimator',sub:'Mediclaim premium by age & cover',
+    html:()=>
+      row('hp','Sum Insured (₹)',100000,10000000,500000,50000,v=>INR(v),false,[{l:'₹3L',v:300000},{l:'₹5L',v:500000},{l:'₹10L',v:1000000}])+
+      row('hpa','Eldest Member Age (Years)',18,80,35,1,v=>v+' Yrs',false,[{l:'25',v:25},{l:'35',v:35},{l:'50',v:50}])+
+      row('hpm','Family Members',1,6,2,1,v=>v+' Members',true,[{l:'1',v:1},{l:'2',v:2},{l:'4',v:4}])+
+      btn('calcHealthPremium','Estimate Premium')+`<div id="hp_res"></div>`},
+
+  annuity:{icon:'🛡️',title:'Annuity Calculator',sub:'Monthly pension from annuity plan',
+    html:()=>
+      row('an','Corpus / Purchase Price (₹)',100000,100000000,5000000,50000,v=>INR(v),false,[{l:'₹50L',v:5000000},{l:'₹1Cr',v:10000000},{l:'₹2Cr',v:20000000}])+
+      row('anr','Annuity Rate (% p.a.)',3,10,6,0.1,v=>v+'%',false,[{l:'5%',v:5},{l:'6%',v:6},{l:'7%',v:7}])+
+      row('ant','Annuity Type (1=Lifetime, 0=Fixed Term)',0,1,1,1,v=>v==1?'Lifetime':'Fixed Term',true,[{l:'Lifetime',v:1},{l:'Fixed Term',v:0}])+
+      row('any','Term (Years, if Fixed)',5,30,15,1,v=>v+' Yrs',false,[{l:'10yr',v:10},{l:'15yr',v:15},{l:'20yr',v:20}])+
+      btn('calcAnnuity','Calculate Monthly Pension')+`<div id="an_res"></div>`},
+
+  savingsgoal:{icon:'🏧',title:'Savings Goal',sub:'Monthly savings to reach a target',
+    html:()=>
+      row('sg','Target Amount (₹)',1000,100000000,1000000,1000,v=>INR(v),false,[{l:'₹5L',v:500000},{l:'₹10L',v:1000000},{l:'₹50L',v:5000000}])+
+      row('sgr','Interest / Return Rate (% p.a.)',0,20,6,0.5,v=>v+'%',false,[{l:'4%',v:4},{l:'6%',v:6},{l:'8%',v:8}])+
+      row('sgy','Time to Goal (Years)',1,30,5,1,v=>v+' Yrs',true,[{l:'3yr',v:3},{l:'5yr',v:5},{l:'10yr',v:10}])+
+      btn('calcSavingsGoal','Calculate Monthly Savings')+`<div id="sg_res"></div>`},
+
+  dailysavings:{icon:'📆',title:'Daily Savings',sub:'Daily habit to a big goal',
+    html:()=>
+      row('ds','Daily Savings Amount (₹)',10,10000,100,10,v=>'₹'+v,false,[{l:'₹50',v:50},{l:'₹100',v:100},{l:'₹500',v:500}])+
+      row('dsr','Annual Return (%)',0,20,7,0.5,v=>v+'%',false,[{l:'4%',v:4},{l:'7%',v:7},{l:'10%',v:10}])+
+      row('dsy','Tenure (Years)',1,40,10,1,v=>v+' Yrs',true,[{l:'5yr',v:5},{l:'10yr',v:10},{l:'20yr',v:20}])+
+      btn('calcDailySavings','Calculate Goal')+`<div id="ds_res"></div>`},
+};
+
+/* ═══ MODAL SHOW/HIDE ═══ */
+function show(id){
+  const c=CALCS[id];
+  if(!c) return;
+  document.getElementById('m-icon').textContent=c.icon;
+  document.getElementById('m-title').textContent=c.title;
+  document.getElementById('m-sub').textContent=c.sub;
+  document.getElementById('m-body').innerHTML=c.html();
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function overlayClick(e){if(e.target===document.getElementById('overlay')) closeModal();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal()});
+
+/* ═══ DETAIL TOOLTIP ═══ */
+function showDetail(btn){
+  const card=btn.closest(".calc-card");
+  const title=card.querySelector(".card-title").textContent.trim();
+  const desc=card.querySelector(".card-desc").textContent.trim();
+  const tags=[...card.querySelectorAll(".ctag")].map(t=>t.textContent.trim());
+  const level=card.querySelector(".card-level").textContent.trim();
+  const existing=card.querySelector(".detail-panel");
+  if(existing){existing.remove();return;}
+  card.querySelectorAll(".detail-panel").forEach(p=>p.remove());
+  document.querySelectorAll(".detail-panel").forEach(p=>p.remove());
+  const panel=document.createElement("div");
+  panel.className="detail-panel";
+  panel.innerHTML=`<div class="dp-title">${title}</div><div class="dp-desc">${desc}</div><div class="dp-meta"><span class="dp-level">${level}</span>${tags.map(t=>`<span class="dp-tag">${t}</span>`).join("")}</div>`;
+  card.appendChild(panel);
+  setTimeout(()=>panel.classList.add("show"),10);
+  document.addEventListener("click",function handler(e){if(!panel.contains(e.target)&&e.target!==btn){panel.remove();document.removeEventListener("click",handler);}},true);
+}
+
+/* ═══ FILTER & SEARCH ═══ */
+var _activeFilter = 'all';
+function filterBy(cat, btn) {
+  _activeFilter = cat;
+  // update tab active state
+  document.querySelectorAll('.ftab').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  // reset search box and card inline styles
+  var searchEl = document.getElementById('search');
+  if (searchEl) searchEl.value = '';
+  document.querySelectorAll('.calc-card').forEach(function(c){ c.style.display = ''; });
+  // show/hide sections using direct style — not classList so there's no CSS dependency
+  document.querySelectorAll('.cat-section').forEach(function(s) {
+    s.style.display = (cat === 'all' || s.dataset.cat === cat) ? '' : 'none';
+  });
+  var emptyEl = document.getElementById('empty');
+  if (emptyEl) emptyEl.classList.remove('show');
+  // scroll to top of calculator grid
+  var mainEl = document.getElementById('main');
+  if (mainEl) mainEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function doSearch() {
+  var q = (document.getElementById('search').value || '').toLowerCase().trim();
+  // reset tab to All
+  document.querySelectorAll('.ftab').forEach(function(b){ b.classList.remove('on'); });
+  var allTab = document.querySelector('.ftab');
+  if (allTab) allTab.classList.add('on');
+  _activeFilter = 'all';
+  if (!q) {
+    document.querySelectorAll('.cat-section').forEach(function(s){ s.style.display = ''; });
+    document.querySelectorAll('.calc-card').forEach(function(c){ c.style.display = ''; });
+    var emptyEl = document.getElementById('empty');
+    if (emptyEl) emptyEl.classList.remove('show');
+    return;
+  }
+  var anyVisible = false;
+  document.querySelectorAll('.cat-section').forEach(function(s) {
+    s.style.display = '';
+    var catHas = false;
+    s.querySelectorAll('.calc-card').forEach(function(c) {
+      var kw = ((c.dataset.kw || '') + ' ' + c.textContent).toLowerCase();
+      var match = kw.indexOf(q) !== -1;
+      c.style.display = match ? '' : 'none';
+      if (match) { catHas = true; anyVisible = true; }
+    });
+    s.style.display = catHas ? '' : 'none';
+  });
+  var emptyEl = document.getElementById('empty');
+  if (emptyEl) emptyEl.classList.toggle('show', !anyVisible);
+}
+function mnavFilter(cat, mnavBtn) {
+  // update mobile nav active state
+  document.querySelectorAll('.mnav-item').forEach(function(a){ a.classList.remove('active'); });
+  mnavBtn.classList.add('active');
+  // trigger the same filter using the matching ftab button
+  var ftab = document.querySelector('.ftab[onclick*="' + cat + '"]');
+  if (ftab) { filterBy(cat, ftab); }
+  else { filterBy(cat, { classList:{ add:function(){}, remove:function(){} } }); }
+}
+
+/* ═══ CALC FUNCTIONS ═══ */
+function calcSIP(){
+  const m=gv('sip_n'),r=gv('sipr_n')/100/12,n=gv('sipy_n')*12;
+  const mat=m*((Math.pow(1+r,n)-1)/r)*(1+r);
+  const inv=m*n;
+  document.getElementById('sip_res').innerHTML=resTiles([
+    {l:'Maturity Amount',v:INR(mat),c:'g',s:'At '+gv('sipr_n')+'% p.a.'},{l:'Total Invested',v:INR(inv),c:'p'},
+    {l:'Wealth Gained',v:INR(mat-inv),c:'a',s:'Pure returns'},{l:'Return Multiple',v:(mat/inv).toFixed(1)+'×',c:'b'},
+  ],{l1:'Invested',l2:'Returns',w:Math.round(inv/mat*100)});
+}
+function calcStepUp(){
+  const m=gv('su_n'),st=gv('sust_n')/100,r=gv('sur_n')/100/12,y=gv('suy_n');
+  let mat=0,cur=m,inv=0;
+  for(let yr=0;yr<y;yr++){
+    for(let mo=0;mo<12;mo++){mat=(mat+cur)*(1+r);}
+    inv+=cur*12;
+    cur*=(1+st);
+  }
+  document.getElementById('su_res').innerHTML=resTiles([
+    {l:'Maturity Amount',v:INR(mat),c:'g'},{l:'Total Invested',v:INR(inv),c:'p'},
+    {l:'Wealth Gained',v:INR(mat-inv),c:'a'},{l:'Return Multiple',v:(mat/inv).toFixed(1)+'×',c:'b'},
+  ]);
+}
+function calcLumpsum(){
+  const p=gv('ls_n'),r=gv('lsr_n')/100,n=gv('lsy_n');
+  const mat=p*Math.pow(1+r,n);
+  document.getElementById('ls_res').innerHTML=resTiles([
+    {l:'Maturity Amount',v:INR(mat),c:'g'},{l:'Invested',v:INR(p),c:'p'},
+    {l:'Gains',v:INR(mat-p),c:'a'},{l:'CAGR',v:gv('lsr_n')+'%',c:'b'},
+  ],{l1:'Principal',l2:'Gains',w:Math.round(p/mat*100)});
+}
+function calcSWP(){
+  const P=gv('swpi_n'),w=gv('swpw_n'),r=gv('swpr_n')/100/12;
+  const sustainMonths=r>0?Math.log(w/(w-P*r))/Math.log(1+r):P/w;
+  const yrs=(sustainMonths/12).toFixed(1);
+  document.getElementById('swp_res').innerHTML=resTiles([
+    {l:'Corpus Lasts',v:sustainMonths>=600?'Forever 🎉':yrs+' years',c:'g'},{l:'Monthly Withdrawal',v:INR(w),c:'p'},
+    {l:'Starting Corpus',v:INR(P),c:'a'},{l:'Annual Return',v:gv('swpr_n')+'%',c:'b'},
+  ]);
+}
+function calcFD(){
+  const p=gv('fd_n'),r=gv('fdr_n')/100,n=gv('fdy_n');
+  const mat=p*Math.pow(1+r/4,4*n);
+  document.getElementById('fd_res').innerHTML=resTiles([
+    {l:'Maturity Amount',v:INR(mat),c:'g'},{l:'Principal',v:INR(p),c:'p'},
+    {l:'Interest Earned',v:INR(mat-p),c:'a'},{l:'Effective Yield',v:PCT(gv('fdr_n')),c:'b'},
+  ]);
+}
+function calcSeniorFD(){
+  const p=gv('scfd_n'),r=gv('scfdr_n')/100,n=gv('scfdy_n');
+  const mat=p*Math.pow(1+r/4,4*n);
+  document.getElementById('scfd_res').innerHTML=resTiles([
+    {l:'Maturity Amount',v:INR(mat),c:'g'},{l:'Principal',v:INR(p),c:'p'},
+    {l:'Interest Earned',v:INR(mat-p),c:'a'},{l:'Rate (Senior)',v:PCT(gv('scfdr_n')),c:'b'},
+  ]);
+}
+function calcRD(){
+  const m=gv('rd_n'),r=gv('rdr_n')/100/4,n=gv('rdy_n')*4;
+  const mat=m*(Math.pow(1+r,n)-1)/r*(1+r);
+  const inv=m*gv('rdy_n')*12;
+  document.getElementById('rd_res').innerHTML=resTiles([
+    {l:'Maturity Amount',v:INR(mat),c:'g'},{l:'Total Deposited',v:INR(inv),c:'p'},
+    {l:'Interest Earned',v:INR(mat-inv),c:'a'},{l:'Rate',v:PCT(gv('rdr_n')),c:'b'},
+  ]);
+}
+function calcCAGR(){
+  const ci=gv('ci_n'),cf=gv('cf_n'),cy=gv('cy_n');
+  const cagr=(Math.pow(cf/ci,1/cy)-1)*100;
+  document.getElementById('cagr_res').innerHTML=resTiles([
+    {l:'CAGR',v:PCT(cagr),c:'g'},{l:'Initial Value',v:INR(ci),c:'p'},
+    {l:'Final Value',v:INR(cf),c:'a'},{l:'Years',v:cy+' yrs',c:'b'},
+  ]);
+}
+function calcRule72(){
+  const r=gv('r72_n');
+  const yrs=(72/r).toFixed(1);
+  document.getElementById('r72_res').innerHTML=resTiles([
+    {l:'Doubling Time',v:yrs+' years',c:'g',s:'At '+r+'% p.a.'},{l:'Return Rate',v:r+'%',c:'p'},
+  ]);
+}
+function calcEMI(){
+  const P=gv('em_n'),r=gv('emr_n')/100/12,n=gv('emy_n')*12;
+  const emi=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  const total=emi*n;
+  document.getElementById('emi_res').innerHTML=resTiles([
+    {l:'Monthly EMI',v:INR(emi),c:'g',s:'Every month'},{l:'Total Payment',v:INR(total),c:'a'},
+    {l:'Principal',v:INR(P),c:'p'},{l:'Total Interest',v:INR(total-P),c:'r'},
+  ],{l1:'Principal',l2:'Interest',w:Math.round(P/total*100)});
+}
+function calcHLE(){
+  const inc=gv('hle_n'),ob=gv('hlo_n'),r=gv('hlr_n')/100/12,n=gv('hlt_n')*12;
+  const foir=0.50;const eligible=(inc*foir-ob);
+  const loanAmt=eligible*(Math.pow(1+r,n)-1)/(r*Math.pow(1+r,n));
+  document.getElementById('hle_res').innerHTML=resTiles([
+    {l:'Max Eligible Loan',v:INR(Math.max(0,loanAmt)),c:'g'},{l:'EMI Capacity',v:INR(Math.max(0,eligible)),c:'p'},
+    {l:'Monthly Obligations',v:INR(ob),c:'a'},{l:'Net Income',v:INR(inc),c:'b'},
+  ]);
+}
+function calcPrepayment(){
+  const P=gv('pp_n'),r=gv('ppr_n')/100/12,n=gv('ppt_n')*12,pre=gv('ppamt_n');
+  const emi=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  const totalOld=emi*n;
+  const newP=P-pre;
+  const emiNew=newP*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  const totalNew=emiNew*n;
+  document.getElementById('pp_res').innerHTML=resTiles([
+    {l:'Interest Saved',v:INR(totalOld-totalNew),c:'g'},{l:'New Monthly EMI',v:INR(emiNew),c:'p'},
+    {l:'Old Monthly EMI',v:INR(emi),c:'a'},{l:'Monthly Saving',v:INR(emi-emiNew),c:'b'},
+  ]);
+}
+function calcCarLoan(){
+  const price=gv('cl_n'),dp=gv('cld_n'),r=gv('clr_n')/100/12,n=gv('cly_n')*12;
+  const loan=price-dp;
+  const emi=loan*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  const total=emi*n;
+  document.getElementById('cl_res').innerHTML=resTiles([
+    {l:'Monthly EMI',v:INR(emi),c:'g'},{l:'Loan Amount',v:INR(loan),c:'p'},
+    {l:'Total Payment',v:INR(total+dp),c:'a'},{l:'Total Interest',v:INR(total-loan),c:'r'},
+  ]);
+}
+function calcCC(){
+  const bal=gv('cc_n'),r=gv('ccr_n')/100/12,pay=gv('ccp_n');
+  if(pay<=bal*r){document.getElementById('cc_res').innerHTML=resTiles([{l:'Status',v:'Monthly payment too low',c:'r',s:'Increase payment to make progress'}]);return;}
+  const months=Math.log(pay/(pay-bal*r))/Math.log(1+r);
+  const total=pay*months;
+  document.getElementById('cc_res').innerHTML=resTiles([
+    {l:'Months to Pay Off',v:Math.ceil(months)+' months',c:'g'},{l:'Total Paid',v:INR(total),c:'a'},
+    {l:'Interest Paid',v:INR(total-bal),c:'r'},{l:'Outstanding',v:INR(bal),c:'p'},
+  ]);
+}
+function calcPL(){
+  const P=gv('pla_n'),r=gv('plr_n')/100/12,n=gv('ply_n')*12;
+  const emi=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  document.getElementById('pl_res').innerHTML=resTiles([
+    {l:'Monthly EMI',v:INR(emi),c:'g'},{l:'Total Payment',v:INR(emi*n),c:'a'},
+    {l:'Interest Paid',v:INR(emi*n-P),c:'r'},{l:'Rate',v:PCT(gv('plr_n')),c:'p'},
+  ]);
+}
+function calcBT(){
+  const P=gv('bt_n'),ro=gv('bto_n')/100/12,rn=gv('btn_n')/100/12,n=gv('btt_n')*12;
+  const emiO=P*ro*Math.pow(1+ro,n)/(Math.pow(1+ro,n)-1);
+  const emiN=P*rn*Math.pow(1+rn,n)/(Math.pow(1+rn,n)-1);
+  document.getElementById('bt_res').innerHTML=resTiles([
+    {l:'Total Savings',v:INR((emiO-emiN)*n),c:'g'},{l:'Old Monthly EMI',v:INR(emiO),c:'r'},
+    {l:'New Monthly EMI',v:INR(emiN),c:'p'},{l:'Monthly Saving',v:INR(emiO-emiN),c:'b'},
+  ]);
+}
+function calcIT(){
+  const inc=gv('it_n'),c80=Math.min(gv('it80c_n'),150000),c80d=Math.min(gv('it80d_n'),25000);
+  const hra_r=gv('ithra_n'),rent=gv('itrp_n'),std=50000;
+  const hraEx=Math.min(hra_r,rent-0.1*inc*0.4,0.4*inc*0.4);
+  const oldTax=taxOld(Math.max(0,inc-std-c80-c80d-Math.max(0,hraEx)));
+  const newTax=taxNew(Math.max(0,inc-75000));
+  document.getElementById('it_res').innerHTML=resTiles([
+    {l:'Old Regime Tax',v:INR(oldTax),c:'r',s:'After all deductions'},{l:'New Regime Tax',v:INR(newTax),c:'p',s:'₹75K std deduction'},
+    {l:'Better Regime',v:oldTax<newTax?'Old Regime':'New Regime',c:'g'},{l:'Tax Saved',v:INR(Math.abs(oldTax-newTax)),c:'b'},
+  ]);
+}
+function taxOld(inc){
+  if(inc<=250000) return 0;
+  if(inc<=500000) return (inc-250000)*0.05;
+  if(inc<=1000000) return 12500+(inc-500000)*0.2;
+  return 112500+(inc-1000000)*0.3;
+}
+function taxNew(inc){
+  if(inc<=400000) return 0;
+  if(inc<=800000) return (inc-400000)*0.05;
+  if(inc<=1200000) return 20000+(inc-800000)*0.1;
+  if(inc<=1600000) return 60000+(inc-1200000)*0.15;
+  if(inc<=2000000) return 120000+(inc-1600000)*0.2;
+  if(inc<=2400000) return 200000+(inc-2000000)*0.25;
+  return 300000+(inc-2400000)*0.3;
+}
+function calcLTCG(){
+  const g=gv('ltcg_n'),ex=125000,tax=Math.max(0,g-ex)*0.125;
+  document.getElementById('ltcg_res').innerHTML=resTiles([
+    {l:'LTCG Tax Payable',v:INR(tax),c:'r'},{l:'Exempt Amount',v:INR(Math.min(g,ex)),c:'g'},
+    {l:'Taxable Gains',v:INR(Math.max(0,g-ex)),c:'a'},{l:'Tax Rate',v:'12.5%',c:'p'},
+  ]);
+}
+function calcSTCG(){
+  const g=gv('stcg_n'),tax=g*0.20;
+  document.getElementById('stcg_res').innerHTML=resTiles([
+    {l:'STCG Tax Payable',v:INR(tax),c:'r'},{l:'Total Gains',v:INR(g),c:'g'},
+    {l:'Tax Rate',v:'20%',c:'a'},{l:'Net After Tax',v:INR(g-tax),c:'p'},
+  ]);
+}
+function calcHRA(){
+  const basic=gv('hrab_n'),hra=gv('hrah_n'),rent=gv('hrar_n');
+  const pct=parseFloat(document.getElementById('hra_city').value);
+  const ex=Math.min(hra,rent-basic*0.1,basic*pct);
+  document.getElementById('hra_res').innerHTML=resTiles([
+    {l:'HRA Exemption',v:INR(Math.max(0,ex)),c:'g'},{l:'Taxable HRA',v:INR(Math.max(0,hra-ex)),c:'r'},
+    {l:'HRA Received',v:INR(hra),c:'p'},{l:'Rent Paid',v:INR(rent),c:'b'},
+  ]);
+}
+function calcPPF(){
+  const a=gv('ppfa_n'),y=gv('ppfy_n'),r=0.071;
+  let bal=0;
+  for(let i=0;i<y;i++) bal=(bal+a)*(1+r);
+  document.getElementById('ppf_res').innerHTML=resTiles([
+    {l:'Maturity Amount',v:INR(bal),c:'g',s:'Tax-Free'},{l:'Total Deposited',v:INR(a*y),c:'p'},
+    {l:'Interest Earned',v:INR(bal-a*y),c:'a'},{l:'Rate',v:'7.1% EEE',c:'b'},
+  ]);
+}
+function calcNSC(){
+  const a=gv('nsca_n'),mat=a*Math.pow(1.077,5);
+  document.getElementById('nsc_res').innerHTML=resTiles([
+    {l:'Maturity Amount',v:INR(mat),c:'g',s:'After 5 years'},{l:'Investment',v:INR(a),c:'p'},
+    {l:'Interest Earned',v:INR(mat-a),c:'a'},{l:'Rate',v:'7.7% p.a.',c:'b'},
+  ]);
+}
+function calcTDS(){
+  const a=gv('tdsa_n'),rate=parseFloat(document.getElementById('tds_type').value);
+  const tds=a*rate;
+  document.getElementById('tds_res').innerHTML=resTiles([
+    {l:'TDS Deducted',v:INR(tds),c:'r'},{l:'Gross Amount',v:INR(a),c:'p'},
+    {l:'Net Received',v:INR(a-tds),c:'g'},{l:'TDS Rate',v:PCT(rate*100),c:'b'},
+  ]);
+}
+function calcLC(){
+  const inc=gv('lca_n'),loans=gv('lcd_n'),dep=gv('lcn_n'),yrs=gv('lcy_n');
+  const cover=inc*yrs+loans+(dep*500000);
+  document.getElementById('lc_res').innerHTML=resTiles([
+    {l:'Recommended Cover',v:INR(cover),c:'g'},{l:'Income Replacement',v:INR(inc*yrs),c:'p'},
+    {l:'Loan Coverage',v:INR(loans),c:'a'},{l:'Dependant Buffer',v:INR(dep*500000),c:'b'},
+  ]);
+}
+function calcGratuity(){
+  const basic=gv('grb_n'),yrs=gv('gry_n');
+  const gratuity=(basic*15*yrs)/26;
+  document.getElementById('gr_res').innerHTML=resTiles([
+    {l:'Gratuity Amount',v:INR(gratuity),c:'g'},{l:'Monthly Basic',v:INR(basic),c:'p'},
+    {l:'Years of Service',v:yrs+' yrs',c:'a'},{l:'Tax Status',v:'Partly Exempt',c:'b'},
+  ]);
+}
+function calcULIP(){
+  const ann=gv('ua_n'),y=gv('uy_n'),r=gv('ur_n')/100;
+  const ulipCharge=0.025;const ulipReturn=ann*y*(1+r-ulipCharge);
+  const termPremium=ann*0.05;const mfContrib=(ann-termPremium);
+  const mfReturn=mfContrib*(Math.pow(1+r,y)-1)/r;
+  document.getElementById('ulip_res').innerHTML=resTiles([
+    {l:'Term+MF Wealth',v:INR(mfReturn),c:'g'},{l:'ULIP Est. Wealth',v:INR(ulipReturn),c:'a'},
+    {l:'Advantage',v:mfReturn>ulipReturn?'Term+MF':'ULIP',c:mfReturn>ulipReturn?'g':'r'},{l:'Extra Wealth',v:INR(Math.abs(mfReturn-ulipReturn)),c:'p'},
+  ]);
+}
+function calcTP(){
+  const age=gv('tpa_n'),sa=gv('tpsa_n'),ten=gv('tpten_n');
+  const base=age<30?3.5:age<40?5.5:age<50?9:15;
+  const premium=sa*100*base;
+  document.getElementById('tp_res').innerHTML=resTiles([
+    {l:'Est. Annual Premium',v:INR(premium),c:'p',s:'Approximate'},{l:'Sum Assured',v:'₹'+sa+' Cr',c:'g'},
+    {l:'Total Premium Paid',v:INR(premium*ten),c:'a',s:'Over '+ten+' years'},{l:'Coverage Period',v:ten+' years',c:'b'},
+  ]);
+}
+function calcCI(){
+  const age=gv('ciage_n'),inc=gv('ciinc_n'),med=gv('cimed_n');
+  const cover=inc*2+med*5+(age>45?500000:300000);
+  const estPremium=cover*(age<35?0.003:age<45?0.005:0.009);
+  document.getElementById('ci_res').innerHTML=resTiles([
+    {l:'Recommended CI Cover',v:INR(cover),c:'g'},{l:'Est. Annual Premium',v:INR(estPremium),c:'p'},
+    {l:'Income Replacement',v:INR(inc*2),c:'a'},{l:'Medical Cost Buffer',v:INR(med*5),c:'b'},
+  ]);
+}
+function calcCP(){
+  const age=gv('cpage_n'),cost=gv('cpcost_n'),inf=gv('cpinf_n')/100,ret=gv('cprr_n')/100;
+  const yrs=18-age;
+  const futureCost=cost*Math.pow(1+inf,yrs);
+  const rM=ret/12,n=yrs*12;
+  const sipNeeded=futureCost*rM/(Math.pow(1+rM,n)-1)/(1+rM);
+  document.getElementById('cp_res').innerHTML=resTiles([
+    {l:'Future Education Cost',v:INR(futureCost),c:'a',s:'In '+yrs+' years'},{l:'Monthly SIP Needed',v:INR(sipNeeded),c:'g'},
+    {l:'Years to Goal',v:yrs+' years',c:'p'},{l:'Total to Invest',v:INR(sipNeeded*n),c:'b'},
+  ]);
+}
+function calcRetirement(){
+  const ca=gv('rta_n'),ra=gv('rtre_n'),la=gv('rtle_n'),me=gv('rtme_n'),inf=gv('rtinf_n')/100,ret=gv('rtr_n')/100;
+  const yrsToRetire=ra-ca,retireDuration=la-ra;
+  const futureExp=me*12*Math.pow(1+inf,yrsToRetire);
+  const corpusNeeded=futureExp/0.04;
+  const rM=ret/12,n=yrsToRetire*12;
+  const sipNeeded=corpusNeeded*rM/(Math.pow(1+rM,n)-1)/(1+rM);
+  document.getElementById('ret_res').innerHTML=resTiles([
+    {l:'Corpus Needed',v:INR(corpusNeeded),c:'g',s:'At retirement'},{l:'Monthly SIP Now',v:INR(sipNeeded),c:'p'},
+    {l:'Retirement Years',v:retireDuration+' yrs',c:'a'},{l:'Future Monthly Exp.',v:INR(futureExp/12),c:'b'},
+  ]);
+}
+function calcNPS(){
+  const m=gv('npsm_n'),y=gv('npsy_n'),r=gv('npsr_n')/100/12,a=gv('npsa_n')/100/12;
+  const corpus=m*(Math.pow(1+r,y*12)-1)/r;
+  const annuityCorpus=corpus*0.4;
+  const pension=annuityCorpus*a;
+  document.getElementById('nps_res').innerHTML=resTiles([
+    {l:'Total NPS Corpus',v:INR(corpus),c:'g'},{l:'Monthly Pension',v:INR(pension),c:'p'},
+    {l:'Lump Sum (60%)',v:INR(corpus*0.6),c:'a'},{l:'Annuity Corpus',v:INR(annuityCorpus),c:'b'},
+  ]);
+}
+function calcEPF(){
+  const basic=gv('epfb_n'),cur=gv('epfc_n'),y=gv('epfy_n'),r=0.082/12;
+  const monthly=basic*0.12*2;
+  let bal=cur;
+  for(let i=0;i<y*12;i++) bal=bal*(1+r)+monthly;
+  document.getElementById('epf_res').innerHTML=resTiles([
+    {l:'EPF Corpus at Retirement',v:INR(bal),c:'g'},{l:'Monthly Contribution',v:INR(monthly),c:'p'},
+    {l:'Current Balance',v:INR(cur),c:'a'},{l:'Rate',v:'8.25% p.a.',c:'b'},
+  ]);
+}
+function calcSSY(){
+  const a=gv('ssya2_n'),age=gv('ssyage_n'),r=0.082;
+  const depositYrs=Math.min(15,21-age);
+  const maturityAge=21;
+  let bal=0;
+  for(let i=0;i<maturityAge-age;i++){
+    if(i<depositYrs) bal=(bal+a)*(1+r);
+    else bal=bal*(1+r);
+  }
+  document.getElementById('ssy_res').innerHTML=resTiles([
+    {l:'Maturity Amount',v:INR(bal),c:'g',s:'Tax-Free at 21'},{l:'Total Deposited',v:INR(a*depositYrs),c:'p'},
+    {l:'Interest Earned',v:INR(bal-a*depositYrs),c:'a'},{l:'Rate',v:'8.2% EEE',c:'b'},
+  ]);
+}
+function calcFIRE(){
+  const me=gv('fme_n'),inf=gv('finf_n')/100,wr=gv('fwr_n')/100,cur=gv('fcr_n'),ret=gv('fret_n')/100;
+  const annualExp=me*12;
+  const fireNum=annualExp/wr;
+  const gap=Math.max(0,fireNum-cur);
+  const rM=ret/12;
+  const monthsNeeded=gap>0?Math.log(fireNum*rM/(me*(1+rM))+1)/Math.log(1+rM):0;
+  document.getElementById('fire_res').innerHTML=resTiles([
+    {l:'FIRE Number',v:INR(fireNum),c:'g',s:'Using '+PCT(wr*100)+' withdrawal rule'},{l:'Current Gap',v:INR(gap),c:'a'},
+    {l:'Monthly SIP to FIRE',v:gap>0?INR(gap*rM/(Math.pow(1+rM,Math.ceil(monthsNeeded))-1)/(1+rM)):'Already FIRE 🎉',c:'p'},{l:'Years to FIRE',v:gap>0?(monthsNeeded/12).toFixed(1)+' yrs':'Ready Now 🎉',c:'b'},
+  ]);
+}
+function calcSCSS(){
+  const d=gv('scssd_n'),y=gv('scssy_n'),rate=0.082;
+  const maxDeposit=Math.min(d,1500000);
+  const annual=maxDeposit*rate;
+  document.getElementById('scss_res').innerHTML=resTiles([
+    {l:'Annual Interest',v:INR(annual),c:'g',s:'@ 8.2% p.a.'},{l:'Quarterly Payout',v:INR(annual/4),c:'p'},
+    {l:'Total Interest',v:INR(annual*y),c:'a',s:'Over '+y+' years'},{l:'Maturity Value',v:INR(maxDeposit+annual*y),c:'b'},
+  ]);
+}
+function calcWD(){
+  const corpus=gv('wdcorpus_n'),mt=gv('wdmt_n'),r=gv('wdr_n')/100/12,inf=gv('wdinf_n')/100/12;
+  const realR=r-inf;
+  let bal=corpus,months=0;
+  while(bal>0&&months<600){bal=bal*(1+r)-mt;months++;}
+  const sustainedMt=corpus*(realR)/(1-Math.pow(1+realR,-30*12));
+  document.getElementById('wd_res').innerHTML=resTiles([
+    {l:'Corpus Lasts',v:months>=600?'Forever 🎉':(months/12).toFixed(1)+' years',c:'g'},{l:'Monthly Withdrawal',v:INR(mt),c:'p'},
+    {l:'Sustainable Withdrawal',v:INR(sustainedMt),c:'a',s:'Lasts 30 years'},{l:'Starting Corpus',v:INR(corpus),c:'b'},
+  ]);
+}
+function calcGoal(){
+  const t=gv('glt_n'),r=gv('glr_n')/100/12,n=gv('gly_n')*12;
+  const sip=t*r/(Math.pow(1+r,n)-1)/(1+r);
+  document.getElementById('goal_res').innerHTML=resTiles([
+    {l:'Monthly SIP Required',v:INR(sip),c:'g'},{l:'Target Amount',v:INR(t),c:'p'},
+    {l:'Time to Goal',v:gv('gly_n')+' years',c:'a'},{l:'Return Rate',v:gv('glr_n')+'%',c:'b'},
+  ]);
+}
+function calcInflation(){
+  const v=gv('infv_n'),r=gv('infr_n')/100,y=gv('infy_n');
+  const fut=v*Math.pow(1+r,y);
+  document.getElementById('inf_res').innerHTML=resTiles([
+    {l:'Future Value Needed',v:INR(fut),c:'r',s:'To match today\'s purchasing power'},{l:'Today\'s Value',v:INR(v),c:'p'},
+    {l:'Purchasing Power Lost',v:PCT((fut-v)/fut*100),c:'a'},{l:'Years',v:y+' yrs',c:'b'},
+  ]);
+}
+function calcEF(){
+  const exp=gv('efexp_n'),mos=gv('efmos_n'),cur=gv('efcur_n');
+  const needed=exp*mos;const gap=Math.max(0,needed-cur);
+  const status=cur>=needed?'Fully Funded ✅':cur>=needed*0.5?'Partially Funded':'Under-Funded ⚠️';
+  document.getElementById('ef_res').innerHTML=resTiles([
+    {l:'Fund Needed',v:INR(needed),c:'g',s:mos+' months of expenses'},{l:'Current Fund',v:INR(cur),c:'p'},
+    {l:'Gap to Fill',v:INR(gap),c:gap>0?'r':'g',s:gap>0?'Monthly add: '+INR(gap/6)+' (6 mo plan)':'You\'re covered!'},{l:'Status',v:status,c:cur>=needed?'g':'a'},
+  ]);
+}
+function calcBudget(){
+  const inc=gv('bgtinc_n'),need=gv('bgtneed_n'),want=gv('bgtwant_n');
+  const savings=Math.max(0,inc-need-want);
+  const status=savings/inc>=0.2?'On Track 🎉':savings/inc>=0.1?'Getting There':'Needs Work ⚠️';
+  document.getElementById('bgt_res').innerHTML=resTiles([
+    {l:'Actual Savings',v:INR(savings),c:'g',s:PCT(savings/inc*100)+' of income'},{l:'Savings Status',v:status,c:savings/inc>=0.2?'g':'a'},
+    {l:'Ideal Needs (50%)',v:INR(inc*0.5),c:'p',s:'Your spend: '+INR(need)},{l:'Ideal Wants (30%)',v:INR(inc*0.3),c:'b',s:'Your spend: '+INR(want)},
+  ]);
+}
+function calcNW(){
+  const a=parseFloat(document.getElementById('nwa').value)||0;
+  const l=parseFloat(document.getElementById('nwl').value)||0;
+  const nw=a-l;
+  document.getElementById('nw_res').innerHTML=resTiles([
+    {l:'Net Worth',v:INR(nw),c:nw>=0?'g':'r'},{l:'Total Assets',v:INR(a),c:'p'},
+    {l:'Total Liabilities',v:INR(l),c:'a'},{l:'Debt Ratio',v:PCT(l/a*100),c:l/a<0.5?'b':'r'},
+  ]);
+}
+function calcSR(){
+  const inc=gv('sri_n'),exp=gv('sre_n'),r=gv('srr_n')/100;
+  const sav=Math.max(0,inc-exp);const rate=sav/inc;
+  const fireYrs=rate>0?Math.log(25)/Math.log(1+r)/(rate):999;
+  document.getElementById('sr_res').innerHTML=resTiles([
+    {l:'Savings Rate',v:PCT(rate*100),c:'g'},{l:'Monthly Savings',v:INR(sav),c:'p'},
+    {l:'Years to FI',v:rate>0?fireYrs.toFixed(1)+' years':'Not saving',c:'a'},{l:'Monthly Expenses',v:INR(exp),c:'b'},
+  ]);
+}
+function calcSH(){
+  const ctc=gv('shctc_n'),hike=gv('shhike_n')/100,tax=gv('shtax_n')/100;
+  const newCtc=ctc*(1+hike);
+  const oldTH=(ctc*0.88)*(1-tax)/12;
+  const newTH=(newCtc*0.88)*(1-tax)/12;
+  document.getElementById('sh_res').innerHTML=resTiles([
+    {l:'New Annual CTC',v:INR(newCtc),c:'g'},{l:'New Monthly Take-Home',v:INR(newTH),c:'p'},
+    {l:'Monthly Increase',v:INR(newTH-oldTH),c:'a',s:'Extra per month'},{l:'Annual Increment',v:INR(newCtc-ctc),c:'b'},
+  ]);
+}
+function calcStepUpSWP(){
+  const corpus=gv('susw_n'),mw=gv('suswm_n'),inc=gv('suswi_n')/100,r=gv('suswr_n')/100/12;
+  let bal=corpus,months=0,totalWithdrawn=0,w=mw;
+  while(bal>0&&months<600){bal=bal*(1+r)-w;totalWithdrawn+=w;months++;if(months%12===0)w*=(1+inc);}
+  const yrs=(months/12).toFixed(1);
+  document.getElementById('susw_res').innerHTML=resTiles([
+    {l:'Corpus Lasts',v:yrs+' Years',c:'g'},{l:'Total Withdrawn',v:INR(totalWithdrawn),c:'p'},
+    {l:'Starting Withdrawal',v:INR(mw)+'/mo',c:'a'},{l:'Final Monthly Withdrawal',v:INR(w)+'/mo',c:'b'},
+  ]);
+}
+function calcGoalPlanner(){
+  const goal=gv('gp_n'),r=gv('gpr_n')/100/12,n=gv('gpy_n')*12;
+  const sip=goal*r/(Math.pow(1+r,n)-1)/(1+r);
+  const lump=goal/Math.pow(1+r,n);
+  document.getElementById('gp_res').innerHTML=resTiles([
+    {l:'Monthly SIP Needed',v:INR(sip),c:'g'},{l:'Lumpsum Needed Today',v:INR(lump),c:'p'},
+    {l:'Target Corpus',v:INR(goal),c:'a'},{l:'Time to Goal',v:gv('gpy_n')+' Years',c:'b'},
+  ]);
+}
+function calcMFReturns(){
+  const inv=gv('mfi_n'),val=gv('mfv_n'),yrs=gv('mfy_n');
+  const abs=(val-inv)/inv*100;
+  const cagr=(Math.pow(val/inv,1/yrs)-1)*100;
+  document.getElementById('mf_res').innerHTML=resTiles([
+    {l:'Absolute Return',v:PCT(abs),c:'g'},{l:'CAGR',v:PCT(cagr),c:'p'},
+    {l:'Profit / Loss',v:INR(val-inv),c:val>=inv?'a':'r'},{l:'Current Value',v:INR(val),c:'b'},
+  ]);
+}
+function calcSIPvsLumpsum(){
+  const amt=gv('svl_n'),r=gv('svlr_n')/100,n=gv('svly_n');
+  const lump=amt*Math.pow(1+r,n);
+  const rm=r/12,nm=n*12,monthly=amt/nm;
+  const sipMat=monthly*((Math.pow(1+rm,nm)-1)/rm)*(1+rm);
+  document.getElementById('svl_res').innerHTML=resTiles([
+    {l:'Lumpsum Grows To',v:INR(lump),c:'p'},{l:'SIP Grows To',v:INR(sipMat),c:'g'},
+    {l:'Lumpsum Profit',v:INR(lump-amt),c:'a'},{l:'SIP Profit',v:INR(sipMat-amt),c:'b'},
+  ],{l1:'Lumpsum',l2:'SIP',w:Math.round(lump/(lump+sipMat)*100)});
+}
+function calcEducationLoan(){
+  const p=gv('el_n'),r=gv('elr_n')/100/12,mor=gv('elm_n'),n=gv('ely_n')*12;
+  const pWithMor=p*Math.pow(1+r,mor);
+  const emi=pWithMor*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  const total=emi*n;
+  document.getElementById('el_res').innerHTML=resTiles([
+    {l:'Monthly EMI',v:INR(emi),c:'g'},{l:'Total Repayment',v:INR(total),c:'p'},
+    {l:'Total Interest',v:INR(total-p),c:'a',s:'After moratorium'},{l:'Loan After Moratorium',v:INR(pWithMor),c:'b'},
+  ]);
+}
+function calcLoanComparison(){
+  const p=gv('lc1a_n');
+  const r1=gv('lc1r_n')/100/12,n1=gv('lc1y_n')*12;
+  const r2=gv('lc2r_n')/100/12,n2=gv('lc2y_n')*12;
+  const emi1=p*r1*Math.pow(1+r1,n1)/(Math.pow(1+r1,n1)-1);
+  const emi2=p*r2*Math.pow(1+r2,n2)/(Math.pow(1+r2,n2)-1);
+  const int1=emi1*n1-p,int2=emi2*n2-p;
+  document.getElementById('lc_res').innerHTML=resTiles([
+    {l:'Loan A EMI',v:INR(emi1),c:'g'},{l:'Loan B EMI',v:INR(emi2),c:'p'},
+    {l:'Loan A Total Interest',v:INR(int1),c:'a'},{l:'Loan B Total Interest',v:INR(int2),c:'b'},
+  ]);
+}
+function calcHomeLoanTax(){
+  const prin=gv('hltp_n'),interest=gv('hlti_n'),selfOcc=gv('hltsl_n');
+  const sec80C=Math.min(prin,150000);
+  const sec24B=selfOcc?Math.min(interest,200000):interest;
+  const totalDeduction=sec80C+sec24B;
+  const taxSaved30=totalDeduction*0.30,taxSaved20=totalDeduction*0.20;
+  document.getElementById('hlt_res').innerHTML=resTiles([
+    {l:'80C Deduction (Principal)',v:INR(sec80C),c:'g',s:'Max ₹1.5L'},{l:'24B Deduction (Interest)',v:INR(sec24B),c:'p',s:selfOcc?'Max ₹2L':'No limit (rented)'},
+    {l:'Total Deduction',v:INR(totalDeduction),c:'a'},{l:'Tax Saved (30% slab)',v:INR(taxSaved30),c:'b'},
+  ]);
+}
+function calcGiftTax(){
+  const amt=gv('gt_n'),isRelative=gv('gtr_n'),isExemptOccasion=gv('gto_n');
+  const exempt=isRelative||isExemptOccasion||(amt<=50000);
+  const taxable=exempt?0:amt;
+  const tax=taxable*0.30;
+  document.getElementById('gt_res').innerHTML=resTiles([
+    {l:'Gift Amount',v:INR(amt),c:'p'},{l:'Taxable?',v:exempt?'No — Exempt':'Yes — Taxable',c:exempt?'g':'r'},
+    {l:'Taxable Amount',v:INR(taxable),c:'a'},{l:'Tax Liability (30% slab)',v:INR(tax),c:'b'},
+  ]);
+}
+function calcHealthPremium(){
+  const si=gv('hp_n'),age=gv('hpa_n'),members=gv('hpm_n');
+  const base=si*0.005;
+  const ageFactor=age<30?0.8:age<40?1:age<50?1.4:age<60?2:3;
+  const memberFactor=1+(members-1)*0.35;
+  const premium=Math.round(base*ageFactor*memberFactor/12)*12;
+  const monthly=premium/12;
+  document.getElementById('hp_res').innerHTML=resTiles([
+    {l:'Est. Annual Premium',v:INR(premium),c:'g'},{l:'Monthly Premium',v:INR(monthly),c:'p'},
+    {l:'Sum Insured',v:INR(si),c:'a'},{l:'80D Deduction',v:INR(Math.min(premium,age>=60?50000:25000)),c:'b',s:'Max allowed'},
+  ]);
+}
+function calcAnnuity(){
+  const corpus=gv('an_n'),rate=gv('anr_n')/100,isLifetime=gv('ant_n'),term=gv('any_n');
+  const monthly=corpus*rate/12;
+  const totalLifetime=isLifetime?corpus*(1+rate*20):monthly*term*12;
+  document.getElementById('an_res').innerHTML=resTiles([
+    {l:'Monthly Pension',v:INR(monthly),c:'g'},{l:'Annual Pension',v:INR(monthly*12),c:'p'},
+    {l:'Type',v:isLifetime?'Lifetime Annuity':'Fixed Term',c:'a'},{l:'Total Payout (Est.)',v:INR(totalLifetime),c:'b'},
+  ]);
+}
+function calcSavingsGoal(){
+  const goal=gv('sg_n'),r=gv('sgr_n')/100/12,n=gv('sgy_n')*12;
+  const monthly=r>0?goal*r/(Math.pow(1+r,n)-1):goal/n;
+  const totalSaved=monthly*n;
+  document.getElementById('sg_res').innerHTML=resTiles([
+    {l:'Monthly Savings Needed',v:INR(monthly),c:'g'},{l:'Total Saved',v:INR(totalSaved),c:'p'},
+    {l:'Interest Earned',v:INR(goal-totalSaved),c:'a'},{l:'Goal Amount',v:INR(goal),c:'b'},
+  ]);
+}
+function calcDailySavings(){
+  const daily=gv('ds_n'),r=gv('dsr_n')/100/365,n=gv('dsy_n')*365;
+  const corpus=r>0?daily*((Math.pow(1+r,n)-1)/r):daily*n;
+  const totalSaved=daily*n;
+  document.getElementById('ds_res').innerHTML=resTiles([
+    {l:'Total Corpus',v:INR(corpus),c:'g'},{l:'Total Saved',v:INR(totalSaved),c:'p'},
+    {l:'Interest Earned',v:INR(corpus-totalSaved),c:'a'},{l:'Daily Amount',v:'₹'+daily,c:'b'},
+  ]);
+}
+
+
+
+/* ═══ CARD CLICK WIRING ═══ */
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.calc-card').forEach(function(card){
+    var key = card.dataset.calc;
+
+    // Click anywhere on tile (except Calculate and Detail Calculation buttons) → open link
+    card.addEventListener('click', function(e){
+      if(e.target.closest('.btn-calc') || e.target.closest('.btn-detail') || e.target.closest('.detail-panel')) return;
+      var link = card.querySelector('.btn-calc');
+      if(link && link.href) window.location.href = link.href;
+    });
+
+    // Calculate → button → open small calculator modal
+    var calcBtn = card.querySelector('.btn-calc');
+    if(calcBtn){
+      calcBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        if(key) show(key);
+      });
+    }
+
+    // Detail Calculation button → open link
+    var detailBtn = card.querySelector('.btn-detail');
+    if(detailBtn){
+      detailBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        var link = card.querySelector('.btn-calc');
+        if(link && link.href) window.location.href = link.href;
+      });
+    }
+  });
+});
+
+/* ═══ LEVEL BADGE COLOUR ═══ */
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.card-level').forEach(function(el){
+    var t=el.textContent.trim();
+    if(t==='Intermediate') el.classList.add('lvl-inter');
+    else if(t==='Advanced') el.classList.add('lvl-adv');
+  });
+});
+
+/* ═══ SCROLL TO TOP ═══ */
+const st=document.getElementById('scrollTop');
+window.addEventListener('scroll',()=>{st.style.display=window.scrollY>400?'flex':'none'},{passive:true});
+</script>
+
+<nav class="mobile-nav" role="navigation" aria-label="Site navigation">
+  <div class="mnav-items">
+    <a class="mnav-item active" href="/" onclick="return true"><span class="mnav-icon">🏠</span><span class="mnav-label">Home</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item" href="#" onclick="mnavFilter('invest',this);return false"><span class="mnav-icon">📈</span><span class="mnav-label">Invest</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item" href="#" onclick="mnavFilter('loans',this);return false"><span class="mnav-icon">🏦</span><span class="mnav-label">Loans</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item" href="#" onclick="mnavFilter('tax',this);return false"><span class="mnav-icon">📋</span><span class="mnav-label">Tax</span><span class="mnav-dot"></span></a>
+    <a class="mnav-item" href="#" onclick="mnavFilter('personal',this);return false"><span class="mnav-icon">💰</span><span class="mnav-label">Savings</span><span class="mnav-dot"></span></a>
+  </div>
+</nav>
+</body>
+</html>

@@ -1,0 +1,3143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta name="theme-color" content="#ffffff"/>
+<meta name="color-scheme" content="light"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<title>How to Read DRHP — Investor's Complete Guide | CompareShareBrokers</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════ */
+:root{
+  --p950:#0a021e;--p900:#150438;--p800:#21085a;
+  --p700:#331280;--p600:#4c1eb0;--p500:#6c3de4;
+  --p400:#8f65f0;--p300:#bda3f8;--p200:#ddd0fc;
+  --p150:#ece5fd;--p100:#f4f0fe;--p50:#faf8ff;
+
+  --g700:#0f5c30;--g600:#157a3e;--g500:#1ea851;
+  --g400:#3dc96e;--g300:#79dfa0;--g200:#b8f0cf;
+  --g100:#e0f8eb;--g50:#f3fdf6;
+
+  --amber:#c47c10;--amber-bg:#fffaec;
+  --red:#e03c3c;--red-bg:#fff0f0;
+
+  --ink:#100428;--ink2:#32205a;--ink3:#7b6598;--ink4:#b8a8d4;
+  --white:#fff;--surf1:#faf8ff;--surf2:#f4f0fe;--surf3:#ece5fd;
+  --border:#e0d8f8;--border2:#cfc3f2;
+
+  --sh1:0 1px 6px rgba(108,61,228,.07);
+  --sh2:0 4px 20px rgba(108,61,228,.11);
+  --sh3:0 12px 44px rgba(108,61,228,.16);
+  --sh4:0 24px 72px rgba(108,61,228,.22);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  font-family:'DM Sans',sans-serif;background:var(--white);color:var(--ink);
+  overflow-x:hidden;-webkit-tap-highlight-color:transparent;
+}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+ul{list-style:none}
+img{max-width:100%;display:block}
+
+/* ══════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════ */
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes floatBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes barGrow{from{width:0}to{width:var(--w)}}
+@keyframes ringPulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.6);opacity:0}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:none}}
+
+.anim{opacity:0;transform:translateY(28px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
+.anim.in{opacity:1;transform:none}
+.anim-d1{transition-delay:.08s}.anim-d2{transition-delay:.16s}
+.anim-d3{transition-delay:.24s}.anim-d4{transition-delay:.32s}
+.anim-d5{transition-delay:.40s}.anim-d6{transition-delay:.48s}
+
+/* ══════════════════════════════════════
+   NAV
+══════════════════════════════════════ */
+.nav-wrap{
+  position:sticky;top:0;z-index:500;
+  background:rgba(255,255,255,.98);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 2px 16px rgba(108,61,228,.07);
+  padding-top:env(safe-area-inset-top);
+}
+.nav{
+  height:58px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 max(40px,env(safe-area-inset-left));
+  max-width:1200px;margin:0 auto;
+}
+@media(max-width:768px){.nav{padding:0 max(16px,env(safe-area-inset-right));height:54px}}
+
+.nav-logo{display:flex;align-items:center;gap:9px}
+.nav-logo-mark{
+  width:34px;height:34px;border-radius:10px;
+  background:linear-gradient(135deg,var(--p500),var(--g500));
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;color:#fff;
+  box-shadow:0 3px 12px rgba(108,61,228,.35);
+}
+.nav-logo-text{font-size:17px;font-weight:900;color:var(--ink);letter-spacing:-.5px}
+.nav-logo-text b{color:var(--p500)}
+
+.nav-breadcrumb{
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;color:var(--ink4);font-weight:500;
+}
+.nav-breadcrumb span{color:var(--ink3)}
+.nav-breadcrumb .sep{color:var(--border2)}
+
+.btn-nav-cta{
+  padding:9px 18px;border-radius:9px;
+  font-size:13px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,var(--p500),var(--g500));
+  background-size:200% auto;
+  box-shadow:0 3px 12px rgba(108,61,228,.30);
+  transition:all .22s;display:inline-flex;align-items:center;gap:6px;
+  white-space:nowrap;-webkit-appearance:none;appearance:none;
+}
+.btn-nav-cta:hover{background-position:right center;transform:translateY(-1px);box-shadow:0 6px 18px rgba(108,61,228,.40)}
+.btn-nav-cta:active{transform:scale(.97)}
+@media(max-width:600px){.nav-breadcrumb{display:none}.btn-nav-cta{font-size:12px;padding:8px 14px}}
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.hero{
+  background:var(--surf1);position:relative;overflow:hidden;
+  padding:88px 52px 80px;
+}
+@media(max-width:768px){.hero{padding:64px 20px 56px}}
+@media(max-width:480px){.hero{padding:48px 16px 44px}}
+
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:44px 44px;opacity:.4;pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:700px;height:700px;
+  background:radial-gradient(ellipse,rgba(108,61,228,.09),transparent 65%);
+  pointer-events:none;
+}
+.hero-glow-left{
+  position:absolute;bottom:-60px;left:-60px;
+  width:400px;height:400px;
+  background:radial-gradient(ellipse,rgba(30,168,81,.08),transparent 65%);
+  pointer-events:none;
+}
+
+.hero-body{
+  max-width:880px;margin:0 auto;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;position:relative;z-index:1;
+}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 14px 5px 8px;background:#fff;border:1.5px solid var(--border2);
+  border-radius:100px;margin-bottom:28px;
+  font-size:12px;font-weight:700;color:var(--p600);box-shadow:var(--sh1);
+  animation:fadeUp .5s ease both;
+}
+.badge-live{padding:3px 9px 3px 5px;background:var(--g100);border-radius:100px;color:var(--g600);font-size:11px;display:flex;align-items:center;gap:4px}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--g500);animation:pulse 1.6s infinite}
+
+.hero-h1{
+  font-size:clamp(34px,5.5vw,68px);font-weight:900;line-height:1.06;letter-spacing:-2.5px;
+  color:var(--ink);margin-bottom:24px;animation:fadeUp .6s .08s ease both;
+}
+@media(max-width:768px){.hero-h1{font-size:clamp(28px,8vw,46px);letter-spacing:-1.6px}}
+@media(max-width:480px){.hero-h1{font-size:clamp(24px,9vw,36px);letter-spacing:-1px}}
+
+.hero-h1 .acc-p{
+  background:linear-gradient(90deg,var(--p500),var(--p400),var(--g500));
+  background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;animation:gradShift 4s ease infinite;
+}
+
+.hero-sub{
+  font-size:18px;color:var(--ink3);line-height:1.72;
+  max-width:640px;margin:0 auto 40px;
+  animation:fadeUp .6s .16s ease both;
+}
+@media(max-width:768px){.hero-sub{font-size:16px;margin-bottom:32px}}
+@media(max-width:480px){.hero-sub{font-size:15px;margin-bottom:28px}}
+
+.hero-ctas{
+  display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:52px;
+  animation:fadeUp .6s .22s ease both;
+}
+@media(max-width:480px){
+  .hero-ctas{flex-direction:column;align-items:center;gap:10px}
+  .btn-hero-p,.btn-hero-s{width:100%;max-width:320px;justify-content:center}
+}
+
+/* PRIMARY CTA — Purple-Green Gradient */
+.btn-hero-p{
+  padding:15px 32px;border-radius:14px;font-size:15px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,var(--p500) 0%,var(--p600) 40%,var(--g600) 100%);
+  background-size:200% auto;
+  box-shadow:0 8px 26px rgba(108,61,228,.38);transition:all .28s;
+  display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+  animation:gradShift 5s ease infinite;
+}
+.btn-hero-p:hover{background-position:right center;transform:translateY(-3px);box-shadow:0 14px 36px rgba(108,61,228,.50)}
+.btn-hero-p:active{transform:scale(.97)}
+@media(max-width:480px){.btn-hero-p{padding:13px 24px;font-size:14px}}
+
+.btn-hero-s{
+  padding:14px 28px;border-radius:14px;font-size:15px;font-weight:700;
+  color:var(--p600);background:#fff;border:2px solid var(--p200);transition:.22s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-hero-s:hover{border-color:var(--p400);background:var(--p50)}
+@media(max-width:480px){.btn-hero-s{padding:12px 22px;font-size:14px}}
+
+.hero-proof{
+  display:flex;gap:40px;flex-wrap:wrap;justify-content:center;
+  padding-top:40px;border-top:1px solid var(--border);
+  animation:fadeUp .6s .3s ease both;width:100%;
+}
+@media(max-width:640px){.hero-proof{gap:20px 28px}}
+.hp-item{text-align:center}
+.hp-val{font-size:28px;font-weight:900;color:var(--ink);letter-spacing:-1px;line-height:1}
+@media(max-width:480px){.hp-val{font-size:22px}}
+.hp-val span{color:var(--p500)}
+.hp-lbl{font-size:11px;color:var(--ink4);font-weight:600;margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+
+/* ══════════════════════════════════════
+   WHAT IS DRHP — INFOGRAPHIC SECTION
+══════════════════════════════════════ */
+.sec{position:relative}
+.sec-inner{max-width:1160px;margin:0 auto;padding:90px 52px}
+@media(max-width:1023px){.sec-inner{padding:60px 28px}}
+@media(max-width:768px){.sec-inner{padding:52px 16px}}
+
+.sec-eyebrow{
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:2px;
+  color:var(--p500);margin-bottom:12px;display:flex;align-items:center;gap:8px;
+  justify-content:center;
+}
+.sec-eyebrow::before{
+  content:'';width:20px;height:2px;
+  background:linear-gradient(90deg,var(--p500),var(--g500));
+  border-radius:2px;flex-shrink:0;
+}
+.sec-eyebrow::after{
+  content:'';width:20px;height:2px;
+  background:linear-gradient(90deg,var(--g500),var(--p500));
+  border-radius:2px;flex-shrink:0;
+}
+.sec-h2{
+  font-size:clamp(26px,3.8vw,46px);font-weight:900;letter-spacing:-1.8px;
+  line-height:1.1;color:var(--ink);margin-bottom:14px;text-align:center;
+}
+.sec-sub{
+  font-size:16px;color:var(--ink3);line-height:1.72;font-weight:400;
+  max-width:600px;text-align:center;margin:0 auto;
+}
+.section-header{margin-bottom:56px}
+
+/* ── DRHP Full Form Banner ── */
+.fullform-banner{
+  background:linear-gradient(135deg,var(--p900),var(--p800));
+  border-radius:20px;padding:36px 40px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  flex-wrap:wrap;margin-bottom:48px;
+  position:relative;overflow:hidden;
+  box-shadow:var(--sh4);
+}
+@media(max-width:768px){.fullform-banner{padding:28px 20px;justify-content:center;text-align:center}}
+.fullform-banner::before{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:300px;height:300px;
+  background:radial-gradient(ellipse,rgba(108,61,228,.3),transparent 65%);
+}
+.fullform-banner::after{
+  content:'';position:absolute;bottom:-40px;left:-40px;
+  width:200px;height:200px;
+  background:radial-gradient(ellipse,rgba(30,168,81,.2),transparent 65%);
+}
+.ffb-left{position:relative;z-index:1}
+.ffb-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--p300);margin-bottom:10px}
+.ffb-acronym{display:flex;align-items:baseline;gap:4px;flex-wrap:wrap}
+.ffb-letter{font-size:clamp(36px,6vw,64px);font-weight:900;line-height:1;letter-spacing:-2px}
+.ffb-letter.purple{color:var(--p300)}
+.ffb-letter.green{color:var(--g300)}
+.ffb-word{font-size:clamp(12px,2vw,16px);font-weight:600;color:rgba(255,255,255,.6);margin-left:6px;padding-bottom:6px}
+.ffb-right{position:relative;z-index:1;max-width:380px}
+.ffb-desc{font-size:15px;color:rgba(255,255,255,.8);line-height:1.7;font-weight:400}
+.ffb-desc strong{color:#fff;font-weight:700}
+
+/* ── What is DRHP — 3-col cards ── */
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+@media(max-width:900px){.what-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.what-grid{grid-template-columns:1fr}}
+.what-card{
+  background:var(--surf1);border:1.5px solid var(--border);border-radius:18px;
+  padding:28px 24px;transition:.28s;position:relative;overflow:hidden;
+}
+.what-card::after{
+  content:'';position:absolute;left:0;top:0;width:100%;height:3px;
+  background:linear-gradient(90deg,var(--p500),var(--g500));
+  transform:scaleX(0);transform-origin:left;transition:.32s;
+}
+.what-card:hover{box-shadow:var(--sh3);transform:translateY(-4px);border-color:var(--p300)}
+.what-card:hover::after{transform:scaleX(1)}
+.wc-ico{
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin-bottom:18px;
+}
+.ico-purple{background:var(--p150)}
+.ico-green{background:var(--g100)}
+.ico-mixed{background:linear-gradient(135deg,var(--p150),var(--g100))}
+.wc-title{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:8px;letter-spacing:-.3px}
+.wc-text{font-size:13.5px;color:var(--ink3);line-height:1.7}
+
+/* ══════════════════════════════════════
+   DRHP STRUCTURE — VISUAL FLOWCHART
+══════════════════════════════════════ */
+.structure-sec{background:var(--surf1)}
+.chapters-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px;position:relative}
+@media(max-width:1000px){.chapters-flow{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.chapters-flow{grid-template-columns:1fr}}
+
+.chapter-node{
+  background:#fff;border:1.5px solid var(--border);
+  padding:24px 20px;position:relative;
+  transition:.28s;cursor:default;
+}
+.chapter-node:not(:last-child)::after{
+  content:'→';position:absolute;right:-14px;top:50%;
+  transform:translateY(-50%);font-size:18px;color:var(--p400);z-index:2;
+}
+@media(max-width:1000px){.chapter-node::after{display:none}}
+.chapter-node:first-child{border-radius:18px 0 0 18px}
+.chapter-node:last-child{border-radius:0 18px 18px 0}
+@media(max-width:1000px){
+  .chapter-node:first-child{border-radius:18px 18px 0 0}
+  .chapter-node:nth-child(2){border-radius:0 0 18px 18px}
+  .chapter-node:nth-child(3){border-radius:18px 18px 0 0}
+  .chapter-node:last-child{border-radius:0 0 18px 18px}
+}
+@media(max-width:580px){
+  .chapter-node{border-radius:0 !important}
+  .chapter-node:first-child{border-radius:18px 18px 0 0 !important}
+  .chapter-node:last-child{border-radius:0 0 18px 18px !important}
+}
+.chapter-node:hover{box-shadow:var(--sh2);z-index:2}
+.cn-num{
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;
+  color:var(--p400);margin-bottom:12px;
+}
+.cn-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:10px;letter-spacing:-.3px}
+.cn-items{display:flex;flex-direction:column;gap:6px}
+.cn-item{
+  display:flex;align-items:flex-start;gap:7px;
+  font-size:12px;color:var(--ink3);line-height:1.5;
+}
+.cn-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:linear-gradient(135deg,var(--p500),var(--g500));
+  flex-shrink:0;margin-top:5px;
+}
+
+/* ══════════════════════════════════════
+   10 KEY SECTIONS TO READ — ACCORDION
+══════════════════════════════════════ */
+.sections-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
+@media(max-width:768px){.sections-grid{grid-template-columns:1fr}}
+
+.section-card{
+  background:#fff;border:1.5px solid var(--border);border-radius:18px;
+  overflow:hidden;transition:.24s;
+}
+.section-card:hover{box-shadow:var(--sh2);border-color:var(--p200)}
+.sc-header{
+  display:flex;align-items:center;gap:14px;padding:20px 22px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+}
+.sc-num{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;color:#fff;
+  background:linear-gradient(135deg,var(--p500),var(--g600));
+}
+.sc-title{font-size:14.5px;font-weight:800;color:var(--ink);flex:1;letter-spacing:-.2px}
+.sc-chevron{font-size:12px;color:var(--ink4);transition:.22s;margin-left:auto}
+.sc-header.open .sc-chevron{transform:rotate(180deg);color:var(--p500)}
+.sc-body{
+  display:none;padding:0 22px 20px;
+  font-size:13.5px;color:var(--ink3);line-height:1.72;
+  border-top:1px solid var(--border);padding-top:16px;
+}
+.sc-body.open{display:block}
+.sc-body .highlight{
+  background:var(--p100);border-left:3px solid var(--p500);
+  padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0;
+  font-size:13px;color:var(--ink2);font-weight:500;
+}
+.sc-body .flag-list{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.sc-body .flag-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--ink3)}
+.sc-body .flag-dot-green{color:var(--g600);font-size:16px;line-height:1.2;flex-shrink:0}
+.sc-body .flag-dot-red{color:var(--red);font-size:16px;line-height:1.2;flex-shrink:0}
+
+/* ══════════════════════════════════════
+   CASE STUDY — ZOMATO DRHP EXAMPLE
+══════════════════════════════════════ */
+.case-sec{background:linear-gradient(180deg,var(--surf1) 0%,#fff 100%)}
+.case-card{
+  background:#fff;border:1.5px solid var(--border);border-radius:24px;
+  overflow:hidden;box-shadow:var(--sh2);margin-top:48px;
+}
+.case-header{
+  background:linear-gradient(135deg,var(--p900),var(--p700));
+  padding:32px 36px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+@media(max-width:600px){.case-header{padding:24px 20px;flex-direction:column;align-items:flex-start}}
+.case-header::after{
+  content:'';position:absolute;right:-30px;top:-30px;
+  width:200px;height:200px;
+  background:radial-gradient(ellipse,rgba(108,61,228,.4),transparent);
+}
+.case-logo{
+  width:52px;height:52px;border-radius:14px;
+  background:linear-gradient(135deg,#e94235,#f97316);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;box-shadow:0 4px 16px rgba(0,0,0,.3);flex-shrink:0;
+}
+.case-title-wrap{flex:1;position:relative;z-index:1}
+.case-tag{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--p300);margin-bottom:6px}
+.case-title{font-size:22px;font-weight:900;color:#fff;letter-spacing:-.5px}
+.case-subtitle{font-size:13px;color:rgba(255,255,255,.65);margin-top:4px}
+.case-ipo-badge{
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  border-radius:12px;padding:14px 20px;text-align:center;position:relative;z-index:1;flex-shrink:0;
+}
+@media(max-width:600px){.case-ipo-badge{width:100%}}
+.cib-val{font-size:28px;font-weight:900;color:#fff;letter-spacing:-1px}
+.cib-lbl{font-size:11px;color:rgba(255,255,255,.6);font-weight:600;margin-top:2px}
+
+.case-body{padding:32px 36px}
+@media(max-width:600px){.case-body{padding:20px}}
+.case-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+@media(max-width:900px){.case-metrics{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.case-metrics{grid-template-columns:1fr 1fr}}
+.cm-card{
+  background:var(--surf1);border:1px solid var(--border);border-radius:14px;
+  padding:16px;text-align:center;
+}
+.cm-icon{font-size:20px;margin-bottom:8px}
+.cm-val{font-size:20px;font-weight:900;letter-spacing:-.5px;color:var(--ink)}
+.cm-val.purple{color:var(--p500)}
+.cm-val.green{color:var(--g600)}
+.cm-val.red{color:var(--red)}
+.cm-lbl{font-size:11px;color:var(--ink4);font-weight:600;margin-top:4px;text-transform:uppercase;letter-spacing:.3px}
+
+.case-insights{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:700px){.case-insights{grid-template-columns:1fr}}
+.ci-box{border-radius:16px;padding:22px}
+.ci-box.green-box{background:var(--g50);border:1.5px solid var(--g200)}
+.ci-box.red-box{background:var(--red-bg);border:1.5px solid var(--red-border,#fbc8c8)}
+.ci-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.ci-title.green{color:var(--g700)}
+.ci-title.red{color:var(--red)}
+.ci-items{display:flex;flex-direction:column;gap:10px}
+.ci-item{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:var(--ink2);line-height:1.6}
+.ci-bullet-g{color:var(--g500);font-size:15px;flex-shrink:0;margin-top:2px}
+.ci-bullet-r{color:var(--red);font-size:15px;flex-shrink:0;margin-top:2px}
+
+/* DRHP Timeline infographic */
+.timeline-wrap{margin-top:32px;padding-top:28px;border-top:1px solid var(--border)}
+.timeline-title{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.timeline-strip{display:flex;align-items:stretch;overflow-x:auto;gap:0;scrollbar-width:none}
+.timeline-strip::-webkit-scrollbar{display:none}
+.ts-step{
+  flex:1;min-width:120px;padding:16px 12px;background:var(--surf1);
+  border:1px solid var(--border);border-right:none;
+  position:relative;display:flex;flex-direction:column;align-items:center;
+  text-align:center;
+}
+.ts-step:first-child{border-radius:12px 0 0 12px}
+.ts-step:last-child{border-radius:0 12px 12px 0;border-right:1px solid var(--border)}
+.ts-step.active{background:linear-gradient(160deg,var(--p100),var(--surf1));border-color:var(--p200)}
+.ts-ico{font-size:22px;margin-bottom:8px}
+.ts-label{font-size:11px;font-weight:700;color:var(--ink2);text-align:center;line-height:1.4}
+.ts-sub{font-size:10px;color:var(--ink4);margin-top:4px}
+.ts-arrow{position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--p400);font-size:14px;z-index:2;background:#fff;padding:2px}
+
+/* ══════════════════════════════════════
+   PROS & CONS — SPLIT CARD
+══════════════════════════════════════ */
+.proscons-sec{background:var(--white)}
+.proscons-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+@media(max-width:700px){.proscons-grid{grid-template-columns:1fr}}
+.pc-card{border-radius:22px;padding:32px 28px;position:relative;overflow:hidden}
+@media(max-width:480px){.pc-card{padding:24px 20px}}
+.pc-card.pro{
+  background:linear-gradient(160deg,var(--g50),#fff);
+  border:1.5px solid var(--g200);
+}
+.pc-card.con{
+  background:linear-gradient(160deg,#fff5f5,#fff);
+  border:1.5px solid #fbc8c8;
+}
+.pc-header{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.pc-icon{
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;
+}
+.pc-icon.green-ico{background:var(--g100)}
+.pc-icon.red-ico{background:#ffe4e4}
+.pc-label{font-size:18px;font-weight:900;letter-spacing:-.5px}
+.pc-label.green{color:var(--g700)}
+.pc-label.red{color:var(--red)}
+.pc-sublabel{font-size:12px;font-weight:500;margin-top:2px}
+.pc-sublabel.green{color:var(--g600)}
+.pc-sublabel.red{color:var(--red)}
+.pc-items{display:flex;flex-direction:column;gap:14px}
+.pc-item{
+  display:flex;align-items:flex-start;gap:12px;
+  background:#fff;border-radius:12px;padding:14px 16px;
+  font-size:13.5px;color:var(--ink2);line-height:1.62;
+}
+.pc-item.pro{border:1px solid var(--g200)}
+.pc-item.con{border:1px solid #fbc8c8}
+.pci-icon{font-size:17px;flex-shrink:0;margin-top:1px}
+.pci-text strong{display:block;font-size:13px;font-weight:800;color:var(--ink);margin-bottom:3px}
+
+/* ══════════════════════════════════════
+   RED FLAGS SECTION
+══════════════════════════════════════ */
+.redflags-sec{background:var(--surf1)}
+.flags-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+@media(max-width:900px){.flags-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.flags-grid{grid-template-columns:1fr}}
+.flag-card{
+  background:#fff;border:1.5px solid var(--border);border-radius:18px;
+  padding:24px 20px;transition:.28s;position:relative;
+}
+.flag-card:hover{box-shadow:var(--sh3);transform:translateY(-4px)}
+.flag-card.red-flag::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  border-radius:18px 18px 0 0;background:#e03c3c;
+}
+.flag-card.green-flag::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  border-radius:18px 18px 0 0;background:linear-gradient(90deg,var(--p500),var(--g500));
+}
+.flag-ico{font-size:28px;margin-bottom:14px}
+.flag-title{font-size:14.5px;font-weight:800;color:var(--ink);margin-bottom:8px;letter-spacing:-.2px}
+.flag-desc{font-size:13px;color:var(--ink3);line-height:1.68}
+.flag-tip{
+  margin-top:12px;padding:8px 12px;
+  background:var(--p100);border-radius:8px;
+  font-size:12px;color:var(--p700);font-weight:600;
+}
+.flag-tip.red-tip{background:var(--red-bg);color:var(--red)}
+.flag-tip.green-tip{background:var(--g50);color:var(--g700)}
+
+/* ══════════════════════════════════════
+   STEP-BY-STEP READING GUIDE
+══════════════════════════════════════ */
+.steps-sec{background:#fff}
+.steps-flow{display:flex;flex-direction:column;gap:0;margin-top:48px}
+.step-row{
+  display:flex;align-items:stretch;gap:0;position:relative;
+}
+@media(max-width:680px){.step-row{flex-direction:column}}
+.step-connector{
+  display:flex;flex-direction:column;align-items:center;
+  width:60px;flex-shrink:0;
+}
+@media(max-width:680px){.step-connector{flex-direction:row;width:100%;height:60px}}
+.step-circle{
+  width:48px;height:48px;border-radius:50%;
+  background:linear-gradient(135deg,var(--p500),var(--g600));
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:900;color:#fff;flex-shrink:0;
+  box-shadow:0 4px 16px rgba(108,61,228,.3);
+}
+.step-line{flex:1;width:2px;background:linear-gradient(180deg,var(--p400),var(--g400));margin:4px auto;opacity:.4}
+@media(max-width:680px){.step-line{height:2px;width:100%;margin:auto 4px}}
+.step-row:last-child .step-line{display:none}
+.step-content{
+  flex:1;background:var(--surf1);border:1.5px solid var(--border);
+  border-radius:18px;padding:22px 24px;margin-bottom:16px;margin-left:16px;
+  transition:.24s;
+}
+@media(max-width:680px){.step-content{margin-left:0;margin-top:12px}}
+.step-content:hover{box-shadow:var(--sh2);border-color:var(--p200)}
+.step-time{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--p400);margin-bottom:6px}
+.step-title{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:8px;letter-spacing:-.3px}
+.step-desc{font-size:13.5px;color:var(--ink3);line-height:1.7}
+.step-checklist{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.sch-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--ink2)}
+.sch-check{color:var(--g600);font-weight:800;flex-shrink:0}
+
+/* ══════════════════════════════════════
+   KEY RATIOS INFOGRAPHIC
+══════════════════════════════════════ */
+.ratios-sec{background:var(--surf1)}
+.ratios-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px}
+@media(max-width:680px){.ratios-grid{grid-template-columns:1fr}}
+.ratio-card{
+  background:#fff;border:1.5px solid var(--border);border-radius:18px;
+  padding:24px;transition:.24s;
+}
+.ratio-card:hover{box-shadow:var(--sh2);border-color:var(--p200);transform:translateY(-3px)}
+.ratio-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.ratio-name{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:-.2px}
+.ratio-badge{
+  font-size:10px;font-weight:700;padding:4px 10px;border-radius:100px;
+}
+.rb-important{background:var(--p150);color:var(--p600)}
+.rb-critical{background:#ffe4e4;color:var(--red)}
+.rb-useful{background:var(--g100);color:var(--g600)}
+.ratio-formula{
+  background:var(--surf2);border-radius:10px;padding:10px 14px;
+  font-size:13px;font-weight:700;color:var(--p600);margin-bottom:12px;
+  font-family:monospace;letter-spacing:.3px;
+}
+.ratio-desc{font-size:13px;color:var(--ink3);line-height:1.68}
+.ratio-benchmark{
+  margin-top:12px;padding:10px 12px;background:var(--g50);
+  border:1px solid var(--g200);border-radius:8px;
+  font-size:12px;color:var(--g700);font-weight:600;
+  display:flex;align-items:center;gap:6px;
+}
+
+/* ══════════════════════════════════════
+   MID-PAGE CTA
+══════════════════════════════════════ */
+.cta-strip{
+  background:linear-gradient(135deg,var(--p800),var(--p700) 40%,var(--g700));
+  padding:60px 52px;text-align:center;position:relative;overflow:hidden;
+}
+@media(max-width:768px){.cta-strip{padding:48px 20px}}
+.cta-strip::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:40px 40px;pointer-events:none;
+}
+.cta-strip-body{max-width:640px;margin:0 auto;position:relative;z-index:1}
+.cta-strip-tag{
+  display:inline-flex;align-items:center;gap:6px;padding:4px 14px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  border-radius:100px;font-size:11px;font-weight:700;color:rgba(255,255,255,.8);
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;
+}
+.cta-strip-h2{font-size:clamp(22px,4vw,36px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:12px;line-height:1.15}
+.cta-strip-sub{font-size:15px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:32px}
+.cta-strip-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+@media(max-width:480px){.cta-strip-btns{flex-direction:column;align-items:center}}
+
+.btn-cta-primary{
+  padding:15px 32px;border-radius:14px;font-size:15px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,var(--p500) 0%,var(--g600) 100%);
+  background-size:200% auto;
+  box-shadow:0 8px 26px rgba(0,0,0,.3);transition:all .28s;
+  display:inline-flex;align-items:center;gap:8px;
+  animation:gradShift 5s ease infinite;
+}
+.btn-cta-primary:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,.4)}
+.btn-cta-primary:active{transform:scale(.97)}
+
+.btn-cta-secondary{
+  padding:14px 28px;border-radius:14px;font-size:15px;font-weight:700;
+  color:#fff;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.25);transition:.22s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-cta-secondary:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.4)}
+
+/* ══════════════════════════════════════
+   COMPARISON TABLE — DRHP vs PROSPECTUS
+══════════════════════════════════════ */
+.compare-sec{background:#fff}
+.compare-tbl-wrap{margin-top:48px;overflow-x:auto;border-radius:18px;border:1.5px solid var(--border);box-shadow:var(--sh1)}
+.compare-tbl{width:100%;border-collapse:collapse;min-width:560px}
+.compare-tbl thead{background:linear-gradient(135deg,var(--p900),var(--p800))}
+.compare-tbl th{padding:16px 20px;text-align:left;font-size:13px;font-weight:700;color:#fff;letter-spacing:.3px}
+.compare-tbl th:first-child{color:rgba(255,255,255,.7);font-size:12px}
+.compare-tbl td{padding:14px 20px;font-size:13.5px;color:var(--ink2);border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6}
+.compare-tbl tr:last-child td{border-bottom:none}
+.compare-tbl tr:nth-child(even) td{background:var(--surf1)}
+.compare-tbl tr:hover td{background:var(--p100)}
+.tbl-tag{
+  display:inline-flex;padding:3px 9px;border-radius:6px;
+  font-size:11px;font-weight:700;
+}
+.tbl-tag.purple{background:var(--p150);color:var(--p600)}
+.tbl-tag.green{background:var(--g100);color:var(--g600)}
+.tbl-tag.amber{background:var(--amber-bg);color:var(--amber)}
+
+/* ══════════════════════════════════════
+   INVESTOR CHECKLIST
+══════════════════════════════════════ */
+.checklist-sec{background:var(--surf1)}
+.checklist-card{
+  background:#fff;border:1.5px solid var(--border);border-radius:22px;
+  padding:36px;margin-top:48px;box-shadow:var(--sh1);
+}
+@media(max-width:600px){.checklist-card{padding:24px 18px}}
+.checklist-intro{font-size:15px;color:var(--ink3);line-height:1.7;margin-bottom:32px}
+.checklist-sections{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:900px){.checklist-sections{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.checklist-sections{grid-template-columns:1fr}}
+.cl-section-title{
+  font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;
+  color:var(--p500);margin-bottom:14px;padding-bottom:10px;
+  border-bottom:2px solid var(--p200);display:flex;align-items:center;gap:6px;
+}
+.cl-items{display:flex;flex-direction:column;gap:10px}
+.cl-item{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;color:var(--ink2);line-height:1.6;
+  background:var(--surf1);border:1px solid var(--border);border-radius:10px;
+  padding:10px 12px;transition:.18s;cursor:pointer;
+}
+.cl-item:hover{background:var(--p100);border-color:var(--p200)}
+.cl-checkbox{
+  width:18px;height:18px;border:2px solid var(--border2);border-radius:5px;
+  flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:transparent;transition:.18s;
+  -webkit-user-select:none;user-select:none;
+}
+.cl-item.checked .cl-checkbox{
+  background:linear-gradient(135deg,var(--p500),var(--g600));
+  border-color:transparent;color:#fff;
+}
+
+/* ══════════════════════════════════════
+   8 CASE STUDIES — TABULAR SECTION
+══════════════════════════════════════ */
+.casestudies-sec{background:linear-gradient(180deg,#fff 0%,var(--surf1) 100%)}
+
+/* Tab Bar */
+.cs-tab-bar{
+  display:flex;gap:0;margin-top:48px;margin-bottom:0;
+  border:1.5px solid var(--border);border-bottom:none;
+  border-radius:18px 18px 0 0;overflow:hidden;
+  background:var(--surf1);
+}
+.cs-tab{
+  flex:1;padding:13px 8px;text-align:center;cursor:pointer;
+  font-size:12px;font-weight:700;color:var(--ink4);
+  border-right:1px solid var(--border);transition:.22s;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  position:relative;user-select:none;-webkit-user-select:none;
+  min-width:0;
+}
+.cs-tab:last-child{border-right:none}
+.cs-tab .ct-ico{font-size:18px;line-height:1}
+.cs-tab .ct-name{font-size:10px;line-height:1.2;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.cs-tab .ct-badge{
+  font-size:9px;font-weight:800;padding:2px 6px;border-radius:100px;
+  letter-spacing:.3px;text-transform:uppercase;white-space:nowrap;
+}
+.cs-tab .ct-badge.win{background:var(--g100);color:var(--g700)}
+.cs-tab .ct-badge.loss{background:var(--red-bg);color:var(--red)}
+.cs-tab.active{
+  background:#fff;color:var(--ink);
+  border-bottom:none;
+}
+.cs-tab.active.win-tab::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--g500),var(--g400));
+}
+.cs-tab.active.loss-tab::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--red),#f97316);
+}
+.cs-tab:hover:not(.active){background:var(--p50);color:var(--ink3)}
+
+/* Tab scroll wrapper for mobile */
+.cs-tab-scroll{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.cs-tab-scroll::-webkit-scrollbar{display:none}
+.cs-tab-scroll .cs-tab-bar{min-width:720px;border-radius:18px 18px 0 0}
+
+/* Table wrapper */
+.cs-table-wrap{
+  border:1.5px solid var(--border);border-top:none;
+  border-radius:0 0 18px 18px;overflow:hidden;
+  background:#fff;box-shadow:var(--sh2);
+}
+.cs-panel{display:none}
+.cs-panel.active{display:block;animation:fadeUp .35s ease both}
+
+/* Summary table */
+.cs-summary-tbl{width:100%;border-collapse:collapse}
+.cs-summary-tbl th{
+  background:linear-gradient(135deg,var(--p900),var(--p800));
+  padding:14px 18px;text-align:left;font-size:12px;
+  font-weight:700;color:rgba(255,255,255,.8);letter-spacing:.5px;
+  white-space:nowrap;
+}
+.cs-summary-tbl th:first-child{color:#fff;font-size:13px}
+.cs-summary-tbl td{
+  padding:13px 18px;font-size:13.5px;color:var(--ink2);
+  border-bottom:1px solid var(--border);vertical-align:middle;line-height:1.5;
+}
+.cs-summary-tbl tr:last-child td{border-bottom:none}
+.cs-summary-tbl tr:nth-child(even) td{background:var(--surf1)}
+.cs-summary-tbl tr:hover td{background:var(--p100);transition:.15s}
+.cs-summary-tbl .td-label{font-weight:700;color:var(--ink);font-size:13px;white-space:nowrap}
+.cs-summary-tbl .td-val{font-weight:800;font-size:15px;letter-spacing:-.3px}
+.cs-summary-tbl .td-val.green{color:var(--g600)}
+.cs-summary-tbl .td-val.red{color:var(--red)}
+.cs-summary-tbl .td-val.purple{color:var(--p500)}
+.cs-summary-tbl .td-val.amber{color:var(--amber)}
+
+/* Detail panel inside tab */
+.cs-detail{padding:24px 28px;border-top:1.5px solid var(--border)}
+@media(max-width:600px){.cs-detail{padding:18px 16px}}
+
+.cs-detail-header{
+  display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap;
+}
+.cs-detail-logo{
+  width:56px;height:56px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;flex-shrink:0;box-shadow:0 4px 14px rgba(0,0,0,.12);
+}
+.cs-detail-title-block{flex:1}
+.cs-detail-eyebrow{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--p400);margin-bottom:4px}
+.cs-detail-name{font-size:20px;font-weight:900;color:var(--ink);letter-spacing:-.5px}
+.cs-detail-sub{font-size:13px;color:var(--ink4);margin-top:2px}
+.cs-verdict-badge{
+  padding:8px 16px;border-radius:10px;
+  font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;
+  flex-shrink:0;
+}
+.cs-verdict-badge.win{background:var(--g100);color:var(--g700);border:1.5px solid var(--g200)}
+.cs-verdict-badge.loss{background:var(--red-bg);color:var(--red);border:1.5px solid #fbc8c8}
+
+/* Metrics row */
+.cs-metrics-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+@media(max-width:900px){.cs-metrics-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.cs-metrics-row{grid-template-columns:1fr 1fr}}
+.cs-metric{
+  background:var(--surf1);border:1px solid var(--border);border-radius:12px;
+  padding:14px 12px;text-align:center;
+}
+.cs-metric-icon{font-size:18px;margin-bottom:6px}
+.cs-metric-val{font-size:17px;font-weight:900;letter-spacing:-.3px;color:var(--ink)}
+.cs-metric-val.green{color:var(--g600)}
+.cs-metric-val.red{color:var(--red)}
+.cs-metric-val.purple{color:var(--p500)}
+.cs-metric-val.amber{color:var(--amber)}
+.cs-metric-lbl{font-size:10px;color:var(--ink4);font-weight:600;margin-top:3px;text-transform:uppercase;letter-spacing:.3px;line-height:1.3}
+
+/* Signals row */
+.cs-signals{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+@media(max-width:600px){.cs-signals{grid-template-columns:1fr}}
+.cs-signal-box{border-radius:12px;padding:16px 18px}
+.cs-signal-box.pos{background:var(--g50);border:1.5px solid var(--g200)}
+.cs-signal-box.neg{background:var(--red-bg);border:1.5px solid #fbc8c8}
+.cs-signal-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.cs-signal-title.pos{color:var(--g700)}
+.cs-signal-title.neg{color:var(--red)}
+.cs-signal-items{display:flex;flex-direction:column;gap:7px}
+.cs-signal-item{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;color:var(--ink2);line-height:1.5}
+.cs-signal-dot{font-size:12px;flex-shrink:0;margin-top:1px}
+
+/* Key lesson bar */
+.cs-lesson{
+  background:linear-gradient(135deg,var(--p100),var(--g50));
+  border:1.5px solid var(--p200);border-radius:12px;
+  padding:14px 18px;display:flex;align-items:flex-start;gap:12px;
+  font-size:13px;color:var(--ink2);line-height:1.65;
+}
+.cs-lesson-ico{font-size:20px;flex-shrink:0;margin-top:2px}
+.cs-lesson strong{font-weight:800;color:var(--ink);display:block;margin-bottom:4px;font-size:13px}
+
+/* Overview comparison table at top */
+.cs-overview-wrap{
+  margin-top:0;overflow-x:auto;border-radius:18px 18px 0 0;
+  border:1.5px solid var(--border);border-bottom:none;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.cs-overview-wrap::-webkit-scrollbar{display:none}
+.cs-overview-tbl{width:100%;border-collapse:collapse;min-width:900px}
+.cs-overview-tbl thead tr:first-child th{
+  background:linear-gradient(135deg,var(--p900),var(--p800));
+  padding:16px 14px;text-align:left;font-size:12px;font-weight:700;
+  color:rgba(255,255,255,.75);letter-spacing:.5px;white-space:nowrap;
+}
+.cs-overview-tbl thead tr:first-child th:first-child{color:#fff;font-size:13px}
+.cs-overview-tbl td{
+  padding:12px 14px;font-size:13px;color:var(--ink2);
+  border-bottom:1px solid var(--border);vertical-align:middle;line-height:1.5;
+}
+.cs-overview-tbl tr:last-child td{border-bottom:none}
+.cs-overview-tbl tr:nth-child(even) td{background:var(--surf1)}
+.cs-overview-tbl tr:hover td{background:var(--p100);transition:.15s}
+.cs-overview-tbl .td-co{font-weight:800;color:var(--ink);font-size:13px}
+.cs-overview-tbl .td-ico{font-size:18px;text-align:center}
+.pill{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 10px;border-radius:100px;
+  font-size:11px;font-weight:700;white-space:nowrap;
+}
+.pill.win{background:var(--g100);color:var(--g700)}
+.pill.loss{background:var(--red-bg);color:var(--red)}
+.pill.mixed{background:var(--amber-bg);color:var(--amber)}
+.return-val{font-weight:900;font-size:14px;letter-spacing:-.3px}
+.return-val.pos{color:var(--g600)}
+.return-val.neg{color:var(--red)}
+.return-val.mixed{color:var(--amber)}
+
+/* Switch between overview and detail */
+.cs-view-toggle{
+  display:flex;gap:8px;margin-bottom:20px;justify-content:flex-end;flex-wrap:wrap;
+}
+.cs-view-btn{
+  padding:8px 16px;border-radius:9px;font-size:12px;font-weight:700;
+  border:1.5px solid var(--border);color:var(--ink3);background:#fff;
+  cursor:pointer;transition:.18s;-webkit-tap-highlight-color:transparent;
+}
+.cs-view-btn.active{
+  background:linear-gradient(135deg,var(--p500),var(--g600));
+  color:#fff;border-color:transparent;
+  box-shadow:0 4px 12px rgba(108,61,228,.25);
+}
+.cs-view-btn:hover:not(.active){background:var(--surf2);color:var(--ink)}
+
+/* Responsive: overview table horizontal scroll indicator */
+.scroll-hint{
+  font-size:11px;color:var(--ink4);text-align:center;padding:8px;
+  display:none;
+}
+@media(max-width:900px){.scroll-hint{display:block}}
+
+/* ══════════════════════════════════════
+   FINAL CTA SECTION
+══════════════════════════════════════ */
+.final-cta-sec{
+  background:linear-gradient(160deg,var(--p50),#fff);
+  padding:100px 52px;text-align:center;position:relative;overflow:hidden;
+}
+@media(max-width:768px){.final-cta-sec{padding:72px 20px}}
+.final-cta-sec::before{
+  content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);
+  width:800px;height:800px;
+  background:radial-gradient(ellipse,rgba(108,61,228,.06),transparent 65%);
+  pointer-events:none;
+}
+.final-cta-body{max-width:660px;margin:0 auto;position:relative;z-index:1}
+.final-cta-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;padding:5px 16px;
+  background:var(--p150);border-radius:100px;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;
+  color:var(--p600);margin-bottom:24px;
+}
+.final-cta-h2{font-size:clamp(28px,5vw,52px);font-weight:900;letter-spacing:-2px;line-height:1.08;color:var(--ink);margin-bottom:16px}
+.final-cta-sub{font-size:17px;color:var(--ink3);line-height:1.72;margin-bottom:40px}
+.final-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+@media(max-width:480px){.final-cta-btns{flex-direction:column;align-items:center}}
+
+.btn-final-primary{
+  padding:16px 36px;border-radius:14px;font-size:16px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,var(--p500) 0%,var(--p600) 40%,var(--g600) 100%);
+  background-size:200% auto;
+  box-shadow:0 10px 32px rgba(108,61,228,.40);transition:all .28s;
+  display:inline-flex;align-items:center;gap:10px;
+  animation:gradShift 5s ease infinite;
+}
+.btn-final-primary:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(108,61,228,.52)}
+.btn-final-primary:active{transform:scale(.97)}
+@media(max-width:480px){.btn-final-primary{padding:15px 28px;font-size:15px;width:100%;max-width:320px;justify-content:center}}
+
+.btn-final-secondary{
+  padding:15px 28px;border-radius:14px;font-size:16px;font-weight:700;
+  color:var(--p600);background:#fff;border:2px solid var(--p300);transition:.22s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-final-secondary:hover{border-color:var(--p500);background:var(--p50);transform:translateY(-2px)}
+@media(max-width:480px){.btn-final-secondary{padding:14px 24px;font-size:15px;width:100%;max-width:320px;justify-content:center}}
+
+.trust-row{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:36px}
+.trust-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink4);font-weight:600}
+.trust-icon{font-size:15px}
+.trust-sep{width:4px;height:4px;border-radius:50%;background:var(--border2)}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer{background:var(--p950);padding:48px 52px 0;color:rgba(255,255,255,.6)}
+@media(max-width:768px){footer{padding:36px 20px 0}}
+.footer-logo{display:flex;align-items:center;gap:9px;margin-bottom:16px}
+.footer-logo-mark{
+  width:32px;height:32px;border-radius:9px;
+  background:linear-gradient(135deg,var(--p500),var(--g500));
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:900;color:#fff;
+}
+.footer-logo-text{font-size:16px;font-weight:900;color:#fff;letter-spacing:-.4px}
+.footer-disclaimer{font-size:12px;line-height:1.7;max-width:740px;margin-bottom:32px}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:20px 0;border-top:1px solid rgba(255,255,255,.08)}
+@media(max-width:600px){.footer-bottom{flex-direction:column;align-items:flex-start;gap:8px}}
+.footer-copy{font-size:12px}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-size:12px;transition:.15s}
+.footer-links a:hover{color:#fff}
+
+/* ── LIC unique section grid ── */
+@media(max-width:700px){.lic-unique-grid{grid-template-columns:1fr !important}}
+@media(max-width:900px) and (min-width:701px){.lic-unique-grid{grid-template-columns:1fr 1fr !important}}
+
+/* ══════════════════════════════════════
+   PROGRESS BAR (reading progress)
+══════════════════════════════════════ */
+.reading-progress{
+  position:fixed;top:0;left:0;height:3px;z-index:9999;
+  background:linear-gradient(90deg,var(--p500),var(--g500));
+  width:0%;transition:width .1s;
+}
+
+/* ══════════════════════════════════════
+   STICKY TOC (desktop)
+══════════════════════════════════════ */
+.toc-float{
+  position:fixed;right:24px;top:50%;transform:translateY(-50%);
+  z-index:100;display:flex;flex-direction:column;gap:6px;
+}
+@media(max-width:1200px){.toc-float{display:none}}
+.toc-dot{
+  width:8px;height:8px;border-radius:50%;border:2px solid var(--border2);
+  cursor:pointer;transition:.2s;position:relative;
+}
+.toc-dot:hover,.toc-dot.active{
+  background:var(--p500);border-color:var(--p500);transform:scale(1.4);
+}
+.toc-dot:hover::after{
+  content:attr(data-label);
+  position:absolute;right:16px;top:50%;transform:translateY(-50%);
+  background:var(--ink);color:#fff;font-size:11px;font-weight:600;
+  padding:3px 8px;border-radius:6px;white-space:nowrap;font-family:'DM Sans',sans-serif;
+}
+
+/* ══════════════════════════════════════
+   BACK TO TOP
+══════════════════════════════════════ */
+.back-top{
+  position:fixed;bottom:24px;right:24px;
+  width:44px;height:44px;border-radius:12px;
+  background:linear-gradient(135deg,var(--p500),var(--g600));
+  color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--sh3);cursor:pointer;transition:.22s;z-index:100;
+  opacity:0;pointer-events:none;border:none;
+}
+.back-top.show{opacity:1;pointer-events:auto}
+.back-top:hover{transform:translateY(-3px);box-shadow:var(--sh4)}
+
+/* Safe areas for iPhone */
+@supports(padding-bottom:env(safe-area-inset-bottom)){
+  .final-cta-sec,.cta-strip{padding-bottom:max(72px,calc(72px + env(safe-area-inset-bottom)))}
+  footer .footer-bottom{padding-bottom:max(20px,env(safe-area-inset-bottom))}
+  .back-top{bottom:max(24px,calc(24px + env(safe-area-inset-bottom)));right:max(24px,env(safe-area-inset-right))}
+}
+</style>
+</head>
+<body>
+
+<!-- Reading Progress Bar -->
+<div class="reading-progress" id="readingProgress"></div>
+
+<!-- TOC Dots (desktop) -->
+<nav class="toc-float" aria-label="Table of contents">
+  <div class="toc-dot" data-label="What is DRHP" data-target="what" onclick="scrollToSection('what')"></div>
+  <div class="toc-dot" data-label="Structure" data-target="structure" onclick="scrollToSection('structure')"></div>
+  <div class="toc-dot" data-label="Key Sections" data-target="key-sections" onclick="scrollToSection('key-sections')"></div>
+  <div class="toc-dot" data-label="Case Study 1: Zomato" data-target="case" onclick="scrollToSection('case')"></div>
+  <div class="toc-dot" data-label="Case Study 2: LIC" data-target="case2" onclick="scrollToSection('case2')"></div>
+  <div class="toc-dot" data-label="8 IPO Case Studies" data-target="casestudies" onclick="scrollToSection('casestudies')"></div>
+  <div class="toc-dot" data-label="Pros &amp; Cons" data-target="proscons" onclick="scrollToSection('proscons')"></div>
+  <div class="toc-dot" data-label="Red Flags" data-target="redflags" onclick="scrollToSection('redflags')"></div>
+  <div class="toc-dot" data-label="How to Read" data-target="howtoread" onclick="scrollToSection('howtoread')"></div>
+  <div class="toc-dot" data-label="Checklist" data-target="checklist" onclick="scrollToSection('checklist')"></div>
+</nav>
+
+<!-- Back to Top -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero">
+  <div class="hero-glow-left"></div>
+  <div class="hero-body">
+    <div class="hero-badge">
+      <div class="badge-live">
+        <span class="live-dot"></span>
+        <span>Investor Guide</span>
+      </div>
+      <span>DRHP Deep Dive · IPO Intelligence</span>
+    </div>
+
+    <h1 class="hero-h1">
+      How to Read a<br>
+      <span class="acc-p">DRHP Like a Pro</span>
+    </h1>
+
+    <p class="hero-sub">
+      The Draft Red Herring Prospectus is the most important document before any IPO. 
+      Master how to decode it — chapter by chapter — to make smarter investment decisions 
+      with real examples, red flags to watch, and an investor checklist.
+    </p>
+
+    <div class="hero-ctas" id="open-demat">
+      <a href="#" class="btn-hero-p">
+        🚀 Open Demat Account Free
+      </a>
+      <a href="#key-sections" class="btn-hero-s">
+        📖 Start Reading Guide
+      </a>
+    </div>
+
+    <div class="hero-proof">
+      <div class="hp-item">
+        <div class="hp-val"><span>500+</span></div>
+        <div class="hp-lbl">IPOs Covered</div>
+      </div>
+      <div class="hp-item">
+        <div class="hp-val"><span>15</span> Sections</div>
+        <div class="hp-lbl">In Every DRHP</div>
+      </div>
+      <div class="hp-item">
+        <div class="hp-val"><span>2</span> Cases</div>
+        <div class="hp-lbl">Real IPO Examples</div>
+      </div>
+      <div class="hp-item">
+        <div class="hp-val"><span>10</span> Min</div>
+        <div class="hp-lbl">Read This Guide</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT IS DRHP ═══ -->
+<section class="sec" id="what">
+  <div class="sec-inner">
+    <div class="section-header anim">
+      <div class="sec-eyebrow">Foundation</div>
+      <h2 class="sec-h2">What Exactly is a DRHP?</h2>
+      <p class="sec-sub">Before diving into analysis, understand what you're reading and why SEBI mandates it.</p>
+    </div>
+
+    <!-- Full Form Banner -->
+    <div class="fullform-banner anim anim-d1">
+      <div class="ffb-left">
+        <div class="ffb-label">Full Form</div>
+        <div class="ffb-acronym">
+          <span class="ffb-letter purple">D</span><span class="ffb-word">raft</span>
+          <span class="ffb-letter green">R</span><span class="ffb-word">ed</span>
+          <span class="ffb-letter purple">H</span><span class="ffb-word">erring</span>
+          <span class="ffb-letter green">P</span><span class="ffb-word">rospectus</span>
+        </div>
+      </div>
+      <div class="ffb-right">
+        <p class="ffb-desc">
+          A <strong>DRHP is a preliminary registration document</strong> filed with SEBI before a company launches its IPO. 
+          It contains everything about the company — from its business model and financials to risk factors 
+          and how IPO proceeds will be used. It's called "Red Herring" because it's <strong>incomplete</strong> — 
+          the final price and issue size are added later.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3 key concepts -->
+    <div class="what-grid">
+      <div class="what-card anim anim-d2">
+        <div class="wc-ico ico-purple">📋</div>
+        <div class="wc-title">Why "Draft"?</div>
+        <p class="wc-text">SEBI reviews the DRHP and may ask the company to modify or add information before approving the final prospectus. The draft is public but not final.</p>
+      </div>
+      <div class="what-card anim anim-d3">
+        <div class="wc-ico ico-green">🔴</div>
+        <div class="wc-title">Why "Red Herring"?</div>
+        <p class="wc-text">Historically, the cover page carried a red-ink warning: this is not a complete offer document. The price band, lot size, and dates are intentionally left blank.</p>
+      </div>
+      <div class="what-card anim anim-d4">
+        <div class="wc-ico ico-mixed">⚖️</div>
+        <div class="wc-title">SEBI's Role</div>
+        <p class="wc-text">Every DRHP must be filed with SEBI at least 30 days before the IPO opens. SEBI doesn't "approve" the offering — it only ensures full disclosure.</p>
+      </div>
+      <div class="what-card anim anim-d3">
+        <div class="wc-ico ico-purple">📂</div>
+        <div class="wc-title">Where to Find It?</div>
+        <p class="wc-text">All DRHPs are publicly available on SEBI's EFILING portal (sebi.gov.in), NSE/BSE websites, and the company's own DRHP microsite. Free to download.</p>
+      </div>
+      <div class="what-card anim anim-d4">
+        <div class="wc-ico ico-green">📏</div>
+        <div class="wc-title">Typical Size</div>
+        <p class="wc-text">Most DRHPs are 300–700 pages long. You don't need to read every page. Focus on 7–8 critical sections for a thorough investment thesis.</p>
+      </div>
+      <div class="what-card anim anim-d5">
+        <div class="wc-ico ico-mixed">🕐</div>
+        <div class="wc-title">DRHP to IPO Timeline</div>
+        <p class="wc-text">SEBI takes 30–75 days to review. Once approved, the company has 12 months to open the IPO. Market conditions often drive the timing decision.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STRUCTURE / FLOWCHART ═══ -->
+<section class="sec structure-sec" id="structure">
+  <div class="sec-inner">
+    <div class="section-header anim">
+      <div class="sec-eyebrow">Architecture</div>
+      <h2 class="sec-h2">The 4-Part Structure of Every DRHP</h2>
+      <p class="sec-sub">A DRHP is divided into four broad parts, each serving a specific regulatory and informational purpose.</p>
+    </div>
+
+    <div class="chapters-flow anim anim-d1">
+      <div class="chapter-node">
+        <div class="cn-num">Part I</div>
+        <div class="cn-title">General Information & Offer Details</div>
+        <div class="cn-items">
+          <div class="cn-item"><div class="cn-dot"></div>Company overview</div>
+          <div class="cn-item"><div class="cn-dot"></div>Offer structure</div>
+          <div class="cn-item"><div class="cn-dot"></div>Use of proceeds</div>
+          <div class="cn-item"><div class="cn-dot"></div>Promoter details</div>
+          <div class="cn-item"><div class="cn-dot"></div>Listing exchanges</div>
+        </div>
+        <div class="ts-arrow">→</div>
+      </div>
+      <div class="chapter-node">
+        <div class="cn-num">Part II</div>
+        <div class="cn-title">Business & Industry Description</div>
+        <div class="cn-items">
+          <div class="cn-item"><div class="cn-dot"></div>Industry overview</div>
+          <div class="cn-item"><div class="cn-dot"></div>Business model</div>
+          <div class="cn-item"><div class="cn-dot"></div>Products & services</div>
+          <div class="cn-item"><div class="cn-dot"></div>Key clients</div>
+          <div class="cn-item"><div class="cn-dot"></div>Competition</div>
+        </div>
+        <div class="ts-arrow">→</div>
+      </div>
+      <div class="chapter-node">
+        <div class="cn-num">Part III</div>
+        <div class="cn-title">Risk Factors & Legal</div>
+        <div class="cn-items">
+          <div class="cn-item"><div class="cn-dot"></div>Business risks</div>
+          <div class="cn-item"><div class="cn-dot"></div>Industry risks</div>
+          <div class="cn-item"><div class="cn-dot"></div>Litigation history</div>
+          <div class="cn-item"><div class="cn-dot"></div>Regulatory risks</div>
+          <div class="cn-item"><div class="cn-dot"></div>IPO risks</div>
+        </div>
+        <div class="ts-arrow">→</div>
+      </div>
+      <div class="chapter-node">
+        <div class="cn-num">Part IV</div>
+        <div class="cn-title">Financials & Appendix</div>
+        <div class="cn-items">
+          <div class="cn-item"><div class="cn-dot"></div>3-year P&L statements</div>
+          <div class="cn-item"><div class="cn-dot"></div>Balance sheets</div>
+          <div class="cn-item"><div class="cn-dot"></div>Cash flow data</div>
+          <div class="cn-item"><div class="cn-dot"></div>Auditor reports</div>
+          <div class="cn-item"><div class="cn-dot"></div>MD&A section</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SVG Visual: DRHP document anatomy -->
+    <div style="margin-top:40px" class="anim anim-d2">
+      <svg viewBox="0 0 900 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:900px;display:block;margin:0 auto">
+        <!-- Document shape -->
+        <rect x="10" y="10" width="880" height="180" rx="16" fill="url(#docBg)" stroke="#e0d8f8" stroke-width="1.5"/>
+        <!-- Progress fill -->
+        <rect x="10" y="10" width="215" height="180" rx="16" fill="url(#p1grad)"/>
+        <rect x="225" y="10" width="220" height="180" fill="url(#p2grad)"/>
+        <rect x="445" y="10" width="215" height="180" fill="url(#p3grad)"/>
+        <rect x="660" y="10" width="230" height="180" rx="0 16 16 0" fill="url(#p4grad)"/>
+        <!-- Dividers -->
+        <line x1="225" y1="10" x2="225" y2="190" stroke="#e0d8f8" stroke-width="1.5"/>
+        <line x1="445" y1="10" x2="445" y2="190" stroke="#e0d8f8" stroke-width="1.5"/>
+        <line x1="660" y1="10" x2="660" y2="190" stroke="#e0d8f8" stroke-width="1.5"/>
+
+        <!-- Labels -->
+        <text x="117" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#8f65f0" letter-spacing="1">PART I</text>
+        <text x="117" y="74" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="800" fill="#100428">Offer</text>
+        <text x="117" y="90" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="800" fill="#100428">Information</text>
+        <text x="117" y="116" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#7b6598">~60 pages</text>
+
+        <text x="335" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#1ea851" letter-spacing="1">PART II</text>
+        <text x="335" y="74" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="800" fill="#100428">Business</text>
+        <text x="335" y="90" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="800" fill="#100428">Description</text>
+        <text x="335" y="116" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#7b6598">~120 pages</text>
+
+        <text x="553" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#8f65f0" letter-spacing="1">PART III</text>
+        <text x="553" y="74" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="800" fill="#100428">Risk Factors</text>
+        <text x="553" y="90" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="800" fill="#100428">& Legal</text>
+        <text x="553" y="116" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#7b6598">~80 pages</text>
+
+        <text x="775" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#1ea851" letter-spacing="1">PART IV</text>
+        <text x="775" y="74" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="800" fill="#100428">Financials</text>
+        <text x="775" y="90" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="800" fill="#100428">& Appendix</text>
+        <text x="775" y="116" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#7b6598">~200 pages</text>
+
+        <!-- Priority tags -->
+        <rect x="68" y="140" width="98" height="22" rx="11" fill="#ece5fd"/>
+        <text x="117" y="155" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#4c1eb0">⭐ Must Read</text>
+
+        <rect x="285" y="140" width="100" height="22" rx="11" fill="#e0f8eb"/>
+        <text x="335" y="155" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#0f5c30">⭐ Must Read</text>
+
+        <rect x="503" y="140" width="100" height="22" rx="11" fill="#ece5fd"/>
+        <text x="553" y="155" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#4c1eb0">⭐ Must Read</text>
+
+        <rect x="725" y="140" width="100" height="22" rx="11" fill="#e0f8eb"/>
+        <text x="775" y="155" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#0f5c30">⭐⭐ Critical</text>
+
+        <defs>
+          <linearGradient id="docBg" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#faf8ff"/>
+            <stop offset="100%" stop-color="#f3fdf6"/>
+          </linearGradient>
+          <linearGradient id="p1grad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#ece5fd"/>
+            <stop offset="100%" stop-color="#f4f0fe"/>
+          </linearGradient>
+          <linearGradient id="p2grad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#e0f8eb"/>
+            <stop offset="100%" stop-color="#f3fdf6"/>
+          </linearGradient>
+          <linearGradient id="p3grad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#f4f0fe"/>
+            <stop offset="100%" stop-color="#ece5fd"/>
+          </linearGradient>
+          <linearGradient id="p4grad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#e0f8eb"/>
+            <stop offset="100%" stop-color="#d1fae5"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 10 KEY SECTIONS ═══ -->
+<section class="sec" id="key-sections">
+  <div class="sec-inner">
+    <div class="section-header anim">
+      <div class="sec-eyebrow">Deep Dive</div>
+      <h2 class="sec-h2">10 Critical Sections You Must Analyse</h2>
+      <p class="sec-sub">Don't read 500 pages. Focus on these ten sections to build a complete investment thesis.</p>
+    </div>
+
+    <div class="sections-grid">
+      <!-- Card 1 -->
+      <div class="section-card anim anim-d1">
+        <div class="sc-header" onclick="toggleSection(this)">
+          <div class="sc-num">01</div>
+          <div class="sc-title">Objects of the Issue (Use of Proceeds)</div>
+          <div class="sc-chevron">▼</div>
+        </div>
+        <div class="sc-body">
+          <p>This is the most critical section. It tells you exactly why the company is raising money. Are they investing in growth, or are promoters cashing out via Offer for Sale (OFS)?</p>
+          <div class="highlight">📌 <strong>Zomato Example:</strong> ₹4,197 Cr fresh issue for expansion, tech, marketing + ₹375 Cr OFS by promoters. Fresh issue is investor-friendly.</div>
+          <div class="flag-list">
+            <div class="flag-item"><span class="flag-dot-green">✔</span> Fresh issue for capex, R&D, or debt repayment = Positive</div>
+            <div class="flag-item"><span class="flag-dot-red">✘</span> Large OFS (promoters selling) = Proceed with caution</div>
+            <div class="flag-item"><span class="flag-dot-red">✘</span> Vague phrases like "general corporate purposes" = Red flag</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="section-card anim anim-d2">
+        <div class="sc-header" onclick="toggleSection(this)">
+          <div class="sc-num">02</div>
+          <div class="sc-title">Risk Factors Section</div>
+          <div class="sc-chevron">▼</div>
+        </div>
+        <div class="sc-body">
+          <p>Often ignored, risk factors are actually goldmines. The company legally must disclose ALL material risks — including ones competitors don't talk about. Read every word.</p>
+          <div class="highlight">📌 <strong>Tip:</strong> Count risks related to "regulations," "key personnel dependency," and "litigation." More than 80 risk factors is a warning sign.</div>
+          <div class="flag-list">
+            <div class="flag-item"><span class="flag-dot-red">✘</span> Heavy reliance on one customer or geography</div>
+            <div class="flag-item"><span class="flag-dot-red">✘</span> Ongoing major litigations or CBI/SEBI investigations</div>
+            <div class="flag-item"><span class="flag-dot-green">✔</span> Risks clearly quantified (not just generic statements)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="section-card anim anim-d3">
+        <div class="sc-header" onclick="toggleSection(this)">
+          <div class="sc-num">03</div>
+          <div class="sc-title">Promoter Background & Shareholding</div>
+          <div class="sc-chevron">▼</div>
+        </div>
+        <div class="sc-body">
+          <p>Who's behind the company matters as much as the business. Check promoter's track record, education, other business interests, criminal records, and post-IPO lock-in periods.</p>
+          <div class="highlight">📌 <strong>Key metric:</strong> Promoter holding post-IPO. If below 40%, founders are diluting heavily — ask why.</div>
+          <div class="flag-list">
+            <div class="flag-item"><span class="flag-dot-green">✔</span> Promoter retaining 50%+ post-IPO = Skin in the game</div>
+            <div class="flag-item"><span class="flag-dot-red">✘</span> Promoter facing criminal charges or past SEBI violations</div>
+            <div class="flag-item"><span class="flag-dot-red">✘</span> Multiple pledged shares or cross-holding structures</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="section-card anim anim-d4">
+        <div class="sc-header" onclick="toggleSection(this)">
+          <div class="sc-num">04</div>
+          <div class="sc-title">Financial Statements (3 Years)</div>
+          <div class="sc-chevron">▼</div>
+        </div>
+        <div class="sc-body">
+          <p>SEBI mandates restated financials for the past 3 fiscal years. Look for revenue growth consistency, margin trends, debt levels, and working capital management.</p>
+          <div class="highlight">📌 <strong>Zomato FY21:</strong> Revenue ₹1,994 Cr, Loss ₹816 Cr — loss-making but rapid revenue recovery post-COVID signalled strength.</div>
+          <div class="flag-list">
+            <div class="flag-item"><span class="flag-dot-green">✔</span> Consistent revenue growth (>20% CAGR for growth companies)</div>
+            <div class="flag-item"><span class="flag-dot-red">✘</span> Sudden revenue spike only in the IPO year</div>
+            <div class="flag-item"><span class="flag-dot-red">✘</span> High and rising debt-to-equity ratio</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="section-card anim anim-d1">
+        <div class="sc-header" onclick="toggleSection(this)">
+          <div class="sc-num">05</div>
+          <div class="sc-title">Management Discussion & Analysis (MD&A)</div>
+          <div class="sc-chevron">▼</div>
+        </div>
+        <div class="sc-body">
+          <p>MD&A is where management explains financials in their own words — what drove revenue, why margins changed, and their forward strategy. Compare with objective financial data.</p>
+          <div class="highlight">📌 If management's explanation of margin expansion in MD&A doesn't match the numbers, something is wrong.</div>
+          <div class="flag-list">
+            <div class="flag-item"><span class="flag-dot-green">✔</span> Clear, detailed explanation of YoY changes</div>
+            <div class="flag-item"><span class="flag-dot-red">✘</span> Vague language for poor performance ("market conditions")</div>
+            <div class="flag-item"><span class="flag-dot-red">✘</span> MD&A contradicts audited financial figures</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="section-card anim anim-d2">
+        <div class="sc-header" onclick="toggleSection(this)">
+          <div class="sc-num">06</div>
+          <div class="sc-title">Industry Overview (IHR / CRISIL Report)</div>
+          <div class="sc-chevron">▼</div>
+        </div>
+        <div class="sc-body">
+          <p>Companies pay third-party research firms (CRISIL, Frost & Sullivan, RedSeer) to write the industry section. Understand the TAM, SAM, growth drivers, and competitive landscape.</p>
+          <div class="highlight">📌 Zomato cited RedSeer data: India food delivery market to grow to $18.5B by 2025 — validating the long-term opportunity.</div>
+          <div class="flag-list">
+            <div class="flag-item"><span class="flag-dot-green">✔</span> Industry growing faster than the company's sector</div>
+            <div class="flag-item"><span class="flag-dot-red">✘</span> Very few independent data citations (too promotional)</div>
+            <div class="flag-item"><span class="flag-dot-green">✔</span> Company's market share clearly quantified and growing</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="section-card anim anim-d3">
+        <div class="sc-header" onclick="toggleSection(this)">
+          <div class="sc-num">07</div>
+          <div class="sc-title">Related Party Transactions</div>
+          <div class="sc-chevron">▼</div>
+        </div>
+        <div class="sc-body">
+          <p>This section reveals transactions between the company and its promoters, directors, or relatives. Excessive RPTs can indicate tunnelling of funds out of the listed entity.</p>
+          <div class="highlight">📌 Watch for: loans given to promoter entities, purchases from promoter-owned vendors, or property rented from promoter at above-market rates.</div>
+          <div class="flag-list">
+            <div class="flag-item"><span class="flag-dot-red">✘</span> RPTs exceeding 10-15% of revenue = Major red flag</div>
+            <div class="flag-item"><span class="flag-dot-red">✘</span> Loans to sister companies without clear business rationale</div>
+            <div class="flag-item"><span class="flag-dot-green">✔</span> RPTs declining as company scales = Positive governance sign</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="section-card anim anim-d4">
+        <div class="sc-header" onclick="toggleSection(this)">
+          <div class="sc-num">08</div>
+          <div class="sc-title">Legal & Outstanding Litigations</div>
+          <div class="sc-chevron">▼</div>
+        </div>
+        <div class="sc-body">
+          <p>This section lists all pending cases against the company, promoters, or subsidiaries. Distinguish between routine business disputes and material ones that could impact operations.</p>
+          <div class="highlight">📌 Always check total litigation exposure vs company's net worth. If exposure >25% of net worth, it's a material risk.</div>
+          <div class="flag-list">
+            <div class="flag-item"><span class="flag-dot-red">✘</span> SEBI enforcement orders or ED/CBI investigations</div>
+            <div class="flag-item"><span class="flag-dot-red">✘</span> Tax disputes pending for multiple years</div>
+            <div class="flag-item"><span class="flag-dot-green">✔</span> Routine labour or consumer cases = Low concern</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 9 -->
+      <div class="section-card anim anim-d1">
+        <div class="sc-header" onclick="toggleSection(this)">
+          <div class="sc-num">09</div>
+          <div class="sc-title">Competitive Strengths & Strategy</div>
+          <div class="sc-chevron">▼</div>
+        </div>
+        <div class="sc-body">
+          <p>Every company says they have "strong brand," "experienced management," and "first mover advantage." Your job is to verify each claim against actual data in the financials.</p>
+          <div class="highlight">📌 If a company claims "strong brand recognition" but their customer acquisition cost is rising, the claim is hollow.</div>
+          <div class="flag-list">
+            <div class="flag-item"><span class="flag-dot-green">✔</span> Each strength backed by a quantitative metric</div>
+            <div class="flag-item"><span class="flag-dot-red">✘</span> Strategy section doesn't explain how funds will be deployed</div>
+            <div class="flag-item"><span class="flag-dot-green">✔</span> Clear moat: patents, network effects, switching costs</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 10 -->
+      <div class="section-card anim anim-d2">
+        <div class="sc-header" onclick="toggleSection(this)">
+          <div class="sc-num">10</div>
+          <div class="sc-title">Capital Structure & ESOP Pool</div>
+          <div class="sc-chevron">▼</div>
+        </div>
+        <div class="sc-body">
+          <p>Understand the fully diluted share count — including ESOPs and convertibles. IPO valuation metrics (PE, EV/EBITDA) should use fully diluted shares, not basic ones.</p>
+          <div class="highlight">📌 Companies sometimes quote valuations on basic share count to appear cheaper. Always use fully diluted shares for calculations.</div>
+          <div class="flag-list">
+            <div class="flag-item"><span class="flag-dot-green">✔</span> ESOP grants tied to performance targets = Employee alignment</div>
+            <div class="flag-item"><span class="flag-dot-red">✘</span> Large convertible instruments not reflected in stated valuation</div>
+            <div class="flag-item"><span class="flag-dot-red">✘</span> >10% dilution from ESOPs can materially impact EPS</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MID PAGE CTA ═══ -->
+<section class="cta-strip">
+  <div class="cta-strip-body">
+    <div class="cta-strip-tag">✦ Start Investing</div>
+    <h2 class="cta-strip-h2">Ready to Apply for the Next Big IPO?</h2>
+    <p class="cta-strip-sub">Open a free demat account in under 10 minutes. Get access to IPO applications, DRHP alerts, GMP tracker, and expert analysis — all in one place.</p>
+    <div class="cta-strip-btns">
+      <a href="#" class="btn-cta-primary">🚀 Open Demat Account Free</a>
+      <a href="#checklist" class="btn-cta-secondary">📋 Grab the Checklist</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CASE STUDY — ZOMATO ═══ -->
+<section class="sec case-sec" id="case">
+  <div class="sec-inner">
+    <div class="section-header anim">
+      <div class="sec-eyebrow">Real Example</div>
+      <h2 class="sec-h2">Case Study: Zomato IPO DRHP (2021)</h2>
+      <p class="sec-sub">Walk through how a seasoned analyst would read Zomato's DRHP — one of India's most watched IPOs in recent history.</p>
+    </div>
+
+    <div class="case-card anim anim-d1">
+      <div class="case-header">
+        <div class="case-logo">🍕</div>
+        <div class="case-title-wrap">
+          <div class="case-tag">📄 DRHP Filed: April 2021 · IPO: July 2021</div>
+          <div class="case-title">Zomato Limited</div>
+          <div class="case-subtitle">India's Food Delivery & Restaurant Platform</div>
+        </div>
+        <div class="case-ipo-badge">
+          <div class="cib-val">₹9,375 Cr</div>
+          <div class="cib-lbl">Total IPO Size</div>
+        </div>
+      </div>
+
+      <div class="case-body">
+        <!-- Key metrics from DRHP -->
+        <div class="case-metrics">
+          <div class="cm-card">
+            <div class="cm-icon">📦</div>
+            <div class="cm-val purple">₹76</div>
+            <div class="cm-lbl">Issue Price</div>
+          </div>
+          <div class="cm-card">
+            <div class="cm-icon">📈</div>
+            <div class="cm-val green">Fresh ₹4,197 Cr</div>
+            <div class="cm-lbl">Fresh Issue</div>
+          </div>
+          <div class="cm-card">
+            <div class="cm-icon">🔄</div>
+            <div class="cm-val red">Loss ₹816 Cr</div>
+            <div class="cm-lbl">FY21 Net Loss</div>
+          </div>
+          <div class="cm-card">
+            <div class="cm-icon">🏭</div>
+            <div class="cm-val purple">3.2x</div>
+            <div class="cm-lbl">Subscribed (OIS)</div>
+          </div>
+          <div class="cm-card">
+            <div class="cm-icon">🏙️</div>
+            <div class="cm-val green">526</div>
+            <div class="cm-lbl">Cities Covered</div>
+          </div>
+          <div class="cm-card">
+            <div class="cm-icon">👥</div>
+            <div class="cm-val purple">32.1M</div>
+            <div class="cm-lbl">Annual Transacting Users</div>
+          </div>
+          <div class="cm-card">
+            <div class="cm-icon">🍽️</div>
+            <div class="cm-val green">3,89,932</div>
+            <div class="cm-lbl">Restaurant Partners</div>
+          </div>
+          <div class="cm-card">
+            <div class="cm-icon">📦</div>
+            <div class="cm-val purple">₹3,083</div>
+            <div class="cm-lbl">Revenue FY21 (Cr)</div>
+          </div>
+        </div>
+
+        <!-- IPO Timeline strip -->
+        <div class="timeline-wrap">
+          <div class="timeline-title">📅 Zomato IPO Journey</div>
+          <div class="timeline-strip">
+            <div class="ts-step">
+              <div class="ts-ico">📝</div>
+              <div class="ts-label">Founded</div>
+              <div class="ts-sub">2008</div>
+            </div>
+            <div class="ts-step">
+              <div class="ts-ico">🌏</div>
+              <div class="ts-label">International Expansion</div>
+              <div class="ts-sub">2012–2019</div>
+            </div>
+            <div class="ts-step">
+              <div class="ts-ico">💰</div>
+              <div class="ts-label">Last Pre-IPO Round</div>
+              <div class="ts-sub">$5.4B Val · 2021</div>
+            </div>
+            <div class="ts-step active">
+              <div class="ts-ico">📋</div>
+              <div class="ts-label">DRHP Filed</div>
+              <div class="ts-sub">April 2021</div>
+            </div>
+            <div class="ts-step active">
+              <div class="ts-ico">🚀</div>
+              <div class="ts-label">IPO Opens</div>
+              <div class="ts-sub">July 14, 2021</div>
+            </div>
+            <div class="ts-step">
+              <div class="ts-ico">📊</div>
+              <div class="ts-label">Listing Day</div>
+              <div class="ts-sub">+53% at ₹115</div>
+            </div>
+            <div class="ts-step">
+              <div class="ts-ico">✅</div>
+              <div class="ts-label">EBITDA Positive</div>
+              <div class="ts-sub">Q2 FY23</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pros & Cons from DRHP analysis -->
+        <div class="case-insights" style="margin-top:28px">
+          <div class="ci-box green-box">
+            <div class="ci-title green">✅ Green Signals in DRHP</div>
+            <div class="ci-items">
+              <div class="ci-item"><span class="ci-bullet-g">▲</span> Large fresh issue (₹4,197 Cr) vs small OFS — promoters not cashing out aggressively</div>
+              <div class="ci-item"><span class="ci-bullet-g">▲</span> Hyundai & Ant Group as marquee institutional investors — validates business quality</div>
+              <div class="ci-item"><span class="ci-bullet-g">▲</span> India food delivery TAM projected to 8x by 2025 — huge runway</div>
+              <div class="ci-item"><span class="ci-bullet-g">▲</span> Market leader with clear #1 or #2 position in every segment</div>
+              <div class="ci-item"><span class="ci-bullet-g">▲</span> Strong unit economics improving quarter-on-quarter per DRHP data</div>
+            </div>
+          </div>
+          <div class="ci-box red-box">
+            <div class="ci-title red">⚠️ Concerns in DRHP</div>
+            <div class="ci-items">
+              <div class="ci-item"><span class="ci-bullet-r">▼</span> Loss-making for 5 consecutive years — path to profitability unclear at IPO</div>
+              <div class="ci-item"><span class="ci-bullet-r">▼</span> No dividend history and none committed in foreseeable future</div>
+              <div class="ci-item"><span class="ci-bullet-r">▼</span> Heavily dependent on restaurant partner relationships — no exclusivity</div>
+              <div class="ci-item"><span class="ci-bullet-r">▼</span> Regulatory risk: gig worker classification laws evolving across India</div>
+              <div class="ci-item"><span class="ci-bullet-r">▼</span> Valuation was purely on EV/Revenue basis — no comparable profitable comps</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CASE STUDY 2 — LIC IPO ═══ -->
+<section class="sec case-sec" id="case2" style="background:#fff;padding-top:0">
+  <div class="sec-inner" style="padding-top:0">
+    <div class="section-header anim" style="margin-bottom:40px">
+      <div class="sec-eyebrow">Case Study 2</div>
+      <h2 class="sec-h2">LIC IPO DRHP (2022) — India's Largest Ever IPO</h2>
+      <p class="sec-sub">How do you read a DRHP for a 65-year-old state-owned insurance behemoth? A completely different playbook from new-age tech IPOs.</p>
+    </div>
+
+    <div class="case-card anim anim-d1">
+      <div class="case-header" style="background:linear-gradient(135deg,#0f3460,#16213e)">
+        <div class="case-logo" style="background:linear-gradient(135deg,#c8a951,#e2c97e)">🏛️</div>
+        <div class="case-title-wrap">
+          <div class="case-tag">📄 DRHP Filed: February 2022 · IPO: May 2022</div>
+          <div class="case-title">Life Insurance Corporation of India</div>
+          <div class="case-subtitle">Government of India's Disinvestment · PSU Insurance Giant</div>
+        </div>
+        <div class="case-ipo-badge" style="background:rgba(200,169,81,.15);border-color:rgba(200,169,81,.3)">
+          <div class="cib-val">₹20,557 Cr</div>
+          <div class="cib-lbl">India's Largest IPO Ever</div>
+        </div>
+      </div>
+
+      <div class="case-body">
+        <!-- Key metrics -->
+        <div class="case-metrics">
+          <div class="cm-card">
+            <div class="cm-icon">💰</div>
+            <div class="cm-val purple">₹949</div>
+            <div class="cm-lbl">Issue Price</div>
+          </div>
+          <div class="cm-card">
+            <div class="cm-icon">🏛️</div>
+            <div class="cm-val" style="color:#c8a951">100% OFS</div>
+            <div class="cm-lbl">Govt Disinvestment</div>
+          </div>
+          <div class="cm-card">
+            <div class="cm-icon">✅</div>
+            <div class="cm-val green">Profit ₹4,043 Cr</div>
+            <div class="cm-lbl">FY22 Net Profit (PAT)</div>
+          </div>
+          <div class="cm-card">
+            <div class="cm-icon">📊</div>
+            <div class="cm-val purple">2.95x</div>
+            <div class="cm-lbl">Overall Subscribed</div>
+          </div>
+          <div class="cm-card">
+            <div class="cm-icon">🛡️</div>
+            <div class="cm-val green">66.2%</div>
+            <div class="cm-lbl">Market Share (New Business)</div>
+          </div>
+          <div class="cm-card">
+            <div class="cm-icon">📋</div>
+            <div class="cm-val purple">28.3 Cr</div>
+            <div class="cm-lbl">Total Policies In-Force</div>
+          </div>
+          <div class="cm-card">
+            <div class="cm-icon">🏢</div>
+            <div class="cm-val green">2,048</div>
+            <div class="cm-lbl">Branch Offices</div>
+          </div>
+          <div class="cm-card">
+            <div class="cm-icon">👔</div>
+            <div class="cm-val purple">13.5 Lakh</div>
+            <div class="cm-lbl">Agents (Distribution Moat)</div>
+          </div>
+        </div>
+
+        <!-- LIC Timeline -->
+        <div class="timeline-wrap">
+          <div class="timeline-title">📅 LIC IPO Journey</div>
+          <div class="timeline-strip">
+            <div class="ts-step">
+              <div class="ts-ico">🏛️</div>
+              <div class="ts-label">LIC Founded</div>
+              <div class="ts-sub">1956</div>
+            </div>
+            <div class="ts-step">
+              <div class="ts-ico">📜</div>
+              <div class="ts-label">Disinvestment Announced</div>
+              <div class="ts-sub">Budget 2021</div>
+            </div>
+            <div class="ts-step">
+              <div class="ts-ico">⚖️</div>
+              <div class="ts-label">LIC Act Amended</div>
+              <div class="ts-sub">Aug 2021</div>
+            </div>
+            <div class="ts-step active">
+              <div class="ts-ico">📋</div>
+              <div class="ts-label">DRHP Filed</div>
+              <div class="ts-sub">Feb 13, 2022</div>
+            </div>
+            <div class="ts-step active">
+              <div class="ts-ico">🚀</div>
+              <div class="ts-label">IPO Opens</div>
+              <div class="ts-sub">May 4, 2022</div>
+            </div>
+            <div class="ts-step">
+              <div class="ts-ico">📉</div>
+              <div class="ts-label">Listing Day</div>
+              <div class="ts-sub">−8.1% at ₹872</div>
+            </div>
+            <div class="ts-step">
+              <div class="ts-ico">📈</div>
+              <div class="ts-label">Recovery Rally</div>
+              <div class="ts-sub">Crossed ₹1,200 in 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- What made LIC's DRHP unique -->
+        <div style="margin-top:28px;padding:22px;background:var(--surf1);border:1.5px solid var(--border);border-radius:16px">
+          <div style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--p500);margin-bottom:16px">🔍 What Made LIC's DRHP Uniquely Complex</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px" class="lic-unique-grid">
+            <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px">
+              <div style="font-size:20px;margin-bottom:8px">📊</div>
+              <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:6px">Embedded Value (EV)</div>
+              <p style="font-size:12.5px;color:var(--ink3);line-height:1.6">Unlike corporate P&L, insurance companies use <strong>Embedded Value</strong> — a metric combining net asset value + present value of future profits. LIC's EV was ₹5.4 lakh crore at filing.</p>
+            </div>
+            <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px">
+              <div style="font-size:20px;margin-bottom:8px">🏛️</div>
+              <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:6px">100% OFS Structure</div>
+              <p style="font-size:12.5px;color:var(--ink3);line-height:1.6">Zero fresh capital raised — entire proceeds went to Government of India. This is the classic "promoter exit" scenario. No new funds entered the company from the IPO.</p>
+            </div>
+            <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px">
+              <div style="font-size:20px;margin-bottom:8px">⚖️</div>
+              <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:6px">Sovereign Guarantee Risk</div>
+              <p style="font-size:12.5px;color:var(--ink3);line-height:1.6">DRHP disclosed that LIC policies carry an <strong>implicit government guarantee</strong> — but this may not automatically transfer to listed equity shareholders if solvency issues arise.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Green / Red analysis -->
+        <div class="case-insights" style="margin-top:24px">
+          <div class="ci-box green-box">
+            <div class="ci-title green">✅ Green Signals in LIC DRHP</div>
+            <div class="ci-items">
+              <div class="ci-item"><span class="ci-bullet-g">▲</span> Absolute market dominance — 66% market share in new business premium, unmatched in India</div>
+              <div class="ci-item"><span class="ci-bullet-g">▲</span> 13.5 lakh agent network = unbeatable distribution moat that private players can't replicate in decades</div>
+              <div class="ci-item"><span class="ci-bullet-g">▲</span> Total Assets Under Management of ₹40.1 lakh crore — one of Asia's largest investment portfolios</div>
+              <div class="ci-item"><span class="ci-bullet-g">▲</span> Policyholders' fund surplus: ₹5,54,266 crore — financial fortress with decades of premium collections</div>
+              <div class="ci-item"><span class="ci-bullet-g">▲</span> Discounted pricing for policyholders & retail investors — ₹60 and ₹45 discount respectively</div>
+            </div>
+          </div>
+          <div class="ci-box red-box">
+            <div class="ci-title red">⚠️ Concerns in LIC DRHP</div>
+            <div class="ci-items">
+              <div class="ci-item"><span class="ci-bullet-r">▼</span> 100% OFS — zero growth capital entered the company; IPO only monetized government stake</div>
+              <div class="ci-item"><span class="ci-bullet-r">▼</span> Market timing was poor — IPO opened during Russia-Ukraine war selloff; Sensex fell 3,000+ points in IPO week</div>
+              <div class="ci-item"><span class="ci-bullet-r">▼</span> Persistency ratios (policy renewal rates) below HDFC Life & SBI Life — signals higher lapses</div>
+              <div class="ci-item"><span class="ci-bullet-r">▼</span> Heavy equity exposure (₹9.1 lakh crore in equities) creates NAV volatility tied to market cycles</div>
+              <div class="ci-item"><span class="ci-bullet-r">▼</span> Government retains 96.5% post-IPO — low free float creates long-term liquidity concerns</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key lesson box -->
+        <div style="margin-top:24px;padding:22px 24px;background:linear-gradient(135deg,var(--p150),var(--g100));border:1.5px solid var(--p200);border-radius:16px;display:flex;align-items:flex-start;gap:16px">
+          <div style="font-size:28px;flex-shrink:0">💡</div>
+          <div>
+            <div style="font-size:14px;font-weight:800;color:var(--ink);margin-bottom:8px">Key Learning from LIC vs Zomato DRHP</div>
+            <p style="font-size:13.5px;color:var(--ink2);line-height:1.72">
+              <strong>Zomato</strong> was a growth story — valued on future potential, loss-making but with a clear runway. <strong>LIC</strong> was a value story — profitable, dominant, but 100% OFS with no growth capital. 
+              Zomato listed at +53% premium; LIC listed at −8%. Both had strong DRHPs — but <strong>listing performance depends equally on valuation pricing and market timing</strong>, not just business quality. 
+              LIC eventually recovered and rewarded patient investors who read the DRHP correctly and understood the long-term thesis.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 8 CASE STUDIES — IPO TABLE ═══ -->
+<section class="sec casestudies-sec" id="casestudies">
+  <div class="sec-inner">
+    <div class="section-header anim">
+      <div class="sec-eyebrow">IPO Lessons · Success & Failure</div>
+      <h2 class="sec-h2">8 Real IPO Case Studies</h2>
+      <p class="sec-sub">From blockbuster listings to value-destroyers — study what the DRHP revealed and what investors missed.</p>
+    </div>
+
+    <!-- View Toggle -->
+    <div class="cs-view-toggle anim">
+      <button class="cs-view-btn active" id="btnOverview" onclick="switchView('overview')">📊 Overview Table</button>
+      <button class="cs-view-btn" id="btnDetail" onclick="switchView('detail')">🔍 Detailed Analysis</button>
+    </div>
+
+    <!-- OVERVIEW TABLE VIEW -->
+    <div id="viewOverview">
+      <div class="cs-overview-wrap anim anim-d1">
+        <table class="cs-overview-tbl">
+          <thead>
+            <tr>
+              <th style="width:32px"></th>
+              <th>Company</th>
+              <th>IPO Year</th>
+              <th>Issue Price</th>
+              <th>IPO Size</th>
+              <th>Listing Return</th>
+              <th>1-Year Return</th>
+              <th>OFS vs Fresh</th>
+              <th>Subscription</th>
+              <th>Verdict</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- SUCCESS 1: Ircon International -->
+            <tr>
+              <td class="td-ico">🏗️</td>
+              <td><div class="td-co">Ircon International</div><div style="font-size:11px;color:var(--ink4)">Railway Infrastructure · PSU</div></td>
+              <td>2018</td>
+              <td>₹475</td>
+              <td>₹466 Cr</td>
+              <td><span class="return-val pos">+89%</span></td>
+              <td><span class="return-val pos">+112%</span></td>
+              <td><span class="pill win">100% Fresh</span></td>
+              <td>24x</td>
+              <td><span class="pill win">✅ Multibagger</span></td>
+            </tr>
+            <!-- SUCCESS 2: Dmart (Avenue Supermarts) -->
+            <tr>
+              <td class="td-ico">🛒</td>
+              <td><div class="td-co">Avenue Supermarts (DMart)</div><div style="font-size:11px;color:var(--ink4)">Retail Supermarkets</div></td>
+              <td>2017</td>
+              <td>₹299</td>
+              <td>₹1,870 Cr</td>
+              <td><span class="return-val pos">+114%</span></td>
+              <td><span class="return-val pos">+280%</span></td>
+              <td><span class="pill win">90% Fresh</span></td>
+              <td>104x</td>
+              <td><span class="pill win">✅ Landmark IPO</span></td>
+            </tr>
+            <!-- SUCCESS 3: Nykaa -->
+            <tr>
+              <td class="td-ico">💄</td>
+              <td><div class="td-co">FSN E-Commerce (Nykaa)</div><div style="font-size:11px;color:var(--ink4)">Beauty & Fashion D2C</div></td>
+              <td>2021</td>
+              <td>₹1,125</td>
+              <td>₹5,352 Cr</td>
+              <td><span class="return-val pos">+96%</span></td>
+              <td><span class="return-val neg">−62%</span></td>
+              <td><span class="pill mixed">40% OFS</span></td>
+              <td>82x</td>
+              <td><span class="pill mixed">⚠️ Hot listing, cold hold</span></td>
+            </tr>
+            <!-- SUCCESS 4: Policybazaar -->
+            <tr>
+              <td class="td-ico">🛡️</td>
+              <td><div class="td-co">PB Fintech (Policybazaar)</div><div style="font-size:11px;color:var(--ink4)">Insurtech Platform</div></td>
+              <td>2021</td>
+              <td>₹980</td>
+              <td>₹5,625 Cr</td>
+              <td><span class="return-val pos">+23%</span></td>
+              <td><span class="return-val pos">+38%</span></td>
+              <td><span class="pill win">78% Fresh</span></td>
+              <td>16x</td>
+              <td><span class="pill win">✅ Solid Recovery</span></td>
+            </tr>
+            <!-- FAILURE 1: Paytm -->
+            <tr>
+              <td class="td-ico">📱</td>
+              <td><div class="td-co">One97 Communications (Paytm)</div><div style="font-size:11px;color:var(--ink4)">Fintech Superapp</div></td>
+              <td>2021</td>
+              <td>₹2,150</td>
+              <td>₹18,300 Cr</td>
+              <td><span class="return-val neg">−27%</span></td>
+              <td><span class="return-val neg">−76%</span></td>
+              <td><span class="pill loss">97% OFS</span></td>
+              <td>1.9x</td>
+              <td><span class="pill loss">❌ Value Destroyer</span></td>
+            </tr>
+            <!-- FAILURE 2: Sapphire Foods -->
+            <tr>
+              <td class="td-ico">🍗</td>
+              <td><div class="td-co">Sapphire Foods India</div><div style="font-size:11px;color:var(--ink4)">KFC & Pizza Hut Franchise</div></td>
+              <td>2021</td>
+              <td>₹1,180</td>
+              <td>₹2,073 Cr</td>
+              <td><span class="return-val neg">−0.5%</span></td>
+              <td><span class="return-val neg">−38%</span></td>
+              <td><span class="pill loss">100% OFS</span></td>
+              <td>3.6x</td>
+              <td><span class="pill loss">❌ Pure OFS trap</span></td>
+            </tr>
+            <!-- FAILURE 3: CarTrade Tech -->
+            <tr>
+              <td class="td-ico">🚗</td>
+              <td><div class="td-co">CarTrade Tech</div><div style="font-size:11px;color:var(--ink4)">Auto Classifieds Platform</div></td>
+              <td>2021</td>
+              <td>₹1,618</td>
+              <td>₹2,998 Cr</td>
+              <td><span class="return-val neg">−8%</span></td>
+              <td><span class="return-val neg">−69%</span></td>
+              <td><span class="pill loss">100% OFS</span></td>
+              <td>20x</td>
+              <td><span class="pill loss">❌ Overhyped & Overpriced</span></td>
+            </tr>
+            <!-- MIXED: LIC -->
+            <tr>
+              <td class="td-ico">🏛️</td>
+              <td><div class="td-co">Life Insurance Corporation</div><div style="font-size:11px;color:var(--ink4)">India's Largest Insurer · PSU</div></td>
+              <td>2022</td>
+              <td>₹949</td>
+              <td>₹20,557 Cr</td>
+              <td><span class="return-val neg">−8%</span></td>
+              <td><span class="return-val pos">+31%</span></td>
+              <td><span class="pill loss">100% OFS</span></td>
+              <td>2.95x</td>
+              <td><span class="pill mixed">⚠️ Long-term value</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="scroll-hint">← Scroll table horizontally to see all data →</div>
+    </div>
+
+    <!-- DETAIL VIEW -->
+    <div id="viewDetail" style="display:none">
+
+      <!-- Tab Bar -->
+      <div class="cs-tab-scroll anim anim-d1">
+        <div class="cs-tab-bar">
+          <div class="cs-tab win-tab active" onclick="switchTab(0)">
+            <span class="ct-ico">🏗️</span>
+            <span class="ct-name">Ircon</span>
+            <span class="ct-badge win">+89%</span>
+          </div>
+          <div class="cs-tab win-tab" onclick="switchTab(1)">
+            <span class="ct-ico">🛒</span>
+            <span class="ct-name">DMart</span>
+            <span class="ct-badge win">+114%</span>
+          </div>
+          <div class="cs-tab win-tab" onclick="switchTab(2)">
+            <span class="ct-ico">💄</span>
+            <span class="ct-name">Nykaa</span>
+            <span class="ct-badge win">+96%</span>
+          </div>
+          <div class="cs-tab win-tab" onclick="switchTab(3)">
+            <span class="ct-ico">🛡️</span>
+            <span class="ct-name">Policybazaar</span>
+            <span class="ct-badge win">+23%</span>
+          </div>
+          <div class="cs-tab loss-tab" onclick="switchTab(4)">
+            <span class="ct-ico">📱</span>
+            <span class="ct-name">Paytm</span>
+            <span class="ct-badge loss">−27%</span>
+          </div>
+          <div class="cs-tab loss-tab" onclick="switchTab(5)">
+            <span class="ct-ico">🍗</span>
+            <span class="ct-name">Sapphire</span>
+            <span class="ct-badge loss">−38%</span>
+          </div>
+          <div class="cs-tab loss-tab" onclick="switchTab(6)">
+            <span class="ct-ico">🚗</span>
+            <span class="ct-name">CarTrade</span>
+            <span class="ct-badge loss">−69%</span>
+          </div>
+          <div class="cs-tab win-tab" onclick="switchTab(7)">
+            <span class="ct-ico">🏛️</span>
+            <span class="ct-name">LIC</span>
+            <span class="ct-badge win">+31%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-table-wrap">
+
+        <!-- PANEL 0: Ircon International -->
+        <div class="cs-panel active" id="csp0">
+          <div class="cs-detail">
+            <div class="cs-detail-header">
+              <div class="cs-detail-logo" style="background:linear-gradient(135deg,#1e3a5f,#2563eb)">🏗️</div>
+              <div class="cs-detail-title-block">
+                <div class="cs-detail-eyebrow">✅ Success Story · 2018 IPO</div>
+                <div class="cs-detail-name">Ircon International Ltd</div>
+                <div class="cs-detail-sub">Railway & Highway Infrastructure PSU · DRHP Filed 2018</div>
+              </div>
+              <div class="cs-verdict-badge win">✅ Multibagger</div>
+            </div>
+            <div class="cs-metrics-row">
+              <div class="cs-metric"><div class="cs-metric-icon">💰</div><div class="cs-metric-val purple">₹475</div><div class="cs-metric-lbl">Issue Price</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">📈</div><div class="cs-metric-val green">+89%</div><div class="cs-metric-lbl">Listing Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">📅</div><div class="cs-metric-val green">+112%</div><div class="cs-metric-lbl">1-Year Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">🔢</div><div class="cs-metric-val purple">24x</div><div class="cs-metric-lbl">Subscribed</div></div>
+            </div>
+            <table class="cs-summary-tbl">
+              <tr><td class="td-label">IPO Size</td><td class="td-val purple">₹466 Cr</td><td class="td-label">Fresh vs OFS</td><td>100% Fresh Issue — zero promoter exit</td></tr>
+              <tr><td class="td-label">Revenue (FY18)</td><td class="td-val">₹4,643 Cr</td><td class="td-label">Net Profit (FY18)</td><td class="td-val green">₹498 Cr (PAT positive)</td></tr>
+              <tr><td class="td-label">Valuation at IPO</td><td>P/E ~8x — deeply discounted vs infra peers</td><td class="td-label">Promoter Post-IPO</td><td class="td-val green">89.18% GoI holding</td></tr>
+              <tr><td class="td-label">Use of Proceeds</td><td colspan="3">Working capital expansion, overseas infra projects bid pipeline</td></tr>
+            </table>
+            <div class="cs-signals" style="margin-top:18px">
+              <div class="cs-signal-box pos">
+                <div class="cs-signal-title pos">✅ DRHP Green Signals</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Profitable for 10+ consecutive years — PAT ₹498 Cr</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>100% fresh issue — all capital stays in company</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Valuation at steep discount — P/E of 8x vs sector 18x</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Strong order book ₹25,000 Cr — 5x revenue visibility</div>
+                </div>
+              </div>
+              <div class="cs-signal-box neg">
+                <div class="cs-signal-title neg">⚠️ Risks in DRHP</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Government disinvestment drive — policy uncertainty</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Revenue concentration in railway segment (85%+)</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Working capital intensive — high receivables from GoI</div>
+                </div>
+              </div>
+            </div>
+            <div class="cs-lesson"><div class="cs-lesson-ico">💡</div><div><strong>Key Lesson</strong>PSU IPOs priced at deep discounts with 100% fresh issue and profitable track record are consistently rewarding. Ircon's DRHP told the full story — low P/E + strong order book = textbook IPO buy signal.</div></div>
+          </div>
+        </div>
+
+        <!-- PANEL 1: DMart -->
+        <div class="cs-panel" id="csp1">
+          <div class="cs-detail">
+            <div class="cs-detail-header">
+              <div class="cs-detail-logo" style="background:linear-gradient(135deg,#dc2626,#ef4444)">🛒</div>
+              <div class="cs-detail-title-block">
+                <div class="cs-detail-eyebrow">✅ India's Best Retail IPO · 2017</div>
+                <div class="cs-detail-name">Avenue Supermarts (DMart)</div>
+                <div class="cs-detail-sub">Supermarket Chain · Founded by Radhakishan Damani</div>
+              </div>
+              <div class="cs-verdict-badge win">✅ Landmark IPO</div>
+            </div>
+            <div class="cs-metrics-row">
+              <div class="cs-metric"><div class="cs-metric-icon">💰</div><div class="cs-metric-val purple">₹299</div><div class="cs-metric-lbl">Issue Price</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">🚀</div><div class="cs-metric-val green">+114%</div><div class="cs-metric-lbl">Listing Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">📅</div><div class="cs-metric-val green">+280%</div><div class="cs-metric-lbl">1-Year Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">🔢</div><div class="cs-metric-val purple">104x</div><div class="cs-metric-lbl">Subscribed</div></div>
+            </div>
+            <table class="cs-summary-tbl">
+              <tr><td class="td-label">IPO Size</td><td class="td-val purple">₹1,870 Cr</td><td class="td-label">Fresh vs OFS</td><td>90% Fresh Issue · 10% OFS</td></tr>
+              <tr><td class="td-label">Revenue (FY17)</td><td class="td-val">₹11,881 Cr</td><td class="td-label">Net Profit</td><td class="td-val green">₹399 Cr · Rising consistently</td></tr>
+              <tr><td class="td-label">Price at IPO</td><td>₹299 · Market was pricing ₹450+ quickly</td><td class="td-label">Promoter Post-IPO</td><td class="td-val green">82% Damani family retained</td></tr>
+              <tr><td class="td-label">Unique DRHP Signal</td><td colspan="3">EBITDA/sq.ft. highest in Indian organized retail — sustainable moat clearly visible in DRHP unit economics</td></tr>
+            </table>
+            <div class="cs-signals" style="margin-top:18px">
+              <div class="cs-signal-box pos">
+                <div class="cs-signal-title pos">✅ DRHP Green Signals</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Profit growing at 40%+ CAGR for 5 consecutive years</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Owner-operated model — owned real estate, no rent risk</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Promoters retained 82% — maximum skin in the game</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Debt-free balance sheet with 5% EBITDA margin advantage over peers</div>
+                </div>
+              </div>
+              <div class="cs-signal-box neg">
+                <div class="cs-signal-title neg">⚠️ Risks in DRHP</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Geographic concentration — majority stores in Maharashtra & Gujarat</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>E-commerce disruption risk explicitly mentioned as material</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Low dividend policy — growth-first capital allocation</div>
+                </div>
+              </div>
+            </div>
+            <div class="cs-lesson"><div class="cs-lesson-ico">💡</div><div><strong>Key Lesson</strong>DMart's DRHP was a masterclass in operational efficiency. Investors who studied the unit economics — sales per sq.ft., inventory turns, zero-debt model — got in at ₹299. Patient holders 5 years later saw ₹4,500+.</div></div>
+          </div>
+        </div>
+
+        <!-- PANEL 2: Nykaa -->
+        <div class="cs-panel" id="csp2">
+          <div class="cs-detail">
+            <div class="cs-detail-header">
+              <div class="cs-detail-logo" style="background:linear-gradient(135deg,#ec4899,#f97316)">💄</div>
+              <div class="cs-detail-title-block">
+                <div class="cs-detail-eyebrow">⚠️ Mixed Story · 2021 IPO</div>
+                <div class="cs-detail-name">FSN E-Commerce Ventures (Nykaa)</div>
+                <div class="cs-detail-sub">Beauty & Personal Care D2C Platform</div>
+              </div>
+              <div class="cs-verdict-badge" style="background:var(--amber-bg);color:var(--amber);border:1.5px solid #f6d186">⚠️ Mixed Result</div>
+            </div>
+            <div class="cs-metrics-row">
+              <div class="cs-metric"><div class="cs-metric-icon">💰</div><div class="cs-metric-val purple">₹1,125</div><div class="cs-metric-lbl">Issue Price</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">🚀</div><div class="cs-metric-val green">+96%</div><div class="cs-metric-lbl">Listing Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">📉</div><div class="cs-metric-val red">−62%</div><div class="cs-metric-lbl">1-Year Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">🔢</div><div class="cs-metric-val purple">82x</div><div class="cs-metric-lbl">Subscribed</div></div>
+            </div>
+            <table class="cs-summary-tbl">
+              <tr><td class="td-label">IPO Size</td><td class="td-val purple">₹5,352 Cr</td><td class="td-label">Fresh vs OFS</td><td>60% Fresh, 40% OFS — founders partially exiting</td></tr>
+              <tr><td class="td-label">Revenue (FY21)</td><td class="td-val">₹2,441 Cr · Growing +47%</td><td class="td-label">Net Profit</td><td class="td-val green">₹62 Cr · Barely profitable</td></tr>
+              <tr><td class="td-label">IPO Valuation</td><td>P/S of 25x — extreme premium for barely-profitable growth</td><td class="td-label">Post-IPO</td><td class="td-val red">Bonus issue controversy, stock tanked</td></tr>
+              <tr><td class="td-label">DRHP Red Flag Missed</td><td colspan="3">Promoters filed for bonus shares just before IPO — diluted value. DRHP hinted at complex shareholding but many retail investors missed it.</td></tr>
+            </table>
+            <div class="cs-signals" style="margin-top:18px">
+              <div class="cs-signal-box pos">
+                <div class="cs-signal-title pos">✅ DRHP Green Signals</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>First-mover in India's organized beauty online space</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Revenue growing at 50%+ CAGR — clear market leadership</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Omnichannel model with owned brands giving margin advantage</div>
+                </div>
+              </div>
+              <div class="cs-signal-box neg">
+                <div class="cs-signal-title neg">⚠️ Risks in DRHP (Missed by Many)</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Valuation at 25x P/S left zero margin of safety</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>40% OFS — founders cashing out at peak valuation</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Bonus issue controversy post-IPO triggered SEBI scrutiny</div>
+                </div>
+              </div>
+            </div>
+            <div class="cs-lesson"><div class="cs-lesson-ico">💡</div><div><strong>Key Lesson</strong>A great business at the wrong price is a bad investment. Nykaa's listing euphoria hid valuation excess. Investors who read the OFS proportion and stretched P/S multiple correctly avoided the eventual −70% drawdown.</div></div>
+          </div>
+        </div>
+
+        <!-- PANEL 3: Policybazaar -->
+        <div class="cs-panel" id="csp3">
+          <div class="cs-detail">
+            <div class="cs-detail-header">
+              <div class="cs-detail-logo" style="background:linear-gradient(135deg,#1e40af,#3b82f6)">🛡️</div>
+              <div class="cs-detail-title-block">
+                <div class="cs-detail-eyebrow">✅ Solid Recovery Story · 2021 IPO</div>
+                <div class="cs-detail-name">PB Fintech (Policybazaar)</div>
+                <div class="cs-detail-sub">Insurance & Credit Aggregator Platform</div>
+              </div>
+              <div class="cs-verdict-badge win">✅ Solid Recovery</div>
+            </div>
+            <div class="cs-metrics-row">
+              <div class="cs-metric"><div class="cs-metric-icon">💰</div><div class="cs-metric-val purple">₹980</div><div class="cs-metric-lbl">Issue Price</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">📈</div><div class="cs-metric-val green">+23%</div><div class="cs-metric-lbl">Listing Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">📅</div><div class="cs-metric-val green">+38%</div><div class="cs-metric-lbl">1-Year Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">🔢</div><div class="cs-metric-val purple">16x</div><div class="cs-metric-lbl">Subscribed</div></div>
+            </div>
+            <table class="cs-summary-tbl">
+              <tr><td class="td-label">IPO Size</td><td class="td-val purple">₹5,625 Cr</td><td class="td-label">Fresh vs OFS</td><td>78% Fresh Issue · 22% OFS</td></tr>
+              <tr><td class="td-label">Revenue (FY21)</td><td class="td-val">₹886 Cr</td><td class="td-label">Net Loss</td><td class="td-val red">₹150 Cr — loss-making but narrowing</td></tr>
+              <tr><td class="td-label">Market Position</td><td>#1 online insurance aggregator · 65% digital insurance market share</td><td class="td-label">Path to Profit</td><td class="td-val green">Achieved profitability by FY24</td></tr>
+              <tr><td class="td-label">DRHP Clarity</td><td colspan="3">Unusually transparent DRHP — clear unit economics, CAC vs LTV ratios disclosed, cohort analysis available</td></tr>
+            </table>
+            <div class="cs-signals" style="margin-top:18px">
+              <div class="cs-signal-box pos">
+                <div class="cs-signal-title pos">✅ DRHP Green Signals</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>78% fresh issue — primary capital for growth, not exits</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Loss narrowing 40% year-on-year — credible path to profitability</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Insurance penetration in India at 4% vs 12% global — massive TAM</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Marquee backers: SoftBank, Info Edge — institutional validation</div>
+                </div>
+              </div>
+              <div class="cs-signal-box neg">
+                <div class="cs-signal-title neg">⚠️ Risks in DRHP</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Regulatory risk — insurance distribution rules can change overnight</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Revenue highly seasonal — Q4 dominated by ULIP renewals</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>High dependence on paid marketing for customer acquisition</div>
+                </div>
+              </div>
+            </div>
+            <div class="cs-lesson"><div class="cs-lesson-ico">💡</div><div><strong>Key Lesson</strong>Loss-making IPOs can work when the loss is narrowing, fresh issue dominates, and the TAM is genuinely underpenetrated. Policybazaar's DRHP had all three signals. Unlike Paytm, it delivered.</div></div>
+          </div>
+        </div>
+
+        <!-- PANEL 4: Paytm -->
+        <div class="cs-panel" id="csp4">
+          <div class="cs-detail">
+            <div class="cs-detail-header">
+              <div class="cs-detail-logo" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">📱</div>
+              <div class="cs-detail-title-block">
+                <div class="cs-detail-eyebrow">❌ India's Biggest IPO Disaster · 2021</div>
+                <div class="cs-detail-name">One97 Communications (Paytm)</div>
+                <div class="cs-detail-sub">Fintech Superapp · India's Largest IPO at the Time</div>
+              </div>
+              <div class="cs-verdict-badge loss">❌ Value Destroyer</div>
+            </div>
+            <div class="cs-metrics-row">
+              <div class="cs-metric"><div class="cs-metric-icon">💰</div><div class="cs-metric-val purple">₹2,150</div><div class="cs-metric-lbl">Issue Price</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">📉</div><div class="cs-metric-val red">−27%</div><div class="cs-metric-lbl">Listing Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">💀</div><div class="cs-metric-val red">−76%</div><div class="cs-metric-lbl">1-Year Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">🔢</div><div class="cs-metric-val amber">1.9x</div><div class="cs-metric-lbl">Subscribed</div></div>
+            </div>
+            <table class="cs-summary-tbl">
+              <tr><td class="td-label">IPO Size</td><td class="td-val red">₹18,300 Cr</td><td class="td-label">Fresh vs OFS</td><td><strong style="color:var(--red)">97% OFS!</strong> — Nearly all promoter/investor exit</td></tr>
+              <tr><td class="td-label">Revenue (FY21)</td><td class="td-val">₹2,802 Cr</td><td class="td-label">Net Loss</td><td class="td-val red">₹1,701 Cr — widening losses</td></tr>
+              <tr><td class="td-label">Valuation at IPO</td><td>₹1.35 Lakh Cr — no profitable comparables globally</td><td class="td-label">RBI Action (2024)</td><td class="td-val red">Paytm Payments Bank shut — stock −80%</td></tr>
+              <tr><td class="td-label">What DRHP Said</td><td colspan="3">Clear: "We have incurred net losses in each fiscal year since inception." Losses were widening, not narrowing. Business model not clearly defined to achieve profitability.</td></tr>
+            </table>
+            <div class="cs-signals" style="margin-top:18px">
+              <div class="cs-signal-box pos">
+                <div class="cs-signal-title pos">⚡ The Hype Case</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>333 million registered users — massive distribution network</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Pioneer of UPI payments in India — first mover advantage</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Backing by Berkshire Hathaway, SoftBank, Ant Group</div>
+                </div>
+              </div>
+              <div class="cs-signal-box neg">
+                <div class="cs-signal-title neg">🚨 DRHP Red Flags (All Visible)</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>97% OFS — Ant Group, SoftBank, Vijay Shekhar all cashing out</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Losses widening year-on-year — no clear path to profitability</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Listed at ₹1.35L Cr with zero profit — irrational valuation</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Low 1.9x subscription vs peers — market itself was cautious</div>
+                </div>
+              </div>
+            </div>
+            <div class="cs-lesson"><div class="cs-lesson-ico">💡</div><div><strong>Key Lesson</strong>Paytm's DRHP had every red flag visible: 97% OFS, widening losses, no profitability timeline. The market ignored the data. Investors who read the DRHP carefully — and noted that ALL major investors were exiting — avoided one of India's worst IPO disasters.</div></div>
+          </div>
+        </div>
+
+        <!-- PANEL 5: Sapphire Foods -->
+        <div class="cs-panel" id="csp5">
+          <div class="cs-detail">
+            <div class="cs-detail-header">
+              <div class="cs-detail-logo" style="background:linear-gradient(135deg,#7c3aed,#5b21b6)">🍗</div>
+              <div class="cs-detail-title-block">
+                <div class="cs-detail-eyebrow">❌ Pure OFS Trap · 2021 IPO</div>
+                <div class="cs-detail-name">Sapphire Foods India Ltd</div>
+                <div class="cs-detail-sub">KFC, Pizza Hut & Taco Bell Franchisee · QSR Operator</div>
+              </div>
+              <div class="cs-verdict-badge loss">❌ OFS Trap</div>
+            </div>
+            <div class="cs-metrics-row">
+              <div class="cs-metric"><div class="cs-metric-icon">💰</div><div class="cs-metric-val purple">₹1,180</div><div class="cs-metric-lbl">Issue Price</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">📉</div><div class="cs-metric-val red">−0.5%</div><div class="cs-metric-lbl">Listing Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">📅</div><div class="cs-metric-val red">−38%</div><div class="cs-metric-lbl">1-Year Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">🔢</div><div class="cs-metric-val amber">3.6x</div><div class="cs-metric-lbl">Subscribed</div></div>
+            </div>
+            <table class="cs-summary-tbl">
+              <tr><td class="td-label">IPO Size</td><td class="td-val">₹2,073 Cr</td><td class="td-label">Fresh vs OFS</td><td><strong style="color:var(--red)">100% OFS</strong> — not a single rupee to company</td></tr>
+              <tr><td class="td-label">Revenue (FY21)</td><td class="td-val">₹739 Cr (COVID year)</td><td class="td-label">Net Loss</td><td class="td-val red">₹169 Cr loss — PE-funded QSR expansion</td></tr>
+              <tr><td class="td-label">PE Seller</td><td>Edelweiss PE, CX Partners both fully exiting at peak</td><td class="td-label">Valuation</td><td class="td-val red">6x EV/Revenue — premium for a franchisee</td></tr>
+              <tr><td class="td-label">DRHP Signal</td><td colspan="3">No growth capital entering business. PE investors with 5-7 year holding selling at QSR sector peak. Classic PE exit IPO — investors funding promoter exit, not future growth.</td></tr>
+            </table>
+            <div class="cs-signals" style="margin-top:18px">
+              <div class="cs-signal-box pos">
+                <div class="cs-signal-title pos">⚡ The Bull Case</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Strong global brands — KFC, Pizza Hut need no marketing</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>India QSR sector growing at 18% CAGR — long runway</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Experienced management team with QSR turnaround expertise</div>
+                </div>
+              </div>
+              <div class="cs-signal-box neg">
+                <div class="cs-signal-title neg">🚨 DRHP Red Flags</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>100% OFS — company received zero proceeds from ₹2,073 Cr IPO</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Loss-making in COVID year — recovery not yet visible in financials</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Franchisee model = lower margin, royalty outflow to Yum! Brands</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Both PE investors fully exiting — no institutional conviction post-IPO</div>
+                </div>
+              </div>
+            </div>
+            <div class="cs-lesson"><div class="cs-lesson-ico">💡</div><div><strong>Key Lesson</strong>When 100% of an IPO is OFS and PE funds are fully exiting, you're not investing in the business — you're funding someone else's exit. Sapphire's DRHP made this crystal clear. The story was fine; the deal structure was not.</div></div>
+          </div>
+        </div>
+
+        <!-- PANEL 6: CarTrade -->
+        <div class="cs-panel" id="csp6">
+          <div class="cs-detail">
+            <div class="cs-detail-header">
+              <div class="cs-detail-logo" style="background:linear-gradient(135deg,#0f172a,#1e293b)">🚗</div>
+              <div class="cs-detail-title-block">
+                <div class="cs-detail-eyebrow">❌ Overhyped & Overpriced · 2021 IPO</div>
+                <div class="cs-detail-name">CarTrade Tech Ltd</div>
+                <div class="cs-detail-sub">Auto Classifieds — CarWale, CarTrade, Shriram Automall</div>
+              </div>
+              <div class="cs-verdict-badge loss">❌ Overpriced</div>
+            </div>
+            <div class="cs-metrics-row">
+              <div class="cs-metric"><div class="cs-metric-icon">💰</div><div class="cs-metric-val purple">₹1,618</div><div class="cs-metric-lbl">Issue Price</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">📉</div><div class="cs-metric-val red">−8%</div><div class="cs-metric-lbl">Listing Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">💀</div><div class="cs-metric-val red">−69%</div><div class="cs-metric-lbl">1-Year Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">🔢</div><div class="cs-metric-val amber">20x</div><div class="cs-metric-lbl">Subscribed</div></td></div>
+            </div>
+            <table class="cs-summary-tbl">
+              <tr><td class="td-label">IPO Size</td><td class="td-val">₹2,998 Cr</td><td class="td-label">Fresh vs OFS</td><td><strong style="color:var(--red)">100% OFS</strong> — all VC/PE exits</td></tr>
+              <tr><td class="td-label">Revenue (FY21)</td><td class="td-val">₹262 Cr (COVID hit)</td><td class="td-label">Net Loss</td><td class="td-val red">₹28 Cr loss (FY21)</td></tr>
+              <tr><td class="td-label">Sellers</td><td>CMDB II, Warburg Pincus, MacRitchie, Beenext — all fully exiting</td><td class="td-label">Valuation</td><td class="td-val red">12x EV/Revenue — extreme premium</td></tr>
+              <tr><td class="td-label">What Went Wrong</td><td colspan="3">Valued like a high-growth digital platform but was a classifieds business with modest growth. Multiple marquee VC/PE all selling = near-perfect signal of peak valuation.</td></tr>
+            </table>
+            <div class="cs-signals" style="margin-top:18px">
+              <div class="cs-signal-box pos">
+                <div class="cs-signal-title pos">⚡ The Bull Case</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Market leader in used auto classifieds — strong brand portfolio</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>India auto market recovery thesis post-COVID</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Asset-light model with high gross margins in classifieds business</div>
+                </div>
+              </div>
+              <div class="cs-signal-box neg">
+                <div class="cs-signal-title neg">🚨 DRHP Red Flags</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>100% OFS — 5 different VC/PE firms all simultaneously exiting</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Revenue base too small (₹262 Cr) for ₹2,998 Cr IPO size</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>12x EV/Revenue when Cars24 (unlisted) was growing 3x faster</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>COVID impact on base year made growth look rosier than reality</div>
+                </div>
+              </div>
+            </div>
+            <div class="cs-lesson"><div class="cs-lesson-ico">💡</div><div><strong>Key Lesson</strong>When multiple financial investors (5 VCs/PEs) are ALL selling through a single IPO, the message is unanimous: fair value has been reached or exceeded. CarTrade's DRHP had this signal. The 20x subscription showed retail ignored it — and paid for it.</div></div>
+          </div>
+        </div>
+
+        <!-- PANEL 7: LIC -->
+        <div class="cs-panel" id="csp7">
+          <div class="cs-detail">
+            <div class="cs-detail-header">
+              <div class="cs-detail-logo" style="background:linear-gradient(135deg,#c8a951,#92651a)">🏛️</div>
+              <div class="cs-detail-title-block">
+                <div class="cs-detail-eyebrow">⚠️ Long-Term Value Play · 2022 IPO</div>
+                <div class="cs-detail-name">Life Insurance Corporation of India</div>
+                <div class="cs-detail-sub">India's Largest IPO Ever · Government Disinvestment</div>
+              </div>
+              <div class="cs-verdict-badge" style="background:var(--amber-bg);color:var(--amber);border:1.5px solid #f6d186">⚠️ Patient Winner</div>
+            </div>
+            <div class="cs-metrics-row">
+              <div class="cs-metric"><div class="cs-metric-icon">💰</div><div class="cs-metric-val purple">₹949</div><div class="cs-metric-lbl">Issue Price</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">📉</div><div class="cs-metric-val red">−8%</div><div class="cs-metric-lbl">Listing Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">📅</div><div class="cs-metric-val green">+31%</div><div class="cs-metric-lbl">2-Year Return</div></div>
+              <div class="cs-metric"><div class="cs-metric-icon">🛡️</div><div class="cs-metric-val green">66%</div><div class="cs-metric-lbl">Market Share</div></div>
+            </div>
+            <table class="cs-summary-tbl">
+              <tr><td class="td-label">IPO Size</td><td class="td-val purple">₹20,557 Cr</td><td class="td-label">Fresh vs OFS</td><td>100% OFS — GoI disinvestment</td></tr>
+              <tr><td class="td-label">Net Profit (FY22)</td><td class="td-val green">₹4,043 Cr — highly profitable</td><td class="td-label">Market Cap at IPO</td><td>₹6 Lakh Cr — discounted vs embedded value</td></tr>
+              <tr><td class="td-label">Policyholders</td><td>28.3 Crore active policies — unparalleled distribution moat</td><td class="td-label">Agents Network</td><td class="td-val green">13.5 Lakh agents — widest in India</td></tr>
+              <tr><td class="td-label">Listing Dip Reason</td><td colspan="3">Market timing — listed during global rate hike concerns. Business was fundamentally strong; listing dip was macro, not business-related.</td></tr>
+            </table>
+            <div class="cs-signals" style="margin-top:18px">
+              <div class="cs-signal-box pos">
+                <div class="cs-signal-title pos">✅ DRHP Green Signals</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>66% life insurance market share — unassailable monopoly</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Listed at 60% discount to embedded value — deep value pricing</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>Consistently profitable — ₹4,000+ Cr PAT each year</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▲</span>13.5 lakh agent network — impossible to replicate distribution</div>
+                </div>
+              </div>
+              <div class="cs-signal-box neg">
+                <div class="cs-signal-title neg">⚠️ Risks in DRHP</div>
+                <div class="cs-signal-items">
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>100% OFS — no fresh capital entering LIC for growth</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Government control — policy & dividend decisions at GoI discretion</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Declining market share trend (from 75% to 66%) over 5 years</div>
+                  <div class="cs-signal-item"><span class="cs-signal-dot">▼</span>Technology infrastructure lag vs private insurers acknowledged</div>
+                </div>
+              </div>
+            </div>
+            <div class="cs-lesson"><div class="cs-lesson-ico">💡</div><div><strong>Key Lesson</strong>LIC was a classic "bad listing, good long-term hold." The DRHP showed a deeply discounted valuation vs embedded value, with unparalleled market dominance. Short-term traders lost; patient DRHP readers who understood the embedded value thesis won.</div></div>
+          </div>
+        </div>
+
+      </div><!-- end cs-table-wrap -->
+    </div><!-- end viewDetail -->
+
+  </div><!-- end sec-inner -->
+</section>
+
+<!-- ═══ PROS & CONS OF READING DRHP ═══ -->
+<section class="sec proscons-sec" id="proscons">
+  <div class="sec-inner">
+    <div class="section-header anim">
+      <div class="sec-eyebrow">Balanced View</div>
+      <h2 class="sec-h2">DRHP: Investor's Pros & Cons</h2>
+      <p class="sec-sub">Understanding the benefits and limitations of relying on a DRHP for investment decisions.</p>
+    </div>
+
+    <div class="proscons-grid">
+      <!-- PROS -->
+      <div class="pc-card pro anim anim-d1">
+        <div class="pc-header">
+          <div class="pc-icon green-ico">✅</div>
+          <div>
+            <div class="pc-label green">Advantages</div>
+            <div class="pc-sublabel green">Why DRHP is an investor's best friend</div>
+          </div>
+        </div>
+        <div class="pc-items">
+          <div class="pc-item pro">
+            <span class="pci-icon">📊</span>
+            <div class="pci-text">
+              <strong>Complete Financial Transparency</strong>
+              3 years of audited financials — revenue, profits, debt, cash flow — all restated and auditor-certified. No better source of financial truth exists.
+            </div>
+          </div>
+          <div class="pc-item pro">
+            <span class="pci-icon">⚖️</span>
+            <div class="pci-text">
+              <strong>Legally Mandated Disclosure</strong>
+              Companies face criminal liability for material misstatements. The risk section must be comprehensive — companies can't hide major risks intentionally.
+            </div>
+          </div>
+          <div class="pc-item pro">
+            <span class="pci-icon">🆓</span>
+            <div class="pci-text">
+              <strong>Completely Free & Public</strong>
+              Available on SEBI EFILING, BSE/NSE sites, and company websites. No subscription or brokerage required to access primary research.
+            </div>
+          </div>
+          <div class="pc-item pro">
+            <span class="pci-icon">🔍</span>
+            <div class="pci-text">
+              <strong>Proprietary Business Insights</strong>
+              KPIs, unit economics, customer metrics — data competitors don't disclose publicly. Gives investors edge over those relying only on news.
+            </div>
+          </div>
+          <div class="pc-item pro">
+            <span class="pci-icon">🏛️</span>
+            <div class="pci-text">
+              <strong>SEBI's 30-Day Review</strong>
+              Regulators scrutinize and question anything unclear. Companies often revise their DRHP after SEBI observations — adding clarity and trust.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONS -->
+      <div class="pc-card con anim anim-d2">
+        <div class="pc-header">
+          <div class="pc-icon red-ico">⚠️</div>
+          <div>
+            <div class="pc-label red">Limitations</div>
+            <div class="pc-sublabel red">What a DRHP cannot tell you</div>
+          </div>
+        </div>
+        <div class="pc-items">
+          <div class="pc-item con">
+            <span class="pci-icon">🔮</span>
+            <div class="pci-text">
+              <strong>No Price Band in DRHP</strong>
+              The price is missing — arguably the most critical variable. Valuation analysis must wait for the RHP (Red Herring Prospectus) filed later.
+            </div>
+          </div>
+          <div class="pc-item con">
+            <span class="pci-icon">📈</span>
+            <div class="pci-text">
+              <strong>Only Historical Data</strong>
+              Financial projections are not allowed in DRHP. Investors must extrapolate trends themselves — leaving room for error in fast-changing sectors.
+            </div>
+          </div>
+          <div class="pc-item con">
+            <span class="pci-icon">📚</span>
+            <div class="pci-text">
+              <strong>Highly Complex & Lengthy</strong>
+              300–700 pages of dense legal and financial text. Requires accounting knowledge to fully interpret. Not accessible to retail investors without guidance.
+            </div>
+          </div>
+          <div class="pc-item con">
+            <span class="pci-icon">🎯</span>
+            <div class="pci-text">
+              <strong>Promotional Bias in Key Sections</strong>
+              Business description and competitive strengths are written by the company (via its investment bankers). Every company sounds like a world-beater.
+            </div>
+          </div>
+          <div class="pc-item con">
+            <span class="pci-icon">⏱️</span>
+            <div class="pci-text">
+              <strong>Can Be Stale by IPO Date</strong>
+              Filed months before the IPO opens. Business conditions, market trends, or even financials may have changed significantly since filing.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RED FLAGS ═══ -->
+<section class="sec redflags-sec" id="redflags">
+  <div class="sec-inner">
+    <div class="section-header anim">
+      <div class="sec-eyebrow">Watch Out</div>
+      <h2 class="sec-h2">Red Flags That Should Make You Pause</h2>
+      <p class="sec-sub">These warning signs in a DRHP have historically preceded poor listing performance or post-IPO value destruction.</p>
+    </div>
+
+    <div class="flags-grid">
+      <div class="flag-card red-flag anim anim-d1">
+        <div class="flag-ico">🚨</div>
+        <div class="flag-title">Massive Offer for Sale</div>
+        <p class="flag-desc">When 70%+ of the IPO is OFS, promoters are selling their stake. Fresh capital doesn't enter the company — investors fund an exit, not growth.</p>
+        <div class="flag-tip red-tip">⚠️ Example: Paytm IPO — 97% OFS component. Post-listing crash of 70%+ followed.</div>
+      </div>
+
+      <div class="flag-card red-flag anim anim-d2">
+        <div class="flag-ico">📉</div>
+        <div class="flag-title">Declining Revenue in Base Year</div>
+        <p class="flag-desc">If revenue in the most recent fiscal year (FY) is lower than the previous year, the company may have timed the IPO to coincide with peak valuations, not peak performance.</p>
+        <div class="flag-tip red-tip">⚠️ Always compare CAGR over 3 years, not just the latest year's growth.</div>
+      </div>
+
+      <div class="flag-card red-flag anim anim-d3">
+        <div class="flag-ico">🔗</div>
+        <div class="flag-title">High Related Party Transactions</div>
+        <p class="flag-desc">Recurring, large RPTs with promoter entities — especially loans, rent, or procurement — can indicate fund siphoning that dilutes shareholder value.</p>
+        <div class="flag-tip red-tip">⚠️ Watch for transactions where "arm's length" pricing is claimed but never independently verified.</div>
+      </div>
+
+      <div class="flag-card red-flag anim anim-d4">
+        <div class="flag-ico">⚖️</div>
+        <div class="flag-title">Undisclosed Litigation Risk</div>
+        <p class="flag-desc">Companies sometimes bury material legal cases as "routine" matters. Always calculate: total litigation exposure ÷ net worth. Above 25% is high.</p>
+        <div class="flag-tip red-tip">⚠️ Check promoter personal legal cases too — not just company-level ones.</div>
+      </div>
+
+      <div class="flag-card red-flag anim anim-d5">
+        <div class="flag-ico">👔</div>
+        <div class="flag-title">Heavy Key-Person Risk</div>
+        <p class="flag-desc">If one founder is responsible for 90% of business relationships and the company has no succession plan, investor capital is vulnerable to single-person decisions.</p>
+        <div class="flag-tip red-tip">⚠️ Check management team depth. Is there a strong second-tier leadership?</div>
+      </div>
+
+      <div class="flag-card green-flag anim anim-d6">
+        <div class="flag-ico">✅</div>
+        <div class="flag-title">Green Signals to Look For</div>
+        <p class="flag-desc">Not all DRHPs are red flags. Look for: institutional investors who invested at similar valuations, declining losses with improving cash burn rate, and strong debt-free balance sheets.</p>
+        <div class="flag-tip green-tip">✔ Marquee PE/VC investors with recent funding rounds are validation signals.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STEP-BY-STEP HOW TO READ ═══ -->
+<section class="sec steps-sec" id="howtoread">
+  <div class="sec-inner">
+    <div class="section-header anim">
+      <div class="sec-eyebrow">Action Plan</div>
+      <h2 class="sec-h2">Your 7-Step DRHP Reading Framework</h2>
+      <p class="sec-sub">Follow this sequence every time. Takes 3–4 hours for a thorough analysis, or 45 minutes for a quick pass.</p>
+    </div>
+
+    <div class="steps-flow">
+      <div class="step-row">
+        <div class="step-connector">
+          <div class="step-circle">1</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content anim anim-d1">
+          <div class="step-time">⏱ 5 minutes · First Pass</div>
+          <div class="step-title">Read the Cover Page & Table of Contents</div>
+          <p class="step-desc">Get the big picture: total size, OFS vs fresh issue split, lead managers, and listing exchange. Scan the ToC to locate key sections for deeper reading.</p>
+          <div class="step-checklist">
+            <div class="sch-item"><span class="sch-check">✓</span> Note total IPO size</div>
+            <div class="sch-item"><span class="sch-check">✓</span> OFS vs Fresh Issue ratio</div>
+            <div class="sch-item"><span class="sch-check">✓</span> Lead investment banks (reputation signal)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-connector">
+          <div class="step-circle">2</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content anim anim-d2">
+          <div class="step-time">⏱ 20 minutes · Deep Dive</div>
+          <div class="step-title">Dissect the "Objects of the Issue" Section</div>
+          <p class="step-desc">This is where the money goes. Verify each stated objective — capex plans, debt repayment, working capital. Look for vague line items and over-allocation to "general corporate purposes."</p>
+          <div class="step-checklist">
+            <div class="sch-item"><span class="sch-check">✓</span> Map every ₹ to a specific purpose</div>
+            <div class="sch-item"><span class="sch-check">✓</span> Check if use aligns with the business plan</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-connector">
+          <div class="step-circle">3</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content anim anim-d3">
+          <div class="step-time">⏱ 30 minutes · Critical</div>
+          <div class="step-title">Read Every Single Risk Factor</div>
+          <p class="step-desc">Yes, every one. Categorize them: business risks, regulatory risks, market risks. Count them. Compare with similar companies' DRHPs. The more specific and quantified the risk, the more seriously management takes disclosure.</p>
+          <div class="step-checklist">
+            <div class="sch-item"><span class="sch-check">✓</span> List top 5 material risks</div>
+            <div class="sch-item"><span class="sch-check">✓</span> Identify any that are dealbreakers</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-connector">
+          <div class="step-circle">4</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content anim anim-d4">
+          <div class="step-time">⏱ 45 minutes · Financial Core</div>
+          <div class="step-title">Analyse 3-Year Restated Financials</div>
+          <p class="step-desc">Build a simple spreadsheet: Revenue, Gross Margin, EBITDA, PAT, Debt, Cash from Operations for each year. Calculate YoY growth and key ratios. Look for trends, not just absolute numbers.</p>
+          <div class="step-checklist">
+            <div class="sch-item"><span class="sch-check">✓</span> Revenue CAGR (3 years)</div>
+            <div class="sch-item"><span class="sch-check">✓</span> EBITDA margin trend</div>
+            <div class="sch-item"><span class="sch-check">✓</span> D/E ratio and interest coverage</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-connector">
+          <div class="step-circle">5</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content anim anim-d5">
+          <div class="step-time">⏱ 20 minutes · Governance Check</div>
+          <div class="step-title">Verify Promoter & Management Background</div>
+          <p class="step-desc">Cross-check promoter names on MCA21 (company registry), court databases, and news archives. Verify educational and professional claims made in the DRHP.</p>
+          <div class="step-checklist">
+            <div class="sch-item"><span class="sch-check">✓</span> Check promoter's other business entities</div>
+            <div class="sch-item"><span class="sch-check">✓</span> Verify management compensation vs market norms</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-connector">
+          <div class="step-circle">6</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content anim anim-d1">
+          <div class="step-time">⏱ 15 minutes · Context</div>
+          <div class="step-title">Benchmark Against Listed Peers</div>
+          <p class="step-desc">The DRHP itself often lists peer comparison tables. Use them — then verify using NSE/BSE data. What's the IPO's EV/EBITDA vs sector average? Are they asking for a premium, and why?</p>
+          <div class="step-checklist">
+            <div class="sch-item"><span class="sch-check">✓</span> P/E, EV/Revenue vs listed peers</div>
+            <div class="sch-item"><span class="sch-check">✓</span> Growth rate justifies valuation premium?</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-connector">
+          <div class="step-circle">7</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content anim anim-d2">
+          <div class="step-time">⏱ 10 minutes · Decision</div>
+          <div class="step-title">Make Your Investment Decision</div>
+          <p class="step-desc">Use your checklist (see below). Assign a Yes/No/Maybe to each checkpoint. An investment needs 75%+ green. If you have more than 3 dealbreakers, pass. There's always another IPO.</p>
+          <div class="step-checklist">
+            <div class="sch-item"><span class="sch-check">✓</span> Minimum 75% checklist items passed</div>
+            <div class="sch-item"><span class="sch-check">✓</span> Zero dealbreaker red flags</div>
+            <div class="sch-item"><span class="sch-check">✓</span> Valuation leaves room for upside</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KEY RATIOS ═══ -->
+<section class="sec ratios-sec" id="ratios">
+  <div class="sec-inner">
+    <div class="section-header anim">
+      <div class="sec-eyebrow">Financial Metrics</div>
+      <h2 class="sec-h2">Key Ratios to Calculate from DRHP Data</h2>
+      <p class="sec-sub">These are the six most important ratios every retail investor should compute before applying to any IPO.</p>
+    </div>
+
+    <div class="ratios-grid">
+      <div class="ratio-card anim anim-d1">
+        <div class="ratio-header">
+          <div class="ratio-name">Price-to-Earnings (PE)</div>
+          <div class="ratio-badge rb-important">Important</div>
+        </div>
+        <div class="ratio-formula">PE = Issue Price ÷ EPS (Diluted)</div>
+        <p class="ratio-desc">Measures how many times earnings investors are paying per share. Must be compared vs sector average PE. Available only after price band is declared (RHP).</p>
+        <div class="ratio-benchmark">📊 Benchmark: IPO PE should be ≤ sector median for value; justify premium with higher growth</div>
+      </div>
+
+      <div class="ratio-card anim anim-d2">
+        <div class="ratio-header">
+          <div class="ratio-name">Return on Equity (ROE)</div>
+          <div class="ratio-badge rb-critical">Critical</div>
+        </div>
+        <div class="ratio-formula">ROE = Net Profit ÷ Shareholders' Equity × 100</div>
+        <p class="ratio-desc">Shows how efficiently the company generates profit from shareholders' money. A rising ROE trend is more important than the absolute number at any single year.</p>
+        <div class="ratio-benchmark">📊 Benchmark: >15% ROE consistently for 3 years is healthy</div>
+      </div>
+
+      <div class="ratio-card anim anim-d3">
+        <div class="ratio-header">
+          <div class="ratio-name">Debt-to-Equity (D/E)</div>
+          <div class="ratio-badge rb-critical">Critical</div>
+        </div>
+        <div class="ratio-formula">D/E = Total Debt ÷ Total Equity</div>
+        <p class="ratio-desc">Measures financial leverage. Capital-intensive sectors (infra, real estate) can sustain higher D/E. Tech and service companies with D/E >1 need scrutiny on debt servicing ability.</p>
+        <div class="ratio-benchmark">📊 Benchmark: &lt;1 for tech/FMCG; &lt;2 for manufacturing; &lt;3 for infra</div>
+      </div>
+
+      <div class="ratio-card anim anim-d4">
+        <div class="ratio-header">
+          <div class="ratio-name">EV/EBITDA</div>
+          <div class="ratio-badge rb-important">Important</div>
+        </div>
+        <div class="ratio-formula">EV/EBITDA = Enterprise Value ÷ EBITDA</div>
+        <p class="ratio-desc">More comprehensive than PE — factors in debt. Crucial for capital-heavy businesses. For loss-making companies, EV/Revenue is used as a proxy until EBITDA turns positive.</p>
+        <div class="ratio-benchmark">📊 Benchmark: Compare with listed peers in same sector</div>
+      </div>
+
+      <div class="ratio-card anim anim-d1">
+        <div class="ratio-header">
+          <div class="ratio-name">Revenue CAGR (3Y)</div>
+          <div class="ratio-badge rb-useful">Useful</div>
+        </div>
+        <div class="ratio-formula">CAGR = (Revenue_FY24 ÷ Revenue_FY21)^(1/3) - 1</div>
+        <p class="ratio-desc">Compound Annual Growth Rate of revenue over 3 years. A company growing revenue at 30%+ CAGR justifies a higher valuation multiple than sector peers growing at 10%.</p>
+        <div class="ratio-benchmark">📊 Benchmark: >20% for high-growth; >10% for stable businesses</div>
+      </div>
+
+      <div class="ratio-card anim anim-d2">
+        <div class="ratio-header">
+          <div class="ratio-name">Cash Flow from Operations (CFO)</div>
+          <div class="ratio-badge rb-critical">Critical</div>
+        </div>
+        <div class="ratio-formula">CFO = Net Income + Non-cash Items ± Working Capital Changes</div>
+        <p class="ratio-desc">Profits can be manipulated; cash cannot (as easily). A company with positive and growing CFO despite accounting losses (as Zomato had) shows real operational strength.</p>
+        <div class="ratio-benchmark">📊 Benchmark: CFO should be positive and growing year-on-year</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COMPARE TABLE ═══ -->
+<section class="sec compare-sec" id="compare">
+  <div class="sec-inner">
+    <div class="section-header anim">
+      <div class="sec-eyebrow">Quick Reference</div>
+      <h2 class="sec-h2">DRHP vs RHP vs Final Prospectus</h2>
+      <p class="sec-sub">Know exactly which document to use at which stage of your IPO analysis journey.</p>
+    </div>
+
+    <div class="compare-tbl-wrap anim anim-d1">
+      <table class="compare-tbl">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>📄 DRHP</th>
+            <th>📋 RHP (Red Herring Prospectus)</th>
+            <th>✅ Final Prospectus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>When Available</strong></td>
+            <td>30–75 days before IPO opens</td>
+            <td>2–3 days before IPO subscription</td>
+            <td>After IPO closes & allotment</td>
+          </tr>
+          <tr>
+            <td><strong>Price Band</strong></td>
+            <td><span class="tbl-tag amber">Not Available</span></td>
+            <td><span class="tbl-tag green">Declared</span></td>
+            <td><span class="tbl-tag green">Final Price</span></td>
+          </tr>
+          <tr>
+            <td><strong>Lot Size</strong></td>
+            <td><span class="tbl-tag amber">Not Available</span></td>
+            <td><span class="tbl-tag green">Declared</span></td>
+            <td><span class="tbl-tag green">Confirmed</span></td>
+          </tr>
+          <tr>
+            <td><strong>Issue Size</strong></td>
+            <td><span class="tbl-tag amber">Indicative</span></td>
+            <td><span class="tbl-tag green">Final</span></td>
+            <td><span class="tbl-tag green">Final + Actual</span></td>
+          </tr>
+          <tr>
+            <td><strong>Risk Factors</strong></td>
+            <td><span class="tbl-tag purple">Complete</span></td>
+            <td><span class="tbl-tag purple">Same as DRHP</span></td>
+            <td><span class="tbl-tag purple">Same</span></td>
+          </tr>
+          <tr>
+            <td><strong>Financials</strong></td>
+            <td>3-year restated financials</td>
+            <td>Same + updated if >6 months old</td>
+            <td>Same</td>
+          </tr>
+          <tr>
+            <td><strong>Where to Get</strong></td>
+            <td>SEBI EFILING / NSE-BSE</td>
+            <td>Broker apps & SEBI EFILING</td>
+            <td>Company registrar website</td>
+          </tr>
+          <tr>
+            <td><strong>Best For</strong></td>
+            <td><span class="tbl-tag purple">Business analysis</span></td>
+            <td><span class="tbl-tag green">Valuation decision</span></td>
+            <td><span class="tbl-tag amber">Post-allotment reference</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INVESTOR CHECKLIST ═══ -->
+<section class="sec checklist-sec" id="checklist">
+  <div class="sec-inner">
+    <div class="section-header anim">
+      <div class="sec-eyebrow">Your Toolkit</div>
+      <h2 class="sec-h2">The IPO DRHP Investor Checklist</h2>
+      <p class="sec-sub">Print this. Use it every time. Click items to check them off.</p>
+    </div>
+
+    <div class="checklist-card anim anim-d1">
+      <p class="checklist-intro">
+        This 18-point checklist is distilled from analyzing hundreds of DRHPs filed with SEBI between 2018–2024. 
+        A score of <strong>14+/18</strong> = Strong consideration. <strong>10–13</strong> = Proceed with caution. 
+        <strong>Below 10</strong> = Consider passing. Any dealbreaker = Automatic disqualification.
+      </p>
+
+      <div class="checklist-sections">
+        <!-- Business & Industry -->
+        <div>
+          <div class="cl-section-title">📊 Business Quality</div>
+          <div class="cl-items">
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>Revenue growing >15% CAGR over 3 years</span>
+            </div>
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>Market leader or strong #2 in addressable market</span>
+            </div>
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>Clear competitive moat (brand, tech, network)</span>
+            </div>
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>Industry TAM growing faster than GDP</span>
+            </div>
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>Diversified customer base (no single >20%)</span>
+            </div>
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>Improving unit economics / gross margins</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Financials -->
+        <div>
+          <div class="cl-section-title">💰 Financial Health</div>
+          <div class="cl-items">
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>D/E ratio within sector norms</span>
+            </div>
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>Positive or improving cash flow from operations</span>
+            </div>
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>Auditor report clean (no qualified opinion)</span>
+            </div>
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>Revenue spike is not just pre-IPO window dressing</span>
+            </div>
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>Working capital cycle not deteriorating</span>
+            </div>
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>IPO valuation reasonable vs listed peers</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Governance -->
+        <div>
+          <div class="cl-section-title">🏛️ Governance & Risk</div>
+          <div class="cl-items">
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>Promoters retain meaningful stake post-IPO (>40%)</span>
+            </div>
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>No major SEBI/ED/CBI investigations pending</span>
+            </div>
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>Related party transactions declining or immaterial</span>
+            </div>
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>Fresh issue proportion >50% of total IPO</span>
+            </div>
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>Marquee institutional investors present pre-IPO</span>
+            </div>
+            <div class="cl-item" onclick="toggleCheck(this)">
+              <div class="cl-checkbox">✓</div>
+              <span>Independent directors with relevant expertise</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═══ -->
+<section class="final-cta-sec">
+  <div class="final-cta-body">
+    <div class="final-cta-eyebrow">✨ Start Investing Smarter</div>
+    <h2 class="final-cta-h2">Apply to the Next IPO With Confidence</h2>
+    <p class="final-cta-sub">
+      Now that you know how to read a DRHP, you're ahead of 90% of retail investors. 
+      Open a free demat account today to access IPO applications, live GMP tracker, 
+      DRHP alerts, and expert analysis for every upcoming IPO.
+    </p>
+    <div class="final-cta-btns">
+      <a href="#" class="btn-final-primary">🚀 Open Demat Account Free</a>
+      <a href="#what" class="btn-final-secondary">📖 Read Guide Again</a>
+    </div>
+    <div class="trust-row">
+      <div class="trust-item"><span class="trust-icon">🔒</span> 100% Free</div>
+      <div class="trust-sep"></div>
+      <div class="trust-item"><span class="trust-icon">⚡</span> Open in 10 minutes</div>
+      <div class="trust-sep"></div>
+      <div class="trust-item"><span class="trust-icon">📱</span> iOS & Android App</div>
+      <div class="trust-sep"></div>
+      <div class="trust-item"><span class="trust-icon">✅</span> SEBI Registered</div>
+      <div class="trust-sep"></div>
+      <div class="trust-item"><span class="trust-icon">🏆</span> 1 Crore+ Investors Trust</div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ── Section Accordion ── */
+function toggleSection(header){
+  const body = header.nextElementSibling;
+  const isOpen = header.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.sc-header.open').forEach(h=>{
+    h.classList.remove('open');
+    h.nextElementSibling.classList.remove('open');
+  });
+  if(!isOpen){
+    header.classList.add('open');
+    body.classList.add('open');
+  }
+}
+
+/* ── Checklist toggle ── */
+function toggleCheck(item){
+  item.classList.toggle('checked');
+}
+
+/* ── Scroll animations ── */
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('in');
+  });
+},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.anim').forEach(el=>observer.observe(el));
+
+/* ── Reading Progress Bar ── */
+const progressBar = document.getElementById('readingProgress');
+window.addEventListener('scroll',()=>{
+  const scrolled = window.scrollY;
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (scrolled/total*100)+'%';
+  // Back to top
+  document.getElementById('backTop').classList.toggle('show', scrolled>600);
+  // TOC dots
+  const sections = ['what','structure','key-sections','case','case2','casestudies','proscons','redflags','howtoread','checklist'];
+  const dots = document.querySelectorAll('.toc-dot');
+  sections.forEach((id,i)=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    const rect = el.getBoundingClientRect();
+    dots[i]&&dots[i].classList.toggle('active', rect.top<=120&&rect.bottom>120);
+  });
+},{ passive:true });
+
+/* ── TOC scroll ── */
+function scrollToSection(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ── Bar chart animations on scroll ── */
+const barObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('[data-w]').forEach(bar=>{
+        bar.style.setProperty('--w',bar.dataset.w+'%');
+        bar.style.animation='barGrow 1.2s ease forwards';
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.ratios-grid,.flags-grid').forEach(el=>barObserver.observe(el));
+
+/* ── Mobile-safe: prevent double-tap zoom on buttons ── */
+document.querySelectorAll('.btn-hero-p,.btn-hero-s,.btn-final-primary,.btn-final-secondary,.btn-cta-primary').forEach(btn=>{
+  btn.addEventListener('touchend',e=>e.preventDefault(),{passive:false});
+  btn.addEventListener('click',e=>e.currentTarget.style.transform='scale(0.97)',{passive:true});
+  btn.addEventListener('transitionend',e=>e.currentTarget.style.transform='',{passive:true});
+});
+
+/* ══ 8 CASE STUDIES — VIEW & TAB LOGIC ══ */
+var currentTab = 0;
+
+function switchView(view){
+  const ov = document.getElementById('viewOverview');
+  const dv = document.getElementById('viewDetail');
+  const btnO = document.getElementById('btnOverview');
+  const btnD = document.getElementById('btnDetail');
+  if(view === 'overview'){
+    ov.style.display = 'block';
+    dv.style.display = 'none';
+    btnO.classList.add('active');
+    btnD.classList.remove('active');
+  } else {
+    ov.style.display = 'none';
+    dv.style.display = 'block';
+    btnO.classList.remove('active');
+    btnD.classList.add('active');
+  }
+}
+
+function switchTab(idx){
+  // Deactivate all tabs & panels
+  document.querySelectorAll('.cs-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.cs-panel').forEach(p=>p.classList.remove('active'));
+  // Activate selected
+  const tabs = document.querySelectorAll('.cs-tab');
+  const panels = document.querySelectorAll('.cs-panel');
+  if(tabs[idx]) tabs[idx].classList.add('active');
+  if(panels[idx]) panels[idx].classList.add('active');
+  currentTab = idx;
+  // Scroll tab into view on mobile
+  if(tabs[idx]){
+    tabs[idx].scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  }
+}
+
+// Touch swipe support for panels (mobile)
+(function(){
+  var startX = 0;
+  var wrap = document.querySelector('.cs-table-wrap');
+  if(!wrap) return;
+  wrap.addEventListener('touchstart', function(e){ startX = e.changedTouches[0].clientX; }, {passive:true});
+  wrap.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - startX;
+    var totalTabs = document.querySelectorAll('.cs-tab').length;
+    if(Math.abs(dx) > 60){
+      if(dx < 0 && currentTab < totalTabs - 1) switchTab(currentTab + 1);
+      if(dx > 0 && currentTab > 0) switchTab(currentTab - 1);
+    }
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>

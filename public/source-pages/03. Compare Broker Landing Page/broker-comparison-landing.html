@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<!-- ═══ VIEWPORT — All Platforms ═══ -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0"/>
+<!-- ═══ iOS / iPadOS ═══ -->
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Compare Brokers 2026"/>
+<meta name="format-detection" content="telephone=no"/>
+<!-- ═══ Android / Chrome ═══ -->
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#6c3de4" media="(prefers-color-scheme: light)"/>
+<meta name="theme-color" content="#21085a" media="(prefers-color-scheme: dark)"/>
+<!-- ═══ SEO ═══ -->
+<meta name="description" content="Compare India's top 25 SEBI-registered stock brokers side-by-side. Verified brokerage charges, AMC, account opening fees, platforms & more — Feb 2026."/>
+<meta name="robots" content="index, follow"/>
+<title>Compare Stock Brokers India 2026 — FairStockBrokers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════
+   FSB DESIGN TOKENS
+═══════════════════════════════════════════ */
+:root{
+  --p950:#0a021e;--p900:#150438;--p800:#21085a;
+  --p700:#331280;--p600:#4c1eb0;--p500:#6c3de4;
+  --p400:#8f65f0;--p300:#bda3f8;--p200:#ddd0fc;
+  --p150:#ece5fd;--p100:#f4f0fe;--p50:#faf8ff;
+  --g700:#0f5c30;--g600:#157a3e;--g500:#1ea851;
+  --g400:#3dc96e;--g300:#79dfa0;--g200:#b8f0cf;
+  --g100:#e0f8eb;--g50:#f3fdf6;
+  --red:#e03c3c;--red-bg:#fff0f0;
+  --amber:#c47c10;--amber-bg:#fffaec;--amber-border:#f9d98a;
+  --ink:#100428;--ink2:#32205a;--ink3:#7b6598;--ink4:#b8a8d4;
+  --white:#fff;--surf1:#faf8ff;--surf2:#f4f0fe;--surf3:#ece5fd;
+  --border:#e0d8f8;--border2:#cfc3f2;
+  --sh1:0 1px 6px rgba(108,61,228,.07);
+  --sh2:0 4px 20px rgba(108,61,228,.11);
+  --sh3:0 12px 44px rgba(108,61,228,.16);
+  --sh4:0 24px 72px rgba(108,61,228,.22);
+  --r:14px;
+  /* touch / safe-area */
+  --safe-t:env(safe-area-inset-top,0px);
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --safe-l:env(safe-area-inset-left,0px);
+  --safe-r:env(safe-area-inset-right,0px);
+}
+
+/* ═══════════════════════════════════════════
+   GLOBAL RESET
+═══════════════════════════════════════════ */
+*,*::before,*::after{
+  margin:0;padding:0;box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-touch-callout:none;
+}
+html{
+  scroll-behavior:smooth;
+  -webkit-text-size-adjust:100%;
+  -moz-text-size-adjust:100%;
+  text-size-adjust:100%;
+  overflow-x:hidden;
+}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--white);color:var(--ink);
+  line-height:1.6;font-size:14px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+img,svg{max-width:100%;height:auto}
+
+/* iOS input zoom prevention — font-size ≥16px */
+input,select,textarea{
+  font-family:'DM Sans',sans-serif;
+  font-size:16px!important;
+}
+button{font-family:'DM Sans',sans-serif;-webkit-appearance:none;appearance:none;border-radius:0}
+.fsb-select{border-radius:12px!important} /* override iOS UA borderRadius after appearance:none */
+
+/* ═══════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════ */
+.container{
+  max-width:1200px;margin:0 auto;
+  padding:0 max(16px, var(--safe-l));
+  padding-right:max(16px, var(--safe-r));
+}
+.sec{padding:64px 0}
+.sec-alt{background:var(--surf1);padding:64px 0}
+.sec-head{text-align:center;margin-bottom:44px}
+.eyebrow{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--p500);margin-bottom:10px}
+.sec-h{font-size:clamp(20px,3.5vw,40px);font-weight:900;letter-spacing:-1.5px;line-height:1.12;margin-bottom:12px}
+.sec-sub{font-size:14px;color:var(--ink3);line-height:1.8;max-width:680px;margin:0 auto}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes floatBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+@keyframes scrollX{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes barGrow{from{width:0}to{width:var(--bw,0%)}}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero{
+  background:var(--surf1);
+  position:relative;overflow:hidden;
+  padding:max(88px,calc(72px + var(--safe-t))) 0 72px;
+  transform:translateZ(0);
+  -webkit-transform:translateZ(0);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:44px 44px;opacity:.45;pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:700px;height:700px;
+  background:radial-gradient(ellipse,rgba(108,61,228,.10),transparent 65%);
+  pointer-events:none;
+}
+.hero-deco{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hero-deco::before{
+  content:'';position:absolute;bottom:-80px;left:-60px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(30,168,81,.06),transparent 65%);
+}
+.hero-deco::after{
+  content:'';position:absolute;top:30%;right:30%;
+  width:320px;height:320px;border-radius:50%;
+  border:1px solid rgba(108,61,228,.07);
+  animation:floatBob 8s ease-in-out infinite;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:52px;
+  align-items:center;position:relative;z-index:1;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 14px 5px 8px;
+  background:#fff;border:1.5px solid var(--border2);
+  border-radius:100px;margin-bottom:20px;
+  font-size:12px;font-weight:700;color:var(--p600);
+  box-shadow:var(--sh1);animation:fadeUp .5s ease both;
+}
+.hero-badge-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--g500);display:inline-block;
+  animation:pulse 1.6s infinite;
+}
+.hero h1{
+  font-size:clamp(28px,4.2vw,58px);font-weight:900;
+  color:var(--ink);letter-spacing:-2px;line-height:1.08;
+  margin-bottom:18px;animation:fadeUp .6s .08s ease both;
+}
+.hero h1 .hl{
+  background:linear-gradient(90deg,var(--p500),var(--p400),var(--g500));
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;animation:gradShift 4s ease infinite;
+}
+.hero-desc{
+  color:var(--ink3);font-size:15px;line-height:1.8;
+  margin-bottom:32px;max-width:480px;
+  animation:fadeUp .6s .16s ease both;
+}
+.hero-ctas{
+  display:flex;gap:12px;flex-wrap:wrap;
+  animation:fadeUp .6s .22s ease both;
+}
+
+/* ── Buttons ── */
+.btn-primary{
+  padding:13px 28px;border-radius:12px;font-size:15px;font-weight:700;
+  color:#fff;background:linear-gradient(135deg,var(--p500),var(--p700));
+  box-shadow:0 8px 26px rgba(108,61,228,.38);
+  transition:.22s;display:inline-flex;align-items:center;gap:8px;
+  border:none;cursor:pointer;
+  min-height:48px;min-width:44px;
+  touch-action:manipulation;
+  -webkit-appearance:none;
+  -webkit-user-select:none;user-select:none;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(108,61,228,.48)}
+.btn-primary:active{transform:scale(.97)}
+.btn-secondary{
+  padding:12px 24px;border-radius:12px;font-size:15px;font-weight:700;
+  color:var(--g700);background:var(--g50);
+  border:1.5px solid var(--g300);transition:.22s;
+  display:inline-flex;align-items:center;gap:8px;
+  cursor:pointer;min-height:48px;min-width:44px;
+  touch-action:manipulation;-webkit-appearance:none;
+  -webkit-user-select:none;user-select:none;
+}
+.btn-secondary:hover{background:var(--g100);border-color:var(--g500)}
+.btn-secondary:active{transform:scale(.97)}
+
+/* Hero panel */
+.hero-panel{
+  background:#fff;border:1.5px solid var(--border);
+  border-radius:22px;padding:24px;
+  box-shadow:var(--sh3);
+  animation:fadeUp .7s .3s ease both;
+  position:relative;z-index:1;overflow:hidden;
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+}
+.hero-panel::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--p500),var(--p400),var(--g500));
+  border-radius:22px 22px 0 0;
+}
+.hero-panel-title{
+  font-size:10px;font-weight:800;text-transform:uppercase;
+  letter-spacing:2.5px;color:var(--ink2);margin-bottom:16px;
+  display:flex;align-items:center;gap:6px;
+}
+.hero-panel-title::before{
+  content:'';width:14px;height:2px;
+  background:linear-gradient(90deg,var(--p500),var(--g500));
+  border-radius:2px;flex-shrink:0;
+}
+.hstat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hstat{
+  border-radius:14px;padding:14px 10px;text-align:center;
+  transition:transform .2s,box-shadow .2s;
+  touch-action:manipulation;cursor:default;
+  -webkit-tap-highlight-color:transparent;
+}
+.hstat:nth-child(1){background:linear-gradient(135deg,#faf5ff,#ede9fe);border:1.5px solid var(--p200)}
+.hstat:nth-child(1) .hnum{color:var(--p600)}
+.hstat:nth-child(1) .hiw{background:var(--p150)}
+.hstat:nth-child(2){background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid var(--g200)}
+.hstat:nth-child(2) .hnum{color:var(--g700)}
+.hstat:nth-child(2) .hiw{background:var(--g100)}
+.hstat:nth-child(3){background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1.5px solid #fde68a}
+.hstat:nth-child(3) .hnum{color:#92400e}
+.hstat:nth-child(3) .hiw{background:#fef3c7}
+.hstat:nth-child(4){background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1.5px solid #bfdbfe}
+.hstat:nth-child(4) .hnum{color:#1d4ed8}
+.hstat:nth-child(4) .hiw{background:#dbeafe}
+@media(hover:hover){.hstat:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(108,61,228,.12)}}
+.hiw{width:40px;height:40px;border-radius:11px;display:inline-flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:20px}
+.hnum{font-size:22px;font-weight:900;display:block;line-height:1;letter-spacing:-1px;margin-bottom:5px}
+.hlbl{font-size:9.5px;color:var(--ink2);text-transform:uppercase;letter-spacing:.8px;font-weight:700;opacity:.85}
+
+/* ═══════════════════════════════════════════
+   TICKER
+═══════════════════════════════════════════ */
+.ticker{
+  background:var(--p900);padding:9px 0;overflow:hidden;
+  border-top:1px solid rgba(143,101,240,.2);
+  border-bottom:1px solid rgba(143,101,240,.2);
+}
+.ticker-track{
+  display:flex;gap:56px;white-space:nowrap;
+  animation:scrollX 42s linear infinite;
+  will-change:transform;
+  transform:translateZ(0);-webkit-transform:translateZ(0);
+}
+.ticker-item{font-size:11px;font-weight:600;color:rgba(255,255,255,.8);display:inline-flex;align-items:center;gap:8px;flex-shrink:0}
+.ticker-item b{color:var(--p300)}
+.ticker-sep{color:rgba(255,255,255,.18)}
+
+/* ═══════════════════════════════════════════
+   COMPARE TOOL
+═══════════════════════════════════════════ */
+.compare-wrap{
+  background:#fff;border:1.5px solid var(--border);
+  border-radius:22px;padding:36px;
+  box-shadow:var(--sh3);
+  position:relative;overflow:hidden;
+  max-width:800px;margin:0 auto;
+}
+.compare-wrap::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--p500),var(--p400),var(--g500));
+  border-radius:22px 22px 0 0;
+}
+.compare-wrap::after{
+  content:'';position:absolute;bottom:-60px;right:-60px;
+  width:240px;height:240px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(108,61,228,.05),transparent 70%);
+  pointer-events:none;
+}
+
+/* Preview cards */
+.preview-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+.preview-card{
+  border:1.5px solid var(--border);border-radius:14px;
+  padding:14px 16px;display:flex;align-items:center;gap:10px;
+  transition:.2s;background:var(--surf1);min-height:72px;
+}
+.preview-card.filled{border-color:var(--border2);background:#fff;box-shadow:var(--sh1)}
+.preview-card.empty{border-style:dashed;opacity:.55;justify-content:center;flex-direction:column;gap:4px}
+.pv-abbr{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}
+.pv-name{font-size:13px;font-weight:800;color:var(--ink);line-height:1.25}
+.pv-sub{font-size:10px;color:var(--ink3);margin-top:1px;word-break:break-word;overflow-wrap:break-word}
+.pv-ei{font-size:24px;opacity:.35}
+.pv-et{font-size:11px;color:var(--ink4);font-weight:600}
+
+/* Selectors */
+.selectors-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:end;margin-bottom:28px}
+.vs-badge{
+  width:48px;height:48px;border-radius:50%;
+  background:linear-gradient(135deg,var(--p500),var(--p700));
+  color:#fff;font-weight:900;font-size:13px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(108,61,228,.4);
+  flex-shrink:0;align-self:flex-end;margin-bottom:2px;
+}
+.sel-lbl{
+  font-size:10px;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--ink2);margin-bottom:8px;
+  display:flex;align-items:center;gap:6px;
+}
+.sel-num{
+  width:20px;height:20px;border-radius:50%;
+  background:linear-gradient(135deg,var(--p500),var(--p700));
+  color:#fff;font-size:10px;font-weight:900;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.sel-wrap{position:relative}
+.sel-wrap .si{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none;z-index:1}
+.fsb-select{
+  width:100%;padding:13px 14px 13px 36px;
+  border:1.5px solid var(--border2);border-radius:12px;
+  font-size:15px;font-weight:600;color:var(--ink);
+  background:#fff;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236c3de4' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  appearance:none;-webkit-appearance:none;
+  cursor:pointer;transition:.2s;outline:none;
+  min-height:52px;
+}
+.fsb-select:focus{border-color:var(--p400);box-shadow:0 0 0 3px rgba(108,61,228,.12)}
+
+/* CTA */
+.cta-center{text-align:center;position:relative;z-index:1;padding-top:4px}
+.btn-compare{
+  padding:15px 44px;border-radius:14px;font-size:16px;font-weight:800;
+  color:#fff;background:linear-gradient(135deg,var(--p500),var(--p700));
+  box-shadow:0 8px 30px rgba(108,61,228,.42);
+  border:none;cursor:pointer;transition:.22s;
+  display:inline-flex;align-items:center;gap:10px;
+  min-height:54px;min-width:44px;
+  touch-action:manipulation;-webkit-appearance:none;
+  -webkit-user-select:none;user-select:none;
+}
+.btn-compare:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 14px 40px rgba(108,61,228,.55)}
+.btn-compare:active{transform:scale(.97)}
+.btn-compare:disabled{opacity:.42;cursor:not-allowed;transform:none;box-shadow:none}
+.compare-hint{font-size:12px;color:var(--ink4);margin-top:12px;line-height:1.6}
+.compare-hint a{color:var(--p500);font-weight:700;cursor:pointer;text-decoration:underline}
+
+/* Data notice */
+.data-notice{
+  display:flex;align-items:flex-start;gap:10px;
+  background:var(--g50);border:1px solid var(--g200);
+  border-radius:10px;padding:12px 14px;margin-top:20px;
+  font-size:11px;color:var(--g700);line-height:1.6;
+}
+.data-notice span{font-size:16px;flex-shrink:0}
+
+/* ═══════════════════════════════════════════
+   PARAMETERS GRID
+═══════════════════════════════════════════ */
+.params-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:16px;margin-top:36px;
+}
+.param-card{
+  background:#fff;border:1.5px solid var(--border);
+  border-radius:16px;padding:20px 18px;
+  transition:.22s;position:relative;overflow:hidden;
+  -webkit-tap-highlight-color:transparent;
+}
+.param-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  border-radius:16px 16px 0 0;
+}
+.param-card:nth-child(1)::before{background:linear-gradient(90deg,#6c3de4,#8f65f0)}
+.param-card:nth-child(2)::before{background:linear-gradient(90deg,#1ea851,#3dc96e)}
+.param-card:nth-child(3)::before{background:linear-gradient(90deg,#c47c10,#f59e0b)}
+.param-card:nth-child(4)::before{background:linear-gradient(90deg,#0369a1,#38bdf8)}
+.param-card:nth-child(5)::before{background:linear-gradient(90deg,#dc2626,#f87171)}
+.param-card:nth-child(6)::before{background:linear-gradient(90deg,#7c3aed,#a78bfa)}
+.param-card:nth-child(7)::before{background:linear-gradient(90deg,#059669,#34d399)}
+.param-card:nth-child(8)::before{background:linear-gradient(90deg,#d97706,#fbbf24)}
+.param-card:nth-child(9)::before{background:linear-gradient(90deg,#0891b2,#22d3ee)}
+.param-card:nth-child(10)::before{background:linear-gradient(90deg,#9333ea,#c084fc)}
+.param-card:nth-child(11)::before{background:linear-gradient(90deg,#16a34a,#4ade80)}
+.param-card:nth-child(12)::before{background:linear-gradient(90deg,#be123c,#fb7185)}
+.param-card:nth-child(13)::before{background:linear-gradient(90deg,#15803d,#86efac)}
+@media(hover:hover){.param-card:hover{transform:translateY(-4px);box-shadow:var(--sh2);border-color:var(--border2)}}
+.param-icon{font-size:26px;margin-bottom:10px;display:block}
+.param-name{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px}
+.param-desc{font-size:11.5px;color:var(--ink3);line-height:1.65}
+.param-tip{display:inline-flex;align-items:center;gap:4px;margin-top:9px;font-size:9.5px;font-weight:700;color:var(--p500);background:var(--p100);border-radius:6px;padding:3px 8px}
+
+/* ═══════════════════════════════════════════
+   INFOGRAPHICS
+═══════════════════════════════════════════ */
+.infographic-block{margin-top:52px}
+.infographic-title{
+  font-size:13px;font-weight:800;color:var(--ink2);
+  margin-bottom:18px;display:flex;align-items:center;gap:10px;
+}
+.infographic-title::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* Bar chart */
+.bar-chart{display:flex;flex-direction:column;gap:7px}
+.bar-row{display:flex;align-items:center;gap:10px}
+.bar-lbl{font-size:11px;font-weight:700;color:var(--ink2);width:116px;text-align:right;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;background:#c8bfe8;border-radius:100px;height:28px;overflow:hidden;position:relative;min-width:0}
+.bar-fill{
+  height:100%;border-radius:100px;
+  display:flex;align-items:center;padding-left:10px;
+  white-space:nowrap;
+  animation:barGrow 1.1s cubic-bezier(.22,1,.36,1) both;
+  animation-delay:var(--d,0s);
+  will-change:width;
+}
+.bar-inner-lbl{
+  font-size:10px;font-weight:800;color:#fff;
+  white-space:nowrap;line-height:1;
+  text-shadow:0 1px 2px rgba(0,0,0,.18);
+}
+.bar-val{font-size:10.5px;font-weight:800;width:60px;flex-shrink:0;color:var(--ink2)}
+
+/* Charge tiles */
+.charge-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px;margin-top:28px}
+.charge-tile{background:#fff;border:1.5px solid var(--border);border-radius:13px;padding:14px 12px;text-align:center;position:relative;overflow:hidden}
+.charge-tile::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px}
+.charge-tile.free::after{background:linear-gradient(90deg,var(--g500),var(--g400))}
+.charge-tile.mid::after{background:linear-gradient(90deg,var(--amber),#f59e0b)}
+.charge-tile.high::after{background:linear-gradient(90deg,var(--red),#f87171)}
+.ct-icon{font-size:22px;margin-bottom:7px}
+.ct-val{font-size:17px;font-weight:900;margin-bottom:4px}
+.ct-lbl{font-size:9.5px;color:var(--ink3);font-weight:600;line-height:1.4}
+.charge-tile.free .ct-val{color:var(--g600)}
+.charge-tile.mid .ct-val{color:var(--amber)}
+.charge-tile.high .ct-val{color:var(--red)}
+
+/* Fin stability grid */
+.fin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:16px}
+.fin-tile{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:13px 11px;text-align:center}
+.fin-broker{font-size:11px;font-weight:800;color:var(--ink2);margin-bottom:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fin-dots{display:flex;justify-content:center;gap:3px;margin-bottom:6px}
+.fin-dot{width:9px;height:9px;border-radius:50%}
+.fin-dot.on-5{background:var(--g600)}
+.fin-dot.on-4{background:var(--p500)}
+.fin-dot.on-3{background:var(--amber)}
+.fin-dot.off{background:var(--border2)}
+.fin-badge{font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:.6px}
+.fin-badge.ex{background:var(--g100);color:var(--g700)}
+.fin-badge.vg{background:var(--p100);color:var(--p600)}
+.fin-badge.gd{background:var(--amber-bg);color:var(--amber)}
+
+/* ═══════════════════════════════════════════
+   BEST PICKS
+═══════════════════════════════════════════ */
+.best-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:36px}
+.best-card{
+  background:#fff;border:1.5px solid var(--border);
+  border-radius:18px;padding:22px 20px;
+  transition:.22s;position:relative;overflow:hidden;
+  -webkit-tap-highlight-color:transparent;
+}
+.best-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;border-radius:18px 0 0 18px}
+.best-card.c1::before{background:linear-gradient(180deg,var(--p500),var(--p700))}
+.best-card.c2::before{background:linear-gradient(180deg,var(--g400),var(--g600))}
+.best-card.c3::before{background:linear-gradient(180deg,#f59e0b,#c47c10)}
+.best-card.c4::before{background:linear-gradient(180deg,#38bdf8,#0369a1)}
+.best-card.c5::before{background:linear-gradient(180deg,#ec4899,#be185d)}
+.best-card.c6::before{background:linear-gradient(180deg,#2dd4bf,#0d9488)}
+.best-card.c7::before{background:linear-gradient(180deg,#6366f1,#4338ca)}
+@media(hover:hover){.best-card:hover{transform:translateY(-4px);box-shadow:var(--sh2);border-color:var(--border2)}}
+.best-cat{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:11px}
+.best-broker-row{display:flex;align-items:center;gap:11px;margin-bottom:10px}
+.best-abbr{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}
+.best-name{font-size:15px;font-weight:900;color:var(--ink);line-height:1.2}
+.best-sub{font-size:10.5px;color:var(--ink3);margin-top:2px}
+.best-reason{font-size:11.5px;color:var(--ink3);line-height:1.65;margin-bottom:12px}
+.best-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:6px;font-size:10.5px;font-weight:700;background:var(--p100);color:var(--p600)}
+
+/* ═══════════════════════════════════════════
+   SUGGESTIONS
+═══════════════════════════════════════════ */
+.sugg-section{margin-top:48px}
+.sugg-title{font-size:clamp(17px,2.5vw,26px);font-weight:900;letter-spacing:-1px;text-align:center;margin-bottom:6px}
+.sugg-sub{font-size:13px;color:var(--ink3);text-align:center;margin-bottom:28px}
+.sugg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(254px,1fr));gap:10px}
+.sugg-card{
+  background:#fff;border:1.5px solid var(--border);
+  border-radius:13px;padding:14px 16px;
+  cursor:pointer;transition:.18s;
+  display:flex;align-items:center;gap:12px;
+  position:relative;overflow:hidden;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-user-select:none;user-select:none;
+}
+@media(hover:hover){.sugg-card:hover{border-color:var(--p300);box-shadow:var(--sh2);transform:translateY(-2px)}}
+.sugg-card:active{transform:scale(.98)}
+.sugg-abbrs{display:flex}
+.sa{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;flex-shrink:0;border:2px solid #fff}
+.sa:not(:first-child){margin-left:-8px}
+.sugg-info{flex:1;min-width:0}
+.sugg-lbl{font-size:12.5px;font-weight:800;color:var(--ink);margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sugg-sublbl{font-size:10.5px;color:var(--ink3)}
+.sugg-arrow{font-size:14px;color:var(--p400);flex-shrink:0;transition:.15s}
+@media(hover:hover){.sugg-card:hover .sugg-arrow{transform:translateX(3px);color:var(--p500)}}
+.stag{font-size:8.5px;font-weight:800;padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:.6px;vertical-align:middle;margin-left:4px}
+.stag.pop{background:var(--p100);color:var(--p600)}
+.stag.val{background:var(--g100);color:var(--g700)}
+.stag.cls{background:var(--amber-bg);color:var(--amber)}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.footer{
+  background:var(--p900);
+  padding:44px 0 max(32px,calc(20px + var(--safe-b)));
+  color:rgba(255,255,255,.7);
+}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:32px}
+.footer-brand{font-size:18px;font-weight:900;color:#fff;margin-bottom:10px}
+.footer-tagline{font-size:12px;line-height:1.7;color:rgba(255,255,255,.5);max-width:300px}
+.footer-col-t{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:13px}
+.footer-links{display:flex;flex-direction:column;gap:9px}
+.footer-links a{font-size:13px;color:rgba(255,255,255,.58);transition:.15s;min-height:36px;display:flex;align-items:center}
+.footer-links a:hover{color:#fff}
+.footer-bar{border-top:1px solid rgba(255,255,255,.08);padding-top:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:11px;color:rgba(255,255,255,.38)}
+.footer-disc{font-size:10px;color:rgba(255,255,255,.28);margin-top:12px;line-height:1.7}
+
+/* ═══════════════════════════════════════════
+   SCROLL TOP
+═══════════════════════════════════════════ */
+#scrollTop{
+  position:fixed;
+  bottom:calc(20px + var(--safe-b));
+  right:max(20px, var(--safe-r));
+  width:48px;height:48px;border-radius:50%;
+  background:linear-gradient(135deg,var(--p600),var(--p800));
+  color:#fff;border:none;cursor:pointer;font-size:20px;
+  box-shadow:0 4px 20px rgba(91,33,182,.4);
+  z-index:999;display:none;align-items:center;justify-content:center;
+  transition:.25s;touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  min-height:48px;min-width:48px;
+}
+#scrollTop:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(91,33,182,.55)}
+
+/* ═══════════════════════════════════════════
+   PLATFORM COMPATIBILITY — iOS · Android · PWA
+═══════════════════════════════════════════ */
+
+/* ── GPU compositing for animated/fixed elements ── */
+.ticker-track,.hero,.hero-panel,.compare-wrap,
+.best-card,.sugg-card,#scrollTop{
+  -webkit-transform:translateZ(0);
+  transform:translateZ(0);
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+}
+
+/* ── iOS / Android button & input reset ── */
+button,input,select,textarea,
+input[type=button],input[type=submit],input[type=reset]{
+  -webkit-appearance:none;
+  appearance:none;
+  border-radius:0; /* prevent iOS rounding */
+}
+
+/* ── Prevent iOS double-tap zoom on buttons/links ── */
+a,button,.sugg-card,.param-card,.best-card,.hstat,
+.preview-card,.charge-tile,.fin-tile{
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-user-select:none;
+  user-select:none;
+}
+/* Re-allow text selection on content areas */
+p,.hero-desc,.best-reason,.param-desc,.footer-tagline,
+.footer-disc,.compare-hint,.data-notice{
+  -webkit-user-select:text;
+  user-select:text;
+}
+
+/* ── Android ripple / highlight kill ── */
+*{-webkit-tap-highlight-color:rgba(0,0,0,0)}
+
+/* ── iOS momentum scroll on all overflow containers ── */
+.sugg-grid-scroll,.params-grid,.charge-tiles,
+.fin-grid,.ticker-track{
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+}
+
+
+/* ── Prevent horizontal overscroll jank ── */
+body{overscroll-behavior-x:none}
+
+/* ── iOS font inflation prevention ── */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+
+/* ── Minimum touch targets — WCAG 2.5.5 (44×44px) ── */
+.btn-primary,.btn-secondary,.btn-compare{min-height:48px;min-width:44px}
+.sugg-card{min-height:56px}
+.hstat{min-height:44px}
+.fsb-select{min-height:52px}
+.footer-links a{min-height:44px}
+.charge-tile,.fin-tile{min-height:44px}
+#scrollTop{min-height:48px;min-width:48px}
+
+/* ── Smooth font rendering ── */
+body{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+
+/* ── Custom scrollbars (Webkit) ── */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(91,33,182,.25);border-radius:2px}
+
+/* ── Focus ring — keyboard & assistive tech ── */
+:focus-visible{
+  outline:2px solid var(--p500);
+  outline-offset:3px;
+  border-radius:4px;
+}
+:focus:not(:focus-visible){outline:none}
+
+/* ── Prefers reduced motion ── */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+  .ticker-track{animation:none!important;transform:none!important}
+}
+
+/* ── iOS safe area insets (notch · Dynamic Island · home bar) ── */
+@supports(padding:env(safe-area-inset-top)){
+  .hero{
+    padding-top:max(88px,calc(72px + env(safe-area-inset-top)));
+  }
+  .footer{
+    padding-bottom:max(36px,calc(24px + env(safe-area-inset-bottom)));
+  }
+  .container{
+    padding-left:max(16px,env(safe-area-inset-left));
+    padding-right:max(16px,env(safe-area-inset-right));
+  }
+  #scrollTop{
+    bottom:calc(24px + env(safe-area-inset-bottom));
+    right:max(20px,env(safe-area-inset-right));
+  }
+  .ticker{
+    padding-left:max(0px,env(safe-area-inset-left));
+    padding-right:max(0px,env(safe-area-inset-right));
+  }
+}
+
+/* ── High-DPI / Retina screens ── */
+@media(-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){
+  .hero-panel,.compare-wrap,.best-card,.sugg-card{
+    box-shadow:0 2px 12px rgba(91,33,182,.09);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — 8 BREAKPOINTS
+   320px · 360px · 480px · 600px · 768px
+   1024px · 1200px · 1400px
+═══════════════════════════════════════════ */
+
+/* ── 1400px+ Wide Desktop ── */
+@media(min-width:1400px){
+  .container{max-width:1320px}
+  .params-grid{grid-template-columns:repeat(4,1fr)}
+  .best-grid{grid-template-columns:repeat(4,1fr)}
+  .sugg-grid{grid-template-columns:repeat(3,1fr)}
+  .fin-grid{grid-template-columns:repeat(5,1fr)}
+}
+
+/* ── 1200px–1399px Desktop ── */
+@media(min-width:1200px) and (max-width:1399px){
+  .params-grid{grid-template-columns:repeat(4,1fr)}
+  .best-grid{grid-template-columns:repeat(4,1fr)}
+  .fin-grid{grid-template-columns:repeat(5,1fr)}
+}
+
+/* ── 1025px–1199px Laptop ── */
+@media(min-width:1025px) and (max-width:1199px){
+  .container{padding:0 28px}
+  .params-grid{grid-template-columns:repeat(3,1fr)}
+  .best-grid{grid-template-columns:repeat(3,1fr)}
+  .fin-grid{grid-template-columns:repeat(4,1fr)}
+}
+
+/* ── 769px–1024px Tablet Landscape / iPad ── */
+@media(min-width:769px) and (max-width:1024px){
+  .container{padding:0 24px}
+  .hero-grid{grid-template-columns:1fr;gap:32px}
+  .hstat-grid{grid-template-columns:repeat(4,1fr);gap:10px}
+  .params-grid{grid-template-columns:repeat(3,1fr);gap:14px}
+  .best-grid{grid-template-columns:repeat(2,1fr)}
+  .sugg-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .sec{padding:52px 0}
+  .sec-alt{padding:52px 0}
+  .compare-wrap{padding:28px 24px;max-width:680px}
+  .fin-grid{grid-template-columns:repeat(4,1fr)}
+  .charge-tiles{grid-template-columns:repeat(4,1fr)}
+  .hero h1{font-size:clamp(30px,5vw,52px)}
+  .hero-desc{font-size:15px}
+  .selectors-grid{gap:16px}
+}
+
+/* ── 601px–768px Tablet Portrait ── */
+@media(min-width:601px) and (max-width:768px){
+  .container{padding:0 20px}
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .hero{padding:60px 0 52px}
+  .hero h1{font-size:clamp(26px,6vw,42px);letter-spacing:-1.5px}
+  .hero-desc{font-size:14px;margin-bottom:28px}
+  .hero-panel{padding:20px 16px}
+  .hstat-grid{grid-template-columns:repeat(4,1fr);gap:8px}
+  .hnum{font-size:18px}
+  .hlbl{font-size:8.5px}
+  .params-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .selectors-grid{grid-template-columns:1fr;gap:12px}
+  .vs-badge{display:none}
+  .preview-row{grid-template-columns:1fr 1fr;gap:10px}
+  .best-grid{grid-template-columns:1fr 1fr}
+  .sugg-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr;gap:28px}
+  .charge-tiles{grid-template-columns:repeat(3,1fr)}
+  .fin-grid{grid-template-columns:repeat(3,1fr)}
+  .sec{padding:48px 0}
+  .sec-alt{padding:48px 0}
+  .compare-wrap{padding:24px 20px}
+  .btn-compare{width:100%;justify-content:center}
+}
+
+/* ── 481px–600px Large Phone (iPhone 14 Pro / Pixel 7) ── */
+@media(min-width:481px) and (max-width:600px){
+  .container{padding:0 16px}
+  .hero-grid{grid-template-columns:1fr;gap:24px}
+  .hero{padding:56px 0 48px}
+  .hero h1{font-size:clamp(24px,7vw,36px);letter-spacing:-1.2px}
+  .hero-desc{font-size:14px;margin-bottom:24px}
+  .hero-badge{font-size:11.5px}
+  .hero-panel{padding:18px 14px}
+  .hstat-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .hnum{font-size:20px}
+  .hlbl{font-size:8.5px}
+  .params-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .selectors-grid{grid-template-columns:1fr;gap:10px}
+  .vs-badge{display:none}
+  .preview-row{grid-template-columns:1fr 1fr;gap:8px}
+  .compare-wrap{padding:20px 16px;border-radius:18px}
+  .btn-compare{width:100%;justify-content:center;font-size:14px}
+  .best-grid{grid-template-columns:1fr}
+  .sugg-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:28px}
+  .charge-tiles{grid-template-columns:repeat(2,1fr);gap:8px}
+  .fin-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .hero-ctas{flex-direction:column;align-items:stretch}
+  .btn-primary,.btn-secondary{width:100%;justify-content:center}
+  .sec{padding:44px 0}
+  .sec-alt{padding:44px 0}
+  .footer-bar{flex-direction:column;align-items:flex-start;gap:8px}
+}
+
+/* ── 361px–480px Standard Phone (iPhone SE / most Android) ── */
+@media(min-width:361px) and (max-width:480px){
+  .container{padding:0 14px}
+  .hero-grid{grid-template-columns:1fr;gap:20px}
+  .hero{padding:52px 0 44px}
+  .hero h1{font-size:clamp(22px,8vw,32px);letter-spacing:-1px}
+  .hero-desc{font-size:13.5px;margin-bottom:20px;line-height:1.7}
+  .hero-badge{font-size:11px;padding:4px 12px 4px 8px}
+  .hero-panel{padding:15px 13px;border-radius:16px}
+  .hstat-grid{grid-template-columns:1fr 1fr;gap:7px}
+  .hstat{padding:12px 8px;border-radius:11px}
+  .hiw{width:34px;height:34px;font-size:16px;border-radius:9px;margin-bottom:6px}
+  .hnum{font-size:17px;letter-spacing:-.5px}
+  .hlbl{font-size:8px;letter-spacing:.4px}
+  .hero-ctas{flex-direction:column;align-items:stretch;gap:10px}
+  .btn-primary,.btn-secondary{width:100%;justify-content:center}
+  .params-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .param-card{padding:15px 12px}
+  .param-icon{font-size:22px;margin-bottom:8px}
+  .param-name{font-size:12px}
+  .param-desc{font-size:11px;line-height:1.55}
+  .selectors-grid{grid-template-columns:1fr;gap:10px}
+  .vs-badge{display:none}
+  .preview-row{grid-template-columns:1fr 1fr;gap:8px}
+  .preview-card{padding:10px;min-height:60px}
+  .pv-abbr{width:30px;height:30px;font-size:10px;border-radius:8px}
+  .pv-name{font-size:11.5px}
+  .pv-sub{font-size:9.5px}
+  .compare-wrap{padding:16px 13px;border-radius:16px}
+  .btn-compare{padding:13px 20px;font-size:14px;min-height:50px;width:100%;justify-content:center}
+  .compare-hint{font-size:11.5px}
+  .data-notice{font-size:10.5px;padding:10px 12px}
+  .best-grid{grid-template-columns:1fr}
+  .best-card{padding:18px 16px}
+  .best-name{font-size:14px}
+  .sugg-grid{grid-template-columns:1fr}
+  .sugg-card{padding:12px 13px}
+  .sugg-lbl{font-size:12px}
+  .footer-grid{grid-template-columns:1fr;gap:26px}
+  .footer-bar{flex-direction:column;align-items:flex-start;gap:8px}
+  .charge-tiles{grid-template-columns:1fr 1fr;gap:8px}
+  .charge-tile{padding:12px 10px}
+  .ct-val{font-size:15px}
+  .fin-grid{grid-template-columns:1fr 1fr;gap:7px}
+  .fin-tile{padding:11px 9px}
+  .sec{padding:40px 0}
+  .sec-alt{padding:40px 0}
+  .infographic-block{margin-top:36px}
+  .sec-h{letter-spacing:-1px}
+}
+
+/* ── ≤360px Very Small (Galaxy A / iPhone SE 1st gen) ── */
+@media(max-width:360px){
+  .container{padding:0 11px}
+  .hero h1{font-size:clamp(19px,8.5vw,28px);letter-spacing:-.8px}
+  .hero-desc{font-size:13px}
+  .hero-badge{font-size:10.5px}
+  .hnum{font-size:15px}
+  .hlbl{font-size:7.5px}
+  .hiw{width:30px;height:30px;font-size:14px}
+  .params-grid{grid-template-columns:1fr;gap:8px}
+  .charge-tiles{grid-template-columns:1fr 1fr;gap:7px}
+  .fin-grid{grid-template-columns:1fr 1fr;gap:7px}
+  .sugg-grid{grid-template-columns:1fr}
+  .btn-compare{font-size:13px}
+  .best-grid{grid-template-columns:1fr}
+  .preview-row{grid-template-columns:1fr 1fr;gap:6px}
+  .preview-card{min-height:56px;padding:9px 8px}
+  .footer-grid{grid-template-columns:1fr}
+  .sec-h{font-size:18px}
+  .sec{padding:36px 0}
+  .sec-alt{padding:36px 0}
+}
+
+/* ── ≤320px Smallest (iPhone 4 / old budget phones) ── */
+@media(max-width:320px){
+  .container{padding:0 8px}
+  .hero h1{font-size:18px;letter-spacing:-.5px}
+  .params-grid{grid-template-columns:1fr}
+  .preview-row{grid-template-columns:1fr}
+  .charge-tiles{grid-template-columns:1fr}
+  .fin-grid{grid-template-columns:1fr}
+  .hstat-grid{gap:5px}
+  .hnum{font-size:14px}
+}
+
+/* ── Landscape short screens (phones in landscape) ── */
+@media(max-height:500px) and (orientation:landscape){
+  .hero{padding:16px 0 14px}
+  .hero-grid{grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+  .hero-panel{display:none} /* hide panel in landscape to save vertical space */
+  .sec{padding:28px 0}
+  .sec-alt{padding:28px 0}
+  .compare-wrap{padding:16px}
+  .params-grid{grid-template-columns:repeat(4,1fr)}
+}
+
+/* ── iPad Pro 12.9 (1024px) ── */
+@media(min-width:1024px) and (max-width:1024px){
+  .hero-grid{grid-template-columns:1fr 1fr;gap:40px}
+}
+
+/* ── Print ── */
+@media print{
+  .hero,.ticker,#scrollTop,.compare-wrap{display:none!important}
+  .params-grid{grid-template-columns:repeat(3,1fr)!important}
+  body{font-size:11px;color:#000;background:#fff}
+  .best-card,.param-card{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+<div class="hero-deco"></div>
+<div class="container">
+<div class="hero-grid">
+  <div>
+    <div class="hero-badge"><div class="hero-badge-dot"></div> 25 Brokers · Verified Feb 2026</div>
+    <h1>Compare Stock Brokers &amp; <span class="hl">Choose the Best</span></h1>
+    <p class="hero-desc">India's most comprehensive broker comparison tool. Verified brokerage charges, AMC, account opening fees, platforms &amp; financial strength — all in one place.</p>
+    <div class="hero-ctas">
+      <a class="btn-primary" href="#compare-tool">⚡ Start Comparing</a>
+      <a class="btn-secondary" href="#best-picks">🏆 Best Picks</a>
+    </div>
+  </div>
+  <div class="hero-panel">
+    <div class="hero-panel-title">Indian Broking Market · Feb 2026</div>
+    <div class="hstat-grid">
+      <div class="hstat"><div class="hiw">🏦</div><span class="hnum">25</span><span class="hlbl">Brokers Covered</span></div>
+      <div class="hstat"><div class="hiw">📊</div><span class="hnum">13+</span><span class="hlbl">Parameters</span></div>
+      <div class="hstat"><div class="hiw">✅</div><span class="hnum">100%</span><span class="hlbl">Verified Data</span></div>
+      <div class="hstat"><div class="hiw">👥</div><span class="hnum">45.47M</span><span class="hlbl">NSE Active</span></div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- ═══ TICKER ═══ -->
+<div class="ticker" aria-hidden="true">
+<div class="ticker-track">
+  <span class="ticker-item">🥇 Groww <b>12.74M</b> clients · 28.14% NSE share</span><span class="ticker-sep">·</span>
+  <span class="ticker-item">⚡ Zerodha <b>₹0 Delivery</b> · ₹20 Intraday/F&O</span><span class="ticker-sep">·</span>
+  <span class="ticker-item">🆓 Shoonya <b>₹5/order</b> F&O — Lowest Flat Fee</span><span class="ticker-sep">·</span>
+  <span class="ticker-item">🦄 Dhan <b>Unicorn 2025</b> · 1M+ Active Clients</span><span class="ticker-sep">·</span>
+  <span class="ticker-item">🏦 Angel One <b>₹0 Delivery</b> · Free Account</span><span class="ticker-sep">·</span>
+  <span class="ticker-item">📈 Budget 2026 <b>STT Hike</b> Effective Apr 1, 2026</span><span class="ticker-sep">·</span>
+  <span class="ticker-item">🥇 Groww <b>12.74M</b> clients · 28.14% NSE share</span><span class="ticker-sep">·</span>
+  <span class="ticker-item">⚡ Zerodha <b>₹0 Delivery</b> · ₹20 Intraday/F&O</span><span class="ticker-sep">·</span>
+  <span class="ticker-item">🆓 Shoonya <b>₹5/order</b> F&O — Lowest Flat Fee</span><span class="ticker-sep">·</span>
+  <span class="ticker-item">🦄 Dhan <b>Unicorn 2025</b> · 1M+ Active Clients</span><span class="ticker-sep">·</span>
+  <span class="ticker-item">🏦 Angel One <b>₹0 Delivery</b> · Free Account</span><span class="ticker-sep">·</span>
+  <span class="ticker-item">📈 Budget 2026 <b>STT Hike</b> Effective Apr 1, 2026</span>
+</div>
+</div>
+
+<!-- ═══ COMPARE TOOL ═══ -->
+<section class="sec" id="compare-tool">
+<div class="container">
+  <div class="sec-head">
+    <div class="eyebrow">Comparison Tool</div>
+    <h2 class="sec-h">Compare Brokers Side-by-Side</h2>
+    <p class="sec-sub">Select any two brokers from all 25 SEBI-registered brokers. Opens full analysis in a new window.</p>
+  </div>
+
+  <div class="compare-wrap">
+    <!-- Preview cards -->
+    <div class="preview-row">
+      <div class="preview-card empty" id="pv1"><div class="pv-ei">🏦</div><div class="pv-et">Select Broker 1</div></div>
+      <div class="preview-card empty" id="pv2"><div class="pv-ei">🏦</div><div class="pv-et">Select Broker 2</div></div>
+    </div>
+
+    <!-- Selectors -->
+    <div class="selectors-grid">
+      <div>
+        <div class="sel-lbl"><div class="sel-num">1</div> Broker 1</div>
+        <div class="sel-wrap">
+          <span class="si">🔍</span>
+          <select class="fsb-select" id="sel1" onchange="onSelect(1,this.value)" aria-label="Select Broker 1">
+            <option value="">— Search & Select Broker —</option>
+          </select>
+        </div>
+      </div>
+      <div class="vs-badge" aria-hidden="true">VS</div>
+      <div>
+        <div class="sel-lbl"><div class="sel-num">2</div> Broker 2</div>
+        <div class="sel-wrap">
+          <span class="si">🔍</span>
+          <select class="fsb-select" id="sel2" onchange="onSelect(2,this.value)" aria-label="Select Broker 2">
+            <option value="">— Search & Select Broker —</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compare CTA — centered -->
+    <div class="cta-center">
+      <button class="btn-compare" id="cmp-btn" disabled onclick="doCompare()" aria-label="Compare now">
+        ⚡ Compare Now — Full Analysis
+      </button>
+      <p class="compare-hint">
+        Opens in a new window with complete data &amp; verified charges.<br>
+        Try: <a onclick="quickLoad('zerodha','groww')">Zerodha vs Groww</a> &nbsp;·&nbsp;
+             <a onclick="quickLoad('angelone','dhan')">Angel One vs Dhan</a> &nbsp;·&nbsp;
+             <a onclick="quickLoad('shoonya','zerodha')">Shoonya vs Zerodha</a>
+      </p>
+    </div>
+
+    <!-- Data verification notice -->
+    <div class="data-notice" role="note">
+      <span>✅</span>
+      <div><strong>Verified Data — Feb 2026:</strong> All charges (brokerage, AMC, account opening, DP) sourced directly from official broker websites and NSE/SEBI disclosures. Verify before opening account.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ PARAMETERS ═══ -->
+<section class="sec-alt" id="parameters">
+<div class="container">
+  <div class="sec-head">
+    <div class="eyebrow">What We Compare</div>
+    <h2 class="sec-h">13 Key Parameters That Matter</h2>
+    <p class="sec-sub">From per-order costs to financial stability — every metric you need to pick the right broker for your trading style.</p>
+  </div>
+  <div class="params-grid">
+    <div class="param-card">
+      <span class="param-icon">💸</span>
+      <div class="param-name">Brokerage Charges</div>
+      <p class="param-desc">Per-order fee for Delivery, Intraday, F&O, Commodity and Currency. The single biggest cost difference across brokers.</p>
+      <div class="param-tip">⭐ Most Critical</div>
+    </div>
+    <div class="param-card">
+      <span class="param-icon">🏦</span>
+      <div class="param-name">Account Opening Fee</div>
+      <p class="param-desc">One-time cost to open a demat + trading account. Ranges from ₹0 (most discount brokers) to ₹999 (HDFC Securities).</p>
+      <div class="param-tip">💡 Often Free</div>
+    </div>
+    <div class="param-card">
+      <span class="param-icon">📅</span>
+      <div class="param-name">AMC Charges</div>
+      <p class="param-desc">Annual Maintenance Charge for your demat account with CDSL/NSDL. Ranges from ₹0 lifetime (mStock) to ₹750/yr (HDFC).</p>
+      <div class="param-tip">📆 Yearly Cost</div>
+    </div>
+    <div class="param-card">
+      <span class="param-icon">💳</span>
+      <div class="param-name">DP Charges</div>
+      <p class="param-desc">Depository Participant charge per sell transaction. Ranges from ₹9 (Shoonya) to ₹35 (ICICI Direct). Adds up for active traders.</p>
+      <div class="param-tip">📦 Per Sell</div>
+    </div>
+    <div class="param-card">
+      <span class="param-icon">📱</span>
+      <div class="param-name">Trading Platform</div>
+      <p class="param-desc">Quality of the mobile app, web platform, desktop software, charting tools and execution speed and reliability.</p>
+      <div class="param-tip">🖥️ UX Matters</div>
+    </div>
+    <div class="param-card">
+      <span class="param-icon">📊</span>
+      <div class="param-name">Margin &amp; Leverage</div>
+      <p class="param-desc">Intraday and overnight leverage available for equity, F&O and commodity segments. Higher = more risk &amp; opportunity.</p>
+      <div class="param-tip">⚠️ Risk Factor</div>
+    </div>
+    <div class="param-card">
+      <span class="param-icon">🔗</span>
+      <div class="param-name">Segments Available</div>
+      <p class="param-desc">NSE, BSE, MCX commodity, CDS currency, Mutual Funds, US Stocks, IPO, SGB &amp; NPS access across the broker's platform.</p>
+      <div class="param-tip">🌐 Coverage</div>
+    </div>
+    <div class="param-card">
+      <span class="param-icon">🎧</span>
+      <div class="param-name">Customer Support</div>
+      <p class="param-desc">Phone, chat, email availability and resolution speed. Critical when trade execution fails during market hours.</p>
+      <div class="param-tip">📞 24×7 or Not?</div>
+    </div>
+    <div class="param-card">
+      <span class="param-icon">🔬</span>
+      <div class="param-name">Research &amp; Advisory</div>
+      <p class="param-desc">In-house equity research, analyst calls, screeners, portfolio advisory and wealth management. Full-service brokers lead here.</p>
+      <div class="param-tip">📑 Full-Service Edge</div>
+    </div>
+    <div class="param-card">
+      <span class="param-icon">🤖</span>
+      <div class="param-name">Technology &amp; API</div>
+      <p class="param-desc">Algo trading API quality, TradingView integration, Smallcase support, uptime reliability and charting depth for power users.</p>
+      <div class="param-tip">⚙️ For Algo Traders</div>
+    </div>
+    <div class="param-card">
+      <span class="param-icon">🌍</span>
+      <div class="param-name">NRI &amp; Global Access</div>
+      <p class="param-desc">NRI PIS account, US stock investing, international fund access and NRE/NRO account compatibility for diaspora investors.</p>
+      <div class="param-tip">✈️ For NRIs</div>
+    </div>
+    <div class="param-card">
+      <span class="param-icon">👥</span>
+      <div class="param-name">Active Client Base</div>
+      <p class="param-desc">NSE-verified active client count as of Feb 2026. A larger base signals trust, infrastructure investment and regulatory stability.</p>
+      <div class="param-tip">📈 Trust Signal</div>
+    </div>
+    <div class="param-card">
+      <span class="param-icon">🏛️</span>
+      <div class="param-name">Financial Stability</div>
+      <p class="param-desc">Backing strength, parent group credibility, years in operation, profitability, SEBI compliance record and client fund safety.</p>
+      <div class="param-tip">🛡️ Safety First</div>
+    </div>
+  </div>
+
+  <!-- INFOGRAPHIC 2: Key Charges -->
+  <div class="infographic-block">
+    <div class="infographic-title">💸 Standard Charges at a Glance — Verified</div>
+    <div class="charge-tiles">
+      <div class="charge-tile free"><div class="ct-icon">🆓</div><div class="ct-val">₹0</div><div class="ct-lbl">Delivery Brokerage<br>Zerodha, Angel One, Dhan &amp; more</div></div>
+      <div class="charge-tile mid"><div class="ct-icon">⚡</div><div class="ct-val">₹20</div><div class="ct-lbl">Intraday Cap<br>Most Discount Brokers</div></div>
+      <div class="charge-tile mid"><div class="ct-icon">🔥</div><div class="ct-val">₹5</div><div class="ct-lbl">F&O — Shoonya<br>Lowest in India</div></div>
+      <div class="charge-tile free"><div class="ct-icon">🏦</div><div class="ct-val">₹0</div><div class="ct-lbl">Account Opening<br>Most Brokers (₹999 at HDFC)</div></div>
+      <div class="charge-tile free"><div class="ct-icon">📅</div><div class="ct-val">₹0</div><div class="ct-lbl">AMC — Lifetime Free<br>mStock by Mirae Asset</div></div>
+      <div class="charge-tile high"><div class="ct-icon">📅</div><div class="ct-val">₹750</div><div class="ct-lbl">AMC — Highest<br>HDFC Securities</div></div>
+      <div class="charge-tile free"><div class="ct-icon">💳</div><div class="ct-val">₹9</div><div class="ct-lbl">DP Charge — Lowest<br>Shoonya by Finvasia</div></div>
+      <div class="charge-tile high"><div class="ct-icon">💳</div><div class="ct-val">₹35</div><div class="ct-lbl">DP Charge — Highest<br>ICICI Direct</div></div>
+      <div class="charge-tile high"><div class="ct-icon">📦</div><div class="ct-val">0.50%</div><div class="ct-lbl">Delivery — Highest<br>HDFC / SBI / Axis Direct</div></div>
+    </div>
+  </div>
+
+  <!-- INFOGRAPHIC 3: Financial Stability -->
+  <div class="infographic-block">
+    <div class="infographic-title">🏛️ Financial Stability Index — Scored on 5 Factors</div>
+    <p style="font-size:12px;color:var(--ink3);margin-bottom:14px">Criteria: Years in operation · Parent group strength · Profitability · SEBI compliance · Client fund safety</p>
+    <div class="fin-grid" id="fin-grid-el"></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ BEST PICKS ═══ -->
+<section class="sec" id="best-picks">
+<div class="container">
+  <div class="sec-head">
+    <div class="eyebrow">Editor's Picks</div>
+    <h2 class="sec-h">Best Brokers by Category</h2>
+    <p class="sec-sub">Data-verified recommendations based on verified charges, platform quality, active clients, financial stability and expert analysis.</p>
+  </div>
+  <div class="best-grid">
+    <div class="best-card c1">
+      <div class="best-cat">🏆 Overall Best</div>
+      <div class="best-broker-row">
+        <div class="best-abbr" style="background:#387ED120;color:#387ED1">ZR</div>
+        <div><div class="best-name">Zerodha</div><div class="best-sub">Pioneer · 6.87M Active · 15.21% Share</div></div>
+      </div>
+      <div class="best-reason">₹0 delivery, ₹20 intraday/F&O, AMC ₹300/yr. Kite — India's best trading platform with Terminal Mode (Feb 2026). Most profitable broker. 15+ years of trust.</div>
+      <span class="best-tag">⭐ Editor's Choice</span>
+    </div>
+    <div class="best-card c2">
+      <div class="best-cat">💰 Lowest Brokerage</div>
+      <div class="best-broker-row">
+        <div class="best-abbr" style="background:#7C3AED20;color:#7C3AED">SH</div>
+        <div><div class="best-name">Shoonya by Finvasia</div><div class="best-sub">₹0 Delivery · ₹5/order F&O</div></div>
+      </div>
+      <div class="best-reason">₹0 delivery, ₹5/order (or 0.03% lower) for intraday, F&O, commodity &amp; currency. Zero AMC. DP just ₹9+GST. All 5 segments. Best for high-frequency traders.</div>
+      <span class="best-tag">🆓 Lowest Cost</span>
+    </div>
+    <div class="best-card c3">
+      <div class="best-cat">🌱 Best for Beginners</div>
+      <div class="best-broker-row">
+        <div class="best-abbr" style="background:#00D09C20;color:#00D09C">GR</div>
+        <div><div class="best-name">Groww</div><div class="best-sub">12.74M Active · 28.14% NSE Share</div></div>
+      </div>
+      <div class="best-reason">Simplest UI in India. Zero AMC, free account. MF, US stocks, NPS in one app. ₹20 intraday/F&O. Note: Delivery is ₹20 or 0.05% (not free). 28% market share.</div>
+      <span class="best-tag">🌱 Most Popular</span>
+    </div>
+    <div class="best-card c4">
+      <div class="best-cat">📱 Best Platform</div>
+      <div class="best-broker-row">
+        <div class="best-abbr" style="background:#00A36C20;color:#00A36C">DH</div>
+        <div><div class="best-name">Dhan</div><div class="best-sub">Unicorn 2025 · 1M+ Active Clients</div></div>
+      </div>
+      <div class="best-reason">Best F&O visual interface in India. Free account, zero AMC. DhanHQ API. 0.03% or ₹20 for F&O. Options Trader tool. Fastest-growing new-gen broker. Unicorn 2025.</div>
+      <span class="best-tag">🦄 Best F&O UI</span>
+    </div>
+    <div class="best-card c5">
+      <div class="best-cat">🏢 Best Full-Service</div>
+      <div class="best-broker-row">
+        <div class="best-abbr" style="background:#D4A01720;color:#D4A017">IC</div>
+        <div><div class="best-name">ICICI Direct</div><div class="best-sub">2.07M Active · 4.58% NSE Share</div></div>
+      </div>
+      <div class="best-reason">3-in-1 ICICI Bank integration. AMC ₹700/yr, delivery 0.29%, F&O ₹35/order. Best research &amp; advisory. NRI PIS, bonds, FDs &amp; insurance. 24×7 phone support.</div>
+      <span class="best-tag">🏦 Bank-Backed</span>
+    </div>
+    <div class="best-card c6">
+      <div class="best-cat">🤖 Best for Algo Trading</div>
+      <div class="best-broker-row">
+        <div class="best-abbr" style="background:#1DA46220;color:#1DA462">FY</div>
+        <div><div class="best-name">FYERS</div><div class="best-sub">Best API · TradingView Integration</div></div>
+      </div>
+      <div class="best-reason">Best-in-class API v3 (Python, Java). TradingView charts natively integrated. ₹0 delivery, ₹20 intraday/F&O. Free AMC. All segments including commodity &amp; currency.</div>
+      <span class="best-tag">⚙️ API-First</span>
+    </div>
+    <div class="best-card c7">
+      <div class="best-cat">🏛️ Most Financially Stable</div>
+      <div class="best-broker-row">
+        <div class="best-abbr" style="background:#00205B20;color:#00205B">HD</div>
+        <div><div class="best-name">HDFC Securities</div><div class="best-sub">HDFC Bank · 1.42M Active · 3.14% Share</div></div>
+      </div>
+      <div class="best-reason">Backed by HDFC Bank — India's largest private bank. 25+ years operation. ₹999 opening, AMC ₹750/yr, delivery 0.32%. Highest client fund safety &amp; compliance record.</div>
+      <span class="best-tag">🛡️ Safest Choice</span>
+    </div>
+    <div class="best-card" style="border-color:var(--border);border-width:1.5px">
+      <div style="position:absolute;top:0;left:0;bottom:0;width:3px;border-radius:18px 0 0 18px;background:linear-gradient(180deg,#059E6F,#34d399)"></div>
+      <div class="best-cat">🌍 Best NRI Friendly Broker</div>
+      <div class="best-broker-row">
+        <div class="best-abbr" style="background:#387ED120;color:#387ED1">ZR</div>
+        <div><div class="best-name">Zerodha</div><div class="best-sub">Pioneer · 6.87M Active · 15.21% Share</div></div>
+      </div>
+      <div class="best-reason">Best NRI demat + trading account in India. Supports NRE/NRO accounts, NRI PIS (Portfolio Investment Scheme) via designated banks. ₹0 delivery, ₹20 F&amp;O, AMC ₹300/yr. Kite platform works seamlessly across time zones. FEMA-compliant. Trusted by NRIs globally.</div>
+      <span class="best-tag" style="background:#e0f8eb;color:#0f5c30">✈️ NRI Recommended</span>
+    </div>
+  </div>
+
+  <!-- SUGGESTIONS -->
+  <div class="sugg-section">
+    <div class="eyebrow" style="text-align:center">Popular Comparisons</div>
+    <div class="sugg-title">Not Sure Where to Start?</div>
+    <p class="sugg-sub">Click any comparison below — it loads both brokers in the tool above instantly.</p>
+    <div class="sugg-grid" id="sugg-grid-el"></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+<div class="container">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">🏦 FairStockBrokers</div>
+      <p class="footer-tagline">India's most trusted broker review &amp; comparison platform. All charge data verified against official broker disclosures and NSE/SEBI reports. Updated February 2026.</p>
+    </div>
+    <div>
+      <div class="footer-col-t">Quick Links</div>
+      <div class="footer-links">
+        <a href="https://fairstockbrokers.com">Broker Reviews</a>
+        <a href="https://fairstockbrokers.com">IPO Tracker</a>
+        <a href="https://fairstockbrokers.com">Brokerage Calculator</a>
+        <a href="https://fairstockbrokers.com">Personal Finance</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-t">Legal</div>
+      <div class="footer-links">
+        <a href="#">Disclaimer</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span>© 2026 FairStockBrokers.com — All rights reserved</span>
+    <span>Data: NSE Feb 2026 · SEBI Registered Brokers</span>
+  </div>
+  <p class="footer-disc">⚠️ Disclaimer: All brokerage, AMC and fee data is sourced from official broker disclosures and NSE/SEBI filings as of February 2026. Charges are subject to change — always verify on the broker's official website before opening an account. This page is for informational purposes only and does not constitute investment advice. Investments in securities markets are subject to market risks.</p>
+</div>
+</footer>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">↑</button>
+
+<script>
+/* ═══════════════════════════════════════════
+   VALIDATED BROKER DATA — Feb 2026
+   Source: Official broker websites + NSE/SEBI
+═══════════════════════════════════════════ */
+const BROKERS = {
+  groww:     {name:'Groww',               abbr:'GR', color:'#00D09C', type:'d', typeLabel:'Discount',
+    sub:"India's Largest · 12.74M Active",
+    open:'Free', amc:'₹0 (Free forever)', delivery:'₹20 or 0.05% (lower, min ₹5)',
+    intraday:'₹20/order', fo:'₹20/order', dp:'₹20 + GST/sell',
+    finScore:4, finLabel:'Very Good'},
+
+  zerodha:   {name:'Zerodha',             abbr:'ZR', color:'#387ED1', type:'d', typeLabel:'Discount',
+    sub:'Pioneer · 6.87M Active · 15.21%',
+    open:'Free', amc:'₹300/yr + GST', delivery:'₹0 (Zero)',
+    intraday:'₹20 or 0.03%', fo:'₹20 or 0.03%', dp:'₹13.50 + GST/sell',
+    finScore:5, finLabel:'Excellent'},
+
+  angelone:  {name:'Angel One',           abbr:'A1', color:'#FF6747', type:'d', typeLabel:'Discount',
+    sub:'AI-Research · 6.75M Active · 14.94%',
+    open:'Free', amc:'Free (1st yr); ₹240/yr after', delivery:'₹0 (Zero)',
+    intraday:'₹20/order', fo:'₹20/order', dp:'₹20 + GST/sell',
+    finScore:4, finLabel:'Very Good'},
+
+  upstox:    {name:'Upstox',              abbr:'UP', color:'#8B5CF6', type:'d', typeLabel:'Discount',
+    sub:'Ratan Tata Backed · 1.99M Active',
+    open:'Free', amc:'Free (1st yr); ₹150/yr after', delivery:'₹20/order',
+    intraday:'₹20 or 0.05%', fo:'₹20 flat', dp:'₹18.5 + GST/sell',
+    finScore:4, finLabel:'Very Good'},
+
+  icici:     {name:'ICICI Direct',        abbr:'IC', color:'#D4A017', type:'f', typeLabel:'Full-Service',
+    sub:'ICICI Bank 3-in-1 · 2.07M Active',
+    open:'Free', amc:'₹700/yr', delivery:'0.29%',
+    intraday:'0.029%', fo:'₹35/order', dp:'₹35 + GST/sell',
+    finScore:5, finLabel:'Excellent'},
+
+  hdfc:      {name:'HDFC Securities',     abbr:'HD', color:'#00205B', type:'f', typeLabel:'Full-Service',
+    sub:'HDFC Bank 3-in-1 · 1.42M Active',
+    open:'₹999', amc:'₹750/yr', delivery:'0.32%',
+    intraday:'0.032%', fo:'0.05% or ₹25', dp:'₹25 + GST/sell',
+    finScore:5, finLabel:'Excellent'},
+
+  kotak:     {name:'Kotak Securities',    abbr:'KS', color:'#E83025', type:'f', typeLabel:'Full-Service',
+    sub:'Kotak Bank · Zero Delivery · 1.38M Active',
+    open:'Free', amc:'₹600/yr', delivery:'Zero (₹0)',
+    intraday:'₹10–₹20/order', fo:'₹20/order', dp:'₹13.5 + GST/sell',
+    finScore:5, finLabel:'Excellent'},
+
+  motilal:   {name:'Motilal Oswal',       abbr:'MO', color:'#1B3A6B', type:'f', typeLabel:'Full-Service',
+    sub:"Premier Research Broker · 9.04L Active",
+    open:'Free', amc:'Free (1st yr); ₹199/yr', delivery:'0.20%',
+    intraday:'0.02%', fo:'₹20/lot (Options); 0.02% (Futures)', dp:'₹15.93 + GST/sell',
+    finScore:4, finLabel:'Very Good'},
+
+  paytm:     {name:'Paytm Money',         abbr:'PM', color:'#00BAF2', type:'d', typeLabel:'Discount',
+    sub:'Paytm Ecosystem · ~500K Active',
+    open:'Free', amc:'Free', delivery:'₹20/order',
+    intraday:'₹20/order', fo:'₹20/order', dp:'₹13.5 + GST/sell',
+    finScore:3, finLabel:'Good'},
+
+  sharekhan: {name:'Mirae Sharekhan',     abbr:'SK', color:'#FF4500', type:'f', typeLabel:'Full-Service',
+    sub:'Mirae Asset Group · ~590K Active',
+    open:'Free', amc:'Free (1st yr); ₹400/yr', delivery:'0.30%',
+    intraday:'0.02%', fo:'0.02%', dp:'₹18 + GST/sell',
+    finScore:4, finLabel:'Very Good'},
+
+  fivepaisa: {name:'5paisa',              abbr:'5P', color:'#0F6BFF', type:'d', typeLabel:'Discount',
+    sub:'IIFL Group · Ultra-Low Fee · ~400K',
+    open:'Free', amc:'₹300/yr', delivery:'₹10/order',
+    intraday:'₹10/order', fo:'₹10/order', dp:'₹13.5 + GST/sell',
+    finScore:4, finLabel:'Very Good'},
+
+  iifl:      {name:'IIFL Securities',     abbr:'II', color:'#F59E0B', type:'f', typeLabel:'Full-Service',
+    sub:'IIFL Finance Group · ~800K Active',
+    open:'Free', amc:'₹240/yr', delivery:'Zero (₹0)',
+    intraday:'₹20/order', fo:'₹20/order', dp:'₹14.5 + GST/sell',
+    finScore:4, finLabel:'Very Good'},
+
+  axis:      {name:'Axis Direct',         abbr:'AD', color:'#97144D', type:'f', typeLabel:'Full-Service',
+    sub:'Axis Bank 3-in-1 · ~400K Active',
+    open:'Free', amc:'Free (1st yr); ₹750/yr', delivery:'0.50%',
+    intraday:'0.05%', fo:'0.05%', dp:'₹20 + GST/sell',
+    finScore:5, finLabel:'Excellent'},
+
+  dhan:      {name:'Dhan',                abbr:'DH', color:'#00A36C', type:'d', typeLabel:'Discount',
+    sub:'Unicorn 2025 · 1.01M Active · 2.24%',
+    open:'Free', amc:'Free', delivery:'₹0 (Zero)',
+    intraday:'0.03% or ₹20 (lower)', fo:'0.03% or ₹20 (lower)', dp:'₹13.5 + GST/sell',
+    finScore:3, finLabel:'Good'},
+
+  fyers:     {name:'FYERS',               abbr:'FY', color:'#1DA462', type:'d', typeLabel:'Discount',
+    sub:'Best API & TradingView · ~400K',
+    open:'Free', amc:'Free', delivery:'₹0 (Zero)',
+    intraday:'₹20/order', fo:'₹20/order', dp:'₹13.5 + GST/sell',
+    finScore:3, finLabel:'Good'},
+
+  shoonya:   {name:'Shoonya by Finvasia', abbr:'SH', color:'#7C3AED', type:'d', typeLabel:'Discount',
+    sub:'₹0 Delivery · ₹5 F&O · All Segments',
+    open:'Free', amc:'Free', delivery:'₹0 (Zero)',
+    intraday:'₹5 or 0.03% (lower)', fo:'₹5 or 0.03% (lower)', dp:'₹9 + GST/sell',
+    finScore:3, finLabel:'Good'},
+
+  choice:    {name:'Choice Broking',      abbr:'CH', color:'#F97316', type:'f', typeLabel:'Full-Service',
+    sub:'Listed Group · ~200K Active',
+    open:'Free', amc:'₹200/yr', delivery:'0.20%',
+    intraday:'0.02%', fo:'0.02%', dp:'₹15 + GST/sell',
+    finScore:3, finLabel:'Good'},
+
+  nuvama:    {name:'Nuvama Wealth',       abbr:'NV', color:'#14B8A6', type:'f', typeLabel:'Full-Service',
+    sub:'Ex-Edelweiss · HNI & PMS · ~200K',
+    open:'Free', amc:'₹500/yr', delivery:'0.30%',
+    intraday:'0.03%', fo:'0.03%', dp:'₹20 + GST/sell',
+    finScore:4, finLabel:'Very Good'},
+
+  samco:     {name:'SAMCO Securities',    abbr:'SC', color:'#6D28D9', type:'d', typeLabel:'Discount',
+    sub:'AI StockNote Platform · ~300K',
+    open:'Free', amc:'Free (1st yr); ₹400/yr', delivery:'₹0 (Zero)',
+    intraday:'₹20/order', fo:'₹20/order', dp:'₹15 + GST/sell',
+    finScore:3, finLabel:'Good'},
+
+  sbi:       {name:'SBI Securities',      abbr:'SB', color:'#1D4ED8', type:'f', typeLabel:'Full-Service',
+    sub:'State Bank of India · ~630K Active',
+    open:'Free', amc:'Free', delivery:'0.50%',
+    intraday:'0.05%', fo:'0.05%', dp:'₹18 + GST/sell',
+    finScore:5, finLabel:'Excellent'},
+
+  alice:     {name:'Alice Blue',          abbr:'AB', color:'#2563EB', type:'d', typeLabel:'Discount',
+    sub:'Sub-broker Network · ~600K Active',
+    open:'Free', amc:'Free', delivery:'₹0 (Zero)',
+    intraday:'₹15/order', fo:'₹15/order', dp:'₹20 + GST/sell',
+    finScore:3, finLabel:'Good'},
+
+  jm:        {name:'JM Financial',        abbr:'JM', color:'#DC2626', type:'f', typeLabel:'Full-Service',
+    sub:'Institutional Research · Est. 1973',
+    open:'Free', amc:'₹300/yr', delivery:'0.25%',
+    intraday:'0.025%', fo:'0.025% or ₹20', dp:'₹20 + GST/sell',
+    finScore:4, finLabel:'Very Good'},
+
+  geojit:    {name:'Geojit Financial',    abbr:'GJ', color:'#059E6F', type:'f', typeLabel:'Full-Service',
+    sub:'Best NRI Broker · ~350K Active',
+    open:'Free', amc:'₹400/yr', delivery:'0.30%',
+    intraday:'0.03%', fo:'0.03%', dp:'₹16 + GST/sell',
+    finScore:4, finLabel:'Very Good'},
+
+  mstock:    {name:'mStock by Mirae',     abbr:'MS', color:'#A21CAF', type:'d', typeLabel:'Discount',
+    sub:'Lifetime Free AMC · Mirae Asset',
+    open:'Free', amc:'Free (Lifetime — no AMC ever)', delivery:'₹0 (Zero)',
+    intraday:'₹20/order', fo:'₹20/order', dp:'₹13.5 + GST/sell',
+    finScore:4, finLabel:'Very Good'},
+
+  bajaj:     {name:'Bajaj Broking',       abbr:'BF', color:'#1E40AF', type:'d', typeLabel:'Discount',
+    sub:'Bajaj Finserv Group · ~300K Active',
+    open:'Free', amc:'Free (1st yr)', delivery:'₹0 (Zero)',
+    intraday:'₹20/order', fo:'₹20/order', dp:'₹13.5 + GST/sell',
+    finScore:4, finLabel:'Very Good'},
+};
+
+
+
+/* Financial stability data */
+const FIN_DATA = [
+  {name:'Zerodha',    score:5, label:'Excellent'},
+  {name:'HDFC Sec',   score:5, label:'Excellent'},
+  {name:'ICICI Direct',score:5,label:'Excellent'},
+  {name:'Kotak Sec',  score:5, label:'Excellent'},
+  {name:'SBI Securities',score:5,label:'Excellent'},
+  {name:'Axis Direct',score:5, label:'Excellent'},
+  {name:'Angel One',  score:4, label:'Very Good'},
+  {name:'Groww',      score:4, label:'Very Good'},
+  {name:'Upstox',     score:4, label:'Very Good'},
+  {name:'Motilal O',  score:4, label:'Very Good'},
+  {name:'mStock',     score:4, label:'Very Good'},
+  {name:'Bajaj Brk',  score:4, label:'Very Good'},
+  {name:'FYERS',      score:3, label:'Good'},
+  {name:'Dhan',       score:3, label:'Good'},
+  {name:'Shoonya',    score:3, label:'Good'},
+];
+
+/* Suggestions */
+const SUGG = [
+  {b1:'zerodha',  b2:'groww',    lbl:'Zerodha vs Groww',          sub:'Most compared pair in India',        tag:'pop'},
+  {b1:'zerodha',  b2:'upstox',   lbl:'Zerodha vs Upstox',         sub:'Platform quality showdown',          tag:'pop'},
+  {b1:'groww',    b2:'angelone', lbl:'Groww vs Angel One',        sub:'Free AMC vs Delivery brokerage',     tag:'val'},
+  {b1:'zerodha',  b2:'icici',    lbl:'Zerodha vs ICICI Direct',   sub:'Discount vs Full-Service',           tag:'cls'},
+  {b1:'shoonya',  b2:'zerodha',  lbl:'Shoonya vs Zerodha',        sub:'₹5 vs ₹20 — who saves more?',       tag:'pop'},
+  {b1:'angelone', b2:'dhan',     lbl:'Angel One vs Dhan',         sub:'New-gen discount brokers',           tag:'val'},
+  {b1:'upstox',   b2:'dhan',     lbl:'Upstox vs Dhan',            sub:'Best app platform debate',           tag:'pop'},
+  {b1:'icici',    b2:'hdfc',     lbl:'ICICI Direct vs HDFC',      sub:'Bank broker rivalry',                tag:'cls'},
+  {b1:'motilal',  b2:'icici',    lbl:'Motilal vs ICICI Direct',   sub:'Research-driven comparison',         tag:'cls'},
+  {b1:'zerodha',  b2:'fyers',    lbl:'Zerodha vs FYERS',          sub:'API trading battle',                 tag:'val'},
+  {b1:'kotak',    b2:'hdfc',     lbl:'Kotak vs HDFC Securities',  sub:'Bank-backed broker face-off',        tag:'cls'},
+  {b1:'mstock',   b2:'bajaj',    lbl:'mStock vs Bajaj Broking',   sub:'New entrant discount brokers',       tag:'val'},
+];
+const TAG_META = {
+  pop:{bg:'var(--p100)',  color:'var(--p600)', lbl:'🔥 Popular'},
+  val:{bg:'var(--g100)',  color:'var(--g700)', lbl:'💰 Value'},
+  cls:{bg:'var(--amber-bg)', color:'var(--amber)', lbl:'⭐ Classic'},
+};
+
+/* ═══ INIT ═══ */
+document.addEventListener('DOMContentLoaded', () => {
+  buildSelects();
+  buildFinGrid();
+  buildSuggestions();
+});
+
+/* ── Build selects with optgroups ── */
+function buildSelects(){
+  const discount = Object.entries(BROKERS).filter(([,b])=>b.type==='d');
+  const full     = Object.entries(BROKERS).filter(([,b])=>b.type==='f');
+  ['sel1','sel2'].forEach(id=>{
+    const el = document.getElementById(id);
+    const og1 = document.createElement('optgroup');
+    og1.label = '⚡ Discount Brokers ('+discount.length+')';
+    discount.forEach(([k,b])=>og1.appendChild(new Option(b.name,k)));
+    const og2 = document.createElement('optgroup');
+    og2.label = '🏢 Full-Service Brokers ('+full.length+')';
+    full.forEach(([k,b])=>og2.appendChild(new Option(b.name,k)));
+    el.appendChild(og1);
+    el.appendChild(og2);
+  });
+}
+
+/* ── On select change ── */
+function onSelect(num, id){
+  const card = document.getElementById('pv'+num);
+  const b = BROKERS[id];
+  if(b){
+    card.className = 'preview-card filled';
+    card.innerHTML = `
+      <div class="pv-abbr" style="background:${b.color}20;color:${b.color}">${b.abbr}</div>
+      <div>
+        <div class="pv-name">${b.name}</div>
+        <div class="pv-sub">${b.typeLabel} · Delivery: ${b.delivery}</div>
+        <div class="pv-sub">AMC: ${b.amc} · Open: ${b.open}</div>
+      </div>`;
+  } else {
+    card.className = 'preview-card empty';
+    card.innerHTML = `<div class="pv-ei">🏦</div><div class="pv-et">Select Broker ${num}</div>`;
+  }
+  const v1=document.getElementById('sel1').value;
+  const v2=document.getElementById('sel2').value;
+  const btn=document.getElementById('cmp-btn');
+  btn.disabled = !(v1 && v2 && v1!==v2);
+}
+
+/* ── Open compare window ── */
+function doCompare(){
+  const b1=document.getElementById('sel1').value;
+  const b2=document.getElementById('sel2').value;
+  if(!b1||!b2||b1===b2) return;
+  window.open(`https://fairstockbrokers.com/compare?b1=${b1}&b2=${b2}`,'_blank','noopener,noreferrer');
+}
+
+/* ── Quick load from suggestion/hint ── */
+function quickLoad(id1, id2){
+  document.getElementById('sel1').value = id1;
+  document.getElementById('sel2').value = id2;
+  onSelect(1, id1);
+  onSelect(2, id2);
+  document.getElementById('compare-tool').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+
+
+/* ── Build fin stability grid ── */
+function buildFinGrid(){
+  const wrap = document.getElementById('fin-grid-el');
+  const scoreColor = {5:'on-5',4:'on-4',3:'on-3'};
+  const badgeCls   = {5:'ex',  4:'vg',  3:'gd'};
+  const badgeTxt   = {5:'🛡️ Excellent',4:'✅ Very Good',3:'⚠️ Good'};
+  wrap.innerHTML = FIN_DATA.map(d=>{
+    const dots=[1,2,3,4,5].map(i=>
+      `<div class="fin-dot ${i<=d.score?scoreColor[d.score]:'off'}"></div>`
+    ).join('');
+    return `
+    <div class="fin-tile">
+      <div class="fin-broker">${d.name}</div>
+      <div class="fin-dots">${dots}</div>
+      <span class="fin-badge ${badgeCls[d.score]}">${badgeTxt[d.score]}</span>
+    </div>`;
+  }).join('');
+}
+
+/* ── Build suggestions ── */
+function buildSuggestions(){
+  const wrap = document.getElementById('sugg-grid-el');
+  wrap.innerHTML = SUGG.map(s=>{
+    const b1=BROKERS[s.b1], b2=BROKERS[s.b2];
+    const t=TAG_META[s.tag];
+    return `
+    <div class="sugg-card" onclick="quickLoad('${s.b1}','${s.b2}')" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')quickLoad('${s.b1}','${s.b2}')">
+      <div class="sugg-abbrs">
+        <div class="sa" style="background:${b1.color}22;color:${b1.color}">${b1.abbr}</div>
+        <div class="sa" style="background:${b2.color}22;color:${b2.color}">${b2.abbr}</div>
+      </div>
+      <div class="sugg-info">
+        <div class="sugg-lbl">${s.lbl} <span class="stag ${s.tag}" style="background:${t.bg};color:${t.color}">${t.lbl}</span></div>
+        <div class="sugg-sublbl">${s.sub}</div>
+      </div>
+      <div class="sugg-arrow">→</div>
+    </div>`;
+  }).join('');
+}
+
+/* ── Scroll top ── */
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll',()=>{
+  scrollBtn.style.display = window.scrollY>400?'flex':'none';
+},{passive:true});
+</script>
+</body>
+</html>

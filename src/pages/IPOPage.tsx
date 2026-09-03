@@ -100,7 +100,7 @@ export function IPOPage() {
                 </div>
                 <div className="ipo-card-footer">
                   <div className="gmp-badge">GMP {ipo.gmp}</div>
-                  <a href="#" className="view-link">View Details →</a>
+                  <Link to="/pages" className="view-link">View Details →</Link>
                 </div>
               </div>
             ))}

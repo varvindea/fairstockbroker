@@ -1,0 +1,23 @@
+import { Link, useParams } from 'react-router-dom'
+import { brokers } from '../data/brokers'
+
+export function BrokerDetailPage() {
+  const { slug } = useParams()
+  const broker = brokers.find(item => item.slug === slug)
+
+  if (!broker) return <section className="sec"><div className="sec-inner" style={{ textAlign: 'center' }}><h1 className="sec-h2">Broker Not Found</h1><Link to="/brokers" className="cta-btn-p">View All Brokers</Link></div></section>
+
+  const charges = [['Account opening', broker.opening], ['Equity delivery', broker.delivery], ['Intraday / F&O', broker.intraday], ['Annual maintenance', broker.amc]]
+  const products = ['Equity', 'Mutual Funds', 'IPOs', 'F&O', 'ETFs', 'Bonds', 'Gold', 'Fixed Deposits']
+  const ratings = [['Charges', broker.rating], ['Platform', Math.min(5, broker.rating + 0.1)], ['Trading tools', Math.min(5, broker.rating + 0.2)], ['Customer support', Math.max(3.8, broker.rating - 0.2)]]
+
+  return (
+    <>
+      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Broker Review</div><div style={{ display: 'flex', alignItems: 'center', gap: '18px', flexWrap: 'wrap' }}><div className="broker-logo" style={{ background: broker.logoBackground, color: broker.logoColor, fontSize: broker.logo.length > 1 ? '18px' : '30px', width: '72px', height: '72px' }}>{broker.logo}</div><div><h1 className="page-h1" style={{ marginBottom: '6px' }}>{broker.name} Review</h1><p className="page-sub" style={{ marginBottom: 0 }}>{broker.type} broker · Established {broker.founded} · Platform: {broker.app}</p></div></div></div></section>
+      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner"><div className="wealth-grid"><div className="wealth-card"><div className="wc-num">{broker.rating}<sup>/5</sup></div><div className="wc-lbl">Overall rating</div></div><div className="wealth-card"><div className="wc-num">{broker.reviews}</div><div className="wc-lbl">User reviews</div></div><div className="wealth-card"><div className="wc-num">{2026 - broker.founded}</div><div className="wc-lbl">Years in business</div></div><div className="wealth-card"><div className="wc-num">{broker.opening}</div><div className="wc-lbl">Account opening</div></div></div></div></section>
+      <section className="sec" style={{ background: 'var(--surf1)' }}><div className="sec-inner"><div className="sec-head"><div className="sec-eyebrow">Charges</div><h2 className="sec-h2">{broker.name} Fees at a Glance</h2></div><div className="feat-grid">{charges.map(([label, value]) => <div key={label} className="fg-card fc-blue"><div className="fg-title">{label}</div><div className="fg-desc" style={{ fontSize: '22px', fontWeight: 900, color: 'var(--ink)' }}>{value}</div></div>)}</div></div></section>
+      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner"><div className="sec-head"><div className="sec-eyebrow">Offering</div><h2 className="sec-h2">Products and Account Access</h2></div><div className="feat-grid">{products.map(product => <div key={product} className="fg-card fc-green"><div className="fg-ico">✓</div><div className="fg-title">{product}</div><div className="fg-desc">Available through {broker.name}</div></div>)}</div></div></section>
+      <section className="sec" style={{ background: 'var(--surf1)' }}><div className="sec-inner"><div className="sec-head"><div className="sec-eyebrow">Investor View</div><h2 className="sec-h2">Strengths and Ratings</h2></div><div className="calc-layout"><div className="live-calc"><div className="lc-body"><div style={{ fontWeight: 800, marginBottom: '14px' }}>Why investors choose {broker.name}</div>{broker.pros.map(item => <div key={item} style={{ display: 'flex', gap: '8px', marginBottom: '10px', color: 'var(--ink3)' }}><span style={{ color: 'var(--g600)', fontWeight: 900 }}>✓</span>{item}</div>)}</div></div><div className="live-calc"><div className="lc-body"><div style={{ fontWeight: 800, marginBottom: '14px' }}>Category ratings</div>{ratings.map(([label, score]) => <div key={label} style={{ marginBottom: '14px' }}><div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px', fontSize: '13px', fontWeight: 700 }}><span>{label}</span><span>{Number(score).toFixed(1)}/5</span></div><div className="sub-rail"><div className="sub-fill" style={{ width: `${Number(score) * 20}%` }} /></div></div>)}</div></div></div><div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/contact" className="cta-btn-p">Open a {broker.name} Account</Link></div></div></section>
+    </>
+  )
+}

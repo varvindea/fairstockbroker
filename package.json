@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "sync:source-pages": "node scripts/sync-source-pages.mjs",
+    "dev": "npm run sync:source-pages && vite",
+    "build": "npm run sync:source-pages && tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"
   },

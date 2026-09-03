@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { brokerReviewHref, calculatorHref, sourcePageHref } from '../data/calculatorLinks'
 
 type AccKey = 'ipo' | 'brokers' | 'calc' | 'learn' | 'pf' | 'demat' | 'market' | null
 
@@ -20,6 +21,7 @@ export function Header() {
             <div className="nav-logo-text">Fair<b>StockBrokers</b></div>
           </Link>
           <div className="nav-actions">
+            <Link to="/pages" className="btn-primary-sm">All Pages</Link>
             <Link to="/contact" className="btn-primary-sm">Open Free Demat</Link>
             <button
               className={`nav-burger${mobOpen ? ' open' : ''}`}
@@ -44,24 +46,24 @@ export function Header() {
                 <div className="mega-col">
                   <div className="mega-col-head">📋 IPO Lists</div>
                   <Link to="/ipo" className="mega-link"><span className="ml-ico">🌐</span> All IPOs</Link>
-                  <a href="#" className="mega-link"><span className="ml-ico">🏢</span> Mainboard IPO</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🏪</span> SME IPO</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">📄</span> NCD</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🔄</span> Buyback</a>
+                  <Link to="/ipo" className="mega-link"><span className="ml-ico">🏢</span> Mainboard IPO</Link>
+                  <Link to="/ipo" className="mega-link"><span className="ml-ico">🏪</span> SME IPO</Link>
+                  <Link to="/ipo" className="mega-link"><span className="ml-ico">📄</span> NCD</Link>
+                  <Link to="/ipo" className="mega-link"><span className="ml-ico">🔄</span> Buyback</Link>
                 </div>
                 <div className="mega-col">
                   <div className="mega-col-head">📊 Live Data</div>
-                  <a href="#" className="mega-link"><span className="ml-ico">🔴</span> GMP (Grey Market) <span className="ml-badge hot">LIVE</span></a>
-                  <a href="#" className="mega-link"><span className="ml-ico">📅</span> IPO Calendar</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🎯</span> Allotment Status</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🚀</span> Listing Gains</a>
+                  <Link to="/ipo" className="mega-link"><span className="ml-ico">🔴</span> GMP (Grey Market) <span className="ml-badge hot">LIVE</span></Link>
+                  <Link to="/ipo" className="mega-link"><span className="ml-ico">📅</span> IPO Calendar</Link>
+                  <Link to="/ipo" className="mega-link"><span className="ml-ico">🎯</span> Allotment Status</Link>
+                  <Link to="/ipo" className="mega-link"><span className="ml-ico">🚀</span> Listing Gains</Link>
                 </div>
                 <div className="mega-col">
                   <div className="mega-col-head">📚 Learn IPO</div>
-                  <a href="#" className="mega-link"><span className="ml-ico">💡</span> IPO Glossary</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🧮</span> How to Apply via UPI</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">📖</span> ASBA Process Guide</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🔍</span> How to Read DRHP</a>
+                  <Link to="/guides/drhp-guide" className="mega-link"><span className="ml-ico">💡</span> IPO Glossary</Link>
+                  <Link to="/guides/drhp-guide" className="mega-link"><span className="ml-ico">🧮</span> How to Apply via UPI</Link>
+                  <Link to="/guides/drhp-guide" className="mega-link"><span className="ml-ico">📖</span> ASBA Process Guide</Link>
+                  <Link to="/guides/drhp-guide" className="mega-link"><span className="ml-ico">🔍</span> How to Read DRHP</Link>
                 </div>
                 <div className="mega-col">
                   <div className="mega-feat-card">
@@ -88,18 +90,18 @@ export function Header() {
                 </div>
                 <div className="mega-col">
                   <div className="mega-col-head">⚡ Discount Brokers</div>
-                  <a href="#" className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#dcfce7,#bbf7d0)',fontSize:'12px',fontWeight:800,color:'#166534'}}>Z</span> Zerodha <span className="ml-badge hot">TOP</span></a>
-                  <a href="#" className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#ede9fe,#ddd6fe)',fontSize:'12px',fontWeight:800,color:'#5b21b6'}}>G</span> Groww</a>
-                  <a href="#" className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#fef3c7,#fde68a)',fontSize:'12px',fontWeight:800,color:'#92400e'}}>A</span> AngelOne</a>
-                  <a href="#" className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#e0f2fe,#bae6fd)',fontSize:'12px',fontWeight:800,color:'#0c4a6e'}}>U</span> Upstox</a>
-                  <a href="#" className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#fce7f3,#fbcfe8)',fontSize:'12px',fontWeight:800,color:'#831843'}}>D</span> Dhan</a>
+                  <a href={brokerReviewHref('Zerodha')} className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#dcfce7,#bbf7d0)',fontSize:'12px',fontWeight:800,color:'#166534'}}>Z</span> Zerodha <span className="ml-badge hot">TOP</span></a>
+                  <a href={brokerReviewHref('Groww')} className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#ede9fe,#ddd6fe)',fontSize:'12px',fontWeight:800,color:'#5b21b6'}}>G</span> Groww</a>
+                  <a href={brokerReviewHref('AngelOne')} className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#fef3c7,#fde68a)',fontSize:'12px',fontWeight:800,color:'#92400e'}}>A</span> AngelOne</a>
+                  <a href={brokerReviewHref('Upstox')} className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#e0f2fe,#bae6fd)',fontSize:'12px',fontWeight:800,color:'#0c4a6e'}}>U</span> Upstox</a>
+                  <a href={brokerReviewHref('Dhan')} className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#fce7f3,#fbcfe8)',fontSize:'12px',fontWeight:800,color:'#831843'}}>D</span> Dhan</a>
                 </div>
                 <div className="mega-col">
                   <div className="mega-col-head">🏦 Full Service Brokers</div>
-                  <a href="#" className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#fef3c7,#fde68a)',fontSize:'12px',fontWeight:800,color:'#b45309'}}>IC</span> ICICI Direct</a>
-                  <a href="#" className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#dcfce7,#bbf7d0)',fontSize:'12px',fontWeight:800,color:'#166534'}}>HD</span> HDFC Securities</a>
-                  <a href="#" className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#e0f2fe,#bae6fd)',fontSize:'12px',fontWeight:800,color:'#0c4a6e'}}>KS</span> Kotak Securities</a>
-                  <a href="#" className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#fce7f3,#fbcfe8)',fontSize:'12px',fontWeight:800,color:'#831843'}}>MO</span> Motilal Oswal</a>
+                  <a href={brokerReviewHref('ICICI Direct')} className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#fef3c7,#fde68a)',fontSize:'12px',fontWeight:800,color:'#b45309'}}>IC</span> ICICI Direct</a>
+                  <a href={brokerReviewHref('HDFC Securities')} className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#dcfce7,#bbf7d0)',fontSize:'12px',fontWeight:800,color:'#166534'}}>HD</span> HDFC Securities</a>
+                  <a href={brokerReviewHref('Kotak Securities')} className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#e0f2fe,#bae6fd)',fontSize:'12px',fontWeight:800,color:'#0c4a6e'}}>KS</span> Kotak Securities</a>
+                  <a href={brokerReviewHref('Motilal Oswal')} className="mega-link"><span className="ml-ico" style={{background:'linear-gradient(135deg,#fce7f3,#fbcfe8)',fontSize:'12px',fontWeight:800,color:'#831843'}}>MO</span> Motilal Oswal</a>
                   <Link to="/brokers" className="mega-link" style={{marginTop:'6px'}}><span className="ml-ico">➕</span><span style={{color:'var(--p600)',fontWeight:700}}>More Brokers →</span></Link>
                 </div>
                 <div className="mega-col">
@@ -124,25 +126,25 @@ export function Header() {
                 <div className="mega-col">
                   <div className="mega-col-head">📈 Investment</div>
                   <Link to="/calculators" className="mega-link"><span className="ml-ico">🌐</span> All Calculators</Link>
-                  <a href="#" className="mega-link"><span className="ml-ico">📈</span> SIP Calculator</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">⬆️</span> Step Up SIP</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">💰</span> Lumpsum</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">💸</span> SWP Calculator</a>
+                  <a href={calculatorHref('SIP Calculator')} className="mega-link"><span className="ml-ico">📈</span> SIP Calculator</a>
+                  <a href={calculatorHref('Step Up SIP')} className="mega-link"><span className="ml-ico">⬆️</span> Step Up SIP</a>
+                  <a href={calculatorHref('Lumpsum')} className="mega-link"><span className="ml-ico">💰</span> Lumpsum</a>
+                  <a href={calculatorHref('SWP Calculator')} className="mega-link"><span className="ml-ico">💸</span> SWP Calculator</a>
                 </div>
                 <div className="mega-col">
                   <div className="mega-col-head">🏦 Fixed Income</div>
-                  <a href="#" className="mega-link"><span className="ml-ico">🏛️</span> FD Calculator</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">📅</span> RD Calculator</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🏠</span> EMI Calculator</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🏛️</span> PPF Calculator</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">👶</span> NPS Calculator</a>
+                  <a href={calculatorHref('FD Calculator')} className="mega-link"><span className="ml-ico">🏛️</span> FD Calculator</a>
+                  <a href={calculatorHref('RD Calculator')} className="mega-link"><span className="ml-ico">📅</span> RD Calculator</a>
+                  <a href={calculatorHref('EMI Calculator')} className="mega-link"><span className="ml-ico">🏠</span> EMI Calculator</a>
+                  <a href={calculatorHref('PPF Calculator')} className="mega-link"><span className="ml-ico">🏛️</span> PPF Calculator</a>
+                  <a href={calculatorHref('NPS Calculator')} className="mega-link"><span className="ml-ico">👶</span> NPS Calculator</a>
                 </div>
                 <div className="mega-col">
                   <div className="mega-col-head">📊 Analytics</div>
-                  <a href="#" className="mega-link"><span className="ml-ico">📊</span> CAGR Calculator</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">♾️</span> Compound Interest</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">72️⃣</span> Rule of 72</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🎯</span> Goal Planner</a>
+                  <a href={calculatorHref('CAGR Calculator')} className="mega-link"><span className="ml-ico">📊</span> CAGR Calculator</a>
+                  <a href={calculatorHref('Compound Interest')} className="mega-link"><span className="ml-ico">♾️</span> Compound Interest</a>
+                  <a href={calculatorHref('Rule of 72')} className="mega-link"><span className="ml-ico">72️⃣</span> Rule of 72</a>
+                  <a href={calculatorHref('Goal Planner')} className="mega-link"><span className="ml-ico">🎯</span> Goal Planner</a>
                   <Link to="/calculators" className="mega-link" style={{marginTop:'6px'}}><span className="ml-ico">➕</span><span style={{color:'var(--p600)',fontWeight:700}}>More Calculators →</span></Link>
                 </div>
                 <div className="mega-col">
@@ -166,32 +168,32 @@ export function Header() {
               <div className="mega-inner cols-4">
                 <div className="mega-col">
                   <div className="mega-col-head">📖 Market Essentials</div>
-                  <a href="#" className="mega-link"><span className="ml-ico">🌐</span> All Topics</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">📊</span> Fundamental Analysis</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">📉</span> Technical Analysis</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">⚡</span> Basic of F&amp;O</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🎯</span> Option Strategies</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🔬</span> Advanced Options</a>
+                  <Link to="/pages" className="mega-link"><span className="ml-ico">🌐</span> All Topics</Link>
+                  <Link to="/pages" className="mega-link"><span className="ml-ico">📊</span> Fundamental Analysis</Link>
+                  <Link to="/pages" className="mega-link"><span className="ml-ico">📉</span> Technical Analysis</Link>
+                  <Link to="/pages" className="mega-link"><span className="ml-ico">⚡</span> Basic of F&amp;O</Link>
+                  <Link to="/pages" className="mega-link"><span className="ml-ico">🎯</span> Option Strategies</Link>
+                  <Link to="/pages" className="mega-link"><span className="ml-ico">🔬</span> Advanced Options</Link>
                 </div>
                 <div className="mega-col">
                   <div className="mega-col-head">🌍 Specialised</div>
-                  <a href="#" className="mega-link"><span className="ml-ico">🌾</span> Commodity Trading</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🧠</span> Risk Management</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🚀</span> Investing in IPO</a>
+                  <Link to="/pages" className="mega-link"><span className="ml-ico">🌾</span> Commodity Trading</Link>
+                  <Link to="/pages" className="mega-link"><span className="ml-ico">🧠</span> Risk Management</Link>
+                  <Link to="/guides/drhp-guide" className="mega-link"><span className="ml-ico">🚀</span> Investing in IPO</Link>
                 </div>
                 <div className="mega-col">
                   <div className="mega-col-head">💡 Wealth &amp; Finance</div>
-                  <a href="#" className="mega-link"><span className="ml-ico">🏦</span> PF — Mutual Funds</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🛡️</span> PF — Insurance</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">⭐</span> Must Read</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">📗</span> Market Books</a>
+                  <Link to="/guides/mutual-fund-learning" className="mega-link"><span className="ml-ico">🏦</span> PF — Mutual Funds</Link>
+                  <Link to="/guides/health-insurance-guide" className="mega-link"><span className="ml-ico">🛡️</span> PF — Insurance</Link>
+                  <Link to="/pages" className="mega-link"><span className="ml-ico">⭐</span> Must Read</Link>
+                  <Link to="/pages" className="mega-link"><span className="ml-ico">📗</span> Market Books</Link>
                 </div>
                 <div className="mega-col">
                   <div className="mega-feat-card">
                     <div className="mfc-tag">📚 120+ Lessons</div>
                     <div className="mfc-title">From Beginner to Advanced</div>
                     <div className="mfc-desc">Structured courses across 12 topics — free, no login required, for all investor levels.</div>
-                    <a href="#" className="mfc-btn">Start Learning →</a>
+                    <Link to="/pages" className="mfc-btn">Start Learning →</Link>
                   </div>
                 </div>
               </div>
@@ -207,17 +209,17 @@ export function Header() {
               <div className="mega-inner cols-2">
                 <div className="mega-col">
                   <div className="mega-col-head">🌿 Personal Finance</div>
-                  <a href="#" className="mega-link"><span className="ml-ico">🛡️</span> Term Plan</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🏥</span> Health Insurance</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">📈</span> Mutual Fund</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🎯</span> Goal Setting</a>
+                  <Link to="/guides/term-plan-guide" className="mega-link"><span className="ml-ico">🛡️</span> Term Plan</Link>
+                  <Link to="/guides/health-insurance-guide" className="mega-link"><span className="ml-ico">🏥</span> Health Insurance</Link>
+                  <Link to="/guides/mutual-fund-learning" className="mega-link"><span className="ml-ico">📈</span> Mutual Fund</Link>
+                  <Link to="/guides/goal-setting-guide" className="mega-link"><span className="ml-ico">🎯</span> Goal Setting</Link>
                 </div>
                 <div className="mega-col">
                   <div className="mega-feat-card">
                     <div className="mfc-tag">🌿 Plan Smarter</div>
                     <div className="mfc-title">Secure Your Financial Future</div>
                     <div className="mfc-desc">From term insurance to mutual funds — plan, protect and grow your wealth in one place.</div>
-                    <a href="#" className="mfc-btn">Explore All Tools →</a>
+                    <Link to="/guides/personal-finance" className="mfc-btn">Explore All Tools →</Link>
                   </div>
                 </div>
               </div>
@@ -234,11 +236,11 @@ export function Header() {
                 <div className="mega-col">
                   <div className="mega-col-head">👤 Account Types</div>
                   <Link to="/contact" className="mega-link"><span className="ml-ico">👤</span> Individual <span className="ml-badge new">Most Popular</span></Link>
-                  <a href="#" className="mega-link"><span className="ml-ico">👨‍👩‍👧</span> HUF</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🌏</span> NRI</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🤝</span> LLP</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🏢</span> Partnership Firm</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🏦</span> Corporate</a>
+                  <a href={sourcePageHref('Demat Opening Form/Final - Demat account opening Form.html')} className="mega-link"><span className="ml-ico">👨‍👩‍👧</span> HUF</a>
+                  <a href={sourcePageHref('Demat Opening Form/Final - Demat account opening Form.html')} className="mega-link"><span className="ml-ico">🌏</span> NRI</a>
+                  <a href={sourcePageHref('Demat Opening Form/Final - Demat account opening Form.html')} className="mega-link"><span className="ml-ico">🤝</span> LLP</a>
+                  <a href={sourcePageHref('Demat Opening Form/Final - Demat account opening Form.html')} className="mega-link"><span className="ml-ico">🏢</span> Partnership Firm</a>
+                  <a href={sourcePageHref('Demat Opening Form/Final - Demat account opening Form.html')} className="mega-link"><span className="ml-ico">🏦</span> Corporate</a>
                 </div>
                 <div className="mega-col">
                   <div className="mega-feat-card">
@@ -261,18 +263,18 @@ export function Header() {
               <div className="mega-inner cols-2">
                 <div className="mega-col">
                   <div className="mega-col-head">📡 Live Market</div>
-                  <a href="#" className="mega-link"><span className="ml-ico">🔊</span> Volume Shocker <span className="ml-badge hot">LIVE</span></a>
-                  <a href="#" className="mega-link"><span className="ml-ico">🌅</span> ORB (Opening Range)</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">📉</span> Index Trend</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">📋</span> Stock Reports</a>
-                  <a href="#" className="mega-link"><span className="ml-ico">📃</span> Stock List</a>
+                  <a href={sourcePageHref('Tool/nifty_trend_finder_v8_live.html')} className="mega-link"><span className="ml-ico">🔊</span> Volume Shocker <span className="ml-badge hot">LIVE</span></a>
+                  <a href={sourcePageHref('Tool/nifty_trend_finder_v8_live.html')} className="mega-link"><span className="ml-ico">🌅</span> ORB (Opening Range)</a>
+                  <a href={sourcePageHref('Tool/nifty_trend_finder_v8_live.html')} className="mega-link"><span className="ml-ico">📉</span> Index Trend</a>
+                  <a href={sourcePageHref('Tool/nifty_trend_finder_v8_live.html')} className="mega-link"><span className="ml-ico">📋</span> Stock Reports</a>
+                  <a href={sourcePageHref('Tool/nifty_trend_finder_v8_live.html')} className="mega-link"><span className="ml-ico">📃</span> Stock List</a>
                 </div>
                 <div className="mega-col">
                   <div className="mega-feat-card">
                     <div className="mfc-tag">📊 Data Hub</div>
                     <div className="mfc-title">Live Market Pulse</div>
                     <div className="mfc-desc">Volume shockers, ORB setups, index trends and curated stock reports — updated daily.</div>
-                    <a href="#" className="mfc-btn">View Market Data →</a>
+                    <a href={sourcePageHref('Tool/nifty_trend_finder_v8_live.html')} className="mfc-btn">View Market Data →</a>
                   </div>
                 </div>
               </div>
@@ -290,10 +292,10 @@ export function Header() {
         </button>
         <div className={`mob-acc-panel${accOpen==='ipo' ? ' open' : ''}`}>
           <Link to="/ipo" onClick={closeNav}>🌐 All IPOs</Link>
-          <a href="#" onClick={closeNav}>🏢 Mainboard IPO</a>
-          <a href="#" onClick={closeNav}>🏪 SME IPO</a>
-          <a href="#" onClick={closeNav}>🔴 GMP (Live)</a>
-          <a href="#" onClick={closeNav}>💡 IPO Glossary</a>
+          <Link to="/ipo" onClick={closeNav}>🏢 Mainboard IPO</Link>
+          <Link to="/ipo" onClick={closeNav}>🏪 SME IPO</Link>
+          <Link to="/ipo" onClick={closeNav}>🔴 GMP (Live)</Link>
+          <Link to="/guides/drhp-guide" onClick={closeNav}>💡 IPO Glossary</Link>
         </div>
 
         <div className="mob-nav-divider" />
@@ -305,13 +307,13 @@ export function Header() {
         <div className={`mob-acc-panel${accOpen==='brokers' ? ' open' : ''}`}>
           <Link to="/brokers" onClick={closeNav}>🌐 All Broker List</Link>
           <div className="mob-sub-head">Discount Brokers</div>
-          <a href="#" onClick={closeNav}>Zerodha</a>
-          <a href="#" onClick={closeNav}>Groww</a>
-          <a href="#" onClick={closeNav}>AngelOne</a>
-          <a href="#" onClick={closeNav}>Upstox</a>
+          <a href={brokerReviewHref('Zerodha')} onClick={closeNav}>Zerodha</a>
+          <a href={brokerReviewHref('Groww')} onClick={closeNav}>Groww</a>
+          <a href={brokerReviewHref('AngelOne')} onClick={closeNav}>AngelOne</a>
+          <a href={brokerReviewHref('Upstox')} onClick={closeNav}>Upstox</a>
           <div className="mob-sub-head">Full Service Brokers</div>
-          <a href="#" onClick={closeNav}>ICICI Direct</a>
-          <a href="#" onClick={closeNav}>HDFC Securities</a>
+          <a href={brokerReviewHref('ICICI Direct')} onClick={closeNav}>ICICI Direct</a>
+          <a href={brokerReviewHref('HDFC Securities')} onClick={closeNav}>HDFC Securities</a>
         </div>
 
         <div className="mob-nav-divider" />
@@ -322,12 +324,12 @@ export function Header() {
         </button>
         <div className={`mob-acc-panel${accOpen==='calc' ? ' open' : ''}`}>
           <Link to="/calculators" onClick={closeNav}>🌐 All Calculators</Link>
-          <a href="#" onClick={closeNav}>📈 SIP Calculator</a>
-          <a href="#" onClick={closeNav}>⬆️ Step Up SIP</a>
-          <a href="#" onClick={closeNav}>💰 Lumpsum</a>
-          <a href="#" onClick={closeNav}>🏛️ FD Calculator</a>
-          <a href="#" onClick={closeNav}>📊 CAGR</a>
-          <a href="#" onClick={closeNav}>♾️ Compound Interest</a>
+          <a href={calculatorHref('SIP Calculator')} onClick={closeNav}>📈 SIP Calculator</a>
+          <a href={calculatorHref('Step Up SIP')} onClick={closeNav}>⬆️ Step Up SIP</a>
+          <a href={calculatorHref('Lumpsum')} onClick={closeNav}>💰 Lumpsum</a>
+          <a href={calculatorHref('FD Calculator')} onClick={closeNav}>🏛️ FD Calculator</a>
+          <a href={calculatorHref('CAGR Calculator')} onClick={closeNav}>📊 CAGR</a>
+          <a href={calculatorHref('Compound Interest')} onClick={closeNav}>♾️ Compound Interest</a>
         </div>
 
         <div className="mob-nav-divider" />
@@ -337,11 +339,11 @@ export function Header() {
           <span className="mat-chevron">▾</span>
         </button>
         <div className={`mob-acc-panel${accOpen==='learn' ? ' open' : ''}`}>
-          <a href="#" onClick={closeNav}>🌐 All Topics</a>
-          <a href="#" onClick={closeNav}>📊 Fundamental Analysis</a>
-          <a href="#" onClick={closeNav}>📉 Technical Analysis</a>
-          <a href="#" onClick={closeNav}>⚡ Basic of F&amp;O</a>
-          <a href="#" onClick={closeNav}>🎯 Option Strategies</a>
+          <Link to="/pages" onClick={closeNav}>🌐 All Topics</Link>
+          <Link to="/pages" onClick={closeNav}>📊 Fundamental Analysis</Link>
+          <Link to="/pages" onClick={closeNav}>📉 Technical Analysis</Link>
+          <Link to="/pages" onClick={closeNav}>⚡ Basic of F&amp;O</Link>
+          <Link to="/pages" onClick={closeNav}>🎯 Option Strategies</Link>
         </div>
 
         <div className="mob-nav-divider" />
@@ -351,10 +353,10 @@ export function Header() {
           <span className="mat-chevron">▾</span>
         </button>
         <div className={`mob-acc-panel${accOpen==='pf' ? ' open' : ''}`}>
-          <a href="#" onClick={closeNav}>🛡️ Term Plan</a>
-          <a href="#" onClick={closeNav}>🏥 Health Insurance</a>
-          <a href="#" onClick={closeNav}>📈 Mutual Fund</a>
-          <a href="#" onClick={closeNav}>🎯 Goal Setting</a>
+          <Link to="/guides/term-plan-guide" onClick={closeNav}>🛡️ Term Plan</Link>
+          <Link to="/guides/health-insurance-guide" onClick={closeNav}>🏥 Health Insurance</Link>
+          <Link to="/guides/mutual-fund-learning" onClick={closeNav}>📈 Mutual Fund</Link>
+          <Link to="/guides/goal-setting-guide" onClick={closeNav}>🎯 Goal Setting</Link>
         </div>
 
         <div className="mob-nav-divider" />
@@ -365,9 +367,9 @@ export function Header() {
         </button>
         <div className={`mob-acc-panel${accOpen==='demat' ? ' open' : ''}`}>
           <Link to="/contact" onClick={closeNav}>👤 Individual</Link>
-          <a href="#" onClick={closeNav}>🌏 NRI</a>
-          <a href="#" onClick={closeNav}>🤝 LLP</a>
-          <a href="#" onClick={closeNav}>🏦 Corporate</a>
+          <a href={sourcePageHref('Demat Opening Form/Final - Demat account opening Form.html')} onClick={closeNav}>🌏 NRI</a>
+          <a href={sourcePageHref('Demat Opening Form/Final - Demat account opening Form.html')} onClick={closeNav}>🤝 LLP</a>
+          <a href={sourcePageHref('Demat Opening Form/Final - Demat account opening Form.html')} onClick={closeNav}>🏦 Corporate</a>
         </div>
 
         <div className="mob-nav-divider" />

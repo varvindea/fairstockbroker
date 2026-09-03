@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { calculatorHref } from '../data/calculatorLinks'
 
 export function HomePage() {
   const [activeLearnTab, setActiveLearnTab] = useState('all')
@@ -49,6 +50,7 @@ export function HomePage() {
           <p className="hero-sub">IPO tracking, broker intelligence, financial calculators, and investment education — everything India's serious investor needs in one platform.</p>
           <div className="hero-ctas">
             <Link to="/contact" className="btn-hero-p">Open Free Demat Account →</Link>
+            <Link to="/pages" className="btn-hero-wa">Explore All Pages →</Link>
             <a href="https://wa.me" className="btn-hero-wa">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" /><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.659 1.437 5.17L2.08 22l4.948-1.297A9.955 9.955 0 0012 22c5.522 0 10-4.477 10-9.997C22 6.477 17.523 2 12 2z" fillRule="evenodd" clipRule="evenodd" /></svg>
               Join Community
@@ -197,7 +199,7 @@ export function HomePage() {
                   <div className="sub-rail"><div className="sub-fill" style={{ width: '100%' }} /></div>
                 </div>
               </div>
-              <div className="ipo-card-footer"><div className="gmp-badge">GMP +₹82 (+28.3%)</div><a href="#" className="view-link">View Details →</a></div>
+              <div className="ipo-card-footer"><div className="gmp-badge">GMP +₹82 (+28.3%)</div><Link to="/ipo" className="view-link">View Details →</Link></div>
             </div>
 
             <div className="ipo-card">
@@ -217,7 +219,7 @@ export function HomePage() {
                   <div className="sub-rail"><div className="sub-fill purple" style={{ width: '90%' }} /></div>
                 </div>
               </div>
-              <div className="ipo-card-footer"><div className="gmp-badge">GMP +₹110 (+27.4%)</div><a href="#" className="view-link">View Details →</a></div>
+              <div className="ipo-card-footer"><div className="gmp-badge">GMP +₹110 (+27.4%)</div><Link to="/ipo" className="view-link">View Details →</Link></div>
             </div>
 
             <div className="ipo-card">
@@ -237,7 +239,7 @@ export function HomePage() {
                   <div className="sub-rail"><div className="sub-fill" style={{ width: '45%' }} /></div>
                 </div>
               </div>
-              <div className="ipo-card-footer"><div className="gmp-badge">GMP +₹24 (+24%)</div><a href="#" className="view-link">Set Alert →</a></div>
+              <div className="ipo-card-footer"><div className="gmp-badge">GMP +₹24 (+24%)</div><Link to="/contact" className="view-link">Set Alert →</Link></div>
             </div>
           </div>
 
@@ -396,7 +398,7 @@ export function HomePage() {
                     <td>{b.intraday}</td>
                     <td>{b.amc}</td>
                     <td><div className="stars">{b.stars}</div><div style={{ fontSize: '11px', color: 'var(--ink4)' }}>{b.rating}/5</div></td>
-                    <td><a href="#" className="open-btn">Open →</a></td>
+                    <td><Link to="/contact" className="open-btn">Open →</Link></td>
                   </tr>
                 ))}
               </tbody>
@@ -433,11 +435,11 @@ export function HomePage() {
                   { ico: '👶', name: 'NPS Calculator', desc: 'Pension planning' },
                   { ico: '🎯', name: 'Goal Planner', desc: 'Wealth goal tracker' },
                 ].map(c => (
-                  <Link key={c.name} to="/calculators" className="calc-pill">
+                  <a key={c.name} href={calculatorHref(c.name)} className="calc-pill">
                     <div className="cp-ico">{c.ico}</div>
                     <div className="cp-name">{c.name}</div>
                     <div className="cp-desc">{c.desc}</div>
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>
@@ -474,8 +476,8 @@ export function HomePage() {
                     </div>
                   </div>
                 </>}
-                {activeSipTab === 'fd' && <div style={{ padding: '20px 0', textAlign: 'center', color: 'var(--ink3)' }}>FD Calculator — <Link to="/calculators" style={{ color: 'var(--p500)', fontWeight: 700 }}>Open Full Calculator →</Link></div>}
-                {activeSipTab === 'emi' && <div style={{ padding: '20px 0', textAlign: 'center', color: 'var(--ink3)' }}>EMI Calculator — <Link to="/calculators" style={{ color: 'var(--p500)', fontWeight: 700 }}>Open Full Calculator →</Link></div>}
+                {activeSipTab === 'fd' && <div style={{ padding: '20px 0', textAlign: 'center', color: 'var(--ink3)' }}>FD Calculator — <a href={calculatorHref('FD Calculator')} style={{ color: 'var(--p500)', fontWeight: 700 }}>Open Full Calculator →</a></div>}
+                {activeSipTab === 'emi' && <div style={{ padding: '20px 0', textAlign: 'center', color: 'var(--ink3)' }}>EMI Calculator — <a href={calculatorHref('EMI Calculator')} style={{ color: 'var(--p500)', fontWeight: 700 }}>Open Full Calculator →</a></div>}
               </div>
             </div>
           </div>

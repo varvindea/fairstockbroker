@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top 30 Stock Brokers India — FY26</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:   #0B1829;
+    --navy2:  #112240;
+    --blue:   #1E5FD8;
+    --blue2:  #2D7DD2;
+    --cyan:   #00C2FF;
+    --gold:   #F5A623;
+    --green:  #22C55E;
+    --red:    #EF4444;
+    --amber:  #F59E0B;
+    --white:  #F0F4FF;
+    --muted:  #8899BB;
+    --border: rgba(255,255,255,0.07);
+    --card:   rgba(255,255,255,0.04);
+    --card2:  rgba(255,255,255,0.07);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Background grid ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(30,95,216,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,95,216,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    padding: 64px 40px 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+    z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(30,95,216,0.15);
+    border: 1px solid rgba(30,95,216,0.4);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 24px;
+  }
+  .hero-badge span { width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 54px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  h1 em { font-style: normal; color: var(--cyan); }
+
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    font-size: 13px; color: var(--muted);
+    margin-bottom: 40px;
+  }
+  .hero-meta strong { color: var(--white); }
+
+  /* ── Stat cards ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 40px;
+    position: relative; z-index: 1;
+  }
+  .stat-card {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-2px); background: rgba(255,255,255,0.09); }
+  .stat-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .stat-value { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; color: var(--white); }
+  .stat-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .stat-card.accent .stat-value { color: var(--cyan); }
+  .stat-card.gain  .stat-value { color: var(--green); }
+  .stat-card.loss  .stat-value { color: var(--red); }
+
+  /* ── Tabs ── */
+  .tabs-wrap {
+    max-width: 1400px; margin: 0 auto; padding: 0 40px;
+    position: relative; z-index: 1;
+  }
+  .tabs {
+    display: flex; gap: 4px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 4px;
+    width: fit-content;
+    margin-bottom: 28px;
+  }
+  .tab {
+    padding: 9px 22px;
+    border-radius: 9px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab:hover { color: var(--white); }
+  .tab.active {
+    background: var(--blue);
+    color: var(--white);
+    box-shadow: 0 2px 12px rgba(30,95,216,0.4);
+  }
+
+  /* ── Filters ── */
+  .filters {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-bottom: 20px;
+  }
+  .filter-btn {
+    padding: 7px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--blue);
+    color: var(--white);
+    background: rgba(30,95,216,0.15);
+  }
+  .search-box {
+    margin-left: auto;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    width: 220px;
+    transition: border 0.2s;
+  }
+  .search-box:focus { border-color: var(--blue); }
+  .search-box::placeholder { color: var(--muted); }
+
+  /* ── Table ── */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: rgba(11,24,41,0.7);
+    backdrop-filter: blur(12px);
+  }
+  table {
+    width: 100%; border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  thead tr {
+    background: rgba(30,95,216,0.12);
+    border-bottom: 1px solid rgba(30,95,216,0.3);
+  }
+  th {
+    padding: 14px 16px;
+    text-align: left;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    white-space: nowrap;
+  }
+  th:first-child { text-align: center; }
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+    animation: fadeIn 0.4s ease both;
+  }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform:none; } }
+  tbody tr:hover { background: rgba(255,255,255,0.04); }
+  tbody tr:last-child { border-bottom: none; }
+  td { padding: 13px 16px; vertical-align: middle; }
+  td:first-child { text-align: center; }
+
+  /* Rank badge */
+  .rank {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .rank-1 { background: linear-gradient(135deg,#FFD700,#FFA500); color: #000; }
+  .rank-2 { background: linear-gradient(135deg,#C0C0C0,#A0A0A0); color: #000; }
+  .rank-3 { background: linear-gradient(135deg,#CD7F32,#8B4513); color: #fff; }
+  .rank-n { background: rgba(255,255,255,0.07); color: var(--muted); }
+
+  /* Type pill */
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .pill-d  { background: rgba(0,194,255,0.12); color: #00C2FF; border: 1px solid rgba(0,194,255,0.25); }
+  .pill-f  { background: rgba(34,197,94,0.12);  color: #4ADE80; border: 1px solid rgba(34,197,94,0.25); }
+  .pill-h  { background: rgba(245,166,35,0.12); color: #FCD34D; border: 1px solid rgba(245,166,35,0.25); }
+
+  .broker-name { font-weight: 500; color: var(--white); font-size: 14px; }
+  .broker-notes { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  .num { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600; }
+  .share-val { color: var(--blue2); }
+
+  .chg-pos { color: var(--green); font-weight: 600; }
+  .chg-neg { color: var(--red);   font-weight: 600; }
+  .chg-flat{ color: var(--muted); }
+
+  .conf-v { color: var(--green);  font-size: 11px; }
+  .conf-e { color: var(--amber);  font-size: 11px; }
+  .conf-d { color: var(--muted);  font-size: 11px; }
+
+  .phone-cell { font-size: 12px; color: #93C5FD; }
+  .email-cell { font-size: 12px; color: #93C5FD; }
+
+  /* ── Contact card view ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+    display: none;
+  }
+  .contact-card {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    transition: transform 0.2s, border-color 0.2s;
+    animation: fadeIn 0.3s ease both;
+  }
+  .contact-card:hover { transform: translateY(-3px); border-color: rgba(30,95,216,0.4); }
+  .cc-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .cc-num { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; color: var(--muted); width: 28px; }
+  .cc-name { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; flex: 1; }
+  .cc-row { display: flex; align-items: flex-start; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 12.5px; }
+  .cc-row:last-child { border-bottom: none; }
+  .cc-icon { color: var(--cyan); width: 16px; flex-shrink: 0; margin-top: 1px; font-size: 13px; }
+  .cc-val { color: var(--muted); }
+  .cc-val strong { color: var(--white); font-weight: 500; }
+
+  /* ── Summary section ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    display: none;
+  }
+  .sum-card {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .sum-card-hdr {
+    padding: 14px 20px;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .sum-card-hdr.gain-hdr { background: rgba(34,197,94,0.12); color: var(--green); border-bottom: 1px solid rgba(34,197,94,0.2); }
+  .sum-card-hdr.loss-hdr { background: rgba(239,68,68,0.12);  color: var(--red);   border-bottom: 1px solid rgba(239,68,68,0.2); }
+  .sum-row {
+    display: flex; align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    gap: 12px;
+  }
+  .sum-row:last-child { border-bottom: none; }
+  .sum-pos { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 11px;
+    width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .sum-pos.g { background: rgba(34,197,94,0.2); color: var(--green); }
+  .sum-pos.l { background: rgba(239,68,68,0.2);  color: var(--red); }
+  .sum-name { flex: 1; font-weight: 500; }
+  .sum-val { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; }
+
+  /* ── Bar chart section ── */
+  .bar-chart { display: none; }
+  .bar-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    animation: fadeIn 0.4s ease both;
+  }
+  .bar-lbl { width: 160px; flex-shrink: 0; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar-track { flex: 1; height: 8px; background: rgba(255,255,255,0.07); border-radius: 99px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 99px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+  .bar-clients { width: 80px; text-align: right; color: var(--muted); font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600; }
+
+  /* ── Footer ── */
+  footer {
+    max-width: 1400px; margin: 48px auto 0; padding: 32px 40px;
+    border-top: 1px solid var(--border);
+    display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
+    justify-content: space-between;
+    font-size: 12px; color: var(--muted);
+    position: relative; z-index: 1;
+  }
+  .sebi-note {
+    background: rgba(30,95,216,0.1);
+    border: 1px solid rgba(30,95,216,0.25);
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+  .sebi-note strong { color: var(--cyan); }
+
+  @media (max-width: 768px) {
+    .hero, .stats-grid, .tabs-wrap { padding-left: 16px; padding-right: 16px; }
+    .hero { padding-top: 36px; }
+    .summary-grid { grid-template-columns: 1fr; }
+    .search-box { width: 100%; }
+    footer { padding: 24px 16px; }
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><span></span> Live Data — NSE FY26</div>
+  <h1>Top 30 Stock Brokers<br>in <em>India</em> — FY26</h1>
+  <div class="hero-meta">
+    <span>Data: <strong>NSE / Kotak Institutional Equities</strong></span>
+    <span>Published: <strong>April 2026</strong></span>
+    <span>Period: <strong>March 2026 (End of FY26)</strong></span>
+    <span>Total Active Clients: <strong>4.57 Crore</strong></span>
+  </div>
+</div>
+
+<!-- STAT CARDS -->
+<div class="stats-grid">
+  <div class="stat-card accent">
+    <div class="stat-label">Industry Total FY26</div>
+    <div class="stat-value">4.57 Cr</div>
+    <div class="stat-sub">Active NSE Clients</div>
+  </div>
+  <div class="stat-card loss">
+    <div class="stat-label">YoY Change</div>
+    <div class="stat-value">−34.88 L</div>
+    <div class="stat-sub">Down 7.1% from FY25</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">#1 Broker</div>
+    <div class="stat-value" style="color:var(--gold)">Groww</div>
+    <div class="stat-sub">28.22% market share</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Top 3 Combined</div>
+    <div class="stat-value">58.1%</div>
+    <div class="stat-sub">Groww + Zerodha + Angel One</div>
+  </div>
+  <div class="stat-card gain">
+    <div class="stat-label">Biggest Gainer</div>
+    <div class="stat-value">Paytm Money</div>
+    <div class="stat-sub">+2.12 Lakh (+83.8%)</div>
+  </div>
+  <div class="stat-card loss">
+    <div class="stat-label">Biggest Loser</div>
+    <div class="stat-value">Zerodha</div>
+    <div class="stat-sub">−9.95 Lakh (−12.6%)</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('table',this)">Rankings Table</button>
+    <button class="tab" onclick="switchTab('contact',this)">Contact Directory</button>
+    <button class="tab" onclick="switchTab('chart',this)">Market Share Chart</button>
+    <button class="tab" onclick="switchTab('summary',this)">FY26 Summary</button>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filters" id="tableFilters">
+    <button class="filter-btn active" onclick="filterType('all',this)">All Brokers</button>
+    <button class="filter-btn" onclick="filterType('Discount',this)">Discount</button>
+    <button class="filter-btn" onclick="filterType('Full-Service',this)">Full-Service</button>
+    <button class="filter-btn" onclick="filterType('Hybrid',this)">Hybrid</button>
+    <button class="filter-btn" onclick="filterType('gain',this)">🟢 Gainers</button>
+    <button class="filter-btn" onclick="filterType('loss',this)">🔴 Losers</button>
+    <input class="search-box" type="text" placeholder="Search broker…" oninput="searchBroker(this.value)" id="searchInput">
+  </div>
+
+  <!-- TABLE VIEW -->
+  <div class="table-wrap" id="tableView">
+    <table id="mainTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Broker</th>
+          <th>Type</th>
+          <th>Active Clients (FY26)</th>
+          <th>Mkt Share</th>
+          <th>FY25 Clients</th>
+          <th>YoY Change</th>
+          <th>YoY %</th>
+          <th>Confidence</th>
+          <th>Phone / Toll-Free</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- CONTACT CARDS -->
+  <div class="cards-grid" id="contactView"></div>
+
+  <!-- CHART -->
+  <div class="bar-chart" id="chartView"></div>
+
+  <!-- SUMMARY -->
+  <div class="summary-grid" id="summaryView">
+    <div class="sum-card">
+      <div class="sum-card-hdr gain-hdr">▲ Top Gainers — FY26</div>
+      <div class="sum-row"><span class="sum-pos g">1</span><span class="sum-name">Paytm Money</span><span class="sum-val chg-pos">+2.12 L (+83.8%)</span></div>
+      <div class="sum-row"><span class="sum-pos g">2</span><span class="sum-name">SBI Securities</span><span class="sum-val chg-pos">+1.82 L (+18.5%)</span></div>
+      <div class="sum-row"><span class="sum-pos g">3</span><span class="sum-name">ICICI Securities</span><span class="sum-val chg-pos">+1.41 L (+7.2%)</span></div>
+      <div class="sum-row"><span class="sum-pos g">4</span><span class="sum-name">Dhan</span><span class="sum-val chg-pos">+2.20 L (+26.9%)</span></div>
+      <div class="sum-row"><span class="sum-pos g">5</span><span class="sum-name">Groww</span><span class="sum-val chg-pos">+0.18 L (+0.1%)</span></div>
+    </div>
+    <div class="sum-card">
+      <div class="sum-card-hdr loss-hdr">▼ Top Losers — FY26</div>
+      <div class="sum-row"><span class="sum-pos l">1</span><span class="sum-name">Zerodha</span><span class="sum-val chg-neg">−9.95 L (−12.6%)</span></div>
+      <div class="sum-row"><span class="sum-pos l">2</span><span class="sum-name">Angel One</span><span class="sum-val chg-neg">−8.15 L (−10.8%)</span></div>
+      <div class="sum-row"><span class="sum-pos l">3</span><span class="sum-name">Upstox</span><span class="sum-val chg-neg">−7.60 L (−27.6%)</span></div>
+      <div class="sum-row"><span class="sum-pos l">4</span><span class="sum-name">Mirae Asset</span><span class="sum-val chg-neg">−2.73 L (−56.5%)</span></div>
+      <div class="sum-row"><span class="sum-pos l">5</span><span class="sum-name">HDFC Securities</span><span class="sum-val chg-neg">−1.37 L (−8.8%)</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="sebi-note"><strong>SEBI Investor Helpline:</strong> 1800 266 7575 / 1800 22 7575 (Toll-Free) &nbsp;|&nbsp; SCORES Portal: <strong>scores.gov.in</strong></div>
+  </div>
+  <div>Data: NSE / Kotak Institutional Equities — April 2026 &nbsp;|&nbsp; Estimates (≈) for ranks 14–30</div>
+</footer>
+
+<script>
+const data = [
+  { r:1,  name:"Groww",               type:"Discount",      c26:12939127, sh:28.22, c25:12921210, yoyL:+0.18,  yoyP:+0.1,  conf:"★ Verified",  phone:"91088 00604",                   email:"support@groww.in",                  gain:true },
+  { r:2,  name:"Zerodha",             type:"Discount",      c26:6893000,  sh:15.08, c25:7888000,  yoyL:-9.95,  yoyP:-12.6, conf:"★ Verified",  phone:"080-4040 2020 / 080-4718 1888", email:"support@zerodha.com",               gain:false },
+  { r:3,  name:"Angel One",           type:"Hybrid",        c26:6762000,  sh:14.79, c25:7577000,  yoyL:-8.15,  yoyP:-10.8, conf:"★ Verified",  phone:"1800 1020 (Toll-Free)",         email:"support@angelone.in",               gain:false },
+  { r:4,  name:"ICICI Securities",    type:"Full-Service",  c26:2090000,  sh:4.57,  c25:1949000,  yoyL:+1.41,  yoyP:+7.2,  conf:"★ Verified",  phone:"1860 123 1122",                 email:"helpdesk@icicidirect.com",          gain:true },
+  { r:5,  name:"Upstox",              type:"Discount",      c26:1988000,  sh:4.35,  c25:2748000,  yoyL:-7.60,  yoyP:-27.6, conf:"★ Verified",  phone:"022-2422 9920",                 email:"support@upstox.com",                gain:false },
+  { r:6,  name:"HDFC Securities",     type:"Full-Service",  c26:1429785,  sh:3.13,  c25:1567000,  yoyL:-1.37,  yoyP:-8.8,  conf:"◎ Derived",   phone:"022-6246 5555",                 email:"support@hdfcsec.com",               gain:false },
+  { r:7,  name:"Kotak Securities",    type:"Full-Service",  c26:1368501,  sh:2.99,  c25:1468000,  yoyL:-1.10,  yoyP:-7.5,  conf:"◎ Derived",   phone:"1800 209 9191 (Toll-Free)",     email:"service.securities@kotak.com",      gain:false },
+  { r:8,  name:"SBI Securities",      type:"Full-Service",  c26:1166000,  sh:2.55,  c25:984000,   yoyL:+1.82,  yoyP:+18.5, conf:"★ Verified",  phone:"1800 425 3800 (Toll-Free)",     email:"helpdesk@sbisec.co.in",             gain:true },
+  { r:9,  name:"Dhan",                type:"Discount",      c26:1038000,  sh:2.27,  c25:818000,   yoyL:+2.20,  yoyP:+26.9, conf:"★ Verified",  phone:"022-4040 7070",                 email:"support@dhan.co",                   gain:true },
+  { r:10, name:"Motilal Oswal",       type:"Full-Service",  c26:904002,   sh:1.98,  c25:1017000,  yoyL:-1.13,  yoyP:-11.1, conf:"◎ Derived",   phone:"022-4054 8000",                 email:"support@motilaloswal.com",          gain:false },
+  { r:11, name:"Paytm Money",         type:"Discount",      c26:465000,   sh:1.02,  c25:253000,   yoyL:+2.12,  yoyP:+83.8, conf:"★ Verified",  phone:"0120-4441 444",                 email:"support@paytmmoney.com",            gain:true },
+  { r:12, name:"Sharekhan (Mirae)",   type:"Full-Service",  c26:555000,   sh:1.21,  c25:685000,   yoyL:-1.30,  yoyP:-19.0, conf:"◎ Derived",   phone:"1800 22 7500 (Toll-Free)",      email:"support@sharekhan.com",             gain:false },
+  { r:13, name:"5Paisa",              type:"Discount",      c26:446000,   sh:0.98,  c25:536000,   yoyL:-0.90,  yoyP:-16.8, conf:"◎ Derived",   phone:"022-4248 9890",                 email:"support@5paisa.com",                gain:false },
+  { r:14, name:"IIFL Securities",     type:"Full-Service",  c26:420000,   sh:0.92,  c25:497000,   yoyL:-0.77,  yoyP:-15.5, conf:"≈ Estimated", phone:"1860 267 3000",                 email:"customercare@iifl.com",             gain:false },
+  { r:15, name:"Mirae Asset (mStock)",type:"Hybrid",        c26:210000,   sh:0.46,  c25:483000,   yoyL:-2.73,  yoyP:-56.5, conf:"★ Verified",  phone:"022-6142 9090",                 email:"support@miraeasset.com",            gain:false },
+  { r:16, name:"Axis Direct",         type:"Full-Service",  c26:398127,   sh:0.87,  c25:398000,   yoyL:0,      yoyP:0,     conf:"◎ Derived",   phone:"1800 419 0808 (Toll-Free)",     email:"clientservices@axisdirect.in",      gain:null },
+  { r:17, name:"Alice Blue",          type:"Discount",      c26:310000,   sh:0.68,  c25:270000,   yoyL:+0.40,  yoyP:+14.8, conf:"≈ Estimated", phone:"080-6869 6096",                 email:"support@aliceblueonline.com",       gain:true },
+  { r:18, name:"Fyers",               type:"Discount",      c26:290000,   sh:0.63,  c25:255000,   yoyL:+0.35,  yoyP:+13.7, conf:"≈ Estimated", phone:"080-4893 7788",                 email:"support@fyers.in",                  gain:true },
+  { r:19, name:"Samco",               type:"Discount",      c26:240000,   sh:0.52,  c25:240000,   yoyL:0,      yoyP:0,     conf:"≈ Estimated", phone:"022-2222 8000",                 email:"support@samco.in",                  gain:null },
+  { r:20, name:"INDmoney",            type:"Discount",      c26:220000,   sh:0.48,  c25:200000,   yoyL:+0.20,  yoyP:+10.0, conf:"≈ Estimated", phone:"011-4954 0000",                 email:"support@indmoney.com",              gain:true },
+  { r:21, name:"Univest",             type:"Hybrid",        c26:200000,   sh:0.44,  c25:180000,   yoyL:+0.20,  yoyP:+11.1, conf:"≈ Estimated", phone:"N/A",                           email:"support@univest.in",                gain:true },
+  { r:22, name:"Aditya Birla Money",  type:"Full-Service",  c26:190000,   sh:0.42,  c25:192000,   yoyL:-0.02,  yoyP:-1.0,  conf:"≈ Estimated", phone:"1800 270 7000 (Toll-Free)",     email:"mabsl.customercare@adityabirla.com",gain:false },
+  { r:23, name:"Choice Broking",      type:"Full-Service",  c26:185000,   sh:0.40,  c25:188000,   yoyL:-0.03,  yoyP:-1.6,  conf:"≈ Estimated", phone:"022-6707 9999",                 email:"support@choiceindia.com",           gain:false },
+  { r:24, name:"Geojit",              type:"Full-Service",  c26:175000,   sh:0.38,  c25:175000,   yoyL:0,      yoyP:0,     conf:"≈ Estimated", phone:"1800 425 5501 (Toll-Free)",     email:"support@geojit.com",                gain:null },
+  { r:25, name:"Anand Rathi",         type:"Full-Service",  c26:160000,   sh:0.35,  c25:162000,   yoyL:-0.02,  yoyP:-1.2,  conf:"≈ Estimated", phone:"022-6281 7777",                 email:"customercare@rathi.com",            gain:false },
+  { r:26, name:"Edelweiss (Nuvama)",  type:"Full-Service",  c26:150000,   sh:0.33,  c25:153000,   yoyL:-0.03,  yoyP:-2.0,  conf:"≈ Estimated", phone:"1800 102 3335 (Toll-Free)",     email:"customercare@nuvama.com",           gain:false },
+  { r:27, name:"BlinkX (JM Fin.)",    type:"Discount",      c26:145000,   sh:0.32,  c25:120000,   yoyL:+0.25,  yoyP:+20.8, conf:"≈ Estimated", phone:"022-6630 3030",                 email:"support@blinkx.in",                 gain:true },
+  { r:28, name:"Shoonya (Finvasia)",  type:"Discount",      c26:135000,   sh:0.30,  c25:133000,   yoyL:+0.02,  yoyP:+1.5,  conf:"≈ Estimated", phone:"022-6236 3010",                 email:"support@shoonya.com",               gain:true },
+  { r:29, name:"SMC Global",          type:"Full-Service",  c26:125000,   sh:0.27,  c25:126000,   yoyL:-0.01,  yoyP:-0.8,  conf:"≈ Estimated", phone:"011-3003 3333",                 email:"smc@smcindiaonline.com",            gain:false },
+  { r:30, name:"Bajaj Broking",       type:"Discount",      c26:115000,   sh:0.25,  c25:108000,   yoyL:+0.07,  yoyP:+6.5,  conf:"≈ Estimated", phone:"1800 833 5533 (Toll-Free)",     email:"support@bajajbroking.in",           gain:true },
+];
+
+function fmtNum(n) {
+  if (n >= 10000000) return (n/10000000).toFixed(2)+' Cr';
+  if (n >= 100000)   return (n/100000).toFixed(2)+' L';
+  return n.toLocaleString('en-IN');
+}
+
+function pillClass(t) {
+  if (t==='Discount') return 'pill-d';
+  if (t==='Full-Service') return 'pill-f';
+  return 'pill-h';
+}
+
+function rankClass(r) {
+  if (r===1) return 'rank rank-1';
+  if (r===2) return 'rank rank-2';
+  if (r===3) return 'rank rank-3';
+  return 'rank rank-n';
+}
+
+function confClass(c) {
+  if (c.includes('★')) return 'conf-v';
+  if (c.includes('◎')) return 'conf-d';
+  return 'conf-e';
+}
+
+let currentFilter = 'all';
+let currentSearch = '';
+
+function renderTable(items) {
+  const tb = document.getElementById('tableBody');
+  tb.innerHTML = '';
+  items.forEach((d,i) => {
+    const yoyStr = d.yoyL===0 ? '—' : (d.yoyL>0?'+':'')+d.yoyL.toFixed(2)+' L';
+    const yoyPStr = d.yoyP===0 ? '—' : (d.yoyP>0?'+':'')+d.yoyP.toFixed(1)+'%';
+    const yoyClass = d.yoyL>0?'chg-pos':d.yoyL<0?'chg-neg':'chg-flat';
+    const tr = document.createElement('tr');
+    tr.dataset.type = d.type;
+    tr.dataset.gain = d.gain===null?'flat':d.gain?'gain':'loss';
+    tr.dataset.name = d.name.toLowerCase();
+    tr.style.animationDelay = (i*0.025)+'s';
+    tr.innerHTML = `
+      <td><span class="${rankClass(d.r)}">${d.r}</span></td>
+      <td>
+        <div class="broker-name">${d.name}</div>
+      </td>
+      <td><span class="pill ${pillClass(d.type)}">${d.type}</span></td>
+      <td><span class="num">${fmtNum(d.c26)}</span></td>
+      <td><span class="num share-val">${d.sh.toFixed(2)}%</span></td>
+      <td><span class="num" style="color:var(--muted)">${fmtNum(d.c25)}</span></td>
+      <td><span class="${yoyClass} num" style="font-size:12px">${yoyStr}</span></td>
+      <td><span class="${yoyClass} num" style="font-size:12px">${yoyPStr}</span></td>
+      <td><span class="${confClass(d.conf)}">${d.conf}</span></td>
+      <td class="phone-cell">${d.phone}</td>
+      <td class="email-cell">${d.email}</td>`;
+    tb.appendChild(tr);
+  });
+}
+
+function renderContacts(items) {
+  const cv = document.getElementById('contactView');
+  cv.innerHTML = '';
+  items.forEach((d,i) => {
+    const card = document.createElement('div');
+    card.className = 'contact-card';
+    card.dataset.type = d.type;
+    card.dataset.gain = d.gain===null?'flat':d.gain?'gain':'loss';
+    card.dataset.name = d.name.toLowerCase();
+    card.style.animationDelay = (i*0.03)+'s';
+    card.innerHTML = `
+      <div class="cc-header">
+        <span class="cc-num">${d.r}</span>
+        <span class="cc-name">${d.name}</span>
+        <span class="pill ${pillClass(d.type)}">${d.type}</span>
+      </div>
+      <div class="cc-row"><span class="cc-icon">📞</span><div class="cc-val"><strong>${d.phone}</strong></div></div>
+      <div class="cc-row"><span class="cc-icon">✉️</span><div class="cc-val">${d.email}</div></div>
+      <div class="cc-row"><span class="cc-icon">👥</span><div class="cc-val">Active Clients: <strong>${fmtNum(d.c26)}</strong> (${d.sh.toFixed(2)}%)</div></div>
+      <div class="cc-row"><span class="cc-icon">${d.yoyL>=0?'📈':'📉'}</span><div class="cc-val">YoY: <strong class="${d.yoyL>0?'chg-pos':d.yoyL<0?'chg-neg':'chg-flat'}">${d.yoyL===0?'Flat':(d.yoyL>0?'+':'')+d.yoyL.toFixed(2)+' L ('+d.yoyP.toFixed(1)+'%)'}</strong></div></div>`;
+    cv.appendChild(card);
+  });
+}
+
+function renderChart(items) {
+  const cv = document.getElementById('chartView');
+  cv.innerHTML = '';
+  const maxC = items[0].c26;
+  const colors = ['#1E5FD8','#2D7DD2','#3B9FCC','#22C55E','#F5A623','#EF4444','#8B5CF6','#EC4899'];
+  items.forEach((d,i) => {
+    const pct = Math.round(d.c26/maxC*100);
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.dataset.type = d.type;
+    row.dataset.gain = d.gain===null?'flat':d.gain?'gain':'loss';
+    row.dataset.name = d.name.toLowerCase();
+    row.style.animationDelay = (i*0.03)+'s';
+    const color = d.gain===true?'#22C55E':d.gain===false?'#EF4444':'#2D7DD2';
+    row.innerHTML = `
+      <div class="bar-lbl"><span class="rank ${rankClass(d.r)}" style="width:22px;height:22px;font-size:10px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;margin-right:6px">${d.r}</span>${d.name}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0%;background:${color}" data-w="${pct}%"></div></div>
+      <div class="bar-clients">${fmtNum(d.c26)}</div>`;
+    cv.appendChild(row);
+  });
+  // animate bars after paint
+  setTimeout(()=>{
+    document.querySelectorAll('.bar-fill').forEach(el=>{ el.style.width = el.dataset.w; });
+  }, 80);
+}
+
+function getFiltered() {
+  return data.filter(d => {
+    const matchType = currentFilter==='all' ||
+      (currentFilter==='gain' && d.gain===true) ||
+      (currentFilter==='loss' && d.gain===false) ||
+      d.type===currentFilter;
+    const matchSearch = !currentSearch || d.name.toLowerCase().includes(currentSearch);
+    return matchType && matchSearch;
+  });
+}
+
+function filterType(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = type;
+  refreshAll();
+}
+
+function searchBroker(val) {
+  currentSearch = val.toLowerCase();
+  refreshAll();
+}
+
+function refreshAll() {
+  const filtered = getFiltered();
+  renderTable(filtered);
+  renderContacts(filtered);
+  renderChart(filtered);
+}
+
+let currentTab = 'table';
+function switchTab(tab, btn) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tableView').style.display    = tab==='table'   ? 'block' : 'none';
+  document.getElementById('contactView').style.display  = tab==='contact' ? 'grid'  : 'none';
+  document.getElementById('chartView').style.display    = tab==='chart'   ? 'block' : 'none';
+  document.getElementById('summaryView').style.display  = tab==='summary' ? 'grid'  : 'none';
+  document.getElementById('tableFilters').style.display = tab==='summary' ? 'none'  : 'flex';
+  if (tab==='chart') refreshAll();
+}
+
+// Initial render
+renderTable(data);
+renderContacts(data);
+renderChart(data);
+</script>
+</body>
+</html>

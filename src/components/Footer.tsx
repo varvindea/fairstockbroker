@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { brokerReviewHref, calculatorHref } from '../data/calculatorLinks'
 
 export function Footer() {
   return (
@@ -10,9 +11,9 @@ export function Footer() {
           <p className="f-tagline">India's most complete financial platform — IPO tracking, broker intelligence, calculators, and investment education for serious investors.</p>
           <div className="f-socials">
             <a href="https://wa.me" className="f-soc" title="WhatsApp">💬</a>
-            <a href="#" className="f-soc" title="Twitter">𝕏</a>
-            <a href="#" className="f-soc" title="YouTube">▶</a>
-            <a href="#" className="f-soc" title="Telegram">✈</a>
+            <a href="https://x.com" className="f-soc" title="Twitter">𝕏</a>
+            <a href="https://www.youtube.com" className="f-soc" title="YouTube">▶</a>
+            <a href="https://telegram.org" className="f-soc" title="Telegram">✈</a>
           </div>
         </div>
 
@@ -21,11 +22,11 @@ export function Footer() {
           <div className="f-col-head">IPO Tracker</div>
           <div className="f-links">
             <Link to="/ipo">All IPOs</Link>
-            <a href="#">Mainboard IPO</a>
-            <a href="#">SME IPO</a>
-            <a href="#">GMP (Grey Market)</a>
-            <a href="#">IPO Calendar</a>
-            <a href="#">Allotment Status</a>
+            <Link to="/ipo">Mainboard IPO</Link>
+            <Link to="/ipo">SME IPO</Link>
+            <Link to="/ipo">GMP (Grey Market)</Link>
+            <Link to="/ipo">IPO Calendar</Link>
+            <Link to="/ipo">Allotment Status</Link>
           </div>
         </div>
 
@@ -34,11 +35,11 @@ export function Footer() {
           <div className="f-col-head">Top Brokers</div>
           <div className="f-links">
             <Link to="/brokers">All Brokers</Link>
-            <a href="#">Zerodha</a>
-            <a href="#">Groww</a>
-            <a href="#">AngelOne</a>
-            <a href="#">Upstox</a>
-            <a href="#">ICICI Direct</a>
+            <a href={brokerReviewHref('Zerodha')}>Zerodha</a>
+            <a href={brokerReviewHref('Groww')}>Groww</a>
+            <a href={brokerReviewHref('AngelOne')}>AngelOne</a>
+            <a href={brokerReviewHref('Upstox')}>Upstox</a>
+            <a href={brokerReviewHref('ICICI Direct')}>ICICI Direct</a>
           </div>
         </div>
 
@@ -47,11 +48,11 @@ export function Footer() {
           <div className="f-col-head">Calculators</div>
           <div className="f-links">
             <Link to="/calculators">All Calculators</Link>
-            <a href="#">SIP Calculator</a>
-            <a href="#">EMI Calculator</a>
-            <a href="#">CAGR Calculator</a>
-            <a href="#">FD Calculator</a>
-            <a href="#">Income Tax</a>
+            <a href={calculatorHref('SIP Calculator')}>SIP Calculator</a>
+            <a href={calculatorHref('EMI Calculator')}>EMI Calculator</a>
+            <a href={calculatorHref('CAGR Calculator')}>CAGR Calculator</a>
+            <a href={calculatorHref('FD Calculator')}>FD Calculator</a>
+            <a href={calculatorHref('Income Tax Calculator')}>Income Tax</a>
           </div>
         </div>
 
@@ -59,12 +60,13 @@ export function Footer() {
         <div>
           <div className="f-col-head">Company</div>
           <div className="f-links">
+            <Link to="/pages">All Website Pages</Link>
             <Link to="/about">About Us</Link>
             <Link to="/contact">Contact</Link>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
-            <a href="#">Disclaimer</a>
-            <a href="#">SEBI Info</a>
+            <Link to="/about">Privacy Policy</Link>
+            <Link to="/about">Terms of Use</Link>
+            <Link to="/about">Disclaimer</Link>
+            <Link to="/about">SEBI Info</Link>
           </div>
         </div>
       </div>

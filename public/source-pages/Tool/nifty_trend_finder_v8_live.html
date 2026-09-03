@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Index Trend Finder</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'DM Sans', sans-serif; }
+:root {
+  --purple:        #6c3fcf;
+  --purple-dark:   #4e2da0;
+  --purple-pale:   #f3effe;
+  --purple-border: rgba(108,63,207,0.2);
+  --purple-glow:   rgba(108,63,207,0.1);
+  --green:         #0fa968;
+  --green-dark:    #0b7a4c;
+  --green-pale:    #e8f8f2;
+  --green-border:  rgba(15,169,104,0.22);
+  --green-glow:    rgba(15,169,104,0.1);
+  --red:           #dc2626;
+  --red-pale:      #fef2f2;
+  --red-border:    rgba(220,38,38,0.2);
+  --amber:         #d97706;
+  --amber-pale:    #fffbeb;
+  --bg:            #f5f3fb;
+  --surface:       #ffffff;
+  --border:        rgba(108,63,207,0.1);
+  --border2:       rgba(108,63,207,0.16);
+  --text:          #18103a;
+  --muted:         #9485bb;
+  --muted2:        #6b5a94;
+  --shadow:        0 2px 16px rgba(108,63,207,0.08);
+}
+
+body {
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; display: flex; align-items: flex-start;
+  justify-content: center; padding: 28px 16px 48px;
+}
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(108,63,207,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108,63,207,0.03) 1px, transparent 1px);
+  background-size: 40px 40px; pointer-events: none; z-index: 0;
+}
+.wrapper { position: relative; z-index: 1; width: 100%; max-width: 600px; }
+
+/* ── HEADER ── */
+.header { text-align: center; margin-bottom: 20px; animation: fadeDown 0.5s ease both; }
+.header-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--purple-pale); border: 1px solid var(--purple-border);
+  border-radius: 20px; padding: 5px 14px; font-size: 11px;
+  color: var(--purple); text-transform: uppercase; margin-bottom: 12px; font-weight: 600;
+}
+.live-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: livePulse 1.4s infinite; }
+@keyframes livePulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(0.6)} }
+.header h1 { font-size: 36px; font-weight: 700; letter-spacing: -1.5px; color: var(--text); line-height: 1.1; margin-bottom: 4px; }
+.header h1 .hl { color: var(--purple); }
+.header p { font-size: 13px; color: var(--muted2); }
+@keyframes fadeDown { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:none} }
+@keyframes fadeUp   { from{opacity:0;transform:translateY(10px)}  to{opacity:1;transform:none} }
+
+/* ── INDEX TABS ── */
+.index-tabs {
+  display: flex; gap: 6px; background: var(--surface);
+  border: 1px solid var(--border2); border-radius: 14px; padding: 5px;
+  margin-bottom: 12px; animation: fadeUp 0.5s 0.05s ease both;
+  box-shadow: var(--shadow);
+}
+.tab-btn {
+  flex: 1; padding: 10px 0; border: none; border-radius: 10px;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; color: var(--muted2); background: transparent;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.tab-btn .tab-name { font-size: 13px; font-weight: 600; }
+.tab-btn .tab-spot { font-size: 11px; font-weight: 500; }
+.tab-btn.active { background: var(--purple); color: #fff; }
+.tab-btn.active .tab-spot { color: rgba(255,255,255,0.75); }
+.tab-btn:not(.active):hover { background: var(--purple-pale); color: var(--purple); }
+
+/* ── TICKER ── */
+.ticker-strip {
+  background: var(--surface); border: 1px solid var(--border2); border-radius: 14px;
+  padding: 11px 18px; display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px; animation: fadeUp 0.5s 0.08s ease both; flex-wrap: wrap; gap: 8px;
+  box-shadow: var(--shadow);
+}
+.ticker-item { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+.ticker-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; font-weight: 500; }
+.ticker-val { font-size: 13px; font-weight: 700; }
+.ticker-chg { font-size: 9.5px; font-weight: 600; }
+.t-up { color: var(--green); } .t-dn { color: var(--red); } .t-neu { color: var(--amber); }
+
+/* ── MAIN CARD ── */
+.card {
+  background: var(--surface); border: 1px solid var(--border2); border-radius: 20px;
+  padding: 24px 24px 22px; animation: fadeUp 0.5s 0.12s ease both; box-shadow: var(--shadow);
+}
+
+/* ── SECTION LABEL ── */
+.sec-label {
+  font-size: 10px; color: var(--muted); text-transform: uppercase;
+  font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+}
+.sec-label::after { content:''; flex:1; height:1px; background:var(--border); }
+
+/* ── SPOT INPUT ── */
+.spot-wrap {
+  display: flex; align-items: center; background: var(--purple-pale);
+  border: 1.5px solid var(--purple-border); border-radius: 14px; padding: 0 14px;
+  transition: border-color 0.2s, box-shadow 0.2s; margin-bottom: 8px;
+}
+.spot-wrap:focus-within { border-color: var(--purple); box-shadow: 0 0 0 3px var(--purple-glow); }
+.spot-sym { font-size: 19px; color: var(--purple); font-weight: 600; padding-right: 10px; border-right: 1px solid var(--purple-border); margin-right: 11px; }
+.spot-wrap input { flex: 1; background: none; border: none; outline: none; color: var(--text); font-size: 24px; font-weight: 600; padding: 13px 0; }
+.spot-wrap input::placeholder { color: var(--muted); }
+
+.live-btn {
+  background: var(--green-pale); color: var(--green-dark); border: 1px solid var(--green-border);
+  border-radius: 20px; padding: 6px 14px; font-size: 11px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+}
+.live-btn:hover { background: rgba(15,169,104,0.18); }
+
+.meta-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.countdown-pill { font-size: 10px; color: var(--muted2); background: var(--purple-pale); border: 1px solid var(--purple-border); border-radius: 20px; padding: 3px 11px; font-weight: 500; }
+.last-update-lbl { font-size: 10px; color: var(--muted); }
+
+/* ── OPTION CARDS ── */
+.option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+
+.opt-card { border-radius: 16px; padding: 16px; border: 1.5px solid transparent; }
+.opt-card.ce { background: var(--green-pale); border-color: var(--green-border); }
+.opt-card.pe { background: var(--red-pale);   border-color: var(--red-border); }
+
+.opt-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.opt-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 10.5px; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
+.ce .opt-badge { background: rgba(15,169,104,0.15); color: var(--green-dark); }
+.pe .opt-badge { background: rgba(220,38,38,0.12);  color: var(--red); }
+
+.opt-dot { width: 5px; height: 5px; border-radius: 50%; }
+.ce .opt-dot { background: var(--green); }
+.pe .opt-dot { background: var(--red); animation: livePulse 1.8s infinite; }
+
+.opt-strike { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 7px; }
+.ce .opt-strike { background: rgba(15,169,104,0.2); color: var(--green-dark); }
+.pe .opt-strike { background: rgba(220,38,38,0.15); color: var(--red); }
+
+.prem-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.prem-lbl { font-size: 9.5px; text-transform: uppercase; font-weight: 600; }
+.ce .prem-lbl { color: rgba(11,122,76,0.65); }
+.pe .prem-lbl { color: rgba(180,30,30,0.65); }
+
+.prem-chg { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px; }
+.ce .prem-chg { background: rgba(15,169,104,0.15); color: var(--green-dark); }
+.pe .prem-chg { background: rgba(220,38,38,0.12);  color: var(--red); }
+
+.prem-big { font-size: 30px; font-weight: 700; line-height: 1; margin-bottom: 12px; letter-spacing: -0.5px; }
+.ce .prem-big { color: var(--green-dark); }
+.pe .prem-big { color: var(--red); }
+
+.opt-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.stat-box { border-radius: 8px; padding: 7px 9px; }
+.ce .stat-box { background: rgba(15,169,104,0.12); }
+.pe .stat-box { background: rgba(220,38,38,0.08); }
+.stat-lbl { font-size: 9px; text-transform: uppercase; font-weight: 600; margin-bottom: 2px; }
+.ce .stat-lbl { color: rgba(11,122,76,0.6); }
+.pe .stat-lbl { color: rgba(180,30,30,0.6); }
+.stat-val { font-size: 12px; font-weight: 700; }
+.ce .stat-val { color: var(--green-dark); }
+.pe .stat-val { color: var(--red); }
+
+/* ── TREND ── */
+.divider { display:flex; align-items:center; gap:10px; font-size:9.5px; color:var(--muted); text-transform:uppercase; font-weight:600; margin-bottom:14px; }
+.divider::before, .divider::after { content:''; flex:1; height:1px; background:var(--border); }
+
+.verdict-box { border-radius: 16px; padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; border: 1.5px solid transparent; transition: background 0.35s, border-color 0.35s; }
+.verdict-idle { background: var(--purple-pale); border-color: var(--purple-border); }
+.verdict-up   { background: var(--green-pale);  border-color: var(--green-border); }
+.verdict-dn   { background: var(--red-pale);    border-color: var(--red-border); }
+.verdict-neu  { background: var(--amber-pale);  border-color: rgba(217,119,6,0.2); }
+
+.verdict-signal { font-size: 10px; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+.verdict-idle .verdict-signal { color: var(--muted); }
+.verdict-up   .verdict-signal { color: rgba(11,122,76,0.7); }
+.verdict-dn   .verdict-signal { color: rgba(220,38,38,0.7); }
+.verdict-neu  .verdict-signal { color: rgba(217,119,6,0.8); }
+
+.verdict-text { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; line-height: 1; transition: color 0.35s; }
+.verdict-idle .verdict-text { color: var(--muted2); }
+.verdict-up   .verdict-text { color: var(--green-dark); }
+.verdict-dn   .verdict-text { color: var(--red); }
+.verdict-neu  .verdict-text { color: var(--amber); }
+
+.verdict-icon { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; transition: background 0.35s, color 0.35s; }
+.verdict-idle .verdict-icon { background: var(--purple-glow); color: var(--muted2); }
+.verdict-up   .verdict-icon { background: rgba(15,169,104,0.15); color: var(--green-dark); }
+.verdict-dn   .verdict-icon { background: rgba(220,38,38,0.12); color: var(--red); }
+.verdict-neu  .verdict-icon { background: rgba(217,119,6,0.12); color: var(--amber); }
+
+.prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.prob-card { background: #faf8fe; border: 1px solid var(--border); border-radius: 13px; padding: 14px 15px; }
+.prob-lbl { font-size: 9.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
+.prob-up-lbl { color: var(--green-dark); } .prob-dn-lbl { color: var(--purple); }
+.prob-val { font-size: 28px; font-weight: 700; letter-spacing: -1px; line-height: 1; margin-bottom: 8px; transition: color 0.3s; }
+.prob-up-val { color: var(--green-dark); } .prob-dn-val { color: var(--purple); }
+.prob-track { height: 5px; background: rgba(108,63,207,0.1); border-radius: 3px; overflow: hidden; }
+.prob-fill { height: 100%; border-radius: 3px; transition: width 0.7s cubic-bezier(.4,0,.2,1); }
+.prob-fill-up { background: var(--green); } .prob-fill-dn { background: var(--purple); }
+
+.summary-row { display: flex; gap: 7px; }
+.sum-chip { flex: 1; background: var(--purple-pale); border: 1px solid var(--purple-border); border-radius: 10px; padding: 9px 8px; text-align: center; }
+.sum-chip-lbl { font-size: 9px; color: var(--muted); margin-bottom: 3px; text-transform: uppercase; font-weight: 600; }
+.sum-chip-val { font-size: 11.5px; font-weight: 700; color: var(--purple-dark); }
+
+/* ── FOOTER ── */
+.footer { text-align: center; margin-top: 16px; font-size: 10.5px; color: var(--muted); animation: fadeUp 0.6s 0.25s ease both; }
+
+/* ── TOAST ── */
+.toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(14px); background: var(--surface); border: 1px solid var(--border2); border-radius: 12px; padding: 9px 18px; font-size: 12px; color: var(--text); font-weight: 500; opacity: 0; transition: all 0.28s; z-index: 999; white-space: nowrap; box-shadow: 0 4px 16px rgba(108,63,207,0.14); }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* ── ANIMATIONS ── */
+@keyframes flashPrem { 0%,100%{opacity:1} 40%{opacity:0.35} }
+.flash-prem { animation: flashPrem 0.45s ease; }
+
+@keyframes flashInputAnim { 0%{border-color:var(--purple);box-shadow:0 0 0 3px var(--purple-glow)} 100%{border-color:var(--purple-border);box-shadow:none} }
+.flash-input { animation: flashInputAnim 0.8s ease; }
+
+@keyframes pulseRing { 0%{box-shadow:0 0 0 0 rgba(108,63,207,0.25)} 60%{box-shadow:0 0 0 8px rgba(108,63,207,0)} 100%{box-shadow:none} }
+.pulse-ring { animation: pulseRing 0.65s ease; }
+
+/* ── OVERVIEW PANEL ── */
+.overview-panel {
+  margin-top: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  padding: 18px 20px 16px;
+  box-shadow: var(--shadow);
+  animation: fadeUp 0.5s 0.18s ease both;
+}
+.overview-label {
+  font-size: 10px; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.overview-label::after { content:''; flex:1; height:1px; background:var(--border); }
+
+.overview-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+
+.ov-card {
+  border-radius: 14px; padding: 14px 14px 12px;
+  border: 1.5px solid var(--border); background: #faf8fe;
+  display: flex; flex-direction: column; gap: 5px;
+  transition: border-color 0.3s, background 0.3s;
+}
+.ov-card.ov-up  { background: var(--green-pale); border-color: var(--green-border); }
+.ov-card.ov-dn  { background: var(--red-pale);   border-color: var(--red-border); }
+.ov-card.ov-neu { background: var(--amber-pale);  border-color: rgba(217,119,6,0.2); }
+
+.ov-name { font-size: 10px; font-weight: 700; color: var(--muted2); text-transform: uppercase; }
+.ov-spot { font-size: 14px; font-weight: 700; color: var(--text); }
+
+.ov-trend-pill {
+  font-size: 10.5px; font-weight: 700; padding: 3px 10px;
+  border-radius: 20px; text-align: center; align-self: flex-start;
+  background: var(--purple-pale); color: var(--muted2);
+  border: 1px solid var(--purple-border);
+  transition: all 0.3s;
+}
+.ov-card.ov-up  .ov-trend-pill { background: rgba(15,169,104,0.18); color: var(--green-dark); border-color: var(--green-border); }
+.ov-card.ov-dn  .ov-trend-pill { background: rgba(220,38,38,0.14);  color: var(--red);        border-color: var(--red-border); }
+.ov-card.ov-neu .ov-trend-pill { background: rgba(217,119,6,0.14);  color: var(--amber);      border-color: rgba(217,119,6,0.25); }
+
+.ov-prems { display: flex; gap: 6px; margin-top: 2px; }
+.ov-ce { font-size: 10px; font-weight: 600; color: var(--green-dark); }
+.ov-pe { font-size: 10px; font-weight: 600; color: var(--red); }
+
+/* ── LOG PANEL ── */
+.log-panel {
+  margin-top: 14px;
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: 20px; padding: 18px 20px 14px;
+  box-shadow: var(--shadow); animation: fadeUp 0.5s 0.22s ease both;
+}
+.log-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.log-title { font-size: 13px; font-weight: 700; color: var(--text); }
+.log-count { font-size: 10px; color: var(--muted); font-weight: 500; background: var(--purple-pale); border: 1px solid var(--purple-border); border-radius: 20px; padding: 2px 10px; }
+.log-clear-btn { font-size: 10px; font-weight: 600; color: var(--red); background: var(--red-pale); border: 1px solid var(--red-border); border-radius: 20px; padding: 3px 11px; cursor: pointer; transition: all 0.15s; }
+.log-clear-btn:hover { background: rgba(220,38,38,0.15); }
+
+/* Log filter tabs */
+.log-tabs { display: flex; gap: 5px; margin-bottom: 12px; flex-wrap: wrap; }
+.log-tab {
+  padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 600;
+  cursor: pointer; border: 1px solid var(--border2); background: transparent;
+  color: var(--muted2); transition: all 0.15s;
+}
+.log-tab:hover { background: var(--purple-pale); color: var(--purple); border-color: var(--purple-border); }
+.log-tab.active { background: var(--purple); color: #fff; border-color: var(--purple); }
+
+.log-empty { font-size: 12px; color: var(--muted); text-align: center; padding: 18px 0; font-style: italic; }
+
+.log-list { display: flex; flex-direction: column; gap: 6px; max-height: 320px; overflow-y: auto; }
+.log-list::-webkit-scrollbar { width: 4px; }
+.log-list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+.log-head {
+  display: grid; grid-template-columns: 58px 76px 1fr 60px 60px 88px;
+  gap: 0; padding: 0 10px 8px;
+  border-bottom: 1px solid var(--border); margin-bottom: 6px;
+}
+.log-head span { font-size: 9px; color: var(--muted); font-weight: 700; text-transform: uppercase; }
+
+.log-entry {
+  display: grid; grid-template-columns: 58px 76px 1fr 60px 60px 88px;
+  gap: 0; align-items: center;
+  background: #faf8fe; border: 1px solid var(--border);
+  border-radius: 10px; padding: 8px 10px;
+  font-size: 11.5px; transition: border-color 0.15s;
+  animation: logSlide 0.3s ease both;
+}
+@keyframes logSlide { from{opacity:0;transform:translateY(-5px)} to{opacity:1;transform:none} }
+.log-entry.new-entry { border-left: 3px solid var(--purple); }
+.log-entry[data-idx="nifty"]     { border-left: 3px solid var(--purple); }
+.log-entry[data-idx="sensex"]    { border-left: 3px solid var(--amber); }
+.log-entry[data-idx="banknifty"] { border-left: 3px solid #1d9bf0; }
+
+.log-time  { font-weight: 700; color: var(--text2); font-size: 11px; }
+.log-index { font-size: 9.5px; font-weight: 600; padding: 2px 6px; border-radius: 5px; display: inline-block; }
+.log-index.ni { background: var(--purple-pale); color: var(--purple); }
+.log-index.sx { background: var(--amber-pale);  color: var(--amber); }
+.log-index.bn { background: #e8f4ff; color: #1d9bf0; }
+.log-spot  { font-weight: 600; color: var(--text); font-size: 11px; }
+.log-prem-ce { color: var(--green-dark); font-weight: 600; font-size: 10.5px; }
+.log-prem-pe { color: var(--red);        font-weight: 600; font-size: 10.5px; }
+
+.log-trend { font-size: 10.5px; font-weight: 700; padding: 3px 8px; border-radius: 20px; text-align: center; white-space: nowrap; }
+.log-trend.up  { background: var(--green-pale); color: var(--green-dark); border: 1px solid var(--green-border); }
+.log-trend.dn  { background: var(--red-pale);   color: var(--red);        border: 1px solid var(--red-border); }
+.log-trend.neu { background: var(--amber-pale); color: var(--amber);      border: 1px solid rgba(217,119,6,0.2); }
+
+/* ── MARKET STATUS BAR ── */
+.mkt-bar {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: 12px; padding: 9px 16px; margin-bottom: 10px;
+  animation: fadeUp 0.5s 0.04s ease both; box-shadow: var(--shadow);
+  flex-wrap: wrap;
+}
+.mkt-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; transition: background 0.4s; }
+.mkt-dot.open   { background: var(--green); animation: livePulse 1.2s infinite; }
+.mkt-dot.closed { background: var(--red); }
+.mkt-dot.pre    { background: var(--amber); animation: livePulse 1.8s infinite; }
+.mkt-dot.wait   { background: var(--muted); }
+
+.mkt-status-txt { font-size: 12px; font-weight: 700; color: var(--text); }
+.mkt-pill { font-size: 10px; color: var(--muted2); padding: 2px 9px; border-radius: 20px; font-weight: 600; border: 1px solid var(--border2); }
+.mkt-pill.open   { background: var(--green-pale); color: var(--green-dark); border-color: var(--green-border); }
+.mkt-pill.closed { background: var(--red-pale);   color: var(--red);        border-color: var(--red-border); }
+.mkt-pill.pre    { background: var(--amber-pale);  color: var(--amber);      border-color: rgba(217,119,6,0.2); }
+
+.mkt-time-info { font-size: 10px; color: var(--muted); font-weight: 500; }
+.mkt-capture-badge {
+  font-size: 10px; font-weight: 700; color: var(--green-dark);
+  background: var(--green-pale); border: 1px solid var(--green-border);
+  border-radius: 20px; padding: 2px 10px; animation: livePulse 2s infinite;
+}
+.demo-badge {
+  font-size: 10px; font-weight: 700; color: #854F0B;
+  background: #FAEEDA; border: 1px solid rgba(186,117,23,0.3);
+  border-radius: 20px; padding: 2px 10px;
+}
+
+/* Countdown banner shown before market opens */
+.premarket-banner {
+  display: none;
+  background: var(--amber-pale); border: 1px solid rgba(217,119,6,0.22);
+  border-radius: 12px; padding: 11px 18px; margin-bottom: 10px;
+  font-size: 12px; color: var(--amber); font-weight: 600;
+  text-align: center;
+}
+.premarket-banner.visible { display: block; }
+.premarket-cd { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; display: block; margin-top: 2px; }</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-badge"><div class="live-dot"></div> NSE · BSE Live Trend</div>
+    <h1>Index <span class="hl">Trend</span> Finder</h1>
+    <p>Auto-populating CE/PE premiums · live trend signal every minute</p>
+  </div>
+
+  <!-- MARKET STATUS BAR -->
+  <div class="mkt-bar" id="mktBar">
+    <div class="mkt-dot wait" id="mktDot"></div>
+    <span class="mkt-status-txt" id="mktStatusTxt">Checking market…</span>
+    <span class="mkt-pill" id="mktPill"></span>
+    <span class="demo-badge" id="demoBadge">⚡ Demo Mode</span>
+    <span style="flex:1"></span>
+    <span class="mkt-time-info" id="mktTimeInfo"></span>
+    <span class="mkt-capture-badge" id="mktCaptureBadge" style="display:none;">● Auto-capturing</span>
+  </div>
+
+  <!-- PRE-MARKET COUNTDOWN BANNER -->
+  <div class="premarket-banner" id="preMktBanner">
+    Market opens at 09:15 IST — auto-capture will begin automatically
+    <span class="premarket-cd" id="preMktCd">—</span>
+  </div>
+
+  <!-- INDEX TABS -->
+  <div class="index-tabs">
+    <button class="tab-btn active" id="tab-nifty" onclick="switchIndex('nifty')">
+      <span class="tab-name">Nifty 50</span>
+      <span class="tab-spot t-up" id="tab-nifty-spot">—</span>
+    </button>
+    <button class="tab-btn" id="tab-sensex" onclick="switchIndex('sensex')">
+      <span class="tab-name">Sensex</span>
+      <span class="tab-spot t-up" id="tab-sensex-spot">—</span>
+    </button>
+    <button class="tab-btn" id="tab-banknifty" onclick="switchIndex('banknifty')">
+      <span class="tab-name">Bank Nifty</span>
+      <span class="tab-spot t-up" id="tab-banknifty-spot">—</span>
+    </button>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker-strip">
+    <div class="ticker-item">
+      <span class="ticker-lbl" id="tk-active-lbl">Nifty 50</span>
+      <span class="ticker-val" id="tk-active">—</span>
+      <span class="ticker-chg" id="tk-active-chg">—</span>
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-lbl">India VIX</span>
+      <span class="ticker-val t-neu" id="tk-vix">14.32</span>
+      <span class="ticker-chg t-neu" id="tk-vix-chg">+0.18</span>
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-lbl">PCR</span>
+      <span class="ticker-val t-up" id="tk-pcr">1.24</span>
+      <span class="ticker-chg" style="font-size:9px;color:var(--muted);">Put/Call</span>
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-lbl">Lot Size</span>
+      <span class="ticker-val" id="tk-lot" style="color:var(--purple);">25</span>
+      <span class="ticker-chg" style="font-size:9px;color:var(--muted);">units</span>
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-lbl">IST</span>
+      <span class="ticker-val" id="tk-time" style="color:#3d2f6e;font-size:12px">—</span>
+    </div>
+  </div>
+
+  <!-- MAIN CARD -->
+  <div class="card">
+
+    <div class="sec-label" id="spot-label">Nifty 50 spot price</div>
+    <div class="spot-wrap" id="spotWrap">
+      <span class="spot-sym">₹</span>
+      <input type="number" id="spotPrice" placeholder="24315" oninput="onManualSpot()" autocomplete="off">
+      <button class="live-btn" onclick="manualFetch()">⟳ Live</button>
+    </div>
+    <div class="meta-row">
+      <span class="countdown-pill" id="countdown-badge">Refresh in 60s</span>
+      <span class="last-update-lbl" id="last-update-lbl">Initialising…</span>
+    </div>
+
+    <!-- OPTION CARDS -->
+    <div class="sec-label">ATM option premiums</div>
+    <div class="option-grid">
+      <!-- PE LEFT (red) -->
+      <div class="opt-card pe">
+        <div class="opt-header">
+          <div class="opt-badge"><div class="opt-dot"></div>PUT · PE</div>
+          <div class="opt-strike" id="peStrikeBadge">—</div>
+        </div>
+        <div class="prem-row">
+          <div class="prem-lbl">LTP Premium</div>
+          <div class="prem-chg" id="peChgBadge">—</div>
+        </div>
+        <div class="prem-big" id="pePremBig">₹ —</div>
+        <div class="opt-stats">
+          <div class="stat-box"><div class="stat-lbl">Impl. Vol</div><div class="stat-val" id="peIV">—</div></div>
+          <div class="stat-box"><div class="stat-lbl">Delta</div><div class="stat-val" id="peDelta">—</div></div>
+          <div class="stat-box"><div class="stat-lbl">OI (L)</div><div class="stat-val" id="peOI">—</div></div>
+          <div class="stat-box"><div class="stat-lbl">Theta/d</div><div class="stat-val" id="peTheta">—</div></div>
+        </div>
+      </div>
+      <!-- CE RIGHT (green) -->
+      <div class="opt-card ce">
+        <div class="opt-header">
+          <div class="opt-badge"><div class="opt-dot"></div>CALL · CE</div>
+          <div class="opt-strike" id="ceStrikeBadge">—</div>
+        </div>
+        <div class="prem-row">
+          <div class="prem-lbl">LTP Premium</div>
+          <div class="prem-chg" id="ceChgBadge">—</div>
+        </div>
+        <div class="prem-big" id="cePremBig">₹ —</div>
+        <div class="opt-stats">
+          <div class="stat-box"><div class="stat-lbl">Impl. Vol</div><div class="stat-val" id="ceIV">—</div></div>
+          <div class="stat-box"><div class="stat-lbl">Delta</div><div class="stat-val" id="ceDelta">—</div></div>
+          <div class="stat-box"><div class="stat-lbl">OI (L)</div><div class="stat-val" id="ceOI">—</div></div>
+          <div class="stat-box"><div class="stat-lbl">Theta/d</div><div class="stat-val" id="ceTheta">—</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TREND -->
+    <div class="divider">Live Trend Signal</div>
+    <div class="verdict-box verdict-idle" id="verdictBox">
+      <div>
+        <div class="verdict-signal" id="verdictSignal">Awaiting price data…</div>
+        <div class="verdict-text" id="verdictText">—</div>
+      </div>
+      <div class="verdict-icon" id="verdictIcon">~</div>
+    </div>
+
+    <div class="prob-grid">
+      <div class="prob-card">
+        <div class="prob-lbl prob-up-lbl">Bullish probability</div>
+        <div class="prob-val prob-up-val" id="upPct">—</div>
+        <div class="prob-track"><div class="prob-fill prob-fill-up" id="upBar" style="width:0%"></div></div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-lbl prob-dn-lbl">Bearish probability</div>
+        <div class="prob-val prob-dn-val" id="dnPct">—</div>
+        <div class="prob-track"><div class="prob-fill prob-fill-dn" id="dnBar" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="summary-row">
+      <div class="sum-chip"><div class="sum-chip-lbl">CE Strike</div><div class="sum-chip-val" id="sumCE">—</div></div>
+      <div class="sum-chip"><div class="sum-chip-lbl">PE Strike</div><div class="sum-chip-val" id="sumPE">—</div></div>
+      <div class="sum-chip"><div class="sum-chip-lbl">CE Prem</div><div class="sum-chip-val" id="sumCP">—</div></div>
+      <div class="sum-chip"><div class="sum-chip-lbl">PE Prem</div><div class="sum-chip-val" id="sumPP">—</div></div>
+    </div>
+
+  </div>
+  <div class="footer">Black-Scholes simulation · Live via Yahoo Finance · Educational use only</div>
+
+  <!-- ALL-THREE CURRENT TRENDS -->
+  <div class="overview-panel">
+    <div class="overview-label">Current Trends — All Indices</div>
+    <div class="overview-grid">
+      <div class="ov-card" id="ov-nifty">
+        <div class="ov-name">Nifty 50</div>
+        <div class="ov-spot" id="ov-nifty-spot">—</div>
+        <div class="ov-trend-pill" id="ov-nifty-trend">Waiting…</div>
+        <div class="ov-prems">
+          <span class="ov-ce" id="ov-nifty-ce">CE —</span>
+          <span class="ov-pe" id="ov-nifty-pe">PE —</span>
+        </div>
+      </div>
+      <div class="ov-card" id="ov-sensex">
+        <div class="ov-name">Sensex</div>
+        <div class="ov-spot" id="ov-sensex-spot">—</div>
+        <div class="ov-trend-pill" id="ov-sensex-trend">Waiting…</div>
+        <div class="ov-prems">
+          <span class="ov-ce" id="ov-sensex-ce">CE —</span>
+          <span class="ov-pe" id="ov-sensex-pe">PE —</span>
+        </div>
+      </div>
+      <div class="ov-card" id="ov-banknifty">
+        <div class="ov-name">Bank Nifty</div>
+        <div class="ov-spot" id="ov-banknifty-spot">—</div>
+        <div class="ov-trend-pill" id="ov-banknifty-trend">Waiting…</div>
+        <div class="ov-prems">
+          <span class="ov-ce" id="ov-banknifty-ce">CE —</span>
+          <span class="ov-pe" id="ov-banknifty-pe">PE —</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TREND LOG -->
+  <div class="log-panel">
+    <div class="log-header">
+      <span class="log-title">Trend Log</span>
+      <span class="log-count" id="logCount">0 entries</span>
+    </div>
+
+    <!-- Log filter tabs -->
+    <div class="log-tabs">
+      <button class="log-tab active" id="ltab-all"       onclick="filterLog('all')">All</button>
+      <button class="log-tab"        id="ltab-nifty"     onclick="filterLog('nifty')">Nifty 50</button>
+      <button class="log-tab"        id="ltab-sensex"    onclick="filterLog('sensex')">Sensex</button>
+      <button class="log-tab"        id="ltab-banknifty" onclick="filterLog('banknifty')">Bank Nifty</button>
+    </div>
+
+    <div class="log-empty" id="logEmpty">Trend snapshots will appear here every minute…</div>
+    <div id="logTableHead" class="log-head" style="display:none;">
+      <span>Time</span><span>Index</span><span>Spot</span><span>CE</span><span>PE</span><span>Trend</span>
+    </div>
+    <div class="log-list" id="logList"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ══════════════════════════════════════════
+   INDEX CONFIG
+══════════════════════════════════════════ */
+var INDICES = {
+  nifty:     { name:'Nifty 50',   sym:'%5ENSEI',    snap:50,  lot:25, baseIV:0.145, spot:24315, spotBase:24315 },
+  sensex:    { name:'Sensex',     sym:'%5EBSESN',   snap:500, lot:10, baseIV:0.135, spot:79800, spotBase:79800 },
+  banknifty: { name:'Bank Nifty', sym:'%5ENSBANKQ', snap:100, lot:15, baseIV:0.170, spot:51820, spotBase:51820 }
+};
+
+/* ── Per-index state — declared FIRST so every function can use it ── */
+var indexState = {
+  nifty:     { ceK:0, peK:0, cePrem:0, pePrem:0, trend:'—' },
+  sensex:    { ceK:0, peK:0, cePrem:0, pePrem:0, trend:'—' },
+  banknifty: { ceK:0, peK:0, cePrem:0, pePrem:0, trend:'—' }
+};
+
+/* ══════════════════════════════════════════
+   LIVE MODE — set DEMO=true to use simulated data
+══════════════════════════════════════════ */
+var DEMO = false;
+
+var DEMO_SPOTS = { nifty:24315, sensex:79800, banknifty:51820 };
+
+/* 60s in live, 10s in demo */
+var COUNTDOWN_SECS = DEMO ? 10 : 60;
+var countdown = COUNTDOWN_SECS;
+
+var activeIdx = 'nifty';
+var ceK = 0, peK = 0;
+var cePrem = 0, pePrem = 0, prevCePrem = 0, prevPePrem = 0;
+var logEntries = [];
+var activeLogFilter = 'all';
+var marketAutoStarted = false;
+
+function cfg() { return INDICES[activeIdx]; }
+
+/* ══════════════════════════════════════════
+   MATHS
+══════════════════════════════════════════ */
+function N(x) {
+  var a1=0.254829592,a2=-0.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=0.3275911;
+  var s=x<0?-1:1; x=Math.abs(x)/Math.SQRT2;
+  var t=1/(1+p*x);
+  return 0.5*(1+s*(1-(((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t)*Math.exp(-x*x)));
+}
+
+function bs(S,K,T,r,sig,type){
+  if(T<=0){return{price:Math.max(0,type==='C'?S-K:K-S),delta:type==='C'?1:0,iv:sig,theta:0};}
+  var sq=Math.sqrt(T),d1=(Math.log(S/K)+(r+sig*sig/2)*T)/(sig*sq),d2=d1-sig*sq;
+  var pdf=Math.exp(-d1*d1/2)/Math.sqrt(2*Math.PI);
+  var price,delta,theta;
+  if(type==='C'){price=S*N(d1)-K*Math.exp(-r*T)*N(d2);delta=N(d1);theta=(-(S*sig*pdf)/(2*sq)-r*K*Math.exp(-r*T)*N(d2))/365;}
+  else{price=K*Math.exp(-r*T)*N(-d2)-S*N(-d1);delta=N(d1)-1;theta=(-(S*sig*pdf)/(2*sq)+r*K*Math.exp(-r*T)*N(-d2))/365;}
+  return{price:Math.max(0.05,price),delta:delta,iv:sig,theta:theta};
+}
+
+function ivK(idxKey,K,type){
+  var S=INDICES[idxKey].spot,biv=INDICES[idxKey].baseIV;
+  var mono=(K-S)/S,skew=type==='C'?mono*0.12:-mono*0.15;
+  return Math.max(0.08,biv+skew+(Math.random()-0.5)*0.004);
+}
+
+/* ══════════════════════════════════════════
+   STRIKES — original OurNifty logic for Nifty, separate for others
+══════════════════════════════════════════ */
+function calcStrikesForIdx(k,s){
+  var cs,ps;
+  if(k==='nifty'){
+    var mod=s%100;
+    if(mod>=0&&mod<40){cs=Math.floor(s/100)*100+100;ps=Math.floor(s/100)*100-100;}
+    else if(mod>=40&&mod<=60){cs=Math.floor(s/100)*100+100;ps=Math.floor(s/100)*100;}
+    else{cs=Math.floor(s/100)*100+200;ps=Math.floor(s/100)*100;}
+  }else if(k==='sensex'){var b=Math.round(s/300)*300;cs=b+300;ps=b-300;}
+  else{var b2=Math.round(s/200)*200;cs=b2+200;ps=b2-200;}
+  return{cs:cs,ps:ps};
+}
+
+function calcStrikes(s){return calcStrikesForIdx(activeIdx,s);}
+
+/* ══════════════════════════════════════════
+   TREND FORMULA — exact OurNifty.com, works for all indices
+══════════════════════════════════════════ */
+function trendFormula(S,csK,psK,cprem,pprem){
+  var mid=(csK+psK)/2;
+  var acr=Math.ceil(100*(((( csK-S)-(csK-mid))/(csK-S))+1)*cprem);
+  var apr=Math.ceil(100*(1-(((mid-psK)-(S-psK))/(S-psK)))*pprem);
+  var tot=acr+apr; if(tot<=0) return null;
+  var bp=Math.ceil(10000*acr/tot)/100, sp=Math.ceil(10000*apr/tot)/100;
+  return{bp:bp,sp:sp,trend:bp>sp?'Trend Up':sp>bp?'Trend Down':'Neutral'};
+}
+
+function computeTrendForIdx(k){
+  var st=indexState[k];
+  if(!st||!st.ceK||!st.peK||!st.cePrem||!st.pePrem) return null;
+  var r=trendFormula(INDICES[k].spot,st.ceK,st.peK,st.cePrem,st.pePrem);
+  return r?r.trend:null;
+}
+
+/* ══════════════════════════════════════════
+   COMPUTE & STORE ALL THREE INDICES
+══════════════════════════════════════════ */
+function computeAndUpdateAll(){
+  Object.keys(INDICES).forEach(function(k){
+    var st=indexState[k];
+    if(!st.ceK||!st.peK) return;
+    var S=INDICES[k].spot, T=14/365, r=0.065;
+    /* fresh premiums */
+    var cr=bs(S,st.ceK,T,r,ivK(k,st.ceK,'C'),'C');
+    var pr=bs(S,st.peK,T,r,ivK(k,st.peK,'P'),'P');
+    st.cePrem=Math.max(0.05,cr.price+(st.cePrem>0?(Math.random()-0.5)*0.5:0));
+    st.pePrem=Math.max(0.05,pr.price+(st.pePrem>0?(Math.random()-0.5)*0.4:0));
+    var trend=computeTrendForIdx(k);
+    if(trend) updateOverviewCard(k,trend,S,st.cePrem,st.pePrem);
+    /* update active UI if this is active index */
+    if(k===activeIdx){
+      cePrem=st.cePrem; pePrem=st.pePrem;
+      if(document.getElementById('cePremBig')){
+        document.getElementById('cePremBig').textContent='₹'+cePrem.toFixed(2);
+        document.getElementById('pePremBig').textContent='₹'+pePrem.toFixed(2);
+        document.getElementById('sumCP').textContent='₹'+cePrem.toFixed(2);
+        document.getElementById('sumPP').textContent='₹'+pePrem.toFixed(2);
+      }
+      calculateTrend();
+    }
+  });
+}
+
+/* ══════════════════════════════════════════
+   OVERVIEW CARDS
+══════════════════════════════════════════ */
+function updateOverviewCard(idx,trend,spotVal,cp,pp){
+  var card=document.getElementById('ov-'+idx);
+  if(!card) return;
+  card.className='ov-card'+(trend==='Trend Up'?' ov-up':trend==='Trend Down'?' ov-dn':trend==='Neutral'?' ov-neu':'');
+  document.getElementById('ov-'+idx+'-trend').textContent=
+    trend==='Trend Up'?'↑ Trend Up':trend==='Trend Down'?'↓ Trend Down':trend==='Neutral'?'— Neutral':'Waiting…';
+  if(spotVal) document.getElementById('ov-'+idx+'-spot').textContent='₹'+parseFloat(spotVal).toFixed(0);
+  if(cp) document.getElementById('ov-'+idx+'-ce').textContent='CE ₹'+parseFloat(cp).toFixed(1);
+  if(pp) document.getElementById('ov-'+idx+'-pe').textContent='PE ₹'+parseFloat(pp).toFixed(1);
+  indexState[idx].trend=trend;
+}
+
+/* ══════════════════════════════════════════
+   REFRESH ACTIVE INDEX PREMIUM CARDS
+══════════════════════════════════════════ */
+function ivForStrike(K,type){
+  var S=cfg().spot,mono=(K-S)/S,skew=type==='C'?mono*0.12:-mono*0.15;
+  return Math.max(0.08,cfg().baseIV+skew+(Math.random()-0.5)*0.004);
+}
+
+function refreshAll(){
+  var S=cfg().spot; if(!ceK||!peK) return;
+  var T=14/365,r=0.065;
+  var ceRes=bs(S,ceK,T,r,ivForStrike(ceK,'C'),'C');
+  var peRes=bs(S,peK,T,r,ivForStrike(peK,'P'),'P');
+  prevCePrem=cePrem||ceRes.price; prevPePrem=pePrem||peRes.price;
+  cePrem=ceRes.price; pePrem=peRes.price;
+  indexState[activeIdx].cePrem=cePrem; indexState[activeIdx].pePrem=pePrem;
+
+  var ceBig=document.getElementById('cePremBig');
+  ceBig.textContent='₹'+cePrem.toFixed(2);
+  ceBig.classList.remove('flash-prem'); void ceBig.offsetWidth; ceBig.classList.add('flash-prem');
+  var ceChgV=cePrem-prevCePrem, ceChgEl=document.getElementById('ceChgBadge');
+  ceChgEl.textContent=(ceChgV>=0?'+':'')+ceChgV.toFixed(2);
+  ceChgEl.style.background=ceChgV>=0?'rgba(15,169,104,0.18)':'rgba(220,38,38,0.13)';
+  ceChgEl.style.color=ceChgV>=0?'var(--green-dark)':'var(--red)';
+  document.getElementById('ceIV').textContent=(ceRes.iv*100).toFixed(1)+'%';
+  document.getElementById('ceDelta').textContent=ceRes.delta.toFixed(3);
+  document.getElementById('ceOI').textContent=(18+Math.round(Math.random()*9))+'L';
+  document.getElementById('ceTheta').textContent=ceRes.theta.toFixed(2);
+
+  var peBig=document.getElementById('pePremBig');
+  peBig.textContent='₹'+pePrem.toFixed(2);
+  peBig.classList.remove('flash-prem'); void peBig.offsetWidth; peBig.classList.add('flash-prem');
+  var peChgV=pePrem-prevPePrem, peChgEl=document.getElementById('peChgBadge');
+  peChgEl.textContent=(peChgV>=0?'+':'')+peChgV.toFixed(2);
+  peChgEl.style.background='rgba(220,38,38,0.12)'; peChgEl.style.color='var(--red)';
+  document.getElementById('peIV').textContent=(peRes.iv*100).toFixed(1)+'%';
+  document.getElementById('peDelta').textContent=peRes.delta.toFixed(3);
+  document.getElementById('peOI').textContent=(15+Math.round(Math.random()*11))+'L';
+  document.getElementById('peTheta').textContent=peRes.theta.toFixed(2);
+
+  document.getElementById('sumCP').textContent='₹'+cePrem.toFixed(2);
+  document.getElementById('sumPP').textContent='₹'+pePrem.toFixed(2);
+  calculateTrend();
+}
+
+/* ══════════════════════════════════════════
+   APPLY SPOT (active index)
+══════════════════════════════════════════ */
+function applySpot(s,fromLive,flash){
+  cfg().spot=s; cfg().spotBase=s;
+  var inp=document.getElementById('spotPrice'); inp.value=s.toFixed(2);
+  if(flash){var sw=document.getElementById('spotWrap');sw.classList.remove('flash-input');void sw.offsetWidth;sw.classList.add('flash-input');}
+  var str=calcStrikes(s); ceK=str.cs; peK=str.ps;
+  indexState[activeIdx].ceK=ceK; indexState[activeIdx].peK=peK;
+  document.getElementById('ceStrikeBadge').textContent=ceK;
+  document.getElementById('peStrikeBadge').textContent=peK;
+  document.getElementById('sumCE').textContent=ceK;
+  document.getElementById('sumPE').textContent=peK;
+  updateTabSpots(); refreshAll();
+  var now=new Date(),ist=new Date(now.getTime()+5.5*3600000);
+  var h=ist.getUTCHours().toString().padStart(2,'0'),m=ist.getUTCMinutes().toString().padStart(2,'0'),sc=ist.getUTCSeconds().toString().padStart(2,'0');
+  document.getElementById('last-update-lbl').textContent='Updated '+h+':'+m+':'+sc+(fromLive?' (live)':' (sim)');
+}
+
+/* ══════════════════════════════════════════
+   CALCULATE TREND (active index DOM)
+══════════════════════════════════════════ */
+function calculateTrend(){
+  if(!ceK||!peK||!cePrem||!pePrem) return;
+  var r=trendFormula(cfg().spot,ceK,peK,cePrem,pePrem);
+  if(!r) return;
+  var bp=r.bp,sp=r.sp,trend=r.trend;
+  document.getElementById('upPct').textContent=bp.toFixed(2)+'%';
+  document.getElementById('dnPct').textContent=sp.toFixed(2)+'%';
+  setTimeout(function(){document.getElementById('upBar').style.width=Math.min(bp,100)+'%';document.getElementById('dnBar').style.width=Math.min(sp,100)+'%';},30);
+  var box=document.getElementById('verdictBox'),sig=document.getElementById('verdictSignal'),txt=document.getElementById('verdictText'),icon=document.getElementById('verdictIcon');
+  box.className='verdict-box';
+  if(trend==='Trend Up'){box.classList.add('verdict-up');sig.textContent='Market signal · Bullish';txt.textContent='Trend Up';icon.textContent='↑';}
+  else if(trend==='Trend Down'){box.classList.add('verdict-dn');sig.textContent='Market signal · Bearish';txt.textContent='Trend Down';icon.textContent='↓';}
+  else{box.classList.add('verdict-neu');sig.textContent='Market signal · Neutral';txt.textContent='Neutral';icon.textContent='—';}
+  box.classList.remove('pulse-ring'); void box.offsetWidth; box.classList.add('pulse-ring');
+  indexState[activeIdx].ceK=ceK; indexState[activeIdx].peK=peK;
+  indexState[activeIdx].cePrem=cePrem; indexState[activeIdx].pePrem=pePrem;
+  updateOverviewCard(activeIdx,trend,cfg().spot,cePrem,pePrem);
+}
+
+/* ══════════════════════════════════════════
+   SWITCH INDEX
+══════════════════════════════════════════ */
+function switchIndex(idx){
+  activeIdx=idx; var c=cfg();
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('tab-'+idx).classList.add('active');
+  document.getElementById('spot-label').textContent=c.name+' spot price';
+  document.getElementById('spotPrice').placeholder=Math.round(c.spot);
+  document.getElementById('tk-active-lbl').textContent=c.name;
+  document.getElementById('tk-lot').textContent=c.lot;
+  /* restore state if already computed */
+  var st=indexState[idx];
+  if(st.ceK){ ceK=st.ceK; peK=st.peK; cePrem=st.cePrem; pePrem=st.pePrem;
+    document.getElementById('ceStrikeBadge').textContent=ceK;
+    document.getElementById('peStrikeBadge').textContent=peK;
+    document.getElementById('sumCE').textContent=ceK;
+    document.getElementById('sumPE').textContent=peK;
+  } else { ceK=0; peK=0; cePrem=0; pePrem=0; }
+  ['cePremBig','pePremBig'].forEach(function(id){document.getElementById(id).textContent=cePrem>0?'₹'+cePrem.toFixed(2):'₹ —';});
+  ['ceIV','ceDelta','ceOI','ceTheta','peIV','peDelta','peOI','peTheta','ceChgBadge','peChgBadge'].forEach(function(id){document.getElementById(id).textContent='—';});
+  document.getElementById('verdictBox').className='verdict-box verdict-idle';
+  document.getElementById('verdictSignal').textContent='Awaiting price data…';
+  document.getElementById('verdictText').textContent='—';
+  document.getElementById('verdictIcon').textContent='~';
+  document.getElementById('upPct').textContent='—'; document.getElementById('dnPct').textContent='—';
+  document.getElementById('upBar').style.width='0%'; document.getElementById('dnBar').style.width='0%';
+  showToast('Switching to '+c.name+'…');
+  fetchSpot(true);
+}
+
+/* ══════════════════════════════════════════
+   MANUAL SPOT INPUT
+══════════════════════════════════════════ */
+function onManualSpot(){
+  var val=parseFloat(document.getElementById('spotPrice').value);
+  if(!val||isNaN(val)||val<1000) return;
+  cfg().spot=val; cfg().spotBase=val;
+  var str=calcStrikes(val); ceK=str.cs; peK=str.ps;
+  indexState[activeIdx].ceK=ceK; indexState[activeIdx].peK=peK;
+  document.getElementById('ceStrikeBadge').textContent=ceK;
+  document.getElementById('peStrikeBadge').textContent=peK;
+  document.getElementById('sumCE').textContent=ceK;
+  document.getElementById('sumPE').textContent=peK;
+  updateTabSpots(); refreshAll();
+}
+
+/* ══════════════════════════════════════════
+   LIVE DATA — Yahoo Finance parallel fetch
+   Fetches Nifty, Sensex, BankNifty, India VIX simultaneously
+   Falls back to simulation if CORS/network blocks
+══════════════════════════════════════════ */
+var liveVIX = 14.5; /* updated from India VIX feed */
+
+var YAHOO_SYMS = {
+  nifty:     '%5ENSEI',
+  sensex:    '%5EBSESN',
+  banknifty: '%5ENSEBANK',
+  vix:       '%5EINDIAVIX'
+};
+
+function fetchYahoo(sym, cb){
+  fetch('https://query1.finance.yahoo.com/v8/finance/chart/'+sym+'?interval=1m&range=1d',{cache:'no-store'})
+    .then(function(r){return r.json();})
+    .then(function(d){
+      var p = d.chart && d.chart.result && d.chart.result[0].meta.regularMarketPrice;
+      if(p && p > 0) cb(p, null); else cb(null, 'no price');
+    })
+    .catch(function(e){ cb(null, e); });
+}
+
+/* Refresh all three index spots + VIX in parallel */
+function fetchAllLive(onDone){
+  var results = {}, pending = 4;
+  function done(k, price){
+    results[k] = price;
+    if(--pending === 0 && onDone) onDone(results);
+  }
+
+  fetchYahoo(YAHOO_SYMS.nifty,     function(p,e){ done('nifty',     p || INDICES.nifty.spot); });
+  fetchYahoo(YAHOO_SYMS.sensex,    function(p,e){ done('sensex',    p || INDICES.sensex.spot); });
+  fetchYahoo(YAHOO_SYMS.banknifty, function(p,e){ done('banknifty', p || INDICES.banknifty.spot); });
+  fetchYahoo(YAHOO_SYMS.vix,       function(p,e){
+    if(p && p > 0){ liveVIX = p; }
+    done('vix', p || liveVIX);
+  });
+}
+
+/* Apply live results to all indices, recalc premiums + trends */
+function applyLiveData(results){
+  /* Update VIX-derived base IVs */
+  var vixDecimal = liveVIX / 100;
+  INDICES.nifty.baseIV     = vixDecimal * 1.0;
+  INDICES.sensex.baseIV    = vixDecimal * 0.95;
+  INDICES.banknifty.baseIV = vixDecimal * 1.2;
+
+  Object.keys(INDICES).forEach(function(k){
+    var price = results[k];
+    if(!price || price < 100) return;
+
+    var prev = INDICES[k].spot;
+    INDICES[k].spot = price;
+    INDICES[k].spotBase = INDICES[k].spotBase || price;
+
+    var str = calcStrikesForIdx(k, price);
+    indexState[k].ceK = str.cs;
+    indexState[k].peK = str.ps;
+
+    var T=14/365, r=0.065;
+    var cr = bs(price, str.cs, T, r, ivK(k, str.cs, 'C'), 'C');
+    var pr = bs(price, str.ps, T, r, ivK(k, str.ps, 'P'), 'P');
+    indexState[k].cePrem = cr.price;
+    indexState[k].pePrem = pr.price;
+
+    if(k === activeIdx){
+      ceK = str.cs; peK = str.ps;
+      cePrem = cr.price; pePrem = pr.price;
+      applySpot(price, true, true);
+    } else {
+      var trend = computeTrendForIdx(k);
+      updateOverviewCard(k, trend || '—', price, cr.price, pr.price);
+    }
+  });
+
+  updateTabSpots();
+  showToast('Live data updated · all indices refreshed');
+}
+
+/* ── fetchSpot: active index quick refresh (used by countdown) ── */
+function fetchSpot(silent){
+  if(DEMO){
+    var drift=(Math.random()-0.495)*cfg().snap*0.6;
+    cfg().spot=Math.max(100,cfg().spot+drift);
+    applySpot(cfg().spot,false,true);
+    if(!silent)showToast('Demo: ₹'+cfg().spot.toFixed(2)+' · Premiums updated');
+    return;
+  }
+  /* In live mode, refresh ALL three + VIX together */
+  fetchAllLive(function(results){
+    applyLiveData(results);
+    captureAllNow();
+    if(!silent) showToast('Live data refreshed · trends logged');
+  });
+}
+
+function manualFetch(){
+  showToast('Fetching live data…');
+  countdown = COUNTDOWN_SECS;
+  fetchSpot(false);
+}
+
+/* ══════════════════════════════════════════
+   TAB SPOT LABELS
+══════════════════════════════════════════ */
+function updateTabSpots(){
+  Object.keys(INDICES).forEach(function(k){
+    var el=document.getElementById('tab-'+k+'-spot');
+    if(el) el.textContent='₹'+INDICES[k].spot.toFixed(0);
+  });
+}
+
+/* ══════════════════════════════════════════
+   CLOCK
+══════════════════════════════════════════ */
+function updateClock(){
+  var now=new Date(),ist=new Date(now.getTime()+5.5*3600000);
+  document.getElementById('tk-time').textContent=ist.getUTCHours().toString().padStart(2,'0')+':'+ist.getUTCMinutes().toString().padStart(2,'0')+':'+ist.getUTCSeconds().toString().padStart(2,'0');
+}
+
+/* ══════════════════════════════════════════
+   TICKER — 1.6s: random walk + compute ALL indices
+══════════════════════════════════════════ */
+function startTicker(){
+  updateClock();
+  setInterval(function(){
+    /* random walk all spots */
+    Object.keys(INDICES).forEach(function(k){INDICES[k].spot+=(Math.random()-0.496)*(INDICES[k].snap*0.08);});
+    updateTabSpots();
+
+    /* active ticker bar */
+    var S=cfg().spot,base=cfg().spotBase,up=S>=base;
+    var ae=document.getElementById('tk-active'); ae.textContent=S.toFixed(2); ae.className='ticker-val '+(up?'t-up':'t-dn');
+    var ac=document.getElementById('tk-active-chg'); var chg=S-base; ac.textContent=(up?'+':'')+chg.toFixed(2); ac.className='ticker-chg '+(up?'t-up':'t-dn');
+    document.getElementById('tk-vix').textContent=(14.32+(Math.random()-0.5)*0.28).toFixed(2);
+    document.getElementById('tk-pcr').textContent=(1.24+(Math.random()-0.5)*0.06).toFixed(2);
+    updateClock();
+
+    /* compute ALL three indices */
+    computeAndUpdateAll();
+  },1600);
+}
+
+/* ══════════════════════════════════════════
+   LOG
+══════════════════════════════════════════ */
+var lastLoggedTrend = { nifty:null, sensex:null, banknifty:null };
+
+function addLogEntry(idxKey,trend){
+  /* Skip if trend hasn't changed since last log for this index */
+  if(lastLoggedTrend[idxKey] === trend) return;
+  lastLoggedTrend[idxKey] = trend;
+
+  var st=indexState[idxKey];
+  if(!st||!st.ceK||!st.peK||!st.cePrem||!st.pePrem) return;
+  var now=new Date(),ist=new Date(now.getTime()+5.5*3600000);
+  var h=ist.getUTCHours().toString().padStart(2,'0'),m=ist.getUTCMinutes().toString().padStart(2,'0'),s=ist.getUTCSeconds().toString().padStart(2,'0');
+  var entry={time:h+':'+m+':'+s,idxKey:idxKey,index:INDICES[idxKey].name,spot:INDICES[idxKey].spot.toFixed(2),cePrem:st.cePrem.toFixed(2),pePrem:st.pePrem.toFixed(2),trend:trend};
+  logEntries.unshift(entry);
+  if(activeLogFilter==='all'||activeLogFilter===idxKey) renderLogRow(entry,true);
+  document.getElementById('logCount').textContent=logEntries.length+(logEntries.length===1?' entry':' entries');
+}
+
+function renderLogRow(entry,isNew){
+  var list=document.getElementById('logList'),empty=document.getElementById('logEmpty'),head=document.getElementById('logTableHead');
+  empty.style.display='none'; head.style.display='grid';
+  var tc=entry.trend==='Trend Up'?'up':entry.trend==='Trend Down'?'dn':'neu';
+  var ti=entry.trend==='Trend Up'?'↑ ':entry.trend==='Trend Down'?'↓ ':'— ';
+  var ic=entry.idxKey==='nifty'?'ni':entry.idxKey==='sensex'?'sx':'bn';
+  var row=document.createElement('div');
+  row.className='log-entry'+(isNew?' new-entry':''); row.dataset.idx=entry.idxKey;
+  row.innerHTML='<span class="log-time">'+entry.time+'</span>'+
+    '<span class="log-index '+ic+'">'+entry.index+'</span>'+
+    '<span class="log-spot">₹'+entry.spot+'</span>'+
+    '<span class="log-prem-ce">₹'+entry.cePrem+'</span>'+
+    '<span class="log-prem-pe">₹'+entry.pePrem+'</span>'+
+    '<span class="log-trend '+tc+'">'+ti+entry.trend+'</span>';
+  if(isNew){list.insertBefore(row,list.firstChild);setTimeout(function(){row.classList.remove('new-entry');},3000);}
+  else list.appendChild(row);
+}
+
+function filterLog(filter){
+  activeLogFilter=filter;
+  document.querySelectorAll('.log-tab').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('ltab-'+filter).classList.add('active');
+  var list=document.getElementById('logList'); list.innerHTML='';
+  var filtered=filter==='all'?logEntries:logEntries.filter(function(e){return e.idxKey===filter;});
+  if(filtered.length===0){document.getElementById('logEmpty').style.display='block';document.getElementById('logTableHead').style.display='none';}
+  else{document.getElementById('logEmpty').style.display='none';document.getElementById('logTableHead').style.display='grid';filtered.forEach(function(e){renderLogRow(e,false);});}
+}
+
+/* ══════════════════════════════════════════
+   CAPTURE ALL NOW (for log)
+══════════════════════════════════════════ */
+function captureAllNow(){
+  Object.keys(INDICES).forEach(function(k){
+    var st=indexState[k];
+    if(!st.ceK||!st.peK) return;
+    var S=INDICES[k].spot,T=14/365,r=0.065;
+    var cr=bs(S,st.ceK,T,r,ivK(k,st.ceK,'C'),'C');
+    var pr=bs(S,st.peK,T,r,ivK(k,st.peK,'P'),'P');
+    st.cePrem=cr.price; st.pePrem=pr.price;
+    if(k===activeIdx){cePrem=st.cePrem;pePrem=st.pePrem;}
+    var trend=computeTrendForIdx(k);
+    if(trend){
+      addLogEntry(k,trend);
+      updateOverviewCard(k,trend,S,st.cePrem,st.pePrem);
+    }
+  });
+}
+
+/* ══════════════════════════════════════════
+   60s COUNTDOWN
+══════════════════════════════════════════ */
+function startCountdown(){
+  setInterval(function(){
+    countdown--;
+    document.getElementById('countdown-badge').textContent='Refresh in '+countdown+'s';
+    if(countdown<=0){
+      countdown=COUNTDOWN_SECS;
+      if(DEMO){
+        fetchSpot(true);
+        captureAllNow();
+        showToast('Demo refreshed · trends captured');
+      } else {
+        fetchAllLive(function(results){
+          applyLiveData(results);
+          captureAllNow();
+        });
+      }
+    }
+  },1000);
+}
+
+/* ══════════════════════════════════════════
+   MARKET HOURS (IST)
+══════════════════════════════════════════ */
+var MKT_OPEN=9*60+15,MKT_CLOSE=15*60+30,PRE_START=9*60;
+
+function getIST(){return new Date(new Date().getTime()+5.5*3600000);}
+function istMins(ist){return ist.getUTCHours()*60+ist.getUTCMinutes();}
+function isWeekday(ist){var d=ist.getUTCDay();return d>=1&&d<=5;}
+function marketStatus(){
+  if(DEMO) return 'open'; /* demo mode — always treat as market open */
+  var ist=getIST(); if(!isWeekday(ist)) return 'weekend';
+  var m=istMins(ist);
+  if(m>=PRE_START&&m<MKT_OPEN) return 'pre';
+  if(m>=MKT_OPEN&&m<MKT_CLOSE) return 'open';
+  return 'closed';
+}
+function secsUntilOpen(){var ist=getIST();return(MKT_OPEN-istMins(ist))*60-ist.getUTCSeconds();}
+function secsUntilClose(){var ist=getIST();return(MKT_CLOSE-istMins(ist))*60-ist.getUTCSeconds();}
+function fmtDur(s){if(s<=0)return'00:00:00';var h=Math.floor(s/3600),m=Math.floor((s%3600)/60),ss=s%60;return h.toString().padStart(2,'0')+':'+m.toString().padStart(2,'0')+':'+ss.toString().padStart(2,'0');}
+
+function updateMarketStatus(){
+  var status=marketStatus();
+  var dot=document.getElementById('mktDot'),txt=document.getElementById('mktStatusTxt'),pill=document.getElementById('mktPill'),info=document.getElementById('mktTimeInfo'),badge=document.getElementById('mktCaptureBadge'),banner=document.getElementById('preMktBanner'),cd=document.getElementById('preMktCd');
+  dot.className='mkt-dot '+status;
+  if(status==='open'){
+    txt.textContent=DEMO?'Demo Mode — Market Open':'Market Open';
+    pill.textContent=DEMO?'Simulated data':'NSE / BSE Live';
+    pill.className='mkt-pill open';
+    var rem2=secsUntilClose(); info.textContent=rem2>0?'Closes in '+fmtDur(rem2):''; badge.style.display='inline-block'; banner.classList.remove('visible');
+    if(!marketAutoStarted){marketAutoStarted=true;captureAllNow();showToast('Market opened · auto-capture started');}
+  }else if(status==='pre'){
+    txt.textContent='Pre-Market'; pill.textContent='Opens 09:15'; pill.className='mkt-pill pre';
+    var rem=secsUntilOpen(); info.textContent='Opens in '+fmtDur(rem); badge.style.display='none'; banner.classList.add('visible'); if(cd)cd.textContent=fmtDur(rem);
+    if(!marketAutoStarted&&rem<=1){marketAutoStarted=true;captureAllNow();showToast('Market opened · auto-capture started');}
+  }else if(status==='weekend'){
+    txt.textContent='Market Closed — Weekend'; pill.textContent='Opens Monday 09:15'; pill.className='mkt-pill closed'; info.textContent=''; badge.style.display='none'; banner.classList.remove('visible');
+  }else{
+    txt.textContent='Market Closed'; pill.textContent='Reopens Tomorrow 09:15'; pill.className='mkt-pill closed'; info.textContent=''; badge.style.display='none'; banner.classList.remove('visible');
+  }
+}
+
+/* ══════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════ */
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2600);}
+
+/* ══════════════════════════════════════════
+   BOOT INIT — demo or live fetch all three
+══════════════════════════════════════════ */
+function initOne(k, price){
+  INDICES[k].spot=price; INDICES[k].spotBase=price;
+  var str=calcStrikesForIdx(k,price);
+  indexState[k].ceK=str.cs; indexState[k].peK=str.ps;
+  var T=14/365,r=0.065;
+  var cr=bs(price,str.cs,T,r,ivK(k,str.cs,'C'),'C');
+  var pr=bs(price,str.ps,T,r,ivK(k,str.ps,'P'),'P');
+  indexState[k].cePrem=cr.price; indexState[k].pePrem=pr.price;
+  if(k===activeIdx){
+    ceK=str.cs; peK=str.ps; cePrem=cr.price; pePrem=pr.price;
+    applySpot(price,false,false);
+  } else {
+    var t=computeTrendForIdx(k);
+    updateOverviewCard(k,t||'—',price,cr.price,pr.price);
+  }
+}
+
+if(DEMO){
+  /* Demo: init all three synchronously, then start everything */
+  Object.keys(INDICES).forEach(function(k){ initOne(k, DEMO_SPOTS[k]); });
+  updateTabSpots();
+  startTicker();
+  startCountdown();
+  updateMarketStatus();
+  setInterval(updateMarketStatus,1000);
+  setTimeout(captureAllNow, 800);
+} else {
+  /* Live: first seed from defaults, start ticker, then fetch real prices */
+  Object.keys(INDICES).forEach(function(k){ initOne(k, INDICES[k].spot); });
+  updateTabSpots();
+  startTicker();
+  startCountdown();
+  updateMarketStatus();
+  setInterval(updateMarketStatus,1000);
+  /* Fetch real live data for all three immediately */
+  fetchAllLive(function(results){
+    applyLiveData(results);
+    setTimeout(captureAllNow, 500);
+  });
+}
+/* Hide demo badge in live mode */
+var demoBadgeEl=document.getElementById('demoBadge');
+if(demoBadgeEl) demoBadgeEl.style.display=DEMO?'inline-block':'none';
+updateTabSpots();
+</script>
+</body>
+</html>

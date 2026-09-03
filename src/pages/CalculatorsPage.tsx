@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { calculatorHref } from '../data/calculatorLinks'
 
 const calculatorCategories = [
   {
@@ -214,7 +215,7 @@ export function CalculatorsPage() {
               </div>
               <div className="calc-cards-grid">
                 {cat.calcs.map(c => (
-                  <a key={c.name} href="#" className="calc-card" onClick={e => e.preventDefault()}>
+                  <a key={c.name} href={calculatorHref(c.name)} className="calc-card">
                     <div className="calc-card-ico">{c.ico}</div>
                     <div className="calc-card-name">{c.name}</div>
                     <div className="calc-card-desc">{c.desc}</div>
