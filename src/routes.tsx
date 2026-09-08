@@ -7,6 +7,7 @@ import { CalculatorDetailPage } from './pages/CalculatorDetailPage'
 import { ContactPage } from './pages/ContactPage'
 import { HomePage } from './pages/HomePage'
 import { IPOPage } from './pages/IPOPage'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { PricingPage } from './pages/PricingPage'
 import { ServicesPage } from './pages/ServicesPage'
 
@@ -14,6 +15,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <NotFoundPage />,
     children: [
       { index: true, element: <HomePage /> },
       { path: 'ipo', element: <IPOPage /> },
@@ -24,6 +26,7 @@ export const router = createBrowserRouter([
       { path: 'services', element: <ServicesPage /> },
       { path: 'pricing', element: <PricingPage /> },
       { path: 'contact', element: <ContactPage /> },
+      { path: '*', element: <NotFoundPage /> },
     ],
   },
 ])
