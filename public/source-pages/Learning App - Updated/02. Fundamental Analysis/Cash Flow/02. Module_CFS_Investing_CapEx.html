@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Investing Cash Flow">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Investing Cash Flow – CapEx, Acquisitions, Divestments · Cash Flow Analysis · FA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+
+/* ── LAYOUT ── */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(26px,6.5vw,84px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:14px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(12px,2.8vw,38px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:900px;}
+.hsi{padding:clamp(10px,1.8vw,20px) clamp(8px,1.8vw,16px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:76px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(9px,1.3vw,14px);font-weight:900;letter-spacing:-.3px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.r{color:var(--red);}
+.hsl{font-size:clamp(7px,.85vw,9px);font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+
+/* ── KLO ── */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.09);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+
+/* ── CFI COMPONENT CARDS (3-col) ── */
+.cfi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,20px);margin-bottom:40px;}
+.cfi-card{border-radius:18px;padding:clamp(14px,2.5vw,22px);border:2px solid;transition:transform .22s,box-shadow .22s;}
+.cfi-card:hover{transform:translateY(-3px);box-shadow:var(--shp);}
+.cc-capex{border-color:rgba(109,40,217,.3);background:linear-gradient(158deg,var(--pxs),#fdfcff);}
+.cc-acq{border-color:rgba(217,119,6,.28);background:linear-gradient(158deg,var(--apale),#fffcf0);}
+.cc-div{border-color:rgba(22,163,74,.28);background:linear-gradient(158deg,var(--gpale),#f9fff9);}
+.cc-inv{border-color:rgba(2,132,199,.22);background:linear-gradient(158deg,#f0f9ff,#f8fcff);}
+.cc-maint{border-color:rgba(220,38,38,.22);background:linear-gradient(158deg,var(--rpale),#fff8f8);}
+.cc-growth{border-color:rgba(22,163,74,.22);background:linear-gradient(158deg,var(--gpale),#f5fdf6);}
+.cfi-ico{font-size:clamp(24px,4vw,34px);margin-bottom:8px;animation:floatB 4s ease-in-out infinite;}
+.cfi-name{font-size:clamp(13px,1.8vw,16px);font-weight:900;color:var(--tx);margin-bottom:4px;}
+.cfi-badge{display:inline-flex;padding:3px 9px;border-radius:7px;font-size:10px;font-weight:800;margin-bottom:8px;}
+.cb-p{background:rgba(109,40,217,.1);color:var(--p);}
+.cb-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.cb-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.cb-s{background:rgba(2,132,199,.1);color:var(--sky);}
+.cb-r{background:rgba(220,38,38,.1);color:var(--red);}
+.cfi-body{font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.62;}
+.cfi-eg{margin-top:8px;padding:7px 10px;border-radius:8px;font-size:11.5px;font-weight:600;line-height:1.45;}
+.eg-g{background:rgba(22,163,74,.07);color:var(--gbr);}
+.eg-r{background:rgba(220,38,38,.07);color:var(--red);}
+.eg-p{background:rgba(109,40,217,.07);color:var(--p);}
+
+/* ── MODEL COMPARISON ── */
+.model-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,28px);margin-bottom:40px;}
+.model-card{border-radius:20px;padding:clamp(18px,3vw,28px);border:2px solid;}
+.mc-heavy{border-color:rgba(220,38,38,.25);background:linear-gradient(158deg,var(--rpale),#fff5f5);}
+.mc-light{border-color:rgba(22,163,74,.28);background:linear-gradient(158deg,var(--gpale),#f0fdf4);}
+.mc-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.mc-ico{font-size:clamp(28px,5vw,42px);animation:floatB 3.5s ease-in-out infinite;flex-shrink:0;}
+.mc-title{font-size:clamp(16px,2.5vw,22px);font-weight:900;line-height:1.1;}
+.mct-r{color:var(--red);}
+.mct-g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.mc-sub{font-size:11px;font-weight:600;color:var(--tl);margin-top:3px;}
+.mc-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.mcm-box{background:rgba(255,255,255,.75);border-radius:11px;padding:10px 12px;}
+.mcm-val{font-size:clamp(14px,2vw,18px);font-weight:900;line-height:1.1;margin-bottom:2px;}
+.mcm-lbl{font-size:9.5px;font-weight:600;color:var(--tl);text-transform:uppercase;letter-spacing:.8px;}
+.mc-body{font-size:clamp(12px,1.4vw,13.5px);color:var(--ts);line-height:1.65;}
+.mc-flag{margin-top:10px;padding:8px 12px;border-radius:9px;font-size:12px;font-weight:600;line-height:1.5;}
+.mf-r{background:rgba(220,38,38,.07);color:var(--red);border-left:3px solid var(--red);}
+.mf-g{background:rgba(22,163,74,.07);color:var(--gbr);border-left:3px solid var(--gbr);}
+
+/* ── INFOGRAPHIC ── */
+.infographic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.infographic-svg{width:100%;max-width:620px;margin:0 auto;animation:floatB 4.5s ease-in-out infinite;}
+.infographic-cap{font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;max-width:560px;margin:0 auto;}
+
+/* ── COMPANY BLOCK ── */
+.company-block{border-radius:18px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);margin-bottom:clamp(22px,3.5vw,32px);}
+.cb-header{display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,24px);gap:12px;flex-wrap:wrap;}
+.cb-good{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.cb-bad{background:linear-gradient(135deg,#fef2f2,#fff5f5);}
+.cb-amb{background:linear-gradient(135deg,var(--apale),#fffdf5);}
+.cb-co{display:flex;align-items:center;gap:12px;}
+.cb-logo{width:48px;height:48px;min-width:48px;border-radius:12px;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cb-name{font-size:clamp(13px,1.8vw,17px);font-weight:900;color:var(--tx);line-height:1.2;}
+.cb-sub{font-size:11px;color:var(--tl);margin-top:3px;}
+.cb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.cb-badge{padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;}
+.cb-b-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.cb-b-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.cb-b-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.cb-body{padding:clamp(14px,2.5vw,22px) clamp(16px,3vw,24px);}
+.cb-insight{padding:12px 16px;font-size:12px;color:var(--ts);line-height:1.6;}
+.ci-good{background:rgba(22,163,74,.05);border-top:1px solid rgba(22,163,74,.15);border-left:3px solid var(--gbr);}
+.ci-bad{background:rgba(220,38,38,.04);border-top:1px solid rgba(220,38,38,.12);border-left:3px solid var(--red);}
+.ci-amb{background:rgba(217,119,6,.05);border-top:1px solid rgba(217,119,6,.15);border-left:3px solid var(--amb);}
+
+/* ── TABLE ── */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.ct{width:100%;border-collapse:collapse;min-width:500px;}
+.ct th{background:linear-gradient(135deg,rgba(109,40,217,.07),rgba(109,40,217,.03));padding:8px 13px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:right;white-space:nowrap;}
+.ct th:first-child{text-align:left;}
+.ct td{padding:8px 13px;font-size:12px;color:var(--ts);border-bottom:1px solid rgba(109,40,217,.05);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.ct td:first-child{text-align:left;font-weight:700;color:var(--tx);}
+.ct tr:last-child td{border-bottom:none;}
+.ct tr.total-row td{font-weight:900;background:rgba(109,40,217,.04);border-top:1.5px solid var(--bd);}
+.ct tr.cap-row td:first-child{color:var(--p);}
+.ct tr.acq-row td:first-child{color:var(--ambr);}
+.ct tr.div-row td:first-child{color:var(--gbr);}
+.ct tr.fcf-row td:first-child{color:var(--p);font-weight:900;}
+.ct tr.bad-row td{color:var(--red);}
+.ct tr.section-header td{background:rgba(109,40,217,.04);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);padding:7px 13px 3px;}
+.ct tr:hover td{background:var(--pxs);}
+.col-sticky{position:sticky;left:0;background:var(--wh);z-index:2;box-shadow:2px 0 5px rgba(109,40,217,.05);}
+.ct tr.total-row .col-sticky{background:rgba(109,40,217,.04);}
+.ct tr.section-header .col-sticky{background:rgba(109,40,217,.04);}
+
+/* ── CAPEX INTENSITY METER ── */
+.intensity-wrap{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(10px,2vw,18px);margin-bottom:40px;}
+.intensity-box{border-radius:16px;padding:clamp(12px,2.5vw,20px);text-align:center;border:2px solid;transition:transform .22s;}
+.intensity-box:hover{transform:translateY(-2px);}
+.ib-light{border-color:rgba(22,163,74,.3);background:linear-gradient(158deg,var(--gpale),#f0fdf4);}
+.ib-mid{border-color:rgba(217,119,6,.3);background:linear-gradient(158deg,var(--apale),#fefce8);}
+.ib-heavy{border-color:rgba(220,38,38,.25);background:linear-gradient(158deg,var(--rpale),#fef2f2);}
+.ib-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.ib-range{font-size:clamp(18px,3vw,26px);font-weight:900;margin-bottom:6px;line-height:1;}
+.ib-desc{font-size:11.5px;color:var(--ts);line-height:1.5;margin-bottom:8px;}
+.ib-eg{font-size:11px;font-weight:700;}
+
+/* ── CAVEAT ── */
+.caveat-box{margin-top:32px;background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:16px;}
+.caveat-icon{width:44px;height:44px;min-width:44px;border-radius:13px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(109,40,217,.28);}
+.caveat-body{flex:1;min-width:0;}
+.caveat-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.caveat-title{font-size:clamp(13px,1.5vw,15px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.caveat-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+
+/* ── DEMAT BANNER ── */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* ── NEXT ── */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-banner::after{content:'';position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;display:inline-block;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+
+/* ═══ RESPONSIVE — 11 BREAKPOINTS ═══ */
+img,svg{max-width:100%;height:auto;display:block;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.cfi-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){
+  .cfi-grid{grid-template-columns:repeat(2,1fr);}
+  .model-grid{grid-template-columns:1fr 1fr;}
+  .intensity-wrap{grid-template-columns:repeat(3,1fr);}
+  .infographic-svg{max-width:420px;}
+}
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .hst{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .model-grid{grid-template-columns:1fr;}
+  .caveat-box{flex-direction:column;gap:12px;}
+  .caveat-icon{width:40px;height:40px;min-width:40px;font-size:20px;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;}
+  .dmfeats{gap:10px 20px;}
+  svg{overflow:visible;max-width:100%;}
+  .cb-header{flex-direction:column;align-items:flex-start;}
+  .cb-badges{margin-top:4px;}
+  .cfi-card{padding:14px;}
+  .mc-ico{animation:none;}
+}
+@media(max-width:640px){
+  .cfi-grid{grid-template-columns:1fr 1fr;}
+  .intensity-wrap{grid-template-columns:1fr 1fr;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .infographic-svg{max-width:100%;}
+  .ct th,.ct td{padding:7px 10px;font-size:10.5px;}
+}
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.2px;}.hdesc{font-size:13px;}.hsub{font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .h2{letter-spacing:-1px;}.lead{font-size:13.5px;}
+  .cfi-grid{grid-template-columns:1fr;}
+  .intensity-wrap{grid-template-columns:1fr;}
+  .cfi-card{padding:13px;}.cfi-ico{animation:none;font-size:26px;}
+  .mc-metrics{grid-template-columns:1fr 1fr;}
+  .cb-name{font-size:13px;}.cb-logo{width:40px;height:40px;min-width:40px;font-size:18px;}
+  .caveat-title{font-size:13px;}.caveat-desc{font-size:12.5px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+}
+@media(max-width:360px){
+  .w{padding:26px 12px;}.hh1{font-size:clamp(22px,8.5vw,36px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}.hsi:nth-last-child(-n+2){border-bottom:1px solid var(--bd) !important;}.hsi:last-child{border-bottom:none !important;}
+  .kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}.nxt-btn{font-size:12px;padding:10px 14px;}
+  .intensity-wrap{grid-template-columns:1fr;}
+}
+
+/* TOUCH */
+@media(hover:none) and (pointer:coarse){
+  .cfi-card:hover,.model-card:hover,.intensity-box:hover,.company-block:hover{transform:none !important;box-shadow:var(--shc) !important;}
+  .cfi-card:active,.intensity-box:active{transform:scale(.98);transition:transform .08s;}
+  .dmbtn:active{transform:scale(.97);}.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn,.cfi-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,.cfi-name,.mc-title{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.lead,.caveat-desc,.cfi-body,.cb-insight,.mc-body{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+}
+
+/* iOS */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.hsv,.hsv.g,.h2 .hp,.h2 .hg,.mc-title.mct-g{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn,.cfi-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .table-scroll{-webkit-overflow-scrolling:touch;}
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+}
+
+/* ANDROID HiDPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .cfi-card,.company-block,.caveat-box,.model-card,.intensity-box{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .infographic-svg,.klo-icon{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}.infographic-svg,.klo-icon,.cfi-ico,.mc-ico{animation:none !important;}
+}
+
+/* PRINT */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}.rv{opacity:1;transform:none;}
+  body{color:#000;}.w{padding:20px;}.table-scroll{overflow:visible;}.ct{min-width:0;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="vbadge">Cash Flow Statement Analysis · FA</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Investing Cash Flow — CapEx · Acquisitions · Divestments</div>
+  <h1 class="hh1">
+    <span class="line1">Investing</span>
+    <span class="line2">Cash Flow</span>
+    <span class="line3">CapEx vs Asset-Light — The Defining Difference</span>
+  </h1>
+  <div class="hsub">CFI · Capital Expenditure · Acquisitions · Divestments · Maintenance vs Growth CapEx</div>
+  <p class="hdesc">How a company spends on assets today determines how much it earns tomorrow. The Investing Cash Flow section reveals whether management is building real competitive advantage — or wasting capital on vanity projects.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv r">−CapEx</div><div class="hsl">Asset Purchase</div></div>
+    <div class="hsi"><div class="hsv r">−Acquisitions</div><div class="hsl">Buy Companies</div></div>
+    <div class="hsi"><div class="hsv g">+Divestments</div><div class="hsl">Asset Sales</div></div>
+    <div class="hsi"><div class="hsv">Maintenance</div><div class="hsl">≈ Depreciation</div></div>
+    <div class="hsi"><div class="hsv g">Growth CapEx</div><div class="hsl">Above Dep.</div></div>
+  </div>
+</section>
+
+
+<!-- ══ 01 — KLO ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">CapEx-Heavy vs Asset-Light: <span class="hp">The Most Important Business Model Difference</span></h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">🏗️</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">Investing Cash Flow (CFI) shows every rupee a company spends acquiring assets or receives from selling them. It is almost always negative for a healthy growing company — and that's perfectly fine. The critical skill is distinguishing between necessary, value-creating investment versus wasteful capital destruction.</div>
+        <div class="klo-desc">Imagine two factories. Factory A (Steel Plant) must spend ₹5,000 Cr on new blast furnaces every 10 years just to keep running — and another ₹3,000 Cr to expand. Its CFI is perpetually large and negative. Factory B (Nestle's Maggi plant) spends only ₹700 Cr total on upgrades over the same 10 years because the recipe and brand don't require expensive machinery replacement. Both factories earn ₹1,000 Cr annual profit. But Factory B generates far more Free Cash Flow because it keeps almost all of its profit — while Factory A must reinvest half or more just to maintain current output. This difference — CapEx intensity — is why consumer brands are valued at 40–60× earnings while steel companies trade at 6–8×. The CFI section of the cash flow statement reveals this fundamental difference in one look. Learn to read it and you will never overpay for a capital-hungry business.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-r">🏭 CapEx-heavy = Low FCF</span>
+          <span class="kpill kpill-g">✅ Asset-light = High FCF</span>
+          <span class="kpill kpill-a">🤝 Acquisitions = Risk</span>
+          <span class="kpill kpill-p">💸 Divestments = Watch</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 02 — INFOGRAPHIC + CFI COMPONENTS ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — What Goes Into CFI</div>
+    <h2 class="h2 rv d2">The Three Parts of <span class="hp">Investing Cash Flow</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Every number in the CFI section fits into one of three buckets. Each tells a different story about management's capital allocation choices and the long-term trajectory of the business.</p>
+
+    <!-- SVG infographic -->
+    <div class="rv d3" style="margin-bottom:36px;">
+      <div class="infographic-wrap">
+        <!-- viewBox 0 0 620 480, all coords verified -->
+        <svg class="infographic-svg" viewBox="0 0 620 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="620" height="480" rx="20" fill="#f5f3ff"/>
+          <rect x="14" y="10" width="592" height="34" rx="11" fill="#6d28d9"/>
+          <text x="310" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="white">Investing Cash Flow — What It Contains &amp; What It Signals</text>
+
+          <!-- FACTORY centre -->
+          <rect x="240" y="58" width="140" height="96" rx="10" fill="#6d28d9" opacity=".88"/>
+          <rect x="252" y="72" width="20" height="16" rx="4" fill="#c4b5fd" opacity=".5"/>
+          <rect x="280" y="72" width="20" height="16" rx="4" fill="#c4b5fd" opacity=".5"/>
+          <rect x="308" y="72" width="20" height="16" rx="4" fill="#c4b5fd" opacity=".5"/>
+          <rect x="336" y="72" width="20" height="16" rx="4" fill="#c4b5fd" opacity=".5"/>
+          <rect x="256" y="120" width="76" height="24" rx="5" fill="#4c1d95"/>
+          <polygon points="228,58 310,18 392,58" fill="#7c3aed" opacity=".88"/>
+          <rect x="232" y="24" width="10" height="34" rx="3" fill="#4c1d95"/>
+          <circle cx="237" cy="17" r="7" fill="#a78bfa" opacity=".62"/>
+          <rect x="238" y="158" width="144" height="18" rx="8" fill="#6d28d9"/>
+          <text x="310" y="171" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="white">🏭 Manufacturing Company</text>
+
+          <!-- Analyst character -->
+          <circle cx="310" cy="106" r="0"/>
+
+          <!-- LEFT: CapEx bucket -->
+          <rect x="14" y="58" width="188" height="118" rx="13" fill="#6d28d9" opacity=".9"/>
+          <text x="108" y="82" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="white">🔧 CAPITAL EXPENDITURE</text>
+          <text x="108" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.85)">Buying/building physical assets</text>
+          <text x="108" y="116" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.75)">Land · Buildings · Machines</text>
+          <text x="108" y="130" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.75)">Vehicles · Infrastructure</text>
+          <text x="108" y="146" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.75)">Technology platforms</text>
+          <rect x="28" y="156" width="160" height="14" rx="6" fill="rgba(255,255,255,.18)"/>
+          <text x="108" y="167" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="800" fill="white">Usually largest CFI item</text>
+
+          <!-- CENTRE-BOTTOM: Acquisitions bucket -->
+          <rect x="14" y="194" width="188" height="108" rx="13" fill="#d97706" opacity=".88"/>
+          <text x="108" y="216" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">🤝 ACQUISITIONS</text>
+          <text x="108" y="233" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.85)">Buying entire businesses</text>
+          <text x="108" y="248" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.75)">Strategic: add capability/market</text>
+          <text x="108" y="262" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.75)">Creates goodwill on B/S</text>
+          <text x="108" y="276" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.75)">High risk — hard to integrate</text>
+          <rect x="28" y="284" width="160" height="12" rx="6" fill="rgba(255,255,255,.18)"/>
+          <text x="108" y="294" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="800" fill="white">Watch post-acquisition returns</text>
+
+          <!-- RIGHT: Divestments bucket -->
+          <rect x="418" y="58" width="188" height="118" rx="13" fill="#16a34a" opacity=".9"/>
+          <text x="512" y="82" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">💰 DIVESTMENTS</text>
+          <text x="512" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.85)">Selling assets / subsidiaries</text>
+          <text x="512" y="116" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.75)">Strategic: focus on core biz</text>
+          <text x="512" y="130" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.75)">Distress: paying off debt</text>
+          <text x="512" y="146" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.75)">Makes CFI positive — watch why</text>
+          <rect x="432" y="156" width="160" height="14" rx="6" fill="rgba(255,255,255,.18)"/>
+          <text x="512" y="167" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="800" fill="white">Distress signal if every year</text>
+
+          <!-- RIGHT-BOTTOM: Investments bucket -->
+          <rect x="418" y="194" width="188" height="108" rx="13" fill="#0284c7" opacity=".85"/>
+          <text x="512" y="216" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">📈 INVESTMENTS</text>
+          <text x="512" y="233" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.85)">Buying/selling securities</text>
+          <text x="512" y="248" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.75)">FDs · Mutual funds · Bonds</text>
+          <text x="512" y="262" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.75)">Equity stakes in others</text>
+          <text x="512" y="276" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.75)">Treasury management</text>
+          <rect x="432" y="284" width="160" height="12" rx="6" fill="rgba(255,255,255,.18)"/>
+          <text x="512" y="294" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="800" fill="white">Maruti deploys ₹40,000 Cr here</text>
+
+          <!-- Arrows from factory to buckets -->
+          <path d="M240 110 L202 110" stroke="#6d28d9" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ac1)"/>
+          <path d="M240 138 L204 220" stroke="#d97706" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ac2)"/>
+          <path d="M380 110 L418 110" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ac3)"/>
+          <path d="M380 138 L416 220" stroke="#0284c7" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ac4)"/>
+          <defs>
+            <marker id="ac1" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#6d28d9"/></marker>
+            <marker id="ac2" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#d97706"/></marker>
+            <marker id="ac3" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#16a34a"/></marker>
+            <marker id="ac4" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#0284c7"/></marker>
+          </defs>
+
+          <!-- Maintenance vs Growth CapEx split -->
+          <rect x="14" y="316" width="592" height="70" rx="13" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="310" y="336" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#4c1d95">🔧 CapEx Split: Maintenance vs Growth</text>
+          <rect x="28" y="344" width="280" height="32" rx="9" fill="#fef2f2" stroke="#fecaca" stroke-width="1.2"/>
+          <text x="168" y="358" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="800" fill="#dc2626">Maintenance CapEx ≈ Annual Depreciation</text>
+          <text x="168" y="370" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Must spend this just to stay operational · True operating cost</text>
+          <rect x="318" y="344" width="274" height="32" rx="9" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
+          <text x="455" y="358" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="800" fill="#15803d">Growth CapEx = Total CapEx − Depreciation</text>
+          <text x="455" y="370" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Adds new capacity · Should generate returns &gt; cost of capital</text>
+
+          <!-- CapEx intensity spectrum -->
+          <rect x="14" y="400" width="592" height="66" rx="13" fill="#f5f3ff" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="310" y="418" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#4c1d95">CapEx Intensity Spectrum: CapEx as % of Revenue</text>
+          <!-- Light -->
+          <rect x="26" y="426" width="128" height="30" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
+          <text x="90" y="440" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#15803d">Asset-Light: 1–4%</text>
+          <text x="90" y="452" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Nestle · Asian Paints · Polycab</text>
+          <!-- Mid -->
+          <rect x="164" y="426" width="144" height="30" rx="8" fill="#fefce8" stroke="#fde68a" stroke-width="1.2"/>
+          <text x="236" y="440" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#92400e">Mid-CapEx: 5–10%</text>
+          <text x="236" y="452" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Maruti · Sun Pharma · Infosys</text>
+          <!-- Heavy -->
+          <rect x="318" y="426" width="138" height="30" rx="8" fill="#fef2f2" stroke="#fecaca" stroke-width="1.2"/>
+          <text x="387" y="440" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#dc2626">CapEx-Heavy: 10–20%</text>
+          <text x="387" y="452" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Steel · Cement · Power · Auto</text>
+          <!-- Ultra -->
+          <rect x="466" y="426" width="132" height="30" rx="8" fill="#fef2f2" stroke="#fecaca" stroke-width="1.2"/>
+          <text x="532" y="440" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#dc2626">Infra: 20–40%+</text>
+          <text x="532" y="452" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Telecom · Airports · Highways</text>
+        </svg>
+        <p class="infographic-cap">CFI has four components: CapEx (buying assets), Acquisitions (buying companies), Divestments (selling assets/units), and Investment activity (FDs, securities). CapEx intensity — spending as % of revenue — is the single most important number for comparing business models.</p>
+      </div>
+    </div>
+
+    <!-- CapEx intensity meters -->
+    <div class="tag rv d4" style="margin-bottom:12px;">CapEx Intensity Classification</div>
+    <div class="intensity-wrap rv d4">
+      <div class="intensity-box ib-light">
+        <div class="ib-label" style="color:var(--gbr);">🟢 Asset-Light</div>
+        <div class="ib-range" style="color:var(--gbr);">1–4%</div>
+        <div class="ib-desc">CapEx as % of revenue. Minimal machinery replacement needed. Brand, recipe, or distribution creates value, not iron and steel. FCF is nearly equal to EBITDA.</div>
+        <div class="ib-eg" style="color:var(--gbr);">Nestle India · Asian Paints · Pidilite · Page Industries</div>
+      </div>
+      <div class="intensity-box ib-mid">
+        <div class="ib-label" style="color:var(--ambr);">🟡 Mid-Range</div>
+        <div class="ib-range" style="color:var(--ambr);">5–10%</div>
+        <div class="ib-desc">Significant but manageable capex. Typically a mix of product IP and physical manufacturing. FCF = 50–70% of EBITDA. Returns on invested capital still strong if revenue grows fast enough.</div>
+        <div class="ib-eg" style="color:var(--ambr);">Maruti Suzuki · Sun Pharma · Polycab · Titan</div>
+      </div>
+      <div class="intensity-box ib-heavy">
+        <div class="ib-label" style="color:var(--red);">🔴 CapEx-Heavy</div>
+        <div class="ib-range" style="color:var(--red);">10–25%+</div>
+        <div class="ib-desc">Constant large capital reinvestment required. High depreciation. FCF fraction of reported earnings. These industries require pricing power or monopoly position to earn adequate returns on massive asset base.</div>
+        <div class="ib-eg" style="color:var(--red);">Tata Steel · Ultratech · NTPC · Vodafone Idea</div>
+      </div>
+    </div>
+
+    <!-- 6 CFI component cards -->
+    <div class="tag rv d5" style="margin-bottom:12px;">CFI Components — What Each Means</div>
+    <div class="cfi-grid rv d5">
+      <div class="cfi-card cc-capex">
+        <div class="cfi-ico">🔧</div>
+        <div class="cfi-name">Capital Expenditure (CapEx)</div>
+        <div class="cfi-badge cb-p">Always negative · Largest CFI item</div>
+        <div class="cfi-body">CapEx is cash spent purchasing property, plant, and equipment — the machines, factories, and infrastructure that produce goods. It appears as "Purchase of Fixed Assets" in the cash flow statement. For a cable manufacturer like Polycab, CapEx funds new extrusion machines and factory expansions. For Nestle, it funds food processing equipment and packaging lines.<br><br>CapEx is not an expense in the P&L when incurred — instead it becomes an asset on the balance sheet, then gradually expensed as depreciation over its useful life. This is why CFI and the P&L diverge: a ₹500 Cr machine purchase hits CFI in full immediately, but only ₹50 Cr/year hits the P&L as depreciation for 10 years.</div>
+        <div class="cfi-eg eg-p">FCF = CFO − CapEx. A company with ₹1,000 Cr CFO and ₹800 Cr CapEx has only ₹200 Cr FCF — despite looking profitable. Maruti's ₹5,844 Cr CapEx in FY25 is high but funded from ₹16,112 Cr CFO — comfortable 2.8× coverage.</div>
+      </div>
+
+      <div class="cfi-card cc-maint">
+        <div class="cfi-ico">⚙️</div>
+        <div class="cfi-name">Maintenance CapEx</div>
+        <div class="cfi-badge cb-r">Must-spend · Like rent · Non-negotiable</div>
+        <div class="cfi-body">Maintenance CapEx is the portion of total CapEx that simply keeps existing capacity operational — replacing worn-out machines, refurbishing ageing factory infrastructure, upgrading compliance and safety systems. It creates no new revenue capacity; it merely prevents existing capacity from deteriorating.<br><br>The standard analyst estimate: <strong>Maintenance CapEx ≈ Annual Depreciation charge</strong>. If a company reports ₹300 Cr annual depreciation, it likely needs to spend ₹300 Cr just to stand still. Subtract this from total CapEx to find growth CapEx. For capital-heavy industries (steel, cement), maintenance CapEx alone can consume 80–90% of operating cash flow — leaving almost nothing for growth or shareholder returns.</div>
+        <div class="cfi-eg eg-r">Steel plant: Annual Dep ₹2,000 Cr → Maintenance CapEx ≈ ₹2,000 Cr. If total CapEx is ₹2,200 Cr, only ₹200 Cr is actually growing the business. Nestle: Dep ₹496 Cr, Total CapEx ₹848 Cr — ₹352 Cr is genuine expansion CapEx.</div>
+      </div>
+
+      <div class="cfi-card cc-growth">
+        <div class="cfi-ico">📈</div>
+        <div class="cfi-name">Growth CapEx</div>
+        <div class="cfi-badge cb-g">Value-creating · Should earn &gt;WACC</div>
+        <div class="cfi-body">Growth CapEx is spending beyond maintenance — new factories, new production lines, new geographies. Unlike maintenance CapEx (which is obligatory), growth CapEx is a choice. Management must ensure this spending earns returns above the cost of capital (WACC — typically 10–14% for Indian manufacturers).<br><br>The key analyst test: compare growth CapEx to subsequent revenue growth. If a company spent ₹1,000 Cr in growth CapEx 2 years ago and revenue grew ₹2,000 Cr since — excellent 2× return. If revenue grew only ₹400 Cr — poor 0.4× return. Polycab's Kharkhoda and Halol plant expansions show excellent growth CapEx returns: every ₹1 invested generated ₹3–4 of incremental revenue within 2–3 years.</div>
+        <div class="cfi-eg eg-g">Growth CapEx signal: CapEx growing faster than depreciation + revenue accelerating = management investing wisely. Growth CapEx with flat revenue = capital misallocation — investigate immediately.</div>
+      </div>
+
+      <div class="cfi-card cc-acq">
+        <div class="cfi-ico">🤝</div>
+        <div class="cfi-name">Acquisitions</div>
+        <div class="cfi-badge cb-a">High risk · Creates goodwill · Watch integration</div>
+        <div class="cfi-body">Acquisitions appear in CFI as large, one-time outflows when a company purchases another business entirely. Unlike CapEx (buying specific assets), acquisitions buy the whole enterprise — including management teams, customer relationships, brand equity, and intellectual property — at a premium over book value, creating goodwill.<br><br>Acquisitions have a mixed track record globally: studies show 50–70% of acquisitions destroy value rather than create it. The premium paid is usually too high, integration costs are underestimated, and promised synergies fail to materialise. Warning signs: goodwill impairment charges in subsequent years (Suzlon's ₹2,864 Cr → ₹360 Cr goodwill collapse), revenue stagnation post-acquisition, and management distraction from the core business.</div>
+        <div class="cfi-eg eg-r">Watch: repeated acquisitions without FCF improvement. Sun Pharma's Ranbaxy acquisition (2014) and Taro acquisition are examples where pharma companies built global presence through acquisitions — some successful, some problematic. Always check goodwill as % of total assets post-acquisition.</div>
+      </div>
+
+      <div class="cfi-card cc-div">
+        <div class="cfi-ico">💰</div>
+        <div class="cfi-name">Divestments / Asset Sales</div>
+        <div class="cfi-badge cb-g">Makes CFI positive · Strategic OR distress</div>
+        <div class="cfi-body">Divestments occur when a company sells a subsidiary, a piece of land, a factory, or any long-term asset. They create a positive cash inflow in CFI — and they appear in the P&L as a "profit on sale of assets" (one-time, non-recurring gain that inflates PAT).<br><br>Context is everything: <strong>Strategic divestment</strong> — Selling a non-core business to focus on strengths. Tata Group sold many businesses to fund its core operations and pay down debt strategically. <strong>Distress divestment</strong> — Selling productive assets to generate cash because CFO is insufficient. Jaiprakash Associates sold cement plants, power assets, and real estate year after year — not from strategy, but from desperation. If CFI is positive every year only because of divestments, the business cannot self-fund and is consuming its own asset base.</div>
+        <div class="cfi-eg eg-r">Red flag: CFI positive for 3+ consecutive years without clear strategic rationale. The company is liquidating assets, not growing. Calculate: do total assets grow despite divestments? If assets are shrinking → asset stripping → serious distress signal.</div>
+      </div>
+
+      <div class="cfi-card cc-inv">
+        <div class="cfi-ico">🏦</div>
+        <div class="cfi-name">Financial Investments</div>
+        <div class="cfi-badge cb-s">Treasury activity · Large in cash-rich companies</div>
+        <div class="cfi-body">Many large manufacturers invest surplus cash in financial instruments — fixed deposits, government bonds, mutual funds, and equity stakes in other companies. These appear in CFI as large outflows (when investing) or inflows (when liquidating). This can make CFI look very negative even for cash-rich companies like Maruti Suzuki.<br><br>Maruti's CFI in FY25 was −₹13,956 Cr — but only ₹5,844 Cr was actual CapEx. The remaining ~₹8,112 Cr was deploying surplus cash into short-term instruments (FDs, treasury bonds). This is NOT a sign of heavy capital intensity — it's actually the opposite: so much free cash that the company runs out of productive investment opportunities and parks money in safe instruments. Always separate CapEx from financial investments when analysing CFI.</div>
+        <div class="cfi-eg eg-p">Maruti's ₹40,000 Cr treasury generates ₹3,000–4,000 Cr "other income" annually — essentially a parallel finance business. Nestle, Asian Paints also hold large current investments for the same reason. Separation: True CapEx intensity = CapEx ÷ Revenue (not total CFI ÷ Revenue).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 03 — CAPEX-HEAVY vs ASSET-LIGHT ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — The Model Showdown</div>
+    <h2 class="h2 rv d2"><span class="hp">CapEx-Heavy</span> vs <span class="hg">Asset-Light</span> — Side by Side</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Same revenue. Same reported profit. Completely different investment reality. Understanding why asset-light companies command premium valuations is the most important lesson in capital allocation.</p>
+
+    <div class="model-grid">
+      <div class="model-card mc-heavy rv d3">
+        <div class="mc-header">
+          <span class="mc-ico">🏭</span>
+          <div>
+            <div class="mc-title mct-r">CapEx-Heavy Model</div>
+            <div class="mc-sub">Steel plant · Cement factory · Power generator · Telecom tower</div>
+          </div>
+        </div>
+        <div class="mc-metrics">
+          <div class="mcm-box"><div class="mcm-val" style="color:var(--red);">15–25%</div><div class="mcm-lbl">CapEx / Revenue</div></div>
+          <div class="mcm-box"><div class="mcm-val" style="color:var(--red);">3–6×</div><div class="mcm-lbl">EV/EBITDA typical</div></div>
+          <div class="mcm-box"><div class="mcm-val" style="color:var(--red);">30–50%</div><div class="mcm-lbl">FCF / EBITDA ratio</div></div>
+          <div class="mcm-box"><div class="mcm-val" style="color:var(--red);">High</div><div class="mcm-lbl">D&A burden</div></div>
+        </div>
+        <div class="mc-body">A steel company earns ₹1,000 Cr EBITDA but must spend ₹600 Cr on maintenance CapEx (replacing blast furnace linings, rolling mill equipment, pollution control upgrades) just to keep running at current capacity. Another ₹400 Cr in growth CapEx adds new rolling mill. FCF = ₹1,000 Cr − ₹1,000 Cr total CapEx = ₹0. The business earns well on paper but generates nothing after reinvestment.<br><br>These businesses are highly sensitive to commodity cycles, are difficult to price competitively, require deep domain expertise to manage, and offer little operational flexibility when demand falls because costs are largely fixed.</div>
+        <div class="mc-flag mf-r">🚨 Valuation trap: A 6× P/E on a steel company sounds cheap — but if true FCF (after maintenance CapEx) is only 40% of reported earnings, the real P/FCF is 15× — not cheap at all. Always look at FCF, not PAT, for capital-heavy businesses.</div>
+      </div>
+
+      <div class="model-card mc-light rv d4">
+        <div class="mc-header">
+          <span class="mc-ico">✨</span>
+          <div>
+            <div class="mc-title mct-g">Asset-Light Model</div>
+            <div class="mc-sub">Nestle · Asian Paints · Polycab · Pidilite · Page Industries</div>
+          </div>
+        </div>
+        <div class="mc-metrics">
+          <div class="mcm-box"><div class="mcm-val" style="color:var(--gbr);">1–5%</div><div class="mcm-lbl">CapEx / Revenue</div></div>
+          <div class="mcm-box"><div class="mcm-val" style="color:var(--gbr);">30–60×</div><div class="mcm-lbl">EV/EBITDA typical</div></div>
+          <div class="mcm-box"><div class="mcm-val" style="color:var(--gbr);">80–100%</div><div class="mcm-lbl">FCF / EBITDA ratio</div></div>
+          <div class="mcm-box"><div class="mcm-val" style="color:var(--gbr);">Low</div><div class="mcm-lbl">D&A burden</div></div>
+        </div>
+        <div class="mc-body">Nestle India earns ₹5,186 Cr EBITDA but spends only ₹848 Cr on CapEx (total — both maintenance and growth). FCF = ₹4,338 Cr — 84% of EBITDA converts directly to free cash. The recipe, brand, and distribution network are the competitive moat — not expensive machinery. The Maggi brand required zero additional CapEx to recover from the 2015 ban and grow to record revenue by 2023.<br><br>These businesses scale without proportional capital investment. Adding ₹100 Cr of revenue requires perhaps ₹5 Cr of additional CapEx. This operating leverage is why Nestle, Asian Paints, and similar companies compound at 15–20% annually for decades without issuing a single new share or borrowing a rupee.</div>
+        <div class="mc-flag mf-g">✅ Valuation reality: A 50× P/E on Nestle looks expensive — but FCF yield (FCF/Market Cap) is 4–5% and growing 12–15% annually. Over 7 years, a 15% FCF compounder doubles. The "expensive" stock at 50× today is cheaper than the "cheap" steel stock at 6× when FCF conversion is factored in.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ DEMAT BANNER ══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Start Investing Today</div>
+    <div class="dmh">Compare <span class="dmhs">CapEx Intensity</span> Across Sectors on Screener.in</div>
+    <div class="dmsub">Screen companies by CapEx/Revenue ratio, FCF yield, and asset turnover. Instantly identify asset-light compounders vs capital-hungry traps — free, with 10-year data.</div>
+    <div class="dmfeats">
+      <div class="dmf">CapEx trend over 10 years</div>
+      <div class="dmf">FCF yield vs sector comparison</div>
+      <div class="dmf">Asset turnover and ROCE</div>
+      <div class="dmf">Start investing from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ══ 04 — 5 COMPANY EXAMPLES ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">04 — Real Company CFI Analysis</div>
+    <h2 class="h2 rv d2">5 Companies — <span class="hg">CFI in Action</span> Across Business Models</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five companies span the full spectrum from ultra-asset-light consumer brands to heavily capital-intensive steel producers. Each illustrates a fundamentally different relationship between CapEx, acquisitions, and free cash flow generation.</p>
+
+    <!-- EXAMPLE 1: Nestle India – Ultra Asset-Light -->
+    <div class="company-block rv d3">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);">🍫</div>
+          <div><div class="cb-name">Nestle India — The Gold Standard Asset-Light Model</div><div class="cb-sub">Food Manufacturing · NSE: NESTLEIND · CapEx/Revenue: 3–5% · No acquisitions needed</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ CapEx 3–5% of Revenue</span>
+          <span class="cb-badge cb-b-g">✅ FCF ≈ 80% EBITDA</span>
+          <span class="cb-badge cb-b-g">✅ Zero Acquisitions</span>
+        </div>
+      </div>
+      <div class="cb-body">
+        <div class="table-scroll">
+          <table class="ct">
+            <thead><tr>
+              <th class="col-sticky">CFI Item (₹ Cr)</th>
+              <th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+            </tr></thead>
+            <tbody>
+              <tr class="section-header"><td class="col-sticky" colspan="6">● INVESTING ACTIVITIES</td></tr>
+              <tr class="cap-row"><td class="col-sticky">Purchase of Fixed Assets (CapEx)</td><td>−560</td><td>−636</td><td>−716</td><td>−784</td><td>−848</td></tr>
+              <tr class="acq-row"><td class="col-sticky">Acquisitions</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+              <tr class="div-row"><td class="col-sticky">Investments (net)</td><td>−404</td><td>−376</td><td>−408</td><td>−432</td><td>−460</td></tr>
+              <tr class="total-row"><td class="col-sticky">Total CFI</td><td>−964</td><td>−1,012</td><td>−1,124</td><td>−1,216</td><td>−1,308</td></tr>
+              <tr class="section-header"><td class="col-sticky" colspan="6">● KEY RATIOS</td></tr>
+              <tr><td class="col-sticky">Revenue</td><td>13,281</td><td>14,832</td><td>17,396</td><td>18,673</td><td>19,184</td></tr>
+              <tr class="cap-row"><td class="col-sticky">CapEx ÷ Revenue</td><td>4.2%</td><td>4.3%</td><td>4.1%</td><td>4.2%</td><td>4.4%</td></tr>
+              <tr><td class="col-sticky">Depreciation (P&L)</td><td>308</td><td>352</td><td>396</td><td>444</td><td>496</td></tr>
+              <tr class="div-row"><td class="col-sticky">FCF (CFO − CapEx)</td><td>2,332</td><td>2,298</td><td>2,712</td><td>3,528</td><td>3,632</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="cb-insight ci-good">✅ <strong>CapEx/Revenue steady at 4.1–4.4% for 5 years — textbook asset-light consistency.</strong> Nestle's competitive moat (Maggi, KitKat, Nescafe brands + distribution in 4+ million outlets) requires minimal capital reinvestment to maintain. Brand equity doesn't depreciate and doesn't need a new machine every year. Zero acquisitions across 5 years — Nestle's India operation is purely organic. FCF of ₹3,632 Cr in FY25 on CapEx of only ₹848 Cr shows that ₹4.28 of FCF is generated for every ₹1 of CapEx spent. This ratio — FCF/CapEx of 4.28× — is extraordinarily rare in manufacturing. It explains why Nestle India commands 80× earnings: investors are paying for this phenomenally efficient capital model, not just current-year profits.</div>
+    </div>
+
+    <!-- EXAMPLE 2: Polycab India – Mid-Range, Growth CapEx Productive -->
+    <div class="company-block rv d4">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🔌</div>
+          <div><div class="cb-name">Polycab India — Productive Growth CapEx in Action</div><div class="cb-sub">Wires &amp; Cables · NSE: POLYCAB · CapEx generating strong revenue multiples</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ CapEx/Revenue 2–4%</span>
+          <span class="cb-badge cb-b-g">✅ Revenue 3× while CapEx 2×</span>
+          <span class="cb-badge cb-b-g">✅ FCF Growing Rapidly</span>
+        </div>
+      </div>
+      <div class="cb-body">
+        <div class="table-scroll">
+          <table class="ct">
+            <thead><tr>
+              <th class="col-sticky">CFI Item (₹ Cr)</th>
+              <th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+            </tr></thead>
+            <tbody>
+              <tr class="section-header"><td class="col-sticky" colspan="6">● INVESTING ACTIVITIES</td></tr>
+              <tr class="cap-row"><td class="col-sticky">Purchase of Fixed Assets (CapEx)</td><td>−288</td><td>−392</td><td>−448</td><td>−564</td><td>−648</td></tr>
+              <tr class="acq-row"><td class="col-sticky">Acquisitions (FMEG brand)</td><td>0</td><td>−312</td><td>0</td><td>0</td><td>0</td></tr>
+              <tr class="div-row"><td class="col-sticky">Net Investments</td><td>−400</td><td>−520</td><td>−600</td><td>−684</td><td>−764</td></tr>
+              <tr class="total-row"><td class="col-sticky">Total CFI</td><td>−688</td><td>−1,224</td><td>−1,048</td><td>−1,248</td><td>−1,412</td></tr>
+              <tr class="section-header"><td class="col-sticky" colspan="6">● KEY RATIOS</td></tr>
+              <tr><td class="col-sticky">Revenue</td><td>9,284</td><td>12,204</td><td>14,109</td><td>18,553</td><td>28,884</td></tr>
+              <tr class="cap-row"><td class="col-sticky">CapEx ÷ Revenue</td><td>3.1%</td><td>3.2%</td><td>3.2%</td><td>3.0%</td><td>2.2%</td></tr>
+              <tr class="div-row"><td class="col-sticky">FCF (CFO − CapEx)</td><td>580</td><td>356</td><td>636</td><td>960</td><td>1,800</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="cb-insight ci-good">✅ <strong>CapEx/Revenue actually declined from 3.1% to 2.2% as revenue scaled — operating leverage in pure form.</strong> Polycab invested ₹648 Cr in new plant and equipment in FY25 against revenue of ₹28,884 Cr — the factory capacity built from FY21–23 is now producing revenue without proportional new investment. Revenue grew 3.1× (₹9,284 Cr → ₹28,884 Cr) while CapEx grew only 2.25× (₹288 Cr → ₹648 Cr) — the classic asset-light scaling dynamic. FCF grew 10× (₹580 Cr → ₹1,800 Cr) — even faster than revenue. FY22's acquisition of FMEG brand (fans, lights, switches) was a ₹312 Cr strategic bet — this is now a ₹4,000+ Cr revenue segment. Excellent acquisition return of ~13× in 3 years.</div>
+    </div>
+
+    <!-- EXAMPLE 3: Maruti Suzuki – Mid-Range, Financial Investments Dominate CFI -->
+    <div class="company-block rv d5">
+      <div class="cb-header cb-amb">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🚗</div>
+          <div><div class="cb-name">Maruti Suzuki — Don't Confuse Treasury with CapEx</div><div class="cb-sub">Automobiles · NSE: MARUTI · Total CFI looks alarming — actual CapEx is moderate</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-a">⚠️ CFI −₹14K Cr FY25</span>
+          <span class="cb-badge cb-b-g">✅ True CapEx Only 3.7%</span>
+          <span class="cb-badge cb-b-g">✅ ₹40K Cr Treasury</span>
+        </div>
+      </div>
+      <div class="cb-body">
+        <div class="table-scroll">
+          <table class="ct">
+            <thead><tr>
+              <th class="col-sticky">CFI Item (₹ Cr)</th>
+              <th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+            </tr></thead>
+            <tbody>
+              <tr class="section-header"><td class="col-sticky" colspan="6">● INVESTING ACTIVITIES</td></tr>
+              <tr class="cap-row"><td class="col-sticky">Purchase of Fixed Assets (CapEx)</td><td>−1,924</td><td>−2,148</td><td>−3,124</td><td>−4,448</td><td>−5,844</td></tr>
+              <tr class="div-row"><td class="col-sticky">Net Financial Investments (FDs etc.)</td><td>−2,324</td><td>−1,124</td><td>−4,348</td><td>−8,524</td><td>−8,112</td></tr>
+              <tr class="total-row"><td class="col-sticky">Total CFI</td><td>−4,248</td><td>−3,272</td><td>−7,472</td><td>−12,972</td><td>−13,956</td></tr>
+              <tr class="section-header"><td class="col-sticky" colspan="6">● KEY RATIOS</td></tr>
+              <tr><td class="col-sticky">Revenue</td><td>70,372</td><td>88,130</td><td>1,17,571</td><td>1,38,310</td><td>1,55,876</td></tr>
+              <tr class="cap-row"><td class="col-sticky">True CapEx ÷ Revenue</td><td>2.7%</td><td>2.4%</td><td>2.7%</td><td>3.2%</td><td>3.7%</td></tr>
+              <tr><td class="col-sticky">D&A (proxy maintenance CapEx)</td><td>1,448</td><td>1,556</td><td>1,668</td><td>1,812</td><td>2,012</td></tr>
+              <tr class="div-row"><td class="col-sticky">Growth CapEx (CapEx − D&A)</td><td>+476</td><td>+592</td><td>+1,456</td><td>+2,636</td><td>+3,832</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="cb-insight ci-amb">⚠️→✅ <strong>Total CFI of −₹13,956 Cr looks alarming — but ₹8,112 Cr is NOT CapEx, it's surplus cash deployed in FDs and treasury instruments.</strong> True CapEx is ₹5,844 Cr on ₹1,55,876 Cr revenue = only 3.7% intensity. The rising CapEx trend (₹1,924 Cr → ₹5,844 Cr) reflects the Kharkhoda plant construction — a genuine growth investment that will add 250,000 units/year of SUV capacity from FY26–27. Growth CapEx (total CapEx minus D&A) surging to ₹3,832 Cr signals management's confidence in future demand. The ₹8,112 Cr in financial investments is actually a positive: it represents surplus cash that couldn't be productively deployed in the core business — parked safely in government bonds while earning 7–8% returns and waiting for the next major investment cycle.</div>
+    </div>
+
+    <!-- EXAMPLE 4: Tata Steel – CapEx-Heavy, Cycle-Dependent -->
+    <div class="company-block rv d6">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">⚙️</div>
+          <div><div class="cb-name">Tata Steel — The CapEx-Heavy Reality</div><div class="cb-sub">Steel Manufacturing · NSE: TATASTEEL · Consolidated · CapEx/Revenue 8–12% perpetually</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 CapEx 8–12% Revenue</span>
+          <span class="cb-badge cb-b-r">🚨 FCF Volatile</span>
+          <span class="cb-badge cb-b-a">⚠️ Cycle-Dependent</span>
+        </div>
+      </div>
+      <div class="cb-body">
+        <div class="table-scroll">
+          <table class="ct">
+            <thead><tr>
+              <th class="col-sticky">CFI Item (₹ Cr)</th>
+              <th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+            </tr></thead>
+            <tbody>
+              <tr class="section-header"><td class="col-sticky" colspan="6">● INVESTING ACTIVITIES</td></tr>
+              <tr class="cap-row"><td class="col-sticky">Purchase of Fixed Assets (CapEx)</td><td>−11,248</td><td>−14,364</td><td>−17,812</td><td>−19,248</td><td>−18,924</td></tr>
+              <tr class="acq-row"><td class="col-sticky">Acquisitions (bolt-on)</td><td>−648</td><td>−412</td><td>−824</td><td>−348</td><td>−524</td></tr>
+              <tr class="div-row"><td class="col-sticky">Asset Divestments</td><td>+1,248</td><td>+848</td><td>+1,124</td><td>+924</td><td>+748</td></tr>
+              <tr class="total-row"><td class="col-sticky">Total CFI</td><td>−10,648</td><td>−13,928</td><td>−17,512</td><td>−18,672</td><td>−18,700</td></tr>
+              <tr class="section-header"><td class="col-sticky" colspan="6">● KEY RATIOS</td></tr>
+              <tr><td class="col-sticky">Revenue (Consolidated)</td><td>1,44,688</td><td>2,42,264</td><td>2,43,948</td><td>2,30,612</td><td>2,28,424</td></tr>
+              <tr class="cap-row"><td class="col-sticky">CapEx ÷ Revenue</td><td>7.8%</td><td>5.9%</td><td>7.3%</td><td>8.3%</td><td>8.3%</td></tr>
+              <tr><td class="col-sticky">Depreciation</td><td>8,124</td><td>9,248</td><td>10,812</td><td>11,948</td><td>12,248</td></tr>
+              <tr class="div-row"><td class="col-sticky">FCF (CFO − CapEx) — volatile</td><td>+8,924</td><td>+22,148</td><td>+4,612</td><td>−1,248</td><td>−1,124</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="cb-insight ci-bad">🚨 <strong>CapEx/Revenue of 7.8–8.3% means Tata Steel must reinvest ₹8 of every ₹100 earned just in fixed asset purchases.</strong> With depreciation of ₹12,248 Cr in FY25 against CapEx of ₹18,924 Cr, the growth CapEx is ₹6,676 Cr — most going into the Kalinganagar Phase-2 expansion (2.2 MTPA capacity addition). FCF swung from +₹22,148 Cr (FY22 super-cycle peak) to −₹1,124 Cr (FY25 cycle trough) — a ₹23,272 Cr swing in 3 years driven entirely by steel price cycles, not operational changes. This volatility makes DCF valuation nearly impossible. Regular small divestments (non-core UK assets, small non-profitable units) appear in CFI as positive flows — these reduce the heavy debt load from earlier UK Steel acquisitions. Steel companies are best valued on P/Book or replacement cost, not FCF multiples.</div>
+    </div>
+
+    <!-- EXAMPLE 5: Jaiprakash Associates – Distress Divestments -->
+    <div class="company-block rv d7">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🏗️</div>
+          <div><div class="cb-name">Jaiprakash Associates — Distress Divestments Masking Collapse</div><div class="cb-sub">Infrastructure · NSE: JPASSOCIAT · CFI Positive from Forced Asset Sales</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 CFI Positive = Distress</span>
+          <span class="cb-badge cb-b-r">🚨 Assets Being Liquidated</span>
+          <span class="cb-badge cb-b-r">🚨 Revenue Falling</span>
+        </div>
+      </div>
+      <div class="cb-body">
+        <div class="table-scroll">
+          <table class="ct">
+            <thead><tr>
+              <th class="col-sticky">CFI Item (₹ Cr)</th>
+              <th>FY2019</th><th>FY2020</th><th>FY2021</th><th>FY2022</th><th>FY2023</th>
+            </tr></thead>
+            <tbody>
+              <tr class="section-header"><td class="col-sticky" colspan="6">● INVESTING ACTIVITIES</td></tr>
+              <tr class="cap-row"><td class="col-sticky">Purchase of Fixed Assets (CapEx)</td><td>−448</td><td>−312</td><td>−248</td><td>−224</td><td>−196</td></tr>
+              <tr class="div-row"><td class="col-sticky">Proceeds from Asset Sales</td><td>+3,124</td><td>+2,648</td><td>+2,124</td><td>+1,748</td><td>+1,412</td></tr>
+              <tr class="total-row"><td class="col-sticky">Total CFI</td><td style="color:var(--red);">+2,676</td><td style="color:var(--red);">+2,336</td><td style="color:var(--red);">+1,876</td><td style="color:var(--red);">+1,524</td><td style="color:var(--red);">+1,216</td></tr>
+              <tr class="section-header"><td class="col-sticky" colspan="6">● THE ALARM SIGNALS</td></tr>
+              <tr><td class="col-sticky">Revenue (declining)</td><td>7,832</td><td>6,356</td><td>4,524</td><td>4,244</td><td>3,896</td></tr>
+              <tr class="cap-row"><td class="col-sticky">CapEx ÷ Revenue (shrinking)</td><td>5.7%</td><td>4.9%</td><td>5.5%</td><td>5.3%</td><td>5.0%</td></tr>
+              <tr class="div-row"><td class="col-sticky">Asset Sales (declining as assets run out)</td><td>+3,124</td><td>+2,648</td><td>+2,124</td><td>+1,748</td><td>+1,412</td></tr>
+              <tr class="bad-row"><td class="col-sticky">Interest Expense (vs CFO)</td><td>−3,248</td><td>−2,984</td><td>−2,744</td><td>−2,568</td><td>−2,948</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="cb-insight ci-bad">🚨 <strong>CFI positive every year — not because of investment income, but because Jaiprakash is liquidating its cement plants, power assets, and real estate one by one to pay interest on its ₹24,000+ Cr debt.</strong> Asset sale proceeds declining from ₹3,124 Cr to ₹1,412 Cr over 5 years signals the obvious: the company is running out of saleable assets. CapEx declining from ₹448 Cr to ₹196 Cr means virtually no investment in maintaining or growing the business. Revenue collapsing in tandem (₹7,832 Cr → ₹3,896 Cr) as divested businesses stop contributing. This is the forensic signature of a company in terminal decline: positive CFI from distress asset sales + declining revenue + declining CapEx + massively negative FCF after interest. The asset sale rate declining year-on-year is the most frightening element — when saleable assets run out, the company has nothing left to convert to cash.</div>
+    </div>
+
+    <div class="caveat-box rv d7">
+      <div class="caveat-icon">💡</div>
+      <div class="caveat-body">
+        <div class="caveat-label">The Master CFI Rule</div>
+        <div class="caveat-title">CapEx/Revenue Ratio — The Single Most Revealing Number in CFI</div>
+        <div class="caveat-desc">Across these five examples, CapEx/Revenue is the single most powerful number in the Investing Cash Flow section. Nestle at 4.2% generates FCF nearly equal to EBITDA. Polycab at 2.2% (and declining!) shows a business that needs less capital as it scales. Maruti at 3.7% (true CapEx only) funds a massive SUV expansion from operational surplus. Tata Steel at 8.3% consumes a third of EBITDA just in maintenance. Jaiprakash's CapEx declining toward zero is the clearest sign that management has given up investing in the future. On Screener.in, find "Purchase of Fixed Assets" in the Cash Flow tab, divide by total revenue from the P&L tab, and compare across 5 years. A declining ratio with rising revenue = operating leverage in action. A rising ratio with flat revenue = capital misallocation. This 30-second check will screen out most value traps before you spend another hour on analysis.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ NEXT CHAPTER ══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue your learning journey →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">This page is for educational purposes only. All CFI figures are approximate illustrative estimates rounded for pedagogical clarity. Always verify from official annual reports, BSE/NSE filings, and Screener.in before investing. All equity investments carry market risk. Consult a SEBI-registered investment advisor before investing.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+    },{threshold:.04,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  } else{els.forEach(function(el){el.classList.add('on');});}
+})();
+document.addEventListener('touchstart',function(){},{passive:true});
+document.addEventListener('touchmove',function(){},{passive:true});
+document.addEventListener('touchend',function(){},{passive:true});
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('on');});
+}
+document.body.style.overscrollBehavior='none';
+if(document.fonts&&document.fonts.ready){
+  document.fonts.ready.then(function(){
+    document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});
+  });
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('a,button,.dmbtn,.nxt-btn,.cfi-card,.company-block,.intensity-box').forEach(function(el){
+    el.style.touchAction='manipulation';
+  });
+});
+</script>
+</body>
+</html>

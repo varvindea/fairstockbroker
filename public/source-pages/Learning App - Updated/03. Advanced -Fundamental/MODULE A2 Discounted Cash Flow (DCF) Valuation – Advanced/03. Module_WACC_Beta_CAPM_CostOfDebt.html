@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-title" content="WACC Calculation">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no,address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>WACC – Beta, CAPM, Cost of Debt · DCF Valuation Advanced</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#fff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);--shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.13s}.d3{transition-delay:.20s}.d4{transition-delay:.27s}.d5{transition-delay:.34s}.d6{transition-delay:.42s}
+@keyframes fsd{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes scaleIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff,#f0fdf4 55%,#fdfcff);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.chip::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rule{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:36px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff,#f0fdf4 40%,#fdfcff 70%,#eef4ff);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(30px,7vw,84px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:14px;animation:fsu .88s ease .12s both;}
+.hh1 .l1{display:block;background:linear-gradient(135deg,var(--pl),var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .l2{display:block;background:linear-gradient(135deg,var(--gbr),var(--g),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .l3{display:block;font-size:clamp(13px,2.8vw,36px);background:linear-gradient(135deg,var(--p),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:620px;line-height:1.72;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hstat{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.78);backdrop-filter:blur(12px);animation:fsu .9s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:900px;}
+.hsi{padding:clamp(12px,2vw,22px) clamp(10px,2.5vw,24px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:80px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(11px,1.8vw,18px);font-weight:900;letter-spacing:-.4px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.a{background:linear-gradient(135deg,var(--ambr),var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(8px,1vw,10px);font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+/* KLO */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3.5vw,42px);display:flex;align-items:flex-start;gap:20px;box-shadow:var(--shc);}
+.klo-icon{width:62px;height:62px;min-width:62px;border-radius:18px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;box-shadow:0 8px 26px rgba(109,40,217,.32);animation:floatA 4s ease-in-out infinite;}
+.klo-tag{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.klo-title{font-size:clamp(14px,2vw,19px);font-weight:900;color:var(--tx);margin-bottom:8px;line-height:1.3;}
+.klo-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px;}
+.kp{display:inline-flex;align-items:center;gap:5px;padding:5px 13px;border-radius:100px;font-size:10px;font-weight:700;}
+.kp-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kp-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kp-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kp-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+/* WACC COMPONENT CARDS */
+.wacc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.5vw,26px);margin-bottom:44px;}
+.wc{border-radius:22px;padding:clamp(20px,2.8vw,30px);border:2px solid;transition:transform .28s,box-shadow .28s;}
+.wc:hover{transform:translateY(-5px);box-shadow:var(--shp);}
+.wc-beta{background:linear-gradient(158deg,var(--pxs),#fdfcff);border-color:rgba(109,40,217,.22);}
+.wc-ke{background:linear-gradient(158deg,var(--gpale),#fafffe);border-color:rgba(22,163,74,.22);}
+.wc-kd{background:linear-gradient(158deg,var(--apale),#fffbeb);border-color:rgba(217,119,6,.22);}
+.wc-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px;animation:floatB 3.8s ease-in-out infinite;box-shadow:0 6px 18px rgba(0,0,0,.1);}
+.wi-beta{background:linear-gradient(135deg,var(--p),var(--ph));}
+.wi-ke{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.wi-kd{background:linear-gradient(135deg,var(--amb),#f59e0b);}
+.wc-tag{font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:5px;}
+.wt-beta{color:var(--p);}
+.wt-ke{color:var(--gbr);}
+.wt-kd{color:var(--ambr);}
+.wc-title{font-size:clamp(16px,2vw,22px);font-weight:900;color:var(--tx);margin-bottom:10px;letter-spacing:-.3px;}
+.wc-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;margin-bottom:12px;}
+.wc-formula{background:rgba(255,255,255,.85);border:1.5px solid rgba(0,0,0,.06);border-radius:12px;padding:11px 14px;margin-bottom:12px;}
+.wf-main{font-size:clamp(12px,1.4vw,14px);font-weight:900;color:var(--tx);margin-bottom:4px;}
+.wf-parts{font-size:11.5px;color:var(--ts);line-height:1.6;}
+.wc-steps{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.ws{display:flex;align-items:flex-start;gap:8px;padding:8px 12px;border-radius:10px;font-size:12px;color:var(--ts);line-height:1.5;}
+.ws-p{background:rgba(109,40,217,.07);border-left:3px solid var(--p);}
+.ws-g{background:rgba(22,163,74,.07);border-left:3px solid var(--g);}
+.ws-a{background:rgba(217,119,6,.06);border-left:3px solid var(--amb);}
+.wc-ana{margin-top:12px;padding:10px 13px;border-radius:10px;font-size:12.5px;font-weight:600;line-height:1.6;}
+.wa-beta{background:rgba(109,40,217,.07);color:var(--pl);border-left:3px solid var(--p);}
+.wa-ke{background:rgba(22,163,74,.07);color:var(--gbr);border-left:3px solid var(--g);}
+.wa-kd{background:rgba(217,119,6,.06);color:var(--ambr);border-left:3px solid var(--amb);}
+/* WACC FORMULA STRIP */
+.wacc-strip{background:linear-gradient(135deg,var(--pl),var(--p) 35%,var(--ph) 65%,#065f46);border-radius:22px;padding:clamp(26px,4vw,48px);color:#fff;position:relative;overflow:hidden;margin-bottom:44px;box-shadow:var(--shp);}
+.wacc-strip::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;}
+.ws-inner{position:relative;z-index:1;}
+.ws-badge{display:inline-flex;padding:4px 14px;border-radius:100px;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);margin-bottom:14px;}
+.ws-title{font-size:clamp(16px,2.5vw,28px);font-weight:900;letter-spacing:-.5px;line-height:1.2;margin-bottom:10px;}
+.ws-formula-big{font-size:clamp(14px,2.5vw,22px);font-weight:900;letter-spacing:-.3px;margin-bottom:16px;padding:14px 18px;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.22);border-radius:14px;text-align:center;}
+.ws-parts{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,14px);}
+.wsp{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;padding:clamp(10px,1.5vw,16px);text-align:center;}
+.wsp-lbl{font-size:9px;font-weight:700;opacity:.65;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;}
+.wsp-val{font-size:clamp(11px,1.5vw,14px);font-weight:900;}
+.wsp-note{font-size:9.5px;opacity:.72;line-height:1.4;margin-top:4px;}
+/* SCREENER TABLE */
+.scr-wrap{background:#fff;border:1.5px solid var(--bd);border-radius:22px;overflow:hidden;box-shadow:var(--shp);margin-bottom:32px;}
+.scr-hdr{background:linear-gradient(135deg,var(--pl),var(--p));padding:clamp(16px,2.8vw,24px) clamp(18px,3vw,28px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.sh-title{font-size:clamp(15px,2.2vw,21px);font-weight:900;color:#fff;}
+.sh-sub{font-size:11px;color:rgba(255,255,255,.7);margin-top:3px;}
+.sh-bdgs{display:flex;gap:7px;flex-wrap:wrap;}
+.sh-bdg{padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.22);}
+.scr-guide{padding:10px clamp(18px,3vw,28px);background:var(--pxs);border-bottom:1px solid var(--bd);font-size:12px;color:var(--ts);display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.sg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;display:inline-block;}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.bstbl{width:100%;border-collapse:collapse;min-width:700px;}
+.bstbl th{background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:10px 13px;font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:right;white-space:nowrap;}
+.bstbl th:first-child{text-align:left;min-width:140px;}
+.bstbl td{padding:10px 13px;font-size:12.5px;color:var(--ts);border-bottom:1px solid rgba(109,40,217,.06);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.bstbl td:first-child{text-align:left;font-weight:700;color:var(--tx);}
+.bstbl tr:last-child td{border-bottom:none;}
+.bstbl tr.shdr td{background:rgba(109,40,217,.05);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);padding:10px 13px 5px;}
+.bstbl tr.hi-r td{color:var(--p);font-weight:800;}
+.bstbl tr.g-r td:first-child{color:var(--gbr);}
+.bstbl tr:not(.shdr):hover td{background:var(--pxs);}
+.up{color:var(--gbr);font-weight:800;}.dn{color:var(--red);font-weight:800;}
+.ann{display:inline-flex;padding:1px 7px;border-radius:5px;font-size:9px;font-weight:700;margin-left:5px;}
+.an-p{background:rgba(109,40,217,.09);color:var(--p);}
+.an-g{background:rgba(22,163,74,.08);color:var(--gbr);}
+.an-a{background:rgba(217,119,6,.08);color:var(--ambr);}
+.an-r{background:rgba(220,38,38,.08);color:var(--red);}
+/* INSIGHT */
+.insight{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:20px;padding:clamp(20px,3vw,32px);display:flex;align-items:flex-start;gap:18px;box-shadow:var(--shc);}
+.ins-ico{width:48px;height:48px;min-width:48px;border-radius:14px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 6px 20px rgba(109,40,217,.28);}
+.ins-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.ins-title{font-size:clamp(13px,1.6vw,16px);font-weight:800;color:var(--tx);margin-bottom:7px;}
+.ins-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;}
+.ins-desc strong{color:var(--tx);}
+/* GOOD/BAD */
+.gbh{display:flex;align-items:center;gap:14px;margin-bottom:22px;padding:18px 22px;border-radius:18px;border:1.5px solid var(--bd);}
+.gbh-g{background:linear-gradient(135deg,var(--gpale),#ecfdf5);}
+.gbh-r{background:linear-gradient(135deg,var(--rpale),#fff5f5);}
+.gbh-ico{width:46px;height:46px;min-width:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.gi-g{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.gi-r{background:linear-gradient(135deg,var(--red),#f87171);}
+.gbh-title{font-size:clamp(16px,2vw,22px);font-weight:900;color:var(--tx);}
+.gbh-sub{font-size:12.5px;color:var(--ts);margin-top:3px;}
+.exgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.5vw,24px);margin-bottom:44px;}
+.excard{border-radius:22px;border:1.5px solid var(--bd);background:#fff;padding:clamp(18px,3vw,28px);box-shadow:var(--shc);transition:border-color .26s,box-shadow .26s,transform .26s;position:relative;overflow:hidden;}
+.excard:hover{border-color:rgba(109,40,217,.28);box-shadow:var(--shp);transform:translateY(-4px);}
+.excard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.eg1::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.eg2::before{background:linear-gradient(90deg,var(--g),var(--gh));}
+.eg3::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.eg4::before{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.eg5::before{background:linear-gradient(90deg,#0d9488,#2dd4bf);}
+.eb1::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.eb2::before{background:linear-gradient(90deg,#b91c1c,#fca5a5);}
+.eb3::before{background:linear-gradient(90deg,var(--amb),#fbbf24);}
+.eb4::before{background:linear-gradient(90deg,#7c3aed,var(--red));}
+.eb5::before{background:linear-gradient(90deg,var(--red),var(--amb));}
+.ex-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.ex-logo{width:48px;height:48px;min-width:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.ex-name{font-size:clamp(13px,1.7vw,16px);font-weight:900;color:var(--tx);line-height:1.15;}
+.ex-sec{font-size:11px;color:var(--tl);font-weight:500;margin-top:2px;}
+.vrd{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-size:10px;font-weight:800;margin-bottom:13px;}
+.vg{background:rgba(22,163,74,.12);color:var(--gbr);border:1px solid rgba(22,163,74,.24);}
+.vr{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.22);}
+.enums{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px;}
+.en{border-radius:11px;padding:10px 11px;text-align:center;}
+.en-p{background:rgba(109,40,217,.07);border:1px solid rgba(109,40,217,.14);}
+.en-g{background:rgba(22,163,74,.07);border:1px solid rgba(22,163,74,.13);}
+.en-r{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.13);}
+.en-a{background:rgba(217,119,6,.07);border:1px solid rgba(217,119,6,.14);}
+.en-lbl{font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--tl);margin-bottom:3px;}
+.en-val{font-size:clamp(12px,1.8vw,15px);font-weight:900;}
+.ev-p{color:var(--p);}.ev-g{color:var(--gbr);}.ev-r{color:var(--red);}.ev-a{color:var(--ambr);}
+.ex-why{font-size:clamp(12px,1.35vw,13.5px);color:var(--ts);line-height:1.68;margin-bottom:10px;}
+.ex-why strong{color:var(--tx);}
+.sigs{display:flex;flex-direction:column;gap:6px;margin-top:10px;}
+.sig{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;color:var(--ts);line-height:1.52;}
+.sdot{width:7px;height:7px;min-width:7px;border-radius:50%;margin-top:4px;flex-shrink:0;}
+.sd-g{background:var(--g);}.sd-r{background:var(--red);}
+.sig-hl{margin-top:8px;padding:9px 12px;border-radius:9px;font-size:11.5px;line-height:1.55;}
+.shl-g{background:rgba(22,163,74,.07);border-left:3px solid var(--g);}
+.shl-r{background:rgba(220,38,38,.06);border-left:3px solid var(--red);}
+.exfull{grid-column:1/-1;}
+.ex-inner{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+/* SUMMARY TABLE */
+.sumwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:18px;box-shadow:var(--shc);margin-bottom:32px;}
+.sumtbl{width:100%;border-collapse:collapse;min-width:560px;}
+.sumtbl thead th{background:linear-gradient(135deg,var(--p),var(--ph));color:#fff;padding:12px 15px;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:left;}
+.sumtbl tbody td{padding:12px 15px;font-size:12.5px;color:var(--ts);border-bottom:1px solid var(--bd);vertical-align:middle;line-height:1.5;}
+.sumtbl tbody td:first-child{font-weight:800;color:var(--tx);}
+.sumtbl tbody tr:last-child td{border-bottom:none;}
+.sumtbl tbody tr:nth-child(even) td{background:var(--pxs);}
+.tb{display:inline-flex;padding:2px 9px;border-radius:100px;font-size:10px;font-weight:700;}
+.tb-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.tb-r{background:rgba(220,38,38,.1);color:var(--red);}
+.tb-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+/* TRICKS */
+.tricks-sec{background:linear-gradient(158deg,#f5f3ff,#f0fdf4 55%,#fdfcff);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.tgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2.5vw,24px);margin-bottom:44px;}
+.tc{border-radius:22px;border:2px solid;padding:clamp(20px,3vw,30px);position:relative;overflow:hidden;transition:transform .28s,box-shadow .28s;}
+.tc:hover{transform:translateY(-5px);box-shadow:var(--shp);}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.tc1{background:linear-gradient(158deg,var(--pxs),#fdfcff);border-color:rgba(109,40,217,.2);}
+.tc1::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.tc2{background:linear-gradient(158deg,var(--gpale),#fafffe);border-color:rgba(22,163,74,.2);}
+.tc2::before{background:linear-gradient(90deg,var(--g),var(--gh));}
+.tc3{background:linear-gradient(158deg,var(--rpale),#fff5f5);border-color:rgba(220,38,38,.2);}
+.tc3::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.tc4{background:linear-gradient(158deg,var(--apale),#fffbeb);border-color:rgba(217,119,6,.2);}
+.tc4::before{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.tc5{background:linear-gradient(158deg,var(--skypale),#f0f9ff);border-color:rgba(2,132,199,.2);grid-column:1/-1;}
+.tc5::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.tn{display:inline-flex;width:36px;height:36px;border-radius:11px;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;margin-bottom:14px;}
+.tn1{background:linear-gradient(135deg,var(--p),var(--ph));}
+.tn2{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.tn3{background:linear-gradient(135deg,var(--red),#f87171);}
+.tn4{background:linear-gradient(135deg,var(--amb),#f59e0b);}
+.tn5{background:linear-gradient(135deg,var(--sky),#38bdf8);}
+.tc-sub{font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:6px;}
+.ts1{color:var(--p);}.ts2{color:var(--gbr);}.ts3{color:var(--red);}.ts4{color:var(--ambr);}.ts5{color:var(--sky);}
+.tc-title{font-size:clamp(15px,1.9vw,20px);font-weight:900;color:var(--tx);margin-bottom:10px;letter-spacing:-.3px;}
+.tc-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;margin-bottom:14px;}
+.tc-desc strong{color:var(--tx);}
+.tc-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.ts{display:flex;align-items:flex-start;gap:10px;padding:9px 13px;border-radius:10px;font-size:12.5px;color:var(--ts);line-height:1.52;}
+.ts-p{background:rgba(109,40,217,.07);border-left:3px solid var(--p);}
+.ts-g{background:rgba(22,163,74,.07);border-left:3px solid var(--g);}
+.ts-r{background:rgba(220,38,38,.06);border-left:3px solid var(--red);}
+.ts-a{background:rgba(217,119,6,.06);border-left:3px solid var(--amb);}
+.ts-s{background:rgba(2,132,199,.07);border-left:3px solid var(--sky);}
+.ts-arr{font-weight:900;min-width:18px;flex-shrink:0;}
+.tc-res{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;}
+.tcr-g{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.22);}
+.tcr-a{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(217,119,6,.09);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.tcr-r{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(220,38,38,.08);color:var(--red);border:1px solid rgba(220,38,38,.2);}
+.tc5-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,22px);margin-top:14px;}
+/* CHEAT */
+.cheat{background:linear-gradient(135deg,var(--p),var(--ph),#059669);border-radius:22px;padding:clamp(22px,3.5vw,44px);color:#fff;position:relative;overflow:hidden;margin-bottom:44px;box-shadow:var(--shp);}
+.cheat::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;}
+.cheat-inner{position:relative;z-index:1;}
+.cheat-badge{display:inline-flex;padding:4px 14px;border-radius:100px;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);margin-bottom:14px;}
+.cheat-title{font-size:clamp(17px,2.5vw,30px);font-weight:900;letter-spacing:-.5px;line-height:1.15;margin-bottom:18px;}
+.cheat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.8vw,16px);}
+.ci{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.2);border-radius:14px;padding:clamp(12px,1.8vw,18px);}
+.ci-num{font-size:10px;font-weight:700;opacity:.65;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.ci-name{font-size:clamp(12px,1.5vw,15px);font-weight:900;margin-bottom:5px;}
+.ci-val{font-size:clamp(10px,1.2vw,12px);opacity:.8;line-height:1.52;}
+.ci-good{border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.1);}
+.ci-warn{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.08);}
+.ci-bad{border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.1);}
+/* DEMAT */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240,#4c1d95 35%,#6d28d9 60%,#059669);padding:clamp(44px,7vw,80px) clamp(22px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:680px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:560px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(14px,2.8vw,30px);flex-wrap:wrap;margin-top:18px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'\2713';color:#4ade80;font-weight:900;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:28px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 52px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:52px;touch-action:manipulation;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:7px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.5);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.4);margin-top:6px;}
+/* NXT2 */
+.nxt2{position:relative;overflow:hidden;background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 35%,#7c3aed 60%,#8b5cf6 85%,#a78bfa 100%);padding:clamp(18px,3vw,32px) clamp(22px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:22px;min-height:clamp(72px,10vw,90px);}
+.nxt2::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:26px 26px;pointer-events:none;}
+.nxt2::after{content:'';position:absolute;right:-80px;top:-80px;width:260px;height:260px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.nxt2-left{position:relative;z-index:1;display:flex;flex-direction:column;gap:4px;}
+.nxt2-lbl{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt2-sub{font-size:clamp(14px,1.9vw,18px);color:rgba(255,255,255,.88);font-weight:600;line-height:1.35;}
+.nxt2-arr-txt{font-size:clamp(12px,1.4vw,14px);color:rgba(255,255,255,.5);font-weight:500;margin-top:2px;}
+.nxt2-btn{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;padding:14px clamp(22px,3vw,36px);min-height:52px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:clamp(14px,1.6vw,16px);font-weight:900;border-radius:14px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.48);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.nxt2-btn:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(34,197,94,.6);}
+.nxt2-btn:active{transform:scale(.97);}
+.nxt2-btn-arr{font-size:17px;transition:transform .22s;}
+.nxt2-btn:hover .nxt2-btn-arr{transform:translateX(4px);}
+/* DISC */
+.disc{background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);}
+.disc-inner{max-width:1240px;margin:0 auto;padding:clamp(22px,4vw,44px) clamp(18px,5vw,56px);display:flex;align-items:flex-start;gap:18px;}
+.disc-ico{width:46px;height:46px;min-width:46px;border-radius:13px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.disc-lbl{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;}
+.disc-txt{font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;}
+/* ═══ RESPONSIVE ═══ */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.wacc-grid{grid-template-columns:1fr 1fr;}.tgrid{grid-template-columns:1fr 1fr;}.tc5{grid-column:1/-1;}.cheat-grid{grid-template-columns:repeat(3,1fr);}.ws-parts{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:900px){.wacc-grid{grid-template-columns:1fr;}.exgrid{grid-template-columns:1fr;}.exfull{grid-column:auto;}.ex-inner{grid-template-columns:1fr;gap:0;}.klobanner{flex-direction:column;}.klo-icon{animation:none;}.insight{flex-direction:column;gap:12px;}.gbh{flex-direction:column;gap:10px;}.tgrid{grid-template-columns:1fr;}.tc5{grid-column:auto;}.tc5-inner{grid-template-columns:1fr;gap:12px;}.cheat-grid{grid-template-columns:1fr 1fr;}.nxt2{flex-direction:column;align-items:flex-start;}.nxt2-btn{align-self:stretch;width:100%;justify-content:center;}.ws-parts{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,30px);}.hstat{flex-direction:column;}.hsi{border-right:none !important;border-bottom:1px solid var(--bd);}.hsi:last-child{border-bottom:none;}.dmfeats{flex-direction:column;align-items:flex-start;gap:9px;}.disc-inner{flex-direction:column;gap:12px;}.scr-hdr{flex-direction:column;align-items:flex-start;}.sh-bdgs{flex-wrap:wrap;}.enums{grid-template-columns:1fr 1fr;}.tgrid{grid-template-columns:1fr;}.tc5{grid-column:auto;}.tc5-inner{grid-template-columns:1fr;gap:12px;}.tc-res{flex-direction:column;align-items:flex-start;}.tcr-g,.tcr-a,.tcr-r{width:100%;}.cheat-grid{grid-template-columns:1fr 1fr;}.ws-parts{grid-template-columns:1fr;}}
+@media(max-width:640px){.bstbl{min-width:620px;}.sumtbl{min-width:500px;}.wacc-grid{grid-template-columns:1fr;}.tgrid{grid-template-columns:1fr;}.tc5-inner{grid-template-columns:1fr;}.cheat-grid{grid-template-columns:1fr;}.tc-res{flex-direction:column;align-items:flex-start;}}
+@media(max-width:480px){.w{padding:28px 14px;}.hh1{letter-spacing:-1.2px;}.hstat{flex-wrap:wrap;}.hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}.hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}.vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}.dmbtn{width:100%;justify-content:center;padding:15px 20px;}.nxt2-btn{font-size:14px;padding:13px 18px;}.enums{grid-template-columns:1fr 1fr;}.tgrid{grid-template-columns:1fr;}.tc{padding:18px 16px;}.tc-title{font-size:15px;}.tc5-inner{grid-template-columns:1fr;}.cheat-grid{grid-template-columns:1fr;}.tc-res{flex-direction:column;align-items:flex-start;}.tcr-g,.tcr-a,.tcr-r{width:100%;font-size:10px;}.ts{font-size:12px;padding:8px 11px;}.cheat-title{font-size:17px;}.ci{padding:12px 10px;}.ci-name{font-size:12px;}.ci-val{font-size:10px;}}
+@media(max-width:360px){.w{padding:22px 12px;}.hh1{font-size:clamp(26px,10vw,38px);letter-spacing:-1px;}.dmbtn{font-size:14px;}.enums{grid-template-columns:1fr;}.tc{padding:16px 14px;}.ts{padding:7px 10px;font-size:11.5px;}.cheat-grid{grid-template-columns:1fr;}}
+@media(hover:none) and (pointer:coarse){.excard:hover,.wc:hover,.tc:hover{transform:none !important;box-shadow:var(--shc) !important;}.excard:active,.wc:active,.tc:active{transform:scale(.98);transition:transform .08s;}.dmbtn:active,.nxt2-btn:active{transform:scale(.97);}.dmbtn,.nxt2-btn{min-height:52px;}::-webkit-scrollbar{display:none;}.excard,.wc,.tc,.klobanner,.insight,.cheat{-webkit-backface-visibility:hidden;backface-visibility:hidden;}a,button,.dmbtn,.nxt2-btn,.excard,.wc,.tc{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}.tscroll,.sumwrap{-webkit-overflow-scrolling:touch;}.hh1,.h2,.chip,.eyebrow,.vbadge,.tc-title,.tn{-webkit-user-select:none;user-select:none;}.tc-desc,.ts,.ci-val,.ins-desc,.klo-desc{-webkit-user-select:text;user-select:text;}}
+@supports(-webkit-touch-callout:none){body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}.hero{min-height:100svh;min-height:-webkit-fill-available;padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}.vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}.w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}.nxt2{padding-bottom:max(18px,env(safe-area-inset-bottom));}.dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}.tscroll,.sumwrap{-webkit-overflow-scrolling:touch;overflow-x:auto;}.hp,.hg,.hh1 .l1,.hh1 .l2,.hh1 .l3,.hsv,.hsv.g,.hsv.a{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}.orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}a,button,.dmbtn,.nxt2-btn,.excard,.wc,.tc{-webkit-tap-highlight-color:transparent;}}
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){.dmbtn,.nxt2-btn{min-height:52px;}.excard,.wc,.tc,.klobanner,.insight,.cheat{-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0);transform:translateZ(0);}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}.rv{opacity:1;transform:none;}.wc-icon,.klo-icon{animation:none !important;}}
+@media print{.dmbanner,.orb,.nxt2{display:none;}.rv{opacity:1;transform:none;}body{color:#000;}.w{padding:20px;}.tscroll,.sumwrap{overflow:visible;}.bstbl,.sumtbl{min-width:0;}section,.tc,.tgrid{break-inside:avoid;}.tgrid{grid-template-columns:1fr 1fr;}.cheat-grid{grid-template-columns:1fr 1fr;}.cheat{background:#4c1d95 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<!-- HERO -->
+<section class="hero">
+  <div class="vbadge">DCF Valuation &middot; Advanced</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Module 11 &mdash; WACC Calculation</div>
+  <h1 class="hh1">
+    <span class="l1">What is Your</span>
+    <span class="l2">WACC?</span>
+    <span class="l3">Beta &middot; CAPM &middot; Cost of Debt &middot; Damodaran Data</span>
+  </h1>
+  <p class="hsub">DCF Valuation Advanced &middot; WACC &middot; Beta &middot; CAPM &middot; Indian Listed Companies</p>
+  <p class="hdesc">WACC is the discount rate that converts future free cash flows into today&rsquo;s value. Get it wrong by even 2% and your valuation changes by 30&ndash;40%. This module teaches you to compute WACC correctly for Indian companies using Screener.in and Damodaran&rsquo;s free data.</p>
+  <div class="hstat">
+    <div class="hsi"><div class="hsv">WACC</div><div class="hsl">Discount Rate</div></div>
+    <div class="hsi"><div class="hsv g">Beta</div><div class="hsl">Market Risk</div></div>
+    <div class="hsi"><div class="hsv a">CAPM</div><div class="hsl">Cost of Equity</div></div>
+    <div class="hsi"><div class="hsv">Cost of Debt</div><div class="hsl">After-Tax Kd</div></div>
+    <div class="hsi"><div class="hsv">Damodaran</div><div class="hsl">Free Data Source</div></div>
+  </div>
+</section>
+
+<!-- 01 KLO -->
+<section style="background:#fff;">
+  <div class="w">
+    <div class="chip rv d1">01 &mdash; Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Compute <span class="hp">WACC for Indian Listed Companies</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">By the end of this module you will be able to compute the Weighted Average Cost of Capital (WACC) for any Nifty 500 company &mdash; step by step, using free Screener.in data and Damodaran&rsquo;s India-specific inputs for the risk-free rate, equity risk premium, and sector betas.</p>
+    <div class="klobanner rv d4">
+      <div class="klo-icon">&#9878;&#65039;</div>
+      <div>
+        <div class="klo-tag">Your Core Takeaway &mdash; WACC is the Price of Capital</div>
+        <div class="klo-title">WACC is the minimum return a company must earn on its assets to satisfy both its equity investors and its lenders. It is the &ldquo;hurdle rate&rdquo; for all investments, and the discount rate that converts future free cash flows into today&rsquo;s intrinsic value in a DCF.</div>
+        <div class="klo-desc">Imagine you borrowed &#8377;50,000 from a bank at 10% interest and raised &#8377;50,000 from a friend who expects 15% return. Your total capital is &#8377;1 lakh. To keep both happy, you need to earn at least: (50% &times; 10%) + (50% &times; 15%) = <strong>12.5% on your &#8377;1 lakh investment</strong>. That 12.5% is your WACC. If your business earns 18%, you are creating value (18% &gt; 12.5%). If it earns only 9%, you are destroying value (9% &lt; 12.5%). For a listed company: Equity = market cap (cost = CAPM return shareholders expect), Debt = bonds + loans (cost = interest rate &times; (1 &minus; tax)). WACC brings both together into one discount rate used in every DCF model.</div>
+        <div class="klo-pills">
+          <span class="kp kp-p">&#946; Beta: Market risk of equity</span>
+          <span class="kp kp-g">Ke: Cost of Equity via CAPM</span>
+          <span class="kp kp-a">Kd: After-tax Cost of Debt</span>
+          <span class="kp kp-r">&#128202; Damodaran: Free India data</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WACC explained visually -->
+    <div style="margin-top:40px;" class="rv d5">
+      <svg viewBox="0 0 740 300" style="max-width:740px;width:100%;margin:0 auto;display:block;border-radius:20px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="740" height="300" rx="20" fill="#f5f3ff"/>
+        <rect width="740" height="300" rx="20" stroke="#e5e1fb" stroke-width="1.5"/>
+        <!-- Investor character left -->
+        <circle cx="80" cy="90" r="18" fill="#fde8cc"/>
+        <ellipse cx="80" cy="76" rx="16" ry="6" fill="#1e1b4b"/>
+        <circle cx="74" cy="91" r="2.5" fill="#1e1b4b"/><circle cx="86" cy="91" r="2.5" fill="#1e1b4b"/>
+        <path d="M74 99 Q80 105 86 99" stroke="#1e1b4b" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <rect x="68" y="108" width="24" height="30" rx="7" fill="#6d28d9"/>
+        <rect x="52" y="114" width="16" height="8" rx="4" fill="#6d28d9"/>
+        <rect x="92" y="114" width="16" height="8" rx="4" fill="#6d28d9"/>
+        <rect x="71" y="138" width="9" height="18" rx="4" fill="#4c1d95"/>
+        <rect x="83" y="138" width="9" height="18" rx="4" fill="#4c1d95"/>
+        <text x="80" y="168" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">Equity Investor</text>
+        <text x="80" y="181" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6e6994">Expects Ke = 14%</text>
+        <!-- Bank character right -->
+        <rect x="620" y="66" width="70" height="88" rx="10" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+        <text x="655" y="95" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#15803d">BANK</text>
+        <rect x="632" y="102" width="14" height="18" rx="3" fill="#15803d" opacity=".4"/>
+        <rect x="650" y="102" width="14" height="18" rx="3" fill="#15803d" opacity=".4"/>
+        <rect x="668" y="102" width="14" height="18" rx="3" fill="#15803d" opacity=".4"/>
+        <rect x="638" y="124" width="34" height="22" rx="3" fill="#14532d" opacity=".6"/>
+        <text x="655" y="162" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#15803d">Debt Lender</text>
+        <text x="655" y="175" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6e6994">Charges Kd = 8%</text>
+        <!-- Company in centre -->
+        <rect x="280" y="50" width="180" height="130" rx="14" fill="white" stroke="#6d28d9" stroke-width="2"/>
+        <rect x="280" y="50" width="180" height="38" rx="14" fill="#6d28d9"/>
+        <rect x="280" y="74" width="180" height="14" fill="#6d28d9"/>
+        <text x="370" y="73" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">COMPANY</text>
+        <text x="370" y="102" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6e6994">Total Capital = &#8377;1,000 Cr</text>
+        <text x="370" y="118" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="700" fill="#6d28d9">Equity: &#8377;600 Cr (60%)</text>
+        <text x="370" y="133" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="700" fill="#15803d">Debt: &#8377;400 Cr (40%)</text>
+        <text x="370" y="150" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="#d97706">WACC = ?</text>
+        <text x="370" y="167" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6e6994">Must earn this to satisfy both</text>
+        <!-- Arrows -->
+        <path d="M108 120 L278 120" stroke="#6d28d9" stroke-width="2.5" stroke-dasharray="5 3" marker-end="url(#ap1)"/>
+        <defs><marker id="ap1" markerWidth="7" markerHeight="7" refX="3" refY="3" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#6d28d9"/></marker></defs>
+        <text x="193" y="112" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">Ke = 14%</text>
+        <path d="M620 120 L462 120" stroke="#15803d" stroke-width="2.5" stroke-dasharray="5 3" marker-end="url(#ap2)"/>
+        <defs><marker id="ap2" markerWidth="7" markerHeight="7" refX="3" refY="3" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#15803d"/></marker></defs>
+        <text x="541" y="112" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#15803d">Kd(1-T) = 6%</text>
+        <!-- WACC result -->
+        <rect x="260" y="200" width="220" height="84" rx="14" fill="white" stroke="#d97706" stroke-width="2"/>
+        <text x="370" y="224" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="700" fill="#d97706">WACC CALCULATION</text>
+        <text x="370" y="242" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#3d3868">(60% &times; 14%) + (40% &times; 6%)</text>
+        <text x="370" y="260" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#3d3868">= 8.4% + 2.4%</text>
+        <text x="370" y="278" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="14" font-weight="900" fill="#d97706">WACC = 10.8%</text>
+        <!-- WACC downward arrow -->
+        <path d="M370 182 L370 198" stroke="#d97706" stroke-width="2.5" marker-end="url(#ap3)"/>
+        <defs><marker id="ap3" markerWidth="7" markerHeight="7" refX="3" refY="3" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#d97706"/></marker></defs>
+        <!-- Side labels -->
+        <rect x="14" y="200" width="230" height="80" rx="10" fill="white" opacity=".9"/>
+        <text x="129" y="220" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">If Company earns &gt;10.8%:</text>
+        <text x="129" y="236" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#15803d">&#10004; Creating Value (Good!)</text>
+        <text x="129" y="254" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#dc2626">If Company earns &lt;10.8%:</text>
+        <text x="129" y="270" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#dc2626">&#10007; Destroying Value (Bad!)</text>
+        <rect x="496" y="200" width="230" height="80" rx="10" fill="white" opacity=".9"/>
+        <text x="611" y="220" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#d97706">WACC is the DCF discount rate:</text>
+        <text x="611" y="238" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#3d3868">+1% WACC &rarr; Valuation &minus;10%</text>
+        <text x="611" y="256" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#3d3868">&minus;1% WACC &rarr; Valuation +12%</text>
+        <text x="611" y="274" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">Most sensitive DCF input!</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 02 THREE COMPONENTS -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="chip rv d1">02 &mdash; Three Components of WACC</div>
+    <h2 class="h2 rv d2">Beta, Cost of Equity &amp; <span class="hg">Cost of Debt Explained</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">WACC has three building blocks. Each must be calculated carefully for Indian companies, using India-specific inputs (not US defaults). Damodaran&rsquo;s freely available India data is the professional standard.</p>
+    <div class="wacc-grid rv d3">
+      <!-- BETA -->
+      <div class="wc wc-beta">
+        <div class="wc-icon wi-beta">&#946;</div>
+        <div class="wc-tag wt-beta">Component 1 &mdash; Market Risk Measure</div>
+        <div class="wc-title">Beta (&beta;) &mdash; How Risky is the Stock?</div>
+        <div class="wc-desc">Beta measures how much a stock moves relative to the overall market. A Beta of 1.0 means the stock moves in sync with the market. Beta &gt;1 = more volatile than market (riskier). Beta &lt;1 = less volatile (more stable). Beta = 0 would be a risk-free asset. Beta is used in the CAPM formula to calculate the Cost of Equity. <strong>For Indian companies, use the unlevered beta from Damodaran&rsquo;s India dataset and re-lever it using the company&rsquo;s actual D/E ratio.</strong></div>
+        <div class="wc-formula">
+          <div class="wf-main">Levered Beta = Unlevered Beta &times; [1 + (1 &minus; Tax Rate) &times; (D/E)]</div>
+          <div class="wf-parts">Unlevered Beta = from Damodaran India sector data (pages.stern.nyu.edu/~adamodar) &bull; Tax Rate = effective tax rate from Screener.in P&amp;L &bull; D/E = Total Debt &divide; Market Cap from Balance Sheet + market data</div>
+        </div>
+        <div class="wc-steps">
+          <div class="ws ws-p"><strong>Step 1:</strong> Go to Damodaran&rsquo;s site (pages.stern.nyu.edu/~adamodar) &rarr; Betas by Sector (Emerging Markets) &rarr; find the company&rsquo;s sector row &rarr; note the Unlevered Beta</div>
+          <div class="ws ws-p"><strong>Step 2:</strong> Screener.in Balance Sheet &rarr; get Total Borrowings (Debt) and Market Cap (homepage) &rarr; calculate D/E ratio = Debt &divide; Market Cap</div>
+          <div class="ws ws-p"><strong>Step 3:</strong> Apply formula: Levered Beta = Unlevered Beta &times; [1 + (1 &minus; 0.245) &times; D/E]. Higher D/E = higher Beta = higher Cost of Equity</div>
+        </div>
+        <div class="wc-ana wa-beta">&#128161; <strong>Example (CDSL):</strong> Depository sector Unlevered Beta = ~0.55 (Damodaran India). Zero debt &rarr; D/E = 0. Levered Beta = 0.55 &times; [1 + 0] = <strong>0.55</strong>. CDSL is much less risky than the market (Beta &lt;1) because its revenues are non-cyclical and monopolistic. Compare: Suzlon (wind energy, high debt) has a levered Beta of ~1.8 &mdash; much more volatile.</div>
+      </div>
+      <!-- COST OF EQUITY -->
+      <div class="wc wc-ke">
+        <div class="wc-icon wi-ke">&#128178;</div>
+        <div class="wc-tag wt-ke">Component 2 &mdash; Equity Investor Return</div>
+        <div class="wc-title">Cost of Equity (Ke) &mdash; CAPM Formula</div>
+        <div class="wc-desc">Cost of Equity is the return equity investors require for taking on the risk of owning the company&rsquo;s shares. If a company cannot deliver this return, shareholders will sell the stock. Cost of Equity is calculated using the <strong>Capital Asset Pricing Model (CAPM)</strong>: Ke = Risk-Free Rate + Beta &times; Equity Risk Premium. For India, the risk-free rate is the 10-year G-Sec yield and the ERP comes from Damodaran&rsquo;s India-specific estimate.</div>
+        <div class="wc-formula">
+          <div class="wf-main">Ke = Rf + &beta; &times; ERP</div>
+          <div class="wf-parts">Rf = India 10-Year G-Sec yield (~7.0% as of 2025) &bull; &beta; = Levered Beta (from Step 1) &bull; ERP = Equity Risk Premium for India (~7.5&ndash;8.0% per Damodaran) &bull; All three inputs are free and publicly available</div>
+        </div>
+        <div class="wc-steps">
+          <div class="ws ws-g"><strong>Rf:</strong> RBI website &rarr; current 10-year G-Sec yield (benchmark bond). OR use NSE India G-Sec yields. Currently ~6.8&ndash;7.2% (check current rate before using)</div>
+          <div class="ws ws-g"><strong>ERP:</strong> Damodaran India &rarr; Country Risk Premium for India (~5%) + Mature Market ERP (~4.5%) = India ERP ~7.5&ndash;8%. Updated annually on Damodaran&rsquo;s site</div>
+          <div class="ws ws-g"><strong>CAPM:</strong> Ke = 7.0% + 0.55 &times; 7.5% = 7.0% + 4.1% = <strong>11.1% Cost of Equity for CDSL</strong></div>
+        </div>
+        <div class="wc-ana wa-ke">&#128161; <strong>Plain English:</strong> A CDSL equity investor (buying the stock) requires at least 11.1% annual return. This includes 7% compensation for inflation/opportunity cost (G-Sec rate) + 4.1% compensation for the risk of owning a stock vs a G-Sec. If CDSL cannot deliver 11.1% total return (dividend + share price appreciation), investors will sell and move to safer assets.</div>
+      </div>
+      <!-- COST OF DEBT -->
+      <div class="wc wc-kd">
+        <div class="wc-icon wi-kd">&#127981;</div>
+        <div class="wc-tag wt-kd">Component 3 &mdash; Lender&rsquo;s Required Return</div>
+        <div class="wc-title">Cost of Debt (Kd) &mdash; After-Tax Interest Rate</div>
+        <div class="wc-desc">Cost of Debt is what the company pays lenders &mdash; the interest rate on its borrowings. Since interest payments are <strong>tax-deductible</strong> (they reduce taxable profit), the actual cost to the company is the interest rate after the tax benefit: Kd(after-tax) = Interest Rate &times; (1 &minus; Tax Rate). This is why debt financing is cheaper than equity &mdash; the government subsidises it through tax deductibility. For Indian companies, the Interest Rate is easily derived from Screener.in P&amp;L and Balance Sheet data.</div>
+        <div class="wc-formula">
+          <div class="wf-main">Kd (after-tax) = (Finance Cost &divide; Total Debt) &times; (1 &minus; Tax Rate)</div>
+          <div class="wf-parts">Finance Cost = Screener.in P&amp;L tab &rarr; &ldquo;Finance Cost&rdquo; row &bull; Total Debt = Screener.in Balance Sheet &rarr; &ldquo;Borrowings&rdquo; row &bull; Tax Rate = P&amp;L &rarr; Tax &divide; PBT &bull; Zero debt companies: Kd = 0, WACC = Ke</div>
+        </div>
+        <div class="wc-steps">
+          <div class="ws ws-a"><strong>Pre-tax Rate:</strong> Finance Cost (P&amp;L) &divide; Average Total Debt = actual interest rate charged. E.g., &#8377;200 Cr interest &divide; &#8377;2,000 Cr debt = 10% pre-tax rate</div>
+          <div class="ws ws-a"><strong>After-tax:</strong> 10% &times; (1 &minus; 0.245) = 10% &times; 0.755 = <strong>7.55% after-tax Cost of Debt</strong>. This is what actually costs the company</div>
+          <div class="ws ws-a"><strong>Zero-debt companies</strong> (CDSL, Bajaj Auto): Kd = 0 and WACC = Ke entirely. Much simpler WACC calculation</div>
+        </div>
+        <div class="wc-ana wa-kd">&#128161; <strong>Tax shield analogy:</strong> A company pays &#8377;100 Cr interest. This reduces taxable profit by &#8377;100 Cr &rarr; saves &#8377;24.5 Cr in tax (at 24.5% rate). So the actual out-of-pocket cost of that &#8377;100 Cr interest is only &#8377;75.5 Cr. The after-tax interest rate = effective rate &times; (1 &minus; 24.5%). Equity has no such tax shield &mdash; dividends come from after-tax profits.</div>
+      </div>
+    </div>
+
+    <!-- Full WACC formula strip -->
+    <div class="wacc-strip rv d5">
+      <div class="ws-inner">
+        <div class="ws-badge">The Complete WACC Formula &mdash; Putting It All Together</div>
+        <div class="ws-title">WACC = (Ke &times; E/V) + (Kd &times; (1&minus;T) &times; D/V)</div>
+        <div class="ws-formula-big">WACC = [Cost of Equity &times; Equity Weight] + [Cost of Debt &times; (1&minus;Tax) &times; Debt Weight]</div>
+        <div class="ws-parts">
+          <div class="wsp"><div class="wsp-lbl">Ke (CAPM)</div><div class="wsp-val">Rf + &beta; &times; ERP</div><div class="wsp-note">Risk-Free Rate + Beta &times; Equity Risk Premium &bull; India: ~7% + &beta; &times; 7.5%</div></div>
+          <div class="wsp"><div class="wsp-lbl">E/V (Equity Weight)</div><div class="wsp-val">Market Cap &divide; (MCap + Debt)</div><div class="wsp-note">Use Market Cap (not Book Equity) for weights &bull; Screener.in homepage shows Market Cap</div></div>
+          <div class="wsp"><div class="wsp-lbl">Kd &times; (1&minus;T)</div><div class="wsp-val">Interest Rate &times; 0.755</div><div class="wsp-note">After-tax cost of debt &bull; Finance Cost &divide; Total Debt = pre-tax rate &bull; Multiply by (1&minus;24.5%)</div></div>
+          <div class="wsp"><div class="wsp-lbl">D/V (Debt Weight)</div><div class="wsp-val">Debt &divide; (MCap + Debt)</div><div class="wsp-note">Market value of debt (use book value as proxy for Indian companies) &bull; Screener.in Balance Sheet &rarr; Borrowings</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 SCREENER + DAMODARAN DATA -->
+<section style="background:#fff;">
+  <div class="w">
+    <div class="chip rv d1">03 &mdash; Real WACC Calculation with Screener.in + Damodaran</div>
+    <h2 class="h2 rv d2">CDSL &mdash; <span class="hp">Step-by-Step WACC Worked Example</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">Here is the complete WACC calculation for CDSL, worked out step by step using free publicly available data. Every number below can be verified independently by you in under 10 minutes.</p>
+    <div class="scr-wrap rv d4">
+      <div class="scr-hdr">
+        <div><div class="sh-title">CDSL &mdash; Complete WACC Calculation Workbook</div><div class="sh-sub">Central Depository Services Ltd &middot; NSE: CDSL &middot; FY25 data &middot; All sources linked</div></div>
+        <div class="sh-bdgs"><span class="sh-bdg">Screener.in</span><span class="sh-bdg">Damodaran India</span><span class="sh-bdg">RBI G-Sec</span></div>
+      </div>
+      <div class="scr-guide">
+        <span><span class="sg-dot" style="background:var(--p);"></span> Purple = Beta inputs</span>
+        <span><span class="sg-dot" style="background:var(--gbr);"></span> Green = CAPM / Cost of Equity inputs</span>
+        <span><span class="sg-dot" style="background:var(--ambr);"></span> Amber = Cost of Debt inputs</span>
+        <span><span class="sg-dot" style="background:var(--red);"></span> Red = Final WACC output</span>
+      </div>
+      <div class="tscroll">
+        <table class="bstbl">
+          <thead><tr><th style="text-align:left;">Input / Step</th><th>Value</th><th>Source</th><th>How to Get It</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr class="shdr"><td colspan="5">── STEP 1: BETA (&beta;) ──</td></tr>
+            <tr><td>Sector <span class="ann an-p">Classification</span></td><td style="text-align:left;">Financial Exchanges &amp; Data</td><td>Damodaran India</td><td>Match company to closest Damodaran sector</td><td>CDSL = Financial Exchange / Depository</td></tr>
+            <tr><td>Unlevered Beta <span class="ann an-p">Damodaran</span></td><td>0.55</td><td>pages.stern.nyu.edu/~adamodar</td><td>Betas by Sector &rarr; Emerging Markets tab</td><td>Updated annually by Prof. Damodaran</td></tr>
+            <tr><td>Total Debt (&#8377; Cr) <span class="ann an-p">Screener</span></td><td>~3</td><td>Screener.in BS Tab</td><td>Balance Sheet &rarr; Borrowings row</td><td>Ind AS 116 lease liability only</td></tr>
+            <tr><td>Market Cap (&#8377; Cr) <span class="ann an-p">Screener</span></td><td>~27,000</td><td>Screener.in Homepage</td><td>Company homepage top bar</td><td>Use current market cap (changes daily)</td></tr>
+            <tr><td>D/E Ratio</td><td>0.0001</td><td>Calculated</td><td>Debt &divide; Market Cap = 3 &divide; 27,000</td><td>Effectively ZERO debt</td></tr>
+            <tr><td>Tax Rate <span class="ann an-p">Screener</span></td><td>24.5%</td><td>Screener.in P&amp;L Tab</td><td>Tax &divide; PBT = 5-year average</td><td>Effective rate (not statutory 30%)</td></tr>
+            <tr class="hi-r"><td>Levered Beta (Calculated)</td><td>0.55</td><td>Formula</td><td>0.55 &times; [1 + (1&minus;0.245) &times; 0.0001] = 0.55</td><td>Same as unlevered (zero debt impact)</td></tr>
+            <tr class="shdr"><td colspan="5">── STEP 2: COST OF EQUITY (CAPM) ──</td></tr>
+            <tr><td>Risk-Free Rate (Rf) <span class="ann an-g">G-Sec</span></td><td>7.0%</td><td>RBI / NSE Bonds</td><td>RBI website &rarr; 10-year G-Sec benchmark yield</td><td>Use current rate; updated daily on RBI site</td></tr>
+            <tr><td>Equity Risk Premium (ERP) <span class="ann an-g">Damodaran</span></td><td>7.5%</td><td>pages.stern.nyu.edu/~adamodar</td><td>Country Risk Premium &rarr; India row &rarr; Total ERP</td><td>India ERP = Mature Market ERP + Country Risk</td></tr>
+            <tr class="hi-r g-r"><td>Cost of Equity (Ke) = Rf + &beta;&times;ERP</td><td>11.1%</td><td>CAPM Formula</td><td>7.0% + 0.55 &times; 7.5% = 7.0% + 4.1%</td><td>Return equity investors require</td></tr>
+            <tr class="shdr"><td colspan="5">── STEP 3: COST OF DEBT ──</td></tr>
+            <tr><td>Finance Cost (&#8377; Cr) <span class="ann an-a">Screener</span></td><td>~1</td><td>Screener.in P&amp;L Tab</td><td>P&amp;L &rarr; Finance Cost row</td><td>Minimal (Ind AS 116 lease interest)</td></tr>
+            <tr><td>Pre-Tax Cost of Debt</td><td>~8%</td><td>Estimated</td><td>1 &divide; 3 = ~33% (unreliable at near-zero debt)</td><td>Use market rate proxy instead</td></tr>
+            <tr><td>After-Tax Cost of Debt (Kd)</td><td>~6.0%</td><td>Formula</td><td>8% &times; (1 &minus; 24.5%) = 8% &times; 0.755</td><td>Not material given near-zero debt</td></tr>
+            <tr class="shdr"><td colspan="5">── STEP 4: WACC CALCULATION ──</td></tr>
+            <tr><td>Equity Weight (E/V)</td><td>~99.99%</td><td>Calculated</td><td>27,000 &divide; (27,000 + 3) = 99.99%</td><td>CDSL is entirely equity-funded</td></tr>
+            <tr><td>Debt Weight (D/V)</td><td>~0.01%</td><td>Calculated</td><td>3 &divide; (27,000 + 3) = 0.01%</td><td>Negligible</td></tr>
+            <tr class="hi-r"><td style="color:var(--red);font-weight:900;">WACC (Final)</td><td style="color:var(--red);font-weight:900;">~11.1%</td><td>WACC Formula</td><td>(99.99% &times; 11.1%) + (0.01% &times; 6%) = 11.1%</td><td>Zero debt &rarr; WACC = Ke exactly</td></tr>
+            <tr><td>Implied Intrinsic Value Sensitivity</td><td>&#177;1% WACC</td><td>Sensitivity</td><td>+1% WACC &rarr; DCF value falls ~12&ndash;15%</td><td>Most sensitive DCF input to verify</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="rv d5" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,22px);margin-bottom:32px;">
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--pxs),#fdfcff);border:1.5px solid rgba(109,40,217,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:7px;">&#128202; How to Use Damodaran&rsquo;s Free India Data</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>Step 1:</strong> Google &ldquo;Damodaran beta by sector emerging markets&rdquo; &rarr; click pages.stern.nyu.edu/~adamodar &rarr; Betas by Sector &rarr; download the Excel for Emerging Markets. <strong>Step 2:</strong> Find your company&rsquo;s sector in the leftmost column. Note the &ldquo;Unlevered Beta corrected for cash&rdquo; column (most accurate). <strong>Step 3:</strong> On the same site: Data &rarr; Country Risk Premium &rarr; download Country Risk file &rarr; find India row &rarr; note Total ERP (Equity Risk Premium). <strong>Step 4:</strong> These two inputs (Unlevered Beta + India ERP) are the professional standard used by every top investment bank for Indian DCF models.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--gpale),#fafffe);border:1.5px solid rgba(22,163,74,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:7px;">&#9878;&#65039; WACC for Zero-Debt Companies vs Levered Companies</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>Zero-debt (CDSL, Bajaj Auto, TCS):</strong> D/E = 0 &rarr; Levered Beta = Unlevered Beta &rarr; WACC = Ke only. Simpler calculation, lower WACC (no debt amplification of risk). <strong>Levered companies (Polycab, Reliance):</strong> Debt amplifies Beta &rarr; higher Levered Beta &rarr; higher Ke. But lower WACC through tax shield on interest. The WACC formula trades off: more debt = higher Beta (bad) but lower after-tax cost (good). Optimal capital structure minimises WACC. In practice, for Indian companies with low D/E (&lt;0.3), WACC is very close to Ke.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--apale),#fffbeb);border:1.5px solid rgba(217,119,6,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ambr);margin-bottom:7px;">&#9728;&#65039; Common India-Specific WACC Mistakes to Avoid</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>Mistake 1:</strong> Using US 10-year Treasury (4.2%) as Rf instead of India G-Sec (7%). This underestimates WACC by ~3% &mdash; a massive valuation error. <strong>Mistake 2:</strong> Using a regression Beta from Yahoo Finance &mdash; often based on only 36 months, highly unstable, and uses the wrong market index. Use Damodaran sector Beta instead. <strong>Mistake 3:</strong> Not applying the country risk premium. India&rsquo;s ERP is ~7.5&ndash;8%, not the US ERP of 4.5%. Missing the country risk premium understates Ke by 3&ndash;5%. <strong>Mistake 4:</strong> Using book value of equity (from balance sheet) instead of market cap for weights.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--rpale),#fff5f5);border:1.5px solid rgba(220,38,38,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:7px;">&#128680; WACC Sensitivity &mdash; Why It Matters So Much</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>Example: Company with FY28E FCF of &#8377;500 Cr and 5% terminal growth rate.</strong> At WACC=10%: DCF Value = &#8377;500 &divide; (10%&minus;5%) = &#8377;10,000 Cr. At WACC=12%: DCF Value = &#8377;500 &divide; (12%&minus;5%) = &#8377;7,143 Cr. A 2% change in WACC produced a 28.6% change in valuation. This is why getting Beta, Rf, and ERP right is not academic &mdash; it is the difference between saying a stock is 30% undervalued or 10% overvalued. Always run a WACC sensitivity table (WACC vs terminal growth rate) in every DCF model.</p>
+      </div>
+    </div>
+    <div class="insight rv d6">
+      <div class="ins-ico">&#128269;</div>
+      <div>
+        <div class="ins-tag">The Professional WACC Standard for Indian Companies</div>
+        <div class="ins-title">Rf = India 10-Year G-Sec · Beta = Damodaran Sector (re-levered) · ERP = Damodaran India Total ERP · Kd = Finance Cost / Avg Debt × (1 − Effective Tax Rate)</div>
+        <div class="ins-desc">These four inputs &mdash; all free, all publicly available &mdash; produce a WACC that is defensible in any investment committee or equity research discussion. The single most important rule: <strong>never use a US risk-free rate for an Indian company</strong>. India&rsquo;s G-Sec yield and country risk premium are what make the WACC India-specific. Everything else follows from these anchors.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMAT BANNER -->
+<section class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Apply WACC to Real Indian Stocks</div>
+    <div class="dmh">Open a Free Demat Account &amp;<br><span class="dmhs">Build Your First DCF Model Today.</span></div>
+    <div class="dmsub">Use Screener.in data and Damodaran&rsquo;s free India inputs to compute WACC for any Nifty 500 company. Open a Demat account and start investing with a real margin of safety.</div>
+    <div class="dmfeats"><div class="dmf">&#8377;0 Account Opening Fee</div><div class="dmf">Screener.in Integration</div><div class="dmf">Zero Brokerage on Delivery</div><div class="dmf">SEBI Regulated &amp; Trusted</div></div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn">&#128640;&nbsp; Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmrating">4.8 &middot; Trusted by 1 Crore+ Investors</span></div>
+    <div class="dmnote">No spam. No hidden charges. SEBI registered broker.</div>
+  </div>
+</section>
+
+<!-- 04 GOOD vs BAD -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="chip rv d1">04 &mdash; Good vs Bad WACC Profiles</div>
+    <h2 class="h2 rv d2">WACC in <span class="hp">Real Indian Companies</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">Here are 5 companies with clean, well-computed WACC profiles that make DCF modelling reliable &mdash; and 5 situations where WACC computation is problematic or commonly mis-computed.</p>
+
+    <div class="gbh rv d2 gbh-g">
+      <div class="gbh-ico gi-g">&#10004;</div>
+      <div><div class="gbh-title">5 Companies Where WACC Computation is Clean and Reliable</div><div class="gbh-sub">Low or zero debt &middot; Stable Beta &middot; Clear interest expense &middot; Consistent tax rate &middot; Defensible WACC</div></div>
+    </div>
+    <div class="exgrid">
+      <div class="excard eg1 rv d2">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pmd));">&#128202;</div><div><div class="ex-name">CDSL</div><div class="ex-sec">Depository &middot; NSE: CDSL &middot; Zero Debt</div></div></div>
+        <div class="vrd vg">&#10004; Cleanest WACC: Zero Debt → WACC = Ke = 11.1%</div>
+        <div class="enums">
+          <div class="en en-p"><div class="en-lbl">Beta (&beta;)</div><div class="en-val ev-p">0.55</div></div>
+          <div class="en en-g"><div class="en-lbl">Ke (CAPM)</div><div class="en-val ev-g">11.1%</div></div>
+          <div class="en en-g"><div class="en-lbl">Kd (after-tax)</div><div class="en-val ev-g">0% (no debt)</div></div>
+          <div class="en en-g"><div class="en-lbl">WACC</div><div class="en-val ev-g">~11.1%</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s clean:</strong> CDSL has zero meaningful debt, so WACC equals the Cost of Equity (CAPM) directly. No debt schedule needed, no tax shield calculation, no D/E ratio to compute. Beta from Damodaran&rsquo;s Financial Exchange sector (~0.55) is stable and reasonable given CDSL&rsquo;s monopoly, non-cyclical revenues. Tax rate is consistent at 24.5% for 5 years. The 5-minute WACC computation: Ke = 7% + 0.55 &times; 7.5% = 11.1%. WACC = 11.1%. Done.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Zero debt &rarr; no leverage effect on Beta &rarr; Levered Beta = Unlevered Beta</div>
+          <div class="sig"><div class="sdot sd-g"></div>Stable sector Beta (monopoly + non-cyclical) &rarr; Beta assumption defensible</div>
+          <div class="sig"><div class="sdot sd-g"></div>Consistent 24.5% effective tax rate for 5 years &rarr; no tax rate uncertainty</div>
+          <div class="sig"><div class="sdot sd-g"></div>Market cap stable relative to small lease liability &rarr; weights are always ~100% equity</div>
+        </div>
+      </div>
+      <div class="excard eg2 rv d3">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--gpale),#d1fae5);">&#127949;&#65039;</div><div><div class="ex-name">Bajaj Auto</div><div class="ex-sec">Two-Wheelers &middot; NSE: BAJAJ-AUTO &middot; Cash-Rich, Zero Debt</div></div></div>
+        <div class="vrd vg">&#10004; WACC = Ke; Cash surplus reduces effective Beta further</div>
+        <div class="enums">
+          <div class="en en-p"><div class="en-lbl">Beta (&beta;)</div><div class="en-val ev-p">~0.9</div></div>
+          <div class="en en-g"><div class="en-lbl">Ke (CAPM)</div><div class="en-val ev-g">~13.8%</div></div>
+          <div class="en en-g"><div class="en-lbl">Kd</div><div class="en-val ev-g">0% (no debt)</div></div>
+          <div class="en en-g"><div class="en-lbl">WACC</div><div class="en-val ev-g">~13.8%</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s clean:</strong> Bajaj Auto has zero long-term debt and a massive &#8377;18,000+ Cr cash and investment portfolio. Auto sector unlevered beta from Damodaran ~0.9 is used as-is (no debt to lever up). Some analysts adjust Beta downward for the cash surplus (cash has zero Beta). Effective WACC is ~13.8% using India CAPM: 7% + 0.9 &times; 7.5%. Higher than CDSL because autos are more cyclical (higher Beta). Clean, simple, defensible WACC computation with no debt complication.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Auto sector Beta ~0.9 (Damodaran EM) &rarr; higher than CDSL reflecting cyclicality</div>
+          <div class="sig"><div class="sdot sd-g"></div>Zero LT debt for 10+ years &rarr; no annual D/E ratio recomputation needed</div>
+          <div class="sig"><div class="sdot sd-g"></div>Cash-adjusted Beta (optional): reduces effective Beta if &#8377;18,000 Cr cash factored</div>
+          <div class="sig"><div class="sdot sd-g"></div>Simple WACC = Ke = 13.8% &rarr; any analyst can verify in 5 minutes</div>
+        </div>
+      </div>
+      <div class="excard eg3 rv d4">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--skypale),#e0f2fe);">&#9917;</div><div><div class="ex-name">Polycab India</div><div class="ex-sec">Wires &amp; Cables &middot; NSE: POLYCAB &middot; Low &amp; Falling Debt</div></div></div>
+        <div class="vrd vg">&#10004; Low Debt Makes WACC Simple; Debt Repayment Reduces WACC Over Time</div>
+        <div class="enums">
+          <div class="en en-p"><div class="en-lbl">Beta (&beta;)</div><div class="en-val ev-p">~1.05</div></div>
+          <div class="en en-g"><div class="en-lbl">Ke</div><div class="en-val ev-g">~14.9%</div></div>
+          <div class="en en-a"><div class="en-lbl">Kd (after-tax)</div><div class="en-val ev-a">~6.4%</div></div>
+          <div class="en en-g"><div class="en-lbl">WACC</div><div class="en-val ev-g">~14.2%</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s clean:</strong> Polycab has modest debt (D/E ~0.02) falling toward zero by FY28E. Electrical equipment sector Beta (Damodaran) ~0.88 unlevered; re-levered with D/E 0.02 &rarr; 0.88 &times; [1 + 0.755 &times; 0.02] = 0.89 ≈ 1.05 (using analyst consensus). Ke = 7% + 1.05 &times; 7.5% = 14.9%. Kd = Finance Cost (&#8377;38 Cr) &divide; Avg Debt (&#8377;235 Cr) = 8.5% pre-tax &times; 0.755 = 6.4% after-tax. Debt weight = 1.5%, equity weight = 98.5%. WACC &asymp; 14.2%. As debt falls to zero by FY28E, WACC converges to Ke = 14.9%.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>D/E ratio trending toward zero &rarr; WACC calculation becomes simpler over time</div>
+          <div class="sig"><div class="sdot sd-g"></div>Clear Finance Cost disclosure on Screener.in P&amp;L &rarr; Kd easily computed</div>
+          <div class="sig"><div class="sdot sd-g"></div>Effective tax rate stable at 24.5% &rarr; after-tax Kd calculation reliable</div>
+          <div class="sig"><div class="sdot sd-g"></div>Model WACC as declining from FY26 to FY28 as debt is repaid</div>
+        </div>
+      </div>
+      <div class="excard eg4 rv d5">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--apale),#fef3c7);">&#128187;</div><div><div class="ex-name">TCS</div><div class="ex-sec">IT Services &middot; NSE: TCS &middot; Asset-Light, Minimal Debt</div></div></div>
+        <div class="vrd vg">&#10004; IT Sector Beta Low; Asset-Light Model = Lower WACC</div>
+        <div class="enums">
+          <div class="en en-p"><div class="en-lbl">Beta (&beta;)</div><div class="en-val ev-p">~0.85</div></div>
+          <div class="en en-g"><div class="en-lbl">Ke</div><div class="en-val ev-g">~13.4%</div></div>
+          <div class="en en-g"><div class="en-lbl">Kd</div><div class="en-val ev-g">~0% (no LT debt)</div></div>
+          <div class="en en-g"><div class="en-lbl">WACC</div><div class="en-val ev-g">~13.4%</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s clean:</strong> TCS operates in IT services, a sector with predictable recurring revenue, low capex, and low cyclicality &mdash; all factors that reduce Beta. IT sector unlevered Beta (Damodaran India/EM) ~0.75&ndash;0.85. TCS has no long-term debt (some Ind AS 116 lease liability). Levered Beta &asymp; Unlevered Beta. Ke = 7% + 0.85 &times; 7.5% = 13.4%. WACC = Ke = 13.4%. The IT industry&rsquo;s stable revenue model means analysts can use the same WACC assumption for 3&ndash;5 years without frequent recalculation &mdash; unlike cyclical companies where Beta and WACC change with the cycle.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>IT sector Beta stable over 10 years &rarr; WACC assumption does not need frequent update</div>
+          <div class="sig"><div class="sdot sd-g"></div>Predictable revenue mix = Beta behaves as expected (low correlation to Nifty cycles)</div>
+          <div class="sig"><div class="sdot sd-g"></div>No LT debt &rarr; no leverage effect on Beta &rarr; clean CAPM computation</div>
+          <div class="sig"><div class="sdot sd-g"></div>Large cash balance can be treated as separate from operating assets in WACC</div>
+        </div>
+      </div>
+      <!-- GOOD 5 FULL -->
+      <div class="excard eg5 exfull rv d6">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,#f0fdf4,#d1fae5);">&#127968;</div><div><div class="ex-name">Pidilite Industries &mdash; Brand Moat Justifies Lower Beta Despite Consumer Sector</div><div class="ex-sec">Adhesives &middot; NSE: PIDILITIND &middot; Defensive Consumer Business</div></div></div>
+        <div class="vrd vg">&#10004; Brand Strength Reduces Beta Below Sector Average; Transparent Kd</div>
+        <div class="ex-inner">
+          <div>
+            <div class="enums">
+              <div class="en en-p"><div class="en-lbl">Unlevered Beta</div><div class="en-val ev-p">~0.65</div></div>
+              <div class="en en-g"><div class="en-lbl">Ke (CAPM)</div><div class="en-val ev-g">~11.9%</div></div>
+              <div class="en en-g"><div class="en-lbl">Kd (after-tax)</div><div class="en-val ev-g">~5.5%</div></div>
+              <div class="en en-g"><div class="en-lbl">WACC</div><div class="en-val ev-g">~11.7%</div></div>
+            </div>
+            <div class="ex-why" style="margin-top:12px;"><strong>Why it&rsquo;s clean:</strong> Pidilite&rsquo;s WACC computation has a nuance worth learning: even though it is a consumer/chemical company (which typically has a Beta of 0.8&ndash;1.0), Pidilite&rsquo;s actual Beta is lower (~0.65) because of its extraordinary brand moat (Fevicol). Brand moats reduce earnings cyclicality &rarr; lower Beta. Analysts can justify using the Damodaran specialty chemicals sector Beta (0.70 unlevered) for Pidilite and argue downward adjustment for brand defensibility. D/E is very low (~0.05) &rarr; minimal leverage effect on Beta. WACC is clean and straightforward to defend.</div>
+          </div>
+          <div>
+            <div class="sigs" style="margin-top:0;">
+              <div class="sig"><div class="sdot sd-g"></div>Brand defensibility justifies below-sector-average Beta assumption</div>
+              <div class="sig"><div class="sdot sd-g"></div>Ke = 7% + 0.65 &times; 7.5% = 11.9% &mdash; low for a manufacturer, justified by moat</div>
+              <div class="sig"><div class="sdot sd-g"></div>Very low D/E &rarr; leverage effect minimal &rarr; Kd contribution to WACC &lt;0.2%</div>
+              <div class="sig"><div class="sdot sd-g"></div>Finance Cost clearly disclosed &rarr; pre-tax Kd easily calculated from Screener.in</div>
+              <div class="sig-hl shl-g"><strong>Key learning:</strong> Beta is not purely mechanical &mdash; it requires judgment. Pidilite&rsquo;s extraordinary pricing power (50+ years of Fevicol dominance, no real substitute) reduces earnings volatility relative to the market, which justifies a below-sector Beta. When using Damodaran sector Betas, always ask: is this company more or less defensive than the average company in its sector? Adjust 10&ndash;15% up or down based on your qualitative assessment of the competitive moat. Document your reasoning.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 BAD -->
+    <div class="gbh rv d2 gbh-r" style="margin-top:44px;">
+      <div class="gbh-ico gi-r">&#9888;</div>
+      <div><div class="gbh-title">5 WACC Computation Problems &mdash; Common Errors That Destroy DCF Accuracy</div><div class="gbh-sub">Wrong Rf &middot; Regression Beta &middot; Missing country risk &middot; Book value weights &middot; Ignoring sector</div></div>
+    </div>
+    <div class="exgrid">
+      <div class="excard eb1 rv d2">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">&#127482;&#127480;</div><div><div class="ex-name">Using US Risk-Free Rate for Indian Companies</div><div class="ex-sec">Error: Rf = 4.2% (US Treasury) instead of 7.0% (India G-Sec)</div></div></div>
+        <div class="vrd vr">&#128680; Understates WACC by 2.8% → Overvalues Company by 25–40%</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Wrong Rf</div><div class="en-val ev-r">4.2% (US)</div></div>
+          <div class="en en-g"><div class="en-lbl">Correct Rf</div><div class="en-val ev-g">7.0% (India)</div></div>
+          <div class="en en-r"><div class="en-lbl">WACC Error</div><div class="en-val ev-r">&minus;2.8%</div></div>
+          <div class="en en-r"><div class="en-lbl">Valuation Error</div><div class="en-val ev-r">+30%+</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it matters:</strong> This is the most common WACC error in Indian retail investor models. Using the US 10-year Treasury (4.2%) as the risk-free rate for an Indian company implies that Indian rupee cash flows can be discounted at USD rates &mdash; which is wrong. India has higher inflation, higher nominal interest rates, and higher sovereign risk than the US. The correct risk-free rate for Indian companies is the India 10-year G-Sec yield (~7%). Using 4.2% instead of 7% understates WACC by ~2.8% &rarr; in a Gordon Growth Model DCF, this can overstate intrinsic value by 30&ndash;50%.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>Rf = 4.2% (US Treasury) used for Indian company &rarr; WACC 2.8% too low</div>
+          <div class="sig"><div class="sdot sd-r"></div>2.8% WACC understatement &rarr; 30&ndash;50% DCF overvaluation</div>
+          <div class="sig"><div class="sdot sd-r"></div>Fix: Always use India 10-Year G-Sec yield from RBI for Indian company WACC</div>
+          <div class="sig"><div class="sdot sd-r"></div>RBI website &rarr; Financial Markets &rarr; Government Securities &rarr; 10-Year benchmark yield</div>
+        </div>
+      </div>
+      <div class="excard eb2 rv d3">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fee2e2);">&#128200;</div><div><div class="ex-name">Using Yahoo Finance Regression Beta</div><div class="ex-sec">Error: 36-month regression Beta = 0.45 for a cyclical company actually at 1.1</div></div></div>
+        <div class="vrd vr">&#128680; Short-Period Regression Beta Is Statistically Unreliable</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Yahoo Beta</div><div class="en-val ev-r">0.45</div></div>
+          <div class="en en-g"><div class="en-lbl">Damodaran Beta</div><div class="en-val ev-g">1.1 (sector)</div></div>
+          <div class="en en-r"><div class="en-lbl">Ke Error</div><div class="en-val ev-r">±5%</div></div>
+          <div class="en en-r"><div class="en-lbl">WACC Error</div><div class="en-val ev-r">±4%</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it matters:</strong> Regression Betas computed from 36 months of weekly returns are statistically unreliable with R&sup2; often below 30% for Indian stocks. One unusual market period (COVID crash, geopolitical event) can distort the regression Beta dramatically. A cyclical metal company might show a Beta of 0.45 in a period when the market crashed but the company&rsquo;s stock happened to be range-bound due to unrelated reasons. Its &ldquo;true&rdquo; economic Beta (from Damodaran sector) is 1.1. Using 0.45 understates Ke by 5% and WACC by 4&ndash;5%. Damodaran&rsquo;s sector Beta uses hundreds of companies and 5+ years &mdash; far more statistically stable.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>36-month regression = only 156 weekly observations &rarr; statistically unreliable</div>
+          <div class="sig"><div class="sdot sd-r"></div>COVID period Beta anomalies still affect 5-year regressions</div>
+          <div class="sig"><div class="sdot sd-r"></div>Damodaran sector Beta: 50&ndash;200 comparable companies, 10-year dataset &rarr; far more stable</div>
+          <div class="sig"><div class="sdot sd-r"></div>Fix: Always use Damodaran unlevered sector Beta; re-lever with company&rsquo;s own D/E</div>
+        </div>
+      </div>
+      <div class="excard eb3 rv d4">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--apale),#fef3c7);">&#127758;</div><div><div class="ex-name">Missing the India Country Risk Premium</div><div class="ex-sec">Error: ERP = 4.5% (US Mature Market) instead of 7.5% (India)</div></div></div>
+        <div class="vrd vr">&#128680; Ke 2.3% Too Low; 20% DCF Overvaluation</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Wrong ERP</div><div class="en-val ev-r">4.5% (US)</div></div>
+          <div class="en en-g"><div class="en-lbl">Correct ERP</div><div class="en-val ev-g">~7.5% (India)</div></div>
+          <div class="en en-r"><div class="en-lbl">Ke Error</div><div class="en-val ev-r">&minus;1.7%</div></div>
+          <div class="en en-r"><div class="en-lbl">Valuation Error</div><div class="en-val ev-r">+20%</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it matters:</strong> India&rsquo;s equity risk premium (~7.5&ndash;8%) is materially higher than the US ERP (~4.5%) because India carries higher sovereign risk, political risk, currency risk, and governance risk vs the US market. Damodaran computes India&rsquo;s ERP as: Mature Market ERP (~4.5%) + India Country Risk Premium (~3%). Using just the US ERP of 4.5% for an Indian company&rsquo;s WACC calculation understates the required return by 3 percentage points &mdash; producing a Ke that is far too low and a DCF valuation that is materially overstated. This is a systemic error that affects entire DCF models built by analysts who use US textbook formulas without India adjustment.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>US ERP (4.5%) applied to Indian company &rarr; ignores India-specific risks</div>
+          <div class="sig"><div class="sdot sd-r"></div>Correct: Damodaran India ERP = Mature ERP (4.5%) + India CRP (3%) = 7.5%</div>
+          <div class="sig"><div class="sdot sd-r"></div>At Beta = 1.0: Ke error = 1.0 &times; (7.5% &minus; 4.5%) = 3% understatement</div>
+          <div class="sig"><div class="sdot sd-r"></div>Fix: Download Damodaran Country Risk table annually; use India Total ERP column</div>
+        </div>
+      </div>
+      <div class="excard eb4 rv d5">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,#faf5ff,#ede9fe);">&#128218;</div><div><div class="ex-name">Using Book Value of Equity for WACC Weights</div><div class="ex-sec">Error: Equity weight based on Balance Sheet &ldquo;Reserves + Capital&rdquo; not Market Cap</div></div></div>
+        <div class="vrd vr">&#128680; Equity Weight Severely Understated for Premium-Valued Companies</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Book Equity</div><div class="en-val ev-r">&#8377;1,500 Cr</div></div>
+          <div class="en en-g"><div class="en-lbl">Market Cap</div><div class="en-val ev-g">&#8377;27,000 Cr</div></div>
+          <div class="en en-r"><div class="en-lbl">Weight Error</div><div class="en-val ev-r">Massive</div></div>
+          <div class="en en-r"><div class="en-lbl">WACC Impact</div><div class="en-val ev-r">Severely wrong</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it matters:</strong> For a company like CDSL (Market Cap &#8377;27,000 Cr, Book Equity &#8377;1,550 Cr), using book equity weight instead of market cap weight produces absurd results. Book equity weight with &#8377;3 Cr debt: E/V (book) = 1,550/(1,550+3) = 99.8%. E/V (market) = 27,000/(27,000+3) = 99.99%. Here the difference is small. But for a highly leveraged company: debt &#8377;5,000 Cr, book equity &#8377;2,000 Cr, market cap &#8377;20,000 Cr. Book weights: 29% equity. Market weights: 80% equity. Completely different WACC because debt is cheap and equity is expensive &mdash; the weights determine the blend. WACC finance theory requires <strong>market value weights</strong>.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>Book equity can be 10&ndash;20&times; below market cap for quality businesses</div>
+          <div class="sig"><div class="sdot sd-r"></div>Using book weights overstates debt weight &rarr; understates WACC (debt cheaper than equity)</div>
+          <div class="sig"><div class="sdot sd-r"></div>Finance theory: WACC must use market value weights, not balance sheet book values</div>
+          <div class="sig"><div class="sdot sd-r"></div>Fix: E/V = Market Cap &divide; (Market Cap + Total Debt). D/V = Total Debt &divide; (Market Cap + Total Debt)</div>
+        </div>
+      </div>
+      <!-- BAD 5 FULL -->
+      <div class="excard eb5 exfull rv d6">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fee2e2);">&#9889;</div><div><div class="ex-name">Using the Same WACC for All Companies in a Sector</div><div class="ex-sec">Error: Applying 12% WACC to all auto companies regardless of debt, size, or segment</div></div></div>
+        <div class="vrd vr">&#128680; WACC Varies by Leverage, Cyclicality, and Business Mix Within a Sector</div>
+        <div class="ex-inner">
+          <div>
+            <div class="enums">
+              <div class="en en-r"><div class="en-lbl">Wrong: Same WACC</div><div class="en-val ev-r">12% all autos</div></div>
+              <div class="en en-g"><div class="en-lbl">Bajaj Auto WACC</div><div class="en-val ev-g">~13.8%</div></div>
+              <div class="en en-r"><div class="en-lbl">Tata Motors WACC</div><div class="en-val ev-r">~15.5%</div></div>
+              <div class="en en-a"><div class="en-lbl">Hero MotoCorp</div><div class="en-val ev-a">~13.2%</div></div>
+            </div>
+            <div class="ex-why" style="margin-top:12px;"><strong>Why it matters:</strong> Within the auto sector, WACC varies significantly based on leverage, international operations, and business segment. Bajaj Auto: zero debt, domestic focus &rarr; WACC ~13.8%. Tata Motors: high debt (JLR exposure), cyclical international revenues &rarr; levered Beta much higher &rarr; WACC ~15.5%. Hero MotoCorp: zero debt, domestic two-wheelers only &rarr; WACC ~13.2%. Applying a blanket 12% WACC to all three would undervalue Bajaj (true WACC 13.8% vs assumed 12%) and drastically overvalue Tata Motors (true WACC 15.5% vs assumed 12%). Each company needs its own WACC based on its specific Beta, capital structure, and tax rate.</div>
+          </div>
+          <div>
+            <div class="sigs" style="margin-top:0;">
+              <div class="sig"><div class="sdot sd-r"></div>Sector-average WACC ignores company-specific leverage differences</div>
+              <div class="sig"><div class="sdot sd-r"></div>High-debt company in same sector has higher levered Beta &rarr; higher Ke &rarr; higher WACC</div>
+              <div class="sig"><div class="sdot sd-r"></div>International operations add currency risk not captured in domestic sector Beta</div>
+              <div class="sig"><div class="sdot sd-r"></div>Two-wheeler vs car vs commercial vehicle have different demand cycles and Betas</div>
+              <div class="sig-hl shl-r"><strong>Correct approach:</strong> Compute WACC for each company separately: (1) Get sector unlevered Beta from Damodaran. (2) Re-lever using each company&rsquo;s own D/E ratio. (3) Apply India Rf and ERP. (4) Compute each company&rsquo;s Kd from its own Finance Cost and tax rate. (5) Use each company&rsquo;s own market cap and debt for weights. This takes 10 minutes per company &mdash; not hours &mdash; and produces a WACC that is specific, defensible, and accurate.</div>
+              <div class="sig-hl shl-g" style="margin-top:8px;"><strong>When using one WACC is acceptable:</strong> If you are doing a relative valuation comparison across multiple companies and need a quick sanity check &mdash; a sector-average WACC can serve as a rough benchmark. But it must never be used as the final discount rate in a standalone DCF valuation. The final DCF must always use a company-specific WACC.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary table -->
+    <p class="rv d6" style="font-size:clamp(17px,2.2vw,24px);font-weight:900;color:var(--tx);margin-bottom:22px;">&#128202; WACC Summary &mdash; All 10 at a Glance</p>
+    <div class="sumwrap rv d6">
+      <table class="sumtbl">
+        <thead><tr><th>Company / Error</th><th>Beta (&beta;)</th><th>Ke (CAPM)</th><th>Kd (after-tax)</th><th>WACC</th><th>Key Factor</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>CDSL</td><td>0.55</td><td>11.1%</td><td>0%</td><td>~11.1%</td><td>Zero debt; monopoly reduces Beta</td><td><span class="tb tb-g">&#10004; Cleanest</span></td></tr>
+          <tr><td>Bajaj Auto</td><td>~0.90</td><td>~13.8%</td><td>0%</td><td>~13.8%</td><td>Zero debt; cyclical sector Beta</td><td><span class="tb tb-g">&#10004; Simple</span></td></tr>
+          <tr><td>Polycab</td><td>~1.05</td><td>~14.9%</td><td>~6.4%</td><td>~14.2%</td><td>Low declining debt; WACC falls over time</td><td><span class="tb tb-g">&#10004; Low Debt</span></td></tr>
+          <tr><td>TCS</td><td>~0.85</td><td>~13.4%</td><td>0%</td><td>~13.4%</td><td>IT sector; defensive recurring revenues</td><td><span class="tb tb-g">&#10004; Stable</span></td></tr>
+          <tr><td>Pidilite</td><td>~0.65</td><td>~11.9%</td><td>~5.5%</td><td>~11.7%</td><td>Brand moat justifies sub-sector Beta</td><td><span class="tb tb-g">&#10004; Defensible</span></td></tr>
+          <tr><td>US Rf Error</td><td>Any</td><td>2.8% too low</td><td>Normal</td><td>~2.8% too low</td><td>Overvalues by 30%+</td><td><span class="tb tb-r">&#128680; Fatal Error</span></td></tr>
+          <tr><td>Yahoo Beta Error</td><td>0.45 (should be 1.1)</td><td>5% too low</td><td>Normal</td><td>~4% too low</td><td>DCF significantly overstated</td><td><span class="tb tb-r">&#128680; Unreliable</span></td></tr>
+          <tr><td>Missing India ERP</td><td>Any</td><td>3% too low</td><td>Normal</td><td>~3% too low</td><td>20% overvaluation</td><td><span class="tb tb-r">&#128680; Systematic</span></td></tr>
+          <tr><td>Book Value Weights</td><td>Any</td><td>Normal</td><td>Normal</td><td>Wrong mix</td><td>Debt overstated; equity understated</td><td><span class="tb tb-r">&#128680; Theory Error</span></td></tr>
+          <tr><td>Sector-Average WACC</td><td>Averaged</td><td>Averaged</td><td>Averaged</td><td>12% for all</td><td>Ignores leverage and segment differences</td><td><span class="tb tb-a">&#9888; Benchmark Only</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight rv d6">
+      <div class="ins-ico">&#127919;</div>
+      <div>
+        <div class="ins-tag">The Golden Rule for Indian Company WACC</div>
+        <div class="ins-title">Rf = India G-Sec (7%) · Beta = Damodaran Sector (Re-levered) · ERP = Damodaran India (~7.5%) · Kd = Finance Cost/Debt × (1−Tax) · Weights = Market Value</div>
+        <div class="ins-desc">These five rules eliminate all the most common WACC errors seen in Indian DCF models. The data for all five is free: RBI website (Rf), Damodaran&rsquo;s site (Beta + ERP), Screener.in P&amp;L (Finance Cost, Tax), and Screener.in Homepage (Market Cap). A correctly computed WACC for any Nifty 500 company takes under 15 minutes. Getting it right is the difference between a DCF that finds genuine undervaluation and one that creates false confidence through a systematically wrong discount rate.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 TRICKS -->
+<section class="tricks-sec">
+  <div class="w">
+    <div class="chip rv d1">05 &mdash; Tricks to Compute WACC Fast</div>
+    <h2 class="h2 rv d2">5 Shortcuts to <span class="hp">WACC in Under 15 Minutes</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">These field-tested tricks let you compute a professional-grade WACC for any Indian listed company using free data &mdash; without spreadsheet complexity.</p>
+    <div class="tgrid rv d3">
+      <div class="tc tc1">
+        <div class="tn tn1">1</div>
+        <div class="tc-sub ts1">Damodaran India Data</div>
+        <div class="tc-title">The &ldquo;Sector Beta in 60 Seconds&rdquo; Trick</div>
+        <div class="tc-desc">Google &ldquo;Damodaran beta by sector emerging markets&rdquo; &rarr; first result is the Damodaran Excel download. Download it, find your company&rsquo;s sector, and note the <strong>Unlevered Beta corrected for cash</strong> (most accurate column). This entire step takes 60 seconds. The sectors most relevant for Indian companies: Software/IT, Consumer Staples, Auto, Pharma, Financial Services, Capital Goods, Metals &amp; Mining, Telecom. Match to the closest one &mdash; do not try to find an exact match.</div>
+        <div class="tc-steps">
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Google: &ldquo;Damodaran betas by sector emerging markets&rdquo;</div>
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Download Excel &rarr; Column B = Sector &rarr; Column E = Unlevered Beta (corrected)</div>
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Match your company to closest sector &rarr; note the Unlevered Beta</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; IT/Software: ~0.75&ndash;0.85</span>
+          <span class="tcr-g">&#10004; Consumer Staples: ~0.55&ndash;0.70</span>
+          <span class="tcr-a">&#9888; Auto: ~0.88&ndash;1.0</span>
+        </div>
+      </div>
+      <div class="tc tc2">
+        <div class="tn tn2">2</div>
+        <div class="tc-sub ts2">Screener.in &mdash; D/E in 30 Seconds</div>
+        <div class="tc-title">The &ldquo;D/E Ratio Fast Calculation&rdquo; Trick</div>
+        <div class="tc-desc">You need D/E ratio to re-lever the Beta. On Screener.in: <strong>Market Cap</strong> is on the company homepage top bar (updated live). <strong>Total Debt</strong> = Balance Sheet tab &rarr; Borrowings row &rarr; latest year. D/E = Total Borrowings &divide; Market Cap. If D/E &lt; 0.05, the leverage adjustment to Beta is negligible (&lt;4% change) &mdash; just use the unlevered Beta directly as the levered Beta and save the calculation step. This covers most quality Indian companies (CDSL, Bajaj Auto, TCS, Infosys, Pidilite, Nestle) where debt is minimal.</div>
+        <div class="tc-steps">
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> Screener.in company page: note Market Cap (top bar)</div>
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> Balance Sheet tab &rarr; Borrowings row &rarr; latest year value</div>
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> D/E = Borrowings &divide; Market Cap. If &lt;0.05: skip re-levering</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; D/E &lt;0.05: use Unlevered Beta directly as Levered Beta</span>
+          <span class="tcr-a">&#9888; D/E 0.05&ndash;0.3: apply full Hamada equation</span>
+          <span class="tcr-r">&#10007; D/E &gt;0.5: Beta and WACC change significantly with leverage</span>
+        </div>
+      </div>
+      <div class="tc tc3">
+        <div class="tn tn3">3</div>
+        <div class="tc-sub ts3">Screener.in &mdash; P&amp;L Tab</div>
+        <div class="tc-title">The &ldquo;Effective Tax Rate from Screener&rdquo; Trick</div>
+        <div class="tc-desc">You need effective tax rate for both the Beta re-levering formula and the after-tax Cost of Debt calculation. <strong>Never use the statutory 30% tax rate.</strong> Most Indian companies pay 22&ndash;25.17% under the new concessional regime (Sections 115BAA / 115BAB). Get the actual effective rate: Screener.in P&amp;L tab &rarr; &ldquo;Tax&rdquo; row &divide; &ldquo;Profit before tax&rdquo; row for the latest 3 years &rarr; average. This is the rate the company actually pays &mdash; the one that determines the real after-tax cost of debt and Beta calculation.</div>
+        <div class="tc-steps">
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Screener.in &rarr; P&amp;L tab &rarr; Tax row &divide; PBT row = effective tax rate</div>
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Do this for 3 years &rarr; average (ignore one-off deferred tax years)</div>
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Use this rate in: (1) Hamada equation, and (2) Kd &times; (1 &minus; Tax Rate)</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; Most large companies: 24&ndash;25.17% effective rate</span>
+          <span class="tcr-a">&#9888; Some still at 34% (not opted for new regime)</span>
+          <span class="tcr-r">&#10007; Never use 30% statutory rate for WACC</span>
+        </div>
+      </div>
+      <div class="tc tc4">
+        <div class="tn tn4">4</div>
+        <div class="tc-sub ts4">RBI + Damodaran &mdash; Two-Minute CAPM</div>
+        <div class="tc-title">The &ldquo;India CAPM in 2 Minutes&rdquo; Trick</div>
+        <div class="tc-desc">Once you have Beta, Ke = Rf + Beta &times; ERP takes 10 seconds to compute. For India as of 2025: <strong>Rf = India 10-Year G-Sec yield (~7.0%)</strong> from RBI website or NSE bond data. <strong>ERP = India Total ERP (~7.5%)</strong> from Damodaran&rsquo;s Country Risk Excel (updated January each year). For most companies, Ke will range between 10% (very low Beta, stable businesses) and 18% (high Beta, cyclical or high-debt). If your Ke is below 10% for an Indian company, double-check your Rf and ERP &mdash; you are likely using US inputs by mistake.</div>
+        <div class="tc-steps">
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Rf: RBI &rarr; Markets &rarr; Bond market &rarr; 10Y G-Sec yield (or NSE bonds page)</div>
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> ERP: Damodaran site &rarr; Country Risk &rarr; India row &rarr; &ldquo;Total ERP&rdquo; column</div>
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Ke = Rf + (Levered Beta &times; ERP). Cross-check: Ke should be 10&ndash;18% for Indian companies</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; Ke 10&ndash;13%: stable, low-Beta businesses (CDSL, Nestle)</span>
+          <span class="tcr-a">&#9888; Ke 13&ndash;16%: moderate-Beta (auto, chemicals)</span>
+          <span class="tcr-r">&#10007; Ke &lt;10%: recheck &mdash; likely using wrong Rf or ERP</span>
+        </div>
+      </div>
+      <!-- TRICK 5 FULL -->
+      <div class="tc tc5">
+        <div class="tn tn5">5</div>
+        <div class="tc-sub ts5">Screener.in + All Sources &mdash; Full WACC in 15 Minutes</div>
+        <div class="tc-title">The Complete &ldquo;15-Minute WACC Worksheet&rdquo; &mdash; Zero-to-WACC for Any Nifty 500 Company</div>
+        <div class="tc-desc">Combine all four tricks into a systematic 15-minute workflow. Print this checklist, fill it in for any company, and you have a professionally defensible WACC. Everything below uses free, publicly available data.</div>
+        <div class="tc5-inner">
+          <div>
+            <div class="tc-steps">
+              <div class="ts ts-s"><span class="ts-arr">1.</span> <strong>Sector Beta:</strong> Damodaran EM Excel &rarr; find sector &rarr; note Unlevered Beta (corrected)</div>
+              <div class="ts ts-s"><span class="ts-arr">2.</span> <strong>D/E ratio:</strong> Screener.in &rarr; Borrowings &divide; Market Cap (if &lt;0.05: skip re-levering)</div>
+              <div class="ts ts-s"><span class="ts-arr">3.</span> <strong>Tax rate:</strong> P&amp;L tab &rarr; Tax &divide; PBT &rarr; 3-year average effective rate</div>
+              <div class="ts ts-s"><span class="ts-arr">4.</span> <strong>Levered Beta:</strong> Unlevered &times; [1 + (1&minus;Tax) &times; D/E]. Zero debt? Skip.</div>
+            </div>
+          </div>
+          <div>
+            <div class="tc-steps">
+              <div class="ts ts-s"><span class="ts-arr">5.</span> <strong>Rf:</strong> RBI 10-Year G-Sec yield (currently ~7%). Check before each model.</div>
+              <div class="ts ts-s"><span class="ts-arr">6.</span> <strong>ERP:</strong> Damodaran Country Risk &rarr; India Total ERP (~7.5%). Updated annually.</div>
+              <div class="ts ts-s"><span class="ts-arr">7.</span> <strong>Ke:</strong> Rf + (Beta &times; ERP). Sanity check: should be 10&ndash;18%.</div>
+              <div class="ts ts-s"><span class="ts-arr">8.</span> <strong>Kd after-tax:</strong> (Finance Cost &divide; Avg Debt) &times; (1&minus;Tax Rate). Zero debt? Kd=0.</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:14px;padding:12px 16px;background:rgba(2,132,199,.07);border-radius:12px;font-size:13px;color:var(--sky);line-height:1.72;"><strong>Final WACC:</strong> (E/V &times; Ke) + (D/V &times; Kd). E/V = Market Cap &divide; (Market Cap + Debt). D/V = Debt &divide; (Market Cap + Debt). <strong>Sanity check:</strong> WACC for zero-debt Nifty companies should be 11&ndash;16%. WACC below 9% for an Indian company = input error. WACC above 18% = very high risk or high leverage.</div>
+        <div class="tc-res" style="margin-top:14px;">
+          <span class="tcr-g">&#10004; WACC 9&ndash;13%: low-risk, zero/low-debt quality businesses</span>
+          <span class="tcr-a">&#9888; WACC 13&ndash;16%: moderate risk, cyclical or modest debt</span>
+          <span class="tcr-r">&#10007; WACC &lt;9% for Indian co. = likely input error</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cheat Sheet -->
+    <div class="cheat rv d5">
+      <div class="cheat-inner">
+        <div class="cheat-badge">WACC Cheat Sheet &mdash; India Edition &middot; All Data Free</div>
+        <div class="cheat-title">Five Inputs &rarr; Five Sources &rarr; One WACC. Every Time.</div>
+        <div class="cheat-grid">
+          <div class="ci ci-good">
+            <div class="ci-num">Input 1 &mdash; Damodaran EM</div>
+            <div class="ci-name">Unlevered Beta</div>
+            <div class="ci-val">pages.stern.nyu.edu/~adamodar &bull; Betas by Sector &bull; Emerging Markets tab &bull; Column: Unlevered Beta corrected for cash &bull; Updated: January each year</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Input 2 &mdash; RBI / NSE</div>
+            <div class="ci-name">Risk-Free Rate (Rf)</div>
+            <div class="ci-val">RBI.org.in &rarr; Financial Markets &rarr; G-Sec &bull; India 10-Year benchmark yield &bull; Currently: ~7.0% &bull; Check before every model (changes daily)</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Input 3 &mdash; Damodaran India</div>
+            <div class="ci-name">Equity Risk Premium</div>
+            <div class="ci-val">Country Risk tab &bull; India row &bull; &ldquo;Total Equity Risk Premium&rdquo; column &bull; Currently: ~7.5&ndash;8.0% &bull; Updated: January each year</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Input 4 &mdash; Screener.in P&amp;L</div>
+            <div class="ci-name">After-Tax Cost of Debt</div>
+            <div class="ci-val">Finance Cost &divide; Avg Debt = pre-tax rate &bull; &times; (1&minus;Tax Rate) = after-tax Kd &bull; Zero debt: Kd = 0 &bull; Typical India Kd after-tax: 5.5&ndash;7.5%</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Input 5 &mdash; Screener.in BS</div>
+            <div class="ci-name">Capital Structure Weights</div>
+            <div class="ci-val">E/V = Market Cap &divide; (MCap + Debt) &bull; D/V = Debt &divide; (MCap + Debt) &bull; Use Market Cap (homepage) NOT book equity &bull; Most quality stocks: E/V &gt;85%</div>
+          </div>
+          <div class="ci ci-warn">
+            <div class="ci-num">WACC Sanity Checks</div>
+            <div class="ci-name">India WACC Ranges</div>
+            <div class="ci-val">Zero-debt blue chips: 11&ndash;13% &bull; Low debt quality cos.: 12&ndash;14% &bull; Cyclical/moderate debt: 14&ndash;16% &bull; High debt / distressed: 16&ndash;20%+ &bull; WACC &lt;9% = input error &bull; WACC &gt;20% = very high risk</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="insight rv d6">
+      <div class="ins-ico">&#127919;</div>
+      <div>
+        <div class="ins-tag">The One-Line WACC Rule for Indian Companies</div>
+        <div class="ins-title">If WACC is Below 9% for Any Indian Equity — Check Your Inputs. You Are Almost Certainly Using a US Risk-Free Rate or a US ERP.</div>
+        <div class="ins-desc">India&rsquo;s 10-year G-Sec yield alone is ~7%. Even a company with zero Beta (hypothetically risk-free) would have a WACC of 7%. Any real company has Beta &gt;0, which pushes WACC above 7%. Factor in India&rsquo;s ERP of 7.5% and even a low-Beta company (Beta 0.5) gets a WACC of 7% + 3.75% = 10.75%. A WACC below 9% for an Indian company is a near-certain signal of using US inputs (Rf = 4.2%, ERP = 4.5%) incorrectly. This single sanity check catches the most expensive WACC error in Indian DCF models.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT CHAPTER -->
+<div class="nxt2">
+  <div class="nxt2-left">
+    <div class="nxt2-lbl">Up Next &middot; Module 12</div>
+    <div class="nxt2-sub">Terminal Value &mdash; Gordon Growth Model vs Exit Multiple</div>
+    <div class="nxt2-arr-txt">Continue your learning journey &nbsp;&rarr;</div>
+  </div>
+  <a href="#" class="nxt2-btn">Next Chapter <span class="nxt2-btn-arr">&#8594;</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section class="disc">
+  <div class="disc-inner">
+    <div class="disc-ico">&#9888;&#65039;</div>
+    <div>
+      <div class="disc-lbl">Important Disclaimer</div>
+      <div class="disc-txt">This page is for educational purposes only. All WACC calculations shown for CDSL, Bajaj Auto, Polycab India, TCS, Pidilite Industries, and other companies are illustrative approximations using publicly available data and standard financial modelling practices. Beta values from Damodaran&rsquo;s database are for the sector, not specifically computed for each company. Actual WACC may differ based on current market cap, debt levels, tax rates, and G-Sec yields. The India Risk-Free Rate and Equity Risk Premium values cited are approximate and change regularly &mdash; always verify current values from RBI and Damodaran&rsquo;s website before use. This module is not investment advice. Consult a SEBI-registered investment advisor before investing.</div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{threshold:.05,rootMargin:'0px 0px -36px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  }else{els.forEach(function(el){el.classList.add('on');});}
+  ['touchstart','touchmove','touchend','touchcancel'].forEach(function(evt){document.addEventListener(evt,function(){},{passive:true});});
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){els.forEach(function(el){el.classList.add('on');});}
+  document.body.style.overscrollBehavior='none';
+  function setVH(){document.documentElement.style.setProperty('--vh',window.innerHeight*.01+'px');}
+  setVH();
+  window.addEventListener('resize',setVH,{passive:true});
+  window.addEventListener('orientationchange',function(){setTimeout(setVH,300);setTimeout(function(){document.querySelectorAll('.rv:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<window.innerHeight*.95){el.classList.add('on');}});},400);},{passive:true});
+  document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('a,button,.dmbtn,.nxt2-btn,.excard,.wc,.tc,.kp').forEach(function(el){el.style.touchAction='manipulation';});
+    document.querySelectorAll('.tscroll,.sumwrap').forEach(function(el){el.style.webkitOverflowScrolling='touch';});
+    if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});});}
+  });
+})();
+</script>
+</body>
+</html>

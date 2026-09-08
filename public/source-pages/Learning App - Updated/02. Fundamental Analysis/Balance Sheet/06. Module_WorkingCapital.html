@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-title" content="Working Capital">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no,address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Working Capital – Inventory, Debtors, Creditors · Balance Sheet Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#fff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.13s}.d3{transition-delay:.20s}.d4{transition-delay:.27s}.d5{transition-delay:.34s}.d6{transition-delay:.42s}
+@keyframes fsd{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes flowRight{0%{stroke-dashoffset:40}100%{stroke-dashoffset:0}}
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff,#f0fdf4 55%,#fdfcff);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.chip::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rule{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:36px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff,#f0fdf4 40%,#fdfcff 70%,#eef4ff);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(32px,7.5vw,88px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:14px;animation:fsu .88s ease .12s both;}
+.hh1 .l1{display:block;background:linear-gradient(135deg,var(--pl),var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .l2{display:block;background:linear-gradient(135deg,var(--gbr),var(--g),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .l3{display:block;font-size:clamp(13px,3vw,38px);background:linear-gradient(135deg,var(--p),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:620px;line-height:1.72;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hstat{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.78);backdrop-filter:blur(12px);animation:fsu .9s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:900px;}
+.hsi{padding:clamp(12px,2vw,22px) clamp(10px,2.5vw,24px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:80px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(11px,1.8vw,18px);font-weight:900;letter-spacing:-.4px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.a{background:linear-gradient(135deg,var(--ambr),var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(8px,1vw,10px);font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+/* KLO */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3.5vw,42px);display:flex;align-items:flex-start;gap:20px;box-shadow:var(--shc);}
+.klo-icon{width:62px;height:62px;min-width:62px;border-radius:18px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;box-shadow:0 8px 26px rgba(109,40,217,.32);animation:floatA 4s ease-in-out infinite;}
+.klo-tag{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.klo-title{font-size:clamp(14px,2vw,19px);font-weight:900;color:var(--tx);margin-bottom:8px;line-height:1.3;}
+.klo-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px;}
+.kp{display:inline-flex;align-items:center;gap:5px;padding:5px 13px;border-radius:100px;font-size:10px;font-weight:700;}
+.kp-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kp-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kp-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.kp-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+/* WC COMPONENT CARDS */
+.wc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.5vw,26px);margin-bottom:44px;}
+.wc-card{border-radius:22px;padding:clamp(20px,2.8vw,30px);border:2px solid;transition:transform .28s,box-shadow .28s;position:relative;overflow:hidden;}
+.wc-card:hover{transform:translateY(-5px);box-shadow:var(--shp);}
+.wc-inv{background:linear-gradient(158deg,var(--apale),#fffbeb);border-color:rgba(217,119,6,.24);}
+.wc-deb{background:linear-gradient(158deg,var(--pxs),#fdfcff);border-color:rgba(109,40,217,.24);}
+.wc-cred{background:linear-gradient(158deg,var(--gpale),#fafffe);border-color:rgba(22,163,74,.24);}
+.wc-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px;animation:floatB 3.8s ease-in-out infinite;box-shadow:0 6px 18px rgba(0,0,0,.1);}
+.wi-inv{background:linear-gradient(135deg,var(--amb),#f59e0b);}
+.wi-deb{background:linear-gradient(135deg,var(--p),var(--ph));}
+.wi-cred{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.wc-tag{font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:5px;}
+.wt-inv{color:var(--ambr);}
+.wt-deb{color:var(--p);}
+.wt-cred{color:var(--gbr);}
+.wc-title{font-size:clamp(16px,2vw,22px);font-weight:900;color:var(--tx);margin-bottom:10px;letter-spacing:-.3px;}
+.wc-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;margin-bottom:12px;}
+.wc-formula{background:rgba(255,255,255,.85);border:1.5px solid rgba(0,0,0,.06);border-radius:12px;padding:11px 14px;margin-bottom:12px;}
+.wc-fm{font-size:clamp(12px,1.4vw,14px);font-weight:800;color:var(--tx);margin-bottom:3px;}
+.wc-fs{font-size:11.5px;color:var(--ts);line-height:1.55;}
+.wc-bench{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.wb{padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;}
+.wb-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.wb-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.wb-r{background:rgba(220,38,38,.1);color:var(--red);}
+.wc-ana{margin-top:12px;padding:10px 13px;border-radius:10px;font-size:12.5px;font-weight:600;line-height:1.6;}
+.wa-inv{background:rgba(217,119,6,.07);color:var(--ambr);border-left:3px solid var(--amb);}
+.wa-deb{background:rgba(109,40,217,.07);color:var(--pl);border-left:3px solid var(--p);}
+.wa-cred{background:rgba(22,163,74,.07);color:var(--gbr);border-left:3px solid var(--g);}
+/* CASH CONVERSION CYCLE */
+.ccc-strip{background:linear-gradient(135deg,var(--pl),var(--p) 38%,var(--ph) 62%,#065f46);border-radius:22px;padding:clamp(28px,4vw,52px);color:#fff;position:relative;overflow:hidden;box-shadow:var(--shp);margin-bottom:44px;}
+.ccc-strip::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;}
+.ccc-inner{position:relative;z-index:1;}
+.ccc-badge{display:inline-flex;padding:4px 14px;border-radius:100px;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);margin-bottom:14px;}
+.ccc-formula{font-size:clamp(15px,3vw,36px);font-weight:900;letter-spacing:-.5px;line-height:1.2;margin-bottom:12px;}
+.ccc-note{font-size:clamp(12px,1.4vw,14px);opacity:.82;line-height:1.68;max-width:580px;margin:0 auto 24px;}
+.ccc-parts{display:flex;justify-content:center;align-items:center;gap:clamp(6px,1.5vw,12px);flex-wrap:wrap;}
+.ccc-part{background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.24);border-radius:14px;padding:clamp(10px,1.8vw,16px) clamp(12px,2vw,20px);text-align:center;}
+.cp-v{font-size:clamp(11px,1.5vw,15px);font-weight:900;line-height:1.2;}
+.cp-l{font-size:9px;font-weight:600;opacity:.72;text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+.ccc-op{font-size:clamp(20px,3vw,30px);font-weight:900;opacity:.9;}
+.ccc-res{background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.36);border-radius:14px;padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,26px);text-align:center;}
+.cr-v{font-size:clamp(13px,2vw,18px);font-weight:900;color:#4ade80;}
+.cr-l{font-size:9px;font-weight:700;opacity:.7;text-transform:uppercase;letter-spacing:1.5px;margin-top:4px;}
+/* SCREENER TABLE */
+.scr-wrap{background:#fff;border:1.5px solid var(--bd);border-radius:22px;overflow:hidden;box-shadow:var(--shp);margin-bottom:32px;}
+.scr-hdr{background:linear-gradient(135deg,var(--pl),var(--p));padding:clamp(16px,2.8vw,24px) clamp(18px,3vw,28px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.sh-title{font-size:clamp(15px,2.2vw,21px);font-weight:900;color:#fff;}
+.sh-sub{font-size:11px;color:rgba(255,255,255,.7);margin-top:3px;}
+.sh-bdgs{display:flex;gap:7px;flex-wrap:wrap;}
+.sh-bdg{padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.22);}
+.scr-guide{padding:10px clamp(18px,3vw,28px);background:var(--pxs);border-bottom:1px solid var(--bd);font-size:12px;color:var(--ts);display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.sg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;display:inline-block;}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.bstbl{width:100%;border-collapse:collapse;min-width:760px;}
+.bstbl th{background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:10px 13px;font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:right;white-space:nowrap;}
+.bstbl th:first-child{text-align:left;min-width:160px;}
+.bstbl td{padding:10px 13px;font-size:12.5px;color:var(--ts);border-bottom:1px solid rgba(109,40,217,.06);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.bstbl td:first-child{text-align:left;font-weight:700;color:var(--tx);}
+.bstbl tr:last-child td{border-bottom:none;}
+.bstbl tr.shdr td{background:rgba(109,40,217,.05);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);padding:10px 13px 5px;}
+.bstbl tr.neg-wc td:first-child,.bstbl tr.neg-wc td{color:var(--gbr);}
+.bstbl tr.hi-row td{color:var(--p);font-weight:800;}
+.bstbl tr:not(.shdr):hover td{background:var(--pxs);}
+.up{color:var(--gbr);font-weight:800;}.dn{color:var(--red);font-weight:800;}.zero{color:var(--gbr);font-weight:900;}
+.ann{display:inline-flex;padding:1px 7px;border-radius:5px;font-size:9px;font-weight:700;margin-left:5px;}
+.an-p{background:rgba(109,40,217,.09);color:var(--p);}
+.an-g{background:rgba(22,163,74,.08);color:var(--gbr);}
+.an-a{background:rgba(217,119,6,.08);color:var(--ambr);}
+/* INSIGHT */
+.insight{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:20px;padding:clamp(20px,3vw,32px);display:flex;align-items:flex-start;gap:18px;box-shadow:var(--shc);}
+.ins-ico{width:48px;height:48px;min-width:48px;border-radius:14px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 6px 20px rgba(109,40,217,.28);}
+.ins-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.ins-title{font-size:clamp(13px,1.6vw,16px);font-weight:800;color:var(--tx);margin-bottom:7px;}
+.ins-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;}
+.ins-desc strong{color:var(--tx);}
+/* GOOD/BAD */
+.gbh{display:flex;align-items:center;gap:14px;margin-bottom:22px;padding:18px 22px;border-radius:18px;border:1.5px solid var(--bd);}
+.gbh-g{background:linear-gradient(135deg,var(--gpale),#ecfdf5);}
+.gbh-r{background:linear-gradient(135deg,var(--rpale),#fff5f5);}
+.gbh-ico{width:46px;height:46px;min-width:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.gi-g{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.gi-r{background:linear-gradient(135deg,var(--red),#f87171);}
+.gbh-title{font-size:clamp(16px,2vw,22px);font-weight:900;color:var(--tx);}
+.gbh-sub{font-size:12.5px;color:var(--ts);margin-top:3px;}
+/* EXAMPLE CARDS */
+.exgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.5vw,24px);margin-bottom:44px;}
+.excard{border-radius:22px;border:1.5px solid var(--bd);background:#fff;padding:clamp(18px,3vw,28px);box-shadow:var(--shc);transition:border-color .26s,box-shadow .26s,transform .26s;position:relative;overflow:hidden;}
+.excard:hover{border-color:rgba(109,40,217,.28);box-shadow:var(--shp);transform:translateY(-4px);}
+.excard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.eg1::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.eg2::before{background:linear-gradient(90deg,var(--g),var(--gh));}
+.eg3::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.eg4::before{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.eg5::before{background:linear-gradient(90deg,#0d9488,#2dd4bf);}
+.eb1::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.eb2::before{background:linear-gradient(90deg,#b91c1c,#fca5a5);}
+.eb3::before{background:linear-gradient(90deg,var(--amb),#fbbf24);}
+.eb4::before{background:linear-gradient(90deg,#7c3aed,var(--red));}
+.eb5::before{background:linear-gradient(90deg,var(--red),var(--amb));}
+.ex-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.ex-logo{width:48px;height:48px;min-width:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.ex-name{font-size:clamp(13px,1.7vw,16px);font-weight:900;color:var(--tx);line-height:1.15;}
+.ex-sec{font-size:11px;color:var(--tl);font-weight:500;margin-top:2px;}
+.vrd{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-size:10px;font-weight:800;margin-bottom:13px;}
+.vg{background:rgba(22,163,74,.12);color:var(--gbr);border:1px solid rgba(22,163,74,.24);}
+.vr{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.22);}
+.enums{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px;}
+.en{border-radius:11px;padding:10px 11px;text-align:center;}
+.en-p{background:rgba(109,40,217,.07);border:1px solid rgba(109,40,217,.14);}
+.en-g{background:rgba(22,163,74,.07);border:1px solid rgba(22,163,74,.13);}
+.en-r{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.13);}
+.en-a{background:rgba(217,119,6,.07);border:1px solid rgba(217,119,6,.14);}
+.en-lbl{font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--tl);margin-bottom:3px;}
+.en-val{font-size:clamp(12px,1.8vw,15px);font-weight:900;}
+.ev-p{color:var(--p);}.ev-g{color:var(--gbr);}.ev-r{color:var(--red);}.ev-a{color:var(--ambr);}
+.ex-why{font-size:clamp(12px,1.35vw,13.5px);color:var(--ts);line-height:1.68;margin-bottom:10px;}
+.ex-why strong{color:var(--tx);}
+.sigs{display:flex;flex-direction:column;gap:6px;margin-top:10px;}
+.sig{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;color:var(--ts);line-height:1.52;}
+.sdot{width:7px;height:7px;min-width:7px;border-radius:50%;margin-top:4px;flex-shrink:0;}
+.sd-g{background:var(--g);}.sd-r{background:var(--red);}
+.sig-hl{margin-top:8px;padding:9px 12px;border-radius:9px;font-size:11.5px;line-height:1.55;}
+.shl-g{background:rgba(22,163,74,.07);border-left:3px solid var(--g);}
+.shl-r{background:rgba(220,38,38,.06);border-left:3px solid var(--red);}
+.exfull{grid-column:1/-1;}
+.ex-inner{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+/* SUMMARY TABLE */
+.sumwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:18px;box-shadow:var(--shc);margin-bottom:32px;}
+.sumtbl{width:100%;border-collapse:collapse;min-width:580px;}
+.sumtbl thead th{background:linear-gradient(135deg,var(--p),var(--ph));color:#fff;padding:12px 15px;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:left;}
+.sumtbl tbody td{padding:12px 15px;font-size:12.5px;color:var(--ts);border-bottom:1px solid var(--bd);vertical-align:middle;line-height:1.5;}
+.sumtbl tbody td:first-child{font-weight:800;color:var(--tx);}
+.sumtbl tbody tr:last-child td{border-bottom:none;}
+.sumtbl tbody tr:nth-child(even) td{background:var(--pxs);}
+.tb{display:inline-flex;padding:2px 9px;border-radius:100px;font-size:10px;font-weight:700;}
+.tb-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.tb-r{background:rgba(220,38,38,.1);color:var(--red);}
+.tb-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+/* DEMAT */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240,#4c1d95 35%,#6d28d9 60%,#059669);padding:clamp(44px,7vw,80px) clamp(22px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:680px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:560px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(14px,2.8vw,30px);flex-wrap:wrap;margin-top:18px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'\2713';color:#4ade80;font-weight:900;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:28px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 52px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:52px;touch-action:manipulation;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:7px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.5);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.4);margin-top:6px;}
+/* NEXT + DISC */
+.nxt{background:linear-gradient(100deg,#3b0e8c,#6d28d9 40%,#7c3aed 70%,#8b5cf6);padding:clamp(18px,3vw,30px) clamp(22px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:26px 26px;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-lbl{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.7vw,15px);color:rgba(255,255,255,.75);font-weight:600;margin-top:2px;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;padding:14px 30px;min-height:50px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:13px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s;white-space:nowrap;flex-shrink:0;touch-action:manipulation;}
+.nxt-btn:hover{transform:translateY(-2px);}
+.nxt-arr{font-size:18px;transition:transform .22s;}
+.nxt-btn:hover .nxt-arr{transform:translateX(4px);}
+.disc{background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);}
+.disc-inner{max-width:1240px;margin:0 auto;padding:clamp(22px,4vw,44px) clamp(18px,5vw,56px);display:flex;align-items:flex-start;gap:18px;}
+.disc-ico{width:46px;height:46px;min-width:46px;border-radius:13px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.disc-lbl{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;}
+.disc-txt{font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;}
+/* RESPONSIVE */
+/* ═══ WC TRICKS SECTION ═══ */
+.tricks-sec{background:linear-gradient(158deg,#f5f3ff,#f0fdf4 55%,#fdfcff);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.tricks-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2.5vw,24px);margin-bottom:44px;}
+.tc{border-radius:22px;border:2px solid;padding:clamp(20px,3vw,30px);position:relative;overflow:hidden;transition:transform .28s,box-shadow .28s;background:#fff;}
+.tc:hover{transform:translateY(-5px);box-shadow:var(--shp);}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.tc1{border-color:rgba(109,40,217,.2);background:linear-gradient(158deg,var(--pxs),#fdfcff);}
+.tc1::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.tc2{border-color:rgba(22,163,74,.2);background:linear-gradient(158deg,var(--gpale),#fafffe);}
+.tc2::before{background:linear-gradient(90deg,var(--g),var(--gh));}
+.tc3{border-color:rgba(217,119,6,.2);background:linear-gradient(158deg,var(--apale),#fffbeb);}
+.tc3::before{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.tc4{border-color:rgba(220,38,38,.2);background:linear-gradient(158deg,var(--rpale),#fff5f5);}
+.tc4::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.tc5{border-color:rgba(2,132,199,.2);background:linear-gradient(158deg,var(--skypale),#f0f9ff);grid-column:1/-1;}
+.tc5::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.tc-num{display:inline-flex;width:36px;height:36px;border-radius:11px;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;margin-bottom:14px;}
+.tn1{background:linear-gradient(135deg,var(--p),var(--ph));}
+.tn2{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.tn3{background:linear-gradient(135deg,var(--amb),#f59e0b);}
+.tn4{background:linear-gradient(135deg,var(--red),#f87171);}
+.tn5{background:linear-gradient(135deg,var(--sky),#38bdf8);}
+.tc-sub{font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:6px;}
+.ts1{color:var(--p);}.ts2{color:var(--gbr);}.ts3{color:var(--ambr);}.ts4{color:var(--red);}.ts5{color:var(--sky);}
+.tc-title{font-size:clamp(15px,1.9vw,20px);font-weight:900;color:var(--tx);margin-bottom:10px;letter-spacing:-.3px;}
+.tc-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;margin-bottom:14px;}
+.tc-desc strong{color:var(--tx);}
+.tc-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.ts{display:flex;align-items:flex-start;gap:10px;padding:9px 13px;border-radius:10px;font-size:12.5px;color:var(--ts);line-height:1.52;}
+.ts-p{background:rgba(109,40,217,.07);border-left:3px solid var(--p);}
+.ts-g{background:rgba(22,163,74,.07);border-left:3px solid var(--g);}
+.ts-a{background:rgba(217,119,6,.06);border-left:3px solid var(--amb);}
+.ts-r{background:rgba(220,38,38,.06);border-left:3px solid var(--red);}
+.ts-s{background:rgba(2,132,199,.07);border-left:3px solid var(--sky);}
+.ts-arr{font-weight:900;min-width:18px;flex-shrink:0;color:inherit;}
+.tc-results{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;}
+.tcr-g{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.22);}
+.tcr-a{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(217,119,6,.09);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.tcr-r{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(220,38,38,.08);color:var(--red);border:1px solid rgba(220,38,38,.2);}
+.tc5-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,22px);margin-top:14px;}
+/* CHEAT SHEET */
+.wc-cheat{background:linear-gradient(135deg,var(--p),var(--ph),#059669);border-radius:22px;padding:clamp(22px,3.5vw,44px);color:#fff;position:relative;overflow:hidden;margin-bottom:44px;box-shadow:var(--shp);}
+.wc-cheat::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;}
+.wcc-inner{position:relative;z-index:1;}
+.wcc-badge{display:inline-flex;padding:4px 14px;border-radius:100px;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);margin-bottom:14px;}
+.wcc-title{font-size:clamp(17px,2.5vw,30px);font-weight:900;letter-spacing:-.5px;line-height:1.15;margin-bottom:18px;}
+.wcc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.8vw,16px);}
+.wci{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.2);border-radius:14px;padding:clamp(12px,1.8vw,18px);}
+.wci-num{font-size:10px;font-weight:700;opacity:.65;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.wci-name{font-size:clamp(12px,1.5vw,15px);font-weight:900;margin-bottom:5px;}
+.wci-val{font-size:clamp(10px,1.2vw,12px);opacity:.8;line-height:1.52;}
+.wci-good{border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.1);}
+.wci-warn{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.08);}
+.wci-bad{border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.1);}
+/* RESPONSIVE for tricks */
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — Desktop · Tablet · Mobile · Android · iOS
+   Covers base layout + tricks section + full WC module
+═══════════════════════════════════════════════════════════ */
+
+/* Large desktop */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+
+/* Tablet landscape (≤1100px) */
+@media(max-width:1100px){
+  .wc-grid{grid-template-columns:1fr 1fr;}
+  .tricks-grid{grid-template-columns:1fr 1fr;}
+  .tc5{grid-column:1/-1;}
+  .wcc-grid{grid-template-columns:repeat(3,1fr);}
+}
+
+/* Tablet portrait (≤900px) */
+@media(max-width:900px){
+  .wc-grid{grid-template-columns:1fr;}
+  .exgrid{grid-template-columns:1fr;}
+  .exfull{grid-column:auto;}
+  .ex-inner{grid-template-columns:1fr;gap:0;}
+  .klobanner{flex-direction:column;}
+  .klo-icon{animation:none;}
+  .insight{flex-direction:column;gap:12px;}
+  .gbh{flex-direction:column;gap:10px;}
+  .ccc-parts{flex-direction:column;align-items:center;}
+  /* Tricks */
+  .tricks-grid{grid-template-columns:1fr;}
+  .tc5{grid-column:auto;}
+  .tc5-inner{grid-template-columns:1fr;gap:12px;}
+  .wcc-grid{grid-template-columns:1fr 1fr;}
+}
+
+/* Mobile large (≤768px) */
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,30px);}
+  .hstat{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:9px;}
+  .nxt{flex-direction:column;align-items:flex-start;}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .scr-hdr{flex-direction:column;align-items:flex-start;}
+  .sh-bdgs{flex-wrap:wrap;}
+  .enums{grid-template-columns:1fr 1fr;}
+  /* Tricks */
+  .tricks-grid{grid-template-columns:1fr;}
+  .tc5{grid-column:auto;}
+  .tc5-inner{grid-template-columns:1fr;gap:12px;}
+  .wcc-grid{grid-template-columns:1fr 1fr;}
+  .tc-results{flex-direction:column;align-items:flex-start;}
+  .tcr-g,.tcr-a,.tcr-r{width:100%;justify-content:flex-start;}
+}
+
+/* Mobile medium (≤640px) */
+@media(max-width:640px){
+  .bstbl{min-width:640px;}
+  .sumtbl{min-width:500px;}
+  .wc-grid{grid-template-columns:1fr;}
+  /* Tricks */
+  .tricks-grid{grid-template-columns:1fr;}
+  .tc5-inner{grid-template-columns:1fr;}
+  .wcc-grid{grid-template-columns:1fr;}
+  .tc-results{flex-direction:column;align-items:flex-start;}
+}
+
+/* Mobile small (≤480px) */
+@media(max-width:480px){
+  .w{padding:28px 14px;}
+  .hh1{letter-spacing:-1.2px;}
+  .hstat{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .vbadge{font-size:9px;padding:3px 9px;
+    top:max(12px,env(safe-area-inset-top,10px));
+    right:max(12px,env(safe-area-inset-right,10px));}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;}
+  .nxt-btn{font-size:13px;padding:12px 16px;}
+  .enums{grid-template-columns:1fr 1fr;}
+  /* Tricks */
+  .tricks-grid{grid-template-columns:1fr;}
+  .tc{padding:18px 16px;}
+  .tc-title{font-size:15px;}
+  .tc5-inner{grid-template-columns:1fr;}
+  .wcc-grid{grid-template-columns:1fr;}
+  .tc-results{flex-direction:column;align-items:flex-start;}
+  .tcr-g,.tcr-a,.tcr-r{width:100%;font-size:10px;}
+  .ts{font-size:12px;padding:8px 11px;}
+  .wcc-title{font-size:17px;}
+  .wci{padding:12px 10px;}
+  .wci-name{font-size:12px;}
+  .wci-val{font-size:10px;}
+}
+
+/* Mobile tiny (≤360px) */
+@media(max-width:360px){
+  .w{padding:22px 12px;}
+  .hh1{font-size:clamp(26px,10vw,38px);letter-spacing:-1px;}
+  .dmbtn{font-size:14px;}
+  .enums{grid-template-columns:1fr;}
+  .tc{padding:16px 14px;}
+  .ts{padding:7px 10px;font-size:11.5px;}
+  .wcc-grid{grid-template-columns:1fr;}
+}
+
+/* Touch devices — remove hover, add active feedback */
+@media(hover:none) and (pointer:coarse){
+  .excard:hover,.wc-card:hover,.tc:hover{
+    transform:none !important;box-shadow:var(--shc) !important;
+  }
+  .excard:active,.wc-card:active,.tc:active{
+    transform:scale(.98);transition:transform .08s;
+  }
+  .dmbtn:active,.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  ::-webkit-scrollbar{display:none;}
+  .excard,.wc-card,.tc,.klobanner,.insight,.wc-cheat{
+    -webkit-backface-visibility:hidden;backface-visibility:hidden;
+  }
+  a,button,.dmbtn,.nxt-btn,.excard,.wc-card,.tc{
+    -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  }
+  .tscroll,.sumwrap{-webkit-overflow-scrolling:touch;}
+  .hh1,.h2,.chip,.eyebrow,.vbadge,.tc-title,.tc-num{
+    -webkit-user-select:none;user-select:none;
+  }
+  .tc-desc,.ts,.wci-val,.ins-desc,.klo-desc{
+    -webkit-user-select:text;user-select:text;
+  }
+}
+
+/* iOS Safari — notch, Dynamic Island, home indicator */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  .hero{
+    min-height:100svh;
+    min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top) + 72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom) + 32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));
+  }
+  .vbadge{
+    top:max(22px,calc(env(safe-area-inset-top) + 8px));
+    right:max(22px,calc(env(safe-area-inset-right) + 8px));
+  }
+  .w{
+    padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));
+    padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));
+  }
+  .nxt{padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{
+    padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));
+    padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));
+  }
+  .tscroll,.sumwrap{-webkit-overflow-scrolling:touch;overflow-x:auto;}
+  .hp,.hg,.hh1 .l1,.hh1 .l2,.hh1 .l3,.hsv,.hsv.g,.hsv.a{
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+  a,button,.dmbtn,.nxt-btn,.excard,.wc-card,.tc{
+    -webkit-tap-highlight-color:transparent;
+  }
+}
+
+/* Android high-DPI screens */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .excard,.wc-card,.tc,.klobanner,.insight,.wc-cheat{
+    -webkit-backface-visibility:hidden;backface-visibility:hidden;
+    -webkit-transform:translateZ(0);transform:translateZ(0);
+  }
+}
+
+/* Reduced motion accessibility */
+@media(prefers-reduced-motion:reduce){
+  *{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  .rv{opacity:1;transform:none;}
+  .wc-icon,.klo-icon{animation:none !important;}
+}
+
+/* Print */
+@media print{
+  .dmbanner,.orb,.nxt{display:none;}
+  .rv{opacity:1;transform:none;}
+  body{color:#000;}
+  .w{padding:20px;}
+  .tscroll,.sumwrap{overflow:visible;}
+  .bstbl,.sumtbl{min-width:0;}
+  section,.tc,.tricks-grid{break-inside:avoid;}
+  .tricks-grid{grid-template-columns:1fr 1fr;}
+  .wcc-grid{grid-template-columns:1fr 1fr;}
+  .wc-cheat{background:#4c1d95 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+<!-- HERO -->
+<section class="hero">
+  <div class="vbadge">Financial Statement Analysis &middot; Balance Sheet</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Module 04 &mdash; Working Capital</div>
+  <h1 class="hh1">
+    <span class="l1">Working</span>
+    <span class="l2">Capital</span>
+    <span class="l3">Inventory &middot; Debtors &middot; Creditors &mdash; Decoded</span>
+  </h1>
+  <p class="hsub">Balance Sheet Analysis &middot; WC Efficiency &middot; Cash Conversion &middot; CDSL Real Data</p>
+  <p class="hdesc">How fast a company turns raw materials into cash determines whether it lives comfortably &mdash; or is always scrambling for money. Working Capital is the engine of daily business survival and the secret behind great profitability.</p>
+  <div class="hstat">
+    <div class="hsi"><div class="hsv a">Inventory</div><div class="hsl">Stock on Hand</div></div>
+    <div class="hsi"><div class="hsv">Debtors</div><div class="hsl">Money Owed to You</div></div>
+    <div class="hsi"><div class="hsv g">Creditors</div><div class="hsl">Money You Owe</div></div>
+    <div class="hsi"><div class="hsv">Cash Cycle</div><div class="hsl">Efficiency Metric</div></div>
+    <div class="hsi"><div class="hsv g">CDSL: Negative</div><div class="hsl">WC Champion</div></div>
+    <div class="hsi"><div class="hsv">10 Companies</div><div class="hsl">Good vs Bad</div></div>
+  </div>
+</section>
+
+<!-- 01 KLO -->
+<section style="background:#fff;">
+  <div class="w">
+    <div class="chip rv d1">01 &mdash; Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Analyse WC Efficiency &amp; <span class="hp">Cash Conversion Cycle</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">By the end of this module you will open any company on Screener.in, read the working capital section, calculate the Cash Conversion Cycle, and know instantly whether the company manages cash brilliantly &mdash; or is stuck in a perpetual cash crunch.</p>
+    <div class="klobanner rv d4">
+      <div class="klo-icon">&#9881;&#65039;</div>
+      <div>
+        <div class="klo-tag">Your Core Takeaway &mdash; Cash Is King, Speed Is Everything</div>
+        <div class="klo-title">Working Capital = Current Assets &minus; Current Liabilities. But the real insight is HOW FAST the company moves: from buying raw material &rarr; making goods &rarr; selling &rarr; collecting cash.</div>
+        <div class="klo-desc">Imagine a samosa shop. The owner buys potatoes on Monday (Inventory). Makes samosas. Sells to a canteen on credit &mdash; they will pay in 15 days (Debtor). But the potato supplier gives 30 days to pay (Creditor). So the shop owner has 30 days of credit in, collects cash in 15 days, and keeps 15 days of cushion as free float. That is <strong>negative working capital</strong> &mdash; the best possible position. CDSL and Nestle India work exactly this way. On the other hand, a manufacturer who holds 90 days of inventory, waits 60 days to collect from customers, but only gets 30 days from suppliers &mdash; is always short of cash even if profitable. This is the working capital trap most retail investors miss completely.</div>
+        <div class="klo-pills">
+          <span class="kp kp-a">&#128230; Inventory Days: Lower = Faster</span>
+          <span class="kp kp-p">&#128203; Debtor Days: Lower = Better</span>
+          <span class="kp kp-g">&#9971; Creditor Days: Higher = Better</span>
+          <span class="kp kp-r">&#9203; CCC: Lower/Negative = Champion</span>
+        </div>
+      </div>
+    </div>
+    <!-- Samosa shop vs manufacturer infographic -->
+    <div style="margin-top:40px;" class="rv d5">
+      <svg viewBox="0 0 740 260" style="max-width:740px;width:100%;margin:0 auto;border-radius:20px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="740" height="260" rx="20" fill="#f5f3ff"/><rect width="740" height="260" rx="20" stroke="#e5e1fb" stroke-width="1.5"/>
+        <!-- LEFT: Negative WC (CDSL/Nestle model) -->
+        <rect x="18" y="18" width="332" height="220" rx="14" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+        <text x="184" y="40" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="800" fill="#15803d">&#10004; NEGATIVE WORKING CAPITAL (Best!)</text>
+        <!-- flow arrows -->
+        <rect x="30" y="56" width="72" height="48" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="1.5"/>
+        <text x="66" y="76" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#15803d">SUPPLIER</text>
+        <text x="66" y="90" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#15803d">30 days credit</text>
+        <path d="M104 80 L142 80" stroke="#15803d" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#gn1)"/>
+        <defs><marker id="gn1" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#15803d"/></marker></defs>
+        <rect x="144" y="56" width="72" height="48" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="1.5"/>
+        <text x="180" y="76" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#15803d">SELL &amp;</text>
+        <text x="180" y="90" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#15803d">collect in 7d</text>
+        <path d="M218 80 L256 80" stroke="#15803d" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#gn2)"/>
+        <defs><marker id="gn2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#15803d"/></marker></defs>
+        <rect x="258" y="56" width="72" height="48" rx="8" fill="#6d28d9"/>
+        <text x="294" y="76" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="white">CASH IN</text>
+        <text x="294" y="90" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#c4b5fd">23 days free!</text>
+        <!-- happy character -->
+        <circle cx="90" cy="150" r="18" fill="#fde8cc"/>
+        <ellipse cx="90" cy="136" rx="16" ry="6" fill="#1e1b4b"/>
+        <circle cx="84" cy="151" r="2.5" fill="#1e1b4b"/><circle cx="96" cy="151" r="2.5" fill="#1e1b4b"/>
+        <path d="M84 159 Q90 165 96 159" stroke="#1e1b4b" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <rect x="78" y="168" width="24" height="30" rx="7" fill="#15803d"/>
+        <rect x="64" y="172" width="14" height="8" rx="4" fill="#15803d"/><rect x="102" y="172" width="14" height="8" rx="4" fill="#15803d"/>
+        <rect x="81" y="198" width="9" height="20" rx="4" fill="#14532d"/><rect x="94" y="198" width="9" height="20" rx="4" fill="#14532d"/>
+        <text x="184" y="148" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="800" fill="#15803d">Cash Conversion Cycle</text>
+        <rect x="140" y="155" width="136" height="40" rx="10" fill="white"/>
+        <text x="208" y="173" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="16" font-weight="900" fill="#15803d">7 &minus; 30 = &minus;23 days</text>
+        <text x="208" y="189" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#15803d" font-weight="700">Negative CCC = Free cash from suppliers!</text>
+        <text x="184" y="224" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#15803d" font-weight="700">Nestle, CDSL, Britannia &mdash; suppliers fund growth</text>
+        <!-- RIGHT: Positive WC (bad) -->
+        <rect x="390" y="18" width="332" height="220" rx="14" fill="#fef2f2" stroke="#fecaca" stroke-width="1.5"/>
+        <text x="556" y="40" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="800" fill="#dc2626">&#9888; STUCK IN CASH CRUNCH</text>
+        <rect x="402" y="56" width="72" height="48" rx="8" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+        <text x="438" y="76" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#dc2626">RAW MAT</text>
+        <text x="438" y="90" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#dc2626">hold 60 days</text>
+        <path d="M476 80 L514 80" stroke="#dc2626" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#gn3)"/>
+        <defs><marker id="gn3" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker></defs>
+        <rect x="516" y="56" width="72" height="48" rx="8" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+        <text x="552" y="76" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#dc2626">SELL ON</text>
+        <text x="552" y="90" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#dc2626">credit 90 days</text>
+        <path d="M590 80 L628 80" stroke="#dc2626" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#gn4)"/>
+        <defs><marker id="gn4" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker></defs>
+        <rect x="630" y="56" width="72" height="48" rx="8" fill="#dc2626"/>
+        <text x="666" y="76" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="white">WAIT 150d</text>
+        <text x="666" y="90" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#fecaca">for cash!</text>
+        <!-- stressed character -->
+        <circle cx="460" cy="150" r="18" fill="#fde8cc"/>
+        <ellipse cx="460" cy="136" rx="16" ry="6" fill="#374151"/>
+        <circle cx="454" cy="151" r="2.5" fill="#1e1b4b"/><circle cx="466" cy="151" r="2.5" fill="#1e1b4b"/>
+        <path d="M454 161 Q460 157 466 161" stroke="#1e1b4b" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <rect x="448" y="168" width="24" height="30" rx="7" fill="#dc2626"/>
+        <rect x="434" y="172" width="14" height="8" rx="4" fill="#dc2626"/><rect x="472" y="172" width="14" height="8" rx="4" fill="#dc2626"/>
+        <rect x="451" y="198" width="9" height="20" rx="4" fill="#b91c1c"/><rect x="464" y="198" width="9" height="20" rx="4" fill="#b91c1c"/>
+        <path d="M478 142 Q486 152 482 160" stroke="#bae6fd" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <text x="556" y="148" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="800" fill="#dc2626">Cash Conversion Cycle</text>
+        <rect x="510" y="155" width="136" height="40" rx="10" fill="white"/>
+        <text x="578" y="173" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="16" font-weight="900" fill="#dc2626">150 days!</text>
+        <text x="578" y="189" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#dc2626" font-weight="700">Must borrow to fund this gap</text>
+        <text x="556" y="224" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#dc2626" font-weight="700">High inventory + slow collections = cash trapped</text>
+        <!-- bottom note -->
+        <rect x="18" y="246" width="704" height="12" rx="5" fill="white" opacity=".88"/>
+        <text x="370" y="255" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#4c1d95">Working Capital efficiency = how fast money cycles. Same profit, different cash reality. Check it on Screener.in in 60 seconds.</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 02 THREE WC COMPONENTS -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="chip rv d1">02 &mdash; Three Working Capital Components</div>
+    <h2 class="h2 rv d2">Inventory, Debtors &amp; <span class="hg">Creditors &mdash; Explained Simply</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">Every company&rsquo;s daily financial health is determined by three numbers: how much stock it holds (Inventory), how much customers owe it (Debtors/Receivables), and how much it owes suppliers (Creditors/Payables). Together they determine whether cash flows freely or gets trapped.</p>
+    <div class="wc-grid rv d3">
+      <!-- INVENTORY -->
+      <div class="wc-card wc-inv">
+        <div class="wc-icon wi-inv">&#128230;</div>
+        <div class="wc-tag wt-inv">Component 1 &mdash; Current Asset</div>
+        <div class="wc-title">Inventory (Stock)</div>
+        <div class="wc-desc">Inventory is the value of all goods a company holds at any point &mdash; raw materials waiting to be processed, work-in-progress on the factory floor, and finished goods ready to ship. Every rupee of inventory is cash that has left the bank but not yet returned as revenue. Holding too much inventory ties up capital; holding too little risks stockouts and lost sales.</div>
+        <div class="wc-formula">
+          <div class="wc-fm">Inventory Days = (Inventory &divide; COGS) &times; 365</div>
+          <div class="wc-fs">How many days worth of sales are sitting in the warehouse. Lower = faster inventory turns = less cash trapped. COGS = Cost of Goods Sold (P&amp;L statement).</div>
+        </div>
+        <div class="wc-bench">
+          <span class="wb wb-g">Excellent: &lt;30 days (FMCG)</span>
+          <span class="wb wb-a">Moderate: 30&ndash;90 days</span>
+          <span class="wb wb-r">Concern: &gt;120 days</span>
+        </div>
+        <div class="wc-ana wa-inv">&#128161; <strong>Real analogy:</strong> You run a clothing store. Every shirt in your store is paid money that isn&rsquo;t earning anything until it sells. Holding 6 months of unsold shirts means your cash is locked in fabric while your rent keeps running. The fastest fashion retailers (Zara) turn inventory in 15 days. Slow ones take 180+ days and constantly borrow to pay salaries.</div>
+      </div>
+      <!-- DEBTORS -->
+      <div class="wc-card wc-deb">
+        <div class="wc-icon wi-deb">&#128203;</div>
+        <div class="wc-tag wt-deb">Component 2 &mdash; Current Asset</div>
+        <div class="wc-title">Debtors (Receivables)</div>
+        <div class="wc-desc">Debtors are customers who bought goods or services but have not paid yet &mdash; they owe the company money. This appears as &ldquo;Trade Receivables&rdquo; on the balance sheet. Every rupee of debtors is a sale that has happened but cash has not arrived. High debtors relative to revenue means the company is financing its customers &mdash; sometimes by force, especially when dealing with large buyers like government entities.</div>
+        <div class="wc-formula">
+          <div class="wc-fm">Debtor Days = (Trade Receivables &divide; Revenue) &times; 365</div>
+          <div class="wc-fs">How many days of sales are outstanding as unpaid invoices. Lower debtor days = faster collection = more cash available. Also called Days Sales Outstanding (DSO).</div>
+        </div>
+        <div class="wc-bench">
+          <span class="wb wb-g">Excellent: &lt;30 days</span>
+          <span class="wb wb-a">Moderate: 30&ndash;60 days</span>
+          <span class="wb wb-r">Concern: &gt;90 days</span>
+        </div>
+        <div class="wc-ana wa-deb">&#128161; <strong>Real analogy:</strong> You sell 100 samosas to a hotel for &#8377;500 but they pay in 60 days. You have &ldquo;earned&rdquo; &#8377;500 on paper, but your bank account is empty for 60 days. Meanwhile you need flour, oil, and gas right now. Companies with 120-day debtor days are effectively providing free 4-month loans to every customer. This becomes critical in sectors like infrastructure and defence where government payments can take 6&ndash;12 months.</div>
+      </div>
+      <!-- CREDITORS -->
+      <div class="wc-card wc-cred">
+        <div class="wc-icon wi-cred">&#9971;</div>
+        <div class="wc-tag wt-cred">Component 3 &mdash; Current Liability</div>
+        <div class="wc-title">Creditors (Payables)</div>
+        <div class="wc-desc">Creditors are suppliers who have delivered goods or services but have not been paid yet &mdash; the company owes them money. This appears as &ldquo;Trade Payables&rdquo; on the balance sheet. Unlike inventory and debtors (which use cash), creditors are effectively free financing from suppliers. The longer you can delay paying suppliers (without damaging relationships), the more cash you retain for operations. This is why strong brands like Nestle have negative working capital.</div>
+        <div class="wc-formula">
+          <div class="wc-fm">Creditor Days = (Trade Payables &divide; COGS) &times; 365</div>
+          <div class="wc-fs">How many days the company takes to pay its suppliers. Higher creditor days = more free financing from suppliers. But too high can damage supplier relationships and signal financial stress.</div>
+        </div>
+        <div class="wc-bench">
+          <span class="wb wb-g">Healthy: 30&ndash;60 days</span>
+          <span class="wb wb-a">Monitor: 60&ndash;90 days</span>
+          <span class="wb wb-r">Red flag: &gt;120 days (stress or dominance?)</span>
+        </div>
+        <div class="wc-ana wa-cred">&#128161; <strong>Real analogy:</strong> The potato supplier gives you 30 days to pay. For those 30 days, you are using the supplier&rsquo;s capital for free. Nestle India gets 60&ndash;90 days from suppliers because of its brand power &mdash; suppliers can&rsquo;t afford to lose Nestle as a customer. Walmart, Amazon, and large FMCG companies use this supplier float to fund entire operations. Creditors &gt; Inventory + Debtors = negative WC = money machine.</div>
+      </div>
+    </div>
+    <!-- Cash Conversion Cycle strip -->
+    <div class="ccc-strip rv d5">
+      <div class="ccc-inner">
+        <div class="ccc-badge">The Master Formula &mdash; Cash Conversion Cycle (CCC)</div>
+        <div class="ccc-formula">CCC = Inventory Days + Debtor Days &minus; Creditor Days</div>
+        <div class="ccc-note">The CCC tells you how many days cash is tied up in operations. Negative CCC = suppliers fund your business for free. Zero or very low = excellent. High positive CCC = cash always short, may need constant borrowing.</div>
+        <div class="ccc-parts">
+          <div class="ccc-part"><div class="cp-v">Inventory Days</div><div class="cp-l">Days in stock</div></div>
+          <div class="ccc-op">+</div>
+          <div class="ccc-part"><div class="cp-v">Debtor Days</div><div class="cp-l">Days to collect</div></div>
+          <div class="ccc-op">&minus;</div>
+          <div class="ccc-part"><div class="cp-v">Creditor Days</div><div class="cp-l">Days to pay</div></div>
+          <div class="ccc-op">=</div>
+          <div class="ccc-res"><div class="cr-v">Cash Conversion Cycle</div><div class="cr-l">Negative is best</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 CDSL REAL DATA -->
+<section style="background:#fff;">
+  <div class="w">
+    <div class="chip rv d1">03 &mdash; Real Data from Screener.in</div>
+    <h2 class="h2 rv d2">CDSL &mdash; The <span class="hg">Negative Working Capital Champion</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">CDSL is the perfect example of a business with structurally negative working capital &mdash; meaning its business model generates free cash from suppliers and customers rather than requiring cash to be invested. This is the ideal WC position and visible directly on Screener.in.</p>
+    <div class="scr-wrap rv d4">
+      <div class="scr-hdr">
+        <div><div class="sh-title">CDSL &mdash; Working Capital Components on Screener.in</div><div class="sh-sub">Central Depository Services Ltd &middot; NSE: CDSL &middot; Consolidated &middot; &#8377; Crores</div></div>
+        <div class="sh-bdgs"><span class="sh-bdg">NSE: CDSL</span><span class="sh-bdg">Negative WC</span><span class="sh-bdg">Zero Inventory</span><span class="sh-bdg">Monopoly</span></div>
+      </div>
+      <div class="scr-guide">
+        <span><span class="sg-dot" style="background:var(--amb);"></span> Amber = Inventory / Current Assets</span>
+        <span><span class="sg-dot" style="background:var(--p);"></span> Purple = Trade Receivables (Debtors)</span>
+        <span><span class="sg-dot" style="background:var(--gbr);"></span> <strong style="color:var(--gbr);">Green = Payables &amp; Negative WC rows</strong></span>
+      </div>
+      <div class="tscroll">
+        <table class="bstbl">
+          <thead><tr><th style="text-align:left;">WC Component</th><th>Mar 2015</th><th>Mar 2017</th><th>Mar 2019</th><th>Mar 2021</th><th>Mar 2022</th><th>Mar 2023</th><th>Mar 2024</th><th>Mar 2025</th><th>Mar 2026</th></tr></thead>
+          <tbody>
+            <tr class="shdr"><td colspan="10">── CURRENT ASSETS (Money tied up) ──</td></tr>
+            <tr><td>Inventory <span class="ann an-a">Stock</span></td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td></tr>
+            <tr class="hi-row"><td>Trade Receivables <span class="ann an-p">Debtors</span></td><td>64</td><td>96</td><td>143</td><td>178</td><td>206</td><td>235</td><td>278</td><td>320</td><td>360</td></tr>
+            <tr><td>Cash &amp; Investments <span class="ann an-g">Surplus</span></td><td>265</td><td>373</td><td>512</td><td>650</td><td>820</td><td>978</td><td>1,187</td><td>1,350</td><td>1,487</td></tr>
+            <tr><td>Other Current Assets</td><td>22</td><td>28</td><td>35</td><td>42</td><td>55</td><td>65</td><td>78</td><td>88</td><td>98</td></tr>
+            <tr class="shdr"><td colspan="10">── CURRENT LIABILITIES (Free financing) ──</td></tr>
+            <tr class="neg-wc"><td>Trade Payables <span class="ann an-g">Creditors</span></td><td>88</td><td class="up">120</td><td class="up">165</td><td class="up">210</td><td class="up">268</td><td class="up">310</td><td class="up">375</td><td class="up">420</td><td class="up">475</td></tr>
+            <tr><td>Other Current Liabilities</td><td>145</td><td>188</td><td>245</td><td>295</td><td>352</td><td>408</td><td>488</td><td>552</td><td>620</td></tr>
+            <tr class="shdr"><td colspan="10">── WC EFFICIENCY METRICS ──</td></tr>
+            <tr><td>Inventory Days <span class="ann an-a">Lower = Better</span></td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td></tr>
+            <tr class="hi-row"><td>Debtor Days <span class="ann an-p">Lower = Better</span></td><td>~18d</td><td>~20d</td><td>~22d</td><td>~24d</td><td>~22d</td><td>~21d</td><td>~20d</td><td>~19d</td><td>~18d</td></tr>
+            <tr class="neg-wc"><td>Working Capital (Net) <span class="ann an-g">Negative = Best</span></td><td class="zero">Negative</td><td class="zero">Negative</td><td class="zero">Negative</td><td class="zero">Negative</td><td class="zero">Negative</td><td class="zero">Negative</td><td class="zero">Negative</td><td class="zero">Negative</td><td class="zero">Negative</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="rv d5" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,22px);margin-bottom:32px;">
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--gpale),#fafffe);border:1.5px solid rgba(22,163,74,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:7px;">&#10004; Why CDSL Has Zero Inventory Forever</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>CDSL is a pure services business</strong> &mdash; it acts as India&rsquo;s monopoly depository, electronically holding and transferring securities. There are no physical goods, no raw materials, no finished product sitting in a warehouse. The &ldquo;product&rdquo; is a digital record. This means zero inventory forever, which is one key reason CDSL&rsquo;s return on capital is so extraordinarily high. Every rupee invested in the business earns returns immediately without being locked in stock for months. Compare this to a steel company that holds 45&ndash;60 days of raw material, WIP, and finished steel inventory at all times.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--pxs),#fdfcff);border:1.5px solid rgba(109,40,217,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:7px;">&#128202; Why CDSL Has Negative Working Capital</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>CDSL collects settlement fees, annual maintenance charges, and transaction fees from brokers and issuers &mdash; often in advance or very quickly (18&ndash;20 day debtor days).</strong> Meanwhile, CDSL pays vendors (technology, infrastructure, staff costs) on longer credit terms (30&ndash;45 days). The result: Trade Payables (&#8377;475 Cr) &gt; Trade Receivables (&#8377;360 Cr) &mdash; meaning CDSL uses its suppliers&rsquo; money to fund operations. Net Working Capital is structurally negative. This is the most capital-efficient operating model possible: the more business you do, the more free financing you receive.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--skypale),#f0f9ff);border:1.5px solid rgba(2,132,199,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--sky);margin-bottom:7px;">&#128202; How to Find WC Data on Screener.in</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>Step-by-step:</strong> Screener.in &#8594; search company &#8594; Balance Sheet tab &#8594; Current Assets section (find Inventories, Trade Receivables, Other Assets) &#8594; Current Liabilities section (find Trade Payables). Then go to <strong>Ratios tab</strong> &#8594; find &ldquo;Debtor Days&rdquo; and &ldquo;Inventory Days&rdquo; (Screener calculates these automatically). The <strong>Cash Conversion Cycle</strong> can be found or calculated as: Inventory Days + Debtor Days &minus; Creditor Days. A rising CCC over 5 years = company getting less efficient with cash. Falling CCC = improving.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--apale),#fffbeb);border:1.5px solid rgba(217,119,6,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ambr);margin-bottom:7px;">&#9203; The 60-Second WC Efficiency Check</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>The fastest working capital check:</strong> Compare Trade Receivables (Debtors) row with Trade Payables (Creditors) row across 5 years. If Payables &gt; Receivables, the company has negative WC &mdash; suppliers fund operations. If Receivables &gt; Payables and both are rising faster than revenue, working capital is deteriorating and the company may need to borrow more to fund operations. Also check: is the Inventories row growing faster or slower than Revenue? Faster = efficiency declining, cash getting trapped in stock.</p>
+      </div>
+    </div>
+    <div class="insight rv d6">
+      <div class="ins-ico">&#128269;</div>
+      <div>
+        <div class="ins-tag">The 5-Number WC Check on Screener.in</div>
+        <div class="ins-title">Five Numbers Reveal Working Capital Health &mdash; All Free on Screener.in</div>
+        <div class="ins-desc">1. <strong>Inventory Days</strong> (Ratios tab) &mdash; lower is better, compare to industry peers. 2. <strong>Debtor Days / DSO</strong> (Ratios tab) &mdash; below 45 days excellent. 3. <strong>Creditor Days</strong> (calculate: Payables&divide;COGS&times;365) &mdash; higher is better. 4. <strong>CCC = Inventory + Debtor &minus; Creditor Days</strong> &mdash; negative or near-zero is ideal. 5. <strong>Receivables &amp; Inventory growth vs Revenue growth</strong> (Balance Sheet) &mdash; if both grow faster than revenue over 3 years, efficiency is declining. These five checks take under 3 minutes and catch most working capital problems before they become financial crises.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMAT BANNER -->
+<section class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Check Working Capital Efficiency on Real Stocks</div>
+    <div class="dmh">Open a Free Demat Account &amp;<br><span class="dmhs">Start Analysing WC Cycles Today.</span></div>
+    <div class="dmsub">Open Screener.in, find any company, check Inventory Days + Debtor Days + Creditor Days, and calculate the Cash Conversion Cycle in under 3 minutes.</div>
+    <div class="dmfeats"><div class="dmf">&#8377;0 Account Opening Fee</div><div class="dmf">Real-Time Screener.in Data</div><div class="dmf">Zero Brokerage on Delivery</div><div class="dmf">SEBI Regulated &amp; Trusted</div></div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn">&#128640;&nbsp; Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmrating">4.8 &middot; Trusted by 1 Crore+ Investors</span></div>
+    <div class="dmnote">No spam. No hidden charges. SEBI registered broker.</div>
+  </div>
+</section>
+
+<!-- 04 GOOD vs BAD -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="chip rv d1">04 &mdash; Good vs Bad Working Capital</div>
+    <h2 class="h2 rv d2">WC Efficiency <span class="hp">in Real Companies</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">The best way to understand working capital is through real companies. Here are 5 that manage WC brilliantly (cash machines) and 5 where working capital is bloated or deteriorating (cash traps) &mdash; all data from Screener.in.</p>
+
+    <div class="gbh rv d2 gbh-g">
+      <div class="gbh-ico gi-g">&#10004;</div>
+      <div><div class="gbh-title">5 Companies With Excellent Working Capital Management</div><div class="gbh-sub">Low or negative CCC &middot; Fast inventory turns &middot; Suppliers finance operations &middot; Cash compounds freely</div></div>
+    </div>
+    <div class="exgrid">
+      <div class="excard eg1 rv d2">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pmd));">&#128202;</div><div><div class="ex-name">CDSL</div><div class="ex-sec">Depository Services &middot; NSE: CDSL</div></div></div>
+        <div class="vrd vg">&#10004; Negative WC &mdash; Suppliers Fund Everything</div>
+        <div class="enums">
+          <div class="en en-g"><div class="en-lbl">Inventory Days</div><div class="en-val ev-g">0 days</div></div>
+          <div class="en en-g"><div class="en-lbl">Debtor Days</div><div class="en-val ev-g">~18 days</div></div>
+          <div class="en en-p"><div class="en-lbl">Net WC</div><div class="en-val ev-p">Negative</div></div>
+          <div class="en en-g"><div class="en-lbl">CCC</div><div class="en-val ev-g">Near-zero</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s exceptional:</strong> Zero inventory (digital business), collects fees within 18&ndash;20 days, and Trade Payables (&#8377;475 Cr) consistently exceed Trade Receivables (&#8377;360 Cr) &mdash; creating structurally negative net working capital. Every additional rupee of revenue that CDSL earns actually generates more free financing, not more cash need. This is the ultimate business model from a WC perspective &mdash; business growth funds itself automatically.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Zero inventory for 10+ years &mdash; pure services model</div>
+          <div class="sig"><div class="sdot sd-g"></div>Debtor days ~18 &mdash; brokers pay quickly due to SEBI settlement rules</div>
+          <div class="sig"><div class="sdot sd-g"></div>Payables &gt; Receivables &mdash; structurally negative WC since listing</div>
+          <div class="sig"><div class="sdot sd-g"></div>&#8377;1,487 Cr cash surplus built entirely from operating cash flows</div>
+        </div>
+      </div>
+      <div class="excard eg2 rv d3">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#ffe4e6);">&#9749;</div><div><div class="ex-name">Nestle India</div><div class="ex-sec">FMCG &middot; NSE: NESTLEIND</div></div></div>
+        <div class="vrd vg">&#10004; Negative WC &mdash; The FMCG Cash Machine</div>
+        <div class="enums">
+          <div class="en en-g"><div class="en-lbl">Inventory Days</div><div class="en-val ev-g">~35 days</div></div>
+          <div class="en en-g"><div class="en-lbl">Debtor Days</div><div class="en-val ev-g">~8 days</div></div>
+          <div class="en en-g"><div class="en-lbl">Creditor Days</div><div class="en-val ev-g">~70 days</div></div>
+          <div class="en en-g"><div class="en-lbl">CCC</div><div class="en-val ev-g">&minus;27 days</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s exceptional:</strong> Nestle India collects cash from supermarkets within 8 days (retail FMCG is near-cash) but takes 70 days to pay suppliers like dairy farmers, packaging companies, and logistics providers. This 62-day gap means Nestle effectively borrows free money from its supply chain to fund operations &mdash; and even to invest. CCC of &minus;27 days means for every rupee of COGS, Nestle gets 27 days of free financing. This is why Nestle&rsquo;s ROE exceeds 100% despite almost no debt.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Debtor days ~8 &mdash; retailers pay Nestle almost immediately (cash sales)</div>
+          <div class="sig"><div class="sdot sd-g"></div>Creditor days ~70 &mdash; brand power forces suppliers to wait</div>
+          <div class="sig"><div class="sdot sd-g"></div>CCC negative (&minus;27 days) &mdash; suppliers fund growth automatically</div>
+          <div class="sig"><div class="sdot sd-g"></div>Working capital generates cash as Nestle grows &mdash; virtuous cycle</div>
+        </div>
+      </div>
+      <div class="excard eg3 rv d4">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--gpale),#d1fae5);">&#127850;</div><div><div class="ex-name">Britannia Industries</div><div class="ex-sec">FMCG Biscuits &middot; NSE: BRITANNIA</div></div></div>
+        <div class="vrd vg">&#10004; Negative WC &mdash; Biscuit Brand Power</div>
+        <div class="enums">
+          <div class="en en-g"><div class="en-lbl">Inventory Days</div><div class="en-val ev-g">~28 days</div></div>
+          <div class="en en-g"><div class="en-lbl">Debtor Days</div><div class="en-val ev-g">~12 days</div></div>
+          <div class="en en-g"><div class="en-lbl">Creditor Days</div><div class="en-val ev-g">~65 days</div></div>
+          <div class="en en-g"><div class="en-lbl">CCC</div><div class="en-val ev-g">&minus;25 days</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s great:</strong> Britannia&rsquo;s biscuits move off shelves fast (28-day inventory turns) and distributors pay in 12 days. But flour suppliers, packaging vendors, and dairy companies wait 65 days to get paid. The result: Britannia&rsquo;s working capital is self-funding and negative. The company has run with negative net working capital for years &mdash; its supply chain is essentially a 25-day free loan that compounds as the company grows. No need to raise equity or debt just to fund operations.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Inventory turns in 28 days &mdash; biscuits sell fast, don&rsquo;t sit on shelves</div>
+          <div class="sig"><div class="sdot sd-g"></div>Distributors pay in 12 days &mdash; near-cash FMCG business model</div>
+          <div class="sig"><div class="sdot sd-g"></div>CCC &minus;25 days &mdash; supply chain provides free 25 days of float</div>
+          <div class="sig"><div class="sdot sd-g"></div>Working capital generates cash as Britannia grows &mdash; best-in-class</div>
+        </div>
+      </div>
+      <div class="excard eg4 rv d5">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--skypale),#e0f2fe);">&#9989;</div><div><div class="ex-name">TCS (Tata Consultancy Services)</div><div class="ex-sec">IT Services &middot; NSE: TCS</div></div></div>
+        <div class="vrd vg">&#10004; Asset-Light &mdash; Low WC Needs</div>
+        <div class="enums">
+          <div class="en en-g"><div class="en-lbl">Inventory Days</div><div class="en-val ev-g">0 days</div></div>
+          <div class="en en-p"><div class="en-lbl">Debtor Days</div><div class="en-val ev-p">~68 days</div></div>
+          <div class="en en-g"><div class="en-lbl">Attrition Impact</div><div class="en-val ev-g">Declining</div></div>
+          <div class="en en-g"><div class="en-lbl">Free Cash Flow</div><div class="en-val ev-g">95%+ of PAT</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s great:</strong> TCS has zero inventory (software services). Debtor days of ~68 days reflect payment terms with global enterprise clients (normal for IT contracts). What makes TCS exceptional is that it converts 95%+ of net profit to free cash flow every year because it has almost no working capital or capex needs. The entire company runs on its employees&rsquo; skills &mdash; the only &ldquo;inventory&rdquo; is human capital. No factories, no raw materials, no stock. Every rupee billed eventually becomes cash.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Zero inventory &mdash; pure people-and-software model</div>
+          <div class="sig"><div class="sdot sd-g"></div>95%+ PAT converts to free cash flow &mdash; exceptional conversion</div>
+          <div class="sig"><div class="sdot sd-g"></div>Debtor days ~68 (normal for IT) &mdash; enterprise billing cycles</div>
+          <div class="sig"><div class="sdot sd-g"></div>&#8377;70,000+ Cr cash returned to shareholders via dividends + buybacks</div>
+        </div>
+      </div>
+      <!-- GOOD 5: FULL WIDTH - Pidilite -->
+      <div class="excard eg5 exfull rv d6">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--apale),#fef3c7);">&#127919;</div><div><div class="ex-name">Pidilite Industries &mdash; Brand Power Gives WC Leverage</div><div class="ex-sec">Adhesives &amp; Chemicals &middot; NSE: PIDILITIND &middot; Fevicol, Dr. Fixit, M-Seal</div></div></div>
+        <div class="vrd vg">&#10004; Improving WC Efficiency &mdash; Brand Strength = Supplier Leverage</div>
+        <div class="ex-inner">
+          <div>
+            <div class="enums">
+              <div class="en en-g"><div class="en-lbl">Inventory Days</div><div class="en-val ev-g">~55 days</div></div>
+              <div class="en en-g"><div class="en-lbl">Debtor Days</div><div class="en-val ev-g">~38 days</div></div>
+              <div class="en en-g"><div class="en-lbl">Creditor Days</div><div class="en-val ev-g">~50 days</div></div>
+              <div class="en en-g"><div class="en-lbl">CCC</div><div class="en-val ev-g">~43 days</div></div>
+            </div>
+            <div class="ex-why" style="margin-top:12px;"><strong>Why it&rsquo;s great:</strong> While Pidilite&rsquo;s CCC of ~43 days is positive (not negative like Nestle), it has been consistently declining over 5 years as the brand gets stronger. Strong brands like Fevicol command better supplier credit terms while distributors pay faster because they want stock. Pidilite converts inventory efficiently (construction chemicals move well with infrastructure growth) and keeps debtor days controlled at ~38 days by working through distributors who pay quickly.</div>
+          </div>
+          <div>
+            <div class="sigs" style="margin-top:0;">
+              <div class="sig"><div class="sdot sd-g"></div>CCC declining year-on-year as brand power increases</div>
+              <div class="sig"><div class="sdot sd-g"></div>Distributor-led model means quick cash collection (38 days)</div>
+              <div class="sig"><div class="sdot sd-g"></div>Inventory well-managed at 55 days for specialty chemicals</div>
+              <div class="sig"><div class="sdot sd-g"></div>Near-zero debt means working capital funded entirely from profits</div>
+              <div class="sig-hl shl-g"><strong>Key lesson:</strong> Not every company can achieve negative WC &mdash; that requires exceptional brand power or a services model. But ANY company can improve WC over time by: (a) faster inventory turns, (b) better debtor collection, (c) longer supplier credit. Tracking the CCC trend over 5 years on Screener.in shows whether management is improving or neglecting this critical metric.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 BAD -->
+    <div class="gbh rv d2 gbh-r" style="margin-top:44px;">
+      <div class="gbh-ico gi-r">&#9888;</div>
+      <div><div class="gbh-title">5 Companies Where Working Capital Is Bloated or Deteriorating</div><div class="gbh-sub">High inventory days &middot; Slow collection from customers &middot; Rising CCC &middot; Cash perpetually trapped in operations</div></div>
+    </div>
+    <div class="exgrid">
+      <div class="excard eb1 rv d2">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">&#127981;</div><div><div class="ex-name">Hind Copper (High Inventory)</div><div class="ex-sec">Metals &middot; NSE: HINDCOPPER &middot; PSU Copper Mining</div></div></div>
+        <div class="vrd vr">&#128680; 150+ Day Inventory &mdash; Cash Trapped in Metal</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Inventory Days</div><div class="en-val ev-r">~150 days</div></div>
+          <div class="en en-r"><div class="en-lbl">Debtor Days</div><div class="en-val ev-r">~45 days</div></div>
+          <div class="en en-r"><div class="en-lbl">CCC</div><div class="en-val ev-r">&gt;150 days</div></div>
+          <div class="en en-r"><div class="en-lbl">Working Capital</div><div class="en-val ev-r">Very High</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s a concern:</strong> Mining and metals companies inherently hold large inventories &mdash; ore at the mine, concentrate at the smelter, refined metal at the warehouse. With 150+ days of inventory sitting across the production chain, vast amounts of capital are locked up waiting to become revenue. Any commodity price drop during that holding period directly destroys value. The company also has 45-day collection terms with buyers, pushing total CCC above 150 days &mdash; meaning capital takes 5+ months to cycle once.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>150+ day inventory cycle = capital locked for 5 months at a time</div>
+          <div class="sig"><div class="sdot sd-r"></div>Commodity price volatility risk on held inventory is very high</div>
+          <div class="sig"><div class="sdot sd-r"></div>High working capital need forces PSU to rely on government support</div>
+          <div class="sig"><div class="sdot sd-r"></div>Low return on capital vs private sector competitors</div>
+        </div>
+      </div>
+      <div class="excard eb2 rv d3">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fee2e2);">&#127959;&#65039;</div><div><div class="ex-name">Infrastructure / EPC Companies</div><div class="ex-sec">Pattern: IRB Infra, KNR, NCC &middot; Slow Government Payments</div></div></div>
+        <div class="vrd vr">&#128680; 200+ Day Debtor Days &mdash; Government Owes You Everything</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Debtor Days</div><div class="en-val ev-r">120&ndash;300 days</div></div>
+          <div class="en en-r"><div class="en-lbl">Retention Money</div><div class="en-val ev-r">Locked for years</div></div>
+          <div class="en en-r"><div class="en-lbl">CCC</div><div class="en-val ev-r">Very High</div></div>
+          <div class="en en-r"><div class="en-lbl">Debt Needed</div><div class="en-val ev-r">High always</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s dangerous:</strong> EPC (Engineering, Procurement, Construction) companies build roads, bridges, and buildings for government clients. The government pays slowly &mdash; sometimes 180&ndash;300+ days after work is certified, and retains 5&ndash;10% of contract value for 2&ndash;3 years as &ldquo;retention money.&rdquo; This means the company has enormous receivables permanently on its balance sheet that it must fund through working capital borrowings. Many EPC companies are perennially in debt not because the business is bad, but because the government is a slow payer.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>Government clients pay 180&ndash;300 days after invoice certification</div>
+          <div class="sig"><div class="sdot sd-r"></div>5&ndash;10% retention withheld for 2&ndash;3 years on every project</div>
+          <div class="sig"><div class="sdot sd-r"></div>EPC companies must borrow constantly to bridge payment gaps</div>
+          <div class="sig"><div class="sdot sd-r"></div>Rising debtor days on Screener.in signals project delays or payment disputes</div>
+        </div>
+      </div>
+      <div class="excard eb3 rv d4">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--apale),#fef3c7);">&#128083;</div><div><div class="ex-name">Future Retail (Pre-Collapse)</div><div class="ex-sec">Retail &middot; BSE: FRETAIL &middot; Inventory Build-up Trap</div></div></div>
+        <div class="vrd vr">&#128680; Inventory Explosion + Creditor Delays = WC Crisis</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Inventory Days</div><div class="en-val ev-r">Rising to 90+ days</div></div>
+          <div class="en en-r"><div class="en-lbl">Vendor Payments</div><div class="en-val ev-r">Stretched 120d+</div></div>
+          <div class="en en-r"><div class="en-lbl">Working Capital</div><div class="en-val ev-r">Deteriorating</div></div>
+          <div class="en en-r"><div class="en-lbl">Trade Payables</div><div class="en-val ev-r">Rising 40% YoY</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it failed:</strong> Future Retail aggressively expanded Big Bazaar stores and pushed vendors to stock shelves. Inventory days kept rising (goods not selling fast enough). To fund this growing inventory, the company stretched vendor payments to 120+ days &mdash; but this was forced on weak suppliers, not voluntary like Nestle. When COVID shut stores, &#8377;5,000+ Cr of inventory sat unsold while vendor payments became due. Trade payables and inventory simultaneously exploded, creating a WC crisis on top of the debt crisis. Both are visible as clear deterioration on Screener.in 5 years before collapse.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>Inventory days rising year-on-year &mdash; goods not moving fast enough</div>
+          <div class="sig"><div class="sdot sd-r"></div>Vendor payments stretched &mdash; not brand power, just cash desperation</div>
+          <div class="sig"><div class="sdot sd-r"></div>Both inventory and payables rising faster than sales &mdash; visible warning</div>
+          <div class="sig"><div class="sdot sd-r"></div>COVID stopped sell-through &mdash; &#8377;5,000 Cr inventory became worthless stock</div>
+        </div>
+      </div>
+      <div class="excard eb4 rv d5">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,#faf5ff,#ede9fe);">&#127981;</div><div><div class="ex-name">Slow-Moving Specialty Pharma / Chemicals</div><div class="ex-sec">Pattern: High-WIP manufacturers with long production cycles</div></div></div>
+        <div class="vrd vr">&#128680; WIP Inventory Trap &mdash; Cash Locked for Months</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Inventory Days</div><div class="en-val ev-r">90&ndash;180 days</div></div>
+          <div class="en en-r"><div class="en-lbl">WIP %</div><div class="en-val ev-r">High (30&ndash;50%)</div></div>
+          <div class="en en-r"><div class="en-lbl">CCC</div><div class="en-val ev-r">150+ days</div></div>
+          <div class="en en-r"><div class="en-lbl">Cash Conversion</div><div class="en-val ev-r">Poor</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s a concern:</strong> Specialty chemicals and certain pharma companies have very long production cycles &mdash; some API (Active Pharmaceutical Ingredient) manufacturers hold raw materials for 30 days, have WIP (batch fermentation, purification) for 60&ndash;90 days, and then finished goods for another 30 days before shipping. Total inventory cycle: 150&ndash;180 days. This means for every &#8377;100 of sales, &#8377;40&ndash;50 is locked in inventory at any time. Rising CCC in this sector often signals product delays, batch failures, or market demand slowdowns.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>Long batch production cycles = 90&ndash;180 days of inventory always held</div>
+          <div class="sig"><div class="sdot sd-r"></div>High WIP % signals long in-process time &mdash; capital tied up unproductively</div>
+          <div class="sig"><div class="sdot sd-r"></div>Rising inventory on Screener.in faster than revenue = efficiency declining</div>
+          <div class="sig"><div class="sdot sd-r"></div>Compare inventory days vs 3 years ago and vs sector peers</div>
+        </div>
+      </div>
+      <!-- BAD 5 FULL WIDTH -->
+      <div class="excard eb5 exfull rv d6">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fee2e2);">&#128203;</div><div><div class="ex-name">The Debtor Days Explosion Trap &mdash; A Common Warning Pattern</div><div class="ex-sec">Pattern visible across: Telecom equipment suppliers, IT services, Defence vendors, B2B companies</div></div></div>
+        <div class="vrd vr">&#128680; Rapidly Rising Debtor Days = Hidden Revenue Quality Problem</div>
+        <div class="ex-inner">
+          <div>
+            <div class="enums">
+              <div class="en en-r"><div class="en-lbl">Debtor Days (Yr 1)</div><div class="en-val ev-r">45 days</div></div>
+              <div class="en en-r"><div class="en-lbl">Debtor Days (Yr 4)</div><div class="en-val ev-r">120 days</div></div>
+              <div class="en en-r"><div class="en-lbl">Revenue Growth</div><div class="en-val ev-r">15% CAGR</div></div>
+              <div class="en en-r"><div class="en-lbl">Receivables Growth</div><div class="en-val ev-r">40% CAGR</div></div>
+            </div>
+            <div class="ex-why" style="margin-top:12px;"><strong>The trap &mdash; and why it matters:</strong> A company whose revenue grows 15% per year but whose Trade Receivables grow 40% per year has a serious problem. Either: (a) it is booking revenue from customers who are not paying (aggressive revenue recognition), (b) its major customers are in financial difficulty and stretching payments, (c) it is winning contracts by offering extended credit terms that reduce effective pricing. All three outcomes are dangerous. On Screener.in, this pattern appears as receivables increasing much faster than sales in the Balance Sheet trend view &mdash; a clear red flag that takes 60 seconds to spot.</div>
+          </div>
+          <div>
+            <div class="sigs" style="margin-top:0;">
+              <div class="sig"><div class="sdot sd-r"></div>Debtor days rising year-on-year signals collection problems or aggressive booking</div>
+              <div class="sig"><div class="sdot sd-r"></div>Receivables growing faster than revenue = quality of earnings deteriorating</div>
+              <div class="sig"><div class="sdot sd-r"></div>Often precedes large bad debt write-offs that hit P&amp;L suddenly</div>
+              <div class="sig"><div class="sdot sd-r"></div>Compare: Revenue growth rate vs Trade Receivables growth rate for 3 years</div>
+              <div class="sig-hl shl-r"><strong>How to spot on Screener.in:</strong> Balance Sheet tab &#8594; open Trade Receivables row in 10-year view. Calculate YoY growth rate of receivables vs YoY revenue growth. If receivables grew 2&times;+ faster than revenue for 2+ years &mdash; investigate urgently. Check if auditors mentioned any &ldquo;significant receivables&rdquo; or &ldquo;expected credit losses&rdquo; in the Auditor&rsquo;s Report section of the Annual Report. This is one of the most reliable early warning signals for future earnings disappointments.</div>
+              <div class="sig-hl shl-g" style="margin-top:8px;"><strong>Good vs Bad rising receivables:</strong> Receivables growing with a growing business in NEW geographies or customer segments = likely healthy. Receivables growing faster than revenue in existing segments with existing customers = almost always a problem.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary table -->
+    <p class="rv d6" style="font-size:clamp(17px,2.2vw,24px);font-weight:900;color:var(--tx);margin-bottom:22px;">&#128202; All 10 Companies &mdash; Working Capital at a Glance</p>
+    <div class="sumwrap rv d6">
+      <table class="sumtbl">
+        <thead><tr><th>Company</th><th>Inventory Days</th><th>Debtor Days</th><th>Creditor Days</th><th>CCC</th><th>WC Quality</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>CDSL</td><td>0 days</td><td>~18 days</td><td>&gt;Receivables</td><td>Negative</td><td>Monopoly asset-light model</td><td><span class="tb tb-g">&#10004; Best-in-Class</span></td></tr>
+          <tr><td>Nestle India</td><td>~35 days</td><td>~8 days</td><td>~70 days</td><td>&minus;27 days</td><td>FMCG brand power WC float</td><td><span class="tb tb-g">&#10004; Cash Machine</span></td></tr>
+          <tr><td>Britannia</td><td>~28 days</td><td>~12 days</td><td>~65 days</td><td>&minus;25 days</td><td>FMCG distributor model</td><td><span class="tb tb-g">&#10004; Excellent</span></td></tr>
+          <tr><td>TCS</td><td>0 days</td><td>~68 days</td><td>N/A</td><td>Low</td><td>Services, 95% FCF conversion</td><td><span class="tb tb-g">&#10004; Asset-Light</span></td></tr>
+          <tr><td>Pidilite</td><td>~55 days</td><td>~38 days</td><td>~50 days</td><td>~43 days</td><td>Improving CCC trend</td><td><span class="tb tb-g">&#10004; Improving</span></td></tr>
+          <tr><td>Hind Copper</td><td>~150 days</td><td>~45 days</td><td>Low</td><td>&gt;150 days</td><td>Capital-intensive PSU mining</td><td><span class="tb tb-r">&#9888; High WC Need</span></td></tr>
+          <tr><td>EPC / Infra Cos</td><td>Moderate</td><td>120&ndash;300 days</td><td>Low</td><td>Very High</td><td>Govt payment delays &amp; retention</td><td><span class="tb tb-r">&#128680; Structural Risk</span></td></tr>
+          <tr><td>Future Retail</td><td>Rising to 90+</td><td>Low</td><td>120+ days</td><td>High</td><td>Inventory + vendor stress</td><td><span class="tb tb-r">&#128680; Collapsed</span></td></tr>
+          <tr><td>Pharma WIP trap</td><td>90&ndash;180 days</td><td>45 days</td><td>Low</td><td>150+ days</td><td>Batch cycles trap capital</td><td><span class="tb tb-a">&#9888; Monitor</span></td></tr>
+          <tr><td>Debtor Explosion</td><td>Normal</td><td>Rising 45&#8594;120</td><td>Normal</td><td>Rising</td><td>Revenue quality declining</td><td><span class="tb tb-r">&#128680; Red Flag</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight rv d6">
+      <div class="ins-ico">&#127919;</div>
+      <div>
+        <div class="ins-tag">The Golden Rule for Working Capital</div>
+        <div class="ins-title">The Best Companies Let Their Business Model Do the Work &mdash; Negative WC Means Growth Is Self-Funded</div>
+        <div class="ins-desc">Open any company on <strong>Screener.in &#8594; Ratios tab &#8594; find Inventory Days and Debtor Days</strong>. Compare to the Trade Payables row in the Balance Sheet. If Payables &gt; Receivables &mdash; company has negative WC (ideal). If CCC is falling over 5 years &mdash; management is improving efficiency. If CCC is rising or receivables are growing faster than revenue &mdash; investigate before investing. The best businesses (Nestle, CDSL, Britannia) get richer as they grow because working capital generates cash rather than consuming it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 05 TRICKS TO FIND WC INSTANTLY -->
+<section class="tricks-sec">
+  <div class="w">
+    <div class="chip rv d1">05 &mdash; Tricks to Find WC Quality Instantly</div>
+    <h2 class="h2 rv d2">5 Screener.in Shortcuts Every <span class="hp">Investor Must Know</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">These are field-tested tricks to spot working capital problems or strength in under 5 minutes &mdash; without reading a single line of an annual report. All data is free on Screener.in.</p>
+
+    <div class="tricks-grid rv d3">
+      <!-- TRICK 1 -->
+      <div class="tc tc1">
+        <div class="tc-num tn1">1</div>
+        <div class="tc-sub ts1">Screener.in &mdash; Ratios Tab</div>
+        <div class="tc-title">The &ldquo;Debtor Days Trend&rdquo; Trick</div>
+        <div class="tc-desc">Most investors never look at Debtor Days. Go to the <strong>Ratios tab</strong> and find &ldquo;Debtor Days&rdquo; (also called DSO &mdash; Days Sales Outstanding). Click the chart icon to see the 10-year trend. A company whose debtor days have been <em>falling</em> is getting better at collecting cash &mdash; a very healthy sign. Rising debtor days over 3+ years means either customers are not paying on time, or the company is booking revenue from customers who may not pay at all (the worst-case scenario that precedes large bad-debt write-offs).</div>
+        <div class="tc-steps">
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Screener.in &rarr; any company &rarr; Ratios tab</div>
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Find &ldquo;Debtor Days&rdquo; or &ldquo;Days Sales Outstanding&rdquo; &rarr; click the chart &#128200; icon</div>
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Is the line trending up or down over 5 years? That&rsquo;s your answer.</div>
+        </div>
+        <div class="tc-results">
+          <span class="tcr-g">&#10004; Falling DSO = Collecting faster</span>
+          <span class="tcr-a">&#9888; Flat at 60&ndash;90d = Monitor</span>
+          <span class="tcr-r">&#10007; Rising DSO = Revenue quality risk</span>
+        </div>
+      </div>
+
+      <!-- TRICK 2 -->
+      <div class="tc tc2">
+        <div class="tc-num tn2">2</div>
+        <div class="tc-sub ts2">Screener.in &mdash; Balance Sheet Tab</div>
+        <div class="tc-title">The &ldquo;Receivables vs Revenue Growth&rdquo; Trick</div>
+        <div class="tc-desc">Open the Balance Sheet tab and look at two rows: <strong>Trade Receivables</strong> and <strong>Revenue from Operations</strong> (P&amp;L tab). Calculate the 3-year growth rate of each. If Trade Receivables grew 35% CAGR while Revenue grew 15% CAGR &mdash; the company is giving more and more credit to customers without getting corresponding revenue. This is one of the most reliable early warning signals for future earnings disappointments, bad-debt write-offs, or even revenue manipulation. It takes 60 seconds and catches problems years before they become news.</div>
+        <div class="tc-steps">
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> Balance Sheet &rarr; find Trade Receivables row, note value 3 years ago vs today</div>
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> P&amp;L tab &rarr; find Revenue row, note value 3 years ago vs today</div>
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> Calculate: Receivables CAGR vs Revenue CAGR. If Receivables &gt; 2&times; Revenue CAGR &rarr; red flag</div>
+        </div>
+        <div class="tc-results">
+          <span class="tcr-g">&#10004; Receivables CAGR &le; Revenue CAGR = Healthy</span>
+          <span class="tcr-a">&#9888; Receivables CAGR 1.3&ndash;2&times; Revenue = Watch</span>
+          <span class="tcr-r">&#10007; Receivables CAGR &gt;2&times; Revenue CAGR = Investigate</span>
+        </div>
+      </div>
+
+      <!-- TRICK 3 -->
+      <div class="tc tc3">
+        <div class="tc-num tn3">3</div>
+        <div class="tc-sub ts3">Screener.in &mdash; Ratios + Balance Sheet</div>
+        <div class="tc-title">The &ldquo;Payables vs Receivables&rdquo; Trick</div>
+        <div class="tc-desc">The single fastest working capital quality test. Go to the <strong>Balance Sheet tab</strong> and compare two rows side-by-side: <strong>Trade Receivables</strong> (money customers owe you) and <strong>Trade Payables</strong> (money you owe suppliers). If Payables &gt; Receivables &mdash; the company has negative net working capital. Suppliers are funding operations for free. This is the hallmark of exceptional businesses like Nestle, Britannia, CDSL, and D-Mart. If Receivables &gt; Payables and growing faster &mdash; the company is financing its customers more than its suppliers are financing it &mdash; a cash drain.</div>
+        <div class="tc-steps">
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Balance Sheet &rarr; find &ldquo;Trade Receivables&rdquo; (Current Assets section)</div>
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Balance Sheet &rarr; find &ldquo;Trade Payables&rdquo; (Current Liabilities section)</div>
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Compare: Payables vs Receivables. Which is bigger? Is the gap growing or shrinking?</div>
+        </div>
+        <div class="tc-results">
+          <span class="tcr-g">&#10004; Payables &gt;&gt; Receivables = Negative WC (best)</span>
+          <span class="tcr-a">&#9888; Payables &asymp; Receivables = Neutral WC</span>
+          <span class="tcr-r">&#10007; Receivables &gt;&gt; Payables = Cash drain, company funds customers</span>
+        </div>
+      </div>
+
+      <!-- TRICK 4 -->
+      <div class="tc tc4">
+        <div class="tc-num tn4">4</div>
+        <div class="tc-sub ts4">Screener.in &mdash; Ratios Tab</div>
+        <div class="tc-title">The &ldquo;Inventory Days vs Sector Peers&rdquo; Trick</div>
+        <div class="tc-desc">Inventory Days in isolation is meaningless. A pharma company with 120 inventory days might be perfectly normal; a FMCG company with 120 inventory days is in serious trouble. The trick is to <strong>always compare inventory days against 2&ndash;3 sector peers</strong> on Screener.in. Open the Ratios tab of Company A, note inventory days, then open Company B and C in separate tabs. Whichever company has the lowest inventory days within the same sector is turning capital fastest and earning the highest return on assets. Rising inventory days vs peers over 2 years = the company is losing efficiency or market share.</div>
+        <div class="tc-steps">
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Ratios tab &rarr; note &ldquo;Inventory Days&rdquo; for Company A</div>
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Open 2 sector peers in new Screener.in tabs, note their Inventory Days</div>
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Rank all three. Lowest inventory days = most efficient capital use in sector</div>
+        </div>
+        <div class="tc-results">
+          <span class="tcr-g">&#10004; Lowest inventory days in sector = Leader in efficiency</span>
+          <span class="tcr-a">&#9888; Middle of pack = Average, investigate why</span>
+          <span class="tcr-r">&#10007; Highest &amp; rising = Losing efficiency or losing market share</span>
+        </div>
+      </div>
+
+      <!-- TRICK 5 FULL WIDTH -->
+      <div class="tc tc5">
+        <div class="tc-num tn5">5</div>
+        <div class="tc-sub ts5">Screener.in &mdash; Calculate CCC in 3 Minutes</div>
+        <div class="tc-title">The &ldquo;Calculate Cash Conversion Cycle&rdquo; Trick &mdash; The Most Powerful One</div>
+        <div class="tc-desc">The Cash Conversion Cycle (CCC) is the single most powerful working capital metric &mdash; yet most retail investors never calculate it. The formula is: <strong>CCC = Inventory Days + Debtor Days &minus; Creditor Days.</strong> A negative CCC means the business model generates cash as it grows. A high positive CCC means the company needs more and more working capital (often borrowed) as it grows. You can calculate CCC for any company in under 3 minutes using freely available Screener.in data. Comparing CCC across 5 years immediately tells you whether WC efficiency is improving or deteriorating.</div>
+        <div class="tc5-inner">
+          <div>
+            <div class="tc-steps">
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Ratios tab &rarr; note <strong>Inventory Days</strong> (e.g. 55 days)</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Ratios tab &rarr; note <strong>Debtor Days / DSO</strong> (e.g. 38 days)</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Balance Sheet &rarr; Trade Payables &divide; COGS &times; 365 = <strong>Creditor Days</strong> (e.g. 50 days)</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> <strong>CCC = 55 + 38 &minus; 50 = 43 days</strong> &rarr; positive, moderate</div>
+            </div>
+          </div>
+          <div>
+            <div class="tc-steps">
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Repeat for the same company 3 years ago (Screener.in shows 10-year data)</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Compare: CCC trending down = WC improving. CCC rising = WC getting worse.</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Compare with 2 peers in same sector &rarr; rank by CCC efficiency</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Negative CCC company in any sector = potential moat &amp; compounding machine</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-results" style="margin-top:14px;">
+          <span class="tcr-g">&#10004; Negative CCC = Suppliers fund growth automatically (Nestle, Britannia, CDSL)</span>
+          <span class="tcr-a">&#9888; CCC 0&ndash;60 days = Normal, watch trend direction</span>
+          <span class="tcr-r">&#10007; CCC &gt;90 days &amp; rising = Capital-hungry, may need constant borrowing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WC Cheat Sheet -->
+    <div class="wc-cheat rv d5">
+      <div class="wcc-inner">
+        <div class="wcc-badge">90-Second Working Capital Cheat Sheet</div>
+        <div class="wcc-title">Open Screener.in &rarr; 5 Numbers &rarr; Pass / Fail &rarr; Done</div>
+        <div class="wcc-grid">
+          <div class="wci wci-good">
+            <div class="wci-num">Check 1 &mdash; Ratios Tab</div>
+            <div class="wci-name">Inventory Days</div>
+            <div class="wci-val">&#10004; Below sector average &amp; falling<br>&#10007; Rising above peers 2+ years</div>
+          </div>
+          <div class="wci wci-good">
+            <div class="wci-num">Check 2 &mdash; Ratios Tab (Chart)</div>
+            <div class="wci-name">Debtor Days Trend</div>
+            <div class="wci-val">&#10004; Flat or falling over 5 years<br>&#10007; Rising year-on-year consistently</div>
+          </div>
+          <div class="wci wci-good">
+            <div class="wci-num">Check 3 &mdash; Balance Sheet</div>
+            <div class="wci-name">Payables vs Receivables</div>
+            <div class="wci-val">&#10004; Payables &gt; Receivables (neg. WC)<br>&#10007; Receivables growing much faster</div>
+          </div>
+          <div class="wci wci-good">
+            <div class="wci-num">Check 4 &mdash; 3-Year Growth</div>
+            <div class="wci-name">Receivables CAGR vs Revenue CAGR</div>
+            <div class="wci-val">&#10004; Receivables CAGR &le; Revenue CAGR<br>&#10007; Receivables growing 2&times; faster</div>
+          </div>
+          <div class="wci wci-good">
+            <div class="wci-num">Check 5 &mdash; Calculate Yourself</div>
+            <div class="wci-name">Cash Conversion Cycle</div>
+            <div class="wci-val">&#10004; Negative or &lt;30 days<br>&#10007; &gt;90 days &amp; rising over 3 years</div>
+          </div>
+          <div class="wci wci-warn">
+            <div class="wci-num">Special Cases</div>
+            <div class="wci-name">Industry Exceptions</div>
+            <div class="wci-val">Banks: use NIM &amp; CASA instead &bull; Infra/EPC: high receivables structural &bull; Pharma: high inventory normal &bull; FMCG: always compare CCC vs peers &bull; IT Services: zero inventory, focus on DSO only</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight rv d6">
+      <div class="ins-ico">&#127919;</div>
+      <div>
+        <div class="ins-tag">The One-Line WC Filter</div>
+        <div class="ins-title">If Payables &gt; Receivables and Inventory Days Are Falling &mdash; Working Capital Is Probably Excellent</div>
+        <div class="ins-desc">This two-second check on Screener.in&rsquo;s Balance Sheet covers 80% of working capital analysis for non-financial companies. Payables exceeding receivables = suppliers fund operations (negative WC). Falling inventory days = company is turning stock faster. Both together = a capital-efficient business that compounds returns automatically. Find it in 90 seconds: <strong>Balance Sheet &rarr; compare Trade Receivables vs Trade Payables rows &rarr; then Ratios tab &rarr; Inventory Days chart.</strong> If both checks pass, focus your remaining analysis on other aspects of the business.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT CHAPTER -->
+<div class="nxt">
+  <div class="nxt-left">
+    <div class="nxt-lbl">Up Next &middot; Module 05</div>
+    <div class="nxt-sub">Fixed Assets &amp; Depreciation &mdash; How Companies Invest in Long-Term Growth</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arr">&#8594;</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section class="disc">
+  <div class="disc-inner">
+    <div class="disc-ico">&#9888;&#65039;</div>
+    <div>
+      <div class="disc-lbl">Important Disclaimer</div>
+      <div class="disc-txt">This page is for educational purposes only. All figures shown for CDSL, Nestle India, Britannia Industries, TCS, Pidilite Industries, Hind Copper, Future Retail, and other companies are approximate illustrative values sourced from publicly available disclosures and Screener.in. Inventory Days, Debtor Days, and CCC figures are approximate calculations for educational illustration. Actual audited numbers may differ. Verify all figures from official SEBI filings and annual reports before making any investment decision. All equity investments carry market risk. Past performance does not guarantee future returns. This module is not investment advice. Consult a SEBI-registered investment advisor before investing.</div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{threshold:.05,rootMargin:'0px 0px -36px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  }else{els.forEach(function(el){el.classList.add('on');});}
+  ['touchstart','touchmove','touchend','touchcancel'].forEach(function(evt){document.addEventListener(evt,function(){},{passive:true});});
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){els.forEach(function(el){el.classList.add('on');});}
+  document.body.style.overscrollBehavior='none';
+  function setVH(){document.documentElement.style.setProperty('--vh',window.innerHeight*.01+'px');}
+  setVH();
+  window.addEventListener('resize',setVH,{passive:true});
+  window.addEventListener('orientationchange',function(){setTimeout(setVH,300);setTimeout(function(){document.querySelectorAll('.rv:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<window.innerHeight*.95){el.classList.add('on');}});},400);},{passive:true});
+  document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('a,button,.dmbtn,.nxt-btn,.excard,.wc-card,.tc,.kp,.vrd').forEach(function(el){el.style.touchAction='manipulation';});
+    document.querySelectorAll('.tscroll,.sumwrap').forEach(function(el){el.style.webkitOverflowScrolling='touch';});
+    if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});});}
+  });
+})();
+</script>
+</body>
+</html>

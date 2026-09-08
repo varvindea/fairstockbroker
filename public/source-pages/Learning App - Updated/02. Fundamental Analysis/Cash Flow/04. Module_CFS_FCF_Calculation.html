@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Free Cash Flow">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Free Cash Flow – Calculation & Importance · Cash Flow Analysis · FA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes coinBounce{0%,100%{transform:translateY(0) scale(1)}40%{transform:translateY(-10px) scale(1.08)}}
+
+/* ── LAYOUT ── */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(26px,6.5vw,84px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:14px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(12px,2.8vw,38px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:920px;}
+.hsi{padding:clamp(10px,1.8vw,20px) clamp(8px,1.8vw,16px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:76px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(9px,1.3vw,14px);font-weight:900;letter-spacing:-.3px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(7px,.85vw,9px);font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+
+/* ── KLO ── */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.09);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+
+/* ── FORMULA CARDS ── */
+.formula-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,20px);margin-bottom:40px;}
+.fcf-formula-box{border-radius:18px;padding:clamp(16px,2.5vw,24px);border:2px solid;transition:transform .22s,box-shadow .22s;}
+.fcf-formula-box:hover{transform:translateY(-3px);box-shadow:var(--shp);}
+.ffb-main{border-color:rgba(109,40,217,.35);background:linear-gradient(135deg,var(--pl),var(--p));color:#fff;}
+.ffb-lvfcf{border-color:rgba(22,163,74,.3);background:linear-gradient(135deg,var(--gbr),var(--gh));color:#fff;}
+.ffb-yield{border-color:rgba(2,132,199,.28);background:linear-gradient(135deg,var(--sky),#38bdf8);color:#fff;}
+.ff-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:6px;}
+.ff-formula{font-size:clamp(12px,1.8vw,17px);font-weight:900;color:#fff;line-height:1.25;margin-bottom:8px;}
+.ff-note{font-size:clamp(10.5px,1.2vw,12px);color:rgba(255,255,255,.78);line-height:1.5;}
+
+/* ── INFOGRAPHIC ── */
+.infographic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.infographic-svg{width:100%;max-width:620px;margin:0 auto;animation:floatB 4.5s ease-in-out infinite;}
+.infographic-cap{font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;max-width:560px;margin:0 auto;}
+
+/* ── FCF USES CARDS ── */
+.uses-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2.5vw,22px);margin-bottom:40px;}
+.use-card{border-radius:18px;padding:clamp(16px,3vw,24px);border:2px solid;transition:transform .22s,box-shadow .22s;}
+.use-card:hover{transform:translateY(-3px);box-shadow:var(--shp);}
+.uc-dcf{border-color:rgba(109,40,217,.3);background:linear-gradient(158deg,var(--pxs),#fdfcff);}
+.uc-yield{border-color:rgba(22,163,74,.28);background:linear-gradient(158deg,var(--gpale),#f9fff9);}
+.uc-growth{border-color:rgba(217,119,6,.25);background:linear-gradient(158deg,var(--apale),#fffcf0);}
+.uc-quality{border-color:rgba(2,132,199,.22);background:linear-gradient(158deg,#f0f9ff,#f8fcff);}
+.uc-ico{font-size:clamp(26px,4vw,36px);margin-bottom:8px;animation:floatB 3.8s ease-in-out infinite;}
+.uc-title{font-size:clamp(14px,2vw,18px);font-weight:900;margin-bottom:4px;}
+.uct-p{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.uct-g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.uct-a{color:var(--ambr);}
+.uct-s{color:var(--sky);}
+.uc-badge{display:inline-flex;padding:3px 10px;border-radius:7px;font-size:10px;font-weight:800;margin-bottom:10px;}
+.ub-p{background:rgba(109,40,217,.1);color:var(--p);}
+.ub-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.ub-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.ub-s{background:rgba(2,132,199,.1);color:var(--sky);}
+.uc-body{font-size:clamp(12px,1.4vw,13.5px);color:var(--ts);line-height:1.68;}
+.uc-eg{margin-top:9px;padding:7px 10px;border-radius:8px;font-size:11.5px;font-weight:600;line-height:1.45;}
+.eg-g{background:rgba(22,163,74,.07);color:var(--gbr);}
+.eg-p{background:rgba(109,40,217,.07);color:var(--p);}
+.eg-a{background:rgba(217,119,6,.07);color:var(--ambr);}
+.eg-r{background:rgba(220,38,38,.07);color:var(--red);}
+
+/* ── SIGNAL GRID ── */
+.signal-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,28px);}
+.sig-box{border-radius:18px;padding:clamp(18px,3vw,28px);}
+.sig-good{background:linear-gradient(135deg,var(--gpale),#ecfdf5);border:1.5px solid rgba(22,163,74,.25);}
+.sig-bad{background:linear-gradient(135deg,var(--rpale),#fff5f5);border:1.5px solid rgba(220,38,38,.22);}
+.sig-title{font-size:clamp(14px,1.9vw,18px);font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.sig-title.g{color:var(--gbr);}
+.sig-title.r{color:var(--red);}
+.sig-list{display:flex;flex-direction:column;gap:9px;}
+.sig-item{display:flex;align-items:flex-start;gap:11px;background:rgba(255,255,255,.74);border-radius:11px;padding:11px 13px;}
+.sig-dot{width:26px;height:26px;min-width:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.sig-dot.g{background:rgba(22,163,74,.15);}
+.sig-dot.r{background:rgba(220,38,38,.12);}
+.sig-text h4{font-size:12.5px;font-weight:800;color:var(--tx);margin-bottom:2px;}
+.sig-text p{font-size:11.5px;color:var(--ts);line-height:1.5;}
+
+/* ── COMPANY BLOCK ── */
+.company-block{border-radius:18px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);margin-bottom:clamp(22px,3.5vw,32px);}
+.cb-header{display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,24px);gap:12px;flex-wrap:wrap;}
+.cb-good{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.cb-bad{background:linear-gradient(135deg,#fef2f2,#fff5f5);}
+.cb-amb{background:linear-gradient(135deg,var(--apale),#fffdf5);}
+.cb-co{display:flex;align-items:center;gap:12px;}
+.cb-logo{width:48px;height:48px;min-width:48px;border-radius:12px;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cb-name{font-size:clamp(13px,1.8vw,17px);font-weight:900;color:var(--tx);line-height:1.2;}
+.cb-sub{font-size:11px;color:var(--tl);margin-top:3px;}
+.cb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.cb-badge{padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;}
+.cb-b-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.cb-b-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.cb-b-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.cb-insight{padding:12px 16px;font-size:12px;color:var(--ts);line-height:1.6;}
+.ci-good{background:rgba(22,163,74,.05);border-top:1px solid rgba(22,163,74,.15);border-left:3px solid var(--gbr);}
+.ci-bad{background:rgba(220,38,38,.04);border-top:1px solid rgba(220,38,38,.12);border-left:3px solid var(--red);}
+.ci-amb{background:rgba(217,119,6,.05);border-top:1px solid rgba(217,119,6,.15);border-left:3px solid var(--amb);}
+
+/* ── TABLE ── */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.gt{width:100%;border-collapse:collapse;min-width:500px;}
+.gt th{background:linear-gradient(135deg,rgba(109,40,217,.07),rgba(109,40,217,.03));padding:8px 13px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:right;white-space:nowrap;}
+.gt th:first-child{text-align:left;}
+.gt td{padding:8px 13px;font-size:12px;color:var(--ts);border-bottom:1px solid rgba(109,40,217,.05);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.gt td:first-child{text-align:left;font-weight:700;color:var(--tx);}
+.gt tr:last-child td{border-bottom:none;}
+.gt tr.total-row td{font-weight:900;background:rgba(109,40,217,.04);border-top:1.5px solid var(--bd);}
+.gt tr.cfo-row td:first-child{color:var(--gbr);}
+.gt tr.cap-row td:first-child{color:var(--red);}
+.gt tr.fcf-row td:first-child{color:var(--p);font-weight:900;}
+.gt tr.yield-row td:first-child{color:var(--sky);}
+.gt tr.pat-row td:first-child{color:var(--ts);}
+.gt tr.bad-row td{color:var(--red);}
+.gt tr.section-header td{background:rgba(109,40,217,.04);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);padding:7px 13px 3px;}
+.gt tr:hover td{background:var(--pxs);}
+.col-sticky{position:sticky;left:0;background:var(--wh);z-index:2;box-shadow:2px 0 5px rgba(109,40,217,.05);}
+.gt tr.total-row .col-sticky,.gt tr.fcf-row .col-sticky{background:rgba(109,40,217,.04);}
+.gt tr.section-header .col-sticky{background:rgba(109,40,217,.04);}
+
+/* ── CAVEAT ── */
+.caveat-box{margin-top:32px;background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:16px;}
+.caveat-icon{width:44px;height:44px;min-width:44px;border-radius:13px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(109,40,217,.28);}
+.caveat-body{flex:1;min-width:0;}
+.caveat-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.caveat-title{font-size:clamp(13px,1.5vw,15px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.caveat-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+
+/* ── DEMAT BANNER ── */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* ── NEXT ── */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-banner::after{content:'';position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;display:inline-block;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+
+/* ═══ RESPONSIVE — 11 BREAKPOINTS ═══ */
+img,svg{max-width:100%;height:auto;display:block;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.formula-strip{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){
+  .signal-grid{grid-template-columns:1fr;}
+  .uses-grid{grid-template-columns:1fr 1fr;}
+  .infographic-svg{max-width:420px;}
+}
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .hst{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .caveat-box{flex-direction:column;gap:12px;}
+  .caveat-icon{width:40px;height:40px;min-width:40px;font-size:20px;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;}
+  .dmfeats{gap:10px 20px;}
+  svg{overflow:visible;max-width:100%;}
+  .cb-header{flex-direction:column;align-items:flex-start;}
+  .cb-badges{margin-top:4px;}
+  .formula-strip{grid-template-columns:1fr;}
+  .fcf-formula-box{padding:16px;}
+}
+@media(max-width:640px){
+  .uses-grid{grid-template-columns:1fr 1fr;}
+  .signal-grid{grid-template-columns:1fr;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .infographic-svg{max-width:100%;}
+  .gt th,.gt td{padding:7px 10px;font-size:10.5px;}
+}
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.2px;}.hdesc{font-size:13px;}.hsub{font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .h2{letter-spacing:-1px;}.lead{font-size:13.5px;}
+  .uses-grid{grid-template-columns:1fr;}
+  .use-card{padding:14px;}.uc-ico{animation:none;font-size:26px;}
+  .cb-name{font-size:13px;}.cb-logo{width:40px;height:40px;min-width:40px;font-size:18px;}
+  .caveat-title{font-size:13px;}.caveat-desc{font-size:12.5px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+  .ff-formula{font-size:clamp(12px,3.5vw,16px);}
+}
+@media(max-width:360px){
+  .w{padding:26px 12px;}.hh1{font-size:clamp(22px,8.5vw,36px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}.hsi:nth-last-child(-n+2){border-bottom:1px solid var(--bd) !important;}.hsi:last-child{border-bottom:none !important;}
+  .kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}.nxt-btn{font-size:12px;padding:10px 14px;}
+}
+
+/* TOUCH */
+@media(hover:none) and (pointer:coarse){
+  .fcf-formula-box:hover,.use-card:hover,.company-block:hover{transform:none !important;box-shadow:var(--shc) !important;}
+  .fcf-formula-box:active,.use-card:active{transform:scale(.98);transition:transform .08s;}
+  .dmbtn:active{transform:scale(.97);}.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn,.fcf-formula-box,.use-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,.uc-title{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.lead,.caveat-desc,.uc-body,.cb-insight,.sig-text p{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+}
+
+/* iOS */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.hsv,.hsv.g,.h2 .hp,.h2 .hg,.uc-title.uct-p,.uc-title.uct-g{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn,.fcf-formula-box,.use-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .table-scroll{-webkit-overflow-scrolling:touch;}
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+}
+
+/* ANDROID HiDPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .fcf-formula-box,.use-card,.company-block,.caveat-box{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .infographic-svg,.klo-icon{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}.infographic-svg,.klo-icon,.uc-ico{animation:none !important;}
+}
+
+/* PRINT */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}.rv{opacity:1;transform:none;}
+  body{color:#000;}.w{padding:20px;}.table-scroll{overflow:visible;}.gt{min-width:0;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="vbadge">Cash Flow Statement Analysis · FA</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Free Cash Flow — Calculation &amp; Importance</div>
+  <h1 class="hh1">
+    <span class="line1">Free Cash Flow</span>
+    <span class="line2">(FCF)</span>
+    <span class="line3">The Truest Measure of a Company's Worth</span>
+  </h1>
+  <div class="hsub">FCF Calculation · DCF Valuation · FCF Yield · Owner's Earnings · FCF Quality</div>
+  <p class="hdesc">Profit can be engineered. Cash cannot be faked. Free Cash Flow — what's left after maintaining and growing the business — is the single most honest measure of the economic value a company creates each year.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv g">FCF</div><div class="hsl">CFO − CapEx</div></div>
+    <div class="hsi"><div class="hsv">Levered FCF</div><div class="hsl">FCF − Interest</div></div>
+    <div class="hsi"><div class="hsv g">FCF Yield</div><div class="hsl">FCF ÷ Mkt Cap</div></div>
+    <div class="hsi"><div class="hsv">DCF</div><div class="hsl">FCF to Value</div></div>
+    <div class="hsi"><div class="hsv g">FCF/PAT</div><div class="hsl">Quality Check</div></div>
+  </div>
+</section>
+
+
+<!-- ══ 01 — KLO ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">FCF: <span class="hp">What You Really Own</span> When You Buy a Stock</h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">💎</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">Free Cash Flow (FCF) = Operating Cash Flow minus Capital Expenditure. It is the cash left over after a company has maintained and grown its business — money that could theoretically be distributed to shareholders immediately without harming future earnings power.</div>
+        <div class="klo-desc">When you buy a share of a company, you are buying a proportional claim on its future Free Cash Flows — not its reported profits. PAT can be inflated by capitalising expenses, understating provisions, or booking revenue before cash arrives. FCF is far harder to manufacture: cash either enters or leaves the bank. Think of FCF like the "take-home pay" of a business. Gross salary is Revenue. Tax deductions and expenses are costs. What's left is PAT (salary credit on the slip). But if you've spent money on EMI for a machine this month (CapEx), that EMI comes out of your actual bank account. What remains after EMI is your real disposable income — that's FCF. Warren Buffett called it "owner's earnings" — the actual return an owner receives for holding the business. A company compounding FCF at 15% annually for 10 years doubles its intrinsic value approximately 4×. This compounding of FCF is what creates wealth in the stock market.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-g">💎 FCF = Owner's Earnings</span>
+          <span class="kpill kpill-p">📊 Base for DCF Valuation</span>
+          <span class="kpill kpill-a">📈 FCF Yield = Real Return</span>
+          <span class="kpill kpill-r">⚠️ PAT can mislead; FCF doesn't</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 02 — FORMULAS + INFOGRAPHIC + USES ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — How to Calculate FCF</div>
+    <h2 class="h2 rv d2">Three Formulas, <span class="hp">One Truth</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">FCF has multiple definitions depending on the context — equity valuation, debt analysis, or management benchmarking. Here are the three versions every fundamental analyst must know.</p>
+
+    <!-- Formula cards -->
+    <div class="formula-strip rv d3" style="margin-bottom:40px;">
+      <div class="fcf-formula-box ffb-main">
+        <div class="ff-label">Basic FCF — Most Used</div>
+        <div class="ff-formula">FCF = CFO − Capital Expenditure</div>
+        <div class="ff-note">The simplest and most widely-used definition. CFO from the Cash Flow Statement minus CapEx (Purchase of Fixed Assets). Used for FCF Yield calculation and FCF/PAT quality check. Available directly from Screener.in in 30 seconds.</div>
+      </div>
+      <div class="fcf-formula-box ffb-lvfcf">
+        <div class="ff-label">Levered FCF — Equity Value</div>
+        <div class="ff-formula">LFCF = CFO − CapEx − Interest Paid − Debt Repayment</div>
+        <div class="ff-note">The cash available specifically to equity shareholders after debt obligations are met. Used in equity DCF valuation. If LFCF is negative while FCF is positive, the debt burden is consuming all free cash generation — shareholder value is shrinking.</div>
+      </div>
+      <div class="fcf-formula-box ffb-yield">
+        <div class="ff-label">FCF Yield — The Valuation Check</div>
+        <div class="ff-formula">FCF Yield = (FCF ÷ Market Cap) × 100</div>
+        <div class="ff-note">Compares FCF to market price. FCF Yield above 4–5% = reasonable for quality manufacturer. Above 7% = attractively priced. Below 2% = expensive — you're paying a large premium and need high FCF growth to justify. Compare to 10-yr bond yield (~7%) for context.</div>
+      </div>
+    </div>
+
+    <!-- SVG infographic -->
+    <div class="rv d4" style="margin-bottom:36px;">
+      <div class="infographic-wrap">
+        <!-- viewBox 0 0 620 480 — verified -->
+        <svg class="infographic-svg" viewBox="0 0 620 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="620" height="480" rx="20" fill="#f5f3ff"/>
+          <rect x="14" y="10" width="592" height="34" rx="11" fill="#6d28d9"/>
+          <text x="310" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="white">Free Cash Flow — From Factory to Owner's Wallet</text>
+
+          <!-- FACTORY (left) -->
+          <rect x="14" y="56" width="124" height="96" rx="10" fill="#6d28d9" opacity=".88"/>
+          <rect x="24" y="70" width="19" height="15" rx="3" fill="#c4b5fd" opacity=".5"/>
+          <rect x="50" y="70" width="19" height="15" rx="3" fill="#c4b5fd" opacity=".5"/>
+          <rect x="76" y="70" width="19" height="15" rx="3" fill="#c4b5fd" opacity=".5"/>
+          <rect x="24" y="112" width="74" height="24" rx="5" fill="#4c1d95"/>
+          <polygon points="2,56 76,16 150,56" fill="#7c3aed" opacity=".88"/>
+          <rect x="6" y="22" width="10" height="34" rx="3" fill="#4c1d95"/>
+          <circle cx="11" cy="15" r="7" fill="#a78bfa" opacity=".62"/>
+          <rect x="8" y="156" width="128" height="18" rx="7" fill="#6d28d9"/>
+          <text x="72" y="169" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="white">🏭 Factory Operates</text>
+
+          <!-- Generates CFO -->
+          <rect x="14" y="184" width="128" height="38" rx="10" fill="#15803d" opacity=".88"/>
+          <text x="78" y="200" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="white">💵 CFO Generated</text>
+          <text x="78" y="216" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.8)">₹1,000 Cr cash from ops</text>
+
+          <!-- Arrow right from CFO -->
+          <path d="M142 203 L185 203" stroke="#15803d" stroke-width="2.5" stroke-dasharray="5,3" marker-end="url(#af1)"/>
+          <defs>
+            <marker id="af1" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#15803d"/></marker>
+            <marker id="af2" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#dc2626"/></marker>
+            <marker id="af3" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#15803d"/></marker>
+          </defs>
+
+          <!-- MINUS CapEx box -->
+          <rect x="186" y="168" width="138" height="72" rx="11" fill="#dc2626" opacity=".85"/>
+          <text x="255" y="191" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="white">🔧 MINUS CapEx</text>
+          <text x="255" y="208" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.85)">Buy new machines &amp; plants</text>
+          <text x="255" y="224" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.85)">Replace worn-out equipment</text>
+          <rect x="200" y="228" width="110" height="6" rx="3" fill="rgba(255,255,255,.22)"/>
+          <text x="255" y="233" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="white">₹300 Cr spent this year</text>
+
+          <!-- Arrow right from CapEx to FCF result -->
+          <path d="M324 203 L367 203" stroke="#15803d" stroke-width="2.5" stroke-dasharray="5,3" marker-end="url(#af3)"/>
+
+          <!-- FCF RESULT box (green, large) -->
+          <rect x="368" y="156" width="238" height="88" rx="14" fill="#15803d" opacity=".92"/>
+          <rect x="366" y="154" width="242" height="92" rx="15" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+          <text x="489" y="182" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="white">⭐ FREE CASH FLOW</text>
+          <text x="489" y="202" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="22" font-weight="900" fill="#4ade80">₹700 Cr</text>
+          <text x="489" y="222" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(255,255,255,.82)">CFO ₹1,000 Cr − CapEx ₹300 Cr</text>
+          <text x="489" y="236" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.7)">= Owner's Earnings</text>
+
+          <!-- Analyst character -->
+          <circle cx="76" cy="106" r="22" fill="#ddd6fe"/>
+          <circle cx="68" cy="102" r="2.5" fill="#4c1d95"/>
+          <circle cx="84" cy="102" r="2.5" fill="#4c1d95"/>
+          <path d="M69 115 Q76 122 83 115" stroke="#4c1d95" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          <rect x="64" y="128" width="24" height="24" rx="5" fill="#6d28d9"/>
+          <rect x="42" y="136" width="22" height="7" rx="4" fill="#6d28d9" transform="rotate(-15 53 139)"/>
+          <rect x="88" y="136" width="22" height="7" rx="4" fill="#6d28d9" transform="rotate(15 99 139)"/>
+          <rect x="62" y="152" width="10" height="20" rx="3" fill="#4c1d95"/>
+          <rect x="78" y="152" width="10" height="20" rx="3" fill="#4c1d95"/>
+
+          <!-- FCF Uses (bottom row) -->
+          <rect x="14" y="258" width="592" height="32" rx="10" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="310" y="278" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="#4c1d95">What does management do with ₹700 Cr FCF?</text>
+
+          <!-- 4 uses boxes -->
+          <rect x="14" y="300" width="136" height="66" rx="12" fill="var(--pxl)" stroke="#c4b5fd" stroke-width="1.2"/>
+          <text x="82" y="320" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#4c1d95">💰 Dividends</text>
+          <text x="82" y="336" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Return cash to</text>
+          <text x="82" y="350" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">shareholders directly</text>
+          <text x="82" y="360" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#4c1d95">e.g. Nestle ₹3,084 Cr</text>
+
+          <rect x="160" y="300" width="136" height="66" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
+          <text x="228" y="320" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#15803d">🔄 Buybacks</text>
+          <text x="228" y="336" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Buy back shares,</text>
+          <text x="228" y="350" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">reduce share count</text>
+          <text x="228" y="360" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#15803d">Boosts EPS per share</text>
+
+          <rect x="306" y="300" width="136" height="66" rx="12" fill="#fef2f2" stroke="#fecaca" stroke-width="1.2"/>
+          <text x="374" y="320" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#dc2626">⬇️ Pay Debt</text>
+          <text x="374" y="336" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Repay existing loans,</text>
+          <text x="374" y="350" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">reduce interest burden</text>
+          <text x="374" y="360" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#dc2626">Guaranteed return = int%</text>
+
+          <rect x="452" y="300" width="154" height="66" rx="12" fill="#fefce8" stroke="#fde68a" stroke-width="1.2"/>
+          <text x="529" y="320" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#92400e">📈 Reinvest</text>
+          <text x="529" y="336" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Acquire businesses or</text>
+          <text x="529" y="350" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">build new capacity</text>
+          <text x="529" y="360" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#92400e">Only if ROCE &gt; WACC</text>
+
+          <!-- FCF Yield calculation display -->
+          <rect x="14" y="378" width="290" height="86" rx="13" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="159" y="398" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#4c1d95">📊 FCF Yield Calculation</text>
+          <text x="159" y="416" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#3d3868">FCF Yield = FCF ÷ Market Cap × 100</text>
+          <text x="159" y="432" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Nestle FCF ₹3,632 Cr ÷ Mkt Cap ₹2,20,000 Cr</text>
+          <text x="159" y="448" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#15803d">= 1.6% FCF Yield (premium brand pricing)</text>
+          <text x="159" y="460" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6e6994">Low yield = market pays premium for quality &amp; growth</text>
+
+          <!-- DCF box -->
+          <rect x="318" y="378" width="288" height="86" rx="13" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="462" y="398" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#6d28d9">🎯 DCF Valuation Link</text>
+          <text x="462" y="415" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Intrinsic Value = Sum of all Future FCFs</text>
+          <text x="462" y="431" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">discounted back to today at WACC (cost of capital)</text>
+          <text x="462" y="447" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="800" fill="#6d28d9">Company growing FCF 15%/yr for 10 yrs ≈</text>
+          <text x="462" y="461" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="900" fill="#15803d">4× current FCF in terminal value terms</text>
+        </svg>
+        <p class="infographic-cap">The factory generates ₹1,000 Cr operating cash, spends ₹300 Cr on machines and expansion (CapEx), and is left with ₹700 Cr FCF — the true owner's earnings. Management then decides: pay dividends, buy back shares, repay debt, or reinvest in growth.</p>
+      </div>
+    </div>
+
+    <!-- FCF Uses — 4 cards -->
+    <div class="tag rv d5" style="margin-bottom:12px;">Why FCF Matters — Four Critical Uses</div>
+    <div class="uses-grid rv d5">
+      <div class="use-card uc-dcf">
+        <div class="uc-ico">🎯</div>
+        <div class="uc-title uct-p">DCF Valuation Foundation</div>
+        <div class="uc-badge ub-p">Primary valuation input</div>
+        <div class="uc-body">The Discounted Cash Flow (DCF) model is the theoretical bedrock of equity valuation. It states that a company's intrinsic value equals the present value of all future Free Cash Flows, discounted at the company's Weighted Average Cost of Capital (WACC).<br><br>In practice: project FCF for 5–10 years using growth assumptions, add a terminal value (FCF in perpetuity at a long-run growth rate), then discount back to today. If the resulting intrinsic value exceeds the current market price — the stock may be undervalued. If market price exceeds intrinsic value significantly — potential overvaluation.<br><br>The key sensitivity: FCF growth rate assumption drives most of the value. A company growing FCF 5% vs 15% annually will have a dramatically different DCF output. This is why high-FCF-growth companies (Nestle, Asian Paints in good years) command 40–80× earnings — the market is paying for compounded future FCF growth, not just current year earnings.</div>
+        <div class="uc-eg eg-p">Simple DCF: Company with FCF ₹500 Cr growing at 12% for 10 years, then 4% terminal, WACC 10%. Intrinsic value ≈ ₹10,000–12,000 Cr. If market cap is ₹8,000 Cr → potential 25–50% upside.</div>
+      </div>
+
+      <div class="use-card uc-yield">
+        <div class="uc-ico">📊</div>
+        <div class="uc-title uct-g">FCF Yield — Quick Valuation Screen</div>
+        <div class="uc-badge ub-g">FCF ÷ Market Cap × 100</div>
+        <div class="uc-body">FCF Yield is the fastest valuation shortcut: it tells you what percentage of a company's market price is returned each year as genuine free cash. Compare it to bond yields for context — if a 10-year government bond yields 7%, a quality stock offering 7%+ FCF yield is likely attractively priced.<br><br>FCF Yield bands for manufacturing companies:<br>Above 7%: Potentially undervalued — check why the market hasn't rerated (cyclical trough, temporary problem, sector headwind).<br>4–7%: Reasonably valued for quality business.<br>2–4%: Fairly priced with growth expectations embedded.<br>Below 2%: Richly valued — market is pricing in significant future FCF growth. Any growth disappointment causes sharp correction.</div>
+        <div class="uc-eg eg-g">Polycab FCF ~₹1,800 Cr on Market Cap ~₹70,000 Cr = ~2.6% FCF Yield. Moderate, reflecting growth expectations as cable demand from infra boom continues. Tata Steel FCF volatile — yield swings from 8% (cycle peak) to negative (cycle trough).</div>
+      </div>
+
+      <div class="use-card uc-growth">
+        <div class="uc-ico">📈</div>
+        <div class="uc-title uct-a">FCF Growth — The Compounding Engine</div>
+        <div class="uc-badge ub-a">FCF CAGR &gt; 15% = wealth machine</div>
+        <div class="uc-body">A company that compounds FCF at 15% annually doubles its intrinsic value every 5 years. Over 15 years, it creates approximately 8× its original value — entirely through organic cash generation without needing new equity or debt. This FCF compounding is the mathematical engine behind the great long-term wealth creators in Indian manufacturing.<br><br>FCF growth comes from three sources: (1) Revenue growth — more products sold = more operating cash. (2) Margin expansion — OpEx growing slower than revenue = more EBITDA → more CFO. (3) CapEx efficiency — the same CapEx produces more revenue over time as capacity utilises fully.<br><br>Nestle India's FCF grew from ₹2,120 Cr (FY20) to ₹3,632 Cr (FY25) — a 71% increase in 5 years (CAGR ~11.5%). Polycab's FCF grew from ₹188 Cr to ₹1,800 Cr — a 10× increase (CAGR ~57%). These are the compounding dynamics that reward long-term patient investors.</div>
+        <div class="uc-eg eg-a">FCF CAGR calculation: (Ending FCF ÷ Starting FCF)^(1/n) − 1. Polycab: (1800÷188)^(1/5) − 1 = 57% CAGR. Outstanding — driven by revenue scaling 3× while CapEx intensity fell from 3.1% to 2.2% of revenue.</div>
+      </div>
+
+      <div class="use-card uc-quality">
+        <div class="uc-ico">🔍</div>
+        <div class="uc-title uct-s">FCF/PAT — Earnings Quality Check</div>
+        <div class="uc-badge ub-s">FCF ÷ PAT: target &gt;0.7×</div>
+        <div class="uc-body">Dividing FCF by PAT reveals what fraction of reported profits actually converted to free cash. This is a powerful earnings quality check that catches problems the P&L hides.<br><br>If FCF/PAT is consistently above 0.8× — earnings are genuine, working capital is well-managed, and CapEx intensity is appropriate. If FCF/PAT is below 0.5× for multiple years — investigate: either CapEx is very high (capital-intensive cycle), working capital is ballooning (HFCL-type B2G trap), or earnings are being manufactured through accounting choices.<br><br>Note: this ratio can legitimately be low during a major CapEx cycle (building a new plant) — don't penalise companies in genuine productive expansion phases. The key is whether FCF/PAT recovers and improves once the plant comes online.</div>
+        <div class="uc-eg eg-r">HFCL: FCF negative while PAT positive every year → FCF/PAT far below zero → pure earnings quality failure. Nestle: FCF consistently 90–110% of PAT → FCF/PAT ratio 0.90–1.10× → gold-standard quality. Use FCF/PAT as a first-pass quality filter for every company.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 03 — SIGNALS ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — FCF Quality Signals</div>
+    <h2 class="h2 rv d2"><span class="hg">Positive FCF Patterns</span> vs <span class="hp">FCF Red Flags</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Reading FCF trends correctly separates genuine compounders from value traps. These are the four patterns that matter most in manufacturing sector analysis.</p>
+
+    <div class="signal-grid">
+      <div class="rv d3">
+        <div class="sig-box sig-good">
+          <div class="sig-title g">✅ High-Quality FCF Patterns</div>
+          <div class="sig-list">
+            <div class="sig-item"><div class="sig-dot g">💎</div><div class="sig-text"><h4>FCF Positive and Growing for 5+ Years</h4><p>A manufacturing company that generates positive, growing FCF across multiple economic cycles — including at least one industry downturn — has proven its business model works in all conditions. Nestle India, Polycab, Asian Paints, and Maruti all achieved this. This 5-year positive track record is the single most reliable FCF quality confirmation available.</p></div></div>
+            <div class="sig-item"><div class="sig-dot g">📉</div><div class="sig-text"><h4>CapEx/Revenue Declining as Business Scales</h4><p>When a company grows revenue 20% annually but CapEx grows only 10%, CapEx intensity (CapEx/Revenue) declines — meaning each unit of revenue requires less capital investment over time. This is operating leverage in its purest form and a direct driver of FCF expansion. Polycab's CapEx intensity dropped from 3.1% to 2.2% of revenue as factories built in 2020–23 reached full utilisation by 2025.</p></div></div>
+            <div class="sig-item"><div class="sig-dot g">🔄</div><div class="sig-text"><h4>FCF Conversion Ratio (FCF/EBITDA) Above 50%</h4><p>FCF/EBITDA measures what fraction of operating earnings converts to free cash after CapEx. Above 60% = asset-light, excellent. Nestle's ratio: ₹3,632 Cr FCF ÷ ₹5,186 Cr EBITDA = 70% — outstanding. Tata Steel at peak: 40% (heavy capex). At cycle trough: negative. The FCF/EBITDA ratio immediately reveals how much of "operating profit" is consumed by maintaining and growing the asset base.</p></div></div>
+            <div class="sig-item"><div class="sig-dot g">📊</div><div class="sig-text"><h4>FCF Yield Expanding Over Time (Rerate Signal)</h4><p>When FCF yield expands (FCF growing faster than market cap) — the stock is becoming cheaper in fundamental terms even as the share price may be flat or rising. This "natural rerate" happens when FCF compounding makes the current price seem increasingly reasonable relative to growing cash generation. Polycab's FCF growing 10× in 5 years created this dynamic for patient holders.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="rv d4">
+        <div class="sig-box sig-bad">
+          <div class="sig-title r">🚨 FCF Red Flags</div>
+          <div class="sig-list">
+            <div class="sig-item"><div class="sig-dot r">📉</div><div class="sig-text"><h4>PAT Growing While FCF is Flat or Declining</h4><p>This is the most dangerous FCF divergence: reported earnings rise every year but the actual cash generated doesn't follow. The widening gap is being filled by receivables buildup, inventory accumulation, or capitalised expenses — all of which will eventually reverse and force PAT lower. Companies showing this pattern for 2–3 years typically face earnings corrections 1–2 years later. HFCL showed this pattern consistently.</p></div></div>
+            <div class="sig-item"><div class="sig-dot r">🏗️</div><div class="sig-text"><h4>CapEx Consistently Exceeding CFO (Negative FCF)</h4><p>When CapEx is larger than CFO every year for 3+ years without visible new revenue-generating capacity coming online, capital is being misallocated or projects are delayed. Negative FCF that doesn't resolve within 2–3 years signals either a structurally broken business model or management that can't execute. The classic symptom: CWIP (Capital Work in Progress) on the balance sheet stays large for years without converting to productive PP&E.</p></div></div>
+            <div class="sig-item"><div class="sig-dot r">💸</div><div class="sig-text"><h4>Negative FCF + Debt Rising + Dividends Paid</h4><p>The most dangerous combination: the company generates negative FCF (CapEx exceeds operations), is raising new debt, AND paying dividends. This triple negative means the company is borrowing to fund both its investment and its shareholder distributions — a fundamentally unsustainable financial profile that ends either in dividend cuts, equity dilution, or debt restructuring.</p></div></div>
+            <div class="sig-item"><div class="sig-dot r">📊</div><div class="sig-text"><h4>FCF Highly Volatile (Cyclical Trap)</h4><p>A company whose FCF swings from ₹5,000 Cr positive to ₹2,000 Cr negative across a 3-year commodity cycle cannot be valued using a DCF model — because the "steady state" FCF is undefined. Rain Industries, Tata Steel in bad years: FCF volatility of ±₹10,000 Cr makes any valuation based on "normalised FCF" an educated guess. Always identify whether FCF volatility is cyclical (business dependent on commodity prices) or structural (business model breaking down).</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ DEMAT BANNER ══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Start Investing Today</div>
+    <div class="dmh">Screen by <span class="dmhs">FCF Yield &amp; FCF Growth</span> on Screener.in</div>
+    <div class="dmsub">Build a custom Screener.in formula: FCF = Operating Cash Flow − CapEx. Filter for FCF positive every year for 5 years, FCF Yield above 3%, and FCF/PAT ratio above 0.75×. This finds the 200–300 quality companies from 5,000+ listed.</div>
+    <div class="dmfeats">
+      <div class="dmf">Build FCF screens in minutes for free</div>
+      <div class="dmf">Track FCF Yield vs sector peers</div>
+      <div class="dmf">10-year FCF compounding chart</div>
+      <div class="dmf">Start investing from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ══ 04 — 5 COMPANY EXAMPLES ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">04 — FCF in Action</div>
+    <h2 class="h2 rv d2">5 Companies — <span class="hg">FCF Calculated &amp; Valued</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five companies show the full FCF spectrum — from the highest-quality consumer brand compounders to chronically FCF-negative businesses. Each tells a fundamentally different story about owner's earnings.</p>
+
+    <!-- COMPANY 1: Nestle India -->
+    <div class="company-block rv d3">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);">🍫</div>
+          <div><div class="cb-name">Nestle India — Elite FCF Quality, Growing Owner's Earnings</div><div class="cb-sub">Food Manufacturing · NSE: NESTLEIND · FCF/PAT 1.0×+ · FCF CAGR ~11.5%</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ FCF Always Positive</span>
+          <span class="cb-badge cb-b-g">✅ FCF/PAT 1.0–1.20×</span>
+          <span class="cb-badge cb-b-g">✅ 71% FCF Growth 5 Yrs</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="gt">
+          <thead><tr>
+            <th class="col-sticky">FCF Item (₹ Cr)</th>
+            <th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="cfo-row"><td class="col-sticky">Operating Cash Flow (CFO)</td><td>2,892</td><td>2,934</td><td>3,428</td><td>4,312</td><td>4,480</td></tr>
+            <tr class="cap-row"><td class="col-sticky">Minus: CapEx</td><td>−560</td><td>−636</td><td>−716</td><td>−784</td><td>−848</td></tr>
+            <tr class="fcf-row total-row"><td class="col-sticky">= Free Cash Flow (FCF)</td><td>2,332</td><td>2,298</td><td>2,712</td><td>3,528</td><td>3,632</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="6">● VALUATION METRICS</td></tr>
+            <tr class="pat-row"><td class="col-sticky">Net Profit (PAT)</td><td>2,474</td><td>2,564</td><td>3,064</td><td>3,925</td><td>4,025</td></tr>
+            <tr class="yield-row"><td class="col-sticky">FCF ÷ PAT (Quality Ratio)</td><td>0.94×</td><td>0.90×</td><td>0.89×</td><td>0.90×</td><td>0.90×</td></tr>
+            <tr class="cap-row"><td class="col-sticky">CapEx ÷ Revenue</td><td>4.2%</td><td>4.3%</td><td>4.1%</td><td>4.2%</td><td>4.4%</td></tr>
+            <tr class="yield-row"><td class="col-sticky">FCF Yield (est. mkt cap)</td><td>~1.5%</td><td>~1.4%</td><td>~1.5%</td><td>~1.7%</td><td>~1.6%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-good">✅ <strong>FCF compounded from ₹2,332 Cr to ₹3,632 Cr — 71% growth in 5 years (11.5% CAGR).</strong> FCF/PAT consistently at 0.90× — for every ₹1 of reported profit, ₹0.90 arrives as actual cash. This 10% gap is entirely explained by CapEx (₹848 Cr) slightly exceeding D&A (₹496 Cr) — healthy growth investment. FCF Yield of 1.5–1.7% sounds low — but reflects the market's justified premium for a business with 55% gross margin, zero debt, negative working capital, and FCF growing 12%+ annually. The DCF mathematics justify a higher multiple: FCF compounding at 12% + terminal value of a zero-debt, brand-dominant consumer company = intrinsic value significantly above book value. This is why Nestle India trades at 70–80× earnings — not because it's a bubble, but because the future FCF stream is exceptionally high-quality and reliable.</div>
+    </div>
+
+    <!-- COMPANY 2: Polycab India -->
+    <div class="company-block rv d4">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🔌</div>
+          <div><div class="cb-name">Polycab India — FCF Compounder: 10× in 5 Years</div><div class="cb-sub">Wires &amp; Cables · NSE: POLYCAB · FCF CAGR 57% · Operating leverage in action</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ FCF 10× in 5 Years</span>
+          <span class="cb-badge cb-b-g">✅ CapEx% Declining</span>
+          <span class="cb-badge cb-b-g">✅ FCF Growing &gt; Revenue</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="gt">
+          <thead><tr>
+            <th class="col-sticky">FCF Item (₹ Cr)</th>
+            <th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="cfo-row"><td class="col-sticky">Operating Cash Flow (CFO)</td><td>868</td><td>748</td><td>1,084</td><td>1,524</td><td>2,448</td></tr>
+            <tr class="cap-row"><td class="col-sticky">Minus: CapEx</td><td>−288</td><td>−392</td><td>−448</td><td>−564</td><td>−648</td></tr>
+            <tr class="fcf-row total-row"><td class="col-sticky">= Free Cash Flow (FCF)</td><td>580</td><td>356</td><td>636</td><td>960</td><td>1,800</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="6">● VALUATION METRICS</td></tr>
+            <tr class="pat-row"><td class="col-sticky">Net Profit (PAT)</td><td>739</td><td>905</td><td>1,108</td><td>1,702</td><td>2,708</td></tr>
+            <tr class="yield-row"><td class="col-sticky">FCF ÷ PAT (Quality Ratio)</td><td>0.78×</td><td>0.39×</td><td>0.57×</td><td>0.56×</td><td>0.66×</td></tr>
+            <tr class="cap-row"><td class="col-sticky">CapEx ÷ Revenue</td><td>3.1%</td><td>3.2%</td><td>3.2%</td><td>3.0%</td><td>2.2%</td></tr>
+            <tr class="yield-row"><td class="col-sticky">FCF Yield (est.)</td><td>~0.7%</td><td>~0.4%</td><td>~0.8%</td><td>~1.3%</td><td>~2.5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-good">✅ <strong>FCF grew from ₹580 Cr to ₹1,800 Cr — a 10× increase in 5 years (57% CAGR) as operating leverage kicked in.</strong> The FY22 FCF/PAT of 0.39× alarmed many investors — but was explained by copper price spike-driven inventory build (WC drain, not structural). By FY25, FCF/PAT recovered to 0.66× and trending higher as WC normalises and revenue scale grows. CapEx intensity declining from 3.1% to 2.2% confirms the key dynamic: capacity built in FY20–23 is now fully utilised, requiring less incremental CapEx per rupee of additional revenue. FCF Yield expanding from 0.7% to 2.5% over 5 years shows the natural re-rate: FCF compounding faster than stock price appreciation. The DCF valuation for Polycab at 15–20% FCF growth rate for 7 years + modest terminal growth suggests significant intrinsic value upside if the cables + FMEG volume thesis plays out.</div>
+    </div>
+
+    <!-- COMPANY 3: Asian Paints -->
+    <div class="company-block rv d5">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">🎨</div>
+          <div><div class="cb-name">Asian Paints — Premium FCF Despite Competitive Pressure</div><div class="cb-sub">Paints &amp; Coatings · NSE: ASIANPAINT · FCF Positive All 5 Years Including FY25 Pressure Year</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ FCF Positive All 6 Years</span>
+          <span class="cb-badge cb-b-g">✅ FCF/EBITDA 70%+</span>
+          <span class="cb-badge cb-b-a">⚠️ FY25 PAT Declined 27%</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="gt">
+          <thead><tr>
+            <th class="col-sticky">FCF Item (₹ Cr)</th>
+            <th>FY2020</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="cfo-row"><td class="col-sticky">Operating Cash Flow (CFO)</td><td>2,944</td><td>3,596</td><td>3,128</td><td>4,448</td><td>5,484</td><td>4,248</td></tr>
+            <tr class="cap-row"><td class="col-sticky">Minus: CapEx</td><td>−964</td><td>−1,148</td><td>−1,452</td><td>−1,636</td><td>−1,844</td><td>−2,016</td></tr>
+            <tr class="fcf-row total-row"><td class="col-sticky">= Free Cash Flow (FCF)</td><td>1,980</td><td>2,448</td><td>1,676</td><td>2,812</td><td>3,640</td><td>2,232</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● VALUATION METRICS</td></tr>
+            <tr class="pat-row"><td class="col-sticky">Net Profit (PAT)</td><td>2,722</td><td>3,228</td><td>3,285</td><td>4,785</td><td>5,336</td><td>3,910</td></tr>
+            <tr class="yield-row"><td class="col-sticky">FCF ÷ PAT</td><td>0.73×</td><td>0.76×</td><td>0.51×</td><td>0.59×</td><td>0.68×</td><td>0.57×</td></tr>
+            <tr class="cap-row"><td class="col-sticky">CapEx ÷ Revenue</td><td>5.0%</td><td>5.6%</td><td>5.6%</td><td>4.7%</td><td>5.4%</td><td>5.8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-good">✅ <strong>FCF positive every single year including FY25 (₹2,232 Cr) despite a 27% PAT decline from Birla Opus competition — confirming the business model is fundamentally intact.</strong> FCF/PAT of 0.51–0.76× is lower than Nestle because Asian Paints is still investing significantly in new plant capacity (₹2,016 Cr CapEx in FY25). This is productive investment: each new factory expands geographic reach and production capacity for paints with 44%+ gross margin. FCF/PAT improving from 0.51× (FY22 peak investment) to 0.68× (FY24) suggests the most capital-intensive phase is passing. For DCF: Asian Paints FCF of ₹2,232–3,640 Cr compounding at 8–12% long-term justifies the high valuation — but FY25's competition-driven PAT decline has introduced uncertainty about the terminal growth rate that makes current valuations look stretched.</div>
+    </div>
+
+    <!-- COMPANY 4: HFCL – Negative FCF -->
+    <div class="company-block rv d6">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">📡</div>
+          <div><div class="cb-name">HFCL — Negative FCF Despite Positive PAT: The Classic Quality Trap</div><div class="cb-sub">Telecom Manufacturing · NSE: HFCL · FCF negative every year while PAT positive</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 FCF Negative 5/5 Years</span>
+          <span class="cb-badge cb-b-r">🚨 FCF/PAT Far Below Zero</span>
+          <span class="cb-badge cb-b-r">🚨 B2G Receivables Trap</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="gt">
+          <thead><tr>
+            <th class="col-sticky">FCF Item (₹ Cr)</th>
+            <th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="cfo-row"><td class="col-sticky">Operating Cash Flow (CFO)</td><td style="color:var(--red);">+48</td><td style="color:var(--red);">−168</td><td style="color:var(--red);">−312</td><td style="color:var(--red);">−248</td><td style="color:var(--red);">−172</td></tr>
+            <tr class="cap-row"><td class="col-sticky">Minus: CapEx</td><td>−164</td><td>−212</td><td>−248</td><td>−272</td><td>−296</td></tr>
+            <tr class="fcf-row total-row"><td class="col-sticky">= Free Cash Flow (FCF)</td><td style="color:var(--red);">−116</td><td style="color:var(--red);">−380</td><td style="color:var(--red);">−560</td><td style="color:var(--red);">−520</td><td style="color:var(--red);">−468</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="6">● QUALITY METRICS</td></tr>
+            <tr class="pat-row"><td class="col-sticky">Net Profit (PAT) — all positive</td><td>172</td><td>168</td><td>216</td><td>176</td><td>200</td></tr>
+            <tr class="yield-row"><td class="col-sticky">FCF ÷ PAT — devastating</td><td style="color:var(--red);">−0.67×</td><td style="color:var(--red);">−2.26×</td><td style="color:var(--red);">−2.59×</td><td style="color:var(--red);">−2.95×</td><td style="color:var(--red);">−2.34×</td></tr>
+            <tr class="cap-row"><td class="col-sticky">CapEx ÷ Revenue</td><td>4.4%</td><td>4.6%</td><td>4.4%</td><td>5.5%</td><td>4.7%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-bad">🚨 <strong>FCF negative every year while PAT is positive — the textbook earnings quality failure that FCF analysis exposes instantly.</strong> The cumulative FCF deficit over 5 years: −(₹116 + 380 + 560 + 520 + 468) = −₹2,044 Cr. Over the same period, cumulative PAT: ₹932 Cr positive. This means HFCL consumed ₹2,044 Cr of cash while reporting ₹932 Cr of profits — a ₹2,976 Cr gap funded entirely by debt and working capital borrowings. For DCF purposes, HFCL's "owner's earnings" are deeply negative every year — the company does not create value for equity holders; it destroys it through its B2G receivables trap where cash never arrives. Any DCF built on HFCL's PAT would value a company with genuine economic earnings; FCF-based DCF correctly shows near-zero or negative intrinsic value from the operating business alone.</div>
+    </div>
+
+    <!-- COMPANY 5: Maruti Suzuki – Mid-Range FCF -->
+    <div class="company-block rv d7">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🚗</div>
+          <div><div class="cb-name">Maruti Suzuki — FCF 4× in 5 Years via SUV Mix + Operating Leverage</div><div class="cb-sub">Automobiles · NSE: MARUTI · FCF ₹2,512 Cr → ₹10,268 Cr · Kharkhoda growth capex underway</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ FCF 4× in 5 Years</span>
+          <span class="cb-badge cb-b-g">✅ FCF Yield 5.2%</span>
+          <span class="cb-badge cb-b-a">⚠️ Growth CapEx Rising</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="gt">
+          <thead><tr>
+            <th class="col-sticky">FCF Item (₹ Cr)</th>
+            <th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="cfo-row"><td class="col-sticky">Operating Cash Flow (CFO)</td><td>4,848</td><td>3,612</td><td>8,948</td><td>13,824</td><td>16,112</td></tr>
+            <tr class="cap-row"><td class="col-sticky">Minus: CapEx</td><td>−1,924</td><td>−2,148</td><td>−3,124</td><td>−4,448</td><td>−5,844</td></tr>
+            <tr class="fcf-row total-row"><td class="col-sticky">= Free Cash Flow (FCF)</td><td>2,924</td><td>1,464</td><td>5,824</td><td>9,376</td><td>10,268</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="6">● VALUATION METRICS</td></tr>
+            <tr class="pat-row"><td class="col-sticky">Net Profit (PAT)</td><td>4,224</td><td>3,882</td><td>8,211</td><td>13,489</td><td>16,622</td></tr>
+            <tr class="yield-row"><td class="col-sticky">FCF ÷ PAT</td><td>0.69×</td><td>0.38×</td><td>0.71×</td><td>0.70×</td><td>0.62×</td></tr>
+            <tr class="cap-row"><td class="col-sticky">True CapEx ÷ Revenue</td><td>2.7%</td><td>2.4%</td><td>2.7%</td><td>3.2%</td><td>3.7%</td></tr>
+            <tr class="yield-row"><td class="col-sticky">FCF Yield (approx.)</td><td>~1.5%</td><td>~0.7%</td><td>~2.9%</td><td>~4.6%</td><td>~5.2%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-good">✅ <strong>FCF grew from ₹2,924 Cr to ₹10,268 Cr — 3.5× in 5 years (CAGR ~29%) — driven entirely by the SUV product mix transformation.</strong> FCF Yield expanding from 1.5% to 5.2% means Maruti is now returning real economic value at a rate above what many bonds offer — despite being equity (with growth optionality). FY22's FCF/PAT of 0.38× reflected the semiconductor chip shortage (both reduced CFO + same CapEx) — a one-time supply disruption, not structural deterioration. FY25's FCF/PAT of 0.62× reflects rising growth CapEx for Kharkhoda plant — another legitimate one-time drag. Once Kharkhoda comes online (FY26–27), CapEx will fall and FCF is projected to jump. For DCF: Maruti's FCF compounding at 15%+ for 3–5 years before normalising to 8–10% long-term suggests current intrinsic value around ₹2.1–2.5 lakh Cr — broadly aligned with or above current market price depending on assumptions.</div>
+    </div>
+
+    <div class="caveat-box rv d7">
+      <div class="caveat-icon">💡</div>
+      <div class="caveat-body">
+        <div class="caveat-label">The Master FCF Insight</div>
+        <div class="caveat-title">FCF Is the Only Number That Cannot Be Faked Over Multiple Years</div>
+        <div class="caveat-desc">Management teams have dozens of accounting tools to smooth, boost, or delay PAT recognition across quarters. But cash in the bank account is binary — either the money is there or it isn't. Across our five examples, the single clearest differentiator between wealth-creating and wealth-destroying companies is sustained positive FCF. Nestle, Polycab, Asian Paints, and Maruti generate real cash that compounds for shareholders. HFCL reports profits that never arrive as cash — and has borrowed ₹2,000+ Cr over 5 years to fund the gap between its accounting profits and its actual cash reality. The FCF/PAT ratio over 5 years is the most reliable single-number quality filter in all of fundamental analysis. Calculate it for any company in 60 seconds on Screener.in. If it's consistently below 0.6×, the business is consuming more cash than it generates — regardless of what the P&L headline says.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ NEXT CHAPTER ══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue your learning journey →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">For educational purposes only. All FCF figures are approximate illustrative estimates rounded for pedagogical clarity. DCF valuations mentioned are illustrative only and not investment recommendations. Always verify from official annual reports and Screener.in. All equity investments carry market risk. Consult a SEBI-registered investment advisor before investing.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+    },{threshold:.04,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  } else{els.forEach(function(el){el.classList.add('on');});}
+})();
+document.addEventListener('touchstart',function(){},{passive:true});
+document.addEventListener('touchmove',function(){},{passive:true});
+document.addEventListener('touchend',function(){},{passive:true});
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('on');});
+}
+document.body.style.overscrollBehavior='none';
+if(document.fonts&&document.fonts.ready){
+  document.fonts.ready.then(function(){
+    document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});
+  });
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('a,button,.dmbtn,.nxt-btn,.fcf-formula-box,.use-card,.company-block').forEach(function(el){
+    el.style.touchAction='manipulation';
+  });
+});
+</script>
+</body>
+</html>

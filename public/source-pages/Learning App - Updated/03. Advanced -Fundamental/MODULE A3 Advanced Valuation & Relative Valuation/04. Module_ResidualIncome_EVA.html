@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EVA Residual Income Valuation">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no,address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Residual Income / EVA Valuation · Advanced Valuation · Module 11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet"><style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;overflow-x:hidden;overscroll-behavior-y:none;}
+a{-webkit-tap-highlight-color:transparent;}button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+/* LAYOUT */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hr{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(28px,7.5vw,84px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:12px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(13px,3.2vw,38px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;box-shadow:var(--shc);width:100%;max-width:860px;}
+.hsi{padding:clamp(12px,2vw,22px) clamp(10px,2.5vw,24px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:80px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(11px,1.8vw,18px);font-weight:900;letter-spacing:-.5px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.r{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.a{background:linear-gradient(135deg,var(--ambr),var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(8px,1vw,10px);font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+/* KLO */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.kpill-s{background:rgba(2,132,199,.1);color:var(--sky);border:1px solid rgba(2,132,199,.18);}
+.klo-hi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;}
+.klo-hi{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--shc);}
+.klo-hi-ico{font-size:22px;margin-bottom:6px;}
+.klo-hi-val{font-size:clamp(12px,1.8vw,15px);font-weight:900;letter-spacing:-.3px;}
+.klo-hi-val.purple{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.green{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.amber{color:var(--ambr);}
+.klo-hi-val.red{color:var(--red);}
+.klo-hi-lbl{font-size:10px;color:var(--tl);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:3px;}
+/* CONCEPT GRID */
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:start;}
+.step-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:16px;padding:18px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:var(--shc);transition:border-color .25s,box-shadow .25s;}
+.step-card:hover{border-color:rgba(109,40,217,.3);box-shadow:var(--shp);}
+.step-num{width:36px;height:36px;min-width:36px;border-radius:10px;color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-body h4{font-size:14px;font-weight:800;color:var(--tx);margin-bottom:4px;}
+.step-body p{font-size:12.5px;color:var(--ts);line-height:1.58;}
+.infographic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.infographic-svg{width:100%;max-width:430px;animation:floatB 4.5s ease-in-out infinite;}
+.infographic-cap{font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;}
+/* EVA MODULE-SPECIFIC */
+/* EVA Gauge / Meter cards */
+.eva-gauge-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,18px);margin-bottom:24px;}
+.eva-gauge{border-radius:18px;padding:clamp(16px,2.5vw,26px);border:1.5px solid;text-align:center;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;}
+.eva-gauge:hover{transform:translateY(-3px);box-shadow:var(--shp);}
+.eva-gauge::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:4px 4px 0 0;}
+.eg-creator{background:linear-gradient(158deg,var(--gpale),#f7fdf7);border-color:rgba(22,163,74,.22);}
+.eg-creator::before{background:linear-gradient(90deg,var(--gbr),var(--gh));}
+.eg-neutral{background:linear-gradient(158deg,var(--apale),#fffdf5);border-color:rgba(217,119,6,.2);}
+.eg-neutral::before{background:linear-gradient(90deg,var(--ambr),var(--amb));}
+.eg-destroyer{background:linear-gradient(158deg,var(--rpale),#fff5f5);border-color:rgba(220,38,38,.18);}
+.eg-destroyer::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.eg-ico{font-size:clamp(28px,5vw,40px);margin-bottom:10px;}
+.eg-tag{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;}
+.eg-title{font-size:clamp(14px,1.9vw,18px);font-weight:900;color:var(--tx);margin-bottom:8px;}
+.eg-formula{background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.06);border-radius:10px;padding:8px 12px;margin-bottom:10px;font-size:10px;font-weight:700;color:var(--ts);}
+.eg-example{font-size:clamp(11px,1.4vw,13px);font-weight:800;margin-bottom:4px;}
+.eg-desc{font-size:clamp(11px,1.2vw,12px);color:var(--ts);line-height:1.55;}
+/* EVA Data Table (Screener-style) */
+.eva-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);}
+.eva-hdr{background:linear-gradient(135deg,var(--pl),var(--p));padding:clamp(14px,2.5vw,22px) clamp(16px,3vw,26px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.eva-hdr-title{font-size:clamp(15px,2.2vw,20px);font-weight:900;color:#fff;}
+.eva-hdr-sub{font-size:12px;color:rgba(255,255,255,.7);margin-top:2px;}
+.eva-legend{padding:10px clamp(14px,3vw,22px);background:var(--pxs);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--ts);}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+.eva-table{width:100%;border-collapse:collapse;min-width:760px;}
+.eva-table th{background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:clamp(9px,1.4vw,13px) clamp(8px,1.5vw,14px);font-size:clamp(9px,1vw,11px);font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:2px solid var(--bd);text-align:right;white-space:nowrap;}
+.eva-table th:first-child{text-align:left;}
+.eva-table td{padding:clamp(9px,1.4vw,13px) clamp(8px,1.5vw,14px);font-size:clamp(11px,1.2vw,13px);color:var(--ts);border-bottom:1px solid rgba(109,40,217,.06);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.eva-table td:first-child{text-align:left;font-weight:700;color:var(--tx);}
+.eva-table tr:last-child td{border-bottom:none;}
+.eva-table tr.creator-row td{background:rgba(22,163,74,.04);}
+.eva-table tr.destroyer-row td{background:rgba(220,38,38,.03);}
+.eva-table tr.total-row td{font-weight:900;color:var(--p);background:linear-gradient(135deg,rgba(109,40,217,.07),rgba(109,40,217,.03));border-top:2px solid var(--pmd);}
+.eva-table tr:hover td{background:var(--pxs);}
+.eva-table tr.creator-row:hover td{background:rgba(22,163,74,.07);}
+.eva-table tr.destroyer-row:hover td{background:rgba(220,38,38,.05);}
+.eva-pos{color:var(--gbr)!important;font-weight:800!important;}
+.eva-neg{color:var(--red)!important;font-weight:800!important;}
+.eva-zero{color:var(--ambr)!important;font-weight:700!important;}
+.flag-cell{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:2px 6px;border-radius:6px;}
+.flag-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.flag-r{background:rgba(220,38,38,.1);color:var(--red);}
+.flag-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.flag-p{background:var(--pxl);color:var(--p);}
+.flag-s{background:rgba(2,132,199,.1);color:var(--sky);}
+/* WACC VISUAL */
+.wacc-visual{background:var(--sf);border:1.5px solid var(--bd);border-radius:16px;padding:clamp(16px,2.5vw,24px);margin-top:20px;}
+.wv-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--p);margin-bottom:14px;}
+.wv-row{display:grid;grid-template-columns:clamp(130px,20vw,200px) 1fr auto;align-items:center;gap:12px;padding:8px 0;border-bottom:1px dashed rgba(109,40,217,.07);}
+.wv-row:last-child{border-bottom:none;}
+.wv-label{font-size:clamp(11.5px,1.4vw,13px);font-weight:700;color:var(--tx);}
+.wv-bar-bg{height:18px;background:rgba(0,0,0,.05);border-radius:5px;overflow:hidden;}
+.wv-bar{height:100%;border-radius:5px;}
+.wv-val{font-size:clamp(11px,1.5vw,13px);font-weight:900;text-align:right;white-space:nowrap;}
+/* COMPANY BLOCKS */
+.company-block{border-radius:18px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);margin-bottom:28px;}
+.cb-header{display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,24px);gap:12px;flex-wrap:wrap;}
+.cb-good{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.cb-bad{background:linear-gradient(135deg,#fef2f2,#fff5f5);}
+.cb-co{display:flex;align-items:center;gap:12px;}
+.cb-name{font-size:clamp(14px,2vw,18px);font-weight:900;color:var(--tx);line-height:1.2;}
+.cb-sub{font-size:11px;color:var(--tl);margin-top:3px;}
+.cb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.cb-badge{padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;}
+.cb-b-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.cb-b-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.cb-b-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.cb-b-s{background:rgba(2,132,199,.1);color:var(--sky);border:1px solid rgba(2,132,199,.2);}
+.cb-insight{padding:14px 18px;font-size:12px;color:var(--ts);line-height:1.65;margin:0;}
+.cb-insight-g{background:rgba(22,163,74,.06);border-top:1px solid rgba(22,163,74,.15);border-left:3px solid var(--gbr);}
+.cb-insight-r{background:rgba(220,38,38,.05);border-top:1px solid rgba(220,38,38,.15);border-left:3px solid var(--red);}
+.ex-logo{width:48px;height:48px;min-width:48px;border-radius:12px;font-size:22px;display:flex;align-items:center;justify-content:justify-content:center;flex-shrink:0;}
+/* TRICK SECTION */
+.trick-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:24px;overflow:hidden;box-shadow:var(--shp);}
+.trick-hdr{background:linear-gradient(135deg,#1a0a3c,var(--pl),var(--p));padding:clamp(20px,3.5vw,36px) clamp(20px,4vw,40px);display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.trick-hdr::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:24px 24px;}
+.th-left{flex:1;min-width:0;position:relative;z-index:1;}
+.th-supertag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.th-supertag::before{content:'';width:16px;height:2px;background:#4ade80;border-radius:2px;}
+.th-title{font-size:clamp(17px,3vw,26px);font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1.2;margin-bottom:8px;}
+.th-sub{font-size:clamp(12px,1.5vw,14px);color:rgba(255,255,255,.68);line-height:1.65;}
+.th-right{display:flex;flex-shrink:0;position:relative;z-index:1;}
+.th-timer{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:14px 20px;text-align:center;}
+.th-timer-num{font-size:clamp(26px,4vw,40px);font-weight:900;color:#fff;line-height:1;}
+.th-timer-lbl{font-size:10px;color:rgba(255,255,255,.55);font-weight:600;margin-top:2px;}
+/* QUICK REF */
+.trick-qref{padding:clamp(16px,3vw,28px) clamp(18px,4vw,36px);background:linear-gradient(158deg,#f5f3ff,#f0fdf4);border-bottom:1px solid var(--bd);}
+.qr-title{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.qr-title::before{content:'';width:18px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.sn-strip{background:var(--pxs);border:1px solid var(--pmd);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.sn-lbl{font-size:10px;font-weight:700;color:var(--p);flex-shrink:0;}
+.sn-num{width:18px;height:18px;border-radius:50%;background:var(--p);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sn-txt{font-size:10px;font-weight:700;color:var(--ts);}
+.sn-arr{font-size:10px;color:var(--tl);}
+/* EVA Quick Chips */
+.eva-chips{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(6px,1.5vw,10px);margin-bottom:14px;}
+.ec-chip{border-radius:12px;padding:clamp(10px,2vw,14px);text-align:center;border:1.5px solid;}
+.ecc-nopat{background:rgba(109,40,217,.06);border-color:rgba(109,40,217,.2);}
+.ecc-ce{background:rgba(2,132,199,.06);border-color:rgba(2,132,199,.18);}
+.ecc-wacc{background:rgba(217,119,6,.08);border-color:rgba(217,119,6,.2);}
+.ecc-eva{background:rgba(22,163,74,.08);border-color:rgba(22,163,74,.2);}
+.ec-chip-lbl{font-size:clamp(11px,1.8vw,16px);font-weight:900;letter-spacing:-.3px;margin-bottom:2px;}
+.ec-chip-name{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--tl);margin-bottom:5px;}
+.ec-chip-formula{font-size:9px;font-weight:600;color:var(--ts);line-height:1.4;border-top:1px dashed rgba(0,0,0,.08);padding-top:5px;}
+/* EVA Calculator strip */
+.eva-calc{background:var(--wh);border:1px solid var(--bd);border-radius:14px;padding:clamp(14px,2.5vw,22px);margin-bottom:12px;}
+.ec-calc-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--p);margin-bottom:12px;}
+.ec-row{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:0 14px;padding:8px 0;border-bottom:1px dashed rgba(109,40,217,.07);}
+.ec-row:last-child{border-bottom:none;}
+.ec-op{font-size:22px;font-weight:900;color:var(--tl);text-align:center;line-height:1;}
+.ec-label{font-size:clamp(11px,1.4vw,13px);font-weight:700;color:var(--tx);}
+.ec-sub{font-size:9.5px;color:var(--tl);font-weight:500;margin-top:2px;}
+.ec-val{font-size:clamp(12px,1.5vw,15px);font-weight:900;text-align:right;white-space:nowrap;}
+.ec-total{border:1.5px solid;border-radius:10px;padding:12px 14px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.ec-total.positive{background:linear-gradient(135deg,rgba(22,163,74,.1),rgba(22,163,74,.04));border-color:rgba(22,163,74,.22);}
+.ec-total.negative{background:linear-gradient(135deg,rgba(220,38,38,.08),rgba(220,38,38,.03));border-color:rgba(220,38,38,.2);}
+.ec-total-lbl{font-size:clamp(12px,1.5vw,14px);font-weight:800;}
+.ec-total-val{font-size:clamp(16px,2.5vw,22px);font-weight:900;white-space:nowrap;}
+/* ROIC vs WACC meter */
+.roic-meter{background:var(--wh);border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin-bottom:12px;}
+.rm-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--p);margin-bottom:10px;}
+.rm-track{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;}
+.rm-zone{border-radius:8px;padding:8px 4px;text-align:center;}
+.rm-val{font-size:clamp(10px,1.4vw,12px);font-weight:900;margin-bottom:2px;}
+.rm-lbl{font-size:8px;font-weight:600;color:var(--tl);}
+/* Data sources */
+.data-strip{background:var(--pxs);border:1px solid var(--pmd);border-radius:12px;padding:clamp(10px,2vw,16px);margin-bottom:12px;}
+.ds-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:10px;}
+.ds-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.ds-item{background:var(--wh);border:1px solid var(--bd);border-radius:10px;padding:10px;display:flex;align-items:flex-start;gap:8px;}
+.ds-ico{font-size:16px;flex-shrink:0;}
+.ds-name{font-size:10px;font-weight:800;color:var(--tx);margin-bottom:2px;}
+.ds-desc{font-size:9px;color:var(--tl);line-height:1.4;}
+/* TRICK STEPS */
+.trick-steps-body{padding:clamp(20px,4vw,36px) clamp(18px,4vw,36px);border-bottom:1px solid var(--bd);}
+.trick-step{display:flex;gap:clamp(12px,2.5vw,20px);padding-bottom:clamp(18px,3vw,28px);position:relative;}
+.trick-step:last-child{padding-bottom:0;}
+.ts-connector{position:absolute;left:clamp(17px,3vw,22px);top:clamp(40px,5vw,48px);bottom:0;width:2px;background:linear-gradient(180deg,var(--pmd),rgba(109,40,217,.06));border-radius:2px;}
+.trick-step:last-child .ts-connector{display:none;}
+.ts-num{width:clamp(36px,5vw,44px);height:clamp(36px,5vw,44px);border-radius:12px;color:#fff;font-size:clamp(14px,2vw,18px);font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(109,40,217,.28);flex-shrink:0;position:relative;z-index:1;}
+.ts-body{flex:1;min-width:0;padding-top:6px;}
+.ts-nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.ts-site{font-size:10px;font-weight:800;color:var(--p);background:var(--pxs);padding:4px 10px;border-radius:8px;border:1px solid var(--pmd);}
+.ts-arrow{font-size:12px;color:var(--tl);}
+.ts-tab{font-size:10px;font-weight:700;color:var(--ts);background:var(--sf);padding:4px 10px;border-radius:8px;border:1px solid var(--bd);}
+.ts-tab.purple{background:var(--pxl);color:var(--p);border-color:var(--pmd);}
+.ts-tab.green{background:rgba(22,163,74,.08);color:var(--gbr);border-color:rgba(22,163,74,.2);}
+.ts-tab.amber{background:rgba(217,119,6,.08);color:var(--ambr);border-color:rgba(217,119,6,.2);}
+.ts-tab.sky{background:rgba(2,132,199,.08);color:var(--sky);border-color:rgba(2,132,199,.2);}
+.ts-tab.red{background:rgba(220,38,38,.08);color:var(--red);border-color:rgba(220,38,38,.2);}
+.ts-action{font-size:clamp(12px,1.5vw,13.5px);color:var(--ts);line-height:1.68;margin-bottom:10px;}
+.ts-formula{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:clamp(12px,2vw,18px);margin-bottom:10px;}
+.ts-f-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.ts-f-lbl{font-size:12px;font-weight:800;color:var(--tx);}
+.ts-f-eq{font-size:18px;font-weight:700;color:var(--tl);}
+.ts-f-item{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;}
+.ts-fi-p{background:var(--pxl);color:var(--p);}
+.ts-fi-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.ts-fi-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.ts-fi-s{background:rgba(2,132,199,.1);color:var(--sky);}
+.ts-fi-r{background:rgba(220,38,38,.1);color:var(--red);}
+.ts-f-guide{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:11px;font-weight:600;}
+.ts-shortcut{background:linear-gradient(135deg,var(--pxl),#f0fdf4);border:1px solid var(--pmd);border-radius:10px;padding:12px 14px;margin-top:8px;}
+.ts-sc-lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.ts-sc-text{font-size:12px;color:var(--ts);line-height:1.6;}
+.ts-outcomes{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.ts-out{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.5;padding:9px 12px;border-radius:10px;}
+.ts-out-g{background:rgba(22,163,74,.07);color:var(--gbr);border:1px solid rgba(22,163,74,.14);}
+.ts-out-r{background:rgba(220,38,38,.06);color:var(--red);border:1px solid rgba(220,38,38,.14);}
+.ts-out-n{background:var(--pxs);color:var(--p);border:1px solid var(--pmd);}
+/* BONUS & FLOWCHART */
+.trick-bonus{padding:clamp(18px,3.5vw,32px) clamp(18px,4vw,36px);background:linear-gradient(158deg,#f5f3ff,#f0fdf4);border-bottom:1px solid var(--bd);}
+.bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,16px);}
+.bonus-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:clamp(12px,2vw,18px);box-shadow:var(--shc);position:relative;overflow:hidden;}
+.bonus-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.bc-p::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.bc-s::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.bc-a::before{background:linear-gradient(90deg,var(--ambr),var(--amb));}
+.bc-g::before{background:linear-gradient(90deg,var(--gbr),var(--gh));}
+.bonus-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;color:#fff;font-size:13px;font-weight:900;margin-bottom:8px;}
+.bonus-title{font-size:clamp(12px,1.5vw,13px);font-weight:800;color:var(--tx);margin-bottom:5px;}
+.bonus-desc{font-size:clamp(11px,1.2vw,12px);color:var(--ts);line-height:1.55;}
+.flow-wrap{padding:clamp(18px,3.5vw,32px) clamp(18px,4vw,36px);}
+.flow-label{font-size:12px;font-weight:700;color:var(--p);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.flow-chain{display:flex;flex-direction:column;gap:8px;}
+.flow-node{border-radius:12px;padding:10px 14px;font-size:clamp(11px,1.4vw,12.5px);font-weight:700;display:flex;align-items:center;gap:8px;line-height:1.4;}
+.fn-q{background:var(--pxl);border:1.5px solid var(--pmd);color:var(--pl);}
+.fn-qlbl{font-size:10px;font-weight:800;background:var(--p);color:#fff;border-radius:6px;padding:2px 7px;flex-shrink:0;}
+.fn-txt{flex:1;}
+.flow-branch{display:flex;flex-direction:column;gap:8px;padding-left:clamp(12px,3vw,24px);border-left:2px dashed var(--pmd);margin-left:18px;}
+.fb-yes,.fb-no{display:flex;flex-direction:column;gap:6px;}
+.fb-lbl{font-size:10px;font-weight:800;padding:2px 8px;border-radius:6px;width:fit-content;}
+.fb-yes>.fb-lbl{background:rgba(22,163,74,.12);color:var(--gbr);}
+.fb-no>.fb-lbl{background:rgba(220,38,38,.1);color:var(--red);}
+.fn-g{background:rgba(22,163,74,.1);border:1.5px solid rgba(22,163,74,.25);color:var(--gbr);font-size:clamp(11px,1.3vw,13px);}
+.fn-a{background:rgba(217,119,6,.08);border:1.5px solid rgba(217,119,6,.22);color:var(--ambr);font-size:clamp(11px,1.3vw,13px);}
+.fn-r{background:rgba(220,38,38,.07);border:1.5px solid rgba(220,38,38,.2);color:var(--red);font-size:clamp(11px,1.3vw,13px);}
+/* GLOSSARY */
+.glos-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);}
+.glos-table{width:100%;border-collapse:collapse;}
+.glos-table thead th{background:linear-gradient(135deg,var(--pxl),var(--pxs));padding:clamp(10px,2vw,15px) clamp(12px,2.5vw,20px);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--p);text-align:left;border-bottom:1.5px solid var(--bd);}
+.glos-table tbody tr{border-bottom:1px solid rgba(109,40,217,.05);transition:background .2s;}
+.glos-table tbody tr:last-child{border-bottom:none;}
+.glos-table tbody tr:hover{background:var(--pxs);}
+.gt-term{padding:clamp(11px,2vw,16px) clamp(12px,2.5vw,20px);font-size:clamp(11px,1.4vw,13px);font-weight:800;color:var(--p);white-space:nowrap;vertical-align:top;}
+.gt-desc{padding:clamp(11px,2vw,16px) clamp(12px,2.5vw,20px);font-size:clamp(11px,1.3vw,13px);color:var(--ts);line-height:1.65;vertical-align:top;}
+.gt-risk{padding:clamp(11px,2vw,16px) clamp(10px,2vw,16px);vertical-align:top;text-align:center;}
+/* DEMAT BANNER */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:"\\2713";color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+/* NEXT BANNER */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-arrow{font-size:18px;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+/* ═══════════════════════════════════════════════════════════════════
+   UNIFIED RESPONSIVE SYSTEM · Module 11 · Residual Income / EVA
+   EVA Gauge Cards · WACC Visual · EVA Table · Trick Section
+   Desktop · Tablet · Mobile · iOS · Android · Touch · A11y · Print
+   ═══════════════════════════════════════════════════════════════════ */
+img,svg{max-width:100%;height:auto;display:block;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+
+/* ── LARGE DESKTOP 1280px+ ── */
+@media(min-width:1280px){
+  .w{padding:80px 72px;}
+}
+
+/* ── SMALL DESKTOP / TABLET LANDSCAPE 901–1100px ── */
+@media(max-width:1100px){
+  /* EVA gauges: 3→2 col */
+  .eva-gauge-wrap{grid-template-columns:1fr 1fr;}
+  .eva-chips{grid-template-columns:1fr 1fr;}
+  .bonus-grid{grid-template-columns:1fr 1fr;}
+  /* WACC bar label shrinks */
+  .wv-row{grid-template-columns:clamp(100px,18vw,160px) 1fr auto;}
+  .ds-grid{grid-template-columns:1fr 1fr;}
+  /* EVA gauge cards compact */
+  .eg-formula{font-size:9.5px;}
+}
+
+/* ── TABLET PORTRAIT 769–900px ── */
+@media(max-width:900px){
+  .concept-grid{grid-template-columns:1fr;}
+  .infographic-svg{max-width:380px;margin:0 auto;}
+  .klo-hi-row{grid-template-columns:repeat(3,1fr);}
+  .flow-branch{padding-left:12px;margin-left:12px;}
+  /* EVA gauges: 2→1 col */
+  .eva-gauge-wrap{grid-template-columns:1fr;}
+  .wv-row{grid-template-columns:clamp(90px,16vw,140px) 1fr auto;}
+  /* EVA gauge text compact */
+  .eg-desc{font-size:12px;}
+  .eg-example{font-size:12px;}
+}
+
+/* ── MOBILE LANDSCAPE / LARGE PHONE 601–768px ── */
+@media(max-width:768px){
+  .w{padding:clamp(32px,6vw,56px) clamp(14px,5vw,28px);}
+  /* Hero */
+  .hst{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  /* KLO */
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .klo-hi-row{grid-template-columns:1fr 1fr;}
+  /* Layout */
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(14px,4vw,24px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;min-height:52px;}
+  .dmfeats{gap:10px 20px;}
+  svg{overflow:visible;}
+  /* EVA header */
+  .eva-hdr{flex-direction:column;align-items:flex-start;}
+  .eva-hdr-title{font-size:clamp(15px,2.5vw,20px);}
+  /* Company blocks */
+  .cb-header{flex-direction:column;align-items:flex-start;}
+  .cb-badges{margin-top:4px;flex-wrap:wrap;}
+  /* Trick section */
+  .trick-hdr{flex-direction:column;gap:14px;}
+  .ts-outcomes{grid-template-columns:1fr;}
+  .flow-branch{padding-left:10px;margin-left:10px;}
+  .bonus-grid{grid-template-columns:1fr 1fr;}
+  .sn-strip{flex-wrap:wrap;gap:4px;}
+  /* Module-specific */
+  .eva-chips{grid-template-columns:1fr 1fr;}
+  .wv-row{grid-template-columns:80px 1fr auto;gap:8px;}
+  .wv-label{font-size:11px;}
+  .wv-val{font-size:11px;}
+  body{overscroll-behavior-y:contain;}
+}
+
+/* ── MOBILE PORTRAIT 481–640px ── */
+@media(max-width:640px){
+  .klo-hi-row{grid-template-columns:1fr;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .infographic-svg{max-width:100%;}
+  /* Tables */
+  .eva-table{min-width:760px;}
+  .glos-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:520px;}
+  /* Cards */
+  .bonus-grid{grid-template-columns:1fr;}
+  /* Trick steps */
+  .trick-steps-body,.trick-bonus,.flow-wrap{padding:16px;}
+  .ts-f-row{flex-wrap:wrap;gap:4px 8px;}
+  .ts-f-guide{flex-direction:column;gap:4px;}
+  /* Module-specific @640 */
+  .eva-chips{grid-template-columns:1fr 1fr;}
+  .wv-row{grid-template-columns:70px 1fr auto;gap:6px;}
+  .wv-label{font-size:10px;}
+  .wv-val{font-size:10px;}
+  .ds-grid{grid-template-columns:1fr;}
+  .rm-track{grid-template-columns:repeat(3,1fr) !important;gap:3px;}
+  .sn-strip{flex-wrap:wrap;gap:4px;}
+  /* EVA gauge compact @640 */
+  .eva-gauge-wrap{grid-template-columns:1fr;}
+  .eg-formula{font-size:9.5px;}
+  .eg-desc{font-size:11.5px;}
+  .eg-example{font-size:11.5px;}
+  .eg-ico{font-size:clamp(24px,4vw,32px);margin-bottom:6px;}
+}
+
+/* ── SMALL MOBILE 361–480px ── */
+@media(max-width:480px){
+  .w{padding:28px 12px;}
+  .hh1{letter-spacing:-1.2px;}
+  .hdesc{font-size:13px;}
+  .hsub{letter-spacing:2.5px;font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .h2{letter-spacing:-1px;}
+  .lead{font-size:13.5px;}
+  .tag{letter-spacing:2px;}
+  .klo-title{font-size:14px;}
+  .klo-desc{font-size:12px;}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .klo-hi{padding:12px 10px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .dmh{letter-spacing:-1px;}
+  .dmsub{font-size:13px;}
+  .nxt-banner{padding:12px 14px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+  /* EVA header compact */
+  .eva-hdr{padding:12px;}
+  .eva-hdr-title{font-size:14px;}
+  .eva-hdr-sub{font-size:10px;}
+  /* Trick compact */
+  .th-timer{display:none;}
+  .ts-outcomes{grid-template-columns:1fr;}
+  .ts-num{width:32px;height:32px;font-size:13px;}
+  .flow-branch{padding-left:6px;margin-left:8px;}
+  .trick-steps-body,.trick-bonus,.flow-wrap{padding:14px;}
+  .bonus-card{padding:14px;}
+  /* Module-specific @480 */
+  .sn-strip{flex-direction:column;align-items:flex-start;}
+  .eva-chips{grid-template-columns:1fr 1fr;}
+  .wv-row{grid-template-columns:60px 1fr auto;gap:4px;}
+  .wv-label{font-size:9.5px;}
+  .wv-val{font-size:10px;}
+  .trick-qref{padding:14px;}
+  /* EVA gauge compact @480 */
+  .eva-gauge{padding:14px;}
+  .eg-title{font-size:15px;}
+  .eg-ico{font-size:24px;margin-bottom:6px;}
+  /* EVA calc compact @480 */
+  .eva-calc{padding:12px;}
+  .ec-row{grid-template-columns:22px 1fr auto;gap:0 8px;}
+  .ec-label{font-size:12px;}
+  .ec-val{font-size:12px;}
+  /* ROIC meter compact */
+  .roic-meter{padding:10px 12px;}
+  /* Data strip compact */
+  .data-strip{padding:10px 12px;}
+  /* WACC visual compact */
+  .wacc-visual{padding:14px;}
+  .wv-title{font-size:10px;margin-bottom:10px;}
+}
+
+/* ── EXTRA SMALL 360px and below ── */
+@media(max-width:360px){
+  .w{padding:22px 10px;}
+  .hh1{font-size:clamp(26px,10vw,40px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}
+  .hsi:last-child{border-bottom:none !important;}
+  .kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}
+  .nxt-btn{font-size:12px;padding:10px 14px;}
+  .ts-nav{flex-direction:column;align-items:flex-start;gap:3px;}
+  .trick-steps-body,.trick-bonus,.flow-wrap{padding:12px;}
+  .eva-chips{grid-template-columns:1fr 1fr;}
+  .wv-row{grid-template-columns:50px 1fr auto;gap:4px;}
+  .eg-title{font-size:14px;}
+  .eva-gauge{padding:12px;}
+}
+
+/* ── TOUCH DEVICES (finger input — no hover) ── */
+@media(hover:none) and (pointer:coarse){
+  /* Cancel hover effects */
+  .eva-gauge:hover,.step-card:hover,.company-block:hover,.bonus-card:hover{
+    transform:none !important;
+    box-shadow:var(--shc) !important;
+    border-color:var(--bd) !important;
+  }
+  /* Colour-tinted press feedback per EVA state */
+  .eg-creator:active{background:rgba(22,163,74,.09) !important;transition:background .08s;}
+  .eg-neutral:active{background:rgba(217,119,6,.08) !important;transition:background .08s;}
+  .eg-destroyer:active{background:rgba(220,38,38,.08) !important;transition:background .08s;}
+  .step-card:active{transform:scale(.99);transition:transform .08s;}
+  .bonus-card:active{transform:scale(.98);transition:transform .08s;}
+  .dmbtn:active,.nxt-btn:active{transform:scale(.97);transition:transform .08s;}
+  /* Minimum touch targets — Apple HIG 44px / Material 48px */
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:8px;padding-bottom:8px;}
+  .ts-num{min-width:44px;min-height:44px;}
+  .bonus-badge{min-width:36px;min-height:36px;}
+  .eva-gauge{min-height:auto;}
+  .ec-chip{min-height:60px;display:flex;flex-direction:column;justify-content:center;}
+  .rm-zone{min-height:40px;}
+  .ds-item{min-height:36px;}
+  /* EVA table rows and WACC bars */
+  .eva-table td{min-height:40px;}
+  .wv-row{min-height:40px;}
+  /* Hide scrollbars on touch */
+  ::-webkit-scrollbar{display:none;}
+  scrollbar-width:none;
+  /* Tap highlight + touch-action on ALL interactive elements */
+  a,button,.dmbtn,.nxt-btn,.eva-gauge,.step-card,.kpill,
+  .company-block,.bonus-card,.trick-wrap,.flow-node,.ec-chip{
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+    -webkit-touch-callout:none;
+  }
+  /* UI — non-selectable */
+  .hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,
+  .th-title,.th-supertag,.ts-nav,.flow-label,
+  .eva-hdr-title,.eg-tag,.eg-title,
+  .qr-title,.ec-chip-lbl,.ec-chip-name,
+  .rm-title,.ds-title,.wv-title{
+    -webkit-user-select:none;user-select:none;
+  }
+  /* Content — selectable */
+  p,.klo-desc,.lead,.cb-insight,.ts-action,
+  .ts-sc-text,.bonus-desc,.ts-out,.step-body p,
+  .ec-chip-formula,.eg-desc,.rm-lbl,.ds-desc,.ec-sub,.wv-label,.wv-val{
+    -webkit-user-select:text;user-select:text;
+  }
+  /* Disable decorative animations */
+  .klo-icon,.infographic-svg,.eva-gauge{animation:none !important;}
+  /* Momentum scroll */
+  .table-scroll,.glos-wrap{-webkit-overflow-scrolling:touch;}
+}
+
+/* ── iOS: NOTCH · HOME INDICATOR · ALL SAFE AREAS ── */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  /* Hero — all 4 sides */
+  .hero{
+    min-height:100svh;
+    min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));
+  }
+  .vbadge{
+    top:max(22px,calc(env(safe-area-inset-top)+8px));
+    right:max(22px,calc(env(safe-area-inset-right)+8px));
+  }
+  /* Section padding — respects landscape side notches */
+  .w{
+    padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));
+    padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));
+  }
+  .nxt-banner{
+    padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));
+    padding-bottom:max(18px,env(safe-area-inset-bottom));
+  }
+  .dmbanner{
+    padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));
+    padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));
+  }
+  /* GPU compositing for orb animations */
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+  /* Re-apply gradient text — Safari WebKit requirement */
+  .hp,.hg,.hr,
+  .hh1 .line1,.hh1 .line2,.hh1 .line3,
+  .hsv,.hsv.g,.hsv.r,.hsv.a,
+  .klo-hi-val.purple,.klo-hi-val.green,.klo-hi-val.amber,.klo-hi-val.red,
+  .h2 .hp,.h2 .hg,.h2 .hr{
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  /* Tap highlight removal */
+  a,button,.dmbtn,.nxt-btn,.eva-gauge,.step-card,
+  .kpill,.company-block,.bonus-card,.trick-wrap,.ec-chip{
+    -webkit-tap-highlight-color:transparent;
+  }
+  /* Momentum scroll */
+  .table-scroll,.glos-wrap{-webkit-overflow-scrolling:touch;}
+}
+
+/* ── ANDROID HIGH-DPI 1.5× DPR ── */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  /* Hardware-accelerate card surfaces */
+  .eva-gauge,.step-card,.eva-wrap,.company-block,
+  .bonus-card,.trick-wrap,.wacc-visual{
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+  }
+  /* GPU layers for animated elements */
+  .infographic-svg,.klo-icon{
+    -webkit-transform:translateZ(0);
+    transform:translateZ(0);
+  }
+  /* Sharper text on high-DPI */
+  body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+}
+
+/* ── ACCESSIBILITY: prefers-reduced-motion ── */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}
+  .infographic-svg,.klo-icon,.eva-gauge{animation:none !important;}
+}
+
+/* ── PRINT ── */
+@media print{
+  .dmbanner,.orb,.nxt-banner,.trick-hdr{display:none;}
+  .rv{opacity:1;transform:none;}
+  body{color:#000;background:#fff;}
+  .w{padding:20px;}
+  .table-scroll{overflow:visible;}
+  .eva-table{min-width:0;}
+  .company-block,.step-card,.bonus-card,.trick-step,.eva-gauge{break-inside:avoid;}
+  .eva-gauge-wrap{grid-template-columns:1fr 1fr;}
+  .eva-chips{grid-template-columns:1fr 1fr 1fr 1fr;}
+  .eva-gauge::before{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .eva-table .total-row td{background:#f0e8ff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .eva-table .creator-row td{background:#f0fdf4 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .eva-table .destroyer-row td{background:#fef2f2 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .wacc-visual,.eva-calc,.roic-meter{border:1px solid #ccc;}
+}
+</style>
+</head>
+<body>
+<!-- HERO -->
+<section class="hero">
+  <div class="vbadge">Advanced Valuation · Module 11 · EVA / Residual Income</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>EVA · ROIC · WACC · Residual Income · Value Creators vs Destroyers</div>
+  <h1 class="hh1">
+    <span class="line1">Economic Value Added</span>
+    <span class="line2">EVA Valuation</span>
+    <span class="line3">Profit Is Not Enough — Does the Business Beat Its Cost of Capital?</span>
+  </h1>
+  <div class="hsub">Advanced Valuation · Residual Income · EVA Framework · ROIC vs WACC</div>
+  <p class="hdesc">Every company reports profit. But not every profitable company creates value. EVA (Economic Value Added) asks a harder question: does the company earn more than what its investors expect? A business earning 8% ROIC with a 12% cost of capital is destroying wealth — even while reporting "profits." EVA and Residual Income reveal which companies truly create value and which consume it.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv">EVA = NOPAT</div><div class="hsl">minus capital charge</div></div>
+    <div class="hsi"><div class="hsv a">ROIC vs WACC</div><div class="hsl">The key spread</div></div>
+    <div class="hsi"><div class="hsv g">Value Creators</div><div class="hsl">ROIC &gt; WACC</div></div>
+    <div class="hsi"><div class="hsv r">Value Destroyers</div><div class="hsl">ROIC &lt; WACC</div></div>
+    <div class="hsi"><div class="hsv g">5 Good · 5 Bad</div><div class="hsl">Real examples</div></div>
+  </div>
+</section>
+
+<!-- 01 KLO -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Apply EVA Framework: <span class="hp">Identify Value Creators vs Destroyers</span></h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">⚡</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">Every business uses two types of capital: equity from shareholders and debt from lenders. Both have a cost. Shareholders expect returns (cost of equity). Lenders charge interest (cost of debt). Together, this is the Weighted Average Cost of Capital (WACC) — the minimum return a company must earn to not destroy value. EVA measures whether the business earned more than this minimum. Positive EVA = value created. Negative EVA = value destroyed. A company can report accounting profit and still have negative EVA.</div>
+        <div class="klo-desc">Imagine you borrow ₹10 lakh at 8% annual interest to start a business, and use ₹5 lakh of your own savings (expecting at least 15% return). Your total cost of capital is WACC = about 10.3%. Now your business earns ₹1.4 lakh profit on ₹15 lakh capital = ROIC of 9.3%. You're profitable — but you're still destroying value because 9.3% ROIC is below 10.3% WACC. Your EVA = (9.3% − 10.3%) × ₹15 lakh = −₹15,000. You earned profit but destroyed economic value. This is EVA thinking.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-p">📊 EVA = NOPAT − (WACC × Capital Employed)</span>
+          <span class="kpill kpill-a">⚠️ Profit ≠ Value Creation</span>
+          <span class="kpill kpill-g">✅ ROIC &gt; WACC = Value Created</span>
+          <span class="kpill kpill-r">🚨 ROIC &lt; WACC = Value Destroyed</span>
+          <span class="kpill kpill-s">📋 ROIC − WACC = Spread (key metric)</span>
+        </div>
+        <div class="klo-hi-row">
+          <div class="klo-hi"><div class="klo-hi-ico">📊</div><div class="klo-hi-val purple">NOPAT</div><div class="klo-hi-lbl">Net Operating Profit After Tax</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">💰</div><div class="klo-hi-val amber">Capital Charge</div><div class="klo-hi-lbl">WACC × Capital Employed</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">⚡</div><div class="klo-hi-val green">EVA = Spread</div><div class="klo-hi-lbl">NOPAT minus Capital Charge</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 THREE EVA STATES + INFOGRAPHIC -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — The Three EVA States</div>
+    <h2 class="h2 rv d2">Value Creator · Neutral · <span class="hp">Value Destroyer</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Every company falls into one of three states: it creates value (ROIC &gt; WACC), it breaks even (ROIC = WACC), or it destroys value (ROIC &lt; WACC). Only companies in the first category are truly compounding wealth for shareholders.</p>
+
+    <!-- 3 EVA state cards -->
+    <div class="eva-gauge-wrap rv d3">
+      <div class="eva-gauge eg-creator">
+        <div class="eg-ico">🏆</div>
+        <div class="eg-tag" style="color:var(--gbr);">Value Creator</div>
+        <div class="eg-title">ROIC &gt; WACC</div>
+        <div class="eg-formula">EVA = NOPAT − (WACC × Capital Employed) &gt; 0</div>
+        <div class="eg-example" style="color:var(--gbr);">Example: Asian Paints — ROIC ~35%, WACC ~10% → Spread +25%</div>
+        <div class="eg-desc">Every rupee of capital deployed earns more than it costs. Shareholders are genuinely getting richer. These companies deserve premium P/E multiples because they compound value over time. The higher the spread and the larger the capital base, the more EVA they generate. Asian Paints, Nestlé, HDFC Bank, and TCS consistently sit in this category — justifying their premium valuations.</div>
+      </div>
+      <div class="eva-gauge eg-neutral">
+        <div class="eg-ico">⚖️</div>
+        <div class="eg-tag" style="color:var(--ambr);">Break-Even</div>
+        <div class="eg-title">ROIC ≈ WACC</div>
+        <div class="eg-formula">EVA = NOPAT − (WACC × Capital Employed) ≈ 0</div>
+        <div class="eg-example" style="color:var(--ambr);">Example: Capital-intensive midcap — ROIC ~12%, WACC ~11% → Spread +1%</div>
+        <div class="eg-desc">The business earns just enough to cover its cost of capital — no more, no less. Shareholders receive their required return but no surplus value. These companies should theoretically trade at book value (P/B ≈ 1×). When ROIC exactly equals WACC, the company earns accounting profit but zero economic profit. Growth at break-even ROIC adds zero value — every rupee invested returns exactly what it cost.</div>
+      </div>
+      <div class="eva-gauge eg-destroyer">
+        <div class="eg-ico">🔥</div>
+        <div class="eg-tag" style="color:var(--red);">Value Destroyer</div>
+        <div class="eg-title">ROIC &lt; WACC</div>
+        <div class="eg-formula">EVA = NOPAT − (WACC × Capital Employed) &lt; 0</div>
+        <div class="eg-example" style="color:var(--red);">Example: Telecom pre-Jio — ROIC ~6%, WACC ~13% → Spread −7%</div>
+        <div class="eg-desc">The business is profitable on paper but destroys economic value. Management might report "₹500 Cr profit" while the EVA is −₹800 Cr — meaning the business consumed ₹800 Cr more than it generated on a risk-adjusted basis. These companies should trade below book value (P/B &lt; 1×). Capital-intensive industries with low margins often fall here. Growth here makes things WORSE — more capital deployed at below-WACC returns destroys more EVA.</div>
+      </div>
+    </div>
+
+    <!-- Concept grid: EVA infographic + step cards -->
+    <div class="concept-grid rv d4">
+      <div class="infographic-wrap">
+        <svg class="infographic-svg" viewBox="0 0 420 580" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="420" height="580" rx="20" fill="#f5f3ff"/>
+          <rect x="10" y="10" width="400" height="32" rx="10" fill="#6d28d9"/>
+          <text x="210" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">EVA = Are You Really Creating Value?</text>
+          <!-- Factory building -->
+          <rect x="155" y="54" width="110" height="72" rx="8" fill="#4c1d95" opacity=".85"/>
+          <rect x="168" y="64" width="16" height="14" rx="3" fill="#a78bfa"/>
+          <rect x="190" y="64" width="16" height="14" rx="3" fill="#a78bfa"/>
+          <rect x="212" y="64" width="16" height="14" rx="3" fill="#a78bfa"/>
+          <rect x="168" y="84" width="16" height="14" rx="3" fill="#a78bfa"/>
+          <rect x="190" y="84" width="16" height="14" rx="3" fill="#a78bfa"/>
+          <rect x="212" y="84" width="16" height="14" rx="3" fill="#a78bfa"/>
+          <rect x="188" y="102" width="44" height="24" rx="5" fill="#7c3aed"/>
+          <!-- Chimney -->
+          <rect x="130" y="58" width="8" height="22" fill="#4c1d95" opacity=".6"/>
+          <rect x="144" y="64" width="6" height="16" fill="#4c1d95" opacity=".4"/>
+          <ellipse cx="134" cy="58" rx="6" ry="3.5" fill="#a78bfa" opacity=".5"/>
+          <text x="210" y="50" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">COMPANY USES CAPITAL</text>
+          <!-- Two capital inputs -->
+          <rect x="14" y="142" width="140" height="48" rx="10" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1.5"/>
+          <text x="84" y="160" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="#4c1d95">Equity Capital</text>
+          <text x="84" y="175" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6e6994">₹10,000 Cr · Cost = 15%</text>
+          <text x="84" y="185" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6d28d9">(Shareholder expectation)</text>
+          <rect x="266" y="142" width="140" height="48" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+          <text x="336" y="160" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="#15803d">Debt Capital</text>
+          <text x="336" y="175" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6e6994">₹5,000 Cr · Cost = 7%</text>
+          <text x="336" y="185" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#15803d">(After-tax interest paid)</text>
+          <!-- Arrow to WACC -->
+          <line x1="154" y1="166" x2="190" y2="204" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <line x1="266" y1="166" x2="230" y2="204" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <line x1="210" y1="130" x2="210" y2="142" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <!-- WACC box -->
+          <rect x="130" y="204" width="160" height="42" rx="10" fill="#6d28d9"/>
+          <text x="210" y="222" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="white">WACC = 12.3%</text>
+          <text x="210" y="237" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#ddd6fe">Weighted cost of all capital</text>
+          <!-- Capital charge -->
+          <rect x="80" y="260" width="260" height="38" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+          <text x="210" y="277" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="#dc2626">Capital Charge = 12.3% × ₹15,000 Cr</text>
+          <text x="210" y="291" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#dc2626">= ₹1,845 Cr (minimum required return)</text>
+          <!-- NOPAT vs Capital Charge -->
+          <line x1="210" y1="298" x2="210" y2="318" stroke="#6d28d9" stroke-width="2"/>
+          <!-- Scenarios -->
+          <rect x="14" y="318" width="175" height="66" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+          <text x="101" y="336" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="800" fill="#15803d">✅ NOPAT = ₹2,400 Cr</text>
+          <text x="101" y="350" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#15803d">ROIC = 16% &gt; WACC 12.3%</text>
+          <text x="101" y="363" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#15803d">EVA = +₹555 Cr</text>
+          <text x="101" y="376" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#15803d">VALUE CREATED ✅</text>
+          <rect x="231" y="318" width="175" height="66" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
+          <text x="318" y="336" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="800" fill="#dc2626">❌ NOPAT = ₹1,200 Cr</text>
+          <text x="318" y="350" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#dc2626">ROIC = 8% &lt; WACC 12.3%</text>
+          <text x="318" y="363" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#dc2626">EVA = −₹645 Cr</text>
+          <text x="318" y="376" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#dc2626">VALUE DESTROYED ❌</text>
+          <!-- EVA formula -->
+          <rect x="40" y="400" width="340" height="38" rx="10" fill="#6d28d9"/>
+          <text x="210" y="416" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="white">EVA = NOPAT − (WACC × Capital Employed)</text>
+          <text x="210" y="430" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#ddd6fe">Also: EVA = (ROIC − WACC) × Capital Employed</text>
+          <!-- Human analyst character -->
+          <circle cx="56" cy="506" r="14" fill="#fbbf24"/>
+          <ellipse cx="56" cy="495" rx="14" ry="7" fill="#4c1d95"/>
+          <circle cx="51" cy="505" r="2.2" fill="white"/><circle cx="51.5" cy="506" r="1.4" fill="#1f2937"/>
+          <circle cx="61" cy="505" r="2.2" fill="white"/><circle cx="61.5" cy="506" r="1.4" fill="#1f2937"/>
+          <path d="M51 513 Q56 517 61 513" stroke="#92400e" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <path d="M42,519 Q38,529 36,519" stroke="#fbbf24" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M70,519 Q74,529 76,519" stroke="#fbbf24" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M42,519 Q45,526 56,526 Q67,526 70,519 Q66,515 61,517 Q56,520 51,517 Q46,515 42,519Z" fill="#3d1fa3"/>
+          <rect x="82" y="492" width="286" height="38" rx="8" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="225" y="509" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="900" fill="#4c1d95">Profitable ≠ Value Creating</text>
+          <text x="225" y="523" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#15803d">Only ROIC &gt; WACC = True wealth creation</text>
+          <polygon points="83,511 76,507 76,515" fill="white" stroke="#e5e1fb" stroke-width="1" stroke-linejoin="round"/>
+          <!-- ROIC bar comparison -->
+          <text x="210" y="554" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6e6994">ROIC 16% vs WACC 12.3% = +3.7% spread</text>
+          <rect x="60" y="558" width="300" height="10" rx="5" fill="rgba(0,0,0,.08)"/>
+          <rect x="60" y="558" width="300" height="10" rx="5" fill="none" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
+          <rect x="60" y="558" width="180" height="10" rx="5" fill="#dc2626" opacity=".7"/>
+          <rect x="60" y="558" width="231" height="10" rx="5" fill="none"/>
+          <rect x="240" y="558" width="69" height="10" rx="0" fill="#15803d" opacity=".8"/>
+          <text x="150" y="572" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="#6e6994">WACC 12.3%</text>
+          <text x="360" y="572" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="#15803d">EVA spread</text>
+        </svg>
+        <p class="infographic-cap">⚡ The same ₹15,000 Cr capital base can produce +₹555 Cr EVA (if ROIC=16%) or −₹645 Cr EVA (if ROIC=8%). Profitable in both cases. Value-creating in only one. The WACC is the critical hurdle rate.</p>
+      </div>
+
+      <div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--p),var(--ph));">1</div>
+            <div class="step-body">
+              <h4>NOPAT: Net Operating Profit After Tax — Not PAT</h4>
+              <p>NOPAT is not the same as PAT (Net Profit). NOPAT adds back interest expense (after-tax) because EVA values the operating business independently of how it's financed. NOPAT = EBIT × (1 − Tax Rate). Example: EBIT ₹1,000 Cr, Tax Rate 25% → NOPAT = ₹750 Cr. Using PAT would understate operating profitability for debt-heavy companies. NOPAT is the true operating return on capital before capital structure decisions.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">2</div>
+            <div class="step-body">
+              <h4>Capital Employed: What the Business Actually Uses</h4>
+              <p>Capital Employed (CE) = Total Assets − Current Liabilities (non-interest-bearing). Or: Fixed Assets + Working Capital. This is the total capital at work in the business. ROIC = NOPAT ÷ Capital Employed. The Capital Charge = WACC × CE is the minimum this capital must earn. Companies that bloat their working capital (excess inventory, long debtor days) inflate CE and reduce ROIC — even without changing NOPAT. Screener.in shows "Capital Employed" in the financial ratios section.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">3</div>
+            <div class="step-body">
+              <h4>WACC: The Hurdle Rate Every Rupee Must Clear</h4>
+              <p>WACC = (Cost of Equity × Equity Weight) + (After-tax Cost of Debt × Debt Weight). Cost of Equity = Risk-Free Rate + Beta × Equity Risk Premium (CAPM). For India: Risk-Free Rate ~7% (10-yr G-Sec), Equity Risk Premium ~5–6%, typical Beta 0.8–1.2 → Cost of Equity = 11–14%. After-tax Cost of Debt = Interest Rate × (1 − Tax Rate). A typical Indian mid-cap WACC ranges from 10–13%. High-risk companies have higher WACC — making value creation harder.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">4</div>
+            <div class="step-body">
+              <h4>Why EVA Matters for Stock Valuation</h4>
+              <p>Stocks trading above book value (P/B &gt; 1×) require positive EVA to justify that premium. The relationship: Market Value = Book Value + PV of all future EVAs. A company with sustainably positive EVA should trade at a premium to book value — investors pay for the value yet to be created. A company with persistently negative EVA should trade below book value. This framework explains why Asian Paints trades at 12× P/B while Tata Motors historically traded at 0.8× P/B — EVA spread explains most of the P/B premium across industries.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 EVA TABLE — Indian Companies -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — EVA in Action: Indian Companies</div>
+    <h2 class="h2 rv d2">ROIC vs WACC — Who's <span class="hp">Creating Value? Who's Destroying It?</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Using Screener.in data for ROIC and estimating sector WACC, here is how EVA ranks major Indian companies across different sectors. All figures illustrative and approximate for educational purposes.</p>
+
+    <div class="eva-wrap rv d3">
+      <div class="eva-hdr">
+        <div>
+          <div class="eva-hdr-title">Indian Companies — EVA Analysis · FY25 Illustrative</div>
+          <div class="eva-hdr-sub">ROIC from Screener.in · WACC estimated by sector · EVA = (ROIC−WACC) × Capital Employed · All figures approximate</div>
+        </div>
+      </div>
+      <div class="eva-legend">
+        <div class="legend-dot" style="background:var(--gbr);"></div><strong>Green rows</strong> = Value Creators (ROIC &gt; WACC) &nbsp;
+        <div class="legend-dot" style="background:var(--red);"></div><strong>Red rows</strong> = Value Destroyers (ROIC &lt; WACC) &nbsp; Scroll right →
+      </div>
+      <div class="table-scroll">
+        <table class="eva-table">
+          <thead><tr>
+            <th>Company</th>
+            <th>Sector</th>
+            <th>Capital Employed (₹ Cr)</th>
+            <th>NOPAT (₹ Cr)</th>
+            <th>ROIC</th>
+            <th>Est. WACC</th>
+            <th>Spread (ROIC−WACC)</th>
+            <th>EVA (₹ Cr)</th>
+          </tr></thead>
+          <tbody>
+            <tr class="creator-row"><td>Asian Paints</td><td>Consumer Paints</td><td>7,800</td><td>3,432</td><td class="eva-pos">44%</td><td>10%</td><td class="eva-pos">+34%</td><td class="eva-pos">+2,652</td></tr>
+            <tr class="creator-row"><td>Nestlé India</td><td>FMCG</td><td>3,200</td><td>1,584</td><td class="eva-pos">49.5%</td><td>11%</td><td class="eva-pos">+38.5%</td><td class="eva-pos">+1,232</td></tr>
+            <tr class="creator-row"><td>TCS</td><td>IT Services</td><td>38,000</td><td>49,454</td><td class="eva-pos">130%</td><td>11%</td><td class="eva-pos">+119%</td><td class="eva-pos">+45,274</td></tr>
+            <tr class="creator-row"><td>HDFC Bank</td><td>Banking</td><td>—</td><td>—</td><td class="eva-pos">ROE 17%</td><td>CoE 14%</td><td class="eva-pos">+3% above CoE</td><td class="eva-pos">Positive</td></tr>
+            <tr class="creator-row"><td>Pidilite Industries</td><td>Specialty Chem</td><td>6,200</td><td>2,170</td><td class="eva-pos">35%</td><td>10.5%</td><td class="eva-pos">+24.5%</td><td class="eva-pos">+1,519</td></tr>
+            <tr><td>Tata Motors</td><td>Auto (JLR heavy)</td><td>1,18,000</td><td>14,160</td><td class="eva-zero">12%</td><td>11.5%</td><td class="eva-zero">+0.5%</td><td class="eva-zero">+590</td></tr>
+            <tr class="destroyer-row"><td>Vodafone Idea</td><td>Telecom</td><td>1,10,000</td><td>-31,238</td><td class="eva-neg">Negative</td><td>15%</td><td class="eva-neg">Far below</td><td class="eva-neg">-47,738</td></tr>
+            <tr class="destroyer-row"><td>MTNL</td><td>PSU Telecom</td><td>42,000</td><td>-3,100</td><td class="eva-neg">Negative</td><td>12%</td><td class="eva-neg">Far below</td><td class="eva-neg">-8,140</td></tr>
+            <tr class="destroyer-row"><td>Steel Authority (SAIL)</td><td>Steel (PSU)</td><td>52,000</td><td>3,380</td><td class="eva-neg">6.5%</td><td>11%</td><td class="eva-neg">−4.5%</td><td class="eva-neg">-2,340</td></tr>
+            <tr class="destroyer-row"><td>Illustrative PSU Bank</td><td>Public Sector Bank</td><td>—</td><td>—</td><td class="eva-neg">ROE 8%</td><td>CoE 14%</td><td class="eva-neg">−6% below CoE</td><td class="eva-neg">Negative</td></tr>
+            <tr class="total-row"><td>TCS Dominates EVA</td><td>Asset-light IT advantage</td><td>—</td><td>—</td><td>130%+ ROIC</td><td>11% WACC</td><td>119% spread</td><td>₹45,000+ Cr</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="padding:12px 18px;background:var(--pxs);border-top:1px solid var(--bd);font-size:11px;color:var(--ts);">
+        <strong style="color:var(--p);">Key insight:</strong> TCS generates more EVA than most entire sectors combined — because it has an enormous NOPAT base with virtually zero capital employed (pure intellectual capital business, no factory needed). Asset-light businesses with high ROIC generate disproportionate EVA. All figures are illustrative educational estimates. Verify from official annual reports.
+      </div>
+    </div>
+
+    <!-- WACC visualization -->
+    <div class="wacc-visual rv d5">
+      <div class="wv-title">📊 Estimated WACC by Indian Sector — Why Each Sector Has Different Hurdles</div>
+      <div class="wv-row">
+        <div class="wv-label">🖥️ IT Services</div>
+        <div class="wv-bar-bg"><div class="wv-bar" style="width:42%;background:linear-gradient(90deg,var(--gbr),var(--gh));"></div></div>
+        <div class="wv-val" style="color:var(--gbr);">~11% WACC · Low beta · Minimal debt</div>
+      </div>
+      <div class="wv-row">
+        <div class="wv-label">🧴 FMCG</div>
+        <div class="wv-bar-bg"><div class="wv-bar" style="width:40%;background:linear-gradient(90deg,var(--gbr),var(--gh));"></div></div>
+        <div class="wv-val" style="color:var(--gbr);">~10–11% WACC · Stable demand</div>
+      </div>
+      <div class="wv-row">
+        <div class="wv-label">💊 Pharma</div>
+        <div class="wv-bar-bg"><div class="wv-bar" style="width:46%;background:linear-gradient(90deg,var(--p),var(--ph));"></div></div>
+        <div class="wv-val" style="color:var(--p);">~11–13% WACC · USFDA risk premium</div>
+      </div>
+      <div class="wv-row">
+        <div class="wv-label">🏦 Banking</div>
+        <div class="wv-bar-bg"><div class="wv-bar" style="width:52%;background:linear-gradient(90deg,var(--ambr),var(--amb));"></div></div>
+        <div class="wv-val" style="color:var(--ambr);">~13–15% Cost of Equity · Levered</div>
+      </div>
+      <div class="wv-row">
+        <div class="wv-label">🏭 Steel/Metals</div>
+        <div class="wv-bar-bg"><div class="wv-bar" style="width:64%;background:linear-gradient(90deg,var(--red),#f87171);"></div></div>
+        <div class="wv-val" style="color:var(--red);">~12–15% WACC · High debt + cyclical risk</div>
+      </div>
+      <div class="wv-row">
+        <div class="wv-label">📡 Telecom</div>
+        <div class="wv-bar-bg"><div class="wv-bar" style="width:80%;background:linear-gradient(90deg,var(--red),#f87171);"></div></div>
+        <div class="wv-val" style="color:var(--red);">~14–17% WACC · Massive debt + spectrum</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMAT BANNER -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Find ROIC on Screener.in — Free</div>
+    <div class="dmh">Identify <span class="dmhs">Value Creators Before the Market Does</span></div>
+    <div class="dmsub">Screener.in shows ROIC, Capital Employed, and EBIT for every listed Indian company — free. Calculate EVA, find companies with widening ROIC-WACC spreads, and invest before the market fully prices them in.</div>
+    <div class="dmfeats">
+      <div class="dmf">Free ROIC and Capital Employed data on Screener.in</div>
+      <div class="dmf">Track ROIC trends over 10 years for any company</div>
+      <div class="dmf">Screen high-ROIC companies across sectors instantly</div>
+      <div class="dmf">Compare EVA spread vs P/B to find undervalued value creators</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated</div>
+  </div>
+</div>
+
+<!-- 04 FIVE VALUE CREATORS -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">04 — Consistent EVA Champions</div>
+    <h2 class="h2 rv d2">5 Indian Companies with <span class="hg">Exceptional EVA Track Records</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These companies consistently earn ROIC far above their cost of capital — generating massive EVA year after year. Their premium valuations are justified by sustained positive EVA, not just earnings growth.</p>
+
+    <div class="company-block rv d3">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pxs));">🖥️</div>
+          <div><div class="cb-name">TCS — The Ultimate EVA Machine</div><div class="cb-sub">ROIC ~130%+ · WACC ~11% · Spread ~119% · Capital Employed: People + Software · No physical factories</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ ROIC 10× above WACC</span>
+          <span class="cb-badge cb-b-g">✅ Asset-light = low capital base</span>
+          <span class="cb-badge cb-b-g">✅ EVA &gt; ₹45,000 Cr annually</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>TCS is the single largest EVA generator in India — by a massive margin.</strong> The reason: TCS employs ~600,000 people who create intellectual value, but requires almost zero physical capital (no blast furnaces, no drilling rigs, no factories). Its Capital Employed is primarily working capital and some office equipment. NOPAT of ~₹49,000 Cr on a capital base of ~₹38,000 Cr means ROIC exceeds 100%. Even with a 11% WACC, the EVA spread is 119%+. The capital charge is ~₹4,180 Cr while NOPAT is ₹49,000 Cr — a 12× ratio. This is why TCS deserves a 28–32× P/E — not just because it earns well, but because it generates astronomical EVA on a small capital base. The EVA framework perfectly explains TCS's premium.</div>
+    </div>
+
+    <div class="company-block rv d4">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fff7ed,#fed7aa);">🎨</div>
+          <div><div class="cb-name">Asian Paints — Consumer Franchise = High EVA</div><div class="cb-sub">ROIC ~40–45% · WACC ~10% · Spread ~30–35% · Moat from brand + distribution</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ 30-year consistent ROIC &gt; 25%</span>
+          <span class="cb-badge cb-b-g">✅ P/B premium = market pricing future EVA</span>
+          <span class="cb-badge cb-b-a">⚠️ FY25 EVA narrowed on competition</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Asian Paints has compounded EVA for 30 years — which is precisely why it trades at 10–15× P/B while most companies trade at 2–4× P/B.</strong> ROIC of 40–45% on consistently growing capital employed means EVA has grown year after year. The formula: higher ROIC + growing capital base (reinvesting in distribution, factories, retail touchpoints) = compounding EVA. P/B premium = Book Value + PV(future EVAs). Asian Paints' book value per share is ~₹220, but the stock has traded at ₹2,500–₹3,000 — the ₹2,300–₹2,800 premium above book is the market pricing in all future EVAs from the moat (12,000+ dealer network, colour matching technology, brand). The FY25 EVA compression (due to Birla Opus competition) is exactly why the stock derated — the market is pricing in lower future EVA.</div>
+    </div>
+
+    <div class="company-block rv d5">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fefce8,#fef9c3);">🍫</div>
+          <div><div class="cb-name">Nestlé India — FMCG Capital Efficiency Champion</div><div class="cb-sub">ROIC ~45–50% · WACC ~11% · Capital Employed minimal relative to revenue · Asset-light FMCG model</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ ROIC consistently above 40%</span>
+          <span class="cb-badge cb-b-g">✅ Working capital negative (paid before delivered)</span>
+          <span class="cb-badge cb-b-g">✅ Brands = EVA moat</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Nestlé India is the perfect example of why consumer brand businesses generate exceptional EVA.</strong> Nestlé's Capital Employed is low because: (1) distributors hold inventory on their behalf — Nestlé often has negative working capital (it gets paid before it delivers), (2) manufacturing is efficient with high asset utilisation, (3) brands (Maggi, KitKat, Munch) require no incremental capital to maintain — they're self-reinforcing through consumer habits. ROIC of 45–50% on ~₹3,200 Cr capital employed generates ~₹1,200 Cr of EVA annually. At 25× EVA = ₹30,000 Cr implied value from EVA alone — aligned with Nestlé's market cap. High P/E of 60–70× is justified when you decompose it through EVA: the market is paying for decades of future positive EVA from Maggi's market position.</div>
+    </div>
+
+    <div class="company-block rv d6">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0);">🏦</div>
+          <div><div class="cb-name">HDFC Bank — Banking EVA Leader (ROE vs Cost of Equity)</div><div class="cb-sub">ROE ~17% · Cost of Equity ~14% · Spread +3% consistently · Best quality loan book in India</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ ROE consistently above Cost of Equity</span>
+          <span class="cb-badge cb-b-g">✅ P/B 3–4× justified by EVA spread</span>
+          <span class="cb-badge cb-b-a">⚠️ Post-merger ROE dip expected temporarily</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>For banks, ROE vs Cost of Equity replaces ROIC vs WACC in EVA analysis — and HDFC Bank has maintained one of the widest positive spreads in Indian banking for a decade.</strong> With ROE consistently at 17–18% vs Cost of Equity (estimated 13–14% for HDFC Bank due to its premium brand and stable deposit franchise), the spread of +3–4% generates enormous EVA on a ₹25+ lakh Cr balance sheet. This sustained positive spread explains why HDFC Bank trades at 3–4× P/B while PSU banks trade at 0.8–1.2× P/B — PSU banks have ROEs that barely match or fall below their cost of equity. HDFC Bank's P/B premium = present value of all future positive ROE-CoE spreads.</div>
+    </div>
+
+    <div class="company-block rv d7" style="margin-bottom:8px;">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,var(--gpale),#ecfdf5);">🔧</div>
+          <div><div class="cb-name">Pidilite Industries — Niche Moat Creates Permanent EVA</div><div class="cb-sub">ROIC ~30–35% · WACC ~10.5% · Fevicol brand = pricing power · Low capital intensity</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ Fevicol quasi-monopoly in adhesives</span>
+          <span class="cb-badge cb-b-g">✅ ROIC stable across cycles</span>
+          <span class="cb-badge cb-b-g">✅ P/B 15–20× = market pricing decades of EVA</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Pidilite demonstrates how a genuine product moat translates directly into sustainable EVA.</strong> Fevicol has become so synonymous with adhesive in India that "Fevicol karo" (apply Fevicol) is a common expression — brand equity so strong that Pidilite charges premium prices in what should be a commodity market. This pricing power means EBIT margins of 20–22% on a business that uses minimal capital (no heavy machinery, no expensive raw material inventory). ROIC of 30–35% on capital employed of ~₹6,200 Cr generates EVA of ~₹1,500 Cr annually. Pidilite's stock at 50–55× P/E seems expensive — until you decompose it through EVA: P/B of 15–18× means the market is paying for approximately 30–40 years of sustained positive EVA at current spread levels.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 FIVE VALUE DESTROYERS -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">05 — Persistent Value Destroyers</div>
+    <h2 class="h2 rv d2">5 Companies Where <span class="hr">ROIC Chronically Trails WACC</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These companies report profits but destroy economic value year after year. Negative EVA explains why they trade below book value and why growth in these businesses makes things worse — not better.</p>
+
+    <div class="company-block rv d3">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">📡</div>
+          <div><div class="cb-name">Vodafone Idea — The Most Extreme EVA Destruction in Indian Corporate History</div><div class="cb-sub">ROIC deeply negative · WACC ~15% · Net Loss ₹31,000 Cr in FY24 · Survival in question</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Negative NOPAT every year</span>
+          <span class="cb-badge cb-b-r">🚨 Capital base shrinking + loss widening</span>
+          <span class="cb-badge cb-b-r">🚨 EVA = −₹47,000+ Cr annually</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>Vodafone Idea is the starkest example of sustained EVA destruction in Indian corporate history.</strong> With ₹1.1+ lakh Cr of capital employed (spectrum licenses, towers, fiber) and a WACC of ~15% (high risk premium due to survival uncertainty), the minimum capital charge alone is ~₹16,500 Cr annually. Against this, Vi has been generating negative NOPAT (operating losses). The EVA is not just negative — it's deeply negative every single year since 2019. The EVA framework explains precisely why Vi's stock has collapsed from ₹100+ to under ₹10: negative EVA means the company destroys more value each year than it earns. Shareholders are not just missing returns — they are having their capital consumed. Any P/E analysis on Vi is meaningless; EVA correctly signals the distress.</div>
+    </div>
+
+    <div class="company-block rv d4">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🏭</div>
+          <div><div class="cb-name">SAIL (Steel Authority of India) — Capital-Intensive at Below-WACC Returns</div><div class="cb-sub">ROIC ~6–8% · WACC ~11% · ₹52,000 Cr capital employed · Steel price sensitivity</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 ROIC below WACC in most years</span>
+          <span class="cb-badge cb-b-r">🚨 Massive capital base → large EVA deficit</span>
+          <span class="cb-badge cb-b-r">🚨 Government ownership = no capital discipline</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>SAIL demonstrates how a capital-intensive business with structurally low returns destroys value even when reporting accounting profit.</strong> With capital employed of ~₹52,000 Cr and an estimated WACC of 11%, the capital charge is ~₹5,720 Cr annually. In typical years, SAIL's NOPAT is ₹3,000–₹4,000 Cr — well below the capital charge. EVA = −₹1,500 to −₹2,700 Cr. Only in steel super-cycle peaks (FY22) does SAIL briefly produce positive EVA. The lesson: for commodity companies, consistently report whether ROIC exceeds WACC — in most years, it doesn't. This is also why government-owned steel companies trade at 0.5–0.8× P/B. The EVA framework correctly signals that SAIL should trade below book value — the business destroys value in normal years, and the government's social objectives prevent capital discipline.</div>
+    </div>
+
+    <div class="company-block rv d5">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">✈️</div>
+          <div><div class="cb-name">Airlines (Structural EVA Destroyers) — SpiceJet / IndiGo Capital Intensity</div><div class="cb-sub">Aviation globally earns below WACC · Massive lease obligations · Fuel price exposure</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 ROIC below WACC in most years</span>
+          <span class="cb-badge cb-b-r">🚨 Aircraft leases = massive capital charge</span>
+          <span class="cb-badge cb-b-r">🚨 Warren Buffett: "Investors would have done better shorting airlines"</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>Airlines are the textbook example of an industry that earns below its cost of capital on a long-run average basis — making the entire sector a persistent EVA destroyer.</strong> Aircraft leases under Ind AS 116 are now capitalised on the balance sheet — inflating capital employed. High fixed costs (aircraft, crew, maintenance), fuel price sensitivity, and intense price competition prevent airlines from earning sustained ROIC above WACC. Even IndiGo (India's most profitable airline) has historically earned ROIC that barely covers its WACC in good years, and deeply negative EVA in bad ones. SpiceJet has been in persistent distress. The EVA framework explains why airline stocks in India have been terrible long-term investments despite India being one of the world's fastest-growing aviation markets — high growth + below-WACC ROIC = value destruction at scale.</div>
+    </div>
+
+    <div class="company-block rv d6">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🏗️</div>
+          <div><div class="cb-name">Infrastructure PSUs — Over-Capitalised, Under-Return</div><div class="cb-sub">NHPC · NMDC · ONGC · Asset-heavy with government-regulated returns below market WACC</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Regulated returns capped below WACC</span>
+          <span class="cb-badge cb-b-r">🚨 Government mandates below-market pricing</span>
+          <span class="cb-badge cb-b-r">🚨 P/B below 1× justified by negative EVA spread</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>Many PSU infrastructure companies (NHPC for hydropower, NMDC for iron ore, ONGC for oil) operate under regulated return frameworks that cap ROIC below the free-market WACC.</strong> NHPC earns a government-regulated return on equity of 15.5% on its hydro assets — but its cost of equity in the free market may be 14–16%. The spread is negligible or negative once adjusted for actual risks. ONGC's ROIC fluctuates with oil prices — in low-oil years, it earns below WACC on its massive capital base. These companies trade at 0.7–1.2× P/B precisely because the EVA framework shows either zero or negative economic value generation. The EVA analysis correctly predicts that growth in these businesses adds little value — investing more capital at below-WACC returns destroys shareholder value, even as the company grows.</div>
+    </div>
+
+    <div class="company-block rv d7" style="margin-bottom:8px;">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🔌</div>
+          <div><div class="cb-name">Highly Leveraged Promoter-Heavy Companies — Capital Structure EVA Trap</div><div class="cb-sub">High debt → high WACC → EVA destruction even when operating margins are acceptable</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Debt raises WACC dramatically</span>
+          <span class="cb-badge cb-b-r">🚨 Operating ROIC may be fine; EVA negative</span>
+          <span class="cb-badge cb-b-r">🚨 Financial distress premium in WACC</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>Over-leveraged companies illustrate how capital structure can turn positive ROIC into negative EVA.</strong> Consider a company with operating ROIC of 10% — which would be decent in many sectors. But if it carries ₹20,000 Cr of debt at 12% interest, plus equity requiring 18% return (due to financial distress premium on equity), the WACC could be 14–15%. Now 10% ROIC against 14–15% WACC produces EVA of −4% to −5% spread on the capital base. This is the EVA trap for companies like Reliance Communications (before collapse), Yes Bank (before crisis), or various over-leveraged infrastructure companies. The danger: management shows "operating profit improvement" and "revenue growth" — while EVA continues to be deeply negative due to the capital structure. Always calculate EVA using the actual WACC reflecting financial distress risk, not the theoretical WACC at target leverage.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 TRICK SECTION -->
+<section class="sec-white" style="position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-100px;right:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(109,40,217,.05) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-80px;left:-60px;width:360px;height:360px;background:radial-gradient(circle,rgba(22,163,74,.04) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div class="w" style="position:relative;z-index:1;">
+    <div class="tag rv d1">06 — The Investor's Shortcut</div>
+    <h2 class="h2 rv d2">Calculate EVA for Any Company <span class="hp">in 5 Minutes on Screener.in</span></h2>
+    <div class="rul rv d2"></div>
+    <p class="lead rv d3">All the data you need for EVA is on Screener.in — EBIT, Tax Rate, Capital Employed, Debt, Equity. Here's the exact sequence to calculate NOPAT, estimate WACC, and compute EVA for any Indian listed company.</p>
+
+    <div class="rv d3">
+      <div class="trick-wrap">
+        <div class="trick-hdr">
+          <div class="th-left">
+            <div class="th-supertag">🎯 EVA Mastery</div>
+            <div class="th-title">5-Step EVA Calculation on Screener.in</div>
+            <div class="th-sub">Open Screener.in for any company. Follow these five steps. You'll have NOPAT, Capital Employed, WACC estimate, and a positive/negative EVA verdict — with the ROIC vs WACC spread — in under 5 minutes.</div>
+          </div>
+          <div class="th-right">
+            <div class="th-timer"><div class="th-timer-num">5</div><div class="th-timer-lbl">minutes<br>any company</div></div>
+          </div>
+        </div>
+
+        <div class="trick-qref">
+          <div class="qr-title">⚡ Quick Reference — EVA Formula Components</div>
+          <div class="sn-strip">
+            <span class="sn-lbl">📍 Screener.in path:</span>
+            <div class="sn-num">1</div><span class="sn-txt">P&L → EBIT</span>
+            <span class="sn-arr">→</span>
+            <div class="sn-num">2</div><span class="sn-txt">P&L → Tax Rate</span>
+            <span class="sn-arr">→</span>
+            <div class="sn-num">3</div><span class="sn-txt">Balance Sheet → CE</span>
+            <span class="sn-arr">→</span>
+            <div class="sn-num">4</div><span class="sn-txt">Ratios → ROIC</span>
+            <span class="sn-arr">→</span>
+            <div class="sn-num">5</div><span class="sn-txt">Estimate WACC → EVA</span>
+          </div>
+          <div class="eva-chips">
+            <div class="ec-chip ecc-nopat">
+              <div class="ec-chip-lbl" style="color:var(--p);">NOPAT</div>
+              <div class="ec-chip-name">Operating profit after tax</div>
+              <div class="ec-chip-formula">EBIT × (1 − Tax Rate)<br>From P&L: Operating Profit<br>Tax Rate: PAT/PBT ratio</div>
+            </div>
+            <div class="ec-chip ecc-ce">
+              <div class="ec-chip-lbl" style="color:var(--sky);">Cap. Employed</div>
+              <div class="ec-chip-name">Total capital at work</div>
+              <div class="ec-chip-formula">Fixed Assets + Working Capital<br>Or: Total Assets − CL<br>Screener: "Capital Employed"</div>
+            </div>
+            <div class="ec-chip ecc-wacc">
+              <div class="ec-chip-lbl" style="color:var(--ambr);">WACC</div>
+              <div class="ec-chip-name">Blended cost of capital</div>
+              <div class="ec-chip-formula">Debt × kd + Equity × ke<br>kd = Int Rate × (1−Tax)<br>ke = 7% + β × 5.5%</div>
+            </div>
+            <div class="ec-chip ecc-eva">
+              <div class="ec-chip-lbl" style="color:var(--gbr);">EVA</div>
+              <div class="ec-chip-name">Economic value added</div>
+              <div class="ec-chip-formula">NOPAT − (WACC × CE)<br>Or: (ROIC−WACC) × CE<br>Positive = Value Created ✅</div>
+            </div>
+          </div>
+
+          <!-- ROIC vs WACC meter -->
+          <div class="roic-meter">
+            <div class="rm-title">📊 ROIC vs WACC Spread — Interpreting the Signal Instantly</div>
+            <div class="rm-track">
+              <div class="rm-zone" style="background:rgba(22,163,74,.14);border:1px solid rgba(22,163,74,.28);">
+                <div class="rm-val" style="color:var(--gbr);">+20%+</div>
+                <div class="rm-lbl">Elite creator ✅</div>
+              </div>
+              <div class="rm-zone" style="background:rgba(22,163,74,.08);border:1px solid rgba(22,163,74,.2);">
+                <div class="rm-val" style="color:var(--gbr);">+5–20%</div>
+                <div class="rm-lbl">Good creator ✓</div>
+              </div>
+              <div class="rm-zone" style="background:rgba(217,119,6,.08);border:1px solid rgba(217,119,6,.2);">
+                <div class="rm-val" style="color:var(--ambr);">0–5%</div>
+                <div class="rm-lbl">Marginal ⚠️</div>
+              </div>
+              <div class="rm-zone" style="background:rgba(220,38,38,.07);border:1px solid rgba(220,38,38,.18);">
+                <div class="rm-val" style="color:var(--red);">-5–0%</div>
+                <div class="rm-lbl">Destroyer ❌</div>
+              </div>
+              <div class="rm-zone" style="background:rgba(220,38,38,.13);border:1px solid rgba(220,38,38,.28);">
+                <div class="rm-val" style="color:var(--red);">Below -5%</div>
+                <div class="rm-lbl">Severe 🚨</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EVA Calculator — TCS example -->
+          <div class="eva-calc">
+            <div class="ec-calc-title">🧮 EVA Calculation — TCS (FY25 Illustrative · 25% Tax Rate)</div>
+            <div class="ec-row">
+              <div class="ec-op" style="color:var(--tl);"> </div>
+              <div><div class="ec-label">EBIT (Operating Profit from Screener.in P&L tab)</div><div class="ec-sub">Screener → P&L → "Operating Profit" row · FY25 ≈ ₹59,000 Cr</div></div>
+              <div class="ec-val" style="color:var(--p);">₹59,000 Cr</div>
+            </div>
+            <div class="ec-row">
+              <div class="ec-op" style="color:var(--red);">×</div>
+              <div><div class="ec-label">Multiply by (1 − Tax Rate) to get NOPAT</div><div class="ec-sub">Tax Rate = 25% → multiply by 0.75 · Screener → Tax/PBT ratio</div></div>
+              <div class="ec-val" style="color:var(--red);">× 0.75</div>
+            </div>
+            <div class="ec-row">
+              <div class="ec-op" style="color:var(--p);">=</div>
+              <div><div class="ec-label">NOPAT (Net Operating Profit After Tax)</div><div class="ec-sub">₹59,000 × 0.75 = NOPAT · This is the true operating earnings</div></div>
+              <div class="ec-val" style="color:var(--p);">₹44,250 Cr</div>
+            </div>
+            <div class="ec-row">
+              <div class="ec-op" style="color:var(--red);">−</div>
+              <div><div class="ec-label">Capital Charge (WACC × Capital Employed)</div><div class="ec-sub">WACC ~11% × Capital Employed ~₹38,000 Cr · From Screener Balance Sheet</div></div>
+              <div class="ec-val" style="color:var(--red);">₹4,180 Cr</div>
+            </div>
+            <div class="ec-total positive">
+              <div class="ec-total-lbl" style="color:var(--gbr);">✅ TCS EVA = ₹44,250 − ₹4,180 = Value Created!</div>
+              <div class="ec-total-val" style="color:var(--gbr);">+₹40,070 Cr</div>
+            </div>
+          </div>
+
+          <!-- Data sources -->
+          <div class="data-strip">
+            <div class="ds-title">📋 Where to Find EVA Inputs on Screener.in</div>
+            <div class="ds-grid">
+              <div class="ds-item">
+                <div class="ds-ico">📊</div>
+                <div><div class="ds-name">EBIT → P&L tab</div><div class="ds-desc">Screener P&L → "Operating Profit" row = EBIT. Use the annual figure. 10-year history available free.</div></div>
+              </div>
+              <div class="ds-item">
+                <div class="ds-ico">📋</div>
+                <div><div class="ds-name">Tax Rate → P&L</div><div class="ds-desc">Tax Rate = Tax (P&L row) ÷ PBT (P&L row). Or use 25% as default for Indian corporates post-2019 tax reform.</div></div>
+              </div>
+              <div class="ds-item">
+                <div class="ds-ico">🏦</div>
+                <div><div class="ds-name">Capital Employed → Ratios</div><div class="ds-desc">Screener.in → Ratios section → "Capital Employed" shown directly. Or: Balance Sheet → Total Assets − Current Liabilities.</div></div>
+              </div>
+              <div class="ds-item">
+                <div class="ds-ico">📈</div>
+                <div><div class="ds-name">ROIC → Ratios tab</div><div class="ds-desc">Screener shows "Return on Capital Employed" (ROCE) in the Ratios section — this approximates ROIC. Use as starting point.</div></div>
+              </div>
+              <div class="ds-item">
+                <div class="ds-ico">💰</div>
+                <div><div class="ds-name">Debt + Equity → Balance Sheet</div><div class="ds-desc">For WACC: get Total Borrowings (debt) and Equity (Reserves + Share Capital) from Screener Balance Sheet tab.</div></div>
+              </div>
+              <div class="ds-item">
+                <div class="ds-ico">📉</div>
+                <div><div class="ds-name">Interest Rate → P&L</div><div class="ds-desc">Finance Costs (P&L) ÷ Total Borrowings (Balance Sheet) = average cost of debt. After-tax cost = Interest Rate × (1 − Tax Rate).</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEPS -->
+        <div class="trick-steps-body">
+
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--p),var(--ph));">1</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">screener.in</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab purple">P&L tab → "Operating Profit" row</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab purple">This is your EBIT</span>
+              </div>
+              <div class="ts-action">On Screener.in, open the company and go to the P&L tab. Find <strong>"Operating Profit"</strong> (this is EBIT — Earnings Before Interest and Tax). Also note <strong>"Tax"</strong> and <strong>"Profit Before Tax (PBT)"</strong>. Calculate effective Tax Rate = Tax ÷ PBT. If this seems abnormal (below 15% or above 35%), use the standard corporate tax rate of 25% instead. Now: <strong>NOPAT = EBIT × (1 − Tax Rate)</strong>. Write this number down — it's the true operating return before any financing effect.</div>
+              <div class="ts-formula">
+                <div class="ts-f-row">
+                  <span class="ts-f-lbl">NOPAT</span><span class="ts-f-eq">=</span>
+                  <span class="ts-f-item ts-fi-p">EBIT (Operating Profit)</span>
+                  <span class="ts-f-eq">×</span>
+                  <span class="ts-f-item ts-fi-g">(1 − Effective Tax Rate)</span>
+                </div>
+                <div class="ts-f-guide">
+                  <span style="color:var(--gbr);">Use 25% tax rate as default for most Indian corporates ✅</span>
+                  <span style="color:var(--red);">Don't use PAT — it includes interest effect ❌</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">2</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">screener.in</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab sky">Ratios tab → "Capital Employed" or "ROCE"</span>
+              </div>
+              <div class="ts-action">On Screener.in, go to the <strong>Ratios tab</strong>. You'll find <strong>"Capital Employed"</strong> or compute it as: Balance Sheet → Fixed Assets + Total Current Assets − Total Current Liabilities. Also note the <strong>ROCE (Return on Capital Employed)</strong> already calculated by Screener — this is very close to ROIC. If ROCE is 35%, your ROIC ≈ 35%. NOPAT ÷ Capital Employed = ROIC independently verify. Write down: Capital Employed value and ROIC percentage.</div>
+              <div class="ts-shortcut">
+                <div class="ts-sc-lbl">💡 Screener.in ROCE shortcut</div>
+                <div class="ts-sc-text">Screener.in directly shows "Return on Capital Employed" (ROCE) on the Ratios section — this is calculated as EBIT ÷ Capital Employed × 100. This is your ROIC proxy. No manual calculation needed. The 10-year ROCE chart on Screener shows whether ROIC has been improving, stable, or declining.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">3</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">Estimate WACC</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab green">Use sector WACC benchmark or calculate</span>
+              </div>
+              <div class="ts-action">For quick EVA: use the sector WACC benchmarks (FMCG ~10–11%, IT ~11–12%, Pharma ~11–13%, Banking CoE ~13–15%, Steel ~12–15%, Telecom ~14–17%). For precise WACC: (1) Cost of Debt = Finance Costs ÷ Total Borrowings from Screener. After-tax cost = Cost of Debt × (1−25%). (2) Cost of Equity = 7% (10-yr G-Sec) + Beta × 5.5% (ERP). Beta from NSE or use 1.0 for unknown. (3) WACC = (Debt × After-tax kd + Equity × ke) ÷ (Debt + Equity).</div>
+              <div class="ts-outcomes">
+                <div class="ts-out ts-out-g">✅ FMCG/IT/Pharma WACC ~10–13%: sector stable, low beta. Use lower end for large stable companies (TCS, HUL), higher end for mid-caps.</div>
+                <div class="ts-out ts-out-r">🚨 Telecom/Steel/Infrastructure WACC ~13–17%: high leverage + cyclical risk = high WACC = much harder to generate positive EVA.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">4</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">Calculate</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab amber">EVA = NOPAT − (WACC × CE) — Is it positive or negative?</span>
+              </div>
+              <div class="ts-action">Now combine: <strong>EVA = NOPAT − (WACC × Capital Employed)</strong>. Or equivalently: <strong>EVA = (ROIC − WACC) × Capital Employed</strong>. Both give the same answer. The sign tells you everything: Positive → value creator, premium P/B justified. Negative → value destroyer, should trade below book value. Then trend-check: is the EVA spread widening (great) or narrowing (risk of derating)?</div>
+              <div class="ts-formula">
+                <div class="ts-f-row">
+                  <span class="ts-f-lbl">EVA</span><span class="ts-f-eq">=</span>
+                  <span class="ts-f-item ts-fi-p">NOPAT</span>
+                  <span class="ts-f-eq">−</span>
+                  <span class="ts-f-item ts-fi-a">WACC</span>
+                  <span class="ts-f-eq">×</span>
+                  <span class="ts-f-item ts-fi-s">Capital Employed</span>
+                </div>
+                <div class="ts-f-guide">
+                  <span style="color:var(--gbr);">EVA positive + widening spread → stock likely to rerate upward ✅</span>
+                  <span style="color:var(--red);">EVA negative + worsening → stock likely to derate, P/B compression ❌</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trick-step" style="padding-bottom:0;">
+            <div class="ts-num" style="background:linear-gradient(135deg,#e11d48,#f43f5e);">5</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">Interpret</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab red">EVA vs P/B — Is the market pricing it correctly?</span>
+              </div>
+              <div class="ts-action">Compare EVA spread to P/B ratio. The relationship: <strong>P/B should be above 1× only if EVA is positive. P/B &gt; 1× means the market is paying for future EVA.</strong> If a stock trades at P/B 5× but ROIC barely exceeds WACC (+1% spread), investors are overpaying — the future EVA won't justify that premium. If a stock trades at P/B 0.9× with ROIC consistently 20%+ above WACC, the stock is deeply undervalued — the market is incorrectly discounting the EVA generation. This EVA-to-P/B crosscheck is one of the most powerful yet underused tools in Indian equity analysis.</div>
+              <div class="ts-outcomes">
+                <div class="ts-out ts-out-g">✅ P/B &lt; 5× with ROIC−WACC spread &gt; 15%: likely undervalued. The market is not fully pricing in the EVA generation. Worth investigating as a potential investment.</div>
+                <div class="ts-out ts-out-r">🚨 P/B &gt; 3× with ROIC−WACC spread &lt; 2%: likely overvalued. Investors are paying for EVA that isn't actually being generated. High risk of P/B compression.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- BONUS -->
+        <div class="trick-bonus">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <span style="font-size:22px;">⚡</span>
+            <span style="font-size:clamp(13px,1.8vw,16px);font-weight:800;color:var(--tx);">4 Advanced EVA Tricks</span>
+          </div>
+          <div class="bonus-grid">
+            <div class="bonus-card bc-p">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--p),var(--ph));">A</div>
+              <div class="bonus-title">The "ROCE 10-Year Trend" Screen on Screener.in</div>
+              <div class="bonus-desc">On Screener.in, search for companies where ROCE (Return on Capital Employed) has been above 20% for 10 consecutive years. This is the single best proxy for sustained positive EVA without any calculation. Go to Screener → Screens → Create New Screen → filter "Return on Capital Employed &gt; 20%" + "10 Year ROCE &gt; 15%". The resulting list will be almost exclusively value-creating businesses — TCS, Nestlé, Asian Paints, Pidilite, HDFC Bank will all appear. This is your hunting ground for compounders.</div>
+            </div>
+            <div class="bonus-card bc-s">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">B</div>
+              <div class="bonus-title">EVA Improvement Signal — Widening Spread</div>
+              <div class="bonus-desc">A company whose ROIC−WACC spread is widening is even more valuable than one with stable high spread. Why? Widening spread means the company is deploying capital at ever-higher returns — a sign of improving competitive moat. Compare ROCE from 5 years ago vs today on Screener: if ROCE went from 12% to 22% while WACC stayed stable at 11%, the EVA spread jumped from 1% to 11% — a 10× improvement in value creation per rupee of capital. These "improving EVA" stories command P/B rerating as the market catches up.</div>
+            </div>
+            <div class="bonus-card bc-a">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">C</div>
+              <div class="bonus-title">Asset-Light = EVA Superpower</div>
+              <div class="bonus-desc">The fastest way to improve EVA is to reduce Capital Employed while maintaining NOPAT — this is what asset-light business models do. Companies that use franchising (McDonald's model), distribution-led brands (Pidilite), or pure software (TCS) carry minimal fixed assets. Their Capital Employed is tiny relative to their revenue, so even moderate NOPAT produces 30–100%+ ROIC. When analysing EVA, always check: is the company asset-light (low CE) or asset-heavy (high CE)? Asset-light companies structurally generate more EVA per rupee of revenue.</div>
+            </div>
+            <div class="bonus-card bc-g">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">D</div>
+              <div class="bonus-title">Working Capital as the Hidden EVA Lever</div>
+              <div class="bonus-desc">Companies can improve EVA without changing NOPAT — simply by reducing working capital (which reduces Capital Employed). A company that collects receivables faster (lower debtor days), reduces inventory, and pays suppliers slower (higher creditor days) compresses its Cash Conversion Cycle — reducing Capital Employed. This mechanical improvement boosts ROIC and EVA with no change in operating performance. On Screener: watch "Debtor Days" and "Inventory Days" trends. Declining working capital ratios = improving EVA, even when NOPAT is flat.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FLOWCHART -->
+        <div class="flow-wrap">
+          <div class="flow-label">🔀 EVA Value Creation Decision Flowchart — 4 Questions · 45 Seconds</div>
+          <div class="flow-chain">
+            <div class="flow-node fn-q"><div class="fn-qlbl">Q1</div><div class="fn-txt">Is ROIC (ROCE on Screener) above WACC — i.e., is the spread positive?</div></div>
+            <div class="flow-branch">
+              <div class="fb-yes">
+                <span class="fb-lbl">YES ✅</span>
+                <div class="flow-node fn-q"><div class="fn-qlbl">Q2</div><div class="fn-txt">Has the ROIC−WACC spread been positive and stable (or widening) for 5+ years?</div></div>
+                <div class="flow-branch">
+                  <div class="fb-yes">
+                    <span class="fb-lbl">YES ✅</span>
+                    <div class="flow-node fn-q"><div class="fn-qlbl">Q3</div><div class="fn-txt">Is the spread wide enough (&gt;10%) to justify a premium P/B multiple?</div></div>
+                    <div class="flow-branch">
+                      <div class="fb-yes">
+                        <span class="fb-lbl">YES ✅</span>
+                        <div class="flow-node fn-q"><div class="fn-qlbl">Q4</div><div class="fn-txt">Does the current P/B reflect a reasonable number of years of EVA at this spread?</div></div>
+                        <div class="flow-branch">
+                          <div class="fb-yes">
+                            <span class="fb-lbl">YES ✅</span>
+                            <div class="flow-node fn-g">✅ STRONG EVA COMPOUNDER AT FAIR PRICE — High-quality business earning significantly above cost of capital, sustained over multiple years, reasonably valued. Core portfolio candidate. Monitor for any ROIC deterioration.</div>
+                          </div>
+                          <div class="fb-no">
+                            <span class="fb-lbl">NO ⚠️</span>
+                            <div class="flow-node fn-a">⚠️ EXCELLENT BUSINESS BUT EXPENSIVE — ROIC far above WACC but P/B is pricing in decades of EVA. Only buy if you have high confidence in the moat's durability. Small margin of safety — any EVA disappointment = significant P/B compression.</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="fb-no">
+                        <span class="fb-lbl">NO ⚠️</span>
+                        <div class="flow-node fn-a">⚠️ MARGINAL EVA CREATOR — Spread is positive but thin (1–10%). Investigate why: is ROIC improving toward wider spread? Or is WACC likely to rise (more debt, higher risk)? Thin spread leaves no room for error. Watch for Capital Employed bloat from acquisitions.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="fb-no">
+                    <span class="fb-lbl">NO ⚠️</span>
+                    <div class="flow-node fn-a">⚠️ CYCLICAL EVA — ROIC beats WACC sometimes (cycle peaks) but not consistently. Value the business on mid-cycle ROIC, not peak. Premium P/B is only justified if the mid-cycle spread is positive. Cyclicals with thin mid-cycle EVA should trade near book value.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="fb-no">
+                <span class="fb-lbl">NO 🚨</span>
+                <div class="flow-node fn-r">❌ VALUE DESTROYER — ROIC below WACC. Business is consuming capital faster than it creates returns. Should trade below book value (P/B &lt; 1×). Avoid unless specific turnaround catalyst identified. Any growth here DESTROYS more EVA — bigger scale at below-WACC returns = worse, not better.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 GLOSSARY -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">07 — Reference Glossary</div>
+    <h2 class="h2 rv d2">EVA &amp; Residual Income <span class="hp">Glossary</span></h2>
+    <div class="rul rv d3"></div>
+    <div class="glos-wrap rv d3">
+      <div class="table-scroll">
+        <table class="glos-table">
+          <thead><tr>
+            <th style="min-width:170px;">Term</th>
+            <th style="min-width:300px;">What It Means in Simple Words</th>
+            <th style="min-width:100px;text-align:center;">Key Point</th>
+          </tr></thead>
+          <tbody>
+            <tr><td class="gt-term">EVA (Economic Value Added)</td><td class="gt-desc">EVA = NOPAT − (WACC × Capital Employed). The rupee amount of value created above the minimum required return. Positive EVA = true value creation beyond accounting profit. Negative EVA = destruction of economic value even when the company reports accounting profit. Invented by Stern Stewart & Co. and widely used in executive compensation and investment analysis.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-p">Core metric</span></td></tr>
+            <tr><td class="gt-term">NOPAT</td><td class="gt-desc">Net Operating Profit After Tax = EBIT × (1 − Tax Rate). The after-tax operating profit the business generates regardless of its capital structure. Unlike PAT (Net Profit), NOPAT is not reduced by interest expense — making it directly comparable across companies with different debt levels. On Screener.in, start with Operating Profit (EBIT) and apply the effective tax rate.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Not PAT</span></td></tr>
+            <tr><td class="gt-term">ROIC</td><td class="gt-desc">Return on Invested Capital = NOPAT ÷ Capital Employed. The operating return on every rupee of capital invested in the business. Comparable to ROCE (Return on Capital Employed) which Screener.in shows directly. The single most important financial ratio for assessing whether a business creates or destroys value. Companies with ROIC consistently above 20% are typically exceptional businesses with durable competitive advantages.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Key ratio</span></td></tr>
+            <tr><td class="gt-term">WACC</td><td class="gt-desc">Weighted Average Cost of Capital = the blended minimum return required by all capital providers (equity shareholders + debt holders). WACC = (Cost of Equity × Equity Weight) + (After-tax Cost of Debt × Debt Weight). Cost of Equity estimated using CAPM: Risk-Free Rate + Beta × Equity Risk Premium (India: ~7% + Beta × 5.5%). WACC is the hurdle rate — every rupee of invested capital must earn at least this to create value.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-a">Hurdle rate</span></td></tr>
+            <tr><td class="gt-term">EVA Spread</td><td class="gt-desc">ROIC − WACC. The percentage points by which returns exceed (or fall short of) the cost of capital. A positive spread means value is being created; a negative spread means value is being destroyed. The spread times the Capital Employed gives the rupee EVA. A company growing its capital base at a positive EVA spread creates compounding value; a company growing at a negative spread destroys compounding value.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-p">The key signal</span></td></tr>
+            <tr><td class="gt-term">Capital Employed (CE)</td><td class="gt-desc">The total capital at work in the business = Fixed Assets + Net Working Capital. Or: Total Assets − Non-interest-bearing Current Liabilities. This is the denominator of ROIC. Companies that reduce CE while maintaining NOPAT (by reducing inventory, collecting receivables faster, or using asset-light models) improve ROIC mechanically. Screener.in shows CE in the Ratios section.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-s">ROIC denominator</span></td></tr>
+            <tr><td class="gt-term">Residual Income (RI)</td><td class="gt-desc">Equity-based equivalent of EVA: Residual Income = Net Income − (Cost of Equity × Book Value of Equity). While EVA uses WACC and all capital, Residual Income uses only the equity perspective. For banks, RI is more intuitive: ROE − Cost of Equity = RI spread. HDFC Bank's ROE of 17% vs Cost of Equity of 14% = +3% RI spread, justifying P/B premium above 1×.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-s">Equity focus</span></td></tr>
+            <tr><td class="gt-term">P/B and EVA Linkage</td><td class="gt-desc">Market Value = Book Value + PV(all future EVAs). This is the fundamental valuation relationship in EVA framework. P/B above 1× implies the market expects future positive EVA. P/B below 1× implies negative EVA expected. The P/B premium is literally the price investors pay for future EVA generation. High ROIC companies with moats deserve high P/B; low ROIC companies should trade below book.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Valuation link</span></td></tr>
+            <tr><td class="gt-term">Capital Charge</td><td class="gt-desc">WACC × Capital Employed. The minimum return the business must generate to simply cover its cost of capital — not create any surplus. If NOPAT equals the Capital Charge exactly, EVA = 0 and the business earns its required return but creates zero surplus value. Any NOPAT above the Capital Charge is true economic profit (EVA). Any NOPAT below is economic loss.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-r">Minimum bar</span></td></tr>
+            <tr><td class="gt-term">ROCE vs ROIC</td><td class="gt-desc">ROCE (Return on Capital Employed) = EBIT ÷ Capital Employed — the pre-tax version. ROIC = NOPAT ÷ Capital Employed — the after-tax version. Screener.in shows ROCE; to get ROIC, multiply by (1 − Tax Rate). Example: ROCE 30%, Tax Rate 25% → ROIC = 30% × 0.75 = 22.5%. When comparing to WACC (which is also after-tax), always use ROIC, not ROCE — otherwise you're comparing pre-tax returns to post-tax costs.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-a">Use ROIC for EVA</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next · Module 12</div>
+    <div class="nxt-sub">Discounted Cash Flow (DCF) — The Intrinsic Value Framework →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">&#8594;</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">&#9888;&#65039;</div>
+    <div><div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+    <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">This page is for educational purposes only. All EVA estimates, ROIC figures, and WACC assumptions for TCS, Asian Paints, Nestlé India, HDFC Bank, Pidilite, Vodafone Idea, SAIL, and others are approximate and illustrative — they are not investment recommendations. All WACC sector estimates are simplified assumptions for educational illustration. Actual EVA analysis requires precise WACC calculations, accounting adjustments, and forward-looking estimates. Verify all figures from official annual reports and Screener.in. ROIC shown on Screener is an approximation (ROCE). All equity investments carry market risk. Consult a SEBI-registered investment advisor before making investment decisions.</div></div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  'use strict';
+  var passOpts={passive:true};
+
+  /* ── Scroll reveal ── */
+  var revEls=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var revIO=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('on');revIO.unobserve(e.target);}
+      });
+    },{threshold:.05,rootMargin:'0px 0px -28px 0px'});
+    revEls.forEach(function(el){revIO.observe(el);});
+  } else {
+    revEls.forEach(function(el){el.classList.add('on');});
+  }
+
+  /* ── Reduced motion ── */
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    revEls.forEach(function(el){el.classList.add('on');});
+  }
+
+  /* ── Passive touch — no scroll jank ── */
+  document.addEventListener('touchstart',function(){},passOpts);
+  document.addEventListener('touchmove',function(){},passOpts);
+  document.addEventListener('touchend',function(){},passOpts);
+
+  /* ── Overscroll containment ── */
+  document.body.style.overscrollBehavior='none';
+
+  /* ── iOS 100vh fix ── */
+  function setVH(){
+    document.documentElement.style.setProperty('--vh',window.innerHeight*0.01+'px');
+  }
+  setVH();
+  window.addEventListener('resize',setVH,passOpts);
+  window.addEventListener('orientationchange',function(){
+    setTimeout(setVH,150);
+    setTimeout(function(){
+      document.querySelectorAll('.rv:not(.on)').forEach(function(el){
+        var r=el.getBoundingClientRect();
+        if(r.top<window.innerHeight-20){el.classList.add('on');}
+      });
+    },320);
+  },passOpts);
+
+  /* ── Font repaint — gradient text on iOS ── */
+  if(document.fonts&&document.fonts.ready){
+    document.fonts.ready.then(function(){
+      document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});
+    });
+  }
+
+  /* ── touch-action:manipulation on ALL interactive elements ──
+     Covers all module-specific: EVA gauge cards, EC chips, ROIC meter zones,
+     WACC bar rows, EVA table rows, data-strip items, bonus cards */
+  function applyTouchActions(){
+    var sel=[
+      'a','button','.dmbtn','.nxt-btn',
+      '.eva-gauge','.step-card','.kpill',
+      '.company-block','.bonus-card',
+      '.trick-wrap','.flow-node','.ec-chip',
+      '.rm-zone','.wv-row','.ds-item',
+      '.ts-num','.bonus-badge',
+      '.eva-table tr'
+    ].join(',');
+    document.querySelectorAll(sel).forEach(function(el){
+      el.style.touchAction='manipulation';
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',applyTouchActions);
+  } else {
+    applyTouchActions();
+  }
+
+  /* ── Android: momentum scroll on all containers ── */
+  document.querySelectorAll('.table-scroll,.glos-wrap').forEach(function(el){
+    el.style.webkitOverflowScrolling='touch';
+  });
+
+  /* ── Visibility change: re-reveal when tab becomes active ── */
+  document.addEventListener('visibilitychange',function(){
+    if(!document.hidden){
+      document.querySelectorAll('.rv:not(.on)').forEach(function(el){
+        var r=el.getBoundingClientRect();
+        if(r.top<window.innerHeight){el.classList.add('on');}
+      });
+    }
+  });
+
+  /* ── iOS: prevent double-tap zoom ── */
+  document.querySelectorAll('a[href="#"]').forEach(function(a){
+    a.addEventListener('touchend',function(e){e.preventDefault();},passOpts);
+  });
+
+  /* ── EVA gauge cards: colour-tinted press feedback on touch ── */
+  if(window.matchMedia('(hover:none) and (pointer:coarse)').matches){
+    var egMap=[
+      {cls:'eg-creator',bg:'rgba(22,163,74,.09)'},
+      {cls:'eg-neutral',bg:'rgba(217,119,6,.08)'},
+      {cls:'eg-destroyer',bg:'rgba(220,38,38,.08)'},
+    ];
+    egMap.forEach(function(m){
+      document.querySelectorAll('.'+m.cls).forEach(function(card){
+        card.addEventListener('touchstart',function(){
+          this.style.background=m.bg;
+          this.style.transition='background .08s';
+        },passOpts);
+        card.addEventListener('touchend',function(){
+          var self=this;
+          setTimeout(function(){self.style.background='';},200);
+        },passOpts);
+      });
+    });
+
+    /* EVA table creator/destroyer rows: tinted press */
+    document.querySelectorAll('.eva-table tr.creator-row').forEach(function(row){
+      row.addEventListener('touchstart',function(){
+        this.style.background='rgba(22,163,74,.07)';
+      },passOpts);
+      row.addEventListener('touchend',function(){
+        var self=this;
+        setTimeout(function(){self.style.background='';},200);
+      },passOpts);
+    });
+    document.querySelectorAll('.eva-table tr.destroyer-row').forEach(function(row){
+      row.addEventListener('touchstart',function(){
+        this.style.background='rgba(220,38,38,.06)';
+      },passOpts);
+      row.addEventListener('touchend',function(){
+        var self=this;
+        setTimeout(function(){self.style.background='';},200);
+      },passOpts);
+    });
+  }
+
+})();
+</script>
+</body>
+</html>

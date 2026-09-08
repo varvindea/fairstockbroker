@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="RPT & Tunnelling Risk · Qualitative Analysis">
+<meta name="theme-color" content="#6d28d9">
+<meta name="format-detection" content="telephone=no">
+<title>Related Party Transactions &amp; Tunnelling Risk — Qualitative Analysis &amp; Management Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;--gring:#bbf7d0;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --teal:#0891b2;--tealpale:#ecfeff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shg:0 4px 22px rgba(22,163,74,.11);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+*{word-break:break-word;overflow-wrap:break-word;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--sf);}
+::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes moneyFlow{0%{transform:translateX(0);opacity:1}60%{transform:translateX(38px);opacity:.8}100%{transform:translateX(0);opacity:1}}
+@keyframes warnPulse{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes tunnelSlide{0%,100%{transform:translateX(0)}50%{transform:translateX(-6px)}}
+
+/* LAYOUT */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+
+/* TYPE */
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;min-width:0;overflow:hidden;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;flex-shrink:0;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#fff0f0 30%,#f0fdf4 65%,#fdfcff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.07);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(220,38,38,.05);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(22,163,74,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(26px,6.5vw,82px);font-weight:900;letter-spacing:-2.5px;line-height:.92;margin-bottom:12px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,#991b1b 0%,var(--red) 50%,#f87171 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(13px,2.8vw,38px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:660px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hero-pills{position:relative;z-index:2;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;animation:fsu .88s ease .44s both;min-width:0;overflow:hidden;}
+.hero-pill{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:100px;font-size:clamp(10px,1.3vw,12px);font-weight:800;min-width:0;max-width:100%;}
+.hp-p{background:var(--pxl);color:var(--p);border:1.5px solid rgba(109,40,217,.2);}
+.hp-g{background:var(--gpale);color:var(--gbr);border:1.5px solid rgba(22,163,74,.2);}
+.hp-a{background:var(--apale);color:var(--ambr);border:1.5px solid rgba(217,119,6,.2);}
+.hp-r{background:var(--rpale);color:var(--red);border:1.5px solid rgba(220,38,38,.2);}
+.hp-t{background:var(--tealpale);color:var(--teal);border:1.5px solid rgba(8,145,178,.2);}
+
+/* KLO BANNER */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;min-width:0;overflow:hidden;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;overflow:hidden;}
+.klo-body>*{min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:8px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;min-width:0;overflow:hidden;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;min-height:28px;max-width:100%;overflow:hidden;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.klo-hi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;min-width:0;overflow:hidden;}
+.klo-hi{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--shc);min-width:0;overflow:hidden;}
+.klo-hi-ico{font-size:22px;margin-bottom:6px;}
+.klo-hi-val{font-size:clamp(12px,2vw,16px);font-weight:900;letter-spacing:-.3px;word-break:normal;line-height:1.1;min-width:0;overflow:hidden;}
+.klo-hi-val.purple{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.green{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.red{color:var(--red);}
+.klo-hi-lbl{font-size:10px;color:var(--tl);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:3px;min-width:0;overflow:hidden;}
+
+/* ══════════════════════════════════════
+   WHAT IS RPT — TWO COLUMN EXPLAINER
+══════════════════════════════════════ */
+.two-col-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,36px);align-items:start;min-width:0;overflow:hidden;}
+
+/* Visual card (left side infographic panel) */
+.vis-card{border-radius:22px;overflow:hidden;border:1.5px solid var(--bd);min-width:0;box-shadow:var(--shp);}
+.vc-hd{padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,28px);position:relative;overflow:hidden;}
+.vc-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:18px 18px;pointer-events:none;}
+.vc-hd-p{background:linear-gradient(135deg,var(--pl),var(--p));}
+.vc-hd-r{background:linear-gradient(135deg,#7f1d1d,var(--red));}
+.vc-hd-g{background:linear-gradient(135deg,#052e16,var(--gbr));}
+.vc-hd-a{background:linear-gradient(135deg,#451a03,var(--ambr));}
+.vc-title{font-size:clamp(13px,1.8vw,16px);font-weight:900;color:#fff;position:relative;z-index:1;margin-bottom:2px;min-width:0;overflow:hidden;}
+.vc-sub{font-size:11px;color:rgba(255,255,255,.65);position:relative;z-index:1;min-width:0;overflow:hidden;}
+.vc-body{background:var(--wh);padding:clamp(16px,2.5vw,24px);min-width:0;overflow:hidden;}
+
+/* Explain blocks stacked on right */
+.explain-stack{display:flex;flex-direction:column;gap:14px;min-width:0;overflow:hidden;}
+.exp-block{border-radius:16px;padding:clamp(14px,2vw,20px);border:1.5px solid var(--bd);background:var(--wh);box-shadow:var(--shc);transition:box-shadow .22s,transform .22s;min-width:0;overflow:hidden;}
+.exp-block:hover{box-shadow:var(--shp);transform:translateY(-2px);}
+.exp-top{display:flex;align-items:flex-start;gap:11px;margin-bottom:9px;min-width:0;overflow:hidden;}
+.exp-ico{font-size:clamp(22px,3.5vw,28px);flex-shrink:0;animation:floatB 3.5s ease-in-out infinite;}
+.exp-tw{min-width:0;overflow:hidden;}
+.exp-title{font-size:clamp(13px,1.8vw,16px);font-weight:900;color:var(--tx);margin-bottom:3px;min-width:0;overflow:hidden;}
+.exp-badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:100px;font-size:9px;font-weight:700;max-width:100%;overflow:hidden;}
+.ebt-p{background:var(--pxl);color:var(--p);}
+.ebt-g{background:var(--gpale);color:var(--gbr);}
+.ebt-a{background:var(--apale);color:var(--ambr);}
+.ebt-r{background:var(--rpale);color:var(--red);}
+.exp-desc{font-size:clamp(12px,1.4vw,13.5px);color:var(--ts);line-height:1.68;min-width:0;overflow:hidden;}
+
+/* ══════════════════════════════════════
+   RPT TYPE GRID
+══════════════════════════════════════ */
+.rpt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.5vw,22px);min-width:0;overflow:hidden;}
+.rpt-card{border-radius:18px;border:1.5px solid;padding:clamp(14px,2.5vw,22px);box-shadow:var(--shc);transition:box-shadow .22s,transform .22s;min-width:0;overflow:hidden;position:relative;}
+.rpt-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:2px 2px 0 0;}
+.rpt-card:hover{box-shadow:var(--shp);transform:translateY(-3px);}
+.rptc-ok{background:rgba(22,163,74,.04);border-color:rgba(22,163,74,.2);}
+.rptc-ok::before{background:linear-gradient(90deg,var(--g),var(--gh));}
+.rptc-warn{background:rgba(217,119,6,.04);border-color:rgba(217,119,6,.2);}
+.rptc-warn::before{background:linear-gradient(90deg,var(--ambr),var(--amb));}
+.rptc-bad{background:rgba(220,38,38,.04);border-color:rgba(220,38,38,.2);}
+.rptc-bad::before{background:linear-gradient(90deg,#991b1b,var(--red));}
+.rpt-ico{font-size:clamp(26px,4.5vw,36px);margin-bottom:10px;display:block;animation:floatB 3s ease-in-out infinite;flex-shrink:0;}
+.rpt-title{font-size:clamp(13px,1.8vw,16px);font-weight:900;color:var(--tx);margin-bottom:5px;min-width:0;overflow:hidden;}
+.rpt-label{display:inline-flex;align-items:center;padding:3px 10px;border-radius:100px;font-size:9px;font-weight:700;margin-bottom:8px;max-width:100%;overflow:hidden;}
+.rptl-ok{background:var(--gpale);color:var(--gbr);}
+.rptl-warn{background:var(--apale);color:var(--ambr);}
+.rptl-bad{background:var(--rpale);color:var(--red);}
+.rpt-desc{font-size:clamp(12px,1.4vw,13.5px);color:var(--ts);line-height:1.68;min-width:0;overflow:hidden;}
+.rpt-eg{margin-top:10px;padding:8px 12px;border-radius:10px;font-size:clamp(11.5px,1.3vw,13px);line-height:1.5;min-width:0;overflow:hidden;}
+.rpte-ok{background:var(--gpale);color:var(--gbr);}
+.rpte-warn{background:var(--apale);color:var(--ambr);}
+.rpte-bad{background:var(--rpale);color:var(--red);}
+
+/* ══════════════════════════════════════
+   TUNNELLING FLOW DIAGRAM
+══════════════════════════════════════ */
+.tunnel-wrap{border-radius:22px;overflow:hidden;border:1.5px solid var(--bd);min-width:0;box-shadow:var(--shp);}
+.tun-hd{background:linear-gradient(135deg,#7f1d1d,var(--red),#f87171);padding:clamp(14px,2.5vw,22px) clamp(18px,3vw,32px);position:relative;overflow:hidden;}
+.tun-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:20px 20px;pointer-events:none;}
+.tun-hd-title{font-size:clamp(14px,2vw,18px);font-weight:900;color:#fff;position:relative;z-index:1;margin-bottom:3px;min-width:0;overflow:hidden;}
+.tun-hd-sub{font-size:11px;color:rgba(255,255,255,.65);position:relative;z-index:1;min-width:0;overflow:hidden;}
+.tun-body{background:var(--pxs);padding:clamp(18px,3vw,28px);min-width:0;overflow:hidden;}
+.tun-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;min-width:0;overflow:hidden;position:relative;}
+.tun-steps::after{content:'';position:absolute;left:12.5%;right:12.5%;top:30px;height:2px;background:linear-gradient(90deg,var(--red),#f87171,var(--red));opacity:.4;border-radius:1px;}
+.tun-step{background:var(--wh);border-radius:14px;padding:clamp(12px,2vw,18px);border:1.5px solid var(--bd);text-align:center;min-width:0;overflow:hidden;box-shadow:var(--shc);position:relative;z-index:1;margin:4px;}
+.ts-num{width:36px;height:36px;min-width:36px;border-radius:50%;background:linear-gradient(135deg,var(--red),#f87171);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;margin:0 auto 8px;box-shadow:0 4px 12px rgba(220,38,38,.3);overflow:hidden;}
+.ts-ico{font-size:clamp(18px,3vw,26px);display:block;margin-bottom:6px;animation:floatB 3.5s ease-in-out infinite;flex-shrink:0;}
+.ts-title{font-size:clamp(11px,1.5vw,13px);font-weight:900;color:var(--tx);margin-bottom:4px;min-width:0;overflow:hidden;}
+.ts-desc{font-size:clamp(10.5px,1.2vw,12px);color:var(--ts);line-height:1.5;min-width:0;overflow:hidden;}
+
+/* ══════════════════════════════════════
+   RED FLAG CHECKLIST
+══════════════════════════════════════ */
+.checklist-wrap{border-radius:22px;overflow:hidden;border:1.5px solid var(--bd);min-width:0;box-shadow:var(--shp);}
+.cl-hd{padding:clamp(14px,2.5vw,22px) clamp(18px,3vw,32px);position:relative;overflow:hidden;}
+.cl-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:20px 20px;pointer-events:none;}
+.cl-hd-r{background:linear-gradient(135deg,#7f1d1d,var(--red));}
+.cl-hd-g{background:linear-gradient(135deg,#052e16,var(--gbr));}
+.cl-hd-title{font-size:clamp(14px,2vw,17px);font-weight:900;color:#fff;position:relative;z-index:1;margin-bottom:3px;min-width:0;overflow:hidden;}
+.cl-hd-sub{font-size:11px;color:rgba(255,255,255,.65);position:relative;z-index:1;min-width:0;overflow:hidden;}
+.cl-body{background:var(--wh);padding:clamp(16px,2.5vw,24px);min-width:0;overflow:hidden;}
+.cl-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,22px);min-width:0;overflow:hidden;}
+.cl-col-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden;}
+.cl-col-title::before{content:'';width:14px;height:2px;border-radius:1px;flex-shrink:0;}
+.clct-r::before{background:var(--red);}
+.clct-r{color:var(--red);}
+.clct-g::before{background:var(--g);}
+.clct-g{color:var(--gbr);}
+.cl-items{display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden;}
+.cl-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;border-radius:12px;border:1px solid;min-width:0;overflow:hidden;transition:box-shadow .2s;}
+.cl-item:hover{box-shadow:var(--shp);}
+.cli-r{background:rgba(220,38,38,.05);border-color:rgba(220,38,38,.18);}
+.cli-g{background:rgba(22,163,74,.05);border-color:rgba(22,163,74,.18);}
+.cl-ico{font-size:14px;flex-shrink:0;margin-top:1px;}
+.cl-body-wrap{min-width:0;overflow:hidden;}
+.cl-title{font-size:clamp(11.5px,1.5vw,13px);font-weight:800;color:var(--tx);margin-bottom:2px;min-width:0;overflow:hidden;}
+.cl-desc{font-size:clamp(11px,1.3vw,12px);color:var(--ts);line-height:1.5;min-width:0;overflow:hidden;}
+
+/* ══════════════════════════════════════
+   EXAMPLE COMPANY CARDS
+══════════════════════════════════════ */
+.ex-cards{display:flex;flex-direction:column;gap:clamp(28px,5vw,48px);min-width:0;overflow:hidden;}
+.ex-card{border-radius:24px;overflow:hidden;min-width:0;box-shadow:var(--shp);}
+.exc-hd{padding:clamp(18px,3vw,28px) clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:clamp(14px,2.5vw,22px);position:relative;overflow:hidden;}
+.exc-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+.exh-fraud{background:linear-gradient(135deg,#450a0a,#991b1b,var(--red),#fb923c);}
+.exh-warn{background:linear-gradient(135deg,#451a03,var(--ambr),var(--amb),#fde68a);}
+.exh-pos{background:linear-gradient(135deg,#052e16,var(--gbr),var(--g),#86efac);}
+.exh-neg{background:linear-gradient(135deg,#450a0a,var(--red),#f87171);}
+.exh-mix{background:linear-gradient(135deg,#1e1b4b,var(--pl),var(--p),#a78bfa);}
+.exc-char{flex-shrink:0;position:relative;z-index:1;}
+.exc-h-text{flex:1;min-width:0;overflow:hidden;position:relative;z-index:1;}
+.exc-badge{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:5px;min-width:0;overflow:hidden;}
+.exc-name{font-size:clamp(18px,3.5vw,34px);font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1;margin-bottom:5px;min-width:0;overflow:hidden;}
+.exc-tagline{font-size:clamp(11.5px,1.6vw,14px);color:rgba(255,255,255,.78);line-height:1.5;margin-bottom:10px;min-width:0;overflow:hidden;}
+.exc-pills{display:flex;gap:7px;flex-wrap:wrap;min-width:0;overflow:hidden;}
+.exc-pill{display:inline-flex;align-items:center;padding:4px 11px;border-radius:100px;font-size:9.5px;font-weight:700;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.25);white-space:nowrap;max-width:100%;overflow:hidden;}
+.exc-body{background:var(--wh);padding:clamp(18px,3vw,28px);min-width:0;overflow:hidden;}
+.exc-2col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,32px);align-items:start;min-width:0;overflow:hidden;}
+.exc-sec-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tl);margin-bottom:12px;display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden;}
+.exc-sec-title::before{content:'';width:14px;height:2px;border-radius:1px;flex-shrink:0;}
+.est-r::before{background:var(--red);}
+.est-a::before{background:var(--amb);}
+.est-g::before{background:var(--g);}
+.est-p::before{background:var(--p);}
+
+/* RPT detail list inside example card */
+.rpt-list{display:flex;flex-direction:column;gap:9px;min-width:0;overflow:hidden;}
+.rpt-item{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border-radius:12px;border:1px solid;min-width:0;overflow:hidden;transition:box-shadow .2s;}
+.rpt-item:hover{box-shadow:var(--shp);}
+.rpti-r{background:rgba(220,38,38,.05);border-color:rgba(220,38,38,.2);}
+.rpti-a{background:rgba(217,119,6,.05);border-color:rgba(217,119,6,.2);}
+.rpti-g{background:rgba(22,163,74,.05);border-color:rgba(22,163,74,.2);}
+.rpti-p{background:var(--pxl);border-color:rgba(109,40,217,.18);}
+.rpti-ico{font-size:16px;flex-shrink:0;margin-top:1px;}
+.rpti-body{min-width:0;overflow:hidden;}
+.rpti-title{font-size:clamp(11.5px,1.5vw,13px);font-weight:800;color:var(--tx);margin-bottom:2px;min-width:0;overflow:hidden;}
+.rpti-desc{font-size:clamp(11px,1.3vw,12px);color:var(--ts);line-height:1.55;min-width:0;overflow:hidden;}
+
+/* Stat chips */
+.stat-row{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0;min-width:0;overflow:hidden;}
+.stat-chip{border-radius:12px;padding:9px 12px;border:1.5px solid var(--bd);background:var(--pxs);flex:1;min-width:60px;min-width:0;overflow:hidden;}
+.sv-r{color:var(--red);}
+.sv-g{color:var(--gbr);}
+.sv-p{color:var(--p);}
+.sv-a{color:var(--ambr);}
+.stat-val{font-size:clamp(13px,2vw,17px);font-weight:900;letter-spacing:-.3px;line-height:1;word-break:normal;min-width:0;overflow:hidden;}
+.stat-lbl{font-size:9px;color:var(--tl);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:3px;min-width:0;overflow:hidden;}
+
+/* Score grid */
+.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;min-width:0;overflow:hidden;}
+.score-chip{border-radius:12px;padding:10px 12px;border:1.5px solid var(--bd);min-width:0;overflow:hidden;}
+.scc-r{background:var(--rpale);}
+.scc-g{background:var(--gpale);}
+.scc-p{background:var(--pxl);}
+.scc-a{background:var(--apale);}
+.sc-lbl{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;min-width:0;overflow:hidden;}
+.scl-r{color:var(--red);}
+.scl-g{color:var(--gbr);}
+.scl-p{color:var(--p);}
+.scl-a{color:var(--ambr);}
+.sc-val{font-size:clamp(13px,2vw,17px);font-weight:900;letter-spacing:-.3px;word-break:normal;line-height:1.1;min-width:0;overflow:hidden;}
+.scv-r{color:var(--red);}
+.scv-g{color:var(--gbr);}
+.scv-p{color:var(--p);}
+.scv-a{color:var(--ambr);}
+.sc-note{font-size:10px;color:var(--tl);margin-top:2px;min-width:0;overflow:hidden;}
+
+/* Verdict */
+.verdict-box{border-radius:14px;padding:clamp(12px,2vw,18px);min-width:0;overflow:hidden;}
+.vb-r{background:linear-gradient(135deg,var(--rpale),#fff9f9);border:1.5px solid rgba(220,38,38,.2);}
+.vb-a{background:linear-gradient(135deg,var(--apale),#fffdf5);border:1.5px solid rgba(217,119,6,.2);}
+.vb-g{background:linear-gradient(135deg,var(--gpale),#fafffe);border:1.5px solid rgba(22,163,74,.25);}
+.vb-p{background:linear-gradient(135deg,var(--pxl),var(--pxs));border:1.5px solid rgba(109,40,217,.2);}
+.vb-title{font-size:clamp(12px,1.7vw,14px);font-weight:900;margin-bottom:6px;min-width:0;overflow:hidden;}
+.vbt-r{color:var(--red);}
+.vbt-a{color:var(--ambr);}
+.vbt-g{color:var(--gbr);}
+.vbt-p{color:var(--p);}
+.vb-desc{font-size:clamp(11.5px,1.4vw,13px);color:var(--ts);line-height:1.68;min-width:0;overflow:hidden;}
+
+/* DEMAT BANNER */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;min-width:0;overflow:hidden;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* NEXT CHAPTER */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left,0px));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right,0px));}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;min-width:0;overflow:hidden;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);min-width:0;overflow:hidden;}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;min-width:0;overflow:hidden;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;display:inline-block;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;min-width:0;overflow:hidden;}
+
+/* ═══ RESPONSIVE ═══ */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.rpt-grid{grid-template-columns:1fr 1fr;}.tun-steps{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:900px){
+  .two-col-grid{grid-template-columns:1fr;}
+  .rpt-grid{grid-template-columns:1fr 1fr;}
+  .tun-steps{grid-template-columns:repeat(2,1fr);}
+  .cl-cols{grid-template-columns:1fr 1fr;}
+  .exc-2col{grid-template-columns:1fr;}
+  .score-grid{grid-template-columns:1fr 1fr;}
+  .klo-hi-row{grid-template-columns:1fr 1fr 1fr;}
+}
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .rpt-grid{grid-template-columns:1fr 1fr;}
+  .tun-steps{grid-template-columns:repeat(2,1fr);}
+  .cl-cols{grid-template-columns:1fr 1fr;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{font-size:14px;padding:12px 20px;}
+  .dmfeats{gap:10px 20px;}
+  .exc-hd{gap:12px;}
+  .exc-name{font-size:clamp(16px,4vw,28px);}
+  .exc-body{padding:clamp(16px,2.5vw,22px);}
+  .exc-char svg{width:clamp(54px,8vw,72px);height:auto;}
+  .hero-pills{gap:6px;}
+  .hero-pill{font-size:10px;padding:6px 11px;}
+  .exp-ico{animation:none;}
+  .rpt-ico{animation:none;}
+}
+@media(max-width:640px){
+  .rpt-grid{grid-template-columns:1fr;}
+  .tun-steps{grid-template-columns:1fr 1fr;}
+  .cl-cols{grid-template-columns:1fr;}
+  .exc-hd{flex-direction:column;gap:10px;}
+  .exc-char{align-self:flex-start;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .klo-hi-row{grid-template-columns:1fr 1fr 1fr;}
+  .hero-pills{gap:5px;}
+  .hero-pill{font-size:10px;padding:5px 9px;}
+  .stat-row{gap:7px;}
+}
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.5px;}
+  .hdesc{font-size:13px;}
+  .hsub{letter-spacing:2px;font-size:9px;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .h2{letter-spacing:-1px;}
+  .lead{font-size:13.5px;}
+  .tag{letter-spacing:2px;}
+  .klo-title{font-size:14px;}
+  .klo-desc{font-size:12px;}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .klo-hi{padding:10px 8px;}
+  .klo-hi-val{font-size:clamp(10px,3.5vw,13px);}
+  .klo-hi-ico{font-size:18px;}
+  .klo-hi-row{grid-template-columns:1fr 1fr 1fr !important;}
+  .exp-ico{font-size:clamp(18px,4vw,24px);animation:none;}
+  .exp-title{font-size:12.5px;}
+  .exp-desc{font-size:11.5px;}
+  .rpt-ico{font-size:clamp(22px,4.5vw,30px);animation:none;}
+  .rpt-title{font-size:12.5px;}
+  .rpt-desc{font-size:11.5px;}
+  .rpt-eg{font-size:11px;}
+  .ts-title{font-size:11px;}
+  .ts-desc{font-size:10px;}
+  .ts-ico{font-size:clamp(16px,4vw,22px);animation:none;}
+  .ts-num{width:30px;height:30px;min-width:30px;font-size:13px;}
+  .rpti-title{font-size:11.5px;}
+  .rpti-desc{font-size:11px;}
+  .cl-title{font-size:11.5px;}
+  .cl-desc{font-size:11px;}
+  .exc-hd{padding:clamp(14px,3vw,20px) clamp(12px,3vw,18px);}
+  .exc-name{font-size:clamp(15px,5.5vw,24px);}
+  .exc-tagline{font-size:11.5px;}
+  .exc-pill{font-size:9px;padding:3px 9px;}
+  .exc-body{padding:13px 12px;}
+  .exc-2col{gap:14px;}
+  .exc-sec-title{font-size:9px;letter-spacing:1px;margin-bottom:8px;}
+  .score-chip{padding:8px 9px;}
+  .sc-val{font-size:clamp(12px,3.5vw,15px);}
+  .sc-lbl{font-size:8.5px;}
+  .stat-val{font-size:clamp(12px,3.5vw,15px);}
+  .stat-lbl{font-size:8.5px;}
+  .vb-title{font-size:12.5px;}
+  .vb-desc{font-size:11.5px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .dmh{letter-spacing:-1px;}
+  .dmsub{font-size:13px;}
+  .nxt-banner{padding:12px 14px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+  .hero-pill{font-size:9px;padding:5px 8px;}
+  .exc-char svg{width:clamp(44px,9vw,60px);height:auto;}
+  .tun-steps{gap:6px;}
+}
+@media(max-width:360px){
+  .w{padding:26px 12px;}
+  .hh1{font-size:clamp(22px,9vw,34px);letter-spacing:-1px;}
+  .lead{font-size:13px;}
+  .h2{font-size:clamp(18px,8vw,26px);}
+  .klo-hi-row{grid-template-columns:1fr 1fr !important;}
+  .rpt-grid{grid-template-columns:1fr;}
+  .tun-steps{grid-template-columns:1fr 1fr;}
+  .exc-hd{padding:11px 10px;}
+  .exc-name{font-size:clamp(13px,6vw,20px);}
+  .exc-tagline{font-size:10.5px;}
+  .rpti-title{font-size:11px;}
+  .rpti-desc{font-size:10.5px;}
+  .score-chip{padding:7px 8px;}
+  .sc-val{font-size:clamp(11px,4vw,14px);}
+  .vb-desc{font-size:11px;}
+  .exc-char svg{width:clamp(36px,9vw,48px);height:auto;}
+  .nxt-btn{font-size:12px;padding:10px 13px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}
+  .hero-pill{font-size:8.5px;padding:4px 7px;}
+  .ts-num{width:26px;height:26px;min-width:26px;font-size:12px;}
+}
+
+/* Touch */
+@media(hover:none) and (pointer:coarse){
+  .exp-block:hover,.rpt-card:hover,.cl-item:hover,.rpt-item:hover,.ex-card:hover{transform:none!important;box-shadow:var(--shc)!important;}
+  .exp-block:active,.rpt-card:active,.cl-item:active{transform:scale(.98);transition:transform .08s;}
+  .dmbtn:active,.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.tag,.eyebrow,.klo-label{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.lead,.exp-desc,.rpt-desc,.vb-desc,.rpti-desc,.cl-desc{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+  .klo-icon,.exp-ico,.rpt-ico,.ts-ico{animation:none;}
+}
+
+/* iOS Safari */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top) + 72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom) + 32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top) + 8px));right:max(22px,calc(env(safe-area-inset-right) + 8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.klo-hi-val.purple,.klo-hi-val.green,.h2 .hp,.h2 .hg{
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn{-webkit-tap-highlight-color:transparent;}
+}
+
+/* Android high-DPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .exp-block,.rpt-card,.ex-card,.klobanner,.score-chip,.tun-step{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .exc-char svg{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
+  .rv{opacity:1;transform:none;}
+  .klo-icon,.exp-ico,.rpt-ico,.ts-ico{animation:none!important;}
+}
+
+/* Print */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}
+  .rv{opacity:1;transform:none;}
+  body{color:#000;}
+  .w{padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="vbadge">Qualitative Analysis · Management Study</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>RPT · Tunnelling Risk · Wealth Transfer Detection</div>
+  <h1 class="hh1">
+    <span class="line1">Related Party</span>
+    <span class="line2">Transactions</span>
+    <span class="line3">Identify Wealth Transfer Risks Before They Destroy Your Investment</span>
+  </h1>
+  <div class="hsub">Qualitative Analysis · Management Study · Governance Risk</div>
+  <p class="hdesc">When promoters use a listed company to channel money into their private pockets — through sweetheart deals, inflated royalties, and fake loans — minority shareholders pay the price. This chapter teaches you to spot these wealth transfers before the market does.</p>
+  <div class="hero-pills">
+    <span class="hero-pill hp-r">🕳️ Tunnelling Risk</span>
+    <span class="hero-pill hp-p">💸 RPT Detection</span>
+    <span class="hero-pill hp-a">⚠️ Royalty Red Flags</span>
+    <span class="hero-pill hp-g">✅ Safe RPTs</span>
+    <span class="hero-pill hp-t">🔍 Annual Report Check</span>
+  </div>
+</section>
+
+
+<!-- ═══ 01 — KLO ═══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Why <span class="hp">Promoter Wealth Transfers</span> Are the Silent Killer of Returns</h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">🕳️</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">A listed company can look profitable on every visible metric — growing revenues, rising profits, impressive ROCE — while simultaneously having money quietly drained out through related party transactions. This hidden value extraction is called "tunnelling," and it can make a fundamentally good business a permanently bad investment.</div>
+        <div class="klo-desc">Imagine you own 20% of a profitable bakery. The owner (promoter) also owns a separate flour supply company. He decides the bakery will buy flour exclusively from his private flour company — at twice the market price. The bakery's reported costs rise, profits fall, and your 20% stake becomes worth less every year. Meanwhile the owner is extracting the bakery's profits into his private company through the inflated flour price. This is tunnelling — and it happens in Indian listed companies through royalty payments, management fees, related-party loans at below-market interest, asset purchases at above-market prices, and sweetheart contracts. The terrifying part: it is all legal. It's disclosed in the annual report. It just requires careful reading to spot. The skill you develop here: identify which Related Party Transactions represent genuine business needs versus structured wealth extraction, and quantify how much of the company's profit is flowing out to promoter-controlled entities before it reaches you as a minority shareholder.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-r">🕳️ Tunnelling = legal theft</span>
+          <span class="kpill kpill-p">📋 Disclosed in Annual Report</span>
+          <span class="kpill kpill-a">💸 RPT % of profit is key</span>
+          <span class="kpill kpill-g">✅ Some RPTs are fine</span>
+        </div>
+        <div class="klo-hi-row">
+          <div class="klo-hi"><div class="klo-hi-ico">📋</div><div class="klo-hi-val purple">Note 34–40</div><div class="klo-hi-lbl">Annual Report location</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">🚨</div><div class="klo-hi-val red">&gt;15% PAT</div><div class="klo-hi-lbl">Investigate threshold</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">✅</div><div class="klo-hi-val green">&lt;5% PAT</div><div class="klo-hi-lbl">Generally acceptable</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 02 — WHAT ARE RPTS ═══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — Understanding RPTs</div>
+    <h2 class="h2 rv d2">What Are <span class="hp">Related Party Transactions</span> — And Why Do They Exist?</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Not all Related Party Transactions are bad. In fact, some are completely normal and necessary. The skill is distinguishing genuine business transactions from disguised wealth transfers. Here is the complete picture.</p>
+
+    <div class="two-col-grid rv d2">
+      <!-- LEFT: Visual infographic -->
+      <div class="vis-card">
+        <div class="vc-hd vc-hd-p">
+          <div class="vc-title">🏢 Who Is a "Related Party"?</div>
+          <div class="vc-sub">Anyone connected to the company's promoters or key management — the web of relationships that creates RPT risk</div>
+        </div>
+        <div class="vc-body">
+          <!-- Corporate structure SVG -->
+          <div style="background:linear-gradient(135deg,var(--pxl),var(--gpale));border-radius:14px;padding:clamp(14px,2.5vw,20px);display:flex;justify-content:center;margin-bottom:16px;overflow:hidden;">
+            <svg width="300" height="200" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="max-width:100%;height:auto;">
+              <!-- Listed Company centre box -->
+              <rect x="100" y="78" width="100" height="44" rx="8" fill="#6d28d9"/>
+              <rect x="102" y="80" width="96"  height="40" rx="6" fill="#7c3aed"/>
+              <text x="150" y="97"  text-anchor="middle" font-family="sans-serif" font-size="8"  fill="rgba(255,255,255,.7)" font-weight="600">🏢 LISTED</text>
+              <text x="150" y="111" text-anchor="middle" font-family="sans-serif" font-size="9"  fill="#fff" font-weight="900">COMPANY</text>
+              <!-- Promoter at top -->
+              <circle cx="150" cy="28" r="20" fill="#4c1d95"/>
+              <text x="150" y="25"  text-anchor="middle" font-family="sans-serif" font-size="8"  fill="rgba(255,255,255,.7)" font-weight="600">👤</text>
+              <text x="150" y="36"  text-anchor="middle" font-family="sans-serif" font-size="8"  fill="#fff" font-weight="800">PROMOTER</text>
+              <!-- Arrow promoter to listed -->
+              <line x1="150" y1="48" x2="150" y2="78" stroke="#6d28d9" stroke-width="2" stroke-dasharray="4 3"/>
+              <polygon points="146,74 150,80 154,74" fill="#6d28d9"/>
+              <!-- Private Co (left — danger) -->
+              <rect x="8"  y="78" width="82" height="44" rx="8" fill="#fef2f2"/>
+              <rect x="10" y="80" width="78" height="40" rx="6" fill="rgba(220,38,38,.15)" stroke="#dc2626" stroke-width="1"/>
+              <text x="49"  y="97"  text-anchor="middle" font-family="sans-serif" font-size="7"  fill="#dc2626" font-weight="700">🏭 PRIVATE CO</text>
+              <text x="49"  y="109" text-anchor="middle" font-family="sans-serif" font-size="7"  fill="#dc2626" font-weight="800">(Promoter owned)</text>
+              <!-- Money flow arrow left - danger -->
+              <path d="M100 100 L92 100" stroke="#dc2626" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <polygon points="96,96 90,100 96,104" fill="#dc2626"/>
+              <text x="97"  y="95"  text-anchor="middle" font-family="sans-serif" font-size="7"  fill="#dc2626" font-weight="800">💸 PROFIT</text>
+              <text x="97"  y="106" text-anchor="middle" font-family="sans-serif" font-size="7"  fill="#dc2626">TUNNELLED</text>
+              <!-- Subsidiary (right — ok) -->
+              <rect x="210" y="78" width="82" height="44" rx="8" fill="var(--gpale)"/>
+              <rect x="212" y="80" width="78" height="40" rx="6" fill="rgba(22,163,74,.15)" stroke="#16a34a" stroke-width="1"/>
+              <text x="251" y="97"  text-anchor="middle" font-family="sans-serif" font-size="7"  fill="#15803d" font-weight="700">🏭 SUBSIDIARY</text>
+              <text x="251" y="109" text-anchor="middle" font-family="sans-serif" font-size="7"  fill="#15803d">(Listed owns 80%)</text>
+              <!-- Arrow to subsidiary — ok -->
+              <path d="M200 100 L212 100" stroke="#16a34a" stroke-width="2" stroke-dasharray="3 2" fill="none"/>
+              <polygon points="208,96 214,100 208,104" fill="#16a34a"/>
+              <text x="207" y="95"  text-anchor="middle" font-family="sans-serif" font-size="7"  fill="#15803d">Services</text>
+              <!-- Family members (bottom) -->
+              <rect x="60"  y="158" width="70" height="36" rx="6" fill="#fefce8"/>
+              <rect x="62"  y="160" width="66" height="32" rx="4" fill="rgba(217,119,6,.12)" stroke="#d97706" stroke-width="1"/>
+              <text x="95"  y="175" text-anchor="middle" font-family="sans-serif" font-size="7"  fill="#92400e" font-weight="700">👨‍👩 Family</text>
+              <text x="95"  y="186" text-anchor="middle" font-family="sans-serif" font-size="7"  fill="#92400e">Member Cos</text>
+              <!-- Associate company (bottom right) -->
+              <rect x="170" y="158" width="70" height="36" rx="6" fill="var(--pxl)"/>
+              <rect x="172" y="160" width="66" height="32" rx="4" fill="rgba(109,40,217,.1)" stroke="#6d28d9" stroke-width="1"/>
+              <text x="205" y="175" text-anchor="middle" font-family="sans-serif" font-size="7"  fill="#4c1d95" font-weight="700">🤝 Associate</text>
+              <text x="205" y="186" text-anchor="middle" font-family="sans-serif" font-size="7"  fill="#4c1d95">Companies</text>
+              <!-- Dotted lines to family/associate -->
+              <line x1="130" y1="122" x2="95"  y2="158" stroke="#d97706" stroke-width="1.5" stroke-dasharray="3 2"/>
+              <line x1="170" y1="122" x2="205" y2="158" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="3 2"/>
+            </svg>
+          </div>
+          <div style="font-size:12px;color:var(--ts);line-height:1.65;">
+            A "related party" includes: promoter and promoter group companies, subsidiaries, associates, joint ventures, key management personnel and their relatives. Every rupee that flows between the listed company and any of these entities must be disclosed — but not all flows are suspicious.
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Explain blocks -->
+      <div class="explain-stack">
+        <div class="exp-block">
+          <div class="exp-top">
+            <span class="exp-ico">📖</span>
+            <div class="exp-tw">
+              <div class="exp-title">Where to Find RPT Disclosures — Free</div>
+              <span class="exp-badge ebt-p">Annual Report</span>
+            </div>
+          </div>
+          <div class="exp-desc">Every listed company must disclose all RPTs in its Annual Report under the Notes to Financial Statements — typically Notes 34–40 depending on the company. The exact note is titled "Related Party Disclosures" or "Transactions with Related Parties." It lists every entity, every transaction type, and every rupee amount. SEBI also requires all "material" RPTs (above 10% of revenue) to be approved by shareholders at AGM. <strong>Pro tip:</strong> search the PDF for "related party" and jump directly to the section. The number of pages devoted to RPT disclosures is itself informative — complex corporate groups have much longer disclosures.</div>
+        </div>
+        <div class="exp-block">
+          <div class="exp-top">
+            <span class="exp-ico">⚖️</span>
+            <div class="exp-tw">
+              <div class="exp-title">The Key Question: Arm's Length or Sweetheart Deal?</div>
+              <span class="exp-badge ebt-a">Core Concept</span>
+            </div>
+          </div>
+          <div class="exp-desc">"Arm's length" means the transaction is priced as if the two parties were strangers negotiating freely. A company paying its subsidiary ₹100/unit for a component that the market price is ₹95/unit — that's arm's length. A company paying its promoter's private firm ₹200/unit for the same component — that's a sweetheart deal. The challenge: companies are not required to disclose whether prices paid to related parties are at, above, or below market rates. You have to deduce this from the disclosed amounts versus publicly available market data.</div>
+        </div>
+        <div class="exp-block">
+          <div class="exp-top">
+            <span class="exp-ico">🧮</span>
+            <div class="exp-tw">
+              <div class="exp-title">The Simple Calculation That Reveals Everything</div>
+              <span class="exp-badge ebt-r">Investor Technique</span>
+            </div>
+          </div>
+          <div class="exp-desc">Take total outflows to related parties (management fees + royalties + purchases from promoter entities + loans given) and divide by Net Profit. This gives you the <strong>RPT Drain Ratio</strong>. Below 5%: generally acceptable. 5–15%: monitor carefully. Above 15%: major red flag. Above 25%: significant portion of your investment returns may be flowing to promoter entities instead of compounding for you. Compare this ratio across 5 years — a rising RPT drain ratio while profits stagnate is one of the clearest tunnelling signals available.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 03 — THREE TYPES ═══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — Three Types of RPTs</div>
+    <h2 class="h2 rv d2">Legitimate, Suspicious &amp; <span class="hp">Dangerous</span> — How to Classify Every Transaction</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Not every related party transaction is a red flag. The same transaction structure — say, a service fee to a promoter company — can be completely legitimate or outright value extraction depending on the amount, pricing, and trend. Here is the classification framework every investor needs.</p>
+
+    <div class="rpt-grid">
+
+      <div class="rpt-card rptc-ok rv d2">
+        <span class="rpt-ico">✅</span>
+        <div class="rpt-title">Legitimate RPTs</div>
+        <span class="rpt-label rptl-ok">Generally Safe</span>
+        <div class="rpt-desc">Transactions that exist for genuine business reasons, are priced at or near market rates, and benefit the listed company — not just the promoter. These are common in large corporate groups where shared services create real efficiencies.</div>
+        <div class="rpt-eg rpte-ok">
+          <strong>✅ Examples:</strong> Shared IT infrastructure from parent company at reasonable cost · Trademark licence from promoter at industry-standard royalty rates (1–3% of revenue) · Purchase of raw materials from group company at publicly verifiable market prices · Salary paid to promoter-MD at reasonable levels relative to company size and profitability
+        </div>
+      </div>
+
+      <div class="rpt-card rptc-warn rv d3">
+        <span class="rpt-ico">⚠️</span>
+        <div class="rpt-title">Suspicious RPTs</div>
+        <span class="rpt-label rptl-warn">Monitor Carefully</span>
+        <div class="rpt-desc">Transactions that may be legitimate but whose pricing or scale raises questions. These don't prove tunnelling but require investigation — check whether the transaction terms are explained clearly and whether comparable market data supports the amounts paid.</div>
+        <div class="rpt-eg rpte-warn">
+          <strong>⚠️ Examples:</strong> Royalty fees above 5% of revenue for a domestic brand (vs global FMCG standard of 1–3%) · Management fee paid to promoter holding company with vague "services" description · Advances given to related parties without clear repayment terms or interest · Purchase of assets from promoter entity without disclosed independent valuation
+        </div>
+      </div>
+
+      <div class="rpt-card rptc-bad rv d4">
+        <span class="rpt-ico">🚨</span>
+        <div class="rpt-title">Dangerous RPTs (Tunnelling)</div>
+        <span class="rpt-label rptl-bad">Exit Signal</span>
+        <div class="rpt-desc">Transactions that are structured primarily to extract value from the listed company to promoter entities, with no corresponding benefit to minority shareholders. These are the signatures of tunnelling — legal but deeply hostile to minority investor interests.</div>
+        <div class="rpt-eg rpte-bad">
+          <strong>🚨 Examples:</strong> Interest-free loans to promoter group companies (listed co loses interest income) · Buying land/property from promoter at prices significantly above market · Providing guarantees for promoter's private company borrowings (listed co takes risk, promoter gets credit) · Selling assets to promoter entities at below-market prices · Persistent and growing "advances to related parties" that are never recovered
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tunnelling flow -->
+    <div class="tunnel-wrap rv d4" style="margin-top:clamp(28px,4vw,44px);">
+      <div class="tun-hd">
+        <div class="tun-hd-title">🕳️ How Tunnelling Actually Works — The Four-Step Wealth Transfer</div>
+        <div class="tun-hd-sub">How promoters legally extract value from listed companies into their private pockets — step by step</div>
+      </div>
+      <div class="tun-body">
+        <div class="tun-steps">
+          <div class="tun-step">
+            <div class="ts-num">1</div>
+            <span class="ts-ico">🏭</span>
+            <div class="ts-title">Listed Company Earns Profit</div>
+            <div class="ts-desc">The listed company (which minority shareholders own) earns ₹100 crore in operating profit from its genuine business operations.</div>
+          </div>
+          <div class="tun-step">
+            <div class="ts-num">2</div>
+            <span class="ts-ico">📄</span>
+            <div class="ts-title">Related Party Transaction Created</div>
+            <div class="ts-desc">Promoter's private company invoices the listed company for "management consulting," "brand royalty," or "technology fee." Board approves. Disclosed in annual report.</div>
+          </div>
+          <div class="tun-step">
+            <div class="ts-num">3</div>
+            <span class="ts-ico">💸</span>
+            <div class="ts-title">Cash Leaves Listed Company</div>
+            <div class="ts-desc">Listed company pays ₹20 crore to the promoter's private company. Net profit of listed company falls from ₹100Cr to ₹80Cr. Minority shareholders' wealth drops proportionally.</div>
+          </div>
+          <div class="tun-step">
+            <div class="ts-num">4</div>
+            <span class="ts-ico">🏠</span>
+            <div class="ts-title">Promoter Personally Benefits</div>
+            <div class="ts-desc">Promoter's private company now holds ₹20 crore that originally belonged (proportionally) to all shareholders. Minority shareholders received nothing for this "service."</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding:12px 16px;background:rgba(220,38,38,.06);border-radius:12px;border:1px solid rgba(220,38,38,.15);font-size:clamp(12px,1.4vw,13.5px);color:var(--red);line-height:1.6;">
+          <strong>🔑 The Key Insight:</strong> Tunnelling is perfectly legal and fully disclosed — the promoter breaks no law. But it systematically transfers wealth from minority shareholders to the promoter's private entities. Over 5–10 years, a company tunnelling 20% of profits annually delivers dramatically lower returns to minority shareholders than its fundamental earnings growth would suggest.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 04 — CHECKLIST ═══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">04 — Your RPT Audit Checklist</div>
+    <h2 class="h2 rv d2"><span class="hp">Red Flags</span> to Avoid vs <span class="hg">Green Signals</span> to Embrace</h2>
+    <div class="rul rv d3"></div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="checklist-wrap rv d2">
+        <div class="cl-hd cl-hd-r">
+          <div class="cl-hd-title">🚨 Red Flags — Investigate Before Investing</div>
+          <div class="cl-hd-sub">Any two of these together = pause and examine the annual report carefully before committing capital</div>
+        </div>
+        <div class="cl-body">
+          <div class="cl-cols">
+            <div>
+              <div class="cl-col-title clct-r">Financial Red Flags</div>
+              <div class="cl-items">
+                <div class="cl-item cli-r">
+                  <span class="cl-ico">💸</span>
+                  <div class="cl-body-wrap">
+                    <div class="cl-title">RPT outflows exceed 15% of net profit</div>
+                    <div class="cl-desc">Total payments to related parties (royalties + fees + purchases above market) exceeding 15% of PAT means a significant slice of your returns flows to the promoter's private pocket.</div>
+                  </div>
+                </div>
+                <div class="cl-item cli-r">
+                  <span class="cl-ico">📈</span>
+                  <div class="cl-body-wrap">
+                    <div class="cl-title">Royalty rate rising faster than brand investment</div>
+                    <div class="cl-desc">If royalty payments are growing 25% annually while the company's advertising spend and revenue grow only 8%, the promoter is increasing extraction without proportional brand value creation.</div>
+                  </div>
+                </div>
+                <div class="cl-item cli-r">
+                  <span class="cl-ico">🏦</span>
+                  <div class="cl-body-wrap">
+                    <div class="cl-title">Loans/advances to related parties that aren't repaid</div>
+                    <div class="cl-desc">If the "advances to related parties" line on the balance sheet grows year after year without being recovered, it is effectively a permanent capital outflow disguised as a loan.</div>
+                  </div>
+                </div>
+                <div class="cl-item cli-r">
+                  <span class="cl-ico">🏠</span>
+                  <div class="cl-body-wrap">
+                    <div class="cl-title">Asset purchases from promoter at inflated prices</div>
+                    <div class="cl-desc">When the listed company buys land, plant, or IP from the promoter's private entity without a disclosed independent valuation, the promoter can set the price at any level.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="cl-col-title clct-r">Governance Red Flags</div>
+              <div class="cl-items">
+                <div class="cl-item cli-r">
+                  <span class="cl-ico">🗳️</span>
+                  <div class="cl-body-wrap">
+                    <div class="cl-title">RPTs approved without independent director dissent</div>
+                    <div class="cl-desc">When every single RPT resolution passes unanimously — including promoter-enriching transactions — it suggests the Board is not independently scrutinising terms. Genuine oversight shows occasional dissent.</div>
+                  </div>
+                </div>
+                <div class="cl-item cli-r">
+                  <span class="cl-ico">📋</span>
+                  <div class="cl-body-wrap">
+                    <div class="cl-title">Vague service descriptions ("management support," "consulting")</div>
+                    <div class="cl-desc">When the listed company pays crores to a promoter entity for vaguely described services with no quantifiable deliverable, it is almost always a disguised extraction rather than a genuine commercial arrangement.</div>
+                  </div>
+                </div>
+                <div class="cl-item cli-r">
+                  <span class="cl-ico">🛡️</span>
+                  <div class="cl-body-wrap">
+                    <div class="cl-title">Corporate guarantees for promoter's private borrowings</div>
+                    <div class="cl-desc">The listed company puts its balance sheet at risk (by guaranteeing promoter's private company loans) while the promoter gets cheap credit. If the private company defaults, the listed company's shareholders bear the loss.</div>
+                  </div>
+                </div>
+                <div class="cl-item cli-r">
+                  <span class="cl-ico">📉</span>
+                  <div class="cl-body-wrap">
+                    <div class="cl-title">Rising RPT/PAT ratio during profit growth</div>
+                    <div class="cl-desc">If RPT payments grow faster than profits during good years, it means the promoter extracts proportionally more when the company does well — structurally disadvantaging minority shareholders in boom years.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="checklist-wrap rv d3">
+        <div class="cl-hd cl-hd-g">
+          <div class="cl-hd-title">✅ Green Signals — Good Governance Indicators</div>
+          <div class="cl-hd-sub">Companies with most of these consistently are the cleanest governance stories in Indian markets</div>
+        </div>
+        <div class="cl-body">
+          <div class="cl-cols">
+            <div>
+              <div class="cl-col-title clct-g">Financial Clean Signals</div>
+              <div class="cl-items">
+                <div class="cl-item cli-g">
+                  <span class="cl-ico">✅</span>
+                  <div class="cl-body-wrap">
+                    <div class="cl-title">RPT outflows below 5% of net profit</div>
+                    <div class="cl-desc">Total related party outflows under 5% of PAT means essentially all earnings stay within the listed entity and compound for all shareholders equally.</div>
+                  </div>
+                </div>
+                <div class="cl-item cli-g">
+                  <span class="cl-ico">📊</span>
+                  <div class="cl-body-wrap">
+                    <div class="cl-title">Royalty at or below global industry standard (1–3% of revenue)</div>
+                    <div class="cl-desc">International FMCG and tech companies typically charge 1–3% royalties. Indian companies that stay within this band for established brands are pricing fairly.</div>
+                  </div>
+                </div>
+                <div class="cl-item cli-g">
+                  <span class="cl-ico">💰</span>
+                  <div class="cl-body-wrap">
+                    <div class="cl-title">Zero or minimal loans to related parties</div>
+                    <div class="cl-desc">Companies that never extend loans to promoter entities — keeping the listed company's capital working within the business — treat minority shareholders as equal partners.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="cl-col-title clct-g">Governance Clean Signals</div>
+              <div class="cl-items">
+                <div class="cl-item cli-g">
+                  <span class="cl-ico">🏛️</span>
+                  <div class="cl-body-wrap">
+                    <div class="cl-title">Independent audit committee with active oversight</div>
+                    <div class="cl-desc">When independent directors on the audit committee visibly scrutinise and sometimes reject or renegotiate RPT terms, it signals genuine governance. Look for audit committee reports in the annual report.</div>
+                  </div>
+                </div>
+                <div class="cl-item cli-g">
+                  <span class="cl-ico">📋</span>
+                  <div class="cl-body-wrap">
+                    <div class="cl-title">RPTs disclosed with specific pricing rationale</div>
+                    <div class="cl-desc">When the annual report explains exactly why the related party price was used, what the market comparator was, and which independent valuer confirmed it — transparency that protects minority shareholders.</div>
+                  </div>
+                </div>
+                <div class="cl-item cli-g">
+                  <span class="cl-ico">📉</span>
+                  <div class="cl-body-wrap">
+                    <div class="cl-title">Declining RPT/PAT ratio over time</div>
+                    <div class="cl-desc">A falling RPT drain ratio over 5+ years means the promoter is progressively extracting less — or the business is growing faster than RPT payments — both shareholder-positive trends.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 05 — FIVE EXAMPLES ═══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">05 — Five Real Examples</div>
+    <h2 class="h2 rv d2">RPT &amp; Tunnelling <span class="hp">in Practice</span> — From Clean Governance to Organised Extraction</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Five Indian companies across the full spectrum — from the cleanest RPT records in the country to some of the most egregious tunnelling cases that have destroyed minority shareholder wealth. Each example shows exactly what to look for in the annual report.</p>
+
+    <div class="ex-cards">
+
+      <!-- EXAMPLE 1: Maruti Suzuki — Royalty under scrutiny -->
+      <div class="ex-card rv d2">
+        <div class="exc-hd exh-warn">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3s ease-in-out infinite;">
+              <!-- Car factory -->
+              <rect x="4"  y="44" width="62" height="44" rx="4" fill="rgba(255,255,255,.2)"/>
+              <rect x="4"  y="38" width="62" height="10" rx="3" fill="rgba(255,255,255,.28)"/>
+              <rect x="10" y="52" width="10" height="8" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="26" y="52" width="10" height="8" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="42" y="52" width="10" height="8" rx="1" fill="rgba(255,255,255,.35)"/>
+              <!-- Car on assembly line -->
+              <rect x="10" y="70" width="36" height="14" rx="4" fill="rgba(255,255,255,.35)"/>
+              <rect x="14" y="66" width="28" height="8"  rx="3" fill="rgba(255,255,255,.3)"/>
+              <circle cx="17" cy="84" r="4" fill="rgba(255,255,255,.5)"/>
+              <circle cx="39" cy="84" r="4" fill="rgba(255,255,255,.5)"/>
+              <!-- Royalty arrow upward to Japan -->
+              <path d="M68 86 L68 48 L74 48 L68 36 L62 48 L68 48" fill="#fbbf24" opacity=".85" style="animation:floatA 2.5s ease-in-out infinite;"/>
+              <text x="68" y="32" text-anchor="middle" font-family="sans-serif" font-size="6" fill="#fde68a" font-weight="800">JPY</text>
+              <!-- CFO character -->
+              <circle cx="68" cy="24" r="14" fill="rgba(255,255,255,.9)"/>
+              <ellipse cx="68" cy="11" rx="12" ry="5" fill="#92400e"/>
+              <circle cx="62" cy="21" r="2.2" fill="#78350f"/>
+              <circle cx="74" cy="21" r="2.2" fill="#78350f"/>
+              <path d="M62 30 Q68 34 74 30" stroke="#78350f" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+              <rect x="60" y="37" width="16" height="18" rx="5" fill="#d97706"/>
+              <rect x="48" y="41" width="14" height="4" rx="2" fill="#d97706" transform="rotate(-15 55 43)"/>
+              <rect x="72" y="40" width="12" height="4" rx="2" fill="#d97706" transform="rotate(10 78 42)"/>
+              <rect x="62" y="53" width="5" height="9" rx="2.5" fill="#92400e"/>
+              <rect x="70" y="53" width="5" height="9" rx="2.5" fill="#92400e"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 01 · Royalty Under Scrutiny · NSE: MARUTI</div>
+            <div class="exc-name">Maruti Suzuki</div>
+            <div class="exc-tagline">Maruti Suzuki pays royalty to its Japanese parent Suzuki Motor Corporation for technology, brand, and engineering. The royalty rate — and whether it is fairly priced for the value received — has been a persistent question from minority investors, making it India's most-discussed legitimate RPT debate.</div>
+            <div class="exc-pills">
+              <span class="exc-pill">Royalty to Suzuki Japan</span>
+              <span class="exc-pill">~5–6% of Net Revenue</span>
+              <span class="exc-pill">Technology transfer</span>
+              <span class="exc-pill">Disclosed, board-approved</span>
+            </div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-a">The RPT Structure</div>
+              <div class="rpt-list">
+                <div class="rpt-item rpti-a">
+                  <span class="rpti-ico">💸</span>
+                  <div class="rpti-body">
+                    <div class="rpti-title">Annual royalty to Suzuki Motor Corporation (Japan)</div>
+                    <div class="rpti-desc">Maruti pays royalty for every vehicle using Suzuki technology, platforms, and powertrains. The amount ranges from ₹3,500–5,500 Cr annually in recent years, representing roughly 5–6% of net revenue. Suzuki Japan owns 58% of Maruti — so 58% of these royalties effectively come back to the majority shareholder anyway. The 42% minority shareholders pay the full royalty but receive proportionally less.</div>
+                  </div>
+                </div>
+                <div class="rpt-item rpti-a">
+                  <span class="rpti-ico">⚖️</span>
+                  <div class="rpti-body">
+                    <div class="rpti-title">Is the royalty rate fair? The debate</div>
+                    <div class="rpti-desc">Global auto royalty benchmarks vary widely: 2–3% for mature platforms, 5–8% for cutting-edge technology transfer to emerging markets. Maruti's rate has historically been at the higher end, though it has been gradually renegotiated downward over time. Key question: is the technology access worth 5–6% of revenue? Given Maruti's 42%+ market share and consistent R&D advantage, many analysts consider the royalty broadly justified — but the rate remains legitimately higher than pure-play Indian companies pay.</div>
+                  </div>
+                </div>
+                <div class="rpt-item rpti-g">
+                  <span class="rpti-ico">✅</span>
+                  <div class="rpti-body">
+                    <div class="rpti-title">What makes this acceptable (with monitoring)</div>
+                    <div class="rpti-desc">The royalty is fully disclosed with specifics. Maruti's market leadership and engineering capabilities are directly enabled by the technology access. The Board includes independent directors from reputable institutions who actively scrutinise the terms. The rate has been renegotiated multiple times. This is a legitimate RPT — but one worth monitoring for any rate creep.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-a">RPT Risk Scorecard</div>
+              <div class="score-grid">
+                <div class="score-chip scc-a"><div class="sc-lbl scl-a">Royalty % Revenue</div><div class="sc-val scv-a">5–6%</div><div class="sc-note">Above domestic average</div></div>
+                <div class="score-chip scc-g"><div class="sc-lbl scl-g">Disclosure Quality</div><div class="sc-val scv-g">High</div><div class="sc-note">Full annual disclosure</div></div>
+                <div class="score-chip scc-g"><div class="sc-lbl scl-g">Technology Benefit</div><div class="sc-val scv-g">Real</div><div class="sc-note">Market leadership proven</div></div>
+                <div class="score-chip scc-a"><div class="sc-lbl scl-a">Minority Impact</div><div class="sc-val scv-a">Moderate</div><div class="sc-note">Rate warrants monitoring</div></div>
+              </div>
+              <div class="verdict-box vb-a">
+                <div class="vb-title vbt-a">⚠️ Verdict — Legitimate But Needs Annual Monitoring</div>
+                <div class="vb-desc">Maruti's royalty to Suzuki is the textbook example of a grey-area RPT. The technology is real, the benefit is real, the disclosure is full. But the rate is at the higher end of global benchmarks and 42% minority shareholders pay the full cost. The right approach: accept the royalty as a business reality but monitor the rate annually. Any increase without corresponding new technology access should be treated as a negative governance signal.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE 2: Asian Paints — Clean RPT record -->
+      <div class="ex-card rv d3">
+        <div class="exc-hd exh-pos">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.3s ease-in-out infinite .3s;">
+              <!-- Paint manufacturing plant -->
+              <rect x="4"  y="44" width="60" height="44" rx="4" fill="rgba(255,255,255,.2)"/>
+              <rect x="4"  y="38" width="60" height="10" rx="3" fill="rgba(255,255,255,.28)"/>
+              <rect x="10" y="52" width="9"  height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="26" y="52" width="9"  height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="42" y="52" width="9"  height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <!-- Colourful paint output -->
+              <circle cx="12" cy="76" r="7" fill="#ef4444" opacity=".7"/>
+              <circle cx="26" cy="76" r="7" fill="#3b82f6" opacity=".7"/>
+              <circle cx="40" cy="76" r="7" fill="#22c55e" opacity=".7"/>
+              <circle cx="54" cy="76" r="7" fill="#f59e0b" opacity=".7"/>
+              <!-- Clean shield (no tunnelling) -->
+              <path d="M68 44 L68 28 Q68 22 74 20 Q80 22 80 28 L80 44 Q80 50 74 52 Q68 50 68 44 Z" fill="#16a34a" opacity=".9"/>
+              <path d="M70 36 L73 39 L79 33" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- CEO -->
+              <circle cx="68" cy="16" r="12" fill="rgba(255,255,255,.9)"/>
+              <ellipse cx="68" cy="5" rx="10" ry="4" fill="#15803d"/>
+              <circle cx="63" cy="14" r="1.8" fill="#14532d"/>
+              <circle cx="73" cy="14" r="1.8" fill="#14532d"/>
+              <path d="M63 20 Q68 24 73 20" stroke="#14532d" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 02 · Clean Governance Benchmark · NSE: ASIANPAINT</div>
+            <div class="exc-name">Asian Paints</div>
+            <div class="exc-tagline">Asian Paints consistently exemplifies best-in-class RPT governance among Indian large-caps — minimal transactions with promoter entities, no loans to related parties, and full transparency about every inter-company transaction that does exist. A model to benchmark others against.</div>
+            <div class="exc-pills">
+              <span class="exc-pill">Minimal promoter RPTs</span>
+              <span class="exc-pill">Zero loans to promoters</span>
+              <span class="exc-pill">Full disclosure always</span>
+              <span class="exc-pill">Independent board oversight</span>
+            </div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-g">RPT Track Record</div>
+              <div class="rpt-list">
+                <div class="rpt-item rpti-g">
+                  <span class="rpti-ico">✅</span>
+                  <div class="rpti-body">
+                    <div class="rpti-title">RPT outflows consistently below 3% of PAT</div>
+                    <div class="rpti-desc">Asian Paints' total related party outflows — primarily transactions with its subsidiaries and associates in overseas markets — represent a very small fraction of net profit. The promoter family (Choksi family) does not charge management fees, royalties, or brand fees to the listed company. The promoter's wealth grows through the appreciation of their stake, not through extraction from the listed entity.</div>
+                  </div>
+                </div>
+                <div class="rpt-item rpti-g">
+                  <span class="rpti-ico">✅</span>
+                  <div class="rpti-body">
+                    <div class="rpti-title">Zero loans to promoter entities over 20+ year track record</div>
+                    <div class="rpti-desc">There is no instance in the last 20+ years of Asian Paints extending loans or guarantees to promoter family companies. The balance sheet does not show any "advances to related parties" growing inexplicably. This clean record is a direct result of governance culture that treats all shareholders equally.</div>
+                  </div>
+                </div>
+                <div class="rpt-item rpti-g">
+                  <span class="rpti-ico">✅</span>
+                  <div class="rpti-body">
+                    <div class="rpti-title">Inter-company transactions fully explained with pricing basis</div>
+                    <div class="rpti-desc">Where transactions do exist between Asian Paints and its overseas subsidiaries, the annual report discloses the transaction type, amount, and confirms pricing is on arm's length commercial terms. Independent directors on the audit committee review and certify these transactions annually.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-g">RPT Governance Scorecard</div>
+              <div class="score-grid">
+                <div class="score-chip scc-g"><div class="sc-lbl scl-g">RPT/PAT Ratio</div><div class="sc-val scv-g">&lt;3%</div><div class="sc-note">Industry best</div></div>
+                <div class="score-chip scc-g"><div class="sc-lbl scl-g">Promoter Loans</div><div class="sc-val scv-g">Zero</div><div class="sc-note">20+ year clean record</div></div>
+                <div class="score-chip scc-g"><div class="sc-lbl scl-g">Royalty Charged</div><div class="sc-val scv-g">None</div><div class="sc-note">No brand fees extracted</div></div>
+                <div class="score-chip scc-g"><div class="sc-lbl scl-g">Board Oversight</div><div class="sc-val scv-g">Strong</div><div class="sc-note">Active audit committee</div></div>
+              </div>
+              <div class="verdict-box vb-g">
+                <div class="vb-title vbt-g">✅ Verdict — The Gold Standard for RPT Governance in India</div>
+                <div class="vb-desc">Asian Paints is the benchmark for what RPT governance should look like. The promoter family has created extraordinary wealth over decades — not by extracting from the listed company, but by letting it compound efficiently for all shareholders. Every rupee of profit stays in the listed entity, working for all shareholders equally. When analysing any company's RPTs, the first question should be: how does this compare to Asian Paints' record?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ DEMAT BANNER ═══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Invest With Confidence</div>
+    <div class="dmh">Invest Only in <span class="dmhs">Clean Governance Companies</span></div>
+    <div class="dmsub">Companies where promoters grow wealth by building the business — not by extracting from it — consistently deliver superior long-term returns to minority shareholders. Screen for RPT quality before every investment.</div>
+    <div class="dmfeats">
+      <div class="dmf">Check annual reports for RPT disclosures</div>
+      <div class="dmf">Track royalty and management fee trends</div>
+      <div class="dmf">Screen promoter holding and pledging</div>
+      <div class="dmf">Open your account from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ═══ EXAMPLES 3–5 ═══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">05 — Continued</div>
+    <div class="ex-cards">
+
+      <!-- EXAMPLE 3: Satyam — Ultimate Tunnelling -->
+      <div class="ex-card rv d2">
+        <div class="exc-hd exh-fraud">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 2.8s ease-in-out infinite .6s;">
+              <!-- Tunnel/drain visual -->
+              <rect x="8"  y="38" width="52" height="44" rx="4" fill="rgba(255,255,255,.18)"/>
+              <!-- Tunnel hole in center -->
+              <ellipse cx="34" cy="60" rx="14" ry="18" fill="#450a0a" opacity=".6"/>
+              <ellipse cx="34" cy="56" rx="11" ry="14" fill="#7f1d1d" opacity=".5"/>
+              <ellipse cx="34" cy="53" rx="8"  ry="10" fill="#991b1b" opacity=".4"/>
+              <!-- Money going down drain -->
+              <text x="30" y="58" font-family="sans-serif" font-size="10" fill="#fbbf24" font-weight="900" style="animation:floatA 1.5s ease-in-out infinite;">₹</text>
+              <!-- Warning -->
+              <path d="M64 52 L74 68 L54 68 Z" fill="#fbbf24" opacity=".9" style="animation:warnPulse 1.5s ease-in-out infinite;"/>
+              <rect x="63.5" y="57" width="3" height="6" rx="1.5" fill="#78350f"/>
+              <circle cx="65" cy="66" r="1.8" fill="#78350f"/>
+              <!-- Convicted CEO -->
+              <circle cx="62" cy="26" r="14" fill="rgba(255,255,255,.9)"/>
+              <ellipse cx="62" cy="13" rx="12" ry="5" fill="#991b1b"/>
+              <path d="M55 20 Q59 18 62 20" stroke="#991b1b" stroke-width="1.5" fill="none"/>
+              <path d="M62 20 Q65 18 69 20" stroke="#991b1b" stroke-width="1.5" fill="none"/>
+              <circle cx="56" cy="24" r="2"   fill="#7f1d1d"/>
+              <circle cx="68" cy="24" r="2"   fill="#7f1d1d"/>
+              <path d="M56 31 Q62 27 68 31" stroke="#7f1d1d" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <rect x="54" y="39" width="16" height="18" rx="5" fill="#dc2626"/>
+              <rect x="42" y="43" width="14" height="4" rx="2" fill="#dc2626" transform="rotate(-15 49 45)"/>
+              <rect x="70" y="42" width="12" height="4" rx="2" fill="#dc2626" transform="rotate(10 76 44)"/>
+              <rect x="56" y="55" width="5" height="9" rx="2.5" fill="#991b1b"/>
+              <rect x="64" y="55" width="5" height="9" rx="2.5" fill="#991b1b"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 03 · India's Biggest Tunnelling Case · NSE: SATYAMCOMP (delisted)</div>
+            <div class="exc-name">Satyam Computers</div>
+            <div class="exc-tagline">The 2009 Satyam fraud was India's most egregious tunnelling case — Chairman Ramalinga Raju used the listed IT company as a fund source for his private real estate empire, routing money through fictitious transactions and fake cash balances totalling ₹7,136 crore over a decade.</div>
+            <div class="exc-pills">
+              <span class="exc-pill">₹7,136 Cr extracted</span>
+              <span class="exc-pill">Fake invoices to subsidiaries</span>
+              <span class="exc-pill">Real estate tunnelling</span>
+              <span class="exc-pill">Stock → ₹0 in 2 days</span>
+            </div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-r">The Tunnelling Mechanisms Used</div>
+              <div class="rpt-list">
+                <div class="rpt-item rpti-r">
+                  <span class="rpti-ico">🏠</span>
+                  <div class="rpti-body">
+                    <div class="rpti-title">Fake transactions to promoter real estate companies</div>
+                    <div class="rpti-desc">Satyam routed cash to Raju family real estate entities (Maytas Properties, Maytas Infrastructure — "Satyam" spelled backwards) through fictitious service contracts. The listed IT company paid for "technology services" that were never actually delivered. These payments were classified as normal business transactions but were actually structured diversions.</div>
+                  </div>
+                </div>
+                <div class="rpt-item rpti-r">
+                  <span class="rpti-ico">🏦</span>
+                  <div class="rpti-body">
+                    <div class="rpti-title">Fake bank balance concealed the extraction</div>
+                    <div class="rpti-desc">To conceal the cash that had been siphoned out, Raju fabricated ₹7,136 Cr of "fixed deposits" on the balance sheet. The auditors (PwC) failed to independently verify these bank statements. The fake cash balance existed only on paper — the actual cash had already been tunnelled into the Raju family's real estate ventures.</div>
+                  </div>
+                </div>
+                <div class="rpt-item rpti-r">
+                  <span class="rpti-ico">📋</span>
+                  <div class="rpti-body">
+                    <div class="rpti-title">The 2009 Maytas acquisition — the moment of exposure</div>
+                    <div class="rpti-desc">In December 2008, Satyam's board approved the acquisition of Maytas Properties and Maytas Infrastructure (both Raju family companies) for $1.6 billion. Institutional investors revolted — the stock fell 55% in a day. The board reversed the decision. Facing investigation, Raju confessed in January 2009. The Maytas acquisition was the planned final step: buy the real estate companies (funded by Satyam) at inflated prices, completing the tunnel.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-r">RPT Risk Scorecard</div>
+              <div class="score-grid">
+                <div class="score-chip scc-r"><div class="sc-lbl scl-r">Amount Tunnelled</div><div class="sc-val scv-r">₹7,136 Cr</div><div class="sc-note">Over 10+ years</div></div>
+                <div class="score-chip scc-r"><div class="sc-lbl scl-r">RPT Transparency</div><div class="sc-val scv-r">Fraudulent</div><div class="sc-note">Fake disclosures</div></div>
+                <div class="score-chip scc-r"><div class="sc-lbl scl-r">Shareholder Loss</div><div class="sc-val scv-r">~85%</div><div class="sc-note">In 2 trading days</div></div>
+                <div class="score-chip scc-r"><div class="sc-lbl scl-r">Audit Quality</div><div class="sc-val scv-r">Failed</div><div class="sc-note">PwC missed entirely</div></div>
+              </div>
+              <div class="verdict-box vb-r">
+                <div class="vb-title vbt-r">🚨 Verdict — The Ultimate Tunnelling Case Study</div>
+                <div class="vb-desc">Satyam teaches the hardest lesson: when promoters are determined to tunnel, even audited financial statements can be fabricated. The available signals — rising related-party transactions, large "advances" to group companies, low FCF/PAT ratio despite high reported profits, and cash balances earning suspiciously low interest — were all present in the filings. The lesson is to treat the Maytas acquisition attempt as a textbook example: when a listed company proposes buying promoter-owned assets at inflated prices, assume the worst until proven otherwise.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE 4: Vedanta — Complex Group Structure RPTs -->
+      <div class="ex-card rv d4">
+        <div class="exc-hd exh-warn">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.5s ease-in-out infinite .9s;">
+              <!-- Mining/metals operation -->
+              <rect x="4"  y="50" width="60" height="38" rx="4" fill="rgba(255,255,255,.18)"/>
+              <!-- Mining shaft -->
+              <rect x="18" y="38" width="16" height="14" rx="2" fill="rgba(255,255,255,.25)"/>
+              <rect x="34" y="44" width="16" height="8"  rx="2" fill="rgba(255,255,255,.25)"/>
+              <!-- Metal products -->
+              <rect x="8"  y="64" width="14" height="14" rx="2" fill="rgba(255,255,255,.35)"/>
+              <rect x="28" y="68" width="14" height="10" rx="2" fill="rgba(255,255,255,.35)"/>
+              <rect x="48" y="60" width="10" height="18" rx="2" fill="rgba(255,255,255,.35)"/>
+              <!-- Dividend flow arrow (up to holding co) -->
+              <path d="M68 82 L68 58 L74 58 L68 46 L62 58 L68 58" fill="#fbbf24" opacity=".85" style="animation:floatA 2.5s ease-in-out infinite;"/>
+              <text x="68" y="42" text-anchor="middle" font-family="sans-serif" font-size="6" fill="#fde68a" font-weight="800">DIV</text>
+              <!-- CEO -->
+              <circle cx="62" cy="26" r="14" fill="rgba(255,255,255,.9)"/>
+              <ellipse cx="62" cy="13" rx="12" ry="5" fill="#92400e"/>
+              <circle cx="56" cy="23" r="2.2" fill="#78350f"/>
+              <circle cx="68" cy="23" r="2.2" fill="#78350f"/>
+              <path d="M56 32 Q62 36 68 32" stroke="#78350f" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+              <rect x="54" y="39" width="16" height="18" rx="5" fill="#d97706"/>
+              <rect x="42" y="43" width="14" height="4" rx="2" fill="#d97706" transform="rotate(-15 49 45)"/>
+              <rect x="70" y="42" width="12" height="4" rx="2" fill="#d97706" transform="rotate(10 76 44)"/>
+              <rect x="56" y="55" width="5" height="9" rx="2.5" fill="#92400e"/>
+              <rect x="64" y="55" width="5" height="9" rx="2.5" fill="#92400e"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 04 · Complex Group RPT Structure · NSE: VEDL</div>
+            <div class="exc-name">Vedanta Limited</div>
+            <div class="exc-tagline">Vedanta demonstrates how complex multi-layer holding structures can create governance concerns — the UK-listed parent Vedanta Resources extracts dividends from India-listed Vedanta Limited to service its own debt, creating a systematic upward cash flow that directly affects minority shareholders' returns in the Indian entity.</div>
+            <div class="exc-pills">
+              <span class="exc-pill">Parent debt-funded dividends</span>
+              <span class="exc-pill">Vedanta Resources (UK)</span>
+              <span class="exc-pill">Royalty to promoter entity</span>
+              <span class="exc-pill">Complex holding structure</span>
+            </div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-a">The RPT Concern Pattern</div>
+              <div class="rpt-list">
+                <div class="rpt-item rpti-a">
+                  <span class="rpti-ico">💸</span>
+                  <div class="rpti-body">
+                    <div class="rpti-title">Excessive dividends to fund parent company's debt</div>
+                    <div class="rpti-desc">Vedanta Limited (India-listed) has periodically declared large special dividends that appear timed to help its UK parent Vedanta Resources service its own debt obligations. While dividends are legal and benefit all shareholders proportionally, the timing and scale — especially when declared during periods of the Indian company's own capital intensity — suggests the dividend policy is driven by parent needs rather than Indian minority shareholder interests.</div>
+                  </div>
+                </div>
+                <div class="rpt-item rpti-a">
+                  <span class="rpti-ico">🏢</span>
+                  <div class="rpti-body">
+                    <div class="rpti-title">Management and brand fees to promoter holding companies</div>
+                    <div class="rpti-desc">Vedanta Limited has historically paid management and technical services fees to Vedanta Resources (parent) and other promoter entities. While some fee payments for genuine group services are normal, the amounts and terms require careful annual scrutiny — particularly whether the services rendered are demonstrably worth the fees charged and whether independent directors certify the arm's length pricing.</div>
+                  </div>
+                </div>
+                <div class="rpt-item rpti-g">
+                  <span class="rpti-ico">📋</span>
+                  <div class="rpti-body">
+                    <div class="rpti-title">What's different from Satyam — full disclosure</div>
+                    <div class="rpti-desc">Unlike Satyam, Vedanta's RPTs are fully disclosed, board-approved, and reported in detail. The concern is not fraud — it is whether the scale and structure of cash outflows to the parent group (through dividends, fees, and guarantees) systematically disadvantages minority shareholders over time. This is the subtle, legal form of governance risk that requires ongoing monitoring rather than immediate exit.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-a">RPT Risk Scorecard</div>
+              <div class="score-grid">
+                <div class="score-chip scc-a"><div class="sc-lbl scl-a">Dividend Policy</div><div class="sc-val scv-a">Parent-driven</div><div class="sc-note">Timing raises questions</div></div>
+                <div class="score-chip scc-a"><div class="sc-lbl scl-a">Management Fees</div><div class="sc-val scv-a">Material</div><div class="sc-note">Requires annual check</div></div>
+                <div class="score-chip scc-g"><div class="sc-lbl scl-g">Disclosure</div><div class="sc-val scv-g">Full</div><div class="sc-note">Legally compliant</div></div>
+                <div class="score-chip scc-a"><div class="sc-lbl scl-a">Minority Alignment</div><div class="sc-val scv-a">Weak</div><div class="sc-note">Parent interests first</div></div>
+              </div>
+              <div class="verdict-box vb-a">
+                <div class="vb-title vbt-a">⚠️ Verdict — Legal But Structurally Misaligned With Minority Interests</div>
+                <div class="vb-desc">Vedanta's RPT structure illustrates the most common form of subtle tunnelling in India: using a listed subsidiary primarily as a cash cow for the parent's financial needs. No laws are broken, everything is disclosed, but the flow of value consistently runs upward to the promoter group rather than compounding within the listed entity for all shareholders. Investors should factor this structural misalignment into their valuation — Vedanta's earnings should trade at a discount to peers with cleaner governance structures precisely because of this ongoing outflow risk.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE 5: Infosys — Clean with brief controversy -->
+      <div class="ex-card rv d5">
+        <div class="exc-hd exh-pos">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.2s ease-in-out infinite 1.2s;">
+              <!-- Tech office -->
+              <rect x="6"  y="38" width="54" height="50" rx="4" fill="rgba(255,255,255,.18)"/>
+              <rect x="6"  y="32" width="54" height="10" rx="3" fill="rgba(255,255,255,.26)"/>
+              <rect x="12" y="46" width="8"  height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="26" y="46" width="8"  height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="40" y="46" width="8"  height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="12" y="58" width="8"  height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="26" y="58" width="8"  height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="40" y="58" width="8"  height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <!-- Clean shield -->
+              <path d="M62 82 L62 68 Q62 62 68 60 Q74 62 74 68 L74 82 Q74 88 68 90 Q62 88 62 82 Z" fill="#16a34a" opacity=".85"/>
+              <path d="M64 74 L67 77 L73 71" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- CEO -->
+              <circle cx="62" cy="22" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="62" cy="9" rx="12" ry="5" fill="#4c1d95"/>
+              <circle cx="56" cy="19" r="2.2" fill="#3730a3"/>
+              <circle cx="68" cy="19" r="2.2" fill="#3730a3"/>
+              <path d="M56 28 Q62 32 68 28" stroke="#3730a3" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+              <rect x="54" y="35" width="16" height="18" rx="5" fill="#7c3aed"/>
+              <rect x="42" y="39" width="14" height="4" rx="2" fill="#7c3aed" transform="rotate(-15 49 41)"/>
+              <rect x="70" y="38" width="12" height="4" rx="2" fill="#7c3aed" transform="rotate(10 76 40)"/>
+              <rect x="56" y="51" width="5" height="9" rx="2.5" fill="#4c1d95"/>
+              <rect x="64" y="51" width="5" height="9" rx="2.5" fill="#4c1d95"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 05 · Clean with Brief Controversy · NSE: INFY</div>
+            <div class="exc-name">Infosys</div>
+            <div class="exc-tagline">Infosys maintains one of the cleanest RPT records among India's large-cap IT companies — essentially no material promoter-related RPTs, transparent governance, and a strong track record of returning capital to all shareholders equally. The brief 2017 controversy around founder allegations provides a useful lesson in distinguishing governance concerns from governance failures.</div>
+            <div class="exc-pills">
+              <span class="exc-pill">Near-zero promoter RPTs</span>
+              <span class="exc-pill">Full shareholder equality</span>
+              <span class="exc-pill">2017 whistle-blower context</span>
+              <span class="exc-pill">Buybacks not extraction</span>
+            </div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-p">RPT Record and 2017 Context</div>
+              <div class="rpt-list">
+                <div class="rpt-item rpti-g">
+                  <span class="rpti-ico">✅</span>
+                  <div class="rpti-body">
+                    <div class="rpti-title">Effectively zero promoter family RPTs</div>
+                    <div class="rpti-desc">Unlike many Indian promoter-driven companies, Infosys has no material transactions with promoter family entities. The founding family (Murthy, Nilekani, etc.) hold shares and receive dividends like any other shareholder. They do not charge management fees, royalties, or technical service fees to the listed company. The promoter stake has declined over time through share sales, not extraction.</div>
+                  </div>
+                </div>
+                <div class="rpt-item rpti-p">
+                  <span class="rpti-ico">📋</span>
+                  <div class="rpti-body">
+                    <div class="rpti-title">The 2017 whistle-blower controversy — what actually happened</div>
+                    <div class="rpti-desc">In 2017, Narayana Murthy (founder) publicly raised concerns about excessive compensation for the then-CEO Vishal Sikka and an acquisition (Panaya) done without adequate board scrutiny. This was NOT an RPT concern — it was a governance concern about CEO pay and acquisition process. The controversy ultimately led to Sikka's resignation. Importantly, no related-party tunnelling was alleged or found. The Panaya acquisition was later examined and a small write-down taken.</div>
+                  </div>
+                </div>
+                <div class="rpt-item rpti-g">
+                  <span class="rpti-ico">✅</span>
+                  <div class="rpti-body">
+                    <div class="rpti-title">Capital returned equally to all shareholders</div>
+                    <div class="rpti-desc">Infosys' ₹27,000+ crore in buybacks were executed at fair prices, benefiting all shareholders proportionally. No differential treatment of promoters vs minority investors. Dividends paid uniformly. This equal treatment is the opposite of the Vedanta/Satyam patterns and represents the ideal alignment of promoter and minority shareholder interests.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-p">RPT Governance Scorecard</div>
+              <div class="score-grid">
+                <div class="score-chip scc-g"><div class="sc-lbl scl-g">Promoter RPTs</div><div class="sc-val scv-g">Near Zero</div><div class="sc-note">No fees/royalties</div></div>
+                <div class="score-chip scc-g"><div class="sc-lbl scl-g">Capital Return</div><div class="sc-val scv-g">Equal</div><div class="sc-note">Buybacks + dividends</div></div>
+                <div class="score-chip scc-p"><div class="sc-lbl scl-p">2017 Issue</div><div class="sc-val scv-p">Resolved</div><div class="sc-note">CEO pay, not RPT</div></div>
+                <div class="score-chip scc-g"><div class="sc-lbl scl-g">Board Governance</div><div class="sc-val scv-g">Strong</div><div class="sc-note">Independent majority</div></div>
+              </div>
+              <div class="verdict-box vb-p">
+                <div class="vb-title vbt-p">💡 Verdict — The IT Sector Governance Benchmark</div>
+                <div class="vb-desc">Infosys teaches a crucial distinction: governance concerns (executive compensation, acquisition discipline) are different from tunnelling risk (RPT extraction). The 2017 controversy was a governance debate — important but not an RPT red flag. On the RPT dimension specifically, Infosys remains a model: zero material promoter transactions, equal capital return to all shareholders, and strong independent board oversight. Investors should always separate "is there an RPT tunnelling risk?" from "is management making good strategic decisions?" — these are different questions requiring different analyses.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ NEXT CHAPTER ═══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue your Qualitative Analysis journey →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+
+<!-- ═══ DISCLAIMER ═══ -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);overflow:hidden;">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">All company examples are used for educational illustration based on publicly available information and are not investment advice. RPT analysis requires careful reading of the full annual report and may require professional guidance. Governance assessments are the author's analytical interpretation and may not reflect the full picture. All equity investments carry risk. Please consult a SEBI-registered investment advisor before making any investment decision.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(el => {
+    if (el.isIntersecting) { el.target.classList.add('on'); io.unobserve(el.target); }
+  });
+}, { threshold: 0.04, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+document.addEventListener('touchstart', () => {}, { passive: true });
+document.addEventListener('touchmove',  () => {}, { passive: true });
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.rv').forEach(el => el.classList.add('on'));
+}
+</script>
+</body>
+</html>

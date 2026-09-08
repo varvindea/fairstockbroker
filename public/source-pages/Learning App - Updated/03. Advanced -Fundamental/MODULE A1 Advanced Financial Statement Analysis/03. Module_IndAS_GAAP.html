@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ind AS vs GAAP">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Ind AS vs GAAP Deep Dive – Leases, Revenue, Financial Instruments · Advanced Financial Statement Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* ── LAYOUT ── */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(26px,6.5vw,82px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:14px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(12px,2.8vw,36px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:920px;}
+.hsi{padding:clamp(10px,1.8vw,20px) clamp(8px,1.8vw,16px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:76px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(9px,1.3vw,13px);font-weight:900;letter-spacing:-.3px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(7px,.85vw,9px);font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+
+/* ── KLO ── */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.09);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+
+/* ── INFOGRAPHIC ── */
+.infographic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.infographic-svg{width:100%;max-width:640px;margin:0 auto;animation:floatB 4.5s ease-in-out infinite;}
+.infographic-cap{font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;max-width:560px;margin:0 auto;}
+
+/* ── STANDARD DEEP-DIVE CARDS ── */
+.std-card{border-radius:22px;overflow:hidden;border:2px solid;box-shadow:var(--shp);margin-bottom:clamp(26px,4vw,42px);}
+.sc-116{border-color:rgba(109,40,217,.32);}
+.sc-115{border-color:rgba(22,163,74,.28);}
+.sc-109{border-color:rgba(217,119,6,.25);}
+.sc-head{display:flex;align-items:center;gap:clamp(14px,2.5vw,22px);padding:clamp(16px,2.5vw,28px);flex-wrap:wrap;}
+.sch-116{background:linear-gradient(135deg,var(--pxs),var(--pxl));}
+.sch-115{background:linear-gradient(135deg,var(--gpale),#ecfdf5);}
+.sch-109{background:linear-gradient(135deg,var(--apale),#fffcf0);}
+.sc-ico{width:66px;height:66px;min-width:66px;border-radius:17px;display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;box-shadow:0 6px 20px rgba(0,0,0,.13);animation:floatB 4s ease-in-out infinite;}
+.sci-116{background:linear-gradient(135deg,var(--p),var(--ph));}
+.sci-115{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.sci-109{background:linear-gradient(135deg,var(--ambr),var(--amb));}
+.sc-meta{flex:1;min-width:0;}
+.sc-std{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:4px;}
+.scs-116{color:var(--p);}
+.scs-115{color:var(--gbr);}
+.scs-109{color:var(--ambr);}
+.sc-name{font-size:clamp(17px,2.8vw,26px);font-weight:900;letter-spacing:-1px;line-height:1.05;color:var(--tx);margin-bottom:5px;}
+.sc-sub{font-size:clamp(12px,1.5vw,14px);color:var(--ts);line-height:1.55;}
+.sc-badge{display:inline-flex;padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;margin-top:8px;}
+.scb-116{background:rgba(109,40,217,.1);color:var(--p);}
+.scb-115{background:rgba(22,163,74,.1);color:var(--gbr);}
+.scb-109{background:rgba(217,119,6,.1);color:var(--ambr);}
+.sc-body{padding:clamp(14px,2.5vw,28px);background:var(--wh);}
+.sc-explain{font-size:clamp(12.5px,1.45vw,14.5px);color:var(--ts);line-height:1.72;margin-bottom:18px;}
+.sc-compare{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,20px);margin-bottom:18px;}
+.sc-old{border-radius:14px;padding:clamp(12px,2vw,18px);background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);}
+.sc-new{border-radius:14px;padding:clamp(12px,2vw,18px);background:var(--gpale);border:1.5px solid rgba(22,163,74,.22);}
+.scwr-title{font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.scwr-title.r{color:var(--red);}
+.scwr-title.g{color:var(--gbr);}
+.scwr-item{font-size:clamp(11.5px,1.35vw,13px);color:var(--ts);line-height:1.5;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.75);margin-bottom:6px;}
+.sc-impact{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.5vw,14px);margin-bottom:16px;}
+.sc-imp{border-radius:12px;padding:clamp(10px,1.8vw,14px);border:1.5px solid;}
+.sci-p{border-color:rgba(109,40,217,.18);background:rgba(109,40,217,.04);}
+.sci-g{border-color:rgba(22,163,74,.18);background:rgba(22,163,74,.04);}
+.sci-a{border-color:rgba(217,119,6,.16);background:rgba(217,119,6,.04);}
+.sci-r{border-color:rgba(220,38,38,.18);background:rgba(220,38,38,.04);}
+.imp-ico{font-size:clamp(18px,2.5vw,24px);margin-bottom:6px;animation:floatB 3.8s ease-in-out infinite;}
+.imp-name{font-size:clamp(11px,1.3vw,13px);font-weight:800;color:var(--tx);margin-bottom:3px;}
+.imp-desc{font-size:clamp(10px,1.1vw,11.5px);color:var(--ts);line-height:1.45;}
+.sc-practical{background:linear-gradient(135deg,var(--gpale),#ecfdf5);border-radius:14px;padding:clamp(12px,2vw,18px);border:1.5px solid rgba(22,163,74,.25);}
+.scp-title{font-size:12px;font-weight:800;color:var(--gbr);letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:7px;}
+.scp-item{display:flex;align-items:flex-start;gap:9px;font-size:clamp(11.5px,1.35vw,13px);color:var(--ts);line-height:1.5;margin-bottom:7px;}
+.scp-dot{width:22px;height:22px;min-width:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:900;flex-shrink:0;margin-top:1px;}
+.spd-p{background:linear-gradient(135deg,var(--p),var(--ph));}
+.spd-g{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.spd-a{background:linear-gradient(135deg,var(--ambr),var(--amb));}
+
+/* ── SCREENER MOCK ── */
+.screener-mock{background:var(--wh);border:2px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);margin-bottom:36px;}
+.sm-bar{background:linear-gradient(135deg,#f0f0f0,#e8e8e8);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bd);}
+.sm-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.sm-url{flex:1;background:var(--wh);border:1px solid var(--bd);border-radius:8px;padding:5px 12px;font-size:10.5px;color:var(--tl);font-family:monospace;}
+.sm-body{padding:clamp(14px,2.5vw,22px);}
+.sm-hr{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--bd);flex-wrap:wrap;}
+.sm-tabs{display:flex;gap:2px;margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px;}
+.sm-tab{padding:6px 14px;border-radius:8px;font-size:11px;font-weight:700;white-space:nowrap;border:1px solid var(--bd);}
+.sm-tab.active{background:var(--p);color:#fff;border-color:var(--p);}
+.sm-tab:not(.active){background:var(--sf);color:var(--ts);}
+.sm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,12px);margin-bottom:14px;}
+.sm-m{background:var(--sf);border-radius:10px;padding:10px 12px;border:1px solid var(--bd);}
+.smm-l{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--tl);margin-bottom:4px;}
+.smm-v{font-size:clamp(13px,1.8vw,16px);font-weight:900;color:var(--tx);}
+.smm-s{font-size:9px;color:var(--tl);margin-top:2px;}
+.sm-alerts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.sma{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;}
+.sma-g{background:var(--gpale);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.sma-r{background:var(--rpale);color:var(--red);border:1px solid rgba(220,38,38,.2);}
+.sma-a{background:var(--apale);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.sm-cap{font-size:10.5px;color:var(--tl);text-align:center;margin-top:12px;font-style:italic;}
+
+/* ── COMPANY EXAMPLES ── */
+.ex-block{border-radius:20px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);margin-bottom:clamp(22px,3.5vw,30px);}
+.eb-head{display:flex;align-items:center;justify-content:space-between;padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,24px);flex-wrap:wrap;gap:10px;}
+.ebh-g{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.ebh-r{background:linear-gradient(135deg,var(--rpale),#fff5f5);}
+.ebh-a{background:linear-gradient(135deg,var(--apale),#fffdf5);}
+.ebh-p{background:linear-gradient(135deg,var(--pxs),var(--pxl));}
+.eb-co{display:flex;align-items:center;gap:12px;}
+.eb-logo{width:46px;height:46px;min-width:46px;border-radius:11px;font-size:21px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.eb-name{font-size:clamp(13px,1.8vw,17px);font-weight:900;color:var(--tx);line-height:1.2;}
+.eb-sub{font-size:10.5px;color:var(--tl);margin-top:2px;}
+.eb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.ebb{padding:3px 9px;border-radius:100px;font-size:10px;font-weight:700;}
+.ebb-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.ebb-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.ebb-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.ebb-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.eb-body{padding:clamp(14px,2.5vw,22px) clamp(14px,2.5vw,24px);}
+.eb-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,14px);margin-bottom:14px;}
+.em-box{background:var(--sf);border-radius:12px;padding:clamp(9px,1.5vw,14px);border:1px solid var(--bd);}
+.em-l{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tl);margin-bottom:4px;}
+.em-v{font-size:clamp(13px,1.9vw,18px);font-weight:900;color:var(--tx);line-height:1.1;}
+.em-s{font-size:9px;color:var(--tl);margin-top:2px;}
+.std-pill{display:inline-flex;padding:4px 12px;border-radius:8px;font-size:12px;font-weight:900;}
+.stp-g{background:rgba(22,163,74,.12);color:var(--gbr);}
+.stp-r{background:rgba(220,38,38,.1);color:var(--red);}
+.stp-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.eb-flags{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.erf{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border-radius:10px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.48;}
+.erf-good{background:rgba(22,163,74,.05);border-left:3px solid var(--gbr);}
+.erf-bad{background:rgba(220,38,38,.05);border-left:3px solid var(--red);}
+.erf-amb{background:rgba(217,119,6,.05);border-left:3px solid var(--amb);}
+.erf-ico{font-size:14px;flex-shrink:0;margin-top:1px;}
+.eb-insight{padding:10px 14px;font-size:11.5px;color:var(--ts);line-height:1.55;border-top:1px solid var(--bd);}
+.ei-g{background:rgba(22,163,74,.04);border-left:3px solid var(--gbr);}
+.ei-r{background:rgba(220,38,38,.04);border-left:3px solid var(--red);}
+.ei-a{background:rgba(217,119,6,.04);border-left:3px solid var(--amb);}
+.ei-p{background:rgba(109,40,217,.04);border-left:3px solid var(--p);}
+
+/* ── SECTION DIVIDER ── */
+.section-divider{display:flex;align-items:center;gap:16px;margin:clamp(28px,4vw,44px) 0;}
+.sd-line{flex:1;height:1px;background:var(--bd);}
+.sd-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tl);white-space:nowrap;}
+
+/* ── CAVEAT ── */
+.caveat-box{margin-top:32px;background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:16px;}
+.caveat-icon{width:44px;height:44px;min-width:44px;border-radius:13px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(109,40,217,.28);}
+.caveat-body{flex:1;min-width:0;}
+.caveat-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.caveat-title{font-size:clamp(13px,1.5vw,15px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.caveat-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+
+/* ── DEMAT BANNER ── */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* ── NEXT ── */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-banner::after{content:'';position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;display:inline-block;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+
+/* ═══ RESPONSIVE — 11 BREAKPOINTS ═══ */
+img,svg{max-width:100%;height:auto;display:block;}
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.sc-compare{grid-template-columns:1fr 1fr;}.sc-impact{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){
+  .sc-compare{grid-template-columns:1fr;}
+  .sc-impact{grid-template-columns:1fr 1fr;}
+  .eb-metrics{grid-template-columns:repeat(2,1fr);}
+  .sm-grid{grid-template-columns:repeat(2,1fr);}
+  .infographic-svg{max-width:420px;}
+}
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .hst{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .sc-head{flex-wrap:wrap;gap:12px;}
+  .sc-ico{width:52px;height:52px;min-width:52px;font-size:24px;animation:none;}
+  .sc-compare{grid-template-columns:1fr;}
+  .sc-impact{grid-template-columns:1fr 1fr;}
+  .caveat-box{flex-direction:column;gap:12px;}
+  .caveat-icon{width:40px;height:40px;min-width:40px;font-size:20px;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;}
+  .dmfeats{gap:10px 20px;}
+  svg{overflow:visible;max-width:100%;}
+  .eb-head{flex-direction:column;align-items:flex-start;}
+  .eb-badges{margin-top:4px;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .imp-ico{animation:none;}
+}
+@media(max-width:640px){
+  .sc-compare{grid-template-columns:1fr;}
+  .sc-impact{grid-template-columns:1fr 1fr;}
+  .eb-metrics{grid-template-columns:1fr 1fr;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .infographic-svg{max-width:100%;}
+}
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.2px;}.hdesc{font-size:13px;}.hsub{font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .h2{letter-spacing:-1px;}.lead{font-size:13.5px;}
+  .sc-compare{grid-template-columns:1fr;}
+  .sc-impact{grid-template-columns:1fr 1fr;}
+  .eb-metrics{grid-template-columns:1fr 1fr;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .sc-body{padding:12px 14px;}
+  .eb-name{font-size:13px;}.eb-logo{width:38px;height:38px;min-width:38px;font-size:17px;}
+  .caveat-title{font-size:13px;}.caveat-desc{font-size:12.5px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+}
+@media(max-width:360px){
+  .w{padding:26px 12px;}.hh1{font-size:clamp(22px,8.5vw,36px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}.hsi:nth-last-child(-n+2){border-bottom:1px solid var(--bd) !important;}.hsi:last-child{border-bottom:none !important;}
+  .kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}.nxt-btn{font-size:12px;padding:10px 14px;}
+  .sc-impact{grid-template-columns:1fr;}
+  .eb-metrics{grid-template-columns:1fr 1fr;}
+}
+/* TOUCH */
+@media(hover:none) and (pointer:coarse){
+  .std-card:hover,.ex-block:hover{transform:none !important;box-shadow:var(--shc) !important;}
+  .std-card:active{transform:scale(.99);transition:transform .08s;}
+  .dmbtn:active{transform:scale(.97);}.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn,.std-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,.sc-name{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.lead,.caveat-desc,.sc-explain,.scwr-item,.scp-item,.eb-insight{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+}
+/* iOS */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.hsv,.hsv.g,.h2 .hp,.h2 .hg{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn,.std-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .sm-tabs{-webkit-overflow-scrolling:touch;}
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+}
+/* ANDROID HiDPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .std-card,.ex-block,.caveat-box,.screener-mock{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .infographic-svg,.klo-icon{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}.infographic-svg,.klo-icon,.sc-ico,.imp-ico{animation:none !important;}
+}
+/* PRINT */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}.rv{opacity:1;transform:none;}
+  body{color:#000;}.w{padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="vbadge">Advanced Financial Statement Analysis · FA</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Ind AS 116 · Ind AS 115 · Ind AS 109 · vs US GAAP</div>
+  <h1 class="hh1">
+    <span class="line1">Same Business.</span>
+    <span class="line2">Different Numbers.</span>
+    <span class="line3">How Accounting Standards Reshape Financial Statements</span>
+  </h1>
+  <div class="hsub">Ind AS 116 Leases · Ind AS 115 Revenue · Ind AS 109 Financial Instruments · US GAAP Differences</div>
+  <p class="hdesc">A company's profit, debt, and assets can look dramatically different depending on which accounting standard is applied — even if the underlying business is identical. This chapter teaches you to read past the standard and find the economic reality underneath.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv">Ind AS 116</div><div class="hsl">Leases On-Balance</div></div>
+    <div class="hsi"><div class="hsv g">Ind AS 115</div><div class="hsl">Revenue 5-Step</div></div>
+    <div class="hsi"><div class="hsv">Ind AS 109</div><div class="hsl">Financial Instruments</div></div>
+    <div class="hsi"><div class="hsv g">GAAP Gap</div><div class="hsl">Key Differences</div></div>
+    <div class="hsi"><div class="hsv">10 Cases</div><div class="hsl">Good + Bad</div></div>
+  </div>
+</section>
+
+
+<!-- ══ 01 — KLO ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Why Accounting Standards <span class="hp">Change Everything You See</span></h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">📚</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">Accounting standards are the rules that determine how economic events — signing a lease, completing a service contract, holding a bond — are translated into the numbers on a financial statement. Different rules produce different numbers from identical business transactions. An analyst who doesn't understand the standard is reading a translation without knowing the language.</div>
+        <div class="klo-desc">Imagine two identical retail stores, side by side on the same street, both paying ₹2 crore per year to lease their space for 10 years. Under <strong>old Ind AS</strong> (before 2019), both reported zero debt related to the lease — it was "off balance sheet." Under <strong>Ind AS 116</strong> (mandatory from April 2019), both must now recognise a "right-of-use asset" (₹16 crore) and a corresponding "lease liability" (₹16 crore) on their balance sheets. The business hasn't changed. The cash flows haven't changed. But suddenly the balance sheet shows ₹16 crore more debt, the EBITDA improves (rent expense is replaced by depreciation + interest, and depreciation is excluded from EBITDA), and the net profit is lower in early years due to front-loaded interest expense.<br><br>This is not a trivial change. For IndiGo airlines — which leases its entire fleet — the Ind AS 116 adoption added over ₹30,000 crore in "lease liabilities" to the balance sheet overnight. Analysts comparing IndiGo pre and post-2019 without adjusting for this standard change will draw completely wrong conclusions about debt levels.<br><br>Similarly, Ind AS 115 (Revenue Recognition, the Indian version of IFRS 15) changed how IT companies, telecom firms, and real estate developers recognise revenue. Ind AS 109 (Financial Instruments) changed how banks, NBFCs, and companies holding bonds value their financial assets — introducing Expected Credit Loss (ECL) provisioning that substantially increases loan loss provisions. This chapter teaches you what each standard does, why it matters for investors, and how to identify when a company's numbers are materially affected by standard changes rather than underlying business changes.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-p">🏢 Ind AS 116: Leases on balance sheet</span>
+          <span class="kpill kpill-g">📋 Ind AS 115: 5-step revenue model</span>
+          <span class="kpill kpill-a">💰 Ind AS 109: ECL provisioning</span>
+          <span class="kpill kpill-r">🌍 vs US GAAP: key differences</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 02 — INFOGRAPHIC + 3 STANDARD CARDS ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — Three Standards That Reshape Indian Financial Statements</div>
+    <h2 class="h2 rv d2">Ind AS 116, 115 &amp; 109 — <span class="hp">What Changed and Why It Matters</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These three Ind AS standards — all mandatory for Indian listed companies since 2019 — represent the biggest transformation in Indian corporate accounting since the Companies Act 2013. Every analyst must understand them to avoid misreading financial statements.</p>
+
+    <!-- SVG Infographic -->
+    <div class="rv d3" style="margin-bottom:36px;">
+      <div class="infographic-wrap">
+        <svg class="infographic-svg" viewBox="0 0 640 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="640" height="480" rx="20" fill="#f5f3ff"/>
+          <rect x="14" y="10" width="612" height="34" rx="11" fill="#6d28d9"/>
+          <text x="320" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="white">How Ind AS Standards Transform the Same Business Into Different Numbers</text>
+
+          <!-- ACCOUNTANT CHARACTER -->
+          <circle cx="80" cy="120" r="28" fill="#ede9fe"/>
+          <circle cx="70" cy="114" r="3.5" fill="#4c1d95"/>
+          <circle cx="90" cy="114" r="3.5" fill="#4c1d95"/>
+          <path d="M71 133 Q80 141 89 133" stroke="#4c1d95" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <!-- Graduation cap -->
+          <rect x="56" y="92" width="48" height="7" rx="3" fill="#4c1d95"/>
+          <rect x="68" y="82" width="24" height="10" rx="4" fill="#4c1d95"/>
+          <line x1="80" y1="92" x2="80" y2="82" stroke="#4c1d95" stroke-width="2"/>
+          <rect x="66" y="148" width="28" height="26" rx="6" fill="#6d28d9"/>
+          <rect x="34" y="158" width="32" height="8" rx="4" fill="#6d28d9" transform="rotate(-18 50 162)"/>
+          <rect x="94" y="158" width="32" height="8" rx="4" fill="#6d28d9" transform="rotate(18 110 162)"/>
+          <rect x="67" y="174" width="11" height="20" rx="3" fill="#4c1d95"/>
+          <rect x="83" y="174" width="11" height="20" rx="3" fill="#4c1d95"/>
+          <rect x="30" y="84" width="100" height="18" rx="8" fill="#ede9fe"/>
+          <text x="80" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#4c1d95">📖 Analyst reads Ind AS</text>
+
+          <!-- LEASE BOX (top right) -->
+          <rect x="198" y="46" width="168" height="96" rx="12" fill="#6d28d9" opacity=".9"/>
+          <text x="282" y="70" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">🏢 Ind AS 116 — Leases</text>
+          <rect x="210" y="78" width="144" height="54" rx="8" fill="rgba(255,255,255,.1)"/>
+          <text x="282" y="95" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.9)">Before: Lease = rent expense only</text>
+          <text x="282" y="108" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.9)">After: ROU Asset + Lease Liability</text>
+          <text x="282" y="121" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#4ade80" font-weight="700">↑ Debt · ↑ EBITDA · ↓ Early PAT</text>
+          <!-- Arrow from analyst -->
+          <path d="M132 118 L196 88" stroke="#6d28d9" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#ai1)"/>
+          <defs>
+            <marker id="ai1" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#6d28d9"/></marker>
+            <marker id="ai2" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#15803d"/></marker>
+            <marker id="ai3" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#d97706"/></marker>
+          </defs>
+
+          <!-- REVENUE BOX (middle) -->
+          <rect x="198" y="158" width="168" height="96" rx="12" fill="#15803d" opacity=".9"/>
+          <text x="282" y="182" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">📋 Ind AS 115 — Revenue</text>
+          <rect x="210" y="190" width="144" height="54" rx="8" fill="rgba(255,255,255,.1)"/>
+          <text x="282" y="207" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.9)">5-step model: Identify contract</text>
+          <text x="282" y="220" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.9)">→ obligations → price → recognise</text>
+          <text x="282" y="233" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#4ade80" font-weight="700">Revenue timing may shift quarters</text>
+          <path d="M132 148 L196 198" stroke="#15803d" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#ai2)"/>
+
+          <!-- INSTRUMENTS BOX (bottom) -->
+          <rect x="198" y="270" width="168" height="96" rx="12" fill="#d97706" opacity=".9"/>
+          <text x="282" y="294" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">💰 Ind AS 109 — Fin Instr</text>
+          <rect x="210" y="302" width="144" height="54" rx="8" fill="rgba(255,255,255,.1)"/>
+          <text x="282" y="319" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.9)">ECL: Expected Credit Loss model</text>
+          <text x="282" y="332" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.9)">FVTPL / FVOCI / Amortised Cost</text>
+          <text x="282" y="345" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#fde68a" font-weight="700">Banks: higher provisions earlier</text>
+          <path d="M120 168 L196 308" stroke="#d97706" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#ai3)"/>
+
+          <!-- RIGHT: Impact panel -->
+          <rect x="388" y="46" width="238" height="320" rx="14" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="507" y="68" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="#4c1d95">📊 Same Company — 3 Views</text>
+
+          <!-- Old GAAP row -->
+          <rect x="400" y="76" width="214" height="58" rx="9" fill="#fef2f2" stroke="#fecaca" stroke-width="1.2"/>
+          <text x="507" y="93" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="900" fill="#dc2626">Old Ind AS (pre-2019)</text>
+          <text x="507" y="107" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Debt: ₹200 Cr · EBITDA: ₹80 Cr</text>
+          <text x="507" y="120" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Revenue: timing depends on mgmt</text>
+
+          <!-- Ind AS row -->
+          <rect x="400" y="142" width="214" height="58" rx="9" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
+          <text x="507" y="159" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="900" fill="#15803d">Ind AS (current, 2019+)</text>
+          <text x="507" y="173" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Debt: ₹460 Cr (incl. leases) · EBITDA: ₹130 Cr</text>
+          <text x="507" y="186" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Revenue: 5-step, performance-based</text>
+
+          <!-- US GAAP row -->
+          <rect x="400" y="208" width="214" height="58" rx="9" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.2"/>
+          <text x="507" y="225" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="900" fill="#0284c7">US GAAP (for comparison)</text>
+          <text x="507" y="239" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Leases: similar to Ind AS 116</text>
+          <text x="507" y="252" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Credit losses: CECL model (earlier)</text>
+
+          <!-- Key lesson box -->
+          <rect x="400" y="274" width="214" height="78" rx="9" fill="#f5f3ff" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="507" y="294" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="900" fill="#4c1d95">💡 Analyst Rule</text>
+          <text x="507" y="308" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Always check: did the standard</text>
+          <text x="507" y="320" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">change, or did the business change?</text>
+          <text x="507" y="334" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#6d28d9">Adj. for Ind AS 116 before comparing</text>
+          <text x="507" y="344" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#6d28d9">pre/post-2019 balance sheets</text>
+
+          <!-- Bottom note -->
+          <rect x="14" y="386" width="612" height="82" rx="13" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="320" y="406" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="#4c1d95">🔑 Three Questions to Ask for Every Company Before Analysing Financials</text>
+          <text x="320" y="422" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">1. Does the company have significant leases? (Retail, Airlines, Telecom, Hospitality) → Ind AS 116 impact on debt &amp; EBITDA</text>
+          <text x="320" y="437" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">2. Does revenue involve multi-year contracts, subscriptions, or performance obligations? (IT, Telecom, Real Estate) → Ind AS 115 timing</text>
+          <text x="320" y="452" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">3. Does the company hold financial assets / give loans? (Banks, NBFCs, Insurers) → Ind AS 109 ECL provisioning impact</text>
+          <text x="320" y="464" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">If yes to any → read the relevant accounting policy note before drawing any financial conclusion</text>
+        </svg>
+        <p class="infographic-cap">The same company can show wildly different debt levels, EBITDA, and profit depending on which accounting standard applies. The business is unchanged — only the translation rules differ. The analyst's job is to understand the rules well enough to see through to the economic reality underneath.</p>
+      </div>
+    </div>
+
+    <!-- ═══ IND AS 116 — LEASES ═══ -->
+    <div class="std-card sc-116 rv d3">
+      <div class="sc-head sch-116">
+        <div class="sc-ico sci-116">🏢</div>
+        <div class="sc-meta">
+          <div class="sc-std scs-116">Standard #1 — Mandatory from April 2019</div>
+          <div class="sc-name">Ind AS 116 — Leases</div>
+          <div class="sc-sub">Brings virtually all lease commitments onto the balance sheet as Right-of-Use (ROU) Assets and Lease Liabilities — transforming how retail, aviation, telecom, and hospitality companies look on paper.</div>
+          <div class="sc-badge scb-116">🏢 Sectors most affected: Airlines · Retail · Telecom · Hotels · QSR Chains</div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-explain">Before Ind AS 116: a company leasing 200 store locations for ₹5 crore per year each reported only ₹100 crore of rent expense in the P&L. No debt on the balance sheet. No asset. No liability. The obligation to pay ₹1,000 crore over 10 years was invisible — disclosed only in tiny footnotes as "operating lease commitments."<br><br>After Ind AS 116: the company must calculate the present value of all future lease payments, recognise a "Right-of-Use Asset" (roughly ₹800 crore after discounting) and a matching "Lease Liability" (₹800 crore). The rent expense disappears from operating costs and is replaced by depreciation on the ROU asset (₹80 crore/yr) and interest on the lease liability (declining each year). The net effect:<br><br>• <strong>Debt appears higher</strong> — ₹800 Cr added to liabilities overnight<br>• <strong>EBITDA improves</strong> — depreciation and interest are excluded from EBITDA; the old rent expense was included<br>• <strong>Early-year PAT falls</strong> — interest is front-loaded; total cost is higher in early years<br>• <strong>Later-year PAT improves</strong> — as interest component declines over the lease term<br>• <strong>D/E ratios blow up</strong> — especially for asset-light businesses that relied on leasing precisely to avoid balance-sheet debt</div>
+        <div class="sc-compare">
+          <div class="sc-old">
+            <div class="scwr-title r">🚫 Old Ind AS Treatment (Pre-2019)</div>
+            <div class="scwr-item">Operating leases: only rent expense in P&L (₹5 Cr/store/yr)</div>
+            <div class="scwr-item">No asset or liability on balance sheet</div>
+            <div class="scwr-item">Commitments buried in Notes to Accounts — page 180 of annual report</div>
+            <div class="scwr-item">Debt/Equity ratio artificially low for lease-heavy businesses</div>
+            <div class="scwr-item">EBITDA margin understated (rent reduces EBITDA)</div>
+          </div>
+          <div class="sc-new">
+            <div class="scwr-title g">✅ Ind AS 116 Treatment (Current)</div>
+            <div class="scwr-item">ROU Asset on balance sheet (PV of all lease payments)</div>
+            <div class="scwr-item">Lease Liability on balance sheet (same amount)</div>
+            <div class="scwr-item">P&L: depreciation (ROU asset) + interest (lease liability) — no rent</div>
+            <div class="scwr-item">EBITDA improved — depreciation excluded from EBITDA calc</div>
+            <div class="scwr-item">Net debt increases; D/E ratios jump; leverage ratios worsened</div>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div class="scwr-title g" style="margin-bottom:10px;">📊 Impact on Key Financial Ratios — Before vs After Ind AS 116</div>
+          <div class="sc-impact">
+            <div class="sc-imp sci-r">
+              <div class="imp-ico">📈</div>
+              <div class="imp-name">Debt / Equity Ratio</div>
+              <div class="imp-desc">Jumps significantly. An airline like IndiGo added ₹30,000+ Cr in lease liabilities. Comparisons pre/post-2019 are meaningless without adjustment.</div>
+            </div>
+            <div class="sc-imp sci-g">
+              <div class="imp-ico">💹</div>
+              <div class="imp-name">EBITDA &amp; EBITDA Margin</div>
+              <div class="imp-desc">Improves — rent moved off operating costs. Retail companies may show 300–500 bps EBITDA margin improvement purely from standard change, with no business change.</div>
+            </div>
+            <div class="sc-imp sci-a">
+              <div class="imp-ico">💰</div>
+              <div class="imp-name">Net Profit (PAT)</div>
+              <div class="imp-desc">Typically lower in early lease years (front-loaded interest). Higher in later years. Long-term cumulative PAT impact is small — same cash flows, just different timing.</div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-practical">
+          <div class="scp-title">✅ How to Adjust for Ind AS 116 on Screener.in — Investor's Guide</div>
+          <div class="scp-item"><div class="scp-dot spd-p">1</div><div><strong>Find ROU Asset:</strong> Balance Sheet → Non-current assets → "Right of Use Assets." If this line is large relative to total assets for a retail or airline company — Ind AS 116 is material. Note the ROU Asset value.</div></div>
+          <div class="scp-item"><div class="scp-dot spd-p">2</div><div><strong>Find Lease Liability:</strong> Balance Sheet → Current + Non-current liabilities → "Lease Liabilities." For a fair debt comparison pre/post-2019, subtract lease liabilities from total debt. This gives you "adjusted net debt" comparable to pre-2019 figures.</div></div>
+          <div class="scp-item"><div class="scp-dot spd-g">3</div><div><strong>Adjust EBITDA:</strong> Cash Flow statement → "Lease payments" (principal + interest component). Add this back to EBITDA to get a pre-Ind AS 116 comparable EBITDA — useful for comparing with international peers who may still be on different standards.</div></div>
+          <div class="scp-item"><div class="scp-dot spd-g">4</div><div><strong>Check Annual Report Note on Leases:</strong> Notes to accounts → "Leases" note. This shows the undiscounted future lease commitments, weighted average discount rate used, and maturity profile. These inputs let you verify the company hasn't used an unrealistically high discount rate to understate the lease liability.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ IND AS 115 — REVENUE ═══ -->
+    <div class="std-card sc-115 rv d4">
+      <div class="sc-head sch-115">
+        <div class="sc-ico sci-115">📋</div>
+        <div class="sc-meta">
+          <div class="sc-std scs-115">Standard #2 — Mandatory from April 2018</div>
+          <div class="sc-name">Ind AS 115 — Revenue from Contracts with Customers</div>
+          <div class="sc-sub">Replaces all previous revenue recognition standards with a unified 5-step model. Revenue is recognised only when (or as) performance obligations are satisfied — fundamentally changing timing for IT services, telecom, real estate, and subscription businesses.</div>
+          <div class="sc-badge scb-115">📋 Sectors most affected: IT Services · Real Estate · Telecom · Construction · SaaS</div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-explain">The old approach to revenue recognition was fragmented — different rules for different industries, creating inconsistency and manipulation opportunity. Ind AS 115 replaced everything with a single 5-step model applicable to all contracts:<br><br><strong>Step 1:</strong> Identify the contract with a customer (written, verbal, or implied)<br><strong>Step 2:</strong> Identify the performance obligations (what has been promised)<br><strong>Step 3:</strong> Determine the transaction price (variable consideration must be estimated)<br><strong>Step 4:</strong> Allocate the transaction price to performance obligations<br><strong>Step 5:</strong> Recognise revenue when (or as) each performance obligation is satisfied<br><br>The practical impact: a software company that sells a ₹12 crore 3-year enterprise software license + 3 years of maintenance can no longer book all ₹12 crore upfront. It must allocate the price between the license and maintenance elements and recognise maintenance revenue over 3 years. An IT company that receives a ₹50 crore contract for a large system implementation must identify each milestone as a separate performance obligation and recognise revenue only as milestones are completed — not on invoicing.</div>
+        <div class="sc-compare">
+          <div class="sc-old">
+            <div class="scwr-title r">🚫 Old Revenue Treatment (Pre-2018)</div>
+            <div class="scwr-item">Software license: entire amount booked on delivery (even multi-year)</div>
+            <div class="scwr-item">Long-term contracts: percentage-of-completion or completion method — management discretion</div>
+            <div class="scwr-item">Bundled products/services: difficult to separate; recognised together</div>
+            <div class="scwr-item">Variable consideration (rebates, discounts): often not estimated upfront</div>
+            <div class="scwr-item">Different sectors followed different standards — hard to compare across industries</div>
+          </div>
+          <div class="sc-new">
+            <div class="scwr-title g">✅ Ind AS 115 Treatment (Current)</div>
+            <div class="scwr-item">Each performance obligation identified and priced separately — no bundling</div>
+            <div class="scwr-item">Revenue only when obligation is "satisfied" — either at a point in time or over time</div>
+            <div class="scwr-item">Variable consideration (discounts, volume rebates) must be estimated using expected value or most likely amount</div>
+            <div class="scwr-item">Contract assets (recognised but not billed) and liabilities (billed but not earned) disclosed</div>
+            <div class="scwr-item">Single consistent model across all sectors — better comparability</div>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div class="scwr-title g" style="margin-bottom:10px;">📊 5-Step Model Applied — Real Example: IT Project Contract</div>
+          <div class="sc-impact">
+            <div class="sc-imp sci-p">
+              <div class="imp-ico">📝</div>
+              <div class="imp-name">Steps 1–2: Identify</div>
+              <div class="imp-desc">₹60 Cr IT contract with 4 milestones: system design (₹10 Cr), build (₹20 Cr), testing (₹15 Cr), go-live (₹15 Cr). Each milestone = separate performance obligation.</div>
+            </div>
+            <div class="sc-imp sci-g">
+              <div class="imp-ico">💱</div>
+              <div class="imp-name">Steps 3–4: Price Allocation</div>
+              <div class="imp-desc">Transaction price ₹60 Cr allocated based on standalone selling prices of each milestone. If go-live is more complex, it gets a higher allocation than its stated value.</div>
+            </div>
+            <div class="sc-imp sci-a">
+              <div class="imp-ico">✅</div>
+              <div class="imp-name">Step 5: Recognise</div>
+              <div class="imp-desc">Revenue booked only as each milestone is completed and accepted. If client delays sign-off on testing, ₹15 Cr stays in Contract Assets (not yet revenue) even if costs are incurred.</div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-practical">
+          <div class="scp-title">✅ Ind AS 115 Signals to Check on Screener.in + Annual Report</div>
+          <div class="scp-item"><div class="scp-dot spd-g">1</div><div><strong>Contract Assets vs Contract Liabilities trend:</strong> Balance Sheet → current assets: "Contract Assets" (revenue earned but not invoiced yet — could be aggressive timing). Current liabilities: "Contract Liabilities" (invoiced but not yet earned — conservative). A growing Contract Assets balance relative to revenue warrants investigation.</div></div>
+          <div class="scp-item"><div class="scp-dot spd-g">2</div><div><strong>Remaining Performance Obligations (RPO):</strong> Annual Report Note on Revenue → IND AS 115 requires disclosure of "remaining performance obligations" — revenue from contracts signed but not yet recognised. A declining RPO while revenue is also declining = genuine slowdown. Rising RPO with stable revenue = strong backlog.</div></div>
+          <div class="scp-item"><div class="scp-dot spd-a">3</div><div><strong>Revenue recognition policy complexity:</strong> Simple businesses (retail, FMCG) have simple 1-paragraph policies. Complex recognition policies (multi-year contracts, variable consideration, bundled performance obligations) warrant closer scrutiny. If the policy has many conditions and estimates — those estimates can be manipulated.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ IND AS 109 — FINANCIAL INSTRUMENTS ═══ -->
+    <div class="std-card sc-109 rv d5">
+      <div class="sc-head sch-109">
+        <div class="sc-ico sci-109">💰</div>
+        <div class="sc-meta">
+          <div class="sc-std scs-109">Standard #3 — Mandatory from April 2018</div>
+          <div class="sc-name">Ind AS 109 — Financial Instruments</div>
+          <div class="sc-sub">Replaces incurred-loss provisioning with Expected Credit Loss (ECL) model — requiring companies to provision for future credit losses before they happen. Fundamentally changes how banks, NBFCs, and companies with large receivables report asset quality and profitability.</div>
+          <div class="sc-badge scb-109">💰 Sectors most affected: Banks · NBFCs · Insurers · Companies with large loans/bonds</div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-explain">The old approach to credit losses was reactive: you only provisioned when a loan actually showed signs of default — when the borrower missed payments, asked for restructuring, or the bank classified the loan as NPA. Under Ind AS 109's ECL model, you must provision for expected future losses from the day the loan is made — even if the borrower is currently paying perfectly.<br><br>ECL uses a three-stage model: <strong>Stage 1</strong> (performing loans) — provision for 12-month expected losses; <strong>Stage 2</strong> (significant credit risk increase) — provision for lifetime expected losses; <strong>Stage 3</strong> (credit-impaired) — lifetime ECL, similar to old NPA provisioning.<br><br>For banks and NBFCs, this means: (1) Provisions are higher and earlier even for good loans; (2) Provisions fluctuate with economic outlook — during recessions, the model's forward-looking assumptions drive provisions up dramatically even before NPAs appear; (3) Management has significant discretion in setting ECL assumptions — probability of default (PD), loss given default (LGD), and exposure at default (EAD) — creating space for both conservatism and manipulation.<br><br>For non-financial companies, Ind AS 109 also changed how they classify and measure bonds, equity investments, and derivatives they hold — some must be marked to market through P&L (FVTPL) and others through OCI (FVOCI), creating more volatility in reported numbers.</div>
+        <div class="sc-compare">
+          <div class="sc-old">
+            <div class="scwr-title r">🚫 Old Incurred-Loss Model (Pre-2018)</div>
+            <div class="scwr-item">Provision only when objective evidence of impairment exists (missed payments, NPA classification)</div>
+            <div class="scwr-item">RBI-mandated NPA provisioning norms — mechanistic, less judgment-based</div>
+            <div class="scwr-item">Provisions could be deferred — making bank balance sheets look better in upcycles</div>
+            <div class="scwr-item">No forward-looking economic assumptions required — backward-looking</div>
+            <div class="scwr-item">Less volatile — provisions didn't swing with economic forecasts</div>
+          </div>
+          <div class="sc-new">
+            <div class="scwr-title g">✅ Ind AS 109 ECL Model (Current)</div>
+            <div class="scwr-item">Day-1 provisioning: even a new, performing loan requires a 12-month ECL provision</div>
+            <div class="scwr-item">Probability of Default (PD), Loss Given Default (LGD), Exposure at Default (EAD) — management estimates</div>
+            <div class="scwr-item">Forward-looking macroeconomic scenarios built into assumptions</div>
+            <div class="scwr-item">Provisions rise faster during downturns — before NPAs appear in RBI classification</div>
+            <div class="scwr-item">Higher transparency: requires detailed disclosure of ECL methodology and movements</div>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div class="scwr-title g" style="margin-bottom:10px;">📊 Classification of Financial Assets Under Ind AS 109</div>
+          <div class="sc-impact">
+            <div class="sc-imp sci-p">
+              <div class="imp-ico">📊</div>
+              <div class="imp-name">FVTPL — Fair Value Through P&amp;L</div>
+              <div class="imp-desc">Equity trading portfolio, derivatives. Marked to market every quarter — gains and losses hit the P&L directly. Creates P&L volatility. Mutual fund investments held for trading.</div>
+            </div>
+            <div class="sc-imp sci-g">
+              <div class="imp-ico">🔄</div>
+              <div class="imp-name">FVOCI — Fair Value Through OCI</div>
+              <div class="imp-desc">Equity investments held strategically (not for trading). Marked to market through Other Comprehensive Income — not P&L. Does not affect reported profit but changes equity.</div>
+            </div>
+            <div class="sc-imp sci-a">
+              <div class="imp-ico">🏦</div>
+              <div class="imp-name">Amortised Cost</div>
+              <div class="imp-desc">Loans and bonds held to collect cash flows. No mark-to-market. ECL provision reduces carrying value. Banks' loan books — measured at amortised cost minus ECL provisions.</div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-practical">
+          <div class="scp-title">✅ Ind AS 109 Red Flags for Investors — What to Check</div>
+          <div class="scp-item"><div class="scp-dot spd-a">1</div><div><strong>ECL provision coverage ratio:</strong> Annual Report → Ind AS 109 note. Compare ECL provisions to gross carrying amount by stage. A bank with 95% of loans in Stage 1 but only 0.2% provision coverage may be using optimistic PD assumptions. Compare to peers.</div></div>
+          <div class="scp-item"><div class="scp-dot spd-a">2</div><div><strong>Movement in ECL provisions:</strong> Notes to accounts → "Movement in loss allowance." If ECL provisions declined significantly in a year without a corresponding improvement in loan quality (Stage 2 and 3 loans also declined) — management may have revised ECL assumptions downward aggressively, inflating reported profit.</div></div>
+          <div class="scp-item"><div class="scp-dot spd-g">3</div><div><strong>FVTPL vs FVOCI classification choice:</strong> For equity investments, management chooses FVTPL (volatile P&L) or FVOCI (stable P&L). Companies that put large equity portfolios into FVTPL take mark-to-market risk through profit — check if this creates artificial profit in bull markets that reverses in bear markets.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREENER MOCK -->
+    <div class="tag rv d5" style="margin-bottom:12px;">How Ind AS Standards Appear on Screener.in</div>
+    <div class="screener-mock rv d5">
+      <div class="sm-bar">
+        <div class="sm-dot" style="background:#ef4444;"></div>
+        <div class="sm-dot" style="background:#f59e0b;"></div>
+        <div class="sm-dot" style="background:#22c55e;"></div>
+        <div class="sm-url">🔒 screener.in/company/INDIGO/consolidated/ → Balance Sheet tab</div>
+      </div>
+      <div class="sm-body">
+        <div class="sm-hr">
+          <div>
+            <div style="font-size:clamp(14px,2vw,18px);font-weight:900;color:var(--tx);">IndiGo (InterGlobe Aviation) — Ind AS 116 Most Visible Here</div>
+            <div style="font-size:11px;color:var(--tl);">INDIGO · Aviation · Fleet entirely leased — biggest Ind AS 116 impact in India</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <span style="font-size:16px;font-weight:900;color:var(--p);">₹4,820</span>
+            <span style="background:var(--rpale);color:var(--red);font-size:11px;font-weight:700;padding:4px 10px;border-radius:7px;">▼ −0.8%</span>
+          </div>
+        </div>
+        <div class="sm-tabs">
+          <div class="sm-tab">Overview</div>
+          <div class="sm-tab">Financials</div>
+          <div class="sm-tab">Quarterly</div>
+          <div class="sm-tab active">Balance Sheet</div>
+          <div class="sm-tab">Cash Flow</div>
+          <div class="sm-tab">Ratios</div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--p);margin-bottom:10px;letter-spacing:.5px;">🔍 Where Ind AS Standards Show Up — Balance Sheet after Ind AS 116 adoption (FY2020 onwards):</div>
+        <div class="sm-grid">
+          <div class="sm-m"><div class="smm-l">Right-of-Use Assets</div><div class="smm-v" style="color:var(--ambr);">₹36,280 Cr</div><div class="smm-s">⚠️ Aircraft leases capitalised — Ind AS 116</div></div>
+          <div class="sm-m"><div class="smm-l">Lease Liabilities (Total)</div><div class="smm-v" style="color:var(--red);">₹35,890 Cr</div><div class="smm-s">🚨 Added to "debt" post-2019</div></div>
+          <div class="sm-m"><div class="smm-l">EBITDA (Lease-Adj)</div><div class="smm-v" style="color:var(--p);">₹14,200 Cr</div><div class="smm-s">📊 Includes lease depreciation reversal</div></div>
+          <div class="sm-m"><div class="smm-l">Adj. Net Debt (ex-leases)</div><div class="smm-v" style="color:var(--gbr);">₹4,100 Cr</div><div class="smm-s">✅ True financial debt is much lower</div></div>
+          <div class="sm-m"><div class="smm-l">Contract Liabilities (115)</div><div class="smm-v" style="color:var(--ambr);">₹7,820 Cr</div><div class="smm-s">⚠️ Advance ticket sales not yet flown</div></div>
+          <div class="sm-m"><div class="smm-l">D/E Ratio (unadjusted)</div><div class="smm-v" style="color:var(--red);">12.4×</div><div class="smm-s">🚨 Meaningless without lease adj.</div></div>
+          <div class="sm-m"><div class="smm-l">D/E Ratio (lease-adjusted)</div><div class="smm-v" style="color:var(--gbr);">1.8×</div><div class="smm-s">✅ The real financial leverage</div></div>
+          <div class="sm-m"><div class="smm-l">Operating Lease Payments</div><div class="smm-v" style="color:var(--p);">₹12,400 Cr</div><div class="smm-s">📊 Actual cash paid for leases</div></div>
+        </div>
+        <div class="sm-alerts">
+          <div class="sma sma-r">🚨 D/E 12.4× includes ₹35,890 Cr lease liability — not financial debt</div>
+          <div class="sma sma-a">⚠️ Always use lease-adjusted metrics for aviation comparison</div>
+          <div class="sma sma-g">✅ Adj. D/E 1.8× tells the real financial story</div>
+        </div>
+        <div class="sm-cap">IndiGo data is illustrative based on publicly available information. Navigation: screener.in → Balance Sheet tab → scroll to "Right of Use Assets" (non-current) + "Lease Liabilities" (current + non-current). For Ind AS 115: check "Contract Liabilities" (advance ticket sales). All disclosed per regulatory filing requirements.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ QUICK TRICKS ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">⚡ Quick Tricks</div>
+    <h2 class="h2 rv d2">The 8-Minute <span class="hp">Ind AS Cheat Sheet</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">No accounting degree needed. These four fast checks — all doable on Screener.in and BSE Annual Reports in under 8 minutes — tell you whether Ind AS 116, 115, or 109 is materially distorting a company's headline numbers before you spend hours analysing the wrong thing.</p>
+
+    <div style="display:flex;flex-direction:column;gap:clamp(14px,2.5vw,20px);margin-bottom:40px;">
+
+      <!-- TRICK 1: Ind AS 116 -->
+      <div class="rv d3" style="border-radius:18px;overflow:hidden;border:2px solid rgba(109,40,217,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--pxs),var(--pxl));padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(109,40,217,.3);">🏢</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:3px;">Trick #1 — 90 Seconds · Screener Balance Sheet Tab · Ind AS 116</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "ROU ÷ Total Assets" Materiality Check</div>
+          </div>
+          <div style="background:rgba(109,40,217,.1);color:var(--p);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">90 seconds</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Screener.in → Balance Sheet tab → Find <strong>"Right of Use Assets"</strong> (non-current assets section) → Divide by Total Assets → That percentage tells you instantly whether Ind AS 116 is distorting the balance sheet.<br><br><strong>Under 5%:</strong> Ind AS 116 is immaterial — ignore it and move on. <strong>5–20%:</strong> Moderate impact — adjust D/E and EBITDA. <strong>Above 20%:</strong> Ind AS 116 is dominating the balance sheet — all leverage ratios are misleading without lease adjustment.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(8px,1.5vw,12px);margin-bottom:14px;">
+            <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.22);border-radius:11px;padding:11px 14px;text-align:center;">
+              <div style="font-size:11px;color:var(--gbr);font-weight:700;margin-bottom:5px;">✅ Safe — Ignore 116</div>
+              <div style="font-size:20px;font-weight:900;color:var(--gbr);">&lt;5%</div>
+              <div style="font-size:10px;color:var(--tl);margin-top:4px;">Asian Paints: ~2% · Nestle: ~3% · Maruti: ~3%</div>
+            </div>
+            <div style="background:var(--apale);border:1.5px solid rgba(217,119,6,.22);border-radius:11px;padding:11px 14px;text-align:center;">
+              <div style="font-size:11px;color:var(--ambr);font-weight:700;margin-bottom:5px;">⚠️ Adjust D/E + EBITDA</div>
+              <div style="font-size:20px;font-weight:900;color:var(--ambr);">5–20%</div>
+              <div style="font-size:10px;color:var(--tl);margin-top:4px;">Retail chains · QSR · Telecom · Hotels</div>
+            </div>
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:11px;padding:11px 14px;text-align:center;">
+              <div style="font-size:11px;color:var(--red);font-weight:700;margin-bottom:5px;">🚨 Ratios Misleading</div>
+              <div style="font-size:20px;font-weight:900;color:var(--red);">&gt;20%</div>
+              <div style="font-size:10px;color:var(--tl);margin-top:4px;">IndiGo: ~60% · SpiceJet · Mall operators</div>
+            </div>
+          </div>
+          <div style="background:var(--sf);border:1px solid var(--bd);border-radius:11px;padding:12px 16px;">
+            <div style="font-size:10px;font-weight:700;color:var(--p);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">📱 4-Step Adjustment When ROU &gt;5%</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--ts);line-height:1.5;"><span style="width:22px;height:22px;min-width:22px;border-radius:5px;background:var(--p);color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">1</span>Note <strong>Lease Liability</strong> (current + non-current) from Balance Sheet</div>
+              <div style="display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--ts);line-height:1.5;"><span style="width:22px;height:22px;min-width:22px;border-radius:5px;background:var(--p);color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">2</span><strong>Adjusted Net Debt</strong> = Total Debt − Lease Liabilities. Use this for D/E comparison.</div>
+              <div style="display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--ts);line-height:1.5;"><span style="width:22px;height:22px;min-width:22px;border-radius:5px;background:var(--p);color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">3</span>Cash Flow tab → Find <strong>"Repayment of lease liabilities"</strong> (financing activities) = actual cash cost of leases per year</div>
+              <div style="display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--ts);line-height:1.5;"><span style="width:22px;height:22px;min-width:22px;border-radius:5px;background:var(--p);color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">4</span><strong>EBITDAR</strong> = EBITDA + total lease cost (repayment from above). Use EBITDAR for comparing pre/post-2019 or across aviation/retail peers.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICK 2: Ind AS 115 -->
+      <div class="rv d4" style="border-radius:18px;overflow:hidden;border:2px solid rgba(22,163,74,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--gpale),#ecfdf5);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--gbr),var(--gh));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(22,163,74,.3);">📋</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:3px;">Trick #2 — 60 Seconds · Balance Sheet Current Assets · Ind AS 115</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Contract Assets vs Contract Liabilities" Ratio Trick</div>
+          </div>
+          <div style="background:rgba(22,163,74,.1);color:var(--gbr);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">60 seconds</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Screener.in → Balance Sheet → Current Assets section → Find <strong>"Contract Assets"</strong> → Current Liabilities section → Find <strong>"Contract Liabilities"</strong>.<br><br>These two numbers, compared to annual revenue, instantly reveal Ind AS 115's effect on the company's revenue timing. Think of it as a "revenue pressure gauge" — high Contract Assets = aggressive recognition, high Contract Liabilities = conservative (deferred) recognition.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.5vw,16px);margin-bottom:14px;">
+            <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.22);border-radius:12px;padding:13px 15px;">
+              <div style="font-size:10px;font-weight:800;color:var(--gbr);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">✅ Healthy Pattern</div>
+              <div style="font-size:12.5px;color:var(--ts);line-height:1.55;"><strong>Contract Liabilities &gt; Contract Assets</strong><br>Customer paid in advance but work not done yet → revenue is conservative. Company is spending customer money, not booking it prematurely.<br><br><em>Examples: Airlines (advance bookings), Maruti (dealer deposits), subscription SaaS businesses</em></div>
+            </div>
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:12px;padding:13px 15px;">
+              <div style="font-size:10px;font-weight:800;color:var(--red);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">🚨 Investigate This Pattern</div>
+              <div style="font-size:12.5px;color:var(--ts);line-height:1.55;"><strong>Contract Assets &gt;10–15% of Revenue</strong><br>Revenue recognised but not yet invoiced — work completed but billing lagging. If growing each year, company may be accelerating recognition.<br><br><em>Red flag for: Software product companies · Long-term project companies</em></div>
+            </div>
+          </div>
+          <div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:10px 14px;font-size:12.5px;color:var(--ts);line-height:1.5;"><strong style="color:var(--gbr);">The one-line rule:</strong> For IT services and project companies, <strong>Contract Assets ÷ Annual Revenue</strong> should be stable or declining as the company grows. A ratio rising from 5% to 12% to 18% over 3 years = revenue recognition is running ahead of billing and potentially ahead of actual work done. Check Annual Report → Revenue Note for explanation.</div>
+        </div>
+      </div>
+
+      <!-- TRICK 3: Ind AS 109 -->
+      <div class="rv d5" style="border-radius:18px;overflow:hidden;border:2px solid rgba(217,119,6,.26);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--apale),#fffcf0);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--ambr),var(--amb));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.3);">🏦</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ambr);margin-bottom:3px;">Trick #3 — 2 Minutes · Annual Report Notes · Ind AS 109</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "ECL Coverage ÷ Peer Benchmark" Shortcut</div>
+          </div>
+          <div style="background:rgba(217,119,6,.1);color:var(--ambr);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">2 minutes</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">For banks and NBFCs, Ind AS 109's ECL model gives management substantial discretion. The fastest way to spot conservative vs aggressive provisioning is a single ratio comparison across peers.<br><br>Annual Report → Notes to Financial Statements → Note on "Financial Instruments" or "Credit Risk" → Find: <strong>Total ECL provisions ÷ Gross loan book = Coverage Ratio</strong>. Compare this to 2–3 peer banks/NBFCs. Significantly below peers = optimistic ECL assumptions = provisions may be understated.</div>
+          <div style="background:var(--sf);border:1px solid var(--bd);border-radius:11px;padding:13px 16px;margin-bottom:14px;">
+            <div style="font-size:10px;font-weight:700;color:var(--ambr);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">📊 Three ECL Numbers to Find in Annual Report Notes</div>
+            <div style="display:flex;flex-direction:column;gap:7px;">
+              <div style="display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.8);border-radius:9px;padding:9px 12px;border:1px solid var(--bd);">
+                <span style="width:28px;height:28px;min-width:28px;border-radius:7px;background:linear-gradient(135deg,var(--ambr),var(--amb));color:#fff;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</span>
+                <div style="font-size:12.5px;color:var(--ts);line-height:1.5;"><strong style="color:var(--tx);">Stage 2 Loans % of total book</strong> — loans where credit risk has "significantly increased." Should be disclosed separately. Below 3% = low watchlist. Above 8% = stress building ahead of NPA classification.</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.8);border-radius:9px;padding:9px 12px;border:1px solid var(--bd);">
+                <span style="width:28px;height:28px;min-width:28px;border-radius:7px;background:linear-gradient(135deg,var(--ambr),var(--amb));color:#fff;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</span>
+                <div style="font-size:12.5px;color:var(--ts);line-height:1.5;"><strong style="color:var(--tx);">ECL Coverage on Stage 3 (NPAs)</strong> — what % of the NPA value is covered by provisions. Below 50% = under-provisioned vs peers. HDFC Bank typically maintains 75%+.</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.8);border-radius:9px;padding:9px 12px;border:1px solid var(--bd);">
+                <span style="width:28px;height:28px;min-width:28px;border-radius:7px;background:linear-gradient(135deg,var(--ambr),var(--amb));color:#fff;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</span>
+                <div style="font-size:12.5px;color:var(--ts);line-height:1.5;"><strong style="color:var(--tx);">Macroeconomic scenarios used</strong> — look for "Base," "Upside," and "Downside" scenarios with weightings. If only one scenario used, or downside weight is below 10%, ECL is probably too optimistic.</div>
+              </div>
+            </div>
+          </div>
+          <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:10px;padding:10px 14px;font-size:12.5px;color:var(--ts);line-height:1.5;"><strong style="color:var(--red);">Quick peer comparison:</strong> If a bank's ECL coverage ratio is more than 30% below its closest peer with a similar loan book — ECL assumptions are likely optimistic. Before investing in any bank or NBFC, spend 2 minutes finding the coverage ratio and comparing it to HDFC Bank (the sector benchmark for conservative provisioning).</div>
+        </div>
+      </div>
+
+      <!-- TRICK 4: Sector Identifier -->
+      <div class="rv d6" style="border-radius:18px;overflow:hidden;border:2px solid rgba(2,132,199,.24);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--skypale),#e0f2fe);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--sky),#38bdf8);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(2,132,199,.3);">🎯</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--sky);margin-bottom:3px;">Trick #4 — 30 Seconds · Sector Lookup · Before Any Analysis</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Which Standards Matter for This Sector?" Instant Lookup</div>
+          </div>
+          <div style="background:rgba(2,132,199,.1);color:var(--sky);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">30 seconds</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:16px;">Before opening Screener.in for any company, identify its sector and immediately know which Ind AS standard to check first. This saves the 10–15 minutes of hunting through financial statements for standards that aren't relevant.</div>
+          <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+          <table style="width:100%;border-collapse:collapse;min-width:420px;font-size:12.5px;">
+            <thead>
+              <tr style="background:linear-gradient(135deg,rgba(109,40,217,.07),rgba(109,40,217,.03));">
+                <th style="padding:9px 12px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:left;">Sector</th>
+                <th style="padding:9px 12px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:center;">Ind AS 116</th>
+                <th style="padding:9px 12px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:center;">Ind AS 115</th>
+                <th style="padding:9px 12px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:center;">Ind AS 109</th>
+                <th style="padding:9px 12px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:left;">What to check first</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(109,40,217,.05);">
+                <td style="padding:8px 12px;font-weight:700;color:var(--tx);">✈️ Aviation</td>
+                <td style="padding:8px 12px;text-align:center;"><span style="color:var(--red);font-weight:800;">Critical 🚨</span></td>
+                <td style="padding:8px 12px;text-align:center;color:var(--tl);">Low</td>
+                <td style="padding:8px 12px;text-align:center;color:var(--tl);">Low</td>
+                <td style="padding:8px 12px;color:var(--ts);">ROU Asset ÷ Total Assets first. Always use EBITDAR, not EBITDA.</td>
+              </tr>
+              <tr style="background:var(--sf);border-bottom:1px solid rgba(109,40,217,.05);">
+                <td style="padding:8px 12px;font-weight:700;color:var(--tx);">🛍️ Retail / QSR</td>
+                <td style="padding:8px 12px;text-align:center;"><span style="color:var(--ambr);font-weight:800;">High ⚠️</span></td>
+                <td style="padding:8px 12px;text-align:center;color:var(--tl);">Low</td>
+                <td style="padding:8px 12px;text-align:center;color:var(--tl);">Low</td>
+                <td style="padding:8px 12px;color:var(--ts);">ROU as % assets. Lease-adjusted D/E and EBITDA essential.</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(109,40,217,.05);">
+                <td style="padding:8px 12px;font-weight:700;color:var(--tx);">💻 IT Services</td>
+                <td style="padding:8px 12px;text-align:center;color:var(--tl);">Low</td>
+                <td style="padding:8px 12px;text-align:center;"><span style="color:var(--ambr);font-weight:800;">High ⚠️</span></td>
+                <td style="padding:8px 12px;text-align:center;color:var(--tl);">Low</td>
+                <td style="padding:8px 12px;color:var(--ts);">Contract Assets ÷ Revenue. RPO trend. Revenue recognition policy.</td>
+              </tr>
+              <tr style="background:var(--sf);border-bottom:1px solid rgba(109,40,217,.05);">
+                <td style="padding:8px 12px;font-weight:700;color:var(--tx);">🏗️ Real Estate</td>
+                <td style="padding:8px 12px;text-align:center;color:var(--tl);">Low</td>
+                <td style="padding:8px 12px;text-align:center;"><span style="color:var(--red);font-weight:800;">Critical 🚨</span></td>
+                <td style="padding:8px 12px;text-align:center;color:var(--tl);">Low</td>
+                <td style="padding:8px 12px;color:var(--ts);">Track Bookings + Collections separately from Ind AS 115 revenue.</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(109,40,217,.05);">
+                <td style="padding:8px 12px;font-weight:700;color:var(--tx);">🏦 Banks / NBFCs</td>
+                <td style="padding:8px 12px;text-align:center;color:var(--tl);">Low</td>
+                <td style="padding:8px 12px;text-align:center;color:var(--tl);">Low</td>
+                <td style="padding:8px 12px;text-align:center;"><span style="color:var(--red);font-weight:800;">Critical 🚨</span></td>
+                <td style="padding:8px 12px;color:var(--ts);">ECL coverage ratio vs peers. Stage 2 % disclosed. Macro scenarios.</td>
+              </tr>
+              <tr style="background:var(--sf);border-bottom:1px solid rgba(109,40,217,.05);">
+                <td style="padding:8px 12px;font-weight:700;color:var(--tx);">📡 Telecom</td>
+                <td style="padding:8px 12px;text-align:center;"><span style="color:var(--ambr);font-weight:800;">High ⚠️</span></td>
+                <td style="padding:8px 12px;text-align:center;"><span style="color:var(--ambr);font-weight:800;">Medium ⚠️</span></td>
+                <td style="padding:8px 12px;text-align:center;color:var(--tl);">Low</td>
+                <td style="padding:8px 12px;color:var(--ts);">Tower leases (116) + bundled plan revenue allocation (115) both matter.</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 12px;font-weight:700;color:var(--tx);">🏭 Mfg / FMCG</td>
+                <td style="padding:8px 12px;text-align:center;color:var(--gbr);font-weight:700;">Low ✅</td>
+                <td style="padding:8px 12px;text-align:center;color:var(--gbr);font-weight:700;">Low ✅</td>
+                <td style="padding:8px 12px;text-align:center;color:var(--gbr);font-weight:700;">Low ✅</td>
+                <td style="padding:8px 12px;color:var(--ts);">Confirm ROU &lt;5% of assets. All three standards likely immaterial.</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          <div style="background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:11px;padding:12px 16px;margin-top:14px;font-size:12.5px;color:var(--ts);line-height:1.55;">💡 <strong style="color:var(--tx);">The 30-second workflow:</strong> Identify sector → lookup table above → know which standard to check → open Screener.in balance sheet for that specific line item. Skip the irrelevant standards completely. You just saved 20 minutes on every company analysis.</div>
+        </div>
+      </div>
+
+      <!-- TRICK 5: One-line master test -->
+      <div class="rv d7" style="border-radius:18px;overflow:hidden;border:2px solid rgba(109,40,217,.28);box-shadow:var(--shp);">
+        <div style="background:linear-gradient(135deg,var(--pxl),var(--pmd));padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--pl),var(--p));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(109,40,217,.3);">🏆</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:3px;">Trick #5 — The One Universal Question · Before Any Ratio Analysis</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">Did the Standard Change — or Did the Business Change?</div>
+          </div>
+          <div style="background:rgba(109,40,217,.1);color:var(--p);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">Universal rule</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:16px;">Every time you see a dramatic change in any financial metric — debt, EBITDA margin, revenue, provisions — ask this one question before drawing any conclusion. If the answer is "the standard changed," the business may be entirely unchanged. If the answer is "the business changed," dig deeper.</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:13px;padding:13px 16px;">
+              <div style="font-size:22px;flex-shrink:0;">🚨</div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:13px;font-weight:800;color:var(--red);margin-bottom:3px;">Dangerous Analyst Mistake — Comparing Pre/Post-2019 Without Adjustment</div>
+                <div style="font-size:12.5px;color:var(--ts);line-height:1.5;">An analyst looking at a retail chain's D/E ratio in FY2018 (0.4×) vs FY2020 (3.2×) and concluding "the company has massively leveraged up" — when the entire change is Ind AS 116 adding lease liabilities. The business didn't change. The standard did. This mistake leads to completely wrong investment conclusions.</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--gpale);border:1.5px solid rgba(22,163,74,.22);border-radius:13px;padding:13px 16px;">
+              <div style="font-size:22px;flex-shrink:0;">✅</div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:13px;font-weight:800;color:var(--gbr);margin-bottom:3px;">The Right Approach — Always Check Annual Report for Standard Transition Notes</div>
+                <div style="font-size:12.5px;color:var(--ts);line-height:1.5;">Annual report → Notes to Accounts → "Effect of adoption of new accounting standards." Any year when Ind AS 116, 115, or 109 was adopted will have a quantified reconciliation showing the before/after impact. Read this note first. If the standard change explains the metric movement — the business story is unchanged and your analysis can proceed on adjusted numbers.</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--pxl);border:1.5px solid rgba(109,40,217,.22);border-radius:13px;padding:13px 16px;">
+              <div style="font-size:22px;flex-shrink:0;">💡</div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:13px;font-weight:800;color:var(--p);margin-bottom:3px;">The 8-Minute Complete Checklist — Run This Before Any Financial Analysis</div>
+                <div style="font-size:12.5px;color:var(--ts);line-height:1.55;"><strong>30 sec:</strong> Identify sector → lookup Trick #4 table → know which standard matters.<br><strong>90 sec:</strong> Screener Balance Sheet → ROU Asset ÷ Total Assets → calibrate Ind AS 116 materiality.<br><strong>60 sec:</strong> Screener Balance Sheet → Contract Assets ÷ Revenue → calibrate Ind AS 115 timing.<br><strong>2 min:</strong> Annual Report (for banks/NBFCs) → ECL coverage vs peers → calibrate Ind AS 109.<br><strong>3 min:</strong> Annual Report → "Effect of adoption" note → read transition reconciliation.<br><strong>Result:</strong> You now know whether the numbers you're reading are distorted by accounting standards or reflect genuine business performance. <em>Then</em> start your financial analysis — not before.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="caveat-box rv d7">
+      <div class="caveat-icon">⚡</div>
+      <div class="caveat-body">
+        <div class="caveat-label">The One-Line Ind AS Rule</div>
+        <div class="caveat-title">Check ROU ÷ Total Assets First. If &gt;5%, All Your Debt and EBITDA Numbers Are Wrong Until Adjusted.</div>
+        <div class="caveat-desc">This single ratio — ROU Asset divided by Total Assets — instantly flags whether Ind AS 116 is material. For aviation, the ratio is 40–70%. For retailers, 10–30%. For manufacturers, under 5%. Knowing this before looking at any other ratio prevents the most common Ind AS analysis mistake: treating lease liabilities as financial debt and lease-adjusted EBITDA as comparable to old EBITDA.<br><br>The equivalent US GAAP rule (ASC 842) produces very similar results — making Indian lease-heavy companies broadly comparable to US counterparts when both use the standard. The gap that remains is in credit loss accounting: Ind AS 109 uses 12-month ECL for Stage 1 loans while US GAAP's CECL model requires lifetime ECL from day 1 — making US banks provision more aggressively from origination. When comparing Indian banks to US-listed peers, Indian banks' earlier-stage provisions will look lower by design — not because Indian loan quality is better.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ DEMAT BANNER ══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Start Investing Today</div>
+    <div class="dmh">Invest Knowing <span class="dmhs">What the Numbers Actually Mean</span></div>
+    <div class="dmsub">Before analysing any airline, retailer, IT company, or bank — spend 10 minutes on the Balance Sheet tab to identify ROU Assets, Lease Liabilities, Contract Assets, and ECL provisions. These Ind AS line items tell the real story beneath the headline numbers.</div>
+    <div class="dmfeats">
+      <div class="dmf">ROU Assets visible in Screener Balance Sheet</div>
+      <div class="dmf">ECL provisions in bank Notes to Accounts</div>
+      <div class="dmf">Contract Assets/Liabilities in current assets/liabilities</div>
+      <div class="dmf">Start investing from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ══ GOOD EXAMPLES ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">03 — Five Companies — Transparent Ind AS Disclosure</div>
+    <h2 class="h2 rv d2">✅ <span class="hg">Good Examples</span> — Standards Applied Correctly and Disclosed Clearly</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five companies applied Ind AS 116, 115, and 109 correctly — providing clear disclosures that allow investors to understand the economic reality behind the numbers rather than being confused by accounting presentations.</p>
+
+    <!-- GOOD 1: TCS — Ind AS 115 -->
+    <div class="ex-block rv d3">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe);">💻</div>
+          <div><div class="eb-name">TCS — Ind AS 115 Applied With Model Disclosure Quality</div><div class="eb-sub">NSE: TCS · IT Services · Complex long-term contracts — 5-step model applied conservatively with full RPO disclosure</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ Ind AS 115</span>
+          <span class="ebb ebb-g">✅ RPO disclosed quarterly</span>
+          <span class="ebb ebb-g">✅ Contract Assets minimal</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Standard Applied</div><div class="em-v"><span class="std-pill stp-g">Ind AS 115 ✅</span></div><div class="em-s">Since FY2019</div></div>
+          <div class="em-box"><div class="em-l">Contract Assets / Revenue</div><div class="em-v" style="color:var(--gbr);">~3%</div><div class="em-s">Low — conservative recognition</div></div>
+          <div class="em-box"><div class="em-l">RPO Disclosure</div><div class="em-v" style="color:var(--gbr);">Full quarterly</div><div class="em-s">TCV + deal wins disclosed</div></div>
+          <div class="em-box"><div class="em-l">Revenue Quality Impact</div><div class="em-v" style="color:var(--gbr);">Minimal change</div><div class="em-s">Conservative already pre-115</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>Time-and-material billing = clean Ind AS 115 application:</strong> The majority of TCS's revenue is time-and-material — hours worked × rate per hour. This is recognised "over time" as services are performed, perfectly aligned with Ind AS 115's "performance obligation satisfied over time" criterion. No judgment needed about when the obligation is complete — work done = revenue earned. The simplest possible application of a complex standard.</div>
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>Total Contract Value (TCV) disclosure as leading indicator:</strong> TCS discloses TCV of new deals signed every quarter — giving investors a direct Ind AS 115 "Remaining Performance Obligations" proxy. When TCV grows faster than current revenue, the backlog is building — a forward revenue indicator. When TCV declines, revenue slowdown follows. This disclosure is voluntary but models best practice.</div>
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>Contract Assets at only ~3% of revenue:</strong> If TCS were recognising revenue aggressively before billing, Contract Assets would be large and growing. At ~3% of revenue, it confirms billing closely follows revenue recognition — no gap, no manipulation. Compare this to companies where Contract Assets represent 15–20% of revenue.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>Ind AS 115 verdict for TCS:</strong> TCS's T&M billing model is structurally aligned with Ind AS 115's over-time recognition principle — making the standard almost irrelevant as it confirms what TCS was already doing. The voluntary RPO/TCV disclosures go beyond regulatory minimums, giving investors a level of revenue quality visibility that most Indian companies don't provide.</div>
+    </div>
+
+    <!-- GOOD 2: Infosys — Ind AS 115 + 116 -->
+    <div class="ex-block rv d4">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);">🖥️</div>
+          <div><div class="eb-name">Infosys — Clear Separation of Ind AS 115 and 116 Impacts</div><div class="eb-sub">NSE: INFY · IT Services · Transition disclosures model-quality; both standards disclosed with quantified impacts</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ Both 115 &amp; 116 disclosed</span>
+          <span class="ebb ebb-g">✅ Reconciliation tables provided</span>
+          <span class="ebb ebb-p">Ind AS 116 lease: ₹2,400 Cr</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">ROU Assets (116)</div><div class="em-v" style="color:var(--ambr);">₹2,400 Cr</div><div class="em-s">Mainly office leases</div></div>
+          <div class="em-box"><div class="em-l">Lease Liabilities (116)</div><div class="em-v" style="color:var(--ambr);">₹2,380 Cr</div><div class="em-s">Manageable vs revenue</div></div>
+          <div class="em-box"><div class="em-l">EBITDA impact (116)</div><div class="em-v" style="color:var(--gbr);">+₹600 Cr</div><div class="em-s">Rent reclassified to D&amp;A + interest</div></div>
+          <div class="em-box"><div class="em-l">Revenue timing (115)</div><div class="em-v" style="color:var(--gbr);">Minimal</div><div class="em-s">Conservative approach maintained</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>Quantified transition impact disclosed:</strong> When Infosys adopted Ind AS 116 in FY2020, the annual report included a specific reconciliation showing exactly how the financial statements changed: lease liability recognised, ROU asset created, EBITDA impact, PAT impact. This transparency allows investors to cleanly compare pre and post-adoption figures. Most Indian companies provided only qualitative descriptions — Infosys provided the actual numbers.</div>
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>Ind AS 116 relatively immaterial at Infosys:</strong> Unlike airlines or retailers, Infosys leases office space — which is a much smaller commitment relative to revenue. Lease liabilities of ₹2,380 Cr vs revenue of ₹147,000 Cr is only 1.6% — genuinely immaterial. The disclosure quality is excellent, and the scale confirms the standard had limited economic impact on Infosys's metrics. This is the correct contrast to IndiGo where the impact is enormous.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>The disclosure benchmark:</strong> Infosys's adoption notes for both Ind AS 115 and 116 are the model for how companies should document standard changes — quantified impacts, before/after reconciliations, and clear explanation of management choices (retrospective vs modified retrospective transition). When a company provides this level of disclosure, the investor can adjust for standard changes with confidence rather than guessing.</div>
+    </div>
+
+    <!-- GOOD 3: HDFC Bank — Ind AS 109 -->
+    <div class="ex-block rv d5">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">🏦</div>
+          <div><div class="eb-name">HDFC Bank — ECL Provisioning Applied Conservatively and Transparently</div><div class="eb-sub">NSE: HDFCBANK · Banking · Ind AS 109 ECL model with conservative stage classification and full disclosure</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ Ind AS 109 ECL</span>
+          <span class="ebb ebb-g">✅ Stage-wise disclosure</span>
+          <span class="ebb ebb-g">✅ Conservative PD assumptions</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Gross NPA</div><div class="em-v" style="color:var(--gbr);">1.24%</div><div class="em-s">Among best in sector</div></div>
+          <div class="em-box"><div class="em-l">ECL Coverage (Stage 3)</div><div class="em-v" style="color:var(--gbr);">75%+</div><div class="em-s">Conservative provisioning</div></div>
+          <div class="em-box"><div class="em-l">Stage 2 Loans %</div><div class="em-v" style="color:var(--gbr);">&lt;3%</div><div class="em-s">Low watchlist loans</div></div>
+          <div class="em-box"><div class="em-l">ECL Methodology</div><div class="em-v" style="color:var(--gbr);">Disclosed fully</div><div class="em-s">PD, LGD, EAD all stated</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>Stage-wise loan classification disclosed:</strong> HDFC Bank's annual report provides a complete breakdown of loans by Stage 1, 2, and 3 (the Ind AS 109 three-stage model), with ECL coverage ratios for each stage. This transparency allows investors to verify that Stage 2 loans (increased credit risk) are being correctly identified — banks that don't disclose Stage 2 separately may be hiding loans that should have migrated to Stage 2.</div>
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>ECL methodology and macro assumptions disclosed:</strong> HDFC Bank discloses the macroeconomic scenarios used in ECL calculations (base case, upside, downside GDP growth assumptions) and the weightings assigned to each scenario. This lets analysts verify the reasonableness of ECL inputs — a bank using only a single optimistic scenario for ECL calculation is using the standard's flexibility to understate provisions.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>Ind AS 109 benchmark quality:</strong> HDFC Bank's ECL disclosures are the reference standard for Indian banking. Stage-wise breakdown, macroeconomic assumptions, PD/LGD methodology, coverage ratios — all disclosed. The conservative provisioning approach means ECL provisions are sufficient to absorb realistic stress scenarios, not just the optimistic base case. This transparency is why HDFC Bank commands premium valuations — investors can see through the accounting to the real asset quality.</div>
+    </div>
+
+    <!-- GOOD 4: Asian Paints — Ind AS 116 immaterial + 109 clean -->
+    <div class="ex-block rv d6">
+      <div class="eb-head ebh-p">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">🎨</div>
+          <div><div class="eb-name">Asian Paints — Ind AS 116 Immaterial; Ind AS 109 Clean Receivables</div><div class="eb-sub">NSE: ASIANPAINT · Paints · Own manufacturing assets dominate; lease impact minimal; short-cycle receivables need negligible ECL</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ Ind AS 116 &lt;2% total assets</span>
+          <span class="ebb ebb-g">✅ ECL provisions minimal</span>
+          <span class="ebb ebb-g">✅ Both standards immaterial</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">ROU Asset</div><div class="em-v" style="color:var(--gbr);">₹680 Cr</div><div class="em-s">✅ &lt;2% total assets — immaterial</div></div>
+          <div class="em-box"><div class="em-l">Lease Liability</div><div class="em-v" style="color:var(--gbr);">₹720 Cr</div><div class="em-s">✅ No meaningful debt distortion</div></div>
+          <div class="em-box"><div class="em-l">ECL Provision</div><div class="em-v" style="color:var(--gbr);">Negligible</div><div class="em-s">✅ 38-day DSO, dealer network</div></div>
+          <div class="em-box"><div class="em-l">Standard Impact</div><div class="em-v" style="color:var(--gbr);">Minimal both</div><div class="em-s">✅ Own factories dominate</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>Own manufacturing + short trade cycle = standards nearly irrelevant:</strong> Asian Paints owns most of its manufacturing facilities rather than leasing them. ROU Assets of ₹680 Cr on total assets of ₹20,000+ Cr is less than 2% — genuinely immaterial. The 38-day DSO means receivables turn over 10× per year; ECL provisions on such short-cycle receivables are negligibly small. For investors, this means Ind AS 116 and 109 haven't distorted Asian Paints' financials — the numbers you see on Screener are close to economic reality.</div>
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>How to identify "standard-immaterial" companies:</strong> When ROU Assets are below 5% of total assets AND the company's business is asset-intensive (owns its factories, plants, equipment), Ind AS 116 can safely be ignored in analysis. When receivables turn over quickly (DSO &lt; 45 days), Ind AS 109 ECL impact is minimal. Asian Paints is the template for this low-standard-impact profile.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-p">📊 <strong>The practical lesson:</strong> Understanding accounting standards doesn't mean every company analysis requires deep-diving into Ind AS 116 and 109. The first step is always materiality — are these standards actually large enough to distort the numbers? For Asian Paints, the answer is no — and knowing this saves significant analysis time that can be allocated to the more important business and competitive questions.</div>
+    </div>
+
+    <!-- GOOD 5: Maruti — Ind AS 115 + clean classification -->
+    <div class="ex-block rv d7">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🚗</div>
+          <div><div class="eb-name">Maruti Suzuki — Ind AS 115 Point-in-Time with Clear Warranty Treatment</div><div class="eb-sub">NSE: MARUTI · Automobiles · Vehicle sale + extended warranty separated; Ind AS 115 applied conservatively; dealer advances correctly as contract liabilities</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ Ind AS 115 clean</span>
+          <span class="ebb ebb-g">✅ Warranty separately disclosed</span>
+          <span class="ebb ebb-p">Contract Liabilities: dealer advances</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Standard</div><div class="em-v"><span class="std-pill stp-g">Ind AS 115 ✅</span></div><div class="em-s">Point-in-time recognition</div></div>
+          <div class="em-box"><div class="em-l">Contract Liabilities</div><div class="em-v" style="color:var(--ambr);">₹2,800 Cr</div><div class="em-s">Dealer advance payments held</div></div>
+          <div class="em-box"><div class="em-l">Warranty Provision</div><div class="em-v" style="color:var(--p);">Disclosed separately</div><div class="em-s">Correctly excluded from revenue</div></div>
+          <div class="em-box"><div class="em-l">Revenue Recognition</div><div class="em-v" style="color:var(--gbr);">On delivery</div><div class="em-s">✅ Straightforward and clean</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>Vehicle sale = point-in-time recognition:</strong> Maruti recognises revenue at the point of vehicle delivery to the dealer (not to end customer, as the dealer is Maruti's customer). This is the simplest Ind AS 115 application — no performance obligations that are satisfied over time, no variable consideration complexity. One contract, one performance obligation, one recognition event. Clean and unambiguous.</div>
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>Extended warranty correctly treated:</strong> When a customer buys extended warranty alongside a vehicle, Ind AS 115 requires Maruti to separate the warranty revenue from vehicle revenue and defer it over the warranty period. Maruti's annual report discloses this separation — warranty revenue deferred as a contract liability and recognised over the warranty term. This prevents revenue from extended warranties being booked upfront, which would be aggressive.</div>
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>Dealer advances disclosed as Contract Liabilities:</strong> Maruti requires dealers to make advance payments before vehicle delivery. These ₹2,800 Cr of advance payments are correctly classified as "Contract Liabilities" (deferred revenue that hasn't been earned yet) — not as revenue. When vehicles are delivered, the liability releases to revenue. This conservative treatment ensures revenue reflects actual deliveries, not advance payments received.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>The automobile Ind AS 115 benchmark:</strong> Maruti's clear separation of vehicle revenue (point-in-time on delivery), warranty revenue (over warranty period), and dealer advance treatment (contract liability until delivery) is the model for how auto companies should apply Ind AS 115. The disclosures are complete, the timing is conservative, and the result is a revenue figure that accurately represents vehicles actually delivered to customers.</div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="section-divider rv d3">
+      <div class="sd-line"></div>
+      <div class="sd-label">🚨 Bad Examples — Standards Applied Aggressively or Disclosed Poorly</div>
+      <div class="sd-line"></div>
+    </div>
+
+    <div class="tag rv d1" style="color:var(--red);">04 — Five Cases of Problematic Ind AS Application</div>
+    <h2 class="h2 rv d2">🚨 <span style="background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Bad Examples</span> — Standards Misapplied, Disclosed Poorly, or Used to Manipulate</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five cases show how accounting standards can be applied aggressively, disclosed inadequately, or exploited to present a more favourable financial picture than economic reality warrants.</p>
+
+    <!-- BAD 1: DLF/Real Estate — Ind AS 115 -->
+    <div class="ex-block rv d3">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🏗️</div>
+          <div><div class="eb-name">Real Estate Sector — Ind AS 115 Transition Created Revenue Cliff for Some Developers</div><div class="eb-sub">Multiple Developers · Real Estate · Old percentage-of-completion → Ind AS 115 point-of-completion caused extreme revenue swings</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 Ind AS 115 cliff risk</span>
+          <span class="ebb ebb-r">Revenue volatile</span>
+          <span class="ebb ebb-a">Contract Liabilities swelled</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Old Method</div><div class="em-v" style="color:var(--red);">POC</div><div class="em-s">% completion = revenue recognised</div></div>
+          <div class="em-box"><div class="em-l">New Method (Ind AS 115)</div><div class="em-v" style="color:var(--p);">Handover</div><div class="em-s">Revenue only on flat possession</div></div>
+          <div class="em-box"><div class="em-l">Contract Liabilities impact</div><div class="em-v" style="color:var(--red);">Surged</div><div class="em-s">Pre-sold flats = deferred revenue</div></div>
+          <div class="em-box"><div class="em-l">Revenue Year of Handover</div><div class="em-v" style="color:var(--ambr);">Massive spike</div><div class="em-s">All deferred recognised at once</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Revenue cliff during transition:</strong> Under the old Percentage-of-Completion (POC) method, a developer building a 500-unit project would recognise revenue as construction progressed — 20% construction = 20% revenue. Under Ind AS 115, revenue can only be recognised when the customer has "control" of the flat — typically at possession/handover. This created an immediate revenue cliff: all the POC-recognised revenue had to be reversed, and re-booked only as flats were handed over. Several real estate companies reported dramatic revenue drops in FY2019 purely from the standard change — not business deterioration.</div>
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Contract Liabilities ballooned overnight:</strong> All customer advances received for under-construction flats (which had previously been partially recognised as revenue under POC) were reclassified as "Contract Liabilities" — deferred revenue that will be recognised at possession. Some developers showed Contract Liabilities equal to 2–3 years of revenue. This confused investors who didn't understand the standard change — declining revenue + surging Contract Liabilities looked like distress when it was actually just an accounting standard change.</div>
+          <div class="erf erf-amb"><div class="erf-ico">⚠️</div><strong>Disclosure quality varied enormously:</strong> Some developers (like DLF) provided clear reconciliation of the transition impact. Others provided minimal explanation, leaving investors to guess whether the revenue decline was business deterioration or the standard change. The disclosure quality differential created significant information asymmetry — analysts who understood the standard had an enormous edge over those who didn't.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The real estate Ind AS 115 lesson:</strong> A developer's "revenue" under Ind AS 115 is dramatically different from old POC revenue and from real cash inflows. For real estate analysis, track three metrics separately: (1) Bookings (new sales contracted — not revenue), (2) Collections (cash received — closer to economic reality), (3) Ind AS 115 revenue (possession-based — lags business by 2–4 years). None of these equals the others. Comparing revenue across real estate companies requires first confirming they're using the same recognition trigger.</div>
+    </div>
+
+    <!-- BAD 2: Airline using Ind AS 116 to show better EBITDA -->
+    <div class="ex-block rv d4">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">✈️</div>
+          <div><div class="eb-name">IndiGo — Ind AS 116 Makes EBITDA Look Strong While Cash Burn Continues</div><div class="eb-sub">NSE: INDIGO · Aviation · ₹35,890 Cr lease liability; D/E ratio of 12.4× meaningless; EBITDA inflated vs pre-116</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">⚠️ D/E 12.4× = misleading</span>
+          <span class="ebb ebb-a">EBITDA inflated by 116</span>
+          <span class="ebb ebb-p">Lease payments: ₹12,400 Cr/yr</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Lease Liabilities (116)</div><div class="em-v" style="color:var(--red);">₹35,890 Cr</div><div class="em-s">🚨 Dominates balance sheet</div></div>
+          <div class="em-box"><div class="em-l">D/E Unadjusted</div><div class="em-v" style="color:var(--red);">12.4×</div><div class="em-s">🚨 Meaningless number</div></div>
+          <div class="em-box"><div class="em-l">D/E Lease-Adjusted</div><div class="em-v" style="color:var(--gbr);">1.8×</div><div class="em-s">✅ Real financial leverage</div></div>
+          <div class="em-box"><div class="em-l">EBITDA (lease-adj.)</div><div class="em-v" style="color:var(--ambr);">∼ −₹2,000 Cr</div><div class="em-s">⚠️ Operating loss when adjusted</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Ind AS 116 EBITDA inflation masks operating weakness:</strong> Airlines lease their entire fleet. Under Ind AS 116, aircraft lease payments are split into depreciation (of ROU asset) and interest (on lease liability). Depreciation and interest are excluded from EBITDA. This means that even when IndiGo is burning cash to fund lease payments, its EBITDA looks positive — because those cash outflows are reclassified from operating costs to financing/depreciation. An analyst who accepts EBITDA at face value for an airline is misreading the economics entirely.</div>
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Management guides on "EBITDAR" — never flag the distortion:</strong> Airline management often presents "EBITDAR" (EBITDA before rent/lease) as the relevant metric — this is the pre-Ind AS 116 equivalent. However, management communications rarely explain clearly that the post-Ind AS 116 "EBITDA" is not comparable to pre-2019 EBITDA or to airlines in markets that report differently. Investors who switch between EBITDA and EBITDAR without adjustment create systematically misleading comparisons.</div>
+          <div class="erf erf-amb"><div class="erf-ico">⚠️</div><strong>The right way to analyse airline economics:</strong> Use EBITDAR (add back total lease costs) for cross-period comparison. Use "Adjusted net debt" (subtract lease liabilities) for leverage comparison. Always check the Cash Flow statement — "repayment of lease liabilities" under financing activities shows the actual cash cost of leases. If this exceeds EBITDA, the company is cash-flow negative on an operating basis despite positive reported EBITDA.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-a">⚠️ <strong>Ind AS 116 creates a systematic distortion for airlines:</strong> This isn't fraud — IndiGo is correctly applying the standard. The problem is that Ind AS 116 makes airlines look better on EBITDA and worse on D/E than the economic reality. Investors who don't make lease adjustments will systematically overestimate operating profitability and overestimate debt burden simultaneously — both errors at once. Always use EBITDAR and lease-adjusted debt for aviation analysis.</div>
+    </div>
+
+    <!-- BAD 3: NBFC using ECL flexibility -->
+    <div class="ex-block rv d5">
+      <div class="eb-head ebh-a">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef9c3,#fde68a);">💳</div>
+          <div><div class="eb-name">NBFC Sector — ECL Assumptions Used to Manage Provisioning Cycles</div><div class="eb-sub">Multiple NBFCs · Lending · Some NBFCs used optimistic ECL macro assumptions to defer provisions during COVID-19 stress</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 ECL assumptions stretched</span>
+          <span class="ebb ebb-a">⚠️ Stage 2 disclosure minimal</span>
+          <span class="ebb ebb-r">Provisions reversed post-stress</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Issue</div><div class="em-v" style="color:var(--red);">ECL flexibility</div><div class="em-s">🚨 Management discretion in PD</div></div>
+          <div class="em-box"><div class="em-l">Stage 2 Disclosure</div><div class="em-v" style="color:var(--red);">Minimal</div><div class="em-s">🚨 Watchlist loans hidden</div></div>
+          <div class="em-box"><div class="em-l">Coverage Ratio</div><div class="em-v" style="color:var(--red);">Below peers</div><div class="em-s">🚨 Optimistic assumptions</div></div>
+          <div class="em-box"><div class="em-l">Later Catch-Up</div><div class="em-v" style="color:var(--red);">Large provision hit</div><div class="em-s">🚨 Delayed recognition</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Using optimistic macro scenarios to understate ECL:</strong> Ind AS 109 requires companies to incorporate forward-looking macroeconomic scenarios in ECL calculations. During COVID-19 (FY2020-21), some NBFCs used exclusively optimistic GDP recovery scenarios (V-shaped recovery) rather than the more realistic base + downside scenarios that HDFC Bank and ICICI Bank employed. The result: ECL provisions were much lower, reported profit was higher, but the provisions proved inadequate — requiring large catch-up provisioning in subsequent quarters.</div>
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Minimal Stage 2 disclosure to hide watchlist:</strong> Ind AS 109 requires disclosure of Stage 2 loans (where credit risk has "significantly increased" since origination). Stage 2 loans require lifetime ECL provisioning rather than the 12-month Stage 1 ECL — a major difference. NBFCs with large Stage 2 books but low coverage ratios have inadequate provisions. Some NBFCs disclosed Stage 2 only in aggregate, without vintage analysis or sector breakdown, making it impossible for investors to assess adequacy.</div>
+          <div class="erf erf-amb"><div class="erf-ico">⚠️</div><strong>How to spot ECL manipulation:</strong> Compare a company's ECL coverage ratio (total provisions ÷ gross loans) with sector peers. If significantly below peers with similar loan books, either asset quality is genuinely superior (verify with gross NPA, restructured book) or ECL assumptions are optimistic. Also check if macroeconomic scenarios are disclosed — companies using only base-case scenarios are applying the standard more aggressively than those incorporating downside scenarios.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-a">⚠️ <strong>The Ind AS 109 investor rule for NBFCs:</strong> Never compare NBFC profitability across companies without normalising for ECL provisioning assumptions. Two identical loan books can show dramatically different PAT depending on ECL conservatism. Check: (1) Coverage ratio vs peers, (2) Stage 2 % disclosed, (3) Macro scenarios used. If any of these are opaque or optimistic vs peers — apply a provisioning discount to PAT before comparison.</div>
+    </div>
+
+    <!-- BAD 4: Software company — Ind AS 115 aggressive timing -->
+    <div class="ex-block rv d6">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">💾</div>
+          <div><div class="eb-name">Software Product Companies — Aggressive Upfront Recognition on Multi-Year Licenses</div><div class="eb-sub">Indian Software Companies · Products + SaaS · Some recognise entire multi-year license upfront while maintenance should be deferred</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 License + maintenance bundled</span>
+          <span class="ebb ebb-r">Revenue pulled forward</span>
+          <span class="ebb ebb-a">Contract Assets inflated</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Issue</div><div class="em-v" style="color:var(--red);">Bundled recognition</div><div class="em-s">License + maintenance at once</div></div>
+          <div class="em-box"><div class="em-l">Contract Assets (aggressive)</div><div class="em-v" style="color:var(--red);">&gt;15% revenue</div><div class="em-s">🚨 Revenue ahead of billing</div></div>
+          <div class="em-box"><div class="em-l">Correct treatment</div><div class="em-v" style="color:var(--p);">Allocate to each obligation</div><div class="em-s">Maintenance over contract term</div></div>
+          <div class="em-box"><div class="em-l">Revenue Quality</div><div class="em-v"><span class="std-pill stp-r">Risky ⚠️</span></div><div class="em-s">Timing subject to judgment</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Upfront license recognition on bundled deals:</strong> A software company sells a ₹6 crore deal: ₹4 crore perpetual license + ₹2 crore annual maintenance for 3 years. Under Ind AS 115, these are two separate performance obligations — the license (recognised upfront on delivery) and maintenance (recognised over 3 years, ₹67 lakh per quarter). If the company instead recognises all ₹6 crore upfront claiming "maintenance is incidental to the license" — revenue is overstated by ₹2 crore in year 1 and understated in years 2–3.</div>
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Standalone selling price estimation for allocation:</strong> Ind AS 115 Step 4 requires allocating the transaction price based on standalone selling prices. If a company estimates that its maintenance has a lower standalone price than it actually commands (to maximise the upfront license allocation), more revenue flows to year 1. This estimation is entirely within management's discretion — making it a manipulation vector that auditors find difficult to challenge without evidence of actual separate maintenance sales.</div>
+          <div class="erf erf-bad"><div class="erf-ico">⚠️</div><strong>Signal: Contract Assets &gt; 15% of revenue:</strong> If a software company's Contract Assets (revenue recognised but not yet billed) exceed 15% of annual revenue — the company is recognising revenue significantly ahead of invoicing. This is a red flag: either there are genuine contractual reasons for billing delays (less likely) or revenue recognition is running ahead of contract performance (more concerning).</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>Software Ind AS 115 checklist:</strong> For any software product company, check: (1) What % of revenue is license vs maintenance? (2) Is maintenance recognised upfront or ratably? (3) How large are Contract Assets relative to revenue? (4) Has the standalone selling price methodology for performance obligation allocation changed year-over-year? Any change in allocation methodology without a business reason is a potential manipulation signal.</div>
+    </div>
+
+    <!-- BAD 5: IL&FS — Ind AS 116 + 109 failures -->
+    <div class="ex-block rv d7">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🏗️</div>
+          <div><div class="eb-name">IL&FS — Multiple Standards Obscured True Financial Position (2018)</div><div class="eb-sub">IL&FS Group · Infrastructure Finance · Complex structure used accounting flexibility across standards to hide ₹91,000 Cr debt before collapse</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 ₹91,000 Cr hidden</span>
+          <span class="ebb ebb-r">Ind AS 115 revenue inflated</span>
+          <span class="ebb ebb-r">ECL provisions inadequate</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Group Entities</div><div class="em-v" style="color:var(--red);">347</div><div class="em-s">🚨 Complexity hid reality</div></div>
+          <div class="em-box"><div class="em-l">Hidden Debt</div><div class="em-v" style="color:var(--red);">₹91,000 Cr</div><div class="em-s">🚨 Across SPVs, not visible</div></div>
+          <div class="em-box"><div class="em-l">Ind AS 115 Revenue</div><div class="em-v" style="color:var(--red);">Inflated</div><div class="em-s">Inter-company circular revenue</div></div>
+          <div class="em-box"><div class="em-l">ECL Coverage</div><div class="em-v" style="color:var(--red);">Inadequate</div><div class="em-s">Internal loans under-provisioned</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Ind AS 115 used to inflate inter-company revenue:</strong> IL&FS used its 347 subsidiaries to create circular revenue — one entity billed another for "project management fees" or "advisory services" that were recognised as Ind AS 115 revenue. From the perspective of any individual entity, the revenue met the technical criteria — there was a contract, a performance obligation, and "consideration." But at the consolidated group level, this revenue was eliminated or should have been — it was circular cash moving between related entities dressed as legitimate service income.</div>
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>ECL provisions on inter-company loans inadequate:</strong> IL&FS entities lent money to each other (and to promoter-connected SPVs) at preferential rates. Under Ind AS 109, these loans required ECL provisioning. But because the entities lending were IL&FS subsidiaries and the entities borrowing were also IL&FS subsidiaries, the ECL assumptions used reflected "group support" assumptions that proved completely wrong when the group collapsed. The circular nature meant ECL models couldn't properly assess the true default probability.</div>
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>The complexity defense:</strong> A 347-entity corporate structure ensures that no single financial statement reveals the truth. Each entity's Ind AS financials look superficially compliant — contracts exist, ECL models exist, revenue is allocated. The manipulation happens at the gaps between standards: consolidated revenue eliminates intercompany but individual entity financials show it; ECL provisions are technically reasonable for individual loans but the system-wide risk is not captured.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The IL&FS multi-standard failure:</strong> IL&FS demonstrates the most dangerous form of accounting manipulation: using legitimate standard compliance at each individual step to produce an illegitimate overall picture. Each Ind AS 115 contract was technically valid. Each Ind AS 109 provision had a methodology. But the interactions between standards, the circular structure, and the complexity of 347 entities prevented any single vantage point from revealing the truth. For investors: extreme complexity in corporate structure is itself a red flag — not because standards can't handle it, but because complexity makes verification impossible.</div>
+    </div>
+
+    <div class="caveat-box rv d7">
+      <div class="caveat-icon">💡</div>
+      <div class="caveat-body">
+        <div class="caveat-label">The Master Ind AS Rule</div>
+        <div class="caveat-title">Always Ask: Is This Change in Numbers from the Business or from the Accounting Standard?</div>
+        <div class="caveat-desc">Every time you see a dramatic change in a company's debt levels, EBITDA margin, or revenue — your first question must be: did the underlying business change, or did an accounting standard change? For any Indian listed company analysed with data from FY2019 or FY2020 onwards, you must check whether Ind AS 116 (leases), Ind AS 115 (revenue), or Ind AS 109 (financial instruments) is materially affecting the numbers.<br><br>A three-minute materiality check on Screener.in: (1) Go to Balance Sheet → Is "Right of Use Assets" greater than 5% of total assets? If yes, Ind AS 116 is material — adjust D/E and EBITDA accordingly. (2) Go to Balance Sheet → Is "Contract Assets" greater than 10% of annual revenue? If yes, investigate Ind AS 115 recognition timing. (3) For banks/NBFCs: Is the ECL coverage ratio disclosed with stage breakdown? If not, make peer comparisons with caution.<br><br>The US GAAP equivalent (ASC 842 for leases, ASC 606 for revenue, CECL for credit losses) is broadly similar in intent to Ind AS 116, 115, and 109 — making Indian accounting broadly comparable to US-listed peers on these dimensions. The key differences: CECL uses lifetime expected losses from day-1 (more aggressive than Ind AS 109's 12-month Stage 1 ECL), and US GAAP allows more operating lease classification flexibility for short-term leases.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ NEXT CHAPTER ══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue your learning journey →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">For educational purposes only. Accounting figures cited are illustrative approximations for teaching purposes. Ind AS standards are complex and their application requires professional judgment. Always refer to actual Annual Reports and consult a Chartered Accountant for specific accounting questions. All equity investments carry market risk. Consult a SEBI-registered investment advisor before making investment decisions. Ind AS standards may be updated — always verify current standards with ICAI.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+    },{threshold:.04,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  } else{els.forEach(function(el){el.classList.add('on');});}
+})();
+document.addEventListener('touchstart',function(){},{passive:true});
+document.addEventListener('touchmove',function(){},{passive:true});
+document.addEventListener('touchend',function(){},{passive:true});
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('on');});
+}
+document.body.style.overscrollBehavior='none';
+if(document.fonts&&document.fonts.ready){
+  document.fonts.ready.then(function(){
+    document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});
+  });
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('a,button,.dmbtn,.nxt-btn,.std-card,.ex-block').forEach(function(el){
+    el.style.touchAction='manipulation';
+  });
+});
+</script>
+</body>
+</html>

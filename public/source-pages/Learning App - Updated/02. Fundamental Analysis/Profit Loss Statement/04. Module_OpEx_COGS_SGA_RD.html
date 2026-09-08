@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="OpEx COGS SGA RD">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no,address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Operating Expenses – COGS, SG&amp;A, R&amp;D · Financial Statement Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hr{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(32px,8vw,88px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:12px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(14px,3.5vw,40px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:860px;}
+.hsi{padding:clamp(12px,2vw,22px) clamp(10px,2.5vw,24px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:88px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(11px,1.8vw,18px);font-weight:900;letter-spacing:-.5px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.r{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.a{background:linear-gradient(135deg,var(--ambr),var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(8px,1vw,10px);font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+/* KLO */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.kpill-s{background:rgba(2,132,199,.1);color:var(--sky);border:1px solid rgba(2,132,199,.18);}
+.klo-hi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;}
+.klo-hi{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--shc);}
+.klo-hi-ico{font-size:22px;margin-bottom:6px;}
+.klo-hi-val{font-size:clamp(12px,1.8vw,16px);font-weight:900;letter-spacing:-.3px;}
+.klo-hi-val.purple{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.green{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.amber{color:var(--ambr);}
+.klo-hi-val.sky{color:var(--sky);}
+.klo-hi-lbl{font-size:10px;color:var(--tl);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:3px;}
+/* 3-COL COST VISUAL */
+.cs-visual{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1.5px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);margin-bottom:36px;}
+.csv-col{display:flex;flex-direction:column;}
+.csv-header{padding:clamp(14px,2.5vw,20px);text-align:center;font-size:clamp(12px,1.8vw,16px);font-weight:900;letter-spacing:-.3px;}
+.csv-header.cogs{background:linear-gradient(135deg,var(--red),#f87171);color:#fff;}
+.csv-header.sga{background:linear-gradient(135deg,var(--ambr),var(--amb));color:#fff;}
+.csv-header.rd{background:linear-gradient(135deg,var(--sky),#38bdf8);color:#fff;}
+.csv-items{padding:clamp(12px,2vw,18px);display:flex;flex-direction:column;gap:8px;flex:1;}
+.csv-col:not(:last-child){border-right:1px solid var(--bd);}
+.csv-item{border-radius:10px;padding:10px 12px;}
+.csvi-cogs{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.14);}
+.csvi-sga{background:rgba(217,119,6,.07);border:1px solid rgba(217,119,6,.15);}
+.csvi-rd{background:rgba(2,132,199,.06);border:1px solid rgba(2,132,199,.14);}
+.csv-item-title{font-size:12px;font-weight:800;color:var(--tx);margin-bottom:2px;}
+.csv-item-sub{font-size:11px;color:var(--ts);line-height:1.45;}
+.csv-equation{grid-column:1/-1;background:linear-gradient(135deg,var(--pxl),var(--gpale));border-top:1.5px solid var(--bd);padding:clamp(14px,2.5vw,20px);text-align:center;}
+.csv-eq-text{font-size:clamp(13px,2vw,18px);font-weight:900;color:var(--tx);}
+/* CONCEPT GRID */
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:start;}
+.step-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:16px;padding:18px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:var(--shc);transition:border-color .25s,box-shadow .25s;}
+.step-card:hover{border-color:rgba(109,40,217,.3);box-shadow:var(--shp);}
+.step-num{width:36px;height:36px;min-width:36px;border-radius:10px;color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-body h4{font-size:14px;font-weight:800;color:var(--tx);margin-bottom:4px;}
+.step-body p{font-size:12.5px;color:var(--ts);line-height:1.58;}
+.infographic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.infographic-svg{width:100%;max-width:430px;animation:floatB 4.5s ease-in-out infinite;}
+.infographic-cap{font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;}
+/* BENCH LIST */
+.bench-list{display:flex;flex-direction:column;gap:10px;}
+.bl-row{display:flex;align-items:flex-start;gap:14px;background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:14px 18px;box-shadow:var(--shc);transition:border-color .25s,box-shadow .25s;}
+.bl-row:hover{border-color:rgba(109,40,217,.28);box-shadow:var(--shp);}
+.bl-ico{font-size:20px;flex-shrink:0;margin-top:1px;}
+.bl-body h4{font-size:13px;font-weight:800;color:var(--tx);margin-bottom:3px;}
+.bl-body p{font-size:12px;color:var(--ts);line-height:1.55;}
+/* 3-STEP GUIDE */
+.rg-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,20px);}
+.rg-card{border-radius:18px;padding:clamp(16px,2.5vw,22px);text-align:center;border:1.5px solid;transition:transform .25s;}
+.rg-card:hover{transform:translateY(-3px);}
+.rg-p{border-color:rgba(109,40,217,.25);background:linear-gradient(158deg,var(--pxs),#fdfcff);}
+.rg-g{border-color:rgba(22,163,74,.25);background:linear-gradient(158deg,var(--gpale),#f9fff9);}
+.rg-r{border-color:rgba(220,38,38,.22);background:linear-gradient(158deg,var(--rpale),#fffafa);}
+.rg-a{border-color:rgba(217,119,6,.22);background:linear-gradient(158deg,var(--apale),#fffcf0);}
+.rg-s{border-color:rgba(2,132,199,.22);background:linear-gradient(158deg,var(--skypale),#f0f9ff);}
+.rg-ico{font-size:clamp(26px,4.5vw,38px);margin-bottom:8px;display:block;animation:floatB 3.5s ease-in-out infinite;}
+.rg-num{font-size:clamp(11px,1.5vw,13px);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.rg-num.p{color:var(--p);}
+.rg-num.g{color:var(--gbr);}
+.rg-num.r{color:var(--red);}
+.rg-num.a{color:var(--ambr);}
+.rg-num.s{color:var(--sky);}
+.rg-title{font-size:clamp(14px,2vw,17px);font-weight:900;color:var(--tx);margin-bottom:6px;}
+.rg-desc{font-size:11.5px;color:var(--ts);line-height:1.55;}
+/* SCREENER TABLE */
+.screener-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:18px;overflow:hidden;box-shadow:var(--shp);}
+.screener-header{background:linear-gradient(135deg,var(--pl),var(--p));padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,24px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.sh-left{display:flex;flex-direction:column;gap:3px;}
+.sh-title{font-size:clamp(16px,2.5vw,22px);font-weight:900;color:#fff;}
+.sh-sub{font-size:12px;color:rgba(255,255,255,.7);}
+.sh-right{display:flex;gap:8px;flex-wrap:wrap;}
+.sh-badge{padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.22);}
+.screener-guide{padding:clamp(12px,2vw,18px) clamp(16px,3vw,24px);background:var(--pxs);border-bottom:1px solid var(--bd);font-size:12px;color:var(--ts);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.screener-guide strong{color:var(--p);}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+.bs-table{width:100%;border-collapse:collapse;min-width:700px;}
+.bs-table th{background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(109,40,217,.04));padding:clamp(9px,1.5vw,13px) clamp(10px,2vw,16px);font-size:clamp(9px,1.1vw,11px);font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:right;white-space:nowrap;}
+.bs-table th:first-child{text-align:left;}
+.bs-table td{padding:clamp(9px,1.5vw,13px) clamp(10px,2vw,16px);font-size:clamp(11px,1.3vw,13px);color:var(--ts);border-bottom:1px solid rgba(109,40,217,.06);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.bs-table td:first-child{text-align:left;font-weight:700;color:var(--tx);}
+.bs-table tr:last-child td{border-bottom:none;}
+.bs-table tr.total-row td{font-weight:900;color:var(--tx);background:linear-gradient(135deg,rgba(109,40,217,.06),rgba(22,163,74,.04));border-top:1.5px solid var(--bd);}
+.bs-table tr:hover td{background:var(--pxs);}
+.bs-full{min-width:860px;}
+.bs-full th,.bs-full td{padding:9px 10px;font-size:clamp(10px,1.1vw,12px);white-space:nowrap;}
+.bs-full th{font-size:clamp(9px,1vw,11px);letter-spacing:.8px;padding:9px 8px;}
+.bs-full .col-label{text-align:left;min-width:150px;font-weight:700;color:var(--tx);position:sticky;left:0;background:var(--wh);z-index:2;box-shadow:2px 0 6px rgba(109,40,217,.06);}
+.bs-full thead .col-label{background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(109,40,217,.04));color:var(--p);}
+.bs-full .total-row .col-label{background:linear-gradient(135deg,rgba(109,40,217,.06),rgba(22,163,74,.04));}
+.rev-row .col-label{color:var(--p)!important;}
+.pft-row .col-label{color:var(--gbr)!important;}
+.rat-row .col-label{color:var(--ambr)!important;}
+.cogs-row .col-label{color:var(--red)!important;}
+.sga-row .col-label{color:var(--ambr)!important;}
+.rd-row .col-label{color:var(--sky)!important;}
+.warn-row td{background:rgba(220,38,38,.03)!important;}
+.good-row td{background:rgba(22,163,74,.03)!important;}
+.flag-cell{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:2px 6px;border-radius:6px;}
+.flag-r{background:rgba(220,38,38,.1);color:var(--red);}
+.flag-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.flag-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.flag-p{background:var(--pxl);color:var(--p);}
+.flag-s{background:rgba(2,132,199,.1);color:var(--sky);}
+/* COMPANY BLOCKS */
+.company-block{border-radius:18px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);}
+.cb-header{display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,24px);gap:12px;flex-wrap:wrap;}
+.cb-good{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.cb-bad{background:linear-gradient(135deg,#fef2f2,#fff5f5);}
+.cb-co{display:flex;align-items:center;gap:12px;}
+.cb-name{font-size:clamp(14px,2vw,18px);font-weight:900;color:var(--tx);line-height:1.2;}
+.cb-sub{font-size:11px;color:var(--tl);margin-top:3px;}
+.cb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.cb-badge{padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;}
+.cb-b-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.cb-b-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.cb-b-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.cb-b-s{background:rgba(2,132,199,.1);color:var(--sky);border:1px solid rgba(2,132,199,.2);}
+.cb-insight{padding:14px 16px;font-size:12px;color:var(--ts);line-height:1.65;margin:0;}
+.cb-insight-g{background:rgba(22,163,74,.06);border-top:1px solid rgba(22,163,74,.15);border-left:3px solid var(--gbr);}
+.cb-insight-r{background:rgba(220,38,38,.05);border-top:1px solid rgba(220,38,38,.15);border-left:3px solid var(--red);}
+.ex-logo{width:48px;height:48px;min-width:48px;border-radius:12px;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+/* COST TREND BARS */
+.ct-bar-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:18px;padding:clamp(16px,3vw,26px);box-shadow:var(--shc);}
+.ct-title{font-size:14px;font-weight:800;color:var(--tx);margin-bottom:18px;}
+.ct-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.ct-label{font-size:11px;font-weight:700;color:var(--tx);width:clamp(100px,18vw,180px);flex-shrink:0;line-height:1.3;}
+.ct-bar-bg{flex:1;height:20px;background:rgba(0,0,0,.05);border-radius:6px;overflow:hidden;}
+.ct-bar-fg{height:100%;border-radius:6px;transition:width 1.4s cubic-bezier(.22,1,.36,1);}
+.ct-val{font-size:11px;font-weight:800;width:44px;text-align:right;flex-shrink:0;}
+.ct-note{font-size:10px;color:var(--tl);padding:0 0 12px calc(clamp(100px,18vw,180px) + 20px);}
+.ct-cogs{background:linear-gradient(90deg,var(--red),#f87171);}
+.ct-sga{background:linear-gradient(90deg,var(--ambr),var(--amb));}
+.ct-rd{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.ct-g{background:linear-gradient(90deg,var(--gbr),var(--gh));}
+.ct-p{background:linear-gradient(90deg,var(--p),var(--ph));}
+/* USE CARDS */
+.use-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,20px);}
+.use-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:18px;padding:clamp(16px,2.5vw,26px);box-shadow:var(--shc);transition:border-color .25s,box-shadow .25s,transform .25s;text-align:center;}
+.use-card:hover{border-color:rgba(109,40,217,.28);box-shadow:var(--shp);transform:translateY(-3px);}
+.uc-ico{font-size:clamp(28px,5vw,44px);margin-bottom:12px;display:block;animation:floatB 3.5s ease-in-out infinite;}
+.uc-title{font-size:clamp(13px,1.7vw,16px);font-weight:800;color:var(--tx);margin-bottom:7px;}
+.uc-desc{font-size:12.5px;color:var(--ts);line-height:1.6;}
+/* CAVEAT */
+.caveat-box{margin-top:32px;background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:16px;}
+.caveat-icon{width:44px;height:44px;min-width:44px;border-radius:13px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(109,40,217,.28);}
+.caveat-body{flex:1;min-width:0;}
+.caveat-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.caveat-title{font-size:clamp(13px,1.5vw,15px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.caveat-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+/* GLOSSARY */
+.glos-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);}
+.glos-table{width:100%;border-collapse:collapse;}
+.glos-table thead th{background:linear-gradient(135deg,var(--pxl),var(--pxs));padding:clamp(10px,2vw,15px) clamp(12px,2.5vw,20px);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--p);text-align:left;border-bottom:1.5px solid var(--bd);}
+.glos-table tbody tr{border-bottom:1px solid rgba(109,40,217,.05);transition:background .2s;}
+.glos-table tbody tr:last-child{border-bottom:none;}
+.glos-table tbody tr:hover{background:var(--pxs);}
+.gt-term{padding:clamp(11px,2vw,16px) clamp(12px,2.5vw,20px);font-size:clamp(11px,1.4vw,13px);font-weight:800;color:var(--p);white-space:nowrap;vertical-align:top;}
+.gt-desc{padding:clamp(11px,2vw,16px) clamp(12px,2.5vw,20px);font-size:clamp(11px,1.3vw,13px);color:var(--ts);line-height:1.65;vertical-align:top;}
+.gt-risk{padding:clamp(11px,2vw,16px) clamp(10px,2vw,16px);font-size:11px;font-weight:700;vertical-align:top;text-align:center;}
+/* DEMAT */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'\\2713';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+/* NEXT */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+
+/* ═══════════════════════════════════════════════════════════════
+   UNIFIED RESPONSIVE SYSTEM · Module 04 · OpEx COGS SG&A R&D
+   Desktop · Tablet · Mobile · iOS · Android · Touch · Print
+   ═══════════════════════════════════════════════════════════════ */
+img,svg{max-width:100%;height:auto;display:block;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+
+/* ── LARGE DESKTOP 1280px+ ── */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+
+/* ── SMALL DESKTOP / TABLET LANDSCAPE 901-1100px ── */
+@media(max-width:1100px){
+  .use-cards{grid-template-columns:1fr 1fr;}
+  .rg-steps{grid-template-columns:1fr 1fr 1fr;}
+  .bonus-grid{grid-template-columns:1fr 1fr;}
+}
+
+/* ── TABLET PORTRAIT 769-900px ── */
+@media(max-width:900px){
+  .concept-grid{grid-template-columns:1fr;}
+  .infographic-svg{max-width:380px;margin:0 auto;}
+  .klo-hi-row{grid-template-columns:repeat(3,1fr);}
+  .use-cards{grid-template-columns:1fr 1fr;}
+  .rg-steps{grid-template-columns:1fr;}
+  .cs-visual{grid-template-columns:1fr;}
+  .csv-col:not(:last-child){border-right:none;border-bottom:1px solid var(--bd);}
+  .csv-equation{grid-column:auto;}
+  .th-right{flex-direction:row;align-items:flex-start;}
+  .opx-branch{padding-left:12px;margin-left:12px;}
+}
+/* ── MOBILE LANDSCAPE / LARGE PHONE 601-768px ── */
+@media(max-width:768px){
+  .w{padding:clamp(32px,6vw,56px) clamp(14px,5vw,28px);}
+  .hst{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .klo-hi-row{grid-template-columns:1fr 1fr;}
+  .caveat-box{flex-direction:column;gap:12px;}
+  .caveat-icon{width:40px;height:40px;min-width:40px;font-size:20px;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(14px,4vw,24px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;min-height:52px;}
+  .dmfeats{gap:10px 20px;}
+  .screener-header{flex-direction:column;align-items:flex-start;}
+  .cb-header{flex-direction:column;align-items:flex-start;}
+  .cb-badges{margin-top:4px;flex-wrap:wrap;}
+  .ct-label{width:90px;font-size:10px;}
+  .ct-note{padding-left:110px;}
+  /* Trick section */
+  .trick-header{flex-direction:column;gap:14px;}
+  .opx-outcomes{grid-template-columns:1fr;}
+  .opx-branch{padding-left:10px;margin-left:10px;}
+  .bonus-grid{grid-template-columns:1fr 1fr;}
+  body{overscroll-behavior-y:contain;}
+}
+
+/* ── MOBILE PORTRAIT 481-640px ── */
+@media(max-width:640px){
+  .use-cards{grid-template-columns:1fr;}
+  .klo-hi-row{grid-template-columns:1fr;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .infographic-svg{max-width:100%;}
+  .bs-table{min-width:600px;}
+  .bs-full{min-width:820px;}
+  .bs-full th,.bs-full td{padding:7px 6px;font-size:10px;}
+  .bs-full .col-label{min-width:110px;}
+  .rg-steps{grid-template-columns:1fr;}
+  .glos-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:500px;}
+  /* Trick section */
+  .bonus-grid{grid-template-columns:1fr;}
+  .opx-formula-row{flex-wrap:wrap;gap:4px 8px;}
+  .opx-f-guide{flex-direction:column;gap:4px;}
+  .opx-steps,.opx-bonus,.opx-flow{padding:16px;}
+}
+
+/* ── SMALL MOBILE 361-480px ── */
+@media(max-width:480px){
+  .w{padding:28px 12px;}
+  .hh1{letter-spacing:-1.2px;}
+  .hdesc{font-size:13px;}
+  .hsub{letter-spacing:2.5px;font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .h2{letter-spacing:-1px;}
+  .lead{font-size:13.5px;}
+  .tag{letter-spacing:2px;}
+  .klo-title{font-size:14px;}
+  .klo-desc{font-size:12px;}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .klo-hi{padding:12px 10px;}
+  .step-num{width:30px;height:30px;min-width:30px;font-size:12px;}
+  .step-body h4{font-size:13px;}
+  .step-body p{font-size:11.5px;}
+  .step-card{padding:13px 14px;gap:11px;}
+  .bl-row{padding:12px 13px;flex-wrap:wrap;gap:8px;}
+  .bl-body h4{font-size:12px;}
+  .bl-body p{font-size:11.5px;}
+  .use-card{padding:16px 14px;}
+  .uc-ico{animation:none;}
+  .caveat-title{font-size:13px;}
+  .caveat-desc{font-size:12.5px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .dmh{letter-spacing:-1px;}
+  .dmsub{font-size:13px;}
+  .nxt-banner{padding:12px 14px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+  .screener-header{padding:12px;}
+  .sh-title{font-size:15px;}
+  .sh-sub{font-size:11px;}
+  .screener-guide{padding:10px 12px;font-size:10.5px;}
+  /* Trick section */
+  .th-timer{display:none;}
+  .th-badges{display:none;}
+  .opx-outcomes{grid-template-columns:1fr;}
+  .opx-num{width:32px;height:32px;font-size:13px;}
+  .opx-branch{padding-left:6px;margin-left:8px;}
+  .lev-lbl{width:80px;font-size:9px;}
+  .lev-note{padding-left:90px;}
+  .opx-steps,.opx-bonus,.opx-flow{padding:14px;}
+  .bonus-card{padding:14px;}
+}
+
+/* ── EXTRA SMALL 360px and below ── */
+@media(max-width:360px){
+  .w{padding:22px 10px;}
+  .hh1{font-size:clamp(26px,10vw,40px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}
+  .hsi:last-child{border-bottom:none !important;}
+  .use-cards{grid-template-columns:1fr;}
+  .kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}
+  .nxt-btn{font-size:12px;padding:10px 14px;}
+  .opx-steps,.opx-bonus,.opx-flow{padding:12px;}
+  .opx-nav{flex-direction:column;align-items:flex-start;gap:3px;}
+  .th-title{font-size:15px;}
+}
+
+/* ── TOUCH DEVICES (finger input) ── */
+@media(hover:none) and (pointer:coarse){
+  .use-card:hover,.step-card:hover,.bl-row:hover,.rg-card:hover,
+  .company-block:hover,.bonus-card:hover{
+    transform:none !important;box-shadow:var(--shc) !important;border-color:var(--bd) !important;
+  }
+  .use-card:active{transform:scale(.97);transition:transform .08s;}
+  .step-card:active,.bl-row:active{transform:scale(.99);transition:transform .08s;}
+  .rg-card:active{transform:scale(.98);transition:transform .08s;}
+  .bonus-card:active{transform:scale(.98);transition:transform .08s;}
+  .dmbtn:active,.nxt-btn:active{transform:scale(.97);transition:transform .08s;}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:8px;padding-bottom:8px;}
+  .opx-num{min-width:44px;min-height:44px;}
+  .bonus-badge{min-width:36px;min-height:36px;}
+  ::-webkit-scrollbar{display:none;}
+  scrollbar-width:none;
+  a,button,.dmbtn,.nxt-btn,.use-card,.step-card,.bl-row,.rg-card,
+  .kpill,.company-block,.bonus-card,.trick-wrap,.opx-step{
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+    -webkit-touch-callout:none;
+  }
+  .hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,
+  .th-title,.th-supertag,.opx-nav,.opx-flow-label{
+    -webkit-user-select:none;user-select:none;
+  }
+  p,.klo-desc,.lead,.uc-desc,.caveat-desc,
+  .bl-body p,.step-body p,.rg-desc,.cb-insight,
+  .opx-action,.opx-sc-text,.bonus-desc,.opx-out{
+    -webkit-user-select:text;user-select:text;
+  }
+  .klo-icon,.uc-ico,.rg-ico,.infographic-svg{animation:none !important;}
+  .table-scroll,.glos-wrap{-webkit-overflow-scrolling:touch;}
+}
+
+/* ── iOS: NOTCH · HOME INDICATOR · SAFE AREAS ── */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  .hero{
+    min-height:100svh;
+    min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));
+  }
+  .vbadge{
+    top:max(22px,calc(env(safe-area-inset-top)+8px));
+    right:max(22px,calc(env(safe-area-inset-right)+8px));
+  }
+  .w{
+    padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));
+    padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));
+  }
+  .nxt-banner{
+    padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));
+    padding-bottom:max(18px,env(safe-area-inset-bottom));
+  }
+  .dmbanner{
+    padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));
+    padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));
+  }
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+  .hp,.hg,.hr,.hh1 .line1,.hh1 .line2,.hh1 .line3,
+  .hsv,.hsv.g,.hsv.r,.hsv.a,
+  .klo-hi-val.purple,.klo-hi-val.green,.klo-hi-val.amber,
+  .h2 .hp,.h2 .hg,.h2 .hr{
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  a,button,.dmbtn,.nxt-btn,.use-card,.step-card,.bl-row,.rg-card,
+  .kpill,.company-block,.bonus-card,.trick-wrap{
+    -webkit-tap-highlight-color:transparent;
+  }
+  .table-scroll,.glos-wrap{-webkit-overflow-scrolling:touch;}
+}
+
+/* ── ANDROID HIGH-DPI 1.5x DPR ── */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .use-card,.step-card,.bl-row,.rg-card,.screener-wrap,
+  .company-block,.bonus-card,.trick-wrap{
+    -webkit-backface-visibility:hidden;backface-visibility:hidden;
+  }
+  .infographic-svg,.klo-icon{-webkit-transform:translateZ(0);transform:translateZ(0);}
+  body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+}
+
+/* ── ACCESSIBILITY: reduced motion ── */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}
+  .infographic-svg,.klo-icon,.uc-ico,.rg-ico{animation:none !important;}
+  .lev-bar-fg,.ct-bar-fg{transition:none !important;}
+}
+
+/* ── PRINT ── */
+@media print{
+  .dmbanner,.orb,.nxt-banner,.trick-header{display:none;}
+  .rv{opacity:1;transform:none;}
+  body{color:#000;background:#fff;}
+  .w{padding:20px;}
+  .table-scroll{overflow:visible;}
+  .bs-table,.bs-full{min-width:0;}
+  .company-block,.step-card,.bonus-card,.opx-step{break-inside:avoid;}
+  .trick-wrap{border:1px solid #ccc;}
+  .opx-steps,.opx-bonus,.opx-flow{padding:16px;}
+}
+
+/* ═══ TRICK SECTION CSS ═══ */
+.trick-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:24px;overflow:hidden;box-shadow:var(--shp);}
+.trick-header{background:linear-gradient(135deg,#1a0a3c,var(--pl),var(--p));padding:clamp(20px,3.5vw,36px) clamp(20px,4vw,40px);display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.trick-header::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:24px 24px;}
+.th-left{flex:1;min-width:0;position:relative;z-index:1;}
+.th-supertag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.th-supertag::before{content:'';width:16px;height:2px;background:#4ade80;border-radius:2px;}
+.th-title{font-size:clamp(17px,3vw,26px);font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1.2;margin-bottom:8px;}
+.th-sub{font-size:clamp(12px,1.5vw,14px);color:rgba(255,255,255,.68);line-height:1.65;}
+.th-right{display:flex;align-items:center;gap:16px;flex-shrink:0;position:relative;z-index:1;flex-wrap:wrap;}
+.th-timer{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:14px 20px;text-align:center;min-width:78px;}
+.th-timer-num{font-size:clamp(26px,4vw,40px);font-weight:900;color:#fff;line-height:1;}
+.th-timer-lbl{font-size:10px;color:rgba(255,255,255,.55);font-weight:600;margin-top:2px;}
+.th-badges{display:flex;flex-direction:column;gap:6px;}
+.th-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;padding:5px 12px;border-radius:100px;background:rgba(255,255,255,.12);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.18);white-space:nowrap;}
+/* STEPS */
+.opx-steps{display:flex;flex-direction:column;gap:0;padding:clamp(20px,4vw,36px) clamp(18px,4vw,36px);border-bottom:1px solid var(--bd);}
+.opx-step{display:flex;gap:clamp(12px,2.5vw,20px);padding-bottom:clamp(18px,3vw,28px);position:relative;}
+.opx-step:last-child{padding-bottom:0;}
+.opx-connector{position:absolute;left:clamp(17px,3vw,22px);top:clamp(40px,5vw,48px);bottom:0;width:2px;background:linear-gradient(180deg,var(--pmd),rgba(109,40,217,.06));border-radius:2px;}
+.opx-step:last-child .opx-connector{display:none;}
+.opx-num-wrap{flex-shrink:0;position:relative;z-index:1;}
+.opx-num{width:clamp(36px,5vw,44px);height:clamp(36px,5vw,44px);border-radius:12px;color:#fff;font-size:clamp(14px,2vw,18px);font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(109,40,217,.28);flex-shrink:0;}
+.opx-body{flex:1;min-width:0;padding-top:6px;}
+.opx-nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.opx-site{font-size:10px;font-weight:800;color:var(--p);background:var(--pxs);padding:4px 10px;border-radius:8px;border:1px solid var(--pmd);}
+.opx-arrow{font-size:12px;color:var(--tl);}
+.opx-tab{font-size:10px;font-weight:700;color:var(--ts);background:var(--sf);padding:4px 10px;border-radius:8px;border:1px solid var(--bd);}
+.opx-tab.red{background:rgba(220,38,38,.08);color:var(--red);border-color:rgba(220,38,38,.2);}
+.opx-tab.amber{background:rgba(217,119,6,.08);color:var(--ambr);border-color:rgba(217,119,6,.2);}
+.opx-tab.sky{background:rgba(2,132,199,.08);color:var(--sky);border-color:rgba(2,132,199,.2);}
+.opx-tab.green{background:rgba(22,163,74,.08);color:var(--gbr);border-color:rgba(22,163,74,.2);}
+.opx-tab.purple{background:var(--pxl);color:var(--p);border-color:var(--pmd);}
+.opx-action{font-size:clamp(12px,1.5vw,13.5px);color:var(--ts);line-height:1.68;margin-bottom:10px;}
+.opx-outcomes{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.opx-out{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.5;padding:9px 12px;border-radius:10px;}
+.opx-out-ico{font-size:14px;flex-shrink:0;margin-top:1px;}
+.opx-out-g{background:rgba(22,163,74,.07);color:var(--gbr);border:1px solid rgba(22,163,74,.14);}
+.opx-out-r{background:rgba(220,38,38,.06);color:var(--red);border:1px solid rgba(220,38,38,.14);}
+.opx-out-n{background:var(--pxs);color:var(--p);border:1px solid var(--pmd);}
+/* FORMULA BOX */
+.opx-formula{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:clamp(12px,2vw,18px);margin-bottom:10px;}
+.opx-formula-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.opx-f-label{font-size:12px;font-weight:800;color:var(--tx);}
+.opx-f-eq{font-size:18px;font-weight:700;color:var(--tl);}
+.opx-f-frac{display:flex;flex-direction:column;align-items:center;gap:0;}
+.opx-f-top{font-size:11px;font-weight:700;color:var(--red);border-bottom:1.5px solid var(--red);padding-bottom:2px;}
+.opx-f-bot{font-size:11px;font-weight:600;color:var(--ts);padding-top:2px;}
+.opx-f-val{font-size:16px;font-weight:900;color:var(--p);}
+.opx-f-hint{font-size:10px;color:var(--tl);font-weight:600;}
+.opx-f-guide{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:11px;font-weight:700;}
+/* SHORTCUT BOX */
+.opx-shortcut{background:linear-gradient(135deg,var(--pxl),#f0fdf4);border:1px solid var(--pmd);border-radius:10px;padding:12px 14px;margin-top:8px;}
+.opx-sc-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.opx-sc-text{font-size:12px;color:var(--ts);line-height:1.6;}
+/* LEVERAGE METER */
+.lev-meter{background:var(--wh);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:10px;}
+.lev-meter-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--p);margin-bottom:12px;}
+.lev-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.lev-lbl{font-size:10px;font-weight:700;color:var(--tx);width:100px;flex-shrink:0;}
+.lev-bar-bg{flex:1;height:14px;background:rgba(0,0,0,.05);border-radius:5px;overflow:hidden;}
+.lev-bar-fg{height:100%;border-radius:5px;}
+.lev-val{font-size:10px;font-weight:800;width:38px;text-align:right;flex-shrink:0;}
+.lev-note{font-size:9.5px;color:var(--tl);padding-left:110px;margin-bottom:4px;}
+/* BONUS TRICKS */
+.opx-bonus{padding:clamp(18px,3.5vw,32px) clamp(18px,4vw,36px);background:linear-gradient(158deg,#f5f3ff,#f0fdf4);border-bottom:1px solid var(--bd);}
+.opx-bonus-hdr{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.opx-bonus-ico{font-size:22px;}
+.opx-bonus-title{font-size:clamp(13px,1.8vw,16px);font-weight:800;color:var(--tx);}
+.bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,16px);}
+.bonus-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:clamp(12px,2vw,18px);box-shadow:var(--shc);position:relative;overflow:hidden;}
+.bonus-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.bc-red::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.bc-amber::before{background:linear-gradient(90deg,var(--ambr),var(--amb));}
+.bc-sky::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.bc-green::before{background:linear-gradient(90deg,var(--gbr),var(--gh));}
+.bonus-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;color:#fff;font-size:13px;font-weight:900;margin-bottom:8px;}
+.bonus-title{font-size:clamp(12px,1.5vw,13px);font-weight:800;color:var(--tx);margin-bottom:5px;}
+.bonus-desc{font-size:clamp(11px,1.2vw,12px);color:var(--ts);line-height:1.55;}
+/* DECISION FLOWCHART */
+.opx-flow{padding:clamp(18px,3.5vw,32px) clamp(18px,4vw,36px);}
+.opx-flow-label{font-size:12px;font-weight:700;color:var(--p);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.opx-flow-chain{display:flex;flex-direction:column;gap:8px;}
+.opx-node{border-radius:12px;padding:10px 14px;font-size:clamp(11px,1.4vw,12.5px);font-weight:700;display:flex;align-items:center;gap:8px;line-height:1.4;}
+.opx-node-q{background:var(--pxl);border:1.5px solid var(--pmd);color:var(--pl);}
+.opx-node-qlbl{font-size:10px;font-weight:800;background:var(--p);color:#fff;border-radius:6px;padding:2px 7px;flex-shrink:0;}
+.opx-node-txt{flex:1;}
+.opx-branch{display:flex;flex-direction:column;gap:8px;padding-left:clamp(12px,3vw,24px);border-left:2px dashed var(--pmd);margin-left:18px;}
+.opx-br-yes{display:flex;flex-direction:column;gap:6px;}
+.opx-br-no{display:flex;flex-direction:column;gap:6px;}
+.opx-br-lbl{font-size:10px;font-weight:800;letter-spacing:.5px;padding:2px 8px;border-radius:6px;width:fit-content;}
+.opx-br-yes>.opx-br-lbl{background:rgba(22,163,74,.12);color:var(--gbr);}
+.opx-br-no>.opx-br-lbl{background:rgba(220,38,38,.1);color:var(--red);}
+.opx-result-g{background:rgba(22,163,74,.1);border:1.5px solid rgba(22,163,74,.25);color:var(--gbr);font-size:clamp(11px,1.3vw,13px);}
+.opx-result-a{background:rgba(217,119,6,.08);border:1.5px solid rgba(217,119,6,.22);color:var(--ambr);font-size:clamp(11px,1.3vw,13px);}
+.opx-result-r{background:rgba(220,38,38,.07);border:1.5px solid rgba(220,38,38,.2);color:var(--red);font-size:clamp(11px,1.3vw,13px);}
+/* MOBILE */
+/* Responsive for trick section is consolidated in unified system above */
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="vbadge">Financial Statement Analysis · Module 04 · OpEx</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Operating Expenses · COGS · SG&amp;A · R&amp;D · Cost Structure Trends</div>
+  <h1 class="hh1">
+    <span class="line1">Operating</span>
+    <span class="line2">Expenses</span>
+    <span class="line3">Where Does Every Rupee Get Spent?</span>
+  </h1>
+  <div class="hsub">Financial Statement Analysis · Income Statement · Screener.in · Cost Trends</div>
+  <p class="hdesc">A company can grow revenue every year — and still destroy value if its costs grow faster. COGS, SG&amp;A, and R&amp;D tracked as a percentage of revenue reveal whether a business is becoming more efficient or slowly bloating. This module teaches you to read it all from Screener.in.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv r">COGS</div><div class="hsl">Direct Production Cost</div></div>
+    <div class="hsi"><div class="hsv a">SG&amp;A</div><div class="hsl">Overhead &amp; Sales</div></div>
+    <div class="hsi"><div class="hsv" style="background:linear-gradient(135deg,var(--sky),#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">R&amp;D</div><div class="hsl">Innovation Investment</div></div>
+    <div class="hsi"><div class="hsv g">OPM %</div><div class="hsl">Cost Efficiency Signal</div></div>
+    <div class="hsi"><div class="hsv">5 Good · 5 Bad</div><div class="hsl">Real Company Data</div></div>
+  </div>
+</section>
+
+<!-- ══ 01 KLO ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Analyse Cost Structure <span class="hp">Trends Over Time</span></h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">🏭</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">Operating Expenses are all the costs a company incurs to run its business and generate revenue. They fall into three major categories: COGS (Cost of Goods Sold — what it costs to actually make the product), SG&amp;A (Selling, General &amp; Administrative — all overhead and marketing), and R&amp;D (Research &amp; Development — investment in future competitive advantage). The TREND of each as a percentage of revenue is the key signal.</div>
+        <div class="klo-desc">Imagine running a restaurant. Your ingredient cost (COGS) should grow in line with meals served — if it grows faster, you're becoming less efficient. Your rent and manager's salary (SG&amp;A) should ideally stay fixed even as revenue grows — this is operating leverage. If you invest in a new kitchen (R&amp;D), it costs money today but builds future capacity. For any listed company on Screener.in, tracking COGS%, SG&amp;A%, and R&amp;D% over 10 years tells you whether management is disciplined, whether the business model has structural efficiency, and whether the company is building or eroding its competitive advantage.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-r">🏭 COGS — Direct Costs</span>
+          <span class="kpill kpill-a">🏢 SG&amp;A — Overhead</span>
+          <span class="kpill kpill-s">🔬 R&amp;D — Innovation</span>
+          <span class="kpill kpill-g">✅ Operating Leverage</span>
+          <span class="kpill kpill-p">📈 % of Revenue Trend</span>
+        </div>
+        <div class="klo-hi-row">
+          <div class="klo-hi"><div class="klo-hi-ico">🏭</div><div class="klo-hi-val purple">COGS</div><div class="klo-hi-lbl">Raw material + Labour</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">🏢</div><div class="klo-hi-val amber">SG&amp;A</div><div class="klo-hi-lbl">Sales + Admin overhead</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">🔬</div><div class="klo-hi-val green">R&amp;D</div><div class="klo-hi-lbl">Tomorrow's revenue</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 02 THREE COST TYPES ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — The Three Cost Categories</div>
+    <h2 class="h2 rv d2">COGS · SG&amp;A · R&amp;D — <span class="hp">Decoded Simply</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Every rupee a company spends falls into one of these three buckets. Understanding what each represents — and why its trend matters far more than its absolute value — is the foundation of cost structure analysis.</p>
+
+    <div class="cs-visual rv d3">
+      <div class="csv-col">
+        <div class="csv-header cogs">🏭 COGS — Cost of Goods Sold</div>
+        <div class="csv-items">
+          <div class="csv-item csvi-cogs"><div class="csv-item-title">Raw Materials</div><div class="csv-item-sub">Steel, cotton, wheat, crude oil, chemicals — whatever the product is physically made from. Rises directly with production volume.</div></div>
+          <div class="csv-item csvi-cogs"><div class="csv-item-title">Direct Labour</div><div class="csv-item-sub">Factory workers, machine operators, assembly line staff — people who physically make the product. Not office staff.</div></div>
+          <div class="csv-item csvi-cogs"><div class="csv-item-title">Manufacturing Overhead</div><div class="csv-item-sub">Factory electricity, machine maintenance, production equipment depreciation, quality control costs.</div></div>
+          <div class="csv-item csvi-cogs"><div class="csv-item-title">Packaging &amp; Inbound Freight</div><div class="csv-item-sub">Cost to package finished goods and bring raw materials to the factory. Rises with production volume.</div></div>
+        </div>
+      </div>
+      <div class="csv-col">
+        <div class="csv-header sga">🏢 SG&amp;A — Selling, General &amp; Administrative</div>
+        <div class="csv-items">
+          <div class="csv-item csvi-sga"><div class="csv-item-title">Sales &amp; Marketing</div><div class="csv-item-sub">Salesperson salaries, advertising, promotions, trade discounts, distribution network — the cost of getting products to customers.</div></div>
+          <div class="csv-item csvi-sga"><div class="csv-item-title">General &amp; Administrative</div><div class="csv-item-sub">CEO/CFO salaries, legal fees, accounting, IT systems, office rent and utilities — the cost of running the organization.</div></div>
+          <div class="csv-item csvi-sga"><div class="csv-item-title">Brand Investment</div><div class="csv-item-sub">TV ads, digital marketing, sponsorships — builds long-term demand but is expensed immediately in the current P&amp;L.</div></div>
+          <div class="csv-item csvi-sga"><div class="csv-item-title">Distribution Costs</div><div class="csv-item-sub">Outbound freight, warehouse management, dealer margins, logistics — the cost of the sales supply chain.</div></div>
+        </div>
+      </div>
+      <div class="csv-col">
+        <div class="csv-header rd">🔬 R&amp;D — Research &amp; Development</div>
+        <div class="csv-items">
+          <div class="csv-item csvi-rd"><div class="csv-item-title">Basic Research</div><div class="csv-item-sub">Pure science and discovery — pharmaceutical drug trials, semiconductor material research. Long-term payoff, often 5–15 years away.</div></div>
+          <div class="csv-item csvi-rd"><div class="csv-item-title">Product Development</div><div class="csv-item-sub">Engineering new products, writing software, designing new features — turning research into market-ready offerings.</div></div>
+          <div class="csv-item csvi-rd"><div class="csv-item-title">Process Innovation</div><div class="csv-item-sub">Improving manufacturing efficiency, reducing COGS over time, automating production steps — drives future margin expansion.</div></div>
+          <div class="csv-item csvi-rd"><div class="csv-item-title">Regulatory &amp; Clinical</div><div class="csv-item-sub">Drug approvals, product certification, compliance testing — mandatory for pharma/biotech before products can be sold.</div></div>
+        </div>
+      </div>
+      <div class="csv-equation">
+        <div class="csv-eq-text"><span style="color:var(--red);">COGS</span> + <span style="color:var(--ambr);">SG&amp;A</span> + <span style="color:var(--sky);">R&amp;D</span> = <span style="background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Total Operating Expenses</span></div>
+        <div style="font-size:11px;color:var(--ts);margin-top:6px;">Revenue − Total Operating Expenses = <strong style="color:var(--gbr);">Operating Profit (EBITDA)</strong> &nbsp;·&nbsp; The lower these costs as % of revenue, the higher the OPM%</div>
+      </div>
+    </div>
+
+    <div class="concept-grid">
+      <!-- SVG Infographic -->
+      <div class="rv d3">
+        <div class="infographic-wrap">
+          <svg class="infographic-svg" viewBox="0 0 420 570" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="420" height="570" rx="20" fill="#f5f3ff"/>
+            <rect x="14" y="10" width="392" height="34" rx="10" fill="#6d28d9"/>
+            <text x="210" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">Where Every Rupee of Revenue Goes</text>
+            <!-- Revenue bar -->
+            <rect x="14" y="56" width="392" height="36" rx="10" fill="#6d28d9" opacity=".88"/>
+            <text x="210" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">REVENUE — ₹1,000 Cr (100%)</text>
+            <!-- Breakdown stacked bars -->
+            <rect x="14" y="104" width="196" height="52" rx="10" fill="#dc2626" opacity=".85"/>
+            <text x="112" y="125" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="white">🏭 COGS · 49%</text>
+            <text x="112" y="141" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">₹490 Cr · Raw mat + Labour</text>
+            <text x="112" y="152" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#fca5a5">Gross Margin = 51%</text>
+            <rect x="216" y="104" width="80" height="52" rx="10" fill="#d97706" opacity=".88"/>
+            <text x="256" y="125" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="white">SG&amp;A</text>
+            <text x="256" y="140" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(255,255,255,.85)">20% · ₹200</text>
+            <text x="256" y="153" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="#fde68a">Overhead</text>
+            <rect x="302" y="104" width="30" height="52" rx="6" fill="#0284c7" opacity=".88"/>
+            <text x="317" y="124" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="900" fill="white">R&amp;D</text>
+            <text x="317" y="137" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7" fill="rgba(255,255,255,.85)">6%</text>
+            <rect x="338" y="104" width="68" height="52" rx="10" fill="#15803d" opacity=".88"/>
+            <text x="372" y="124" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="white">PROFIT</text>
+            <text x="372" y="139" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">₹250 Cr</text>
+            <text x="372" y="152" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#86efac">OPM 25%</text>
+            <!-- Downward arrow -->
+            <line x1="210" y1="158" x2="210" y2="180" stroke="#6d28d9" stroke-width="2.5"/>
+            <polygon points="205,178 210,188 215,178" fill="#6d28d9"/>
+            <!-- Factory -->
+            <rect x="100" y="188" width="220" height="104" rx="10" fill="#6d28d9" opacity=".9"/>
+            <rect x="116" y="204" width="22" height="18" rx="4" fill="#c4b5fd" opacity=".5"/>
+            <rect x="148" y="204" width="22" height="18" rx="4" fill="#c4b5fd" opacity=".5"/>
+            <rect x="180" y="204" width="22" height="18" rx="4" fill="#c4b5fd" opacity=".5"/>
+            <rect x="212" y="204" width="22" height="18" rx="4" fill="#c4b5fd" opacity=".5"/>
+            <rect x="244" y="204" width="22" height="18" rx="4" fill="#c4b5fd" opacity=".5"/>
+            <rect x="116" y="234" width="22" height="16" rx="3" fill="#c4b5fd" opacity=".28"/>
+            <rect x="180" y="234" width="22" height="16" rx="3" fill="#c4b5fd" opacity=".28"/>
+            <rect x="244" y="234" width="22" height="16" rx="3" fill="#c4b5fd" opacity=".28"/>
+            <rect x="186" y="256" width="48" height="36" rx="5" fill="#4c1d95"/>
+            <polygon points="88,188 210,144 332,188" fill="#7c3aed" opacity=".9"/>
+            <rect x="156" y="152" width="13" height="36" rx="3" fill="#4c1d95"/>
+            <circle cx="162" cy="144" r="8" fill="#a78bfa" opacity=".5"/>
+            <circle cx="165" cy="132" r="6" fill="#a78bfa" opacity=".35"/>
+            <rect x="234" y="160" width="13" height="28" rx="3" fill="#4c1d95"/>
+            <circle cx="240" cy="152" r="7" fill="#a78bfa" opacity=".45"/>
+            <rect x="60" y="292" width="300" height="5" rx="2" fill="#bbf7d0"/>
+            <!-- Analyst character -->
+            <circle cx="46" cy="226" r="16" fill="#fbbf24"/>
+            <ellipse cx="46" cy="214" rx="16" ry="7" fill="#4c1d95"/>
+            <circle cx="41" cy="225" r="2.5" fill="white"/><circle cx="42" cy="226" r="1.5" fill="#1f2937"/>
+            <circle cx="51" cy="225" r="2.5" fill="white"/><circle cx="52" cy="226" r="1.5" fill="#1f2937"/>
+            <path d="M41 234 Q46 239 51 234" stroke="#92400e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M29,241 Q25,254 23,283 L69,283 Q67,254 63,241 Q56,235 51,238 Q46,242 41,238 Q35,235 29,241Z" fill="#3d1fa3"/>
+            <polygon points="41,238 46,232 51,238 48,249 44,249" fill="#6d28d9"/>
+            <path d="M29,251 Q16,257 14,267" stroke="#fbbf24" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <path d="M63,251 Q76,257 80,265" stroke="#fbbf24" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <polygon points="77,262 83,269 77,272" fill="#fbbf24"/>
+            <rect x="2" y="188" width="82" height="26" rx="7" fill="white" stroke="#6d28d9" stroke-width="1.5"/>
+            <polygon points="16,214 26,214 21,222" fill="white" stroke="#6d28d9" stroke-width="1" stroke-linejoin="round"/>
+            <text x="43" y="199" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="800" fill="#4c1d95">Track % of</text>
+            <text x="43" y="210" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="800" fill="#4c1d95">Revenue! 📊</text>
+            <!-- Three output result boxes -->
+            <line x1="122" y1="294" x2="72" y2="312" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <rect x="14" y="312" width="118" height="72" rx="12" fill="#dc2626" opacity=".85"/>
+            <text x="73" y="331" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="white">🏭 COGS %</text>
+            <text x="73" y="346" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(255,255,255,.85)">Falling = pricing power ✅</text>
+            <text x="73" y="358" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#fca5a5">Rising = margin squeeze ❌</text>
+            <text x="73" y="371" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="rgba(255,255,255,.7)">Watch gross margin trend</text>
+            <line x1="210" y1="298" x2="210" y2="312" stroke="#d97706" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <rect x="152" y="312" width="116" height="72" rx="12" fill="#d97706" opacity=".88"/>
+            <text x="210" y="331" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="white">🏢 SG&amp;A %</text>
+            <text x="210" y="346" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(255,255,255,.85)">Stable/falling = leverage ✅</text>
+            <text x="210" y="358" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#fde68a">Rising faster than rev ❌</text>
+            <text x="210" y="371" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="rgba(255,255,255,.7)">Revenue growing faster?</text>
+            <line x1="298" y1="294" x2="348" y2="312" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <rect x="288" y="312" width="118" height="72" rx="12" fill="#0284c7" opacity=".85"/>
+            <text x="347" y="331" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="white">🔬 R&amp;D %</text>
+            <text x="347" y="346" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(255,255,255,.85)">Stable/growing = moat ✅</text>
+            <text x="347" y="358" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#7dd3fc">Cutting to boost PAT ❌</text>
+            <text x="347" y="371" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="rgba(255,255,255,.7)">Future earnings at risk</text>
+            <!-- Golden rule box -->
+            <rect x="14" y="398" width="392" height="48" rx="13" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+            <text x="210" y="419" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#4c1d95">Golden Rule: Track % of Revenue, NOT Absolute ₹</text>
+            <text x="210" y="437" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Revenue doubled but SG&amp;A stayed flat? OPM just expanded massively. That is operating leverage.</text>
+            <!-- Leverage vs bloat -->
+            <rect x="14" y="460" width="188" height="96" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2"/>
+            <text x="108" y="478" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="800" fill="#15803d">✅ Operating Leverage</text>
+            <text x="108" y="492" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Revenue: ₹100 → ₹200 (+100%)</text>
+            <text x="108" y="504" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">SG&amp;A: ₹20 → ₹24 (+20%)</text>
+            <text x="108" y="516" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">SG&amp;A %: 20% → 12% ↓ ✅</text>
+            <text x="108" y="530" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#15803d">Profits grow faster than revenue!</text>
+            <text x="108" y="542" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#15803d">OPM expands from 15% to 23%</text>
+            <rect x="218" y="460" width="188" height="96" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.2"/>
+            <text x="312" y="478" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="800" fill="#dc2626">❌ Cost Bloat</text>
+            <text x="312" y="492" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Revenue: ₹100 → ₹200 (+100%)</text>
+            <text x="312" y="504" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">SG&amp;A: ₹20 → ₹80 (+300%)</text>
+            <text x="312" y="516" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">SG&amp;A %: 20% → 40% ↑ ❌</text>
+            <text x="312" y="530" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#dc2626">Profits grow slower than revenue!</text>
+            <text x="312" y="542" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#dc2626">OPM compresses from 15% to 5%</text>
+          </svg>
+          <p class="infographic-cap">🏭 Every rupee of revenue flows through three cost filters before becoming profit. Track each as a % of revenue over 10 years on Screener.in. Falling percentages = improving efficiency. Rising percentages = cost discipline slipping.</p>
+        </div>
+      </div>
+
+      <!-- Step cards -->
+      <div class="rv d4">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--red),#f87171);">C</div>
+            <div class="step-body">
+              <h4>COGS — What It Costs to Actually Make the Product</h4>
+              <p>COGS (also called "Cost of Revenue") covers everything directly tied to production: raw materials, direct factory labour, factory overhead, and packaging. Gross Margin = (Revenue − COGS) ÷ Revenue. A rising COGS% over years means raw material inflation is eating margins or production is becoming less efficient. A falling COGS% means the company is gaining pricing power or improving manufacturing efficiency. On Screener.in, expand "Expenses +" in the P&amp;L to find "Raw Material Cost" and "Power &amp; Fuel" — these form the COGS equivalent.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">S</div>
+            <div class="step-body">
+              <h4>SG&amp;A — The Overhead That Should Scale Slowly</h4>
+              <p>SG&amp;A is everything beyond production: salesperson salaries, ad budgets, CEO pay, legal fees, office rent, IT systems. The crucial insight is that SG&amp;A should ideally grow much slower than revenue — this creates operating leverage. If SG&amp;A% is stable or declining as revenue grows, the business is becoming more profitable per rupee of revenue. If SG&amp;A% is rising rapidly, management is not controlling overhead — or is investing heavily in sales force expansion (which needs to show up in revenue growth to justify itself).</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">R</div>
+            <div class="step-body">
+              <h4>R&amp;D — Today's Cost That Builds Tomorrow's Revenue</h4>
+              <p>R&amp;D is the investment a company makes in its own future: new drugs, better products, improved processes, new technologies. Indian pharma companies spend 6–10% of revenue on R&amp;D. IT service companies spend 1–3%. A company cutting R&amp;D to boost short-term PAT is mortgaging its competitive future — it may look good for 1–2 years before competitive pressure shows up. Stable or growing R&amp;D% during difficult revenue periods shows that management is protecting long-term strategic advantage.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">→</div>
+            <div class="step-body">
+              <h4>How to Find This Data on Screener.in — Exactly</h4>
+              <p>Go to Screener.in → search any company → P&amp;L tab → click the "+" icon next to "Expenses" row. This expands into sub-components: Raw Material Cost (COGS), Employee Benefit Expense (mix of COGS + SG&amp;A), Other Manufacturing Expenses (COGS), Selling &amp; Distribution Expenses (SG&amp;A), and sometimes a separate R&amp;D line. For each line, mentally divide by Sales to get the % of revenue. Plot this % trend across 10 years. If it's declining — that's the story of a business gaining efficiency. If it's rising faster than revenue — investigate why.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 03 SCREENER DATA ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — Reading Cost Structure on Screener.in</div>
+    <h2 class="h2 rv d2">Nestlé India — Cost Structure <span class="hp">Decoded Line by Line</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">This is the Screener.in expense breakdown for Nestlé India — 6 years of data with every cost line tracked as a % of revenue. Watch how a brand powerhouse manages cost discipline even through input cost inflation.</p>
+
+    <!-- Trend bars -->
+    <div class="rv d3" style="margin-bottom:32px;">
+      <div class="ct-bar-wrap">
+        <div class="ct-title">📊 Nestlé India — Cost as % of Revenue (FY20–FY25)</div>
+        <div class="ct-row">
+          <div class="ct-label">Raw Material Cost %</div>
+          <div class="ct-bar-bg"><div class="ct-bar-fg ct-cogs" data-w="41" style="width:0;"></div></div>
+          <div class="ct-val" style="color:var(--red);">41%</div>
+        </div>
+        <div class="ct-note">FY25: Raw material cost at 41% of revenue. Held relatively stable despite significant global commodity inflation in FY22–FY23 — a sign of pricing power and supply chain management.</div>
+        <div class="ct-row">
+          <div class="ct-label">Employee Cost %</div>
+          <div class="ct-bar-bg"><div class="ct-bar-fg ct-sga" data-w="10" style="width:0;"></div></div>
+          <div class="ct-val" style="color:var(--ambr);">10%</div>
+        </div>
+        <div class="ct-note">Employee costs at 10% — reflects both direct factory workers (COGS portion) and head office staff (SG&amp;A portion). Stable across years — a sign of controlled headcount growth.</div>
+        <div class="ct-row">
+          <div class="ct-label">Advertising &amp; Promotion %</div>
+          <div class="ct-bar-bg"><div class="ct-bar-fg ct-sga" data-w="8" style="width:0;"></div></div>
+          <div class="ct-val" style="color:var(--ambr);">8%</div>
+        </div>
+        <div class="ct-note">A&amp;P spend at 8% of revenue — one of the highest in Indian FMCG. This builds brand equity that justifies premium pricing, reducing price sensitivity and protecting COGS%.</div>
+        <div class="ct-row">
+          <div class="ct-label">Other Manufacturing %</div>
+          <div class="ct-bar-bg"><div class="ct-bar-fg ct-cogs" data-w="12" style="width:0;"></div></div>
+          <div class="ct-val" style="color:var(--red);">12%</div>
+        </div>
+        <div class="ct-note">Factory overhead, power, maintenance — the indirect COGS. Rising slowly over FY20–FY25 as energy costs increased. But still within normal range for an FMCG manufacturer.</div>
+        <div class="ct-row">
+          <div class="ct-label">OPM % (Operating Margin)</div>
+          <div class="ct-bar-bg"><div class="ct-bar-fg ct-g" data-w="22" style="width:0;"></div></div>
+          <div class="ct-val" style="color:var(--gbr);">22%</div>
+        </div>
+        <div class="ct-note">22% OPM — exceptional for FMCG. Revenue grew 47% from FY20 to FY25, while total costs grew 45%. The gap (2%) translated into sustained OPM above 22% every year despite inflation headwinds.</div>
+      </div>
+    </div>
+
+    <!-- Screener P&L table -->
+    <div class="screener-wrap rv d4">
+      <div class="screener-header">
+        <div class="sh-left">
+          <div class="sh-title">P&amp;L Expenses Breakdown — Nestlé India</div>
+          <div class="sh-sub">Standalone · Rs. Crores · Screener.in format · FY20–FY25 cost structure analysis</div>
+        </div>
+        <div class="sh-right">
+          <span class="sh-badge">6-Year View</span>
+          <span class="sh-badge">Cost Trends</span>
+          <span class="sh-badge" style="background:rgba(34,197,94,.2);border-color:rgba(34,197,94,.4);">✅ Disciplined Structure</span>
+        </div>
+      </div>
+      <div class="screener-guide">
+        <div class="legend-dot" style="background:var(--red);"></div><strong>Red</strong> = COGS rows &nbsp;
+        <div class="legend-dot" style="background:var(--ambr);"></div><strong>Amber</strong> = SG&amp;A rows &nbsp;
+        <div class="legend-dot" style="background:var(--gbr);"></div><strong>Green</strong> = Profit rows &nbsp;
+        <div class="legend-dot" style="background:var(--p);"></div><strong>Purple</strong> = Revenue/ratio rows &nbsp;·&nbsp; Scroll right for all years →
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr>
+            <th class="col-label" style="min-width:190px;">Line Item</th>
+            <th>FY20</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th>
+            <th style="min-width:120px;text-align:left;color:var(--tl);font-size:9px;">Signal</th>
+          </tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">💰 Net Sales (Revenue)</td><td>12,369</td><td>13,284</td><td>14,637</td><td>17,359</td><td>18,562</td><td>18,166</td><td style="text-align:left;"><span class="flag-cell flag-g">+47% in 5yr</span></td></tr>
+            <tr class="cogs-row"><td class="col-label">🏭 Raw Material Cost</td><td>5,022</td><td>5,360</td><td>6,195</td><td>7,500</td><td>7,558</td><td>7,433</td><td style="text-align:left;"><span class="flag-cell flag-g">41% stable ✅</span></td></tr>
+            <tr class="cogs-row"><td class="col-label">🏭 Manufacturing Expenses</td><td>1,284</td><td>1,384</td><td>1,520</td><td>1,862</td><td>2,113</td><td>2,151</td><td style="text-align:left;"><span class="flag-cell flag-a">11–12% stable</span></td></tr>
+            <tr class="sga-row"><td class="col-label">🏢 Employee Benefit Expense</td><td>1,215</td><td>1,244</td><td>1,308</td><td>1,470</td><td>1,726</td><td>1,832</td><td style="text-align:left;"><span class="flag-cell flag-g">10% stable ✅</span></td></tr>
+            <tr class="sga-row"><td class="col-label">🏢 Advertising &amp; Promotion</td><td>1,012</td><td>986</td><td>1,132</td><td>1,388</td><td>1,486</td><td>1,488</td><td style="text-align:left;"><span class="flag-cell flag-p">~8% brand invest</span></td></tr>
+            <tr class="sga-row"><td class="col-label">🏢 Other Expenses (Admin)</td><td>586</td><td>596</td><td>620</td><td>780</td><td>842</td><td>942</td><td style="text-align:left;"><span class="flag-cell flag-a">4–5% controlled</span></td></tr>
+            <tr class="pft-row total-row"><td class="col-label">⚙️ EBITDA</td><td>2,750</td><td>3,214</td><td>3,462</td><td>4,359</td><td>5,037</td><td>4,320</td><td style="text-align:left;"><span class="flag-cell flag-g">Strong margins</span></td></tr>
+            <tr class="rat-row"><td class="col-label">📊 OPM %</td><td>22.2%</td><td>24.2%</td><td>23.7%</td><td>25.1%</td><td>27.1%</td><td>23.8%</td><td style="text-align:left;"><span class="flag-cell flag-g">20–27% band</span></td></tr>
+            <tr class="pft-row total-row"><td class="col-label">🎯 Net Profit (PAT)</td><td>1,882</td><td>2,143</td><td>2,302</td><td>2,906</td><td>3,324</td><td>2,560</td><td style="text-align:left;"><span class="flag-cell flag-g">High quality</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="padding:12px 18px;background:var(--gpale);border-top:1px solid rgba(22,163,74,.15);font-size:11px;color:var(--gbr);font-weight:600;">✅ Key insight: Revenue grew 47% from FY20 to FY25 but total operating costs grew 46% — a near-perfect tracking that maintained OPM above 22% throughout. Nestlé's brand pricing power absorbed commodity inflation without letting COGS% spiral out of control. This is what cost discipline in FMCG looks like.</div>
+    </div>
+
+    <div class="bench-list rv d5" style="margin-top:28px;">
+      <div class="bl-row">
+        <div class="bl-ico">🏭</div>
+        <div class="bl-body">
+          <h4>COGS Discipline — Stable Raw Material % Despite Commodity Inflation</h4>
+          <p>Nestlé's raw material cost percentage stayed in a narrow 40–44% band across FY20–FY25, even though global commodity prices (wheat, cocoa, palm oil, milk) went through significant inflation in FY22–FY23. How? Brand pricing power: Nestlé raised Maggi, KitKat, and Munch prices 10–15% in FY22–FY23, passing on cost increases to consumers without losing significant volume. This is the hallmark of a company with genuine pricing power — COGS inflation doesn't reach the bottom line because revenue grows proportionally.</p>
+        </div>
+      </div>
+      <div class="bl-row">
+        <div class="bl-ico">🏢</div>
+        <div class="bl-body">
+          <h4>SG&amp;A Leverage — Revenue Growing Faster Than Overhead</h4>
+          <p>Employee costs grew from ₹1,215 Cr (FY20) to ₹1,832 Cr (FY25) — a 51% increase. But revenue grew 47%. Employee costs as % of revenue stayed at 10%. This tells you Nestlé is adding staff at roughly the same rate as revenue — not faster. The A&amp;P (advertising) spend of 8% of revenue is a deliberate choice: keeping brands visible requires consistent investment. Notice that A&amp;P grew from ₹1,012 Cr to ₹1,488 Cr — Nestlé didn't cut brand investment when margins were under pressure in FY22–FY23. That discipline protects the long-term moat.</p>
+        </div>
+      </div>
+      <div class="bl-row">
+        <div class="bl-ico">📊</div>
+        <div class="bl-body">
+          <h4>OPM% Trend — The Final Cost Structure Report Card</h4>
+          <p>Nestlé's OPM expanded from 22.2% in FY20 to 27.1% in FY24 — a significant 5-percentage-point improvement showing costs growing slower than revenue (genuine operating leverage). The slight compression to 23.8% in FY25 reflects Nestlé investing in new capacity and product categories. This is a temporary, investment-driven compression — not structural deterioration. For any FMCG company, sustained OPM above 20% is excellent. When Nestlé's OPM touched 27%, it was generating ₹27 of operating profit for every ₹100 of revenue — extraordinary for a consumer goods company selling everyday food products at grocery store prices.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DEMAT BANNER ══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Analyse Cost Structures Today</div>
+    <div class="dmh">Track <span class="dmhs">COGS, SG&amp;A &amp; R&amp;D %</span> Trends on Screener.in</div>
+    <div class="dmsub">Expand the "Expenses +" row on any P&amp;L to see the full cost breakdown. Track each line as % of revenue across 10 years. Open your demat account and invest with cost-structure conviction — not just revenue headlines.</div>
+    <div class="dmfeats">
+      <div class="dmf">Free 12-year P&amp;L with full expense breakdown</div>
+      <div class="dmf">Expand Expenses + to see COGS, SG&amp;A, R&amp;D separately</div>
+      <div class="dmf">Calculate OPM trend instantly for any company</div>
+      <div class="dmf">Compare cost efficiency across sectors and peers</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated</div>
+  </div>
+</div>
+
+<!-- ══ 04 GOOD EXAMPLES ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">04 — Cost Discipline Champions</div>
+    <h2 class="h2 rv d2">5 Companies With <span class="hg">Excellent Cost Structure Management</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These companies show what disciplined cost management looks like — COGS% under control, SG&amp;A growing slower than revenue, and R&amp;D investments that create lasting competitive advantages.</p>
+
+    <!-- GOOD 1: TCS -->
+    <div class="company-block rv d3" style="margin-bottom:32px;">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🖥️</div>
+          <div><div class="cb-name">TCS — Tata Consultancy Services</div><div class="cb-sub">IT Services · NSE: TCS · Rs. Crores · Employee-cost dominant model</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ Employee cost % declining</span>
+          <span class="cb-badge cb-b-g">✅ SG&amp;A leverage strong</span>
+          <span class="cb-badge cb-b-g">✅ OPM 25–27% consistent</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>1,64,177</td><td>1,91,754</td><td>2,25,458</td><td>2,40,893</td><td>2,55,324</td></tr>
+            <tr class="cogs-row"><td class="col-label">Employee Cost</td><td>88,956</td><td>1,01,641</td><td>1,22,572</td><td>1,28,034</td><td>1,34,019</td></tr>
+            <tr class="cogs-row"><td class="col-label">Employee Cost %</td><td>54.2%</td><td>53.0%</td><td>54.4%</td><td>53.1%</td><td>52.5%</td></tr>
+            <tr class="sga-row"><td class="col-label">SG&amp;A + Other</td><td>28,110</td><td>31,190</td><td>34,680</td><td>36,580</td><td>37,220</td></tr>
+            <tr class="sga-row"><td class="col-label">SG&amp;A %</td><td>17.1%</td><td>16.3%</td><td>15.4%</td><td>15.2%</td><td>14.6%</td></tr>
+            <tr class="pft-row total-row"><td class="col-label">OPM %</td><td>26.1%</td><td>25.0%</td><td>24.1%</td><td>25.0%</td><td>25.7%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>The perfect SG&amp;A leverage story in Indian IT.</strong> TCS's selling and admin costs declined from 17.1% to 14.6% of revenue as scale grew — meaning every rupee of new revenue dropped more directly to operating profit. The employee cost (COGS equivalent) held steady at 52–54% showing wage discipline despite intense talent competition. OPM consistently above 25% across business cycles = robust cost structure that doesn't depend on good times to be profitable. This is how scale creates value in IT services.</div>
+    </div>
+
+    <!-- GOOD 2: Asian Paints -->
+    <div class="company-block rv d4" style="margin-bottom:32px;">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fff7ed,#fed7aa);">🎨</div>
+          <div><div class="cb-name">Asian Paints</div><div class="cb-sub">Paints · NSE: ASIANPAINT · Rs. Crores · Raw material cost efficiency through scale</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ COGS% improving 10-year trend</span>
+          <span class="cb-badge cb-b-g">✅ Distribution leverage</span>
+          <span class="cb-badge cb-b-g">✅ OPM 18–27% range</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>20,196</td><td>26,798</td><td>34,489</td><td>34,903</td><td>32,568</td></tr>
+            <tr class="cogs-row"><td class="col-label">Raw Material Cost</td><td>10,580</td><td>16,380</td><td>21,510</td><td>18,860</td><td>16,792</td></tr>
+            <tr class="cogs-row"><td class="col-label">COGS %</td><td>52.4%</td><td>61.1%</td><td>62.4%</td><td>54.0%</td><td>51.5%</td></tr>
+            <tr class="sga-row"><td class="col-label">Employee + SG&amp;A</td><td>3,128</td><td>3,640</td><td>4,224</td><td>4,760</td><td>5,322</td></tr>
+            <tr class="sga-row"><td class="col-label">SG&amp;A %</td><td>15.5%</td><td>13.6%</td><td>12.2%</td><td>13.6%</td><td>16.3%</td></tr>
+            <tr class="pft-row total-row"><td class="col-label">OPM %</td><td>22.4%</td><td>18.7%</td><td>18.6%</td><td>25.6%</td><td>20.2%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>A textbook illustration of commodity cost impact and recovery — and why tracking % matters more than absolute numbers.</strong> In FY22–FY23, global crude oil derivatives (key paint raw materials) surged, pushing Asian Paints' COGS% from 52% to 62%. Management held the line on SG&amp;A (actually achieved leverage — SG&amp;A% fell from 15.5% to 12.2% as revenue grew). As commodity prices normalized in FY24, COGS% fell back to 54% and OPM surged to 25.6% — the highest in five years. This shows cost structure analysis is dynamic: a rising COGS% in a commodity cycle is very different from structural cost deterioration.</div>
+    </div>
+
+    <!-- GOOD 3: Page Industries -->
+    <div class="company-block rv d5" style="margin-bottom:32px;">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);">👕</div>
+          <div><div class="cb-name">Page Industries (Jockey India)</div><div class="cb-sub">Apparel · NSE: PAGEIND · Rs. Crores · Brand-driven COGS efficiency</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ COGS% stable at 53–57%</span>
+          <span class="cb-badge cb-b-g">✅ A&amp;P spend building moat</span>
+          <span class="cb-badge cb-b-g">✅ OPM 16–18% strong</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>2,462</td><td>3,622</td><td>4,726</td><td>4,482</td><td>4,904</td></tr>
+            <tr class="cogs-row"><td class="col-label">Raw Material + Manufacturing</td><td>1,328</td><td>2,010</td><td>2,656</td><td>2,422</td><td>2,619</td></tr>
+            <tr class="cogs-row"><td class="col-label">COGS %</td><td>53.9%</td><td>55.5%</td><td>56.2%</td><td>54.1%</td><td>53.4%</td></tr>
+            <tr class="sga-row"><td class="col-label">Employee + Selling + Admin</td><td>692</td><td>978</td><td>1,274</td><td>1,235</td><td>1,367</td></tr>
+            <tr class="sga-row"><td class="col-label">SG&amp;A %</td><td>28.1%</td><td>27.0%</td><td>27.0%</td><td>27.6%</td><td>27.9%</td></tr>
+            <tr class="pft-row total-row"><td class="col-label">OPM %</td><td>17.5%</td><td>17.3%</td><td>16.6%</td><td>18.0%</td><td>18.0%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Remarkable cost stability in a fashion-adjacent business where input costs are notoriously volatile.</strong> Page Industries' COGS% stayed in a narrow 53–56% band over five years despite significant cotton price volatility. The SG&amp;A (which includes a substantial Jockey brand investment) held steady at 27–28% — showing deliberate investment consistency, not cost bloat. OPM of 17–18% is structurally stable — this company isn't accidentally profitable but architecturally designed to maintain margins through disciplined cost management and brand pricing power.</div>
+    </div>
+
+    <!-- GOOD 4: CDSL -->
+    <div class="company-block rv d6" style="margin-bottom:32px;">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pxs));">📊</div>
+          <div><div class="cb-name">CDSL — Central Depository Services</div><div class="cb-sub">Market Infrastructure · NSE: CDSL · Rs. Crores · Capital-light operating leverage</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ OPM 50–66%</span>
+          <span class="cb-badge cb-b-g">✅ Near-zero COGS</span>
+          <span class="cb-badge cb-b-g">✅ Revenue growing faster than costs</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>344</td><td>551</td><td>555</td><td>812</td><td>1,082</td></tr>
+            <tr class="cogs-row"><td class="col-label">Technology + Operating Costs</td><td>28</td><td>44</td><td>52</td><td>88</td><td>118</td></tr>
+            <tr class="cogs-row"><td class="col-label">"COGS" %</td><td>8.1%</td><td>8.0%</td><td>9.4%</td><td>10.8%</td><td>10.9%</td></tr>
+            <tr class="sga-row"><td class="col-label">Employee + Admin Expenses</td><td>98</td><td>136</td><td>182</td><td>234</td><td>336</td></tr>
+            <tr class="sga-row"><td class="col-label">SG&amp;A %</td><td>28.5%</td><td>24.7%</td><td>32.8%</td><td>28.8%</td><td>31.1%</td></tr>
+            <tr class="pft-row total-row"><td class="col-label">OPM %</td><td>62%</td><td>66%</td><td>57%</td><td>60%</td><td>58%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>The ultimate capital-light cost structure — CDSL's "COGS" is only IT infrastructure at 8–11% of revenue.</strong> As a depository, CDSL doesn't manufacture anything — there are no raw materials, no factory costs, no production labour. Once the platform is built, adding new demat accounts costs almost nothing. Revenue grew 214% from FY21 to FY25 while tech costs grew 321% — yes, tech grew faster in absolute terms, but from a tiny 8% base. More importantly, the 50–66% OPM tells the full story: for every ₹100 of new revenue, ₹50–66 becomes operating profit. That is the definition of a structurally efficient cost model.</div>
+    </div>
+
+    <!-- GOOD 5: Sun Pharma -->
+    <div class="company-block rv d7" style="margin-bottom:8px;">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">💊</div>
+          <div><div class="cb-name">Sun Pharmaceutical Industries</div><div class="cb-sub">Pharmaceuticals · NSE: SUNPHARMA · Rs. Crores · R&amp;D investment creating future moat</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ R&amp;D 6–8% of revenue</span>
+          <span class="cb-badge cb-b-g">✅ Specialty portfolio building</span>
+          <span class="cb-badge cb-b-g">✅ OPM expanding to 28%+</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>30,008</td><td>33,239</td><td>38,434</td><td>46,893</td><td>52,416</td></tr>
+            <tr class="cogs-row"><td class="col-label">Raw Material + Manufacturing</td><td>12,903</td><td>14,459</td><td>16,246</td><td>18,568</td><td>19,670</td></tr>
+            <tr class="cogs-row"><td class="col-label">COGS %</td><td>43.0%</td><td>43.5%</td><td>42.3%</td><td>39.6%</td><td>37.5%</td></tr>
+            <tr class="rd-row"><td class="col-label">R&amp;D Expenditure</td><td>1,920</td><td>2,196</td><td>2,498</td><td>2,954</td><td>3,312</td></tr>
+            <tr class="rd-row"><td class="col-label">R&amp;D %</td><td>6.4%</td><td>6.6%</td><td>6.5%</td><td>6.3%</td><td>6.3%</td></tr>
+            <tr class="pft-row total-row"><td class="col-label">OPM %</td><td>21.2%</td><td>22.4%</td><td>23.8%</td><td>26.4%</td><td>28.2%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Sun Pharma's cost structure tells the story of a pharma company successfully transitioning from generics to specialty drugs — and it shows up in the numbers.</strong> COGS% declined dramatically from 43% to 37.5% as the product mix shifted toward higher-margin specialty drugs (which cost less per unit to make but sell at premium prices). R&amp;D maintained a stable 6.3–6.6% band — not cut during tougher years, not inflated during good years — showing consistent investment discipline. The result: OPM expanded from 21% to 28% in just 5 years. This is R&amp;D investment paying off through better product mix and lower COGS%.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 05 BAD EXAMPLES ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">05 — Cost Structure Red Flags</div>
+    <h2 class="h2 rv d2">5 Cost Structure <span class="hr">Warning Signs</span> — What Bad Looks Like</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These examples show how poor cost management — COGS% spiralling, SG&amp;A growing faster than revenue, or R&amp;D being recklessly cut — destroys shareholder value even when revenue is growing.</p>
+
+    <!-- BAD 1: MTNL -->
+    <div class="company-block rv d3" style="margin-bottom:32px;">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">📞</div>
+          <div><div class="cb-name">MTNL — Mahanagar Telephone Nigam</div><div class="cb-sub">Telecom PSU · NSE: MTNL · Rs. Crores · Employee cost exceeding revenue</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Employee cost &gt; Revenue</span>
+          <span class="cb-badge cb-b-r">🚨 OPM deeply negative</span>
+          <span class="cb-badge cb-b-r">🚨 Fixed cost trap</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>1,468</td><td>1,298</td><td>1,125</td><td>989</td><td>876</td></tr>
+            <tr class="warn-row"><td class="col-label">Employee Cost</td><td>2,140</td><td>2,198</td><td>2,052</td><td>1,988</td><td>1,924</td></tr>
+            <tr class="warn-row"><td class="col-label">Employee Cost %</td><td>145.8%</td><td>169.3%</td><td>182.4%</td><td>201.0%</td><td>219.6%</td></tr>
+            <tr class="warn-row"><td class="col-label">Total Operating Expenses</td><td>3,980</td><td>3,856</td><td>3,624</td><td>3,512</td><td>3,388</td></tr>
+            <tr class="warn-row"><td class="col-label">Operating Loss</td><td>-2,512</td><td>-2,558</td><td>-2,499</td><td>-2,523</td><td>-2,512</td></tr>
+            <tr class="warn-row total-row"><td class="col-label">OPM %</td><td style="color:var(--red);">-171%</td><td style="color:var(--red);">-197%</td><td style="color:var(--red);">-222%</td><td style="color:var(--red);">-255%</td><td style="color:var(--red);">-287%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>The most extreme cost structure failure in Indian listed companies — employee costs exceed total revenue by more than double.</strong> MTNL employed roughly 22,000 people in FY25 but was servicing fewer than 3 million customers in Delhi and Mumbai — markets where Jio, Airtel, and Vi collectively serve 100 million+ users. The employees are government staff who cannot be easily let go, creating a permanent, irreducible cost structure that is structurally unprofitable at any revenue level achievable. This is the fixed cost trap in its purest form: costs are fixed (government employment guarantees), revenue is declining (losing customers every quarter), and there is no combination of efficiency or growth that can close the gap. MTNL has survived only because of repeated government capital infusions.</div>
+    </div>
+
+    <!-- BAD 2: Vodafone Idea -->
+    <div class="company-block rv d4" style="margin-bottom:32px;">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">📱</div>
+          <div><div class="cb-name">Vodafone Idea (Vi)</div><div class="cb-sub">Telecom · NSE: IDEA · Rs. Crores · Network + interest costs overwhelming EBITDA</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Debt interest &gt; EBITDA</span>
+          <span class="cb-badge cb-b-r">🚨 COGS% rising as revenue falls</span>
+          <span class="cb-badge cb-b-r">🚨 Negative FCF every year</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>41,892</td><td>38,726</td><td>41,489</td><td>43,154</td><td>43,920</td></tr>
+            <tr class="cogs-row"><td class="col-label">Network + Spectrum Cost (COGS)</td><td>28,408</td><td>27,864</td><td>30,264</td><td>31,960</td><td>32,804</td></tr>
+            <tr class="cogs-row"><td class="col-label">Network Cost %</td><td>67.8%</td><td>71.9%</td><td>72.9%</td><td>74.1%</td><td>74.7%</td></tr>
+            <tr class="sga-row"><td class="col-label">SG&amp;A + Employee</td><td>5,468</td><td>4,892</td><td>4,986</td><td>5,120</td><td>4,896</td></tr>
+            <tr class="warn-row"><td class="col-label">Finance Cost (Interest)</td><td>25,068</td><td>26,924</td><td>28,888</td><td>31,200</td><td>32,448</td></tr>
+            <tr class="warn-row total-row"><td class="col-label">Net Loss</td><td>-44,232</td><td>-28,245</td><td>-29,301</td><td>-31,238</td><td>-33,048</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>A cost structure that cannot be fixed — network infrastructure costs exceed 74% of revenue and are almost entirely fixed (spectrum payments, tower rentals, depreciation).</strong> Vodafone Idea's core operational problem: it needs to run its entire network (massive fixed cost) regardless of how many subscribers it serves. As subscribers migrated to Jio and Airtel, revenue per unit of network cost collapsed. The COGS% (network cost) rose from 68% to 75% not because costs increased but because revenue shrank while the network cost base stayed fixed. Then add ₹32,000+ Cr of annual interest payments on ₹2+ lakh crore of debt — there is no combination of revenue growth or cost cutting that makes this business solvent without massive debt restructuring and equity dilution.</div>
+    </div>
+
+    <!-- BAD 3: Illustrative EdTech R&D Cut -->
+    <div class="company-block rv d5" style="margin-bottom:32px;">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">💻</div>
+          <div><div class="cb-name">Illustrative EdTech / SaaS — R&amp;D Cutting to Boost PAT</div><div class="cb-sub">Technology · Hypothetical · Cutting innovation to show short-term profits · Rs. Crores</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 R&amp;D cut from 22% to 6%</span>
+          <span class="cb-badge cb-b-r">🚨 Product stagnation follows</span>
+          <span class="cb-badge cb-b-r">🚨 Revenue collapse 2 years later</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY20</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>480</td><td>680</td><td>920</td><td>1,080</td><td style="color:var(--red);">840</td></tr>
+            <tr class="rd-row"><td class="col-label">R&amp;D Expenditure</td><td>106</td><td>123</td><td>92</td><td>65</td><td>50</td></tr>
+            <tr class="rd-row"><td class="col-label">R&amp;D %</td><td>22.1%</td><td>18.1%</td><td>10.0%</td><td>6.0%</td><td style="color:var(--red);">6.0%</td></tr>
+            <tr class="cogs-row"><td class="col-label">Content + Tech (COGS)</td><td>192</td><td>272</td><td>368</td><td>432</td><td>378</td></tr>
+            <tr class="sga-row"><td class="col-label">Sales + Marketing</td><td>144</td><td>272</td><td>460</td><td>540</td><td>420</td></tr>
+            <tr class="sga-row"><td class="col-label">Sales / Marketing %</td><td>30.0%</td><td>40.0%</td><td>50.0%</td><td>50.0%</td><td style="color:var(--red);">50.0%</td></tr>
+            <tr class="warn-row total-row"><td class="col-label">Net Profit / Loss</td><td>-48</td><td>-62</td><td>-28</td><td>22</td><td style="color:var(--red);">-86</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>Cutting R&amp;D to reach PAT profitability — and then watching revenue collapse when the product stops improving.</strong> This hypothetical EdTech company slashed R&amp;D from 22% to 6% of revenue between FY20 and FY23. PAT turned positive in FY23 — management celebrated, investors applauded. But meanwhile, competitors who maintained R&amp;D spending launched better features, AI-powered personalization, and superior content quality. By FY24, retention rates collapsed, new customer acquisition stalled despite massive marketing spend (50% of revenue on sales &amp; marketing), and revenue fell 22%. The company was buying growth with marketing and financing it by mortgaging its product. R&amp;D is not optional in technology businesses — it's the structural input that sustains competitive advantage. When you cut it, you're eating your seed corn.</div>
+    </div>
+
+    <!-- BAD 4: SGA Bloat FMCG -->
+    <div class="company-block rv d6" style="margin-bottom:32px;">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">📦</div>
+          <div><div class="cb-name">Illustrative FMCG — SG&amp;A Growing Faster Than Revenue</div><div class="cb-sub">Consumer Products · Hypothetical · Classic overhead bloat pattern · Rs. Crores</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 SG&amp;A grew 300% vs revenue 60%</span>
+          <span class="cb-badge cb-b-r">🚨 OPM halved from 18% to 8%</span>
+          <span class="cb-badge cb-b-r">🚨 No operating leverage</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY20</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>1,000</td><td>1,100</td><td>1,250</td><td>1,420</td><td>1,600</td></tr>
+            <tr class="cogs-row"><td class="col-label">COGS (Raw Material + Mfg)</td><td>580</td><td>638</td><td>750</td><td>852</td><td>944</td></tr>
+            <tr class="cogs-row"><td class="col-label">COGS %</td><td>58.0%</td><td>58.0%</td><td>60.0%</td><td>60.0%</td><td>59.0%</td></tr>
+            <tr class="warn-row"><td class="col-label">SG&amp;A (Employee + Marketing + Admin)</td><td>240</td><td>330</td><td>430</td><td>556</td><td>720</td></tr>
+            <tr class="warn-row"><td class="col-label">SG&amp;A %</td><td>24.0%</td><td>30.0%</td><td>34.4%</td><td>39.2%</td><td>45.0%</td></tr>
+            <tr class="warn-row total-row"><td class="col-label">OPM %</td><td>18.0%</td><td>12.0%</td><td>5.6%</td><td>0.8%</td><td style="color:var(--red);">-4.0%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>SG&amp;A bloat in slow motion — overhead growing 3× faster than revenue until OPM goes negative.</strong> Revenue grew 60% over 5 years — respectable. But SG&amp;A exploded from ₹240 Cr to ₹720 Cr — a 200% increase. Why? The company hired aggressively (headcount doubled), launched new marketing campaigns (A&amp;P budget tripled), and expanded geographies without proportionate revenue. The COGS% was actually well-controlled at 58–60% — the business model wasn't broken. Only overhead was. The lesson: even a fundamentally sound product business can be destroyed by uncontrolled overhead expansion. When SG&amp;A% is rising every single year while revenue grows at a fraction of that rate, it is almost always a sign of poor capital allocation discipline — management spending shareholder money without adequate returns.</div>
+    </div>
+
+    <!-- BAD 5: Jaypee Associates -->
+    <div class="company-block rv d7" style="margin-bottom:8px;">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🏗️</div>
+          <div><div class="cb-name">Jaypee Associates — Interest Cost Overwhelming Operations</div><div class="cb-sub">Infrastructure · Historical · Interest cost exceeding EBITDA by multiple · Rs. Crores</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Interest &gt; Operating Profit</span>
+          <span class="cb-badge cb-b-r">🚨 COGS% rising due to project delays</span>
+          <span class="cb-badge cb-b-r">🚨 Structural insolvency</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY17</th><th>FY18</th><th>FY19</th><th>FY20</th><th>FY21</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>5,218</td><td>4,824</td><td>4,412</td><td>3,986</td><td>3,124</td></tr>
+            <tr class="cogs-row"><td class="col-label">Construction + COGS</td><td>3,234</td><td>3,168</td><td>3,068</td><td>2,948</td><td>2,468</td></tr>
+            <tr class="cogs-row"><td class="col-label">COGS %</td><td>62.0%</td><td>65.7%</td><td>69.5%</td><td>73.9%</td><td>79.0%</td></tr>
+            <tr class="warn-row"><td class="col-label">Finance Cost (Interest)</td><td>2,886</td><td>3,124</td><td>3,348</td><td>3,592</td><td>3,812</td></tr>
+            <tr class="warn-row"><td class="col-label">Interest vs EBITDA</td><td>1.8×</td><td>2.1×</td><td>2.6×</td><td>3.4×</td><td>5.2×</td></tr>
+            <tr class="warn-row total-row"><td class="col-label">Net Loss</td><td style="color:var(--red);">-1,482</td><td style="color:var(--red);">-2,184</td><td style="color:var(--red);">-2,860</td><td style="color:var(--red);">-3,548</td><td style="color:var(--red);">-4,124</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>Interest costs exceeding EBITDA by 5× is the definition of structural insolvency — no operating improvement can fix this.</strong> Jaypee's cost problem was dual: (1) COGS% rose from 62% to 79% as construction projects were delayed (fixed costs spread over fewer completed units, cost overruns on stalled projects, idle labour and equipment on unfinished sites). (2) Finance costs grew from ₹2,886 Cr to ₹3,812 Cr — compounding on massive debt taken for real estate and hydropower projects that didn't generate revenue on schedule. When interest costs are 5.2× your EBITDA, there is no revenue growth rate, no cost-cutting, no asset sale that solves the problem at the operating level. The only exit is debt restructuring, asset liquidation, or insolvency — which is the path Jaypee ultimately took. For investors, the warning was visible in the data years before the collapse: COGS% rising every single year + interest cost growing despite revenue falling = structural impossibility.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 06 TRICKS TO FIND COST ISSUES ══ -->
+<section class="sec-white" style="position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-100px;right:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(109,40,217,.05) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-80px;left:-60px;width:360px;height:360px;background:radial-gradient(circle,rgba(22,163,74,.04) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div class="w" style="position:relative;z-index:1;">
+    <div class="tag rv d1">06 — The Investor's Shortcut</div>
+    <h2 class="h2 rv d2">How to Find Cost Problems <span class="hp">in 90 Seconds on Screener.in</span></h2>
+    <div class="rul rv d2"></div>
+    <p class="lead rv d3">No accounting degree needed. Follow these exact steps once — and you'll instantly know whether any company's cost structure is improving, stagnating, or deteriorating.</p>
+
+    <div class="rv d3">
+      <div class="trick-wrap">
+
+        <!-- HEADER -->
+        <div class="trick-header">
+          <div class="th-left">
+            <div class="th-supertag">🎯 Cost Structure Mastery</div>
+            <div class="th-title">The 5-Step Cost Audit on Screener.in — COGS · SG&amp;A · R&amp;D · OPM</div>
+            <div class="th-sub">Open Screener.in in one tab. Follow these five steps. By the end, you'll know more about a company's cost discipline than 90% of retail investors — without reading a single annual report.</div>
+          </div>
+          <div class="th-right">
+            <div class="th-timer">
+              <div class="th-timer-num">90</div>
+              <div class="th-timer-lbl">seconds<br>per stock</div>
+            </div>
+            <div class="th-badges">
+              <div class="th-badge">🏭 COGS Trend</div>
+              <div class="th-badge">🏢 SG&amp;A Leverage</div>
+              <div class="th-badge">🔬 R&amp;D Discipline</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 STEPS -->
+        <div class="opx-steps">
+
+          <!-- STEP 1 -->
+          <div class="opx-step">
+            <div class="opx-connector"></div>
+            <div class="opx-num-wrap">
+              <div class="opx-num" style="background:linear-gradient(135deg,var(--p),var(--ph));">1</div>
+            </div>
+            <div class="opx-body">
+              <div class="opx-nav">
+                <span class="opx-site">screener.in</span>
+                <span class="opx-arrow">→</span>
+                <span class="opx-tab purple">Search any company</span>
+                <span class="opx-arrow">→</span>
+                <span class="opx-tab purple">Profit &amp; Loss tab</span>
+                <span class="opx-arrow">→</span>
+                <span class="opx-tab red">Click "+" next to Expenses</span>
+              </div>
+              <div class="opx-action">Expand the Expenses row by clicking the <strong>"+" icon</strong>. You'll see sub-components appear below — Raw Material Cost, Employee Benefit Expense, Power &amp; Fuel, Selling &amp; Distribution, Other Expenses. This one click reveals the entire cost structure. Note the <strong>Sales row</strong> at the top — that's your denominator for every calculation.</div>
+              <div class="opx-outcomes" style="grid-template-columns:1fr;">
+                <div class="opx-out opx-out-n"><span class="opx-out-ico">📋</span><span>You now see the full cost structure. Every line below will become a % of that Sales number. Take a screenshot or keep this tab open for reference.</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 2 — COGS -->
+          <div class="opx-step">
+            <div class="opx-connector"></div>
+            <div class="opx-num-wrap">
+              <div class="opx-num" style="background:linear-gradient(135deg,var(--red),#f87171);">2</div>
+            </div>
+            <div class="opx-body">
+              <div class="opx-nav">
+                <span class="opx-site">COGS Check</span>
+                <span class="opx-arrow">→</span>
+                <span class="opx-tab red">Raw Material Cost</span>
+                <span class="opx-arrow">+</span>
+                <span class="opx-tab red">Power &amp; Fuel</span>
+                <span class="opx-arrow">÷</span>
+                <span class="opx-tab red">Sales × 100</span>
+              </div>
+              <div class="opx-action">Find <strong>"Raw Material Cost"</strong> and <strong>"Power &amp; Fuel / Manufacturing Expenses"</strong> in the expanded list. Add them. Divide by <strong>Sales</strong> and multiply by 100. Do this for FY20, FY22, and FY25. Three data points tell the trend.</div>
+              <!-- Formula display -->
+              <div class="opx-formula">
+                <div class="opx-formula-row">
+                  <span class="opx-f-label">COGS %</span>
+                  <span class="opx-f-eq">=</span>
+                  <span class="opx-f-frac">
+                    <span class="opx-f-top">Raw Material + Manufacturing</span>
+                    <span class="opx-f-bot">Net Sales</span>
+                  </span>
+                  <span class="opx-f-eq">× 100</span>
+                </div>
+                <div class="opx-f-guide">
+                  <span style="color:var(--gbr);">Falling COGS% = pricing power or efficiency ✅</span>
+                  <span style="color:var(--ambr);">Stable COGS% = holding line ⚠️</span>
+                  <span style="color:var(--red);">Rising COGS% = margin squeeze ❌</span>
+                </div>
+              </div>
+              <div class="opx-outcomes">
+                <div class="opx-out opx-out-g"><span class="opx-out-ico">✅</span><span><strong>COGS% declining 3 years in a row</strong> = company gaining pricing power or manufacturing efficiency. Strong buy signal for long-term investors.</span></div>
+                <div class="opx-out opx-out-r"><span class="opx-out-ico">🚨</span><span><strong>COGS% rising every year</strong> = input costs outpacing revenue growth. Gross margin compressing. Investigate commodity cycle vs structural issue.</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3 — SG&A LEVERAGE -->
+          <div class="opx-step">
+            <div class="opx-connector"></div>
+            <div class="opx-num-wrap">
+              <div class="opx-num" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">3</div>
+            </div>
+            <div class="opx-body">
+              <div class="opx-nav">
+                <span class="opx-site">SG&amp;A Check</span>
+                <span class="opx-arrow">→</span>
+                <span class="opx-tab amber">Employee Benefit</span>
+                <span class="opx-arrow">+</span>
+                <span class="opx-tab amber">Selling &amp; Distribution</span>
+                <span class="opx-arrow">+</span>
+                <span class="opx-tab amber">Other Expenses</span>
+                <span class="opx-arrow">÷</span>
+                <span class="opx-tab amber">Sales</span>
+              </div>
+              <div class="opx-action">Add <strong>Employee Benefit Expense + Selling &amp; Distribution + Other Expenses</strong>. Divide by Sales. Track this <strong>SG&amp;A%</strong> over 5 years. Now apply the Operating Leverage Test below — this is the single most revealing check for business quality.</div>
+              <!-- Leverage meter illustration -->
+              <div class="lev-meter">
+                <div class="lev-meter-title">📍 Operating Leverage Test — Revenue Growth vs SG&amp;A Growth</div>
+                <div class="lev-row">
+                  <div class="lev-lbl">Revenue grew</div>
+                  <div class="lev-bar-bg"><div class="lev-bar-fg" style="width:80%;background:linear-gradient(90deg,var(--p),var(--ph));"></div></div>
+                  <div class="lev-val" style="color:var(--p);">+80%</div>
+                </div>
+                <div class="lev-note">Revenue grew 80% in 5 years — good headline.</div>
+                <div class="lev-row">
+                  <div class="lev-lbl">SG&amp;A grew (Good)</div>
+                  <div class="lev-bar-bg"><div class="lev-bar-fg" style="width:30%;background:linear-gradient(90deg,var(--gbr),var(--gh));"></div></div>
+                  <div class="lev-val" style="color:var(--gbr);">+30% ✅</div>
+                </div>
+                <div class="lev-note">SG&amp;A growing much slower than revenue = operating leverage. Every extra rupee of revenue drops to profit.</div>
+                <div class="lev-row">
+                  <div class="lev-lbl">SG&amp;A grew (Bad)</div>
+                  <div class="lev-bar-bg"><div class="lev-bar-fg" style="width:100%;background:linear-gradient(90deg,var(--red),#f87171);"></div></div>
+                  <div class="lev-val" style="color:var(--red);">+200% ❌</div>
+                </div>
+                <div class="lev-note">SG&amp;A growing 2.5× faster than revenue = cost bloat. OPM is compressing. Profits growing much slower than revenue — or declining.</div>
+              </div>
+              <div class="opx-outcomes">
+                <div class="opx-out opx-out-g"><span class="opx-out-ico">✅</span><span><strong>SG&amp;A% declining</strong> while revenue grows = operating leverage. Each doubling of revenue makes the company more profitable, not just bigger.</span></div>
+                <div class="opx-out opx-out-r"><span class="opx-out-ico">🚨</span><span><strong>SG&amp;A% rising</strong> year after year = overhead growing faster than revenue. Unless deliberate (expanding into new geographies), this is a red flag.</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 4 — R&D -->
+          <div class="opx-step">
+            <div class="opx-connector"></div>
+            <div class="opx-num-wrap">
+              <div class="opx-num" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">4</div>
+            </div>
+            <div class="opx-body">
+              <div class="opx-nav">
+                <span class="opx-site">R&amp;D Check</span>
+                <span class="opx-arrow">→</span>
+                <span class="opx-tab sky">Search "R&amp;D" or "Research"</span>
+                <span class="opx-arrow">→</span>
+                <span class="opx-tab sky">in expanded Expenses</span>
+                <span class="opx-arrow">÷</span>
+                <span class="opx-tab sky">Sales × 100</span>
+              </div>
+              <div class="opx-action">Look for an <strong>"R&amp;D Expenditure"</strong> or <strong>"Research &amp; Development"</strong> line in the expanded expenses. Divide by Sales. Compare across 5 years. For FMCG: R&amp;D is &lt;1% (normal). For pharma: 6–12%. For IT products: 8–15%. For IT services: 1–3%. Cutting R&amp;D to boost short-term profit is a classic management short-termism warning sign.</div>
+              <div class="opx-shortcut">
+                <div class="opx-sc-label">💡 Quick Reference — Is This R&amp;D Level Normal?</div>
+                <div class="opx-sc-text">
+                  <strong style="color:var(--red);">Pharma / Biotech:</strong> 6–12% = good · Below 5% = underinvesting in pipeline risk &nbsp;|&nbsp;
+                  <strong style="color:var(--sky);">IT Products / SaaS:</strong> 8–18% = competitive &nbsp;|&nbsp;
+                  <strong style="color:var(--ambr);">IT Services:</strong> 1–3% = normal (IP-light model) &nbsp;|&nbsp;
+                  <strong style="color:var(--p);">FMCG / Consumer:</strong> &lt;1% = normal (brand &gt; product R&amp;D) &nbsp;|&nbsp;
+                  <strong style="color:var(--gbr);">Auto / Engineering:</strong> 2–5% = healthy innovation investment
+                </div>
+              </div>
+              <div class="opx-outcomes">
+                <div class="opx-out opx-out-g"><span class="opx-out-ico">✅</span><span><strong>R&amp;D% stable or growing</strong> during difficult revenue periods = management protecting long-term competitive edge over short-term PAT optics.</span></div>
+                <div class="opx-out opx-out-r"><span class="opx-out-ico">🚨</span><span><strong>R&amp;D% suddenly cut by 30–50%</strong> in one year = management under pressure prioritizing current PAT. Future revenue pipeline at serious risk.</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 5 — OPM TREND -->
+          <div class="opx-step" style="padding-bottom:0;">
+            <div class="opx-num-wrap">
+              <div class="opx-num" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">5</div>
+            </div>
+            <div class="opx-body">
+              <div class="opx-nav">
+                <span class="opx-site">Final Verdict</span>
+                <span class="opx-arrow">→</span>
+                <span class="opx-tab green">OPM % row</span>
+                <span class="opx-arrow">→</span>
+                <span class="opx-tab green">10-year trend</span>
+                <span class="opx-arrow">→</span>
+                <span class="opx-tab green">Operating Profit ÷ Sales</span>
+              </div>
+              <div class="opx-action">The OPM% (Operating Profit Margin) row is already calculated on Screener.in — no math needed. Just look at the 10-year trend. Is it expanding (improving year over year), stable (holding but not improving), or compressing (deteriorating)? This single number summarises the combined impact of all three cost lines — it's your final verdict on cost structure quality.</div>
+              <div class="opx-formula">
+                <div class="opx-formula-row">
+                  <span class="opx-f-label">OPM %</span>
+                  <span class="opx-f-eq">=</span>
+                  <span class="opx-f-frac">
+                    <span class="opx-f-top" style="color:var(--gbr);border-bottom-color:var(--gbr);">Revenue − COGS − SG&amp;A − R&amp;D</span>
+                    <span class="opx-f-bot">Revenue</span>
+                  </span>
+                  <span class="opx-f-eq">× 100</span>
+                </div>
+                <div class="opx-f-guide">
+                  <span style="color:var(--gbr);">Expanding OPM% = cost discipline + operating leverage ✅</span>
+                  <span style="color:var(--ambr);">Stable OPM% = costs tracking revenue (no leverage) ⚠️</span>
+                  <span style="color:var(--red);">Compressing OPM% = costs growing faster than revenue ❌</span>
+                </div>
+              </div>
+              <div class="opx-outcomes">
+                <div class="opx-out opx-out-g"><span class="opx-out-ico">✅</span><span><strong>OPM expanding 1–2% per year</strong> over 10 years = costs being extremely well managed. Profits compounding faster than revenue. Best business quality signal.</span></div>
+                <div class="opx-out opx-out-r"><span class="opx-out-ico">🚨</span><span><strong>OPM compressing 2–3% per year</strong> = costs out of control. In 5 years this company may have razor-thin or negative margins despite growing revenue.</span></div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end steps -->
+
+        <!-- BONUS TRICKS -->
+        <div class="opx-bonus">
+          <div class="opx-bonus-hdr">
+            <span class="opx-bonus-ico">⚡</span>
+            <span class="opx-bonus-title">4 Bonus Quick Tricks — Spot Cost Problems in 10 Seconds Each</span>
+          </div>
+          <div class="bonus-grid">
+            <div class="bonus-card bc-red">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--red),#f87171);">A</div>
+              <div class="bonus-title">The Gross Margin Collapse Test</div>
+              <div class="bonus-desc">Look at the OPM% row on Screener.in. Then look at the "Expenses / Revenue" ratio. If OPM dropped 5+ percentage points in 2 years but revenue grew — COGS exploded. Check Raw Material Cost% specifically. A 3% COGS% rise on ₹10,000 Cr revenue = ₹300 Cr less profit. That's massive.</div>
+            </div>
+            <div class="bonus-card bc-amber">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">B</div>
+              <div class="bonus-title">The Employee Cost Ratio Trick</div>
+              <div class="bonus-desc">Divide Employee Cost by Revenue. Compare FY20 vs FY25. If Employee Cost% is declining as revenue scales: operating leverage from a semi-fixed payroll. If Employee Cost% is rising every year: either over-hiring or wage inflation not matched by revenue. For IT services (employee-heavy), stable at 52–55% is healthy.</div>
+            </div>
+            <div class="bonus-card bc-sky">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">C</div>
+              <div class="bonus-title">The Revenue vs Operating Profit Multiplier</div>
+              <div class="bonus-desc">Revenue 5-year growth: X%. Operating Profit 5-year growth: Y%. If Y &gt; X: operating leverage exists — OPM is expanding. If Y = X: costs tracking revenue perfectly — neutral. If Y &lt; X: costs growing faster than revenue — OPM is compressing. This comparison takes 15 seconds and tells you everything about cost discipline.</div>
+            </div>
+            <div class="bonus-card bc-green">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">D</div>
+              <div class="bonus-title">The Fixed Cost Trap Early Warning</div>
+              <div class="bonus-desc">If revenue is <em>falling</em> but total expenses are barely changing — the company has high fixed costs it cannot reduce. OPM will collapse fast. Calculate: when revenue fell 10%, did OPM fall more than 10%? If OPM fell 20–30% on a 10% revenue drop = dangerously high fixed cost base. MTNL, Vi — both showed this pattern years before the crisis.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DECISION FLOWCHART -->
+        <div class="opx-flow">
+          <div class="opx-flow-label">🔀 Cost Structure Decision Flowchart — 4 Questions · 60 Seconds</div>
+          <div class="opx-flow-chain">
+
+            <div class="opx-node opx-node-q">
+              <div class="opx-node-qlbl">Q1</div>
+              <div class="opx-node-txt">Is COGS% stable or declining over 5 years?</div>
+            </div>
+            <div class="opx-branch">
+              <div class="opx-br-yes">
+                <span class="opx-br-lbl">YES ✅</span>
+                <div class="opx-node opx-node-q">
+                  <div class="opx-node-qlbl">Q2</div>
+                  <div class="opx-node-txt">Is SG&amp;A% stable or declining while revenue grows?</div>
+                </div>
+                <div class="opx-branch">
+                  <div class="opx-br-yes">
+                    <span class="opx-br-lbl">YES ✅</span>
+                    <div class="opx-node opx-node-q">
+                      <div class="opx-node-qlbl">Q3</div>
+                      <div class="opx-node-txt">Is R&amp;D% maintained or growing (sector-appropriate)?</div>
+                    </div>
+                    <div class="opx-branch">
+                      <div class="opx-br-yes">
+                        <span class="opx-br-lbl">YES ✅</span>
+                        <div class="opx-node opx-node-q">
+                          <div class="opx-node-qlbl">Q4</div>
+                          <div class="opx-node-txt">Is OPM% expanding over 10 years?</div>
+                        </div>
+                        <div class="opx-branch">
+                          <div class="opx-br-yes">
+                            <span class="opx-br-lbl">YES ✅</span>
+                            <div class="opx-node opx-result-g">✅ EXCELLENT COST STRUCTURE — All four signals positive. High-quality business with operating leverage. Deep-dive into valuation with confidence.</div>
+                          </div>
+                          <div class="opx-br-no">
+                            <span class="opx-br-lbl">NO ⚠️</span>
+                            <div class="opx-node opx-result-a">⚠️ GOOD COSTS, STABLE OPM — Costs controlled but no leverage yet. May be a investment/expansion phase. Check if revenue growth justifies it.</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="opx-br-no">
+                        <span class="opx-br-lbl">NO ⚠️</span>
+                        <div class="opx-node opx-result-a">⚠️ R&amp;D DECLINING — COGS and SG&amp;A disciplined, but R&amp;D being cut. Short-term margins look great — long-term competitive moat may be eroding. Sector-dependent severity.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="opx-br-no">
+                    <span class="opx-br-lbl">NO ⚠️</span>
+                    <div class="opx-node opx-result-a">⚠️ SG&amp;A BLOAT RISK — Check if overhead growth is deliberate expansion (new geographies, distribution build-out) or undisciplined hiring. Compare to revenue growth rate carefully.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="opx-br-no">
+                <span class="opx-br-lbl">NO 🚨</span>
+                <div class="opx-node opx-result-r">❌ COGS PROBLEM — Gross margin eroding. Check if commodity cycle (temporary) or structural pricing power loss (permanent). Avoid until COGS% stabilises or explains itself.</div>
+              </div>
+            </div>
+
+          </div><!-- end chain -->
+        </div><!-- end flow -->
+
+      </div><!-- end trick-wrap -->
+    </div>
+  </div>
+</section>
+
+<!-- ══ 07 GLOSSARY ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">07 — Reference Glossary</div>
+    <h2 class="h2 rv d2">Cost Structure <span class="hp">Glossary</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Every term you need to analyse operating expenses — plain language definitions with context on what each means for investors.</p>
+    <div class="glos-wrap rv d3">
+      <div class="table-scroll">
+        <table class="glos-table">
+          <thead><tr>
+            <th style="min-width:190px;">Term</th>
+            <th style="min-width:280px;">What It Means in Simple Words</th>
+            <th style="min-width:100px;text-align:center;">Investor Signal</th>
+          </tr></thead>
+          <tbody>
+            <tr><td class="gt-term">COGS</td><td class="gt-desc">Cost of Goods Sold — the direct cost of making the product: raw materials, direct labour, factory overhead. Gross Margin = (Revenue − COGS) ÷ Revenue. Falling COGS% = efficiency improving.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-r">Watch %</span></td></tr>
+            <tr><td class="gt-term">SG&amp;A</td><td class="gt-desc">Selling, General &amp; Administrative costs — all overhead beyond production: sales team, marketing, executive salaries, office, IT systems. Should ideally grow slower than revenue to create operating leverage.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-a">Trend key</span></td></tr>
+            <tr><td class="gt-term">R&amp;D</td><td class="gt-desc">Research &amp; Development — investment in future products, processes, and competitive advantage. Expensed immediately in P&amp;L even though benefits come years later. Cutting R&amp;D for short-term profit = dangerous.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-s">Long-term</span></td></tr>
+            <tr><td class="gt-term">Gross Margin</td><td class="gt-desc">(Revenue − COGS) ÷ Revenue. Shows how much is left after direct production costs. High gross margin = pricing power or manufacturing efficiency. Low gross margin = thin product economics.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Core metric</span></td></tr>
+            <tr><td class="gt-term">OPM %</td><td class="gt-desc">Operating Profit Margin = (Revenue − COGS − SG&amp;A − R&amp;D) ÷ Revenue. The bottom line of operational efficiency. OPM expanding over time = costs growing slower than revenue. OPM contracting = cost bloat or pricing pressure.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Key ratio</span></td></tr>
+            <tr><td class="gt-term">Operating Leverage</td><td class="gt-desc">The multiplier effect of fixed costs: when revenue grows faster than fixed costs, every extra rupee of revenue drops disproportionately to profit. Businesses with high fixed costs but growing revenue show rapidly expanding OPM.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-p">Very bullish</span></td></tr>
+            <tr><td class="gt-term">Fixed Cost Trap</td><td class="gt-desc">The opposite of operating leverage: when a business has high fixed costs (that cannot be reduced) and falling revenue. Every rupee of lost revenue has a multiplied impact on losses. MTNL and Vi are classic examples.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-r">🚨 Danger</span></td></tr>
+            <tr><td class="gt-term">Cost Bloat</td><td class="gt-desc">When SG&amp;A or overhead grows significantly faster than revenue without generating proportionate additional revenue. Common in rapidly hiring companies, companies with weak management discipline, or businesses chasing growth without profitability.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-r">Red flag</span></td></tr>
+            <tr><td class="gt-term">EBITDA</td><td class="gt-desc">Earnings Before Interest, Taxes, Depreciation &amp; Amortisation — a proxy for operating cash generation. Revenue minus COGS minus SG&amp;A minus R&amp;D (but before depreciation). Used to compare operational efficiency across capital structures.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Watch trend</span></td></tr>
+            <tr><td class="gt-term">% of Revenue Analysis</td><td class="gt-desc">Expressing every cost line as a percentage of revenue and tracking that percentage over 10 years. The most powerful tool for cost structure analysis — it removes the distortion of absolute growth and shows whether costs are being controlled relative to revenue.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-p">Core method</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ NEXT CHAPTER ══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next · Module 05</div>
+    <div class="nxt-sub">Cash Flow Statement — Where the Real Money Actually Goes →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">&#8594;</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">&#9888;&#65039;</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">This page is for educational purposes only. Nestlé India, TCS, Asian Paints, Page Industries, CDSL, and Sun Pharma data shown is approximate and illustrative based on publicly available disclosures — verify all figures from official annual reports before making investment decisions. MTNL and Vodafone Idea data is approximate and for educational illustration only. The EdTech/SaaS and FMCG SG&amp;A bloat examples are entirely hypothetical. Jaypee Associates historical data is approximate and based on publicly available disclosures for educational purposes. All equity investments carry market risk. Past performance does not guarantee future results. This content does not constitute investment advice. Consult a SEBI-registered investment advisor before investing.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  'use strict';
+  var passOpts={passive:true};
+  var revEls=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var revIO=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');revIO.unobserve(e.target);}});
+    },{threshold:.05,rootMargin:'0px 0px -28px 0px'});
+    revEls.forEach(function(el){revIO.observe(el);});
+  } else {revEls.forEach(function(el){el.classList.add('on');});}
+
+  var ctBars=document.querySelectorAll('.ct-bar-fg');
+  if('IntersectionObserver' in window){
+    var ctIO=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){var b=e.target,w=b.getAttribute('data-w');b.style.width=w+'%';ctIO.unobserve(b);}
+      });
+    },{threshold:.15});
+    ctBars.forEach(function(b){b.style.width='0';ctIO.observe(b);});
+  } else {ctBars.forEach(function(b){b.style.width=b.getAttribute('data-w')+'%';});}
+
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    revEls.forEach(function(el){el.classList.add('on');});
+    ctBars.forEach(function(b){b.style.width=b.getAttribute('data-w')+'%';});
+  }
+
+  document.addEventListener('touchstart',function(){},passOpts);
+  document.addEventListener('touchmove',function(){},passOpts);
+  document.addEventListener('touchend',function(){},passOpts);
+  document.body.style.overscrollBehavior='none';
+
+  function setVH(){document.documentElement.style.setProperty('--vh',window.innerHeight*.01+'px');}
+  setVH();
+  window.addEventListener('resize',setVH,passOpts);
+  window.addEventListener('orientationchange',function(){setTimeout(setVH,150);setTimeout(function(){document.querySelectorAll('.rv:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<window.innerHeight-20){el.classList.add('on');}});},300);},passOpts);
+
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});});}
+
+  function applyTouch(){
+    var sel='a,button,.dmbtn,.nxt-btn,.use-card,.step-card,.bl-row,.rg-card,.kpill,.company-block,.rg-card';
+    document.querySelectorAll(sel).forEach(function(el){el.style.touchAction='manipulation';});
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',applyTouch);}else{applyTouch();}
+
+  document.querySelectorAll('.table-scroll,.glos-wrap').forEach(function(el){el.style.webkitOverflowScrolling='touch';});
+
+  document.addEventListener('visibilitychange',function(){
+    if(!document.hidden){document.querySelectorAll('.rv:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<window.innerHeight){el.classList.add('on');}});}
+  });
+})();
+</script>
+</body>
+</html>

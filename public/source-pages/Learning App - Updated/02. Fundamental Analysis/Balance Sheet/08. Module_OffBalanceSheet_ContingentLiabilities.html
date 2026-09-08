@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-title" content="Hidden Risks BS">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no,address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Off-Balance Sheet Items &amp; Contingent Liabilities &middot; Balance Sheet Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#fff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.13s}.d3{transition-delay:.20s}.d4{transition-delay:.27s}.d5{transition-delay:.34s}.d6{transition-delay:.42s}
+@keyframes fsd{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes warn{0%,100%{opacity:1}50%{opacity:.4}}
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff,#f0fdf4 55%,#fdfcff);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.chip::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hr{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rule{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:36px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff,#f0fdf4 40%,#fdfcff 70%,#eef4ff);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(220,38,38,.06);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:blink 1.8s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(32px,7.5vw,88px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:14px;animation:fsu .88s ease .12s both;}
+.hh1 .l1{display:block;background:linear-gradient(135deg,var(--pl),var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .l2{display:block;background:linear-gradient(135deg,var(--red),#f87171,var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .l3{display:block;font-size:clamp(13px,3vw,38px);background:linear-gradient(135deg,var(--p),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:620px;line-height:1.72;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hstat{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.78);backdrop-filter:blur(12px);animation:fsu .9s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:900px;}
+.hsi{padding:clamp(12px,2vw,22px) clamp(10px,2.5vw,24px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:80px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(11px,1.8vw,18px);font-weight:900;letter-spacing:-.4px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.r{background:linear-gradient(135deg,var(--red),var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(8px,1vw,10px);font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+/* KLO */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3.5vw,42px);display:flex;align-items:flex-start;gap:20px;box-shadow:var(--shc);}
+.klo-icon{width:62px;height:62px;min-width:62px;border-radius:18px;background:linear-gradient(135deg,var(--red),var(--amb));display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;box-shadow:0 8px 26px rgba(220,38,38,.28);animation:floatA 4s ease-in-out infinite;}
+.klo-tag{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.klo-title{font-size:clamp(14px,2vw,19px);font-weight:900;color:var(--tx);margin-bottom:8px;line-height:1.3;}
+.klo-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px;}
+.kp{display:inline-flex;align-items:center;gap:5px;padding:5px 13px;border-radius:100px;font-size:10px;font-weight:700;}
+.kp-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kp-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kp-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.kp-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+/* OBS TYPE CARDS */
+.obs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.5vw,26px);margin-bottom:44px;}
+.obs-card{border-radius:22px;padding:clamp(20px,2.8vw,30px);border:2px solid;transition:transform .28s,box-shadow .28s;}
+.obs-card:hover{transform:translateY(-5px);box-shadow:var(--shp);}
+.oc-cl{background:linear-gradient(158deg,var(--rpale),#fff5f5);border-color:rgba(220,38,38,.22);}
+.oc-obs{background:linear-gradient(158deg,var(--apale),#fffbeb);border-color:rgba(217,119,6,.22);}
+.oc-guar{background:linear-gradient(158deg,var(--pxs),#fdfcff);border-color:rgba(109,40,217,.22);}
+.obs-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px;animation:floatB 3.8s ease-in-out infinite;box-shadow:0 6px 18px rgba(0,0,0,.1);}
+.oi-cl{background:linear-gradient(135deg,var(--red),#f87171);}
+.oi-obs{background:linear-gradient(135deg,var(--amb),#f59e0b);}
+.oi-guar{background:linear-gradient(135deg,var(--p),var(--ph));}
+.obs-tag{font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:5px;}
+.ot-cl{color:var(--red);}
+.ot-obs{color:var(--ambr);}
+.ot-guar{color:var(--p);}
+.obs-title{font-size:clamp(16px,2vw,22px);font-weight:900;color:var(--tx);margin-bottom:10px;letter-spacing:-.3px;}
+.obs-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;margin-bottom:12px;}
+.obs-items{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
+.obs-item{display:flex;align-items:flex-start;gap:9px;padding:8px 12px;border-radius:10px;font-size:12.5px;color:var(--ts);line-height:1.5;}
+.oi-bg-r{background:rgba(220,38,38,.06);border-left:3px solid var(--red);}
+.oi-bg-a{background:rgba(217,119,6,.06);border-left:3px solid var(--amb);}
+.oi-bg-p{background:rgba(109,40,217,.07);border-left:3px solid var(--p);}
+.obs-ana{margin-top:12px;padding:10px 13px;border-radius:10px;font-size:12.5px;font-weight:600;line-height:1.6;}
+.oa-r{background:rgba(220,38,38,.06);color:var(--red);border-left:3px solid var(--red);}
+.oa-a{background:rgba(217,119,6,.06);color:var(--ambr);border-left:3px solid var(--amb);}
+.oa-p{background:rgba(109,40,217,.07);color:var(--pl);border-left:3px solid var(--p);}
+/* RISK LADDER */
+.risk-ladder{background:linear-gradient(135deg,var(--pl),var(--p) 35%,var(--ph) 65%,#b45309);border-radius:22px;padding:clamp(26px,4vw,48px);color:#fff;position:relative;overflow:hidden;margin-bottom:44px;box-shadow:var(--shp);}
+.risk-ladder::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;}
+.rl-inner{position:relative;z-index:1;}
+.rl-badge{display:inline-flex;padding:4px 14px;border-radius:100px;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);margin-bottom:14px;}
+.rl-title{font-size:clamp(16px,2.5vw,28px);font-weight:900;letter-spacing:-.4px;margin-bottom:10px;}
+.rl-sub{font-size:clamp(12px,1.4vw,14px);opacity:.8;line-height:1.65;max-width:580px;margin:0 auto 24px;}
+.rl-steps{display:flex;flex-direction:column;gap:10px;}
+.rl-step{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.2);border-radius:14px;padding:clamp(12px,2vw,18px);}
+.rl-num{width:36px;height:36px;min-width:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;}
+.rn1{background:rgba(34,197,94,.3);}
+.rn2{background:rgba(251,191,36,.3);}
+.rn3{background:rgba(251,146,60,.35);}
+.rn4{background:rgba(248,113,113,.35);}
+.rn5{background:rgba(220,38,38,.4);}
+.rl-step-title{font-size:clamp(12px,1.6vw,15px);font-weight:800;margin-bottom:3px;}
+.rl-step-desc{font-size:clamp(11px,1.2vw,12.5px);opacity:.78;line-height:1.5;}
+/* SCREENER TABLE */
+.scr-wrap{background:#fff;border:1.5px solid var(--bd);border-radius:22px;overflow:hidden;box-shadow:var(--shp);margin-bottom:32px;}
+.scr-hdr{background:linear-gradient(135deg,var(--pl),var(--p));padding:clamp(16px,2.8vw,24px) clamp(18px,3vw,28px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.sh-title{font-size:clamp(15px,2.2vw,21px);font-weight:900;color:#fff;}
+.sh-sub{font-size:11px;color:rgba(255,255,255,.7);margin-top:3px;}
+.sh-bdgs{display:flex;gap:7px;flex-wrap:wrap;}
+.sh-bdg{padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.22);}
+.scr-guide{padding:10px clamp(18px,3vw,28px);background:var(--pxs);border-bottom:1px solid var(--bd);font-size:12px;color:var(--ts);display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.sg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;display:inline-block;}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.bstbl{width:100%;border-collapse:collapse;min-width:720px;}
+.bstbl th{background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:10px 13px;font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:left;white-space:nowrap;}
+.bstbl td{padding:10px 13px;font-size:12.5px;color:var(--ts);border-bottom:1px solid rgba(109,40,217,.06);text-align:left;line-height:1.5;}
+.bstbl td:first-child{font-weight:700;color:var(--tx);}
+.bstbl tr:last-child td{border-bottom:none;}
+.bstbl tr.shdr td{background:rgba(109,40,217,.05);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);padding:10px 13px 5px;}
+.bstbl tr.g-r td:first-child{color:var(--gbr);}
+.bstbl tr.r-r td:first-child{color:var(--red);}
+.bstbl tr:not(.shdr):hover td{background:var(--pxs);}
+.up{color:var(--gbr);font-weight:800;}.dn{color:var(--red);font-weight:800;}
+.zero{color:var(--gbr);font-weight:900;}
+.ann{display:inline-flex;padding:1px 7px;border-radius:5px;font-size:9px;font-weight:700;margin-left:5px;}
+.an-p{background:rgba(109,40,217,.09);color:var(--p);}
+.an-g{background:rgba(22,163,74,.08);color:var(--gbr);}
+.an-r{background:rgba(220,38,38,.08);color:var(--red);}
+.an-a{background:rgba(217,119,6,.08);color:var(--ambr);}
+/* INSIGHT */
+.insight{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:20px;padding:clamp(20px,3vw,32px);display:flex;align-items:flex-start;gap:18px;box-shadow:var(--shc);}
+.ins-ico{width:48px;height:48px;min-width:48px;border-radius:14px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 6px 20px rgba(109,40,217,.28);}
+.ins-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.ins-title{font-size:clamp(13px,1.6vw,16px);font-weight:800;color:var(--tx);margin-bottom:7px;}
+.ins-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;}
+.ins-desc strong{color:var(--tx);}
+/* EXAMPLE CARDS */
+.gbh{display:flex;align-items:center;gap:14px;margin-bottom:22px;padding:18px 22px;border-radius:18px;border:1.5px solid var(--bd);}
+.gbh-g{background:linear-gradient(135deg,var(--gpale),#ecfdf5);}
+.gbh-r{background:linear-gradient(135deg,var(--rpale),#fff5f5);}
+.gbh-ico{width:46px;height:46px;min-width:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.gi-g{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.gi-r{background:linear-gradient(135deg,var(--red),#f87171);}
+.gbh-title{font-size:clamp(16px,2vw,22px);font-weight:900;color:var(--tx);}
+.gbh-sub{font-size:12.5px;color:var(--ts);margin-top:3px;}
+.exgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.5vw,24px);margin-bottom:44px;}
+.excard{border-radius:22px;border:1.5px solid var(--bd);background:#fff;padding:clamp(18px,3vw,28px);box-shadow:var(--shc);transition:border-color .26s,box-shadow .26s,transform .26s;position:relative;overflow:hidden;}
+.excard:hover{border-color:rgba(109,40,217,.28);box-shadow:var(--shp);transform:translateY(-4px);}
+.excard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.eg1::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.eg2::before{background:linear-gradient(90deg,var(--g),var(--gh));}
+.eg3::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.eg4::before{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.eg5::before{background:linear-gradient(90deg,#0d9488,#2dd4bf);}
+.eb1::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.eb2::before{background:linear-gradient(90deg,#b91c1c,#fca5a5);}
+.eb3::before{background:linear-gradient(90deg,var(--amb),#fbbf24);}
+.eb4::before{background:linear-gradient(90deg,#7c3aed,var(--red));}
+.eb5::before{background:linear-gradient(90deg,var(--red),var(--amb));}
+.ex-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.ex-logo{width:48px;height:48px;min-width:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.ex-name{font-size:clamp(13px,1.7vw,16px);font-weight:900;color:var(--tx);line-height:1.15;}
+.ex-sec{font-size:11px;color:var(--tl);font-weight:500;margin-top:2px;}
+.vrd{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-size:10px;font-weight:800;margin-bottom:13px;}
+.vg{background:rgba(22,163,74,.12);color:var(--gbr);border:1px solid rgba(22,163,74,.24);}
+.vr{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.22);}
+.enums{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px;}
+.en{border-radius:11px;padding:10px 11px;text-align:center;}
+.en-p{background:rgba(109,40,217,.07);border:1px solid rgba(109,40,217,.14);}
+.en-g{background:rgba(22,163,74,.07);border:1px solid rgba(22,163,74,.13);}
+.en-r{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.13);}
+.en-a{background:rgba(217,119,6,.07);border:1px solid rgba(217,119,6,.14);}
+.en-lbl{font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--tl);margin-bottom:3px;}
+.en-val{font-size:clamp(12px,1.8vw,15px);font-weight:900;}
+.ev-p{color:var(--p);}.ev-g{color:var(--gbr);}.ev-r{color:var(--red);}.ev-a{color:var(--ambr);}
+.ex-why{font-size:clamp(12px,1.35vw,13.5px);color:var(--ts);line-height:1.68;margin-bottom:10px;}
+.ex-why strong{color:var(--tx);}
+.sigs{display:flex;flex-direction:column;gap:6px;margin-top:10px;}
+.sig{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;color:var(--ts);line-height:1.52;}
+.sdot{width:7px;height:7px;min-width:7px;border-radius:50%;margin-top:4px;flex-shrink:0;}
+.sd-g{background:var(--g);}.sd-r{background:var(--red);}
+.sig-hl{margin-top:8px;padding:9px 12px;border-radius:9px;font-size:11.5px;line-height:1.55;}
+.shl-g{background:rgba(22,163,74,.07);border-left:3px solid var(--g);}
+.shl-r{background:rgba(220,38,38,.06);border-left:3px solid var(--red);}
+.exfull{grid-column:1/-1;}
+.ex-inner{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+/* SUMMARY TABLE */
+.sumwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:18px;box-shadow:var(--shc);margin-bottom:32px;}
+.sumtbl{width:100%;border-collapse:collapse;min-width:560px;}
+.sumtbl thead th{background:linear-gradient(135deg,var(--p),var(--ph));color:#fff;padding:12px 15px;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:left;}
+.sumtbl tbody td{padding:12px 15px;font-size:12.5px;color:var(--ts);border-bottom:1px solid var(--bd);vertical-align:middle;line-height:1.5;}
+.sumtbl tbody td:first-child{font-weight:800;color:var(--tx);}
+.sumtbl tbody tr:last-child td{border-bottom:none;}
+.sumtbl tbody tr:nth-child(even) td{background:var(--pxs);}
+.tb{display:inline-flex;padding:2px 9px;border-radius:100px;font-size:10px;font-weight:700;}
+.tb-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.tb-r{background:rgba(220,38,38,.1);color:var(--red);}
+.tb-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+/* TRICKS */
+.tricks-sec{background:linear-gradient(158deg,#f5f3ff,#f0fdf4 55%,#fdfcff);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.tgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2.5vw,24px);margin-bottom:44px;}
+.tc{border-radius:22px;border:2px solid;padding:clamp(20px,3vw,30px);position:relative;overflow:hidden;transition:transform .28s,box-shadow .28s;}
+.tc:hover{transform:translateY(-5px);box-shadow:var(--shp);}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.tc1{background:linear-gradient(158deg,var(--pxs),#fdfcff);border-color:rgba(109,40,217,.2);}
+.tc1::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.tc2{background:linear-gradient(158deg,var(--gpale),#fafffe);border-color:rgba(22,163,74,.2);}
+.tc2::before{background:linear-gradient(90deg,var(--g),var(--gh));}
+.tc3{background:linear-gradient(158deg,var(--rpale),#fff5f5);border-color:rgba(220,38,38,.2);}
+.tc3::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.tc4{background:linear-gradient(158deg,var(--apale),#fffbeb);border-color:rgba(217,119,6,.2);}
+.tc4::before{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.tc5{background:linear-gradient(158deg,var(--skypale),#f0f9ff);border-color:rgba(2,132,199,.2);grid-column:1/-1;}
+.tc5::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.tn{display:inline-flex;width:36px;height:36px;border-radius:11px;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;margin-bottom:14px;}
+.tn1{background:linear-gradient(135deg,var(--p),var(--ph));}
+.tn2{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.tn3{background:linear-gradient(135deg,var(--red),#f87171);}
+.tn4{background:linear-gradient(135deg,var(--amb),#f59e0b);}
+.tn5{background:linear-gradient(135deg,var(--sky),#38bdf8);}
+.tc-sub{font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:6px;}
+.ts1{color:var(--p);}.ts2{color:var(--gbr);}.ts3{color:var(--red);}.ts4{color:var(--ambr);}.ts5{color:var(--sky);}
+.tc-title{font-size:clamp(15px,1.9vw,20px);font-weight:900;color:var(--tx);margin-bottom:10px;letter-spacing:-.3px;}
+.tc-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;margin-bottom:14px;}
+.tc-desc strong{color:var(--tx);}
+.tc-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.ts{display:flex;align-items:flex-start;gap:10px;padding:9px 13px;border-radius:10px;font-size:12.5px;color:var(--ts);line-height:1.52;}
+.ts-p{background:rgba(109,40,217,.07);border-left:3px solid var(--p);}
+.ts-g{background:rgba(22,163,74,.07);border-left:3px solid var(--g);}
+.ts-r{background:rgba(220,38,38,.06);border-left:3px solid var(--red);}
+.ts-a{background:rgba(217,119,6,.06);border-left:3px solid var(--amb);}
+.ts-s{background:rgba(2,132,199,.07);border-left:3px solid var(--sky);}
+.ts-arr{font-weight:900;min-width:18px;flex-shrink:0;}
+.tc-res{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;}
+.tcr-g{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.22);}
+.tcr-a{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(217,119,6,.09);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.tcr-r{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(220,38,38,.08);color:var(--red);border:1px solid rgba(220,38,38,.2);}
+.tc5-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,22px);margin-top:14px;}
+/* CHEAT SHEET */
+.cheat{background:linear-gradient(135deg,var(--p),var(--ph),#b45309);border-radius:22px;padding:clamp(22px,3.5vw,44px);color:#fff;position:relative;overflow:hidden;margin-bottom:44px;box-shadow:var(--shp);}
+.cheat::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;}
+.cheat-inner{position:relative;z-index:1;}
+.cheat-badge{display:inline-flex;padding:4px 14px;border-radius:100px;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);margin-bottom:14px;}
+.cheat-title{font-size:clamp(17px,2.5vw,30px);font-weight:900;letter-spacing:-.5px;line-height:1.15;margin-bottom:18px;}
+.cheat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.8vw,16px);}
+.ci{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.2);border-radius:14px;padding:clamp(12px,1.8vw,18px);}
+.ci-num{font-size:10px;font-weight:700;opacity:.65;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.ci-name{font-size:clamp(12px,1.5vw,15px);font-weight:900;margin-bottom:5px;}
+.ci-val{font-size:clamp(10px,1.2vw,12px);opacity:.8;line-height:1.52;}
+.ci-good{border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.1);}
+.ci-warn{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.08);}
+.ci-bad{border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.1);}
+/* DEMAT */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240,#4c1d95 35%,#6d28d9 60%,#059669);padding:clamp(44px,7vw,80px) clamp(22px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:680px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:560px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(14px,2.8vw,30px);flex-wrap:wrap;margin-top:18px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'\2713';color:#4ade80;font-weight:900;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:28px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 52px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:52px;touch-action:manipulation;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:7px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.5);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.4);margin-top:6px;}
+/* NEXT + DISC */
+.nxt{background:linear-gradient(100deg,#3b0e8c,#6d28d9 40%,#7c3aed 70%,#8b5cf6);padding:clamp(18px,3vw,30px) clamp(22px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:26px 26px;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-lbl{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.7vw,15px);color:rgba(255,255,255,.75);font-weight:600;margin-top:2px;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;padding:14px 30px;min-height:50px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:13px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s;white-space:nowrap;flex-shrink:0;touch-action:manipulation;}
+.nxt-btn:hover{transform:translateY(-2px);}
+.nxt-arr{font-size:18px;transition:transform .22s;}
+.nxt-btn:hover .nxt-arr{transform:translateX(4px);}
+.disc{background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);}
+.disc-inner{max-width:1240px;margin:0 auto;padding:clamp(22px,4vw,44px) clamp(18px,5vw,56px);display:flex;align-items:flex-start;gap:18px;}
+.disc-ico{width:46px;height:46px;min-width:46px;border-radius:13px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.disc-lbl{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;}
+.disc-txt{font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;}
+/* ═══ RESPONSIVE ═══ */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.obs-grid{grid-template-columns:1fr 1fr;}.tgrid{grid-template-columns:1fr 1fr;}.tc5{grid-column:1/-1;}.cheat-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){.obs-grid{grid-template-columns:1fr;}.exgrid{grid-template-columns:1fr;}.exfull{grid-column:auto;}.ex-inner{grid-template-columns:1fr;gap:0;}.klobanner{flex-direction:column;}.klo-icon{animation:none;}.insight{flex-direction:column;gap:12px;}.gbh{flex-direction:column;gap:10px;}.rl-step{flex-direction:column;gap:10px;}.tgrid{grid-template-columns:1fr;}.tc5{grid-column:auto;}.tc5-inner{grid-template-columns:1fr;gap:12px;}.cheat-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,30px);}.hstat{flex-direction:column;}.hsi{border-right:none !important;border-bottom:1px solid var(--bd);}.hsi:last-child{border-bottom:none;}.dmfeats{flex-direction:column;align-items:flex-start;gap:9px;}.nxt{flex-direction:column;align-items:flex-start;}.nxt-btn{align-self:stretch;width:100%;justify-content:center;}.disc-inner{flex-direction:column;gap:12px;}.scr-hdr{flex-direction:column;align-items:flex-start;}.sh-bdgs{flex-wrap:wrap;}.enums{grid-template-columns:1fr 1fr;}.tgrid{grid-template-columns:1fr;}.tc5{grid-column:auto;}.tc5-inner{grid-template-columns:1fr;gap:12px;}.tc-res{flex-direction:column;align-items:flex-start;}.tcr-g,.tcr-a,.tcr-r{width:100%;}.cheat-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:640px){.bstbl{min-width:640px;}.sumtbl{min-width:500px;}.obs-grid{grid-template-columns:1fr;}.tgrid{grid-template-columns:1fr;}.tc5-inner{grid-template-columns:1fr;}.cheat-grid{grid-template-columns:1fr;}.tc-res{flex-direction:column;align-items:flex-start;}}
+@media(max-width:480px){.w{padding:28px 14px;}.hh1{letter-spacing:-1.2px;}.hstat{flex-wrap:wrap;}.hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}.hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}.vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}.dmbtn{width:100%;justify-content:center;padding:15px 20px;}.nxt-btn{font-size:13px;padding:12px 16px;}.enums{grid-template-columns:1fr 1fr;}.tgrid{grid-template-columns:1fr;}.tc{padding:18px 16px;}.tc-title{font-size:15px;}.tc5-inner{grid-template-columns:1fr;}.cheat-grid{grid-template-columns:1fr;}.tc-res{flex-direction:column;align-items:flex-start;}.tcr-g,.tcr-a,.tcr-r{width:100%;font-size:10px;}.ts{font-size:12px;padding:8px 11px;}.cheat-title{font-size:17px;}.ci{padding:12px 10px;}.ci-name{font-size:12px;}.ci-val{font-size:10px;}}
+@media(max-width:360px){.w{padding:22px 12px;}.hh1{font-size:clamp(26px,10vw,38px);letter-spacing:-1px;}.dmbtn{font-size:14px;}.enums{grid-template-columns:1fr;}.tc{padding:16px 14px;}.ts{padding:7px 10px;font-size:11.5px;}.cheat-grid{grid-template-columns:1fr;}}
+@media(hover:none) and (pointer:coarse){.excard:hover,.obs-card:hover,.tc:hover{transform:none !important;box-shadow:var(--shc) !important;}.excard:active,.obs-card:active,.tc:active{transform:scale(.98);transition:transform .08s;}.dmbtn:active,.nxt-btn:active{transform:scale(.97);}.dmbtn,.nxt-btn{min-height:52px;}::-webkit-scrollbar{display:none;}.excard,.obs-card,.tc,.klobanner,.insight,.cheat{-webkit-backface-visibility:hidden;backface-visibility:hidden;}a,button,.dmbtn,.nxt-btn,.excard,.obs-card,.tc{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}.tscroll,.sumwrap{-webkit-overflow-scrolling:touch;}.hh1,.h2,.chip,.eyebrow,.vbadge,.tc-title,.tn{-webkit-user-select:none;user-select:none;}.tc-desc,.ts,.ci-val,.ins-desc,.klo-desc{-webkit-user-select:text;user-select:text;}}
+@supports(-webkit-touch-callout:none){body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}.hero{min-height:100svh;min-height:-webkit-fill-available;padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}.vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}.w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}.nxt{padding-bottom:max(18px,env(safe-area-inset-bottom));}.dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}.tscroll,.sumwrap{-webkit-overflow-scrolling:touch;overflow-x:auto;}.hp,.hg,.hr,.hh1 .l1,.hh1 .l2,.hh1 .l3,.hsv,.hsv.r,.hsv.g{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}.orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}a,button,.dmbtn,.nxt-btn,.excard,.obs-card,.tc{-webkit-tap-highlight-color:transparent;}}
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){.dmbtn,.nxt-btn{min-height:52px;}.excard,.obs-card,.tc,.klobanner,.insight,.cheat{-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0);transform:translateZ(0);}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}.rv{opacity:1;transform:none;}.obs-icon,.klo-icon{animation:none !important;}}
+@media print{.dmbanner,.orb,.nxt{display:none;}.rv{opacity:1;transform:none;}body{color:#000;}.w{padding:20px;}.tscroll,.sumwrap{overflow:visible;}.bstbl,.sumtbl{min-width:0;}section,.tc,.tgrid{break-inside:avoid;}.tgrid{grid-template-columns:1fr 1fr;}.cheat-grid{grid-template-columns:1fr 1fr;}.cheat{background:#4c1d95 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<!-- HERO -->
+<section class="hero">
+  <div class="vbadge">Financial Statement Analysis &middot; Balance Sheet</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Module 08 &mdash; Hidden Risks</div>
+  <h1 class="hh1">
+    <span class="l1">Uncovering</span>
+    <span class="l2">Hidden Risks</span>
+    <span class="l3">Off-Balance Sheet Items &middot; Contingent Liabilities</span>
+  </h1>
+  <p class="hsub">Balance Sheet Analysis &middot; Hidden Risks &middot; Contingent Liabilities &middot; CDSL Real Data</p>
+  <p class="hdesc">The most dangerous financial risks are the ones that do not appear on the balance sheet at all. Learning to find and evaluate these hidden obligations separates a careful investor from one who gets surprised by sudden bad news.</p>
+  <div class="hstat">
+    <div class="hsi"><div class="hsv r">Contingent</div><div class="hsl">Possible Liabilities</div></div>
+    <div class="hsi"><div class="hsv">Off-Balance Sheet</div><div class="hsl">Hidden Obligations</div></div>
+    <div class="hsi"><div class="hsv g">Guarantees</div><div class="hsl">Subsidiaries &amp; JVs</div></div>
+    <div class="hsi"><div class="hsv">CDSL Example</div><div class="hsl">Low Risk Model</div></div>
+    <div class="hsi"><div class="hsv">10 Companies</div><div class="hsl">Good vs Risky</div></div>
+  </div>
+</section>
+
+<!-- 01 KLO -->
+<section style="background:#fff;">
+  <div class="w">
+    <div class="chip rv d1">01 &mdash; Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Uncover <span class="hr">Hidden Risks</span> in Any Balance Sheet</h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">By the end of this module you will know exactly where to look in annual reports and Screener.in to find obligations, guarantees, and lawsuits that are not on the main balance sheet &mdash; and judge whether they pose a real threat to the company&rsquo;s financial health.</p>
+    <div class="klobanner rv d4">
+      <div class="klo-icon">&#128163;</div>
+      <div>
+        <div class="klo-tag">Your Core Takeaway &mdash; The Iceberg Problem</div>
+        <div class="klo-title">The balance sheet shows the tip of the iceberg. Below the waterline sit contingent liabilities, guarantees, lawsuits, and off-balance sheet obligations that can sink the ship without warning.</div>
+        <div class="klo-desc">Imagine you buy a house and the seller did not tell you there is a &#8377;50 lakh pending court case about the property, a guarantee he gave to his neighbour&rsquo;s loan, and a lease on equipment that is not in the sale deed. You thought you were getting a &#8377;1 Cr property &mdash; but the true obligation is &#8377;1.5 Cr+. Companies work identically. Enron&rsquo;s collapse in 2001, IL&amp;FS&rsquo;s crisis, and dozens of Indian corporate failures happened because investors read only the main balance sheet &mdash; not the notes and footnotes where the real dangers hide. These notes are available on Screener.in and in every annual report, but most retail investors never read them. This module teaches you exactly where to look and what to look for.</div>
+        <div class="klo-pills">
+          <span class="kp kp-r">&#9878;&#65039; Contingent Liabilities: May or may not crystallise</span>
+          <span class="kp kp-a">&#128203; Off-BS Items: Real obligations not shown</span>
+          <span class="kp kp-p">&#127973; Guarantees: Company backs others&rsquo; debt</span>
+          <span class="kp kp-g">&#128269; Notes to Accounts: Where truth hides</span>
+        </div>
+      </div>
+    </div>
+    <!-- Iceberg infographic -->
+    <div style="margin-top:40px;" class="rv d5">
+      <svg viewBox="0 0 740 310" style="max-width:740px;width:100%;margin:0 auto;display:block;border-radius:20px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="740" height="310" rx="20" fill="#f5f3ff"/>
+        <rect width="740" height="310" rx="20" stroke="#e5e1fb" stroke-width="1.5"/>
+        <!-- Water line -->
+        <rect x="14" y="148" width="712" height="148" rx="0" fill="#dbeafe" opacity=".55"/>
+        <path d="M14 148 Q185 138 370 148 Q555 158 726 148" stroke="#93c5fd" stroke-width="2" fill="none"/>
+        <text x="50" y="168" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="700" fill="#1d4ed8" opacity=".7">WATER LINE &mdash; What investors usually see</text>
+        <!-- Above water: tip (balance sheet) -->
+        <polygon points="370,18 440,148 300,148" fill="#6d28d9" opacity=".85"/>
+        <text x="370" y="70" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">BALANCE</text>
+        <text x="370" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">SHEET</text>
+        <text x="370" y="104" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#ddd6fe">Debt, Equity, Assets</text>
+        <text x="370" y="120" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#ddd6fe">Current Liabilities</text>
+        <text x="370" y="136" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#ddd6fe">Fixed Assets, WC</text>
+        <!-- Tip label -->
+        <rect x="452" y="48" width="180" height="28" rx="8" fill="white" opacity=".85"/>
+        <text x="542" y="66" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#6d28d9">Visible to all investors &#128065;</text>
+        <path d="M451 62 L441 80" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="3 2"/>
+        <!-- Below water: hidden risks -->
+        <polygon points="300,148 440,148 530,296 210,296" fill="#dc2626" opacity=".75"/>
+        <!-- Sub-polygons to show layers -->
+        <polygon points="300,148 440,148 490,220 250,220" fill="#b91c1c" opacity=".5"/>
+        <!-- Hidden items text -->
+        <text x="370" y="178" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="white">CONTINGENT LIABILITIES</text>
+        <text x="370" y="196" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#fecaca">Lawsuits &middot; Tax demands &middot; Environmental claims</text>
+        <text x="370" y="226" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="white">OFF-BALANCE SHEET ITEMS</text>
+        <text x="370" y="242" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#fecaca">Guarantees &middot; Lease commitments &middot; Take-or-pay</text>
+        <text x="370" y="268" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="white">LETTERS OF COMFORT &amp; PLEDGES</text>
+        <text x="370" y="284" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#fecaca">Promoter share pledges &middot; Subsidiary guarantees</text>
+        <!-- Hidden label -->
+        <rect x="100" y="210" width="160" height="28" rx="8" fill="white" opacity=".85"/>
+        <text x="180" y="228" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#dc2626">Hidden from most investors &#128683;</text>
+        <!-- Analyst character (pointing) -->
+        <circle cx="670" cy="90" r="18" fill="#fde8cc"/>
+        <ellipse cx="670" cy="76" rx="16" ry="6" fill="#1e1b4b"/>
+        <circle cx="664" cy="91" r="2.5" fill="#1e1b4b"/><circle cx="676" cy="91" r="2.5" fill="#1e1b4b"/>
+        <path d="M664 99 Q670 105 676 99" stroke="#1e1b4b" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <rect x="658" y="108" width="24" height="30" rx="7" fill="#6d28d9"/>
+        <rect x="636" y="112" width="22" height="8" rx="4" fill="#6d28d9"/>
+        <rect x="682" y="112" width="14" height="8" rx="4" fill="#6d28d9"/>
+        <rect x="661" y="138" width="9" height="18" rx="4" fill="#4c1d95"/>
+        <rect x="674" y="138" width="9" height="18" rx="4" fill="#4c1d95"/>
+        <!-- Magnifying glass -->
+        <circle cx="632" cy="118" r="9" stroke="#6d28d9" stroke-width="2.5" fill="rgba(109,40,217,.1)"/>
+        <path d="M640 126 L648 134" stroke="#6d28d9" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Where to look label -->
+        <rect x="560" y="160" width="166" height="44" rx="10" fill="white" opacity=".92"/>
+        <text x="643" y="179" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="700" fill="#6d28d9">Look in:</text>
+        <text x="643" y="193" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Notes to Accounts (AR) or</text>
+        <text x="643" y="207" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Screener.in &rarr; Annual Report tab</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 02 THREE TYPES -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="chip rv d1">02 &mdash; Three Types of Hidden Obligations</div>
+    <h2 class="h2 rv d2">Contingent Liabilities, OBS Items &amp; <span class="hp">Guarantees Explained</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">Hidden risks come in three flavours. Each sits in a different part of the annual report, carries different probability of becoming a real cash outflow, and requires a different evaluation approach. Understanding the difference is the first step to uncovering them.</p>
+    <div class="obs-grid rv d3">
+      <!-- CONTINGENT LIABILITIES -->
+      <div class="obs-card oc-cl">
+        <div class="obs-icon oi-cl">&#9878;&#65039;</div>
+        <div class="obs-tag ot-cl">Type 1 &mdash; May Crystallise</div>
+        <div class="obs-title">Contingent Liabilities</div>
+        <div class="obs-desc">Contingent liabilities are <strong>possible future obligations</strong> that depend on the outcome of an uncertain event &mdash; typically a lawsuit, government demand, or regulatory order. They are disclosed in the <strong>Notes to Accounts</strong> of every annual report but do NOT appear on the main balance sheet unless the liability becomes probable and quantifiable. The company must disclose them if: (a) a possible obligation exists, and (b) it cannot be reliably estimated to be remote.</div>
+        <div class="obs-items">
+          <div class="obs-item oi-bg-r"><strong>Income tax disputes:</strong> Tax department claims additional taxes; company contests in court. Could be &#8377;500 Cr or &#8377;0 depending on verdict.</div>
+          <div class="obs-item oi-bg-r"><strong>GST / Excise demands:</strong> Indirect tax notices under appeal. Very common in manufacturing companies.</div>
+          <div class="obs-item oi-bg-r"><strong>Customer / vendor lawsuits:</strong> Breach of contract claims, product liability suits, labour disputes.</div>
+          <div class="obs-item oi-bg-r"><strong>Environmental liabilities:</strong> Pollution clean-up orders, regulatory penalties under appeal.</div>
+        </div>
+        <div class="obs-ana oa-r">&#9888; <strong>Key rule:</strong> If total contingent liabilities exceed 20&ndash;30% of net worth, a single adverse verdict could materially hurt the balance sheet. Always check: has the company won or lost similar cases before? Is the quantum growing year-on-year?</div>
+      </div>
+      <!-- OFF-BALANCE SHEET -->
+      <div class="obs-card oc-obs">
+        <div class="obs-icon oi-obs">&#128203;</div>
+        <div class="obs-tag ot-obs">Type 2 &mdash; Real But Hidden</div>
+        <div class="obs-title">Off-Balance Sheet Items</div>
+        <div class="obs-desc">Off-balance sheet items are <strong>real, committed obligations</strong> that accounting rules allow to be kept off the main balance sheet. Unlike contingent liabilities (which may never materialise), these WILL require cash payments &mdash; they are just structured to avoid the balance sheet. Post Ind AS 116 (2019), most operating leases are now on the balance sheet &mdash; but other items still remain off.</div>
+        <div class="obs-items">
+          <div class="obs-item oi-bg-a"><strong>Take-or-pay contracts:</strong> Company committed to buy raw material / power whether or not it uses it. Steel plants, power generators sign these.</div>
+          <div class="obs-item oi-bg-a"><strong>Capital commitments:</strong> Signed contracts to buy machinery / land not yet delivered. Shown in notes as &ldquo;Capital commitments not provided for.&rdquo;</div>
+          <div class="obs-item oi-bg-a"><strong>Undrawn loan commitments:</strong> Banks have committed to lend (credit lines sanctioned) but not yet drawn down. An off-BS contingent obligation for banks.</div>
+          <div class="obs-item oi-bg-a"><strong>Sale and leaseback:</strong> Company sells an asset then leases it back &mdash; generates cash today but creates long-term lease obligation.</div>
+        </div>
+        <div class="obs-ana oa-a">&#128161; <strong>Where to find:</strong> Notes to Accounts &rarr; &ldquo;Commitments and Contingencies&rdquo; section. Also in the Cash Flow Statement footnotes. Screener.in links directly to the Annual Report where these notes live.</div>
+      </div>
+      <!-- GUARANTEES -->
+      <div class="obs-card oc-guar">
+        <div class="obs-icon oi-guar">&#127973;</div>
+        <div class="obs-tag ot-guar">Type 3 &mdash; Backing Others&rsquo; Debt</div>
+        <div class="obs-title">Corporate Guarantees</div>
+        <div class="obs-desc">A corporate guarantee is when <strong>Company A promises to repay Company B&rsquo;s loan</strong> if Company B defaults. If Company B is a subsidiary, associate, or promoter-related entity, this is common and often disclosed. If Company B defaults, Company A must pay &mdash; converting a hidden obligation into a very real and sudden liability. Promoter share pledges work similarly: if the stock price falls below a threshold, lenders can sell pledged shares, causing the stock to crash further.</div>
+        <div class="obs-items">
+          <div class="obs-item oi-bg-p"><strong>Subsidiary guarantees:</strong> Parent company guarantees loans taken by wholly-owned subsidiaries. Usually disclosed in notes.</div>
+          <div class="obs-item oi-bg-p"><strong>JV guarantees:</strong> Company guarantees debt of a joint venture. Risk depends on JV&rsquo;s financial health.</div>
+          <div class="obs-item oi-bg-p"><strong>Promoter pledges:</strong> Promoter has pledged company shares to get personal loans. Visible in shareholding data; if stock falls, lenders dump shares.</div>
+          <div class="obs-item oi-bg-p"><strong>Letters of comfort:</strong> Softer version of guarantee &mdash; parent signals intention to support subsidiary without formal legal obligation.</div>
+        </div>
+        <div class="obs-ana oa-p">&#128161; <strong>Where to find:</strong> (a) Notes to Accounts &rarr; Related Party Transactions &amp; Guarantees Given. (b) BSE/NSE shareholding disclosures &rarr; promoter pledge percentage. (c) Subsidiary financials in the Annual Report &rarr; check their loan-to-equity ratio.</div>
+      </div>
+    </div>
+
+    <!-- Risk ladder -->
+    <div class="risk-ladder rv d5">
+      <div class="rl-inner">
+        <div class="rl-badge">The Hidden Risk Danger Ladder &mdash; Low to Critical</div>
+        <div class="rl-title">How Hidden Risks Escalate into Real Losses</div>
+        <div class="rl-sub">Not all contingent liabilities are equal. This ladder shows how a disclosed risk can move from harmless to catastrophic, and what warning signs to watch for at each stage.</div>
+        <div class="rl-steps">
+          <div class="rl-step"><div class="rl-num rn1">1</div><div><div class="rl-step-title">&#128994; DISCLOSED — Remote Probability</div><div class="rl-step-desc">Liability disclosed in notes. Company&rsquo;s legal team believes outcome is unlikely. Small amount. Multiple similar cases won historically. Safe to ignore unless amount is very large.</div></div></div>
+          <div class="rl-step"><div class="rl-num rn2">2</div><div><div class="rl-step-title">&#128993; WATCH — Possible but Uncertain</div><div class="rl-step-desc">Medium-sized tax dispute or lawsuit under appeal. Outcome unclear. Company has provisioned some amount. Monitor for verdict dates and provision increases in future quarters.</div></div></div>
+          <div class="rl-step"><div class="rl-num rn3">3</div><div><div class="rl-step-title">&#128992; ESCALATING — Amount Growing Year on Year</div><div class="rl-step-desc">Contingent liability quantum is rising every year in the notes. New cases being added. This signals either growing legal risk or aggressive tax authority. Warrants deep investigation before investing.</div></div></div>
+          <div class="rl-step"><div class="rl-num rn4">4</div><div><div class="rl-step-title">&#128308; DANGER — Exceeds 30% of Net Worth</div><div class="rl-step-desc">Total contingent liabilities exceed 30% of shareholders&rsquo; equity. A single adverse outcome could materially impair the balance sheet. Large guarantees to weak subsidiaries. High promoter pledge (&gt;50%). Must investigate immediately.</div></div></div>
+          <div class="rl-step"><div class="rl-num rn5">5</div><div><div class="rl-step-title">&#128308; CRITICAL — Crystallising into Real Loss</div><div class="rl-step-desc">Court ruling against company. Tax demand upheld. Subsidiary defaults, triggering guarantee. Lenders sell pledged shares. The hidden risk becomes a reported loss overnight. By this point, the stock has already crashed. Investors who read the notes ahead of time had a chance to exit.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 CDSL REAL DATA -->
+<section style="background:#fff;">
+  <div class="w">
+    <div class="chip rv d1">03 &mdash; Real Data from Screener.in</div>
+    <h2 class="h2 rv d2">CDSL &mdash; The <span class="hg">Low Hidden-Risk Balance Sheet</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">CDSL is the ideal benchmark for hidden risk analysis &mdash; its contingent liabilities are minimal, guarantees are negligible, and off-balance sheet obligations are transparent and tiny. This makes it easy to understand what healthy disclosures look like before comparing with riskier companies.</p>
+    <div class="scr-wrap rv d4">
+      <div class="scr-hdr">
+        <div><div class="sh-title">CDSL &mdash; Contingent Liabilities &amp; OBS Items (Notes to Accounts)</div><div class="sh-sub">Central Depository Services Ltd &middot; NSE: CDSL &middot; Annual Report Notes &middot; &#8377; Crores</div></div>
+        <div class="sh-bdgs"><span class="sh-bdg">NSE: CDSL</span><span class="sh-bdg">Low Risk Model</span><span class="sh-bdg">Notes to Accounts</span></div>
+      </div>
+      <div class="scr-guide">
+        <span><span class="sg-dot" style="background:var(--red);"></span> Red = Contingent liabilities / risk items</span>
+        <span><span class="sg-dot" style="background:var(--p);"></span> Purple = Commitments / OBS</span>
+        <span><span class="sg-dot" style="background:var(--gbr);"></span> <strong style="color:var(--gbr);">Green = Nil / negligible = ideal</strong></span>
+      </div>
+      <div class="tscroll">
+        <table class="bstbl">
+          <thead><tr><th>Item (from Notes to Accounts)</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>Risk Level</th><th>Investor Action</th></tr></thead>
+          <tbody>
+            <tr class="shdr"><td colspan="8">── CONTINGENT LIABILITIES ──</td></tr>
+            <tr class="g-r"><td>Income Tax disputes under appeal <span class="ann an-r">Tax risk</span></td><td class="zero">Nil</td><td>~2</td><td>~3</td><td>~4</td><td>~5</td><td><span class="ann an-g">Low</span></td><td>Monitor annually; &lt;1% of net worth</td></tr>
+            <tr class="g-r"><td>GST / Indirect Tax demands <span class="ann an-r">Tax</span></td><td class="zero">Nil</td><td class="zero">Nil</td><td class="zero">Nil</td><td class="zero">Nil</td><td class="zero">Nil</td><td><span class="ann an-g">None</span></td><td>No GST exposure &mdash; services model</td></tr>
+            <tr class="g-r"><td>Customer / Vendor litigation <span class="ann an-a">Legal</span></td><td class="zero">Nil</td><td class="zero">Nil</td><td class="zero">Nil</td><td class="zero">Nil</td><td class="zero">Nil</td><td><span class="ann an-g">None</span></td><td>Monopoly &mdash; no contract disputes</td></tr>
+            <tr class="shdr"><td colspan="8">── CAPITAL COMMITMENTS (OBS) ──</td></tr>
+            <tr><td>Capex commitments (contracts signed) <span class="ann an-p">OBS</span></td><td>~8</td><td>~12</td><td>~15</td><td>~18</td><td>~22</td><td><span class="ann an-p">Low</span></td><td>Small server / tech upgrades; funded by cash</td></tr>
+            <tr class="shdr"><td colspan="8">── GUARANTEES &amp; PLEDGES ──</td></tr>
+            <tr class="g-r"><td>Guarantees given for subsidiaries <span class="ann an-g">Guarantee</span></td><td class="zero">Nil</td><td class="zero">Nil</td><td class="zero">Nil</td><td class="zero">Nil</td><td class="zero">Nil</td><td><span class="ann an-g">None</span></td><td>Subsidiaries are small &amp; self-funded</td></tr>
+            <tr class="g-r"><td>Promoter share pledge <span class="ann an-g">Pledge</span></td><td class="zero">0%</td><td class="zero">0%</td><td class="zero">0%</td><td class="zero">0%</td><td class="zero">0%</td><td><span class="ann an-g">None</span></td><td>BSE / NSE shareholding data &mdash; zero pledge</td></tr>
+            <tr class="shdr"><td colspan="8">── SUMMARY ──</td></tr>
+            <tr><td><strong>Total Contingent Liabilities (&#8377; Cr)</strong></td><td class="zero">~0</td><td>~2</td><td>~3</td><td>~4</td><td>~5</td><td><span class="ann an-g">Excellent</span></td><td>&lt;0.5% of net worth &mdash; negligible</td></tr>
+            <tr><td><strong>Net Worth (&#8377; Cr)</strong></td><td>~900</td><td>~1,100</td><td>~1,300</td><td>~1,550</td><td>~1,780</td><td>&mdash;</td><td>Contingent % of NW = &lt;0.5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="rv d5" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,22px);margin-bottom:32px;">
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--gpale),#fafffe);border:1.5px solid rgba(22,163,74,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:7px;">&#10004; Why CDSL Has Almost No Hidden Risk</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>CDSL&rsquo;s business model creates almost no hidden risk exposure:</strong> It is a monopoly depository regulated by SEBI &mdash; no customers can sue it for a competing product, no government can dispute its business model, and its revenue (settlement fees, annual maintenance charges) is non-negotiable and non-discretionary. The company has no subsidiaries that require guarantees, no manufacturing operations creating environmental liability, no long-term purchase contracts creating take-or-pay risk. The only contingent liability that appears (&#8377;4&ndash;5 Cr of minor tax disputes) is less than 0.3% of net worth &mdash; statistically irrelevant. This is the benchmark standard.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--pxs),#fdfcff);border:1.5px solid rgba(109,40,217,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:7px;">&#128202; How to Find Contingent Liabilities on Screener.in</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>Step-by-step:</strong> Screener.in &rarr; search company &rarr; Annual Report tab &rarr; download latest Annual Report PDF. Open PDF &rarr; search &ldquo;Contingent Liabilities&rdquo; or &ldquo;Notes to Accounts&rdquo; &rarr; look for Note number covering &ldquo;Contingencies and Commitments&rdquo; (usually Note 30&ndash;40 in most reports). Also check: <strong>(a)</strong> BSE/NSE filings &rarr; Shareholding Pattern &rarr; Promoter Pledge % column. <strong>(b)</strong> Screener.in &rarr; Balance Sheet &rarr; scroll down &rarr; some companies show contingent liabilities in a separate row. <strong>(c)</strong> Screener.in &rarr; Peers tab &rarr; compare contingent liabilities across the sector.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--rpale),#fff5f5);border:1.5px solid rgba(220,38,38,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:7px;">&#128680; The 3 Questions to Ask for Every Contingent Liability</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>Question 1: How large is it relative to net worth?</strong> Under 10% = manageable. Over 30% = investigate urgently. <strong>Question 2: Is the amount growing year-on-year?</strong> Rising contingent liabilities = new legal problems being added or existing ones escalating. <strong>Question 3: What has the company&rsquo;s track record been?</strong> If past contingent liabilities were resolved in the company&rsquo;s favour &mdash; current ones are likely manageable. If past liabilities resulted in actual outflows &mdash; treat current ones more seriously. All three answers come from comparing the last 5 years of annual report Notes to Accounts sections.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--apale),#fffbeb);border:1.5px solid rgba(217,119,6,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ambr);margin-bottom:7px;">&#9728;&#65039; Promoter Pledge &mdash; The Fastest Hidden Risk Check</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>The single fastest hidden risk check for any stock:</strong> Go to BSE/NSE &rarr; search company &rarr; Shareholding Pattern &rarr; look at Promoter section &rarr; find &ldquo;Shares Pledged or Encumbered.&rdquo; If this number is above 20% of promoter holding, the promoter has taken personal loans against company shares. If the stock falls significantly, lenders dump those shares in the market, pushing the price down further &mdash; a dangerous spiral. Screener.in also shows this data in the Shareholding section. Zero pledge (like CDSL) = best. Over 50% pledge = serious warning. Over 70% = avoid entirely.</p>
+      </div>
+    </div>
+    <div class="insight rv d6">
+      <div class="ins-ico">&#128269;</div>
+      <div>
+        <div class="ins-tag">The Hidden Risk Master Check</div>
+        <div class="ins-title">Five Places to Find Hidden Risk in Any Company &mdash; All Available Free</div>
+        <div class="ins-desc">1. <strong>Annual Report &rarr; Notes to Accounts &rarr; Contingencies</strong> &mdash; total quantum, year-on-year trend. 2. <strong>BSE/NSE Shareholding Pattern &rarr; Promoter Pledge %</strong> &mdash; zero is ideal, over 50% is a warning. 3. <strong>Annual Report &rarr; Related Party Transactions</strong> &mdash; guarantees given to subsidiaries/JVs. 4. <strong>Annual Report &rarr; Capital Commitments</strong> &mdash; signed but unspent capex contracts. 5. <strong>Annual Report &rarr; Subsidiary Financials</strong> &mdash; if subsidiaries are loss-making, guarantees given to them are at higher risk of crystallising. Five checks, 20 minutes, could save you from a stock that collapses overnight.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMAT BANNER -->
+<section class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Check Hidden Risks Before You Invest</div>
+    <div class="dmh">Open a Free Demat Account &amp;<br><span class="dmhs">Start Reading Notes to Accounts Today.</span></div>
+    <div class="dmsub">Every annual report reveals what the balance sheet hides. Open a Demat account to access real-time company data, screener tools, and annual reports for free.</div>
+    <div class="dmfeats"><div class="dmf">&#8377;0 Account Opening Fee</div><div class="dmf">Annual Report Access</div><div class="dmf">Zero Brokerage on Delivery</div><div class="dmf">SEBI Regulated &amp; Trusted</div></div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn">&#128640;&nbsp; Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmrating">4.8 &middot; Trusted by 1 Crore+ Investors</span></div>
+    <div class="dmnote">No spam. No hidden charges. SEBI registered broker.</div>
+  </div>
+</section>
+
+<!-- 04 GOOD vs BAD -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="chip rv d1">04 &mdash; Good vs Risky Hidden Obligations</div>
+    <h2 class="h2 rv d2">Hidden Risk <span class="hp">in Real Companies</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">The best way to master hidden risk analysis is through real companies. Here are 5 with clean, low-risk off-balance sheet profiles and 5 where hidden obligations created real damage to investors &mdash; all from public disclosures.</p>
+
+    <div class="gbh rv d2 gbh-g">
+      <div class="gbh-ico gi-g">&#10004;</div>
+      <div><div class="gbh-title">5 Companies With Clean Hidden Risk Profiles</div><div class="gbh-sub">Low or nil contingent liabilities &middot; Zero promoter pledge &middot; No risky guarantees &middot; Transparent disclosures</div></div>
+    </div>
+    <div class="exgrid">
+      <div class="excard eg1 rv d2">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pmd));">&#128202;</div><div><div class="ex-name">CDSL</div><div class="ex-sec">Depository Services &middot; NSE: CDSL</div></div></div>
+        <div class="vrd vg">&#10004; Near-Zero Contingent Liabilities</div>
+        <div class="enums">
+          <div class="en en-g"><div class="en-lbl">Contingent Liab.</div><div class="en-val ev-g">&lt;&#8377;5 Cr</div></div>
+          <div class="en en-g"><div class="en-lbl">Promoter Pledge</div><div class="en-val ev-g">0%</div></div>
+          <div class="en en-g"><div class="en-lbl">Guarantees Given</div><div class="en-val ev-g">Nil</div></div>
+          <div class="en en-g"><div class="en-lbl">% of Net Worth</div><div class="en-val ev-g">&lt;0.3%</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s clean:</strong> CDSL&rsquo;s monopoly depository model creates virtually no hidden risk. Tax disputes are negligible (&lt;&#8377;5 Cr vs &#8377;1,780 Cr net worth). Zero promoter pledges &mdash; BSE holdings data confirms this every quarter. No subsidiaries requiring guarantees. No take-or-pay contracts. The Notes to Accounts section of CDSL&rsquo;s annual report is the shortest of any company its size because there simply are no hidden obligations to disclose.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Contingent liabilities &lt;0.3% of net worth &mdash; irrelevant in magnitude</div>
+          <div class="sig"><div class="sdot sd-g"></div>Zero promoter pledge for 10+ years &mdash; confirmed quarterly in BSE data</div>
+          <div class="sig"><div class="sdot sd-g"></div>No guarantees to subsidiaries &mdash; subsidiaries are tiny and self-funded</div>
+          <div class="sig"><div class="sdot sd-g"></div>SEBI-regulated monopoly &mdash; business model itself reduces litigation risk</div>
+        </div>
+      </div>
+      <div class="excard eg2 rv d3">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--gpale),#d1fae5);">&#127949;&#65039;</div><div><div class="ex-name">Bajaj Auto</div><div class="ex-sec">Two-Wheelers &middot; NSE: BAJAJ-AUTO</div></div></div>
+        <div class="vrd vg">&#10004; Minimal Contingent Liabilities, Zero Pledge</div>
+        <div class="enums">
+          <div class="en en-g"><div class="en-lbl">Contingent Liab.</div><div class="en-val ev-g">~&#8377;800 Cr</div></div>
+          <div class="en en-g"><div class="en-lbl">Promoter Pledge</div><div class="en-val ev-g">0%</div></div>
+          <div class="en en-g"><div class="en-lbl">% of Net Worth</div><div class="en-val ev-g">~5%</div></div>
+          <div class="en en-g"><div class="en-lbl">Track Record</div><div class="en-val ev-g">Mostly resolved</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s clean:</strong> Bajaj Auto has modest contingent liabilities (mostly product liability and indirect tax matters, ~5% of net worth) which is normal for a manufacturing company of its scale. Zero promoter pledge &mdash; the Bajaj family has never pledged shares. Historical contingent liabilities have been resolved in Bajaj&rsquo;s favour at a high rate. The company&rsquo;s &#8377;18,000+ Cr cash pile dwarfs all hidden obligations, providing an enormous buffer even if every contingent liability crystallised simultaneously.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>~5% contingent liabilities to net worth &mdash; healthy for a manufacturer</div>
+          <div class="sig"><div class="sdot sd-g"></div>Zero promoter pledge &mdash; Bajaj family never pledged any shares</div>
+          <div class="sig"><div class="sdot sd-g"></div>&#8377;18,000+ Cr cash = 20&times;+ buffer over all contingent liabilities</div>
+          <div class="sig"><div class="sdot sd-g"></div>Historical resolution rate high &mdash; most past disputes resolved favourably</div>
+        </div>
+      </div>
+      <div class="excard eg3 rv d4">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--skypale),#e0f2fe);">&#128187;</div><div><div class="ex-name">TCS</div><div class="ex-sec">IT Services &middot; NSE: TCS</div></div></div>
+        <div class="vrd vg">&#10004; Low Risk Despite Scale &mdash; Strong Legal Track Record</div>
+        <div class="enums">
+          <div class="en en-p"><div class="en-lbl">Contingent Liab.</div><div class="en-val ev-p">~&#8377;5,000 Cr</div></div>
+          <div class="en en-g"><div class="en-lbl">Promoter Pledge</div><div class="en-val ev-g">0%</div></div>
+          <div class="en en-g"><div class="en-lbl">% of Net Worth</div><div class="en-val ev-g">~8%</div></div>
+          <div class="en en-g"><div class="en-lbl">Cash Buffer</div><div class="en-val ev-g">&#8377;55,000+ Cr</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s manageable:</strong> TCS does have ~&#8377;5,000 Cr of contingent liabilities (primarily income tax disputes over transfer pricing with subsidiaries) &mdash; but this is only ~8% of net worth, and TCS sits on &#8377;55,000+ Cr of cash and investments. Even if every dispute went against TCS simultaneously, the cash buffer covers it 10&times;. Zero promoter pledge. Tax disputes are common for large IT companies operating across 50+ jurisdictions, but TCS has a strong historical resolution rate and world-class legal teams.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>~8% contingent liabilities to NW &mdash; manageable, well within safety zone</div>
+          <div class="sig"><div class="sdot sd-g"></div>Primarily transfer pricing disputes &mdash; common for global IT companies</div>
+          <div class="sig"><div class="sdot sd-g"></div>&#8377;55,000+ Cr cash = massive buffer; no real financial risk</div>
+          <div class="sig"><div class="sdot sd-g"></div>Zero promoter pledge &mdash; Tata Sons never pledged TCS shares</div>
+        </div>
+      </div>
+      <div class="excard eg4 rv d5">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--apale),#fef3c7);">&#128293;</div><div><div class="ex-name">Pidilite Industries</div><div class="ex-sec">Adhesives &middot; NSE: PIDILITIND</div></div></div>
+        <div class="vrd vg">&#10004; Clean Disclosures &mdash; Low Manufacturing Risk</div>
+        <div class="enums">
+          <div class="en en-g"><div class="en-lbl">Contingent Liab.</div><div class="en-val ev-g">~&#8377;200 Cr</div></div>
+          <div class="en en-g"><div class="en-lbl">Promoter Pledge</div><div class="en-val ev-g">0%</div></div>
+          <div class="en en-g"><div class="en-lbl">% of Net Worth</div><div class="en-val ev-g">~3%</div></div>
+          <div class="en en-g"><div class="en-lbl">OBS Commitments</div><div class="en-val ev-g">Small</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s clean:</strong> Pidilite has very low contingent liabilities (~3% of net worth) primarily from indirect tax matters relating to chemical inputs. Environmental liability is minimal because Pidilite uses relatively benign chemicals (adhesives, sealants) compared to petrochemicals or mining. Zero promoter pledge &mdash; the Parekh family has maintained full unencumbered shareholding. Capital commitments (factory expansions) are small relative to cash generation. Subsidiary guarantees are nil; subsidiaries are small, profitable, and self-sustaining.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>~3% contingent liabilities to NW &mdash; one of the lowest in specialty chemicals</div>
+          <div class="sig"><div class="sdot sd-g"></div>Zero promoter pledge &mdash; Parekh family commitment to unencumbered holding</div>
+          <div class="sig"><div class="sdot sd-g"></div>Low environmental risk &mdash; adhesive chemistry is relatively benign</div>
+          <div class="sig"><div class="sdot sd-g"></div>Small, profitable subsidiaries &mdash; guarantee risk negligible</div>
+        </div>
+      </div>
+      <!-- GOOD 5 FULL WIDTH -->
+      <div class="excard eg5 exfull rv d6">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,#f0fdf4,#d1fae5);">&#127963;&#65039;</div><div><div class="ex-name">HDFC Bank &mdash; Transparent Disclosures Despite Massive Scale</div><div class="ex-sec">Private Bank &middot; NSE: HDFCBANK &middot; Rigorous Off-Balance Sheet Disclosures</div></div></div>
+        <div class="vrd vg">&#10004; Large but Well-Disclosed &amp; Well-Provisioned OBS Items</div>
+        <div class="ex-inner">
+          <div>
+            <div class="enums">
+              <div class="en en-p"><div class="en-lbl">Contingent Liab.</div><div class="en-val ev-p">&#8377;16L+ Cr</div></div>
+              <div class="en en-g"><div class="en-lbl">Promoter Pledge</div><div class="en-val ev-g">0%</div></div>
+              <div class="en en-g"><div class="en-lbl">NPA Provision</div><div class="en-val ev-g">PCR &gt;75%</div></div>
+              <div class="en en-g"><div class="en-lbl">Capital Adequacy</div><div class="en-val ev-g">18.8%</div></div>
+            </div>
+            <div class="ex-why" style="margin-top:12px;"><strong>Why it&rsquo;s managed despite huge size:</strong> HDFC Bank has &#8377;16+ lakh crore of off-balance sheet items &mdash; primarily letters of credit, bank guarantees issued to customers, and foreign exchange forward contracts. For a bank, these are <em>normal business activities</em>. The risk is managed through SEBI/RBI regulatory oversight, Provision Coverage Ratio &gt;75% (adequate provisioning for expected losses), and Capital Adequacy Ratio of 18.8% (double the regulatory minimum). Key: the disclosure is extremely thorough in HDFC Bank&rsquo;s annual report &mdash; every OBS item is categorised by type, tenure, and risk weight. This transparency is what distinguishes a well-managed bank from a risky one.</div>
+          </div>
+          <div>
+            <div class="sigs" style="margin-top:0;">
+              <div class="sig"><div class="sdot sd-g"></div>OBS items are standard banking instruments (LCs, BGs, FX forwards) &mdash; not reckless</div>
+              <div class="sig"><div class="sdot sd-g"></div>RBI&rsquo;s regulatory framework mandates capital allocation against every OBS item</div>
+              <div class="sig"><div class="sdot sd-g"></div>PCR &gt;75% &mdash; already provisioned for 75%+ of expected loan losses</div>
+              <div class="sig"><div class="sdot sd-g"></div>Zero promoter pledge &mdash; HDFC Ltd (promoter) never encumbered shares</div>
+              <div class="sig-hl shl-g"><strong>For banks: use different metrics.</strong> Standard contingent liability analysis does not apply to banks &mdash; their entire business involves off-balance sheet commitments. Instead, use: Provision Coverage Ratio (&gt;70% = well-provisioned), Gross NPA% (&lt;3% = clean loans), Capital Adequacy Ratio (&gt;12% = well-capitalised). HDFC Bank passes all three comfortably, making its massive OBS book a sign of business activity, not hidden risk.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 BAD -->
+    <div class="gbh rv d2 gbh-r" style="margin-top:44px;">
+      <div class="gbh-ico gi-r">&#9888;</div>
+      <div><div class="gbh-title">5 Companies Where Hidden Obligations Created Real Investor Pain</div><div class="gbh-sub">Large contingent liabilities &middot; High promoter pledge &middot; Subsidiary guarantees crystallised &middot; Investors blindsided</div></div>
+    </div>
+    <div class="exgrid">
+      <div class="excard eb1 rv d2">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">&#128161;</div><div><div class="ex-name">IL&amp;FS &mdash; Hidden Subsidiary Guarantees</div><div class="ex-sec">Infrastructure Finance &middot; Crisis September 2018</div></div></div>
+        <div class="vrd vr">&#128680; Subsidiary Guarantees Triggered Chain Defaults</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Guarantees to Subs</div><div class="en-val ev-r">&#8377;20,000+ Cr</div></div>
+          <div class="en en-r"><div class="en-lbl">Total Defaults</div><div class="en-val ev-r">&#8377;91,000 Cr</div></div>
+          <div class="en en-r"><div class="en-lbl">Subsidiaries</div><div class="en-val ev-r">300+</div></div>
+          <div class="en en-r"><div class="en-lbl">Pledge %</div><div class="en-val ev-r">Very High</div></div>
+        </div>
+        <div class="ex-why"><strong>What happened:</strong> IL&amp;FS had 300+ subsidiaries and special purpose vehicles (SPVs) for various infrastructure projects. The parent company had given massive guarantees to lenders of these subsidiaries &mdash; commitments hidden in the Notes to Accounts that most analysts did not track. When the SPVs began defaulting on commercial paper in September 2018, the guarantees crystallised simultaneously across multiple entities, creating a &#8377;91,000 Cr default chain. The main balance sheet had looked manageable &mdash; it was the off-balance sheet guarantees that caused the catastrophe. Rated AAA until weeks before the collapse.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>&#8377;20,000+ Cr guarantees to 300+ subsidiaries hidden in notes &mdash; not visible on main BS</div>
+          <div class="sig"><div class="sdot sd-r"></div>Maturity mismatch (short-term CP funding long-term infra) compounded the crisis</div>
+          <div class="sig"><div class="sdot sd-r"></div>AAA rating right up to default &mdash; rating agencies missed the OBS risk entirely</div>
+          <div class="sig"><div class="sdot sd-r"></div>Lesson: Read subsidiary disclosures and guarantee notes, not just the main balance sheet</div>
+        </div>
+      </div>
+      <div class="excard eb2 rv d3">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,#faf5ff,#ede9fe);">&#128184;</div><div><div class="ex-name">DHFL &mdash; Fraudulent Off-Balance Sheet Entities</div><div class="ex-sec">Housing Finance &middot; Collapsed 2019</div></div></div>
+        <div class="vrd vr">&#128680; Fraudulent OBS Entities Hiding Real Liabilities</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Fake Loan Entities</div><div class="en-val ev-r">&#8377;34,000 Cr</div></div>
+          <div class="en en-r"><div class="en-lbl">Actual Defaults</div><div class="en-val ev-r">&#8377;90,000+ Cr</div></div>
+          <div class="en en-r"><div class="en-lbl">Promoter Pledge</div><div class="en-val ev-r">Very High</div></div>
+          <div class="en en-r"><div class="en-lbl">Credit Rating</div><div class="en-val ev-r">AA to Default</div></div>
+        </div>
+        <div class="ex-why"><strong>What happened:</strong> DHFL&rsquo;s promoters created a network of shadow companies (off-balance sheet entities) and directed &#8377;34,000+ Cr of home loan borrowings to these fake companies, which then diverted the money. These entities and their obligations were never disclosed in the main balance sheet. Depositors and NCD holders had lent to what they thought was a legitimate housing finance company &mdash; but a massive off-balance sheet fraud had stripped out the assets. By the time it was discovered, the company had defaulted on &#8377;90,000+ Cr. This is the extreme end of OBS risk &mdash; outright fraud, not just accounting.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>&#8377;34,000 Cr funnelled through undisclosed off-balance sheet entities</div>
+          <div class="sig"><div class="sdot sd-r"></div>Promoter had borrowed personally using pledged DHFL shares</div>
+          <div class="sig"><div class="sdot sd-r"></div>Warning sign visible earlier: related party loans growing rapidly in notes</div>
+          <div class="sig"><div class="sdot sd-r"></div>Lesson: Rising related party transactions + high promoter pledge = fraud risk flag</div>
+        </div>
+      </div>
+      <div class="excard eb3 rv d4">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fee2e2);">&#9889;</div><div><div class="ex-name">Suzlon Energy (Peak Debt Period)</div><div class="ex-sec">Wind Energy &middot; NSE: SUZLON &middot; Guarantee Trap</div></div></div>
+        <div class="vrd vr">&#128680; Promoter Pledge &gt;90% + Subsidiary Guarantees</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Promoter Pledge</div><div class="en-val ev-r">&gt;90% at peak</div></div>
+          <div class="en en-r"><div class="en-lbl">Sub. Guarantees</div><div class="en-val ev-r">Large</div></div>
+          <div class="en en-r"><div class="en-lbl">Contingent Liab.</div><div class="en-val ev-r">High vs NW</div></div>
+          <div class="en en-r"><div class="en-lbl">Debt Peak</div><div class="en-val ev-r">&#8377;11,860 Cr</div></div>
+        </div>
+        <div class="ex-why"><strong>What happened:</strong> Suzlon Energy&rsquo;s promoter pledged over 90% of their holdings to get loans against shares. When the wind energy sector hit problems and Suzlon&rsquo;s stock fell, lenders sold the pledged shares &mdash; causing the stock to fall further in a vicious spiral. Simultaneously, Suzlon had given guarantees to overseas subsidiaries (German and US wind companies acquired in the 2008 boom) whose performance deteriorated. These guarantees were disclosed in notes but few investors read them. The combination of high pledge + overseas subsidiary guarantees created a hidden risk multiplier that became visible only when the stock had already fallen 80%+.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>Promoter pledge &gt;90% &mdash; any share price decline triggers forced selling</div>
+          <div class="sig"><div class="sdot sd-r"></div>Overseas subsidiary guarantees crystallised when European wind revenues fell</div>
+          <div class="sig"><div class="sdot sd-r"></div>Warning visible: Notes showed rising guarantee amounts + promoter pledge data on BSE</div>
+          <div class="sig"><div class="sdot sd-r"></div>Lesson: Check promoter pledge % on BSE quarterly &mdash; over 50% is a serious warning</div>
+        </div>
+      </div>
+      <div class="excard eb4 rv d5">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--apale),#fef3c7);">&#127958;&#65039;</div><div><div class="ex-name">Coffee Day Group (CCD) &mdash; Hidden Personal Guarantees</div><div class="ex-sec">Retail &middot; Founder Tragedy 2019 &middot; Pledges &amp; Personal Guarantees</div></div></div>
+        <div class="vrd vr">&#128680; Promoter Personal Loans Against Pledged Shares</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Promoter Pledge</div><div class="en-val ev-r">~70-80%</div></div>
+          <div class="en en-r"><div class="en-lbl">Personal Loans</div><div class="en-val ev-r">&#8377;6,000 Cr+</div></div>
+          <div class="en en-r"><div class="en-lbl">Undisclosed</div><div class="en-val ev-r">Initially hidden</div></div>
+          <div class="en en-r"><div class="en-lbl">Stock Crash</div><div class="en-val ev-r">-70%+ in days</div></div>
+        </div>
+        <div class="ex-why"><strong>What happened:</strong> The founder of Cafe Coffee Day had taken over &#8377;6,000 Cr of personal loans using pledged CCD group shares as collateral. These personal borrowings by the promoter were not fully disclosed in the company&rsquo;s balance sheet or notes &mdash; they were personal obligations that the market did not know about. When questions arose in 2019, the stock collapsed 60-70% within days as lenders began dumping pledged shares. The promoter had given personal guarantees across multiple group entities. Hidden personal leverage at the promoter level &mdash; different from corporate guarantees but equally dangerous for shareholders.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>&#8377;6,000+ Cr personal loans by promoter partially hidden from investors</div>
+          <div class="sig"><div class="sdot sd-r"></div>70-80% promoter pledge visible on BSE data &mdash; huge red flag if tracked</div>
+          <div class="sig"><div class="sdot sd-r"></div>When disclosed, stock fell 70% in days as pledge selling cascaded</div>
+          <div class="sig"><div class="sdot sd-r"></div>Lesson: BSE quarterly pledge data is the earliest warning &mdash; check every quarter</div>
+        </div>
+      </div>
+      <!-- BAD 5 FULL WIDTH -->
+      <div class="excard eb5 exfull rv d6">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fee2e2);">&#127981;</div><div><div class="ex-name">Large Conglomerates with Stressed Subsidiaries &mdash; The Guarantee Trap Pattern</div><div class="ex-sec">Pattern seen across: Group companies with weak JV / subsidiary networks</div></div></div>
+        <div class="vrd vr">&#128680; Parent Guarantee to Weak Subsidiary = Time Bomb</div>
+        <div class="ex-inner">
+          <div>
+            <div class="enums">
+              <div class="en en-r"><div class="en-lbl">Guarantee Quantum</div><div class="en-val ev-r">30&ndash;50% of NW</div></div>
+              <div class="en en-r"><div class="en-lbl">Sub. Performance</div><div class="en-val ev-r">Losses &amp; Declining</div></div>
+              <div class="en en-r"><div class="en-lbl">Contingent Liab.</div><div class="en-val ev-r">Rising Fast</div></div>
+              <div class="en en-r"><div class="en-lbl">Promoter Pledge</div><div class="en-val ev-r">Elevated</div></div>
+            </div>
+            <div class="ex-why" style="margin-top:12px;"><strong>The pattern and why it fails:</strong> A parent company in a large conglomerate gives corporate guarantees to lenders of its subsidiary or JV. Initially, the subsidiary is healthy and the guarantee is theoretical. Over time the subsidiary&rsquo;s business deteriorates &mdash; revenues fall, losses mount. The lenders now have a weak borrower but a strong guarantor (the parent). When the subsidiary finally defaults, the guarantee triggers immediately &mdash; the parent must suddenly pay the subsidiary&rsquo;s entire loan. This converts a disclosed-but-ignored footnote into a sudden, massive balance sheet hit. The stock crashes 40-70% overnight when the guarantee crystallises.</div>
+          </div>
+          <div>
+            <div class="sigs" style="margin-top:0;">
+              <div class="sig"><div class="sdot sd-r"></div>Guarantees given to subsidiaries disclosed in Notes &mdash; usually ignored by most investors</div>
+              <div class="sig"><div class="sdot sd-r"></div>Subsidiary annual reports (in parent&rsquo;s AR) show deteriorating financials for years before crisis</div>
+              <div class="sig"><div class="sdot sd-r"></div>Guarantee quantum growing year-on-year = subsidiary needing more loan support</div>
+              <div class="sig"><div class="sdot sd-r"></div>Parent&rsquo;s promoter pledge also rising = parent itself financially stretched</div>
+              <div class="sig-hl shl-r"><strong>How to spot this pattern:</strong> Annual Report &rarr; Notes &rarr; find &ldquo;Guarantees given on behalf of subsidiaries/JVs.&rdquo; Note the amount. Then open the subsidiary&rsquo;s standalone financials in the same Annual Report &rarr; check if it is profitable. If guarantee quantum is &gt;20% of parent net worth AND subsidiary is loss-making &rarr; high risk of guarantee crystallisation. This takes 20 minutes per company and catches 80% of guarantee traps before they become newsworthy.</div>
+              <div class="sig-hl shl-g" style="margin-top:8px;"><strong>Safe pattern:</strong> Guarantees to subsidiaries are fine if: (a) amount &lt;10% of parent net worth, (b) subsidiary is profitable and growing, (c) subsidiary could service the loans independently. All three conditions together = low risk guarantee. Any one condition failing = investigate further.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary table -->
+    <p class="rv d6" style="font-size:clamp(17px,2.2vw,24px);font-weight:900;color:var(--tx);margin-bottom:22px;">&#128202; All 10 Companies &mdash; Hidden Risk at a Glance</p>
+    <div class="sumwrap rv d6">
+      <table class="sumtbl">
+        <thead><tr><th>Company</th><th>Contingent Liab.</th><th>% of Net Worth</th><th>Promoter Pledge</th><th>Guarantees Given</th><th>Key Risk Factor</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>CDSL</td><td>&lt;&#8377;5 Cr</td><td>&lt;0.3%</td><td>0%</td><td>Nil</td><td>Near-zero exposure, monopoly model</td><td><span class="tb tb-g">&#10004; Excellent</span></td></tr>
+          <tr><td>Bajaj Auto</td><td>~&#8377;800 Cr</td><td>~5%</td><td>0%</td><td>Nil</td><td>Normal manufacturing exposure</td><td><span class="tb tb-g">&#10004; Clean</span></td></tr>
+          <tr><td>TCS</td><td>~&#8377;5,000 Cr</td><td>~8%</td><td>0%</td><td>Minimal</td><td>Transfer pricing disputes &mdash; manageable</td><td><span class="tb tb-g">&#10004; Managed</span></td></tr>
+          <tr><td>Pidilite</td><td>~&#8377;200 Cr</td><td>~3%</td><td>0%</td><td>Nil</td><td>Low environmental &amp; tax risk</td><td><span class="tb tb-g">&#10004; Low Risk</span></td></tr>
+          <tr><td>HDFC Bank</td><td>&#8377;16L+ Cr OBS</td><td>N/A (bank)</td><td>0%</td><td>Normal LCs &amp; BGs</td><td>Well-provisioned, RBI regulated</td><td><span class="tb tb-g">&#10004; Transparent</span></td></tr>
+          <tr><td>IL&amp;FS</td><td>&#8377;20,000+ Cr</td><td>&gt;100% NW</td><td>High</td><td>&#8377;20,000+ Cr</td><td>Sub. guarantees triggered chain default</td><td><span class="tb tb-r">&#128680; Collapsed</span></td></tr>
+          <tr><td>DHFL</td><td>Hidden fraud</td><td>N/A</td><td>Very High</td><td>Fake entities</td><td>Fraudulent OBS entities, &#8377;34k Cr diverted</td><td><span class="tb tb-r">&#128680; Fraud</span></td></tr>
+          <tr><td>Suzlon (peak)</td><td>High</td><td>&gt;30% NW</td><td>&gt;90%</td><td>Overseas subs.</td><td>Pledge + guarantee double exposure</td><td><span class="tb tb-r">&#128680; Crisis</span></td></tr>
+          <tr><td>CCD Group</td><td>Hidden personal</td><td>High</td><td>70&ndash;80%</td><td>Personal loans</td><td>Promoter personal loans undisclosed</td><td><span class="tb tb-r">&#128680; Collapsed</span></td></tr>
+          <tr><td>Conglomerate pattern</td><td>30&ndash;50% NW</td><td>High</td><td>Elevated</td><td>Stressed subs.</td><td>Guarantee to loss-making subsidiary</td><td><span class="tb tb-r">&#128680; High Risk</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight rv d6">
+      <div class="ins-ico">&#127919;</div>
+      <div>
+        <div class="ins-tag">The Golden Rule for Hidden Risks</div>
+        <div class="ins-title">Always Read the Notes. A Stock That Looks Cheap May Be Hiding Obligations That Make It Expensive.</div>
+        <div class="ins-desc">Contingent liabilities &lt;10% of net worth + zero promoter pledge + no guarantees to loss-making subsidiaries = safe hidden risk profile. Any one of these failing demands investigation before investing. The notes to accounts section of every annual report is freely available and typically 20&ndash;30 pages &mdash; reading it takes 30 minutes and can save years of returns. The companies that blindsided investors most spectacularly &mdash; IL&amp;FS, DHFL, Suzlon, CCD &mdash; all had clear warning signals in the notes that were ignored.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 TRICKS -->
+<section class="tricks-sec">
+  <div class="w">
+    <div class="chip rv d1">05 &mdash; Tricks to Find Hidden Risks Instantly</div>
+    <h2 class="h2 rv d2">5 Shortcuts to <span class="hp">Uncover Hidden Obligations</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">These are field-tested tricks to spot contingent liabilities and off-balance sheet risks in under 10 minutes &mdash; before they become tomorrow&rsquo;s headline. All data is publicly available.</p>
+
+    <div class="tgrid rv d3">
+      <div class="tc tc1">
+        <div class="tn tn1">1</div>
+        <div class="tc-sub ts1">Annual Report &mdash; Notes to Accounts</div>
+        <div class="tc-title">The &ldquo;Contingent Liab. as % of Net Worth&rdquo; Trick</div>
+        <div class="tc-desc">Every annual report must disclose contingent liabilities in a specific note. Open the Annual Report (linked from Screener.in) and search for &ldquo;Contingent Liabilities.&rdquo; Note the total amount. Then find Total Equity (Share Capital + Reserves) from the main balance sheet. <strong>Calculate: Contingent Liabilities &divide; Total Equity &times; 100.</strong> Under 10% = safe. 10&ndash;30% = monitor carefully. Over 30% = investigate every item individually before investing.</div>
+        <div class="tc-steps">
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Screener.in &rarr; Annual Report tab &rarr; download PDF</div>
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Search &ldquo;Contingent Liabilities&rdquo; in the PDF &rarr; note total amount</div>
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Calculate: Total Contingent Liab. &divide; Total Equity &times; 100</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; &lt;10% of equity = safe</span>
+          <span class="tcr-a">&#9888; 10&ndash;30% = monitor</span>
+          <span class="tcr-r">&#10007; &gt;30% = investigate urgently</span>
+        </div>
+      </div>
+
+      <div class="tc tc2">
+        <div class="tn tn2">2</div>
+        <div class="tc-sub ts2">BSE / NSE &mdash; Shareholding Pattern Quarterly</div>
+        <div class="tc-title">The &ldquo;Promoter Pledge %&rdquo; Trick</div>
+        <div class="tc-desc">BSE and NSE publish promoter shareholding data every quarter, including the exact number of shares pledged. Go to BSE.com &rarr; search company &rarr; Shareholding Pattern &rarr; Promoter section &rarr; &ldquo;Shares pledged or otherwise encumbered.&rdquo; Compare with total promoter holding to get pledge %. Screener.in also shows this under the Shareholding section. <strong>Any pledge over 20% of promoter holding warrants attention. Over 50% is serious. Over 70% is a major red flag.</strong> Check this every quarter &mdash; a rising pledge % is more dangerous than a high static number.</div>
+        <div class="tc-steps">
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> BSE.com or NSE.com &rarr; search company &rarr; Shareholding Pattern</div>
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> Promoter section &rarr; find &ldquo;Shares Pledged&rdquo; column</div>
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> Calculate: Pledged shares &divide; Total promoter shares &times; 100</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; 0% pledge = ideal (CDSL, Bajaj)</span>
+          <span class="tcr-a">&#9888; 20&ndash;50% = watch quarterly</span>
+          <span class="tcr-r">&#10007; &gt;50% &amp; rising = serious warning</span>
+        </div>
+      </div>
+
+      <div class="tc tc3">
+        <div class="tn tn3">3</div>
+        <div class="tc-sub ts3">Annual Report &mdash; Related Party Notes</div>
+        <div class="tc-title">The &ldquo;Guarantees Given to Subsidiaries&rdquo; Trick</div>
+        <div class="tc-desc">Search the Annual Report for &ldquo;Guarantees given on behalf of&rdquo; or &ldquo;Related Party Transactions.&rdquo; This reveals all guarantees the parent has given to subsidiaries, JVs, and associates. Once you find the amount, go to the subsidiary&rsquo;s standalone financials (usually in the same Annual Report under the subsidiary list) and check: is the subsidiary profitable? Is it growing? If the subsidiary is loss-making and the parent has given large guarantees, the risk of crystallisation is high. <strong>Loss-making subsidiary + large guarantee = active time bomb.</strong></div>
+        <div class="tc-steps">
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Annual Report &rarr; search &ldquo;Guarantees given on behalf&rdquo;</div>
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Note amount &rarr; find subsidiary in Annual Report subsidiaries list</div>
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Check: is the subsidiary profitable? PAT positive or negative?</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; Guarantee to profitable subsidiary = low risk</span>
+          <span class="tcr-a">&#9888; Small guarantee, moderate subsidiary = watch</span>
+          <span class="tcr-r">&#10007; Large guarantee + loss-making sub. = time bomb</span>
+        </div>
+      </div>
+
+      <div class="tc tc4">
+        <div class="tn tn4">4</div>
+        <div class="tc-sub ts4">Annual Report &mdash; Year-on-Year Comparison</div>
+        <div class="tc-title">The &ldquo;Rising Contingent Liab. Trend&rdquo; Trick</div>
+        <div class="tc-desc">A single year&rsquo;s contingent liability number means little without context. The <strong>real trick is comparing Notes to Accounts for 3 consecutive annual reports</strong> to see if the total is rising, stable, or falling. A rising quantum signals either new legal cases being added, existing disputes escalating in magnitude, or aggressive tax authorities. A falling quantum (cases being resolved in company&rsquo;s favour) is actually a positive signal &mdash; it shows the company&rsquo;s management is resolving legal disputes successfully. A sudden jump in one year is the most alarming signal &mdash; new major legal exposure has appeared.</div>
+        <div class="tc-steps">
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Download 3 years of Annual Reports &rarr; find Contingent Liab. note in each</div>
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Write down total for FY22, FY23, FY24, FY25 &rarr; compare trend</div>
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Is it rising, flat, or falling? Sudden jump = new major legal risk</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; Falling trend = cases being resolved</span>
+          <span class="tcr-a">&#9888; Stable = ongoing normal disputes</span>
+          <span class="tcr-r">&#10007; Rising sharply = new major risk has emerged</span>
+        </div>
+      </div>
+
+      <!-- TRICK 5 FULL WIDTH -->
+      <div class="tc tc5">
+        <div class="tn tn5">5</div>
+        <div class="tc-sub ts5">Annual Report + Screener.in &mdash; The Complete Hidden Risk Scan</div>
+        <div class="tc-title">The &ldquo;30-Minute Hidden Risk Scan&rdquo; &mdash; The Most Complete Check</div>
+        <div class="tc-desc">Combine all four tricks above into a systematic 30-minute scan before any investment. This covers 90% of hidden risks that cause sudden stock collapses. The checklist is designed to be done in sequence: if any step fails the test, investigate deeply before proceeding to the next step.</div>
+        <div class="tc5-inner">
+          <div>
+            <div class="tc-steps">
+              <div class="ts ts-s"><span class="ts-arr">1.</span> <strong>Promoter Pledge:</strong> BSE.com &rarr; Shareholding &rarr; Pledge % &rarr; Over 20%? Stop and investigate.</div>
+              <div class="ts ts-s"><span class="ts-arr">2.</span> <strong>Contingent Liab. %:</strong> Annual Report notes &rarr; Contingent Liab. &divide; Equity &rarr; Over 30%? Investigate each item.</div>
+              <div class="ts ts-s"><span class="ts-arr">3.</span> <strong>Guarantee scan:</strong> Notes &rarr; &ldquo;Guarantees given&rdquo; &rarr; Find subsidiaries &rarr; Are they profitable?</div>
+              <div class="ts ts-s"><span class="ts-arr">4.</span> <strong>3-Year trend:</strong> Compare contingent liab. for 3 years &rarr; Rising sharply? New risk exposure.</div>
+            </div>
+          </div>
+          <div>
+            <div class="tc-steps">
+              <div class="ts ts-s"><span class="ts-arr">5.</span> <strong>Capital commitments:</strong> Notes &rarr; &ldquo;Capital Commitments&rdquo; &rarr; Large unspent commitments funded how?</div>
+              <div class="ts ts-s"><span class="ts-arr">6.</span> <strong>Related party loans:</strong> Notes &rarr; RPT section &rarr; Large loans to promoter entities? Red flag.</div>
+              <div class="ts ts-s"><span class="ts-arr">7.</span> <strong>Auditor&rsquo;s report:</strong> Check for &ldquo;emphasis of matter&rdquo; or qualified opinions &rarr; Auditor is flagging something.</div>
+              <div class="ts ts-s"><span class="ts-arr">8.</span> <strong>Cash flow vs profit:</strong> Screener.in &rarr; Compare Operating CF vs PAT &rarr; Large divergence = earnings quality risk.</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-res" style="margin-top:14px;">
+          <span class="tcr-g">&#10004; All 8 clear = hidden risk is low, proceed with analysis</span>
+          <span class="tcr-a">&#9888; 1&ndash;2 issues = investigate before buying</span>
+          <span class="tcr-r">&#10007; 3+ issues = very high hidden risk, likely avoid</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cheat Sheet -->
+    <div class="cheat rv d5">
+      <div class="cheat-inner">
+        <div class="cheat-badge">Hidden Risk Cheat Sheet &mdash; 90-Second Scan</div>
+        <div class="cheat-title">Six Checks &rarr; Pass / Fail &rarr; Invest or Investigate</div>
+        <div class="cheat-grid">
+          <div class="ci ci-good">
+            <div class="ci-num">Check 1 &mdash; BSE Quarterly</div>
+            <div class="ci-name">Promoter Pledge</div>
+            <div class="ci-val">&#10004; 0% = ideal &bull; &#9888; 20&ndash;50% = watch<br>&#10007; &gt;50% &amp; rising = avoid</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Check 2 &mdash; Notes to Accounts</div>
+            <div class="ci-name">Contingent Liab. % of Equity</div>
+            <div class="ci-val">&#10004; &lt;10% = safe &bull; &#9888; 10&ndash;30% = monitor<br>&#10007; &gt;30% = investigate each item</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Check 3 &mdash; Notes / RPT</div>
+            <div class="ci-name">Guarantees to Subsidiaries</div>
+            <div class="ci-val">&#10004; Profitable sub. = low risk<br>&#10007; Loss-making sub. + large guarantee = danger</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Check 4 &mdash; 3-Year Comparison</div>
+            <div class="ci-name">Contingent Liab. Trend</div>
+            <div class="ci-val">&#10004; Falling = cases resolving<br>&#10007; Rising sharply = new major risk added</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Check 5 &mdash; Auditor&rsquo;s Report</div>
+            <div class="ci-name">Qualified Opinion / Emphasis</div>
+            <div class="ci-val">&#10004; Clean unqualified = good<br>&#10007; Emphasis of matter or qualification = serious flag</div>
+          </div>
+          <div class="ci ci-warn">
+            <div class="ci-num">Special Sector Notes</div>
+            <div class="ci-name">Sector-Specific Rules</div>
+            <div class="ci-val">Banks: use NPA + PCR, not contingent liab. % &bull; Infra/EPC: capital commitments are structural &bull; IT: transfer pricing disputes are normal &bull; Mining: environmental liabilities can be large &mdash; compare with peers &bull; Telecom: AGR dues are company-specific risk</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight rv d6">
+      <div class="ins-ico">&#127919;</div>
+      <div>
+        <div class="ins-tag">The One-Line Hidden Risk Filter</div>
+        <div class="ins-title">Zero Promoter Pledge + Contingent Liabilities &lt;10% of Net Worth + No Guarantees to Loss-Making Subsidiaries = Hidden Risk Is Probably Manageable</div>
+        <div class="ins-desc">This three-condition filter takes 10 minutes to check and eliminates the majority of companies with serious hidden risk exposure. CDSL, Bajaj Auto, TCS, and Pidilite all pass it effortlessly. IL&amp;FS, DHFL, Suzlon, and CCD all failed at least one condition &mdash; in most cases, years before their stock collapsed. The information was publicly available. The investors who read the notes ahead of time had the opportunity to exit. Those who only read the main balance sheet were blindsided. Be the investor who reads the notes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT CHAPTER -->
+<div class="nxt">
+  <div class="nxt-left">
+    <div class="nxt-lbl">Up Next &middot; Module 09</div>
+    <div class="nxt-sub">Cash Flow Statement &mdash; The Real Truth Behind Reported Profits</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arr">&#8594;</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section class="disc">
+  <div class="disc-inner">
+    <div class="disc-ico">&#9888;&#65039;</div>
+    <div>
+      <div class="disc-lbl">Important Disclaimer</div>
+      <div class="disc-txt">This page is for educational purposes only. All figures and events described for CDSL, Bajaj Auto, TCS, Pidilite Industries, HDFC Bank, IL&amp;FS, DHFL, Suzlon Energy, Cafe Coffee Day, and other companies are approximate illustrative values sourced from publicly available disclosures, annual reports, and news sources. Contingent liability figures and promoter pledge percentages are approximate and may differ from precise audited numbers. Verify all figures from official SEBI filings and annual reports before making any investment decision. All equity investments carry market risk. Past performance does not guarantee future returns. This module is not investment advice. Consult a SEBI-registered investment advisor before investing.</div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{threshold:.05,rootMargin:'0px 0px -36px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  }else{els.forEach(function(el){el.classList.add('on');});}
+  ['touchstart','touchmove','touchend','touchcancel'].forEach(function(evt){document.addEventListener(evt,function(){},{passive:true});});
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){els.forEach(function(el){el.classList.add('on');});}
+  document.body.style.overscrollBehavior='none';
+  function setVH(){document.documentElement.style.setProperty('--vh',window.innerHeight*.01+'px');}
+  setVH();
+  window.addEventListener('resize',setVH,{passive:true});
+  window.addEventListener('orientationchange',function(){setTimeout(setVH,300);setTimeout(function(){document.querySelectorAll('.rv:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<window.innerHeight*.95){el.classList.add('on');}});},400);},{passive:true});
+  document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('a,button,.dmbtn,.nxt-btn,.excard,.obs-card,.tc,.kp').forEach(function(el){el.style.touchAction='manipulation';});
+    document.querySelectorAll('.tscroll,.sumwrap').forEach(function(el){el.style.webkitOverflowScrolling='touch';});
+    if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});});}
+  });
+})();
+</script>
+</body>
+</html>

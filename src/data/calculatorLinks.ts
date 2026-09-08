@@ -36,27 +36,83 @@ const calculatorPaths: Record<string, string> = {
   'Inflation Calculator': 'Inflation_Calculator.html',
   'CAGR vs XIRR': 'Mutual_Fund_Returns_Calculator.html',
   'Wealth Drawdown': 'Wealth_Drawdown_Planner.html',
+  'EPF Calculator': 'EPF_Calculator.html',
+  'Senior Citizen Savings': 'Senior_Citizen_Savings_Calculator.html',
+  'Savings Goal': 'Savings_Goal_Calculator.html',
+  'Saving Rate': 'Saving_Rate_Calculator.html',
+  'Daily Savings': 'Daily_Savings_Calculator.html',
+  // Landing-page card title aliases + calculators not yet native
+  'Home Loan Eligibility': 'Home_Loan_Eligibility_Calculator.html',
+  'Loan Comparison': 'Loan_Comparison_Calculator.html',
+  'Personal Loan EMI': 'Personal_Loan_EMI_Calculator.html',
+  'Gift Tax Guide': 'Gift_Tax_Guide_Calculator.html',
+  'Home Loan Tax Benefits': 'Home_Loan_Tax_Benefits_Calculator.html',
+  'Life Cover Estimator': 'Life_Cover_Estimator.html',
+  'Gratuity Calculator': 'Gratuity_Calculator.html',
+  'ULIP vs Term + MF': 'ULIP_vs_Term_MF_Calculator.html',
+  'Term Premium Estimator': 'Term_Premium_Estimator.html',
+  'Critical Illness Cover': 'Critical_Illness_Cover_Calculator.html',
+  'Health Premium Estimator': 'Health_Premium_Estimator.html',
+  'Wealth Goal Tracker': 'Wealth_Goal_Tracker.html',
+  'Budget Planner (50/30/20)': 'Budget_Planner.html',
+  'Loan Prepayment Savings': 'Loan_Prepayment_Savings_Calculator.html',
+  'Balance Transfer Savings': 'Balance_Transfer_Calculator.html',
+  'HRA Exemption': 'HRA_Exemption_Calculator.html',
+  'TDS Estimator': 'TDS_Calculator.html',
+  'FIRE Number Calculator': 'FIRE_Number_Calculator.html',
+  'Wealth Drawdown Planner': 'Wealth_Drawdown_Planner.html',
+  'Emergency Fund Calculator': 'Emergency_Fund_Calculator.html',
 }
 
 export function sourcePageHref(path: string) {
   return `${import.meta.env.BASE_URL}source-pages/${path.split('/').map(encodeURIComponent).join('/')}`
 }
 
+const nativeCalculatorSlugs: Record<string, string> = {
+  'SIP Calculator': 'sip',
+  'Lumpsum': 'lumpsum',
+  'Lumpsum Calculator': 'lumpsum',
+  'Step Up SIP': 'step-up-sip',
+  'Step-Up SIP': 'step-up-sip',
+  'SWP Calculator': 'swp',
+  'SIP vs Lumpsum': 'sip-vs-lumpsum',
+  'FD Calculator': 'fd',
+  'RD Calculator': 'rd',
+  'PPF Calculator': 'ppf',
+  'NSC Calculator': 'nsc',
+  'Sukanya Samriddhi': 'sukanya',
+  'NPS Calculator': 'nps',
+  'EPF Calculator': 'epf',
+  'Senior Citizen Savings': 'senior-citizen-savings',
+  'Savings Goal': 'savings-goal',
+  'Saving Rate': 'saving-rate',
+  'Daily Savings': 'daily-savings',
+  'Step-up SWP': 'step-up-swp',
+  'Step-Up SWP': 'step-up-swp',
+  'CAGR Calculator': 'cagr',
+  'Compound Interest': 'annuity',
+  'Rule of 72': 'rule-of-72',
+  'CAGR vs XIRR': 'mutual-fund-returns',
+  'Inflation Calculator': 'inflation',
+  // Landing-page card title aliases pointing at the same native calculators
+  'Annuity Calculator': 'annuity',
+  'Mutual Fund Returns': 'mutual-fund-returns',
+  'Sukanya Samriddhi (SSY)': 'sukanya',
+  'Senior Citizen Savings (SCSS)': 'senior-citizen-savings',
+  'Savings Rate Calculator': 'saving-rate',
+  'Senior Citizen FD': 'fd',
+}
+
+export function isNativeCalculator(name: string) {
+  return name in nativeCalculatorSlugs
+}
+
 export function calculatorHref(name: string) {
-  if (name === 'SIP Calculator') return '/#/calculators/sip'
-  if (name === 'Lumpsum' || name === 'Lumpsum Calculator') return '/#/calculators/lumpsum'
-  if (name === 'Step Up SIP') return '/#/calculators/step-up-sip'
-  if (name === 'SWP Calculator') return '/#/calculators/swp'
-  if (name === 'SIP vs Lumpsum') return '/#/calculators/sip-vs-lumpsum'
-  if (name === 'FD Calculator') return '/#/calculators/fd'
-  if (name === 'RD Calculator') return '/#/calculators/rd'
-  if (name === 'PPF Calculator') return '/#/calculators/ppf'
-  if (name === 'NSC Calculator') return '/#/calculators/nsc'
-  if (name === 'Sukanya Samriddhi') return '/#/calculators/sukanya'
-  if (name === 'NPS Calculator') return '/#/calculators/nps'
+  const slug = nativeCalculatorSlugs[name]
+  if (slug) return `/calculators/${slug}`
 
   const path = calculatorPaths[name]
-  if (!path) return '/#/calculators'
+  if (!path) return '/calculators'
 
   return sourcePageHref(`08. Financial Calculator/${path}`)
 }

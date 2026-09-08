@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-title" content="Reverse DCF">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no,address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Reverse DCF – What Growth Is Priced In? · DCF Valuation Advanced</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#fff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);--shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:"DM Sans",sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.13s}.d3{transition-delay:.20s}.d4{transition-delay:.27s}.d5{transition-delay:.34s}.d6{transition-delay:.42s}
+@keyframes fsd{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff,#f0fdf4 55%,#fdfcff);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.chip::before{content:"";width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rule{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:36px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff,#f0fdf4 40%,#fdfcff 70%,#eef4ff);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;will-change:transform;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(30px,7vw,84px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:14px;animation:fsu .88s ease .12s both;}
+.hh1 .l1{display:block;background:linear-gradient(135deg,var(--pl),var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .l2{display:block;background:linear-gradient(135deg,var(--gbr),var(--g),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .l3{display:block;font-size:clamp(13px,2.8vw,36px);background:linear-gradient(135deg,var(--p),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:620px;line-height:1.72;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hstat{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.78);backdrop-filter:blur(12px);animation:fsu .9s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:900px;}
+.hsi{padding:clamp(12px,2vw,22px) clamp(10px,2.5vw,24px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:80px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(11px,1.8vw,18px);font-weight:900;letter-spacing:-.4px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.a{background:linear-gradient(135deg,var(--ambr),var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(8px,1vw,10px);font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+/* KLO */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3.5vw,42px);display:flex;align-items:flex-start;gap:20px;box-shadow:var(--shc);}
+.klo-icon{width:62px;height:62px;min-width:62px;border-radius:18px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;box-shadow:0 8px 26px rgba(109,40,217,.32);animation:floatA 4s ease-in-out infinite;}
+.klo-tag{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.klo-title{font-size:clamp(14px,2vw,19px);font-weight:900;color:var(--tx);margin-bottom:8px;line-height:1.3;}
+.klo-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px;}
+.kp{display:inline-flex;align-items:center;gap:5px;padding:5px 13px;border-radius:100px;font-size:10px;font-weight:700;}
+.kp-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kp-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kp-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kp-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+/* APPROACH CARDS */
+.approach-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.5vw,26px);margin-bottom:44px;}
+.ac{border-radius:22px;padding:clamp(20px,2.8vw,30px);border:2px solid;transition:transform .28s,box-shadow .28s;}
+.ac:hover{transform:translateY(-5px);box-shadow:var(--shp);}
+.ac-fwd{background:linear-gradient(158deg,var(--pxs),#fdfcff);border-color:rgba(109,40,217,.22);}
+.ac-rev{background:linear-gradient(158deg,var(--gpale),#fafffe);border-color:rgba(22,163,74,.22);}
+.ac-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px;animation:floatB 3.8s ease-in-out infinite;box-shadow:0 6px 18px rgba(0,0,0,.1);}
+.ai-fwd{background:linear-gradient(135deg,var(--p),var(--ph));}
+.ai-rev{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.ac-tag{font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:5px;}
+.at-fwd{color:var(--p);}.at-rev{color:var(--gbr);}
+.ac-title{font-size:clamp(16px,2vw,22px);font-weight:900;color:var(--tx);margin-bottom:10px;letter-spacing:-.3px;}
+.ac-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;margin-bottom:12px;}
+.ac-formula{background:rgba(255,255,255,.9);border:1.5px solid rgba(0,0,0,.07);border-radius:12px;padding:11px 14px;margin-bottom:12px;}
+.af-main{font-size:clamp(12px,1.4vw,14px);font-weight:900;color:var(--tx);margin-bottom:4px;}
+.af-parts{font-size:11.5px;color:var(--ts);line-height:1.6;}
+.ac-steps{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.as{display:flex;align-items:flex-start;gap:8px;padding:8px 12px;border-radius:10px;font-size:12px;color:var(--ts);line-height:1.5;}
+.as-p{background:rgba(109,40,217,.07);border-left:3px solid var(--p);}
+.as-g{background:rgba(22,163,74,.07);border-left:3px solid var(--g);}
+.ac-ana{margin-top:12px;padding:10px 13px;border-radius:10px;font-size:12.5px;font-weight:600;line-height:1.6;}
+.aa-fwd{background:rgba(109,40,217,.07);color:var(--pl);border-left:3px solid var(--p);}
+.aa-rev{background:rgba(22,163,74,.07);color:var(--gbr);border-left:3px solid var(--g);}
+/* VERDICT STRIP */
+.vstrp{background:linear-gradient(135deg,var(--pl),var(--p) 38%,var(--ph) 65%,#065f46);border-radius:22px;padding:clamp(26px,4vw,48px);color:#fff;position:relative;overflow:hidden;margin-bottom:44px;box-shadow:var(--shp);}
+.vstrp::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;}
+.vs-inner{position:relative;z-index:1;}
+.vs-badge{display:inline-flex;padding:4px 14px;border-radius:100px;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);margin-bottom:14px;}
+.vs-title{font-size:clamp(16px,2.5vw,28px);font-weight:900;letter-spacing:-.5px;line-height:1.2;margin-bottom:16px;}
+.vs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.5vw,16px);}
+.vsc{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.2);border-radius:14px;padding:clamp(12px,2vw,20px);text-align:center;}
+.vsc-lbl{font-size:9px;font-weight:700;opacity:.65;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.vsc-val{font-size:clamp(14px,2.2vw,22px);font-weight:900;line-height:1.15;}
+.vsc-note{font-size:10px;opacity:.75;margin-top:5px;line-height:1.4;}
+.vsc-green{border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.12);}
+.vsc-red{border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.12);}
+.vsc-amb{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.1);}
+/* SCREENER TABLE */
+.scr-wrap{background:#fff;border:1.5px solid var(--bd);border-radius:22px;overflow:hidden;box-shadow:var(--shp);margin-bottom:32px;}
+.scr-hdr{background:linear-gradient(135deg,var(--pl),var(--p));padding:clamp(16px,2.8vw,24px) clamp(18px,3vw,28px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.sh-title{font-size:clamp(15px,2.2vw,21px);font-weight:900;color:#fff;}
+.sh-sub{font-size:11px;color:rgba(255,255,255,.7);margin-top:3px;}
+.sh-bdgs{display:flex;gap:7px;flex-wrap:wrap;}
+.sh-bdg{padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.22);}
+.scr-guide{padding:10px clamp(18px,3vw,28px);background:var(--pxs);border-bottom:1px solid var(--bd);font-size:12px;color:var(--ts);display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.sg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;display:inline-block;}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.bstbl{width:100%;border-collapse:collapse;min-width:680px;}
+.bstbl th{background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:10px 13px;font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:right;white-space:nowrap;}
+.bstbl th:first-child{text-align:left;min-width:160px;}
+.bstbl td{padding:10px 13px;font-size:12.5px;color:var(--ts);border-bottom:1px solid rgba(109,40,217,.06);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.bstbl td:first-child{text-align:left;font-weight:700;color:var(--tx);}
+.bstbl tr:last-child td{border-bottom:none;}
+.bstbl tr.shdr td{background:rgba(109,40,217,.05);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);padding:10px 13px 5px;}
+.bstbl tr.hi-r td{color:var(--p);font-weight:800;}
+.bstbl tr.g-r td:first-child{color:var(--gbr);}
+.bstbl tr.r-r td:first-child{color:var(--red);}
+.bstbl tr:not(.shdr):hover td{background:var(--pxs);}
+.up{color:var(--gbr);font-weight:800;}.dn{color:var(--red);font-weight:800;}
+.ann{display:inline-flex;padding:1px 7px;border-radius:5px;font-size:9px;font-weight:700;margin-left:5px;}
+.an-p{background:rgba(109,40,217,.09);color:var(--p);}
+.an-g{background:rgba(22,163,74,.08);color:var(--gbr);}
+.an-a{background:rgba(217,119,6,.08);color:var(--ambr);}
+.an-r{background:rgba(220,38,38,.08);color:var(--red);}
+/* INSIGHT */
+.insight{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:20px;padding:clamp(20px,3vw,32px);display:flex;align-items:flex-start;gap:18px;box-shadow:var(--shc);}
+.ins-ico{width:48px;height:48px;min-width:48px;border-radius:14px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 6px 20px rgba(109,40,217,.28);}
+.ins-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.ins-title{font-size:clamp(13px,1.6vw,16px);font-weight:800;color:var(--tx);margin-bottom:7px;}
+.ins-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;}
+.ins-desc strong{color:var(--tx);}
+/* GOOD/BAD */
+.gbh{display:flex;align-items:center;gap:14px;margin-bottom:22px;padding:18px 22px;border-radius:18px;border:1.5px solid var(--bd);}
+.gbh-g{background:linear-gradient(135deg,var(--gpale),#ecfdf5);}
+.gbh-r{background:linear-gradient(135deg,var(--rpale),#fff5f5);}
+.gbh-ico{width:46px;height:46px;min-width:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.gi-g{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.gi-r{background:linear-gradient(135deg,var(--red),#f87171);}
+.gbh-title{font-size:clamp(16px,2vw,22px);font-weight:900;color:var(--tx);}
+.gbh-sub{font-size:12.5px;color:var(--ts);margin-top:3px;}
+.exgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.5vw,24px);margin-bottom:44px;}
+.excard{border-radius:22px;border:1.5px solid var(--bd);background:#fff;padding:clamp(18px,3vw,28px);box-shadow:var(--shc);transition:border-color .26s,box-shadow .26s,transform .26s;position:relative;overflow:hidden;}
+.excard:hover{border-color:rgba(109,40,217,.28);box-shadow:var(--shp);transform:translateY(-4px);}
+.excard::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;}
+.eg1::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.eg2::before{background:linear-gradient(90deg,var(--g),var(--gh));}
+.eg3::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.eg4::before{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.eg5::before{background:linear-gradient(90deg,#0d9488,#2dd4bf);}
+.eb1::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.eb2::before{background:linear-gradient(90deg,#b91c1c,#fca5a5);}
+.eb3::before{background:linear-gradient(90deg,var(--amb),#fbbf24);}
+.eb4::before{background:linear-gradient(90deg,#7c3aed,var(--red));}
+.eb5::before{background:linear-gradient(90deg,var(--red),var(--amb));}
+.ex-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.ex-logo{width:48px;height:48px;min-width:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.ex-name{font-size:clamp(13px,1.7vw,16px);font-weight:900;color:var(--tx);line-height:1.15;}
+.ex-sec{font-size:11px;color:var(--tl);font-weight:500;margin-top:2px;}
+.vrd{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-size:10px;font-weight:800;margin-bottom:13px;}
+.vg{background:rgba(22,163,74,.12);color:var(--gbr);border:1px solid rgba(22,163,74,.24);}
+.vr{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.22);}
+.enums{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px;}
+.en{border-radius:11px;padding:10px 11px;text-align:center;}
+.en-p{background:rgba(109,40,217,.07);border:1px solid rgba(109,40,217,.14);}
+.en-g{background:rgba(22,163,74,.07);border:1px solid rgba(22,163,74,.13);}
+.en-r{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.13);}
+.en-a{background:rgba(217,119,6,.07);border:1px solid rgba(217,119,6,.14);}
+.en-lbl{font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--tl);margin-bottom:3px;}
+.en-val{font-size:clamp(12px,1.8vw,15px);font-weight:900;}
+.ev-p{color:var(--p);}.ev-g{color:var(--gbr);}.ev-r{color:var(--red);}.ev-a{color:var(--ambr);}
+.ex-why{font-size:clamp(12px,1.35vw,13.5px);color:var(--ts);line-height:1.68;margin-bottom:10px;}
+.ex-why strong{color:var(--tx);}
+.sigs{display:flex;flex-direction:column;gap:6px;margin-top:10px;}
+.sig{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;color:var(--ts);line-height:1.52;}
+.sdot{width:7px;height:7px;min-width:7px;border-radius:50%;margin-top:4px;flex-shrink:0;}
+.sd-g{background:var(--g);}.sd-r{background:var(--red);}
+.sig-hl{margin-top:8px;padding:9px 12px;border-radius:9px;font-size:11.5px;line-height:1.55;}
+.shl-g{background:rgba(22,163,74,.07);border-left:3px solid var(--g);}
+.shl-r{background:rgba(220,38,38,.06);border-left:3px solid var(--red);}
+.exfull{grid-column:1/-1;}
+.ex-inner{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+/* SUMMARY TABLE */
+.sumwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:18px;box-shadow:var(--shc);margin-bottom:32px;}
+.sumtbl{width:100%;border-collapse:collapse;min-width:560px;}
+.sumtbl thead th{background:linear-gradient(135deg,var(--p),var(--ph));color:#fff;padding:12px 15px;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:left;}
+.sumtbl tbody td{padding:12px 15px;font-size:12.5px;color:var(--ts);border-bottom:1px solid var(--bd);vertical-align:middle;line-height:1.5;}
+.sumtbl tbody td:first-child{font-weight:800;color:var(--tx);}
+.sumtbl tbody tr:last-child td{border-bottom:none;}
+.sumtbl tbody tr:nth-child(even) td{background:var(--pxs);}
+.tb{display:inline-flex;padding:2px 9px;border-radius:100px;font-size:10px;font-weight:700;}
+.tb-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.tb-r{background:rgba(220,38,38,.1);color:var(--red);}
+.tb-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+/* TRICKS */
+.tricks-sec{background:linear-gradient(158deg,#f5f3ff,#f0fdf4 55%,#fdfcff);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.tgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2.5vw,24px);margin-bottom:44px;}
+.tc{border-radius:22px;border:2px solid;padding:clamp(20px,3vw,30px);position:relative;overflow:hidden;transition:transform .28s,box-shadow .28s;}
+.tc:hover{transform:translateY(-5px);box-shadow:var(--shp);}
+.tc::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;}
+.tc1{background:linear-gradient(158deg,var(--pxs),#fdfcff);border-color:rgba(109,40,217,.2);}
+.tc1::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.tc2{background:linear-gradient(158deg,var(--gpale),#fafffe);border-color:rgba(22,163,74,.2);}
+.tc2::before{background:linear-gradient(90deg,var(--g),var(--gh));}
+.tc3{background:linear-gradient(158deg,var(--rpale),#fff5f5);border-color:rgba(220,38,38,.2);}
+.tc3::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.tc4{background:linear-gradient(158deg,var(--apale),#fffbeb);border-color:rgba(217,119,6,.2);}
+.tc4::before{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.tc5{background:linear-gradient(158deg,var(--skypale),#f0f9ff);border-color:rgba(2,132,199,.2);grid-column:1/-1;}
+.tc5::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.tc6{background:linear-gradient(158deg,#fefce8,#fff7ed);border:2px solid rgba(217,119,6,.25);border-radius:22px;padding:clamp(20px,3vw,30px);grid-column:1/-1;position:relative;overflow:hidden;}
+.tc6::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--amb),#f59e0b,var(--p),var(--g));}
+.tn{display:inline-flex;width:36px;height:36px;border-radius:11px;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;margin-bottom:14px;}
+.tn1{background:linear-gradient(135deg,var(--p),var(--ph));}
+.tn2{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.tn3{background:linear-gradient(135deg,var(--red),#f87171);}
+.tn4{background:linear-gradient(135deg,var(--amb),#f59e0b);}
+.tn5{background:linear-gradient(135deg,var(--sky),#38bdf8);}
+.tn6{background:linear-gradient(135deg,var(--amb),#f59e0b);}
+.tc-sub{font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:6px;}
+.ts1{color:var(--p);}.ts2{color:var(--gbr);}.ts3{color:var(--red);}.ts4{color:var(--ambr);}.ts5{color:var(--sky);}.ts6{color:var(--ambr);}
+.tc-title{font-size:clamp(15px,1.9vw,20px);font-weight:900;color:var(--tx);margin-bottom:10px;letter-spacing:-.3px;}
+.tc-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;margin-bottom:14px;}
+.tc-desc strong{color:var(--tx);}
+.tc-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.ts{display:flex;align-items:flex-start;gap:10px;padding:9px 13px;border-radius:10px;font-size:12.5px;color:var(--ts);line-height:1.52;}
+.ts-p{background:rgba(109,40,217,.07);border-left:3px solid var(--p);}
+.ts-g{background:rgba(22,163,74,.07);border-left:3px solid var(--g);}
+.ts-r{background:rgba(220,38,38,.06);border-left:3px solid var(--red);}
+.ts-a{background:rgba(217,119,6,.06);border-left:3px solid var(--amb);}
+.ts-s{background:rgba(2,132,199,.07);border-left:3px solid var(--sky);}
+.ts-arr{font-weight:900;min-width:18px;flex-shrink:0;}
+.tc-res{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;}
+.tcr-g{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.22);}
+.tcr-a{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(217,119,6,.09);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.tcr-r{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(220,38,38,.08);color:var(--red);border:1px solid rgba(220,38,38,.2);}
+.tc5-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,22px);margin-top:14px;}
+/* QUICK FIND */
+.qf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,2vw,16px);margin-top:16px;}
+.qf-card{border-radius:14px;padding:clamp(12px,2vw,18px);}
+.qf-input{background:rgba(109,40,217,.08);border:1.5px solid rgba(109,40,217,.2);}
+.qf-scr{background:rgba(22,163,74,.08);border:1.5px solid rgba(22,163,74,.2);}
+.qf-excel{background:rgba(2,132,199,.08);border:1.5px solid rgba(2,132,199,.2);}
+.qf-signal{background:rgba(220,38,38,.06);border:1.5px solid rgba(220,38,38,.18);}
+.qf-tag{font-size:9px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:8px;}
+.qt-input{color:var(--p);}.qt-scr{color:var(--gbr);}.qt-excel{color:var(--sky);}.qt-signal{color:var(--red);}
+.qf-item{display:flex;align-items:flex-start;gap:7px;margin-bottom:7px;font-size:11.5px;color:var(--ts);line-height:1.5;}
+.qf-item:last-child{margin-bottom:0;}
+.qi-icon{font-size:13px;flex-shrink:0;margin-top:1px;}
+.qi-text strong{color:var(--tx);}
+.qf-formula{background:var(--pxs);border:1px solid var(--pmd);border-radius:7px;padding:5px 9px;font-size:10.5px;font-weight:800;color:var(--pl);margin-top:5px;display:block;}
+/* CHEAT */
+.cheat{background:linear-gradient(135deg,var(--p),var(--ph),#059669);border-radius:22px;padding:clamp(22px,3.5vw,44px);color:#fff;position:relative;overflow:hidden;margin-bottom:44px;box-shadow:var(--shp);}
+.cheat::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;}
+.cheat-inner{position:relative;z-index:1;}
+.cheat-badge{display:inline-flex;padding:4px 14px;border-radius:100px;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);margin-bottom:14px;}
+.cheat-title{font-size:clamp(17px,2.5vw,30px);font-weight:900;letter-spacing:-.5px;line-height:1.15;margin-bottom:18px;}
+.cheat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.8vw,16px);}
+.ci{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.2);border-radius:14px;padding:clamp(12px,1.8vw,18px);}
+.ci-num{font-size:10px;font-weight:700;opacity:.65;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.ci-name{font-size:clamp(12px,1.5vw,15px);font-weight:900;margin-bottom:5px;}
+.ci-val{font-size:clamp(10px,1.2vw,12px);opacity:.8;line-height:1.52;}
+.ci-good{border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.1);}
+.ci-warn{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.08);}
+.ci-bad{border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.1);}
+/* GLOSSARY */
+.gloss-sec{background:#fff;border-top:1px solid var(--bd);}
+.gloss-hdr-row{display:grid;grid-template-columns:1fr 2fr 1fr;gap:0;background:linear-gradient(135deg,var(--p),var(--ph));border-radius:16px 16px 0 0;overflow:hidden;}
+.gh-cell{padding:12px 20px;font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.75);}
+.gloss-table{width:100%;border-collapse:collapse;}
+.gloss-table tbody tr{border-bottom:1px solid var(--bd);transition:background .18s;}
+.gloss-table tbody tr:last-child{border-bottom:none;}
+.gloss-table tbody tr:hover{background:var(--pxs);}
+.gt-term{padding:clamp(14px,2vw,20px);font-size:clamp(12px,1.5vw,14px);font-weight:800;color:var(--p);vertical-align:top;white-space:nowrap;width:22%;}
+.gt-desc{padding:clamp(14px,2vw,20px) clamp(10px,1.5vw,16px);font-size:clamp(12px,1.4vw,13.5px);color:var(--ts);line-height:1.72;vertical-align:top;width:60%;}
+.gt-desc strong{color:var(--tx);}
+.gt-key{padding:clamp(14px,2vw,20px) clamp(10px,1.5vw,16px);vertical-align:top;text-align:right;width:18%;}
+.gk-pill{display:inline-flex;padding:4px 11px;border-radius:100px;font-size:10px;font-weight:800;white-space:nowrap;}
+.gk-p{background:var(--pxl);color:var(--p);}
+.gk-g{background:var(--gpale);color:var(--gbr);}
+.gk-a{background:var(--apale);color:var(--ambr);}
+.gk-r{background:var(--rpale);color:var(--red);}
+.gk-s{background:var(--skypale);color:var(--sky);}
+.gf{display:inline-block;background:var(--pxs);border:1px solid var(--pmd);border-radius:6px;padding:2px 8px;font-size:11.5px;font-weight:800;color:var(--pl);margin-top:4px;}
+/* DEMAT */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240,#4c1d95 35%,#6d28d9 60%,#059669);padding:clamp(44px,7vw,80px) clamp(22px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:"";position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:"";width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:680px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:560px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(14px,2.8vw,30px);flex-wrap:wrap;margin-top:18px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:"\2713";color:#4ade80;font-weight:900;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:28px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 52px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:"DM Sans",sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:52px;touch-action:manipulation;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:7px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.5);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.4);margin-top:6px;}
+/* NXT2 */
+.nxt2{position:relative;overflow:hidden;background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 35%,#7c3aed 60%,#8b5cf6 85%,#a78bfa 100%);padding:clamp(18px,3vw,32px) clamp(22px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:22px;min-height:clamp(72px,10vw,90px);}
+.nxt2::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:26px 26px;pointer-events:none;}
+.nxt2::after{content:"";position:absolute;right:-80px;top:-80px;width:260px;height:260px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.nxt2-left{position:relative;z-index:1;display:flex;flex-direction:column;gap:4px;}
+.nxt2-lbl{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt2-sub{font-size:clamp(14px,1.9vw,18px);color:rgba(255,255,255,.88);font-weight:600;line-height:1.35;}
+.nxt2-arr-txt{font-size:clamp(12px,1.4vw,14px);color:rgba(255,255,255,.5);font-weight:500;margin-top:2px;}
+.nxt2-btn{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;padding:14px clamp(22px,3vw,36px);min-height:52px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:"DM Sans",sans-serif;font-size:clamp(14px,1.6vw,16px);font-weight:900;border-radius:14px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.48);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.nxt2-btn:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(34,197,94,.6);}
+.nxt2-btn:active{transform:scale(.97);}
+.nxt2-btn-arr{font-size:17px;transition:transform .22s;}
+.nxt2-btn:hover .nxt2-btn-arr{transform:translateX(4px);}
+.disc{background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);}
+.disc-inner{max-width:1240px;margin:0 auto;padding:clamp(22px,4vw,44px) clamp(18px,5vw,56px);display:flex;align-items:flex-start;gap:18px;}
+.disc-ico{width:46px;height:46px;min-width:46px;border-radius:13px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.disc-lbl{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;}
+.disc-txt{font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;}
+/* ═══ RESPONSIVE ═══ */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.approach-grid{grid-template-columns:1fr 1fr;}.tgrid{grid-template-columns:1fr 1fr;}.tc5{grid-column:1/-1;}.tc6{grid-column:1/-1;}.cheat-grid{grid-template-columns:repeat(3,1fr);}.vs-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){.approach-grid{grid-template-columns:1fr;}.exgrid{grid-template-columns:1fr;}.exfull{grid-column:auto;}.ex-inner{grid-template-columns:1fr;gap:0;}.klobanner{flex-direction:column;}.klo-icon{animation:none;}.insight{flex-direction:column;gap:12px;}.gbh{flex-direction:column;gap:10px;}.tgrid{grid-template-columns:1fr;}.tc5{grid-column:auto;}.tc6{grid-column:auto;}.tc5-inner{grid-template-columns:1fr;gap:12px;}.cheat-grid{grid-template-columns:1fr 1fr;}.nxt2{flex-direction:column;align-items:flex-start;}.nxt2-btn{align-self:stretch;width:100%;justify-content:center;}.vs-grid{grid-template-columns:1fr;}.qf-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,30px);}.hstat{flex-direction:column;}.hsi{border-right:none !important;border-bottom:1px solid var(--bd);}.hsi:last-child{border-bottom:none;}.dmfeats{flex-direction:column;align-items:flex-start;gap:9px;}.disc-inner{flex-direction:column;gap:12px;}.scr-hdr{flex-direction:column;align-items:flex-start;}.sh-bdgs{flex-wrap:wrap;}.enums{grid-template-columns:1fr 1fr;}.tgrid{grid-template-columns:1fr;}.tc5{grid-column:auto;}.tc6{grid-column:auto;}.tc5-inner{grid-template-columns:1fr;gap:12px;}.tc-res{flex-direction:column;align-items:flex-start;}.tcr-g,.tcr-a,.tcr-r{width:100%;}.cheat-grid{grid-template-columns:1fr 1fr;}.gloss-hdr-row{grid-template-columns:1fr 2fr;}.gh-cell:last-child{display:none;}.gt-term{width:28%;white-space:normal;font-size:11.5px;}.gt-desc{width:72%;font-size:12px;}.gt-key{display:none;}.scr-guide{flex-wrap:wrap;gap:8px;}.qf-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:640px){.bstbl{min-width:620px;}.sumtbl{min-width:500px;}.approach-grid{grid-template-columns:1fr;}.tgrid{grid-template-columns:1fr;}.tc5-inner{grid-template-columns:1fr;}.cheat-grid{grid-template-columns:1fr;}.tc-res{flex-direction:column;align-items:flex-start;}.qf-grid{grid-template-columns:1fr;}}
+@media(max-width:480px){.w{padding:28px 14px;}.hh1{letter-spacing:-1.2px;}.hstat{flex-wrap:wrap;}.hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}.hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}.vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}.dmbtn{width:100%;justify-content:center;padding:15px 20px;}.nxt2-btn{font-size:14px;padding:13px 18px;}.enums{grid-template-columns:1fr 1fr;}.tgrid{grid-template-columns:1fr;}.tc{padding:18px 16px;}.tc-title{font-size:15px;}.tc5-inner{grid-template-columns:1fr;}.cheat-grid{grid-template-columns:1fr;}.tc-res{flex-direction:column;align-items:flex-start;}.tcr-g,.tcr-a,.tcr-r{width:100%;font-size:10px;}.ts{font-size:12px;padding:8px 11px;}.cheat-title{font-size:17px;}.ci{padding:12px 10px;}.ci-name{font-size:12px;}.ci-val{font-size:10px;}.gloss-hdr-row{grid-template-columns:1fr;}.gh-cell:not(:first-child){display:none;}.gloss-table tbody tr{display:flex;flex-direction:column;padding:12px 14px;}.gt-term,.gt-desc{padding:4px 0;display:block;width:100%;}.gt-key{display:none;}.qf-grid{grid-template-columns:1fr;}}
+@media(max-width:360px){.w{padding:22px 12px;}.hh1{font-size:clamp(26px,10vw,38px);letter-spacing:-1px;}.dmbtn{font-size:14px;}.enums{grid-template-columns:1fr;}.tc{padding:16px 14px;}.ts{padding:7px 10px;font-size:11.5px;}.cheat-grid{grid-template-columns:1fr;}}
+@media(hover:none) and (pointer:coarse){.excard:hover,.ac:hover,.tc:hover{transform:none !important;box-shadow:var(--shc) !important;}.excard:active,.ac:active,.tc:active{transform:scale(.98);transition:transform .08s;}.dmbtn:active,.nxt2-btn:active{transform:scale(.97);}.dmbtn,.nxt2-btn{min-height:52px;}::-webkit-scrollbar{display:none;}.excard,.ac,.tc,.klobanner,.insight,.cheat{-webkit-backface-visibility:hidden;backface-visibility:hidden;}a,button,.dmbtn,.nxt2-btn,.excard,.ac,.tc{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}.tscroll,.sumwrap{-webkit-overflow-scrolling:touch;}.hh1,.h2,.chip,.eyebrow,.vbadge,.tc-title,.tn{-webkit-user-select:none;user-select:none;}.tc-desc,.ts,.ci-val,.ins-desc,.klo-desc{-webkit-user-select:text;user-select:text;}}
+@supports(-webkit-touch-callout:none){body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}.hero{min-height:100svh;min-height:-webkit-fill-available;padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}.vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}.w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}.nxt2{padding-bottom:max(18px,env(safe-area-inset-bottom));}.dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}.tscroll,.sumwrap{-webkit-overflow-scrolling:touch;overflow-x:auto;}.hp,.hg,.hh1 .l1,.hh1 .l2,.hh1 .l3,.hsv,.hsv.g,.hsv.a{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}.orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}a,button,.dmbtn,.nxt2-btn,.excard,.ac,.tc{-webkit-tap-highlight-color:transparent;}}
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){.dmbtn,.nxt2-btn{min-height:52px;}.excard,.ac,.tc,.klobanner,.insight,.cheat{-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0);transform:translateZ(0);}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}.rv{opacity:1;transform:none;}.ac-icon,.klo-icon{animation:none !important;}}
+@media print{.dmbanner,.orb,.nxt2{display:none;}.rv{opacity:1;transform:none;}body{color:#000;}.w{padding:20px;}.tscroll,.sumwrap{overflow:visible;}.bstbl,.sumtbl{min-width:0;}section,.tc,.tgrid{break-inside:avoid;}.tgrid{grid-template-columns:1fr 1fr;}.cheat-grid{grid-template-columns:1fr 1fr;}.cheat{background:#4c1d95 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+
+/* ═══ TRICK 7 DECISION TREE ═══ */
+.tc7{background:linear-gradient(158deg,#f0fdf4,#fafffe);border:2px solid rgba(22,163,74,.22);border-radius:22px;padding:clamp(20px,3vw,30px);grid-column:1/-1;position:relative;overflow:hidden;}
+.tc7::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--g),var(--gh),var(--p),var(--ph));}
+.dt-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(10px,2vw,18px);margin-top:18px;}
+.dt-col{display:flex;flex-direction:column;gap:10px;}
+.dt-hdr{border-radius:12px;padding:10px 14px;font-size:9.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;text-align:center;}
+.dth-scr{background:rgba(22,163,74,.12);color:var(--gbr);border:1.5px solid rgba(22,163,74,.25);}
+.dth-calc{background:rgba(109,40,217,.1);color:var(--p);border:1.5px solid rgba(109,40,217,.22);}
+.dth-decide{background:rgba(220,38,38,.08);color:var(--red);border:1.5px solid rgba(220,38,38,.2);}
+.dt-step{border-radius:10px;padding:10px 13px;font-size:12px;color:var(--ts);line-height:1.55;border-left:3px solid;}
+.dts-g{background:rgba(22,163,74,.06);border-color:var(--gbr);}
+.dts-p{background:rgba(109,40,217,.06);border-color:var(--p);}
+.dts-r{background:rgba(220,38,38,.05);border-color:var(--red);}
+.dts-a{background:rgba(217,119,6,.06);border-color:var(--amb);}
+.dt-step strong{color:var(--tx);}
+.dt-arrow{text-align:center;font-size:18px;color:var(--tl);line-height:1;}
+.dt-verdict{border-radius:12px;padding:10px 14px;text-align:center;}
+.dtv-buy{background:rgba(22,163,74,.1);border:1.5px solid rgba(22,163,74,.25);}
+.dtv-fair{background:rgba(217,119,6,.08);border:1.5px solid rgba(217,119,6,.22);}
+.dtv-sell{background:rgba(220,38,38,.08);border:1.5px solid rgba(220,38,38,.2);}
+.dtv-icon{font-size:22px;margin-bottom:4px;}
+.dtv-label{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;}
+.dtv-buy .dtv-label{color:var(--gbr);}
+.dtv-fair .dtv-label{color:var(--ambr);}
+.dtv-sell .dtv-label{color:var(--red);}
+.dtv-range{font-size:11px;color:var(--ts);margin-top:4px;line-height:1.4;}
+@media(max-width:900px){.dt-grid{grid-template-columns:1fr;}.tc7{grid-column:auto;}}
+@media(max-width:480px){.tc7{padding:16px 14px;}.dt-hdr{font-size:8.5px;}.dt-step{font-size:11.5px;padding:8px 10px;}}
+@media(hover:none) and (pointer:coarse){.tc7:active{transform:scale(.99);}}
+
+</style>
+</head>
+<body>
+<!-- HERO -->
+<section class="hero">
+  <div class="vbadge">DCF Valuation &middot; Advanced</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Module 15 &mdash; Reverse DCF</div>
+  <h1 class="hh1">
+    <span class="l1">Reverse</span>
+    <span class="l2">DCF</span>
+    <span class="l3">What Growth Is the Market Pricing In Right Now?</span>
+  </h1>
+  <p class="hsub">DCF Valuation Advanced &middot; Back-Solve Market Expectations &middot; Implied Growth Rate</p>
+  <p class="hdesc">Instead of projecting cash flows and computing a value, the Reverse DCF starts with today&rsquo;s stock price and works backwards to reveal what growth rate the market is assuming. It answers the most powerful investment question: &ldquo;Is the implied expectation realistic or not?&rdquo;</p>
+  <div class="hstat">
+    <div class="hsi"><div class="hsv">Back-Solve</div><div class="hsl">Price &rarr; Growth</div></div>
+    <div class="hsi"><div class="hsv g">Implied g</div><div class="hsl">Market expectation</div></div>
+    <div class="hsi"><div class="hsv a">Reality Check</div><div class="hsl">Can it be done?</div></div>
+    <div class="hsi"><div class="hsv">5-Min Setup</div><div class="hsl">Screener.in</div></div>
+    <div class="hsi"><div class="hsv">10 Examples</div><div class="hsl">Good vs Bad</div></div>
+  </div>
+</section>
+
+<!-- 01 KLO -->
+<section style="background:#fff;">
+  <div class="w">
+    <div class="chip rv d1">01 &mdash; Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Back-Solve <span class="hp">Market Expectations from the Current Stock Price</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">By the end of this module you will be able to open Screener.in, get five numbers from the P&amp;L and CF tabs, and compute in under five minutes the growth rate the market is implying for any Nifty 500 stock &mdash; then judge whether that expectation is achievable or not.</p>
+    <div class="klobanner rv d4">
+      <div class="klo-icon">&#128270;</div>
+      <div>
+        <div class="klo-tag">Your Core Takeaway &mdash; Read What the Market Believes</div>
+        <div class="klo-title">Every stock price contains a hidden assumption about future growth. The Reverse DCF makes that hidden assumption visible. Once you can see it, you can judge it &mdash; and that judgment is the basis of every intelligent buy or sell decision.</div>
+        <div class="klo-desc">Think of a stock price like a bet. When you pay &#8377;2,590 for one share of CDSL, you are making a bet that CDSL&rsquo;s future cash flows, discounted at WACC, are worth at least &#8377;2,590 today. But what growth rate does that price imply? The Reverse DCF answers this by rearranging the standard DCF formula. Normal DCF: &ldquo;If growth is X%, the stock is worth &#8377;Y.&rdquo; Reverse DCF: &ldquo;If the stock is priced at &#8377;2,590, then growth must be X% for that to make sense.&rdquo; Once you have the implied growth rate, you ask: has this company <em>ever</em> sustained that growth rate? Does the industry support it? Does management have the track record? If yes &rarr; the price may be fair. If no &rarr; the market is pricing in a scenario that is historically unprecedented, and the stock carries downside risk even without a catastrophe.</div>
+        <div class="klo-pills">
+          <span class="kp kp-p">&#128270; Back-solve implied growth from market price</span>
+          <span class="kp kp-g">&#128200; Compare implied g vs historical g on Screener.in</span>
+          <span class="kp kp-a">&#9989; Realistic implied g = fair value zone</span>
+          <span class="kp kp-r">&#9888; Unrealistic implied g = overvalued signal</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- INFOGRAPHIC: Detective / analyst back-solving -->
+    <div style="margin-top:40px;" class="rv d5">
+      <svg viewBox="0 0 740 290" style="max-width:740px;width:100%;margin:0 auto;display:block;border-radius:20px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="740" height="290" rx="20" fill="#f5f3ff"/>
+        <rect width="740" height="290" rx="20" stroke="#e5e1fb" stroke-width="1.5"/>
+        <!-- Normal DCF (left) -->
+        <rect x="14" y="14" width="230" height="262" rx="14" fill="white" stroke="#6d28d9" stroke-width="2"/>
+        <rect x="14" y="14" width="230" height="40" rx="14" fill="#6d28d9"/>
+        <rect x="14" y="40" width="230" height="14" fill="#6d28d9"/>
+        <text x="129" y="38" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">&#128202; NORMAL DCF</text>
+        <text x="28" y="74" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">INPUT ASSUMPTIONS:</text>
+        <text x="28" y="90" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Revenue growth: 18% p.a.</text>
+        <text x="28" y="106" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">EBITDA margin: 62%</text>
+        <text x="28" y="122" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">WACC: 11.1%</text>
+        <text x="28" y="138" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Terminal g: 5%</text>
+        <line x1="22" y1="148" x2="236" y2="148" stroke="#e5e1fb" stroke-width="1"/>
+        <text x="28" y="165" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">DCF ENGINE:</text>
+        <text x="28" y="181" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">FCF Year 1-5 + Terminal Value</text>
+        <text x="28" y="196" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">PV all cash flows</text>
+        <text x="28" y="212" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Add net cash, divide by shares</text>
+        <line x1="22" y1="222" x2="236" y2="222" stroke="#e5e1fb" stroke-width="1"/>
+        <text x="28" y="240" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">OUTPUT:</text>
+        <text x="28" y="258" font-family="DM Sans,sans-serif" font-size="14" font-weight="900" fill="#6d28d9">IV = &#8377;1,620/share</text>
+        <!-- Arrow right -->
+        <text x="270" y="148" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="28" fill="#6d28d9">&#8594;</text>
+        <text x="270" y="166" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6e6994">vs</text>
+        <text x="270" y="180" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="28" fill="#15803d">&#8592;</text>
+        <!-- Reverse DCF (right) -->
+        <rect x="300" y="14" width="260" height="262" rx="14" fill="white" stroke="#15803d" stroke-width="2"/>
+        <rect x="300" y="14" width="260" height="40" rx="14" fill="#15803d"/>
+        <rect x="300" y="40" width="260" height="14" fill="#15803d"/>
+        <text x="430" y="38" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">&#128270; REVERSE DCF</text>
+        <text x="314" y="74" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#15803d">KNOWN INPUT:</text>
+        <text x="314" y="90" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#6d28d9">Market Price: &#8377;2,590/share</text>
+        <text x="314" y="108" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">WACC: 11.1% (from Module 11)</text>
+        <text x="314" y="124" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Terminal g: 5% (assumed)</text>
+        <text x="314" y="140" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Current FCF: &#8377;515 Cr (Screener.in)</text>
+        <line x1="308" y1="150" x2="552" y2="150" stroke="#e5e1fb" stroke-width="1"/>
+        <text x="314" y="168" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#15803d">BACK-SOLVE FOR: Revenue growth g</text>
+        <text x="314" y="184" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">What growth rate makes</text>
+        <text x="314" y="200" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">DCF output = &#8377;2,590?</text>
+        <text x="314" y="216" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Iterate until IV = Market Price</text>
+        <line x1="308" y1="225" x2="552" y2="225" stroke="#e5e1fb" stroke-width="1"/>
+        <text x="314" y="243" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#15803d">IMPLIED GROWTH = ?</text>
+        <text x="314" y="262" font-family="DM Sans,sans-serif" font-size="14" font-weight="900" fill="#15803d">g = ~26% p.a. (5 yrs)</text>
+        <!-- Reality check panel -->
+        <rect x="580" y="14" width="146" height="262" rx="14" fill="white" stroke="#d97706" stroke-width="2"/>
+        <rect x="580" y="14" width="146" height="40" rx="14" fill="#d97706"/>
+        <rect x="580" y="40" width="146" height="14" fill="#d97706"/>
+        <text x="653" y="37" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="white">REALITY CHECK</text>
+        <text x="594" y="68" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#92400e">Implied: 26%</text>
+        <text x="594" y="84" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Historical 5Y CAGR:</text>
+        <text x="594" y="98" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">~25% &#10003;</text>
+        <text x="594" y="114" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Industry growth:</text>
+        <text x="594" y="128" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">18-22% &#9888;</text>
+        <text x="594" y="144" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Demat penetration:</text>
+        <text x="594" y="158" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">Growing &#10003;</text>
+        <line x1="588" y1="168" x2="718" y2="168" stroke="#e5e1fb" stroke-width="1"/>
+        <text x="594" y="186" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#92400e">VERDICT:</text>
+        <text x="594" y="204" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Implied g is</text>
+        <text x="594" y="220" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">at upper end of</text>
+        <text x="594" y="236" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">historical range.</text>
+        <text x="594" y="254" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#d97706">Fairly priced.</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 02 APPROACH -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="chip rv d1">02 &mdash; Normal DCF vs Reverse DCF</div>
+    <h2 class="h2 rv d2">Two Sides of the Same <span class="hg">Equation &mdash; How Each Works</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">The Normal DCF and Reverse DCF use exactly the same model and the same inputs. The only difference is which variable is unknown. Understanding both directions makes you a far more complete analyst.</p>
+    <div class="approach-grid rv d3">
+      <div class="ac ac-fwd">
+        <div class="ac-icon ai-fwd">&#128202;</div>
+        <div class="ac-tag at-fwd">Direction 1 &mdash; Forward</div>
+        <div class="ac-title">Normal DCF: Assumptions &rarr; Value</div>
+        <div class="ac-desc">You define all assumptions (growth rate, margins, WACC, terminal growth rate) and the DCF model computes a single intrinsic value. The question answered: <strong>&ldquo;Given these assumptions, what is this stock worth?&rdquo;</strong> This is how Modules 9&ndash;14 work. The weakness: you can choose assumptions that make the stock look cheap or expensive depending on your bias. Normal DCF requires honesty about assumptions.</div>
+        <div class="ac-formula">
+          <div class="af-main">IV = PV(FCFs, Year 1&ndash;5) + PV(Terminal Value)</div>
+          <div class="af-parts">All inputs known &bull; Revenue growth, Margin, WACC, Terminal g all specified by analyst &bull; Output = Intrinsic Value per share &bull; Compare vs market price for buy/sell signal</div>
+        </div>
+        <div class="ac-steps">
+          <div class="as as-p"><strong>Input:</strong> Revenue growth = 18%, Margin = 62%, WACC = 11.1%, g = 5%</div>
+          <div class="as as-p"><strong>Process:</strong> Build FCF &rarr; Terminal Value &rarr; Discount all &rarr; Add cash &rarr; Divide by shares</div>
+          <div class="as as-p"><strong>Output:</strong> Intrinsic Value = &#8377;1,620/share. Market = &#8377;2,590. Verdict: overvalued by 37%</div>
+        </div>
+        <div class="ac-ana aa-fwd">&#128161; <strong>Strength:</strong> Gives a precise valuation range with full scenario analysis. <strong>Weakness:</strong> The answer is only as good as the assumptions. An optimistic analyst and a pessimistic analyst will produce wildly different &ldquo;intrinsic values&rdquo; from the same company &mdash; both claiming their DCF is correct.</div>
+      </div>
+      <div class="ac ac-rev">
+        <div class="ac-icon ai-rev">&#128270;</div>
+        <div class="ac-tag at-rev">Direction 2 &mdash; Reverse</div>
+        <div class="ac-title">Reverse DCF: Price &rarr; Implied Growth</div>
+        <div class="ac-desc">You fix WACC and terminal growth rate, then back-solve to find the revenue growth rate that makes the DCF output exactly equal to today&rsquo;s market price. The question answered: <strong>&ldquo;What must the company achieve for this price to be justified?&rdquo;</strong> The result is an implied growth rate that you then compare to historical performance and industry fundamentals. This is assumption-free valuation &mdash; no analyst bias, just market-revealed expectations.</div>
+        <div class="ac-formula">
+          <div class="af-main">Market Price = PV(FCFs at implied g) + PV(TV) &rarr; Solve for g</div>
+          <div class="af-parts">Market Price known (Screener.in homepage) &bull; WACC from Module 11 &bull; Terminal g assumed 5% &bull; Solve: what g makes DCF = Market Price? &bull; Output = Implied growth rate</div>
+        </div>
+        <div class="ac-steps">
+          <div class="as as-g"><strong>Input:</strong> Market Price = &#8377;2,590, WACC = 11.1%, Terminal g = 5%, Current FCF = &#8377;515 Cr</div>
+          <div class="as as-g"><strong>Process:</strong> Try different growth rates until DCF output = &#8377;2,590. Use Goal Seek in Excel.</div>
+          <div class="as as-g"><strong>Output:</strong> Implied g &asymp; 26% p.a. for 5 years. Compare vs CDSL historical 25% CAGR. Verdict: stretched but achievable</div>
+        </div>
+        <div class="ac-ana aa-rev">&#128161; <strong>Strength:</strong> No assumptions to defend. The market price IS the input. The implied growth rate reveals what Mr Market believes. <strong>Use it to ask:</strong> Is implied g above or below historical g? If above &rarr; market is pricing in acceleration. If below &rarr; market expects deceleration. Either way, the insight is real and grounded.</div>
+      </div>
+    </div>
+
+    <!-- Verdict strip -->
+    <div class="vstrp rv d5">
+      <div class="vs-inner">
+        <div class="vs-badge">CDSL Back-Solved &mdash; Market Price &#8377;2,590 Implies These Expectations</div>
+        <div class="vs-title">What the Market Is Betting on When It Pays &#8377;2,590 for CDSL</div>
+        <div class="vs-grid">
+          <div class="vsc vsc-amb"><div class="vsc-lbl">Implied Revenue Growth</div><div class="vsc-val">~26% p.a.</div><div class="vsc-note">For 5 consecutive years. Historical 5Y CAGR was ~25%. Achievable but at the upper end.</div></div>
+          <div class="vsc vsc-amb"><div class="vsc-lbl">Historical Comparison</div><div class="vsc-val">25% vs 26%</div><div class="vsc-note">Implied g is above historical average. Requires CDSL to maintain or accelerate its best-ever growth rate.</div></div>
+          <div class="vsc vsc-red"><div class="vsc-lbl">Feasibility Check</div><div class="vsc-val">Stretched</div><div class="vsc-note">At 26% growth, CDSL revenue reaches &#8377;3,950 Cr by FY30E &mdash; feasible only if demat accounts reach 20 Cr+.</div></div>
+          <div class="vsc vsc-amb"><div class="vsc-lbl">Terminal g assumed</div><div class="vsc-val">5%</div><div class="vsc-note">Standard India CPI proxy. If terminal g is 6%, implied near-term growth falls to ~22% (more achievable).</div></div>
+          <div class="vsc vsc-green"><div class="vsc-lbl">Industry Tailwind</div><div class="vsc-val">Supports</div><div class="vsc-note">India demat penetration at 9% vs 55% in US. Industry can sustain 18-22% growth for a decade. 26% is aggressive.</div></div>
+          <div class="vsc vsc-amb"><div class="vsc-lbl">Overall Verdict</div><div class="vsc-val">Priced for Perfection</div><div class="vsc-note">Market prices in near-best-case scenario. Any disappointment in growth &rarr; significant price correction risk.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 SCREENER DATA -->
+<section style="background:#fff;">
+  <div class="w">
+    <div class="chip rv d1">03 &mdash; The Reverse DCF Calculation from Screener.in</div>
+    <h2 class="h2 rv d2">How to Back-Solve <span class="hp">Implied Growth in 5 Minutes with Screener.in</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">You need exactly five numbers from Screener.in and two parameters from your model (WACC and terminal growth rate). With those seven inputs, the implied growth rate can be solved in Excel using Goal Seek in under five minutes.</p>
+    <div class="scr-wrap rv d4">
+      <div class="scr-hdr">
+        <div><div class="sh-title">CDSL &mdash; Reverse DCF Workbook (Back-Solve from Market Price &#8377;2,590)</div><div class="sh-sub">NSE: CDSL &middot; All data from Screener.in + Module 11 WACC &middot; Excel Goal Seek used to find implied g</div></div>
+        <div class="sh-bdgs"><span class="sh-bdg">Screener.in</span><span class="sh-bdg">Goal Seek</span><span class="sh-bdg">5 Minutes</span></div>
+      </div>
+      <div class="scr-guide">
+        <span><span class="sg-dot" style="background:var(--p);"></span> Purple = inputs from Screener.in</span>
+        <span><span class="sg-dot" style="background:var(--gbr);"></span> Green = back-solved / computed</span>
+        <span><span class="sg-dot" style="background:var(--ambr);"></span> Amber = interpretation / verdict</span>
+      </div>
+      <div class="tscroll">
+        <table class="bstbl">
+          <thead><tr><th style="text-align:left;">Item</th><th>Value</th><th>Screener.in Location</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr class="shdr"><td colspan="4">── STEP 1: COLLECT 5 NUMBERS FROM SCREENER.IN ──</td></tr>
+            <tr><td>Market Price (per share) <span class="ann an-p">Known</span></td><td class="up">&#8377;2,590</td><td>Company homepage &rarr; current price</td><td>This is what we are back-solving from</td></tr>
+            <tr><td>Total Shares Outstanding <span class="ann an-p">Known</span></td><td>104.5 Cr</td><td>Balance Sheet &rarr; Share Capital &divide; face value</td><td>104.5 Cr &times; face value &#8377;10 = Share Cap</td></tr>
+            <tr><td>Market Cap (&#8377; Cr) <span class="ann an-p">Known</span></td><td>&#8377;27,065 Cr</td><td>Company homepage top bar</td><td>Market Cap = Market Price &times; Shares</td></tr>
+            <tr><td>Net Cash / (Debt) (&#8377; Cr) <span class="ann an-g">Known</span></td><td class="up">+&#8377;900 Cr (net cash)</td><td>Balance Sheet &rarr; Investments + Cash &minus; Borrowings</td><td>CDSL has zero debt; large investment book</td></tr>
+            <tr><td>Current Year FCF (&#8377; Cr) <span class="ann an-p">Known</span></td><td>&#8377;515 Cr</td><td>CF tab &rarr; Cash from Ops &minus; Capex (FY25)</td><td>Starting point for DCF engine</td></tr>
+            <tr class="shdr"><td colspan="4">── STEP 2: SET PARAMETERS ──</td></tr>
+            <tr><td>WACC <span class="ann an-a">From Module 11</span></td><td>11.1%</td><td>Computed (Ke = Rf + Beta &times; ERP)</td><td>CDSL zero-debt &rarr; WACC = Ke = 11.1%</td></tr>
+            <tr><td>Terminal Growth Rate (g) <span class="ann an-a">Assumed</span></td><td>5.0%</td><td>India long-run CPI proxy</td><td>Standard assumption; sensitivity at 4% and 6%</td></tr>
+            <tr><td>Explicit forecast period</td><td>5 years</td><td>Standard</td><td>FCF Year 1 = FCF&#8320; &times; (1+implied g); repeat for 5 years</td></tr>
+            <tr class="shdr"><td colspan="4">── STEP 3: TARGET EQUITY VALUE ──</td></tr>
+            <tr class="hi-r"><td>Target Enterprise Value (&#8377; Cr)</td><td>&#8377;26,165 Cr</td><td>Calculated</td><td>Market Cap (&#8377;27,065) &minus; Net Cash (&#8377;900) = EV that DCF must match</td></tr>
+            <tr class="shdr"><td colspan="4">── STEP 4: BACK-SOLVE WITH EXCEL GOAL SEEK ──</td></tr>
+            <tr><td>DCF setup (in Excel) <span class="ann an-g">Build</span></td><td colspan="3" style="text-align:left;font-size:12px;color:var(--ts);">Year 1 FCF = &#8377;515 &times; (1+g). Year 2 = Year 1 &times; (1+g). Repeat to Year 5. TV = Year5 FCF &times; 1.05 &divide; (11.1% &minus; 5%). PV each FCF at WACC. Total EV = Sum PV FCFs + PV TV. Set cell = &#8377;26,165. Changing cell = g (the growth rate). Goal Seek solves: what g makes EV = &#8377;26,165?</td></tr>
+            <tr class="g-r hi-r"><td>Implied Revenue Growth Rate (g)</td><td class="up">~26% p.a.</td><td>Excel Goal Seek output</td><td>Market is pricing 26% FCF/revenue growth for 5 years</td></tr>
+            <tr class="shdr"><td colspan="4">── STEP 5: REALITY CHECK vs SCREENER.IN HISTORY ──</td></tr>
+            <tr><td>CDSL 5-Year Revenue CAGR (FY21&ndash;FY25) <span class="ann an-g">Screener</span></td><td>~25%</td><td>P&amp;L tab &rarr; Sales row</td><td>Implied 26% is slightly above 5Y historical CAGR</td></tr>
+            <tr><td>CDSL 10-Year Revenue CAGR (FY16&ndash;FY25) <span class="ann an-g">Screener</span></td><td>~20%</td><td>P&amp;L tab &rarr; Sales row (10Y)</td><td>Implied 26% is above 10Y average</td></tr>
+            <tr><td>Highest single-year revenue growth <span class="ann an-g">Screener</span></td><td>+45% (FY22)</td><td>P&amp;L tab &rarr; YoY Sales change</td><td>Achievable but FY22 was a market-boom year</td></tr>
+            <tr class="r-r hi-r"><td>Verdict: Is 26% p.a. for 5 years realistic?</td><td>Stretched</td><td>Analyst judgment</td><td>Above 10Y avg; requires sustained market boom. Any slowdown = downside risk</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Sensitivity: Implied g at different terminal g assumptions -->
+    <div class="rv d5" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,22px);margin-bottom:32px;">
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--pxs),#fdfcff);border:1.5px solid rgba(109,40,217,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:7px;">&#128203; How to Run Goal Seek in Excel (30 Seconds)</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>Step 1:</strong> Build the DCF engine in Excel with the growth rate (g) in a single cell (e.g., B2). All FCF projections reference B2. Terminal Value references B2. Total EV is computed. <strong>Step 2:</strong> Data &rarr; What-If Analysis &rarr; Goal Seek. Set cell: [EV output cell]. To value: 26,165 (target EV in Crores). By changing cell: B2 (the growth rate). <strong>Step 3:</strong> Click OK. Excel iterates in under 1 second and places the implied growth rate in B2. Done. <strong>Alternative:</strong> Use Excel Solver for more complex models or if Goal Seek doesn&rsquo;t converge. Python&rsquo;s scipy.optimize.brentq achieves the same in 3 lines of code.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--gpale),#fafffe);border:1.5px solid rgba(22,163,74,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:7px;">&#128200; How Terminal g Affects Implied Near-Term Growth</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>The terminal growth assumption significantly changes the implied near-term g.</strong> Try three terminal growth scenarios for CDSL at price &#8377;2,590: &bull; If terminal g = 4% &rarr; implied near-term growth &asymp; 29% p.a. (very aggressive) &bull; If terminal g = 5% &rarr; implied near-term growth &asymp; 26% p.a. (stretched) &bull; If terminal g = 6% &rarr; implied near-term growth &asymp; 22% p.a. (more achievable). This is why Reverse DCF must always be presented with sensitivity across at least three terminal g assumptions. The &ldquo;implied growth&rdquo; number is not a single fact &mdash; it is conditional on the terminal g you assume.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--apale),#fffbeb);border:1.5px solid rgba(217,119,6,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ambr);margin-bottom:7px;">&#9728;&#65039; The Buy/Sell Decision from Implied Growth</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>Implied g below historical average &rarr; potential buy.</strong> The market is pricing in deceleration that history doesn&rsquo;t support. <strong>Implied g near historical average &rarr; fairly valued.</strong> Market is pricing in continuation of existing trends. <strong>Implied g above historical best &rarr; caution.</strong> The market is pricing in a growth rate the company has never sustained. Any disappointment will disappoint buyers. <strong>Rule of thumb:</strong> Implied g &gt; (historical 10Y CAGR + 3%) = overvalued signal. Implied g &lt; (historical 10Y CAGR &minus; 5%) = potentially undervalued signal.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--rpale),#fff5f5);border:1.5px solid rgba(220,38,38,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:7px;">&#128680; The &ldquo;Market Is Always Right&rdquo; Trap</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>The Reverse DCF reveals market expectations, not market truth.</strong> The market can price in growth rates that are genuinely unrealistic. In 2000, Infosys&rsquo;s market price implied 50%+ revenue growth for 10 years &mdash; a physically impossible expectation. In 2022, many EV stocks priced in implied growth of 60%+ annually. The Reverse DCF does not tell you the market is right; it tells you what the market believes. <strong>Your job is to judge whether the implied belief is realistic.</strong> Use Screener.in&rsquo;s historical data as the reality anchor. If the implied growth rate has never been sustained by any company in the same sector for 5 years &mdash; the stock is likely speculative, not investment-grade.</p>
+      </div>
+    </div>
+    <div class="insight rv d6">
+      <div class="ins-ico">&#128269;</div>
+      <div>
+        <div class="ins-tag">The Reverse DCF Decision Rule</div>
+        <div class="ins-title">Compare Implied g to Historical g from Screener.in. Below Historical = Opportunity. Above Historical = Premium. Far Above Historical = Speculation.</div>
+        <div class="ins-desc">The Reverse DCF is the fastest reality-check in equity analysis. Five numbers from Screener.in, one Goal Seek in Excel, and you know exactly what the market is betting on. Then a 30-second check of the P&amp;L tab&rsquo;s historical revenue CAGR tells you whether that bet is grounded in reality. No assumptions to defend. No valuation model to argue about. Just the market&rsquo;s implied expectation, made visible, held up against the company&rsquo;s actual track record.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMAT BANNER -->
+<section class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Apply Reverse DCF to Any Nifty 500 Stock</div>
+    <div class="dmh">Open a Free Demat Account &amp;<br><span class="dmhs">Know What You Are Really Paying For.</span></div>
+    <div class="dmsub">Use Screener.in P&amp;L data and Excel Goal Seek to back-solve implied growth for any stock in under 5 minutes. Buy only when the implied g is realistic.</div>
+    <div class="dmfeats"><div class="dmf">&#8377;0 Account Opening Fee</div><div class="dmf">Screener.in 10-Year History</div><div class="dmf">Zero Brokerage on Delivery</div><div class="dmf">SEBI Regulated &amp; Trusted</div></div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn">&#128640;&nbsp; Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmrating">4.8 &middot; Trusted by 1 Crore+ Investors</span></div>
+    <div class="dmnote">No spam. No hidden charges. SEBI registered broker.</div>
+  </div>
+</section>
+
+<!-- 04 GOOD vs BAD -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="chip rv d1">04 &mdash; Good vs Bad Reverse DCF Applications</div>
+    <h2 class="h2 rv d2">Reverse DCF <span class="hp">Quality in Real Companies</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">Here are 5 situations where the Reverse DCF produces a clear, actionable insight &mdash; and 5 where the technique is misapplied or the conclusion is wrong.</p>
+
+    <div class="gbh rv d2 gbh-g">
+      <div class="gbh-ico gi-g">&#10004;</div>
+      <div><div class="gbh-title">5 Cases Where Reverse DCF Works Powerfully</div><div class="gbh-sub">Implied g clearly above or below history &middot; Actionable buy or sell signal &middot; Rich Screener.in data for comparison</div></div>
+    </div>
+    <div class="exgrid">
+      <div class="excard eg1 rv d2">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pmd));">&#127850;</div><div><div class="ex-name">Asian Paints (Post-Correction)</div><div class="ex-sec">FMCG &middot; NSE: ASIANPAINT &middot; After 35% correction from peak</div></div></div>
+        <div class="vrd vg">&#10004; Implied g Below Historical Average &rarr; Clear Buy Signal</div>
+        <div class="enums">
+          <div class="en en-g"><div class="en-lbl">Market price (post-fall)</div><div class="en-val ev-g">&#8377;2,100</div></div>
+          <div class="en en-p"><div class="en-lbl">Implied g (back-solved)</div><div class="en-val ev-p">~6%</div></div>
+          <div class="en en-g"><div class="en-lbl">Historical 10Y CAGR</div><div class="en-val ev-g">~12%</div></div>
+          <div class="en en-g"><div class="en-lbl">Verdict</div><div class="en-val ev-g">Opportunity</div></div>
+        </div>
+        <div class="ex-why"><strong>Why Reverse DCF works powerfully here:</strong> Asian Paints fell 35% from its 2023 peak of &#8377;3,300 to &#8377;2,100, driven by margin concerns from high crude oil costs and fear of Birla Opus competition. At &#8377;2,100, the Reverse DCF back-solved an implied revenue growth of only 6% p.a. But Asian Paints has delivered 12% revenue CAGR for 10 years, holds 55% market share, and has never seen 6% growth in a normal macro environment. The implied growth was below the company&rsquo;s own worst decade. This was the clearest buy signal that Reverse DCF produced &mdash; market pricing in permanent de-rating that history did not support.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Implied g = 6% vs 10Y historical CAGR 12% &rarr; market pricing in 50% deceleration</div>
+          <div class="sig"><div class="sdot sd-g"></div>Screener.in shows no 5-year period with revenue CAGR &lt;8% in 20-year history</div>
+          <div class="sig"><div class="sdot sd-g"></div>Birla Opus threat was real but market overpriced the risk</div>
+          <div class="sig"><div class="sdot sd-g"></div>Reverse DCF exposed the overreaction and identified the buying opportunity</div>
+        </div>
+      </div>
+      <div class="excard eg2 rv d3">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--gpale),#d1fae5);">&#127949;&#65039;</div><div><div class="ex-name">Bajaj Auto (Post-COVID Trough)</div><div class="ex-sec">Autos &middot; NSE: BAJAJ-AUTO &middot; At cyclical price trough</div></div></div>
+        <div class="vrd vg">&#10004; Implied g at Trough Implied Permanent Decline &rarr; Reverse DCF Revealed Overreaction</div>
+        <div class="enums">
+          <div class="en en-g"><div class="en-lbl">Price at COVID trough</div><div class="en-val ev-g">&#8377;2,200</div></div>
+          <div class="en en-p"><div class="en-lbl">Implied g back-solved</div><div class="en-val ev-p">~2%</div></div>
+          <div class="en en-g"><div class="en-lbl">Normal-cycle CAGR</div><div class="en-val ev-g">~8%</div></div>
+          <div class="en en-g"><div class="en-lbl">Result</div><div class="en-val ev-g">Multibagger</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it worked:</strong> At the COVID trough of March 2020, Bajaj Auto fell to &#8377;2,200. The Reverse DCF showed implied revenue growth of only 2% p.a. for 5 years &mdash; a scenario that would have required Indian two-wheeler penetration to stagnate permanently. But Bajaj&rsquo;s 15-year revenue CAGR was ~8%, and the company had already pivoted to high-value exports (Africa, ASEAN) that were structurally growing. The implied 2% growth was a COVID-panic projection, not an economic reality. Investors who ran the Reverse DCF, compared with Screener.in&rsquo;s 15-year data, and bought at &#8377;2,200 saw a 4&times; return over 4 years.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Implied g = 2% at COVID trough vs historical 8% long-run CAGR</div>
+          <div class="sig"><div class="sdot sd-g"></div>Screener.in 15-year history: no period with 2% sustained growth</div>
+          <div class="sig"><div class="sdot sd-g"></div>Export business diversification not priced into trough valuation</div>
+          <div class="sig"><div class="sdot sd-g"></div>Reverse DCF revealed classic panic-driven mispricing &rarr; multibagger entry point</div>
+        </div>
+      </div>
+      <div class="excard eg3 rv d4">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--skypale),#e0f2fe);">&#128202;</div><div><div class="ex-name">HDFC Bank (2022 Underperformance)</div><div class="ex-sec">Private Banking &middot; NSE: HDFCBANK &middot; After 2-year underperformance</div></div></div>
+        <div class="vrd vg">&#10004; Implied Loan Growth Below Historical Average &rarr; Market Pricing in Structural Slowdown</div>
+        <div class="enums">
+          <div class="en en-g"><div class="en-lbl">Implied loan growth</div><div class="en-val ev-g">~10%</div></div>
+          <div class="en en-p"><div class="en-lbl">Historical loan CAGR</div><div class="en-val ev-p">~18%</div></div>
+          <div class="en en-g"><div class="en-lbl">Implied NIM</div><div class="en-val ev-g">Compressed</div></div>
+          <div class="en en-g"><div class="en-lbl">Signal</div><div class="en-val ev-g">Undervalued</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it worked:</strong> HDFC Bank underperformed from 2021 to 2023 as markets worried about the HDFC-HDFC Bank merger complexity, NIM compression, and slowdown in retail credit. At &#8377;1,450 in mid-2022, the Reverse DCF (applied to loan book growth) showed the market was implying only 10% loan growth for 5 years. But HDFC Bank had delivered 18% loan CAGR for 15 consecutive years, maintained best-in-class NIMs, and had the most extensive retail distribution in India. The Reverse DCF signal was clear: implied growth far below historical &rarr; strong long-term buy. HDFC Bank recovered to &#8377;1,900+ by 2024.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Loan growth Reverse DCF: implied 10% vs historical 18% for 15 years</div>
+          <div class="sig"><div class="sdot sd-g"></div>Merger integration risk overpriced &rarr; Reverse DCF exposed the value</div>
+          <div class="sig"><div class="sdot sd-g"></div>Screener.in: HDFC Bank never grew loans below 14% in any 5-year period</div>
+          <div class="sig"><div class="sdot sd-g"></div>30% recovery from Reverse DCF signal entry point</div>
+        </div>
+      </div>
+      <div class="excard eg4 rv d5">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--apale),#fef3c7);">&#128187;</div><div><div class="ex-name">TCS (at 30x P/E, 2022 Peak)</div><div class="ex-sec">IT Services &middot; NSE: TCS &middot; At bull-market peak valuation</div></div></div>
+        <div class="vrd vg">&#10004; Implied g Above Historical &rarr; Reverse DCF Correctly Flagged Overvaluation</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Price at peak</div><div class="en-val ev-r">&#8377;4,000</div></div>
+          <div class="en en-r"><div class="en-lbl">Implied g</div><div class="en-val ev-r">~22%</div></div>
+          <div class="en en-p"><div class="en-lbl">Historical 10Y CAGR</div><div class="en-val ev-p">~10%</div></div>
+          <div class="en en-r"><div class="en-lbl">Verdict</div><div class="en-val ev-r">Expensive</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it worked as a caution signal:</strong> At the IT bull market peak of early 2022, TCS traded at &#8377;4,000 (30&times; earnings). The Reverse DCF back-solved an implied revenue growth of ~22% p.a. for 5 years. But TCS&rsquo;s 10-year revenue CAGR was ~10%. Even during the post-COVID tech boom (FY21&ndash;FY22), TCS grew at 15-16%. The market was implying 22% growth for 5 consecutive years, something TCS had never come close to. Investors who ran the Reverse DCF in January 2022 and compared with Screener.in history would have avoided buying at the top. TCS corrected to &#8377;2,800 by end of 2022 (&minus;30%).</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>Implied g = 22% vs historical peak growth of 16% &rarr; unrealistic expectation</div>
+          <div class="sig"><div class="sdot sd-r"></div>Screener.in showed no 5-year period with TCS revenue CAGR &gt;14%</div>
+          <div class="sig"><div class="sdot sd-r"></div>Reverse DCF flagged overvaluation before the 30% correction</div>
+          <div class="sig"><div class="sdot sd-g"></div>At &#8377;2,800, re-running Reverse DCF showed implied g of 9% = fair value</div>
+        </div>
+      </div>
+      <div class="excard eg5 exfull rv d6">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,#f0fdf4,#d1fae5);">&#127968;</div><div><div class="ex-name">Pidilite Industries &mdash; Reverse DCF Validates Consistent Premium Pricing</div><div class="ex-sec">Adhesives &middot; NSE: PIDILITIND &middot; 45x+ P/E premium warranted by implied g check</div></div></div>
+        <div class="vrd vg">&#10004; Implied g Matches Historical Rate &rarr; Premium Valuation Is Justified</div>
+        <div class="ex-inner">
+          <div>
+            <div class="enums">
+              <div class="en en-g"><div class="en-lbl">Implied g (at &#8377;2,800)</div><div class="en-val ev-g">~13%</div></div>
+              <div class="en en-p"><div class="en-lbl">Historical 10Y CAGR</div><div class="en-val ev-p">~14%</div></div>
+              <div class="en en-g"><div class="en-lbl">Brand moat</div><div class="en-val ev-g">Fevicol 50Y+</div></div>
+              <div class="en en-g"><div class="en-lbl">Verdict</div><div class="en-val ev-g">Fairly priced</div></div>
+            </div>
+            <div class="ex-why" style="margin-top:12px;"><strong>Why Reverse DCF justifies the premium:</strong> Pidilite is perpetually &ldquo;expensive&rdquo; by traditional valuation metrics (P/E 45&ndash;55&times;). Many analysts call it overvalued every year for a decade. The Reverse DCF tells a different story: at &#8377;2,800, the implied revenue growth is ~13% p.a. Pidilite&rsquo;s actual 10-year CAGR is ~14%. The market is not pricing in acceleration &mdash; it is simply pricing in the continuation of Pidilite&rsquo;s historically consistent growth, aided by the Fevicol brand moat. The Reverse DCF reveals that Pidilite is not &ldquo;overvalued&rdquo; &mdash; it is fairly valued for a business that consistently delivers 13&ndash;15% growth with expanding margins.</div>
+          </div>
+          <div>
+            <div class="sigs" style="margin-top:0;">
+              <div class="sig"><div class="sdot sd-g"></div>Implied g 13% vs historical CAGR 14% &rarr; market pricing in slight deceleration only</div>
+              <div class="sig"><div class="sdot sd-g"></div>Traditional P/E analysis says &ldquo;expensive.&rdquo; Reverse DCF says &ldquo;fair for this track record&rdquo;</div>
+              <div class="sig"><div class="sdot sd-g"></div>The premium is warranted once you see what growth rate the premium implies</div>
+              <div class="sig"><div class="sdot sd-g"></div>Screener.in 15Y data: Pidilite never had a 5Y period with &lt;10% revenue CAGR</div>
+              <div class="sig-hl shl-g"><strong>Key lesson:</strong> P/E ratio says nothing about whether a premium is warranted. A 45&times; P/E might be expensive for a company growing at 5% and cheap for one growing at 18%. The Reverse DCF is the correct tool for evaluating whether a premium is justified because it directly compares the implied growth rate against the company&rsquo;s own historical track record &mdash; the only fair benchmark.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 BAD -->
+    <div class="gbh rv d2 gbh-r" style="margin-top:44px;">
+      <div class="gbh-ico gi-r">&#9888;</div>
+      <div><div class="gbh-title">5 Reverse DCF Failures &mdash; When the Technique Misleads</div><div class="gbh-sub">Wrong WACC &middot; No terminal g sensitivity &middot; Cyclical peak as base &middot; Short history &middot; Ignoring structural change</div></div>
+    </div>
+    <div class="exgrid">
+      <div class="excard eb1 rv d2">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">&#9878;&#65039;</div><div><div class="ex-name">Using Wrong WACC in Reverse DCF</div><div class="ex-sec">Error: Using US 10-year rate (4%) as Rf instead of India G-Sec (7%)</div></div></div>
+        <div class="vrd vr">&#128680; Wrong WACC Produces Artificially Bullish Implied Growth</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Wrong WACC used</div><div class="en-val ev-r">8% (US Rf)</div></div>
+          <div class="en en-r"><div class="en-lbl">Correct WACC</div><div class="en-val ev-r">11.1% (India)</div></div>
+          <div class="en en-r"><div class="en-lbl">Implied g (wrong)</div><div class="en-val ev-r">18%</div></div>
+          <div class="en en-r"><div class="en-lbl">Implied g (correct)</div><div class="en-val ev-r">26%</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it fails:</strong> Using WACC = 8% (derived from a US risk-free rate of 4%) instead of the correct India CAPM WACC of 11.1% dramatically changes the Reverse DCF output. With WACC = 8%, back-solving for CDSL&rsquo;s market price of &#8377;2,590 gives an implied growth of only 18% &mdash; which looks perfectly achievable vs the historical 25% CAGR. This produces a misleading &ldquo;fair value&rdquo; conclusion. With the correct WACC = 11.1%, the implied growth is 26% &mdash; stretched. The wrong WACC makes an overvalued stock look fairly valued, leading the investor to hold a position that should be avoided. This is the most dangerous Reverse DCF error because the conclusion changes from &ldquo;caution&rdquo; to &ldquo;buy&rdquo;.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>WACC 8% vs 11.1% &rarr; implied g drops from 26% to 18% &rarr; misleadingly fair</div>
+          <div class="sig"><div class="sdot sd-r"></div>Wrong WACC masks overvaluation as fairly priced</div>
+          <div class="sig"><div class="sdot sd-r"></div>Fix: Always use India G-Sec Rf and Damodaran India ERP for Indian companies</div>
+          <div class="sig"><div class="sdot sd-r"></div>WACC error is amplified in Reverse DCF because it shifts the entire back-solve</div>
+        </div>
+      </div>
+      <div class="excard eb2 rv d3">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fee2e2);">&#128270;</div><div><div class="ex-name">Single Terminal g Assumption (No Sensitivity)</div><div class="ex-sec">Error: Presenting implied g = 26% without showing how it changes with terminal g</div></div></div>
+        <div class="vrd vr">&#128680; Implied Growth Looks Different Depending on Terminal g</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Implied g at term.g=4%</div><div class="en-val ev-r">29%</div></div>
+          <div class="en en-r"><div class="en-lbl">Implied g at term.g=5%</div><div class="en-val ev-r">26%</div></div>
+          <div class="en en-r"><div class="en-lbl">Implied g at term.g=6%</div><div class="en-val ev-r">22%</div></div>
+          <div class="en en-r"><div class="en-lbl">Presented</div><div class="en-val ev-r">Only 26%</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it fails:</strong> An analyst reports &ldquo;CDSL&rsquo;s market price implies 26% growth.&rdquo; But this is only true if terminal g = 5%. If terminal g = 6% (still reasonable), the implied near-term growth drops to 22% &mdash; much more achievable. If terminal g = 4% (conservative), the implied growth rises to 29% &mdash; very aggressive. Presenting a single implied growth number without terminal g sensitivity gives the reader a false sense of precision. The correct Reverse DCF output is a range: &ldquo;The market is pricing in 22&ndash;29% near-term growth, depending on terminal growth assumption, with the midpoint at 26%.&rdquo; Always present sensitivity.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>Single implied g = 26% hides that it could be 22% or 29% with different terminal g</div>
+          <div class="sig"><div class="sdot sd-r"></div>Different terminal g assumptions reverse the buy/sell signal in some cases</div>
+          <div class="sig"><div class="sdot sd-r"></div>Fix: Always present implied g across terminal g = 4%, 5%, 6%</div>
+          <div class="sig"><div class="sdot sd-r"></div>The range of implied g (not a single number) is the honest Reverse DCF output</div>
+        </div>
+      </div>
+      <div class="excard eb3 rv d4">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--apale),#fef3c7);">&#9889;</div><div><div class="ex-name">Applying Reverse DCF to a Cyclical at the Peak</div><div class="ex-sec">Error: Tata Steel at cycle peak &mdash; implied g looks achievable vs inflated peak FCF</div></div></div>
+        <div class="vrd vr">&#128680; Peak-Cycle FCF Makes Implied g Look Achievable When It Is Not</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Peak FCF (FY22)</div><div class="en-val ev-r">&#8377;25,000 Cr</div></div>
+          <div class="en en-r"><div class="en-lbl">Mid-cycle FCF</div><div class="en-val ev-r">&#8377;10,000 Cr</div></div>
+          <div class="en en-r"><div class="en-lbl">Implied g (peak)</div><div class="en-val ev-r">5%</div></div>
+          <div class="en en-r"><div class="en-lbl">Implied g (correct)</div><div class="en-val ev-r">18%</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it fails:</strong> At the 2022 commodity price peak, Tata Steel&rsquo;s FCF was &#8377;25,000 Cr. Running the Reverse DCF with this peak FCF as the base, the implied growth at Tata Steel&rsquo;s peak price of &#8377;1,800 was only 5% &mdash; which appeared very achievable and justified the &ldquo;cheap&rdquo; reading. But steel prices crashed in 2023, and Tata Steel&rsquo;s mid-cycle FCF is closer to &#8377;10,000 Cr. Running the Reverse DCF with mid-cycle FCF of &#8377;10,000 Cr shows implied growth of 18% at &#8377;1,800 &mdash; which was unrealistic for a commodity cycle company. Always use normalised, mid-cycle FCF as the starting point for Reverse DCF on cyclical companies.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>Peak FCF base makes implied g look achievable at any market price</div>
+          <div class="sig"><div class="sdot sd-r"></div>Mid-cycle FCF reveals the true implied growth rate (much higher)</div>
+          <div class="sig"><div class="sdot sd-r"></div>Fix: For cyclicals, use 5-year average FCF as the Reverse DCF base</div>
+          <div class="sig"><div class="sdot sd-r"></div>Never run Reverse DCF at a commodity price extreme without mid-cycle normalisation</div>
+        </div>
+      </div>
+      <div class="excard eb4 rv d5">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,#faf5ff,#ede9fe);">&#128203;</div><div><div class="ex-name">Comparing Implied g vs Only 3-Year History</div><div class="ex-sec">Error: 3-year post-COVID boom history makes 25% implied growth look normal</div></div></div>
+        <div class="vrd vr">&#128680; Short Historical Comparison Misidentifies Boom as Normal</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">3Y CAGR (post-COVID)</div><div class="en-val ev-r">28%</div></div>
+          <div class="en en-r"><div class="en-lbl">10Y CAGR (full cycle)</div><div class="en-val ev-r">14%</div></div>
+          <div class="en en-r"><div class="en-lbl">Implied g</div><div class="en-val ev-r">25%</div></div>
+          <div class="en en-r"><div class="en-lbl">Conclusion</div><div class="en-val ev-r">Wrong</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it fails:</strong> An IT company had 28% revenue CAGR for FY21&ndash;FY23 (post-COVID digital boom). An analyst runs the Reverse DCF and finds implied growth of 25% at current price. Comparing with the 3-year history (28%), the analyst concludes the stock is fairly valued. But the 10-year CAGR (including the pre-COVID &ldquo;normal&rdquo; period) was only 14%. The 28% boom was driven by catch-up digital transformation post-COVID &mdash; a one-time surge, not a structural baseline. The correct comparison is 10-year history, not 3-year boom history. Using the boom period as the benchmark produces a completely wrong fair value conclusion.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>3-year boom CAGR 28% vs 10-year cycle CAGR 14% &rarr; boom is not the baseline</div>
+          <div class="sig"><div class="sdot sd-r"></div>Implied 25% looks fair vs 3Y but is 80% above 10Y average</div>
+          <div class="sig"><div class="sdot sd-r"></div>Fix: Always compare implied g against 10-year CAGR, not recent boom period</div>
+          <div class="sig"><div class="sdot sd-r"></div>Screener.in P&amp;L tab shows 10 years &rarr; always use the full available history</div>
+        </div>
+      </div>
+      <div class="excard eb5 exfull rv d6">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fee2e2);">&#128260;</div><div><div class="ex-name">Ignoring a Structural Business Model Change When Applying Reverse DCF</div><div class="ex-sec">Error: Comparing implied g vs historical g when the business has fundamentally changed</div></div></div>
+        <div class="vrd vr">&#128680; Historical Comparison Is Invalid When the Business Model Has Changed</div>
+        <div class="ex-inner">
+          <div>
+            <div class="enums">
+              <div class="en en-r"><div class="en-lbl">Old model CAGR</div><div class="en-val ev-r">8% (distribution)</div></div>
+              <div class="en en-r"><div class="en-lbl">New model CAGR</div><div class="en-val ev-r">25% (SaaS pivot)</div></div>
+              <div class="en en-r"><div class="en-lbl">Implied g</div><div class="en-val ev-r">22%</div></div>
+              <div class="en en-r"><div class="en-lbl">Error</div><div class="en-val ev-r">Used old history</div></div>
+            </div>
+            <div class="ex-why" style="margin-top:12px;"><strong>Why it fails:</strong> A distribution company successfully pivoted to a SaaS (Software-as-a-Service) model 2 years ago. Before the pivot: 8% revenue CAGR. After: 25% CAGR (SaaS revenues growing fast). The Reverse DCF shows implied growth of 22%. An analyst comparing 22% to the pre-pivot 8% historical CAGR concludes the stock is massively overvalued. But this comparison is invalid because the company&rsquo;s revenue engine has fundamentally changed. The correct comparison is vs SaaS peer companies with similar ACV (Annual Contract Value) metrics &mdash; not the company&rsquo;s own pre-pivot distribution CAGR. Using historical data from the wrong business model leads to the wrong Reverse DCF conclusion.</div>
+          </div>
+          <div>
+            <div class="sigs" style="margin-top:0;">
+              <div class="sig"><div class="sdot sd-r"></div>Pre-pivot 8% CAGR vs implied 22% &rarr; looks wildly overvalued but comparison is wrong</div>
+              <div class="sig"><div class="sdot sd-r"></div>Post-pivot SaaS peers grow 20&ndash;30% &rarr; 22% implied is actually reasonable</div>
+              <div class="sig"><div class="sdot sd-r"></div>Reverse DCF requires comparable historical data &rarr; business model continuity</div>
+              <div class="sig"><div class="sdot sd-r"></div>Fix: For pivot companies, use sector peer CAGR as benchmark, not own pre-pivot history</div>
+              <div class="sig-hl shl-r"><strong>General rule:</strong> Reverse DCF&rsquo;s &ldquo;compare implied g vs history&rdquo; insight only works when the historical data represents the same business model as the current one. Major changes &mdash; SaaS pivot, geographic expansion, product diversification, management change &mdash; can make the historical comparison invalid. When in doubt, use peer comparable growth rates instead of own history as the benchmark for evaluating the implied growth rate.</div>
+              <div class="sig-hl shl-g" style="margin-top:8px;"><strong>How to identify this situation:</strong> Screener.in Ratios tab shows a sudden jump in Asset Turnover, Revenue per Employee, or EBITDA margin improvement that is inconsistent with prior history. If two or more ratios show a structural break in the last 2&ndash;3 years, the historical growth comparison may be invalid and peer comparison should be used instead.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="rv d6" style="font-size:clamp(17px,2.2vw,24px);font-weight:900;color:var(--tx);margin-bottom:22px;">&#128202; Reverse DCF Quality &mdash; All 10 at a Glance</p>
+    <div class="sumwrap rv d6">
+      <table class="sumtbl">
+        <thead><tr><th>Company / Situation</th><th>Implied g</th><th>Historical CAGR</th><th>Implied vs Historical</th><th>Data Source</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Asian Paints (post-fall)</td><td>~6%</td><td>12% (10Y)</td><td>Below historical &darr;</td><td>Screener.in 10Y P&amp;L</td><td><span class="tb tb-g">&#10004; Strong Buy Signal</span></td></tr>
+          <tr><td>Bajaj Auto (COVID trough)</td><td>~2%</td><td>8% (15Y)</td><td>Far below historical &darr;</td><td>Screener.in 15Y P&amp;L</td><td><span class="tb tb-g">&#10004; Panic Mispricing</span></td></tr>
+          <tr><td>HDFC Bank (2022)</td><td>~10%</td><td>18% (15Y)</td><td>Below historical &darr;</td><td>Screener.in 15Y P&amp;L</td><td><span class="tb tb-g">&#10004; Undervalued</span></td></tr>
+          <tr><td>TCS (2022 peak)</td><td>~22%</td><td>10% (10Y)</td><td>Far above historical &uarr;</td><td>Screener.in 10Y P&amp;L</td><td><span class="tb tb-g">&#10004; Overvalued Signal</span></td></tr>
+          <tr><td>Pidilite (at 45x P/E)</td><td>~13%</td><td>14% (10Y)</td><td>Near historical &#8776;</td><td>Screener.in 10Y P&amp;L</td><td><span class="tb tb-g">&#10004; Premium Justified</span></td></tr>
+          <tr><td>Wrong WACC (8% vs 11%)</td><td>18% (wrong)</td><td>&mdash;</td><td>Misleadingly low implied g</td><td>WACC error</td><td><span class="tb tb-r">&#128680; Fatal Error</span></td></tr>
+          <tr><td>No terminal g sensitivity</td><td>One number</td><td>&mdash;</td><td>Range hidden (22&ndash;29%)</td><td>Single assumption</td><td><span class="tb tb-r">&#128680; Incomplete</span></td></tr>
+          <tr><td>Cyclical at peak (Tata Steel)</td><td>5% (looks cheap)</td><td>&mdash;</td><td>Peak FCF distorts result</td><td>Peak FCF used</td><td><span class="tb tb-r">&#128680; Use mid-cycle FCF</span></td></tr>
+          <tr><td>3-year boom comparison</td><td>25%</td><td>28% (wrong period)</td><td>Boom &#8800; structural baseline</td><td>Short history</td><td><span class="tb tb-r">&#128680; Use 10Y, not 3Y</span></td></tr>
+          <tr><td>Post-pivot comparison</td><td>22%</td><td>8% (pre-pivot)</td><td>Wrong benchmark used</td><td>Wrong model period</td><td><span class="tb tb-r">&#128680; Use peer CAGR</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight rv d6">
+      <div class="ins-ico">&#127919;</div>
+      <div>
+        <div class="ins-tag">The Golden Rule of Reverse DCF</div>
+        <div class="ins-title">Implied g Below 10-Year Historical CAGR = Opportunity. Implied g Above Historical CAGR + 5pp = Caution. Always Use Correct India WACC and Show Three Terminal g Scenarios.</div>
+        <div class="ins-desc">The Reverse DCF is the most powerful, fastest reality-check in equity analysis. It takes 5 minutes and requires no complex model &mdash; just five numbers from Screener.in, one Goal Seek in Excel, and 30 seconds to compare with the P&amp;L tab historical revenue CAGR. The discipline: use 10-year history (not 3-year), normalised mid-cycle FCF for cyclicals, correct India WACC, and always present implied g across three terminal growth rate assumptions. Done correctly, the Reverse DCF cuts through valuation noise and asks the one question that matters most: can this company actually deliver what the market is betting on?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 TRICKS -->
+<section class="tricks-sec">
+  <div class="w">
+    <div class="chip rv d1">05 &mdash; Tricks to Run Reverse DCF Faster</div>
+    <h2 class="h2 rv d2">6 Shortcuts to <span class="hp">Back-Solve Implied Growth in Under 5 Minutes</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">These tricks let you run the Reverse DCF for any Nifty 500 company using Screener.in data and Excel Goal Seek &mdash; producing an actionable implied growth rate in under 5 minutes per company.</p>
+    <div class="tgrid rv d3">
+      <div class="tc tc1">
+        <div class="tn tn1">1</div>
+        <div class="tc-sub ts1">Screener.in &rarr; 5 Numbers in 60 Seconds</div>
+        <div class="tc-title">The &ldquo;5-Number Quick-Collect&rdquo; Trick</div>
+        <div class="tc-desc">All five inputs for the Reverse DCF are on Screener.in. Collect them in this exact order: <strong>1)</strong> Market Price: company homepage, top bar, current price. <strong>2)</strong> Total Shares: Balance Sheet &rarr; Share Capital &divide; face value = shares. <strong>3)</strong> Market Cap = Price &times; Shares (or read directly from homepage). <strong>4)</strong> Net Cash: Balance Sheet &rarr; Cash + Investments &minus; Borrowings. <strong>5)</strong> Current FCF: CF tab &rarr; Cash from Ops (latest year) minus Capex (latest year). These five numbers plus WACC from Module 11 are everything needed for Goal Seek.</div>
+        <div class="tc-steps">
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Market Price &amp; Market Cap: company homepage top bar (1 click)</div>
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Net Cash: Balance Sheet tab &rarr; Investments + Cash &minus; Borrowings (2 rows)</div>
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Current FCF: CF tab &rarr; Cash from Operations &minus; Capex (2 rows, 1 calculation)</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; All 5 inputs collected in &lt;60 seconds</span>
+          <span class="tcr-a">&#9888; Double-check Shares by dividing Market Cap by Price</span>
+          <span class="tcr-r">&#10007; Never use book value equity as a proxy for Market Cap</span>
+        </div>
+      </div>
+      <div class="tc tc2">
+        <div class="tn tn2">2</div>
+        <div class="tc-sub ts2">Excel Goal Seek &mdash; Back-Solve in 30 Seconds</div>
+        <div class="tc-title">The &ldquo;Goal Seek in 5 Steps&rdquo; Trick</div>
+        <div class="tc-desc">Once you have the DCF model set up with the growth rate in one cell (e.g., B2), Goal Seek finds the implied growth in 30 seconds. <strong>The one-time setup</strong> (build the DCF engine once as a template) takes 15 minutes. Every subsequent company takes only 2 minutes (change 5 inputs, run Goal Seek). Save your Reverse DCF template as an Excel workbook and reuse it for every new stock.</div>
+        <div class="tc-steps">
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> Data &rarr; What-If Analysis &rarr; Goal Seek</div>
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> Set cell: [Total EV cell]. To value: [Target EV = Market Cap &minus; Net Cash]. By changing cell: [growth rate cell B2]</div>
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> Click OK &rarr; Excel places implied g in B2 in &lt;1 second</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; Template built once; reuse for every stock</span>
+          <span class="tcr-a">&#9888; Save as separate file so you don&rsquo;t overwrite old results</span>
+          <span class="tcr-r">&#10007; If Goal Seek fails to converge, check WACC &gt; terminal g</span>
+        </div>
+      </div>
+      <div class="tc tc3">
+        <div class="tn tn3">3</div>
+        <div class="tc-sub ts3">Screener.in P&amp;L Historical CAGR</div>
+        <div class="tc-title">The &ldquo;10-Year CAGR in 30 Seconds&rdquo; Reality-Check Trick</div>
+        <div class="tc-desc">After getting the implied g, compare it to the 10-year revenue CAGR in 30 seconds. Screener.in P&amp;L tab &rarr; Sales row &rarr; Screener.in shows the CAGR automatically at the bottom of the Sales row (3Y, 5Y, 10Y CAGRs displayed). Read the 10Y CAGR directly &mdash; no calculation needed. If implied g &gt; 10Y CAGR + 5%: likely overvalued. If implied g &lt; 10Y CAGR &minus; 5%: potential opportunity. The 10Y CAGR shown on Screener.in is the fastest, most honest benchmark available for a Reverse DCF reality check.</div>
+        <div class="tc-steps">
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Screener.in P&amp;L tab &rarr; scroll to Sales row &rarr; read 10Y CAGR at row bottom</div>
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Compare implied g (from Goal Seek) vs 10Y CAGR (from Screener)</div>
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Difference &gt;5pp above = overvalued signal. Difference &gt;5pp below = opportunity</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; Screener shows 3Y/5Y/10Y CAGR &mdash; no Excel needed</span>
+          <span class="tcr-a">&#9888; Check all three CAGRs; look for inflection points</span>
+          <span class="tcr-r">&#10007; Never compare implied g only to 3Y CAGR (boom/bust distortion)</span>
+        </div>
+      </div>
+      <div class="tc tc4">
+        <div class="tn tn4">4</div>
+        <div class="tc-sub ts4">Three Terminal g Scenarios in One Table</div>
+        <div class="tc-title">The &ldquo;Three-Row Implied g Table&rdquo; Trick</div>
+        <div class="tc-desc">Run Goal Seek three times (takes &lt;2 minutes): once with terminal g = 4%, once with 5%, once with 6%. Record the implied near-term growth for each. Present as a three-row table. This is the correct Reverse DCF output: <strong>a range of implied growth rates, not a single number</strong>. The range tells you: even in the optimistic terminal growth scenario, how high is the implied near-term g? If the lowest implied g (at terminal g = 6%) is still above the historical CAGR, the stock is expensive across all reasonable terminal assumptions. If the highest implied g (at terminal g = 4%) is still below the historical CAGR, the stock is cheap across all scenarios.</div>
+        <div class="tc-steps">
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Set terminal g = 4% &rarr; Goal Seek &rarr; record implied near-term g (row 1)</div>
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Set terminal g = 5% &rarr; Goal Seek &rarr; record implied near-term g (row 2)</div>
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Set terminal g = 6% &rarr; Goal Seek &rarr; record implied near-term g (row 3)</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; Three rows = honest implied g range in 2 minutes</span>
+          <span class="tcr-a">&#9888; All three above history = avoid. All three below = buy</span>
+          <span class="tcr-r">&#10007; Never present only one terminal g result as &ldquo;the&rdquo; implied growth</span>
+        </div>
+      </div>
+      <div class="tc tc5">
+        <div class="tn tn5">5</div>
+        <div class="tc-sub ts5">Quick Screener Chart Shortcut &mdash; Visual Reality Check</div>
+        <div class="tc-title">The &ldquo;Screener Chart Icon&rdquo; Visual Reverse DCF Check</div>
+        <div class="tc-desc">The fastest possible Reverse DCF reality check: no Excel needed. On Screener.in P&amp;L tab, click the chart icon next to the Sales row. The 10-year bar chart immediately shows you the historical growth trajectory. Place your implied growth rate mentally on the chart: Is it near the average bar? (= fairly valued). Is it below the lowest bar? (= market pricing in unprecedented weakness). Is it above the highest bar? (= market pricing in unprecedented strength). This visual check takes 10 seconds and is directionally accurate enough to flag obvious overvaluation or undervaluation without any computation.</div>
+        <div class="tc-steps">
+          <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Screener.in P&amp;L &rarr; click &#128200; chart icon next to Sales row</div>
+          <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Note the height of an average bar (= historical revenue growth %)</div>
+          <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Is implied g above all bars? = expensive. Below all bars? = potentially cheap</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; 10-second directional check without any calculation</span>
+          <span class="tcr-a">&#9888; Chart gives direction; Goal Seek gives precision</span>
+          <span class="tcr-r">&#10007; Chart alone is not enough for investment decisions; always run Goal Seek too</span>
+        </div>
+      </div>
+      <!-- TRICK 6 QUICK-FIND -->
+      <div class="tc6 rv d6">
+        <div class="tn tn6" style="margin-bottom:10px;">6</div>
+        <div class="tc-sub ts6">Quick-Find Map &mdash; Every Reverse DCF Input &amp; Formula on One Card</div>
+        <div class="tc-title">The &ldquo;60-Second Reverse DCF Setup Card&rdquo; &mdash; Where to Find Everything on Screener.in</div>
+        <div class="tc-desc">The slowest part of Reverse DCF is hunting for data and remembering Excel steps. This card shows <strong>every input source, every formula, and every decision rule in one place</strong>. Cut your Reverse DCF time to under 5 minutes per company.</div>
+        <div class="qf-grid">
+          <div class="qf-card qf-input">
+            <div class="qf-tag qt-input">&#128202; Inputs Required</div>
+            <div class="qf-item"><span class="qi-icon">&#9312;</span><div class="qi-text"><strong>Market Price:</strong> Homepage top bar &rarr; current price</div></div>
+            <div class="qf-item"><span class="qi-icon">&#9313;</span><div class="qi-text"><strong>Market Cap:</strong> Homepage top bar (or Price &times; Shares)</div></div>
+            <div class="qf-item"><span class="qi-icon">&#9314;</span><div class="qi-text"><strong>Net Cash:</strong> B/S &rarr; Cash + Investments &minus; Borrowings</div></div>
+            <div class="qf-item"><span class="qi-icon">&#9315;</span><div class="qi-text"><strong>Current FCF:</strong> CF tab &rarr; Cash from Ops &minus; Capex</div></div>
+            <div class="qf-item"><span class="qi-icon">&#9316;</span><div class="qi-text"><strong>WACC:</strong> From Module 11 (India CAPM)</div></div>
+            <div class="qf-item"><span class="qi-icon">&#9317;</span><div class="qi-text"><strong>Terminal g:</strong> Run at 4%, 5%, 6% for sensitivity</div></div>
+          </div>
+          <div class="qf-card qf-scr">
+            <div class="qf-tag qt-scr">&#128200; Screener.in Locations</div>
+            <div class="qf-item"><span class="qi-icon">&#128202;</span><div class="qi-text"><strong>P&amp;L tab &rarr; Sales row:</strong> 10Y CAGR shown at bottom &rarr; use as benchmark for implied g comparison</div></div>
+            <div class="qf-item"><span class="qi-icon">&#128181;</span><div class="qi-text"><strong>CF tab &rarr; Cash from Ops:</strong> Latest year = FCF numerator</div></div>
+            <div class="qf-item"><span class="qi-icon">&#127981;</span><div class="qi-text"><strong>CF tab &rarr; Capex:</strong> Subtract from Cash from Ops = FCF</div></div>
+            <div class="qf-item"><span class="qi-icon">&#128218;</span><div class="qi-text"><strong>B/S tab &rarr; Borrowings:</strong> Subtract from cash + investments for Net Cash</div></div>
+            <div class="qf-item"><span class="qi-icon">&#128200;</span><div class="qi-text"><strong>Chart shortcut:</strong> Click &#128200; next to Sales row for instant 10Y growth visual</div></div>
+          </div>
+          <div class="qf-card qf-excel">
+            <div class="qf-tag qt-excel">&#128203; Excel Steps</div>
+            <div class="qf-item"><span class="qi-icon">&#9312;</span><div class="qi-text"><strong>Target EV:</strong> Market Cap &minus; Net Cash <div class="qf-formula">=market_cap - net_cash</div></div></div>
+            <div class="qf-item"><span class="qi-icon">&#9313;</span><div class="qi-text"><strong>FCF projection:</strong><div class="qf-formula">=FCF0*(1+g)^year</div></div></div>
+            <div class="qf-item"><span class="qi-icon">&#9314;</span><div class="qi-text"><strong>Terminal Value:</strong><div class="qf-formula">=FCF5*1.05/(WACC-term_g)</div></div></div>
+            <div class="qf-item"><span class="qi-icon">&#9315;</span><div class="qi-text"><strong>Goal Seek:</strong> Data &rarr; What-If &rarr; Goal Seek &rarr; Set EV = Target EV &rarr; Change cell = g</div></div>
+          </div>
+          <div class="qf-card qf-signal">
+            <div class="qf-tag qt-signal">&#127894; Decision Rules</div>
+            <div class="qf-item"><span class="qi-icon">&#128994;</span><div class="qi-text"><strong>Implied g &lt; 10Y CAGR &minus;5pp:</strong> Strong buy signal. Market pricing in unprecedented deceleration.</div></div>
+            <div class="qf-item"><span class="qi-icon">&#9898;</span><div class="qi-text"><strong>Implied g &asymp; 10Y CAGR:</strong> Fairly valued. Market pricing in historical continuation.</div></div>
+            <div class="qf-item"><span class="qi-icon">&#9888;</span><div class="qi-text"><strong>Implied g &gt; 10Y CAGR +5pp:</strong> Caution. Market pricing in acceleration above historical.</div></div>
+            <div class="qf-item"><span class="qi-icon">&#128308;</span><div class="qi-text"><strong>Implied g &gt; company&rsquo;s best-ever 5Y period:</strong> Speculation signal. Avoid unless you have a specific catalyst thesis.</div></div>
+          </div>
+        </div>
+        <div style="margin-top:14px;padding:12px 16px;background:rgba(217,119,6,.08);border-radius:10px;border-left:4px solid var(--amb);font-size:13px;color:var(--ambr);line-height:1.72;"><strong>&#9200; Fastest Reverse DCF:</strong> Screener.in P&amp;L tab &rarr; click chart icon next to Sales row &rarr; read average bar height = historical growth rate &rarr; that is your benchmark. Then: Screener CF tab &rarr; read latest Cash from Ops and Capex. Subtract. That is your FCF base. Enter into Excel Goal Seek template. 5 minutes total &rarr; implied g ready to compare vs chart. The chart comparison alone gives you a 10-second directional answer; Goal Seek gives you the precise number.</div>
+      </div>
+    </div>
+    <!-- Cheat Sheet -->
+
+      <!-- TRICK 7: Visual Decision Tree -->
+      <div class="tc7 rv d6">
+        <div class="tn tn2" style="margin-bottom:10px;">7</div>
+        <div class="tc-sub ts2">Visual Decision Flowchart &mdash; Find the Signal in 60 Seconds</div>
+        <div class="tc-title">The &ldquo;Reverse DCF Decision Tree&rdquo; &mdash; Three Columns, One Answer, No Confusion</div>
+        <div class="tc-desc">This three-column flowchart maps the complete Reverse DCF process from <strong>data collection</strong> to <strong>calculation</strong> to <strong>investment verdict</strong>. Follow the arrows down each column. The decision at the bottom of Column 3 tells you whether the stock is a buy, hold, or avoid at today&rsquo;s price. No spreadsheet experience needed to follow the logic.</div>
+        <div class="dt-grid">
+          <!-- Column 1: Collect from Screener -->
+          <div class="dt-col">
+            <div class="dt-hdr dth-scr">&#128202; Column 1 &mdash; Collect from Screener.in</div>
+            <div class="dt-step dts-g"><strong>&#9312; Market Price</strong><br>Homepage &rarr; current price per share</div>
+            <div class="dt-arrow">&#8595;</div>
+            <div class="dt-step dts-g"><strong>&#9313; Market Cap</strong><br>Homepage top bar (updated live)</div>
+            <div class="dt-arrow">&#8595;</div>
+            <div class="dt-step dts-g"><strong>&#9314; Net Cash</strong><br>B/S tab &rarr; Cash + Investments &minus; Borrowings</div>
+            <div class="dt-arrow">&#8595;</div>
+            <div class="dt-step dts-g"><strong>&#9315; Current FCF</strong><br>CF tab &rarr; Cash from Ops &minus; Capex (latest year)</div>
+            <div class="dt-arrow">&#8595;</div>
+            <div class="dt-step dts-g"><strong>&#9316; 10Y Revenue CAGR</strong><br>P&amp;L tab &rarr; Sales row &rarr; 10Y CAGR shown at bottom</div>
+            <div class="dt-arrow">&#8595;</div>
+            <div class="dt-step dts-a"><strong>&#9888; Cyclical?</strong><br>Use 5Y avg FCF instead of latest year FCF</div>
+          </div>
+          <!-- Column 2: Calculate -->
+          <div class="dt-col">
+            <div class="dt-hdr dth-calc">&#128203; Column 2 &mdash; Calculate (Excel Goal Seek)</div>
+            <div class="dt-step dts-p"><strong>&#9312; Target EV</strong><br>= Market Cap &minus; Net Cash<br><span style="font-size:10.5px;opacity:.75;">e.g. &#8377;27,065 &minus; &#8377;900 = &#8377;26,165 Cr</span></div>
+            <div class="dt-arrow">&#8595;</div>
+            <div class="dt-step dts-p"><strong>&#9313; Set WACC &amp; terminal g</strong><br>WACC = Module 11 result<br>Terminal g = 5% (run at 4% and 6% too)</div>
+            <div class="dt-arrow">&#8595;</div>
+            <div class="dt-step dts-p"><strong>&#9314; Build FCF projection</strong><br>Year 1 FCF = FCF&#8320; &times; (1+g)<br>Repeat for Years 1&ndash;5</div>
+            <div class="dt-arrow">&#8595;</div>
+            <div class="dt-step dts-p"><strong>&#9315; Add Terminal Value</strong><br>TV = Year5 FCF &times;1.05 &divide; (WACC&minus;5%)<br>PV(TV) = TV &divide; (1+WACC)&#8309;</div>
+            <div class="dt-arrow">&#8595;</div>
+            <div class="dt-step dts-p"><strong>&#9316; Goal Seek</strong><br>Data &rarr; What-If &rarr; Goal Seek<br>Set Total EV = Target EV<br>Changing cell = growth rate g</div>
+            <div class="dt-arrow">&#8595;</div>
+            <div class="dt-step dts-p" style="background:rgba(109,40,217,.12);font-weight:700;"><strong>&#10003; Implied g = X% p.a.</strong><br>Run at 3 terminal g values &rarr; present range</div>
+          </div>
+          <!-- Column 3: Decide -->
+          <div class="dt-col">
+            <div class="dt-hdr dth-decide">&#127894; Column 3 &mdash; Compare &amp; Decide</div>
+            <div class="dt-step dts-g"><strong>&#9312; Compare to 10Y CAGR</strong><br>From Column 1 Step &#9316;<br>Is implied g above or below?</div>
+            <div class="dt-arrow">&#8595;</div>
+            <div class="dt-step dts-g"><strong>&#9313; Check best-ever period</strong><br>P&amp;L tab &rarr; find highest single-year growth<br>Is implied g above even that?</div>
+            <div class="dt-arrow">&#8595;</div>
+            <div class="dt-step dts-a"><strong>&#9314; Structural check</strong><br>Has business model changed? If yes,<br>use peer CAGR as benchmark</div>
+            <div class="dt-arrow">&#8595;</div>
+            <div class="dt-step dts-a"><strong>&#9315; Cyclical check</strong><br>Is FCF at a peak? If yes, re-run<br>with 5Y avg FCF (likely changes signal)</div>
+            <div class="dt-arrow">&#8595;</div>
+            <div class="dt-step dts-r"><strong>&#9316; Make the call</strong><br>Implied g vs 10Y CAGR difference decides:</div>
+            <div class="dt-arrow">&#8595;</div>
+            <!-- Three verdict boxes -->
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div class="dt-verdict dtv-buy">
+                <div class="dtv-icon">&#128994;</div>
+                <div class="dtv-label">BUY SIGNAL</div>
+                <div class="dtv-range">Implied g &lt; 10Y CAGR &minus; 5pp<br>Market prices in deceleration history doesn&rsquo;t support</div>
+              </div>
+              <div class="dt-verdict dtv-fair">
+                <div class="dtv-icon">&#9898;</div>
+                <div class="dtv-label">FAIRLY VALUED</div>
+                <div class="dtv-range">Implied g &asymp; 10Y CAGR (&plusmn;5pp)<br>Market prices in continuation of history</div>
+              </div>
+              <div class="dt-verdict dtv-sell">
+                <div class="dtv-icon">&#128308;</div>
+                <div class="dtv-label">CAUTION / AVOID</div>
+                <div class="dtv-range">Implied g &gt; 10Y CAGR + 5pp<br>Market prices in unprecedented acceleration</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding:12px 16px;background:rgba(22,163,74,.07);border-radius:10px;border-left:4px solid var(--gbr);font-size:13px;color:var(--gbr);line-height:1.72;"><strong>&#9200; 60-second visual shortcut (no Excel):</strong> Screener.in P&amp;L tab &rarr; click the chart icon next to the Sales row &rarr; 10-year bar chart appears &rarr; mentally estimate the average bar height (= historical CAGR). Now ask: is your back-solved implied growth rate above, at, or below that average bar? Above by a lot = expensive. At the average = fair. Well below the average = cheap. This visual comparison takes 10 seconds and gives you the directional answer before running Goal Seek. Use Goal Seek only to get the precise number for your investment notes.</div>
+      </div>
+
+
+    <div class="cheat rv d5">
+      <div class="cheat-inner">
+        <div class="cheat-badge">Reverse DCF Cheat Sheet &mdash; India Equity Edition</div>
+        <div class="cheat-title">5 Numbers &rarr; 1 Goal Seek &rarr; Implied g &rarr; Compare vs 10Y CAGR &rarr; Decision</div>
+        <div class="cheat-grid">
+          <div class="ci ci-good">
+            <div class="ci-num">Step 1 &mdash; Screener.in</div>
+            <div class="ci-name">Collect 5 Inputs</div>
+            <div class="ci-val">Market Price (homepage) &bull; Market Cap (homepage) &bull; Net Cash (B/S: Cash+Inv&minus;Debt) &bull; Current FCF (CF: Ops&minus;Capex) &bull; WACC from Module 11</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Step 2 &mdash; Excel</div>
+            <div class="ci-name">Goal Seek Setup</div>
+            <div class="ci-val">Target EV = Market Cap &minus; Net Cash &bull; FCF year 1 = FCF0&times;(1+g) &bull; Terminal Value = FCF5&times;1.05&divide;(WACC&minus;5%) &bull; Goal Seek: EV = Target &rarr; find g</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Step 3 &mdash; Sensitivity</div>
+            <div class="ci-name">Three Terminal g Runs</div>
+            <div class="ci-val">Run Goal Seek at term.g=4%, 5%, 6% &bull; Get three implied g values &bull; Present as range, not single number &bull; Honest output: &ldquo;22&ndash;29% implied growth&rdquo;</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Step 4 &mdash; Screener.in</div>
+            <div class="ci-name">Reality Check</div>
+            <div class="ci-val">P&amp;L tab &rarr; Sales row &rarr; read 10Y CAGR &bull; Also read: worst year, best year, 5Y CAGR &bull; For cyclicals: use 5Y avg FCF not latest year FCF</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Step 5 &mdash; Decision</div>
+            <div class="ci-name">Buy / Hold / Avoid</div>
+            <div class="ci-val">Implied g &lt; 10Y CAGR&minus;5pp: Strong Buy &bull; Implied g &asymp; 10Y CAGR: Fair Value &bull; Implied g &gt; 10Y CAGR+5pp: Caution &bull; Above all-time best: Speculation</div>
+          </div>
+          <div class="ci ci-warn">
+            <div class="ci-num">Sanity Checks</div>
+            <div class="ci-name">Common Errors</div>
+            <div class="ci-val">Use India WACC 11&ndash;14%, not US 8% &bull; Use 10Y history, not 3Y boom &bull; Use mid-cycle FCF for cyclicals &bull; Structural change? Use peer CAGR &bull; Always 3 terminal g scenarios &bull; WACC must exceed terminal g</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="insight rv d6">
+      <div class="ins-ico">&#127919;</div>
+      <div>
+        <div class="ins-tag">The One-Line Reverse DCF Rule</div>
+        <div class="ins-title">If the Implied Growth Rate Has Never Been Sustained by Any Company in This Sector for 5 Consecutive Years, You Are Paying for a Miracle &mdash; Not a Business.</div>
+        <div class="ins-desc">The Reverse DCF is not a reason to avoid premium businesses. Pidilite at 45&times; P/E is justified if the implied growth rate matches its historical track record. The tool is a reason to avoid businesses where the market price implies a growth rate that the company &mdash; and its entire sector &mdash; has never demonstrated over any sustained period. History is your anchor. Screener.in&rsquo;s 10-year P&amp;L data is the database. The implied growth rate is the question. Whether the historical record answers that question with a &ldquo;yes&rdquo; or &ldquo;no&rdquo; is the investment decision.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOSSARY -->
+<section class="gloss-sec">
+  <div class="w">
+    <div class="chip rv d1">06 &mdash; Reference Glossary</div>
+    <h2 class="h2 rv d2">Reverse DCF &mdash; <span class="hp">Key Terms Explained Simply</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">Every term used in this module &mdash; defined in plain English so you can apply the Reverse DCF confidently and interpret the results correctly.</p>
+    <div class="rv d4" style="border-radius:16px;overflow:hidden;box-shadow:var(--shp);margin-bottom:44px;">
+      <div class="gloss-hdr-row">
+        <div class="gh-cell">Term</div>
+        <div class="gh-cell">What It Means in Simple Words</div>
+        <div class="gh-cell" style="text-align:right;">Key Point</div>
+      </div>
+      <table class="gloss-table">
+        <tbody>
+          <tr>
+            <td class="gt-term">Reverse DCF</td>
+            <td class="gt-desc">A valuation technique that starts with the current market price (which is known) and works backwards to find the growth rate that makes the standard DCF model produce exactly that price. Unlike a normal DCF (which asks &ldquo;what is this stock worth?&rdquo;), the Reverse DCF asks <strong>&ldquo;what must this company achieve for the current price to be justified?&rdquo;</strong> The answer is the implied growth rate, which is then compared to the company&rsquo;s historical track record on Screener.in. No assumptions to defend; the market price IS the input.</td>
+            <td class="gt-key"><span class="gk-pill gk-p">Price &rarr; Growth</span></td>
+          </tr>
+          <tr>
+            <td class="gt-term">Implied Growth Rate</td>
+            <td class="gt-desc">The revenue or FCF growth rate that the current market price is implicitly assuming for the company over the next 5 years. This is the <strong>key output of the Reverse DCF</strong>. If implied growth rate = 26%, it means: for an investor paying today&rsquo;s price to earn a fair return (equal to WACC), the company must grow at 26% p.a. for 5 years. Compare this against the company&rsquo;s historical CAGR from Screener.in P&amp;L tab to judge whether the market&rsquo;s expectation is realistic or not. The implied growth rate is also called the &ldquo;market-implied growth rate&rdquo; or &ldquo;priced-in growth rate.&rdquo;</td>
+            <td class="gt-key"><span class="gk-pill gk-g">Market expectation</span></td>
+          </tr>
+          <tr>
+            <td class="gt-term">Back-Solve</td>
+            <td class="gt-desc">To start with the output (market price) and work backwards to find the input (growth rate) that produces that output, holding all other variables constant. In a standard DCF, growth is an input and intrinsic value is an output. In Reverse DCF, intrinsic value is set equal to market price (the target) and growth becomes the unknown. <strong>Excel Goal Seek</strong> automates the back-solving process: it iterates through growth rate values until the DCF output exactly matches the target. Data &rarr; What-If Analysis &rarr; Goal Seek &rarr; takes under 1 second to converge.</td>
+            <td class="gt-key"><span class="gk-pill gk-p">Goal Seek in Excel</span></td>
+          </tr>
+          <tr>
+            <td class="gt-term">Goal Seek (Excel)</td>
+            <td class="gt-desc">An Excel built-in tool that automatically finds the input value that produces a desired output value. In Reverse DCF: <div class="gf">Data &rarr; What-If Analysis &rarr; Goal Seek</div> <strong>Set cell:</strong> the cell containing your computed Total Enterprise Value. <strong>To value:</strong> the target Enterprise Value (Market Cap &minus; Net Cash). <strong>By changing cell:</strong> the growth rate cell (g). Excel iterates the growth rate until the DCF output equals the target. Returns the implied growth rate in under 1 second. No manual trial-and-error needed.</td>
+            <td class="gt-key"><span class="gk-pill gk-s">30-second solve</span></td>
+          </tr>
+          <tr>
+            <td class="gt-term">Target Enterprise Value</td>
+            <td class="gt-desc">The Enterprise Value that the Reverse DCF model must match. Derived from the current market price: <div class="gf">Target EV = Market Cap &minus; Net Cash (or + Net Debt)</div> If a company has Market Cap &#8377;27,065 Cr and Net Cash &#8377;900 Cr: Target EV = &#8377;27,065 &minus; &#8377;900 = &#8377;26,165 Cr. This is the value that all future discounted cash flows must add up to (at the implied growth rate) for the current stock price to be justified. Found entirely from Screener.in: Market Cap from homepage, Net Cash from Balance Sheet.</td>
+            <td class="gt-key"><span class="gk-pill gk-p">MCap &minus; Net Cash</span></td>
+          </tr>
+          <tr>
+            <td class="gt-term">Net Cash (for Reverse DCF)</td>
+            <td class="gt-desc">Cash and liquid investments minus all financial debt. <div class="gf">Net Cash = Cash + Current Investments + Long-term Investments &minus; Total Borrowings</div> Found entirely from Screener.in Balance Sheet tab. For CDSL: no debt + &#8377;900+ Cr in government securities = &#8377;900 Cr net cash. Net Cash is subtracted from Market Cap to get the Enterprise Value &mdash; the value attributable to the operating business (not the cash). For companies with net debt, it is added to Market Cap to get EV.</td>
+            <td class="gt-key"><span class="gk-pill gk-g">B/S tab Screener</span></td>
+          </tr>
+          <tr>
+            <td class="gt-term">Historical CAGR (Benchmark)</td>
+            <td class="gt-desc">The Compound Annual Growth Rate of revenue over the past 10 years &mdash; the primary benchmark for evaluating whether the implied growth rate is realistic. Found directly on Screener.in: <div class="gf">P&amp;L tab &rarr; Sales row &rarr; 10Y CAGR shown at the bottom of the row</div> The decision rule: implied g &lt; historical 10Y CAGR &minus;5pp = potential buy. Implied g &asymp; historical CAGR = fairly valued. Implied g &gt; historical CAGR +5pp = caution. Always use 10-year CAGR (not 3-year or 5-year) to avoid boom/bust distortion.</td>
+            <td class="gt-key"><span class="gk-pill gk-g">10Y CAGR benchmark</span></td>
+          </tr>
+          <tr>
+            <td class="gt-term">Priced for Perfection</td>
+            <td class="gt-desc">An investment expression meaning the stock price already incorporates the most optimistic realistic scenario &mdash; leaving no margin of safety. In Reverse DCF terms: a stock is &ldquo;priced for perfection&rdquo; when the implied growth rate equals or exceeds the company&rsquo;s best historical growth period. Even modest underperformance vs expectations will produce significant share price declines. <strong>Example:</strong> CDSL at &#8377;2,590 implies 26% growth &mdash; matching its best-ever 5-year period. Any disappointment (SEBI charge cut, market slowdown) risks a sharp correction because there is no margin for error built into the price.</td>
+            <td class="gt-key"><span class="gk-pill gk-r">No margin for error</span></td>
+          </tr>
+          <tr>
+            <td class="gt-term">Margin of Safety (in Reverse DCF)</td>
+            <td class="gt-desc">The cushion between what the market implies (implied g) and what the company can realistically deliver (historical g). A large positive margin of safety means the market is pricing in slow growth when the company can likely deliver strong growth. <div class="gf">Margin of Safety = Historical CAGR &minus; Implied Growth Rate</div> Positive margin of safety (implied g well below historical g) = high conviction buy. Zero margin of safety (implied g = historical g) = fairly valued. Negative margin of safety (implied g above historical g) = risk of disappointment. The larger the gap between implied and historical, the stronger the investment opportunity or risk.</td>
+            <td class="gt-key"><span class="gk-pill gk-g">Historical &minus; Implied g</span></td>
+          </tr>
+          <tr>
+            <td class="gt-term">Mid-Cycle FCF</td>
+            <td class="gt-desc">For cyclical companies (commodities, chemicals, steel, fertilisers), the &ldquo;normal&rdquo; free cash flow at a mid-point in the business cycle &mdash; not peak and not trough. Used as the starting FCF in Reverse DCF instead of the most recent year&rsquo;s FCF. <div class="gf">Mid-Cycle FCF &asymp; 5-year average of (Cash from Ops &minus; Capex) from Screener CF tab</div> Using peak FCF as the Reverse DCF base makes the implied growth look artificially low (stock appears cheap at peak). Using trough FCF makes implied growth look artificially high (stock appears expensive at trough). Mid-cycle FCF eliminates this distortion.</td>
+            <td class="gt-key"><span class="gk-pill gk-a">5-year avg FCF</span></td>
+          </tr>
+          <tr>
+            <td class="gt-term">Terminal Growth Rate Sensitivity (Reverse DCF)</td>
+            <td class="gt-desc">Because the terminal growth rate assumption significantly affects the implied near-term growth from Reverse DCF, it is essential to run three scenarios: <div class="gf">terminal g = 4% (bear) &rarr; 5% (base) &rarr; 6% (bull)</div> Each produces a different implied near-term growth rate. The range of implied growth rates (rather than a single number) is the honest output. If all three implied growth rates are above the historical CAGR, the stock is expensive across all terminal growth assumptions. If all three are below, it is cheap across all assumptions. The base case (terminal g = 5%) is presented as the primary output, flanked by the bear and bull sensitivity.</td>
+            <td class="gt-key"><span class="gk-pill gk-a">3 scenarios always</span></td>
+          </tr>
+          <tr>
+            <td class="gt-term">Structural Business Model Change</td>
+            <td class="gt-desc">A fundamental shift in how a company generates revenue, making historical growth rates incomparable to future growth rates. Examples: traditional business pivoting to SaaS, a distributor becoming an e-commerce platform, a manufacturer adding a service segment. When a structural change has occurred, the historical CAGR comparison in Reverse DCF becomes invalid because the business generating future growth is fundamentally different from the business in the historical data. In this case, use <strong>sector peer CAGR</strong> (comparable companies in the new business model) as the benchmark instead of own history.</td>
+            <td class="gt-key"><span class="gk-pill gk-r">Use peer CAGR</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight rv d5">
+      <div class="ins-ico">&#128218;</div>
+      <div>
+        <div class="ins-tag">How to Use This Glossary</div>
+        <div class="ins-title">Every Term Here Maps to a Screener.in Data Point or an Excel Step. The Reverse DCF Is the Simplest Powerful Tool in Equity Analysis.</div>
+        <div class="ins-desc">The most important terms to internalise: <strong>Implied Growth Rate</strong> (the primary output &mdash; what must the company achieve?), <strong>Goal Seek</strong> (the Excel tool that computes it in 30 seconds), and <strong>Historical CAGR</strong> from Screener.in P&amp;L tab (the benchmark that tells you whether the implied rate is achievable). With just these three, you can apply the Reverse DCF to any stock in under 5 minutes. The Reverse DCF does not require a complex model, a finance degree, or hours of research. It requires five numbers, one Excel function, and 30 seconds of historical comparison. That is why it is the first tool professional investors reach for when evaluating whether a stock is cheap or expensive at current market prices.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT CHAPTER -->
+<div class="nxt2">
+  <div class="nxt2-left">
+    <div class="nxt2-lbl">DCF Valuation Advanced &middot; Module 15 Complete</div>
+    <div class="nxt2-sub">You can now back-solve market expectations from any stock price &mdash; the fastest reality-check in equity analysis</div>
+    <div class="nxt2-arr-txt">Continue your learning journey &nbsp;&rarr;</div>
+  </div>
+  <a href="#" class="nxt2-btn">Next Module <span class="nxt2-btn-arr">&#8594;</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section class="disc">
+  <div class="disc-inner">
+    <div class="disc-ico">&#9888;&#65039;</div>
+    <div>
+      <div class="disc-lbl">Important Disclaimer</div>
+      <div class="disc-txt">This page is for educational purposes only. All Reverse DCF calculations, implied growth rates, and back-solved values shown for CDSL, Asian Paints, Bajaj Auto, HDFC Bank, TCS, Pidilite Industries, and other companies are illustrative approximations computed using simplified models for teaching purposes. Implied growth rates are highly sensitive to WACC and terminal growth rate assumptions. The results shown are based on estimated inputs and may differ significantly from professionally computed values. This module is not investment advice &mdash; it is a demonstration of analytical technique. The Reverse DCF is a tool for analysis, not a guarantee of any outcome. Actual stock prices and growth rates may differ materially from any illustrative calculation shown here. Consult a SEBI-registered investment advisor before making any investment decision. All equity investments carry market risk including the risk of total loss of capital.</div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{threshold:.05,rootMargin:'0px 0px -36px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  }else{els.forEach(function(el){el.classList.add('on');});}
+  ['touchstart','touchmove','touchend','touchcancel'].forEach(function(evt){document.addEventListener(evt,function(){},{passive:true});});
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){els.forEach(function(el){el.classList.add('on');});}
+  document.body.style.overscrollBehavior='none';
+  function setVH(){document.documentElement.style.setProperty('--vh',window.innerHeight*.01+'px');}
+  setVH();
+  window.addEventListener('resize',setVH,{passive:true});
+  window.addEventListener('orientationchange',function(){setTimeout(setVH,300);setTimeout(function(){document.querySelectorAll('.rv:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<window.innerHeight*.95){el.classList.add('on');}});},400);},{passive:true});
+  document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('a,button,.dmbtn,.nxt2-btn,.excard,.ac,.tc,.kp').forEach(function(el){el.style.touchAction='manipulation';});
+    document.querySelectorAll('.tscroll,.sumwrap').forEach(function(el){el.style.webkitOverflowScrolling='touch';});
+    if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});});}
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Diversification · Portfolio Framework">
+<meta name="theme-color" content="#6d28d9">
+<meta name="format-detection" content="telephone=no">
+<title>Diversification – Sector, Market Cap &amp; Geography — Build a Balanced Portfolio Framework</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;--gring:#bbf7d0;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --teal:#0891b2;--tealpale:#ecfeff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shg:0 4px 22px rgba(22,163,74,.11);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+*{word-break:break-word;overflow-wrap:break-word;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--sf);}
+::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes growY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* LAYOUT */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+
+/* TYPE */
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;min-width:0;overflow:hidden;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;flex-shrink:0;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(26px,6.5vw,82px);font-weight:900;letter-spacing:-2.5px;line-height:.92;margin-bottom:12px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(13px,2.8vw,38px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:660px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hero-pills{position:relative;z-index:2;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;animation:fsu .88s ease .44s both;min-width:0;overflow:hidden;}
+.hero-pill{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:100px;font-size:clamp(10px,1.3vw,12px);font-weight:800;min-width:0;max-width:100%;}
+.hp-p{background:var(--pxl);color:var(--p);border:1.5px solid rgba(109,40,217,.2);}
+.hp-g{background:var(--gpale);color:var(--gbr);border:1.5px solid rgba(22,163,74,.2);}
+.hp-a{background:var(--apale);color:var(--ambr);border:1.5px solid rgba(217,119,6,.2);}
+.hp-r{background:var(--rpale);color:var(--red);border:1.5px solid rgba(220,38,38,.2);}
+.hp-t{background:var(--tealpale);color:var(--teal);border:1.5px solid rgba(8,145,178,.2);}
+
+/* KLO BANNER */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;min-width:0;overflow:hidden;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;overflow:hidden;}
+.klo-body>*{min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:8px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;min-width:0;overflow:hidden;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;min-height:28px;max-width:100%;overflow:hidden;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.klo-hi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;min-width:0;overflow:hidden;}
+.klo-hi{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--shc);min-width:0;overflow:hidden;}
+.klo-hi-ico{font-size:22px;margin-bottom:6px;}
+.klo-hi-val{font-size:clamp(12px,2vw,16px);font-weight:900;letter-spacing:-.3px;word-break:normal;line-height:1.1;min-width:0;overflow:hidden;}
+.klo-hi-val.purple{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.green{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-lbl{font-size:10px;color:var(--tl);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:3px;min-width:0;overflow:hidden;}
+
+/* ══════════════════════════════════════
+   THREE PILLAR CARDS
+══════════════════════════════════════ */
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,24px);min-width:0;overflow:hidden;}
+.pillar-card{border-radius:22px;overflow:hidden;min-width:0;box-shadow:var(--shp);transition:transform .25s;}
+.pillar-card:hover{transform:translateY(-4px);}
+.pc-hd{padding:clamp(18px,3vw,26px);position:relative;overflow:hidden;}
+.pc-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.08) 1px,transparent 1px);background-size:18px 18px;pointer-events:none;}
+.pch-p{background:linear-gradient(135deg,var(--pl),var(--p),var(--ph));}
+.pch-g{background:linear-gradient(135deg,#052e16,var(--gbr),var(--g));}
+.pch-a{background:linear-gradient(135deg,#451a03,var(--ambr),var(--amb));}
+.pc-hd-inner{position:relative;z-index:1;min-width:0;overflow:hidden;}
+.pc-ico{font-size:clamp(30px,5vw,44px);display:block;margin-bottom:8px;animation:floatB 3.5s ease-in-out infinite;flex-shrink:0;}
+.pc-title{font-size:clamp(17px,2.5vw,24px);font-weight:900;color:#fff;letter-spacing:-.3px;margin-bottom:4px;min-width:0;overflow:hidden;}
+.pc-sub{font-size:clamp(11px,1.4vw,13px);color:rgba(255,255,255,.72);min-width:0;overflow:hidden;}
+.pc-body{background:var(--wh);padding:clamp(16px,2.5vw,24px);min-width:0;overflow:hidden;}
+.pc-desc{font-size:clamp(12.5px,1.5vw,14px);color:var(--ts);line-height:1.72;margin-bottom:14px;min-width:0;overflow:hidden;}
+.pc-points{display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden;}
+.pc-point{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;border-radius:12px;border:1px solid;min-width:0;overflow:hidden;transition:box-shadow .2s;}
+.pc-point:hover{box-shadow:var(--shp);}
+.pcp-p{background:var(--pxl);border-color:rgba(109,40,217,.18);}
+.pcp-g{background:rgba(22,163,74,.05);border-color:rgba(22,163,74,.18);}
+.pcp-a{background:rgba(217,119,6,.05);border-color:rgba(217,119,6,.18);}
+.pp-ico{font-size:15px;flex-shrink:0;margin-top:1px;}
+.pp-body{min-width:0;overflow:hidden;}
+.pp-title{font-size:clamp(11.5px,1.5vw,13px);font-weight:800;color:var(--tx);margin-bottom:2px;min-width:0;overflow:hidden;}
+.pp-desc{font-size:clamp(11px,1.3vw,12px);color:var(--ts);line-height:1.5;min-width:0;overflow:hidden;}
+
+/* ══════════════════════════════════════
+   BASKET / ALLOCATION VISUALISER
+══════════════════════════════════════ */
+.basket-wrap{border-radius:22px;overflow:hidden;border:1.5px solid var(--bd);min-width:0;box-shadow:var(--shp);}
+.bw-hd{padding:clamp(14px,2.5vw,22px) clamp(18px,3vw,32px);position:relative;overflow:hidden;}
+.bw-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:20px 20px;pointer-events:none;}
+.bw-hd-p{background:linear-gradient(135deg,var(--pl),var(--p));}
+.bw-hd-g{background:linear-gradient(135deg,#052e16,var(--gbr));}
+.bw-title{font-size:clamp(14px,2vw,18px);font-weight:900;color:#fff;position:relative;z-index:1;margin-bottom:3px;min-width:0;overflow:hidden;}
+.bw-sub{font-size:11px;color:rgba(255,255,255,.65);position:relative;z-index:1;min-width:0;overflow:hidden;}
+.bw-body{background:var(--wh);padding:clamp(16px,2.5vw,24px);min-width:0;overflow:hidden;}
+
+/* Allocation bar rows */
+.alloc-rows{display:flex;flex-direction:column;gap:11px;min-width:0;overflow:hidden;}
+.alloc-row{min-width:0;overflow:hidden;}
+.alloc-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;min-width:0;overflow:hidden;}
+.alloc-name{font-size:clamp(12px,1.6vw,14px);font-weight:700;color:var(--tx);min-width:0;overflow:hidden;}
+.alloc-pct{font-size:clamp(12px,1.6vw,14px);font-weight:900;word-break:normal;flex-shrink:0;}
+.ap-p{color:var(--p);}
+.ap-g{color:var(--gbr);}
+.ap-a{color:var(--ambr);}
+.ap-t{color:var(--teal);}
+.ap-r{color:var(--red);}
+.alloc-track{height:10px;background:var(--pxl);border-radius:6px;overflow:hidden;min-width:0;}
+.alloc-fill{height:100%;border-radius:6px;transform-origin:left;animation:grow 1.2s ease both;min-width:0;}
+.af-p{background:linear-gradient(90deg,var(--p),var(--ph));}
+.af-g{background:linear-gradient(90deg,var(--g),var(--gh));}
+.af-a{background:linear-gradient(90deg,var(--ambr),var(--amb));}
+.af-t{background:linear-gradient(90deg,var(--teal),#22d3ee);}
+.af-r{background:linear-gradient(90deg,var(--red),#f87171);}
+.alloc-note{font-size:clamp(10.5px,1.2vw,11.5px);color:var(--tl);margin-top:3px;min-width:0;overflow:hidden;}
+
+/* ══════════════════════════════════════
+   CONCEPT CARDS — WHY DIVERSIFY
+══════════════════════════════════════ */
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.5vw,24px);min-width:0;overflow:hidden;}
+.concept-card{border-radius:18px;padding:clamp(14px,2.5vw,22px);border:1.5px solid var(--bd);background:var(--wh);box-shadow:var(--shc);transition:box-shadow .22s,transform .22s;min-width:0;overflow:hidden;}
+.concept-card:hover{box-shadow:var(--shp);transform:translateY(-3px);}
+.cc-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:11px;min-width:0;overflow:hidden;}
+.cc-ico{font-size:clamp(26px,4vw,34px);flex-shrink:0;animation:floatB 3.5s ease-in-out infinite;}
+.cc-tw{min-width:0;overflow:hidden;}
+.cc-title{font-size:clamp(14px,1.9vw,17px);font-weight:900;color:var(--tx);margin-bottom:4px;min-width:0;overflow:hidden;}
+.cc-badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:100px;font-size:9px;font-weight:700;max-width:100%;overflow:hidden;}
+.ccb-p{background:var(--pxl);color:var(--p);}
+.ccb-g{background:var(--gpale);color:var(--gbr);}
+.ccb-a{background:var(--apale);color:var(--ambr);}
+.ccb-r{background:var(--rpale);color:var(--red);}
+.cc-desc{font-size:clamp(12px,1.4vw,13.5px);color:var(--ts);line-height:1.7;min-width:0;overflow:hidden;}
+.cc-eg{margin-top:10px;padding:9px 12px;border-radius:10px;font-size:clamp(11.5px,1.3vw,13px);line-height:1.5;min-width:0;overflow:hidden;}
+.cce-p{background:var(--pxl);color:var(--p);}
+.cce-g{background:var(--gpale);color:var(--gbr);}
+.cce-a{background:var(--apale);color:var(--ambr);}
+.cce-r{background:var(--rpale);color:var(--red);}
+
+/* ══════════════════════════════════════
+   EXAMPLE PORTFOLIO CARDS
+══════════════════════════════════════ */
+.ex-cards{display:flex;flex-direction:column;gap:clamp(28px,5vw,48px);min-width:0;overflow:hidden;}
+.ex-card{border-radius:24px;overflow:hidden;min-width:0;box-shadow:var(--shp);}
+.exc-hd{padding:clamp(18px,3vw,28px) clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:clamp(14px,2.5vw,22px);position:relative;overflow:hidden;}
+.exc-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+.exh-p{background:linear-gradient(135deg,#1e1b4b,var(--pl),var(--p),#a78bfa);}
+.exh-g{background:linear-gradient(135deg,#052e16,var(--gbr),var(--g),#86efac);}
+.exh-a{background:linear-gradient(135deg,#451a03,var(--ambr),var(--amb),#fde68a);}
+.exh-t{background:linear-gradient(135deg,#0c4a6e,var(--teal),#22d3ee,#a5f3fc);}
+.exh-r{background:linear-gradient(135deg,#450a0a,var(--red),#f87171,#fca5a5);}
+.exc-char{flex-shrink:0;position:relative;z-index:1;}
+.exc-h-text{flex:1;min-width:0;overflow:hidden;position:relative;z-index:1;}
+.exc-badge{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:5px;min-width:0;overflow:hidden;}
+.exc-name{font-size:clamp(18px,3.5vw,34px);font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1;margin-bottom:5px;min-width:0;overflow:hidden;}
+.exc-tagline{font-size:clamp(11.5px,1.6vw,14px);color:rgba(255,255,255,.78);line-height:1.5;margin-bottom:10px;min-width:0;overflow:hidden;}
+.exc-pills{display:flex;gap:7px;flex-wrap:wrap;min-width:0;overflow:hidden;}
+.exc-pill{display:inline-flex;align-items:center;padding:4px 11px;border-radius:100px;font-size:9.5px;font-weight:700;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.25);white-space:nowrap;max-width:100%;overflow:hidden;}
+.exc-body{background:var(--wh);padding:clamp(18px,3vw,28px);min-width:0;overflow:hidden;}
+.exc-2col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,32px);align-items:start;min-width:0;overflow:hidden;}
+.exc-sec-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tl);margin-bottom:12px;display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden;}
+.exc-sec-title::before{content:'';width:14px;height:2px;border-radius:1px;flex-shrink:0;}
+.est-p::before{background:var(--p);}
+.est-g::before{background:var(--g);}
+.est-a::before{background:var(--amb);}
+.est-t::before{background:var(--teal);}
+.est-r::before{background:var(--red);}
+
+/* Portfolio allocation inside example card */
+.port-alloc{display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden;}
+.pa-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;border:1px solid var(--bd);background:var(--pxs);min-width:0;overflow:hidden;transition:box-shadow .2s;}
+.pa-row:hover{box-shadow:var(--shp);}
+.pa-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.pad-p{background:var(--p);}
+.pad-g{background:var(--g);}
+.pad-a{background:var(--amb);}
+.pad-t{background:var(--teal);}
+.pad-r{background:var(--red);}
+.pad-pi{background:#ec4899;}
+.pa-info{flex:1;min-width:0;overflow:hidden;}
+.pa-name{font-size:clamp(11.5px,1.5vw,13px);font-weight:800;color:var(--tx);min-width:0;overflow:hidden;}
+.pa-detail{font-size:clamp(10.5px,1.2vw,11.5px);color:var(--tl);min-width:0;overflow:hidden;}
+.pa-pct{font-size:clamp(13px,1.8vw,15px);font-weight:900;word-break:normal;flex-shrink:0;}
+
+/* Lesson box */
+.lesson-box{border-radius:14px;padding:clamp(12px,2vw,18px);min-width:0;overflow:hidden;}
+.lb-p{background:linear-gradient(135deg,var(--pxl),var(--pxs));border:1.5px solid rgba(109,40,217,.2);}
+.lb-g{background:linear-gradient(135deg,var(--gpale),#fafffe);border:1.5px solid rgba(22,163,74,.25);}
+.lb-a{background:linear-gradient(135deg,var(--apale),#fffdf5);border:1.5px solid rgba(217,119,6,.2);}
+.lb-t{background:linear-gradient(135deg,var(--tealpale),#f0feff);border:1.5px solid rgba(8,145,178,.2);}
+.lb-r{background:linear-gradient(135deg,var(--rpale),#fff9f9);border:1.5px solid rgba(220,38,38,.2);}
+.lb-title{font-size:clamp(12px,1.7vw,14px);font-weight:900;margin-bottom:6px;min-width:0;overflow:hidden;}
+.lbt-p{color:var(--p);}
+.lbt-g{color:var(--gbr);}
+.lbt-a{color:var(--ambr);}
+.lbt-t{color:var(--teal);}
+.lbt-r{color:var(--red);}
+.lb-desc{font-size:clamp(11.5px,1.4vw,13px);color:var(--ts);line-height:1.68;min-width:0;overflow:hidden;}
+
+/* Risk meter */
+.risk-meter{display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden;}
+.rm-row{min-width:0;overflow:hidden;}
+.rm-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px;min-width:0;overflow:hidden;}
+.rm-label{font-size:clamp(11.5px,1.5vw,13px);font-weight:700;color:var(--tx);min-width:0;overflow:hidden;}
+.rm-val{font-size:clamp(11px,1.4vw,13px);font-weight:900;word-break:normal;flex-shrink:0;}
+.rm-track{height:8px;background:var(--pxl);border-radius:6px;overflow:hidden;min-width:0;}
+.rm-fill{height:100%;border-radius:6px;transform-origin:left;animation:grow 1s ease both;min-width:0;}
+
+/* DEMAT BANNER */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;min-width:0;overflow:hidden;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* NEXT CHAPTER */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left,0px));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right,0px));}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;min-width:0;overflow:hidden;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);min-width:0;overflow:hidden;}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;min-width:0;overflow:hidden;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;display:inline-block;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;min-width:0;overflow:hidden;}
+
+/* ═══ RESPONSIVE ═══ */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.pillar-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){
+  .pillar-grid{grid-template-columns:1fr 1fr;}
+  .concept-grid{grid-template-columns:1fr 1fr;}
+  .exc-2col{grid-template-columns:1fr;}
+  .klo-hi-row{grid-template-columns:1fr 1fr 1fr;}
+}
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .pillar-grid{grid-template-columns:1fr 1fr;}
+  .concept-grid{grid-template-columns:1fr 1fr;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{font-size:14px;padding:12px 20px;}
+  .dmfeats{gap:10px 20px;}
+  .exc-hd{gap:12px;}
+  .exc-name{font-size:clamp(16px,4vw,28px);}
+  .exc-body{padding:clamp(16px,2.5vw,22px);}
+  .exc-char svg{width:clamp(54px,8vw,72px);height:auto;}
+  .hero-pills{gap:6px;}
+  .hero-pill{font-size:10px;padding:6px 11px;}
+  .pc-ico{animation:none;}
+  .cc-ico{animation:none;}
+}
+@media(max-width:640px){
+  .pillar-grid{grid-template-columns:1fr;}
+  .concept-grid{grid-template-columns:1fr;}
+  .exc-hd{flex-direction:column;gap:10px;}
+  .exc-char{align-self:flex-start;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .klo-hi-row{grid-template-columns:1fr 1fr 1fr;}
+  .hero-pills{gap:5px;}
+  .hero-pill{font-size:10px;padding:5px 9px;}
+}
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.5px;}
+  .hdesc{font-size:13px;}
+  .hsub{letter-spacing:2px;font-size:9px;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .h2{letter-spacing:-1px;}
+  .lead{font-size:13.5px;}
+  .tag{letter-spacing:2px;}
+  .klo-title{font-size:14px;}
+  .klo-desc{font-size:12px;}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .klo-hi{padding:10px 8px;}
+  .klo-hi-val{font-size:clamp(10px,3.5vw,13px);}
+  .klo-hi-ico{font-size:18px;}
+  .klo-hi-row{grid-template-columns:1fr 1fr 1fr !important;}
+  .pc-ico{font-size:clamp(26px,5vw,36px);animation:none;}
+  .pc-title{font-size:clamp(15px,4.5vw,20px);}
+  .pc-desc{font-size:12px;}
+  .pp-title{font-size:11.5px;}
+  .pp-desc{font-size:11px;}
+  .cc-ico{font-size:clamp(22px,4vw,28px);animation:none;}
+  .cc-title{font-size:12.5px;}
+  .cc-desc{font-size:11.5px;}
+  .cc-eg{font-size:11px;}
+  .alloc-name{font-size:12px;}
+  .alloc-pct{font-size:12px;}
+  .pa-name{font-size:11.5px;}
+  .pa-detail{font-size:10.5px;}
+  .pa-pct{font-size:13px;}
+  .exc-hd{padding:clamp(14px,3vw,20px) clamp(12px,3vw,18px);}
+  .exc-name{font-size:clamp(15px,5.5vw,24px);}
+  .exc-tagline{font-size:11.5px;}
+  .exc-pill{font-size:9px;padding:3px 9px;}
+  .exc-body{padding:13px 12px;}
+  .exc-2col{gap:14px;}
+  .exc-sec-title{font-size:9px;letter-spacing:1px;margin-bottom:8px;}
+  .rm-label{font-size:11.5px;}
+  .rm-val{font-size:11.5px;}
+  .lb-title{font-size:12.5px;}
+  .lb-desc{font-size:11.5px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .dmh{letter-spacing:-1px;}
+  .dmsub{font-size:13px;}
+  .nxt-banner{padding:12px 14px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+  .hero-pill{font-size:9px;padding:5px 8px;}
+  .exc-char svg{width:clamp(44px,9vw,60px);height:auto;}
+  .pillar-grid{grid-template-columns:1fr;}
+}
+@media(max-width:360px){
+  .w{padding:26px 12px;}
+  .hh1{font-size:clamp(22px,9vw,34px);letter-spacing:-1px;}
+  .lead{font-size:13px;}
+  .h2{font-size:clamp(18px,8vw,26px);}
+  .klo-hi-row{grid-template-columns:1fr 1fr !important;}
+  .exc-hd{padding:11px 10px;}
+  .exc-name{font-size:clamp(13px,6vw,20px);}
+  .exc-tagline{font-size:10.5px;}
+  .pa-name{font-size:11px;}
+  .lb-desc{font-size:11px;}
+  .exc-char svg{width:clamp(36px,9vw,48px);height:auto;}
+  .nxt-btn{font-size:12px;padding:10px 13px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}
+  .hero-pill{font-size:8.5px;padding:4px 7px;}
+}
+
+/* Touch */
+@media(hover:none) and (pointer:coarse){
+  .pillar-card:hover,.concept-card:hover,.pc-point:hover,.pa-row:hover,.ex-card:hover{transform:none!important;box-shadow:var(--shc)!important;}
+  .pillar-card:active,.concept-card:active,.pc-point:active{transform:scale(.98);transition:transform .08s;}
+  .dmbtn:active,.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.tag,.eyebrow,.klo-label{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.lead,.pc-desc,.pp-desc,.cc-desc,.lb-desc,.pa-detail{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+  .klo-icon,.pc-ico,.cc-ico{animation:none;}
+}
+
+/* iOS Safari */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top) + 72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom) + 32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top) + 8px));right:max(22px,calc(env(safe-area-inset-right) + 8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.klo-hi-val.purple,.klo-hi-val.green,.h2 .hp,.h2 .hg{
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn{-webkit-tap-highlight-color:transparent;}
+}
+
+/* Android high-DPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .pillar-card,.concept-card,.ex-card,.klobanner,.basket-wrap{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .exc-char svg{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
+  .rv{opacity:1;transform:none;}
+  .klo-icon,.pc-ico,.cc-ico{animation:none!important;}
+  .alloc-fill,.rm-fill{animation:none;transform:scaleX(1);}
+}
+
+/* Print */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}
+  .rv{opacity:1;transform:none;}
+  body{color:#000;}
+  .w{padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="vbadge">Portfolio Framework · Diversification</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Sector · Market Cap · Geography · Balanced Portfolio</div>
+  <h1 class="hh1">
+    <span class="line1">Diversification</span>
+    <span class="line2">Done Right</span>
+    <span class="line3">Build a Portfolio That Survives Any Market Storm</span>
+  </h1>
+  <div class="hsub">Portfolio Framework · Risk Management · Asset Allocation</div>
+  <p class="hdesc">Most investors put all their money in the same type of company. When that sector falls, their whole portfolio falls with it. Real diversification — across sectors, company sizes, and geographies — is the single most powerful free lunch available to any investor.</p>
+  <div class="hero-pills">
+    <span class="hero-pill hp-p">🏭 Sector Spread</span>
+    <span class="hero-pill hp-g">📊 Market Cap Mix</span>
+    <span class="hero-pill hp-a">🌍 Geographic Reach</span>
+    <span class="hero-pill hp-t">⚖️ Risk Balance</span>
+    <span class="hero-pill hp-r">🚫 Avoid Concentration</span>
+  </div>
+</section>
+
+
+<!-- ═══ 01 — KLO ═══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Why <span class="hp">Diversification</span> Is the Only Free Lunch in Investing</h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">⚖️</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">Diversification does not reduce your returns. It reduces your risk for the same expected return. This is the only proven way to get something for nothing in investing — and most retail investors in India do the exact opposite, accidentally concentrating in the same 3–4 sectors and the same market cap size.</div>
+        <div class="klo-desc">Imagine you run a small food stall. On Mondays you sell only vada pav — if it rains and no one comes, you earn nothing. But if you sell vada pav, chai, juice, and pav bhaji, a rainy Monday might kill vada pav sales but chai sales explode. You still earn. This is diversification — spreading your bets so that one bad outcome does not wipe out your entire portfolio. In investing, this means holding companies from different sectors (technology falls but healthcare rises), different company sizes (large-caps protect in crashes, small-caps amplify in recoveries), and different countries (India stagnates but US tech soars for three years). A truly diversified portfolio is one where no single event — a budget announcement, an RBI rate hike, a global recession, a sector-specific regulatory change — can cause catastrophic damage to more than 20% of your total wealth. Building this kind of portfolio requires understanding three dimensions of diversification: sector, market cap, and geography. Each dimension adds a different layer of protection and a different source of potential return. By the end of this chapter, you will be able to build a real allocation framework that uses all three dimensions systematically.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-p">🏭 Sector diversification</span>
+          <span class="kpill kpill-g">📊 Market cap diversification</span>
+          <span class="kpill kpill-a">🌍 Geographic diversification</span>
+          <span class="kpill kpill-r">🚫 No single stock &gt;10%</span>
+        </div>
+        <div class="klo-hi-row">
+          <div class="klo-hi"><div class="klo-hi-ico">🎯</div><div class="klo-hi-val purple">3 Dimensions</div><div class="klo-hi-lbl">Sector · Cap · Geo</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">📉</div><div class="klo-hi-val green">Risk −40%</div><div class="klo-hi-lbl">vs concentrated port</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">📈</div><div class="klo-hi-val purple">Return Same</div><div class="klo-hi-lbl">Expected returns preserved</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 02 — WHY DIVERSIFY ═══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — Why Diversify?</div>
+    <h2 class="h2 rv d2">What Happens When You <span class="hp">Don't Diversify</span> — Real Consequences</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Every investor understands diversification in theory. Almost no retail investor actually practises it. Here is exactly what concentration risk looks like — and why each type of diversification protects against a different kind of catastrophe.</p>
+
+    <div class="concept-grid">
+
+      <div class="concept-card rv d2">
+        <div class="cc-top">
+          <span class="cc-ico">🏭</span>
+          <div class="cc-tw">
+            <div class="cc-title">Sector Concentration Risk — All in One Industry</div>
+            <span class="cc-badge ccb-r">Most Common Mistake</span>
+          </div>
+        </div>
+        <div class="cc-desc">Imagine investing ₹10 lakh entirely in IT stocks in January 2022. By October 2022, Nifty IT had fallen 35% as US tech spending slowed and layoffs began across the sector. Your ₹10 lakh was now ₹6.5 lakh — through no fault of any individual company. They were all simply in the same industry that faced the same headwind simultaneously. Sector concentration means that one budget announcement, one regulatory change, or one global trend shift can damage your entire portfolio in a single quarter. Investors who concentrate in real estate, pharma, PSU banks, or IT often make this mistake without realising it — because the companies look different on the surface but share the same underlying risk factor.</div>
+        <div class="cc-eg cce-r">🚨 <strong>Real case:</strong> An investor with 80% in FMCG stocks in 2022 underperformed the Nifty by 12% as FMCG sector battled rural slowdown and raw material inflation simultaneously across all holdings.</div>
+      </div>
+
+      <div class="concept-card rv d3">
+        <div class="cc-top">
+          <span class="cc-ico">📊</span>
+          <div class="cc-tw">
+            <div class="cc-title">Market Cap Concentration — Only Large Caps or Only Small Caps</div>
+            <span class="cc-badge ccb-a">Cycle Timing Risk</span>
+          </div>
+        </div>
+        <div class="cc-desc">Large-cap stocks (Nifty 50 companies) and small-cap stocks (below ₹5,000 Cr market cap) behave very differently across market cycles. In bear markets, small caps fall 40–60% while large caps fall only 20–25%. In strong bull markets, small caps give 80–150% returns while large caps give 30–50%. If you hold only small caps, you cannot sleep through a bear market. If you hold only large caps, you miss the wealth-creation phase that has made many retail investors wealthy in India's bull runs. A mix — typically 60% large cap, 25% mid cap, 15% small cap for a moderate-risk investor — smooths this cycle dramatically without sacrificing long-term returns.</div>
+        <div class="cc-eg cce-a">⚠️ <strong>The 2018 lesson:</strong> Investors who went 100% into small caps in 2017–18 peak saw portfolios fall 60–70% by 2019, with recovery taking 3+ years. A 60/25/15 mix fell only 28% in the same period.</div>
+      </div>
+
+      <div class="concept-card rv d2">
+        <div class="cc-top">
+          <span class="cc-ico">🌍</span>
+          <div class="cc-tw">
+            <div class="cc-title">Geographic Concentration — India-Only Portfolio</div>
+            <span class="cc-badge ccb-p">Currency + Country Risk</span>
+          </div>
+        </div>
+        <div class="cc-desc">India is one of the world's most exciting growth stories — but even the best economies have multi-year periods of underperformance. The Nifty delivered near-zero returns from 2010 to 2012 and again from 2017 to 2019. During these same periods, US tech stocks doubled. A purely India-focused investor with no global exposure misses these opportunities entirely — and also bears the full impact of India-specific risks: rupee depreciation (₹ has lost 30%+ vs USD over 10 years), political uncertainty, domestic regulatory changes, and monsoon-driven agricultural shocks that can slow the entire economy. Even a 10–15% allocation to international indices (US, emerging markets) provides meaningful diversification that most Indian retail investors completely overlook.</div>
+        <div class="cc-eg cce-p">💡 <strong>The dollar benefit:</strong> An investor with 15% in a US index fund in 2013 not only earned US market returns but also gained from rupee depreciation — effectively earning returns in both the market and the currency dimension.</div>
+      </div>
+
+      <div class="concept-card rv d3">
+        <div class="cc-top">
+          <span class="cc-ico">🔀</span>
+          <div class="cc-tw">
+            <div class="cc-title">Correlation — Why Diversification Only Works When Assets Are Uncorrelated</div>
+            <span class="cc-badge ccb-g">The Science of Diversification</span>
+          </div>
+        </div>
+        <div class="cc-desc">Here's the key concept that most investors miss: owning 10 IT stocks is not diversification — it's concentration with extra steps. Real diversification requires owning assets that respond differently to the same event. When IT falls, healthcare often rises (defensive demand). When domestic consumption stocks fall in a recession, export-oriented IT often rises (dollar revenue). When India underperforms, US tech can surge. The degree to which two assets move together is called "correlation." Assets with low or negative correlation provide genuine risk reduction when combined. The goal of portfolio construction is to combine assets that each have good individual risk-return profiles but that have low correlation with each other — giving you the best of all worlds.</div>
+        <div class="cc-eg cce-g">✅ <strong>Low-correlation pairs (India):</strong> IT (dollar revenue) + FMCG (domestic demand) + Pharma (defensive) + PSU Banks (rate cycle) + Gold ETF (crisis hedge) = each affected by different macro factors.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 03 — THREE PILLARS ═══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — The Three Pillars</div>
+    <h2 class="h2 rv d2">Sector · Market Cap · Geography — <span class="hp">Your Diversification Toolkit</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">A balanced portfolio is built on three independent dimensions of diversification. Each pillar addresses a different type of risk. Understanding all three — and how to implement them practically in the Indian market — is the core skill of portfolio construction.</p>
+
+    <div class="pillar-grid">
+
+      <!-- PILLAR 1: SECTOR -->
+      <div class="pillar-card rv d2">
+        <div class="pc-hd pch-p">
+          <div class="pc-hd-inner">
+            <span class="pc-ico">🏭</span>
+            <div class="pc-title">Pillar 1: Sector Diversification</div>
+            <div class="pc-sub">Spread across industries so no single economic event dominates</div>
+          </div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-desc">Think of the economy as a machine with many different departments — some do well when interest rates are high (banks), some do well in recessions (pharma, FMCG), some do well when the global economy booms (IT, metals). By owning at least 6–8 different sectors, you ensure that whatever is happening in the economy, some part of your portfolio is benefiting while another is suffering — and the net effect is stability. A practical guideline: no single sector should exceed 30% of your portfolio. A well-balanced Indian equity portfolio covers: Financials (banks + NBFC), Technology (IT services + software), Consumer (FMCG + retail + auto), Healthcare (pharma + hospitals), Energy (oil + gas + renewables), Industrials (capital goods + infrastructure), and Materials (chemicals + metals).</div>
+          <div class="pc-points">
+            <div class="pc-point pcp-p">
+              <span class="pp-ico">🏦</span>
+              <div class="pp-body">
+                <div class="pp-title">Financials (20–25% typical)</div>
+                <div class="pp-desc">Banks, NBFCs, insurance — benefits from economic growth cycles. HDFC Bank, Bajaj Finance, SBI Life. Rate-sensitive.</div>
+              </div>
+            </div>
+            <div class="pc-point pcp-p">
+              <span class="pp-ico">💻</span>
+              <div class="pp-body">
+                <div class="pp-title">Technology (10–15% typical)</div>
+                <div class="pp-desc">IT services, software products — dollar revenue hedge against rupee depreciation. TCS, Infosys, HCL Tech. Global macro-linked.</div>
+              </div>
+            </div>
+            <div class="pc-point pcp-p">
+              <span class="pp-ico">🛒</span>
+              <div class="pp-body">
+                <div class="pp-title">Consumer (15–20% typical)</div>
+                <div class="pp-desc">FMCG, retail, auto — domestic demand driven. Asian Paints, HUL, Maruti. Defensive in downturns.</div>
+              </div>
+            </div>
+            <div class="pc-point pcp-p">
+              <span class="pp-ico">💊</span>
+              <div class="pp-body">
+                <div class="pp-title">Healthcare (10–15% typical)</div>
+                <div class="pp-desc">Pharma, hospitals — non-cyclical demand. Sun Pharma, Apollo Hospitals. Performs when other sectors fall.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PILLAR 2: MARKET CAP -->
+      <div class="pillar-card rv d3">
+        <div class="pc-hd pch-g">
+          <div class="pc-hd-inner">
+            <span class="pc-ico">📊</span>
+            <div class="pc-title">Pillar 2: Market Cap Mix</div>
+            <div class="pc-sub">Balance stability (large cap) with growth potential (mid &amp; small cap)</div>
+          </div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-desc">Market cap (the total value of a company's shares) determines how a stock behaves through market cycles. Large-cap companies (Nifty 50, top 100) are like established banks — they grow steadily and fall less dramatically in crashes. Small-cap companies are like new startups — enormous upside when they succeed, but volatile and illiquid. A balanced allocation uses all three tiers. The classic Indian retail investor framework: Large Cap 50–60% (stability, liquidity, lower drawdown), Mid Cap 20–25% (growth + some stability), Small Cap 10–15% (high-growth potential, accept volatility). Adjust based on your risk tolerance and investment horizon — longer horizon = more you can afford in small caps.</div>
+          <div class="pc-points">
+            <div class="pc-point pcp-g">
+              <span class="pp-ico">🏔️</span>
+              <div class="pp-body">
+                <div class="pp-title">Large Cap — ₹20,000 Cr+ (50–60% allocation)</div>
+                <div class="pp-desc">Top 100 companies by market cap. High liquidity, stable earnings, lower volatility. Reliance, TCS, HDFC Bank, Infosys. Anchor your portfolio.</div>
+              </div>
+            </div>
+            <div class="pc-point pcp-g">
+              <span class="pp-ico">🌊</span>
+              <div class="pp-body">
+                <div class="pp-title">Mid Cap — ₹5,000–20,000 Cr (20–25% allocation)</div>
+                <div class="pp-desc">Companies in growth phase. More volatile than large cap but more stable than small cap. Persistent Systems, Crompton Consumer, Mphasis.</div>
+              </div>
+            </div>
+            <div class="pc-point pcp-g">
+              <span class="pp-ico">🚀</span>
+              <div class="pp-body">
+                <div class="pp-title">Small Cap — Below ₹5,000 Cr (10–15% allocation)</div>
+                <div class="pp-desc">High potential, high risk. Can 5–10× in a bull market; can fall 60–70% in a crash. Requires higher research effort and ability to hold through pain.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PILLAR 3: GEOGRAPHY -->
+      <div class="pillar-card rv d4">
+        <div class="pc-hd pch-a">
+          <div class="pc-hd-inner">
+            <span class="pc-ico">🌍</span>
+            <div class="pc-title">Pillar 3: Geographic Spread</div>
+            <div class="pc-sub">Break India-only risk by accessing global growth engines</div>
+          </div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-desc">India-only investors carry two invisible risks they often ignore: (1) India-specific political/regulatory risk — a single budget announcement can crash an entire sector overnight; and (2) currency risk — the rupee has depreciated 30%+ against the dollar over 10 years, effectively reducing the real dollar-value of India-only wealth. A simple geographic diversification framework adds 10–20% international exposure through low-cost ETFs or funds of funds. You do not need to pick individual US or European stocks. Index funds tracking the S&amp;P 500 (US large caps), Nasdaq 100 (US tech), or emerging market indices give you instant geographic diversification at minimal cost. For most Indian retail investors, this is the most neglected — and highest-impact — dimension of diversification.</div>
+          <div class="pc-points">
+            <div class="pc-point pcp-a">
+              <span class="pp-ico">🇮🇳</span>
+              <div class="pp-body">
+                <div class="pp-title">India (80–85% core)</div>
+                <div class="pp-desc">Your home market — best information advantage. Direct stocks, mutual funds, ETFs. India's growth story intact for 20+ years.</div>
+              </div>
+            </div>
+            <div class="pc-point pcp-a">
+              <span class="pp-ico">🇺🇸</span>
+              <div class="pp-body">
+                <div class="pp-title">US Markets (10–15% via FOF/ETF)</div>
+                <div class="pp-desc">S&amp;P 500 or Nasdaq 100 index funds. Dollar exposure + world's deepest technology companies. Mirae Asset, Motilal Oswal, Franklin US funds.</div>
+              </div>
+            </div>
+            <div class="pc-point pcp-a">
+              <span class="pp-ico">🌐</span>
+              <div class="pp-body">
+                <div class="pp-title">Emerging Markets (0–5% optional)</div>
+                <div class="pp-desc">Exposure to high-growth developing economies outside India. Edelweiss EM fund, PPFAS International allocation. Optional for most investors.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Allocation visualiser -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.5vw,24px);margin-top:clamp(28px,4vw,44px);min-width:0;overflow:hidden;" class="rv d3">
+      <div class="basket-wrap">
+        <div class="bw-hd bw-hd-p">
+          <div class="bw-title">📊 Moderate-Risk Indian Investor — Suggested Sector Split</div>
+          <div class="bw-sub">A practical starting framework — adjust based on your views and research</div>
+        </div>
+        <div class="bw-body">
+          <div class="alloc-rows">
+            <div class="alloc-row"><div class="alloc-top"><div class="alloc-name">Financials (Banks + NBFC)</div><div class="alloc-pct ap-p">25%</div></div><div class="alloc-track"><div class="alloc-fill af-p" style="width:25%;"></div></div><div class="alloc-note">HDFC Bank, ICICI Bank, Bajaj Finance, Kotak</div></div>
+            <div class="alloc-row"><div class="alloc-top"><div class="alloc-name">Consumer (FMCG + Auto)</div><div class="alloc-pct ap-g">20%</div></div><div class="alloc-track"><div class="alloc-fill af-g" style="width:20%;animation-delay:.1s"></div></div><div class="alloc-note">HUL, Asian Paints, Maruti, Titan, Pidilite</div></div>
+            <div class="alloc-row"><div class="alloc-top"><div class="alloc-name">Technology (IT Services)</div><div class="alloc-pct ap-t">15%</div></div><div class="alloc-track"><div class="alloc-fill af-t" style="width:15%;animation-delay:.2s"></div></div><div class="alloc-note">TCS, Infosys, HCL Tech, Wipro</div></div>
+            <div class="alloc-row"><div class="alloc-top"><div class="alloc-name">Healthcare (Pharma)</div><div class="alloc-pct ap-a">12%</div></div><div class="alloc-track"><div class="alloc-fill af-a" style="width:12%;animation-delay:.3s"></div></div><div class="alloc-note">Sun Pharma, Dr. Reddy's, Apollo Hospitals</div></div>
+            <div class="alloc-row"><div class="alloc-top"><div class="alloc-name">Energy (Oil + Renewables)</div><div class="alloc-pct ap-p">10%</div></div><div class="alloc-track"><div class="alloc-fill af-p" style="width:10%;animation-delay:.4s"></div></div><div class="alloc-note">Reliance, ONGC, NTPC, Adani Green</div></div>
+            <div class="alloc-row"><div class="alloc-top"><div class="alloc-name">Industrials + Materials</div><div class="alloc-pct ap-r">10%</div></div><div class="alloc-track"><div class="alloc-fill af-r" style="width:10%;animation-delay:.5s"></div></div><div class="alloc-note">L&amp;T, UltraTech, Pidilite, SRF</div></div>
+            <div class="alloc-row"><div class="alloc-top"><div class="alloc-name">International (US/Global ETF)</div><div class="alloc-pct ap-g">8%</div></div><div class="alloc-track"><div class="alloc-fill af-g" style="width:8%;animation-delay:.6s"></div></div><div class="alloc-note">Mirae Asset S&amp;P 500, Motilal Oswal Nasdaq</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="basket-wrap">
+        <div class="bw-hd bw-hd-g">
+          <div class="bw-title">📈 Suggested Market Cap Allocation — Moderate Risk</div>
+          <div class="bw-sub">Time horizon 5+ years · Adjust small cap lower for &lt;3 yr horizon</div>
+        </div>
+        <div class="bw-body">
+          <div class="alloc-rows">
+            <div class="alloc-row"><div class="alloc-top"><div class="alloc-name">Large Cap (Top 100 stocks)</div><div class="alloc-pct ap-p">55%</div></div><div class="alloc-track"><div class="alloc-fill af-p" style="width:55%;"></div></div><div class="alloc-note">Core anchor — stability, liquidity, lower drawdown in crashes</div></div>
+            <div class="alloc-row"><div class="alloc-top"><div class="alloc-name">Mid Cap (₹5,000–20,000 Cr)</div><div class="alloc-pct ap-g">25%</div></div><div class="alloc-track"><div class="alloc-fill af-g" style="width:25%;animation-delay:.1s"></div></div><div class="alloc-note">Growth engine — higher upside, manageable volatility</div></div>
+            <div class="alloc-row"><div class="alloc-top"><div class="alloc-name">Small Cap (Below ₹5,000 Cr)</div><div class="alloc-pct ap-a">12%</div></div><div class="alloc-track"><div class="alloc-fill af-a" style="width:12%;animation-delay:.2s"></div></div><div class="alloc-note">High-conviction bets only — can 5× or fall 60%</div></div>
+            <div class="alloc-row"><div class="alloc-top"><div class="alloc-name">International Index ETFs</div><div class="alloc-pct ap-t">8%</div></div><div class="alloc-track"><div class="alloc-fill af-t" style="width:8%;animation-delay:.3s"></div></div><div class="alloc-note">S&amp;P 500 / Nasdaq ETF — geographic + currency hedge</div></div>
+          </div>
+          <div style="margin-top:14px;padding:11px 14px;background:var(--pxl);border-radius:12px;border:1px solid rgba(109,40,217,.18);font-size:clamp(11.5px,1.4vw,13px);color:var(--p);line-height:1.6;min-width:0;overflow:hidden;">
+            🔑 <strong>Golden rule:</strong> No single stock should exceed 10% of your total portfolio. No single sector should exceed 30%. If a stock grows beyond these thresholds, consider trimming — not because it's bad, but to maintain the diversification that protects you.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 04 — FIVE PORTFOLIO EXAMPLES ═══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">04 — Five Portfolio Examples</div>
+    <h2 class="h2 rv d2">Diversification <span class="hp">in Practice</span> — Five Real Investor Profiles &amp; Their Balanced Portfolios</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Five different investors, five different life situations, five carefully constructed diversified portfolios — each demonstrating how sector, market cap, and geographic diversification is applied differently based on risk tolerance, investment horizon, and financial goals.</p>
+
+    <div class="ex-cards">
+
+      <!-- EXAMPLE 1: The Young Professional -->
+      <div class="ex-card rv d2">
+        <div class="exc-hd exh-p">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3s ease-in-out infinite;">
+              <!-- Young professional at desk -->
+              <rect x="8" y="58" width="52" height="30" rx="4" fill="rgba(255,255,255,.2)"/>
+              <!-- Laptop -->
+              <rect x="12" y="62" width="32" height="22" rx="3" fill="rgba(255,255,255,.28)"/>
+              <rect x="14" y="64" width="28" height="16" rx="2" fill="rgba(255,255,255,.15)"/>
+              <!-- Growth chart on screen -->
+              <polyline points="16,76 20,72 24,74 28,68 32,66 36,64 38,65" stroke="#4ade80" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <!-- Coffee cup -->
+              <rect x="50" y="68" width="8" height="10" rx="2" fill="rgba(255,255,255,.3)"/>
+              <path d="M58 72 Q62 72 62 76 Q62 78 58 78" stroke="rgba(255,255,255,.4)" stroke-width="1.5" fill="none"/>
+              <!-- Phone showing app -->
+              <rect x="50" y="82" width="6" height="4" rx="1" fill="rgba(255,255,255,.25)"/>
+              <!-- Young professional character -->
+              <circle cx="68" cy="24" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="68" cy="11" rx="12" ry="5" fill="#4c1d95"/>
+              <circle cx="62" cy="21" r="2.2" fill="#3730a3"/>
+              <circle cx="74" cy="21" r="2.2" fill="#3730a3"/>
+              <path d="M62 30 Q68 34 74 30" stroke="#3730a3" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="60" y="37" width="16" height="18" rx="5" fill="#7c3aed"/>
+              <!-- Tie -->
+              <polygon points="68,37 66,45 68,47 70,45" fill="#a78bfa" opacity=".7"/>
+              <rect x="48" y="41" width="14" height="4" rx="2" fill="#7c3aed" transform="rotate(-15 55 43)"/>
+              <rect x="72" y="40" width="12" height="4" rx="2" fill="#7c3aed" transform="rotate(10 78 42)"/>
+              <rect x="62" y="53" width="5" height="9" rx="2.5" fill="#4c1d95"/>
+              <rect x="70" y="53" width="5" height="9" rx="2.5" fill="#4c1d95"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Profile 01 · Age 26 · 25-Year Horizon · Aggressive Growth</div>
+            <div class="exc-name">Arjun — The Young Professional</div>
+            <div class="exc-tagline">Software engineer, monthly SIP of ₹15,000, just started investing. Long horizon means he can afford higher risk — more small caps, more international exposure — since he has 25 years for compounding to work and bear markets to recover.</div>
+            <div class="exc-pills"><span class="exc-pill">₹15K monthly SIP</span><span class="exc-pill">25-yr horizon</span><span class="exc-pill">High risk tolerance</span><span class="exc-pill">Growth-first</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-p">Portfolio Allocation</div>
+              <div class="port-alloc">
+                <div class="pa-row"><div class="pa-dot pad-p"></div><div class="pa-info"><div class="pa-name">Large Cap Index Fund (Nifty 50)</div><div class="pa-detail">Core stability — falls less in crashes · SBI Nifty 50 ETF</div></div><div class="pa-pct" style="color:var(--p);">40%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-g"></div><div class="pa-info"><div class="pa-name">Mid Cap Fund (active)</div><div class="pa-detail">Growth engine · Mirae Asset Mid Cap</div></div><div class="pa-pct" style="color:var(--gbr);">25%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-a"></div><div class="pa-info"><div class="pa-name">Small Cap Fund (active)</div><div class="pa-detail">High risk, high potential · Nippon Small Cap</div></div><div class="pa-pct" style="color:var(--ambr);">20%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-t"></div><div class="pa-info"><div class="pa-name">US Nasdaq 100 ETF</div><div class="pa-detail">Dollar + Tech exposure · Motilal Oswal Nasdaq</div></div><div class="pa-pct" style="color:var(--teal);">15%</div></div>
+              </div>
+              <div style="margin-top:12px;padding:10px 12px;background:var(--pxl);border-radius:12px;font-size:clamp(11.5px,1.4vw,13px);color:var(--p);line-height:1.6;min-width:0;overflow:hidden;">
+                ✅ <strong>Sector coverage via funds:</strong> Index funds automatically cover Financials, IT, Consumer, Energy, Pharma, Industrials — no manual sector picking needed.
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-p">Why This Portfolio Works for Arjun</div>
+              <div class="risk-meter">
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Growth Potential</div><div class="rm-val" style="color:var(--gbr);">Very High</div></div><div class="rm-track"><div class="rm-fill" style="width:90%;background:linear-gradient(90deg,var(--g),var(--gh));"></div></div></div>
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Drawdown Risk (crash)</div><div class="rm-val" style="color:var(--red);">High</div></div><div class="rm-track"><div class="rm-fill" style="width:70%;background:linear-gradient(90deg,var(--red),#f87171);animation-delay:.1s"></div></div></div>
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Geographic Diversification</div><div class="rm-val" style="color:var(--teal);">Good (15% intl)</div></div><div class="rm-track"><div class="rm-fill" style="width:65%;background:linear-gradient(90deg,var(--teal),#22d3ee);animation-delay:.2s"></div></div></div>
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Sector Coverage</div><div class="rm-val" style="color:var(--p);">Excellent (via index)</div></div><div class="rm-track"><div class="rm-fill" style="width:95%;background:linear-gradient(90deg,var(--p),var(--ph));animation-delay:.3s"></div></div></div>
+              </div>
+              <div class="lesson-box lb-p" style="margin-top:14px;">
+                <div class="lb-title lbt-p">💡 Key Lesson — Time is Arjun's Biggest Asset</div>
+                <div class="lb-desc">With 25 years ahead, Arjun can afford to watch this portfolio fall 40% in a bear market and simply continue his SIP. History shows that every Indian market crash has been fully recovered within 3–5 years. The higher small cap allocation (20%) is appropriate precisely because of this long horizon. When he turns 40, he should gradually shift to 60/25/15 large/mid/small and reduce international to 10%.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE 2: Mid-career family person -->
+      <div class="ex-card rv d3">
+        <div class="exc-hd exh-g">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.3s ease-in-out infinite .3s;">
+              <!-- Family home visual -->
+              <path d="M16 56 L16 88 L52 88 L52 56 L34 42 Z" fill="rgba(255,255,255,.2)"/>
+              <rect x="22" y="70" width="10" height="18" rx="2" fill="rgba(255,255,255,.3)"/>
+              <rect x="38" y="64" width="10" height="10" rx="2" fill="rgba(255,255,255,.3)"/>
+              <!-- Chimney -->
+              <rect x="42" y="42" width="6" height="10" rx="1" fill="rgba(255,255,255,.25)"/>
+              <!-- Smoke from chimney -->
+              <ellipse cx="45" cy="38" rx="4" ry="5" fill="rgba(255,255,255,.1)"/>
+              <ellipse cx="44" cy="33" rx="3" ry="4" fill="rgba(255,255,255,.07)"/>
+              <!-- Garden/lawn -->
+              <ellipse cx="34" cy="90" rx="26" ry="4" fill="rgba(255,255,255,.15)"/>
+              <!-- Family person character -->
+              <circle cx="68" cy="24" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="68" cy="11" rx="12" ry="5" fill="#15803d"/>
+              <circle cx="62" cy="21" r="2.2" fill="#14532d"/>
+              <circle cx="74" cy="21" r="2.2" fill="#14532d"/>
+              <path d="M62 30 Q68 34 74 30" stroke="#14532d" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="60" y="37" width="16" height="18" rx="5" fill="#16a34a"/>
+              <rect x="48" y="41" width="14" height="4" rx="2" fill="#16a34a" transform="rotate(-15 55 43)"/>
+              <rect x="72" y="40" width="12" height="4" rx="2" fill="#16a34a" transform="rotate(10 78 42)"/>
+              <rect x="62" y="53" width="5" height="9" rx="2.5" fill="#14532d"/>
+              <rect x="70" y="53" width="5" height="9" rx="2.5" fill="#14532d"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Profile 02 · Age 40 · 15-Year Horizon · Balanced Growth</div>
+            <div class="exc-name">Priya — The Mid-Career Parent</div>
+            <div class="exc-tagline">Marketing manager with two school-age children. Building wealth for children's education (10 years) and retirement (20 years). Moderate risk tolerance — cannot afford to watch portfolio halve without losing sleep. Needs balance between growth and stability.</div>
+            <div class="exc-pills"><span class="exc-pill">₹30K monthly SIP</span><span class="exc-pill">15-yr horizon</span><span class="exc-pill">Moderate risk</span><span class="exc-pill">Education + retirement</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-g">Portfolio Allocation</div>
+              <div class="port-alloc">
+                <div class="pa-row"><div class="pa-dot pad-p"></div><div class="pa-info"><div class="pa-name">Large Cap (direct stocks — 6 stocks)</div><div class="pa-detail">HDFC Bank, TCS, Reliance, Asian Paints, Sun Pharma, L&amp;T</div></div><div class="pa-pct" style="color:var(--p);">50%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-g"></div><div class="pa-info"><div class="pa-name">Mid Cap Fund (index)</div><div class="pa-detail">Nifty Midcap 150 ETF — broad mid cap exposure, low cost</div></div><div class="pa-pct" style="color:var(--gbr);">20%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-a"></div><div class="pa-info"><div class="pa-name">Small Cap (2 high-conviction stocks)</div><div class="pa-detail">10% each — high research, long conviction hold</div></div><div class="pa-pct" style="color:var(--ambr);">20%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-t"></div><div class="pa-info"><div class="pa-name">US S&amp;P 500 Index Fund</div><div class="pa-detail">Currency hedge + global diversification · Mirae Asset S&amp;P 500</div></div><div class="pa-pct" style="color:var(--teal);">10%</div></div>
+              </div>
+              <div style="margin-top:12px;padding:10px 12px;background:var(--gpale);border-radius:12px;border:1px solid rgba(22,163,74,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--gbr);line-height:1.6;min-width:0;overflow:hidden;">
+                ✅ <strong>6 large cap stocks cover 5 sectors:</strong> Financials (HDFC Bank), Technology (TCS), Energy+Retail (Reliance), Consumer (Asian Paints), Pharma (Sun Pharma), Industrials (L&amp;T). Auto-diversified at the stock level.
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-g">Sector Coverage Analysis</div>
+              <div class="risk-meter">
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Sector Coverage</div><div class="rm-val" style="color:var(--gbr);">6 sectors</div></div><div class="rm-track"><div class="rm-fill" style="width:85%;background:linear-gradient(90deg,var(--g),var(--gh));"></div></div></div>
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Drawdown in 2020-type crash</div><div class="rm-val" style="color:var(--ambr);">~28%</div></div><div class="rm-track"><div class="rm-fill" style="width:55%;background:linear-gradient(90deg,var(--ambr),var(--amb));animation-delay:.1s"></div></div></div>
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Expected 15-yr CAGR</div><div class="rm-val" style="color:var(--gbr);">13–15%</div></div><div class="rm-track"><div class="rm-fill" style="width:78%;background:linear-gradient(90deg,var(--g),var(--gh));animation-delay:.2s"></div></div></div>
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Geographic Risk</div><div class="rm-val" style="color:var(--teal);">Low (10% intl)</div></div><div class="rm-track"><div class="rm-fill" style="width:35%;background:linear-gradient(90deg,var(--teal),#22d3ee);animation-delay:.3s"></div></div></div>
+              </div>
+              <div class="lesson-box lb-g" style="margin-top:14px;">
+                <div class="lb-title lbt-g">✅ Key Lesson — Use Direct Stocks for Large Caps, Funds for Mid/Small</div>
+                <div class="lb-desc">Priya's portfolio shows a smart hybrid approach: direct stocks for large caps (where research is easy and companies are transparent) + index funds for mid caps (where stock picking is harder) + high-conviction small caps only for 2 stocks she has deeply researched. This is more efficient than using funds for everything — large cap funds charge 1–1.5% expense ratios for basic index exposure that ETFs give at 0.05–0.20%.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE 3: Pre-retiree -->
+      <div class="ex-card rv d4">
+        <div class="exc-hd exh-a">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.5s ease-in-out infinite .6s;">
+              <!-- Factory/business owner visual -->
+              <rect x="6" y="46" width="54" height="42" rx="4" fill="rgba(255,255,255,.18)"/>
+              <rect x="6" y="40" width="54" height="10" rx="3" fill="rgba(255,255,255,.24)"/>
+              <rect x="12" y="54" width="9" height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="27" y="54" width="9" height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="42" y="54" width="9" height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <!-- Dividend/income symbol -->
+              <circle cx="52" cy="76" r="10" fill="rgba(255,255,255,.25)"/>
+              <text x="52" y="80" text-anchor="middle" font-family="sans-serif" font-size="11" fill="rgba(255,255,255,.7)" font-weight="900">₹</text>
+              <!-- Pre-retiree character (older) -->
+              <circle cx="68" cy="24" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="68" cy="11" rx="12" ry="5" fill="#92400e"/>
+              <circle cx="62" cy="21" r="2.2" fill="#78350f"/>
+              <circle cx="74" cy="21" r="2.2" fill="#78350f"/>
+              <path d="M62 30 Q68 34 74 30" stroke="#78350f" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="60" y="37" width="16" height="18" rx="5" fill="#d97706"/>
+              <rect x="48" y="41" width="14" height="4" rx="2" fill="#d97706" transform="rotate(-15 55 43)"/>
+              <rect x="72" y="40" width="12" height="4" rx="2" fill="#d97706" transform="rotate(10 78 42)"/>
+              <rect x="62" y="53" width="5" height="9" rx="2.5" fill="#92400e"/>
+              <rect x="70" y="53" width="5" height="9" rx="2.5" fill="#92400e"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Profile 03 · Age 52 · 8-Year Horizon · Capital Preservation + Growth</div>
+            <div class="exc-name">Ramesh — The Pre-Retiree</div>
+            <div class="exc-tagline">Business owner, 8 years from retirement. Has built substantial wealth. Priority is now protecting what he has built while still growing it to fund 25+ years of retirement. Cannot afford a 50% drawdown at this stage — must shift toward quality, dividend-paying large caps and reduce speculative positions.</div>
+            <div class="exc-pills"><span class="exc-pill">₹2 Cr corpus</span><span class="exc-pill">8-yr to retirement</span><span class="exc-pill">Low-moderate risk</span><span class="exc-pill">Dividend income</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-a">Portfolio Allocation</div>
+              <div class="port-alloc">
+                <div class="pa-row"><div class="pa-dot pad-p"></div><div class="pa-info"><div class="pa-name">Quality Large Caps (dividend payers)</div><div class="pa-detail">ITC, Coal India, ONGC, Infosys, HDFC Bank · 3–6% yield</div></div><div class="pa-pct" style="color:var(--p);">55%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-g"></div><div class="pa-info"><div class="pa-name">Mid Cap (only 3 stocks max)</div><div class="pa-detail">High-quality only — Pidilite, Bajaj Finance, Supreme Inds</div></div><div class="pa-pct" style="color:var(--gbr);">15%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-r"></div><div class="pa-info"><div class="pa-name">Debt / Hybrid Fund</div><div class="pa-detail">Capital protection · SBI Balanced Advantage Fund</div></div><div class="pa-pct" style="color:var(--red);">15%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-a"></div><div class="pa-info"><div class="pa-name">Gold ETF / Sovereign Gold Bond</div><div class="pa-detail">Crisis hedge + long-term inflation hedge</div></div><div class="pa-pct" style="color:var(--ambr);">10%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-t"></div><div class="pa-info"><div class="pa-name">US Index ETF (S&amp;P 500)</div><div class="pa-detail">Currency hedge, dollar-denominated assets</div></div><div class="pa-pct" style="color:var(--teal);">5%</div></div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-a">Risk Management Profile</div>
+              <div class="risk-meter">
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Portfolio Stability</div><div class="rm-val" style="color:var(--gbr);">High</div></div><div class="rm-track"><div class="rm-fill" style="width:85%;background:linear-gradient(90deg,var(--g),var(--gh));"></div></div></div>
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Max Drawdown (estimate)</div><div class="rm-val" style="color:var(--ambr);">~18%</div></div><div class="rm-track"><div class="rm-fill" style="width:35%;background:linear-gradient(90deg,var(--ambr),var(--amb));animation-delay:.1s"></div></div></div>
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Dividend Income (annual)</div><div class="rm-val" style="color:var(--p);">₹3.5–5 L</div></div><div class="rm-track"><div class="rm-fill" style="width:60%;background:linear-gradient(90deg,var(--p),var(--ph));animation-delay:.2s"></div></div></div>
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Growth Potential</div><div class="rm-val" style="color:var(--ambr);">Moderate</div></div><div class="rm-track"><div class="rm-fill" style="width:55%;background:linear-gradient(90deg,var(--ambr),var(--amb));animation-delay:.3s"></div></div></div>
+              </div>
+              <div class="lesson-box lb-a" style="margin-top:14px;">
+                <div class="lb-title lbt-a">⚠️ Key Lesson — Add Non-Equity Assets as Retirement Approaches</div>
+                <div class="lb-desc">Ramesh's portfolio introduces two elements not present in younger portfolios: Debt funds (capital protection, low volatility) and Gold ETFs (crisis hedge — gold typically rises when equities crash). At 52, a 50% market crash would take 4–5 years to recover — potentially disrupting retirement plans. The 30% in debt+gold dramatically limits worst-case outcomes while the 70% equity allocation still ensures inflation-beating growth.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ DEMAT BANNER ═══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Start Building Your Portfolio</div>
+    <div class="dmh">Build a <span class="dmhs">Diversified Portfolio</span> Today</div>
+    <div class="dmsub">The best time to start a diversified portfolio was 10 years ago. The second-best time is today. Begin with a simple 3-fund portfolio — Large Cap Index, Mid Cap Index, and an International ETF — and add complexity as your knowledge grows.</div>
+    <div class="dmfeats">
+      <div class="dmf">Invest in direct mutual funds (0% commission)</div>
+      <div class="dmf">Buy ETFs for lowest-cost index exposure</div>
+      <div class="dmf">Track your sector allocation quarterly</div>
+      <div class="dmf">Open your account from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ═══ EXAMPLES 4 & 5 ═══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">04 — Continued</div>
+    <div class="ex-cards">
+
+      <!-- EXAMPLE 4: Retiree -->
+      <div class="ex-card rv d2">
+        <div class="exc-hd exh-t">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.2s ease-in-out infinite .9s;">
+              <!-- Serene garden / retired life -->
+              <ellipse cx="34" cy="82" rx="28" ry="6" fill="rgba(255,255,255,.15)"/>
+              <!-- Garden bench -->
+              <rect x="16" y="74" width="36" height="5" rx="2" fill="rgba(255,255,255,.3)"/>
+              <rect x="18" y="74" width="4" height="10" rx="1" fill="rgba(255,255,255,.25)"/>
+              <rect x="46" y="74" width="4" height="10" rx="1" fill="rgba(255,255,255,.25)"/>
+              <!-- Tree -->
+              <rect x="60" y="68" width="4" height="20" rx="2" fill="rgba(255,255,255,.25)"/>
+              <ellipse cx="62" cy="62" rx="10" ry="12" fill="rgba(255,255,255,.2)"/>
+              <ellipse cx="60" cy="58" rx="8" ry="10" fill="rgba(255,255,255,.15)"/>
+              <!-- Retired person (reading newspaper) -->
+              <circle cx="66" cy="24" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="66" cy="11" rx="12" ry="5" fill="#0891b2"/>
+              <circle cx="60" cy="21" r="2.2" fill="#0e7490"/>
+              <circle cx="72" cy="21" r="2.2" fill="#0e7490"/>
+              <path d="M60 30 Q66 34 72 30" stroke="#0e7490" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="58" y="37" width="16" height="18" rx="5" fill="#0891b2"/>
+              <rect x="46" y="41" width="14" height="4" rx="2" fill="#0891b2" transform="rotate(-15 53 43)"/>
+              <rect x="60" y="53" width="5" height="9" rx="2.5" fill="#0e7490"/>
+              <rect x="68" y="53" width="5" height="9" rx="2.5" fill="#0e7490"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Profile 04 · Age 62 · Retired · Income + Capital Preservation</div>
+            <div class="exc-name">Suresh — The Retiree</div>
+            <div class="exc-tagline">Recently retired government employee with a ₹50 lakh corpus from PF and savings. Needs this money to last 25+ years. Priority: monthly income to supplement pension, capital preservation, inflation protection. Cannot afford any position that might halve in value — needs to sleep soundly at night.</div>
+            <div class="exc-pills"><span class="exc-pill">₹50L retirement corpus</span><span class="exc-pill">Monthly income need</span><span class="exc-pill">Very low risk</span><span class="exc-pill">25-yr sustainability</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-t">Portfolio Allocation — Income-Focused</div>
+              <div class="port-alloc">
+                <div class="pa-row"><div class="pa-dot pad-r"></div><div class="pa-info"><div class="pa-name">Senior Citizen Savings Scheme (SCSS)</div><div class="pa-detail">8.2% guaranteed · Govt backed · ₹15L max · Quarterly income</div></div><div class="pa-pct" style="color:var(--red);">30%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-a"></div><div class="pa-info"><div class="pa-name">Post Office Monthly Income Scheme</div><div class="pa-detail">7.4% guaranteed monthly payout · Very safe · ₹9L max</div></div><div class="pa-pct" style="color:var(--ambr);">15%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-p"></div><div class="pa-info"><div class="pa-name">Dividend Large Caps (5 stocks)</div><div class="pa-detail">ITC, Coal India, Power Grid, ONGC, Infosys · 4–6% yield</div></div><div class="pa-pct" style="color:var(--p);">25%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-t"></div><div class="pa-info"><div class="pa-name">Balanced Advantage / Hybrid Fund</div><div class="pa-detail">Dynamic equity + debt mix · Capital appreciation with limited downside</div></div><div class="pa-pct" style="color:var(--teal);">20%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-g"></div><div class="pa-info"><div class="pa-name">Gold ETF / Sovereign Gold Bond</div><div class="pa-detail">Inflation + crisis hedge · 2.5% interest on SGB</div></div><div class="pa-pct" style="color:var(--gbr);">10%</div></div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-t">Monthly Income Calculation</div>
+              <div class="risk-meter">
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Monthly income (corpus of ₹50L)</div><div class="rm-val" style="color:var(--gbr);">₹28,000/mo</div></div><div class="rm-track"><div class="rm-fill" style="width:75%;background:linear-gradient(90deg,var(--g),var(--gh));"></div></div></div>
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Portfolio volatility</div><div class="rm-val" style="color:var(--gbr);">Very Low</div></div><div class="rm-track"><div class="rm-fill" style="width:20%;background:linear-gradient(90deg,var(--g),var(--gh));animation-delay:.1s"></div></div></div>
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Max drawdown risk (crash)</div><div class="rm-val" style="color:var(--teal);">~12%</div></div><div class="rm-track"><div class="rm-fill" style="width:24%;background:linear-gradient(90deg,var(--teal),#22d3ee);animation-delay:.2s"></div></div></div>
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Inflation protection (25 yr)</div><div class="rm-val" style="color:var(--ambr);">Moderate</div></div><div class="rm-track"><div class="rm-fill" style="width:60%;background:linear-gradient(90deg,var(--ambr),var(--amb));animation-delay:.3s"></div></div></div>
+              </div>
+              <div class="lesson-box lb-t" style="margin-top:14px;">
+                <div class="lb-title lbt-t">💡 Key Lesson — In Retirement, Sequence of Returns Risk is the Real Enemy</div>
+                <div class="lb-desc">Suresh's portfolio avoids the biggest retirement risk: a market crash in years 1–5 of retirement forcing him to sell equities at a loss to fund expenses. By having 45% in guaranteed-income instruments (SCSS + POM), he can live on those for 4–5 years during any crash without touching equities — allowing his equity portfolio time to recover. This "bucket strategy" is the gold standard for retirement portfolio construction.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE 5: The Thematic Over-Investor (What NOT to do) -->
+      <div class="ex-card rv d3">
+        <div class="exc-hd exh-r">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3s ease-in-out infinite 1.2s;">
+              <!-- Falling chart -->
+              <rect x="8" y="48" width="52" height="40" rx="4" fill="rgba(255,255,255,.18)"/>
+              <!-- Down chart -->
+              <polyline points="14,56 22,58 28,62 36,68 44,74 52,80" stroke="#f87171" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <!-- Warning triangle -->
+              <path d="M60 44 L72 64 L48 64 Z" fill="#fbbf24" opacity=".9"/>
+              <rect x="59.5" y="49" width="3" height="9" rx="1.5" fill="#78350f"/>
+              <circle cx="61" cy="62" r="1.8" fill="#78350f"/>
+              <!-- All eggs in IT basket -->
+              <rect x="14" y="82" width="12" height="4" rx="1" fill="#a5b4fc" opacity=".7"/>
+              <rect x="30" y="82" width="12" height="4" rx="1" fill="#a5b4fc" opacity=".7"/>
+              <!-- Worried investor -->
+              <circle cx="68" cy="24" r="14" fill="rgba(255,255,255,.9)"/>
+              <ellipse cx="68" cy="11" rx="12" ry="5" fill="#991b1b"/>
+              <path d="M61 18 Q65 16 68 18" stroke="#991b1b" stroke-width="1.5" fill="none"/>
+              <path d="M68 18 Q71 16 75 18" stroke="#991b1b" stroke-width="1.5" fill="none"/>
+              <circle cx="62" cy="22" r="2" fill="#7f1d1d"/>
+              <circle cx="74" cy="22" r="2" fill="#7f1d1d"/>
+              <path d="M62 31 Q68 27 74 31" stroke="#7f1d1d" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <rect x="60" y="37" width="16" height="18" rx="5" fill="#dc2626"/>
+              <rect x="60" y="53" width="5" height="9" rx="2.5" fill="#991b1b"/>
+              <rect x="68" y="53" width="5" height="9" rx="2.5" fill="#991b1b"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Profile 05 · Age 34 · What NOT to Do · Classic Concentration Mistake</div>
+            <div class="exc-name">Vikram — The Concentrated Investor (A Cautionary Tale)</div>
+            <div class="exc-tagline">A real pattern seen repeatedly among retail investors: an enthusiastic early investor who put 80% of his portfolio into IT stocks in early 2022 after reading about the tech boom — then watched his ₹8 lakh portfolio fall to ₹5.2 lakh as Nifty IT corrected 35%. A textbook lesson in why sector concentration is dangerous.</div>
+            <div class="exc-pills"><span class="exc-pill">80% in IT stocks</span><span class="exc-pill">−35% in 9 months</span><span class="exc-pill">₹8L → ₹5.2L</span><span class="exc-pill">Panic sold at bottom</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-r">What Vikram's Portfolio Looked Like</div>
+              <div class="port-alloc">
+                <div class="pa-row"><div class="pa-dot pad-r"></div><div class="pa-info"><div class="pa-name">TCS</div><div class="pa-detail">IT services — large cap but same sector risk as all others</div></div><div class="pa-pct" style="color:var(--red);">25%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-r"></div><div class="pa-info"><div class="pa-name">Infosys</div><div class="pa-detail">IT services — different company, identical risk factor</div></div><div class="pa-pct" style="color:var(--red);">20%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-r"></div><div class="pa-info"><div class="pa-name">Wipro</div><div class="pa-detail">IT services — all three move together on US tech spend news</div></div><div class="pa-pct" style="color:var(--red);">15%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-r"></div><div class="pa-info"><div class="pa-name">HCL Technologies</div><div class="pa-detail">IT services — 4th IT stock, 4th time same exposure</div></div><div class="pa-pct" style="color:var(--red);">20%</div></div>
+                <div class="pa-row"><div class="pa-dot pad-a"></div><div class="pa-info"><div class="pa-name">HDFC Bank</div><div class="pa-detail">Only non-IT position — 20% is not enough to diversify</div></div><div class="pa-pct" style="color:var(--ambr);">20%</div></div>
+              </div>
+              <div style="margin-top:12px;padding:10px 12px;background:var(--rpale);border-radius:12px;border:1px solid rgba(220,38,38,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--red);line-height:1.6;min-width:0;overflow:hidden;">
+                🚨 <strong>The illusion of diversification:</strong> Vikram thought he was diversified because he owned 5 different stocks. But 80% of his portfolio responded to exactly one thing: US technology spending. When that fell, everything fell together.
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-r">What Went Wrong — The Numbers</div>
+              <div class="risk-meter">
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Portfolio fall (Jan–Oct 2022)</div><div class="rm-val" style="color:var(--red);">−35%</div></div><div class="rm-track"><div class="rm-fill" style="width:70%;background:linear-gradient(90deg,var(--red),#f87171);"></div></div></div>
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Nifty 50 fall same period</div><div class="rm-val" style="color:var(--ambr);">−12%</div></div><div class="rm-track"><div class="rm-fill" style="width:24%;background:linear-gradient(90deg,var(--ambr),var(--amb));animation-delay:.1s"></div></div></div>
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Diversified port (estimated)</div><div class="rm-val" style="color:var(--gbr);">−8%</div></div><div class="rm-track"><div class="rm-fill" style="width:16%;background:linear-gradient(90deg,var(--g),var(--gh));animation-delay:.2s"></div></div></div>
+                <div class="rm-row"><div class="rm-top"><div class="rm-label">Vikram's actual loss (₹)</div><div class="rm-val" style="color:var(--red);">₹2.8 lakh</div></div><div class="rm-track"><div class="rm-fill" style="width:70%;background:linear-gradient(90deg,var(--red),#f87171);animation-delay:.3s"></div></div></div>
+              </div>
+              <div class="lesson-box lb-r" style="margin-top:14px;">
+                <div class="lb-title lbt-r">🚨 Key Lesson — Owning Multiple Companies in the Same Sector Is NOT Diversification</div>
+                <div class="lb-desc">Vikram's mistake is the most common one made by new Indian investors: confusing the number of stocks with diversification. 4 IT stocks is not a diversified portfolio — it is a concentrated IT bet with extra complexity. A truly diversified ₹8 lakh portfolio would have fallen only ₹64,000 (−8%) in the same period instead of ₹2.8 lakh (−35%). The rule: first achieve sector diversification, then worry about company selection within each sector. If in doubt, use index funds that automatically spread across all sectors.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ NEXT CHAPTER ═══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue building your portfolio framework →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+
+<!-- ═══ DISCLAIMER ═══ -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);overflow:hidden;">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">All portfolio examples and allocations presented here are for educational illustration only and do not constitute personalised investment advice. Every investor's situation — tax status, income, risk tolerance, financial goals, and liabilities — is unique. Past performance of any asset class does not guarantee future returns. All equity investments carry the risk of loss. Please consult a SEBI-registered investment advisor before making any investment decision. Mutual fund investments are subject to market risks; read all scheme related documents carefully before investing.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(el => {
+    if (el.isIntersecting) { el.target.classList.add('on'); io.unobserve(el.target); }
+  });
+}, { threshold: 0.04, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+document.addEventListener('touchstart', () => {}, { passive: true });
+document.addEventListener('touchmove',  () => {}, { passive: true });
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.rv').forEach(el => el.classList.add('on'));
+}
+</script>
+</body>
+</html>

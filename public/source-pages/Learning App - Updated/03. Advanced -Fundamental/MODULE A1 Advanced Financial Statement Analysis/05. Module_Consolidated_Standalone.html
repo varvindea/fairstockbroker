@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Consolidated vs Standalone">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Consolidated vs Standalone – Subsidiary Risks · Advanced Financial Statement Analysis · FA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes pulse{0%,100%{opacity:.8}50%{opacity:1}}
+
+/* ── LAYOUT ── */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(220,38,38,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(26px,6.5vw,82px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:14px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(12px,2.8vw,36px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:920px;}
+.hsi{padding:clamp(10px,1.8vw,20px) clamp(8px,1.8vw,16px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:76px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(9px,1.3vw,13px);font-weight:900;letter-spacing:-.3px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(7px,.85vw,9px);font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+
+/* ── KLO BANNER ── */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.09);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+
+/* ── CONCEPT CARDS ── */
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,22px);margin-bottom:36px;}
+.concept-card{border-radius:18px;padding:clamp(16px,2.5vw,24px);border:1.5px solid;transition:transform .2s,box-shadow .2s;}
+.concept-card:hover{transform:translateY(-3px);box-shadow:var(--shp);}
+.cc-p{border-color:rgba(109,40,217,.22);background:linear-gradient(158deg,var(--pxs),#fdfcff);}
+.cc-g{border-color:rgba(22,163,74,.22);background:linear-gradient(158deg,var(--gpale),#f9fff9);}
+.cc-r{border-color:rgba(220,38,38,.2);background:linear-gradient(158deg,var(--rpale),#fff8f8);}
+.cc-a{border-color:rgba(217,119,6,.2);background:linear-gradient(158deg,var(--apale),#fffcf0);}
+.cc-ico{font-size:clamp(26px,3.5vw,34px);margin-bottom:10px;animation:floatB 4s ease-in-out infinite;}
+.cc-name{font-size:clamp(14px,1.8vw,17px);font-weight:900;color:var(--tx);margin-bottom:5px;line-height:1.2;}
+.cc-badge{display:inline-flex;padding:3px 10px;border-radius:7px;font-size:10px;font-weight:800;margin-bottom:8px;}
+.cbp{background:rgba(109,40,217,.1);color:var(--p);}
+.cbg{background:rgba(22,163,74,.1);color:var(--gbr);}
+.cbr{background:rgba(220,38,38,.1);color:var(--red);}
+.cba{background:rgba(217,119,6,.1);color:var(--ambr);}
+.cc-body{font-size:clamp(12px,1.3vw,13.5px);color:var(--ts);line-height:1.62;}
+
+/* ── STRUCTURE VISUAL (tree) ── */
+.struct-wrap{border-radius:20px;overflow:hidden;border:2px solid rgba(109,40,217,.22);box-shadow:var(--shp);margin-bottom:36px;}
+.struct-head{background:linear-gradient(135deg,var(--pxs),var(--pxl));padding:clamp(14px,2vw,22px) clamp(16px,2.5vw,26px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.struct-icon{width:52px;height:52px;min-width:52px;border-radius:14px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;box-shadow:0 5px 18px rgba(109,40,217,.28);animation:floatB 4s ease-in-out infinite;}
+.struct-meta{flex:1;min-width:0;}
+.struct-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:4px;}
+.struct-title{font-size:clamp(16px,2.2vw,22px);font-weight:900;color:var(--tx);line-height:1.1;margin-bottom:4px;}
+.struct-sub{font-size:clamp(12px,1.4vw,13.5px);color:var(--ts);line-height:1.55;}
+.struct-body{padding:clamp(14px,2.5vw,26px);background:var(--wh);}
+
+/* ── INFOGRAPHIC ── */
+.infographic-svg{width:100%;max-width:680px;margin:0 auto;animation:floatB 4.5s ease-in-out infinite;}
+.infographic-cap{font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;max-width:560px;margin:8px auto 0;}
+
+/* ── COMPARISON TABLE ── */
+.comp-table{width:100%;border-collapse:collapse;font-size:clamp(11.5px,1.3vw,13px);margin-bottom:20px;}
+.comp-table thead th{background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(109,40,217,.03));padding:9px 14px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:left;}
+.comp-table td{padding:9px 14px;border-bottom:1px solid rgba(109,40,217,.05);color:var(--ts);line-height:1.45;vertical-align:top;}
+.comp-table td:first-child{font-weight:700;color:var(--tx);}
+.comp-table tr:last-child td{border-bottom:none;}
+.comp-table tr:nth-child(even) td{background:rgba(109,40,217,.02);}
+
+/* ── RISK CARDS ── */
+.risk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,18px);margin-bottom:36px;}
+.risk-card{border-radius:16px;padding:clamp(14px,2.5vw,20px);border:1.5px solid;transition:transform .2s;}
+.risk-card:hover{transform:translateY(-2px);box-shadow:var(--shp);}
+.rk-r{border-color:rgba(220,38,38,.22);background:linear-gradient(158deg,var(--rpale),#fff8f8);}
+.rk-a{border-color:rgba(217,119,6,.2);background:linear-gradient(158deg,var(--apale),#fffcf0);}
+.rk-p{border-color:rgba(109,40,217,.2);background:linear-gradient(158deg,var(--pxs),#fdfcff);}
+.rk-ico{font-size:clamp(22px,3vw,28px);margin-bottom:8px;animation:floatB 4s ease-in-out infinite;}
+.rk-name{font-size:clamp(12px,1.5vw,14px);font-weight:900;color:var(--tx);margin-bottom:4px;}
+.rk-badge{display:inline-flex;padding:3px 9px;border-radius:7px;font-size:10px;font-weight:800;margin-bottom:8px;}
+.rbr{background:rgba(220,38,38,.1);color:var(--red);}
+.rba{background:rgba(217,119,6,.1);color:var(--ambr);}
+.rbp{background:rgba(109,40,217,.1);color:var(--p);}
+.rk-body{font-size:clamp(11px,1.2vw,12.5px);color:var(--ts);line-height:1.58;}
+
+/* ── SCREENER MOCK ── */
+.screener-mock{background:var(--wh);border:2px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);margin-bottom:36px;}
+.sm-bar{background:linear-gradient(135deg,#f0f0f0,#e8e8e8);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bd);}
+.sm-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.sm-url{flex:1;background:var(--wh);border:1px solid var(--bd);border-radius:8px;padding:5px 12px;font-size:10.5px;color:var(--tl);font-family:monospace;}
+.sm-body{padding:clamp(14px,2.5vw,22px);}
+.sm-hr{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--bd);flex-wrap:wrap;}
+.sm-tabs{display:flex;gap:2px;margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px;}
+.sm-tab{padding:6px 14px;border-radius:8px;font-size:11px;font-weight:700;white-space:nowrap;border:1px solid var(--bd);}
+.sm-tab.active{background:var(--p);color:#fff;border-color:var(--p);}
+.sm-tab:not(.active){background:var(--sf);color:var(--ts);}
+.sm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,12px);margin-bottom:14px;}
+.sm-m{background:var(--sf);border-radius:10px;padding:10px 12px;border:1px solid var(--bd);}
+.smm-l{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--tl);margin-bottom:4px;}
+.smm-v{font-size:clamp(13px,1.8vw,16px);font-weight:900;color:var(--tx);}
+.smm-s{font-size:9px;color:var(--tl);margin-top:2px;}
+.sm-alerts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.sma{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;}
+.sma-g{background:var(--gpale);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.sma-r{background:var(--rpale);color:var(--red);border:1px solid rgba(220,38,38,.2);}
+.sma-a{background:var(--apale);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.sm-cap{font-size:10.5px;color:var(--tl);text-align:center;margin-top:12px;font-style:italic;}
+
+/* ── EXAMPLE BLOCKS ── */
+.ex-block{border-radius:20px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);margin-bottom:clamp(22px,3.5vw,30px);}
+.eb-head{display:flex;align-items:center;justify-content:space-between;padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,24px);flex-wrap:wrap;gap:10px;}
+.ebh-g{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.ebh-r{background:linear-gradient(135deg,var(--rpale),#fff5f5);}
+.ebh-a{background:linear-gradient(135deg,var(--apale),#fffdf5);}
+.ebh-p{background:linear-gradient(135deg,var(--pxs),var(--pxl));}
+.eb-co{display:flex;align-items:center;gap:12px;}
+.eb-logo{width:46px;height:46px;min-width:46px;border-radius:11px;font-size:21px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.eb-name{font-size:clamp(13px,1.8vw,17px);font-weight:900;color:var(--tx);line-height:1.2;}
+.eb-sub{font-size:10.5px;color:var(--tl);margin-top:2px;}
+.eb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.ebb{padding:3px 9px;border-radius:100px;font-size:10px;font-weight:700;}
+.ebb-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.ebb-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.ebb-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.ebb-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.eb-body{padding:clamp(14px,2.5vw,22px) clamp(14px,2.5vw,24px);}
+.eb-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,14px);margin-bottom:14px;}
+.em-box{background:var(--sf);border-radius:12px;padding:clamp(9px,1.5vw,14px);border:1px solid var(--bd);}
+.em-l{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tl);margin-bottom:4px;}
+.em-v{font-size:clamp(13px,1.9vw,18px);font-weight:900;color:var(--tx);line-height:1.1;}
+.em-s{font-size:9px;color:var(--tl);margin-top:2px;}
+.sub-pill{display:inline-flex;padding:4px 12px;border-radius:8px;font-size:12px;font-weight:900;}
+.spp-g{background:rgba(22,163,74,.12);color:var(--gbr);}
+.spp-r{background:rgba(220,38,38,.1);color:var(--red);}
+.spp-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.spp-p{background:rgba(109,40,217,.1);color:var(--p);}
+.eb-flags{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.erf{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border-radius:10px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.48;}
+.erf-good{background:rgba(22,163,74,.05);border-left:3px solid var(--gbr);}
+.erf-bad{background:rgba(220,38,38,.05);border-left:3px solid var(--red);}
+.erf-amb{background:rgba(217,119,6,.05);border-left:3px solid var(--amb);}
+.erf-ico{font-size:14px;flex-shrink:0;margin-top:1px;}
+.eb-insight{padding:10px 14px;font-size:11.5px;color:var(--ts);line-height:1.55;border-top:1px solid var(--bd);}
+.ei-g{background:rgba(22,163,74,.04);border-left:3px solid var(--gbr);}
+.ei-r{background:rgba(220,38,38,.04);border-left:3px solid var(--red);}
+.ei-a{background:rgba(217,119,6,.04);border-left:3px solid var(--amb);}
+.ei-p{background:rgba(109,40,217,.04);border-left:3px solid var(--p);}
+
+/* ── QUICK TRICKS ── */
+.trick-card{border-radius:18px;overflow:hidden;border:2px solid;box-shadow:var(--shc);margin-bottom:clamp(14px,2vw,18px);}
+.trick-head{padding:clamp(13px,2vw,18px) clamp(15px,2.5vw,22px);display:flex;align-items:center;gap:13px;flex-wrap:wrap;}
+.trick-icon{width:44px;height:44px;min-width:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;box-shadow:0 4px 14px rgba(0,0,0,.14);}
+.trick-body-inner{flex:1;min-width:0;}
+.trick-number{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;}
+.trick-name{font-size:clamp(14px,2vw,17px);font-weight:900;color:var(--tx);}
+.trick-time{font-size:10px;font-weight:800;padding:3px 11px;border-radius:7px;white-space:nowrap;}
+.trick-content{padding:clamp(13px,2vw,20px) clamp(15px,2.5vw,22px);background:var(--wh);}
+.trick-desc{font-size:clamp(12.5px,1.45vw,14px);color:var(--ts);line-height:1.7;margin-bottom:14px;}
+.trick-step{display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--ts);line-height:1.5;margin-bottom:7px;}
+.trick-dot{width:22px;height:22px;min-width:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:900;flex-shrink:0;margin-top:1px;}
+.tdp{background:linear-gradient(135deg,var(--p),var(--ph));}
+.tdg{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.tda{background:linear-gradient(135deg,var(--ambr),var(--amb));}
+.tdr{background:linear-gradient(135deg,var(--red),#f87171);}
+
+/* ── SECTION DIVIDER ── */
+.section-divider{display:flex;align-items:center;gap:16px;margin:clamp(28px,4vw,44px) 0;}
+.sd-line{flex:1;height:1px;background:var(--bd);}
+.sd-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tl);white-space:nowrap;}
+
+/* ── CAVEAT ── */
+.caveat-box{margin-top:32px;background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:16px;}
+.caveat-icon{width:44px;height:44px;min-width:44px;border-radius:13px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(109,40,217,.28);}
+.caveat-body{flex:1;min-width:0;}
+.caveat-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.caveat-title{font-size:clamp(13px,1.5vw,15px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.caveat-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+
+/* ── DEMAT BANNER ── */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* ── NEXT CHAPTER ── */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-banner::after{content:'';position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+
+/* ═══ RESPONSIVE — 11 BREAKPOINTS ═══ */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.concept-grid{grid-template-columns:1fr 1fr;}.risk-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){
+  .concept-grid{grid-template-columns:1fr 1fr;}
+  .risk-grid{grid-template-columns:1fr 1fr;}
+  .eb-metrics{grid-template-columns:repeat(2,1fr);}
+  .sm-grid{grid-template-columns:repeat(2,1fr);}
+  .infographic-svg{max-width:460px;}
+}
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .hst{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .concept-grid{grid-template-columns:1fr 1fr;}
+  .concept-card:hover{transform:none;}
+  .risk-grid{grid-template-columns:1fr 1fr;}
+  .risk-card:hover{transform:none;}
+  .eb-head{flex-direction:column;align-items:flex-start;}
+  .eb-badges{margin-top:4px;}
+  .caveat-box{flex-direction:column;gap:12px;}
+  .caveat-icon{width:40px;height:40px;min-width:40px;font-size:20px;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;}
+  .dmfeats{gap:10px 20px;}
+  svg{overflow:visible;max-width:100%;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .struct-head{flex-wrap:wrap;gap:12px;}
+  .struct-icon{animation:none;}
+  .cc-ico{animation:none;}
+  .rk-ico{animation:none;}
+  .klo-icon{animation:none;}
+  .trick-head{flex-wrap:wrap;gap:10px;}
+}
+@media(max-width:640px){
+  .concept-grid{grid-template-columns:1fr;}
+  .risk-grid{grid-template-columns:1fr;}
+  .eb-metrics{grid-template-columns:1fr 1fr;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .infographic-svg{max-width:100%;}
+}
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.2px;}.hdesc{font-size:13px;}.hsub{font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .h2{letter-spacing:-1px;}.lead{font-size:13.5px;}
+  .concept-grid{grid-template-columns:1fr;}
+  .risk-grid{grid-template-columns:1fr;}
+  .eb-metrics{grid-template-columns:1fr 1fr;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+}
+@media(max-width:360px){
+  .w{padding:26px 12px;}.hh1{font-size:clamp(22px,8.5vw,36px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:1px solid var(--bd) !important;}
+  .hsi:last-child{border-bottom:none !important;}
+  .kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}.nxt-btn{font-size:12px;padding:10px 14px;}
+}
+/* TOUCH */
+@media(hover:none) and (pointer:coarse){
+  .concept-card:hover,.risk-card:hover,.ex-block:hover,.trick-card:hover{transform:none !important;box-shadow:var(--shc) !important;}
+  .concept-card:active,.risk-card:active{transform:scale(.99);transition:transform .08s;}
+  .dmbtn:active{transform:scale(.97);}.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn,.concept-card,.risk-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,.cc-name,.rk-name{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.lead,.caveat-desc,.rk-body,.erf,.eb-insight,.trick-desc{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+}
+/* iOS */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.hsv,.hsv.g,.h2 .hp,.h2 .hg{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn,.concept-card,.risk-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .sm-tabs{-webkit-overflow-scrolling:touch;}
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+}
+/* ANDROID HiDPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .concept-card,.risk-card,.ex-block,.caveat-box,.screener-mock,.struct-wrap{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .infographic-svg,.klo-icon{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}.infographic-svg,.klo-icon,.cc-ico,.rk-ico,.struct-icon{animation:none !important;}
+}
+/* PRINT */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}.rv{opacity:1;transform:none;}
+  body{color:#000;}.w{padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="vbadge">Advanced Financial Statement Analysis · FA</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Consolidated vs Standalone · Subsidiary Risks · Minority Interest</div>
+  <h1 class="hh1">
+    <span class="line1">What the Parent</span>
+    <span class="line2">Hides in its Children</span>
+    <span class="line3">Subsidiary Structures, Minority Interest &amp; Hidden Financial Risks</span>
+  </h1>
+  <div class="hsub">Consolidated Financials · Standalone Financials · Subsidiary Risk · Minority Interest · NCI · Related Party · Ind AS 110</div>
+  <p class="hdesc">A company's consolidated financial statements can look perfectly healthy while its subsidiaries are haemorrhaging cash, piling up debt, or being used to hide transactions the parent company doesn't want you to see. Learning to read both statements — and understand the gap between them — is one of the most powerful forensic skills in investing.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv">Consolidated</div><div class="hsl">Parent + All Subs</div></div>
+    <div class="hsi"><div class="hsv g">Standalone</div><div class="hsl">Parent Only</div></div>
+    <div class="hsi"><div class="hsv">Minority Interest</div><div class="hsl">NCI Impact</div></div>
+    <div class="hsi"><div class="hsv g">5 Good</div><div class="hsl">Transparent</div></div>
+    <div class="hsi"><div class="hsv" style="background:linear-gradient(135deg,#dc2626,#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">5 Bad</div><div class="hsl">Hidden Risks</div></div>
+  </div>
+</section>
+
+
+<!-- ══ 01 — KLO ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Why <span class="hp">Two Financial Statements</span> Tell Two Very Different Stories</h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">🔍</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">Every listed Indian company files two sets of financial statements — Standalone (the parent company alone) and Consolidated (the parent plus all its subsidiaries, associates, and joint ventures). The gap between these two statements is where some of the most important — and dangerous — information in investing lives.</div>
+        <div class="klo-desc">Imagine a parent company — call it ABC Ltd. Its standalone financial statements show ₹800 crore profit, zero debt, strong cash flows. Management is rewarded, the stock rises. But ABC Ltd has 12 subsidiaries. Three of them are losing money — ₹200 crore per year in aggregate. Five have taken bank loans that don't appear on ABC's standalone balance sheet. The consolidated financial statements show all of this — if you know where to look. But many investors read only the standalone numbers from the press release and miss the full picture.<br><br>The relationship between parent and subsidiary is governed by <strong>Ind AS 110 (Consolidated Financial Statements)</strong>, <strong>Ind AS 111 (Joint Arrangements)</strong>, and <strong>Ind AS 28 (Investments in Associates)</strong>. These standards determine which entities get fully consolidated (subsidiaries where parent has control), which get equity-accounted (associates with significant influence), and which remain at cost (minority holdings).<br><br>Three critical concepts to master: (1) <strong>Minority Interest / Non-Controlling Interest (NCI)</strong> — when the parent owns less than 100% of a subsidiary, the minority shareholders' share of profits and net assets shows up separately in consolidated financials; (2) <strong>Standalone vs Consolidated divergence</strong> — large gaps between the two reveal hidden subsidiary problems; (3) <strong>Guarantee exposure</strong> — a parent may guarantee a subsidiary's loans, creating contingent liabilities that don't appear on the balance sheet until the subsidiary defaults.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-p">📊 Ind AS 110: Consolidated accounts</span>
+          <span class="kpill kpill-g">🏢 Standalone: Parent company only</span>
+          <span class="kpill kpill-r">⚠️ Minority interest = NCI impact</span>
+          <span class="kpill kpill-a">💰 Contingent liability = loan guarantees</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 02 — STRUCTURE + INFOGRAPHIC ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — The Corporate Structure Explained Simply</div>
+    <h2 class="h2 rv d2">Parent, Subsidiaries &amp; <span class="hp">What Each Statement Shows</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Think of a parent company as a family home and each subsidiary as a separate house the family owns. The standalone accounts show only the family home's finances. The consolidated accounts show the finances of every house the family owns — including the ones that are run-down, mortgaged, or rented to questionable tenants.</p>
+
+    <!-- INFOGRAPHIC SVG -->
+    <div class="rv d3" style="margin-bottom:36px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+      <svg class="infographic-svg" viewBox="0 0 680 490" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="680" height="490" rx="20" fill="#f5f3ff"/>
+        <rect x="14" y="10" width="652" height="34" rx="11" fill="#6d28d9"/>
+        <text x="340" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="white">Consolidated vs Standalone — What Each Statement Shows</text>
+
+        <!-- PARENT COMPANY (top centre) -->
+        <rect x="240" y="54" width="200" height="80" rx="12" fill="#6d28d9" opacity=".92"/>
+        <text x="340" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">🏢 ABC Ltd (Parent)</text>
+        <text x="340" y="94" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.8)">STANDALONE P&amp;L</text>
+        <text x="340" y="107" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="700" fill="#4ade80">Revenue ₹2,000 Cr · PAT ₹800 Cr</text>
+        <text x="340" y="120" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.65)">Parent entity only · No sub debt shown</text>
+
+        <!-- Manager character on top -->
+        <circle cx="340" cy="44" r="14" fill="#ede9fe"/>
+        <circle cx="335" cy="40" r="2.5" fill="#4c1d95"/>
+        <circle cx="345" cy="40" r="2.5" fill="#4c1d95"/>
+        <path d="M335 48 Q340 52 345 48" stroke="#4c1d95" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <!-- Briefcase -->
+        <rect x="356" y="38" width="12" height="9" rx="2" fill="#4c1d95"/>
+        <path d="M358 38 Q358 35 362 35 Q366 35 366 38" stroke="#4c1d95" stroke-width="1.5" fill="none"/>
+
+        <!-- Lines to subs -->
+        <line x1="290" y1="134" x2="130" y2="200" stroke="#6d28d9" stroke-width="1.8" stroke-dasharray="6,3"/>
+        <line x1="340" y1="134" x2="340" y2="200" stroke="#6d28d9" stroke-width="1.8" stroke-dasharray="6,3"/>
+        <line x1="390" y1="134" x2="550" y2="200" stroke="#6d28d9" stroke-width="1.8" stroke-dasharray="6,3"/>
+
+        <!-- SUB A: Profitable (left) -->
+        <rect x="30" y="200" width="200" height="90" rx="10" fill="#15803d" opacity=".88"/>
+        <text x="130" y="220" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="white">✅ Sub A — Consumer</text>
+        <text x="130" y="236" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">100% owned by ABC Ltd</text>
+        <rect x="42" y="244" width="176" height="18" rx="6" fill="rgba(255,255,255,.15)"/>
+        <text x="130" y="257" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="white">Revenue ₹1,200 Cr · PAT ₹180 Cr</text>
+        <text x="130" y="276" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(255,255,255,.7)">Profitable · adds to consolidated</text>
+
+        <!-- SUB B: Minority interest (centre) -->
+        <rect x="240" y="200" width="200" height="90" rx="10" fill="#d97706" opacity=".88"/>
+        <text x="340" y="220" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="white">⚠️ Sub B — Tech (65% owned)</text>
+        <text x="340" y="236" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">35% minority interest (NCI)</text>
+        <rect x="252" y="244" width="176" height="18" rx="6" fill="rgba(255,255,255,.15)"/>
+        <text x="340" y="257" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="white">Revenue ₹600 Cr · Loss ₹80 Cr</text>
+        <text x="340" y="276" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#fde68a">NCI absorbs 35% of loss · fully consolidated</text>
+
+        <!-- SUB C: Debt hidden (right) -->
+        <rect x="450" y="200" width="200" height="90" rx="10" fill="#dc2626" opacity=".88"/>
+        <text x="550" y="220" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="white">🚨 Sub C — Infra (100%)</text>
+        <text x="550" y="236" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">Not in standalone — fully in consolidated</text>
+        <rect x="462" y="244" width="176" height="18" rx="6" fill="rgba(255,255,255,.15)"/>
+        <text x="550" y="257" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="white">Debt ₹1,500 Cr · Loss ₹220 Cr</text>
+        <text x="550" y="276" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#fca5a5">Debt hidden from standalone view!</text>
+
+        <!-- CONSOLIDATED BOX (bottom) -->
+        <rect x="50" y="320" width="580" height="76" rx="13" fill="#4c1d95" opacity=".9"/>
+        <text x="340" y="344" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">📊 CONSOLIDATED STATEMENT — What You Actually Need to Read</text>
+        <text x="340" y="362" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(255,255,255,.85)">Revenue ₹3,800 Cr · PAT ₹480 Cr (after NCI) · Debt ₹1,500 Cr · Minority Interest ₹28 Cr on balance sheet</text>
+        <text x="340" y="379" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#4ade80" font-weight="700">Standalone PAT ₹800 Cr vs Consolidated PAT ₹480 Cr — gap of ₹320 Cr = subsidiary losses!</text>
+
+        <!-- Lines to consolidated -->
+        <line x1="130" y1="290" x2="200" y2="320" stroke="#15803d" stroke-width="1.5"/>
+        <line x1="340" y1="290" x2="340" y2="320" stroke="#d97706" stroke-width="1.5"/>
+        <line x1="550" y1="290" x2="480" y2="320" stroke="#dc2626" stroke-width="1.5"/>
+
+        <!-- Standalone vs Consolidated highlight -->
+        <rect x="50" y="406" width="284" height="72" rx="12" fill="#6d28d9" opacity=".08" stroke="#6d28d9" stroke-width="1.5"/>
+        <text x="192" y="426" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#4c1d95">📋 Standalone Only (Parent)</text>
+        <text x="192" y="442" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Revenue: ₹2,000 Cr · PAT: ₹800 Cr</text>
+        <text x="192" y="456" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Debt: ₹0 · Sub losses: Invisible</text>
+        <text x="192" y="469" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#dc2626">⚠️ Misleadingly healthy picture</text>
+
+        <rect x="346" y="406" width="284" height="72" rx="12" fill="#15803d" opacity=".08" stroke="#15803d" stroke-width="1.5"/>
+        <text x="488" y="426" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#15803d">📊 Consolidated (Full Picture)</text>
+        <text x="488" y="442" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Revenue: ₹3,800 Cr · PAT: ₹480 Cr</text>
+        <text x="488" y="456" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Debt: ₹1,500 Cr · NCI: ₹28 Cr</text>
+        <text x="488" y="469" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#15803d">✅ Real risk picture — read this first</text>
+      </svg>
+      <p class="infographic-cap">The parent ABC Ltd looks profitable in standalone (₹800 Cr PAT, zero debt). But the consolidated statement reveals Sub C is carrying ₹1,500 Cr of debt and losing ₹220 Cr per year — invisible in standalone. Sub B's losses are partially absorbed by minority shareholders (NCI). Consolidated PAT of ₹480 Cr vs standalone PAT of ₹800 Cr — a ₹320 Cr gap that only appears when you compare both statements.</p>
+    </div>
+
+    <!-- STANDALONE vs CONSOLIDATED COMPARISON TABLE -->
+    <div class="tag rv d4" style="margin-bottom:12px;">Standalone vs Consolidated — Key Differences Explained</div>
+    <div class="struct-wrap rv d4">
+      <div class="struct-head">
+        <div class="struct-icon">📊</div>
+        <div class="struct-meta">
+          <div class="struct-label">Core Distinction — Know This Before Reading Any Financial Statement</div>
+          <div class="struct-title">What Each Statement Includes — and What It Hides</div>
+          <div class="struct-sub">Both statements are filed by every listed Indian company. Both are available free on Screener.in and BSE. But they tell fundamentally different stories — and most investors read only one.</div>
+        </div>
+      </div>
+      <div class="struct-body">
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Standalone Statement</th>
+              <th>Consolidated Statement</th>
+              <th>Why It Matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>What's included</td>
+              <td>Parent company only — no subsidiaries</td>
+              <td>Parent + all subsidiaries + associates (equity method)</td>
+              <td>Subsidiary losses, debt, and cash only appear in consolidated</td>
+            </tr>
+            <tr>
+              <td>Revenue</td>
+              <td>Only revenue earned by parent entity</td>
+              <td>All subsidiary revenues added; inter-company eliminated</td>
+              <td>Consolidated revenue can be 2–5× standalone for conglomerates</td>
+            </tr>
+            <tr>
+              <td>Profit (PAT)</td>
+              <td>Parent's own earnings — may include dividend income from subs</td>
+              <td>Group-level profit after minority interest (NCI)</td>
+              <td>Gap between two = subsidiary performance quality indicator</td>
+            </tr>
+            <tr>
+              <td>Debt / Borrowings</td>
+              <td>Only parent entity's loans</td>
+              <td>All subsidiary borrowings included</td>
+              <td>Subsidiary debt invisible in standalone — biggest risk blind spot</td>
+            </tr>
+            <tr>
+              <td>Minority Interest (NCI)</td>
+              <td>Not applicable — doesn't exist in standalone</td>
+              <td>Shown separately in equity and P&amp;L</td>
+              <td>Tells you how much profit "belongs" to external minority shareholders</td>
+            </tr>
+            <tr>
+              <td>Dividend income</td>
+              <td>Includes dividends received from subsidiaries (inflates parent income)</td>
+              <td>Inter-company dividends eliminated on consolidation</td>
+              <td>Standalone profit can be inflated by upstream dividends from subs</td>
+            </tr>
+            <tr>
+              <td>Loan guarantees</td>
+              <td>May appear in contingent liabilities note</td>
+              <td>Subsidiary's actual loan appears on balance sheet</td>
+              <td>If subsidiary defaults, contingent liability becomes real liability</td>
+            </tr>
+            <tr>
+              <td>Where to read</td>
+              <td>Screener.in → switch toggle to "Standalone"</td>
+              <td>Screener.in → switch toggle to "Consolidated"</td>
+              <td>Always compare both — the gap is the story</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+
+        <!-- MINORITY INTEREST EXPLAINED -->
+        <div style="background:linear-gradient(135deg,var(--apale),#fffcf0);border:1.5px solid rgba(217,119,6,.22);border-radius:14px;padding:clamp(14px,2vw,20px);margin-top:16px;">
+          <div style="font-size:12px;font-weight:800;color:var(--ambr);letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:8px;">⚠️ Minority Interest / Non-Controlling Interest (NCI) — Explained in Plain Language</div>
+          <div style="font-size:clamp(12.5px,1.4vw,14px);color:var(--ts);line-height:1.7;margin-bottom:14px;">When ABC Ltd owns 65% of Sub B, the other 35% belongs to "minority shareholders" — people who own the sub directly but not through ABC Ltd. When ABC consolidates Sub B into its accounts, it must include 100% of Sub B's assets, liabilities, and revenue (because ABC controls Sub B). But in the P&amp;L, it must separately show the 35% of profit (or loss) that belongs to minority shareholders.<br><br>This 35% is called <strong>Minority Interest</strong> (old term) or <strong>Non-Controlling Interest/NCI</strong> (Ind AS terminology). It shows up in two places:<br>• <strong>In the Consolidated P&amp;L:</strong> "Profit attributable to non-controlling interests" — subtracted to get profit "attributable to owners of the parent"<br>• <strong>In the Consolidated Balance Sheet:</strong> As a separate line in equity — "Non-controlling interests" — representing the minority's share of the subsidiary's net assets</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(8px,1.5vw,14px);">
+            <div style="background:rgba(255,255,255,.75);border-radius:10px;padding:10px 12px;border:1px solid var(--bd);">
+              <div style="font-size:10px;font-weight:700;color:var(--ambr);margin-bottom:4px;">NCI in P&L</div>
+              <div style="font-size:12px;color:var(--ts);">Sub B loses ₹80 Cr. 35% = ₹28 Cr absorbed by NCI. ABC's share = ₹52 Cr loss. Consolidated PAT reduced by ₹52 Cr (not full ₹80 Cr).</div>
+            </div>
+            <div style="background:rgba(255,255,255,.75);border-radius:10px;padding:10px 12px;border:1px solid var(--bd);">
+              <div style="font-size:10px;font-weight:700;color:var(--ambr);margin-bottom:4px;">NCI in Balance Sheet</div>
+              <div style="font-size:12px;color:var(--ts);">Sub B has net assets ₹500 Cr. NCI = 35% × ₹500 Cr = ₹175 Cr shown in consolidated equity. This is "minority's skin in the game."</div>
+            </div>
+            <div style="background:rgba(255,255,255,.75);border-radius:10px;padding:10px 12px;border:1px solid var(--bd);">
+              <div style="font-size:10px;font-weight:700;color:var(--ambr);margin-bottom:4px;">Why NCI Matters</div>
+              <div style="font-size:12px;color:var(--ts);">Rising NCI as % of consolidated equity = parent ownership diluting in subs. Shrinking NCI = parent buying out minorities (or sub losing value).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOUR CONCEPT CARDS -->
+    <div class="tag rv d5" style="margin-bottom:12px;">Four Subsidiary Risk Structures Every Investor Must Recognise</div>
+    <div class="concept-grid rv d5">
+      <div class="concept-card cc-r">
+        <div class="cc-ico">🚨</div>
+        <div class="cc-name">Subsidiary Debt Trap</div>
+        <div class="cc-badge cbr">Biggest Risk</div>
+        <div class="cc-body">The parent borrows nothing — but its subsidiary has ₹5,000 crore of loans. These don't appear on the standalone balance sheet. When the subsidiary struggles to repay, the parent often provides "letters of comfort," upstream loans, or eventually guarantees — transforming a subsidiary problem into a parent crisis. Screener: compare standalone debt to consolidated debt. Any large gap = subsidiary debt exposure.</div>
+      </div>
+      <div class="concept-card cc-a">
+        <div class="cc-ico">⚠️</div>
+        <div class="cc-name">Minority Interest Erosion</div>
+        <div class="cc-badge cba">NCI Warning</div>
+        <div class="cc-body">When a subsidiary with significant minority shareholders continuously loses money, the minority interest (NCI) on the consolidated balance sheet shrinks — because losses are being absorbed by NCI. Eventually NCI hits zero; after that, all further losses fall entirely on the parent. Check: is NCI declining each year relative to the subsidiary's revenue? Declining NCI = minority shareholders being eroded by losses.</div>
+      </div>
+      <div class="concept-card cc-p">
+        <div class="cc-ico">🔄</div>
+        <div class="cc-name">Related Party Circular Revenue</div>
+        <div class="cc-badge cbp">Revenue Inflation</div>
+        <div class="cc-body">Parent company "buys" services from a subsidiary at inflated prices — or sells goods to a subsidiary at below-market prices. These transactions inflate the parent's standalone revenue or the subsidiary's reported revenue, but at consolidation, inter-company transactions are eliminated. Large related-party revenues that disappear in consolidation reveal circular revenue structures. Check Notes → Related Party Transactions annually.</div>
+      </div>
+      <div class="concept-card cc-g">
+        <div class="cc-ico">💎</div>
+        <div class="cc-name">Hidden Gem Subsidiary</div>
+        <div class="cc-badge cbg">Positive Signal</div>
+        <div class="cc-body">Sometimes a subsidiary that is growing rapidly and highly profitable is being consolidated but not separately highlighted by management — because they don't want competitors or potential acquirers to notice it. Investors who read the segment note or subsidiary schedule (Schedule of Subsidiaries in the consolidated accounts) can identify these hidden gems before they are widely recognised. This is the positive side of subsidiary analysis.</div>
+      </div>
+    </div>
+
+    <!-- RISK CARDS -->
+    <div class="tag rv d6" style="margin-bottom:12px;">Six Specific Warning Signs in Subsidiary Analysis</div>
+    <div class="risk-grid rv d6">
+      <div class="risk-card rk-r">
+        <div class="rk-ico">📉</div>
+        <div class="rk-name">Consolidated PAT &lt; Standalone PAT</div>
+        <div class="rk-badge rbr">Screener: Compare Toggle</div>
+        <div class="rk-body">When consolidated profit is consistently lower than standalone profit — subsidiaries are losing money. Calculate the gap: Standalone PAT minus Consolidated PAT = subsidiary losses absorbed by parent. If this gap exceeds 15% of standalone PAT for 2+ years, the subsidiary drag is material. Screener.in makes this comparison trivial — toggle between consolidated and standalone views.</div>
+      </div>
+      <div class="risk-card rk-r">
+        <div class="rk-ico">💳</div>
+        <div class="rk-name">Consolidated Debt &gt;&gt; Standalone Debt</div>
+        <div class="rk-badge rbr">Balance Sheet Gap</div>
+        <div class="rk-body">If consolidated borrowings are 3× or more than standalone borrowings — subsidiaries are the primary borrowers. This debt is real and covenant-attached even though it doesn't appear on the parent's standalone sheet. Check if parent has guaranteed any of these loans (Notes → Contingent Liabilities → Corporate Guarantees). If yes, parent is on the hook if subsidiary defaults.</div>
+      </div>
+      <div class="risk-card rk-a">
+        <div class="rk-ico">🔀</div>
+        <div class="rk-name">Subsidiaries Added or Removed</div>
+        <div class="rk-badge rba">Schedule of Subsidiaries</div>
+        <div class="rk-body">Compare the "Schedule of Subsidiaries" (listed in the consolidated annual report) year over year. New subsidiaries added in Q4 that inflated year-end consolidation revenue is a red flag. Subsidiaries quietly removed — especially those with losses — suggest the company is deconsolidating problems to clean up the consolidated number. Any movement requires explanation.</div>
+      </div>
+      <div class="risk-card rk-a">
+        <div class="rk-ico">🔃</div>
+        <div class="rk-name">Upstream Dividend from Loss-Making Sub</div>
+        <div class="rk-badge rba">Income Inflation</div>
+        <div class="rk-body">A subsidiary paying dividends to the parent while itself reporting losses is using past retained earnings or debt to fund the dividend. This inflates the parent's standalone income (dividend income is income in standalone) while the subsidiary deteriorates. Check: standalone "Other Income" → dividend from subsidiaries. Compare to subsidiary's own PAT. If subsidiary PAT is negative but dividend is flowing up — investigate.</div>
+      </div>
+      <div class="risk-card rk-p">
+        <div class="rk-ico">💱</div>
+        <div class="rk-name">Goodwill Growth on Consolidation</div>
+        <div class="rk-badge rbp">Acquisition Premium Risk</div>
+        <div class="rk-body">When a parent acquires a subsidiary at a premium to book value, the excess is recognised as "Goodwill" on the consolidated balance sheet. Rising goodwill with stagnant or declining subsidiary profitability → impairment risk. Under Ind AS 36, goodwill must be tested annually for impairment. Companies that consistently avoid impairment despite clearly struggling acquisitions are over-stating consolidated assets.</div>
+      </div>
+      <div class="risk-card rk-p">
+        <div class="rk-ico">📋</div>
+        <div class="rk-name">Step Acquisition / Deconsolidation Gains</div>
+        <div class="rk-badge rbp">One-Time Profit</div>
+        <div class="rk-body">When a parent increases its stake in a subsidiary from below 50% (equity method) to above 50% (full consolidation), accounting rules require recognising a "deemed disposal gain" — a one-time profit. Similarly, losing control of a subsidiary creates a large gain or loss. These are non-cash accounting entries that inflate consolidated PAT without any cash being generated. Look for "exceptional items" in consolidated P&amp;L.</div>
+      </div>
+    </div>
+
+    <!-- SCREENER MOCK -->
+    <div class="tag rv d6" style="margin-bottom:12px;">How to Read Consolidated vs Standalone on Screener.in</div>
+    <div class="screener-mock rv d6">
+      <div class="sm-bar">
+        <div class="sm-dot" style="background:#ef4444;"></div>
+        <div class="sm-dot" style="background:#f59e0b;"></div>
+        <div class="sm-dot" style="background:#22c55e;"></div>
+        <div class="sm-url">🔒 screener.in/company/MOTHERSON/ — toggle Consolidated ↔ Standalone</div>
+      </div>
+      <div class="sm-body">
+        <div class="sm-hr">
+          <div>
+            <div style="font-size:clamp(14px,2vw,18px);font-weight:900;color:var(--tx);">Samvardhana Motherson International — Consolidated vs Standalone Gap</div>
+            <div style="font-size:11px;color:var(--tl);">NSE: MOTHERSON · Auto Components · Global subsidiaries dominate — standalone is just Indian parent</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <span style="font-size:16px;font-weight:900;color:var(--p);">₹185</span>
+            <span style="background:var(--gpale);color:var(--gbr);font-size:11px;font-weight:700;padding:4px 10px;border-radius:7px;">▲ +0.4%</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:14px;background:var(--sf);border-radius:10px;padding:6px;width:fit-content;">
+          <div style="padding:6px 16px;border-radius:7px;background:var(--p);color:#fff;font-size:11px;font-weight:700;cursor:pointer;">Consolidated ✓</div>
+          <div style="padding:6px 16px;border-radius:7px;background:var(--wh);border:1px solid var(--bd);color:var(--ts);font-size:11px;font-weight:700;cursor:pointer;">Standalone</div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--p);margin-bottom:10px;letter-spacing:.5px;">📊 The Consolidated vs Standalone comparison — the gap tells the story (illustrative based on public data):</div>
+        <div class="sm-grid">
+          <div class="sm-m"><div class="smm-l">Consolidated Revenue</div><div class="smm-v" style="color:var(--p);">₹96,000 Cr</div><div class="smm-s">All global subs included</div></div>
+          <div class="sm-m"><div class="smm-l">Standalone Revenue</div><div class="smm-v" style="color:var(--ambr);">₹8,400 Cr</div><div class="smm-s">India parent entity only</div></div>
+          <div class="sm-m"><div class="smm-l">Consolidated PAT</div><div class="smm-v" style="color:var(--p);">₹1,850 Cr</div><div class="smm-s">After NCI absorption</div></div>
+          <div class="sm-m"><div class="smm-l">Standalone PAT</div><div class="smm-v" style="color:var(--ambr);">₹1,100 Cr</div><div class="smm-s">Parent only — inc. dividends</div></div>
+          <div class="sm-m"><div class="smm-l">NCI (Minority Interest)</div><div class="smm-v" style="color:var(--p);">₹620 Cr</div><div class="smm-s">JV partners' share of profit</div></div>
+          <div class="sm-m"><div class="smm-l">Consolidated Debt</div><div class="smm-v" style="color:var(--red);">₹22,000 Cr</div><div class="smm-s">🚨 Global sub borrowings</div></div>
+          <div class="sm-m"><div class="smm-l">Standalone Debt</div><div class="smm-v" style="color:var(--gbr);">₹2,800 Cr</div><div class="smm-s">India parent only</div></div>
+          <div class="sm-m"><div class="smm-l">Debt Gap (Con vs Stand)</div><div class="smm-v" style="color:var(--red);">₹19,200 Cr</div><div class="smm-s">🚨 Sub debt invisible in standalone</div></div>
+        </div>
+        <div class="sm-alerts">
+          <div class="sma sma-r">🚨 Consolidated debt 7.9× standalone — global sub borrowings are the key risk</div>
+          <div class="sma sma-a">⚠️ NCI ₹620 Cr = significant JV partner share — watch NCI trend</div>
+          <div class="sma sma-g">✅ Revenue gap (consolidated 11.4× standalone) shows subs are the business</div>
+        </div>
+        <div class="sm-cap">Navigation: screener.in → Search company → Toggle "Consolidated / Standalone" at top of Financials section. Compare P&amp;L (Revenue, PAT) and Balance Sheet (Total Borrowings) across both views. The gap in each line is your risk indicator.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ DEMAT BANNER ══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Start Investing Today</div>
+    <div class="dmh">Invest With <span class="dmhs">Full Visibility</span> — Read Both Statements</div>
+    <div class="dmsub">Before buying any stock, switch between consolidated and standalone on Screener.in. If the gap in debt or profit is large — spend 10 minutes in the annual report understanding why. Companies with clean subsidiary structures rarely have large gaps.</div>
+    <div class="dmfeats">
+      <div class="dmf">Consolidated vs Standalone toggle free on Screener.in</div>
+      <div class="dmf">NCI visible in consolidated balance sheet</div>
+      <div class="dmf">Subsidiary list in annual report Notes</div>
+      <div class="dmf">Start investing from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ══ GOOD EXAMPLES ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">03 — Five Companies — Transparent Subsidiary Structures</div>
+    <h2 class="h2 rv d2">✅ <span class="hg">Good Examples</span> — Subsidiary Management That Adds Value Transparently</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five companies use subsidiary structures to grow value — and disclose them transparently enough that investors can understand what each subsidiary contributes to (or takes from) the group.</p>
+
+    <!-- GOOD 1: Bajaj Finance -->
+    <div class="ex-block rv d3">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe);">💳</div>
+          <div><div class="eb-name">Bajaj Finance — Holding Company Structure Is the Value-Creation Engine</div><div class="eb-sub">NSE: BAJFINANCE · NBFC · Bajaj Finserv (parent) → Bajaj Finance (sub) → multiple sub-subs — each adds value</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ Transparent NCI</span>
+          <span class="ebb ebb-g">✅ Sub structure value-creative</span>
+          <span class="ebb ebb-p">Bajaj Finserv owns 52.5%</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Bajaj Finserv stake in BJF</div><div class="em-v" style="color:var(--p);">52.5%</div><div class="em-s">NCI = 47.5% minority</div></div>
+          <div class="em-box"><div class="em-l">Bajaj Finance PAT</div><div class="em-v" style="color:var(--gbr);">₹14,451 Cr</div><div class="em-s">Standalone of Bajaj Finance</div></div>
+          <div class="em-box"><div class="em-l">NCI Share (Finserv level)</div><div class="em-v" style="color:var(--p);">₹6,864 Cr</div><div class="em-s">47.5% of BJF PAT to NCI</div></div>
+          <div class="em-box"><div class="em-l">Consolidated ROCE</div><div class="em-v" style="color:var(--gbr);">22%+</div><div class="em-s">✅ Sub structure earns well</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">✅</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">NCI is transparently disclosed at every level</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">Bajaj Finserv's ownership of Bajaj Finance at 52.5% means 47.5% of Bajaj Finance's profits and net assets belong to NCI (public shareholders of Bajaj Finance). Bajaj Finserv's consolidated accounts explicitly show this large NCI in both P&amp;L and equity — there is no attempt to obscure it. The NCI line at ₹6,864 Cr tells investors exactly how much of Bajaj Finance's profit flows through to Bajaj Finserv's shareholders.</div></div>
+          <div class="erf erf-good" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">✅</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">Each subsidiary adds value independently</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">Within Bajaj Finance's structure, further subsidiaries (Bajaj Housing Finance, Bajaj Financial Securities) are themselves growing entities. Each is separately licensed, separately capitalised, and generates positive ROCE. The subsidiary structure is not a vehicle for hiding losses — it's a regulatory and operational necessity (RBI requires separate entities for housing finance). The structure creates value, and disclosure is sufficient to verify this.</div></div>
+          <div class="erf erf-good" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">✅</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">NCI trend is stable</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">Bajaj Finserv hasn't diluted its stake in Bajaj Finance unexpectedly, and Bajaj Finance's NCI hasn't eroded through losses. NCI equity has grown proportionally with Bajaj Finance's retained earnings — confirming the subsidiary is healthy and the minority shareholders are benefiting. Stable growing NCI equity = healthy subsidiary.</div></div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>Subsidiary structure verdict:</strong> Bajaj Finance / Bajaj Finserv's multi-entity structure is the model for how subsidiary structures should work — each entity separately licensed, transparently capitalised, generating strong ROCE, and fully disclosed in consolidated accounts with NCI clearly broken out. The consolidated statement of Bajaj Finserv is more complex than the standalone, but the complexity is real business complexity, not obfuscation.</div>
+    </div>
+
+    <!-- GOOD 2: Infosys BPM -->
+    <div class="ex-block rv d4">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);">🖥️</div>
+          <div><div class="eb-name">Infosys — Wholly-Owned Subsidiaries Transparently Consolidated, Clean NCI</div><div class="eb-sub">NSE: INFY · IT Services · 50+ wholly-owned subs globally — all consolidated with zero significant NCI exposure</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ 100% owned subs</span>
+          <span class="ebb ebb-g">✅ NCI minimal and disclosed</span>
+          <span class="ebb ebb-g">✅ Consolidated = real picture</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Number of Subsidiaries</div><div class="em-v" style="color:var(--p);">50+</div><div class="em-s">All global, all 100% owned</div></div>
+          <div class="em-box"><div class="em-l">NCI (Minority Interest)</div><div class="em-v" style="color:var(--gbr);">Negligible</div><div class="em-s">✅ No meaningful NCI exposure</div></div>
+          <div class="em-box"><div class="em-l">Standalone vs Consol Gap</div><div class="em-v" style="color:var(--gbr);">Small</div><div class="em-s">Subs profitable — gap minimal</div></div>
+          <div class="em-box"><div class="em-l">Subsidiary Debt</div><div class="em-v" style="color:var(--gbr);">Negligible</div><div class="em-s">✅ Subs are people-businesses</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">✅</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">100% ownership eliminates NCI complexity</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">Infosys structures virtually all its international subsidiaries as 100% wholly-owned. This means there is no NCI to track or manage. The consolidated financial statements reflect 100% of every subsidiary's results — and since all profits flow entirely to Infosys shareholders, there is no NCI adjustment in the P&amp;L. Investors get the full consolidated picture without the complexity of minority interest allocation.</div></div>
+          <div class="erf erf-good" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">✅</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">Subsidiaries are low-debt, high-margin service entities</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">IT service subsidiaries don't carry significant debt — they are essentially people and office spaces. The consolidated debt barely exceeds the standalone debt. The absence of a large standalone-to-consolidated debt gap is the clearest possible sign that subsidiary structures are not being used to hide liabilities. For comparison, check Infosys against IL&FS — the contrast is stark.</div></div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>The cleanest possible subsidiary structure:</strong> 100% owned subsidiaries with zero material NCI, negligible subsidiary debt, and profitable operations means the consolidated statement is simply an aggregation of profitable global entities. No NCI complexity, no hidden debt, no subsidiary loss drag. The gap between standalone and consolidated Infosys is small — and entirely explained by inter-company eliminations and global subsidiary profitability, not losses.</div>
+    </div>
+
+    <!-- GOOD 3: Asian Paints -->
+    <div class="ex-block rv d5">
+      <div class="eb-head ebh-p">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pmd));">🎨</div>
+          <div><div class="eb-name">Asian Paints — International Subsidiaries Transparently Disclosed, Manageable NCI</div><div class="eb-sub">NSE: ASIANPAINT · Paints · 15+ country subsidiaries — all growing profitably; NCI from partial stakes clearly disclosed</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-p">✅ International sub disclosure</span>
+          <span class="ebb ebb-g">✅ Each country sub profitable</span>
+          <span class="ebb ebb-g">✅ NCI stable and growing</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">International Subsidiaries</div><div class="em-v" style="color:var(--p);">15+</div><div class="em-s">Countries including Ethiopia, Nepal, etc.</div></div>
+          <div class="em-box"><div class="em-l">NCI trend</div><div class="em-v" style="color:var(--gbr);">Stable growing</div><div class="em-s">✅ Subs are profitable</div></div>
+          <div class="em-box"><div class="em-l">Standalone vs Consol PAT gap</div><div class="em-v" style="color:var(--gbr);">Small positive</div><div class="em-s">✅ Subs add profit</div></div>
+          <div class="em-box"><div class="em-l">Goodwill on consolidation</div><div class="em-v" style="color:var(--gbr);">Modest</div><div class="em-s">No large acquisition premium risk</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">✅</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">Subsidiaries add to consolidated profit (positive gap)</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">For Asian Paints, consolidated PAT is typically higher than standalone PAT — because the international subsidiaries are profitable. This is the best possible subsidiary outcome: not just "not a drag" but actively improving the consolidated picture. When consolidated PAT exceeds standalone PAT consistently — the subsidiary portfolio is a genuine value creator.</div></div>
+          <div class="erf erf-good" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">✅</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">NCI from local JV partners in specific countries</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">Asian Paints has local joint venture partners in some markets (where regulations require local ownership). These minority partners are disclosed in the Notes to consolidated accounts with their exact ownership percentages. The NCI arising from these JVs is stable and growing — reflecting the success of joint ventures in those markets. No NCI erosion, no hidden losses.</div></div>
+        </div>
+      </div>
+      <div class="eb-insight ei-p">✅ <strong>International subsidiary quality benchmark:</strong> Asian Paints demonstrates that a multi-country subsidiary structure can be a genuine value-creator rather than a risk source — if subsidiaries are properly capitalised, operationally profitable, and transparently disclosed. The consistency of PAT and NCI growth across subsidiaries over a decade is the gold standard for international subsidiary management.</div>
+    </div>
+
+    <!-- GOOD 4: Tata Consultancy Services -->
+    <div class="ex-block rv d6">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🌐</div>
+          <div><div class="eb-name">Tata Sons / TCS — Clean Group Structure With Clear Minority Interest Accounting</div><div class="eb-sub">NSE: TCS · Tata Sons owns 72.4% · NCI of 27.6% fully disclosed · public shareholders = meaningful minority</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ NCI 27.6% fully disclosed</span>
+          <span class="ebb ebb-g">✅ No hidden sub debt</span>
+          <span class="ebb ebb-g">✅ Tata Sons stake transparent</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Tata Sons stake in TCS</div><div class="em-v" style="color:var(--p);">72.4%</div><div class="em-s">Parent's ownership</div></div>
+          <div class="em-box"><div class="em-l">NCI (public shareholders)</div><div class="em-v" style="color:var(--gbr);">27.6%</div><div class="em-s">✅ Transparent minority</div></div>
+          <div class="em-box"><div class="em-l">TCS Subsidiaries</div><div class="em-v" style="color:var(--gbr);">100% owned</div><div class="em-s">All wholly-owned globally</div></div>
+          <div class="em-box"><div class="em-l">Sub debt</div><div class="em-v" style="color:var(--gbr);">Negligible</div><div class="em-s">✅ No hidden leverage</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">✅</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">The simple transparency of TCS's structure</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">TCS is a straightforward case — Tata Sons owns 72.4%, public shareholders own 27.6%. When Tata Sons consolidates TCS into its own accounts (Tata Sons is not listed), TCS's public shareholders show up as NCI. But from TCS's own consolidated perspective, it is the parent — and its own subsidiaries are all 100% owned. The simplicity of the structure means no NCI complexity at TCS's level, no minority shareholder disputes, and no hidden subsidiary debt.</div></div>
+          <div class="erf erf-good" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">✅</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">Dividend upstreaming is clean and transparent</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">TCS regularly pays large dividends to all shareholders including Tata Sons. These are disclosed in the Cash Flow statement, match the declared dividend per share exactly, and are verifiable in Tata Sons' own income (as "dividend income from subsidiary TCS"). No circular dividend manipulation, no upstream of subsidiary debt disguised as dividends.</div></div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>The TCS structural benchmark:</strong> Large parent stake (72.4%) + 100% owned global subs + negligible subsidiary debt + transparent dividend upstreaming = the cleanest large-cap subsidiary structure in Indian markets. When the parent-subsidiary relationship is this straightforward, consolidated analysis is simply consolidation — not a forensic exercise.</div>
+    </div>
+
+    <!-- GOOD 5: Hindustan Unilever -->
+    <div class="ex-block rv d7">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🧴</div>
+          <div><div class="eb-name">Hindustan Unilever — Unilever PLC's Stake Creates Clear NCI With Full Transparency</div><div class="eb-sub">NSE: HINDUNILVR · FMCG · Unilever PLC owns 61.9% · NCI 38.1% to public · no subsidiary risks</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ Parent stake fully disclosed</span>
+          <span class="ebb ebb-g">✅ Subsidiaries add value</span>
+          <span class="ebb ebb-g">✅ Standalone ≈ consolidated</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Unilever PLC stake</div><div class="em-v" style="color:var(--p);">61.9%</div><div class="em-s">Parent's ownership</div></div>
+          <div class="em-box"><div class="em-l">NCI (public shareholders)</div><div class="em-v" style="color:var(--gbr);">38.1%</div><div class="em-s">✅ Clear minority structure</div></div>
+          <div class="em-box"><div class="em-l">Consol vs Standalone gap</div><div class="em-v" style="color:var(--gbr);">Minimal</div><div class="em-s">✅ Subs are small, profitable</div></div>
+          <div class="em-box"><div class="em-l">Sub debt</div><div class="em-v" style="color:var(--gbr);">Zero</div><div class="em-s">✅ Negative working capital model</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">✅</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">Standalone ≈ Consolidated — the gold standard gap</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">HUL's standalone and consolidated financials are virtually identical. The few subsidiaries it has (Unilever India Exports, Pond's Exports, etc.) are small, profitable, and carry no debt. The consolidated revenue is only marginally higher than standalone. There is no subsidiary debt to worry about, no NCI erosion, and no circular revenue. Consolidated PAT ≈ standalone PAT — confirming subsidiaries neither add nor subtract significantly from the parent.</div></div>
+          <div class="erf erf-good" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">✅</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">Global parent relationship fully transparent</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">Unilever PLC's 61.9% ownership of HUL is fully disclosed in BSE shareholding filings (updated quarterly), and Unilever consolidates HUL as a subsidiary in its own global accounts. The related-party transactions between HUL and Unilever PLC (royalties for trademarks, technology fees) are disclosed in HUL's annual report with exact amounts. No hidden transfer pricing, no unclear royalty rates.</div></div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>The FMCG subsidiary benchmark:</strong> HUL's near-identical standalone and consolidated statements, combined with full disclosure of the Unilever PLC ownership and related-party transactions, is the model for how a listed subsidiary of a global MNC should present its financials. When standalone ≈ consolidated — you can trust that the subsidiary structure is not hiding anything material.</div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="section-divider rv d3">
+      <div class="sd-line"></div>
+      <div class="sd-label">🚨 Bad Examples — Subsidiary Structures That Hid Risks</div>
+      <div class="sd-line"></div>
+    </div>
+
+    <div class="tag rv d1" style="color:var(--red);">04 — Five Cases of Problematic Subsidiary Structures</div>
+    <h2 class="h2 rv d2">🚨 <span style="background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Bad Examples</span> — When Subsidiaries Become Risk Vehicles</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five cases show how subsidiary structures can be used to hide debt, obscure losses, create circular revenue, or manipulate reported profits — and how careful reading of consolidated vs standalone differences would have flagged each one.</p>
+
+    <!-- BAD 1: IL&FS -->
+    <div class="ex-block rv d3">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">🏗️</div>
+          <div><div class="eb-name">IL&FS — 347 Subsidiaries Used to Hide ₹91,000 Cr of Debt (2018)</div><div class="eb-sub">IL&FS · Infrastructure Finance · Subsidiary SPVs each held debt; consolidated never showed the scale; parent looked fine in standalone</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 ₹91,000 Cr hidden</span>
+          <span class="ebb ebb-r">347 subsidiaries</span>
+          <span class="ebb ebb-r">Standalone: misleadingly clean</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Total Group Debt</div><div class="em-v" style="color:var(--red);">₹91,000 Cr</div><div class="em-s">🚨 Across 347 entities</div></div>
+          <div class="em-box"><div class="em-l">Entities in structure</div><div class="em-v" style="color:var(--red);">347</div><div class="em-s">🚨 SPVs, JVs, subs</div></div>
+          <div class="em-box"><div class="em-l">Parent standalone look</div><div class="em-v" style="color:var(--red);">Misleadingly clean</div><div class="em-s">🚨 Debt in subs</div></div>
+          <div class="em-box"><div class="em-l">Consolidated disclosure</div><div class="em-v" style="color:var(--red);">Inadequate</div><div class="em-s">3 segments for 347 entities</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">🚨</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">Each SPV borrowed independently — parent guaranteed silently</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">IL&FS structured its infrastructure projects as separate Special Purpose Vehicles (SPVs). Each SPV borrowed from banks independently for its project. The SPV's debt appeared in the consolidated accounts — but the sheer number of entities (347) and the complexity of the group structure meant no single consolidated balance sheet clearly showed the aggregate ₹91,000 Cr exposure. IL&FS Ltd's standalone balance sheet was relatively clean — the debt was distributed across subsidiaries.</div></div>
+          <div class="erf erf-bad" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">🚨</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">Consolidated-to-standalone debt ratio was the signal</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">Had investors consistently compared consolidated debt to standalone debt for IL&FS Financial Services (the listed entity), the massive gap would have been visible. The listed entity's standalone debt was manageable; the consolidated group debt was catastrophic. Every year this gap widened, the risk grew. The signal was in the comparison — investors who read only the standalone missed the iceberg.</div></div>
+          <div class="erf erf-bad" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">🚨</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">NCI structure hid cross-default risk</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">Many of IL&FS's subsidiaries had external investors (through NCI structures) who were promised specific returns. When projects failed to generate adequate cash flows, IL&FS parent had to upstream funds to subsidiaries to meet these commitments — creating a cashflow drain at parent level that didn't appear as "expense" in any normal accounting line.</div></div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The IL&FS subsidiary lesson:</strong> 347 entities with aggregate debt 30× the parent's standalone debt = the parent's standalone balance sheet was completely misleading. The forensic check: consolidated debt ÷ standalone debt. For IL&FS, this ratio was dramatically above 10× for years. A ratio above 3× warrants investigation; above 5× for a non-manufacturing company is a serious red flag. The tool to catch it: Screener's consolidated vs standalone toggle — takes 30 seconds.</div>
+    </div>
+
+    <!-- BAD 2: Jet Airways and subsidiaries -->
+    <div class="ex-block rv d4">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">✈️</div>
+          <div><div class="eb-name">Jet Airways — Subsidiary Used for JetPrivilege Monetisation While Hiding Core Losses (2019)</div><div class="eb-sub">BSE: 532617 · Aviation · JetPrivilege subsidiary was valuable but being monetised while core airline bled cash</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 Core losses hidden by sub</span>
+          <span class="ebb ebb-r">Standalone vs consol gap</span>
+          <span class="ebb ebb-a">NCI used to access value</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Core Airline Losses</div><div class="em-v" style="color:var(--red);">₹4,000+ Cr</div><div class="em-s">🚨 Building over years</div></div>
+          <div class="em-box"><div class="em-l">JetPrivilege value</div><div class="em-v" style="color:var(--ambr);">Significant</div><div class="em-s">Loyalty program sold partially to Etihad</div></div>
+          <div class="em-box"><div class="em-l">Standalone vs consol debt</div><div class="em-v" style="color:var(--red);">Large gap</div><div class="em-s">🚨 Subsidiary debt mounting</div></div>
+          <div class="em-box"><div class="em-l">CFO of core airline</div><div class="em-v" style="color:var(--red);">Chronically negative</div><div class="em-s">🚨 Visible in consol cash flow</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">🚨</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">JetPrivilege subsidiary monetisation masked core business collapse</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">Jet Airways sold a 50% stake in its JetPrivilege loyalty programme to Etihad, booking a large gain in the standalone financial statements. This one-time gain temporarily improved the parent's standalone profit — masking the chronically cash-negative core airline operation. Investors who saw "Jet Airways parent earning profit" didn't look at the consolidated cash flow from operations, which was deeply negative across the group.</div></div>
+          <div class="erf erf-bad" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">🚨</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">The consolidated CFO was the warning signal years in advance</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">Jet Airways' consolidated Cash Flow from Operations (CFO) was negative or near-zero for multiple years before its bankruptcy. The operating business was not generating cash to service its liabilities — it was surviving on sale of assets (including the JetPrivilege stake) and new borrowings. Investors reading standalone profits saw one story; those reading consolidated CFO saw the real one.</div></div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The aviation subsidiary trap:</strong> When a subsidiary contains a valuable but non-core asset (loyalty programme, real estate, IP), and the parent is monetising it through NCI sales or divestment, check whether the proceeds are filling an operating hole or genuinely capital allocation. In Jet's case, JetPrivilege proceeds funded working capital for a loss-making airline — a structural deterioration masked by subsidiary accounting.</div>
+    </div>
+
+    <!-- BAD 3: Vodafone Idea -->
+    <div class="ex-block rv d5">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">📡</div>
+          <div><div class="eb-name">Vodafone Idea — Minority Interest Erosion Signals Deep Subsidiary Stress</div><div class="eb-sub">NSE: IDEA · Telecom · Vodafone Group and Aditya Birla Group both minority in Vi post-merger; NCI declining</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 NCI declining annually</span>
+          <span class="ebb ebb-r">₹2+ lakh Cr accumulated losses</span>
+          <span class="ebb ebb-a">Promoter ownership diluting</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Accumulated Losses</div><div class="em-v" style="color:var(--red);">₹2,00,000+ Cr</div><div class="em-s">🚨 Reserves wiped out</div></div>
+          <div class="em-box"><div class="em-l">NCI trend</div><div class="em-v" style="color:var(--red);">Declining</div><div class="em-s">🚨 Losses eroding equity</div></div>
+          <div class="em-box"><div class="em-l">Government stake (via AGR)</div><div class="em-v" style="color:var(--ambr);">~33%</div><div class="em-s">Converted from dues</div></div>
+          <div class="em-box"><div class="em-l">Promoter equity</div><div class="em-v" style="color:var(--red);">Heavily diluted</div><div class="em-s">🚨 Capital raises at distress</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">🚨</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">NCI erosion through accumulated losses is the clearest possible signal</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">Vodafone Idea's equity has been systematically destroyed by annual losses. When a company's accumulated losses exceed its paid-up capital and reserves — equity turns negative without equity injections. The NCI portion of equity declines proportionally. Investors watching NCI on the consolidated balance sheet saw it declining each year — a direct mathematical consequence of the group absorbing massive losses year after year.</div></div>
+          <div class="erf erf-bad" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">🚨</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">Goodwill impairment avoided while business value collapsed</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">Post-merger, Vi's consolidated balance sheet carried significant goodwill from the merger between Vodafone India and Idea Cellular. Despite the business losing value dramatically (subscriber losses, ARPU collapse, mounting AGR liabilities), goodwill impairment was modest relative to the economic value destruction. The consolidated balance sheet's goodwill was being protected by management judgment — an accounting flexibility that inflated asset values.</div></div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The NCI erosion rule:</strong> When NCI is declining on the balance sheet year after year without the parent buying out minority shareholders — the subsidiary is losing value. In Vi's case, the losses were so large that equity was being destroyed faster than it could be replenished. Watching NCI on the consolidated balance sheet over 3 years would have shown investors that the business was destroying value at a catastrophic rate — before the full AGR liability crisis became public.</div>
+    </div>
+
+    <!-- BAD 4: Gitanjali Gems -->
+    <div class="ex-block rv d6">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">💎</div>
+          <div><div class="eb-name">Gitanjali Gems — Offshore Subsidiaries Used for Circular Revenue and Related Party Inflation</div><div class="eb-sub">BSE: 532715 · Gems &amp; Jewellery · Offshore subsidiary "customers" created circular revenue; subsidiary structure enabled ₹13,500 Cr PNB fraud</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 Circular subsidiary revenue</span>
+          <span class="ebb ebb-r">₹13,500 Cr fraud</span>
+          <span class="ebb ebb-r">Offshore subs as conduits</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Fraud Scale</div><div class="em-v" style="color:var(--red);">₹13,500 Cr</div><div class="em-s">🚨 PNB Letters of Undertaking</div></div>
+          <div class="em-box"><div class="em-l">Offshore subsidiary role</div><div class="em-v" style="color:var(--red);">Circular revenue</div><div class="em-s">🚨 "Buyers" that weren't real</div></div>
+          <div class="em-box"><div class="em-l">DSO pre-fraud</div><div class="em-v" style="color:var(--red);">180+ days</div><div class="em-s">🚨 Related party not paying</div></div>
+          <div class="em-box"><div class="em-l">Related party disclosures</div><div class="em-v" style="color:var(--red);">Large export to affiliates</div><div class="em-s">🚨 Signal in Notes</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad" style="flex-direction:column;gap:5px;">
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div class="erf-ico">🚨</div>
+              <strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">Offshore subsidiaries as "customers" for circular revenue</strong>
+            </div>
+            <div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">Gitanjali Gems had offshore subsidiary and affiliated entities that appeared in its books as export customers. The parent would "export" jewellery to these affiliated offshore entities, raise invoices, recognise revenue, and use fraudulent PNB Letters of Undertaking (LOUs) to finance the "receivables" from these entities. The offshore entities then recycled the money back. The subsidiaries were not genuine customers — they were conduits for a circular financing scheme.</div>
+          </div>
+          <div class="erf erf-bad" style="flex-direction:column;gap:5px;">
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div class="erf-ico">🚨</div>
+              <strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">Related Party Transaction note was the available signal</strong>
+            </div>
+            <div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">In Gitanjali's annual report Notes → Related Party Transactions: the notes disclosed large "export sales" to affiliated entities. These transactions were large in scale, showed very long DSO (180+ days — export customers that aren't paying), and the affiliated entities had the same promoter group. Investors who read the Related Party Note could see that "export revenue" to related offshore entities was a very large portion of total revenue — this is the circular revenue signal.</div>
+          </div>
+          <div class="erf erf-bad" style="flex-direction:column;gap:5px;">
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div class="erf-ico">🚨</div>
+              <strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">Consolidated accounts that should have eliminated the circularity didn't</strong>
+            </div>
+            <div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">If the offshore "customers" were true subsidiaries of Gitanjali, the inter-company sales should have been eliminated on consolidation. But they were structured as "associates" or third-party affiliates — close enough to control that the revenue was real from the promoter's perspective, but far enough to avoid consolidation elimination. This is the grey zone of subsidiary accounting that enables fraud.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The circular subsidiary revenue forensic check:</strong> For any export-heavy company — check (1) Related Party Transactions Note: are a significant % of exports to related/affiliated entities? (2) DSO of those related-party receivables: are they aging beyond 90 days? (3) Are the offshore "customers" associates or JVs that should be eliminated on consolidation but aren't? Three positive answers = circular revenue risk. This check takes 5 minutes in the annual report.</div>
+    </div>
+
+    <!-- BAD 5: CG Power -->
+    <div class="ex-block rv d7">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">⚡</div>
+          <div><div class="eb-name">CG Power and Industrial Solutions — Subsidiary Loans to Related Parties Hidden in Consolidated (2019)</div><div class="eb-sub">NSE: CGPOWER · Electricals · ₹2,800+ Cr of unauthorized transactions discovered via forensic audit; subsidiary used to disguise</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 ₹2,800+ Cr unauthorized</span>
+          <span class="ebb ebb-r">Subsidiary loans to promoters</span>
+          <span class="ebb ebb-a">Forensic audit exposed it</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Unauthorized Transactions</div><div class="em-v" style="color:var(--red);">₹2,800+ Cr</div><div class="em-s">🚨 Via subsidiary routes</div></div>
+          <div class="em-box"><div class="em-l">Loans to related parties</div><div class="em-v" style="color:var(--red);">Multiple</div><div class="em-s">🚨 Through subsidiary books</div></div>
+          <div class="em-box"><div class="em-l">Standalone vs consol gap</div><div class="em-v" style="color:var(--red);">Large unexplained</div><div class="em-s">🚨 Signal visible pre-discovery</div></div>
+          <div class="em-box"><div class="em-l">CFO mismatch</div><div class="em-v" style="color:var(--red);">Consistent</div><div class="em-s">🚨 Cash not matching PAT</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">🚨</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">Subsidiary used to route loans to promoter-related entities</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">CG Power's forensic audit (conducted after the board identified suspicious transactions) revealed that subsidiary companies had been used to disburse loans to entities connected to the promoter group. These loans appeared in the subsidiary books as "advances" or "receivables" — normal-looking accounting entries. At consolidation, they appeared as inter-company receivables that should have been eliminated — but since the recipient entities were not always subsidiaries, the transactions stayed in the consolidated accounts as third-party exposures.</div></div>
+          <div class="erf erf-bad" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">🚨</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">The advances-to-related-parties forensic check</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">CG Power's annual reports had a growing "Advances" line in the consolidated balance sheet — money given out but not yet received back. The nature of these advances (to whom? for what?) was disclosed in the Related Party Note but not prominently highlighted. Investors who tracked the "Advances to Related Parties" line over 3–4 years would have seen it growing faster than the business — a forensic signal that money was leaving the group through the subsidiary structure.</div></div>
+          <div class="erf erf-bad" style="flex-direction:column;gap:5px;"><div style="display:flex;align-items:flex-start;gap:10px;"><div class="erf-ico">🚨</div><strong style="font-size:clamp(12px,1.35vw,13.5px);color:var(--tx);line-height:1.4;">Promoter pledge + related party advances = double red flag</strong></div><div style="padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;">CG Power had significant promoter pledge (Avantha Group promoters had pledged shares) simultaneous with growing related-party advances in consolidated accounts. High promoter pledge + growing advances to related parties = money is possibly being extracted from the company through the subsidiary route to fund the promoter's personal debt. This combination — observable in BSE shareholding data (pledge) + Notes to accounts (advances) — is one of the clearest forensic patterns in Indian corporate governance failures.</div></div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The CG Power subsidiary forensic check:</strong> The combination of (1) growing "advances to related parties" in consolidated balance sheet, (2) significant promoter pledging visible in quarterly shareholding reports, and (3) CFO/PAT consistently below 0.7× was visible 2–3 years before the forensic audit discovery. Each signal individually is a yellow flag; all three together is a red flag that demands immediate investigation of the subsidiary structure.</div>
+    </div>
+
+    <!-- QUICK TRICKS -->
+    <div class="section-divider rv d3">
+      <div class="sd-line"></div>
+      <div class="sd-label">⚡ Quick Tricks — Spot Subsidiary Risks in 8 Minutes</div>
+      <div class="sd-line"></div>
+    </div>
+
+    <div class="tag rv d1">⚡ Quick Tricks</div>
+    <h2 class="h2 rv d2">The 8-Minute <span class="hp">Subsidiary Risk Cheat Sheet</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Five fast checks — using only Screener.in, BSE shareholding data, and annual report PDF search. Run them in order. Any single trigger warrants investigation; multiple triggers together demand it.</p>
+
+    <!-- TRICK 1 -->
+    <div class="trick-card rv d3" style="border-color:rgba(109,40,217,.28);">
+      <div class="trick-head" style="background:linear-gradient(135deg,var(--pxs),var(--pxl));">
+        <div class="trick-icon" style="background:linear-gradient(135deg,var(--p),var(--ph));"><span>🔄</span></div>
+        <div class="trick-body-inner">
+          <div class="trick-number" style="color:var(--p);">Trick #1 — 60 Seconds · Screener.in Toggle</div>
+          <div class="trick-name">The "Consolidated vs Standalone Toggle" — Find the Gap Instantly</div>
+        </div>
+        <div class="trick-time" style="background:rgba(109,40,217,.1);color:var(--p);">60 seconds</div>
+      </div>
+      <div class="trick-content">
+        <div class="trick-desc">Screener.in → Search company → Financials tab → Top of the page there is a toggle: <strong>"Consolidated / Standalone"</strong>. Switch between them. Write down two numbers for the same year: <strong>PAT (Consolidated)</strong> and <strong>PAT (Standalone)</strong>. Then do the same for <strong>Total Borrowings</strong>.<br><br>Calculate:<br><strong>PAT Gap = Standalone PAT − Consolidated PAT</strong> → If positive and large, subsidiaries are losing money.<br><strong>Debt Gap = Consolidated Borrowings − Standalone Borrowings</strong> → If large, subsidiaries are the borrowers.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.5vw,14px);">
+          <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:10px;padding:11px 13px;">
+            <div style="font-size:10px;font-weight:800;color:var(--red);margin-bottom:5px;">🚨 Warning Thresholds</div>
+            <div style="font-size:12px;color:var(--ts);line-height:1.55;"><strong>PAT gap &gt;20% of standalone PAT</strong> = subsidiary losses are material<br><strong>Debt gap &gt;3× standalone debt</strong> = subsidiaries are the primary borrowers<br><strong>Both triggers simultaneously</strong> = deep investigate required</div>
+          </div>
+          <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:10px;padding:11px 13px;">
+            <div style="font-size:10px;font-weight:800;color:var(--gbr);margin-bottom:5px;">✅ Clean Signal</div>
+            <div style="font-size:12px;color:var(--ts);line-height:1.55;"><strong>Consolidated PAT &gt; Standalone PAT</strong> = subsidiaries are adding value (good)<br><strong>Debt gap &lt;2× standalone</strong> = subsidiary debt manageable<br><strong>Both clean</strong> = move on, no concern</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRICK 2 -->
+    <div class="trick-card rv d4" style="border-color:rgba(22,163,74,.28);">
+      <div class="trick-head" style="background:linear-gradient(135deg,var(--gpale),#ecfdf5);">
+        <div class="trick-icon" style="background:linear-gradient(135deg,var(--gbr),var(--gh));"><span>📊</span></div>
+        <div class="trick-body-inner">
+          <div class="trick-number" style="color:var(--gbr);">Trick #2 — 90 Seconds · Consolidated Balance Sheet</div>
+          <div class="trick-name">The "NCI Trend" Check — Is Minority Interest Growing or Eroding?</div>
+        </div>
+        <div class="trick-time" style="background:rgba(22,163,74,.1);color:var(--gbr);">90 seconds</div>
+      </div>
+      <div class="trick-content">
+        <div class="trick-desc">Screener.in → Balance Sheet tab (consolidated) → Find <strong>"Non-Controlling Interests"</strong> or <strong>"Minority Interest"</strong> in the Equity section. Track this number for 3 years.<br><br><strong>Growing NCI</strong> = subsidiaries with minority shareholders are profitable — minority equity growing with retained earnings = healthy.<br><strong>Declining or negative NCI</strong> = subsidiaries losing money year after year — minority equity being eroded by losses. When NCI hits zero, all future losses fall entirely on the parent.</div>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-top:8px;">
+          <div class="trick-step"><div class="trick-dot tdg">1</div><div>Open consolidated Balance Sheet on Screener → Equity section → Find "Non-Controlling Interests" (sometimes called "Minority Interest")</div></div>
+          <div class="trick-step"><div class="trick-dot tdg">2</div><div>Compare 3 years: FY2022 → FY2023 → FY2024. Is the trend up, flat, or down?</div></div>
+          <div class="trick-step"><div class="trick-dot tdg">3</div><div>If declining: cross-check consolidated P&amp;L → "Profit attributable to Non-Controlling Interests" → is it negative (NCI absorbing losses)? If yes — subsidiaries with minority partners are losing money.</div></div>
+          <div class="trick-step"><div class="trick-dot tdg">4</div><div>Calculate: NCI ÷ Total Equity. If declining as a ratio over 3 years AND the company hasn't bought out minority shareholders → subsidiary losses are the explanation.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRICK 3 -->
+    <div class="trick-card rv d5" style="border-color:rgba(220,38,38,.28);">
+      <div class="trick-head" style="background:linear-gradient(135deg,var(--rpale),#fff5f5);">
+        <div class="trick-icon" style="background:linear-gradient(135deg,var(--red),#f87171);"><span>🔎</span></div>
+        <div class="trick-body-inner">
+          <div class="trick-number" style="color:var(--red);">Trick #3 — 2 Minutes · Annual Report PDF Ctrl+F</div>
+          <div class="trick-name">The "Advances to Related Parties" Trap — Find Growing Leakage</div>
+        </div>
+        <div class="trick-time" style="background:rgba(220,38,38,.1);color:var(--red);">2 minutes</div>
+      </div>
+      <div class="trick-content">
+        <div class="trick-desc">Download Annual Report PDF from Screener Documents → Press <strong>Ctrl+F</strong> → Search <strong>"loans to related"</strong> or <strong>"advances to subsidiaries"</strong> or <strong>"amounts due from"</strong>.<br><br>Find the Related Party Transactions table (mandatory under Ind AS 24). Look for <strong>loans or advances from the parent to subsidiaries or related entities</strong>. Track this number over 3 years. Rising advances = money leaving the group through the subsidiary structure. Always ask: what is the business purpose, and is it being repaid?</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.5vw,14px);margin-top:8px;">
+          <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:10px;padding:11px 13px;">
+            <div style="font-size:10px;font-weight:800;color:var(--red);margin-bottom:5px;">🚨 Red Flag Patterns</div>
+            <div style="font-size:12px;color:var(--ts);line-height:1.55;"><strong>Advances growing faster than revenue</strong> = money leaving the group<br><strong>Advances to entities with same promoter</strong> = potential extraction<br><strong>Advances aging &gt;1 year without repayment</strong> = unlikely to return</div>
+          </div>
+          <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:10px;padding:11px 13px;">
+            <div style="font-size:10px;font-weight:800;color:var(--gbr);margin-bottom:5px;">✅ Clean Patterns</div>
+            <div style="font-size:12px;color:var(--ts);line-height:1.55;"><strong>Advances declining</strong> = being repaid — healthy<br><strong>Advances for specific capex projects</strong> with defined return = legitimate<br><strong>Inter-company advances eliminated in consolidation</strong> = no net group exposure</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRICK 4 -->
+    <div class="trick-card rv d6" style="border-color:rgba(217,119,6,.26);">
+      <div class="trick-head" style="background:linear-gradient(135deg,var(--apale),#fffcf0);">
+        <div class="trick-icon" style="background:linear-gradient(135deg,var(--ambr),var(--amb));"><span>📋</span></div>
+        <div class="trick-body-inner">
+          <div class="trick-number" style="color:var(--ambr);">Trick #4 — 90 Seconds · BSE Shareholding + Annual Report</div>
+          <div class="trick-name">The "Promoter Pledge + Subsidiary Advances" Double Red Flag</div>
+        </div>
+        <div class="trick-time" style="background:rgba(217,119,6,.1);color:var(--ambr);">90 seconds</div>
+      </div>
+      <div class="trick-content">
+        <div class="trick-desc">BSE/NSE → Shareholding Pattern (Regulation 31, filed quarterly) → Check <strong>"Promoter Pledged Shares %"</strong>. Cross-reference with Annual Report → Related Party Transactions → <strong>Advances to related entities</strong>.<br><br>When a promoter has pledged significant shares AND their company is simultaneously advancing money to related entities through subsidiaries — the probability of extraction/tunneling is high. The promoter is under financial pressure (hence the pledge) and may be using the listed company's subsidiaries to access liquidity.</div>
+        <div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;margin-top:8px;">
+          <div style="font-size:10px;font-weight:700;color:var(--ambr);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">📊 Combined Risk Scoring</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div class="trick-step"><div class="trick-dot tda">A</div><div><strong>Promoter pledge &gt;20%</strong> = financial distress signal (BSE quarterly)</div></div>
+            <div class="trick-step"><div class="trick-dot tda">B</div><div><strong>Related party advances growing</strong> = money leaving via subsidiaries (Annual Report)</div></div>
+            <div class="trick-step"><div class="trick-dot tda">C</div><div><strong>CFO/PAT below 0.7×</strong> = cash not tracking profit (Screener Cash Flow)</div></div>
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--ts);"><strong style="color:var(--red);">If A + B + C all present:</strong> Extremely high probability of value extraction via subsidiary structure. Exit or short position. CG Power, DHFL, Gitanjali all showed this pattern before collapse.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRICK 5 -->
+    <div class="trick-card rv d7" style="border-color:rgba(109,40,217,.28);">
+      <div class="trick-head" style="background:linear-gradient(135deg,var(--pxl),var(--pmd));">
+        <div class="trick-icon" style="background:linear-gradient(135deg,var(--pl),var(--p));"><span>🏆</span></div>
+        <div class="trick-body-inner">
+          <div class="trick-number" style="color:var(--p);">Trick #5 — The 8-Minute Master Subsidiary Checklist</div>
+          <div class="trick-name">Consolidated vs Standalone — Complete Risk Assessment in 8 Minutes</div>
+        </div>
+        <div class="trick-time" style="background:rgba(109,40,217,.1);color:var(--p);">8 minutes</div>
+      </div>
+      <div class="trick-content">
+        <div class="trick-desc">Run these five checks in sequence for any company with multiple subsidiaries. A single green doesn't mean safe; a single red doesn't always mean fraud. But multiple reds together demand you stop and investigate before investing.</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px;">
+          <div style="display:flex;align-items:flex-start;gap:14px;background:var(--pxl);border:1.5px solid rgba(109,40,217,.2);border-radius:12px;padding:12px 14px;">
+            <span style="font-size:20px;flex-shrink:0;">1️⃣</span>
+            <div><div style="font-size:13px;font-weight:800;color:var(--p);margin-bottom:3px;">Screener Toggle Test (60 sec)</div><div style="font-size:12px;color:var(--ts);line-height:1.5;">PAT gap &gt;20%? Debt gap &gt;3×? → Flag for investigation</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:14px;background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:12px;padding:12px 14px;">
+            <span style="font-size:20px;flex-shrink:0;">2️⃣</span>
+            <div><div style="font-size:13px;font-weight:800;color:var(--gbr);margin-bottom:3px;">NCI Trend Check (90 sec)</div><div style="font-size:12px;color:var(--ts);line-height:1.5;">Consolidated balance sheet → NCI 3-year trend → Declining? Sub losses are real.</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:14px;background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:12px;padding:12px 14px;">
+            <span style="font-size:20px;flex-shrink:0;">3️⃣</span>
+            <div><div style="font-size:13px;font-weight:800;color:var(--red);margin-bottom:3px;">Related Party Advances Ctrl+F (2 min)</div><div style="font-size:12px;color:var(--ts);line-height:1.5;">Annual report PDF → "loans to related" → Growing over 3 years? Extraction risk.</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:14px;background:var(--apale);border:1.5px solid rgba(217,119,6,.2);border-radius:12px;padding:12px 14px;">
+            <span style="font-size:20px;flex-shrink:0;">4️⃣</span>
+            <div><div style="font-size:13px;font-weight:800;color:var(--ambr);margin-bottom:3px;">Promoter Pledge Check (90 sec)</div><div style="font-size:12px;color:var(--ts);line-height:1.5;">BSE shareholding → Promoter pledged % → &gt;20% = distress signal → combine with Trick 3.</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:14px;background:var(--pxl);border:1.5px solid rgba(109,40,217,.2);border-radius:12px;padding:12px 14px;">
+            <span style="font-size:20px;flex-shrink:0;">5️⃣</span>
+            <div><div style="font-size:13px;font-weight:800;color:var(--p);margin-bottom:3px;">Schedule of Subsidiaries Check (2 min)</div><div style="font-size:12px;color:var(--ts);line-height:1.5;">Annual report → "Subsidiaries" schedule → Compare current to prior year. New entities added in Q4? Entities quietly removed? Either requires explanation.</div></div>
+          </div>
+          <div style="background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:12px;padding:12px 14px;">
+            <div style="font-size:12.5px;font-weight:800;color:var(--tx);margin-bottom:5px;">🏆 All 5 checks in 8 minutes = full subsidiary risk picture</div>
+            <div style="font-size:12px;color:var(--ts);line-height:1.6;">Zero red flags across all 5 checks = subsidiary structure is likely clean. Move on to business analysis. One or two flags = note and monitor quarterly. Three or more flags = do not invest until the subsidiary structure is understood in full detail, including reading the Related Party Transactions note and the complete Schedule of Subsidiaries in the annual report.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caveat-box rv d7">
+      <div class="caveat-icon">⚡</div>
+      <div class="caveat-body">
+        <div class="caveat-label">The One-Line Consolidated vs Standalone Rule</div>
+        <div class="caveat-title">Always Read Consolidated. The Gap Between Consolidated and Standalone Is the Risk. Large Gap = Large Investigation.</div>
+        <div class="caveat-desc">Every press release, most analyst summaries, and many investor presentations highlight standalone numbers — because they often look better. Subsidiary debt doesn't appear. Subsidiary losses don't appear. Related-party loans to affiliated entities don't appear. The parent looks clean, profitable, and debt-free.<br><br>The consolidated financial statement is the economic truth. It includes every subsidiary's assets, liabilities, revenues, and losses. If a company has subsidiaries — which every listed Indian company of any size does — the consolidated statement is the relevant document for investment analysis. Standalone analysis is useful only for specific purposes (dividend coverage, parent entity asset quality, or when subsidiaries are genuinely immaterial).<br><br>The Screener.in toggle between consolidated and standalone takes 10 seconds. The gap it reveals — in PAT, in debt, in ROCE — is the starting point for every subsidiary risk analysis. IL&FS, Jet Airways, Gitanjali Gems, CG Power, and Vodafone Idea all had telling gaps between their consolidated and standalone statements — visible, free, and available to any investor willing to look. The information was never hidden; it was simply not being read by most.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ STANDALONE QUICK TRICKS SECTION ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">⚡ Quick Tricks</div>
+    <h2 class="h2 rv d2">The 8-Minute <span class="hp">Subsidiary Risk Cheat Sheet</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Five fast, practical checks — using only free tools (Screener.in, BSE website, annual report PDF) — that give you a complete subsidiary risk picture in under 8 minutes. Run them before analysing any company with multiple subsidiaries.</p>
+
+    <div style="display:flex;flex-direction:column;gap:clamp(14px,2.5vw,20px);margin-bottom:40px;">
+
+      <!-- TRICK 1: The Toggle Test -->
+      <div class="rv d3" style="border-radius:18px;overflow:hidden;border:2px solid rgba(109,40,217,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--pxs),var(--pxl));padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(109,40,217,.3);">🔄</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:3px;">Trick #1 — 60 Seconds · Screener.in Toggle</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "PAT Gap + Debt Gap" — Two Numbers That Reveal Everything</div>
+          </div>
+          <div style="background:rgba(109,40,217,.1);color:var(--p);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">60 seconds</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Screener.in → Search any company → Financials tab → At the top you will see <strong>"Consolidated / Standalone"</strong> toggle. Click each and write down two numbers:<br><br>1. <strong>Net Profit (PAT)</strong> — both consolidated and standalone, same year<br>2. <strong>Total Borrowings</strong> — both consolidated and standalone, same year<br><br>Then divide each: <strong>Consolidated ÷ Standalone</strong>. These two ratios tell you immediately whether subsidiaries are a risk source or a value creator — before reading a single word of the annual report.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.5vw,16px);margin-bottom:14px;">
+            <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.22);border-radius:11px;padding:12px 14px;">
+              <div style="font-size:10px;font-weight:800;color:var(--gbr);letter-spacing:.5px;margin-bottom:6px;">✅ Healthy Ratios</div>
+              <div style="font-family:monospace;font-size:12.5px;color:var(--tx);font-weight:700;margin-bottom:4px;">Consol PAT ÷ Standalone PAT ≥ 1.0</div>
+              <div style="font-size:11.5px;color:var(--ts);line-height:1.5;">Subsidiaries are adding profit — consolidated is better than standalone. Clean structure.</div>
+              <div style="font-family:monospace;font-size:12.5px;color:var(--tx);font-weight:700;margin-top:8px;margin-bottom:4px;">Consol Debt ÷ Standalone Debt &lt; 2×</div>
+              <div style="font-size:11.5px;color:var(--ts);line-height:1.5;">Subsidiary borrowings manageable relative to parent. No hidden debt iceberg.</div>
+            </div>
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:11px;padding:12px 14px;">
+              <div style="font-size:10px;font-weight:800;color:var(--red);letter-spacing:.5px;margin-bottom:6px;">🚨 Warning Ratios</div>
+              <div style="font-family:monospace;font-size:12.5px;color:var(--tx);font-weight:700;margin-bottom:4px;">Consol PAT ÷ Standalone PAT &lt; 0.8</div>
+              <div style="font-size:11.5px;color:var(--ts);line-height:1.5;">Subsidiaries losing 20%+ of parent's profit. Gap = subsidiary losses absorbed by group every year.</div>
+              <div style="font-family:monospace;font-size:12.5px;color:var(--tx);font-weight:700;margin-top:8px;margin-bottom:4px;">Consol Debt ÷ Standalone Debt &gt; 3×</div>
+              <div style="font-size:11.5px;color:var(--ts);line-height:1.5;">Subsidiaries are the primary borrowers. Standalone balance sheet is misleading.</div>
+            </div>
+          </div>
+          <div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:10px 14px;font-size:12.5px;color:var(--ts);line-height:1.5;"><strong style="color:var(--p);">Historical examples:</strong> IL&FS Consolidated Debt ÷ Standalone Debt exceeded 15× for years. Motherson Consolidated Revenue = 11.4× standalone. Any ratio above 5× demands reading the subsidiary schedule in the annual report to understand what entities are driving the gap.</div>
+        </div>
+      </div>
+
+      <!-- TRICK 2: NCI 3-Year Trend -->
+      <div class="rv d4" style="border-radius:18px;overflow:hidden;border:2px solid rgba(22,163,74,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--gpale),#ecfdf5);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--gbr),var(--gh));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(22,163,74,.3);">📊</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:3px;">Trick #2 — 90 Seconds · Screener Consolidated Balance Sheet</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "NCI Straight Line" — Track Minority Interest Over 3 Years</div>
+          </div>
+          <div style="background:rgba(22,163,74,.1);color:var(--gbr);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">90 seconds</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Screener.in → Balance Sheet (Consolidated) → Equity section → Find <strong>"Non-Controlling Interests"</strong> or <strong>"Minority Interest"</strong>. Write down the value for FY2022, FY2023, FY2024. Draw an imaginary straight line through the three numbers.<br><br>NCI behaves like a thermometer for subsidiary health — it goes up when subsidiaries earn and down when they lose. You don't need to read a single accounting note to interpret it.</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;">
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--gpale);border:1.5px solid rgba(22,163,74,.22);border-radius:11px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">📈</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--gbr);margin-bottom:3px;">NCI Growing Year-on-Year</div><div style="font-size:12px;color:var(--ts);line-height:1.5;">Subsidiaries with minority partners are earning money. Minority equity increases through retained profits. Example: Bajaj Finance NCI growing as the company compounds profitably. Green flag — subsidiaries are healthy.</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--apale);border:1.5px solid rgba(217,119,6,.22);border-radius:11px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">➡️</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--ambr);margin-bottom:3px;">NCI Flat (No Change)</div><div style="font-size:12px;color:var(--ts);line-height:1.5;">Check if the company has bought out minority shareholders (check Notes for "acquisition of NCI"). If no buyout — subsidiaries with minority partners are breaking even or not growing. Watch closely next year.</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:11px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">📉</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--red);margin-bottom:3px;">NCI Declining or Approaching Zero</div><div style="font-size:12px;color:var(--ts);line-height:1.5;">Subsidiaries with minority shareholders are losing money. NCI equity is being eroded by losses absorbed by minority. When NCI hits zero — all future losses fall 100% on the parent. Vodafone Idea showed this pattern for 3 consecutive years before its equity crisis. Red flag — act now.</div></div>
+            </div>
+          </div>
+          <div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:10px 14px;font-size:12.5px;color:var(--ts);line-height:1.5;"><strong style="color:var(--gbr);">Quick math:</strong> If NCI declined by ₹X from FY2023 to FY2024 without a buyout — then ₹X ÷ (1 − parent's ownership %) is approximately the subsidiary's total loss for the year attributable to the NCI portion. Scale this up to find the total subsidiary loss impact on consolidated P&L.</div>
+        </div>
+      </div>
+
+      <!-- TRICK 3: Ctrl+F Related Party Advances -->
+      <div class="rv d5" style="border-radius:18px;overflow:hidden;border:2px solid rgba(220,38,38,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--rpale),#fff5f5);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--red),#f87171);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(220,38,38,.3);">🔎</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:3px;">Trick #3 — 2 Minutes · Annual Report PDF Ctrl+F</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Ctrl+F Related Party" — Find Money Flowing Through Subsidiary Routes</div>
+          </div>
+          <div style="background:rgba(220,38,38,.1);color:var(--red);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">2 minutes</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Download Annual Report PDF from Screener → Documents tab → Press <strong>Ctrl+F</strong> (or ⌘F on Mac, search icon on mobile) and search these exact phrases one by one. The Related Party Transactions Note (mandated under Ind AS 24) is where subsidiary-related money flows are disclosed.</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(8px,1.5vw,12px);margin-bottom:14px;">
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:10px;padding:10px 12px;">
+              <div style="font-family:monospace;font-size:13px;font-weight:700;color:var(--red);margin-bottom:4px;">"loans to subsidiaries"</div>
+              <div style="font-size:11.5px;color:var(--ts);">Money lent from parent to subs. If growing year on year and not being repaid — potential extraction or sub funding losses.</div>
+            </div>
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:10px;padding:10px 12px;">
+              <div style="font-family:monospace;font-size:13px;font-weight:700;color:var(--red);margin-bottom:4px;">"corporate guarantees"</div>
+              <div style="font-size:11.5px;color:var(--ts);">Parent guaranteeing sub's bank loans. If sub defaults, parent pays. Check total guarantee amount vs parent net worth.</div>
+            </div>
+            <div style="background:var(--apale);border:1.5px solid rgba(217,119,6,.2);border-radius:10px;padding:10px 12px;">
+              <div style="font-family:monospace;font-size:13px;font-weight:700;color:var(--ambr);margin-bottom:4px;">"advances to related"</div>
+              <div style="font-size:11.5px;color:var(--ts);">Advances to promoter-affiliated entities via subsidiary routes. Compare to prior year — growing = red flag.</div>
+            </div>
+            <div style="background:var(--apale);border:1.5px solid rgba(217,119,6,.2);border-radius:10px;padding:10px 12px;">
+              <div style="font-family:monospace;font-size:13px;font-weight:700;color:var(--ambr);margin-bottom:4px;">"dividend from subsidiary"</div>
+              <div style="font-size:11.5px;color:var(--ts);">Upstream dividend. If sub is loss-making but still paying dividend — it's using past reserves or debt to fund the parent. Investigate.</div>
+            </div>
+            <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:10px;padding:10px 12px;">
+              <div style="font-family:monospace;font-size:13px;font-weight:700;color:var(--gbr);margin-bottom:4px;">"amount due from"</div>
+              <div style="font-size:11.5px;color:var(--ts);">Track outstanding amounts between parent and subs. Stable or declining = normal. Growing = investigate what's outstanding and why.</div>
+            </div>
+            <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:10px;padding:10px 12px;">
+              <div style="font-family:monospace;font-size:13px;font-weight:700;color:var(--gbr);margin-bottom:4px;">"management fees"</div>
+              <div style="font-size:11.5px;color:var(--ts);">Parent charging subs for services. If excessive vs sub's own revenue — potential value extraction from minority shareholders of sub.</div>
+            </div>
+          </div>
+          <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:10px;padding:10px 14px;font-size:12.5px;color:var(--ts);line-height:1.5;"><strong style="color:var(--gbr);">Zero hits on the red terms = best outcome.</strong> A Related Party note where transactions between parent and subsidiaries are only routine (management services, common employee costs, treasury operations) is clean. When you find loans, guarantees, and advances all growing simultaneously — that combination demands deep investigation before investing.</div>
+        </div>
+      </div>
+
+      <!-- TRICK 4: BSE Shareholding + Pledge -->
+      <div class="rv d6" style="border-radius:18px;overflow:hidden;border:2px solid rgba(217,119,6,.26);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--apale),#fffcf0);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--ambr),var(--amb));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.3);">📋</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ambr);margin-bottom:3px;">Trick #4 — 90 Seconds · BSE Website + Screener</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Promoter Pledge + CFO/PAT" Triple Alarm System</div>
+          </div>
+          <div style="background:rgba(217,119,6,.1);color:var(--ambr);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">90 seconds</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:16px;">Three signals — each visible in 30 seconds each — that together form the most reliable early warning system for subsidiary-driven financial distress. When all three are present simultaneously, the probability of hidden subsidiary problems is very high.</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:12px;padding:12px 14px;">
+              <div style="width:32px;height:32px;min-width:32px;border-radius:8px;background:var(--red);color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">A</div>
+              <div><div style="font-size:13px;font-weight:800;color:var(--red);margin-bottom:3px;">Promoter Pledge &gt;20% (BSE: Shareholding → Reg 31)</div><div style="font-size:12px;color:var(--ts);line-height:1.5;">BSE → Company → Shareholding Pattern → Latest filing → "Shares pledged or otherwise encumbered." Above 20% = promoter under financial pressure. Above 50% = extreme distress. Free, public, updated quarterly.</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:12px;padding:12px 14px;">
+              <div style="width:32px;height:32px;min-width:32px;border-radius:8px;background:var(--red);color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">B</div>
+              <div><div style="font-size:13px;font-weight:800;color:var(--red);margin-bottom:3px;">Consolidated CFO/PAT &lt;0.7× (Screener: Cash Flow)</div><div style="font-size:12px;color:var(--ts);line-height:1.5;">Screener → Cash Flow tab (Consolidated) → Cash from Operations ÷ Net Profit. Below 0.7× = profit not converting to cash. Subsidiary losses or related-party cash extraction often show up here before they appear anywhere else.</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:12px;padding:12px 14px;">
+              <div style="width:32px;height:32px;min-width:32px;border-radius:8px;background:var(--red);color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">C</div>
+              <div><div style="font-size:13px;font-weight:800;color:var(--red);margin-bottom:3px;">Growing "Other Current Assets" in Consolidated (Screener: Balance Sheet)</div><div style="font-size:12px;color:var(--ts);line-height:1.5;">Screener → Balance Sheet (Consolidated) → "Other Current Assets." This line often hides advances to subsidiaries, loans to related parties, and inter-company receivables. Growing faster than revenue = money accumulating outside the normal business cycle.</div></div>
+            </div>
+          </div>
+          <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:10px;padding:11px 14px;font-size:12.5px;color:var(--ts);line-height:1.5;"><strong style="color:var(--red);">A + B + C all present = triple alarm.</strong> CG Power had all three in FY2018–19. DHFL had all three. Gitanjali had all three. Any single signal = yellow flag, monitor quarterly. All three together = stop, investigate, and do not invest until the subsidiary structure is fully understood through the annual report.</div>
+        </div>
+      </div>
+
+      <!-- TRICK 5: The Subsidiary Count + Goodwill Check -->
+      <div class="rv d7" style="border-radius:18px;overflow:hidden;border:2px solid rgba(109,40,217,.28);box-shadow:var(--shp);">
+        <div style="background:linear-gradient(135deg,var(--pxl),var(--pmd));padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--pl),var(--p));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(109,40,217,.3);">🏆</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:3px;">Trick #5 — The Master Check · Annual Report Schedule of Subsidiaries</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Subsidiary Count + Goodwill" — How Many Entities and What Did You Pay For Them?</div>
+          </div>
+          <div style="background:rgba(109,40,217,.1);color:var(--p);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">2 minutes</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:16px;">Annual Report → Ctrl+F <strong>"Schedule of Subsidiaries"</strong> or <strong>"Statement pursuant to Section 129"</strong>. This schedule lists every subsidiary, associate, and joint venture — with ownership %, capital, reserves, revenue, PAT, and "proposed dividend." It takes 2 minutes to read and tells you the health of every entity in the group at a glance.<br><br>Simultaneously, check the Consolidated Balance Sheet for <strong>"Goodwill on Consolidation"</strong> — the premium paid above book value when subsidiaries were acquired. Large goodwill that isn't being tested for impairment despite deteriorating subsidiary performance = overstated assets.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.5vw,16px);margin-bottom:14px;">
+            <div style="background:var(--sf);border:1px solid var(--bd);border-radius:11px;padding:12px 14px;">
+              <div style="font-size:10px;font-weight:700;color:var(--p);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">📋 What to Check in Sub Schedule</div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <div style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ts);"><span style="width:18px;height:18px;min-width:18px;border-radius:4px;background:var(--p);color:#fff;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">1</span>Which subs have negative reserves? (Accumulated losses)</div>
+                <div style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ts);"><span style="width:18px;height:18px;min-width:18px;border-radius:4px;background:var(--p);color:#fff;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">2</span>Which subs show zero or negative PAT for 2+ years?</div>
+                <div style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ts);"><span style="width:18px;height:18px;min-width:18px;border-radius:4px;background:var(--p);color:#fff;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">3</span>New subsidiaries added in Q4 that weren't there last year?</div>
+                <div style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ts);"><span style="width:18px;height:18px;min-width:18px;border-radius:4px;background:var(--p);color:#fff;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">4</span>Subsidiaries removed vs prior year? (Deconsolidation of problems?)</div>
+              </div>
+            </div>
+            <div style="background:var(--sf);border:1px solid var(--bd);border-radius:11px;padding:12px 14px;">
+              <div style="font-size:10px;font-weight:700;color:var(--ambr);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">📊 Goodwill Warning Signs</div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <div style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ts);"><span style="width:18px;height:18px;min-width:18px;border-radius:4px;background:var(--ambr);color:#fff;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">A</span>Goodwill &gt;15% of Total Assets = large acquisition premium sitting on balance sheet</div>
+                <div style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ts);"><span style="width:18px;height:18px;min-width:18px;border-radius:4px;background:var(--ambr);color:#fff;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">B</span>Goodwill unchanged for 3 years despite acquired sub losing money = impairment avoided</div>
+                <div style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ts);"><span style="width:18px;height:18px;min-width:18px;border-radius:4px;background:var(--ambr);color:#fff;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">C</span>Goodwill impaired by large amount = management finally admits overpaid for acquisition</div>
+              </div>
+            </div>
+          </div>
+          <div style="background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:11px;padding:12px 16px;">
+            <div style="font-size:12.5px;font-weight:800;color:var(--tx);margin-bottom:5px;">🏆 Complete 8-Minute Subsidiary Risk Checklist</div>
+            <div style="font-size:12px;color:var(--ts);line-height:1.65;">
+              <strong>60s:</strong> Screener toggle → PAT gap and Debt gap ratios → flag if PAT &lt;0.8× or Debt &gt;3×<br>
+              <strong>90s:</strong> NCI 3-year trend on consolidated balance sheet → declining = sub losses<br>
+              <strong>2min:</strong> Ctrl+F annual report → "loans to subsidiaries" + "corporate guarantees" + "advances to related"<br>
+              <strong>90s:</strong> BSE pledge data + consolidated CFO/PAT + "Other Current Assets" growth → triple alarm if all present<br>
+              <strong>2min:</strong> Schedule of Subsidiaries → loss-making subs + goodwill check<br>
+              <strong>Result: You now know whether the subsidiary structure is a value creator or a risk vehicle — before reading a single word of management commentary.</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="caveat-box rv d7">
+      <div class="caveat-icon">⚡</div>
+      <div class="caveat-body">
+        <div class="caveat-label">The One-Line Subsidiary Risk Rule</div>
+        <div class="caveat-title">If Consolidated Debt is 3× Standalone Debt — Your Standalone Analysis Is Wrong. Full Stop.</div>
+        <div class="caveat-desc">The standalone balance sheet of any company with significant subsidiaries is an incomplete picture of that company's true financial position. Subsidiary debt is real debt — it comes with interest obligations, covenants, and maturity risk. Subsidiary losses are real value destruction — they reduce the group's equity year after year. Related-party advances through subsidiaries are real cash outflows — regardless of how they're classified.<br><br>The single most important financial habit for any serious investor in Indian equities: toggle to consolidated on Screener.in before reading any financial number. Calculate the PAT ratio (consolidated ÷ standalone) and the debt ratio (consolidated ÷ standalone). If both are close to 1.0 — the subsidiary structure is simple and clean. If either diverges significantly — the subsidiary structure is telling you something important that the standalone statement is hiding.<br><br>IL&FS had a debt ratio above 15×. The information was in the consolidated accounts. It was free. It was publicly filed. Nobody was reading it — or rather, nobody was comparing it to the standalone. The eight minutes these tricks take would have prevented enormous capital loss. The question is never whether the information exists. It always does. The question is whether you are looking.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ NEXT CHAPTER ══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue your learning journey →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">For educational purposes only. Figures cited are illustrative approximations for teaching. Always verify from official Annual Reports and BSE/NSE filings. Subsidiary structures and NCI can be complex — consult a Chartered Accountant or SEBI-registered advisor for specific situations. Historical cases cited (IL&FS, Jet Airways, Gitanjali, CG Power, Vodafone Idea) are based on publicly reported SEBI/court proceedings and regulatory filings. All equity investments carry market risk.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+    },{threshold:.04,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  } else{els.forEach(function(el){el.classList.add('on');});}
+})();
+document.addEventListener('touchstart',function(){},{passive:true});
+document.addEventListener('touchmove',function(){},{passive:true});
+document.addEventListener('touchend',function(){},{passive:true});
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('on');});
+}
+document.body.style.overscrollBehavior='none';
+if(document.fonts&&document.fonts.ready){
+  document.fonts.ready.then(function(){
+    document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});
+  });
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('a,button,.dmbtn,.nxt-btn,.concept-card,.risk-card,.ex-block,.trick-card').forEach(function(el){
+    el.style.touchAction='manipulation';
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CFO/PAT Ratio">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>CFO/PAT Ratio & Cash Conversion Quality · Cash Flow Statement Analysis · FA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes barGrow{from{width:0}to{width:var(--bw,100%)}}
+@keyframes pulseRing{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.06);opacity:.4}}
+
+/* ── LAYOUT ── */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(26px,6.5vw,84px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:14px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(12px,2.8vw,38px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:900px;}
+.hsi{padding:clamp(10px,1.8vw,20px) clamp(8px,1.8vw,16px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:76px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(9px,1.3vw,14px);font-weight:900;letter-spacing:-.3px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.r{color:var(--red);}
+.hsl{font-size:clamp(7px,.85vw,9px);font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+
+/* ── KLO BANNER ── */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.09);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+
+/* ── RATIO SCALE VISUAL ── */
+.ratio-scale{background:var(--wh);border:2px solid var(--bd);border-radius:22px;padding:clamp(18px,3vw,32px);box-shadow:var(--shp);margin-bottom:40px;}
+.rs-title{font-size:13px;font-weight:700;color:var(--p);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.rs-title::before{content:'';width:28px;height:3px;background:linear-gradient(90deg,var(--p),var(--ph));border-radius:2px;}
+.rs-track{position:relative;height:16px;border-radius:8px;background:linear-gradient(90deg,var(--red) 0%,var(--amb) 25%,#eab308 40%,var(--g) 65%,var(--gbr) 100%);margin-bottom:10px;overflow:visible;}
+.rs-markers{display:flex;justify-content:space-between;margin-bottom:22px;position:relative;}
+.rs-mark{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.rs-val{font-size:clamp(10px,1.4vw,12px);font-weight:900;color:var(--tx);}
+.rs-lbl{font-size:9px;font-weight:600;color:var(--tl);text-transform:uppercase;letter-spacing:.5px;text-align:center;max-width:60px;}
+.rs-bands{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,12px);}
+.rs-band{border-radius:13px;padding:clamp(12px,2vw,16px);text-align:center;}
+.rb-critical{background:linear-gradient(135deg,var(--rpale),#fff5f5);border:1.5px solid rgba(220,38,38,.25);}
+.rb-watch{background:linear-gradient(135deg,var(--apale),#fefce8);border:1.5px solid rgba(217,119,6,.25);}
+.rb-good{background:linear-gradient(135deg,#fefce8,var(--gpale));border:1.5px solid rgba(22,163,74,.22);}
+.rb-elite{background:linear-gradient(135deg,var(--gpale),#ecfdf5);border:1.5px solid rgba(22,163,74,.35);}
+.rb-range{font-size:clamp(16px,2.5vw,22px);font-weight:900;margin-bottom:4px;}
+.rb-name{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;}
+.rb-desc{font-size:11px;color:var(--ts);line-height:1.45;}
+.rb-eg{font-size:10px;font-weight:700;margin-top:6px;}
+
+/* ── INFOGRAPHIC ── */
+.infographic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.infographic-svg{width:100%;max-width:640px;margin:0 auto;animation:floatB 4.5s ease-in-out infinite;}
+.infographic-cap{font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;max-width:560px;margin:0 auto;}
+
+/* ── DRIVER CARDS (2×3 grid) ── */
+.driver-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,20px);margin-bottom:40px;}
+.driver-card{border-radius:18px;padding:clamp(14px,2.5vw,22px);border:2px solid;transition:transform .22s,box-shadow .22s;}
+.driver-card:hover{transform:translateY(-3px);box-shadow:var(--shp);}
+.dc-dep{border-color:rgba(109,40,217,.28);background:linear-gradient(158deg,var(--pxs),#fdfcff);}
+.dc-inv{border-color:rgba(220,38,38,.22);background:linear-gradient(158deg,var(--rpale),#fff8f8);}
+.dc-rec{border-color:rgba(220,38,38,.25);background:linear-gradient(158deg,#fef2f2,#fff5f5);}
+.dc-pay{border-color:rgba(22,163,74,.28);background:linear-gradient(158deg,var(--gpale),#f9fff9);}
+.dc-tax{border-color:rgba(217,119,6,.22);background:linear-gradient(158deg,var(--apale),#fffcf0);}
+.dc-other{border-color:rgba(2,132,199,.2);background:linear-gradient(158deg,var(--skypale),#f8fcff);}
+.dc-ico{font-size:clamp(22px,3.5vw,32px);margin-bottom:8px;animation:floatB 3.8s ease-in-out infinite;}
+.dc-name{font-size:clamp(13px,1.7vw,15px);font-weight:900;color:var(--tx);margin-bottom:4px;}
+.dc-badge{display:inline-flex;padding:3px 9px;border-radius:7px;font-size:10px;font-weight:800;margin-bottom:8px;}
+.db-p{background:rgba(109,40,217,.1);color:var(--p);}
+.db-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.db-r{background:rgba(220,38,38,.1);color:var(--red);}
+.db-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.db-s{background:rgba(2,132,199,.1);color:var(--sky);}
+.dc-body{font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.6;}
+.dc-eg{margin-top:8px;padding:7px 10px;border-radius:8px;font-size:11.5px;font-weight:600;line-height:1.45;}
+.eg-g{background:rgba(22,163,74,.07);color:var(--gbr);}
+.eg-r{background:rgba(220,38,38,.07);color:var(--red);}
+.eg-p{background:rgba(109,40,217,.07);color:var(--p);}
+
+/* ── BAR CHART COMPARISON ── */
+.bar-chart-wrap{background:var(--wh);border:2px solid var(--bd);border-radius:22px;padding:clamp(18px,3vw,32px);box-shadow:var(--shc);margin-bottom:40px;}
+.bc-title{font-size:13px;font-weight:700;color:var(--p);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.bc-title::before{content:'';width:28px;height:3px;background:linear-gradient(90deg,var(--p),var(--ph));border-radius:2px;}
+.bc-row{display:flex;align-items:center;gap:clamp(8px,1.5vw,14px);margin-bottom:12px;}
+.bc-label{width:clamp(100px,18vw,160px);flex-shrink:0;font-size:clamp(10.5px,1.3vw,12.5px);font-weight:700;color:var(--tx);text-align:right;line-height:1.3;}
+.bc-bars{flex:1;display:flex;flex-direction:column;gap:4px;}
+.bc-bar-wrap{display:flex;align-items:center;gap:8px;}
+.bc-bar{height:22px;border-radius:6px;display:flex;align-items:center;padding:0 8px;min-width:36px;transition:width .8s cubic-bezier(.4,0,.2,1);}
+.bc-bar span{font-size:10px;font-weight:800;color:#fff;white-space:nowrap;}
+.bc-bar-lbl{font-size:10px;color:var(--tl);white-space:nowrap;}
+.bb-cfo{background:linear-gradient(90deg,var(--gbr),var(--gh));}
+.bb-pat{background:linear-gradient(90deg,var(--p),var(--ph));}
+.bb-neg{background:linear-gradient(90deg,var(--red),#f87171);}
+.bc-sep{height:1px;background:var(--bd);margin:8px 0;}
+.bc-legend{display:flex;gap:clamp(12px,2vw,24px);flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid var(--bd);}
+.bl-item{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--ts);}
+.bl-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+
+/* ── SIGNAL GRID ── */
+.signal-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,28px);}
+.sig-box{border-radius:18px;padding:clamp(18px,3vw,28px);}
+.sig-good{background:linear-gradient(135deg,var(--gpale),#ecfdf5);border:1.5px solid rgba(22,163,74,.25);}
+.sig-bad{background:linear-gradient(135deg,var(--rpale),#fff5f5);border:1.5px solid rgba(220,38,38,.22);}
+.sig-title{font-size:clamp(14px,1.9vw,18px);font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.sig-title.g{color:var(--gbr);}
+.sig-title.r{color:var(--red);}
+.sig-list{display:flex;flex-direction:column;gap:9px;}
+.sig-item{display:flex;align-items:flex-start;gap:11px;background:rgba(255,255,255,.74);border-radius:11px;padding:11px 13px;}
+.sig-dot{width:26px;height:26px;min-width:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.sig-dot.g{background:rgba(22,163,74,.15);}
+.sig-dot.r{background:rgba(220,38,38,.12);}
+.sig-text h4{font-size:12.5px;font-weight:800;color:var(--tx);margin-bottom:2px;}
+.sig-text p{font-size:11.5px;color:var(--ts);line-height:1.5;}
+
+/* ── COMPANY BLOCK ── */
+.company-block{border-radius:18px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);margin-bottom:clamp(22px,3.5vw,32px);}
+.cb-header{display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,24px);gap:12px;flex-wrap:wrap;}
+.cb-good{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.cb-bad{background:linear-gradient(135deg,#fef2f2,#fff5f5);}
+.cb-amb{background:linear-gradient(135deg,var(--apale),#fffdf5);}
+.cb-co{display:flex;align-items:center;gap:12px;}
+.cb-logo{width:48px;height:48px;min-width:48px;border-radius:12px;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cb-name{font-size:clamp(13px,1.8vw,17px);font-weight:900;color:var(--tx);line-height:1.2;}
+.cb-sub{font-size:11px;color:var(--tl);margin-top:3px;}
+.cb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.cb-badge{padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;}
+.cb-b-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.cb-b-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.cb-b-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.cb-insight{padding:12px 16px;font-size:12px;color:var(--ts);line-height:1.6;}
+.ci-good{background:rgba(22,163,74,.05);border-top:1px solid rgba(22,163,74,.15);border-left:3px solid var(--gbr);}
+.ci-bad{background:rgba(220,38,38,.04);border-top:1px solid rgba(220,38,38,.12);border-left:3px solid var(--red);}
+.ci-amb{background:rgba(217,119,6,.05);border-top:1px solid rgba(217,119,6,.15);border-left:3px solid var(--amb);}
+
+/* ── TABLE ── */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.rt{width:100%;border-collapse:collapse;min-width:500px;}
+.rt th{background:linear-gradient(135deg,rgba(109,40,217,.07),rgba(109,40,217,.03));padding:8px 13px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:right;white-space:nowrap;}
+.rt th:first-child{text-align:left;}
+.rt td{padding:8px 13px;font-size:12px;color:var(--ts);border-bottom:1px solid rgba(109,40,217,.05);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.rt td:first-child{text-align:left;font-weight:700;color:var(--tx);}
+.rt tr:last-child td{border-bottom:none;}
+.rt tr.cfo-r td:first-child{color:var(--gbr);}
+.rt tr.pat-r td:first-child{color:var(--p);}
+.rt tr.ratio-r td{font-weight:900;background:rgba(109,40,217,.03);}
+.rt tr.total-row td{font-weight:900;background:rgba(109,40,217,.04);border-top:1.5px solid var(--bd);}
+.rt tr.bad-row td{color:var(--red);}
+.rt tr.good-row td{color:var(--gbr);font-weight:800;}
+.rt tr.section-header td{background:rgba(109,40,217,.04);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);padding:7px 13px 3px;}
+.rt tr:hover td{background:var(--pxs);}
+.col-sticky{position:sticky;left:0;background:var(--wh);z-index:2;box-shadow:2px 0 5px rgba(109,40,217,.05);}
+.rt tr.total-row .col-sticky{background:rgba(109,40,217,.04);}
+.rt tr.section-header .col-sticky{background:rgba(109,40,217,.04);}
+.ratio-pill{display:inline-flex;padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:900;}
+.rp-elite{background:rgba(22,163,74,.15);color:var(--gbr);}
+.rp-good{background:rgba(109,40,217,.1);color:var(--p);}
+.rp-watch{background:rgba(217,119,6,.12);color:var(--ambr);}
+.rp-bad{background:rgba(220,38,38,.1);color:var(--red);}
+
+/* ── CAVEAT ── */
+.caveat-box{margin-top:32px;background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:16px;}
+.caveat-icon{width:44px;height:44px;min-width:44px;border-radius:13px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(109,40,217,.28);}
+.caveat-body{flex:1;min-width:0;}
+.caveat-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.caveat-title{font-size:clamp(13px,1.5vw,15px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.caveat-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+
+/* ── DEMAT BANNER ── */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* ── NEXT ── */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-banner::after{content:'';position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;display:inline-block;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+
+/* ═══ RESPONSIVE — 11 BREAKPOINTS ═══ */
+img,svg{max-width:100%;height:auto;display:block;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.driver-grid{grid-template-columns:repeat(3,1fr);}.rs-bands{grid-template-columns:repeat(4,1fr);}}
+@media(max-width:900px){
+  .driver-grid{grid-template-columns:repeat(2,1fr);}
+  .signal-grid{grid-template-columns:1fr;}
+  .rs-bands{grid-template-columns:repeat(2,1fr);}
+  .infographic-svg{max-width:420px;}
+  .bc-label{width:clamp(80px,22vw,130px);}
+}
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .hst{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .caveat-box{flex-direction:column;gap:12px;}
+  .caveat-icon{width:40px;height:40px;min-width:40px;font-size:20px;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;}
+  .dmfeats{gap:10px 20px;}
+  svg{overflow:visible;max-width:100%;}
+  .cb-header{flex-direction:column;align-items:flex-start;}
+  .cb-badges{margin-top:4px;}
+  .driver-card{padding:14px;}
+  .ratio-scale{padding:16px;}
+  .bar-chart-wrap{padding:16px;}
+}
+@media(max-width:640px){
+  .driver-grid{grid-template-columns:1fr 1fr;}
+  .signal-grid{grid-template-columns:1fr;}
+  .rs-bands{grid-template-columns:1fr 1fr;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .infographic-svg{max-width:100%;}
+  .rt th,.rt td{padding:7px 10px;font-size:10.5px;}
+  .bc-label{width:clamp(70px,25vw,110px);font-size:10px;}
+  .bc-bar span{font-size:9px;}
+}
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.2px;}.hdesc{font-size:13px;}.hsub{font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .h2{letter-spacing:-1px;}.lead{font-size:13.5px;}
+  .driver-grid{grid-template-columns:1fr;}
+  .rs-bands{grid-template-columns:1fr 1fr;}
+  .driver-card{padding:13px;}.dc-ico{animation:none;font-size:24px;}
+  .cb-name{font-size:13px;}.cb-logo{width:40px;height:40px;min-width:40px;font-size:18px;}
+  .caveat-title{font-size:13px;}.caveat-desc{font-size:12.5px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+  .bc-label{font-size:9.5px;width:68px;}
+}
+@media(max-width:360px){
+  .w{padding:26px 12px;}.hh1{font-size:clamp(22px,8.5vw,36px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}.hsi:nth-last-child(-n+2){border-bottom:1px solid var(--bd) !important;}.hsi:last-child{border-bottom:none !important;}
+  .kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}.nxt-btn{font-size:12px;padding:10px 14px;}
+  .rs-bands{grid-template-columns:1fr;}
+  .driver-grid{grid-template-columns:1fr;}
+}
+
+/* TOUCH */
+@media(hover:none) and (pointer:coarse){
+  .driver-card:hover,.company-block:hover{transform:none !important;box-shadow:var(--shc) !important;}
+  .driver-card:active{transform:scale(.98);transition:transform .08s;}
+  .dmbtn:active{transform:scale(.97);}.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn,.driver-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,.dc-name{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.lead,.caveat-desc,.dc-body,.cb-insight,.sig-text p,.caveat-desc{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+}
+
+/* iOS */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.hsv,.hsv.g,.h2 .hp,.h2 .hg{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn,.driver-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .table-scroll{-webkit-overflow-scrolling:touch;}
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+}
+
+/* ANDROID HiDPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .driver-card,.company-block,.caveat-box,.ratio-scale,.bar-chart-wrap{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .infographic-svg,.klo-icon{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}.infographic-svg,.klo-icon,.dc-ico{animation:none !important;}
+  .bc-bar{transition:none !important;}
+}
+
+/* PRINT */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}.rv{opacity:1;transform:none;}
+  body{color:#000;}.w{padding:20px;}.table-scroll{overflow:visible;}.rt{min-width:0;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="vbadge">Cash Flow Statement Analysis · FA</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>CFO/PAT Ratio &amp; Cash Conversion Quality</div>
+  <h1 class="hh1">
+    <span class="line1">CFO ÷ PAT Ratio</span>
+    <span class="line2">Cash Quality</span>
+    <span class="line3">Is the Profit Real — or Just on Paper?</span>
+  </h1>
+  <div class="hsub">Cash Conversion · Earnings Quality · Working Capital · Accrual Gap · Quality Score</div>
+  <p class="hdesc">A company reports ₹1,000 Cr profit every year. But is it collecting that money in cash? The CFO/PAT ratio answers this in one number — and separates elite earnings from accounting illusions.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv">CFO/PAT</div><div class="hsl">Quality Ratio</div></div>
+    <div class="hsi"><div class="hsv g">&gt;1.0×</div><div class="hsl">Elite Quality</div></div>
+    <div class="hsi"><div class="hsv">0.8–1.0×</div><div class="hsl">Good Quality</div></div>
+    <div class="hsi"><div class="hsv" style="color:var(--ambr);">0.5–0.8×</div><div class="hsl">Watch Closely</div></div>
+    <div class="hsi"><div class="hsv r">&lt;0.5×</div><div class="hsl">Red Flag</div></div>
+  </div>
+</section>
+
+
+<!-- ══ 01 — KLO ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">The Single Most Powerful <span class="hp">Earnings Quality Check</span></h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">🔬</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">CFO/PAT Ratio = Operating Cash Flow ÷ Net Profit After Tax. It measures how much of every rupee of reported profit actually arrives as cash in the company's bank account. A ratio consistently above 1.0× is the highest possible earnings quality signal.</div>
+        <div class="klo-desc">Imagine two kirana shops on the same street. Shop A (Nestle) sells Maggi to supermarkets that pay within 3 days. Shop B (HFCL) sells telecom equipment to government agencies that pay after 18 months. Both shops record ₹100 Cr "profit" today in their ledgers. But Shop A already has ₹100 Cr in its bank. Shop B has a ledger entry — and a prayer that the government will eventually pay.<br><br>This difference — between accrual profit (what's recorded) and cash collected (what's in the bank) — is precisely what the CFO/PAT ratio measures. Indian accounting standards (IndAS) require accrual accounting: revenue is recognised when earned, not when cash arrives. This is perfectly standard — but it means PAT can diverge dramatically from actual cash. The CFO/PAT ratio bridges this gap.<br><br>A ratio consistently above 1.0× means the company's cash collections <em>exceed</em> its reported profits — usually because it runs on negative working capital (like Nestle, where retailers pay before Nestle pays its suppliers). A ratio below 0.6× for multiple years means significant profits are stuck as uncollected receivables or inefficient inventory — a potential earnings quality problem that often precedes PAT downgrades.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-g">✅ &gt;1.0× = Elite quality</span>
+          <span class="kpill kpill-p">📊 0.8–1.0× = Strong</span>
+          <span class="kpill kpill-a">⚠️ 0.5–0.8× = Monitor WC</span>
+          <span class="kpill kpill-r">🚨 &lt;0.5× = Investigate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 02 — RATIO SCALE + INFOGRAPHIC + DRIVERS ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — The CFO/PAT Quality Scale</div>
+    <h2 class="h2 rv d2">What Each Ratio Range <span class="hp">Tells You</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">The CFO/PAT ratio runs on a scale from deeply negative (cash-destroying) to above 1.0× (cash-exceeding). Each band carries distinct implications for earnings quality and investment decision-making.</p>
+
+    <!-- Ratio scale -->
+    <div class="ratio-scale rv d3">
+      <div class="rs-title">CFO ÷ PAT Ratio — Quality Spectrum</div>
+      <div class="rs-track"></div>
+      <div class="rs-markers">
+        <div class="rs-mark"><span class="rs-val" style="color:var(--red);">−ve</span><span class="rs-lbl">Negative</span></div>
+        <div class="rs-mark"><span class="rs-val" style="color:var(--ambr);">0.5×</span><span class="rs-lbl">Watch</span></div>
+        <div class="rs-mark"><span class="rs-val" style="color:#eab308;">0.8×</span><span class="rs-lbl">Good</span></div>
+        <div class="rs-mark"><span class="rs-val" style="color:var(--gbr);">1.0×</span><span class="rs-lbl">Excellent</span></div>
+        <div class="rs-mark"><span class="rs-val" style="color:var(--gbr);">1.2×+</span><span class="rs-lbl">Elite</span></div>
+      </div>
+      <div class="rs-bands">
+        <div class="rs-band rb-critical">
+          <div class="rb-range" style="color:var(--red);">Below 0.5×</div>
+          <div class="rb-name" style="color:var(--red);">🚨 Critical</div>
+          <div class="rb-desc">More than half of profits never arrive as cash. Large working capital problems or CapEx exceeding operations. Investigate immediately — this level sustained for 2+ years almost always precedes earnings shocks.</div>
+          <div class="rb-eg" style="color:var(--red);">HFCL: −2.95× (worst case)</div>
+        </div>
+        <div class="rs-band rb-watch">
+          <div class="rb-range" style="color:var(--ambr);">0.5 – 0.8×</div>
+          <div class="rb-name" style="color:var(--ambr);">⚠️ Monitor</div>
+          <div class="rb-desc">A meaningful portion of profits is not yet cash. Could be temporary (CapEx cycle, working capital seasonal swing) or structural (aggressive revenue recognition). Track the trend — improving or worsening?</div>
+          <div class="rb-eg" style="color:var(--ambr);">Asian Paints FY22: 0.51× (CapEx surge)</div>
+        </div>
+        <div class="rs-band rb-good">
+          <div class="rb-range" style="color:var(--gbr);">0.8 – 1.0×</div>
+          <div class="rb-name" style="color:var(--gbr);">✅ Good</div>
+          <div class="rb-desc">Most profits are cash-backed. The 10–20% gap is typically explained by CapEx exceeding depreciation (growth investment) or small working capital movements. This is the range for most quality Indian manufacturers.</div>
+          <div class="rb-eg" style="color:var(--gbr);">Maruti FY25: 0.97× — nearly perfect</div>
+        </div>
+        <div class="rs-band rb-elite">
+          <div class="rb-range" style="color:var(--gbr);">Above 1.0×</div>
+          <div class="rb-name" style="color:var(--gbr);">🏆 Elite</div>
+          <div class="rb-desc">Cash exceeds reported profit — the hallmark of negative working capital businesses. Suppliers are effectively financing the company. This is the rarest and most desirable cash quality pattern in Indian manufacturing.</div>
+          <div class="rb-eg" style="color:var(--gbr);">Nestle: 1.10–1.19× every year</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SVG infographic -->
+    <div class="rv d4" style="margin-bottom:36px;">
+      <div class="infographic-wrap">
+        <!-- viewBox 0 0 640 540 — all coords verified within bounds -->
+        <svg class="infographic-svg" viewBox="0 0 640 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="640" height="540" rx="20" fill="#f5f3ff"/>
+
+          <!-- ── HEADER ── -->
+          <rect x="14" y="10" width="612" height="34" rx="11" fill="#6d28d9"/>
+          <text x="320" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="white">CFO/PAT Ratio — The Two-Factory Test</text>
+
+          <!-- ══ FACTORY A — left column x=14..200 ══ -->
+          <!-- Roof / chimney -->
+          <polygon points="14,80 107,44 200,80" fill="#22c55e" opacity=".88"/>
+          <rect x="56" y="50" width="11" height="30" rx="3" fill="#14532d"/>
+          <circle cx="62" cy="44" r="8" fill="#4ade80" opacity=".65"/>
+          <!-- Body -->
+          <rect x="14" y="80" width="186" height="112" rx="10" fill="#15803d" opacity=".88"/>
+          <!-- Windows row -->
+          <rect x="28" y="95" width="22" height="16" rx="3" fill="#bbf7d0" opacity=".55"/>
+          <rect x="58" y="95" width="22" height="16" rx="3" fill="#bbf7d0" opacity=".55"/>
+          <rect x="88" y="95" width="22" height="16" rx="3" fill="#bbf7d0" opacity=".55"/>
+          <rect x="118" y="95" width="22" height="16" rx="3" fill="#bbf7d0" opacity=".55"/>
+          <rect x="148" y="95" width="22" height="16" rx="3" fill="#bbf7d0" opacity=".55"/>
+          <!-- Factory sign -->
+          <rect x="38" y="128" width="124" height="22" rx="5" fill="#14532d"/>
+          <text x="100" y="143" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#4ade80">🏭 FACTORY A</text>
+          <!-- Cash icons inside -->
+          <text x="52" y="178" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="16">💵</text>
+          <text x="100" y="172" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="16">💵</text>
+          <text x="148" y="178" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="16">💵</text>
+
+          <!-- Factory A label block -->
+          <text x="107" y="212" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#15803d">🏭 Factory A</text>
+          <text x="107" y="228" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#3d3868">(Nestle — Consumer Brand)</text>
+
+          <!-- Factory A ratio badge -->
+          <rect x="18" y="235" width="178" height="42" rx="11" fill="#15803d" opacity=".92"/>
+          <text x="107" y="253" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">CFO/PAT = 1.15× 🏆</text>
+          <text x="107" y="269" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.82)">Cash &gt; Profit — suppliers fund ops</text>
+
+          <!-- ══ ANALYST — centre column x=210..430 ══ -->
+          <!-- Label bubble -->
+          <rect x="222" y="56" width="196" height="20" rx="8" fill="#ede9fe"/>
+          <text x="320" y="69" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">FA Analyst 🔍 compares both</text>
+          <!-- Magnifying glass -->
+          <circle cx="320" cy="94" r="18" fill="none" stroke="#6d28d9" stroke-width="3" opacity=".5"/>
+          <line x1="333" y1="107" x2="344" y2="118" stroke="#6d28d9" stroke-width="4" stroke-linecap="round" opacity=".5"/>
+          <!-- Head -->
+          <circle cx="320" cy="148" r="30" fill="#ede9fe"/>
+          <circle cx="309" cy="143" r="4" fill="#4c1d95"/>
+          <circle cx="331" cy="143" r="4" fill="#4c1d95"/>
+          <path d="M310 162 Q320 171 330 162" stroke="#4c1d95" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <!-- Body -->
+          <rect x="304" y="178" width="32" height="32" rx="7" fill="#6d28d9"/>
+          <!-- Arms -->
+          <rect x="270" y="186" width="34" height="9" rx="4" fill="#6d28d9" transform="rotate(-20 287 190)"/>
+          <rect x="336" y="186" width="34" height="9" rx="4" fill="#6d28d9" transform="rotate(20 353 190)"/>
+          <!-- Legs -->
+          <rect x="305" y="210" width="12" height="28" rx="4" fill="#4c1d95"/>
+          <rect x="323" y="210" width="12" height="28" rx="4" fill="#4c1d95"/>
+
+          <!-- ══ FACTORY B — right column x=440..626 ══ -->
+          <!-- Roof / chimney -->
+          <polygon points="440,80 533,44 626,80" fill="#f87171" opacity=".85"/>
+          <rect x="574" y="50" width="11" height="30" rx="3" fill="#7f1d1d"/>
+          <circle cx="580" cy="44" r="8" fill="#fca5a5" opacity=".65"/>
+          <!-- Body -->
+          <rect x="440" y="80" width="186" height="112" rx="10" fill="#dc2626" opacity=".85"/>
+          <!-- Windows -->
+          <rect x="454" y="95" width="22" height="16" rx="3" fill="#fecaca" opacity=".55"/>
+          <rect x="484" y="95" width="22" height="16" rx="3" fill="#fecaca" opacity=".55"/>
+          <rect x="514" y="95" width="22" height="16" rx="3" fill="#fecaca" opacity=".55"/>
+          <rect x="544" y="95" width="22" height="16" rx="3" fill="#fecaca" opacity=".55"/>
+          <rect x="574" y="95" width="22" height="16" rx="3" fill="#fecaca" opacity=".55"/>
+          <!-- Factory sign -->
+          <rect x="464" y="128" width="124" height="22" rx="5" fill="#7f1d1d"/>
+          <text x="526" y="143" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#fca5a5">🏭 FACTORY B</text>
+          <!-- Invoice stacks inside -->
+          <rect x="464" y="158" width="38" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+          <text x="483" y="177" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#dc2626" font-weight="700">📄 INV</text>
+          <rect x="510" y="155" width="38" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+          <text x="529" y="174" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#dc2626" font-weight="700">📄 INV</text>
+          <rect x="556" y="160" width="38" height="28" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+          <text x="575" y="179" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#dc2626" font-weight="700">📄 INV</text>
+
+          <!-- Factory B label block -->
+          <text x="533" y="212" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#dc2626">🏭 Factory B</text>
+          <text x="533" y="228" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#3d3868">(HFCL — Govt. Supplier)</text>
+
+          <!-- Factory B ratio badge -->
+          <rect x="444" y="235" width="178" height="42" rx="11" fill="#dc2626" opacity=".88"/>
+          <text x="533" y="253" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">CFO/PAT = −2.95× 🚨</text>
+          <text x="533" y="269" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.82)">₹4,016 Cr owed — cash never arrives</text>
+
+          <!-- ══ COMPARISON BAR ── y=292 ══ -->
+          <rect x="14" y="292" width="612" height="36" rx="11" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="320" y="314" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="#4c1d95">Both report ₹200 Cr PAT — Factory A has ₹230 Cr in cash · Factory B has ₹0</text>
+
+          <!-- ══ FORMULA + SCREENER ── y=340 ══ -->
+          <rect x="14" y="340" width="298" height="80" rx="13" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="163" y="362" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#4c1d95">📐 The Formula</text>
+          <rect x="26" y="369" width="274" height="40" rx="9" fill="#f5f3ff" stroke="#e5e1fb" stroke-width="1"/>
+          <text x="163" y="386" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#6d28d9">CFO/PAT = Operating Cash Flow</text>
+          <text x="163" y="403" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#6d28d9">÷ Net Profit After Tax</text>
+
+          <rect x="328" y="340" width="298" height="80" rx="13" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="477" y="362" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#4c1d95">📱 Find on Screener.in</text>
+          <text x="477" y="378" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">P&amp;L tab → Net Profit (PAT)</text>
+          <text x="477" y="393" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Cash Flow tab → Cash from Operations</text>
+          <text x="477" y="408" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#15803d">Divide CFO ÷ PAT = Quality Ratio ✅</text>
+
+          <!-- ══ DRIVERS ROW ── y=434 ══ -->
+          <rect x="14" y="434" width="612" height="92" rx="13" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="320" y="454" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#4c1d95">What Makes CFO/PAT High or Low?</text>
+          <!-- D&A box -->
+          <rect x="26" y="462" width="136" height="52" rx="9" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
+          <text x="94" y="479" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#15803d">🏗️ D&amp;A Add-back</text>
+          <text x="94" y="492" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Non-cash → always</text>
+          <text x="94" y="505" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">boosts CFO ↑</text>
+          <!-- Inventory box -->
+          <rect x="170" y="462" width="136" height="52" rx="9" fill="#fef2f2" stroke="#fecaca" stroke-width="1.2"/>
+          <text x="238" y="479" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#dc2626">📦 Inventory Rise</text>
+          <text x="238" y="492" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Cash spent on stock</text>
+          <text x="238" y="505" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">drains CFO ↓</text>
+          <!-- Receivables box -->
+          <rect x="314" y="462" width="136" height="52" rx="9" fill="#fef2f2" stroke="#fecaca" stroke-width="1.2"/>
+          <text x="382" y="479" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#dc2626">🧾 Receivables Rise</text>
+          <text x="382" y="492" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Revenue booked,</text>
+          <text x="382" y="505" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">cash not collected ↓</text>
+          <!-- Payables box -->
+          <rect x="458" y="462" width="154" height="52" rx="9" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
+          <text x="535" y="479" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#15803d">🤝 Payables Rise</text>
+          <text x="535" y="492" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Bought on credit,</text>
+          <text x="535" y="505" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">not yet paid → boosts ↑</text>
+        </svg>
+        <p class="infographic-cap">Factory A (Nestle-type) and Factory B (HFCL-type) both report ₹200 Cr profit. Factory A has ₹230 Cr cash because its retailers pay instantly and its suppliers wait 45 days. Factory B has zero cash because government clients take 18 months to pay. CFO/PAT ratio = 1.15× vs −2.95× — the most dramatic earnings quality gap visible in Indian manufacturing.</p>
+      </div>
+    </div>
+
+    <!-- Bar chart comparison -->
+    <div class="bar-chart-wrap rv d5">
+      <div class="bc-title">CFO vs PAT — 5 Company Comparison (FY2025 Estimates)</div>
+      <div class="bc-row">
+        <div class="bc-label">Nestle India</div>
+        <div class="bc-bars">
+          <div class="bc-bar-wrap"><div class="bc-bar bb-cfo" style="width:89%;"><span>CFO ₹4,480 Cr</span></div><div class="bc-bar-lbl">1.11× ✅</div></div>
+          <div class="bc-bar-wrap"><div class="bc-bar bb-pat" style="width:80%;"><span>PAT ₹4,025 Cr</span></div></div>
+        </div>
+      </div>
+      <div class="bc-sep"></div>
+      <div class="bc-row">
+        <div class="bc-label">Polycab India</div>
+        <div class="bc-bars">
+          <div class="bc-bar-wrap"><div class="bc-bar bb-cfo" style="width:54%;"><span>CFO ₹2,448 Cr</span></div><div class="bc-bar-lbl">0.90× ✅</div></div>
+          <div class="bc-bar-wrap"><div class="bc-bar bb-pat" style="width:60%;"><span>PAT ₹2,708 Cr</span></div></div>
+        </div>
+      </div>
+      <div class="bc-sep"></div>
+      <div class="bc-row">
+        <div class="bc-label">Maruti Suzuki</div>
+        <div class="bc-bars">
+          <div class="bc-bar-wrap"><div class="bc-bar bb-cfo" style="width:96%;"><span>CFO ₹16,112 Cr</span></div><div class="bc-bar-lbl">0.97× ✅</div></div>
+          <div class="bc-bar-wrap"><div class="bc-bar bb-pat" style="width:99%;"><span>PAT ₹16,622 Cr</span></div></div>
+        </div>
+      </div>
+      <div class="bc-sep"></div>
+      <div class="bc-row">
+        <div class="bc-label">Sun Pharma</div>
+        <div class="bc-bars">
+          <div class="bc-bar-wrap"><div class="bc-bar bb-cfo" style="width:68%;"><span>CFO ₹11,248 Cr</span></div><div class="bc-bar-lbl">0.90× ✅</div></div>
+          <div class="bc-bar-wrap"><div class="bc-bar bb-pat" style="width:75%;"><span>PAT ₹12,524 Cr</span></div></div>
+        </div>
+      </div>
+      <div class="bc-sep"></div>
+      <div class="bc-row">
+        <div class="bc-label">HFCL</div>
+        <div class="bc-bars">
+          <div class="bc-bar-wrap"><div class="bc-bar bb-neg" style="width:22%;"><span>CFO −₹172 Cr</span></div><div class="bc-bar-lbl" style="color:var(--red);">−0.86× 🚨</div></div>
+          <div class="bc-bar-wrap"><div class="bc-bar bb-pat" style="width:6%;"><span>PAT ₹200</span></div></div>
+        </div>
+      </div>
+      <div class="bc-legend">
+        <div class="bl-item"><div class="bl-dot" style="background:linear-gradient(90deg,var(--gbr),var(--gh));"></div>CFO (actual cash generated)</div>
+        <div class="bl-item"><div class="bl-dot" style="background:linear-gradient(90deg,var(--p),var(--ph));"></div>PAT (reported profit)</div>
+        <div class="bl-item"><div class="bl-dot" style="background:linear-gradient(90deg,var(--red),#f87171);"></div>Negative CFO</div>
+      </div>
+    </div>
+
+    <!-- 6 driver cards -->
+    <div class="tag rv d5" style="margin-bottom:12px;">What Drives the CFO/PAT Ratio — Six Key Factors</div>
+    <div class="driver-grid rv d5">
+      <div class="driver-card dc-dep">
+        <div class="dc-ico">🏗️</div>
+        <div class="dc-name">Depreciation &amp; Amortisation</div>
+        <div class="dc-badge db-p">Always raises CFO/PAT above PAT alone</div>
+        <div class="dc-body">Depreciation is an accounting expense that reduces PAT but involves zero cash leaving the bank account. The asset was purchased in a previous period (cash left then, in CFI). When preparing the cash flow statement, D&A is added back to PAT to compute CFO — because the cash never actually left this year.<br><br>For capital-heavy manufacturers (steel, cement, auto), D&A can be ₹2,000–8,000 Cr annually. This is the largest single "booster" of CFO above PAT. Even a business with thin operating margins can have a healthy CFO/PAT ratio if its D&A charge is large relative to profits. Maruti Suzuki adds back ₹2,012 Cr in D&A every year — this alone contributes 0.12× to the CFO/PAT ratio.</div>
+        <div class="dc-eg eg-p">Maruti: PAT ₹16,622 Cr + D&A ₹2,012 Cr = ₹18,634 Cr before WC changes. D&A adds ~0.12× to CFO/PAT ratio automatically.</div>
+      </div>
+
+      <div class="driver-card dc-inv">
+        <div class="dc-ico">📦</div>
+        <div class="dc-name">Inventory Changes</div>
+        <div class="dc-badge db-r">Rise = Drains CFO/PAT · Fall = Boosts it</div>
+        <div class="dc-body">When a company increases its inventory (buys more raw material, produces more goods than sold), cash leaves the bank but no P&L expense is recorded immediately — the cost sits on the balance sheet as an asset until goods are sold. This cash outflow reduces CFO without reducing PAT, lowering the CFO/PAT ratio.<br><br>Conversely, drawing down inventory (selling goods from previous period stock) generates cash revenue without a current-period cash cost — boosting CFO/PAT. For commodity manufacturers (copper cable makers like Polycab), inventory can swing ₹300–500 Cr in a single year based on commodity price cycles — creating dramatic but often temporary CFO/PAT distortions.</div>
+        <div class="dc-eg eg-r">Polycab FY22: Copper price spike → Inventory +₹385 Cr → CFO/PAT dropped to 0.83× (from 1.17×). Normalised within 2 years as copper stabilised and inventory unwound.</div>
+      </div>
+
+      <div class="driver-card dc-rec">
+        <div class="dc-ico">🧾</div>
+        <div class="dc-name">Trade Receivables Changes</div>
+        <div class="dc-badge db-r">Single largest structural driver of low CFO/PAT</div>
+        <div class="dc-body">Trade receivables represent revenue that has been recognised (PAT boosted) but not yet collected in cash. When receivables rise year after year, each year's PAT includes uncollected amounts that will reduce CFO — lowering the CFO/PAT ratio.<br><br>Rising receivables relative to revenue signals: (a) customers taking longer to pay (credit quality deteriorating), (b) company extending overly generous credit to boost sales, or (c) aggressive revenue recognition (booking revenue before goods are even delivered). Any of these is problematic. HFCL's receivables grew from ₹1,956 Cr to ₹4,016 Cr in 4 years — a doubling driven purely by government payment delays — making CFO/PAT deeply negative despite positive PAT every year.</div>
+        <div class="dc-eg eg-r">HFCL FY25: Receivables ₹4,016 Cr on revenue ₹4,268 Cr = 343 debtor days. More than a full year of revenue is stuck unpaid. CFO/PAT = −0.86× as a result.</div>
+      </div>
+
+      <div class="driver-card dc-pay">
+        <div class="dc-ico">🤝</div>
+        <div class="dc-name">Trade Payables Changes</div>
+        <div class="dc-badge db-g">Rise = Boosts CFO/PAT · Structural advantage</div>
+        <div class="dc-body">Trade payables represent amounts owed to suppliers that have been expensed in the P&L (reducing PAT) but not yet paid in cash. The cash is still in the bank — boosting CFO above PAT. When a company has strong bargaining power over suppliers, it can extend payment terms — creating a persistent structural boost to CFO/PAT.<br><br>Nestle India's massive payables advantage comes from its dominance: dairy farmers, packaging suppliers, and ingredient vendors cannot refuse Nestle's extended payment terms. This "free supplier financing" means Nestle collects from retailers before it pays its suppliers — cash arrives before it leaves — producing CFO/PAT consistently above 1.0×. This negative working capital model is only available to companies with genuine market power.</div>
+        <div class="dc-eg eg-g">Nestle's payable days: ~45–60 days. Receivable days: ~3–7 days. Net WC cycle: negative — cash arrives before it leaves. CFO/PAT = 1.11–1.19× structurally, not accidentally.</div>
+      </div>
+
+      <div class="driver-card dc-tax">
+        <div class="dc-ico">💸</div>
+        <div class="dc-name">Tax Timing Differences</div>
+        <div class="dc-badge db-a">Can temporarily distort CFO/PAT either way</div>
+        <div class="dc-body">The P&L tax expense is computed under accrual accounting — it includes current tax and deferred tax adjustments. The CFO shows actual cash paid to the government (advance tax + self-assessment). These differ because of:<br><br>(1) <strong>Advance tax</strong>: Companies pay tax in 4 instalments throughout the year — sometimes paying more Q1–Q3, less Q4, creating quarterly distortions that normalise annually.<br>(2) <strong>Deferred tax</strong>: A P&L-only adjustment for timing differences in asset depreciation between books and tax. Deferred tax expense doesn't involve any cash payment.<br><br>Always use annual data when computing CFO/PAT — quarterly tax timing creates misleading ratios.</div>
+        <div class="dc-eg eg-p">If the P&L shows ₹400 Cr tax expense but cash tax paid was ₹300 Cr (balance was deferred), CFO is boosted ₹100 Cr above what it "should" be — pushing CFO/PAT temporarily higher. Reverses in future years.</div>
+      </div>
+
+      <div class="driver-card dc-other">
+        <div class="dc-ico">⚙️</div>
+        <div class="dc-name">Other Non-Cash Items</div>
+        <div class="dc-badge db-s">Multiple small items · Read each carefully</div>
+        <div class="dc-body">Several other P&L items don't involve cash movements and must be reversed in the CFO computation:<br><br>• <strong>ESOP (Employee Stock Options) expense</strong>: P&L charge but no cash out — shares are issued, not cash. Added back in CFO.<br>• <strong>Unrealised forex gains/losses</strong>: Foreign currency assets/liabilities remeasured — P&L impact but no cash until settlement. Reversed in CFO.<br>• <strong>Impairment charges</strong>: Write-downs of asset values — P&L charge, zero cash. Added back.<br>• <strong>Provision for bad debts</strong>: Estimate of future credit losses — P&L charge, no cash yet. Added back when created, flows as actual write-off later.</div>
+        <div class="dc-eg eg-p">Company with ₹150 Cr ESOP expense (employees' stock options) → add back ₹150 Cr in CFO computation → CFO higher than simple cash view. This inflates CFO/PAT during ESOP-heavy periods — check if it's recurring or one-time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 03 — SIGNALS ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — What to Look For</div>
+    <h2 class="h2 rv d2"><span class="hg">Healthy Quality Signals</span> vs <span class="hp">Cash Conversion Traps</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These patterns in the CFO/PAT ratio separate genuine earnings quality from accounting-inflated PAT that will eventually correct — often painfully for investors who missed the warning signs.</p>
+
+    <div class="signal-grid">
+      <div class="rv d3">
+        <div class="sig-box sig-good">
+          <div class="sig-title g">✅ Strong Cash Conversion Signals</div>
+          <div class="sig-list">
+            <div class="sig-item"><div class="sig-dot g">🏆</div><div class="sig-text"><h4>CFO/PAT Above 0.9× for 5 Consecutive Years</h4><p>This is the gold-standard quality certification. Achieving CFO/PAT above 0.9× for 5 straight years proves the business model generates genuine cash — not just accounting entries. Only companies with well-managed working capital, competitive pricing power, and operational discipline achieve this consistently across economic cycles. Nestle India has achieved CFO/PAT above 1.0× for 9+ consecutive years — an extraordinary achievement.</p></div></div>
+            <div class="sig-item"><div class="sig-dot g">📈</div><div class="sig-text"><h4>CFO/PAT Ratio Improving Over Time</h4><p>Even if starting from a lower base (e.g., 0.70× in a heavy CapEx year), a CFO/PAT ratio that consistently trends upward signals improving earnings quality. Working capital is normalising, receivables are being collected faster, or the CapEx cycle is ending and cash generation is catching up with reported profits. An improving ratio trend is often more valuable than a single high reading.</p></div></div>
+            <div class="sig-item"><div class="sig-dot g">💰</div><div class="sig-text"><h4>CFO/PAT Stable Across Commodity/Business Cycles</h4><p>A company that maintains CFO/PAT above 0.8× even during commodity price spikes, economic slowdowns, or industry-wide working capital stress has a structurally superior business model. This cycle-resilience means the cash quality is embedded in the business (brand power, market dominance, negative WC) — not a function of favourable timing.</p></div></div>
+            <div class="sig-item"><div class="sig-dot g">⬇️</div><div class="sig-text"><h4>Debtor Days (Receivable Days) Stable or Declining</h4><p>Receivable Days = (Trade Receivables ÷ Revenue) × 365. If this number is stable (customers consistently paying in similar timeframes) or declining (customers paying faster), receivables quality is sound and CFO/PAT will remain healthy. Rising debtor days is the earliest warning sign that CFO/PAT is about to deteriorate — often appearing 1–2 quarters before the CFO impact shows in the annual report.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="rv d4">
+        <div class="sig-box sig-bad">
+          <div class="sig-title r">🚨 Cash Conversion Red Flags</div>
+          <div class="sig-list">
+            <div class="sig-item"><div class="sig-dot r">📉</div><div class="sig-text"><h4>PAT Growing While CFO/PAT Ratio Falls</h4><p>If PAT rises 20% annually but CFO/PAT falls from 0.90× to 0.70× to 0.55×, the gap between reported and cash profits is widening. Every ₹1 of "new" profit is increasingly a paper entry rather than cash. This divergence — called the "accrual anomaly" in academic finance — is one of the most reliable predictors of future earnings disappointments. The accounting catch-up is inevitable: either receivables are written off or inventory is written down, collapsing reported PAT.</p></div></div>
+            <div class="sig-item"><div class="sig-dot r">🧾</div><div class="sig-text"><h4>Debtor Days Rising Faster than Revenue Growth</h4><p>If revenue grows 15% but receivables grow 30%, debtor days are expanding — customers are taking longer to pay, or the company is selling on more generous credit terms to maintain revenue growth that wouldn't otherwise exist. This is a common revenue-manipulation precursor: book the sale, count the profit, worry about collection later. When collection becomes impossible, large bad debt provisions collapse PAT in one quarter.</p></div></div>
+            <div class="sig-item"><div class="sig-dot r">📦</div><div class="sig-text"><h4>Inventory Days Rising Without Revenue Acceleration</h4><p>If inventory grows 25% but revenue grows only 8%, the company is building stock it cannot sell. This working capital trap consumes cash (reducing CFO and CFO/PAT) while PAT stays unchanged because the inventory is still "valued" at cost on the balance sheet. Eventually, unsaleable inventory must be written off — directly hitting PAT and creating a double correction: PAT falls AND CFO/PAT normalises as the inventory write-off is a non-cash charge that gets added back.</p></div></div>
+            <div class="sig-item"><div class="sig-dot r">🔄</div><div class="sig-text"><h4>CFO/PAT Below 0.5× for Two or More Consecutive Years</h4><p>Two consecutive years below 0.5× is not a coincidence — it's a pattern. The company's accounting profits are significantly disconnected from cash reality. If no clear one-time explanation exists (e.g., major new factory under construction), this is a fundamental earnings quality failure that should trigger immediate deep investigation. The most dangerous scenario: management knows the gap but continues reporting optimistic PAT, hoping business will recover before the cash problem forces disclosure. It rarely does.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ DEMAT BANNER ══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Start Investing Today</div>
+    <div class="dmh">Calculate <span class="dmhs">CFO/PAT Ratio</span> in 30 Seconds on Screener.in</div>
+    <div class="dmsub">Open any company on Screener.in. Cash Flow tab → "Cash from Operations" = CFO. P&L tab → "Net Profit" = PAT. Divide. Do this for 5 years. In 2 minutes you know more about earnings quality than most retail investors.</div>
+    <div class="dmfeats">
+      <div class="dmf">Free 10-year CFO and PAT data</div>
+      <div class="dmf">Debtor days and inventory turnover</div>
+      <div class="dmf">Working capital trend charts built in</div>
+      <div class="dmf">Start investing from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ══ 04 — 5 COMPANY EXAMPLES ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">04 — CFO/PAT Ratio — 5 Real Companies</div>
+    <h2 class="h2 rv d2">Cash Quality <span class="hg">Scored &amp; Explained</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five companies — from food to cables to pharma to telecom manufacturing — show the full CFO/PAT spectrum and what each ratio reveals about the underlying business model and earnings quality.</p>
+
+    <!-- COMPANY 1: Nestle -->
+    <div class="company-block rv d3">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);">🍫</div>
+          <div>
+            <div class="cb-name">Nestle India — CFO/PAT Above 1.0× Every Single Year</div>
+            <div class="cb-sub">Food Manufacturing · NSE: NESTLEIND · Negative Working Capital drives elite cash conversion</div>
+          </div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">🏆 5-yr Avg: 1.13×</span>
+          <span class="cb-badge cb-b-g">✅ Cash Beats Profit Always</span>
+          <span class="cb-badge cb-b-g">✅ Negative WC Model</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="rt">
+          <thead><tr>
+            <th class="col-sticky">Metric (₹ Cr)</th>
+            <th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="cfo-r"><td class="col-sticky">Operating Cash Flow (CFO)</td><td>2,892</td><td>2,934</td><td>3,428</td><td>4,312</td><td>4,480</td></tr>
+            <tr class="pat-r"><td class="col-sticky">Net Profit (PAT)</td><td>2,474</td><td>2,564</td><td>3,064</td><td>3,925</td><td>4,025</td></tr>
+            <tr class="ratio-r"><td class="col-sticky">CFO ÷ PAT Ratio</td>
+              <td><span class="ratio-pill rp-elite">1.17×</span></td>
+              <td><span class="ratio-pill rp-elite">1.14×</span></td>
+              <td><span class="ratio-pill rp-elite">1.12×</span></td>
+              <td><span class="ratio-pill rp-elite">1.10×</span></td>
+              <td><span class="ratio-pill rp-elite">1.11×</span></td>
+            </tr>
+            <tr class="section-header"><td class="col-sticky" colspan="6">● WORKING CAPITAL METRICS</td></tr>
+            <tr><td class="col-sticky">Receivable Days (approx.)</td><td>4</td><td>4</td><td>5</td><td>5</td><td>5</td></tr>
+            <tr><td class="col-sticky">Payable Days (approx.)</td><td>47</td><td>48</td><td>50</td><td>52</td><td>54</td></tr>
+            <tr class="good-row"><td class="col-sticky">Net WC Cycle (Pay minus Rec)</td><td>−43 days</td><td>−44 days</td><td>−45 days</td><td>−47 days</td><td>−49 days</td></tr>
+            <tr><td class="col-sticky">D&amp;A (add-back to CFO)</td><td>308</td><td>352</td><td>396</td><td>444</td><td>496</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-good">✅ <strong>CFO/PAT above 1.0× every year — the rarest and most valuable quality signal in Indian manufacturing.</strong> The structural driver is a permanently negative WC cycle: Nestle's supermarket and kirana retailer customers pay within 4–5 days of receiving products, while Nestle's dairy, packaging, and ingredient suppliers wait 47–54 days for payment. This 49-day "float" means cash arrives into Nestle's bank account 49 days before the corresponding cash cost is paid out. Every unit sold generates immediate cash, while the cost of goods is financed by suppliers for 7 weeks. Additionally, D&A of ₹308–496 Cr is added back annually (non-cash charge). The combined effect: CFO systematically exceeds PAT by 10–17%. No debt required. No equity dilution. Pure cash machine. This is the financial signature of a dominant consumer brand — and it explains why Nestle has paid ever-growing dividends for 9+ consecutive years without ever needing to borrow.</div>
+    </div>
+
+    <!-- COMPANY 2: Polycab -->
+    <div class="company-block rv d4">
+      <div class="cb-header cb-amb">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🔌</div>
+          <div>
+            <div class="cb-name">Polycab India — One-Year Distortion vs Structural Quality</div>
+            <div class="cb-sub">Wires &amp; Cables · NSE: POLYCAB · FY22 copper shock created misleading 0.83× — trend is healthy</div>
+          </div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ 4-yr Avg (excl FY22): 0.97×</span>
+          <span class="cb-badge cb-b-a">⚠️ FY22: 0.83× (copper shock)</span>
+          <span class="cb-badge cb-b-g">✅ Ratio Improving</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="rt">
+          <thead><tr>
+            <th class="col-sticky">Metric (₹ Cr)</th>
+            <th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="cfo-r"><td class="col-sticky">Operating Cash Flow (CFO)</td><td>868</td><td>748</td><td>1,084</td><td>1,524</td><td>2,448</td></tr>
+            <tr class="pat-r"><td class="col-sticky">Net Profit (PAT)</td><td>739</td><td>905</td><td>1,108</td><td>1,702</td><td>2,708</td></tr>
+            <tr class="ratio-r"><td class="col-sticky">CFO ÷ PAT Ratio</td>
+              <td><span class="ratio-pill rp-elite">1.17×</span></td>
+              <td><span class="ratio-pill rp-watch">0.83×</span></td>
+              <td><span class="ratio-pill rp-good">0.98×</span></td>
+              <td><span class="ratio-pill rp-good">0.90×</span></td>
+              <td><span class="ratio-pill rp-good">0.90×</span></td>
+            </tr>
+            <tr class="section-header"><td class="col-sticky" colspan="6">● WORKING CAPITAL DRIVERS</td></tr>
+            <tr><td class="col-sticky">Inventory Change (₹ Cr)</td><td>−67</td><td style="color:var(--red);font-weight:800;">−385 ⚠️</td><td>−188</td><td>−312</td><td>−244</td></tr>
+            <tr><td class="col-sticky">WC Net Change</td><td>−67</td><td>−385</td><td>−288</td><td>−490</td><td>−632</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="6">● CONTEXT</td></tr>
+            <tr><td class="col-sticky">Copper LME Price Change</td><td>+5%</td><td style="color:var(--red);">+35% ⚠️</td><td>−8%</td><td>+12%</td><td>+18%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-amb">⚠️→✅ <strong>FY22's 0.83× ratio was a one-year commodity-driven event — not structural deterioration.</strong> Copper, Polycab's primary raw material (30%+ of revenue), spiked 35% in FY22 due to global supply chain disruptions. Polycab management pre-purchased large copper quantities to protect against further price rises — inventory jumped ₹385 Cr above normal operational requirements. This cash was spent (reducing CFO) but no corresponding P&L expense was recorded (inventory stays on the balance sheet until sold). The result: CFO fell, PAT held — compressing the ratio to 0.83×. By FY23, copper stabilised and the surplus inventory was consumed, restoring the ratio to 0.98×. This example teaches the most important CFO/PAT skill: <em>always explain the outlier before judging it.</em> An investor who sold Polycab in FY22 citing "deteriorating cash quality" missed the entire 3× stock re-rating as the ratio normalised. The 4-year average excluding the copper spike is 0.97× — excellent quality.</div>
+    </div>
+
+    <!-- COMPANY 3: Sun Pharma -->
+    <div class="company-block rv d5">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe);">💊</div>
+          <div>
+            <div class="cb-name">Sun Pharmaceutical — Pharma WC Creates Structural 0.90× Floor</div>
+            <div class="cb-sub">Pharma Manufacturing · NSE: SUNPHARMA · US specialty drug receivables create predictable gap</div>
+          </div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ 5-yr Avg: 0.96×</span>
+          <span class="cb-badge cb-b-g">✅ D&amp;A largest driver</span>
+          <span class="cb-badge cb-b-g">✅ Quality improving</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="rt">
+          <thead><tr>
+            <th class="col-sticky">Metric (₹ Cr)</th>
+            <th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="cfo-r"><td class="col-sticky">Operating Cash Flow (CFO)</td><td>5,324</td><td>5,812</td><td>7,124</td><td>9,248</td><td>11,248</td></tr>
+            <tr class="pat-r"><td class="col-sticky">Net Profit (PAT)</td><td>4,896</td><td>5,756</td><td>7,498</td><td>9,878</td><td>12,524</td></tr>
+            <tr class="ratio-r"><td class="col-sticky">CFO ÷ PAT Ratio</td>
+              <td><span class="ratio-pill rp-elite">1.09×</span></td>
+              <td><span class="ratio-pill rp-good">1.01×</span></td>
+              <td><span class="ratio-pill rp-good">0.95×</span></td>
+              <td><span class="ratio-pill rp-good">0.94×</span></td>
+              <td><span class="ratio-pill rp-good">0.90×</span></td>
+            </tr>
+            <tr class="section-header"><td class="col-sticky" colspan="6">● KEY BRIDGE ITEMS</td></tr>
+            <tr class="good-row"><td class="col-sticky">D&amp;A Add-back (largest item)</td><td>1,848</td><td>2,024</td><td>2,248</td><td>2,512</td><td>2,812</td></tr>
+            <tr class="bad-row"><td class="col-sticky">WC Net Change (drain)</td><td>−1,420</td><td>−1,968</td><td>−2,622</td><td>−2,942</td><td>−4,088</td></tr>
+            <tr><td class="col-sticky">US Receivable Days (specialty)</td><td>62</td><td>64</td><td>68</td><td>72</td><td>76</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-good">✅ <strong>D&A of ₹1,848–2,812 Cr is the single largest bridge between PAT and CFO — reflecting Sun's massive intangible asset base from global drug acquisitions.</strong> Sun has acquired drug licences, manufacturing plants, and brands across the world — all generating large amortisation charges (intangible D&A). These are non-cash P&L charges added back in CFO. Without D&A, CFO/PAT would be below 0.70× — entirely driven by the US specialty drug receivables drain (US distributors pay in 60–76 days, versus global peers paying 30–45 days). The ratio declining from 1.09× to 0.90× is NOT a quality deterioration — it reflects (a) US receivable days expanding as the specialty drug business grows (larger revenue base, same payment terms = larger absolute receivables), and (b) R&D and inventory investments for new drug launches. The absolute CFO growing from ₹5,324 Cr to ₹11,248 Cr confirms business health — the ratio decline is a composition shift, not a quality problem.</div>
+    </div>
+
+    <!-- COMPANY 4: HFCL -->
+    <div class="company-block rv d6">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">📡</div>
+          <div>
+            <div class="cb-name">HFCL — Structural CFO/PAT Failure: The B2G Receivables Trap</div>
+            <div class="cb-sub">Telecom Manufacturing · NSE: HFCL · Ratio negative 4 of 5 years — systemic, not temporary</div>
+          </div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 5-yr Avg: −1.72×</span>
+          <span class="cb-badge cb-b-r">🚨 PAT positive, CFO negative</span>
+          <span class="cb-badge cb-b-r">🚨 343 debtor days</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="rt">
+          <thead><tr>
+            <th class="col-sticky">Metric (₹ Cr)</th>
+            <th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="cfo-r"><td class="col-sticky">Operating Cash Flow (CFO)</td>
+              <td style="color:var(--ambr);">+48</td>
+              <td style="color:var(--red);">−168</td>
+              <td style="color:var(--red);">−312</td>
+              <td style="color:var(--red);">−248</td>
+              <td style="color:var(--red);">−172</td>
+            </tr>
+            <tr class="pat-r"><td class="col-sticky">Net Profit (PAT)</td><td>172</td><td>168</td><td>216</td><td>176</td><td>200</td></tr>
+            <tr class="ratio-r"><td class="col-sticky">CFO ÷ PAT Ratio</td>
+              <td><span class="ratio-pill rp-watch">0.28×</span></td>
+              <td><span class="ratio-pill rp-bad">−1.0×</span></td>
+              <td><span class="ratio-pill rp-bad">−1.44×</span></td>
+              <td><span class="ratio-pill rp-bad">−1.41×</span></td>
+              <td><span class="ratio-pill rp-bad">−0.86×</span></td>
+            </tr>
+            <tr class="section-header"><td class="col-sticky" colspan="6">● THE RECEIVABLES TRAP</td></tr>
+            <tr class="bad-row"><td class="col-sticky">Trade Receivables (₹ Cr)</td><td>1,956</td><td>2,524</td><td>3,148</td><td>3,724</td><td>4,016</td></tr>
+            <tr class="bad-row"><td class="col-sticky">Revenue (₹ Cr)</td><td>3,286</td><td>3,624</td><td>3,948</td><td>4,108</td><td>4,268</td></tr>
+            <tr class="bad-row"><td class="col-sticky">Debtor Days</td><td>217</td><td>254</td><td>291</td><td>331</td><td>343</td></tr>
+            <tr><td class="col-sticky">WC Net Change (drain)</td><td>−312</td><td>−432</td><td>−636</td><td>−544</td><td>−500</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-bad">🚨 <strong>CFO/PAT negative in 4 of 5 years — the most extreme structural cash quality failure in this analysis.</strong> The mechanism is mathematical and relentless: HFCL installs optical fibre cables for government projects (BharatNet, DoT) and invoices immediately — booking revenue and PAT. The Government of India then takes 12–18 months to process and pay these invoices. Meanwhile, HFCL must pay its own suppliers (cable, equipment, contractors) on 30–60 day terms. Every quarter, a new wave of project completions creates fresh receivables while old receivables trickle in slowly. Debtor days escalating from 217 to 343 over 5 years proves the gap is widening, not closing. This is not a temporary working capital cycle — it is a structural incompatibility between HFCL's business model (B2G, government as customer) and healthy cash conversion. The PAT of ₹172–216 Cr per year is completely irrelevant as an earnings quality metric. The business model generates zero real owner's earnings until the government pays — and the government increasingly delays payment each year.</div>
+    </div>
+
+    <!-- COMPANY 5: Maruti Suzuki -->
+    <div class="company-block rv d7">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🚗</div>
+          <div>
+            <div class="cb-name">Maruti Suzuki — D&amp;A-Driven Quality Across Automotive Cycles</div>
+            <div class="cb-sub">Automobiles · NSE: MARUTI · D&amp;A the primary CFO bridge · Ratio recovers after chip shortage</div>
+          </div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ 5-yr Avg: 1.03×</span>
+          <span class="cb-badge cb-b-g">✅ D&amp;A adds ~0.10×</span>
+          <span class="cb-badge cb-b-a">⚠️ FY22: 0.93× (chip shortage)</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="rt">
+          <thead><tr>
+            <th class="col-sticky">Metric (₹ Cr)</th>
+            <th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="cfo-r"><td class="col-sticky">Operating Cash Flow (CFO)</td><td>4,848</td><td>3,612</td><td>8,948</td><td>13,824</td><td>16,112</td></tr>
+            <tr class="pat-r"><td class="col-sticky">Net Profit (PAT)</td><td>4,224</td><td>3,882</td><td>8,211</td><td>13,489</td><td>16,622</td></tr>
+            <tr class="ratio-r"><td class="col-sticky">CFO ÷ PAT Ratio</td>
+              <td><span class="ratio-pill rp-elite">1.15×</span></td>
+              <td><span class="ratio-pill rp-good">0.93×</span></td>
+              <td><span class="ratio-pill rp-elite">1.09×</span></td>
+              <td><span class="ratio-pill rp-elite">1.02×</span></td>
+              <td><span class="ratio-pill rp-good">0.97×</span></td>
+            </tr>
+            <tr class="section-header"><td class="col-sticky" colspan="6">● BRIDGE ANALYSIS</td></tr>
+            <tr class="good-row"><td class="col-sticky">D&amp;A Add-back</td><td>1,448</td><td>1,556</td><td>1,668</td><td>1,812</td><td>2,012</td></tr>
+            <tr><td class="col-sticky">WC Net Change</td><td>−824</td><td>−1,826</td><td>−931</td><td>−1,477</td><td>−2,522</td></tr>
+            <tr><td class="col-sticky">D&amp;A as % of PAT</td><td>34%</td><td>40%</td><td>20%</td><td>13%</td><td>12%</td></tr>
+            <tr><td class="col-sticky">Dealer Receivable Days</td><td>7</td><td>8</td><td>7</td><td>7</td><td>7</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-good">✅ <strong>5-year average CFO/PAT of 1.03× — outstanding quality across automotive cycles including the semiconductor crisis and COVID disruption.</strong> Maruti's CFO/PAT is driven by three structural factors: (1) D&A of ₹1,448–2,012 Cr adds 10–40% of PAT back as non-cash (the primary booster). (2) Dealer receivable days of just 7 days — Maruti collects from its 3,500 dealerships within one week of vehicle dispatch (dealers pre-arrange financing before taking delivery). (3) Supplier payable terms of 30–45 days — Maruti's scale lets it delay payments, creating free short-term financing. The FY22 dip to 0.93× was semiconductor chip shortage-driven: partly assembled vehicles accumulated as CWIP (no revenue recognised), depleting CFO without a corresponding PAT impact. By FY23, chip supply normalised and CFO/PAT surged to 1.09×. The declining D&A-to-PAT ratio (34% → 12%) as PAT surged with SUV mix shift shows PAT growth outpacing D&A — making the ratio slightly lower — but absolute CFO of ₹16,112 Cr is spectacular.</div>
+    </div>
+
+    <div class="caveat-box rv d7">
+      <div class="caveat-icon">💡</div>
+      <div class="caveat-body">
+        <div class="caveat-label">The Master CFO/PAT Rule</div>
+        <div class="caveat-title">Always Explain the Outlier Before Judging It — Then Run the 5-Year Average</div>
+        <div class="caveat-desc">The single most important lesson from these five companies: context before conclusion. Polycab's 0.83× in FY22 was a legitimate commodity hedge — not an earnings quality problem. Sun Pharma's declining ratio reflects growing specialty drug business, not cash weakness. HFCL's consistently negative ratio is a structural B2G trap — not a temporary cycle.<br><br>The practical framework: (1) Compute CFO/PAT for each of the last 5 years. (2) Calculate the 5-year average. (3) Identify any outlier years and find the explanation. (4) Assess whether remaining low-ratio years are structural (alarming) or tactical (manageable). (5) Check the trend — is the average improving, stable, or declining? A 5-year average above 0.85× with no structural deterioration = strong cash quality. Below 0.70× average with declining trend = investigate urgently before considering investment. This 60-second CFO/PAT analysis, done for every shortlisted stock, will eliminate 80% of earnings quality traps before they cost you money.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ NEXT CHAPTER ══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue your learning journey →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:justify;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">For educational purposes only. All CFO, PAT, and ratio figures are approximate illustrative estimates. Always verify from official annual reports, BSE/NSE filings, and Screener.in before investing. All equity investments carry market risk. Consult a SEBI-registered investment advisor before investing.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+    },{threshold:.04,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  } else{els.forEach(function(el){el.classList.add('on');});}
+})();
+document.addEventListener('touchstart',function(){},{passive:true});
+document.addEventListener('touchmove',function(){},{passive:true});
+document.addEventListener('touchend',function(){},{passive:true});
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('on');});
+}
+document.body.style.overscrollBehavior='none';
+if(document.fonts&&document.fonts.ready){
+  document.fonts.ready.then(function(){
+    document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});
+  });
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('a,button,.dmbtn,.nxt-btn,.driver-card,.company-block').forEach(function(el){
+    el.style.touchAction='manipulation';
+  });
+});
+</script>
+</body>
+</html>

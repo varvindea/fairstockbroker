@@ -1,0 +1,2181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EBITDA EBIT PBT PAT">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no,address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>EBITDA, EBIT, PBT, PAT – What They Mean · Financial Statement Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes cascadeIn{from{opacity:0;transform:scaleY(0);transform-origin:top}to{opacity:1;transform:scaleY(1);transform-origin:top}}
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hr{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(28px,7.5vw,84px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:12px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(13px,3.2vw,38px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:860px;}
+.hsi{padding:clamp(12px,2vw,22px) clamp(10px,2.5vw,24px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:88px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(11px,1.8vw,18px);font-weight:900;letter-spacing:-.5px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.r{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(8px,1vw,10px);font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+/* KLO */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.kpill-s{background:rgba(2,132,199,.1);color:var(--sky);border:1px solid rgba(2,132,199,.18);}
+.klo-hi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px;}
+.klo-hi{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--shc);}
+.klo-hi-ico{font-size:22px;margin-bottom:6px;}
+.klo-hi-val{font-size:clamp(12px,1.8vw,15px);font-weight:900;letter-spacing:-.3px;}
+.klo-hi-val.purple{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.green{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.amber{color:var(--ambr);}
+.klo-hi-val.sky{color:var(--sky);}
+.klo-hi-lbl{font-size:10px;color:var(--tl);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:3px;}
+/* PROFIT WATERFALL — KEY DESIGN ELEMENT */
+.waterfall{display:flex;flex-direction:column;gap:0;background:var(--wh);border:1.5px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);}
+.wf-header{background:linear-gradient(135deg,var(--pl),var(--p));padding:clamp(14px,2.5vw,22px) clamp(16px,3vw,28px);color:#fff;}
+.wf-title{font-size:clamp(14px,2vw,20px);font-weight:900;margin-bottom:3px;}
+.wf-sub{font-size:12px;color:rgba(255,255,255,.7);}
+.wf-body{padding:clamp(16px,3vw,28px);}
+.wf-row{display:flex;align-items:center;gap:12px;padding:clamp(10px,2vw,16px) clamp(12px,2vw,18px);border-radius:14px;margin-bottom:10px;position:relative;transition:box-shadow .25s;}
+.wf-row:last-child{margin-bottom:0;}
+.wf-row:hover{box-shadow:var(--shp);}
+.wf-ebitda{background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(109,40,217,.04));border:1.5px solid rgba(109,40,217,.2);}
+.wf-ebit{background:linear-gradient(135deg,rgba(2,132,199,.08),rgba(2,132,199,.04));border:1.5px solid rgba(2,132,199,.2);}
+.wf-pbt{background:linear-gradient(135deg,rgba(217,119,6,.08),rgba(217,119,6,.04));border:1.5px solid rgba(217,119,6,.2);}
+.wf-pat{background:linear-gradient(135deg,rgba(22,163,74,.1),rgba(22,163,74,.05));border:1.5px solid rgba(22,163,74,.25);}
+.wf-badge{min-width:56px;padding:6px 10px;border-radius:10px;text-align:center;font-size:clamp(9px,1.2vw,11px);font-weight:900;letter-spacing:.5px;flex-shrink:0;}
+.wb-ebitda{background:var(--p);color:#fff;}
+.wb-ebit{background:var(--sky);color:#fff;}
+.wb-pbt{background:var(--ambr);color:#fff;}
+.wb-pat{background:var(--gbr);color:#fff;}
+.wf-info{flex:1;min-width:0;}
+.wf-name{font-size:clamp(13px,1.8vw,16px);font-weight:900;color:var(--tx);margin-bottom:2px;}
+.wf-full{font-size:10px;font-weight:600;color:var(--tl);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;}
+.wf-desc{font-size:12px;color:var(--ts);line-height:1.5;}
+.wf-what{min-width:100px;text-align:right;flex-shrink:0;}
+.wf-label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--tl);margin-bottom:2px;}
+.wf-val{font-size:clamp(11px,1.6vw,14px);font-weight:900;}
+.wf-deduction{display:flex;align-items:center;gap:8px;padding:6px 16px;margin-bottom:10px;}
+.wfd-arrow{font-size:14px;color:var(--tl);}
+.wfd-text{font-size:11px;color:var(--tl);font-weight:600;font-style:italic;}
+/* CONCEPT GRID */
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:start;}
+.step-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:16px;padding:18px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:var(--shc);transition:border-color .25s,box-shadow .25s;}
+.step-card:hover{border-color:rgba(109,40,217,.3);box-shadow:var(--shp);}
+.step-num{width:36px;height:36px;min-width:36px;border-radius:10px;color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-body h4{font-size:14px;font-weight:800;color:var(--tx);margin-bottom:4px;}
+.step-body p{font-size:12.5px;color:var(--ts);line-height:1.58;}
+.infographic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.infographic-svg{width:100%;max-width:430px;animation:floatB 4.5s ease-in-out infinite;}
+.infographic-cap{font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;}
+/* BENCH LIST */
+.bench-list{display:flex;flex-direction:column;gap:10px;}
+.bl-row{display:flex;align-items:flex-start;gap:14px;background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:14px 18px;box-shadow:var(--shc);transition:border-color .25s,box-shadow .25s;}
+.bl-row:hover{border-color:rgba(109,40,217,.28);box-shadow:var(--shp);}
+.bl-ico{font-size:20px;flex-shrink:0;margin-top:1px;}
+.bl-body h4{font-size:13px;font-weight:800;color:var(--tx);margin-bottom:3px;}
+.bl-body p{font-size:12px;color:var(--ts);line-height:1.55;}
+/* SCREENER TABLE */
+.screener-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:18px;overflow:hidden;box-shadow:var(--shp);}
+.screener-header{background:linear-gradient(135deg,var(--pl),var(--p));padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,24px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.sh-left{display:flex;flex-direction:column;gap:3px;}
+.sh-title{font-size:clamp(16px,2.5vw,22px);font-weight:900;color:#fff;}
+.sh-sub{font-size:12px;color:rgba(255,255,255,.7);}
+.sh-right{display:flex;gap:8px;flex-wrap:wrap;}
+.sh-badge{padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.22);}
+.screener-guide{padding:clamp(12px,2vw,18px) clamp(16px,3vw,24px);background:var(--pxs);border-bottom:1px solid var(--bd);font-size:12px;color:var(--ts);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.screener-guide strong{color:var(--p);}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+.bs-table{width:100%;border-collapse:collapse;min-width:700px;}
+.bs-table th{background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(109,40,217,.04));padding:clamp(9px,1.5vw,13px) clamp(10px,2vw,16px);font-size:clamp(9px,1.1vw,11px);font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:right;white-space:nowrap;}
+.bs-table th:first-child{text-align:left;}
+.bs-table td{padding:clamp(9px,1.5vw,13px) clamp(10px,2vw,16px);font-size:clamp(11px,1.3vw,13px);color:var(--ts);border-bottom:1px solid rgba(109,40,217,.06);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.bs-table td:first-child{text-align:left;font-weight:700;color:var(--tx);}
+.bs-table tr:last-child td{border-bottom:none;}
+.bs-table tr.total-row td{font-weight:900;color:var(--tx);background:linear-gradient(135deg,rgba(109,40,217,.06),rgba(22,163,74,.04));border-top:1.5px solid var(--bd);}
+.bs-table tr:hover td{background:var(--pxs);}
+.bs-full{min-width:860px;}
+.bs-full th,.bs-full td{padding:9px 10px;font-size:clamp(10px,1.1vw,12px);white-space:nowrap;}
+.bs-full th{font-size:clamp(9px,1vw,11px);letter-spacing:.8px;padding:9px 8px;}
+.bs-full .col-label{text-align:left;min-width:160px;font-weight:700;color:var(--tx);position:sticky;left:0;background:var(--wh);z-index:2;box-shadow:2px 0 6px rgba(109,40,217,.06);}
+.bs-full thead .col-label{background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(109,40,217,.04));color:var(--p);}
+.bs-full .total-row .col-label{background:linear-gradient(135deg,rgba(109,40,217,.06),rgba(22,163,74,.04));}
+.rev-row .col-label{color:var(--p)!important;}
+.exp-row .col-label{color:var(--red)!important;}
+.pft-row .col-label{color:var(--gbr)!important;}
+.rat-row .col-label{color:var(--ambr)!important;}
+.eb-row .col-label{color:var(--p)!important;}
+.ei-row .col-label{color:var(--sky)!important;}
+.pb-row .col-label{color:var(--ambr)!important;}
+.pa-row .col-label{color:var(--gbr)!important;}
+.warn-row td{background:rgba(220,38,38,.03)!important;}
+.good-row td{background:rgba(22,163,74,.03)!important;}
+.flag-cell{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:2px 6px;border-radius:6px;}
+.flag-r{background:rgba(220,38,38,.1);color:var(--red);}
+.flag-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.flag-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.flag-p{background:var(--pxl);color:var(--p);}
+.flag-s{background:rgba(2,132,199,.1);color:var(--sky);}
+/* COMPANY BLOCKS */
+.company-block{border-radius:18px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);}
+.cb-header{display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,24px);gap:12px;flex-wrap:wrap;}
+.cb-good{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.cb-bad{background:linear-gradient(135deg,#fef2f2,#fff5f5);}
+.cb-co{display:flex;align-items:center;gap:12px;}
+.cb-name{font-size:clamp(14px,2vw,18px);font-weight:900;color:var(--tx);line-height:1.2;}
+.cb-sub{font-size:11px;color:var(--tl);margin-top:3px;}
+.cb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.cb-badge{padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;}
+.cb-b-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.cb-b-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.cb-b-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.cb-b-s{background:rgba(2,132,199,.1);color:var(--sky);border:1px solid rgba(2,132,199,.2);}
+.cb-insight{padding:14px 16px;font-size:12px;color:var(--ts);line-height:1.65;margin:0;}
+.cb-insight-g{background:rgba(22,163,74,.06);border-top:1px solid rgba(22,163,74,.15);border-left:3px solid var(--gbr);}
+.cb-insight-r{background:rgba(220,38,38,.05);border-top:1px solid rgba(220,38,38,.15);border-left:3px solid var(--red);}
+.ex-logo{width:48px;height:48px;min-width:48px;border-radius:12px;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+/* LAYER COMPARISON CARDS */
+.layer-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,2vw,16px);margin-bottom:32px;}
+.lc{border-radius:18px;padding:clamp(14px,2.5vw,22px);border:1.5px solid;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;}
+.lc:hover{transform:translateY(-3px);box-shadow:var(--shp);}
+.lc-ebitda{background:linear-gradient(158deg,var(--pxs),#fdfcff);border-color:rgba(109,40,217,.25);}
+.lc-ebit{background:linear-gradient(158deg,var(--skypale),#f0faff);border-color:rgba(2,132,199,.22);}
+.lc-pbt{background:linear-gradient(158deg,var(--apale),#fffcf0);border-color:rgba(217,119,6,.22);}
+.lc-pat{background:linear-gradient(158deg,var(--gpale),#f9fff9);border-color:rgba(22,163,74,.25);}
+.lc-tag{font-size:clamp(18px,3vw,28px);font-weight:900;letter-spacing:-1px;margin-bottom:6px;}
+.lc-full{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tl);margin-bottom:8px;}
+.lc-what{font-size:clamp(11px,1.5vw,13px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.lc-desc{font-size:11px;color:var(--ts);line-height:1.5;}
+.lc-deduct{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;margin-top:8px;}
+.lc-d-p{background:var(--pxl);color:var(--p);}
+.lc-d-s{background:var(--skypale);color:var(--sky);}
+.lc-d-a{background:var(--apale);color:var(--ambr);}
+.lc-d-g{background:var(--gpale);color:var(--gbr);}
+/* USE CARDS */
+.use-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,20px);}
+.use-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:18px;padding:clamp(16px,2.5vw,26px);box-shadow:var(--shc);transition:border-color .25s,box-shadow .25s,transform .25s;text-align:center;}
+.use-card:hover{border-color:rgba(109,40,217,.28);box-shadow:var(--shp);transform:translateY(-3px);}
+.uc-ico{font-size:clamp(28px,5vw,44px);margin-bottom:12px;display:block;animation:floatB 3.5s ease-in-out infinite;}
+.uc-title{font-size:clamp(13px,1.7vw,16px);font-weight:800;color:var(--tx);margin-bottom:7px;}
+.uc-desc{font-size:12.5px;color:var(--ts);line-height:1.6;}
+/* CAVEAT */
+.caveat-box{margin-top:32px;background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:16px;}
+.caveat-icon{width:44px;height:44px;min-width:44px;border-radius:13px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(109,40,217,.28);}
+.caveat-body{flex:1;min-width:0;}
+.caveat-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.caveat-title{font-size:clamp(13px,1.5vw,15px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.caveat-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+/* GLOSSARY */
+.glos-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);}
+.glos-table{width:100%;border-collapse:collapse;}
+.glos-table thead th{background:linear-gradient(135deg,var(--pxl),var(--pxs));padding:clamp(10px,2vw,15px) clamp(12px,2.5vw,20px);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--p);text-align:left;border-bottom:1.5px solid var(--bd);}
+.glos-table tbody tr{border-bottom:1px solid rgba(109,40,217,.05);transition:background .2s;}
+.glos-table tbody tr:last-child{border-bottom:none;}
+.glos-table tbody tr:hover{background:var(--pxs);}
+.gt-term{padding:clamp(11px,2vw,16px) clamp(12px,2.5vw,20px);font-size:clamp(11px,1.4vw,13px);font-weight:800;color:var(--p);white-space:nowrap;vertical-align:top;}
+.gt-desc{padding:clamp(11px,2vw,16px) clamp(12px,2.5vw,20px);font-size:clamp(11px,1.3vw,13px);color:var(--ts);line-height:1.65;vertical-align:top;}
+.gt-risk{padding:clamp(11px,2vw,16px) clamp(10px,2vw,16px);font-size:11px;font-weight:700;vertical-align:top;text-align:center;}
+/* TRICK SECTION */
+.trick-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:24px;overflow:hidden;box-shadow:var(--shp);}
+.trick-hdr{background:linear-gradient(135deg,#1a0a3c,var(--pl),var(--p));padding:clamp(20px,3.5vw,36px) clamp(20px,4vw,40px);display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.trick-hdr::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:24px 24px;}
+.th-left{flex:1;min-width:0;position:relative;z-index:1;}
+.th-supertag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.th-supertag::before{content:'';width:16px;height:2px;background:#4ade80;border-radius:2px;}
+.th-title{font-size:clamp(17px,3vw,26px);font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1.2;margin-bottom:8px;}
+.th-sub{font-size:clamp(12px,1.5vw,14px);color:rgba(255,255,255,.68);line-height:1.65;}
+.th-right{display:flex;align-items:flex-start;gap:12px;flex-shrink:0;position:relative;z-index:1;flex-wrap:wrap;}
+.th-timer{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:14px 20px;text-align:center;}
+.th-timer-num{font-size:clamp(26px,4vw,40px);font-weight:900;color:#fff;line-height:1;}
+.th-timer-lbl{font-size:10px;color:rgba(255,255,255,.55);font-weight:600;margin-top:2px;}
+.trick-steps-body{padding:clamp(20px,4vw,36px) clamp(18px,4vw,36px);border-bottom:1px solid var(--bd);}
+.trick-step{display:flex;gap:clamp(12px,2.5vw,20px);padding-bottom:clamp(18px,3vw,28px);position:relative;}
+.trick-step:last-child{padding-bottom:0;}
+.ts-connector{position:absolute;left:clamp(17px,3vw,22px);top:clamp(40px,5vw,48px);bottom:0;width:2px;background:linear-gradient(180deg,var(--pmd),rgba(109,40,217,.06));border-radius:2px;}
+.trick-step:last-child .ts-connector{display:none;}
+.ts-num{width:clamp(36px,5vw,44px);height:clamp(36px,5vw,44px);border-radius:12px;color:#fff;font-size:clamp(14px,2vw,18px);font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(109,40,217,.28);flex-shrink:0;position:relative;z-index:1;}
+.ts-body{flex:1;min-width:0;padding-top:6px;}
+.ts-nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.ts-site{font-size:10px;font-weight:800;color:var(--p);background:var(--pxs);padding:4px 10px;border-radius:8px;border:1px solid var(--pmd);}
+.ts-arrow{font-size:12px;color:var(--tl);}
+.ts-tab{font-size:10px;font-weight:700;color:var(--ts);background:var(--sf);padding:4px 10px;border-radius:8px;border:1px solid var(--bd);}
+.ts-tab.purple{background:var(--pxl);color:var(--p);border-color:var(--pmd);}
+.ts-tab.green{background:rgba(22,163,74,.08);color:var(--gbr);border-color:rgba(22,163,74,.2);}
+.ts-tab.amber{background:rgba(217,119,6,.08);color:var(--ambr);border-color:rgba(217,119,6,.2);}
+.ts-tab.sky{background:rgba(2,132,199,.08);color:var(--sky);border-color:rgba(2,132,199,.2);}
+.ts-tab.red{background:rgba(220,38,38,.08);color:var(--red);border-color:rgba(220,38,38,.2);}
+.ts-action{font-size:clamp(12px,1.5vw,13.5px);color:var(--ts);line-height:1.68;margin-bottom:10px;}
+.ts-outcomes{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.ts-out{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.5;padding:9px 12px;border-radius:10px;}
+.ts-out-g{background:rgba(22,163,74,.07);color:var(--gbr);border:1px solid rgba(22,163,74,.14);}
+.ts-out-r{background:rgba(220,38,38,.06);color:var(--red);border:1px solid rgba(220,38,38,.14);}
+.ts-out-n{background:var(--pxs);color:var(--p);border:1px solid var(--pmd);}
+.ts-out-a{background:rgba(217,119,6,.08);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.ts-formula{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:clamp(12px,2vw,18px);margin-bottom:10px;}
+.ts-f-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.ts-f-lbl{font-size:12px;font-weight:800;color:var(--tx);}
+.ts-f-eq{font-size:18px;font-weight:700;color:var(--tl);}
+.ts-f-item{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;}
+.ts-fi-rev{background:var(--pxl);color:var(--p);}
+.ts-fi-exp{background:rgba(220,38,38,.1);color:var(--red);}
+.ts-fi-dep{background:rgba(2,132,199,.1);color:var(--sky);}
+.ts-fi-int{background:rgba(217,119,6,.1);color:var(--ambr);}
+.ts-fi-tax{background:rgba(22,163,74,.1);color:var(--gbr);}
+.ts-fi-res{background:linear-gradient(135deg,var(--p),var(--ph));color:#fff;padding:3px 10px;}
+.ts-f-guide{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:11px;font-weight:600;}
+.ts-shortcut{background:linear-gradient(135deg,var(--pxl),#f0fdf4);border:1px solid var(--pmd);border-radius:10px;padding:12px 14px;margin-top:8px;}
+.ts-sc-lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.ts-sc-text{font-size:12px;color:var(--ts);line-height:1.6;}
+/* RATIO TABLE */
+.ratio-table{background:var(--wh);border:1.5px solid var(--bd);border-radius:16px;padding:clamp(16px,3vw,24px);box-shadow:var(--shc);margin-bottom:10px;}
+.rt-title{font-size:13px;font-weight:800;color:var(--tx);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.rt-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:12px;}
+.rt-metric{font-weight:700;color:var(--tx);min-width:80px;}
+.rt-formula{color:var(--ts);flex:1;}
+.rt-badge{font-weight:800;font-size:11px;padding:2px 8px;border-radius:6px;}
+/* BONUS CARDS */
+.bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,16px);}
+.bonus-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:clamp(12px,2vw,18px);box-shadow:var(--shc);position:relative;overflow:hidden;}
+.bonus-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.bc-p::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.bc-s::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.bc-a::before{background:linear-gradient(90deg,var(--ambr),var(--amb));}
+.bc-g::before{background:linear-gradient(90deg,var(--gbr),var(--gh));}
+.bonus-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;color:#fff;font-size:13px;font-weight:900;margin-bottom:8px;}
+.bonus-title{font-size:clamp(12px,1.5vw,13px);font-weight:800;color:var(--tx);margin-bottom:5px;}
+.bonus-desc{font-size:clamp(11px,1.2vw,12px);color:var(--ts);line-height:1.55;}
+/* FLOWCHART */
+.flow-wrap{padding:clamp(18px,3.5vw,32px) clamp(18px,4vw,36px);}
+.flow-label{font-size:12px;font-weight:700;color:var(--p);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.flow-chain{display:flex;flex-direction:column;gap:8px;}
+.flow-node{border-radius:12px;padding:10px 14px;font-size:clamp(11px,1.4vw,12.5px);font-weight:700;display:flex;align-items:center;gap:8px;line-height:1.4;}
+.fn-q{background:var(--pxl);border:1.5px solid var(--pmd);color:var(--pl);}
+.fn-qlbl{font-size:10px;font-weight:800;background:var(--p);color:#fff;border-radius:6px;padding:2px 7px;flex-shrink:0;}
+.fn-txt{flex:1;}
+.flow-branch{display:flex;flex-direction:column;gap:8px;padding-left:clamp(12px,3vw,24px);border-left:2px dashed var(--pmd);margin-left:18px;}
+.fb-yes,.fb-no{display:flex;flex-direction:column;gap:6px;}
+.fb-lbl{font-size:10px;font-weight:800;letter-spacing:.5px;padding:2px 8px;border-radius:6px;width:fit-content;}
+.fb-yes>.fb-lbl{background:rgba(22,163,74,.12);color:var(--gbr);}
+.fb-no>.fb-lbl{background:rgba(220,38,38,.1);color:var(--red);}
+.fn-g{background:rgba(22,163,74,.1);border:1.5px solid rgba(22,163,74,.25);color:var(--gbr);font-size:clamp(11px,1.3vw,13px);}
+.fn-a{background:rgba(217,119,6,.08);border:1.5px solid rgba(217,119,6,.22);color:var(--ambr);font-size:clamp(11px,1.3vw,13px);}
+.fn-r{background:rgba(220,38,38,.07);border:1.5px solid rgba(220,38,38,.2);color:var(--red);font-size:clamp(11px,1.3vw,13px);}
+/* DEMAT */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'\u2713';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+/* NEXT */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;display:inline-block;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+/* TRICK BONUS */
+.trick-bonus{padding:clamp(18px,3.5vw,32px) clamp(18px,4vw,36px);background:linear-gradient(158deg,#f5f3ff,#f0fdf4);border-bottom:1px solid var(--bd);}
+.trick-bonus-hdr{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.trick-bonus-ico{font-size:22px;}
+.trick-bonus-title{font-size:clamp(13px,1.8vw,16px);font-weight:800;color:var(--tx);}
+
+
+/* ── LAYER EXPLANATION CARDS ── */
+.layer-explain-card{display:flex;gap:clamp(14px,2.5vw,22px);padding:clamp(20px,3.5vw,32px) clamp(20px,3.5vw,32px);border-bottom:1px solid var(--bd);position:relative;transition:background .2s;}
+.layer-explain-card:last-child{border-bottom:none;}
+.layer-explain-card:hover{background:var(--sf);}
+.lec-ebitda:hover{background:rgba(109,40,217,.02);}
+.lec-ebit:hover{background:rgba(2,132,199,.02);}
+.lec-pbt:hover{background:rgba(217,119,6,.02);}
+.lec-pat:hover{background:rgba(22,163,74,.02);}
+/* Left column: badge + connector line */
+.lec-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;gap:0;width:clamp(44px,6vw,56px);}
+.lec-badge{width:clamp(44px,6vw,56px);height:clamp(44px,6vw,56px);border-radius:14px;color:#fff;font-size:clamp(12px,1.8vw,16px);font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 20px rgba(0,0,0,.2);letter-spacing:-.5px;}
+.lec-connector{flex:1;width:2px;background:linear-gradient(180deg,var(--pmd),rgba(109,40,217,.05));border-radius:2px;margin-top:10px;min-height:24px;}
+/* Body: all content */
+.lec-body{flex:1;min-width:0;}
+/* Header row: tag + heading + formula chip inline */
+.lec-header-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap;}
+.lec-tag{font-size:clamp(10px,1.5vw,13px);font-weight:900;letter-spacing:-.3px;padding:3px 10px;border-radius:8px;white-space:nowrap;flex-shrink:0;}
+.lec-tag-ebitda{background:rgba(109,40,217,.1);color:var(--p);}
+.lec-tag-ebit{background:rgba(2,132,199,.1);color:var(--sky);}
+.lec-tag-pbt{background:rgba(217,119,6,.1);color:var(--ambr);}
+.lec-tag-pat{background:rgba(22,163,74,.12);color:var(--gbr);}
+.lec-formula-chip{font-size:clamp(10px,1.3vw,12px);font-weight:800;padding:4px 10px;border-radius:8px;white-space:nowrap;flex-shrink:0;}
+.lec-heading{font-size:clamp(14px,2vw,18px);font-weight:900;color:var(--tx);letter-spacing:-.4px;line-height:1.2;margin-bottom:10px;}
+.lec-desc{font-size:clamp(12.5px,1.4vw,14px);color:var(--ts);line-height:1.72;margin-bottom:14px;}
+.lec-pills{display:flex;flex-wrap:wrap;gap:7px;}
+.lec-pill{font-size:10px;font-weight:700;padding:5px 11px;border-radius:8px;display:inline-flex;align-items:center;gap:4px;}
+/* Deduction strips between cards */
+.lec-deduct-strip{display:flex;align-items:center;gap:0;background:var(--sf);border-bottom:1px solid var(--bd);}
+.lec-deduct-indent{width:clamp(44px,6vw,56px);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:clamp(10px,1.5vw,14px) 0;}
+.lec-minus{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--bd),#d8d3f5);color:var(--tl);font-size:16px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.lec-deduct-content{flex:1;padding:clamp(10px,1.5vw,14px) clamp(14px,2.5vw,24px);border-left:1px dashed var(--bd);}
+.lec-deduct-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tl);margin-bottom:2px;}
+.lec-deduct-text{font-size:clamp(11.5px,1.4vw,13px);color:var(--ts);font-weight:600;}
+
+/* ── TRICK SECTION VISUAL COMPONENTS ── */
+/* Quick-reference cheat sheet */
+.cheat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(6px,1.5vw,10px);margin-bottom:16px;}
+.cs-chip{border-radius:14px;padding:clamp(10px,2vw,16px) clamp(8px,1.5vw,12px);text-align:center;border:1.5px solid;}
+.cs-chip-ebitda{background:rgba(109,40,217,.06);border-color:rgba(109,40,217,.2);}
+.cs-chip-ebit{background:rgba(2,132,199,.06);border-color:rgba(2,132,199,.18);}
+.cs-chip-pbt{background:rgba(217,119,6,.07);border-color:rgba(217,119,6,.2);}
+.cs-chip-pat{background:rgba(22,163,74,.08);border-color:rgba(22,163,74,.2);}
+.cs-lbl{font-size:clamp(15px,2.5vw,22px);font-weight:900;letter-spacing:-.5px;margin-bottom:2px;}
+.cs-name{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--tl);margin-bottom:6px;}
+.cs-formula{font-size:9px;font-weight:600;color:var(--ts);line-height:1.4;margin-bottom:6px;border-top:1px dashed rgba(0,0,0,.08);padding-top:6px;}
+.cs-signal{font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;display:inline-block;}
+/* Profit funnel bars */
+.pf-funnel{display:flex;flex-direction:column;gap:8px;padding:clamp(14px,2.5vw,22px);background:var(--sf);border:1.5px solid var(--bd);border-radius:14px;margin-bottom:14px;}
+.pf-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:8px;}
+.pf-row{display:flex;align-items:center;gap:10px;}
+.pf-layer{height:clamp(32px,4vw,42px);border-radius:8px;display:flex;align-items:center;padding:0 14px;font-size:clamp(11px,1.6vw,13px);font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;}
+.pf-meta{font-size:clamp(10px,1.3vw,12px);font-weight:700;flex-shrink:0;color:var(--ts);}
+.pf-ebitda{background:linear-gradient(90deg,var(--p),var(--ph));width:100%;}
+.pf-ebit{background:linear-gradient(90deg,var(--sky),#38bdf8);width:78%;}
+.pf-pbt{background:linear-gradient(90deg,var(--ambr),var(--amb));width:63%;}
+.pf-pat{background:linear-gradient(90deg,var(--gbr),var(--gh));width:44%;}
+/* Screener nav path strip */
+.sn-strip{background:var(--pxs);border:1px solid var(--pmd);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.sn-lbl{font-size:10px;font-weight:700;color:var(--p);flex-shrink:0;}
+.sn-num{width:18px;height:18px;border-radius:50%;background:var(--p);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sn-txt{font-size:10px;font-weight:700;color:var(--ts);}
+.sn-arr{font-size:10px;color:var(--tl);}
+/* ICR danger zone meter */
+.icr-meter{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.icr-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--p);margin-bottom:10px;}
+.icr-track{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;}
+.icr-zone{border-radius:8px;padding:8px 4px;text-align:center;}
+.icr-val{font-size:clamp(10px,1.5vw,13px);font-weight:900;margin-bottom:2px;}
+.icr-lbl{font-size:8px;font-weight:600;color:var(--tl);}
+/* PAT CAGR multiplier reference */
+.cagr-ref{background:linear-gradient(135deg,rgba(22,163,74,.06),rgba(22,163,74,.02));border:1px solid rgba(22,163,74,.18);border-radius:12px;padding:12px 14px;margin-top:8px;}
+.cagr-ref-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gbr);margin-bottom:10px;}
+.cagr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.cagr-cell{text-align:center;background:var(--wh);border:1px solid rgba(22,163,74,.15);border-radius:8px;padding:8px 4px;}
+.cagr-val{font-size:clamp(12px,1.8vw,16px);font-weight:900;color:var(--gbr);}
+.cagr-lbl{font-size:8.5px;font-weight:600;color:var(--tl);margin-top:2px;}
+/* PAT ÷ EBITDA ratio comparison bars */
+.ratio-visual{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+.rv-row{display:flex;align-items:center;gap:10px;}
+.rv-lbl{font-size:11px;font-weight:700;color:var(--tx);width:clamp(80px,15vw,130px);flex-shrink:0;}
+.rv-bar-bg{flex:1;height:16px;background:rgba(0,0,0,.05);border-radius:5px;overflow:hidden;}
+.rv-bar{height:100%;border-radius:5px;}
+.rv-val{font-size:11px;font-weight:800;width:40px;text-align:right;flex-shrink:0;}
+
+/* ═══════════════════════════════════════════════════════════════════
+   UNIFIED RESPONSIVE SYSTEM · Module 05 · EBITDA EBIT PBT PAT v5
+   Waterfall · LEC Layer Cards · Trick Section · Cheat Strip · All
+   Desktop · Tablet · Mobile · iOS · Android · Touch · A11y · Print
+   ═══════════════════════════════════════════════════════════════════ */
+img,svg{max-width:100%;height:auto;display:block;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+
+/* ── LARGE DESKTOP 1280px+ ── */
+@media(min-width:1280px){
+  .w{padding:80px 72px;}
+}
+
+/* ── SMALL DESKTOP / TABLET LANDSCAPE 901–1100px ── */
+@media(max-width:1100px){
+  .use-cards{grid-template-columns:1fr 1fr;}
+  .layer-cards{grid-template-columns:1fr 1fr;}
+  .bonus-grid{grid-template-columns:1fr 1fr;}
+  .cheat-strip{grid-template-columns:1fr 1fr;}
+  .cagr-grid{grid-template-columns:repeat(4,1fr);}
+  .wf-badge{min-width:48px;padding:5px 8px;}
+  .layer-explain-card{padding:clamp(18px,3vw,28px) clamp(16px,3vw,26px);}
+}
+
+/* ── TABLET PORTRAIT 769–900px ── */
+@media(max-width:900px){
+  .concept-grid{grid-template-columns:1fr;}
+  .infographic-svg{max-width:380px;margin:0 auto;}
+  .klo-hi-row{grid-template-columns:repeat(2,1fr);}
+  .use-cards{grid-template-columns:1fr 1fr;}
+  .layer-cards{grid-template-columns:1fr 1fr;}
+  .flow-branch{padding-left:12px;margin-left:12px;}
+  .wf-row{flex-wrap:wrap;gap:10px;}
+  .wf-what{text-align:left;min-width:auto;}
+  .cheat-strip{grid-template-columns:1fr 1fr;}
+  .cagr-grid{grid-template-columns:repeat(4,1fr);}
+  .lec-header-row{flex-wrap:wrap;gap:6px;}
+  .lec-body{padding-top:2px;}
+}
+
+/* ── MOBILE LANDSCAPE / LARGE PHONE 601–768px ── */
+@media(max-width:768px){
+  .w{padding:clamp(32px,6vw,56px) clamp(14px,5vw,28px);}
+  .hst{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .klo-hi-row{grid-template-columns:1fr 1fr;}
+  .caveat-box{flex-direction:column;gap:12px;}
+  .caveat-icon{width:40px;height:40px;min-width:40px;font-size:20px;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(14px,4vw,24px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;min-height:52px;}
+  .dmfeats{gap:10px 20px;}
+  svg{overflow:visible;}
+  .screener-header{flex-direction:column;align-items:flex-start;}
+  .cb-header{flex-direction:column;align-items:flex-start;}
+  .cb-badges{margin-top:4px;flex-wrap:wrap;}
+  .layer-cards{grid-template-columns:1fr 1fr;}
+  .trick-hdr{flex-direction:column;gap:14px;}
+  .ts-outcomes{grid-template-columns:1fr;}
+  .flow-branch{padding-left:10px;margin-left:10px;}
+  .bonus-grid{grid-template-columns:1fr 1fr;}
+  .wf-row{flex-wrap:wrap;gap:8px;}
+  .wf-what{text-align:left;min-width:auto;}
+  .wf-deduction{padding:6px 10px;}
+  /* LEC cards */
+  .layer-explain-card{gap:12px;padding:16px 14px;}
+  .lec-header-row{flex-wrap:wrap;gap:5px;margin-bottom:5px;}
+  .lec-heading{font-size:clamp(13px,1.8vw,16px);margin-bottom:8px;}
+  .lec-connector{min-height:10px;}
+  .lec-deduct-content{padding:10px 12px;}
+  .lec-deduct-text{font-size:11px;}
+  .lec-deduct-label{font-size:8.5px;}
+  .lec-pills{gap:5px;}
+  .sn-strip{flex-wrap:wrap;gap:4px;}
+  body{overscroll-behavior-y:contain;}
+}
+
+/* ── MOBILE PORTRAIT 481–640px ── */
+@media(max-width:640px){
+  .use-cards{grid-template-columns:1fr;}
+  .klo-hi-row{grid-template-columns:1fr;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .infographic-svg{max-width:100%;}
+  .bs-table{min-width:600px;}
+  .bs-full{min-width:820px;}
+  .bs-full th,.bs-full td{padding:7px 6px;font-size:10px;}
+  .bs-full .col-label{min-width:110px;}
+  .glos-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:520px;}
+  .layer-cards{grid-template-columns:1fr;}
+  .bonus-grid{grid-template-columns:1fr;}
+  .trick-steps-body,.trick-bonus,.flow-wrap{padding:16px;}
+  .ts-f-row{flex-wrap:wrap;gap:4px 8px;}
+  .ts-f-guide{flex-direction:column;gap:4px;}
+  .wf-badge{min-width:44px;font-size:9px;padding:5px 6px;}
+  .wf-name{font-size:13px;}
+  .wf-desc{font-size:11.5px;}
+  .wf-body{padding:16px;}
+  .icr-track{grid-template-columns:repeat(3,1fr) !important;gap:3px;}
+  .pf-ebit{width:88%;}
+  .pf-pbt{width:74%;}
+  .pf-pat{width:54%;}
+  .sn-txt{font-size:9px;}
+  .rv-lbl{width:80px;font-size:10px;}
+  /* LEC cards */
+  .layer-explain-card{gap:10px;padding:14px 12px;}
+  .lec-left{width:clamp(36px,8vw,44px);}
+  .lec-badge{width:clamp(36px,8vw,44px);height:clamp(36px,8vw,44px);font-size:11px;border-radius:10px;}
+  .lec-heading{font-size:13px;}
+  .lec-desc{font-size:12px;}
+  .lec-pills{gap:4px;}
+  .lec-pill{font-size:9.5px;padding:4px 9px;}
+  .lec-deduct-indent{width:clamp(36px,8vw,44px);}
+  .lec-deduct-content{padding:9px 12px;}
+  .lec-deduct-text{font-size:11px;}
+  .lec-deduct-label{font-size:8px;letter-spacing:1px;}
+}
+
+/* ── SMALL MOBILE 361–480px ── */
+@media(max-width:480px){
+  .w{padding:28px 12px;}
+  .hh1{letter-spacing:-1.2px;}
+  .hdesc{font-size:13px;}
+  .hsub{letter-spacing:2.5px;font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .h2{letter-spacing:-1px;}
+  .lead{font-size:13.5px;}
+  .tag{letter-spacing:2px;}
+  .klo-title{font-size:14px;}
+  .klo-desc{font-size:12px;}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .klo-hi{padding:12px 10px;}
+  .step-num{width:30px;height:30px;min-width:30px;font-size:12px;}
+  .step-body h4{font-size:13px;}
+  .step-body p{font-size:11.5px;}
+  .step-card{padding:13px 14px;gap:11px;}
+  .bl-row{padding:12px 13px;flex-wrap:wrap;gap:8px;}
+  .bl-body h4{font-size:12px;}
+  .bl-body p{font-size:11.5px;}
+  .use-card{padding:16px 14px;}
+  .uc-ico{animation:none;}
+  .caveat-title{font-size:13px;}
+  .caveat-desc{font-size:12.5px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .dmh{letter-spacing:-1px;}
+  .dmsub{font-size:13px;}
+  .nxt-banner{padding:12px 14px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+  .screener-header{padding:12px;}
+  .sh-title{font-size:15px;}
+  .sh-sub{font-size:11px;}
+  .screener-guide{padding:10px 12px;font-size:10.5px;}
+  .th-timer{display:none;}
+  .ts-outcomes{grid-template-columns:1fr;}
+  .ts-num{width:32px;height:32px;font-size:13px;}
+  .flow-branch{padding-left:6px;margin-left:8px;}
+  .trick-steps-body,.trick-bonus,.flow-wrap{padding:14px;}
+  .bonus-card{padding:14px;}
+  .wf-body{padding:14px;}
+  .wf-row{padding:10px 12px;gap:8px;}
+  .wf-badge{min-width:40px;font-size:9px;padding:4px 6px;}
+  .wf-name{font-size:13px;}
+  .wf-full{font-size:9px;}
+  .wf-desc{font-size:11px;}
+  .wf-val{font-size:12px;}
+  /* LEC cards — small phone */
+  .layer-explain-card{gap:10px;padding:14px 10px;}
+  .lec-left{width:36px;}
+  .lec-badge{width:36px;height:36px;font-size:11px;border-radius:10px;}
+  .lec-heading{font-size:13px;margin-bottom:8px;}
+  .lec-tag{font-size:11px;}
+  .lec-formula-chip{font-size:9px;padding:3px 8px;}
+  .lec-desc{font-size:12px;line-height:1.65;}
+  .lec-deduct-indent{width:36px;}
+  .lec-deduct-content{padding:8px 10px;}
+  .lec-deduct-text{font-size:10.5px;}
+  .lec-deduct-label{letter-spacing:.8px;}
+  .lec-pill{font-size:9px;padding:3px 8px;}
+  .cheat-strip{grid-template-columns:1fr 1fr;}
+  .cagr-grid{grid-template-columns:repeat(2,1fr);}
+  .pf-layer{font-size:10px;padding:0 8px;}
+  .sn-strip{flex-direction:column;align-items:flex-start;}
+  .lc-tag{font-size:clamp(16px,5vw,22px);}
+  .lc-full{font-size:8.5px;}
+  .lc-what{font-size:12px;}
+  .lc-desc{font-size:10.5px;}
+}
+
+/* ── EXTRA SMALL 360px and below ── */
+@media(max-width:360px){
+  .w{padding:22px 10px;}
+  .hh1{font-size:clamp(26px,10vw,40px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}
+  .hsi:last-child{border-bottom:none !important;}
+  .use-cards{grid-template-columns:1fr;}
+  .kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}
+  .nxt-btn{font-size:12px;padding:10px 14px;}
+  .ts-nav{flex-direction:column;align-items:flex-start;gap:3px;}
+  .trick-steps-body,.trick-bonus,.flow-wrap{padding:12px;}
+  .waterfall{border-radius:14px;}
+  .wf-header{padding:12px 14px;}
+  .wf-body{padding:12px;}
+  .layer-cards{grid-template-columns:1fr;}
+  .cheat-strip{grid-template-columns:1fr;}
+  .cagr-grid{grid-template-columns:repeat(2,1fr);}
+  .layer-explain-card{padding:12px 10px;gap:8px;}
+  .lec-left{width:32px;}
+  .lec-badge{width:32px;height:32px;font-size:10px;border-radius:8px;}
+  .lec-heading{font-size:12.5px;}
+  .lec-tag{font-size:10px;}
+  .lec-formula-chip{font-size:9px;padding:3px 7px;}
+  .lec-desc{font-size:11.5px;}
+  .lec-deduct-indent{width:32px;}
+  .lec-deduct-content{padding:6px 10px;}
+  .lec-deduct-text{font-size:10px;}
+  .lec-pill{font-size:8.5px;padding:3px 7px;}
+}
+
+/* ── TOUCH DEVICES (finger — no hover) ── */
+@media(hover:none) and (pointer:coarse){
+  .use-card:hover,.step-card:hover,.bl-row:hover,.lc:hover,
+  .company-block:hover,.bonus-card:hover,.wf-row:hover,
+  .layer-explain-card:hover,
+  .lec-ebitda:hover,.lec-ebit:hover,.lec-pbt:hover,.lec-pat:hover{
+    transform:none !important;box-shadow:var(--shc) !important;
+    border-color:var(--bd) !important;background:inherit !important;
+  }
+  .use-card:active{transform:scale(.97);transition:transform .08s;}
+  .step-card:active,.bl-row:active{transform:scale(.99);transition:transform .08s;}
+  .lc:active,.bonus-card:active{transform:scale(.98);transition:transform .08s;}
+  .wf-row:active{transform:scale(.99);transition:transform .08s;}
+  .layer-explain-card:active{background:var(--sf) !important;transition:background .08s;}
+  .lec-ebitda:active{background:rgba(109,40,217,.04) !important;}
+  .lec-ebit:active{background:rgba(2,132,199,.04) !important;}
+  .lec-pbt:active{background:rgba(217,119,6,.04) !important;}
+  .lec-pat:active{background:rgba(22,163,74,.04) !important;}
+  .dmbtn:active,.nxt-btn:active{transform:scale(.97);transition:transform .08s;}
+  /* Touch targets */
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:8px;padding-bottom:8px;}
+  .ts-num{min-width:44px;min-height:44px;}
+  .bonus-badge{min-width:36px;min-height:36px;}
+  .lec-badge{min-width:40px;min-height:40px;}
+  .lec-tag{min-height:28px;display:inline-flex;align-items:center;}
+  .lec-formula-chip{min-height:28px;display:inline-flex;align-items:center;}
+  .lec-pill{min-height:32px;display:inline-flex;align-items:center;}
+  .wf-row{min-height:52px;}
+  .wf-badge{min-height:36px;display:flex;align-items:center;justify-content:center;}
+  .lec-deduct-strip{min-height:44px;}
+  ::-webkit-scrollbar{display:none;}
+  scrollbar-width:none;
+  a,button,.dmbtn,.nxt-btn,.use-card,.step-card,.bl-row,.lc,
+  .kpill,.company-block,.bonus-card,.trick-wrap,.wf-row,.waterfall,
+  .layer-explain-card,.lec-pill,.lec-tag,.lec-formula-chip,
+  .cs-chip,.flow-node,.icr-zone,.cagr-cell{
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+    -webkit-touch-callout:none;
+  }
+  .hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,
+  .th-title,.th-supertag,.ts-nav,.flow-label,
+  .wf-name,.wf-full,.lc-tag,.lc-full,.lc-what,
+  .lec-tag,.lec-heading,.lec-formula-chip,
+  .lec-deduct-label,.lec-deduct-text,
+  .pf-title,.sn-lbl,.icr-title,.cagr-ref-title,.cs-name{
+    -webkit-user-select:none;user-select:none;
+  }
+  p,.klo-desc,.lead,.uc-desc,.caveat-desc,
+  .bl-body p,.step-body p,.cb-insight,
+  .ts-action,.ts-sc-text,.bonus-desc,.ts-out,
+  .wf-desc,.lc-desc,.lec-desc,.cs-formula,.icr-lbl,.cagr-lbl{
+    -webkit-user-select:text;user-select:text;
+  }
+  .klo-icon,.uc-ico,.infographic-svg,.lc{animation:none !important;}
+  .table-scroll,.glos-wrap,.waterfall{-webkit-overflow-scrolling:touch;}
+}
+
+/* ── iOS: NOTCH · HOME INDICATOR · ALL SAFE AREAS ── */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  .hero{
+    min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));
+  }
+  .vbadge{
+    top:max(22px,calc(env(safe-area-inset-top)+8px));
+    right:max(22px,calc(env(safe-area-inset-right)+8px));
+  }
+  .w{
+    padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));
+    padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));
+  }
+  .nxt-banner{
+    padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));
+    padding-bottom:max(18px,env(safe-area-inset-bottom));
+  }
+  .dmbanner{
+    padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));
+    padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));
+  }
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+  .hp,.hg,.hr,.hh1 .line1,.hh1 .line2,.hh1 .line3,
+  .hsv,.hsv.g,.hsv.r,
+  .klo-hi-val.purple,.klo-hi-val.green,.klo-hi-val.amber,.klo-hi-val.sky,
+  .h2 .hp,.h2 .hg,.h2 .hr{
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  a,button,.dmbtn,.nxt-btn,.use-card,.step-card,.bl-row,.lc,
+  .kpill,.company-block,.bonus-card,.trick-wrap,.wf-row,.layer-explain-card,
+  .lec-pill,.lec-tag,.lec-formula-chip{
+    -webkit-tap-highlight-color:transparent;
+  }
+  .table-scroll,.glos-wrap,.waterfall{-webkit-overflow-scrolling:touch;}
+}
+
+/* ── ANDROID HIGH-DPI 1.5× DPR ── */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .use-card,.step-card,.bl-row,.lc,.screener-wrap,
+  .company-block,.bonus-card,.trick-wrap,.waterfall,.layer-explain-card{
+    -webkit-backface-visibility:hidden;backface-visibility:hidden;
+  }
+  .infographic-svg,.klo-icon{-webkit-transform:translateZ(0);transform:translateZ(0);}
+  body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+}
+
+/* ── ACCESSIBILITY: prefers-reduced-motion ── */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}
+  .infographic-svg,.klo-icon,.uc-ico,.lc{animation:none !important;}
+}
+
+/* ── PRINT ── */
+@media print{
+  .dmbanner,.orb,.nxt-banner,.trick-hdr{display:none;}
+  .rv{opacity:1;transform:none;}
+  body{color:#000;background:#fff;}
+  .w{padding:20px;}
+  .table-scroll{overflow:visible;}
+  .bs-table,.bs-full{min-width:0;}
+  .company-block,.step-card,.bonus-card,.trick-step,
+  .wf-row,.lc,.layer-explain-card,.lec-deduct-strip{break-inside:avoid;}
+  .waterfall{border:1px solid #ccc;}
+  .wf-header{background:#6d28d9 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .layer-cards{grid-template-columns:1fr 1fr;}
+  .lec-deduct-strip{background:#f5f5f5;}
+  .lec-badge{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="vbadge">Financial Statement Analysis · Module 05 · Profitability Layers</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>EBITDA · EBIT · PBT · PAT · Profitability Layers · Screener.in</div>
+  <h1 class="hh1">
+    <span class="line1">EBITDA · EBIT</span>
+    <span class="line2">PBT · PAT</span>
+    <span class="line3">Four Lenses to Read Any Company's True Profit</span>
+  </h1>
+  <div class="hsub">Financial Statement Analysis · Income Statement · Profitability · Screener.in</div>
+  <p class="hdesc">Revenue is just the start. Every profitable company has four different "profit" numbers — each stripping out one more layer of cost. Understanding which one matters for which analysis, and why they can diverge dramatically, is how serious investors read income statements.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv">EBITDA</div><div class="hsl">Operating Power</div></div>
+    <div class="hsi"><div class="hsv" style="background:linear-gradient(135deg,var(--sky),#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">EBIT</div><div class="hsl">After Depreciation</div></div>
+    <div class="hsi"><div class="hsv" style="background:linear-gradient(135deg,var(--ambr),var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">PBT</div><div class="hsl">After Interest</div></div>
+    <div class="hsi"><div class="hsv g">PAT</div><div class="hsl">Final Net Profit</div></div>
+    <div class="hsi"><div class="hsv">5 Good · 5 Bad</div><div class="hsl">Real Company Data</div></div>
+  </div>
+</section>
+
+<!-- ══ 01 KLO ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Calculate and Interpret <span class="hp">Profitability Layers</span></h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">📊</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">A company's income statement contains four distinct profit numbers — EBITDA, EBIT, PBT, and PAT. Each one strips out a different type of cost from revenue. They exist because different stakeholders need different measures: an analyst comparing operational efficiency across industries ignores capital structure (uses EBITDA); a debt investor needs to see interest coverage (uses EBIT); a tax lawyer focuses on PBT; an equity shareholder ultimately cares about PAT.</div>
+        <div class="klo-desc">Think of it like peeling an onion. Revenue is the whole onion. EBITDA peels off operating expenses. EBIT additionally peels off depreciation — the accounting cost of assets wearing out. PBT further peels off interest — the cost of borrowed money. PAT is the final layer: profit after paying the government's share of taxes. Each layer reveals something different about the business. A company with great EBITDA but terrible PAT is either heavily indebted (interest eating profits) or highly capital-intensive (depreciation eating profits) — and that matters enormously for your investment decision.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-p">📊 EBITDA — Operating Profit</span>
+          <span class="kpill kpill-s">🔵 EBIT — After Depreciation</span>
+          <span class="kpill kpill-a">🟡 PBT — After Interest</span>
+          <span class="kpill kpill-g">✅ PAT — Final Net Profit</span>
+          <span class="kpill kpill-r">📐 Calculate &amp; Compare</span>
+        </div>
+        <div class="klo-hi-row">
+          <div class="klo-hi"><div class="klo-hi-ico">⚙️</div><div class="klo-hi-val purple">EBITDA</div><div class="klo-hi-lbl">Operational efficiency</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">🏗️</div><div class="klo-hi-val sky">EBIT</div><div class="klo-hi-lbl">After asset wear &amp; tear</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">🏦</div><div class="klo-hi-val amber">PBT</div><div class="klo-hi-lbl">After debt cost</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">💰</div><div class="klo-hi-val green">PAT</div><div class="klo-hi-lbl">What shareholders keep</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 02 THE FOUR LAYERS ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — The Profitability Stack</div>
+    <h2 class="h2 rv d2">From Revenue to PAT — <span class="hp">Every Deduction Explained</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Revenue flows through four deductions to become PAT. Each deduction represents a real cost — operational, physical, financial, and governmental. Understanding each one tells you who is taking a cut before shareholders get their share.</p>
+
+    <!-- 4 Layer Cards -->
+    <div class="layer-cards rv d3" style="margin-bottom:36px;">
+      <div class="lc lc-ebitda">
+        <div class="lc-tag" style="color:var(--p);">EBITDA</div>
+        <div class="lc-full">Earnings Before Interest, Tax, Depreciation &amp; Amortisation</div>
+        <div class="lc-what">Operating profit — before financing and accounting deductions</div>
+        <div class="lc-desc">Measures pure operational efficiency. Two companies with identical products but different debt levels will have the same EBITDA but very different PATs. Best for comparing operational performance across capital structures.</div>
+        <span class="lc-deduct lc-d-p">Revenue − COGS − SG&amp;A − R&amp;D</span>
+      </div>
+      <div class="lc lc-ebit">
+        <div class="lc-tag" style="color:var(--sky);">EBIT</div>
+        <div class="lc-full">Earnings Before Interest &amp; Tax</div>
+        <div class="lc-what">After subtracting depreciation &amp; amortisation from EBITDA</div>
+        <div class="lc-desc">Depreciation represents the annual accounting cost of assets wearing out (machines, buildings). EBIT shows profit after recognising this real economic cost. Capital-intensive companies (steel, power) have much lower EBIT vs EBITDA.</div>
+        <span class="lc-deduct lc-d-s">EBITDA − Depreciation − Amortisation</span>
+      </div>
+      <div class="lc lc-pbt">
+        <div class="lc-tag" style="color:var(--ambr);">PBT</div>
+        <div class="lc-full">Profit Before Tax</div>
+        <div class="lc-what">After subtracting interest expense from EBIT</div>
+        <div class="lc-desc">Interest is the cost of debt — paid to banks and bondholders regardless of business performance. A heavily indebted company can have excellent EBIT but near-zero or negative PBT. PBT reveals the burden of the capital structure on profitability.</div>
+        <span class="lc-deduct lc-d-a">EBIT − Net Interest Expense</span>
+      </div>
+      <div class="lc lc-pat">
+        <div class="lc-tag" style="color:var(--gbr);">PAT</div>
+        <div class="lc-full">Profit After Tax (Net Profit)</div>
+        <div class="lc-what">What's left for shareholders after paying government taxes</div>
+        <div class="lc-desc">PAT is the "bottom line" — the profit that belongs entirely to equity shareholders. It can be paid out as dividends or retained to reinvest. PAT drives EPS (Earnings Per Share) and ultimately the intrinsic value of every share you own.</div>
+        <span class="lc-deduct lc-d-g">PBT − Income Tax Expense</span>
+      </div>
+    </div>
+
+    <!-- Concept grid: Waterfall + Infographic -->
+    <div class="concept-grid">
+      <!-- Interactive Waterfall Visual -->
+      <div class="rv d3">
+        <div class="waterfall">
+          <div class="wf-header">
+            <div class="wf-title">📊 Profitability Waterfall — Illustrative Example</div>
+            <div class="wf-sub">Revenue of ₹1,000 Cr flowing through each deduction to PAT · Rs. Crores</div>
+          </div>
+          <div class="wf-body">
+            <div class="wf-row" style="background:linear-gradient(135deg,rgba(109,40,217,.06),rgba(109,40,217,.03));border:1.5px solid rgba(109,40,217,.15);">
+              <div class="wf-badge" style="background:var(--p);color:#fff;">Rev</div>
+              <div class="wf-info">
+                <div class="wf-name">Revenue</div>
+                <div class="wf-full">Net Sales / Net Revenue from Operations</div>
+                <div class="wf-desc">Total money received from selling goods/services before any deduction.</div>
+              </div>
+              <div class="wf-what">
+                <div class="wf-label">Amount</div>
+                <div class="wf-val" style="color:var(--p);">₹1,000</div>
+              </div>
+            </div>
+            <div class="wf-deduction">
+              <div class="wfd-arrow">↓</div>
+              <div class="wfd-text">Minus: Operating Expenses (COGS + SG&amp;A + R&amp;D) = ₹620 Cr</div>
+            </div>
+            <div class="wf-row wf-ebitda">
+              <div class="wf-badge wb-ebitda">EBITDA</div>
+              <div class="wf-info">
+                <div class="wf-name">EBITDA</div>
+                <div class="wf-full">Earnings Before Interest, Tax, Depreciation &amp; Amortisation</div>
+                <div class="wf-desc">Operating profit before any financing or accounting deductions. Pure operational efficiency — used to compare companies across different debt structures and tax regimes.</div>
+              </div>
+              <div class="wf-what">
+                <div class="wf-label">OPM %</div>
+                <div class="wf-val" style="color:var(--p);">₹380 · 38%</div>
+              </div>
+            </div>
+            <div class="wf-deduction">
+              <div class="wfd-arrow">↓</div>
+              <div class="wfd-text">Minus: Depreciation &amp; Amortisation = ₹80 Cr (asset wear &amp; tear)</div>
+            </div>
+            <div class="wf-row wf-ebit">
+              <div class="wf-badge wb-ebit">EBIT</div>
+              <div class="wf-info">
+                <div class="wf-name">EBIT</div>
+                <div class="wf-full">Earnings Before Interest &amp; Tax</div>
+                <div class="wf-desc">After recognising the annual cost of assets wearing out. Capital-intensive businesses show a bigger drop here. Asset-light businesses (IT, FMCG) show almost no difference vs EBITDA. EBIT = EBITDA for zero-depreciation businesses.</div>
+              </div>
+              <div class="wf-what">
+                <div class="wf-label">EBIT Margin</div>
+                <div class="wf-val" style="color:var(--sky);">₹300 · 30%</div>
+              </div>
+            </div>
+            <div class="wf-deduction">
+              <div class="wfd-arrow">↓</div>
+              <div class="wfd-text">Minus: Net Interest Expense = ₹60 Cr (cost of debt financing)</div>
+            </div>
+            <div class="wf-row wf-pbt">
+              <div class="wf-badge wb-pbt">PBT</div>
+              <div class="wf-info">
+                <div class="wf-name">PBT</div>
+                <div class="wf-full">Profit Before Tax</div>
+                <div class="wf-desc">After paying interest to lenders. A debt-free company skips this step (EBIT = PBT). A heavily indebted company can see PBT far below EBIT. Interest coverage ratio = EBIT ÷ Interest — below 2× is concerning.</div>
+              </div>
+              <div class="wf-what">
+                <div class="wf-label">PBT Margin</div>
+                <div class="wf-val" style="color:var(--ambr);">₹240 · 24%</div>
+              </div>
+            </div>
+            <div class="wf-deduction">
+              <div class="wfd-arrow">↓</div>
+              <div class="wfd-text">Minus: Income Tax = ₹72 Cr (effective tax rate ~30%)</div>
+            </div>
+            <div class="wf-row wf-pat">
+              <div class="wf-badge wb-pat">PAT</div>
+              <div class="wf-info">
+                <div class="wf-name">PAT — Net Profit</div>
+                <div class="wf-full">Profit After Tax · The Bottom Line</div>
+                <div class="wf-desc">What belongs 100% to equity shareholders. Drives EPS, dividend capacity, and book value growth. PAT ÷ Revenue = Net Profit Margin. If PAT grows faster than revenue — exceptional. If PAT grows slower — costs or financing eroding value.</div>
+              </div>
+              <div class="wf-what">
+                <div class="wf-label">Net Margin</div>
+                <div class="wf-val" style="color:var(--gbr);">₹168 · 16.8%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Infographic SVG -->
+      <div class="rv d4">
+        <div class="infographic-wrap">
+          <svg class="infographic-svg" viewBox="0 0 420 570" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="420" height="570" rx="20" fill="#f5f3ff"/>
+            <rect x="14" y="10" width="392" height="34" rx="10" fill="#6d28d9"/>
+            <text x="210" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">The Profit Onion — Peeling Each Layer</text>
+            <!-- Revenue Circle (biggest) -->
+            <circle cx="210" cy="160" r="130" fill="rgba(109,40,217,.08)" stroke="rgba(109,40,217,.2)" stroke-width="1.5"/>
+            <text x="210" y="52" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#6e6994">Revenue</text>
+            <text x="210" y="64" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6e6994">₹1,000 Cr</text>
+            <!-- EBITDA Circle -->
+            <circle cx="210" cy="160" r="100" fill="rgba(109,40,217,.1)" stroke="rgba(109,40,217,.3)" stroke-width="1.5"/>
+            <!-- EBIT Circle -->
+            <circle cx="210" cy="160" r="72" fill="rgba(2,132,199,.1)" stroke="rgba(2,132,199,.3)" stroke-width="1.5"/>
+            <!-- PBT Circle -->
+            <circle cx="210" cy="160" r="48" fill="rgba(217,119,6,.12)" stroke="rgba(217,119,6,.3)" stroke-width="1.5"/>
+            <!-- PAT Circle -->
+            <circle cx="210" cy="160" r="26" fill="rgba(22,163,74,.2)" stroke="rgba(22,163,74,.4)" stroke-width="1.5"/>
+            <!-- Labels on each ring -->
+            <text x="210" y="82" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="#6d28d9">EBITDA</text>
+            <text x="210" y="94" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">₹380 · OPM 38%</text>
+            <text x="210" y="112" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="#0284c7">EBIT</text>
+            <text x="210" y="124" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">₹300 · 30%</text>
+            <text x="210" y="142" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="#d97706">PBT</text>
+            <text x="210" y="154" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">₹240 · 24%</text>
+            <text x="210" y="163" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#15803d">PAT</text>
+            <text x="210" y="175" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#15803d" font-weight="700">₹168 · 16.8%</text>
+            <!-- Analyst character bottom left -->
+            <circle cx="46" cy="320" r="16" fill="#fbbf24"/>
+            <ellipse cx="46" cy="308" rx="16" ry="7" fill="#4c1d95"/>
+            <circle cx="41" cy="319" r="2.5" fill="white"/><circle cx="42" cy="320" r="1.5" fill="#1f2937"/>
+            <circle cx="51" cy="319" r="2.5" fill="white"/><circle cx="52" cy="320" r="1.5" fill="#1f2937"/>
+            <path d="M41 328 Q46 333 51 328" stroke="#92400e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M29,335 Q25,348 23,378 L69,378 Q67,348 63,335 Q56,329 51,332 Q46,336 41,332 Q35,329 29,335Z" fill="#3d1fa3"/>
+            <polygon points="41,332 46,326 51,332 48,343 44,343" fill="#6d28d9"/>
+            <path d="M29,345 Q16,351 14,361" stroke="#fbbf24" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <path d="M63,345 Q76,351 80,359" stroke="#fbbf24" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <rect x="2" y="278" width="82" height="26" rx="7" fill="white" stroke="#6d28d9" stroke-width="1.5"/>
+            <polygon points="16,304 26,304 21,312" fill="white" stroke="#6d28d9" stroke-width="1" stroke-linejoin="round"/>
+            <text x="43" y="289" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="800" fill="#4c1d95">Which profit</text>
+            <text x="43" y="300" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="800" fill="#4c1d95">matters here?</text>
+            <!-- Who cares about each -->
+            <rect x="14" y="400" width="392" height="48" rx="13" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+            <text x="210" y="420" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="#4c1d95">Who Uses Which Profit Measure?</text>
+            <text x="210" y="437" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Analyst: EBITDA · Banker: EBIT · Tax CA: PBT · Equity Investor: PAT</text>
+            <!-- 4 boxes -->
+            <rect x="14" y="462" width="88" height="94" rx="12" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1.2"/>
+            <text x="58" y="480" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#4c1d95">EBITDA</text>
+            <text x="58" y="494" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Compare ops</text>
+            <text x="58" y="506" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">across different</text>
+            <text x="58" y="518" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">capital structures</text>
+            <text x="58" y="532" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#6d28d9">Used by: PE firms</text>
+            <text x="58" y="544" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#6d28d9">M&amp;A analysts</text>
+            <rect x="110" y="462" width="88" height="94" rx="12" fill="#f0f9ff" stroke="rgba(2,132,199,.3)" stroke-width="1.2"/>
+            <text x="154" y="480" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#0284c7">EBIT</text>
+            <text x="154" y="494" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Interest coverage</text>
+            <text x="154" y="506" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">EBIT ÷ Interest</text>
+            <text x="154" y="518" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">above 3× = safe</text>
+            <text x="154" y="532" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#0284c7">Used by: Credit</text>
+            <text x="154" y="544" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#0284c7">analysts, banks</text>
+            <rect x="206" y="462" width="88" height="94" rx="12" fill="#fefce8" stroke="rgba(217,119,6,.3)" stroke-width="1.2"/>
+            <text x="250" y="480" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#d97706">PBT</text>
+            <text x="250" y="494" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Tax planning</text>
+            <text x="250" y="506" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Effective tax rate</text>
+            <text x="250" y="518" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">= Tax ÷ PBT</text>
+            <text x="250" y="532" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#d97706">Used by: CFO</text>
+            <text x="250" y="544" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#d97706">tax advisors</text>
+            <rect x="302" y="462" width="104" height="94" rx="12" fill="#f0fdf4" stroke="rgba(22,163,74,.3)" stroke-width="1.2"/>
+            <text x="354" y="480" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#15803d">PAT</text>
+            <text x="354" y="494" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Shareholder return</text>
+            <text x="354" y="506" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">EPS = PAT ÷ Shares</div>
+            <text x="354" y="506" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">EPS = PAT ÷ Shares</text>
+            <text x="354" y="518" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">P/E = Price ÷ EPS</text>
+            <text x="354" y="532" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#15803d">Used by: Equity</text>
+            <text x="354" y="544" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#15803d">investors (YOU)</text>
+          </svg>
+          <p class="infographic-cap">🧅 The Profit Onion — Revenue is the outermost layer. Each ring strips out one more cost. PAT at the centre is what equity shareholders actually own. The gap between outer and inner rings reveals the company's cost burden.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rich Layer Explanation Cards -->
+    <div class="rv d5">
+      <div style="background:var(--wh);border:1.5px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);">
+
+        <!-- EBITDA Card -->
+        <div class="layer-explain-card lec-ebitda">
+          <div class="lec-left">
+            <div class="lec-badge" style="background:linear-gradient(135deg,var(--p),var(--ph));">E1</div>
+            <div class="lec-connector"></div>
+          </div>
+          <div class="lec-body">
+            <div class="lec-header-row">
+              <span class="lec-tag lec-tag-ebitda">EBITDA</span>
+              <span class="lec-formula-chip" style="background:rgba(109,40,217,.08);border:1px solid rgba(109,40,217,.2);color:var(--p);">Revenue − OpEx</span>
+            </div>
+            <h4 class="lec-heading">Why It Ignores Debt and Depreciation — and Why That's Useful</h4>
+            <p class="lec-desc">EBITDA deliberately excludes interest (debt financing), depreciation (accounting for asset age), and taxes (government-set rates). This makes it ideal for comparing two companies with identical products but different capital structures. Company A borrowed heavily to build its factory — high interest, high depreciation, low PAT. Company B raised equity — zero interest, same depreciation, higher PAT. Their EBITDA would be <em>identical</em> — their PAT wildly different. On Screener.in this is the <strong>"Operating Profit"</strong> row.</p>
+            <div class="lec-pills">
+              <span class="lec-pill" style="background:rgba(109,40,217,.08);color:var(--p);">📍 Screener: "Operating Profit" row</span>
+              <span class="lec-pill" style="background:rgba(22,163,74,.08);color:var(--gbr);">✅ Used for: cross-company comparison</span>
+              <span class="lec-pill" style="background:rgba(220,38,38,.07);color:var(--red);">⚠️ Ignores debt burden entirely</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lec-deduct-strip">
+          <div class="lec-deduct-indent"><div class="lec-minus">−</div></div>
+          <div class="lec-deduct-content">
+            <div class="lec-deduct-label">Deducted next</div>
+            <div class="lec-deduct-text">Depreciation &amp; Amortisation — annual accounting cost of physical assets wearing out</div>
+          </div>
+        </div>
+
+        <!-- EBIT Card -->
+        <div class="layer-explain-card lec-ebit">
+          <div class="lec-left">
+            <div class="lec-badge" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">E2</div>
+            <div class="lec-connector"></div>
+          </div>
+          <div class="lec-body">
+            <div class="lec-header-row">
+              <span class="lec-tag lec-tag-ebit">EBIT</span>
+              <span class="lec-formula-chip" style="background:rgba(2,132,199,.08);border:1px solid rgba(2,132,199,.2);color:var(--sky);">EBITDA − D&amp;A</span>
+            </div>
+            <h4 class="lec-heading">The True Earning Power After Acknowledging Asset Wear</h4>
+            <p class="lec-desc">Depreciation is the annual accounting charge for physical assets wearing out over time. A steel company with ₹10,000 Cr of fixed assets might depreciate ₹800 Cr annually — a real economic cost even if no cash leaves today. For asset-light businesses (software, FMCG brands), depreciation is tiny and <strong>EBIT ≈ EBITDA</strong>. For capital-intensive businesses (telecom, power, manufacturing), EBIT can be dramatically lower than EBITDA — revealing hidden asset replacement costs that EBITDA flatters away.</p>
+            <div class="lec-pills">
+              <span class="lec-pill" style="background:rgba(2,132,199,.08);color:var(--sky);">📍 Screener: Operating Profit − Depreciation</span>
+              <span class="lec-pill" style="background:rgba(22,163,74,.08);color:var(--gbr);">✅ Asset-light: EBIT ≈ EBITDA (tiny D&amp;A)</span>
+              <span class="lec-pill" style="background:rgba(220,38,38,.07);color:var(--red);">🚨 Capital-intensive: EBIT far below EBITDA</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lec-deduct-strip">
+          <div class="lec-deduct-indent"><div class="lec-minus">−</div></div>
+          <div class="lec-deduct-content">
+            <div class="lec-deduct-label">Deducted next</div>
+            <div class="lec-deduct-text">Net Interest Expense — cost of borrowing, paid to banks, bonds &amp; NCDs regardless of performance</div>
+          </div>
+        </div>
+
+        <!-- PBT Card -->
+        <div class="layer-explain-card lec-pbt">
+          <div class="lec-left">
+            <div class="lec-badge" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">PBT</div>
+            <div class="lec-connector"></div>
+          </div>
+          <div class="lec-body">
+            <div class="lec-header-row">
+              <span class="lec-tag lec-tag-pbt">PBT</span>
+              <span class="lec-formula-chip" style="background:rgba(217,119,6,.08);border:1px solid rgba(217,119,6,.2);color:var(--ambr);">EBIT − Interest</span>
+            </div>
+            <h4 class="lec-heading">Profit After Paying Your Lenders, Before Paying the Government</h4>
+            <p class="lec-desc">Interest is the price of borrowing — paid to banks, bondholders, and NCDs regardless of how the business is performing. A company with ₹300 Cr EBIT but ₹280 Cr interest expense has PBT of only ₹20 Cr — dangerously leveraged. The <strong>Interest Coverage Ratio (EBIT ÷ Interest)</strong> below 2× is a red flag. Above 5× = financially comfortable. Debt-free companies (CDSL, Nestlé, TCS) have EBIT = PBT — they skip this deduction entirely, giving them a massive competitive advantage during downturns.</p>
+            <div class="lec-pills">
+              <span class="lec-pill" style="background:rgba(217,119,6,.08);color:var(--ambr);">📍 Screener: "Interest" row in P&amp;L</span>
+              <span class="lec-pill" style="background:rgba(22,163,74,.08);color:var(--gbr);">✅ Debt-free: EBIT = PBT (or higher!)</span>
+              <span class="lec-pill" style="background:rgba(220,38,38,.07);color:var(--red);">🚨 ICR below 2× = solvency risk</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lec-deduct-strip">
+          <div class="lec-deduct-indent"><div class="lec-minus">−</div></div>
+          <div class="lec-deduct-content">
+            <div class="lec-deduct-label">Deducted next</div>
+            <div class="lec-deduct-text">Income Tax — government's share, typically 22–30% effective rate for Indian listed companies</div>
+          </div>
+        </div>
+
+        <!-- PAT Card -->
+        <div class="layer-explain-card lec-pat">
+          <div class="lec-left">
+            <div class="lec-badge" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">PAT</div>
+          </div>
+          <div class="lec-body">
+            <div class="lec-header-row">
+              <span class="lec-tag lec-tag-pat">PAT</span>
+              <span class="lec-formula-chip" style="background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.25);color:var(--gbr);">PBT − Tax ✅</span>
+            </div>
+            <h4 class="lec-heading">The Final Number That Actually Belongs to You</h4>
+            <p class="lec-desc">PAT is the only profit number that truly belongs to equity shareholders. It drives <strong>EPS (Earnings Per Share = PAT ÷ Total Shares)</strong>, which drives the P/E ratio used for valuation. Net Profit Margin = PAT ÷ Revenue. A 20%+ net margin for 10 consecutive years is exceptional — businesses like this compound wealth reliably. On Screener.in, PAT is listed as <strong>"Net Profit"</strong> in the P&amp;L. Watch the <strong>PAT CAGR over 10 years</strong> — it's the single most reliable predictor of long-term stock price performance.</p>
+            <div class="lec-pills">
+              <span class="lec-pill" style="background:rgba(22,163,74,.1);color:var(--gbr);">📍 Screener: "Net Profit" row</span>
+              <span class="lec-pill" style="background:rgba(22,163,74,.1);color:var(--gbr);">✅ Drives EPS · P/E · Dividends · Book Value</span>
+              <span class="lec-pill" style="background:rgba(109,40,217,.08);color:var(--p);">📊 10-yr PAT CAGR = wealth compounder signal</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ══ 03 SCREENER TABLE ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — Reading All Four Layers on Screener.in</div>
+    <h2 class="h2 rv d2">TCS — All Four Profit Layers <span class="hp">Decoded</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">This is TCS's actual Screener.in P&L — 5 years of data with EBITDA, EBIT, PBT, and PAT identified and tracked. Notice how each layer behaves and what the margins reveal about this asset-light IT giant.</p>
+
+    <div class="screener-wrap rv d3">
+      <div class="screener-header">
+        <div class="sh-left">
+          <div class="sh-title">P&L — All Four Profit Layers · TCS</div>
+          <div class="sh-sub">Consolidated · Rs. Crores · Screener.in format · EBITDA → EBIT → PBT → PAT</div>
+        </div>
+        <div class="sh-right">
+          <span class="sh-badge">5-Year View</span>
+          <span class="sh-badge">4 Profit Layers</span>
+          <span class="sh-badge" style="background:rgba(34,197,94,.2);border-color:rgba(34,197,94,.4);">✅ Asset-Light Model</span>
+        </div>
+      </div>
+      <div class="screener-guide">
+        <div class="legend-dot" style="background:var(--p);"></div><strong>Purple</strong> = EBITDA row &nbsp;
+        <div class="legend-dot" style="background:var(--sky);"></div><strong>Sky</strong> = EBIT row &nbsp;
+        <div class="legend-dot" style="background:var(--ambr);"></div><strong>Amber</strong> = PBT row &nbsp;
+        <div class="legend-dot" style="background:var(--gbr);"></div><strong>Green</strong> = PAT row &nbsp;·&nbsp; Scroll right →
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr>
+            <th class="col-label" style="min-width:200px;">Line Item</th>
+            <th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th>
+            <th style="min-width:120px;text-align:left;color:var(--tl);font-size:9px;">Observation</th>
+          </tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">💰 Net Revenue</td><td>1,64,177</td><td>1,91,754</td><td>2,25,458</td><td>2,40,893</td><td>2,55,324</td><td style="text-align:left;"><span class="flag-cell flag-g">+55% in 5yr</span></td></tr>
+            <tr><td class="col-label">⚙️ Total Operating Expenses</td><td>1,21,226</td><td>1,43,584</td><td>1,71,087</td><td>1,80,714</td><td>1,90,093</td><td style="text-align:left;"><span class="flag-cell flag-g">Controlled growth</span></td></tr>
+            <tr class="eb-row"><td class="col-label">📊 EBITDA (Operating Profit)</td><td>42,951</td><td>48,170</td><td>54,371</td><td>60,179</td><td>65,231</td><td style="text-align:left;"><span class="flag-cell flag-p">OPM 26–27%</span></td></tr>
+            <tr class="rat-row"><td class="col-label">📊 EBITDA Margin %</td><td>26.2%</td><td>25.1%</td><td>24.1%</td><td>25.0%</td><td>25.6%</td><td style="text-align:left;"><span class="flag-cell flag-p">Very stable</span></td></tr>
+            <tr><td class="col-label">🏗️ Depreciation &amp; Amortisation</td><td>9,563</td><td>9,843</td><td>12,224</td><td>14,080</td><td>15,777</td><td style="text-align:left;"><span class="flag-cell flag-s">~6% of Rev</span></td></tr>
+            <tr class="ei-row"><td class="col-label">🔵 EBIT</td><td>33,388</td><td>38,327</td><td>42,147</td><td>46,099</td><td>49,454</td><td style="text-align:left;"><span class="flag-cell flag-s">EBIT Margin 19%</span></td></tr>
+            <tr><td class="col-label">🏦 Net Interest (Income)</td><td>2,148</td><td>1,680</td><td>3,108</td><td>4,522</td><td>5,282</td><td style="text-align:left;"><span class="flag-cell flag-g">Net income, debt-free</span></td></tr>
+            <tr class="pb-row"><td class="col-label">🟡 PBT</td><td>35,536</td><td>40,007</td><td>45,255</td><td>50,621</td><td>54,736</td><td style="text-align:left;"><span class="flag-cell flag-a">PBT&gt;EBIT (no debt!)</span></td></tr>
+            <tr><td class="col-label">💸 Income Tax</td><td>9,514</td><td>10,488</td><td>11,494</td><td>12,804</td><td>13,744</td><td style="text-align:left;"><span class="flag-cell flag-a">~26% effective rate</span></td></tr>
+            <tr class="pa-row total-row"><td class="col-label">💰 PAT (Net Profit)</td><td>33,388</td><td>38,327</td><td>42,147</td><td>46,099</td><td>49,454</td><td style="text-align:left;"><span class="flag-cell flag-g">PAT Margin 19%</span></td></tr>
+            <tr class="rat-row"><td class="col-label">📊 Interest Coverage (EBIT÷Int)</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td style="text-align:left;"><span class="flag-cell flag-g">Debt-free ✅</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="padding:12px 18px;background:var(--gpale);border-top:1px solid rgba(22,163,74,.15);font-size:11px;color:var(--gbr);font-weight:600;">✅ TCS insight: As a debt-free company, TCS's PBT is actually HIGHER than its EBIT — because surplus cash earns interest income. This is the "reverse leverage" of being debt-free. EBITDA, EBIT, PBT, and PAT all grow consistently — a hallmark of high-quality compounding businesses. Note: D&A rising (from IT infrastructure depreciation) keeps EBIT below EBITDA even in asset-light IT.</div>
+    </div>
+
+    <div class="bench-list rv d5" style="margin-top:28px;">
+      <div class="bl-row">
+        <div class="bl-ico">📊</div>
+        <div class="bl-body">
+          <h4>EBITDA vs EBIT — Why TCS Shows the Asset-Light Advantage</h4>
+          <p>TCS's EBITDA margin (26%) is 6–7 percentage points above its EBIT margin (19–20%). This gap is the D&A — ₹9,500–15,700 Cr annually for servers, software, office equipment, and right-of-use asset depreciation (leased office spaces under Ind AS 116). For a pure software company with no physical factories, this D&A is real but manageable. Compare this to a steel company where D&A can consume 10–15% of revenue — making EBIT dramatically lower than EBITDA. When someone quotes "26% EBITDA margin" for TCS but the stock P/E uses PAT-based EPS, you need both numbers to understand the full picture.</p>
+        </div>
+      </div>
+      <div class="bl-row">
+        <div class="bl-ico">🏦</div>
+        <div class="bl-body">
+          <h4>PBT &gt; EBIT — The Magical Effect of Being Debt-Free with Surplus Cash</h4>
+          <p>TCS's PBT exceeds EBIT by ₹2,000–5,000 Cr annually — because TCS has no debt and instead holds massive cash reserves (₹50,000+ Cr in investments) that earn interest income. Net Interest = Interest Income − Interest Expense. For TCS, Interest Income is substantial (earning returns on its cash pile) while Interest Expense is near-zero (no borrowings). This is the opposite of a leveraged company where Interest Expense devastates PBT. Debt-free, cash-rich companies effectively have a free "financial business" running alongside their operating business — the cash earns money while the core business earns money.</p>
+        </div>
+      </div>
+      <div class="bl-row">
+        <div class="bl-ico">💰</div>
+        <div class="bl-body">
+          <h4>PAT CAGR — The Single Most Important Trend for Equity Investors</h4>
+          <p>TCS's PAT grew from ₹33,388 Cr (FY21) to ₹49,454 Cr (FY25) — a 48% increase in 5 years, or approximately 10% CAGR. This PAT growth directly drives EPS growth, which drives P/E-based valuation, which determines whether the stock is cheap or expensive. If PAT CAGR exceeds 15% for 10+ years, the company is compounding wealth. If PAT CAGR is below revenue CAGR, costs are growing faster than revenue — a warning sign. The 10-year PAT CAGR is one of the most predictive indicators of long-term stock performance available on Screener.in — it requires no complex analysis, just discipline to read the trend.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DEMAT BANNER ══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Calculate All Four Profit Layers Today</div>
+    <div class="dmh">Find <span class="dmhs">EBITDA, EBIT, PBT &amp; PAT</span> on Screener.in</div>
+    <div class="dmsub">Every Indian listed company's full P&L — with all four profitability layers — is free on Screener.in. Track margins, compare across years, and invest with genuine conviction in the companies you understand.</div>
+    <div class="dmfeats">
+      <div class="dmf">Free 12-year P&L with all profitability layers</div>
+      <div class="dmf">Calculate EBITDA, EBIT, PBT, PAT margins instantly</div>
+      <div class="dmf">Track PAT CAGR across 10 years for any company</div>
+      <div class="dmf">Compare interest coverage ratios across sectors</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated</div>
+  </div>
+</div>
+
+<!-- ══ 04 GOOD EXAMPLES ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">04 — Strong Profitability Across All Four Layers</div>
+    <h2 class="h2 rv d2">5 Companies Where <span class="hg">EBITDA, EBIT, PBT &amp; PAT Are All Healthy</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These companies demonstrate strong, consistent profitability at every level of the income statement — not just EBITDA, but all the way down to PAT.</p>
+
+    <!-- GOOD 1: Nestlé -->
+    <div class="company-block rv d3" style="margin-bottom:32px;">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fefce8,#fef9c3);">🍫</div>
+          <div><div class="cb-name">Nestlé India</div><div class="cb-sub">FMCG · NSE: NESTLEIND · Rs. Crores · Asset-light brand business</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ EBITDA 22–27%</span>
+          <span class="cb-badge cb-b-g">✅ PAT Margin 18%+</span>
+          <span class="cb-badge cb-b-g">✅ Zero net debt</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>13,284</td><td>14,637</td><td>17,359</td><td>18,562</td><td>18,166</td></tr>
+            <tr class="eb-row"><td class="col-label">EBITDA</td><td>3,214</td><td>3,462</td><td>4,359</td><td>5,037</td><td>4,320</td></tr>
+            <tr class="rat-row"><td class="col-label">EBITDA Margin</td><td>24.2%</td><td>23.7%</td><td>25.1%</td><td>27.1%</td><td>23.8%</td></tr>
+            <tr class="ei-row"><td class="col-label">EBIT (after D&amp;A)</td><td>2,980</td><td>3,218</td><td>4,004</td><td>4,640</td><td>3,892</td></tr>
+            <tr class="pb-row"><td class="col-label">PBT (no interest cost)</td><td>3,060</td><td>3,306</td><td>4,120</td><td>4,780</td><td>4,020</td></tr>
+            <tr class="pa-row total-row"><td class="col-label">PAT (Net Profit)</td><td>2,143</td><td>2,302</td><td>2,906</td><td>3,324</td><td>2,560</td></tr>
+            <tr class="rat-row"><td class="col-label">PAT Margin</td><td>16.1%</td><td>15.7%</td><td>16.7%</td><td>17.9%</td><td>14.1%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Nestlé shows near-perfect profitability consistency across all four layers.</strong> EBITDA stays in the 23–27% band — strong brand pricing power. EBIT is only slightly below EBITDA (small D&A because asset-light model). PBT is actually higher than EBIT (interest income from surplus cash — zero debt). PAT of 15–18% is exceptional for an FMCG company. The FY25 dip (PAT margin fell to 14%) reflects competitive pressure and input costs — but all four layers remained positive and healthy. This is what "quality earnings" looks like at every layer of the income statement.</div>
+    </div>
+
+    <!-- GOOD 2: CDSL -->
+    <div class="company-block rv d4" style="margin-bottom:32px;">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pxs));">📊</div>
+          <div><div class="cb-name">CDSL — Central Depository Services</div><div class="cb-sub">Market Infrastructure · NSE: CDSL · Rs. Crores · Capital-light, debt-free</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ EBITDA 55–68%</span>
+          <span class="cb-badge cb-b-g">✅ PAT ≈ EBITDA (no debt, low D&A)</span>
+          <span class="cb-badge cb-b-g">✅ All 4 layers healthy</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>344</td><td>551</td><td>555</td><td>812</td><td>1,082</td></tr>
+            <tr class="eb-row"><td class="col-label">EBITDA</td><td>234</td><td>376</td><td>330</td><td>510</td><td>654</td></tr>
+            <tr class="rat-row"><td class="col-label">EBITDA Margin</td><td>68%</td><td>68%</td><td>59%</td><td>63%</td><td>60%</td></tr>
+            <tr class="ei-row"><td class="col-label">EBIT</td><td>218</td><td>355</td><td>295</td><td>470</td><td>594</td></tr>
+            <tr class="pb-row"><td class="col-label">PBT (interest income adds)</td><td>240</td><td>382</td><td>338</td><td>528</td><td>660</td></tr>
+            <tr class="pa-row total-row"><td class="col-label">PAT</td><td>201</td><td>312</td><td>276</td><td>420</td><td>526</td></tr>
+            <tr class="rat-row"><td class="col-label">PAT Margin</td><td>58%</td><td>57%</td><td>50%</td><td>52%</td><td>49%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>CDSL is the extreme end of the profitability spectrum — all four layers robust at 50–68% margins.</strong> The reason EBITDA, EBIT, PBT, and PAT are all very close to each other: (1) Minimal depreciation — CDSL's main asset is its digital platform, not physical machines. (2) Zero debt — so no interest deduction. (3) PBT exceeds EBIT because CDSL earns substantial investment income on its cash pile. When all four profit layers are this tightly clustered, it means the company has almost no financial burden between revenue and shareholder profit. This is the architectural beauty of a platform business.</div>
+    </div>
+
+    <!-- GOOD 3: Asian Paints -->
+    <div class="company-block rv d5" style="margin-bottom:32px;">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fff7ed,#fed7aa);">🎨</div>
+          <div><div class="cb-name">Asian Paints</div><div class="cb-sub">Consumer Products · NSE: ASIANPAINT · Rs. Crores · Moderate capex, strong brand</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ EBITDA 18–27%</span>
+          <span class="cb-badge cb-b-g">✅ Near-zero debt</span>
+          <span class="cb-badge cb-b-g">✅ PAT margin 10–16%</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>20,196</td><td>26,798</td><td>34,489</td><td>34,903</td><td>32,568</td></tr>
+            <tr class="eb-row"><td class="col-label">EBITDA</td><td>4,523</td><td>5,012</td><td>6,420</td><td>8,950</td><td>6,578</td></tr>
+            <tr class="rat-row"><td class="col-label">EBITDA Margin</td><td>22.4%</td><td>18.7%</td><td>18.6%</td><td>25.6%</td><td>20.2%</td></tr>
+            <tr class="ei-row"><td class="col-label">EBIT</td><td>3,884</td><td>4,318</td><td>5,624</td><td>8,080</td><td>5,636</td></tr>
+            <tr class="pb-row"><td class="col-label">PBT</td><td>3,928</td><td>4,368</td><td>5,696</td><td>8,160</td><td>5,564</td></tr>
+            <tr class="pa-row total-row"><td class="col-label">PAT</td><td>3,212</td><td>3,602</td><td>4,584</td><td>5,108</td><td>3,748</td></tr>
+            <tr class="rat-row"><td class="col-label">PAT Margin</td><td>15.9%</td><td>13.4%</td><td>13.3%</td><td>14.6%</td><td>11.5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Asian Paints shows how a manufacturing company can maintain excellent profitability across all four layers.</strong> The gap between EBITDA and EBIT (roughly ₹600–870 Cr annually) is depreciation on paint manufacturing plants and distribution infrastructure — modest for a ₹30,000+ Cr revenue company. EBIT ≈ PBT because Asian Paints carries minimal debt and earns some investment income. The PAT of 11–16% of revenue is exceptional for a consumer manufacturing company that also faces significant raw material costs (paint pigments, resins are commodity-priced). FY22–FY23 margin compression (raw material inflation) then recovery in FY24 shows all four layers moving together.</div>
+    </div>
+
+    <!-- GOOD 4: Sun Pharma -->
+    <div class="company-block rv d6" style="margin-bottom:32px;">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">💊</div>
+          <div><div class="cb-name">Sun Pharmaceutical Industries</div><div class="cb-sub">Pharmaceuticals · NSE: SUNPHARMA · Rs. Crores · Strong specialty portfolio</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ EBITDA expanding to 28%</span>
+          <span class="cb-badge cb-b-g">✅ Low debt-to-equity</span>
+          <span class="cb-badge cb-b-g">✅ PAT 18%+ in FY25</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>30,008</td><td>33,239</td><td>38,434</td><td>46,893</td><td>52,416</td></tr>
+            <tr class="eb-row"><td class="col-label">EBITDA</td><td>6,362</td><td>7,445</td><td>9,147</td><td>12,380</td><td>14,780</td></tr>
+            <tr class="rat-row"><td class="col-label">EBITDA Margin</td><td>21.2%</td><td>22.4%</td><td>23.8%</td><td>26.4%</td><td>28.2%</td></tr>
+            <tr class="ei-row"><td class="col-label">EBIT</td><td>4,562</td><td>5,245</td><td>6,447</td><td>9,180</td><td>11,380</td></tr>
+            <tr class="pb-row"><td class="col-label">PBT</td><td>4,288</td><td>5,068</td><td>6,200</td><td>8,960</td><td>11,148</td></tr>
+            <tr class="pa-row total-row"><td class="col-label">PAT</td><td>5,180</td><td>5,890</td><td>6,572</td><td>9,076</td><td>9,810</td></tr>
+            <tr class="rat-row"><td class="col-label">PAT Margin</td><td>17.3%</td><td>17.7%</td><td>17.1%</td><td>19.3%</td><td>18.7%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Sun Pharma's profitability story: EBITDA expanding while all lower layers follow proportionally.</strong> The gap between EBITDA (28%) and EBIT (22%) represents R&D amortisation and significant pharmaceutical manufacturing plant depreciation — real costs for a pharma company with multiple global facilities. The relatively small gap between EBIT and PBT shows moderate, manageable debt (pharmaceutical companies often borrow for acquisitions). PAT of 17–19% consistently is outstanding for a company also spending 6–7% of revenue on R&D. The fact that PAT CAGR (~14% over 5 years) nearly matches EBITDA CAGR shows profitability is being generated, not just cosmetically boosted.</div>
+    </div>
+
+    <!-- GOOD 5: HDFC Bank -->
+    <div class="company-block rv d7" style="margin-bottom:8px;">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0);">🏛️</div>
+          <div><div class="cb-name">HDFC Bank</div><div class="cb-sub">Private Banking · NSE: HDFCBANK · Rs. Crores · NII as the "EBITDA equivalent" for banks</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ NII growing 15%+ CAGR</span>
+          <span class="cb-badge cb-b-g">✅ PAT 30%+ CAGR historical</span>
+          <span class="cb-badge cb-b-s">📌 Banks use NIM not OPM</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Net Interest Income (NII)</td><td>66,084</td><td>75,468</td><td>95,616</td><td>1,11,744</td><td>1,32,348</td></tr>
+            <tr class="eb-row"><td class="col-label">Pre-Provision Operating Profit</td><td>52,068</td><td>62,136</td><td>82,456</td><td>95,304</td><td>1,12,128</td></tr>
+            <tr class="rat-row"><td class="col-label">Cost-to-Income Ratio</td><td>38.2%</td><td>39.1%</td><td>41.8%</td><td>41.0%</td><td>40.2%</td></tr>
+            <tr class="ei-row"><td class="col-label">Profit Before Provisions (PBP)</td><td>52,068</td><td>62,136</td><td>82,456</td><td>95,304</td><td>1,12,128</td></tr>
+            <tr class="pb-row"><td class="col-label">PBT (after provisions)</td><td>40,651</td><td>49,148</td><td>57,692</td><td>79,828</td><td>90,244</td></tr>
+            <tr class="pa-row total-row"><td class="col-label">PAT (Net Profit)</td><td>31,116</td><td>36,961</td><td>44,109</td><td>60,812</td><td>67,932</td></tr>
+            <tr class="rat-row"><td class="col-label">Return on Assets (ROA)</td><td>1.9%</td><td>1.9%</td><td>1.9%</td><td>2.0%</td><td>1.9%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Banks use different metrics — NII replaces EBITDA, and ROA/ROE replace PAT margin. But the principle is identical: consistent profitability at every layer.</strong> For banks, "EBITDA equivalent" is Net Interest Income (NII = Interest Earned − Interest Paid on deposits). "EBIT equivalent" is Pre-Provision Operating Profit. "PBT" is after loan loss provisions. "PAT" is the final number. HDFC Bank's ROA of ~2% is among the highest for any large bank globally — only a handful of banks worldwide sustain this. PAT CAGR of 16%+ over 5 years drives consistent EPS growth, making it a compounding machine for long-term equity investors.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 05 BAD EXAMPLES ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">05 — Profitability Layer Collapses</div>
+    <h2 class="h2 rv d2">5 Cases Where Profits <span class="hr">Collapse Between EBITDA and PAT</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These examples show why EBITDA alone is misleading. When depreciation, interest, or taxes eat the difference — the company that looked profitable at the EBITDA level becomes a value destroyer at the PAT level.</p>
+
+    <!-- BAD 1: Vodafone Idea -->
+    <div class="company-block rv d3" style="margin-bottom:32px;">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">📱</div>
+          <div><div class="cb-name">Vodafone Idea (Vi)</div><div class="cb-sub">Telecom · NSE: IDEA · EBITDA positive but EBIT, PBT, PAT deeply negative</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-a">⚠️ EBITDA positive</span>
+          <span class="cb-badge cb-b-r">🚨 PAT -₹33,000 Cr/year</span>
+          <span class="cb-badge cb-b-r">🚨 D&A &gt; EBITDA</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>41,892</td><td>38,726</td><td>41,489</td><td>43,154</td><td>43,920</td></tr>
+            <tr class="eb-row"><td class="col-label">EBITDA</td><td>13,484</td><td>10,862</td><td>11,225</td><td>11,194</td><td>11,116</td></tr>
+            <tr class="rat-row"><td class="col-label">EBITDA Margin</td><td>32.2%</td><td>28.0%</td><td>27.0%</td><td>25.9%</td><td>25.3%</td></tr>
+            <tr class="warn-row"><td class="col-label">Depreciation &amp; Amortisation</td><td>25,832</td><td>23,844</td><td>27,988</td><td>29,960</td><td>30,624</td></tr>
+            <tr class="ei-row warn-row"><td class="col-label">EBIT (EBITDA − D&amp;A)</td><td style="color:var(--red);">-12,348</td><td style="color:var(--red);">-12,982</td><td style="color:var(--red);">-16,763</td><td style="color:var(--red);">-18,766</td><td style="color:var(--red);">-19,508</td></tr>
+            <tr class="warn-row"><td class="col-label">Net Interest Expense</td><td>25,068</td><td>26,924</td><td>28,888</td><td>31,200</td><td>32,448</td></tr>
+            <tr class="pb-row warn-row"><td class="col-label">PBT</td><td style="color:var(--red);">-37,416</td><td style="color:var(--red);">-39,906</td><td style="color:var(--red);">-45,651</td><td style="color:var(--red);">-49,966</td><td style="color:var(--red);">-51,956</td></tr>
+            <tr class="pa-row warn-row total-row"><td class="col-label">PAT (Net Loss)</td><td style="color:var(--red);">-44,232</td><td style="color:var(--red);">-28,245</td><td style="color:var(--red);">-29,301</td><td style="color:var(--red);">-31,238</td><td style="color:var(--red);">-33,048</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>The most extreme EBITDA-to-PAT collapse in Indian listed companies — a 25% EBITDA margin becoming a -75% PAT margin.</strong> Vodafone Idea's EBITDA of ~₹11,000 Cr annually looks reasonable. But D&A (spectrum amortisation + massive network depreciation) exceeds EBITDA — turning EBIT deeply negative immediately. Then add ₹25,000–32,000 Cr of annual interest on ₹2+ lakh crore debt — making PBT catastrophically negative. This is why "EBITDA positive" is meaningless for a company with Vi's capital structure. The lesson: always check whether D&A + Interest exceeds EBITDA. If it does, the company is economically insolvent even while appearing profitable at the operating level.</div>
+    </div>
+
+    <!-- BAD 2: Yes Bank -->
+    <div class="company-block rv d4" style="margin-bottom:32px;">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🏦</div>
+          <div><div class="cb-name">Yes Bank — NII Collapse to PAT Loss (FY2019–2020)</div><div class="cb-sub">Private Banking · NSE: YESBANK · NII positive but provisions destroyed PAT</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-a">⚠️ NII positive</span>
+          <span class="cb-badge cb-b-r">🚨 PAT -₹16,418 Cr in FY20</span>
+          <span class="cb-badge cb-b-r">🚨 Provision wipeout</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY17</th><th>FY18</th><th>FY19</th><th>FY20</th><th>FY21</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Net Interest Income (NII)</td><td>6,408</td><td>9,116</td><td>12,616</td><td>12,068</td><td>8,632</td></tr>
+            <tr class="eb-row"><td class="col-label">Pre-Provision Operating Profit</td><td>5,184</td><td>7,348</td><td>9,892</td><td>8,726</td><td>5,892</td></tr>
+            <tr class="warn-row"><td class="col-label">Loan Loss Provisions</td><td>684</td><td>1,380</td><td>5,044</td><td>24,768</td><td>7,148</td></tr>
+            <tr class="pb-row warn-row"><td class="col-label">PBT (after provisions)</td><td>4,500</td><td>5,968</td><td>4,848</td><td style="color:var(--red);">-16,042</td><td style="color:var(--red);">-1,256</td></tr>
+            <tr class="pa-row warn-row total-row"><td class="col-label">PAT (Net Profit/Loss)</td><td>3,330</td><td>4,224</td><td>1,720</td><td style="color:var(--red);">-16,418</td><td style="color:var(--red);">-3,462</td></tr>
+            <tr class="rat-row"><td class="col-label">Return on Assets (ROA)</td><td>1.8%</td><td>1.7%</td><td>0.5%</td><td style="color:var(--red);">-4.2%</td><td style="color:var(--red);">-0.9%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>Yes Bank's profitability collapse illustrates a banking-specific risk: provisions between PBT and PAT can be catastrophic.</strong> Yes Bank's NII (the banking equivalent of EBITDA) looked strong at ₹12,616 Cr in FY19. Pre-Provision Operating Profit of ₹9,892 Cr looked excellent. But in FY20, ₹24,768 Cr of loan loss provisions were recognized — all at once, for years of under-reported NPAs. This single line item collapsed PBT to -₹16,042 Cr and PAT to -₹16,418 Cr in a single year. The lesson for banking analysis: "PPOP" (Pre-Provision Operating Profit) means almost nothing if loan quality is deteriorating. Always check NPA% trends and provision coverage — they determine whether the bank's stated profits will survive contact with reality.</div>
+    </div>
+
+    <!-- BAD 3: MTNL -->
+    <div class="company-block rv d5" style="margin-bottom:32px;">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">📞</div>
+          <div><div class="cb-name">MTNL — Negative at All Levels</div><div class="cb-sub">Telecom PSU · NSE: MTNL · EBITDA negative, PAT catastrophically negative</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 EBITDA negative</span>
+          <span class="cb-badge cb-b-r">🚨 PAT -150% to -300%</span>
+          <span class="cb-badge cb-b-r">🚨 Structurally broken</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>1,468</td><td>1,298</td><td>1,125</td><td>989</td><td>876</td></tr>
+            <tr class="eb-row warn-row"><td class="col-label">EBITDA</td><td style="color:var(--red);">-1,672</td><td style="color:var(--red);">-1,780</td><td style="color:var(--red);">-1,586</td><td style="color:var(--red);">-1,488</td><td style="color:var(--red);">-1,432</td></tr>
+            <tr class="rat-row"><td class="col-label">EBITDA Margin</td><td style="color:var(--red);">-113%</td><td style="color:var(--red);">-137%</td><td style="color:var(--red);">-141%</td><td style="color:var(--red);">-150%</td><td style="color:var(--red);">-163%</td></tr>
+            <tr class="ei-row warn-row"><td class="col-label">EBIT</td><td style="color:var(--red);">-2,310</td><td style="color:var(--red);">-2,392</td><td style="color:var(--red);">-2,148</td><td style="color:var(--red);">-2,052</td><td style="color:var(--red);">-1,998</td></tr>
+            <tr class="warn-row"><td class="col-label">Net Interest Expense</td><td>1,086</td><td>1,124</td><td>1,168</td><td>1,214</td><td>1,258</td></tr>
+            <tr class="pa-row warn-row total-row"><td class="col-label">PAT (Net Loss)</td><td style="color:var(--red);">-3,512</td><td style="color:var(--red);">-3,628</td><td style="color:var(--red);">-3,384</td><td style="color:var(--red);">-3,312</td><td style="color:var(--red);">-3,284</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>MTNL is negative at every single profitability layer — the rarest and most severe form of business failure.</strong> Revenue is not only below operating expenses — it's so far below that EBITDA is -113% to -163% of revenue. There is no scenario where D&A deductions or interest charges "fix" this — they only make it worse. EBIT, PBT, and PAT are all deeply negative. This represents a complete structural mismatch between a fixed cost base (22,000+ employees who cannot be easily let go) and a rapidly declining revenue base (losing customers to Jio and Airtel every quarter). When EBITDA itself is deeply negative, no amount of financial engineering changes the fundamental reality: the company cannot cover its costs from its revenue at any level.</div>
+    </div>
+
+    <!-- BAD 4: Jaypee Associates -->
+    <div class="company-block rv d6" style="margin-bottom:32px;">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🏗️</div>
+          <div><div class="cb-name">Jaypee Associates — Interest Destroying EBIT</div><div class="cb-sub">Infrastructure · Historical · Interest expense 5× EBITDA</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-a">⚠️ EBITDA positive</span>
+          <span class="cb-badge cb-b-r">🚨 Interest &gt; EBITDA</span>
+          <span class="cb-badge cb-b-r">🚨 PAT -₹4,000+ Cr loss</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY17</th><th>FY18</th><th>FY19</th><th>FY20</th><th>FY21</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue</td><td>5,218</td><td>4,824</td><td>4,412</td><td>3,986</td><td>3,124</td></tr>
+            <tr class="eb-row"><td class="col-label">EBITDA</td><td>1,596</td><td>1,392</td><td>1,200</td><td>1,040</td><td>836</td></tr>
+            <tr class="rat-row"><td class="col-label">EBITDA Margin</td><td>30.6%</td><td>28.9%</td><td>27.2%</td><td>26.1%</td><td>26.7%</td></tr>
+            <tr class="ei-row"><td class="col-label">EBIT</td><td>960</td><td>824</td><td>680</td><td>560</td><td>424</td></tr>
+            <tr class="warn-row"><td class="col-label">Net Interest Expense</td><td>2,886</td><td>3,124</td><td>3,348</td><td>3,592</td><td>3,812</td></tr>
+            <tr class="pb-row warn-row"><td class="col-label">PBT</td><td style="color:var(--red);">-1,926</td><td style="color:var(--red);">-2,300</td><td style="color:var(--red);">-2,668</td><td style="color:var(--red);">-3,032</td><td style="color:var(--red);">-3,388</td></tr>
+            <tr class="pa-row warn-row total-row"><td class="col-label">PAT (Net Loss)</td><td style="color:var(--red);">-1,482</td><td style="color:var(--red);">-2,184</td><td style="color:var(--red);">-2,860</td><td style="color:var(--red);">-3,548</td><td style="color:var(--red);">-4,124</td></tr>
+            <tr class="rat-row"><td class="col-label">Interest Coverage (EBIT÷Int)</td><td style="color:var(--red);">0.33×</td><td style="color:var(--red);">0.26×</td><td style="color:var(--red);">0.20×</td><td style="color:var(--red);">0.16×</td><td style="color:var(--red);">0.11×</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>Jaypee is the classic "EBITDA trap" — looks profitable at the top, economically insolvent at the bottom.</strong> A 27–31% EBITDA margin sounds excellent. But subtract D&A: EBIT falls to ₹424–960 Cr. Then subtract interest: ₹2,886–3,812 Cr of annual interest payments on massive construction debt. PBT collapses to -₹1,926 Cr to -₹3,388 Cr. Interest Coverage Ratio fell from an already-dangerous 0.33× to a catastrophic 0.11×. This means EBIT covers only 11 paisa of every rupee of interest owed — the company is burning through cash and equity every year just to service debt. This is precisely why Warren Buffett famously distrusts high-EBITDA, high-debt companies: EBITDA flatters the picture until interest arrives on stage.</div>
+    </div>
+
+    <!-- BAD 5: Illustrative Startup -->
+    <div class="company-block rv d7" style="margin-bottom:8px;">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🚀</div>
+          <div><div class="cb-name">Illustrative New-Age Consumer Tech — EBITDA Adjusted Away Reality</div><div class="cb-sub">Consumer Tech · Hypothetical · EBITDA "adjusted" excludes critical costs · Rs. Crores</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-a">⚠️ "Adjusted EBITDA" positive</span>
+          <span class="cb-badge cb-b-r">🚨 GAAP EBITDA negative</span>
+          <span class="cb-badge cb-b-r">🚨 PAT deeply negative</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="bs-table bs-full">
+          <thead><tr><th class="col-label"></th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+          <tbody>
+            <tr class="rev-row"><td class="col-label">Revenue (GMV-based)</td><td>480</td><td>920</td><td>1,480</td><td>1,920</td><td>2,280</td></tr>
+            <tr class="eb-row"><td class="col-label">"Adjusted EBITDA" (mgmt claim)</td><td style="color:var(--ambr);">-48</td><td style="color:var(--ambr);">-36</td><td style="color:var(--ambr);">12</td><td>62</td><td>96</td></tr>
+            <tr class="warn-row"><td class="col-label">ESOP/Share-based comp (excluded above)</td><td>84</td><td>148</td><td>192</td><td>216</td><td>248</td></tr>
+            <tr class="warn-row"><td class="col-label">Customer acquisition costs (excluded)</td><td>192</td><td>368</td><td>444</td><td>480</td><td>456</td></tr>
+            <tr class="eb-row warn-row"><td class="col-label">Actual EBITDA (GAAP)</td><td style="color:var(--red);">-324</td><td style="color:var(--red);">-552</td><td style="color:var(--red);">-624</td><td style="color:var(--red);">-634</td><td style="color:var(--red);">-608</td></tr>
+            <tr class="pa-row warn-row total-row"><td class="col-label">PAT (Net Loss)</td><td style="color:var(--red);">-408</td><td style="color:var(--red);">-688</td><td style="color:var(--red);">-748</td><td style="color:var(--red);">-760</td><td style="color:var(--red);">-736</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>"Adjusted EBITDA" is not a GAAP metric — companies can define it almost however they want, and many exclude real, recurring costs.</strong> This illustrative startup claims "EBITDA breakeven" by excluding ESOP compensation (₹248 Cr — real compensation that dilutes your shareholding), customer acquisition costs (₹456 Cr — a cost it must incur every year to maintain revenue), and restructuring charges. The actual GAAP EBITDA is -₹608 Cr. PAT is -₹736 Cr. Revenue growing from ₹480 Cr to ₹2,280 Cr looks impressive — but actual losses are also growing from ₹408 Cr to ₹736 Cr. The company burns more cash each year despite higher revenue because customer acquisition costs scale with revenue. When a company promotes "Adjusted EBITDA" instead of actual EBITDA or PAT, ask: what is it adjusting out, and why? Always read PAT on Screener.in — it cannot be "adjusted away".</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 06 TRICK TO FIND EASILY ══ -->
+<section class="sec-white" style="position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-100px;right:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(109,40,217,.05) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-80px;left:-60px;width:360px;height:360px;background:radial-gradient(circle,rgba(22,163,74,.04) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div class="w" style="position:relative;z-index:1;">
+    <div class="tag rv d1">06 — The Investor's Shortcut</div>
+    <h2 class="h2 rv d2">Find All Four Profit Layers <span class="hp">in 60 Seconds — Exact Steps</span></h2>
+    <div class="rul rv d2"></div>
+    <p class="lead rv d3">No spreadsheets. No manual calculations. Screener.in pre-computes everything. Follow this exact sequence — once — and you'll read any company's profitability stack faster than most professional analysts.</p>
+
+    <div class="rv d3">
+      <div class="trick-wrap">
+
+        <!-- ── HEADER ── -->
+        <div class="trick-hdr">
+          <div class="th-left">
+            <div class="th-supertag">🎯 Profitability Mastery · EBITDA → EBIT → PBT → PAT</div>
+            <div class="th-title">The 5-Step Profit Layer Audit on Screener.in</div>
+            <div class="th-sub">Open any company on Screener.in. Follow these five steps in order. By the end you'll know: is this company truly profitable at every layer, or is EBITDA flattering a deeply troubled business?</div>
+          </div>
+          <div class="th-right">
+            <div class="th-timer">
+              <div class="th-timer-num">60</div>
+              <div class="th-timer-lbl">seconds<br>per company</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── QUICK REFERENCE CHEAT SHEET ── -->
+        <div style="padding:clamp(16px,3vw,28px) clamp(18px,4vw,36px);border-bottom:1px solid var(--bd);background:linear-gradient(158deg,#f5f3ff,#f0fdf4);">
+          <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:14px;">📋 Quick Reference — All 4 Profit Layers at a Glance</div>
+          <div class="cheat-strip">
+            <div class="cs-chip cs-chip-ebitda">
+              <div class="cs-lbl" style="color:var(--p);">EBITDA</div>
+              <div class="cs-name">Operating Profit</div>
+              <div class="cs-formula">Revenue − OpEx<br>(before D&amp;A, Interest, Tax)</div>
+              <span class="cs-signal" style="background:var(--pxl);color:var(--p);">OPM % row</span>
+            </div>
+            <div class="cs-chip cs-chip-ebit">
+              <div class="cs-lbl" style="color:var(--sky);">EBIT</div>
+              <div class="cs-name">After Depreciation</div>
+              <div class="cs-formula">EBITDA − Depreciation<br>(asset wear &amp; tear)</div>
+              <span class="cs-signal" style="background:var(--skypale);color:var(--sky);">D&amp;A % matters</span>
+            </div>
+            <div class="cs-chip cs-chip-pbt">
+              <div class="cs-lbl" style="color:var(--ambr);">PBT</div>
+              <div class="cs-name">After Interest</div>
+              <div class="cs-formula">EBIT − Net Interest<br>(cost of debt)</div>
+              <span class="cs-signal" style="background:var(--apale);color:var(--ambr);">ICR check</span>
+            </div>
+            <div class="cs-chip cs-chip-pat">
+              <div class="cs-lbl" style="color:var(--gbr);">PAT</div>
+              <div class="cs-name">Net Profit (Final)</div>
+              <div class="cs-formula">PBT − Income Tax<br>(what you own)</div>
+              <span class="cs-signal" style="background:var(--gpale);color:var(--gbr);">10yr CAGR key</span>
+            </div>
+          </div>
+          <!-- Profit funnel visual -->
+          <div class="pf-funnel">
+            <div class="pf-title">📊 Profit Funnel — How Revenue Shrinks to PAT · Illustrative</div>
+            <div class="pf-row">
+              <div class="pf-layer pf-ebitda">EBITDA · ₹380 · OPM 38%</div>
+              <div class="pf-meta">100% of EBITDA</div>
+            </div>
+            <div class="pf-row">
+              <div class="pf-layer pf-ebit">EBIT · ₹300 · 30% margin</div>
+              <div class="pf-meta">79% of EBITDA remains</div>
+            </div>
+            <div class="pf-row">
+              <div class="pf-layer pf-pbt">PBT · ₹240 · 24% margin</div>
+              <div class="pf-meta">63% of EBITDA remains</div>
+            </div>
+            <div class="pf-row">
+              <div class="pf-layer pf-pat">PAT · ₹168 · 16.8% margin</div>
+              <div class="pf-meta">44% of EBITDA reaches you</div>
+            </div>
+          </div>
+          <!-- Screener navigation path -->
+          <div class="sn-strip">
+            <span class="sn-lbl">📍 Screener.in path:</span>
+            <div class="sn-num">1</div><span class="sn-txt">Search company</span>
+            <span class="sn-arr">→</span>
+            <div class="sn-num">2</div><span class="sn-txt">P&amp;L tab</span>
+            <span class="sn-arr">→</span>
+            <div class="sn-num">3</div><span class="sn-txt">10-year view</span>
+            <span class="sn-arr">→</span>
+            <div class="sn-num">4</div><span class="sn-txt">Read: OPM% · Depreciation · Interest · Net Profit</span>
+          </div>
+        </div>
+
+        <!-- ── 5 STEPS ── -->
+        <div class="trick-steps-body">
+
+          <!-- STEP 1 -->
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--p),var(--ph));">1</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">screener.in</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab purple">P&amp;L tab</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab purple">"Operating Profit" row = EBITDA ✅</span>
+              </div>
+              <div class="ts-action"><strong>"Operating Profit"</strong> on Screener.in is your EBITDA — pre-calculated, no math needed. Read the <strong>OPM %</strong> column next to it (also pre-calculated). Track it for 5–10 years. Is it expanding, stable, or compressing? This one number tells you whether the core business is getting more or less profitable over time.</div>
+              <div class="ts-formula">
+                <div class="ts-f-row">
+                  <span class="ts-f-lbl">EBITDA</span><span class="ts-f-eq">=</span>
+                  <span class="ts-f-item ts-fi-rev">Revenue</span>
+                  <span class="ts-f-eq">−</span>
+                  <span class="ts-f-item ts-fi-exp">All Operating Expenses</span>
+                  <span style="font-size:10px;color:var(--tl);">(excl. D&amp;A, Interest, Tax)</span>
+                </div>
+                <div class="ts-f-guide">
+                  <span style="color:var(--gbr);">OPM above 20% = strong operating business ✅</span>
+                  <span style="color:var(--ambr);">OPM 10–20% = moderate, sector-dependent ⚠️</span>
+                  <span style="color:var(--red);">OPM below 5% = thin margins, high risk ❌</span>
+                  <span style="color:var(--red);">OPM negative = operating loss, avoid 🚨</span>
+                </div>
+              </div>
+              <div class="ts-outcomes" style="grid-template-columns:1fr;">
+                <div class="ts-out ts-out-n">📋 You now have EBITDA and OPM% for 10 years. Every step below will reduce this number further. The goal is to see how much survives each layer.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">2</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">P&amp;L tab</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab sky">"Depreciation" row</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab sky">EBIT = Operating Profit − Depreciation</span>
+              </div>
+              <div class="ts-action">Find <strong>"Depreciation"</strong> (exactly this name on Screener). Calculate <strong>D&amp;A ÷ Revenue</strong>. This percentage tells you the capital intensity of the business — how much of each revenue rupee goes to covering asset wear-out. The larger this gap between EBITDA and EBIT, the more capital-hungry the business.</div>
+              <div class="ts-formula">
+                <div class="ts-f-row">
+                  <span class="ts-f-lbl">EBIT</span><span class="ts-f-eq">=</span>
+                  <span class="ts-f-item ts-fi-rev">EBITDA</span>
+                  <span class="ts-f-eq">−</span>
+                  <span class="ts-f-item ts-fi-dep">Depreciation &amp; Amortisation</span>
+                </div>
+                <div class="ts-f-guide">
+                  <span style="color:var(--gbr);">D&amp;A below 3% of revenue = asset-light model ✅</span>
+                  <span style="color:var(--ambr);">D&amp;A 3–8% = moderate capital intensity ⚠️</span>
+                  <span style="color:var(--red);">D&amp;A above 10% = heavy capex, EBIT far below EBITDA 🚨</span>
+                </div>
+              </div>
+              <div class="ts-shortcut">
+                <div class="ts-sc-lbl">💡 No-calculator trick</div>
+                <div class="ts-sc-text">Just look at the Depreciation number vs the Operating Profit number. If Depreciation is less than 15% of Operating Profit — it's not eating much. If it's above 50% of Operating Profit — EBIT is far below EBITDA. For Vodafone Idea, D&A exceeds EBITDA entirely — EBIT goes negative immediately after this step.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">3</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">P&amp;L tab</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab amber">"Interest" row</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab amber">ICR = EBIT ÷ Interest</span>
+              </div>
+              <div class="ts-action">Find the <strong>"Interest"</strong> row. Calculate <strong>Interest Coverage Ratio (ICR) = EBIT ÷ Interest</strong>. This is the single most important solvency check for any non-financial company. If there is no Interest row — the company is debt-free (PBT ≈ EBIT or higher from interest income).</div>
+              <!-- ICR danger zones -->
+              <div class="icr-meter">
+                <div class="icr-title">📍 Interest Coverage Ratio — Danger Zones</div>
+                <div class="icr-track">
+                  <div class="icr-zone" style="background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.25);">
+                    <div class="icr-val" style="color:var(--red);">Below 1×</div>
+                    <div class="icr-lbl">Cannot pay interest 🚨</div>
+                  </div>
+                  <div class="icr-zone" style="background:rgba(220,38,38,.07);border:1px solid rgba(220,38,38,.18);">
+                    <div class="icr-val" style="color:var(--red);">1–2×</div>
+                    <div class="icr-lbl">Danger zone ❌</div>
+                  </div>
+                  <div class="icr-zone" style="background:rgba(217,119,6,.08);border:1px solid rgba(217,119,6,.2);">
+                    <div class="icr-val" style="color:var(--ambr);">2–3×</div>
+                    <div class="icr-lbl">Caution ⚠️</div>
+                  </div>
+                  <div class="icr-zone" style="background:rgba(22,163,74,.07);border:1px solid rgba(22,163,74,.18);">
+                    <div class="icr-val" style="color:var(--gbr);">3–5×</div>
+                    <div class="icr-lbl">Acceptable ✓</div>
+                  </div>
+                  <div class="icr-zone" style="background:rgba(22,163,74,.12);border:1px solid rgba(22,163,74,.25);">
+                    <div class="icr-val" style="color:var(--gbr);">5×+</div>
+                    <div class="icr-lbl">Very safe ✅</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ts-outcomes">
+                <div class="ts-out ts-out-g">✅ No Interest row or interest income &gt; interest expense = debt-free. PBT will be ≥ EBIT. This is the best possible outcome here.</div>
+                <div class="ts-out ts-out-r">🚨 ICR below 2× = the company struggles to pay interest from operations. PBT and PAT will be dramatically lower than EBIT.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 4 -->
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">4</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">P&amp;L tab</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab green">"Net Profit" row = PAT</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab green">PAT Margin % + 10-yr CAGR</span>
+              </div>
+              <div class="ts-action">Screener.in shows <strong>"Net Profit" = PAT</strong>, pre-calculated. Check PAT Margin = Net Profit ÷ Revenue. Then estimate the <strong>10-year PAT CAGR</strong> — the most important long-term investor metric. Use the reference below instead of a calculator.</div>
+              <!-- PAT CAGR reference table -->
+              <div class="cagr-ref">
+                <div class="cagr-ref-title">💡 PAT CAGR Quick Reference — No Calculator Needed</div>
+                <div class="cagr-grid">
+                  <div class="cagr-cell"><div class="cagr-val">2× in 5yr</div><div class="cagr-lbl">= 15% CAGR</div></div>
+                  <div class="cagr-cell"><div class="cagr-val">3× in 5yr</div><div class="cagr-lbl">= 25% CAGR</div></div>
+                  <div class="cagr-cell"><div class="cagr-val">2× in 10yr</div><div class="cagr-lbl">= 7% CAGR</div></div>
+                  <div class="cagr-cell"><div class="cagr-val">3× in 10yr</div><div class="cagr-lbl">= 12% CAGR</div></div>
+                  <div class="cagr-cell"><div class="cagr-val">5× in 10yr</div><div class="cagr-lbl">= 17% CAGR</div></div>
+                  <div class="cagr-cell"><div class="cagr-val">10× in 10yr</div><div class="cagr-lbl">= 26% CAGR</div></div>
+                  <div class="cagr-cell"><div class="cagr-val">Flat/negative</div><div class="cagr-lbl">= Avoid ❌</div></div>
+                  <div class="cagr-cell"><div class="cagr-val">15%+ CAGR</div><div class="cagr-lbl">= Exceptional ✅</div></div>
+                </div>
+              </div>
+              <div class="ts-outcomes">
+                <div class="ts-out ts-out-g">✅ PAT CAGR above 15% for 10 years = wealth-compounding business. If it also passes Steps 1–3, this is a rare, high-quality find.</div>
+                <div class="ts-out ts-out-r">🚨 PAT declining or negative while EBITDA grows = the layers between are destroying value. EBITDA is misleading here.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 5 -->
+          <div class="trick-step" style="padding-bottom:0;">
+            <div class="ts-num" style="background:linear-gradient(135deg,#e11d48,#f43f5e);">5</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">Final calculation</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab red">PAT ÷ EBITDA = Profit Retention Ratio</span>
+              </div>
+              <div class="ts-action">Calculate <strong>PAT ÷ EBITDA</strong>. This tells you how many paisa of every EBITDA rupee actually reaches shareholders. A high ratio = asset-light + debt-free business. A low ratio = capital-intensive or heavily leveraged. Below 20% is a warning sign even if EBITDA looks strong.</div>
+              <!-- Ratio comparison bars -->
+              <div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:10px;">
+                <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--tx);margin-bottom:12px;">📍 PAT ÷ EBITDA — Real Company Comparisons</div>
+                <div class="ratio-visual">
+                  <div class="rv-row">
+                    <div class="rv-lbl">CDSL</div>
+                    <div class="rv-bar-bg"><div class="rv-bar" style="width:80%;background:linear-gradient(90deg,var(--gbr),var(--gh));"></div></div>
+                    <div class="rv-val" style="color:var(--gbr);">~80% ✅</div>
+                  </div>
+                  <div class="rv-row">
+                    <div class="rv-lbl">TCS</div>
+                    <div class="rv-bar-bg"><div class="rv-bar" style="width:75%;background:linear-gradient(90deg,var(--gbr),var(--gh));"></div></div>
+                    <div class="rv-val" style="color:var(--gbr);">~75% ✅</div>
+                  </div>
+                  <div class="rv-row">
+                    <div class="rv-lbl">Nestlé India</div>
+                    <div class="rv-bar-bg"><div class="rv-bar" style="width:65%;background:linear-gradient(90deg,var(--p),var(--ph));"></div></div>
+                    <div class="rv-val" style="color:var(--p);">~65% ✅</div>
+                  </div>
+                  <div class="rv-row">
+                    <div class="rv-lbl">Jaypee (FY17)</div>
+                    <div class="rv-bar-bg"><div class="rv-bar" style="width:18%;background:linear-gradient(90deg,var(--ambr),var(--amb));"></div></div>
+                    <div class="rv-val" style="color:var(--ambr);">-93% ⚠️</div>
+                  </div>
+                  <div class="rv-row">
+                    <div class="rv-lbl">Vodafone Idea</div>
+                    <div class="rv-bar-bg"><div class="rv-bar" style="width:100%;background:linear-gradient(90deg,var(--red),#f87171);"></div></div>
+                    <div class="rv-val" style="color:var(--red);">-∞ 🚨</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ts-outcomes">
+                <div class="ts-out ts-out-g">✅ PAT/EBITDA above 60% = most operating profit reaches shareholders. Asset-light, low-debt business with strong structural profitability.</div>
+                <div class="ts-out ts-out-r">🚨 PAT/EBITDA below 20% or negative = EBITDA is deceptive. D&A + interest are consuming the apparent profit. Investigate before investing.</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end steps -->
+
+        <!-- ── BONUS TRICKS ── -->
+        <div class="trick-bonus">
+          <div class="trick-bonus-hdr">
+            <span class="trick-bonus-ico">⚡</span>
+            <span class="trick-bonus-title">4 Bonus Quick Tricks — Read Any Profit Layer in 10 Seconds Each</span>
+          </div>
+          <div class="bonus-grid">
+            <div class="bonus-card bc-p">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--p),var(--ph));">A</div>
+              <div class="bonus-title">The EBITDA–PAT Gap Test</div>
+              <div class="bonus-desc">Subtract PAT Margin from EBITDA Margin. Gap above 15 percentage points = something big is eating between those layers. Ask: Is it D&A (capital-intensive)? Or interest (over-leveraged)? Or abnormal taxes? Each point of gap = real shareholder money not arriving. TCS gap: ~9%. Vi gap: +80% (EBITDA positive, PAT massively negative).</div>
+            </div>
+            <div class="bonus-card bc-s">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">B</div>
+              <div class="bonus-title">The Effective Tax Rate Check</div>
+              <div class="bonus-desc">Calculate Tax Expense ÷ PBT. Normal Indian company: 22–30%. Below 15% = tax incentives or deferred tax assets (check if sustainable). Above 40% = disallowances or additional levies. A sudden drop in effective tax rate makes PAT look better without operational improvement — always verify it's repeatable.</div>
+            </div>
+            <div class="bonus-card bc-a">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">C</div>
+              <div class="bonus-title">The PAT vs CFO Cross-Check</div>
+              <div class="bonus-desc">After reading PAT, jump to the Cash Flow tab → "Cash from Operating Activities" (CFO). Calculate CFO ÷ PAT. Above 0.8× = profits are backed by real cash. Far below PAT for years = paper profits from accruals or aggressive revenue recognition. This cross-check validates whether all four layers are telling a consistent story.</div>
+            </div>
+            <div class="bonus-card bc-g">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">D</div>
+              <div class="bonus-title">The "Adjusted EBITDA" Red Flag</div>
+              <div class="bonus-desc">If a company's presentations say "Adjusted EBITDA" — always find Screener.in's "Operating Profit" instead. Companies adjust out ESOP costs, customer acquisition costs, restructuring charges. If these recur every year, they're not "one-time" — they're permanent costs being hidden. GAAP Operating Profit on Screener.in cannot be adjusted away.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── DECISION FLOWCHART ── -->
+        <div class="flow-wrap">
+          <div class="flow-label">🔀 All-Four-Layers Decision Flowchart — 4 Questions · 45 Seconds</div>
+          <div class="flow-chain">
+            <div class="flow-node fn-q">
+              <div class="fn-qlbl">Q1</div>
+              <div class="fn-txt">Is EBITDA (Operating Profit) positive and OPM above 10%?</div>
+            </div>
+            <div class="flow-branch">
+              <div class="fb-yes">
+                <span class="fb-lbl">YES ✅</span>
+                <div class="flow-node fn-q">
+                  <div class="fn-qlbl">Q2</div>
+                  <div class="fn-txt">Is EBIT also positive? (D&A does not wipe out EBITDA)</div>
+                </div>
+                <div class="flow-branch">
+                  <div class="fb-yes">
+                    <span class="fb-lbl">YES ✅</span>
+                    <div class="flow-node fn-q">
+                      <div class="fn-qlbl">Q3</div>
+                      <div class="fn-txt">Is Interest Coverage (EBIT ÷ Interest) above 3× or no debt?</div>
+                    </div>
+                    <div class="flow-branch">
+                      <div class="fb-yes">
+                        <span class="fb-lbl">YES ✅</span>
+                        <div class="flow-node fn-q">
+                          <div class="fn-qlbl">Q4</div>
+                          <div class="fn-txt">Is PAT growing — 10-year CAGR above 10% with no sudden drops?</div>
+                        </div>
+                        <div class="flow-branch">
+                          <div class="fb-yes">
+                            <span class="fb-lbl">YES ✅</span>
+                            <div class="flow-node fn-g">✅ ALL FOUR LAYERS HEALTHY — Strong compounding business. Proceed to valuation with high confidence.</div>
+                          </div>
+                          <div class="fb-no">
+                            <span class="fb-lbl">NO ⚠️</span>
+                            <div class="flow-node fn-a">⚠️ PAT STAGNANT — Operations and solvency fine, but PAT not growing. Check tax rate, one-time items, and whether revenue growth is stalling.</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="fb-no">
+                        <span class="fb-lbl">NO ⚠️</span>
+                        <div class="flow-node fn-a">⚠️ LEVERAGE RISK — EBIT and EBITDA good, but debt burden suppressing PBT and PAT. Check D/E ratio, debt repayment schedule, and interest trend.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="fb-no">
+                    <span class="fb-lbl">NO 🚨</span>
+                    <div class="flow-node fn-r">❌ CAPITAL TRAP — D&A exceeds or nearly equals EBITDA. Company cannot cover asset replacement from operations. Avoid unless turnaround thesis with evidence. Classic telecom/infra risk.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="fb-no">
+                <span class="fb-lbl">NO 🚨</span>
+                <div class="flow-node fn-r">❌ CORE BUSINESS FAILING — Revenue doesn't cover operating expenses. No financing adjustment will fix this. MTNL / structural decline pattern. Avoid entirely.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end trick-wrap -->
+    </div>
+  </div>
+</section>
+
+<!-- ══ 07 GLOSSARY ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">07 — Reference Glossary</div>
+    <h2 class="h2 rv d2">Profitability Layers <span class="hp">Glossary</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Every term in the EBITDA → PAT profitability chain — plain language, precise definition, and investor relevance.</p>
+    <div class="glos-wrap rv d3">
+      <div class="table-scroll">
+        <table class="glos-table">
+          <thead><tr>
+            <th style="min-width:180px;">Term</th>
+            <th style="min-width:290px;">What It Means in Simple Words</th>
+            <th style="min-width:100px;text-align:center;">Investor Signal</th>
+          </tr></thead>
+          <tbody>
+            <tr><td class="gt-term">EBITDA</td><td class="gt-desc">Earnings Before Interest, Tax, Depreciation &amp; Amortisation. Operating profit before financing and accounting deductions. Best for comparing operational efficiency across companies with different debt levels or asset intensities.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-p">Compare ops</span></td></tr>
+            <tr><td class="gt-term">EBIT</td><td class="gt-desc">Earnings Before Interest &amp; Tax. EBITDA minus depreciation. Recognises the real economic cost of assets wearing out. For asset-light companies (IT, FMCG), EBIT ≈ EBITDA. For capital-intensive companies (steel, telecom), EBIT is dramatically lower.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-s">Solvency test</span></td></tr>
+            <tr><td class="gt-term">PBT</td><td class="gt-desc">Profit Before Tax. EBIT minus net interest expense. Reveals the cost of debt financing on profitability. Debt-free companies have PBT = EBIT (or higher if earning interest income). Heavily indebted companies can have EBIT positive but PBT negative.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-a">Debt impact</span></td></tr>
+            <tr><td class="gt-term">PAT</td><td class="gt-desc">Profit After Tax. Net Profit. The final number that belongs entirely to equity shareholders. Drives EPS, dividends, and intrinsic value. This is the only profit number you should use for PE ratio calculation and long-term investment decisions.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Core metric</span></td></tr>
+            <tr><td class="gt-term">OPM %</td><td class="gt-desc">Operating Profit Margin = EBITDA ÷ Revenue × 100. Shows the percentage of revenue that becomes operating profit before financing costs. Available directly on Screener.in as "OPM %".</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Key ratio</span></td></tr>
+            <tr><td class="gt-term">Interest Coverage</td><td class="gt-desc">EBIT ÷ Interest Expense. Shows how many times EBIT covers interest payments. Below 2× = high risk; company barely covers interest from operations. Above 5× = very safe. The most important solvency ratio for non-financial companies.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-r">Watch carefully</span></td></tr>
+            <tr><td class="gt-term">Depreciation</td><td class="gt-desc">Annual accounting charge for the wearing out of physical assets (machines, buildings) over their useful life. Not a cash outflow today, but represents the real economic cost of eventually replacing assets. Added back in EBITDA — subtracted in EBIT.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-s">% of rev</span></td></tr>
+            <tr><td class="gt-term">EPS</td><td class="gt-desc">Earnings Per Share = PAT ÷ Total Shares Outstanding. The per-share amount of net profit. P/E Ratio = Share Price ÷ EPS. Growing EPS over 10 years is the most direct predictor of share price appreciation. Dilution (new share issuance) reduces EPS even if PAT grows.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Valuation key</span></td></tr>
+            <tr><td class="gt-term">Effective Tax Rate</td><td class="gt-desc">Actual Income Tax Paid ÷ PBT × 100. Normal for Indian companies: 22–30%. Below 15% = deferred tax benefits or tax incentives (check sustainability). Above 35% = additional charges. A sudden drop in effective tax rate can inflate PAT without operational improvement.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-a">Watch</span></td></tr>
+            <tr><td class="gt-term">Adjusted EBITDA</td><td class="gt-desc">A non-GAAP metric defined by management, not auditors. Can exclude any "one-time" costs the company chooses. Common exclusions: ESOP cost, customer acquisition cost, restructuring. Always compare to Screener.in's Operating Profit (GAAP EBITDA) — if they differ significantly, investigate what's being excluded and why.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-r">🚨 Verify</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ NEXT CHAPTER ══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next · Module 06</div>
+    <div class="nxt-sub">Cash Flow Statement — Where the Real Money Actually Goes →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">&#8594;</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">&#9888;&#65039;</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">This page is for educational purposes only. TCS, Nestlé India, CDSL, Asian Paints, Sun Pharma, and HDFC Bank data shown is approximate and illustrative based on publicly available disclosures — verify all figures from official annual reports before investment decisions. Vodafone Idea, Yes Bank, MTNL, and Jaypee Associates data are approximate and for educational illustration only. The "Illustrative Consumer Tech" example is entirely hypothetical. All equity investments carry market risk. Past performance does not guarantee future results. This content does not constitute investment advice. Consult a SEBI-registered investment advisor before investing.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  'use strict';
+  var passOpts={passive:true};
+
+  /* ── Scroll reveal: IntersectionObserver + legacy fallback ── */
+  var revEls=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var revIO=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('on');revIO.unobserve(e.target);}
+      });
+    },{threshold:.05,rootMargin:'0px 0px -28px 0px'});
+    revEls.forEach(function(el){revIO.observe(el);});
+  } else {
+    revEls.forEach(function(el){el.classList.add('on');});
+  }
+
+  /* ── Accessibility: skip animations ── */
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    revEls.forEach(function(el){el.classList.add('on');});
+  }
+
+  /* ── Passive touch: no scroll jank on iOS & Android ── */
+  document.addEventListener('touchstart',function(){},passOpts);
+  document.addEventListener('touchmove',function(){},passOpts);
+  document.addEventListener('touchend',function(){},passOpts);
+
+  /* ── Overscroll containment ── */
+  document.body.style.overscrollBehavior='none';
+
+  /* ── iOS 100vh fix (Safari viewport units bug) ── */
+  function setVH(){
+    document.documentElement.style.setProperty('--vh',window.innerHeight*0.01+'px');
+  }
+  setVH();
+  window.addEventListener('resize',setVH,passOpts);
+  window.addEventListener('orientationchange',function(){
+    setTimeout(setVH,150);
+    setTimeout(function(){
+      document.querySelectorAll('.rv:not(.on)').forEach(function(el){
+        var r=el.getBoundingClientRect();
+        if(r.top<window.innerHeight-20){el.classList.add('on');}
+      });
+    },320);
+  },passOpts);
+
+  /* ── Font repaint: gradient text re-renders after load on iOS ── */
+  if(document.fonts&&document.fonts.ready){
+    document.fonts.ready.then(function(){
+      document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});
+    });
+  }
+
+  /* ── touch-action:manipulation on ALL interactive elements ──
+     Includes all new module-specific components: layer cards, waterfall,
+     LEC cards, ICR zones, CAGR cells, cheat-strip chips, flow nodes       */
+  function applyTouchActions(){
+    var sel=[
+      'a','button','.dmbtn','.nxt-btn',
+      '.use-card','.step-card','.bl-row','.lc',
+      '.kpill','.company-block','.bonus-card',
+      '.trick-wrap','.wf-row','.waterfall',
+      '.layer-explain-card','.lec-pill','.cs-chip',
+      '.ts-num','.flow-node','.lc-deduct',
+      '.icr-zone','.cagr-cell','.pf-layer',
+      '.bonus-badge','.lec-badge','.wf-badge'
+    ].join(',');
+    document.querySelectorAll(sel).forEach(function(el){
+      el.style.touchAction='manipulation';
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',applyTouchActions);
+  } else {
+    applyTouchActions();
+  }
+
+  /* ── Android momentum scroll on all scroll containers ── */
+  document.querySelectorAll('.table-scroll,.glos-wrap,.waterfall').forEach(function(el){
+    el.style.webkitOverflowScrolling='touch';
+  });
+
+  /* ── Visibility change: re-reveal on tab focus ── */
+  document.addEventListener('visibilitychange',function(){
+    if(!document.hidden){
+      document.querySelectorAll('.rv:not(.on)').forEach(function(el){
+        var r=el.getBoundingClientRect();
+        if(r.top<window.innerHeight){el.classList.add('on');}
+      });
+    }
+  });
+
+  /* ── iOS double-tap zoom prevention on anchor links ── */
+  document.querySelectorAll('a[href="#"]').forEach(function(a){
+    a.addEventListener('touchend',function(e){e.preventDefault();},passOpts);
+  });
+
+  /* ── LEC cards: colour-tinted press feedback on touch ── */
+  if(window.matchMedia('(hover:none) and (pointer:coarse)').matches){
+    document.querySelectorAll('.layer-explain-card').forEach(function(card){
+      var bg=card.classList.contains('lec-ebitda')?'rgba(109,40,217,.04)':
+             card.classList.contains('lec-ebit')  ?'rgba(2,132,199,.04)':
+             card.classList.contains('lec-pbt')   ?'rgba(217,119,6,.04)':
+                                                   'rgba(22,163,74,.04)';
+      card.addEventListener('touchstart',function(){
+        this.style.background=bg;
+        this.style.transition='background .08s';
+      },passOpts);
+      card.addEventListener('touchend',function(){
+        var self=this;
+        setTimeout(function(){self.style.background='';},200);
+      },passOpts);
+    });
+  }
+
+})();
+</script>
+</body>
+</html>

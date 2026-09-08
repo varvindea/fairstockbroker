@@ -4710,6 +4710,12 @@ function showSubtopic(topicId, subtopicId) {
   currentSubtopicKey = key;
   updateProgress();
   updateSidebarActive(key);
+  // Topic detail lives under the "Learn" tab — sync the top tab bar so a
+  // previously selected tab (e.g. SIP Calc) does not stay highlighted.
+  currentTab = 'home';
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
+  const learnTabBtn = document.querySelectorAll('.tab-btn')[0];
+  if (learnTabBtn) learnTabBtn.classList.add('active-tab');
 
   const idx = allSubtopicKeys.indexOf(key);
   const prevKey = idx > 0 ? allSubtopicKeys[idx-1] : null;
@@ -4840,7 +4846,7 @@ function showSubtopic(topicId, subtopicId) {
     ${prevKey ? `<button class="sub-nav-btn sub-nav-prev" onclick="navigateToKey('${prevKey}')">← Previous</button>` : '<span></span>'}
     ${nextKey ? `<button class="sub-nav-btn sub-nav-next" onclick="navigateToKey('${nextKey}')">Next →</button>` : '<span></span>'}`;
 
-  ['homeView','detailView','quizView','glossaryView','infographicView'].forEach(id => {
+  ['homeView','detailView','quizView','glossaryView','infographicView','storiesView','topFundsView','amcGuideView','roadmapView','sipCalcView','faqView'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.classList.remove('active');
   });
@@ -4857,7 +4863,7 @@ function navigateToKey(key) {
 //  SHOW HOME VIEW
 // ═══════════════════════════════════════════════
 function showHomeView() {
-  ['homeView','detailView','quizView','glossaryView','infographicView'].forEach(id => {
+  ['homeView','detailView','quizView','glossaryView','infographicView','storiesView','topFundsView','amcGuideView','roadmapView','sipCalcView','faqView'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.classList.remove('active');
   });

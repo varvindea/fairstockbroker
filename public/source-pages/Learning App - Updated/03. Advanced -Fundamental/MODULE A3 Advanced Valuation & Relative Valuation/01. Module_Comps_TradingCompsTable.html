@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Comps Table Valuation">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no,address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Comparable Company Analysis – Building a Trading Comps Table · Advanced Valuation · Module 08</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;overflow-x:hidden;overscroll-behavior-y:none;}
+a{-webkit-tap-highlight-color:transparent;}button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+/* ── LAYOUT ── */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hr{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+/* ── HERO ── */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(28px,7.5vw,84px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:12px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(13px,3.2vw,38px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;box-shadow:var(--shc);width:100%;max-width:860px;}
+.hsi{padding:clamp(12px,2vw,22px) clamp(10px,2.5vw,24px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:80px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(11px,1.8vw,18px);font-weight:900;letter-spacing:-.5px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.r{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.a{background:linear-gradient(135deg,var(--ambr),var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(8px,1vw,10px);font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+/* ── KLO ── */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.kpill-s{background:rgba(2,132,199,.1);color:var(--sky);border:1px solid rgba(2,132,199,.18);}
+.klo-hi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;}
+.klo-hi{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--shc);}
+.klo-hi-ico{font-size:22px;margin-bottom:6px;}
+.klo-hi-val{font-size:clamp(12px,1.8vw,15px);font-weight:900;letter-spacing:-.3px;}
+.klo-hi-val.purple{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.green{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.amber{color:var(--ambr);}
+.klo-hi-val.red{color:var(--red);}
+.klo-hi-lbl{font-size:10px;color:var(--tl);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:3px;}
+/* ── STEP PROCESS CARDS ── */
+.process-steps{display:flex;flex-direction:column;gap:0;}
+.ps-item{display:flex;gap:clamp(14px,2.5vw,22px);padding:clamp(18px,3vw,28px) 0;border-bottom:1px solid var(--bd);position:relative;}
+.ps-item:last-child{border-bottom:none;}
+.ps-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;gap:0;width:48px;}
+.ps-num{width:48px;height:48px;border-radius:14px;color:#fff;font-size:clamp(16px,2.5vw,22px);font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 16px rgba(109,40,217,.22);}
+.ps-line{flex:1;width:2px;background:linear-gradient(180deg,var(--pmd),rgba(109,40,217,.06));border-radius:2px;margin-top:8px;min-height:20px;}
+.ps-item:last-child .ps-line{display:none;}
+.ps-body{flex:1;min-width:0;padding-top:8px;}
+.ps-tag{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:4px;}
+.ps-title{font-size:clamp(14px,2vw,18px);font-weight:900;color:var(--tx);margin-bottom:8px;letter-spacing:-.3px;}
+.ps-desc{font-size:clamp(12.5px,1.4vw,14px);color:var(--ts);line-height:1.7;margin-bottom:12px;}
+.ps-pills{display:flex;flex-wrap:wrap;gap:6px;}
+.ps-pill{font-size:10px;font-weight:700;padding:4px 10px;border-radius:8px;}
+/* ── CONCEPT GRID ── */
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:start;}
+.step-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:16px;padding:18px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:var(--shc);transition:border-color .25s,box-shadow .25s;}
+.step-card:hover{border-color:rgba(109,40,217,.3);box-shadow:var(--shp);}
+.step-num{width:36px;height:36px;min-width:36px;border-radius:10px;color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-body h4{font-size:14px;font-weight:800;color:var(--tx);margin-bottom:4px;}
+.step-body p{font-size:12.5px;color:var(--ts);line-height:1.58;}
+.infographic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.infographic-svg{width:100%;max-width:430px;animation:floatB 4.5s ease-in-out infinite;}
+.infographic-cap{font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;}
+/* ── COMPS TABLE WRAPPER ── */
+.comps-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);}
+.comps-hdr{background:linear-gradient(135deg,var(--pl),var(--p));padding:clamp(16px,2.5vw,24px) clamp(18px,3vw,28px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.comps-hdr-title{font-size:clamp(16px,2.5vw,22px);font-weight:900;color:#fff;}
+.comps-hdr-sub{font-size:12px;color:rgba(255,255,255,.7);margin-top:2px;}
+.comps-legend{padding:10px clamp(16px,3vw,24px);background:var(--pxs);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--ts);}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+/* ── COMPS TABLE ── */
+.comps-table{width:100%;border-collapse:collapse;min-width:900px;}
+.comps-table th{background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:clamp(9px,1.4vw,13px) clamp(8px,1.5vw,14px);font-size:clamp(9px,1vw,11px);font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:2px solid var(--bd);text-align:right;white-space:nowrap;}
+.comps-table th:first-child{text-align:left;min-width:140px;}
+.comps-table th.grp-hdr{background:rgba(109,40,217,.06);font-size:8.5px;letter-spacing:1.5px;color:var(--tl);}
+.comps-table td{padding:clamp(9px,1.4vw,13px) clamp(8px,1.5vw,14px);font-size:clamp(11px,1.2vw,13px);color:var(--ts);border-bottom:1px solid rgba(109,40,217,.06);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.comps-table td:first-child{text-align:left;font-weight:700;color:var(--tx);}
+.comps-table tr:last-child td{border-bottom:none;}
+.comps-table tr.median-row td{font-weight:900;color:var(--p);background:linear-gradient(135deg,rgba(109,40,217,.07),rgba(109,40,217,.03));border-top:2px solid var(--pmd);border-bottom:2px solid var(--pmd);}
+.comps-table tr.target-row td{font-weight:900;color:var(--gbr);background:rgba(22,163,74,.05);border-top:1.5px solid rgba(22,163,74,.2);}
+.comps-table tr:hover td{background:var(--pxs);}
+.comps-table tr.median-row:hover td,.comps-table tr.target-row:hover td{background:inherit;}
+.high-val{color:var(--gbr)!important;font-weight:800!important;}
+.low-val{color:var(--red)!important;font-weight:800!important;}
+.med-val{color:var(--ambr)!important;font-weight:800!important;}
+/* ── MULTIPLES SUMMARY CARDS ── */
+.multiples-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,2vw,16px);margin-top:20px;}
+.mult-card{border-radius:16px;padding:clamp(14px,2.5vw,22px);border:1.5px solid;text-align:center;transition:transform .25s,box-shadow .25s;}
+.mult-card:hover{transform:translateY(-2px);box-shadow:var(--shp);}
+.mc-pe{background:var(--pxs);border-color:rgba(109,40,217,.22);}
+.mc-ev{background:var(--skypale);border-color:rgba(2,132,199,.2);}
+.mc-pb{background:var(--gpale);border-color:rgba(22,163,74,.2);}
+.mc-ps{background:var(--apale);border-color:rgba(217,119,6,.2);}
+.mult-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;}
+.mult-label-p{color:var(--p);}
+.mult-label-s{color:var(--sky);}
+.mult-label-g{color:var(--gbr);}
+.mult-label-a{color:var(--ambr);}
+.mult-val{font-size:clamp(20px,3.5vw,30px);font-weight:900;letter-spacing:-1px;margin-bottom:3px;}
+.mult-sub{font-size:10px;color:var(--tl);font-weight:600;}
+/* ── VALUATION BRIDGE ── */
+.val-bridge{background:var(--sf);border:1.5px solid var(--bd);border-radius:16px;padding:clamp(16px,2.5vw,24px);margin-top:20px;}
+.vb-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--p);margin-bottom:14px;}
+.vb-row{display:grid;grid-template-columns:clamp(120px,20vw,200px) 1fr auto;align-items:center;gap:12px;padding:8px 0;border-bottom:1px dashed rgba(109,40,217,.08);}
+.vb-row:last-child{border-bottom:none;}
+.vb-label{font-size:clamp(12px,1.4vw,14px);font-weight:700;color:var(--tx);}
+.vb-bar-bg{height:18px;background:rgba(0,0,0,.05);border-radius:5px;overflow:hidden;}
+.vb-bar{height:100%;border-radius:5px;}
+.vb-val{font-size:clamp(12px,1.5vw,14px);font-weight:900;text-align:right;white-space:nowrap;}
+/* ── PEER SELECTION CRITERIA ── */
+.peer-criteria{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,16px);margin-bottom:28px;}
+.pc-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:16px;padding:clamp(14px,2.5vw,22px);box-shadow:var(--shc);transition:transform .25s;}
+.pc-card:hover{transform:translateY(-2px);box-shadow:var(--shp);}
+.pc-ico{font-size:clamp(26px,4vw,36px);margin-bottom:10px;}
+.pc-title{font-size:clamp(13px,1.7vw,16px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.pc-desc{font-size:12px;color:var(--ts);line-height:1.6;}
+.pc-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;margin-top:8px;}
+.pc-badge-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.pc-badge-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+/* ── COMPANY EXAMPLES ── */
+.company-block{border-radius:18px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);margin-bottom:28px;}
+.cb-header{display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,24px);gap:12px;flex-wrap:wrap;}
+.cb-good{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.cb-bad{background:linear-gradient(135deg,#fef2f2,#fff5f5);}
+.cb-co{display:flex;align-items:center;gap:12px;}
+.cb-name{font-size:clamp(14px,2vw,18px);font-weight:900;color:var(--tx);line-height:1.2;}
+.cb-sub{font-size:11px;color:var(--tl);margin-top:3px;}
+.cb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.cb-badge{padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;}
+.cb-b-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.cb-b-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.cb-b-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.cb-b-s{background:rgba(2,132,199,.1);color:var(--sky);border:1px solid rgba(2,132,199,.2);}
+.cb-insight{padding:14px 18px;font-size:12px;color:var(--ts);line-height:1.65;margin:0;}
+.cb-insight-g{background:rgba(22,163,74,.06);border-top:1px solid rgba(22,163,74,.15);border-left:3px solid var(--gbr);}
+.cb-insight-r{background:rgba(220,38,38,.05);border-top:1px solid rgba(220,38,38,.15);border-left:3px solid var(--red);}
+.ex-logo{width:48px;height:48px;min-width:48px;border-radius:12px;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+/* ── TRICK SECTION ── */
+.trick-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:24px;overflow:hidden;box-shadow:var(--shp);}
+.trick-hdr{background:linear-gradient(135deg,#1a0a3c,var(--pl),var(--p));padding:clamp(20px,3.5vw,36px) clamp(20px,4vw,40px);display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.trick-hdr::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:24px 24px;}
+.th-left{flex:1;min-width:0;position:relative;z-index:1;}
+.th-supertag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.th-supertag::before{content:'';width:16px;height:2px;background:#4ade80;border-radius:2px;}
+.th-title{font-size:clamp(17px,3vw,26px);font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1.2;margin-bottom:8px;}
+.th-sub{font-size:clamp(12px,1.5vw,14px);color:rgba(255,255,255,.68);line-height:1.65;}
+.th-right{display:flex;align-items:flex-start;gap:12px;flex-shrink:0;position:relative;z-index:1;}
+.th-timer{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:14px 20px;text-align:center;}
+.th-timer-num{font-size:clamp(26px,4vw,40px);font-weight:900;color:#fff;line-height:1;}
+.th-timer-lbl{font-size:10px;color:rgba(255,255,255,.55);font-weight:600;margin-top:2px;}
+/* Quick ref inside trick */
+.trick-qref{padding:clamp(16px,3vw,28px) clamp(18px,4vw,36px);background:linear-gradient(158deg,#f5f3ff,#f0fdf4);border-bottom:1px solid var(--bd);}
+.qr-title{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.qr-title::before{content:'';width:18px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+/* Multiples quick chips */
+.mult-chips{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(6px,1.5vw,10px);margin-bottom:14px;}
+.mchip{border-radius:12px;padding:clamp(10px,2vw,14px);text-align:center;border:1.5px solid;}
+.mchip-pe{background:rgba(109,40,217,.06);border-color:rgba(109,40,217,.2);}
+.mchip-ev{background:rgba(2,132,199,.06);border-color:rgba(2,132,199,.18);}
+.mchip-pb{background:rgba(22,163,74,.08);border-color:rgba(22,163,74,.2);}
+.mchip-ps{background:rgba(217,119,6,.07);border-color:rgba(217,119,6,.2);}
+.mchip-lbl{font-size:clamp(13px,2vw,18px);font-weight:900;letter-spacing:-.3px;margin-bottom:2px;}
+.mchip-name{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--tl);margin-bottom:5px;}
+.mchip-formula{font-size:9px;font-weight:600;color:var(--ts);line-height:1.4;border-top:1px dashed rgba(0,0,0,.08);padding-top:5px;}
+/* Screener nav */
+.sn-strip{background:var(--pxs);border:1px solid var(--pmd);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.sn-lbl{font-size:10px;font-weight:700;color:var(--p);flex-shrink:0;}
+.sn-num{width:18px;height:18px;border-radius:50%;background:var(--p);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sn-txt{font-size:10px;font-weight:700;color:var(--ts);}
+.sn-arr{font-size:10px;color:var(--tl);}
+/* Trick steps */
+.trick-steps-body{padding:clamp(20px,4vw,36px) clamp(18px,4vw,36px);border-bottom:1px solid var(--bd);}
+.trick-step{display:flex;gap:clamp(12px,2.5vw,20px);padding-bottom:clamp(18px,3vw,28px);position:relative;}
+.trick-step:last-child{padding-bottom:0;}
+.ts-connector{position:absolute;left:clamp(17px,3vw,22px);top:clamp(40px,5vw,48px);bottom:0;width:2px;background:linear-gradient(180deg,var(--pmd),rgba(109,40,217,.06));border-radius:2px;}
+.trick-step:last-child .ts-connector{display:none;}
+.ts-num{width:clamp(36px,5vw,44px);height:clamp(36px,5vw,44px);border-radius:12px;color:#fff;font-size:clamp(14px,2vw,18px);font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(109,40,217,.28);flex-shrink:0;position:relative;z-index:1;}
+.ts-body{flex:1;min-width:0;padding-top:6px;}
+.ts-nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.ts-site{font-size:10px;font-weight:800;color:var(--p);background:var(--pxs);padding:4px 10px;border-radius:8px;border:1px solid var(--pmd);}
+.ts-arrow{font-size:12px;color:var(--tl);}
+.ts-tab{font-size:10px;font-weight:700;color:var(--ts);background:var(--sf);padding:4px 10px;border-radius:8px;border:1px solid var(--bd);}
+.ts-tab.purple{background:var(--pxl);color:var(--p);border-color:var(--pmd);}
+.ts-tab.green{background:rgba(22,163,74,.08);color:var(--gbr);border-color:rgba(22,163,74,.2);}
+.ts-tab.amber{background:rgba(217,119,6,.08);color:var(--ambr);border-color:rgba(217,119,6,.2);}
+.ts-tab.sky{background:rgba(2,132,199,.08);color:var(--sky);border-color:rgba(2,132,199,.2);}
+.ts-tab.red{background:rgba(220,38,38,.08);color:var(--red);border-color:rgba(220,38,38,.2);}
+.ts-action{font-size:clamp(12px,1.5vw,13.5px);color:var(--ts);line-height:1.68;margin-bottom:10px;}
+.ts-formula{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:clamp(12px,2vw,18px);margin-bottom:10px;}
+.ts-f-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.ts-f-lbl{font-size:12px;font-weight:800;color:var(--tx);}
+.ts-f-eq{font-size:18px;font-weight:700;color:var(--tl);}
+.ts-f-item{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;}
+.ts-fi-p{background:var(--pxl);color:var(--p);}
+.ts-fi-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.ts-fi-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.ts-fi-s{background:rgba(2,132,199,.1);color:var(--sky);}
+.ts-f-guide{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:11px;font-weight:600;}
+.ts-shortcut{background:linear-gradient(135deg,var(--pxl),#f0fdf4);border:1px solid var(--pmd);border-radius:10px;padding:12px 14px;margin-top:8px;}
+.ts-sc-lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.ts-sc-text{font-size:12px;color:var(--ts);line-height:1.6;}
+.ts-outcomes{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.ts-out{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.5;padding:9px 12px;border-radius:10px;}
+.ts-out-g{background:rgba(22,163,74,.07);color:var(--gbr);border:1px solid rgba(22,163,74,.14);}
+.ts-out-r{background:rgba(220,38,38,.06);color:var(--red);border:1px solid rgba(220,38,38,.14);}
+.ts-out-n{background:var(--pxs);color:var(--p);border:1px solid var(--pmd);}
+.ts-out-a{background:rgba(217,119,6,.08);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+/* Bonus & flowchart */
+.trick-bonus{padding:clamp(18px,3.5vw,32px) clamp(18px,4vw,36px);background:linear-gradient(158deg,#f5f3ff,#f0fdf4);border-bottom:1px solid var(--bd);}
+.bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,16px);}
+.bonus-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:clamp(12px,2vw,18px);box-shadow:var(--shc);position:relative;overflow:hidden;}
+.bonus-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.bc-p::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.bc-s::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.bc-a::before{background:linear-gradient(90deg,var(--ambr),var(--amb));}
+.bc-g::before{background:linear-gradient(90deg,var(--gbr),var(--gh));}
+.bonus-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;color:#fff;font-size:13px;font-weight:900;margin-bottom:8px;}
+.bonus-title{font-size:clamp(12px,1.5vw,13px);font-weight:800;color:var(--tx);margin-bottom:5px;}
+.bonus-desc{font-size:clamp(11px,1.2vw,12px);color:var(--ts);line-height:1.55;}
+.flow-wrap{padding:clamp(18px,3.5vw,32px) clamp(18px,4vw,36px);}
+.flow-label{font-size:12px;font-weight:700;color:var(--p);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.flow-chain{display:flex;flex-direction:column;gap:8px;}
+.flow-node{border-radius:12px;padding:10px 14px;font-size:clamp(11px,1.4vw,12.5px);font-weight:700;display:flex;align-items:center;gap:8px;line-height:1.4;}
+.fn-q{background:var(--pxl);border:1.5px solid var(--pmd);color:var(--pl);}
+.fn-qlbl{font-size:10px;font-weight:800;background:var(--p);color:#fff;border-radius:6px;padding:2px 7px;flex-shrink:0;}
+.fn-txt{flex:1;}
+.flow-branch{display:flex;flex-direction:column;gap:8px;padding-left:clamp(12px,3vw,24px);border-left:2px dashed var(--pmd);margin-left:18px;}
+.fb-yes,.fb-no{display:flex;flex-direction:column;gap:6px;}
+.fb-lbl{font-size:10px;font-weight:800;padding:2px 8px;border-radius:6px;width:fit-content;}
+.fb-yes>.fb-lbl{background:rgba(22,163,74,.12);color:var(--gbr);}
+.fb-no>.fb-lbl{background:rgba(220,38,38,.1);color:var(--red);}
+.fn-g{background:rgba(22,163,74,.1);border:1.5px solid rgba(22,163,74,.25);color:var(--gbr);font-size:clamp(11px,1.3vw,13px);}
+.fn-a{background:rgba(217,119,6,.08);border:1.5px solid rgba(217,119,6,.22);color:var(--ambr);font-size:clamp(11px,1.3vw,13px);}
+.fn-r{background:rgba(220,38,38,.07);border:1.5px solid rgba(220,38,38,.2);color:var(--red);font-size:clamp(11px,1.3vw,13px);}
+/* ── GLOSSARY ── */
+.glos-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);}
+.glos-table{width:100%;border-collapse:collapse;}
+.glos-table thead th{background:linear-gradient(135deg,var(--pxl),var(--pxs));padding:clamp(10px,2vw,15px) clamp(12px,2.5vw,20px);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--p);text-align:left;border-bottom:1.5px solid var(--bd);}
+.glos-table tbody tr{border-bottom:1px solid rgba(109,40,217,.05);transition:background .2s;}
+.glos-table tbody tr:last-child{border-bottom:none;}
+.glos-table tbody tr:hover{background:var(--pxs);}
+.gt-term{padding:clamp(11px,2vw,16px) clamp(12px,2.5vw,20px);font-size:clamp(11px,1.4vw,13px);font-weight:800;color:var(--p);white-space:nowrap;vertical-align:top;}
+.gt-desc{padding:clamp(11px,2vw,16px) clamp(12px,2.5vw,20px);font-size:clamp(11px,1.3vw,13px);color:var(--ts);line-height:1.65;vertical-align:top;}
+.gt-risk{padding:clamp(11px,2vw,16px) clamp(10px,2vw,16px);font-size:11px;font-weight:700;vertical-align:top;text-align:center;}
+.flag-cell{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:2px 6px;border-radius:6px;}
+.flag-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.flag-r{background:rgba(220,38,38,.1);color:var(--red);}
+.flag-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.flag-p{background:var(--pxl);color:var(--p);}
+.flag-s{background:rgba(2,132,199,.1);color:var(--sky);}
+/* ── DEMAT BANNER ── */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:"\2713";color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+/* ── NEXT BANNER ── */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-arrow{font-size:18px;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+/* ═══════════════════════════════════════════════════════════════════
+   UNIFIED RESPONSIVE SYSTEM · Module 08 · Comparable Company Analysis
+   Process Steps · Peer Criteria · Comps Table · Multiples · Val Bridge
+   Desktop · Tablet · Mobile · iOS · Android · Touch · A11y · Print
+   ═══════════════════════════════════════════════════════════════════ */
+img,svg{max-width:100%;height:auto;display:block;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+
+/* ── LARGE DESKTOP 1280px+ ── */
+@media(min-width:1280px){
+  .w{padding:80px 72px;}
+}
+
+/* ── SMALL DESKTOP / TABLET LANDSCAPE 901–1100px ── */
+@media(max-width:1100px){
+  .multiples-grid{grid-template-columns:1fr 1fr;}
+  .peer-criteria{grid-template-columns:1fr 1fr;}
+  .bonus-grid{grid-template-columns:1fr 1fr;}
+  .mult-chips{grid-template-columns:1fr 1fr;}
+  .vb-row{grid-template-columns:clamp(100px,18vw,160px) 1fr auto;}
+  /* Comps table: slightly tighter */
+  .comps-hdr{gap:10px;}
+}
+
+/* ── TABLET PORTRAIT 769–900px ── */
+@media(max-width:900px){
+  .concept-grid{grid-template-columns:1fr;}
+  .infographic-svg{max-width:380px;margin:0 auto;}
+  .klo-hi-row{grid-template-columns:repeat(3,1fr);}
+  /* Peer criteria: 3→1 col for readability */
+  .peer-criteria{grid-template-columns:1fr;}
+  .flow-branch{padding-left:12px;margin-left:12px;}
+  .vb-row{grid-template-columns:clamp(90px,16vw,140px) 1fr auto;}
+  /* Process steps: tighter */
+  .ps-item{padding:clamp(16px,2.5vw,24px) 0;}
+  .ps-title{font-size:clamp(14px,2vw,17px);}
+}
+
+/* ── MOBILE LANDSCAPE / LARGE PHONE 601–768px ── */
+@media(max-width:768px){
+  .w{padding:clamp(32px,6vw,56px) clamp(14px,5vw,28px);}
+  /* Hero */
+  .hst{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  /* KLO */
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .klo-hi-row{grid-template-columns:1fr 1fr;}
+  /* Layout */
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(14px,4vw,24px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;min-height:52px;}
+  .dmfeats{gap:10px 20px;}
+  svg{overflow:visible;}
+  /* Comps header */
+  .comps-hdr{flex-direction:column;align-items:flex-start;}
+  .comps-hdr-title{font-size:clamp(15px,2.5vw,20px);}
+  /* Company blocks */
+  .cb-header{flex-direction:column;align-items:flex-start;}
+  .cb-badges{margin-top:4px;flex-wrap:wrap;}
+  /* Trick section */
+  .trick-hdr{flex-direction:column;gap:14px;}
+  .ts-outcomes{grid-template-columns:1fr;}
+  .flow-branch{padding-left:10px;margin-left:10px;}
+  .bonus-grid{grid-template-columns:1fr 1fr;}
+  .sn-strip{flex-wrap:wrap;gap:4px;}
+  /* Module-specific */
+  .multiples-grid{grid-template-columns:1fr 1fr;}
+  .vb-row{grid-template-columns:80px 1fr auto;gap:8px;}
+  .vb-label{font-size:11px;}
+  .vb-val{font-size:12px;min-width:90px;}
+  /* Process steps layout */
+  .ps-desc{font-size:12px;}
+  body{overscroll-behavior-y:contain;}
+}
+
+/* ── MOBILE PORTRAIT 481–640px ── */
+@media(max-width:640px){
+  .klo-hi-row{grid-template-columns:1fr;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .infographic-svg{max-width:100%;}
+  /* Tables */
+  .comps-table{min-width:900px;}
+  .glos-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:520px;}
+  /* Cards */
+  .bonus-grid{grid-template-columns:1fr;}
+  /* Trick steps */
+  .trick-steps-body,.trick-bonus,.flow-wrap{padding:16px;}
+  .ts-f-row{flex-wrap:wrap;gap:4px 8px;}
+  .ts-f-guide{flex-direction:column;gap:4px;}
+  /* Module-specific @640 */
+  .multiples-grid{grid-template-columns:1fr 1fr;}
+  .mult-chips{grid-template-columns:1fr 1fr;}
+  .sn-strip{flex-wrap:wrap;gap:4px;}
+  .vb-row{grid-template-columns:70px 1fr auto;gap:6px;}
+  .vb-label{font-size:10px;}
+  .vb-val{font-size:11px;min-width:80px;}
+  /* Process steps: stack on mobile */
+  .ps-item{flex-direction:column;gap:10px;padding:14px 0;}
+  .ps-left{flex-direction:row;width:auto;align-items:center;gap:10px;}
+  .ps-line{display:none;}
+  .ps-num{width:36px;height:36px;font-size:14px;border-radius:10px;}
+  .ps-title{font-size:14px;}
+  .ps-desc{font-size:12px;}
+  /* Peer criteria cards compact */
+  .pc-card{padding:clamp(12px,2.5vw,18px);}
+  .pc-ico{font-size:clamp(22px,4vw,30px);margin-bottom:6px;}
+  .pc-title{font-size:14px;}
+  .pc-desc{font-size:11.5px;}
+  /* Multiples cards compact */
+  .mult-card{padding:clamp(12px,2.5vw,18px);}
+  .mult-val{font-size:clamp(18px,3.5vw,26px);}
+}
+
+/* ── SMALL MOBILE 361–480px ── */
+@media(max-width:480px){
+  .w{padding:28px 12px;}
+  .hh1{letter-spacing:-1.2px;}
+  .hdesc{font-size:13px;}
+  .hsub{letter-spacing:2.5px;font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .h2{letter-spacing:-1px;}
+  .lead{font-size:13.5px;}
+  .tag{letter-spacing:2px;}
+  .klo-title{font-size:14px;}
+  .klo-desc{font-size:12px;}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .klo-hi{padding:12px 10px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .dmh{letter-spacing:-1px;}
+  .dmsub{font-size:13px;}
+  .nxt-banner{padding:12px 14px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+  /* Comps header compact */
+  .comps-hdr{padding:12px;}
+  .comps-hdr-title{font-size:14px;}
+  .comps-hdr-sub{font-size:10px;}
+  /* Trick */
+  .th-timer{display:none;}
+  .ts-outcomes{grid-template-columns:1fr;}
+  .ts-num{width:32px;height:32px;font-size:13px;}
+  .flow-branch{padding-left:6px;margin-left:8px;}
+  .trick-steps-body,.trick-bonus,.flow-wrap{padding:14px;}
+  .bonus-card{padding:14px;}
+  /* Module-specific @480 */
+  .sn-strip{flex-direction:column;align-items:flex-start;}
+  .mult-chips{grid-template-columns:1fr 1fr;}
+  .multiples-grid{grid-template-columns:1fr 1fr;}
+  .vb-row{grid-template-columns:60px 1fr auto;gap:4px;}
+  .vb-label{font-size:10px;}
+  .vb-val{font-size:11px;min-width:76px;}
+  .trick-qref{padding:14px;}
+  /* Peer card compact */
+  .pc-card{padding:14px;}
+  .pc-ico{font-size:22px;margin-bottom:6px;}
+  .pc-title{font-size:13px;}
+  .pc-desc{font-size:11.5px;}
+  /* Multiples card compact */
+  .mult-card{padding:14px;}
+  .mult-val{font-size:clamp(18px,3.5vw,24px);}
+  .mult-sub{font-size:9px;}
+  /* Valuation bridge label */
+  .vb-bar-bg{height:14px;}
+  /* Process step compact */
+  .ps-body{padding-top:2px;}
+  .ps-desc{font-size:11.5px;}
+  .ps-title{font-size:13px;}
+}
+
+/* ── EXTRA SMALL 360px and below ── */
+@media(max-width:360px){
+  .w{padding:22px 10px;}
+  .hh1{font-size:clamp(26px,10vw,40px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}
+  .hsi:last-child{border-bottom:none !important;}
+  .kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}
+  .nxt-btn{font-size:12px;padding:10px 14px;}
+  .ts-nav{flex-direction:column;align-items:flex-start;gap:3px;}
+  .trick-steps-body,.trick-bonus,.flow-wrap{padding:12px;}
+  /* Module-specific @360 */
+  .multiples-grid{grid-template-columns:1fr;}
+  .mult-chips{grid-template-columns:1fr 1fr;}
+  .vb-row{grid-template-columns:50px 1fr auto;gap:4px;}
+  .vb-label{font-size:9px;}
+  .vb-val{font-size:10px;min-width:68px;}
+  .mult-val{font-size:18px;}
+  .pc-card{padding:12px;}
+  .mult-card{padding:12px;}
+}
+
+/* ── TOUCH DEVICES (finger input — no hover) ── */
+@media(hover:none) and (pointer:coarse){
+  /* Cancel hover effects */
+  .step-card:hover,.pc-card:hover,.mult-card:hover,
+  .company-block:hover,.bonus-card:hover{
+    transform:none !important;
+    box-shadow:var(--shc) !important;
+    border-color:var(--bd) !important;
+  }
+  /* Press feedback per element */
+  .step-card:active{transform:scale(.99);transition:transform .08s;}
+  .pc-card:active{transform:scale(.98);transition:transform .08s;}
+  .mult-card:active{transform:scale(.97);transition:transform .08s;}
+  .bonus-card:active{transform:scale(.98);transition:transform .08s;}
+  .dmbtn:active,.nxt-btn:active{transform:scale(.97);transition:transform .08s;}
+  /* Minimum touch targets — Apple HIG 44px / Material 48px */
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:8px;padding-bottom:8px;}
+  .ts-num{min-width:44px;min-height:44px;}
+  .bonus-badge{min-width:36px;min-height:36px;}
+  .mult-card{min-height:80px;}
+  .pc-card{min-height:auto;}
+  .mchip{min-height:60px;display:flex;flex-direction:column;justify-content:center;}
+  /* Comps table rows: adequate touch targets */
+  .comps-table td{min-height:44px;}
+  .pc-badge{min-height:28px;display:inline-flex;align-items:center;}
+  /* Hide scrollbars */
+  ::-webkit-scrollbar{display:none;}
+  scrollbar-width:none;
+  /* Tap highlight + touch-action on ALL interactive elements */
+  a,button,.dmbtn,.nxt-btn,.step-card,.pc-card,.mult-card,
+  .kpill,.company-block,.bonus-card,.trick-wrap,.flow-node,
+  .mchip,.ps-item,.vb-row{
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+    -webkit-touch-callout:none;
+  }
+  /* UI — non-selectable */
+  .hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,
+  .th-title,.th-supertag,.ts-nav,.flow-label,
+  .ps-tag,.ps-title,.comps-hdr-title,.comps-legend,
+  .mult-label,.mult-sub,.pc-title,.qr-title,
+  .mchip-lbl,.mchip-name,.vb-label{
+    -webkit-user-select:none;user-select:none;
+  }
+  /* Content — selectable */
+  p,.klo-desc,.lead,.cb-insight,.ts-action,
+  .ts-sc-text,.bonus-desc,.ts-out,.ps-desc,
+  .pc-desc,.mchip-formula,.vb-val{
+    -webkit-user-select:text;user-select:text;
+  }
+  /* Stop decorative animations */
+  .klo-icon,.infographic-svg{animation:none !important;}
+  /* Momentum scroll */
+  .table-scroll,.glos-wrap{-webkit-overflow-scrolling:touch;}
+}
+
+/* ── iOS: NOTCH · HOME INDICATOR · ALL SAFE AREAS ── */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  /* Hero — all 4 sides: notch, home bar, landscape side notches */
+  .hero{
+    min-height:100svh;
+    min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));
+  }
+  .vbadge{
+    top:max(22px,calc(env(safe-area-inset-top)+8px));
+    right:max(22px,calc(env(safe-area-inset-right)+8px));
+  }
+  /* Section padding — respects landscape side notches */
+  .w{
+    padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));
+    padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));
+  }
+  .nxt-banner{
+    padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));
+    padding-bottom:max(18px,env(safe-area-inset-bottom));
+  }
+  .dmbanner{
+    padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));
+    padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));
+  }
+  /* GPU compositing for orb animations */
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+  /* Re-apply gradient text — Safari WebKit requirement */
+  .hp,.hg,.hr,
+  .hh1 .line1,.hh1 .line2,.hh1 .line3,
+  .hsv,.hsv.g,.hsv.r,.hsv.a,
+  .klo-hi-val.purple,.klo-hi-val.green,.klo-hi-val.amber,.klo-hi-val.red,
+  .h2 .hp,.h2 .hg,.h2 .hr{
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  /* Tap highlight removal */
+  a,button,.dmbtn,.nxt-btn,.step-card,.pc-card,.mult-card,
+  .kpill,.company-block,.bonus-card,.trick-wrap,.mchip{
+    -webkit-tap-highlight-color:transparent;
+  }
+  /* Momentum scroll */
+  .table-scroll,.glos-wrap{-webkit-overflow-scrolling:touch;}
+}
+
+/* ── ANDROID HIGH-DPI 1.5× DPR ── */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  /* Hardware-accelerate card surfaces — prevents scroll jank */
+  .step-card,.pc-card,.mult-card,.company-block,
+  .bonus-card,.comps-wrap,.trick-wrap{
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+  }
+  /* GPU layers for animated elements */
+  .infographic-svg,.klo-icon{
+    -webkit-transform:translateZ(0);
+    transform:translateZ(0);
+  }
+  /* Sharper text on high-DPI */
+  body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+}
+
+/* ── ACCESSIBILITY: prefers-reduced-motion ── */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}
+  .infographic-svg,.klo-icon{animation:none !important;}
+}
+
+/* ── PRINT ── */
+@media print{
+  .dmbanner,.orb,.nxt-banner,.trick-hdr{display:none;}
+  .rv{opacity:1;transform:none;}
+  body{color:#000;background:#fff;}
+  .w{padding:20px;}
+  .table-scroll{overflow:visible;}
+  .comps-table{min-width:0;}
+  .company-block,.step-card,.bonus-card,.trick-step,
+  .pc-card,.mult-card,.ps-item,.vb-row{break-inside:avoid;}
+  .multiples-grid{grid-template-columns:1fr 1fr;}
+  .peer-criteria{grid-template-columns:1fr 1fr;}
+  .mult-chips{grid-template-columns:1fr 1fr 1fr 1fr;}
+  .comps-table th,.comps-table td{white-space:normal;}
+  .comps-wrap{border:1px solid #ccc;}
+  .comps-table .median-row td{background:#f0e8ff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+<!-- HERO -->
+<section class="hero">
+  <div class="vbadge">Advanced Valuation · Module 08 · Trading Comps</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Comps · Peer Selection · Multiples · EV/EBITDA · P/E · P/B · P/S</div>
+  <h1 class="hh1">
+    <span class="line1">Comparable Company</span>
+    <span class="line2">Analysis</span>
+    <span class="line3">Build a Trading Comps Table · Value Any Stock</span>
+  </h1>
+  <div class="hsub">Advanced Valuation · Relative Valuation · Screener.in · Trading Multiples</div>
+  <p class="hdesc">How do professional analysts decide if a stock is cheap or expensive? They build a Comps Table — selecting peer companies, spreading their financials, calculating valuation multiples, and finding the median. Then they apply that median multiple to the target company to derive a fair value range. This module teaches you to do exactly that — using Screener.in for every data point.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv">Peer Selection</div><div class="hsl">Step 1: pick right peers</div></div>
+    <div class="hsi"><div class="hsv a">Spread Financials</div><div class="hsl">Revenue, EBITDA, PAT</div></div>
+    <div class="hsi"><div class="hsv g">Calc Multiples</div><div class="hsl">P/E, EV/EBITDA, P/B</div></div>
+    <div class="hsi"><div class="hsv">Median</div><div class="hsl">Apply to target</div></div>
+    <div class="hsi"><div class="hsv g">5 Good · 5 Bad</div><div class="hsl">Real examples</div></div>
+  </div>
+</section>
+
+<!-- 01 KLO -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Select Peers · Spread Financials · <span class="hp">Calculate Multiples</span></h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">📊</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">Comparable Company Analysis (Comps) is the most widely used valuation method in investment banking and equity research. The logic is simple: if similar companies trade at a P/E of 25×, then your target company — if genuinely similar — should also trade at approximately 25×. The entire skill lies in (1) selecting truly comparable peers, (2) correctly spreading their financial data, and (3) calculating the right multiples. Garbage peers → garbage valuation.</div>
+        <div class="klo-desc">Imagine you want to price a 2-bedroom flat in Pune's Koregaon Park. You'd look at what similar 2-bed flats in the same locality sold for recently. You wouldn't compare it to a 5-bedroom villa in Baner or a studio in Kothrud — that would be a bad comp. The same logic applies to stocks: compare a mid-cap IT services company to other mid-cap IT services companies — not to large-cap IT or to telecom. The closer the peers, the more reliable the valuation range.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-p">🏢 Step 1: Select 5–8 true peers</span>
+          <span class="kpill kpill-a">📋 Step 2: Spread financials on Screener.in</span>
+          <span class="kpill kpill-g">📊 Step 3: Calculate P/E · EV/EBITDA · P/B · P/S</span>
+          <span class="kpill kpill-s">📐 Step 4: Find median multiple</span>
+          <span class="kpill kpill-r">🎯 Step 5: Apply to target → fair value range</span>
+        </div>
+        <div class="klo-hi-row">
+          <div class="klo-hi"><div class="klo-hi-ico">🏢</div><div class="klo-hi-val purple">Peer Selection</div><div class="klo-hi-lbl">Most critical step</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">📊</div><div class="klo-hi-val amber">Multiples</div><div class="klo-hi-lbl">P/E · EV/EBITDA · P/B · P/S</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">🎯</div><div class="klo-hi-val green">Fair Value Range</div><div class="klo-hi-lbl">Implied from median</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 HOW IT WORKS -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — How Comps Analysis Works</div>
+    <h2 class="h2 rv d2">The 5-Step Process <span class="hp">Step by Step</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Building a comps table is a systematic process. Each step must be done correctly — an error in peer selection invalidates everything that follows.</p>
+
+    <!-- Concept grid: process steps + infographic -->
+    <div class="concept-grid rv d3">
+      <div>
+        <div class="process-steps">
+          <div class="ps-item">
+            <div class="ps-left">
+              <div class="ps-num" style="background:linear-gradient(135deg,var(--p),var(--ph));">1</div>
+              <div class="ps-line"></div>
+            </div>
+            <div class="ps-body">
+              <div class="ps-tag">Peer Selection</div>
+              <div class="ps-title">Identify 5–8 Truly Comparable Companies</div>
+              <div class="ps-desc">Choose companies in the same industry, of similar size (market cap within 0.3×–3× of target), similar business model (pure-play vs diversified), and operating in similar geographies. For an Indian mid-cap IT company: compare to other Indian mid-cap IT companies — not to TCS or Infosys (too large), not to US tech (different market), not to BFSI-focused IT (different segment).</div>
+              <div class="ps-pills">
+                <span class="ps-pill" style="background:var(--pxl);color:var(--p);">Same sector ✅</span>
+                <span class="ps-pill" style="background:rgba(22,163,74,.1);color:var(--gbr);">Similar size ✅</span>
+                <span class="ps-pill" style="background:rgba(220,38,38,.1);color:var(--red);">Outliers distort median ❌</span>
+              </div>
+            </div>
+          </div>
+          <div class="ps-item">
+            <div class="ps-left">
+              <div class="ps-num" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">2</div>
+              <div class="ps-line"></div>
+            </div>
+            <div class="ps-body">
+              <div class="ps-tag">Spread Financials</div>
+              <div class="ps-title">Collect Revenue, EBITDA, PAT, Debt, Book Value</div>
+              <div class="ps-desc">For each peer, collect: Revenue (Net Sales), EBITDA (Operating Profit), PAT (Net Profit), Total Debt, Cash &amp; Equivalents, Book Value of Equity, and Share Count. Use the most recent full year (FY25) and next year estimate (FY26E) if available. On Screener.in, all historical data is on the P&amp;L tab — consistent format across all companies.</div>
+              <div class="ps-pills">
+                <span class="ps-pill" style="background:rgba(2,132,199,.1);color:var(--sky);">Same fiscal year ✅</span>
+                <span class="ps-pill" style="background:rgba(22,163,74,.1);color:var(--gbr);">Consolidated P&amp;L ✅</span>
+                <span class="ps-pill" style="background:rgba(220,38,38,.1);color:var(--red);">Standalone misleads ❌</span>
+              </div>
+            </div>
+          </div>
+          <div class="ps-item">
+            <div class="ps-left">
+              <div class="ps-num" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">3</div>
+              <div class="ps-line"></div>
+            </div>
+            <div class="ps-body">
+              <div class="ps-tag">Calculate Multiples</div>
+              <div class="ps-title">Compute P/E, EV/EBITDA, P/B, P/S for Every Peer</div>
+              <div class="ps-desc">P/E = Market Cap ÷ PAT. EV/EBITDA = (Market Cap + Debt − Cash) ÷ EBITDA. P/B = Market Cap ÷ Book Value. P/S = Market Cap ÷ Revenue. These four multiples together capture profitability-based, cash-flow-based, asset-based, and revenue-based valuation angles. Use all four; never rely on just one.</div>
+              <div class="ps-pills">
+                <span class="ps-pill" style="background:var(--pxl);color:var(--p);">P/E — earnings based</span>
+                <span class="ps-pill" style="background:rgba(2,132,199,.1);color:var(--sky);">EV/EBITDA — cash flow</span>
+                <span class="ps-pill" style="background:rgba(22,163,74,.1);color:var(--gbr);">P/B — asset based</span>
+                <span class="ps-pill" style="background:rgba(217,119,6,.1);color:var(--ambr);">P/S — revenue based</span>
+              </div>
+            </div>
+          </div>
+          <div class="ps-item">
+            <div class="ps-left">
+              <div class="ps-num" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">4</div>
+              <div class="ps-line"></div>
+            </div>
+            <div class="ps-body">
+              <div class="ps-tag">Find Median</div>
+              <div class="ps-title">Calculate Median (Not Mean) of Peer Multiples</div>
+              <div class="ps-desc">Use the median — not the average — of all peer multiples. The median is less distorted by one extreme outlier. If 7 peers have P/E of 20, 22, 24, 25, 27, 30, 85 — the average is 33× (distorted by the outlier at 85×) but the median is 25× (robust). Always exclude clearly broken companies (negative EPS, distressed) from the peer set before calculating medians.</div>
+              <div class="ps-pills">
+                <span class="ps-pill" style="background:var(--gpale);color:var(--gbr);">Median — outlier robust ✅</span>
+                <span class="ps-pill" style="background:rgba(220,38,38,.1);color:var(--red);">Mean — distorted by outliers ❌</span>
+              </div>
+            </div>
+          </div>
+          <div class="ps-item">
+            <div class="ps-left">
+              <div class="ps-num" style="background:linear-gradient(135deg,#e11d48,#f43f5e);">5</div>
+            </div>
+            <div class="ps-body">
+              <div class="ps-tag">Apply to Target</div>
+              <div class="ps-title">Derive Fair Value Range for Your Target Company</div>
+              <div class="ps-desc">Implied Price (P/E method) = Median Peer P/E × Target's EPS. Implied Price (EV/EBITDA method) = (Median EV/EBITDA × Target EBITDA) − Net Debt ÷ Shares. Take the range from both methods. If target trades below this range → potentially undervalued. Above → potentially overvalued. This is not a guarantee — it's a range based on how the market values peers today.</div>
+              <div class="ps-pills">
+                <span class="ps-pill" style="background:var(--gpale);color:var(--gbr);">Trading below range → investigate ✅</span>
+                <span class="ps-pill" style="background:rgba(220,38,38,.1);color:var(--red);">Wrong peers → wrong range ❌</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="infographic-wrap rv d4">
+        <svg class="infographic-svg" viewBox="0 0 420 580" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="420" height="580" rx="20" fill="#f5f3ff"/>
+          <rect x="10" y="10" width="400" height="32" rx="10" fill="#6d28d9"/>
+          <text x="210" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">Building a Trading Comps Table — Visual</text>
+          <!-- Target company -->
+          <rect x="155" y="56" width="110" height="64" rx="10" fill="#4c1d95" opacity=".9"/>
+          <text x="210" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="white">TARGET CO.</text>
+          <text x="210" y="94" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#ddd6fe">Mid-cap IT · ₹5,000 Cr</text>
+          <text x="210" y="108" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#ddd6fe">PAT ₹400 Cr · EPS ₹40</text>
+          <text x="210" y="50" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">❓ What is it worth?</text>
+          <!-- Arrows to peers -->
+          <line x1="155" y1="88" x2="90" y2="130" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <line x1="210" y1="120" x2="210" y2="145" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <line x1="265" y1="88" x2="330" y2="130" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <!-- Peer 1 -->
+          <rect x="14" y="130" width="140" height="52" rx="8" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1.5"/>
+          <text x="84" y="148" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="800" fill="#4c1d95">Peer A · MPHASIS</text>
+          <text x="84" y="162" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6e6994">P/E 28× · EV/EBITDA 19×</text>
+          <text x="84" y="175" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6e6994">P/B 7.2× · P/S 4.8×</text>
+          <!-- Peer 2 -->
+          <rect x="140" y="145" width="140" height="52" rx="8" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1.5"/>
+          <text x="210" y="163" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="800" fill="#4c1d95">Peer B · PERSISTENT</text>
+          <text x="210" y="177" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6e6994">P/E 32× · EV/EBITDA 21×</text>
+          <text x="210" y="190" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6e6994">P/B 8.1× · P/S 5.2×</text>
+          <!-- Peer 3 -->
+          <rect x="266" y="130" width="140" height="52" rx="8" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1.5"/>
+          <text x="336" y="148" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="800" fill="#4c1d95">Peer C · COFORGE</text>
+          <text x="336" y="162" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6e6994">P/E 30× · EV/EBITDA 20×</text>
+          <text x="336" y="175" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6e6994">P/B 6.8× · P/S 4.9×</text>
+          <!-- Arrow down -->
+          <line x1="210" y1="200" x2="210" y2="224" stroke="#15803d" stroke-width="2.5"/>
+          <polygon points="205,222 210,232 215,222" fill="#15803d"/>
+          <!-- Median box -->
+          <rect x="60" y="232" width="300" height="50" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+          <text x="210" y="252" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#15803d">MEDIAN PEER MULTIPLES</text>
+          <text x="210" y="269" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#3d3868">P/E 30× · EV/EBITDA 20× · P/B 7.2× · P/S 4.9×</text>
+          <!-- Arrow down -->
+          <line x1="210" y1="282" x2="210" y2="306" stroke="#6d28d9" stroke-width="2.5"/>
+          <polygon points="205,304 210,314 215,304" fill="#6d28d9"/>
+          <!-- Implied value box -->
+          <rect x="40" y="314" width="340" height="76" rx="12" fill="#6d28d9"/>
+          <text x="210" y="336" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">IMPLIED FAIR VALUE RANGE</text>
+          <text x="210" y="353" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#ddd6fe">P/E: 30 × ₹40 EPS = ₹1,200/share</text>
+          <text x="210" y="368" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#ddd6fe">EV/EBITDA: 20 × ₹600 Cr EBITDA − Debt ÷ shares</text>
+          <text x="210" y="381" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="700" fill="#4ade80">Fair Value Range: ₹1,100 – ₹1,300/share</text>
+          <!-- Market price comparison -->
+          <rect x="40" y="404" width="160" height="56" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+          <text x="120" y="422" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#dc2626">Market Price: ₹1,400</text>
+          <text x="120" y="436" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#dc2626">Above fair value range</text>
+          <text x="120" y="450" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#dc2626">⚠️ Potentially overvalued</text>
+          <rect x="220" y="404" width="160" height="56" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+          <text x="300" y="422" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#15803d">Market Price: ₹950</text>
+          <text x="300" y="436" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#15803d">Below fair value range</text>
+          <text x="300" y="450" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#15803d">✅ Potentially undervalued</text>
+          <!-- Human analyst character -->
+          <circle cx="58" cy="524" r="14" fill="#fbbf24"/>
+          <ellipse cx="58" cy="513" rx="14" ry="7" fill="#4c1d95"/>
+          <circle cx="53" cy="523" r="2.5" fill="white"/><circle cx="54" cy="524" r="1.5" fill="#1f2937"/>
+          <circle cx="63" cy="523" r="2.5" fill="white"/><circle cx="64" cy="524" r="1.5" fill="#1f2937"/>
+          <path d="M53 531 Q58 535 63 531" stroke="#92400e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M44,537 Q40,549 38,537" stroke="#fbbf24" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M72,537 Q76,549 78,537" stroke="#fbbf24" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M44,537 Q47,544 58,544 Q69,544 72,537 Q68,533 63,535 Q58,538 53,535 Q48,533 44,537Z" fill="#3d1fa3"/>
+          <rect x="84" y="510" width="272" height="40" rx="9" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="220" y="525" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="900" fill="#4c1d95">Always use Screener.in for all financial data</text>
+          <text x="220" y="540" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#15803d">Market cap + P&amp;L data = complete comps table in 10 min</text>
+          <polygon points="85,530 78,526 78,534" fill="white" stroke="#e5e1fb" stroke-width="1" stroke-linejoin="round"/>
+        </svg>
+        <p class="infographic-cap">📊 The entire Comps process: Target company → identify peers → spread their multiples → find median → apply to target → get fair value range. If market price is below fair value → potentially undervalued. Above → potentially overvalued.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 PEER SELECTION CRITERIA -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — What Makes a Good Peer</div>
+    <h2 class="h2 rv d2">Peer Selection: <span class="hp">The Most Critical Step</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">A comps table is only as good as its peer selection. If you compare an FMCG company to a commodity chemicals company just because both have "consumer" in their description, your multiples will be meaningless.</p>
+
+    <div class="peer-criteria rv d3">
+      <div class="pc-card">
+        <div class="pc-ico">🏭</div>
+        <div class="pc-title">Same Industry &amp; Business Model</div>
+        <div class="pc-desc">Companies must be in the same or closely adjacent industry. A pure-play IT services company should be compared to other IT services companies — not IT products, not hardware, not telecom. Sub-sector matters: pharma API vs branded pharma vs generic exports are three different businesses even within pharma.</div>
+        <span class="pc-badge pc-badge-g">✅ IT services vs IT services</span>
+        <span class="pc-badge pc-badge-r">❌ IT services vs IT products</span>
+      </div>
+      <div class="pc-card">
+        <div class="pc-ico">📏</div>
+        <div class="pc-title">Similar Size (Market Cap)</div>
+        <div class="pc-desc">Keep peers within 0.3×–3× of the target's market cap. TCS (₹12 lakh Cr) should not be in the same comps set as a ₹2,000 Cr IT company — they have completely different growth profiles, client quality, and pricing power. Small-cap companies typically trade at a discount to large-cap peers; mixing them distorts the median.</div>
+        <span class="pc-badge pc-badge-g">✅ Within 3× market cap range</span>
+        <span class="pc-badge pc-badge-r">❌ Large-cap vs micro-cap</span>
+      </div>
+      <div class="pc-card">
+        <div class="pc-ico">📈</div>
+        <div class="pc-title">Similar Growth Rate</div>
+        <div class="pc-desc">A company growing revenue at 30% annually should not be compared to peers growing at 5%. Higher growth typically commands a premium multiple. If growth rates are very different, the median multiple will misrepresent the target. Use P/E-to-Growth (PEG) as a supplementary check when growth rates vary significantly within your peer set.</div>
+        <span class="pc-badge pc-badge-g">✅ Similar 3yr revenue CAGR range</span>
+        <span class="pc-badge pc-badge-r">❌ 5% growth vs 40% growth peers</span>
+      </div>
+      <div class="pc-card">
+        <div class="pc-ico">💰</div>
+        <div class="pc-title">Similar Profitability (Margins)</div>
+        <div class="pc-desc">EBITDA margins matter because high-margin businesses deserve premium multiples. If your target has 20% EBITDA margin and peers have 35%, the peer multiples will overstate fair value. Sort peers by EBITDA margin — those within ±5 percentage points are most comparable. Exclude loss-making companies from the P/E comps (they make the median meaningless).</div>
+        <span class="pc-badge pc-badge-g">✅ EBITDA margin within ±5pp</span>
+        <span class="pc-badge pc-badge-r">❌ Include loss-making peers in P/E</span>
+      </div>
+      <div class="pc-card">
+        <div class="pc-ico">🌍</div>
+        <div class="pc-title">Same Geography / Market</div>
+        <div class="pc-desc">Indian-listed companies should be compared to other Indian-listed companies — not to US-listed ADRs or international stocks. Country risk premium, tax rates, regulatory environment, and market depth all affect multiples. Infosys India-listed vs Infosys NYSE-listed would have different multiples even for the same underlying business.</div>
+        <span class="pc-badge pc-badge-g">✅ NSE/BSE-listed Indian companies</span>
+        <span class="pc-badge pc-badge-r">❌ Indian vs US-listed comps</span>
+      </div>
+      <div class="pc-card">
+        <div class="pc-ico">🏦</div>
+        <div class="pc-title">Similar Capital Structure</div>
+        <div class="pc-desc">A debt-free company should ideally be compared to other low-debt peers. High leverage artificially suppresses P/E (interest cuts PAT) and inflates EV/EBITDA. When capital structures differ significantly, use EV/EBITDA (enterprise-value based) rather than P/E (equity-value based), because EV/EBITDA is capital-structure neutral.</div>
+        <span class="pc-badge pc-badge-g">✅ EV/EBITDA for debt-heavy sectors</span>
+        <span class="pc-badge pc-badge-r">❌ P/E comparison across debt levels</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 LIVE COMPS TABLE -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">04 — Live Comps Table</div>
+    <h2 class="h2 rv d2">Indian Mid-Cap IT Services <span class="hp">Comps Table · FY25</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">This is how a real comps table looks for the Indian mid-cap IT services sector. All data sourced from Screener.in. Figures are illustrative and approximate for educational purposes.</p>
+
+    <div class="comps-wrap rv d3">
+      <div class="comps-hdr">
+        <div>
+          <div class="comps-hdr-title">Indian Mid-Cap IT Services — Trading Comps Table · FY25</div>
+          <div class="comps-hdr-sub">Market Cap: ₹20,000–₹80,000 Cr · Consolidated · Rs. Crores · Source: Screener.in · Figures approximate</div>
+        </div>
+      </div>
+      <div class="comps-legend">
+        <div class="legend-dot" style="background:var(--gbr);"></div><strong>Green</strong> = Highest value (most attractive)&nbsp;
+        <div class="legend-dot" style="background:var(--red);"></div><strong>Red</strong> = Lowest value&nbsp;
+        <div class="legend-dot" style="background:var(--p);"></div><strong>Purple row</strong> = Median &nbsp;·&nbsp; Scroll right →
+      </div>
+      <div class="table-scroll">
+        <table class="comps-table">
+          <thead>
+            <tr>
+              <th rowspan="2">Company</th>
+              <th rowspan="2">Mkt Cap<br>(₹ Cr)</th>
+              <th colspan="3" class="grp-hdr" style="text-align:center;border-left:1px solid var(--bd);">Financials (₹ Cr)</th>
+              <th colspan="4" class="grp-hdr" style="text-align:center;border-left:1px solid var(--bd);">Valuation Multiples</th>
+            </tr>
+            <tr>
+              <th style="border-left:1px solid var(--bd);">Revenue</th>
+              <th>EBITDA</th>
+              <th>PAT</th>
+              <th style="border-left:1px solid var(--bd);">P/E</th>
+              <th>EV/EBITDA</th>
+              <th>P/B</th>
+              <th>P/S</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Mphasis</td><td>34,800</td><td>15,824</td><td>3,406</td><td>1,718</td><td>20.3×</td><td>13.8×</td><td>5.2×</td><td>2.2×</td></tr>
+            <tr><td>Persistent Systems</td><td>72,400</td><td>10,436</td><td>2,214</td><td>1,324</td><td class="high-val">54.7×</td><td class="high-val">30.2×</td><td class="high-val">18.1×</td><td class="high-val">6.9×</td></tr>
+            <tr><td>Coforge</td><td>48,200</td><td>10,868</td><td>2,044</td><td>1,002</td><td>48.1×</td><td>22.4×</td><td>14.2×</td><td>4.4×</td></tr>
+            <tr><td>LTIMindtree</td><td>1,42,000</td><td>37,524</td><td>8,046</td><td>5,272</td><td>26.9×</td><td>18.2×</td><td>8.4×</td><td>3.8×</td></tr>
+            <tr><td>KPIT Technologies</td><td>38,500</td><td>6,212</td><td>1,282</td><td>684</td><td>56.3×</td><td>26.8×</td><td>16.2×</td><td>6.2×</td></tr>
+            <tr><td>Tata Elxsi</td><td>28,400</td><td>3,874</td><td>1,186</td><td>862</td><td>33.0×</td><td>22.6×</td><td>12.8×</td><td>7.3×</td></tr>
+            <tr><td>Hexaware (BSE)</td><td>32,600</td><td>12,276</td><td>2,206</td><td>1,124</td><td class="low-val">29.0×</td><td class="low-val">13.2×</td><td class="low-val">4.6×</td><td class="low-val">2.7×</td></tr>
+            <tr class="median-row"><td>MEDIAN</td><td>38,500</td><td>10,868</td><td>2,206</td><td>1,124</td><td>33.0×</td><td>22.4×</td><td>12.8×</td><td>4.4×</td></tr>
+            <tr class="target-row"><td>🎯 Target Co. (Hypothetical)</td><td>—</td><td>8,400</td><td>1,680</td><td>960</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="padding:12px 18px;background:var(--pxs);border-top:1px solid var(--bd);font-size:11px;color:var(--ts);">
+        <strong style="color:var(--p);">How to read this table:</strong> The median P/E of 33× applied to Target's PAT of ₹960 Cr → Implied Market Cap = 33 × 960 = ₹31,680 Cr. EV/EBITDA: 22.4 × ₹1,680 Cr EBITDA − Net Debt ÷ shares = per-share value. Take the range across methods. LTIMindtree excluded from median calculation as it is in the ₹1 lakh Cr+ size bracket — a different tier. All data illustrative.
+      </div>
+    </div>
+
+    <!-- Multiples summary cards -->
+    <div class="multiples-grid rv d5">
+      <div class="mult-card mc-pe">
+        <div class="mult-label mult-label-p">Price / Earnings (P/E)</div>
+        <div class="mult-val" style="color:var(--p);">33×</div>
+        <div class="mult-sub">Median peer P/E · Most widely used</div>
+      </div>
+      <div class="mult-card mc-ev">
+        <div class="mult-label mult-label-s">EV / EBITDA</div>
+        <div class="mult-val" style="color:var(--sky);">22.4×</div>
+        <div class="mult-sub">Debt-neutral · Use for capital-intensive peers</div>
+      </div>
+      <div class="mult-card mc-pb">
+        <div class="mult-label mult-label-g">Price / Book (P/B)</div>
+        <div class="mult-val" style="color:var(--gbr);">12.8×</div>
+        <div class="mult-sub">Asset-based · High for asset-light IT</div>
+      </div>
+      <div class="mult-card mc-ps">
+        <div class="mult-label mult-label-a">Price / Sales (P/S)</div>
+        <div class="mult-val" style="color:var(--ambr);">4.4×</div>
+        <div class="mult-sub">Use when margins vary widely</div>
+      </div>
+    </div>
+
+    <!-- Valuation bridge -->
+    <div class="val-bridge rv d5">
+      <div class="vb-title">📐 Implied Value Range for Target Company (Hypothetical)</div>
+      <div class="vb-row">
+        <div class="vb-label">P/E Method</div>
+        <div class="vb-bar-bg"><div class="vb-bar" style="width:82%;background:linear-gradient(90deg,var(--p),var(--ph));"></div></div>
+        <div class="vb-val" style="color:var(--p);">₹1,100 – ₹1,280</div>
+      </div>
+      <div class="vb-row">
+        <div class="vb-label">EV/EBITDA</div>
+        <div class="vb-bar-bg"><div class="vb-bar" style="width:74%;background:linear-gradient(90deg,var(--sky),#38bdf8);"></div></div>
+        <div class="vb-val" style="color:var(--sky);">₹960 – ₹1,180</div>
+      </div>
+      <div class="vb-row">
+        <div class="vb-label">P/B Method</div>
+        <div class="vb-bar-bg"><div class="vb-bar" style="width:65%;background:linear-gradient(90deg,var(--gbr),var(--gh));"></div></div>
+        <div class="vb-val" style="color:var(--gbr);">₹840 – ₹1,050</div>
+      </div>
+      <div class="vb-row">
+        <div class="vb-label">P/S Method</div>
+        <div class="vb-bar-bg"><div class="vb-bar" style="width:58%;background:linear-gradient(90deg,var(--ambr),var(--amb));"></div></div>
+        <div class="vb-val" style="color:var(--ambr);">₹740 – ₹980</div>
+      </div>
+      <div style="margin-top:12px;padding:12px 14px;background:var(--gpale);border-radius:10px;border:1px solid rgba(22,163,74,.2);font-size:12px;color:var(--gbr);">
+        <strong>✅ Blended Fair Value Range: ₹900 – ₹1,200 per share.</strong> The centre of this range (₹1,050) is the best single-point estimate from the comps. Any current market price significantly below ₹900 warrants further investigation as a potential buying opportunity; above ₹1,200 suggests premium pricing relative to peers.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMAT BANNER -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Build Comps Tables on Screener.in</div>
+    <div class="dmh">All Data You Need for <span class="dmhs">Comps Valuation — Free</span></div>
+    <div class="dmsub">Screener.in has P/E, EV/EBITDA, P/B, and P/S ratios pre-calculated for every listed Indian company. Build a complete comps table in 10 minutes. Open your demat account and invest based on relative valuation — not just gut feel.</div>
+    <div class="dmfeats">
+      <div class="dmf">Free sector comparison tool on Screener.in</div>
+      <div class="dmf">Pre-calculated P/E, EV/EBITDA for all companies</div>
+      <div class="dmf">Screen by sector and market cap for peer selection</div>
+      <div class="dmf">10-year financial data for spreading comps</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated</div>
+  </div>
+</div>
+
+<!-- 05 FIVE GOOD COMPS -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">05 — Good Comps Examples</div>
+    <h2 class="h2 rv d2">5 Sectors Where <span class="hg">Comps Analysis Works Well</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Comps work best in sectors with many listed, similar-sized peers, transparent financials, and comparable business models. These sectors are ideal for building reliable comps tables on Screener.in.</p>
+
+    <div class="company-block rv d3">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🖥️</div>
+          <div><div class="cb-name">Indian Mid-Cap IT Services Sector</div><div class="cb-sub">Mphasis · Persistent · Coforge · Hexaware · KPIT · Tata Elxsi · LTIMindtree · ₹20,000–₹80,000 Cr bracket</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ Many listed peers</span>
+          <span class="cb-badge cb-b-g">✅ Similar business models</span>
+          <span class="cb-badge cb-b-g">✅ Transparent Screener data</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Indian mid-cap IT services is the best sector for comps in India.</strong> There are 15+ listed mid-cap IT services companies with transparent P&amp;L data on Screener.in, similar business models (offshore software delivery to US/EU clients), comparable margin profiles (14–22% EBITDA), and similar revenue scales. P/E multiples tend to cluster in a 25–50× range with a clear median. Outliers (high-growth companies like Persistent at 50×+ P/E) can be separately identified. Comps gives a tight, reliable fair value range for any mid-cap IT company you're analyzing.</div>
+    </div>
+
+    <div class="company-block rv d4">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fefce8,#fef9c3);">🏦</div>
+          <div><div class="cb-name">Private Sector Banks (Large-Cap)</div><div class="cb-sub">HDFC Bank · ICICI Bank · Axis Bank · Kotak Mahindra · IndusInd Bank — P/B method preferred</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ P/B is the correct multiple</span>
+          <span class="cb-badge cb-b-g">✅ All Screener-listed, consistent data</span>
+          <span class="cb-badge cb-b-s">📌 ROE matters for P/B premium</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>For banks, P/B (Price to Book Value) is the standard comps multiple — not P/E.</strong> Banks create value by deploying capital (book value) at returns above their cost of equity. A bank with 18% ROE deserves a higher P/B than one with 12% ROE. The comps methodology: collect P/B for all major private banks, plot against their ROE, and see where your target bank falls on the ROE-P/B regression line. HDFC Bank at 3.5× P/B with 17% ROE vs IndusInd Bank at 1.2× P/B with 11% ROE — this differential makes intuitive sense and comes directly from the comps analysis.</div>
+    </div>
+
+    <div class="company-block rv d5">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fff7ed,#fed7aa);">💊</div>
+          <div><div class="cb-name">Generic Pharmaceutical Exporters</div><div class="cb-sub">Sun Pharma · Cipla · Dr Reddy's · Aurobindo · Alkem · Torrent — export-focused, similar profiles</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ Similar US FDA exposure</span>
+          <span class="cb-badge cb-b-g">✅ Revenue and margin comparability</span>
+          <span class="cb-badge cb-b-a">⚠️ Separate branded vs generic</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Pharma comps work well when you carefully separate sub-segments.</strong> Generic exporters (Cipla, Aurobindo, Dr Reddy's) are directly comparable — they all sell off-patent molecules to US, EU, and emerging market pharmacies. Their P/E multiples cluster in a 20–30× range. The critical segmentation: don't mix branded Indian domestic pharma (Alkem domestic) with generic exporters (Alkem international) — their growth drivers and margin profiles are completely different. On Screener.in, use the "Pharmaceuticals" sector screen and filter by export revenue percentage &gt;50% to get the right peer set.</div>
+    </div>
+
+    <div class="company-block rv d6">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0);">🎨</div>
+          <div><div class="cb-name">Indian Consumer Paints Sector</div><div class="cb-sub">Asian Paints · Berger Paints · Kansai Nerolac · Indigo Paints — tight, well-defined peer set</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ Only 4 major listed peers</span>
+          <span class="cb-badge cb-b-g">✅ Very similar business models</span>
+          <span class="cb-badge cb-b-g">✅ Clean comps for any one of them</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Consumer paints is ideal for comps — a small, homogeneous peer set.</strong> With only 4–5 major listed companies selling decorative paints in India, the comps table is clean and reliable. Asian Paints, Berger, and Kansai all sell to the same customer (Indian household renovating their home), through similar distribution (dealer networks), with similar products. EV/EBITDA multiples have historically ranged 30–55×. When Asian Paints faced competition from Birla Opus in 2024, watching how its comps multiple compressed vs peers gave early signals of earnings risk — a textbook example of comps tracking fundamental shifts.</div>
+    </div>
+
+    <div class="company-block rv d7" style="margin-bottom:8px;">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pxs));">🏭</div>
+          <div><div class="cb-name">Specialty Chemicals (Domestic Focused)</div><div class="cb-sub">Pidilite · SRF · Aarti Industries · Vinati Organics · Clean Science — India-focused specialty chemicals</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ Premium P/E range 30–60×</span>
+          <span class="cb-badge cb-b-g">✅ High ROE, capital-efficient</span>
+          <span class="cb-badge cb-b-a">⚠️ Separate commodity vs specialty</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Specialty chemicals comps work because this sub-sector has genuinely differentiated companies with similar structural characteristics.</strong> Pidilite, Vinati Organics, and Clean Science all have: high EBITDA margins (30–45%), strong ROEs (20%+), niche products with pricing power, low debt, and consistent earnings quality. Their P/E multiples cluster in the 40–65× range — high, but consistently so. Comps here helps you identify when any one company has derated significantly vs peers — a potential entry signal if the business thesis is intact. Key: always separate commodity chemical exporters (cyclical, P/E 8–15×) from specialty chemicals players (structural, P/E 40–65×).</div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 FIVE BAD COMPS -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">06 — Bad Comps Pitfalls</div>
+    <h2 class="h2 rv d2">5 Ways Comps Analysis <span class="hr">Goes Wrong</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Comps analysis fails when peers are poorly selected, when the wrong multiples are used, or when the analyst ignores structural differences between peers and target. These are the most common and dangerous errors.</p>
+
+    <div class="company-block rv d3">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">⚠️</div>
+          <div><div class="cb-name">Using TCS as a Peer for a ₹3,000 Cr IT Company</div><div class="cb-sub">Size mismatch error — different tier, different growth profile, different client quality</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 100× size difference</span>
+          <span class="cb-badge cb-b-r">🚨 TCS's premium inflates median</span>
+          <span class="cb-badge cb-b-r">🚨 Overvalues small company</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>The most common beginner mistake: including TCS or Infosys in a comps set for a small IT company.</strong> TCS trades at a premium P/E of 28–32× because it has ₹2.5 lakh Cr revenue, 400+ Fortune 500 clients, decades of relationships, and an unmatched talent pool. A ₹3,000 Cr IT company with 20 clients and ₹300 Cr PAT should not be valued using TCS's multiples — it will systematically overvalue the small company. The small company should trade at a meaningful discount to TCS (smaller client base, execution risk, key-man dependency, liquidity discount). Always keep peers within 0.3×–3× market cap range. If you can't find 5 comparable-sized peers, widen the sub-sector — don't add a company 50× larger.</div>
+    </div>
+
+    <div class="company-block rv d4">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">❌</div>
+          <div><div class="cb-name">Including Loss-Making Companies in P/E Comps</div><div class="cb-sub">Negative EPS makes P/E undefined — distorts the median and misleads</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Negative P/E is meaningless</span>
+          <span class="cb-badge cb-b-r">🚨 Inflates mean dramatically</span>
+          <span class="cb-badge cb-b-r">🚨 Use EV/Sales instead for loss-makers</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>Including Vodafone Idea, MTNL, or any loss-making peer in a P/E comps table is a fundamental error.</strong> If a company has negative EPS, its P/E ratio is negative — which is mathematically meaningless in a valuation context. Including it in the peer set either (a) creates an undefined median, or (b) if you use absolute values, dramatically distorts the analysis. The correct approach: for loss-making peers, exclude them from the P/E section and use EV/Revenue (Price/Sales) instead — it's defined even when companies are unprofitable. Alternatively, use forward-year estimates for companies expected to return to profitability. Never include currently loss-making peers in a trailing P/E comps table.</div>
+    </div>
+
+    <div class="company-block rv d5">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🔀</div>
+          <div><div class="cb-name">Mixing Conglomerates with Pure-Play Companies</div><div class="cb-sub">Reliance Industries vs Jio Platforms — comparing diversified group vs pure telecom</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Conglomerates trade at discount</span>
+          <span class="cb-badge cb-b-r">🚨 Different risk profiles</span>
+          <span class="cb-badge cb-b-r">🚨 Use SOTP for conglomerates instead</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>Comparing a diversified conglomerate to a pure-play company produces systematically wrong multiples.</strong> Reliance Industries (retail + telecom + petrochemicals + O2C) cannot be compared to a pure-play telecom like Bharti Airtel or a pure-play retailer like DMart. Conglomerates typically trade at a "conglomerate discount" — a lower multiple than the sum of their parts — because investors cannot efficiently price diversified businesses. The correct approach for conglomerates: Sum-of-the-Parts (SOTP) valuation, where each business segment gets its own comps table with appropriate peers, and the values are added up. Using a single multiple from a mixed peer set will either significantly overvalue or undervalue the conglomerate.</div>
+    </div>
+
+    <div class="company-block rv d6">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">📉</div>
+          <div><div class="cb-name">Using Historical P/E During Commodity Cycles</div><div class="cb-sub">Steel / metals sector — cyclical earnings make P/E comps unreliable at cycle peaks</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Cycle-peak P/E appears cheap</span>
+          <span class="cb-badge cb-b-r">🚨 Earnings will mean-revert</span>
+          <span class="cb-badge cb-b-r">🚨 Use EV/EBITDA through-cycle instead</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>Comps using trailing P/E for cyclical companies (steel, metals, cement, chemicals) at cycle peaks is deeply misleading.</strong> When steel prices are at all-time highs (like FY22), Tata Steel and JSW Steel report peak earnings. Using this peak P/E to value the sector gives a false impression of cheapness — the stocks appear at 5× P/E! But 5× P/E during a commodity super-cycle doesn't mean the stock is cheap; it means the "E" is temporarily very high and will fall sharply when the cycle turns. The correct approach for cyclicals: use EV/EBITDA on a mid-cycle (through-cycle average) EBITDA estimate — typically the average of 5–7 years, smoothing out the peaks and troughs. Alternatively, use P/BV (which doesn't depend on cyclical earnings).</div>
+    </div>
+
+    <div class="company-block rv d7" style="margin-bottom:8px;">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🌐</div>
+          <div><div class="cb-name">Comparing Indian-Listed Stocks to US ADRs</div><div class="cb-sub">Infosys India vs Infosys NYSE — same business, different valuation for structural reasons</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Different country risk premium</span>
+          <span class="cb-badge cb-b-r">🚨 Different investor base</span>
+          <span class="cb-badge cb-b-r">🚨 Inflates Indian valuation estimates</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>Cross-border comps systematically distort valuations because different markets price risk, liquidity, and growth differently.</strong> US tech companies (similar business model to Indian IT) trade at much higher multiples — partly because of deeper liquidity, lower country risk premium, and higher institutional quality. If you build comps for an Indian IT company using US tech multiples (30–40× EV/Revenue for SaaS, 50–80× P/E for high-growth tech), you'll overvalue the Indian company by 2–4×. Always stick to NSE/BSE-listed peers. The one exception: if an Indian company has a genuine global peer (like HDFC Life being compared to global life insurance companies), use a country discount factor — typically 20–30% — to adjust the global peer multiples downward for India-specific risks.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 TRICK SECTION -->
+<section class="sec-white" style="position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-100px;right:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(109,40,217,.05) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-80px;left:-60px;width:360px;height:360px;background:radial-gradient(circle,rgba(22,163,74,.04) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div class="w" style="position:relative;z-index:1;">
+    <div class="tag rv d1">07 — The Investor's Shortcut</div>
+    <h2 class="h2 rv d2">Build a Full Comps Table <span class="hp">in 15 Minutes on Screener.in</span></h2>
+    <div class="rul rv d2"></div>
+    <p class="lead rv d3">Every data point you need for a comps table is on Screener.in — free. Here's the exact sequence, step by step, with the precise Screener.in location for each data point.</p>
+
+    <div class="rv d3">
+      <div class="trick-wrap">
+        <div class="trick-hdr">
+          <div class="th-left">
+            <div class="th-supertag">🎯 Relative Valuation Mastery</div>
+            <div class="th-title">The 5-Step Comps Table on Screener.in</div>
+            <div class="th-sub">Open Screener.in. Follow these five steps for any company you want to value. You'll have a complete comps table with P/E, EV/EBITDA, P/B, and P/S for 6–8 peers — and a defensible fair value range — in under 15 minutes.</div>
+          </div>
+          <div class="th-right">
+            <div class="th-timer"><div class="th-timer-num">15</div><div class="th-timer-lbl">minutes<br>full table</div></div>
+          </div>
+        </div>
+
+        <!-- QUICK REF -->
+        <div class="trick-qref">
+          <div class="qr-title">⚡ Quick Reference — The 4 Core Multiples</div>
+          <div class="sn-strip">
+            <span class="sn-lbl">📍 Screener.in path:</span>
+            <div class="sn-num">1</div><span class="sn-txt">Search sector</span>
+            <span class="sn-arr">→</span>
+            <div class="sn-num">2</div><span class="sn-txt">Market cap filter</span>
+            <span class="sn-arr">→</span>
+            <div class="sn-num">3</div><span class="sn-txt">Each company → P&amp;L + Valuation tabs</span>
+            <span class="sn-arr">→</span>
+            <div class="sn-num">4</div><span class="sn-txt">Collect Revenue, EBITDA, PAT, Debt, BV</span>
+            <span class="sn-arr">→</span>
+            <div class="sn-num">5</div><span class="sn-txt">Calculate multiples in spreadsheet</span>
+          </div>
+          <div class="mult-chips">
+            <div class="mchip mchip-pe">
+              <div class="mchip-lbl" style="color:var(--p);">P/E Ratio</div>
+              <div class="mchip-name">Earnings-based</div>
+              <div class="mchip-formula">Market Cap ÷ PAT<br>Or: Price ÷ EPS<br>On Screener: shown directly</div>
+            </div>
+            <div class="mchip mchip-ev">
+              <div class="mchip-lbl" style="color:var(--sky);">EV/EBITDA</div>
+              <div class="mchip-name">Cash flow-based</div>
+              <div class="mchip-formula">(Mkt Cap + Debt − Cash) ÷ EBITDA<br>Debt-neutral multiple<br>On Screener: EV shown</div>
+            </div>
+            <div class="mchip mchip-pb">
+              <div class="mchip-lbl" style="color:var(--gbr);">P/B Ratio</div>
+              <div class="mchip-name">Asset-based</div>
+              <div class="mchip-formula">Market Cap ÷ Book Value<br>Or: Price ÷ Book Per Share<br>On Screener: shown directly</div>
+            </div>
+            <div class="mchip mchip-ps">
+              <div class="mchip-lbl" style="color:var(--ambr);">P/S Ratio</div>
+              <div class="mchip-name">Revenue-based</div>
+              <div class="mchip-formula">Market Cap ÷ Revenue<br>Use for loss-making peers<br>On Screener: Market Cap ÷ Sales</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEPS -->
+        <div class="trick-steps-body">
+
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--p),var(--ph));">1</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">screener.in</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab purple">Screens tab</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab purple">Sector filter + Market Cap filter</span>
+              </div>
+              <div class="ts-action">Go to Screener.in → "Screens" → Create a new screen. Set <strong>Sector = [your target sector]</strong> and <strong>Market Capitalization between [0.3× and 3× of target's market cap]</strong>. This gives you the raw peer universe. From this list, select 6–8 companies with similar business models. Exclude: conglomerates, holding companies, loss-making companies, and companies with very different margin profiles (±8 percentage points EBITDA margin from target).</div>
+              <div class="ts-outcomes" style="grid-template-columns:1fr;">
+                <div class="ts-out ts-out-n">📋 Goal: A list of 6–8 peers. Write their NSE ticker symbols in a spreadsheet column. These are your comps. Resist the temptation to add "famous" names that don't fit the size/model criteria.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">2</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">For each peer</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab sky">P&amp;L tab → FY25 column</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab sky">Revenue · EBITDA · PAT</span>
+              </div>
+              <div class="ts-action">Open each peer on Screener.in. On the P&amp;L tab, collect: <strong>Revenue (Net Sales)</strong>, <strong>Operating Profit (= EBITDA)</strong>, and <strong>Net Profit (= PAT)</strong> for FY25. Then go to the Balance Sheet tab: collect <strong>Total Borrowings (= Debt)</strong>, <strong>Cash and Equivalents</strong>, and <strong>Reserves + Share Capital (= Book Value)</strong>. Finally note <strong>Market Capitalisation</strong> (shown on the company overview page).</div>
+              <div class="ts-formula">
+                <div class="ts-f-row">
+                  <span class="ts-f-lbl">EV</span><span class="ts-f-eq">=</span>
+                  <span class="ts-f-item ts-fi-p">Market Cap</span>
+                  <span class="ts-f-eq">+</span>
+                  <span class="ts-f-item ts-fi-a">Total Debt</span>
+                  <span class="ts-f-eq">−</span>
+                  <span class="ts-f-item ts-fi-g">Cash &amp; Equivalents</span>
+                </div>
+                <div class="ts-f-guide">
+                  <span style="color:var(--gbr);">Cash-rich companies: EV much lower than Market Cap ✅</span>
+                  <span style="color:var(--red);">Debt-heavy: EV much higher than Market Cap ⚠️</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">3</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">Spreadsheet</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab green">Calculate all 4 multiples for each peer</span>
+              </div>
+              <div class="ts-action">In your spreadsheet (or even on paper), calculate four multiples for each peer: <strong>P/E = Market Cap ÷ PAT</strong>, <strong>EV/EBITDA = EV ÷ Operating Profit</strong>, <strong>P/B = Market Cap ÷ Book Value</strong>, <strong>P/S = Market Cap ÷ Revenue</strong>. Skip P/E for any peer with negative PAT (use "N/A"). Highlight the highest and lowest value in each column — this shows you the range.</div>
+              <div class="ts-shortcut">
+                <div class="ts-sc-lbl">💡 Screener.in shortcut</div>
+                <div class="ts-sc-text">Screener.in already shows P/E and P/B ratios on the company overview page — no calculation needed for these two. You only need to manually calculate EV/EBITDA (since you need to add debt and subtract cash from market cap) and P/S (market cap ÷ revenue from P&amp;L). This saves 60% of the calculation time.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">4</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">Spreadsheet</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab amber">Find MEDIAN for each multiple column</span>
+              </div>
+              <div class="ts-action">Sort each column and find the middle value (median). For 7 peers sorted ascending by P/E: values are 20, 24, 28, 30, 35, 42, 55 — the median is the 4th value = <strong>30×</strong>. The median is more reliable than the average (which would be 33.4×, pulled up by the 55× outlier). If you have a clear outlier (a company 2× above all others), note it separately and recalculate the median without it — present both.</div>
+              <div class="ts-outcomes">
+                <div class="ts-out ts-out-g">✅ Use MEDIAN() function in Excel/Google Sheets on your peer multiple column — faster than manual sorting. Present both median and mean; note if they differ significantly.</div>
+                <div class="ts-out ts-out-r">🚨 Never use a single peer's multiple as the "benchmark." One data point is not a comps analysis — it's a cherry-pick. Always have at least 5 peers.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trick-step" style="padding-bottom:0;">
+            <div class="ts-num" style="background:linear-gradient(135deg,#e11d48,#f43f5e);">5</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">Final calculation</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab red">Apply median multiple to target → fair value range</span>
+              </div>
+              <div class="ts-action">Apply each median multiple to the target company's financials: <strong>P/E implied price = Median P/E × Target EPS</strong>. <strong>EV/EBITDA implied market cap = (Median EV/EBITDA × Target EBITDA) − Target Net Debt</strong> → divide by shares for per-share value. Take the range from all four methods. If the target is trading outside this range — significantly below suggests undervaluation worth investigating; significantly above suggests premium or overvaluation.</div>
+              <div class="ts-outcomes">
+                <div class="ts-out ts-out-g">✅ Trading at 20% discount to comps median = worth deeper dive. Read the annual report; check if the discount is justified by a specific risk or if it's a market inefficiency.</div>
+                <div class="ts-out ts-out-r">🚨 Trading at 50% premium to comps median = extremely high bar. Requires exceptional growth or quality to justify. Check if the business deserves to be in this comps set at all — maybe it's genuinely better.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- BONUS TRICKS -->
+        <div class="trick-bonus">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <span style="font-size:22px;">⚡</span>
+            <span style="font-size:clamp(13px,1.8vw,16px);font-weight:800;color:var(--tx);">4 Advanced Comps Tricks — Each Saves You From Common Errors</span>
+          </div>
+          <div class="bonus-grid">
+            <div class="bonus-card bc-p">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--p),var(--ph));">A</div>
+              <div class="bonus-title">The "PEG-Adjusted Comps" Method</div>
+              <div class="bonus-desc">When peers have very different growth rates, raw P/E comps are misleading. Use PEG (P/E ÷ EPS CAGR). If Peer A trades at 40× P/E with 30% EPS CAGR (PEG 1.33) and Peer B trades at 25× P/E with 10% EPS CAGR (PEG 2.5) — Peer A is actually cheaper on a growth-adjusted basis. Find the median PEG across peers, then multiply by the target's EPS CAGR to get a growth-fair P/E. This adjusts for the most common peer set bias.</div>
+            </div>
+            <div class="bonus-card bc-s">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">B</div>
+              <div class="bonus-title">The "Football Field" Chart</div>
+              <div class="bonus-desc">Present your comps as a "football field" — a horizontal bar chart with the valuation range from each method shown as a bar. P/E method: ₹900–₹1,200. EV/EBITDA: ₹850–₹1,150. P/B: ₹800–₹1,050. The overlap of all bars is your "conviction zone" — the price range where all methods agree. This is the most defensible target price range. In Excel or Google Sheets, this is a simple Gantt chart with min/max values.</div>
+            </div>
+            <div class="bonus-card bc-a">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">C</div>
+              <div class="bonus-title">Forward vs Trailing Multiples</div>
+              <div class="bonus-desc">Trailing P/E uses last year's actual PAT. Forward P/E uses next year's estimated PAT. Professional analysts use forward multiples because markets price future earnings. If a company is expected to grow 40% next year, the forward P/E is much lower than trailing. On Screener.in, use the current year financials as "trailing" and estimate forward by applying the 3-year average growth rate. Always state clearly whether your comps are trailing or forward — they are NOT interchangeable.</div>
+            </div>
+            <div class="bonus-card bc-g">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">D</div>
+              <div class="bonus-title">The "Sector Screen" on Screener.in</div>
+              <div class="bonus-desc">Screener.in allows you to build custom screens with P/E, P/B, EV/EBITDA filters for an entire sector. Go to Screener → Screens → Create New Screen → filter by Sector + Market Cap range + positive PAT (excludes loss-makers automatically). Export to Excel. You now have all peers' multiples in one download — the fastest way to build the data foundation for a comps table. Filter out non-comparable names manually.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FLOWCHART -->
+        <div class="flow-wrap">
+          <div class="flow-label">🔀 Comps Quality Decision Flowchart — 4 Questions · 60 Seconds</div>
+          <div class="flow-chain">
+            <div class="flow-node fn-q"><div class="fn-qlbl">Q1</div><div class="fn-txt">Are all peers in the same sub-sector with similar business models and within 3× market cap?</div></div>
+            <div class="flow-branch">
+              <div class="fb-yes">
+                <span class="fb-lbl">YES ✅</span>
+                <div class="flow-node fn-q"><div class="fn-qlbl">Q2</div><div class="fn-txt">Have you excluded loss-making peers from P/E and used EV/EBITDA as the primary metric?</div></div>
+                <div class="flow-branch">
+                  <div class="fb-yes">
+                    <span class="fb-lbl">YES ✅</span>
+                    <div class="flow-node fn-q"><div class="fn-qlbl">Q3</div><div class="fn-txt">Does the target's EBITDA margin fall within ±8 percentage points of the peer median margin?</div></div>
+                    <div class="flow-branch">
+                      <div class="fb-yes">
+                        <span class="fb-lbl">YES ✅</span>
+                        <div class="flow-node fn-q"><div class="fn-qlbl">Q4</div><div class="fn-txt">Is the target trading at or below the peer median multiple on both P/E and EV/EBITDA?</div></div>
+                        <div class="flow-branch">
+                          <div class="fb-yes">
+                            <span class="fb-lbl">YES ✅</span>
+                            <div class="flow-node fn-g">✅ STRONG COMPS SIGNAL — Target appears undervalued relative to peers. Investigate WHY the discount exists. If no structural reason → potential investment opportunity. Read annual report before acting.</div>
+                          </div>
+                          <div class="fb-no">
+                            <span class="fb-lbl">NO ⚠️</span>
+                            <div class="flow-node fn-a">⚠️ TARGET IS PREMIUM-PRICED — Either the market sees something the comps miss (better growth/quality) or it is genuinely overvalued. Check if growth rate justifies the premium using PEG ratio.</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="fb-no">
+                        <span class="fb-lbl">NO ⚠️</span>
+                        <div class="flow-node fn-a">⚠️ MARGIN MISMATCH — Apply a margin-premium or discount to the median multiple. High-margin target deserves premium; low-margin target deserves discount. Don't apply raw median directly.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="fb-no">
+                    <span class="fb-lbl">NO 🚨</span>
+                    <div class="flow-node fn-r">❌ METHODOLOGY ERROR — Fix the peer set first. Remove loss-makers from P/E table, use EV/EBITDA, recalculate medians. The comps table is unreliable until corrected.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="fb-no">
+                <span class="fb-lbl">NO 🚨</span>
+                <div class="flow-node fn-r">❌ PEER SELECTION FAILURE — Rebuild the peer set. Wrong peers → wrong multiples → wrong conclusion. Start over at Step 1 with stricter sector and size filters on Screener.in.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 GLOSSARY -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">08 — Reference Glossary</div>
+    <h2 class="h2 rv d2">Comps &amp; Multiples <span class="hp">Glossary</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Every term used in comparable company analysis — plain language, precise definitions, and when to use each.</p>
+    <div class="glos-wrap rv d3">
+      <div class="table-scroll">
+        <table class="glos-table">
+          <thead><tr>
+            <th style="min-width:160px;">Term</th>
+            <th style="min-width:300px;">What It Means in Simple Words</th>
+            <th style="min-width:100px;text-align:center;">When to Use</th>
+          </tr></thead>
+          <tbody>
+            <tr><td class="gt-term">Trading Comps</td><td class="gt-desc">Valuation method using multiples from publicly traded comparable companies. The most common form of relative valuation. Works best for companies with many listed peers in the same sector. Faster and more market-grounded than DCF, but only as reliable as the peer selection and current market conditions (avoids "garbage in, garbage out").</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-p">Primary method</span></td></tr>
+            <tr><td class="gt-term">Enterprise Value (EV)</td><td class="gt-desc">EV = Market Cap + Total Debt − Cash. Represents the total value of the business to all capital providers (equity + debt holders). Capital-structure neutral — allows comparison between companies with different debt levels. Used in EV/EBITDA and EV/Sales multiples. On Screener.in, EV is shown directly on company pages.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-s">EV/EBITDA</span></td></tr>
+            <tr><td class="gt-term">P/E Ratio</td><td class="gt-desc">Price-to-Earnings = Market Cap ÷ PAT. The most widely used valuation multiple. Represents how many times earnings investors are paying. Use trailing P/E for stable, mature businesses; forward P/E for growth companies. Only valid for profitable companies — undefined for loss-makers. Distorted by one-time exceptional items.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Profitable cos</span></td></tr>
+            <tr><td class="gt-term">EV/EBITDA</td><td class="gt-desc">Enterprise Value divided by EBITDA (Operating Profit). Capital-structure neutral — not affected by debt levels. Preferred for capital-intensive sectors (cement, steel, telecom) and M&amp;A valuation. More stable than P/E because EBITDA excludes interest, tax, and depreciation. Range varies dramatically by sector: FMCG 35–55×, IT 15–25×, Steel 6–10×.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Capital intensive</span></td></tr>
+            <tr><td class="gt-term">P/B Ratio</td><td class="gt-desc">Price-to-Book = Market Cap ÷ Book Value of Equity. Asset-based multiple. Preferred for banks and financial companies where book value (loan book, deposits) is the core of the business. A bank with 18% ROE deserves a higher P/B than one with 10% ROE. The P/B-ROE regression is the standard peer analysis framework for banks in India.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-s">Banks &amp; NBFC</span></td></tr>
+            <tr><td class="gt-term">P/S Ratio</td><td class="gt-desc">Price-to-Sales = Market Cap ÷ Revenue. Revenue-based multiple — only valid comparison when peers have similar margin profiles. Use when companies are loss-making (EPS undefined) or when revenue is the most stable metric. SaaS and early-stage tech companies often valued on P/S multiples. Lower P/S with same growth = more attractive.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-a">Loss-making</span></td></tr>
+            <tr><td class="gt-term">Median Multiple</td><td class="gt-desc">The middle value when all peer multiples are sorted from lowest to highest. Preferred over the mean because it is not distorted by one extreme outlier. If you have 7 peers and one has a P/E of 200× (due to a one-time low earning year), the median ignores this outlier while the mean would be dramatically inflated. Always use median in comps.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Always use this</span></td></tr>
+            <tr><td class="gt-term">Conglomerate Discount</td><td class="gt-desc">The tendency for diversified companies (conglomerates) to trade at a lower multiple than the sum of their individual business segments valued separately. Investors apply this discount because conglomerates are harder to analyse, capital allocation decisions are opaque, and investors can't easily exit one subsidiary without the whole. Use SOTP valuation for conglomerates — not comps.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-r">Avoid in comps</span></td></tr>
+            <tr><td class="gt-term">SOTP Valuation</td><td class="gt-desc">Sum-of-the-Parts = separate valuation of each business segment using appropriate comps for that segment, then adding them together. Used for conglomerates (Reliance: Jio + Retail + O2C + Upstream), holding companies (Tata Sons), or companies with clearly distinct business divisions. More complex than comps but more accurate for diversified businesses.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-p">Conglomerates</span></td></tr>
+            <tr><td class="gt-term">Football Field Chart</td><td class="gt-desc">Visual representation of valuation showing a horizontal bar for each valuation method (comps P/E, comps EV/EBITDA, DCF, P/B) with the range from low to high case. The overlap zone where all methods agree is the "conviction zone." Standard output format in investment banking pitch books and equity research — shows the range and convergence of multiple methods.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-s">Presentation</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT CHAPTER -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next · Module 09</div>
+    <div class="nxt-sub">DCF Valuation — Discounting Future Cash Flows to Present Value →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">&#8594;</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">&#9888;&#65039;</div>
+    <div><div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+    <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">This page is for educational purposes only. All company names (Mphasis, Persistent Systems, Coforge, LTIMindtree, KPIT, Tata Elxsi, Hexaware, HDFC Bank, Cipla, Asian Paints, Pidilite, and others) are used for illustrative educational purposes only. All financial figures shown in comps tables are approximate and illustrative — verify all numbers from official annual reports and Screener.in before any investment decision. The hypothetical target company and its valuation range are entirely fictional. Comps analysis is a relative valuation method and does not constitute a recommendation to buy or sell any security. All equity investments carry market risk. Past valuations do not guarantee future returns. This content does not constitute investment advice. Consult a SEBI-registered investment advisor before making investment decisions.</div></div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  'use strict';
+  var passOpts={passive:true};
+
+  /* ── Scroll reveal: IntersectionObserver + fallback ── */
+  var revEls=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var revIO=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('on');revIO.unobserve(e.target);}
+      });
+    },{threshold:.05,rootMargin:'0px 0px -28px 0px'});
+    revEls.forEach(function(el){revIO.observe(el);});
+  } else {
+    revEls.forEach(function(el){el.classList.add('on');});
+  }
+
+  /* ── Accessibility: skip animations ── */
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    revEls.forEach(function(el){el.classList.add('on');});
+  }
+
+  /* ── Passive touch: no scroll jank on iOS & Android ── */
+  document.addEventListener('touchstart',function(){},passOpts);
+  document.addEventListener('touchmove',function(){},passOpts);
+  document.addEventListener('touchend',function(){},passOpts);
+
+  /* ── Overscroll containment ── */
+  document.body.style.overscrollBehavior='none';
+
+  /* ── iOS 100vh fix (Safari viewport units bug) ── */
+  function setVH(){
+    document.documentElement.style.setProperty('--vh',window.innerHeight*0.01+'px');
+  }
+  setVH();
+  window.addEventListener('resize',setVH,passOpts);
+  window.addEventListener('orientationchange',function(){
+    setTimeout(setVH,150);
+    setTimeout(function(){
+      document.querySelectorAll('.rv:not(.on)').forEach(function(el){
+        var r=el.getBoundingClientRect();
+        if(r.top<window.innerHeight-20){el.classList.add('on');}
+      });
+    },320);
+  },passOpts);
+
+  /* ── Font repaint: gradient text on iOS after font load ── */
+  if(document.fonts&&document.fonts.ready){
+    document.fonts.ready.then(function(){
+      document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});
+    });
+  }
+
+  /* ── touch-action:manipulation on ALL interactive elements ──
+     Covers all module-specific components: process steps, peer criteria cards,
+     multiples cards, mchips, valuation bridge rows, comps table rows, bonus cards */
+  function applyTouchActions(){
+    var sel=[
+      'a','button','.dmbtn','.nxt-btn',
+      '.step-card','.pc-card','.mult-card',
+      '.kpill','.company-block','.bonus-card',
+      '.trick-wrap','.flow-node',
+      '.mchip','.ps-item','.vb-row',
+      '.ts-num','.bonus-badge','.pc-badge',
+      '.comps-table tr'
+    ].join(',');
+    document.querySelectorAll(sel).forEach(function(el){
+      el.style.touchAction='manipulation';
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',applyTouchActions);
+  } else {
+    applyTouchActions();
+  }
+
+  /* ── Android: momentum scrolling on all scroll containers ── */
+  document.querySelectorAll('.table-scroll,.glos-wrap').forEach(function(el){
+    el.style.webkitOverflowScrolling='touch';
+  });
+
+  /* ── Visibility change: re-reveal when tab becomes active ── */
+  document.addEventListener('visibilitychange',function(){
+    if(!document.hidden){
+      document.querySelectorAll('.rv:not(.on)').forEach(function(el){
+        var r=el.getBoundingClientRect();
+        if(r.top<window.innerHeight){el.classList.add('on');}
+      });
+    }
+  });
+
+  /* ── iOS: prevent double-tap zoom on anchor links ── */
+  document.querySelectorAll('a[href="#"]').forEach(function(a){
+    a.addEventListener('touchend',function(e){e.preventDefault();},passOpts);
+  });
+
+  /* ── Mult cards: colour-tinted press feedback on touch ── */
+  if(window.matchMedia('(hover:none) and (pointer:coarse)').matches){
+    var multMap=[
+      {cls:'mc-pe',bg:'rgba(109,40,217,.06)'},
+      {cls:'mc-ev',bg:'rgba(2,132,199,.06)'},
+      {cls:'mc-pb',bg:'rgba(22,163,74,.08)'},
+      {cls:'mc-ps',bg:'rgba(217,119,6,.07)'},
+    ];
+    multMap.forEach(function(m){
+      document.querySelectorAll('.'+m.cls).forEach(function(card){
+        card.addEventListener('touchstart',function(){
+          this.style.background=m.bg;
+          this.style.transition='background .08s';
+        },passOpts);
+        card.addEventListener('touchend',function(){
+          var self=this;
+          setTimeout(function(){self.style.background='';},200);
+        },passOpts);
+      });
+    });
+
+    /* Peer criteria cards: tinted press */
+    document.querySelectorAll('.pc-card').forEach(function(card){
+      card.addEventListener('touchstart',function(){
+        this.style.background='rgba(109,40,217,.03)';
+        this.style.transition='background .08s';
+      },passOpts);
+      card.addEventListener('touchend',function(){
+        var self=this;
+        setTimeout(function(){self.style.background='';},200);
+      },passOpts);
+    });
+  }
+
+})();
+</script>
+</body>
+</html>

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { brokerHref } from '../data/brokers'
 
 const brokers = [
   { name: 'Zerodha', type: 'Discount', av: { bg: 'linear-gradient(135deg,#dcfce7,#bbf7d0)', color: '#166534', text: 'Z' }, open: '₹200', delivery: 'FREE', intraday: '₹20/order', amc: '₹300/yr', rating: 4.8, reviews: '12.4K', best: true, badges: ['best', 'low-fee'], founded: 2010, app: 'Kite', pros: ['Zero delivery brokerage', 'Best-in-class Kite platform', 'Largest active client base', 'Coin for direct MF'] },
@@ -100,7 +99,7 @@ export function BrokersPage() {
                     </div>
                   ))}
                 </div>
-                <a href={brokerHref(b.name)} className="broker-open-btn" style={{ display: 'block', textAlign: 'center', textDecoration: 'none' }}>View Full Review →</a>
+                <button className="broker-open-btn">Open Account Free →</button>
               </div>
             ))}
           </div>
@@ -147,7 +146,7 @@ export function BrokersPage() {
                     <td>{b.amc}</td>
                     <td style={{ fontSize: '12px' }}>{b.app}</td>
                     <td><div className="stars">{'★'.repeat(Math.floor(b.rating))}</div><div style={{ fontSize: '11px', color: 'var(--ink4)' }}>{b.rating}/5</div></td>
-                    <td><a href={brokerHref(b.name)} className="open-btn">Review →</a></td>
+                    <td><a href="#" className="open-btn">Open →</a></td>
                   </tr>
                 ))}
               </tbody>

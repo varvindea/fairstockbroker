@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Banking NBFC Analysis">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Banking &amp; NBFC Analysis – NIM, GNPA, PCR, CASA, Tier 1 Capital · Sector-Specific Advanced Analysis · FA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* ── LAYOUT ── */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(26px,6.5vw,82px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:14px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(12px,2.8vw,36px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:1000px;}
+.hsi{padding:clamp(10px,1.8vw,18px) clamp(8px,1.8vw,14px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:80px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(9px,1.2vw,13px);font-weight:900;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.r{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(7px,.8vw,9px);font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+
+/* KLO */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.09);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+
+/* METRIC CARDS GRID */
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,20px);margin-bottom:36px;}
+.metric-card{border-radius:18px;padding:clamp(16px,2.5vw,26px);border:1.5px solid;transition:transform .2s,box-shadow .2s;}
+.metric-card:hover{transform:translateY(-3px);box-shadow:var(--shp);}
+.mc-p{border-color:rgba(109,40,217,.22);background:linear-gradient(158deg,var(--pxs),#fdfcff);}
+.mc-g{border-color:rgba(22,163,74,.22);background:linear-gradient(158deg,var(--gpale),#f9fff9);}
+.mc-r{border-color:rgba(220,38,38,.2);background:linear-gradient(158deg,var(--rpale),#fff8f8);}
+.mc-a{border-color:rgba(217,119,6,.2);background:linear-gradient(158deg,var(--apale),#fffcf0);}
+.mc-sky{border-color:rgba(2,132,199,.2);background:linear-gradient(158deg,var(--skypale),#fafeff);}
+.mc-ico{font-size:clamp(28px,3.5vw,38px);margin-bottom:10px;animation:floatB 4s ease-in-out infinite;}
+.mc-abbr{font-size:clamp(22px,3vw,32px);font-weight:900;letter-spacing:-1px;margin-bottom:6px;line-height:1;}
+.mc-full{font-size:clamp(11px,1.3vw,13px);font-weight:700;color:var(--ts);margin-bottom:8px;}
+.mc-badge{display:inline-flex;padding:3px 10px;border-radius:7px;font-size:10px;font-weight:800;margin-bottom:10px;}
+.cbp{background:rgba(109,40,217,.1);color:var(--p);}
+.cbg{background:rgba(22,163,74,.1);color:var(--gbr);}
+.cbr{background:rgba(220,38,38,.1);color:var(--red);}
+.cba{background:rgba(217,119,6,.1);color:var(--ambr);}
+.cbsky{background:rgba(2,132,199,.1);color:var(--sky);}
+.mc-body{font-size:clamp(12px,1.3vw,13.5px);color:var(--ts);line-height:1.62;}
+.mc-threshold{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px;}
+.mt-good{background:rgba(22,163,74,.08);border:1px solid rgba(22,163,74,.18);border-radius:8px;padding:6px 10px;text-align:center;}
+.mt-bad{background:rgba(220,38,38,.07);border:1px solid rgba(220,38,38,.16);border-radius:8px;padding:6px 10px;text-align:center;}
+.mt-val{font-size:13px;font-weight:900;display:block;line-height:1.2;}
+.mt-lbl{font-size:9px;font-weight:700;display:block;margin-top:2px;letter-spacing:.5px;}
+
+/* SCREENER P&L MOCK */
+.screener-mock{background:var(--wh);border:2px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);margin-bottom:36px;}
+.sm-bar{background:linear-gradient(135deg,#f0f0f0,#e8e8e8);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bd);}
+.sm-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.sm-url{flex:1;background:var(--wh);border:1px solid var(--bd);border-radius:8px;padding:5px 12px;font-size:10.5px;color:var(--tl);font-family:'DM Sans',sans-serif;}
+.sm-body{padding:clamp(14px,2.5vw,22px);}
+.sm-hr{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--bd);flex-wrap:wrap;}
+.sm-tabs{display:flex;gap:2px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px;}
+.sm-tab{padding:6px 14px;border-radius:8px;font-size:11px;font-weight:700;white-space:nowrap;border:1px solid var(--bd);}
+.sm-tab.active{background:var(--p);color:#fff;border-color:var(--p);}
+.sm-tab:not(.active){background:var(--sf);color:var(--ts);}
+/* P&L TABLE */
+.pnl-table{width:100%;border-collapse:collapse;font-size:clamp(10.5px,1.2vw,12.5px);}
+.pnl-table thead th{background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:8px 12px;font-size:9.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:right;}
+.pnl-table thead th:first-child{text-align:left;}
+.pnl-table td{padding:7px 12px;border-bottom:1px solid rgba(109,40,217,.05);color:var(--ts);font-variant-numeric:tabular-nums;text-align:right;}
+.pnl-table td:first-child{text-align:left;font-weight:600;color:var(--tx);}
+.pnl-table tr.sec-row td{background:rgba(109,40,217,.03);font-weight:700;color:var(--tx);}
+.pnl-table tr.highlight-g td{background:rgba(22,163,74,.04);}
+.pnl-table tr.highlight-r td{background:rgba(220,38,38,.04);}
+.pnl-table tr.total-row td{font-weight:900;color:var(--tx);border-top:1.5px solid var(--bd);border-bottom:1.5px solid var(--bd);}
+.pnl-table .pos{color:var(--gbr);font-weight:700;}
+.pnl-table .neg{color:var(--red);font-weight:700;}
+.pnl-table .label-pill{display:inline-flex;padding:1px 7px;border-radius:4px;font-size:8.5px;font-weight:800;margin-left:5px;vertical-align:middle;}
+.pill-g{background:rgba(22,163,74,.12);color:var(--gbr);}
+.pill-r{background:rgba(220,38,38,.1);color:var(--red);}
+.pill-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.pnl-note{font-size:10px;color:var(--tl);margin-top:10px;line-height:1.5;font-style:italic;border-top:1px solid var(--bd);padding-top:8px;}
+.sm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,12px);margin-bottom:14px;}
+.sm-m{background:var(--sf);border-radius:10px;padding:10px 12px;border:1px solid var(--bd);}
+.smm-l{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--tl);margin-bottom:4px;}
+.smm-v{font-size:clamp(13px,1.8vw,16px);font-weight:900;color:var(--tx);}
+.smm-s{font-size:9px;color:var(--tl);margin-top:2px;}
+.sm-alerts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.sma{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;}
+.sma-g{background:var(--gpale);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.sma-r{background:var(--rpale);color:var(--red);border:1px solid rgba(220,38,38,.2);}
+.sma-a{background:var(--apale);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+
+/* EXAMPLE BLOCKS */
+.ex-block{border-radius:20px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);margin-bottom:clamp(22px,3.5vw,30px);}
+.eb-head{display:flex;align-items:center;justify-content:space-between;padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,24px);flex-wrap:wrap;gap:10px;}
+.ebh-g{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.ebh-r{background:linear-gradient(135deg,var(--rpale),#fff5f5);}
+.ebh-a{background:linear-gradient(135deg,var(--apale),#fffdf5);}
+.ebh-p{background:linear-gradient(135deg,var(--pxs),var(--pxl));}
+.eb-co{display:flex;align-items:center;gap:12px;}
+.eb-logo{width:46px;height:46px;min-width:46px;border-radius:11px;font-size:21px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.eb-name{font-size:clamp(13px,1.8vw,17px);font-weight:900;color:var(--tx);line-height:1.2;}
+.eb-sub{font-size:10.5px;color:var(--tl);margin-top:2px;}
+.eb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.ebb{padding:3px 9px;border-radius:100px;font-size:10px;font-weight:700;}
+.ebb-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.ebb-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.ebb-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.ebb-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.eb-body{padding:clamp(14px,2.5vw,22px) clamp(14px,2.5vw,24px);}
+.eb-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,14px);margin-bottom:14px;}
+.em-box{background:var(--sf);border-radius:12px;padding:clamp(9px,1.5vw,14px);border:1px solid var(--bd);}
+.em-l{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tl);margin-bottom:4px;}
+.em-v{font-size:clamp(13px,1.9vw,18px);font-weight:900;color:var(--tx);line-height:1.1;}
+.em-s{font-size:9px;color:var(--tl);margin-top:2px;}
+.eb-flags{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.erf{border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:5px;}
+.erf-good{background:rgba(22,163,74,.05);border-left:3px solid var(--gbr);}
+.erf-bad{background:rgba(220,38,38,.05);border-left:3px solid var(--red);}
+.erf-amb{background:rgba(217,119,6,.05);border-left:3px solid var(--amb);}
+.erf-row{display:flex;align-items:flex-start;gap:10px;}
+.erf-ico{font-size:14px;flex-shrink:0;margin-top:1px;}
+.erf-lbl{font-size:clamp(12px,1.35vw,13.5px);font-weight:800;color:var(--tx);line-height:1.4;}
+.erf-txt{padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;}
+.eb-insight{padding:10px 14px;font-size:11.5px;color:var(--ts);line-height:1.55;border-top:1px solid var(--bd);}
+.ei-g{background:rgba(22,163,74,.04);border-left:3px solid var(--gbr);}
+.ei-r{background:rgba(220,38,38,.04);border-left:3px solid var(--red);}
+.ei-a{background:rgba(217,119,6,.04);border-left:3px solid var(--amb);}
+.ei-p{background:rgba(109,40,217,.04);border-left:3px solid var(--p);}
+
+/* SECTION DIVIDER */
+.section-divider{display:flex;align-items:center;gap:16px;margin:clamp(28px,4vw,44px) 0;}
+.sd-line{flex:1;height:1px;background:var(--bd);}
+.sd-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tl);white-space:nowrap;}
+
+/* CAVEAT */
+.caveat-box{margin-top:32px;background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:16px;}
+.caveat-icon{width:44px;height:44px;min-width:44px;border-radius:13px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(109,40,217,.28);}
+.caveat-body{flex:1;min-width:0;}
+.caveat-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.caveat-title{font-size:clamp(13px,1.5vw,15px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.caveat-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+
+/* DEMAT */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* NEXT */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-banner::after{content:'';position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+
+/* ═══ RESPONSIVE — 11 BREAKPOINTS ═══ */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.metric-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){
+  .metric-grid{grid-template-columns:1fr 1fr;}
+  .eb-metrics{grid-template-columns:repeat(2,1fr);}
+  .sm-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .hst{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .metric-grid{grid-template-columns:1fr 1fr;}
+  .metric-card:hover{transform:none;}
+  .eb-head{flex-direction:column;align-items:flex-start;}
+  .eb-badges{margin-top:4px;}
+  .caveat-box{flex-direction:column;gap:12px;}
+  .caveat-icon{width:40px;height:40px;min-width:40px;font-size:20px;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;}
+  .dmfeats{gap:10px 20px;}
+  svg{overflow:visible;max-width:100%;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .mc-ico{animation:none;}
+}
+@media(max-width:640px){
+  .metric-grid{grid-template-columns:1fr;}
+  .eb-metrics{grid-template-columns:1fr 1fr;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+}
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.2px;}.hdesc{font-size:13px;}.hsub{font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .h2{letter-spacing:-1px;}.lead{font-size:13.5px;}
+  .metric-grid{grid-template-columns:1fr;}
+  .eb-metrics{grid-template-columns:1fr 1fr;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+}
+@media(max-width:360px){
+  .w{padding:26px 12px;}.hh1{font-size:clamp(22px,8.5vw,36px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:1px solid var(--bd) !important;}
+  .hsi:last-child{border-bottom:none !important;}
+  .kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}.nxt-btn{font-size:12px;padding:10px 14px;}
+}
+/* TOUCH */
+@media(hover:none) and (pointer:coarse){
+  .metric-card:hover,.ex-block:hover{transform:none !important;box-shadow:var(--shc) !important;}
+  .metric-card:active{transform:scale(.99);transition:transform .08s;}
+  .dmbtn:active{transform:scale(.97);}.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn,.metric-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,.mc-abbr{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.lead,.caveat-desc,.mc-body,.erf-txt,.eb-insight{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+}
+/* iOS */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.hsv,.hsv.g,.hsv.r,.h2 .hp,.h2 .hg{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn,.metric-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .sm-tabs{-webkit-overflow-scrolling:touch;}
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+}
+/* ANDROID HiDPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .metric-card,.ex-block,.caveat-box,.screener-mock{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .klo-icon{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}.klo-icon,.mc-ico{animation:none !important;}
+}
+/* PRINT */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}.rv{opacity:1;transform:none;}
+  body{color:#000;}.w{padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="vbadge">Sector-Specific Advanced Analysis · FA</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Banking &amp; NBFC Analysis · NIM · GNPA · PCR · CASA · Tier 1 Capital</div>
+  <h1 class="hh1">
+    <span class="line1">Banks Are</span>
+    <span class="line2">Different</span>
+    <span class="line3">The Complete Framework for Analysing Banks and NBFCs from Scratch</span>
+  </h1>
+  <div class="hsub">Net Interest Margin · GNPA · Net NPA · PCR · CASA · ROA · ROE · Tier 1 Capital · CAR · Cost-to-Income</div>
+  <p class="hdesc">You cannot apply standard company analysis to a bank. A bank's "inventory" is money, its "sales" are interest income, its "costs" are interest expenses and credit losses, and its balance sheet is 10–20× larger than its equity. This chapter gives you the exact framework — the metrics, the ratios, the thresholds, and the P&amp;L structure — to analyse any bank or NBFC from first principles.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv">NIM</div><div class="hsl">Profit Margin</div></div>
+    <div class="hsi"><div class="hsv r">GNPA</div><div class="hsl">Loan Quality</div></div>
+    <div class="hsi"><div class="hsv">PCR</div><div class="hsl">Buffer Cover</div></div>
+    <div class="hsi"><div class="hsv g">CASA</div><div class="hsl">Cheap Funding</div></div>
+    <div class="hsi"><div class="hsv">Tier 1</div><div class="hsl">Safety Capital</div></div>
+    <div class="hsi"><div class="hsv g">5 Good</div><div class="hsl">Strong Banks</div></div>
+    <div class="hsi"><div class="hsv r">5 Bad</div><div class="hsl">Stressed Banks</div></div>
+  </div>
+</section>
+
+
+<!-- ══ 01 — KLO ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Why <span class="hp">Bank Analysis</span> Needs a Completely Different Framework</h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">🏦</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">A bank borrows money from depositors at low rates and lends it to borrowers at higher rates. The difference is its "profit margin" — called the Net Interest Margin (NIM). But unlike a factory, a bank's biggest risk is not competition or raw material prices — it is whether its borrowers repay. Bad loans (NPAs) can wipe out years of profits in a single year. This is why bank analysis uses completely different metrics from regular company analysis.</div>
+        <div class="klo-desc">Think of a bank as a water tank system. CASA deposits (Current Account &amp; Savings Account) are cheap water flowing in at the bottom. Fixed Deposits are more expensive water. The bank pipes this water out as loans to earn interest. The difference between what it costs to bring water in and what it earns by piping it out is the Net Interest Margin.<br><br>Now imagine some pipes develop leaks — borrowers who stop repaying. These are NPAs (Non-Performing Assets). If the bank doesn't seal these leaks quickly (through provisions = money set aside as a buffer), the leaks grow larger. The Provision Coverage Ratio (PCR) tells you what percentage of bad loans the bank has already provisioned for. High PCR = well-prepared. Low PCR = exposed.<br><br>Finally, every bank must keep its own money (capital) as a safety cushion — so even if borrowers default, the bank can absorb the losses without failing. This cushion is measured as Tier 1 Capital / Capital Adequacy Ratio (CAR). The higher the Tier 1, the safer the bank. RBI requires a minimum 9% CAR; strong banks maintain 15–20%.<br><br>Master five numbers: <strong>NIM</strong> (profitability of lending), <strong>GNPA</strong> (gross bad loans as % of total loans), <strong>PCR</strong> (coverage against bad loans), <strong>CASA</strong> (quality of deposit franchise), and <strong>Tier 1 Capital</strong> (safety buffer). These five define whether a bank is a compounding machine or a time bomb.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-p">📊 NIM = lending profit margin</span>
+          <span class="kpill kpill-r">🚨 GNPA = bad loan %, lower = better</span>
+          <span class="kpill kpill-g">✅ PCR &gt;70% = well-provisioned</span>
+          <span class="kpill kpill-a">💰 CASA = cheap deposit franchise</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 02 — METRICS + INFOGRAPHIC ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — The Five Core Banking Metrics Explained</div>
+    <h2 class="h2 rv d2">Five Numbers That <span class="hp">Define Every Bank</span> — With Plain-Language Explanations</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Before reading a bank's P&amp;L, understand these five metrics. Every good bank has specific thresholds for each. Every stressed bank violates at least two of them — usually GNPA and PCR together.</p>
+
+    <!-- SVG INFOGRAPHIC — Bank as water system -->
+    <div class="rv d3" style="margin-bottom:36px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+      <svg style="width:100%;max-width:680px;margin:0 auto;animation:floatB 4.5s ease-in-out infinite;" viewBox="0 0 680 490" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="680" height="490" rx="20" fill="#f5f3ff"/>
+        <rect x="14" y="10" width="652" height="34" rx="11" fill="#6d28d9"/>
+        <text x="340" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="white">The Bank as a Water System — How Money Flows In, Out, and Leaks</text>
+
+        <!-- INFLOW — DEPOSITS (left) -->
+        <rect x="14" y="56" width="186" height="130" rx="12" fill="#15803d" opacity=".88"/>
+        <text x="107" y="80" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">💧 DEPOSITS (Funding)</text>
+        <rect x="26" y="88" width="162" height="22" rx="7" fill="rgba(255,255,255,.2)"/>
+        <text x="107" y="103" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="white">CASA: 0% (Current) / 3% (Savings)</text>
+        <rect x="26" y="116" width="162" height="22" rx="7" fill="rgba(255,255,255,.15)"/>
+        <text x="107" y="131" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#4ade80">Fixed Deposits: 6–7%</text>
+        <text x="107" y="154" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.8)">High CASA % = cheaper funding</text>
+        <text x="107" y="166" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#4ade80">= better NIM + competitive moat</text>
+
+        <!-- ARROW RIGHT from deposits to tank -->
+        <path d="M200 120 L248 120" stroke="#15803d" stroke-width="2.5" marker-end="url(#arrG)"/>
+        <defs>
+          <marker id="arrG" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#15803d"/></marker>
+          <marker id="arrP" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#6d28d9"/></marker>
+          <marker id="arrR" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#dc2626"/></marker>
+        </defs>
+
+        <!-- BANK TANK (centre) -->
+        <rect x="250" y="56" width="180" height="160" rx="14" fill="#4c1d95" opacity=".92"/>
+        <text x="340" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">🏦 BANK</text>
+        <!-- Water level inside -->
+        <rect x="258" y="130" width="164" height="78" rx="6" fill="#6d28d9" opacity=".5"/>
+        <text x="340" y="148" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#c4b5fd">Interest Earned on Loans</text>
+        <text x="340" y="162" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="white">10–12%</text>
+        <text x="340" y="176" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#c4b5fd">−</text>
+        <text x="340" y="191" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#c4b5fd">Cost of Funds: 5–6%</text>
+        <!-- NIM label -->
+        <rect x="268" y="92" width="144" height="28" rx="7" fill="rgba(255,255,255,.15)"/>
+        <text x="340" y="108" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#4ade80">NIM = 4–5% (difference)</text>
+
+        <!-- Banker character on top of tank -->
+        <circle cx="340" cy="48" r="14" fill="#ede9fe"/>
+        <circle cx="335" cy="43" r="2.5" fill="#4c1d95"/>
+        <circle cx="345" cy="43" r="2.5" fill="#4c1d95"/>
+        <path d="M336 52 Q340 56 344 52" stroke="#4c1d95" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <!-- briefcase -->
+        <rect x="350" y="42" width="11" height="9" rx="2" fill="#4c1d95"/>
+        <path d="M351 42 Q351 39 355 39 Q359 39 359 42" stroke="#4c1d95" stroke-width="1.5" fill="none"/>
+
+        <!-- ARROW RIGHT to loans -->
+        <path d="M430 120 L478 120" stroke="#6d28d9" stroke-width="2.5" marker-end="url(#arrP)"/>
+
+        <!-- OUTFLOW — LOANS (right) -->
+        <rect x="480" y="56" width="186" height="130" rx="12" fill="#6d28d9" opacity=".88"/>
+        <text x="573" y="80" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">💼 LOANS (AUM)</text>
+        <rect x="492" y="88" width="162" height="20" rx="6" fill="rgba(255,255,255,.2)"/>
+        <text x="573" y="102" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="white">Home Loans: 8.5%</text>
+        <rect x="492" y="114" width="162" height="20" rx="6" fill="rgba(255,255,255,.15)"/>
+        <text x="573" y="128" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="white">Business Loans: 11–14%</text>
+        <rect x="492" y="140" width="162" height="20" rx="6" fill="rgba(255,255,255,.15)"/>
+        <text x="573" y="154" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#fde68a">MSME / Retail: 15–18%</text>
+        <text x="573" y="174" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.75)">Higher yield = higher NIM</text>
+        <text x="573" y="186" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#fca5a5">But higher risk of default</text>
+
+        <!-- NPA LEAK — downward from tank -->
+        <path d="M340 216 L340 260" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="6,3" marker-end="url(#arrR)"/>
+        <text x="356" y="244" font-family="DM Sans,sans-serif" font-size="8.5" fill="#dc2626" font-weight="700">NPAs = leaks</text>
+
+        <!-- NPA / PROVISION BOX (centre bottom) -->
+        <rect x="180" y="262" width="320" height="106" rx="13" fill="#dc2626" opacity=".88"/>
+        <text x="340" y="284" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">🚨 NPAs — The Bad Loans That Drain Profit</text>
+        <rect x="192" y="292" width="136" height="20" rx="6" fill="rgba(255,255,255,.18)"/>
+        <text x="260" y="306" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="white">GNPA % of Total Loans</text>
+        <rect x="352" y="292" width="136" height="20" rx="6" fill="rgba(255,255,255,.18)"/>
+        <text x="420" y="306" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#fde68a">PCR: Buffer Set Aside</text>
+        <text x="260" y="330" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.8)">Below 2% = healthy</text>
+        <text x="260" y="343" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#fca5a5">Above 5% = distressed</text>
+        <text x="420" y="330" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.8)">Above 70% = well covered</text>
+        <text x="420" y="343" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#fca5a5">Below 50% = exposed</text>
+        <line x1="340" y1="292" x2="340" y2="368" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+        <text x="340" y="362" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(255,255,255,.55)">GNPA × (1 − PCR%) = Net NPA</text>
+
+        <!-- CAPITAL CUSHION (bottom) -->
+        <rect x="14" y="388" width="652" height="92" rx="13" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+        <text x="340" y="410" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="#4c1d95">🛡️ Tier 1 Capital — The Safety Cushion That Absorbs Losses So Depositors Don't</text>
+        <rect x="26" y="418" width="186" height="50" rx="9" fill="#f5f3ff" stroke="#e5e1fb" stroke-width="1.2"/>
+        <text x="119" y="437" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#4c1d95">Tier 1 Capital Ratio</text>
+        <text x="119" y="451" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Own equity as % of risk-weighted</text>
+        <text x="119" y="463" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#15803d">Strong: above 15% · Min: 9%</text>
+        <rect x="226" y="418" width="210" height="50" rx="9" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
+        <text x="331" y="437" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#15803d">Return on Assets (ROA)</text>
+        <text x="331" y="451" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Profit generated per ₹100 of assets</text>
+        <text x="331" y="463" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#15803d">Strong: above 1.5% · Average: 1%</text>
+        <rect x="450" y="418" width="220" height="50" rx="9" fill="#fef2f2" stroke="#fecaca" stroke-width="1.2"/>
+        <text x="560" y="437" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#dc2626">Cost-to-Income Ratio</text>
+        <text x="560" y="451" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Operating costs as % of income</text>
+        <text x="560" y="463" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#dc2626">Below 40% = efficient · Above 60% = heavy</text>
+      </svg>
+      <p style="font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;max-width:580px;margin:0 auto;">The bank as a water system: CASA deposits flow in cheaply, Fixed Deposits cost more. Loans flow out at higher rates. NIM is the price difference kept as profit. NPAs are the leaks. PCR is the repair budget pre-set aside. Tier 1 Capital is the emergency fund if the leaks overwhelm the repair budget. A strong bank maximises NIM, minimises GNPA, maintains high PCR, grows CASA, and holds surplus Tier 1.</p>
+    </div>
+
+    <!-- FIVE METRIC CARDS -->
+    <div class="tag rv d4" style="margin-bottom:14px;">The Five Core Metrics — Explained for Non-Finance Readers</div>
+    <div class="metric-grid rv d4">
+      <!-- NIM -->
+      <div class="metric-card mc-p">
+        <div class="mc-ico">📈</div>
+        <div class="mc-abbr" style="background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">NIM</div>
+        <div class="mc-full">Net Interest Margin</div>
+        <div class="mc-badge cbp">Core Profitability</div>
+        <div class="mc-body">NIM is the most important measure of how profitably a bank lends. It equals: (Interest Earned on Loans − Interest Paid on Deposits) ÷ Average Earning Assets. Think of it as the bank's gross profit margin — the spread between what it charges borrowers and what it pays depositors.<br><br>A bank with high CASA (cheap deposits) automatically has a lower cost of funds → higher NIM. A bank lending to higher-risk segments (MSME, unsecured personal loans) charges higher rates → higher NIM, but more NPAs. The trade-off between NIM and asset quality is the central tension in bank analysis.</div>
+        <div class="mc-threshold">
+          <div class="mt-good"><span class="mt-val" style="color:var(--gbr);">3.5–5%</span><span class="mt-lbl" style="color:var(--gbr);">✅ Strong NIM</span></div>
+          <div class="mt-bad"><span class="mt-val" style="color:var(--red);">&lt;2.5%</span><span class="mt-lbl" style="color:var(--red);">🚨 Thin Margin</span></div>
+        </div>
+      </div>
+      <!-- GNPA -->
+      <div class="metric-card mc-r">
+        <div class="mc-ico">⚠️</div>
+        <div class="mc-abbr" style="background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">GNPA</div>
+        <div class="mc-full">Gross Non-Performing Asset Ratio</div>
+        <div class="mc-badge cbr">Loan Book Quality</div>
+        <div class="mc-body">GNPA % is the percentage of total loans where borrowers have stopped repaying for 90+ days. A loan becomes an NPA after three missed EMIs. GNPA measures the scale of the problem before any provisions are applied. This is the most important single metric for assessing a bank's asset quality.<br><br>Net NPA = GNPA minus provisions already set aside. A bank with GNPA 5% but PCR 80% has Net NPA of only 1% — genuinely well-covered. A bank with GNPA 5% and PCR 40% has Net NPA 3% — dangerously exposed. Always read GNPA and PCR together.</div>
+        <div class="mc-threshold">
+          <div class="mt-good"><span class="mt-val" style="color:var(--gbr);">&lt;2%</span><span class="mt-lbl" style="color:var(--gbr);">✅ Healthy Book</span></div>
+          <div class="mt-bad"><span class="mt-val" style="color:var(--red);">&gt;5%</span><span class="mt-lbl" style="color:var(--red);">🚨 Stressed Book</span></div>
+        </div>
+      </div>
+      <!-- PCR -->
+      <div class="metric-card mc-g">
+        <div class="mc-ico">🛡️</div>
+        <div class="mc-abbr" style="background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">PCR</div>
+        <div class="mc-full">Provision Coverage Ratio</div>
+        <div class="mc-badge cbg">Loss Preparedness</div>
+        <div class="mc-body">PCR measures how much of the Gross NPAs have already been provisioned (set aside as a buffer). PCR = Provisions Held ÷ Gross NPAs × 100. A PCR of 80% means for every ₹100 of bad loans, the bank has already set aside ₹80 as a buffer.<br><br>High PCR is a quality indicator — it shows management has been conservative and honest about losses. Banks with low PCR may have been under-provisioning — deferring recognition of losses and boosting short-term profitability at the cost of balance sheet honesty. RBI's minimum is 70% (technical write-offs included). Best-in-class banks maintain 80%+.</div>
+        <div class="mc-threshold">
+          <div class="mt-good"><span class="mt-val" style="color:var(--gbr);">&gt;75%</span><span class="mt-lbl" style="color:var(--gbr);">✅ Well Covered</span></div>
+          <div class="mt-bad"><span class="mt-val" style="color:var(--red);">&lt;50%</span><span class="mt-lbl" style="color:var(--red);">🚨 Exposed</span></div>
+        </div>
+      </div>
+      <!-- CASA -->
+      <div class="metric-card mc-a">
+        <div class="mc-ico">💰</div>
+        <div class="mc-abbr" style="background:linear-gradient(135deg,var(--ambr),var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">CASA</div>
+        <div class="mc-full">Current &amp; Savings Account Ratio</div>
+        <div class="mc-badge cba">Funding Quality</div>
+        <div class="mc-body">CASA % is the share of total deposits that sit in Current Accounts (0% interest — float money from businesses) and Savings Accounts (3–3.5% interest — retail deposits). These are the cheapest sources of funding for a bank. The higher the CASA %, the lower the overall cost of deposits.<br><br>CASA is also a franchise indicator. Customers maintain current and savings accounts with banks they trust and use daily. High CASA = large retail network + brand trust + sticky low-cost deposits. Banks with 40%+ CASA ratios have structural cost advantages that are very hard for competitors to replicate.</div>
+        <div class="mc-threshold">
+          <div class="mt-good"><span class="mt-val" style="color:var(--gbr);">&gt;40%</span><span class="mt-lbl" style="color:var(--gbr);">✅ Strong Franchise</span></div>
+          <div class="mt-bad"><span class="mt-val" style="color:var(--red);">&lt;25%</span><span class="mt-lbl" style="color:var(--red);">🚨 High Cost Base</span></div>
+        </div>
+      </div>
+      <!-- TIER 1 -->
+      <div class="metric-card mc-sky">
+        <div class="mc-ico">🏛️</div>
+        <div class="mc-abbr" style="background:linear-gradient(135deg,var(--sky),#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Tier 1</div>
+        <div class="mc-full">Tier 1 Capital / CAR</div>
+        <div class="mc-badge cbsky">Safety Cushion</div>
+        <div class="mc-body">Tier 1 Capital Ratio is the bank's own equity (and retained earnings) as a percentage of its risk-weighted assets. It measures how much loss a bank can absorb before depositors' money is at risk. Capital Adequacy Ratio (CAR) includes Tier 2 capital (subordinated debt, provisions).<br><br>RBI mandates minimum CAR of 9% (Tier 1 at 7%). Strong banks maintain 15–20%. The 2008 global financial crisis happened partly because many banks had thin capital ratios — losses wiped out equity quickly. High Tier 1 = bank can withstand NPA shocks without external capital infusion (dilution). Low Tier 1 = one NPA cycle away from distress.</div>
+        <div class="mc-threshold">
+          <div class="mt-good"><span class="mt-val" style="color:var(--gbr);">&gt;14%</span><span class="mt-lbl" style="color:var(--gbr);">✅ Well Capitalised</span></div>
+          <div class="mt-bad"><span class="mt-val" style="color:var(--red);">&lt;10%</span><span class="mt-lbl" style="color:var(--red);">🚨 Near Minimum</span></div>
+        </div>
+      </div>
+      <!-- ROA / ROE -->
+      <div class="metric-card mc-g">
+        <div class="mc-ico">💹</div>
+        <div class="mc-abbr" style="background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">ROA/ROE</div>
+        <div class="mc-full">Return on Assets / Equity</div>
+        <div class="mc-badge cbg">Profitability</div>
+        <div class="mc-body">ROA (Net Profit ÷ Average Total Assets) measures efficiency — how much profit a bank generates per rupee of assets managed. Banks are highly leveraged (assets 10–20× equity), so even 1.5% ROA translates to 15–20% ROE. ROA is the better comparator across banks because it removes leverage effects.<br><br>ROE (Net Profit ÷ Average Equity) reflects returns to shareholders. A bank with 20% ROE and 15% Tier 1 capital is genuinely creating value. A bank with 20% ROE but 8% Tier 1 is taking excessive risk to generate returns — leverage is doing the work, not quality.</div>
+        <div class="mc-threshold">
+          <div class="mt-good"><span class="mt-val" style="color:var(--gbr);">ROA&gt;1.5%</span><span class="mt-lbl" style="color:var(--gbr);">✅ Efficient</span></div>
+          <div class="mt-bad"><span class="mt-val" style="color:var(--red);">ROA&lt;0.5%</span><span class="mt-lbl" style="color:var(--red);">🚨 Struggling</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREENER P&L MOCK -->
+    <div class="tag rv d5" style="margin-bottom:12px;">Reading a Bank's P&amp;L on Screener.in — HDFC Bank Illustration</div>
+    <div class="screener-mock rv d5">
+      <div class="sm-bar">
+        <div class="sm-dot" style="background:#ef4444;"></div>
+        <div class="sm-dot" style="background:#f59e0b;"></div>
+        <div class="sm-dot" style="background:#22c55e;"></div>
+        <div class="sm-url">🔒 screener.in/company/HDFCBANK/consolidated/ → Profit &amp; Loss Statement</div>
+      </div>
+      <div class="sm-body">
+        <div class="sm-hr">
+          <div>
+            <div style="font-size:clamp(14px,2vw,18px);font-weight:900;color:var(--tx);">HDFC Bank — Bank P&amp;L Structure (₹ Crore, illustrative)</div>
+            <div style="font-size:11px;color:var(--tl);">NSE: HDFCBANK · Private Bank · NIM 3.7% · GNPA 1.24% · CASA 38% · Tier 1 ~17%</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <span style="font-size:16px;font-weight:900;color:var(--p);">₹1,812</span>
+            <span style="background:var(--gpale);color:var(--gbr);font-size:11px;font-weight:700;padding:4px 10px;border-radius:7px;">▲ +1.1%</span>
+          </div>
+        </div>
+        <div class="sm-tabs">
+          <div class="sm-tab">Overview</div>
+          <div class="sm-tab active">Profit &amp; Loss</div>
+          <div class="sm-tab">Balance Sheet</div>
+          <div class="sm-tab">Ratios</div>
+          <div class="sm-tab">Quarters</div>
+        </div>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:12px;">
+        <table class="pnl-table">
+          <thead>
+            <tr>
+              <th>Income / Expense Head</th>
+              <th>FY2023</th>
+              <th>FY2024</th>
+              <th>FY2025</th>
+              <th>YoY%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="sec-row"><td>INCOME</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr class="highlight-g">
+              <td>Interest Earned <span class="label-pill pill-g">Key Metric</span></td>
+              <td>1,88,402</td><td>2,35,184</td><td>2,72,561</td><td class="pos">+15.9%</td>
+            </tr>
+            <tr><td>Other Income (Fees, Trading)</td><td>29,843</td><td>36,422</td><td>42,106</td><td class="pos">+15.6%</td></tr>
+            <tr class="total-row"><td>Total Income</td><td>2,18,245</td><td>2,71,606</td><td>3,14,667</td><td class="pos">+15.9%</td></tr>
+            <tr class="sec-row"><td>EXPENSES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr class="highlight-r">
+              <td>Interest Expended <span class="label-pill pill-r">Cost of Funds</span></td>
+              <td>1,10,060</td><td>1,46,538</td><td>1,71,228</td><td class="neg">+16.9%</td>
+            </tr>
+            <tr class="highlight-a">
+              <td>Provisions &amp; Contingencies <span class="label-pill pill-a">PCR Impact</span></td>
+              <td>15,260</td><td>17,314</td><td>19,862</td><td class="neg">+14.7%</td>
+            </tr>
+            <tr><td>Operating Expenses</td><td>46,870</td><td>55,620</td><td>62,446</td><td class="neg">+12.3%</td></tr>
+            <tr><td>Other Expenses</td><td>8,424</td><td>9,115</td><td>10,208</td><td class="neg">+12.0%</td></tr>
+            <tr class="total-row"><td>Total Expenses</td><td>1,80,614</td><td>2,28,587</td><td>2,63,744</td><td class="neg">+15.4%</td></tr>
+            <tr class="sec-row"><td>PROFITABILITY</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr class="highlight-g">
+              <td>Net Interest Income (NII) <span class="label-pill pill-g">= Interest Earned − Expended</span></td>
+              <td>78,342</td><td>88,646</td><td>1,01,333</td><td class="pos">+14.3%</td>
+            </tr>
+            <tr class="highlight-g">
+              <td>Profit Before Tax</td>
+              <td>43,718</td><td>50,773</td><td>58,266</td><td class="pos">+14.8%</td>
+            </tr>
+            <tr class="highlight-g" style="background:rgba(22,163,74,.07);">
+              <td><strong>Net Profit (PAT)</strong></td>
+              <td><strong>32,843</strong></td><td><strong>37,441</strong></td><td><strong>43,052</strong></td><td class="pos"><strong>+15.0%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="pnl-note">📊 How to read a bank P&amp;L: (1) Net Interest Income = Interest Earned − Interest Expended — this is the core banking revenue. (2) Provisions = buffer set aside for bad loans. Rising provisions in line with loan growth = healthy conservatism. Provisions surging abnormally = NPA stress. (3) Operating Expenses ÷ Net Revenue = Cost-to-Income ratio. HDFC Bank ~40% = efficient. (4) Net Profit growth should roughly match NII growth — if NII grows fast but PAT grows slower, provisions are eating profit = asset quality concern.</div>
+        <div class="sm-grid" style="margin-top:14px;">
+          <div class="sm-m"><div class="smm-l">NIM</div><div class="smm-v" style="color:var(--gbr);">3.7%</div><div class="smm-s">✅ Strong spread</div></div>
+          <div class="sm-m"><div class="smm-l">GNPA</div><div class="smm-v" style="color:var(--gbr);">1.24%</div><div class="smm-s">✅ Healthy book</div></div>
+          <div class="sm-m"><div class="smm-l">CASA Ratio</div><div class="smm-v" style="color:var(--ambr);">38%</div><div class="smm-s">⚠️ Declining post-merger</div></div>
+          <div class="sm-m"><div class="smm-l">Tier 1 Capital</div><div class="smm-v" style="color:var(--gbr);">~17%</div><div class="smm-s">✅ Well capitalised</div></div>
+          <div class="sm-m"><div class="smm-l">ROA</div><div class="smm-v" style="color:var(--gbr);">1.8%</div><div class="smm-s">✅ Above benchmark</div></div>
+          <div class="sm-m"><div class="smm-l">PCR</div><div class="smm-v" style="color:var(--gbr);">&gt;70%</div><div class="smm-s">✅ Well provisioned</div></div>
+          <div class="sm-m"><div class="smm-l">Cost-to-Income</div><div class="smm-v" style="color:var(--gbr);">~40%</div><div class="smm-s">✅ Efficient</div></div>
+          <div class="sm-m"><div class="smm-l">Net NPA</div><div class="smm-v" style="color:var(--gbr);">0.33%</div><div class="smm-s">✅ Excellent coverage</div></div>
+        </div>
+        <div class="sm-alerts">
+          <div class="sma sma-g">✅ NII growing 14.3% YoY — core lending business healthy</div>
+          <div class="sma sma-a">⚠️ CASA declined post HDFC merger — watch cost of funds trend</div>
+          <div class="sma sma-g">✅ Provisions growing in line with loans — conservative and healthy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ DEMAT BANNER ══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Start Investing Today</div>
+    <div class="dmh">Invest in <span class="dmhs">Quality Banks</span> With Confidence</div>
+    <div class="dmsub">Before buying any bank or NBFC, check five numbers on Screener.in: NIM, GNPA%, PCR, CASA%, and Tier 1 Capital. A bank that scores well on all five is structurally sound. A bank that scores poorly on even two deserves deep investigation before investment.</div>
+    <div class="dmfeats">
+      <div class="dmf">NIM and ROA on Screener Ratios tab</div>
+      <div class="dmf">GNPA and PCR in quarterly investor presentations</div>
+      <div class="dmf">CASA and Tier 1 in annual report</div>
+      <div class="dmf">Start investing from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ══ GOOD EXAMPLES ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">03 — Five Banks &amp; NBFCs With Strong Fundamentals</div>
+    <h2 class="h2 rv d2">✅ <span class="hg">Good Examples</span> — What a Structurally Sound Bank Looks Like</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five institutions demonstrate what genuine banking quality looks like across the five core metrics — NIM, GNPA, PCR, CASA, and Tier 1 Capital. Each has a distinct business model, but all share disciplined credit culture, conservative provisioning, and strong franchise economics.</p>
+
+    <!-- GOOD 1: HDFC Bank -->
+    <div class="ex-block rv d3">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">🏦</div>
+          <div><div class="eb-name">HDFC Bank — India's Most Consistent Private Bank Across All Five Metrics</div><div class="eb-sub">NSE: HDFCBANK · Private Bank · 30 years of consistent NIM, GNPA, PCR, CASA and capital management · Post-merger integration ongoing</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ NIM 3.7%</span>
+          <span class="ebb ebb-g">✅ GNPA 1.24%</span>
+          <span class="ebb ebb-g">✅ PCR &gt;70%</span>
+          <span class="ebb ebb-a">⚠️ CASA 38% (post-merger)</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">NIM</div><div class="em-v" style="color:var(--gbr);">3.7%</div><div class="em-s">✅ Stable 5-year average</div></div>
+          <div class="em-box"><div class="em-l">GNPA</div><div class="em-v" style="color:var(--gbr);">1.24%</div><div class="em-s">✅ Industry-leading quality</div></div>
+          <div class="em-box"><div class="em-l">PCR</div><div class="em-v" style="color:var(--gbr);">&gt;70%</div><div class="em-s">✅ Well provisioned</div></div>
+          <div class="em-box"><div class="em-l">Tier 1 Capital</div><div class="em-v" style="color:var(--gbr);">~17%</div><div class="em-s">✅ Strong buffer</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">30 years of GNPA below 2% — through multiple credit cycles</div></div>
+            <div class="erf-txt">HDFC Bank maintained GNPA below 2% through the 2008 global financial crisis, the 2013 Indian NBFC stress, the 2016 demonetisation, and the 2020 COVID pandemic. This consistency across multiple economic shocks is the definitive proof of credit culture — it is not luck or timing. The bank's underwriting standards, collection infrastructure, and risk management have been tested repeatedly and held. GNPA below 1.5% for 25 of 30 years is a standard no other Indian private bank has matched.</div>
+          </div>
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">CASA ratio despite post-merger dilution — watching the recovery trajectory</div></div>
+            <div class="erf-txt">HDFC Bank's CASA ratio declined from ~46% to ~38% after the merger with HDFC Ltd (which had a different funding profile — primarily wholesale and fixed deposits). This is a genuine concern — but not a structural one. The bank's branch network (the largest in India at 9,000+ branches) and digital channels support gradual CASA recovery. Investors should track CASA trajectory quarterly: each 1% improvement in CASA saves approximately ₹600–700 crore in annual interest cost. The recovery pace is the key post-merger integration signal.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>Banking quality verdict:</strong> HDFC Bank is the reference standard for Indian private banking — consistent NIM, industry-leading GNPA, conservative PCR, strong Tier 1, and a franchise that has compounded for three decades. The post-merger CASA dilution is real but temporary. The underlying credit culture that produced 1.24% GNPA has not changed. Use HDFC Bank's five-metric scorecard as the benchmark against which to measure all other Indian private banks.</div>
+    </div>
+
+    <!-- GOOD 2: Bajaj Finance -->
+    <div class="ex-block rv d4">
+      <div class="eb-head ebh-p">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pmd));">💳</div>
+          <div><div class="eb-name">Bajaj Finance — India's Best-in-Class Consumer NBFC With Superior NIM and Collection Infrastructure</div><div class="eb-sub">NSE: BAJFINANCE · NBFC · NIM &gt;10% (consumer lending premium) · Gross Stage 3 &lt;1.1% · 91M+ customers · Zero CASA (not a bank)</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-p">✅ NIM &gt;10%</span>
+          <span class="ebb ebb-g">✅ Stage 3 &lt;1.1%</span>
+          <span class="ebb ebb-g">✅ Collection efficiency &gt;99%</span>
+          <span class="ebb ebb-p">No CASA — wholesale funded</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">NIM (Yield − Cost)</div><div class="em-v" style="color:var(--p);">&gt;10%</div><div class="em-s">Consumer lending premium</div></div>
+          <div class="em-box"><div class="em-l">Gross Stage 3 (NPA equiv)</div><div class="em-v" style="color:var(--gbr);">&lt;1.1%</div><div class="em-s">✅ Exceptional for consumer</div></div>
+          <div class="em-box"><div class="em-l">Collection Efficiency</div><div class="em-v" style="color:var(--gbr);">&gt;99%</div><div class="em-s">✅ Loans being repaid</div></div>
+          <div class="em-box"><div class="em-l">AUM Growth</div><div class="em-v" style="color:var(--p);">28% CAGR</div><div class="em-s">✅ Consistent 10-year growth</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">NIM above 10% with Stage 3 below 1.1% — the holy grail of consumer lending</div></div>
+            <div class="erf-txt">Consumer lending (personal loans, buy-now-pay-later, consumer durables) inherently carries higher NIM than corporate or home loans — because the borrower has fewer options and the bank/NBFC bears more unsecured risk. The typical trade-off: higher NIM comes with higher NPAs. Bajaj Finance has defied this trade-off by maintaining Stage 3 (equivalent to NPA under Ind AS 109) below 1.1% while generating NIM above 10%. This combination — only achieved through exceptional underwriting, analytics-driven credit scoring, and a 100,000+ collection agent network — is what justifies Bajaj Finance's premium valuation.</div>
+          </div>
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">91M+ customer relationships = data moat that improves credit quality over time</div></div>
+            <div class="erf-txt">Bajaj Finance has proprietary data on 91M+ customers — spending patterns, repayment history, EMI behaviour, product upgrade patterns. This dataset allows it to cross-sell confidently (a customer who repaid a consumer durable loan gets pre-approved for a personal loan at favourable rates) and to tighten underwriting for customer profiles that show early stress signals. No traditional bank has this consumer data density. The data moat is a structural driver of the low Stage 3 ratio — it's not just collection, it's prevention at the point of origination.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-p">✅ <strong>NBFC quality verdict:</strong> Bajaj Finance is the reference standard for consumer NBFC analysis. NIM above 10% + Stage 3 below 1.1% + collection efficiency above 99% + 28% AUM CAGR sustained for a decade — this combination has never been replicated at scale by any Indian consumer lender. Use these numbers as the benchmark when analysing other consumer-facing NBFCs — and understand that matching them requires years of customer data and infrastructure investment.</div>
+    </div>
+
+    <!-- GOOD 3: Kotak Mahindra Bank -->
+    <div class="ex-block rv d5">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">🏦</div>
+          <div><div class="eb-name">Kotak Mahindra Bank — Premium NIM, Conservative Credit Culture, Best-in-Class Provisioning</div><div class="eb-sub">NSE: KOTAKBANK · Private Bank · NIM 5%+ in peak cycle · GNPA &lt;1.5% consistently · Tier 1 ~22% · Uday Kotak's credit-first culture</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ NIM 5%+</span>
+          <span class="ebb ebb-g">✅ GNPA &lt;1.5%</span>
+          <span class="ebb ebb-g">✅ Tier 1 ~22%</span>
+          <span class="ebb ebb-g">✅ ROA &gt;2%</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">NIM</div><div class="em-v" style="color:var(--gbr);">5.0%+</div><div class="em-s">✅ Industry leading</div></div>
+          <div class="em-box"><div class="em-l">GNPA</div><div class="em-v" style="color:var(--gbr);">&lt;1.5%</div><div class="em-s">✅ Consistent quality</div></div>
+          <div class="em-box"><div class="em-l">Tier 1 Capital</div><div class="em-v" style="color:var(--gbr);">~22%</div><div class="em-s">✅ Highest among peers</div></div>
+          <div class="em-box"><div class="em-l">ROA</div><div class="em-v" style="color:var(--gbr);">&gt;2%</div><div class="em-s">✅ Top quartile</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">22% Tier 1 Capital — highest capital ratio among large Indian banks</div></div>
+            <div class="erf-txt">Kotak Mahindra Bank consistently maintains Tier 1 capital above 20% — nearly double the RBI minimum. This is partly a management philosophy (Uday Kotak's well-documented capital conservatism) and partly strategic — it allows the bank to grow loans aggressively when opportunities arise without needing equity dilution. In the 2020 COVID NPA cycle, Kotak's excess capital buffer allowed it to provision aggressively without impacting Tier 1 meaningfully. High capital = operational freedom. Competitors with thin Tier 1 had to slow loan growth at exactly the moment when opportunities were greatest.</div>
+          </div>
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">NIM above 5% with GNPA below 1.5% — superior risk-adjusted spread management</div></div>
+            <div class="erf-txt">Kotak's NIM above 5% is achieved through a mix of retail banking, merchant banking, and selective corporate lending — not through excessive exposure to high-risk segments. Unlike some peers who boost NIM by lending to high-risk microfinance or subprime segments, Kotak's NIM quality comes from strong CASA (low funding cost) and selective high-yield retail products with disciplined underwriting. The NIM-GNPA combination is the best risk-adjusted lending spread among large Indian private banks.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>Banking quality verdict:</strong> Kotak's highest Tier 1 + consistently low GNPA + NIM above 5% + ROA above 2% creates a compounding machine. The bank uses its capital buffer to take advantage of stress cycles when peers are capital-constrained. This "patient capital, opportunistic lending" strategy has generated superior long-term returns. Kotak's benchmark: ROA&gt;2%, Tier 1&gt;20%, GNPA&lt;1.5%.</div>
+    </div>
+
+    <!-- GOOD 4: SBI — PSU done right -->
+    <div class="ex-block rv d6">
+      <div class="eb-head ebh-p">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🇮🇳</div>
+          <div><div class="eb-name">State Bank of India — PSU Bank Transformed: GNPA From 10% to Under 2% in 5 Years</div><div class="eb-sub">NSE: SBIN · Public Sector Bank · GNPA fell from 10.91% (FY18) to 2.0% (FY25) · Record PAT ₹61,077 Cr · CASA &gt;40% · Tier 1 ~13%</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ GNPA turned around</span>
+          <span class="ebb ebb-g">✅ CASA &gt;40%</span>
+          <span class="ebb ebb-g">✅ Record profits FY24–25</span>
+          <span class="ebb ebb-a">⚠️ Tier 1 &lt;15% vs private peers</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">GNPA FY18 vs FY25</div><div class="em-v" style="color:var(--gbr);">10.91% → 2.0%</div><div class="em-s">✅ Dramatic improvement</div></div>
+          <div class="em-box"><div class="em-l">CASA Ratio</div><div class="em-v" style="color:var(--gbr);">&gt;40%</div><div class="em-s">✅ Structural advantage</div></div>
+          <div class="em-box"><div class="em-l">Net Profit FY25</div><div class="em-v" style="color:var(--gbr);">₹61,077 Cr</div><div class="em-s">✅ Record high</div></div>
+          <div class="em-box"><div class="em-l">Tier 1 Capital</div><div class="em-v" style="color:var(--ambr);">~13%</div><div class="em-s">⚠️ Below top private banks</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">GNPA from 10.91% (FY2018) to 2.0% (FY2025) — the most dramatic PSU bank turnaround in Indian history</div></div>
+            <div class="erf-txt">SBI's NPA cycle peaked in FY2018 with GNPA at 10.91% — driven by corporate NPAs in steel, power, telecom, and infrastructure sectors from the 2010–2016 excessive lending cycle. The turnaround involved aggressive provisioning (PCR raised to 87%), bad loan resolution through IBC (Insolvency and Bankruptcy Code), write-offs of unrecoverable accounts, and a fundamental shift in the loan portfolio towards retail (home loans, auto loans, personal loans) and away from concentrated corporate lending. Five years of consistent execution reduced GNPA by 8.91 percentage points — a turnaround that most analysts considered impossible in 2018.</div>
+          </div>
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">40%+ CASA ratio — structural advantage from 22,000+ branches and government salary accounts</div></div>
+            <div class="erf-txt">SBI's CASA ratio above 40% is structural — not cyclical. Government salary accounts, pension payments, and social benefit transfers flow through SBI by default. The bank's 22,000+ branches and the largest rural banking network in India ensure that even unbanked populations get their first bank account with SBI. This default CASA franchise is impossible to replicate and provides SBI with a cost of deposits that rivals any private bank — at a scale no private bank can match.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-p">✅ <strong>PSU banking quality verdict:</strong> SBI's turnaround from 10.91% to 2.0% GNPA over five years is the most important banking story of the past decade in India. The combination of aggressive IBC resolutions, provisioning discipline, and portfolio reorientation towards retail demonstrates that institutional transformation is possible even in the largest PSU banks. The remaining watch points: Tier 1 capital (still below private peers) and corporate loan concentration risk — both monitor quarterly.</div>
+    </div>
+
+    <!-- GOOD 5: HDFC Life / SBI Life — for variety -->
+    <div class="ex-block rv d7">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--gpale),#dcfce7);">🏥</div>
+          <div><div class="eb-name">Bandhan Bank — CASA 37%, Microfinance NIM 12%+, Capital Buffer Rebuilt Post-COVID Stress</div><div class="eb-sub">NSE: BANDHANBNK · Private Bank · From MFI to full bank · NIM 7%+ · Rebuilding GNPA from COVID peak · CASA franchise growing</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ NIM 7%+</span>
+          <span class="ebb ebb-g">✅ CASA recovering</span>
+          <span class="ebb ebb-a">⚠️ GNPA improving from 7% peak</span>
+          <span class="ebb ebb-g">✅ MFI expertise unique</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">NIM</div><div class="em-v" style="color:var(--gbr);">7%+</div><div class="em-s">✅ MFI premium spread</div></div>
+          <div class="em-box"><div class="em-l">CASA Ratio</div><div class="em-v" style="color:var(--ambr);">37%</div><div class="em-s">⚠️ Improving from 22%</div></div>
+          <div class="em-box"><div class="em-l">GNPA (recovering)</div><div class="em-v" style="color:var(--ambr);">~4% trend</div><div class="em-s">⚠️ Down from 7% peak</div></div>
+          <div class="em-box"><div class="em-l">Tier 1 Capital</div><div class="em-v" style="color:var(--gbr);">~15%</div><div class="em-s">✅ Rebuilt post-stress</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">NIM above 7% — microfinance lending generates the highest sustainable NIM in Indian banking</div></div>
+            <div class="erf-txt">Bandhan Bank's roots in microfinance lending (joint liability groups, small-ticket rural loans at 22–24% annual rates) generate NIM that no retail or corporate bank can match. This premium NIM exists because microfinance borrowers have no alternative credit source, group lending reduces individual default risk, and collection is through field agents who know borrowers personally. The NIM premium comes with a structural vulnerability: economic shocks (demonetisation 2016, COVID 2020) can spike NPAs rapidly because microfinance borrowers have no financial buffer. This is why GNPA analysis matters most at Bandhan.</div>
+          </div>
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">GNPA normalisation trajectory — from 7% COVID peak back toward 3–4% range</div></div>
+            <div class="erf-txt">Bandhan's GNPA peaked near 7% in FY2022 (COVID aftermath in microfinance — borrowers lost livelihoods, couldn't repay). The bank took aggressive write-offs, raised capital, improved its diversification into home loans and commercial banking, and rebuilt provision buffers. GNPA normalising from 7% toward 3–4% while maintaining NIM above 7% is the recovery story. The key watch point: is the GNPA reduction coming from genuine repayments (sustainable) or from technical write-offs and loan restructuring (short-term fix)? Track collection efficiency quarterly alongside GNPA.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>Banking quality verdict:</strong> Bandhan Bank demonstrates that the highest NIM in banking (microfinance) comes with cyclical GNPA volatility — the two are structurally linked. The investment thesis requires believing that: (1) GNPA normalisation is genuine, (2) diversification into secured lending reduces cyclical vulnerability over time, and (3) the 7%+ NIM is sustainable. All three are trackable with quarterly metrics. Bandhan is the best case study in the NIM-GNPA trade-off that defines all high-yield lending institutions.</div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="section-divider rv d3">
+      <div class="sd-line"></div>
+      <div class="sd-label">🚨 Bad Examples — Stressed Banks and NBFCs</div>
+      <div class="sd-line"></div>
+    </div>
+
+    <div class="tag rv d1" style="color:var(--red);">04 — Five Banks &amp; NBFCs With Structural Problems</div>
+    <h2 class="h2 rv d2">🚨 <span style="background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Bad Examples</span> — When Banking Metrics Signal Deep Problems</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five cases show how specific metric failures — high GNPA with low PCR, thin capital buffers, CASA collapse, or NIM compression — translated into investor losses, regulatory action, or outright failure.</p>
+
+    <!-- BAD 1: Yes Bank -->
+    <div class="ex-block rv d3">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">🏦</div>
+          <div><div class="eb-name">Yes Bank — High NIM Masked by Concealed NPAs Until RBI Forced Reconstruction (2020)</div><div class="eb-sub">NSE: YESBANK · Private Bank · GNPA reported 2% in FY19; actual was 16%+ after RBI inspection · Tier 1 collapsed · ₹3,780 Cr write-down for AT1 holders</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 GNPA understated by 14%</span>
+          <span class="ebb ebb-r">Tier 1 collapsed</span>
+          <span class="ebb ebb-r">RBI moratorium 2020</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Reported GNPA FY19</div><div class="em-v" style="color:var(--red);">2%</div><div class="em-s">🚨 Actually 16%+ post-RBI</div></div>
+          <div class="em-box"><div class="em-l">Divergence from RBI</div><div class="em-v" style="color:var(--red);">₹3,277 Cr</div><div class="em-s">🚨 Loans not classified as NPA</div></div>
+          <div class="em-box"><div class="em-l">PCR at time of stress</div><div class="em-v" style="color:var(--red);">Low</div><div class="em-s">🚨 Insufficient buffer</div></div>
+          <div class="em-box"><div class="em-l">CASA pre-stress</div><div class="em-v" style="color:var(--red);">~30%</div><div class="em-s">🚨 Declining rapidly</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">GNPA understated for 3+ years — divergence between reported and RBI-assessed NPAs was the forensic signal</div></div>
+            <div class="erf-txt">RBI's annual inspection of Yes Bank (SPARC — Supervisory Programme for Assessment of Risk and Capital) consistently found higher NPAs than what Yes Bank reported. In FY2019, Yes Bank reported GNPA of 2.09%. RBI's inspection (results always disclosed with a lag) found divergence of ₹3,277 crore — meaning NPAs should have been approximately ₹5,600 crore more than reported. The RBI divergence data is public — published annually in the RBI Annual Report and in the SEBI disclosures of the bank. Investors tracking the divergence trend (which grew each year from FY2016 to FY2019) had a clear forensic signal that NPA classification was being manipulated.</div>
+          </div>
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">CASA declining while expensive wholesale deposits grew — liquidity risk building visibly</div></div>
+            <div class="erf-txt">Yes Bank's CASA ratio declined from 40%+ (FY2016) to 26% (FY2020) as the bank grew its wholesale funding — institutional deposits and borrowings — to fuel rapid loan growth. Wholesale deposits are "hot money" — they flee at the first sign of distress. When Yes Bank's NPA problems became public, wholesale depositors withdrew immediately, creating a bank run. A bank where CASA is consistently declining and wholesale funding is growing is building a structural liquidity risk. HDFC Bank's CASA is stable at 38–46%; Yes Bank's went from 40% to 26% in four years — the trend was unmistakable and alarming.</div>
+          </div>
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">AT1 (Additional Tier 1) bond write-down — ₹3,780 crore of investor wealth wiped out</div></div>
+            <div class="erf-txt">During the Yes Bank reconstruction (March 2020), RBI and the government wrote down ₹3,780 crore of Yes Bank's AT1 (Additional Tier 1) bonds to zero. AT1 bonds are quasi-equity instruments that absorb losses before equity holders when a bank fails. Many retail investors held these bonds believing them to be safe "bank bonds." The write-down was the consequence of insufficient Tier 1 Capital and unrecognised NPAs combining in a stress event. The lesson: when a bank's Tier 1 Capital falls toward the RBI minimum AND GNPA is understated, AT1 bonds face existential risk even before equity does.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The Yes Bank forensic checklist:</strong> Three specific checks would have flagged Yes Bank 2 years before RBI acted: (1) RBI SPARC divergence data — annually published, showed growing gap between reported and inspected NPAs; (2) CASA declining from 40% to 26% in 4 years — wholesale funding dependence growing; (3) Tier 1 Capital trending toward 9–10% — minimal buffer. All three were public data. Track all three for any bank where NIM looks too good relative to sector peers.</div>
+    </div>
+
+    <!-- BAD 2: Lakshmi Vilas Bank -->
+    <div class="ex-block rv d4">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">🏦</div>
+          <div><div class="eb-name">Lakshmi Vilas Bank — GNPA 25%, Tier 1 Negative, RBI Forced Merger with DBS India (2020)</div><div class="eb-sub">BSE: 541153 · Old Private Bank · GNPA 25.4% · Net NPA 11.3% · Tier 1 Capital turned negative · Equity shareholders wiped out</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 GNPA 25.4%</span>
+          <span class="ebb ebb-r">Tier 1 turned negative</span>
+          <span class="ebb ebb-r">Equity zeroed out</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">GNPA (Peak)</div><div class="em-v" style="color:var(--red);">25.4%</div><div class="em-s">🚨 One-in-four loans bad</div></div>
+          <div class="em-box"><div class="em-l">Net NPA</div><div class="em-v" style="color:var(--red);">11.3%</div><div class="em-s">🚨 Even after provisions</div></div>
+          <div class="em-box"><div class="em-l">Tier 1 Capital</div><div class="em-v" style="color:var(--red);">Negative</div><div class="em-s">🚨 Equity wiped by losses</div></div>
+          <div class="em-box"><div class="em-l">Final Outcome</div><div class="em-v" style="color:var(--red);">Forced merger</div><div class="em-s">DBS India took over</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">GNPA 25.4% — one in four loans was non-performing; the inevitable result of aggressive lending without credit discipline</div></div>
+            <div class="erf-txt">Lakshmi Vilas Bank lent aggressively to real estate developers, NBFC groups, and Tier 2/3 corporate borrowers in the period 2014–2018, seeking higher NIM than its traditional South India retail banking book generated. These loans were concentrated in stressed sectors and had insufficient collateral. As the real estate downturn and NBFC liquidity crisis of 2018 hit, these borrowers stopped paying. GNPA rose from 2% (2015) to 25% (2020) — an almost linear deterioration over 5 years. Each annual report showed clearly rising GNPA. Each year the board said "we are addressing it." Each year it got worse.</div>
+          </div>
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">Negative Tier 1 Capital — cumulative losses exceeded equity; the mathematical end state of unmanaged NPAs</div></div>
+            <div class="erf-txt">When a bank's NPAs generate credit losses that exceed its equity (retained earnings + paid-up capital), Tier 1 Capital turns negative. This is the mathematical end state of GNPA 25% with insufficient provisioning — losses of ₹X crore per year eventually consume the entire equity cushion. Once Tier 1 goes negative, RBI has no choice but to intervene (moratorium, forced merger, or liquidation). Shareholders get nothing. Lakshmi Vilas Bank's equity holders were wiped out. DBS India took over the bank for ₹2,500 crore — a fraction of the book value on the balance sheet — because the book value was fictitious (NPAs not adequately provisioned).</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The LVB GNPA trajectory lesson:</strong> GNPA rising from 2% to 25% over 5 years is not sudden — it's visible every year. The forensic rule: GNPA rising more than 1 percentage point per year for 3 consecutive years = structural credit problem, not a one-time shock. Exit or avoid when GNPA crosses 8% with Tier 1 below 11% — the provision requirement at that GNPA level will consume multiple years of profits even with PCR of 70%.</div>
+    </div>
+
+    <!-- BAD 3: DHFL -->
+    <div class="ex-block rv d5">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">🏠</div>
+          <div><div class="eb-name">DHFL — NBFC Liquidity Crisis: IL&FS Triggered Run on DHFL; ₹31,000+ Cr Fraud; Zero NIM at Collapse</div><div class="eb-sub">BSE: 511072 · Housing Finance NBFC · No CASA · Wholesale funded · ALM mismatch · ₹31,000+ Cr fraud on top of NPA stress</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 Zero CASA (wholesale only)</span>
+          <span class="ebb ebb-r">ALM mismatch exposed</span>
+          <span class="ebb ebb-r">₹31,000+ Cr fraud</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">CASA Ratio</div><div class="em-v" style="color:var(--red);">0%</div><div class="em-s">🚨 100% wholesale funded</div></div>
+          <div class="em-box"><div class="em-l">Funding Source</div><div class="em-v" style="color:var(--red);">MF + NCD + Bank</div><div class="em-s">🚨 All institutional — hot money</div></div>
+          <div class="em-box"><div class="em-l">ALM Mismatch</div><div class="em-v" style="color:var(--red);">Severe</div><div class="em-s">🚨 Long loans, short liabilities</div></div>
+          <div class="em-box"><div class="em-l">Outcome</div><div class="em-v" style="color:var(--red);">Resolution IBC</div><div class="em-s">Piramal acquired remnants</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">Zero CASA = 100% wholesale funding = existential liquidity risk in any crisis</div></div>
+            <div class="erf-txt">NBFCs cannot accept deposits from the public — they must borrow from banks, mutual funds, NCDs (Non-Convertible Debentures), and commercial paper. DHFL's entire ₹1 lakh crore+ lending book was funded by wholesale sources — mutual fund investments in DHFL's NCDs, bank loans, and retail NCD public issues. When IL&FS collapsed in September 2018, the entire NBFC funding market froze. Mutual funds stopped rolling over DHFL's NCDs. Banks recalled loans. DHFL had 20-year home loans on the asset side and 3–12 month papers on the liability side — a classic Asset-Liability Mismatch (ALM) that became fatal when wholesale funding dried up overnight. There was no CASA, no sticky retail deposits, no funding floor.</div>
+          </div>
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">Reported NIM masked fraud through inflated loan book — Bandra Book fake accounts</div></div>
+            <div class="erf-txt">DHFL's NIM appeared healthy at 2.5–3% on reported AUM. But the loan book included thousands of fictitious borrowers ("Bandra Book" — fake retail accounts used to divert ₹31,000+ crore to promoter-connected entities). The NIM was calculated on a fictitious denominator. When investigators discovered the fake accounts, the effective AUM was materially lower, and the NIM picture changed completely. For investors: when any NBFC's AUM grows significantly faster than its branch/distribution count, or when disbursals to stated geographies don't match economic activity in those areas — the loan book may contain fictitious or inflated entries.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The NBFC ALM lesson:</strong> Any NBFC funding long-duration assets (housing, infrastructure, equipment) with short-duration liabilities (commercial paper, short-term NCDs) has structural ALM risk that becomes existential in a liquidity freeze. The investor check: CP + Short-term NCDs as % of total borrowings. If above 30% for a long-duration lender — the ALM risk is material. DHFL's short-term borrowings were over 40% of total liabilities — visible in every quarterly balance sheet for 3 years before collapse.</div>
+    </div>
+
+    <!-- BAD 4: Punjab National Bank pre-Nirav Modi -->
+    <div class="ex-block rv d6">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">🏦</div>
+          <div><div class="eb-name">Punjab National Bank — ₹13,500 Cr Nirav Modi Fraud Exposed Systemic Internal Control Failure (2018)</div><div class="eb-sub">NSE: PNB · PSU Bank · GNPA already 12%+ pre-fraud · LoU fraud bypassed all audit controls · Tier 1 under pressure</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 GNPA 12%+ pre-fraud</span>
+          <span class="ebb ebb-r">₹13,500 Cr LoU fraud</span>
+          <span class="ebb ebb-a">PCR insufficient</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">GNPA Pre-Fraud (FY18)</div><div class="em-v" style="color:var(--red);">12.1%</div><div class="em-s">🚨 Already severe stress</div></div>
+          <div class="em-box"><div class="em-l">LoU Fraud Exposure</div><div class="em-v" style="color:var(--red);">₹13,500 Cr</div><div class="em-s">🚨 Off-balance sheet</div></div>
+          <div class="em-box"><div class="em-l">PCR at Stress Peak</div><div class="em-v" style="color:var(--ambr);">&lt;55%</div><div class="em-s">🚨 Insufficient buffer</div></div>
+          <div class="em-box"><div class="em-l">NIM Trend</div><div class="em-v" style="color:var(--red);">Compressed</div><div class="em-s">🚨 High provisioning hit</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">GNPA 12% + PCR &lt;55% = the most dangerous combination in banking</div></div>
+            <div class="erf-txt">When PNB's Nirav Modi fraud was discovered, the bank was already carrying 12.1% GNPA with a PCR of approximately 55% — meaning 45% of its gross NPAs had no provision cover. This combination (high GNPA + low PCR) meant that: (1) the bank was already absorbing massive credit losses on a large NPA base, (2) it had insufficient buffers to absorb further losses, and (3) the ₹13,500 crore LoU fraud exposure added to an already stressed Tier 1 Capital. The GNPA + PCR combination was visible in every quarterly result for 8 quarters before the fraud discovery. Investors who tracked both metrics together could see the vulnerability.</div>
+          </div>
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">Letters of Undertaking off-balance sheet — the fraud bypass that GNPA metrics couldn't capture</div></div>
+            <div class="erf-txt">The Nirav Modi fraud used Letters of Undertaking (LoUs) — essentially guarantees issued by PNB Brady House branch to foreign banks, allowing Nirav Modi's companies to borrow from those banks with PNB's guarantee. These LoUs were not recorded in PNB's SWIFT messaging system (deliberately bypassed) and therefore didn't appear as contingent liabilities in PNB's balance sheet. No standard banking metric captures off-balance sheet fraud. However, the pre-existing 12% GNPA was a clear indicator of PNB's broader credit culture — a bank with strong internal controls and credit discipline doesn't arrive at 12% GNPA. Weak credit culture and weak internal controls are correlated.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The PNB combined risk lesson:</strong> GNPA above 8% + PCR below 60% in any bank deserves immediate exit or avoidance. The capital consumption of provisioning up to 70%+ coverage on 12% GNPA is so large that it consumes multiple years of profit and compresses NIM. PNB needed to provision approximately ₹40,000+ crore to bring PCR to 75% on its GNPA base — an amount that would have required government capital infusion to maintain Tier 1. The combination was always visible in quarterly disclosures.</div>
+    </div>
+
+    <!-- BAD 5: Vodafone/Yes-style telecom NBFC exposure -->
+    <div class="ex-block rv d7">
+      <div class="eb-head ebh-a">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--apale),#fde68a);">📡</div>
+          <div><div class="eb-name">Small Finance Banks / MFI-Heavy NBFCs — COVID and Post-COVID Collection Crisis (2020–22)</div><div class="eb-sub">Multiple MFI-focused NBFCs · GNPA spiked 8–12% · NIM temporarily inflated by accrued income · PCR insufficient for scale of shock</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 GNPA spiked 8–12%</span>
+          <span class="ebb ebb-a">NIM inflated by accrued interest</span>
+          <span class="ebb ebb-r">PCR insufficient</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">GNPA at COVID peak</div><div class="em-v" style="color:var(--red);">8–12%</div><div class="em-s">🚨 MFI borrowers lost income</div></div>
+          <div class="em-box"><div class="em-l">Accrued Interest Issue</div><div class="em-v" style="color:var(--red);">Inflated NIM</div><div class="em-s">🚨 Interest not collected</div></div>
+          <div class="em-box"><div class="em-l">PCR at stress point</div><div class="em-v" style="color:var(--red);">50–60%</div><div class="em-s">🚨 Insufficient buffer</div></div>
+          <div class="em-box"><div class="em-l">Collection Efficiency</div><div class="em-v" style="color:var(--red);">Fell to 70–80%</div><div class="em-s">🚨 From 98%+ pre-COVID</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">Accrued interest inflation — NIM looked healthy while actual cash collection collapsed</div></div>
+            <div class="erf-txt">Under Indian accounting standards (Ind AS), interest on loans continues to accrue on the income statement even when the borrower hasn't paid — as long as the loan hasn't been classified as NPA (which happens after 90 days of non-payment). During COVID moratoriums (April–August 2020) and the subsequent recovery period, many MFI/NBFC borrowers stopped paying. Interest accrued on these loans inflated reported NIM and PAT. But no actual cash was being received. The difference between reported interest income and cash collected (visible in the cash flow statement) was the forensic signal: revenue looked fine, but CFO/PAT was far below 1.0×, revealing the accrual inflation.</div>
+          </div>
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">PCR insufficient for the scale of NPA shock — structural undercapitalization of credit risk</div></div>
+            <div class="erf-txt">Multiple small finance banks and MFI-focused NBFCs entered COVID with PCR of 50–60% — adequate for normal NPA levels but completely insufficient when GNPA spiked to 8–12%. Provisioning 70% of 12% GNPA requires setting aside 8.4% of the loan book as provisions — a massive immediate hit to capital. Institutions with PCR 50–60% at the start of the shock had to rapidly increase provisions, collapsing PAT and, in some cases, requiring fresh equity capital at distress valuations. The investors who tracked PCR and maintained a rule of "minimum 70% PCR at any point" would have avoided these institutions entering the COVID period.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-a">⚠️ <strong>The MFI-NBFC cyclical risk lesson:</strong> Microfinance and small-ticket unsecured lending generates the highest NIM in banking but concentrates credit risk in the most vulnerable borrowers. The forensic rule: in any MFI/SFB/NBFC-MFI, monitor collection efficiency monthly (published in MFIN data and investor presentations). When collection efficiency falls below 95%, begin reducing exposure. At 90% or below, the upcoming GNPA spike is mathematically inevitable. The NIM premium only pays off if PCR is maintained above 70% and capital is sufficient to absorb a 10%+ GNPA scenario.</div>
+    </div>
+
+    <!-- QUICK TRICKS -->
+    <div class="section-divider rv d3">
+      <div class="sd-line"></div>
+      <div class="sd-label">⚡ Quick Tricks — Bank Analysis in 8 Minutes</div>
+      <div class="sd-line"></div>
+    </div>
+
+    <div class="tag rv d1">⚡ Quick Tricks</div>
+    <h2 class="h2 rv d2">The 8-Minute <span class="hp">Bank Quality Cheat Sheet</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Five fast checks on Screener.in and investor presentations that give you the complete banking quality picture in under 8 minutes. Run these before analysing any bank or NBFC's valuation.</p>
+
+    <div style="display:flex;flex-direction:column;gap:clamp(14px,2.5vw,20px);margin-bottom:40px;">
+
+      <!-- TRICK 1 -->
+      <div class="rv d3" style="border-radius:18px;overflow:hidden;border:2px solid rgba(109,40,217,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--pxs),var(--pxl));padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(109,40,217,.3);">📊</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:3px;">Trick #1 — 60 Seconds · Screener Ratios Tab</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Five-Number Bank Scorecard" — Pass or Fail Instantly</div>
+          </div>
+          <div style="background:rgba(109,40,217,.1);color:var(--p);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">60 seconds</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Screener.in → Search bank → Ratios tab. Find and note these five numbers. Any bank that fails two or more of these thresholds needs deep investigation before investment.</div>
+          <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+          <table style="width:100%;border-collapse:collapse;font-size:clamp(11px,1.3vw,12.5px);min-width:500px;">
+            <thead><tr style="background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(109,40,217,.03));">
+              <th style="padding:8px 12px;font-size:10px;font-weight:700;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:left;">Metric</th>
+              <th style="padding:8px 12px;font-size:10px;font-weight:700;text-transform:uppercase;color:var(--gbr);border-bottom:1.5px solid var(--bd);text-align:left;">✅ Pass</th>
+              <th style="padding:8px 12px;font-size:10px;font-weight:700;text-transform:uppercase;color:var(--red);border-bottom:1.5px solid var(--bd);text-align:left;">🚨 Fail</th>
+              <th style="padding:8px 12px;font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ts);border-bottom:1.5px solid var(--bd);text-align:left;">Where to Find</th>
+            </tr></thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(109,40,217,.05);">
+                <td style="padding:8px 12px;font-weight:700;color:var(--tx);">NIM</td>
+                <td style="padding:8px 12px;color:var(--gbr);font-weight:700;">3%+ (banks) / 5%+ (NBFCs)</td>
+                <td style="padding:8px 12px;color:var(--red);font-weight:700;">&lt;2.5% — squeezed</td>
+                <td style="padding:8px 12px;color:var(--tl);">Screener → Ratios → NIM%</td>
+              </tr>
+              <tr style="background:rgba(109,40,217,.02);border-bottom:1px solid rgba(109,40,217,.05);">
+                <td style="padding:8px 12px;font-weight:700;color:var(--tx);">GNPA %</td>
+                <td style="padding:8px 12px;color:var(--gbr);font-weight:700;">&lt;2% — clean book</td>
+                <td style="padding:8px 12px;color:var(--red);font-weight:700;">&gt;5% — stressed</td>
+                <td style="padding:8px 12px;color:var(--tl);">Quarterly investor presentation</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(109,40,217,.05);">
+                <td style="padding:8px 12px;font-weight:700;color:var(--tx);">PCR</td>
+                <td style="padding:8px 12px;color:var(--gbr);font-weight:700;">&gt;70% — well covered</td>
+                <td style="padding:8px 12px;color:var(--red);font-weight:700;">&lt;50% — exposed</td>
+                <td style="padding:8px 12px;color:var(--tl);">Quarterly investor presentation</td>
+              </tr>
+              <tr style="background:rgba(109,40,217,.02);border-bottom:1px solid rgba(109,40,217,.05);">
+                <td style="padding:8px 12px;font-weight:700;color:var(--tx);">CASA %</td>
+                <td style="padding:8px 12px;color:var(--gbr);font-weight:700;">&gt;35% — strong franchise</td>
+                <td style="padding:8px 12px;color:var(--red);font-weight:700;">&lt;25% — high cost</td>
+                <td style="padding:8px 12px;color:var(--tl);">Screener → Ratios or Investor Deck</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 12px;font-weight:700;color:var(--tx);">Tier 1 Capital</td>
+                <td style="padding:8px 12px;color:var(--gbr);font-weight:700;">&gt;13% — comfortable</td>
+                <td style="padding:8px 12px;color:var(--red);font-weight:700;">&lt;10% — near minimum</td>
+                <td style="padding:8px 12px;color:var(--tl);">Annual report → Capital Adequacy</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICK 2 -->
+      <div class="rv d4" style="border-radius:18px;overflow:hidden;border:2px solid rgba(220,38,38,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--rpale),#fff5f5);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--red),#f87171);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(220,38,38,.3);">⚠️</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:3px;">Trick #2 — 90 Seconds · GNPA + PCR Together</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Net NPA Calculation" — The Number That Actually Matters</div>
+          </div>
+          <div style="background:rgba(220,38,38,.1);color:var(--red);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">90 seconds</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Never look at GNPA alone. Always calculate Net NPA = GNPA × (1 − PCR%). This is the actual uncovered bad loan exposure as a percentage of the loan book — the number that will hit equity if those loans are never recovered.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.5vw,16px);">
+            <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.22);border-radius:11px;padding:12px 14px;">
+              <div style="font-size:10px;font-weight:800;color:var(--gbr);margin-bottom:6px;">✅ Good Combination</div>
+              <div style="font-size:13px;font-weight:900;color:var(--gbr);margin-bottom:4px;">GNPA 5% + PCR 80% = Net NPA 1%</div>
+              <div style="font-size:12px;color:var(--ts);">Gross problem exists but well covered. Bank has already absorbed most of the loss. Real exposure is only 1% of loan book. Manageable.</div>
+            </div>
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:11px;padding:12px 14px;">
+              <div style="font-size:10px;font-weight:800;color:var(--red);margin-bottom:6px;">🚨 Dangerous Combination</div>
+              <div style="font-size:13px;font-weight:900;color:var(--red);margin-bottom:4px;">GNPA 5% + PCR 40% = Net NPA 3%</div>
+              <div style="font-size:12px;color:var(--ts);">Three rupees of every hundred loaned out is neither being repaid nor provisioned. This 3% must come from future profits or equity. At GNPA 12% + PCR 50% = Net NPA 6% = bank may need recapitalisation.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICK 3 -->
+      <div class="rv d5" style="border-radius:18px;overflow:hidden;border:2px solid rgba(22,163,74,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--gpale),#ecfdf5);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--gbr),var(--gh));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(22,163,74,.3);">📉</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:3px;">Trick #3 — 2 Minutes · GNPA 5-Year Trend</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "GNPA Trend Line" — Direction Matters More Than the Level</div>
+          </div>
+          <div style="background:rgba(22,163,74,.1);color:var(--gbr);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">2 minutes</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Screener Ratios tab → GNPA % → 5-year history. Plot the five numbers mentally. Is GNPA improving (declining each year) or deteriorating (rising each year)? The direction is more important than the current level — a bank at 5% GNPA but declining is usually safer than a bank at 2% GNPA but rising.</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:12px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">📈</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--gbr);margin-bottom:2px;">GNPA: 8% → 6% → 4% → 3% → 2% (5 years, declining)</div><div style="font-size:12px;color:var(--ts);">Even though GNPA started high, the improving trajectory shows recovery. Management is resolving NPAs faster than new ones form. Improving asset quality + growing loan book = quality improvement cycle. SBI's turnaround is this pattern.</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:12px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">📉</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--red);margin-bottom:2px;">GNPA: 1.5% → 2% → 3% → 5% → 8% (5 years, rising)</div><div style="font-size:12px;color:var(--ts);">Even starting from a low base, rising GNPA is a structural alarm. Each year the problem deepens. Yes Bank: 0.8% → 1.3% → 2.1% → 3.2% → 16% (actual). The early years looked manageable. They weren't.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICK 4 -->
+      <div class="rv d6" style="border-radius:18px;overflow:hidden;border:2px solid rgba(217,119,6,.26);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--apale),#fffcf0);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--ambr),var(--amb));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.3);">💧</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ambr);margin-bottom:3px;">Trick #4 — 60 Seconds · CASA Trend</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "CASA Trend" — Cheap Deposits Are the Competitive Moat. Is It Growing or Eroding?</div>
+          </div>
+          <div style="background:rgba(217,119,6,.1);color:var(--ambr);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">60 seconds</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Screener → Ratios → CASA % (or quarterly investor presentation). Track 5 years. CASA growing = franchise strength and cost of funds improving. CASA declining = bank becoming more dependent on expensive wholesale/term deposits → NIM pressure → margin compression → valuation risk.<br><br>One additional check for NBFCs (which have no CASA): look at the CP (commercial paper) + short-term NCD % of total borrowings. Above 30% for a long-duration lender = structural ALM risk. DHFL example: CP + short NCD was 40%+ of borrowings in 2018.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.5vw,14px);">
+            <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:10px;padding:11px 13px;">
+              <div style="font-size:10px;font-weight:800;color:var(--gbr);margin-bottom:5px;">✅ CASA Growing</div>
+              <div style="font-size:12px;color:var(--ts);">More customers trusting the bank with daily banking → franchise expansion → cost of deposits improving → NIM protection. Every 1% CASA increase ≈ 8–10 bps NIM improvement at scale.</div>
+            </div>
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:10px;padding:11px 13px;">
+              <div style="font-size:10px;font-weight:800;color:var(--red);margin-bottom:5px;">🚨 CASA Declining</div>
+              <div style="font-size:12px;color:var(--ts);">Customers withdrawing day-to-day deposits → franchise erosion → bank must offer higher term deposit rates → NIM compression → PAT growth slows. Yes Bank CASA fell from 40% to 26% in 4 years.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICK 5 -->
+      <div class="rv d7" style="border-radius:18px;overflow:hidden;border:2px solid rgba(22,163,74,.28);box-shadow:var(--shp);">
+        <div style="background:linear-gradient(135deg,var(--gpale),#ecfdf5);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--gbr),var(--gh));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(22,163,74,.3);">🏆</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:3px;">Trick #5 — 3 Minutes · Complete Bank Quality Score</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The Full 8-Minute Bank Framework — Score Any Bank Before Investing</div>
+          </div>
+          <div style="background:rgba(22,163,74,.1);color:var(--gbr);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">3 minutes</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:16px;">Score 1 point for each metric that passes threshold. 5/5 = high quality bank. 3–4/5 = investable with monitoring. 2/5 or below = avoid until improvement confirmed.</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--pxl);border:1.5px solid rgba(109,40,217,.2);border-radius:12px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">1️⃣</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--p);margin-bottom:2px;">NIM above threshold (60s)</div><div style="font-size:12px;color:var(--ts);">Screener Ratios → NIM% → above 3% for banks, above 5% for NBFCs → Score 1 point</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:12px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">2️⃣</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--red);margin-bottom:2px;">Net NPA below 2% (90s)</div><div style="font-size:12px;color:var(--ts);">Get GNPA from investor deck → Get PCR → Calculate Net NPA = GNPA × (1−PCR%) → Below 2% → Score 1 point</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:12px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">3️⃣</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--gbr);margin-bottom:2px;">GNPA trending down for 3+ years (60s)</div><div style="font-size:12px;color:var(--ts);">Screener Ratios 5-year GNPA → declining for 3 consecutive years → Score 1 point (direction &gt; level)</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--apale);border:1.5px solid rgba(217,119,6,.2);border-radius:12px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">4️⃣</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--ambr);margin-bottom:2px;">CASA stable or growing (30s)</div><div style="font-size:12px;color:var(--ts);">Screener Ratios → CASA% → stable or growing → Score 1 point. Declining CASA = score 0.</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--pxl);border:1.5px solid rgba(109,40,217,.2);border-radius:12px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">5️⃣</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--p);margin-bottom:2px;">ROA above 1% (30s)</div><div style="font-size:12px;color:var(--ts);">Screener Ratios → ROA% → above 1% → Score 1 point. Above 1.5% = 2 points. Top-quartile signal.</div></div>
+            </div>
+          </div>
+          <div style="background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:12px;padding:12px 16px;">
+            <div style="font-size:12.5px;font-weight:800;color:var(--tx);margin-bottom:5px;">🏆 Complete 8-Minute Bank Framework Score</div>
+            <div style="font-size:12px;color:var(--ts);line-height:1.65;"><strong>5/5:</strong> HDFC Bank, Kotak, Bajaj Finance → high conviction investment<br><strong>4/5:</strong> SBI (Tier 1 below peers), Bandhan (GNPA recovering) → investable with specific watch points<br><strong>3/5:</strong> Monitor for improvement — track quarterly investor presentations<br><strong>2/5 or below:</strong> Yes Bank (FY19), LVB, DHFL → avoid until fundamental improvement confirmed<br><strong>Total time: 8 minutes. Data is free. Decision quality improves dramatically.</strong></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="caveat-box rv d7">
+      <div class="caveat-icon">⚡</div>
+      <div class="caveat-body">
+        <div class="caveat-label">The One-Line Bank Analysis Rule</div>
+        <div class="caveat-title">GNPA × (1 − PCR%) = Net NPA. This Single Number — Trended Over 5 Years — Tells You Everything About a Bank's Credit Culture.</div>
+        <div class="caveat-desc">Banking is a deceptively simple business: borrow cheap, lend dear, collect reliably. The complexity comes from the fact that lending is inherently risky — any loan can become an NPA, and large NPAs can wipe out years of interest income in a single provisioning cycle.<br><br>The five metrics in this chapter — NIM, GNPA, PCR, CASA, Tier 1 Capital — are not five separate analyses. They are five windows into a single question: Does this bank lend at sustainable rates, to borrowers who can repay, with enough capital to absorb the inevitable mistakes?<br><br>HDFC Bank answers "yes" to all five. Yes Bank in FY2019 answered "apparently yes" to NIM and "no" to everything else — but the NIM was inflated by accrued interest on loans that were actually bad. SBI in FY2018 answered "no" to GNPA but "yes" to everything else — and the trend showed it was fixing the problem. LVB answered "no" to everything and was eventually merged.<br><br>Five metrics. Eight minutes. Free data. The difference between investing in a compounding machine and investing in a time bomb depends entirely on whether you ran these checks before buying.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ REFERENCE GLOSSARY ══ -->
+<section style="background:var(--wh);border-top:2px solid var(--bd);">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(44px,6vw,80px) clamp(16px,5vw,56px);">
+
+    <!-- Header -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <div style="width:3px;height:22px;background:linear-gradient(180deg,var(--p),var(--ph));border-radius:2px;flex-shrink:0;"></div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);">Reference Glossary</div>
+    </div>
+    <h2 style="font-size:clamp(26px,4.5vw,52px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:6px;">Banking &amp; NBFC <span style="background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Glossary</span></h2>
+    <div style="width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:36px;"></div>
+    <p style="font-size:clamp(13.5px,1.5vw,15px);color:var(--ts);line-height:1.72;max-width:740px;margin-bottom:40px;">Every banking and NBFC metric used in this chapter — defined in plain language. Refer back whenever you encounter these terms in quarterly investor presentations, RBI reports, or annual disclosures.</p>
+
+    <!-- Glossary Table -->
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:16px;border:1.5px solid var(--bd);box-shadow:var(--shc);">
+      <table style="width:100%;border-collapse:collapse;font-size:clamp(12px,1.3vw,13.5px);min-width:560px;">
+        <thead>
+          <tr>
+            <th style="background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:12px 18px;font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--p);border-bottom:2px solid var(--bd);text-align:left;white-space:nowrap;width:26%;">Term</th>
+            <th style="background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:12px 18px;font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--p);border-bottom:2px solid var(--bd);text-align:left;">What It Means in Simple Words</th>
+            <th style="background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:12px 18px;font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--p);border-bottom:2px solid var(--bd);text-align:left;white-space:nowrap;width:18%;">Key Point</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--p);font-size:clamp(12.5px,1.4vw,14px);">NIM — Net Interest Margin</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">The spread between what a bank earns on its loans and what it pays on its deposits, expressed as a percentage of earning assets. NIM = (Interest Earned − Interest Paid) ÷ Average Earning Assets. Think of it as the bank's gross profit margin — the difference between the cost of money and the price it lends at. A bank with CASA-dominated funding earns a higher NIM because its cost of deposits is lower.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(109,40,217,.1);color:var(--p);">Core profitability</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);background:rgba(109,40,217,.015);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--red);font-size:clamp(12.5px,1.4vw,14px);">GNPA — Gross Non-Performing Asset</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">The percentage of total loans where borrowers have not paid for 90+ days (three missed EMIs). GNPA is the gross problem before any provisions are deducted. It is the primary indicator of a bank's credit quality and underwriting discipline. Below 2% = healthy; above 5% = stressed; above 10% = distressed. Always read GNPA alongside PCR — a high GNPA with high PCR is far safer than a high GNPA with low PCR.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(220,38,38,.1);color:var(--red);">Loan quality signal</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--red);font-size:clamp(12.5px,1.4vw,14px);">Net NPA</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Gross NPA minus the provisions already set aside against those bad loans. Net NPA = GNPA × (1 − PCR%). This is the actual uncovered bad loan exposure that will hit equity if those loans are never recovered. Net NPA below 1% is excellent; above 3% signals capital strain. Always calculate Net NPA before drawing any conclusions from GNPA alone.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(220,38,38,.1);color:var(--red);">Real exposure metric</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);background:rgba(22,163,74,.02);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--gbr);font-size:clamp(12.5px,1.4vw,14px);">PCR — Provision Coverage Ratio</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">The percentage of Gross NPAs already covered by provisions (money set aside as a buffer). PCR = Provisions Held ÷ Gross NPAs × 100. A PCR of 80% means for every ₹100 of bad loans, ₹80 has already been set aside. High PCR signals that management has been honest and conservative about credit losses. RBI's minimum guideline is 70% (including technical write-offs). Best-in-class banks maintain 80–90%+.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(22,163,74,.1);color:var(--gbr);">Min 70% ideal</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--ambr);font-size:clamp(12.5px,1.4vw,14px);">CASA — Current &amp; Savings Account Ratio</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">The share of total deposits sitting in Current Accounts (0% interest — business float money) and Savings Accounts (3–3.5% interest — retail daily deposits). CASA represents the cheapest source of funding. A high CASA ratio (above 40%) means the bank pays very little for a large portion of its deposits — directly improving NIM. CASA is also a franchise moat indicator: customers maintain these accounts with banks they trust for daily transactions.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(217,119,6,.12);color:var(--ambr);">Cheap funding moat</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);background:rgba(109,40,217,.015);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--sky);font-size:clamp(12.5px,1.4vw,14px);">Tier 1 Capital / CAR</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Tier 1 Capital is the bank's own equity and retained earnings as a percentage of risk-weighted assets — the safety cushion that absorbs losses before depositors' money is at risk. Capital Adequacy Ratio (CAR) includes Tier 2 capital (subordinated debt + provisions). RBI mandates minimum CAR of 9% and Tier 1 of 7%. Well-capitalised banks maintain Tier 1 of 14–20%+. High Tier 1 = freedom to grow loans and absorb NPA shocks without diluting equity.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(2,132,199,.1);color:var(--sky);">Safety cushion</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--gbr);font-size:clamp(12.5px,1.4vw,14px);">ROA — Return on Assets</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Net Profit ÷ Average Total Assets. Measures how efficiently a bank generates profit from each rupee of assets it manages. Banks are highly leveraged (assets 10–20× equity), so even 1.5% ROA translates to 15–20% ROE. ROA is the better cross-bank comparator because it removes the leverage effect. Above 1.5% = top-quartile; above 1% = acceptable; below 0.5% = struggling. Use ROA alongside NIM to assess the full profitability picture.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(22,163,74,.1);color:var(--gbr);">Best profitability proxy</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);background:rgba(109,40,217,.015);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--p);font-size:clamp(12.5px,1.4vw,14px);">NII — Net Interest Income</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Interest Earned on Loans minus Interest Paid on Deposits. NII is the core banking revenue — the absolute rupee amount of the spread the bank earns. NII growing at 15%+ while NIM remains stable signals both volume (loan book growing) and quality (spread maintained) growth. NII declining despite rising loan book = NIM compression. Watch for NII vs PAT divergence — if PAT grows slower than NII, provisions are increasing (potential NPA buildup).</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(109,40,217,.1);color:var(--p);">Core banking revenue</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--ambr);font-size:clamp(12.5px,1.4vw,14px);">Cost-to-Income Ratio</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Operating Expenses ÷ Net Revenue (NII + Other Income). Measures operational efficiency — what percentage of income is consumed by running costs (salaries, branches, technology, compliance). Below 40% = highly efficient (HDFC Bank ~40%). Above 60% = bloated cost structure. A declining Cost-to-Income ratio means the bank is scaling faster than costs — operational leverage kicking in. Rising ratio despite revenue growth = structural inefficiency.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(217,119,6,.12);color:var(--ambr);">Below 40% = efficient</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);background:rgba(220,38,38,.02);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--red);font-size:clamp(12.5px,1.4vw,14px);">Provisions &amp; Contingencies</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Money set aside in the P&amp;L as a buffer against expected future credit losses. Provisions reduce PAT in the current year to protect the balance sheet from NPA losses in future years. Rising provisions in proportion to loan growth = healthy conservatism. Provisions surging abnormally relative to loan growth = management recognising hidden NPAs. Provisions falling while NPAs are rising = management under-provisioning to protect near-term PAT — a red flag.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(220,38,38,.1);color:var(--red);">NPA buffer</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--p);font-size:clamp(12.5px,1.4vw,14px);">AUM — Assets Under Management</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">For NBFCs, AUM is the total loan book outstanding — the amount of money lent to customers that is yet to be repaid. It is the NBFC equivalent of a bank's "loan book." AUM growth rate is the headline volume metric. A strong NBFC grows AUM at 20–30% CAGR while maintaining Stage 3 (NPA equivalent) below 2%. AUM growth without credit quality = dangerous growth; AUM growth with stable Stage 3 = compounding franchise value.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(109,40,217,.1);color:var(--p);">NBFC loan book</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);background:rgba(22,163,74,.02);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--gbr);font-size:clamp(12.5px,1.4vw,14px);">Stage 3 Assets (Ind AS 109)</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Under the Expected Credit Loss (ECL) model of Ind AS 109, loans are classified into three stages. Stage 1: performing loans. Stage 2: significant increase in credit risk. Stage 3: credit-impaired — equivalent to NPA under RBI's old framework. Stage 3 % is the NPA equivalent for NBFCs reporting under Ind AS. Use Stage 3 for NBFCs the same way you use GNPA for banks. Bajaj Finance maintains Stage 3 below 1.1% — exceptional for consumer lending.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(22,163,74,.1);color:var(--gbr);">NBFC NPA equivalent</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--gbr);font-size:clamp(12.5px,1.4vw,14px);">Collection Efficiency</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">For NBFCs, the percentage of scheduled repayments (EMIs due) that are actually collected in a given month. Collection efficiency of 99%+ means 99 paise of every ₹1 due is being paid — the NBFC equivalent of a bank's CFO/PAT quality test. When collection efficiency falls below 95%, upcoming GNPA spikes are mathematically inevitable. Bajaj Finance publishes monthly collection efficiency — it is the earliest NPA warning signal available for any NBFC.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(22,163,74,.1);color:var(--gbr);">Early NPA warning</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);background:rgba(109,40,217,.015);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--ambr);font-size:clamp(12.5px,1.4vw,14px);">ALM — Asset-Liability Mismatch</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">When a bank or NBFC funds long-duration assets (20-year home loans) with short-duration liabilities (3-month commercial paper). This creates liquidity risk — if short-term lenders refuse to roll over borrowings, the institution cannot meet obligations even if its long-term assets are performing. DHFL's collapse was an ALM mismatch crisis — long housing loans funded by short-term NCDs. NBFCs are more vulnerable to ALM risk than banks because they lack stable deposit funding.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(217,119,6,.12);color:var(--ambr);">Liquidity risk</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--red);font-size:clamp(12.5px,1.4vw,14px);">AT1 Bonds — Additional Tier 1</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Perpetual bonds issued by banks that absorb losses before equity when a bank faces financial distress. AT1 bonds are classified as Tier 1 capital for regulatory purposes. They pay a higher coupon than regular bonds because they carry additional risk — they can be written down to zero by the regulator if the bank's capital falls below a trigger level. Yes Bank's ₹3,780 Cr AT1 write-down in 2020 demonstrated that these are not "safe bonds" when a bank is in distress.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(220,38,38,.1);color:var(--red);">Quasi-equity risk</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);background:rgba(109,40,217,.015);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--p);font-size:clamp(12.5px,1.4vw,14px);">SPARC — RBI Supervisory Assessment</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Supervisory Programme for Assessment of Risk and Capital — RBI's annual internal inspection of every bank. SPARC results include the RBI-assessed NPA level, which is often higher than what the bank reports. The "divergence" between reported NPAs and RBI-assessed NPAs is disclosed in the bank's annual report and RBI's annual publication. Yes Bank's SPARC divergence grew from ₹500 Cr to ₹3,277 Cr over 4 years before its collapse — visible in public disclosures every year.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(109,40,217,.1);color:var(--p);">NPA divergence signal</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--ambr);font-size:clamp(12.5px,1.4vw,14px);">ECL — Expected Credit Loss</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Under Ind AS 109 (adopted 2019), banks and NBFCs must estimate and provision for credit losses based on probability-weighted future scenarios — not just actual defaults. ECL provisioning is more forward-looking than the old RBI provisioning norms. Conservative ECL assumptions (higher macro stress scenarios, larger management overlays) lead to higher provisions and lower near-term PAT — but better balance sheet quality. Bajaj Finance's conservative ECL methodology is a key quality indicator.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(217,119,6,.12);color:var(--ambr);">Forward-looking buffer</span></td>
+          </tr>
+
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);background:rgba(22,163,74,.02);">
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--gbr);font-size:clamp(12.5px,1.4vw,14px);">IBC — Insolvency and Bankruptcy Code</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">India's 2016 law that allows creditors to initiate insolvency proceedings against defaulting borrowers. IBC was transformational for PSU banks — it gave them a time-bound mechanism (180–270 days) to resolve large corporate NPAs. SBI's dramatic GNPA reduction from 10.91% to 2% between FY2018 and FY2025 was largely driven by IBC resolutions of large steel, power, and telecom sector NPAs. IBC resolutions often involve significant haircuts (losses on loans) — but allow clean-up of the NPA book.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(22,163,74,.1);color:var(--gbr);">NPA resolution tool</span></td>
+          </tr>
+
+          <tr>
+            <td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--p);font-size:clamp(12.5px,1.4vw,14px);">Bancassurance / Fee Income</strong></td>
+            <td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Non-interest income earned by banks through selling third-party products (insurance, mutual funds) and services (transaction fees, forex, investment banking). Fee income is high-quality because it doesn't require deploying capital at credit risk. Banks with growing fee income (15–25% of total revenue) have more diversified, capital-light earnings. "Other Income" in the bank P&amp;L contains fee income, trading gains, and treasury profits — decompose it carefully as trading gains are volatile and not recurring.</td>
+            <td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(109,40,217,.1);color:var(--p);">Capital-light income</span></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer note -->
+    <div style="margin-top:18px;padding:14px 18px;background:var(--sf);border-radius:12px;border:1px solid var(--bd);font-size:11.5px;color:var(--tl);line-height:1.6;">
+      <strong style="color:var(--p);">Where to find these metrics:</strong> NIM, ROA, Cost-to-Income → Screener.in Ratios tab. GNPA, PCR, Net NPA, Tier 1, CASA → Quarterly investor presentation (search "[Bank Name] Q4 Investor Presentation" on BSE). RBI divergence data → Bank annual report → "Divergence in Asset Classification" note. Stage 3, Collection Efficiency, AUM → NBFC quarterly results and investor decks. ECL assumptions → Annual report → Notes to accounts → ECL methodology.
+    </div>
+  </div>
+</section>
+
+<!-- ══ NEXT CHAPTER ══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue your learning journey →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">For educational purposes only. Figures cited are illustrative approximations based on publicly available data; always verify from official annual reports, RBI disclosures, and BSE/NSE filings. Banking and NBFC analysis involves complex regulatory and credit considerations — consult a SEBI-registered investment advisor before making investment decisions. Historical cases (Yes Bank, LVB, DHFL, PNB, MFI NBFCs) are based on publicly reported RBI/SEBI/SFIO/court proceedings. All equity investments carry market risk. Bank deposits carry separate risks from bank equity. Tier 1 Capital and NPA figures change quarterly — always verify current data from investor presentations.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+    },{threshold:.04,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  } else{els.forEach(function(el){el.classList.add('on');});}
+})();
+document.addEventListener('touchstart',function(){},{passive:true});
+document.addEventListener('touchmove',function(){},{passive:true});
+document.addEventListener('touchend',function(){},{passive:true});
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('on');});
+}
+document.body.style.overscrollBehavior='none';
+if(document.fonts&&document.fonts.ready){
+  document.fonts.ready.then(function(){
+    document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});
+  });
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('a,button,.dmbtn,.nxt-btn,.metric-card,.ex-block').forEach(function(el){
+    el.style.touchAction='manipulation';
+  });
+});
+</script>
+</body>
+</html>

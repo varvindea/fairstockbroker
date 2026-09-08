@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Rebalancing · Portfolio Construction">
+<meta name="theme-color" content="#6d28d9">
+<meta name="format-detection" content="telephone=no">
+<title>Rebalancing &amp; Portfolio Review — Portfolio Construction Basics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;--gring:#bbf7d0;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --teal:#0891b2;--tealpale:#ecfeff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shg:0 4px 22px rgba(22,163,74,.11);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+*{word-break:break-word;overflow-wrap:break-word;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--sf);}
+::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* LAYOUT */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+
+/* TYPE */
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;min-width:0;overflow:hidden;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;flex-shrink:0;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(26px,6.5vw,82px);font-weight:900;letter-spacing:-2.5px;line-height:.92;margin-bottom:12px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(13px,2.8vw,38px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:660px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hero-pills{position:relative;z-index:2;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;animation:fsu .88s ease .44s both;min-width:0;overflow:hidden;}
+.hero-pill{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:100px;font-size:clamp(10px,1.3vw,12px);font-weight:800;min-width:0;max-width:100%;}
+.hp-p{background:var(--pxl);color:var(--p);border:1.5px solid rgba(109,40,217,.2);}
+.hp-g{background:var(--gpale);color:var(--gbr);border:1.5px solid rgba(22,163,74,.2);}
+.hp-a{background:var(--apale);color:var(--ambr);border:1.5px solid rgba(217,119,6,.2);}
+.hp-r{background:var(--rpale);color:var(--red);border:1.5px solid rgba(220,38,38,.2);}
+.hp-t{background:var(--tealpale);color:var(--teal);border:1.5px solid rgba(8,145,178,.2);}
+
+/* KLO BANNER */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;min-width:0;overflow:hidden;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;overflow:hidden;}
+.klo-body>*{min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:8px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;min-width:0;overflow:hidden;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;min-height:28px;max-width:100%;overflow:hidden;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.klo-hi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;min-width:0;overflow:hidden;}
+.klo-hi{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--shc);min-width:0;overflow:hidden;}
+.klo-hi-ico{font-size:22px;margin-bottom:6px;}
+.klo-hi-val{font-size:clamp(12px,2vw,16px);font-weight:900;letter-spacing:-.3px;word-break:normal;line-height:1.1;min-width:0;overflow:hidden;}
+.klo-hi-val.purple{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.green{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-lbl{font-size:10px;color:var(--tl);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:3px;min-width:0;overflow:hidden;}
+
+/* ══════════════════════════════════════
+   REBALANCING CONCEPT CARDS
+══════════════════════════════════════ */
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.5vw,24px);min-width:0;overflow:hidden;}
+.concept-card{border-radius:18px;padding:clamp(14px,2.5vw,22px);border:1.5px solid var(--bd);background:var(--wh);box-shadow:var(--shc);transition:box-shadow .22s,transform .22s;min-width:0;overflow:hidden;}
+.concept-card:hover{box-shadow:var(--shp);transform:translateY(-3px);}
+.cc-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:11px;min-width:0;overflow:hidden;}
+.cc-ico{font-size:clamp(26px,4vw,34px);flex-shrink:0;animation:floatB 3.5s ease-in-out infinite;}
+.cc-tw{min-width:0;overflow:hidden;}
+.cc-title{font-size:clamp(13px,1.9vw,17px);font-weight:900;color:var(--tx);margin-bottom:4px;min-width:0;overflow:hidden;}
+.cc-badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:100px;font-size:9px;font-weight:700;max-width:100%;overflow:hidden;}
+.ccb-p{background:var(--pxl);color:var(--p);}
+.ccb-g{background:var(--gpale);color:var(--gbr);}
+.ccb-a{background:var(--apale);color:var(--ambr);}
+.ccb-r{background:var(--rpale);color:var(--red);}
+.cc-desc{font-size:clamp(12px,1.4vw,13.5px);color:var(--ts);line-height:1.7;min-width:0;overflow:hidden;}
+.cc-eg{margin-top:10px;padding:9px 12px;border-radius:10px;font-size:clamp(11.5px,1.3vw,13px);line-height:1.5;min-width:0;overflow:hidden;}
+.cce-p{background:var(--pxl);color:var(--p);}
+.cce-g{background:var(--gpale);color:var(--gbr);}
+.cce-a{background:var(--apale);color:var(--ambr);}
+.cce-r{background:var(--rpale);color:var(--red);}
+
+/* ══════════════════════════════════════
+   REBALANCING METHODS
+══════════════════════════════════════ */
+.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.5vw,22px);min-width:0;overflow:hidden;}
+.method-card{border-radius:18px;overflow:hidden;min-width:0;box-shadow:var(--shp);transition:transform .25s;}
+.method-card:hover{transform:translateY(-3px);}
+.mc-hd{padding:clamp(16px,2.5vw,24px);position:relative;overflow:hidden;}
+.mc-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.08) 1px,transparent 1px);background-size:18px 18px;pointer-events:none;}
+.mch-time{background:linear-gradient(135deg,var(--pl),var(--p));}
+.mch-trigger{background:linear-gradient(135deg,#052e16,var(--gbr));}
+.mch-hybrid{background:linear-gradient(135deg,#451a03,var(--ambr));}
+.mc-hd-inner{position:relative;z-index:1;min-width:0;overflow:hidden;}
+.mc-ico{font-size:clamp(28px,4.5vw,40px);display:block;margin-bottom:8px;animation:floatB 3.5s ease-in-out infinite;flex-shrink:0;}
+.mc-name{font-size:clamp(14px,2vw,18px);font-weight:900;color:#fff;margin-bottom:3px;min-width:0;overflow:hidden;}
+.mc-sub{font-size:clamp(10.5px,1.3vw,12px);color:rgba(255,255,255,.72);min-width:0;overflow:hidden;}
+.mc-body{background:var(--wh);padding:clamp(14px,2.5vw,22px);min-width:0;overflow:hidden;}
+.mc-desc{font-size:clamp(12px,1.4vw,13.5px);color:var(--ts);line-height:1.7;margin-bottom:12px;min-width:0;overflow:hidden;}
+.mc-rule{padding:9px 12px;border-radius:11px;font-size:clamp(11.5px,1.3vw,13px);font-weight:700;line-height:1.5;min-width:0;overflow:hidden;}
+.mcr-p{background:var(--pxl);color:var(--p);}
+.mcr-g{background:var(--gpale);color:var(--gbr);}
+.mcr-a{background:var(--apale);color:var(--ambr);}
+.mc-pros{display:flex;flex-direction:column;gap:5px;margin-top:10px;min-width:0;overflow:hidden;}
+.mc-pro{font-size:clamp(11px,1.3vw,12.5px);color:var(--ts);line-height:1.45;display:flex;align-items:flex-start;gap:5px;min-width:0;overflow:hidden;}
+.mc-pro-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:4px;background:var(--g);}
+
+/* ══════════════════════════════════════
+   PORTFOLIO DRIFT VISUAL
+══════════════════════════════════════ */
+.drift-wrap{border-radius:22px;overflow:hidden;border:1.5px solid var(--bd);min-width:0;box-shadow:var(--shp);}
+.dw-hd{padding:clamp(14px,2.5vw,22px) clamp(18px,3vw,32px);position:relative;overflow:hidden;}
+.dw-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:20px 20px;pointer-events:none;}
+.dwh-p{background:linear-gradient(135deg,var(--pl),var(--p));}
+.dw-title{font-size:clamp(14px,2vw,18px);font-weight:900;color:#fff;position:relative;z-index:1;margin-bottom:3px;min-width:0;overflow:hidden;}
+.dw-sub{font-size:11px;color:rgba(255,255,255,.65);position:relative;z-index:1;min-width:0;overflow:hidden;}
+.dw-body{background:var(--wh);padding:clamp(16px,2.5vw,28px);min-width:0;overflow:hidden;}
+.drift-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,32px);min-width:0;overflow:hidden;}
+.drift-col-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tl);margin-bottom:12px;display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden;}
+.drift-col-title::before{content:'';width:14px;height:2px;border-radius:1px;flex-shrink:0;}
+.dct-before::before{background:var(--red);}
+.dct-after::before{background:var(--g);}
+.drift-rows{display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden;}
+.drift-row{min-width:0;overflow:hidden;}
+.dr-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px;min-width:0;overflow:hidden;}
+.dr-name{font-size:clamp(11.5px,1.5vw,13px);font-weight:700;color:var(--tx);min-width:0;overflow:hidden;}
+.dr-pct{font-size:clamp(12px,1.6vw,14px);font-weight:900;word-break:normal;flex-shrink:0;}
+.drp-over{color:var(--red);}
+.drp-ok{color:var(--gbr);}
+.drp-under{color:var(--teal);}
+.dr-bar-track{height:8px;background:var(--pxl);border-radius:6px;overflow:hidden;min-width:0;}
+.dr-bar-fill{height:100%;border-radius:6px;transform-origin:left;animation:grow 1s ease both;min-width:0;}
+.dbf-g{background:linear-gradient(90deg,var(--g),var(--gh));}
+.dbf-p{background:linear-gradient(90deg,var(--p),var(--ph));}
+.dbf-a{background:linear-gradient(90deg,var(--ambr),var(--amb));}
+.dbf-t{background:linear-gradient(90deg,var(--teal),#22d3ee);}
+.dbf-r{background:linear-gradient(90deg,var(--red),#f87171);}
+.dr-note{font-size:10px;color:var(--tl);margin-top:2px;min-width:0;overflow:hidden;}
+
+/* ══════════════════════════════════════
+   EXAMPLE CARDS
+══════════════════════════════════════ */
+.ex-cards{display:flex;flex-direction:column;gap:clamp(28px,5vw,48px);min-width:0;overflow:hidden;}
+.ex-card{border-radius:24px;overflow:hidden;min-width:0;box-shadow:var(--shp);}
+.exc-hd{padding:clamp(18px,3vw,28px) clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:clamp(14px,2.5vw,22px);position:relative;overflow:hidden;}
+.exc-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+.exh-p{background:linear-gradient(135deg,#1e1b4b,var(--p),var(--ph),#a78bfa);}
+.exh-g{background:linear-gradient(135deg,#052e16,var(--gbr),var(--g),#86efac);}
+.exh-a{background:linear-gradient(135deg,#451a03,var(--ambr),var(--amb),#fde68a);}
+.exh-t{background:linear-gradient(135deg,#0c4a6e,var(--teal),#22d3ee);}
+.exh-r{background:linear-gradient(135deg,#450a0a,var(--red),#f87171);}
+.exc-char{flex-shrink:0;position:relative;z-index:1;}
+.exc-h-text{flex:1;min-width:0;overflow:hidden;position:relative;z-index:1;}
+.exc-badge{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:5px;min-width:0;overflow:hidden;}
+.exc-name{font-size:clamp(18px,3.5vw,34px);font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1;margin-bottom:5px;min-width:0;overflow:hidden;}
+.exc-tagline{font-size:clamp(11.5px,1.6vw,14px);color:rgba(255,255,255,.78);line-height:1.5;margin-bottom:10px;min-width:0;overflow:hidden;}
+.exc-pills{display:flex;gap:7px;flex-wrap:wrap;min-width:0;overflow:hidden;}
+.exc-pill{display:inline-flex;align-items:center;padding:4px 11px;border-radius:100px;font-size:9.5px;font-weight:700;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.25);white-space:nowrap;max-width:100%;overflow:hidden;}
+.exc-body{background:var(--wh);padding:clamp(18px,3vw,28px);min-width:0;overflow:hidden;}
+.exc-2col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,32px);align-items:start;min-width:0;overflow:hidden;}
+.exc-sec-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tl);margin-bottom:12px;display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden;}
+.exc-sec-title::before{content:'';width:14px;height:2px;border-radius:1px;flex-shrink:0;}
+.est-p::before{background:var(--p);}
+.est-g::before{background:var(--g);}
+.est-a::before{background:var(--amb);}
+.est-t::before{background:var(--teal);}
+.est-r::before{background:var(--red);}
+
+/* Rebalancing action list */
+.rebal-list{display:flex;flex-direction:column;gap:9px;min-width:0;overflow:hidden;}
+.rebal-item{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border-radius:12px;border:1.5px solid;min-width:0;overflow:hidden;transition:box-shadow .2s;}
+.rebal-item:hover{box-shadow:var(--shp);}
+.ri-sell{background:rgba(220,38,38,.05);border-color:rgba(220,38,38,.2);}
+.ri-buy{background:rgba(22,163,74,.05);border-color:rgba(22,163,74,.2);}
+.ri-hold{background:var(--pxl);border-color:rgba(109,40,217,.18);}
+.ri-badge{padding:4px 10px;border-radius:100px;font-size:9.5px;font-weight:900;white-space:nowrap;flex-shrink:0;letter-spacing:.3px;}
+.rib-sell{background:var(--red);color:#fff;}
+.rib-buy{background:var(--g);color:#fff;}
+.rib-hold{background:var(--p);color:#fff;}
+.ri-body{flex:1;min-width:0;overflow:hidden;}
+.ri-name{font-size:clamp(12px,1.5vw,13.5px);font-weight:800;color:var(--tx);min-width:0;overflow:hidden;}
+.ri-detail{font-size:clamp(11px,1.3vw,12px);color:var(--ts);line-height:1.5;min-width:0;overflow:hidden;}
+.ri-amt{font-size:clamp(13px,1.8vw,15px);font-weight:900;word-break:normal;flex-shrink:0;}
+
+/* Lesson box */
+.lesson-box{border-radius:14px;padding:clamp(12px,2vw,18px);min-width:0;overflow:hidden;}
+.lb-p{background:linear-gradient(135deg,var(--pxl),var(--pxs));border:1.5px solid rgba(109,40,217,.2);}
+.lb-g{background:linear-gradient(135deg,var(--gpale),#fafffe);border:1.5px solid rgba(22,163,74,.25);}
+.lb-a{background:linear-gradient(135deg,var(--apale),#fffdf5);border:1.5px solid rgba(217,119,6,.2);}
+.lb-t{background:linear-gradient(135deg,var(--tealpale),#f0feff);border:1.5px solid rgba(8,145,178,.2);}
+.lb-r{background:linear-gradient(135deg,var(--rpale),#fff9f9);border:1.5px solid rgba(220,38,38,.2);}
+.lb-title{font-size:clamp(12px,1.7vw,14px);font-weight:900;margin-bottom:6px;min-width:0;overflow:hidden;}
+.lbt-p{color:var(--p);}
+.lbt-g{color:var(--gbr);}
+.lbt-a{color:var(--ambr);}
+.lbt-t{color:var(--teal);}
+.lbt-r{color:var(--red);}
+.lb-desc{font-size:clamp(11.5px,1.4vw,13px);color:var(--ts);line-height:1.68;min-width:0;overflow:hidden;}
+
+/* DEMAT BANNER */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;min-width:0;overflow:hidden;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* NEXT CHAPTER */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left,0px));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right,0px));}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;min-width:0;overflow:hidden;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);min-width:0;overflow:hidden;}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;min-width:0;overflow:hidden;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;display:inline-block;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;min-width:0;overflow:hidden;}
+
+/* ═══ RESPONSIVE ═══ */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.method-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){
+  .concept-grid{grid-template-columns:1fr 1fr;}
+  .method-grid{grid-template-columns:1fr 1fr;}
+  .drift-cols{grid-template-columns:1fr 1fr;}
+  .exc-2col{grid-template-columns:1fr;}
+  .klo-hi-row{grid-template-columns:1fr 1fr 1fr;}
+}
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .concept-grid{grid-template-columns:1fr 1fr;}
+  .method-grid{grid-template-columns:1fr 1fr;}
+  .drift-cols{grid-template-columns:1fr 1fr;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{font-size:14px;padding:12px 20px;}
+  .dmfeats{gap:10px 20px;}
+  .exc-hd{gap:12px;}
+  .exc-name{font-size:clamp(16px,4vw,28px);}
+  .exc-body{padding:clamp(16px,2.5vw,22px);}
+  .exc-char svg{width:clamp(54px,8vw,72px);height:auto;}
+  .hero-pills{gap:6px;}
+  .hero-pill{font-size:10px;padding:6px 11px;}
+  .cc-ico{animation:none;}
+  .mc-ico{animation:none;}
+}
+@media(max-width:640px){
+  .concept-grid{grid-template-columns:1fr;}
+  .method-grid{grid-template-columns:1fr;}
+  .drift-cols{grid-template-columns:1fr;}
+  .exc-hd{flex-direction:column;gap:10px;}
+  .exc-char{align-self:flex-start;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .klo-hi-row{grid-template-columns:1fr 1fr 1fr;}
+  .hero-pills{gap:5px;}
+  .hero-pill{font-size:10px;padding:5px 9px;}
+}
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.5px;}
+  .hdesc{font-size:13px;}
+  .hsub{letter-spacing:2px;font-size:9px;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .h2{letter-spacing:-1px;}
+  .lead{font-size:13.5px;}
+  .tag{letter-spacing:2px;}
+  .klo-title{font-size:14px;}
+  .klo-desc{font-size:12px;}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .klo-hi{padding:10px 8px;}
+  .klo-hi-val{font-size:clamp(10px,3.5vw,13px);}
+  .klo-hi-ico{font-size:18px;}
+  .klo-hi-row{grid-template-columns:1fr 1fr 1fr !important;}
+  .cc-ico{font-size:clamp(22px,4vw,28px);animation:none;}
+  .cc-title{font-size:13px;}
+  .cc-desc{font-size:12px;}
+  .mc-ico{font-size:clamp(24px,4.5vw,32px);animation:none;}
+  .mc-name{font-size:clamp(13px,4vw,17px);}
+  .mc-desc{font-size:12px;}
+  .dr-name{font-size:12px;}
+  .dr-pct{font-size:12.5px;}
+  .exc-hd{padding:clamp(14px,3vw,20px) clamp(12px,3vw,18px);}
+  .exc-name{font-size:clamp(15px,5.5vw,24px);}
+  .exc-tagline{font-size:11.5px;}
+  .exc-pill{font-size:9px;padding:3px 9px;}
+  .exc-body{padding:13px 12px;}
+  .exc-2col{gap:14px;}
+  .exc-sec-title{font-size:9px;letter-spacing:1px;margin-bottom:8px;}
+  .ri-name{font-size:12px;}
+  .ri-detail{font-size:11px;}
+  .ri-badge{font-size:9px;padding:3px 9px;}
+  .ri-amt{font-size:13px;}
+  .lb-title{font-size:12.5px;}
+  .lb-desc{font-size:11.5px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .dmh{letter-spacing:-1px;}
+  .dmsub{font-size:13px;}
+  .nxt-banner{padding:12px 14px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+  .hero-pill{font-size:9px;padding:5px 8px;}
+  .exc-char svg{width:clamp(44px,9vw,60px);height:auto;}
+}
+@media(max-width:360px){
+  .w{padding:26px 12px;}
+  .hh1{font-size:clamp(22px,9vw,34px);letter-spacing:-1px;}
+  .lead{font-size:13px;}
+  .h2{font-size:clamp(18px,8vw,26px);}
+  .klo-hi-row{grid-template-columns:1fr 1fr !important;}
+  .exc-hd{padding:11px 10px;}
+  .exc-name{font-size:clamp(13px,6vw,20px);}
+  .ri-name{font-size:11px;}
+  .lb-desc{font-size:11px;}
+  .exc-char svg{width:clamp(36px,9vw,48px);height:auto;}
+  .nxt-btn{font-size:12px;padding:10px 13px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}
+  .hero-pill{font-size:8.5px;padding:4px 7px;}
+}
+
+/* Touch */
+@media(hover:none) and (pointer:coarse){
+  .concept-card:hover,.method-card:hover,.rebal-item:hover,.ex-card:hover{transform:none!important;box-shadow:var(--shc)!important;}
+  .concept-card:active,.method-card:active,.rebal-item:active{transform:scale(.98);transition:transform .08s;}
+  .dmbtn:active,.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.tag,.eyebrow,.klo-label{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.lead,.cc-desc,.mc-desc,.lb-desc,.ri-detail,.zd-desc{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+  .klo-icon,.cc-ico,.mc-ico{animation:none;}
+}
+
+/* iOS Safari */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top) + 72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom) + 32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top) + 8px));right:max(22px,calc(env(safe-area-inset-right) + 8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.klo-hi-val.purple,.klo-hi-val.green,.h2 .hp,.h2 .hg{
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn{-webkit-tap-highlight-color:transparent;}
+}
+
+/* Android high-DPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .concept-card,.method-card,.ex-card,.klobanner,.drift-wrap{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .exc-char svg{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
+  .rv{opacity:1;transform:none;}
+  .klo-icon,.cc-ico,.mc-ico{animation:none!important;}
+  .dr-bar-fill{animation:none;transform:scaleX(1);}
+}
+
+/* Print */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}
+  .rv{opacity:1;transform:none;}
+  body{color:#000;}
+  .w{padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="vbadge">Portfolio Construction · Basics</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Rebalancing · Portfolio Review · Drift Management</div>
+  <h1 class="hh1">
+    <span class="line1">Rebalancing &amp;</span>
+    <span class="line2">Portfolio Review</span>
+    <span class="line3">Keep Your Portfolio Aligned with Your Original Plan</span>
+  </h1>
+  <div class="hsub">Portfolio Construction Basics · Discipline · Systematic Review</div>
+  <p class="hdesc">Over time, your best-performing stocks grow to dominate your portfolio while laggards shrink — leaving you with a concentrated, risky portfolio you never intended to build. Rebalancing is the systematic discipline that brings you back on track.</p>
+  <div class="hero-pills">
+    <span class="hero-pill hp-p">🔄 Rebalancing</span>
+    <span class="hero-pill hp-g">📅 Review Calendar</span>
+    <span class="hero-pill hp-a">⚖️ Drift Management</span>
+    <span class="hero-pill hp-t">💡 Profit-Taking Rules</span>
+    <span class="hero-pill hp-r">🚫 Avoid Drift Risk</span>
+  </div>
+</section>
+
+
+<!-- ═══ 01 — KLO ═══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Why <span class="hp">Rebalancing</span> Forces You to Buy Low and Sell High — Automatically</h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">🔄</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">Rebalancing is the single investing activity that most closely approximates the ideal of "buy low, sell high" — automatically, systematically, and without requiring you to predict markets. When you rebalance, you are mechanically trimming positions that have grown expensive and adding to positions that have become relatively cheap. This is disciplined contrarian investing with no emotional judgement required.</div>
+        <div class="klo-desc">Imagine you start with a perfectly balanced portfolio: 50% Reliance, 25% HDFC Bank, 25% TCS — all equal by your conviction. A year later, Reliance has rallied 60% while TCS is flat and HDFC Bank is down 10%. Your portfolio is now 63% Reliance, 18% HDFC Bank, 19% TCS. You are now accidentally heavily concentrated in the stock that has already had its big run. Rebalancing says: sell some Reliance (take profits on the winner), buy more HDFC Bank and TCS (add to underperformers). This feels deeply uncomfortable — you're selling a winner and buying underperformers. But research consistently shows that this mechanical discipline outperforms both "buy and hold" and "chase winners" strategies over long periods. Rebalancing forces the "buy low, sell high" behaviour that every investor claims they want but almost none actually practises. By the end of this chapter, you will have a complete rebalancing framework: when to rebalance, how much to rebalance, and how to do it in a tax-efficient way that maximises your net returns.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-p">🔄 Sell winners, buy laggards</span>
+          <span class="kpill kpill-g">📅 Calendar or trigger based</span>
+          <span class="kpill kpill-a">💰 Tax-efficient execution</span>
+          <span class="kpill kpill-r">🎯 Max position drift rule</span>
+        </div>
+        <div class="klo-hi-row">
+          <div class="klo-hi"><div class="klo-hi-ico">📅</div><div class="klo-hi-val purple">Annual</div><div class="klo-hi-lbl">Minimum review frequency</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">⚠️</div><div class="klo-hi-val green">±5% Drift</div><div class="klo-hi-lbl">Trigger for rebalancing</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">📈</div><div class="klo-hi-val purple">+1.5% pa</div><div class="klo-hi-lbl">Rebalancing bonus (research)</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 02 — WHY REBALANCE ═══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — Why Rebalance?</div>
+    <h2 class="h2 rv d2">What <span class="hp">Portfolio Drift</span> Does to Your Risk — Without You Noticing</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Portfolio drift is silent and dangerous. You build a carefully balanced portfolio — then do nothing — and one year later you have accidentally created a completely different, far more concentrated portfolio that you never intended. Here is exactly how drift destroys your original risk plan.</p>
+
+    <div class="concept-grid">
+      <div class="concept-card rv d2">
+        <div class="cc-top">
+          <span class="cc-ico">📈</span>
+          <div class="cc-tw">
+            <div class="cc-title">How Drift Happens — The Silent Portfolio Reshaper</div>
+            <span class="cc-badge ccb-r">The Problem</span>
+          </div>
+        </div>
+        <div class="cc-desc">You start with 10 stocks at 10% each — perfectly balanced. Over 3 years, your 3 best stocks double while 3 others are flat and 4 are down 20%. Without rebalancing, those 3 winners now represent 22–24% of your portfolio each. You have accidentally created a portfolio that is 65%+ concentrated in just 3 stocks. This is not the portfolio you built — this is drift. And the irony: the stocks that have already doubled are now the most expensive relative to their value, while the underperformers may represent the best future opportunity.</div>
+        <div class="cc-eg cce-r">🚨 <strong>The drift trap:</strong> An investor who bought Bajaj Finance, Asian Paints, and TCS in equal weight in 2018 and never rebalanced found 72% of their portfolio in these 3 stocks by 2023 — a concentration they never planned and may not have wanted at those valuations.</div>
+      </div>
+
+      <div class="concept-card rv d3">
+        <div class="cc-top">
+          <span class="cc-ico">🔄</span>
+          <div class="cc-tw">
+            <div class="cc-title">Why Rebalancing Outperforms Buy-and-Hold</div>
+            <span class="cc-badge ccb-g">The Evidence</span>
+          </div>
+        </div>
+        <div class="cc-desc">Research across global markets consistently shows that annual rebalancing adds 1–2% per year to portfolio returns versus buy-and-hold. This is called the "rebalancing bonus." It comes from three sources: (1) Mean reversion — stocks that have risen sharply tend to give back some gains; buying underperformers systematically captures mean reversion. (2) Forced discipline — rebalancing prevents the emotional mistake of chasing recently-hot stocks. (3) Risk control — by consistently trimming overweight positions, you prevent catastrophic single-stock risk from building up invisibly.</div>
+        <div class="cc-eg cce-g">✅ <strong>The evidence:</strong> MSCI research shows that equal-weight rebalanced portfolios outperformed cap-weighted (drift-allowed) portfolios by 1.8% per year over 20 years across 40 countries. The rebalancing bonus is real and consistent.</div>
+      </div>
+
+      <div class="concept-card rv d2">
+        <div class="cc-top">
+          <span class="cc-ico">💰</span>
+          <div class="cc-tw">
+            <div class="cc-title">Tax-Smart Rebalancing — Don't Let LTCG Eat Your Gains</div>
+            <span class="cc-badge ccb-a">Tax Efficiency</span>
+          </div>
+        </div>
+        <div class="cc-desc">The biggest objection to rebalancing: "But I'll have to pay capital gains tax!" This is true — but manageable. Long-term capital gains (LTCG) on Indian equity are taxed at 12.5% above ₹1.25 lakh. Smart rebalancing strategies: (1) Use new SIP money to buy underweight positions rather than selling overweight ones — avoids taxable events. (2) Rebalance only positions held for 1+ year to qualify for LTCG treatment. (3) Net LTCG gains against any LTCL losses in the same financial year. (4) The ₹1.25L annual LTCG exemption allows modest rebalancing each year completely tax-free.</div>
+        <div class="cc-eg cce-a">💡 <strong>The smart move:</strong> Instead of selling overweight Bajaj Finance to rebalance, direct next 6 months of SIP contributions entirely to underweight positions. Same result, zero tax event. Only sell if drift is extreme (position &gt;20% overweight vs target).</div>
+      </div>
+
+      <div class="concept-card rv d3">
+        <div class="cc-top">
+          <span class="cc-ico">📅</span>
+          <div class="cc-tw">
+            <div class="cc-title">The Annual Review Checklist — Not Just Allocation, But Thesis</div>
+            <span class="cc-badge ccb-p">Annual Discipline</span>
+          </div>
+        </div>
+        <div class="cc-desc">Rebalancing is not just about fixing allocation weights — it should trigger a full annual review of every holding's thesis. This is the moment to ask: is the original reason I bought this stock still valid? Has management delivered on their promises? Has the competitive landscape changed? Has valuation drifted into expensive territory? Many investors skip this review and discover 3 years later that they are still holding a stock whose thesis broke 18 months ago — simply because they never scheduled the annual check.</div>
+        <div class="cc-eg cce-p">📋 <strong>Annual review date:</strong> Set a fixed date — April (post full-year results), or November (Q2 results season). Block one full day. Review every position: thesis intact? Management delivering? Valuation zone? Only after this review, decide allocation changes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 03 — THREE METHODS ═══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — Three Rebalancing Methods</div>
+    <h2 class="h2 rv d2">Calendar · Trigger · Hybrid — <span class="hp">Which Rebalancing Method Is Right for You?</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">There is no single "correct" rebalancing method. Each approach has advantages and trade-offs. Understanding all three helps you pick the one that matches your investment style, time availability, and tax situation.</p>
+
+    <div class="method-grid">
+      <!-- Calendar -->
+      <div class="method-card rv d2">
+        <div class="mc-hd mch-time">
+          <div class="mc-hd-inner">
+            <span class="mc-ico">📅</span>
+            <div class="mc-name">Calendar-Based Rebalancing</div>
+            <div class="mc-sub">Rebalance on fixed dates regardless of drift</div>
+          </div>
+        </div>
+        <div class="mc-body">
+          <div class="mc-desc">You set a specific date — annually, semi-annually, or quarterly — and rebalance every time it arrives, regardless of how much or little drift has occurred. The discipline is in the schedule, not the magnitude of drift. Annual rebalancing is the most popular and most tax-efficient version (qualifies more positions for LTCG treatment). Quarterly is more precise but creates more taxable events. Best for investors who prefer simplicity and predictability.</div>
+          <div class="mc-rule mcr-p">📅 <strong>Rule:</strong> Review every April 1st (post full-year results). Any position deviating by more than 3% from target → rebalance to target. All others → hold.</div>
+          <div class="mc-pros">
+            <div class="mc-pro"><div class="mc-pro-dot"></div>Simple to execute — just set a reminder</div>
+            <div class="mc-pro"><div class="mc-pro-dot"></div>Maximises LTCG qualification (annual)</div>
+            <div class="mc-pro"><div class="mc-pro-dot"></div>Prevents emotional rebalancing during market crashes</div>
+            <div class="mc-pro"><div class="mc-pro-dot"></div>Easy to explain and maintain consistently</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trigger -->
+      <div class="method-card rv d3">
+        <div class="mc-hd mch-trigger">
+          <div class="mc-hd-inner">
+            <span class="mc-ico">🎯</span>
+            <div class="mc-name">Threshold / Trigger Rebalancing</div>
+            <div class="mc-sub">Rebalance only when drift exceeds a pre-set threshold</div>
+          </div>
+        </div>
+        <div class="mc-body">
+          <div class="mc-desc">Instead of a fixed date, you rebalance when any position drifts beyond a pre-defined threshold — typically ±5% from target weight. A stock targeted at 10% that grows to 15%+ triggers an immediate review and partial sale. This approach rebalances more often when markets are volatile (more drift) and less often when markets are calm (less drift) — which is actually the opposite of what most investors do emotionally.</div>
+          <div class="mc-rule mcr-g">🎯 <strong>Rule:</strong> Any position exceeding target +5% or falling below target −5% triggers a rebalance to the midpoint of the target range. Monitor monthly (5 minutes using a spreadsheet).</div>
+          <div class="mc-pros">
+            <div class="mc-pro"><div class="mc-pro-dot"></div>Catches extreme drift before it becomes a problem</div>
+            <div class="mc-pro"><div class="mc-pro-dot"></div>Automatically more active in volatile markets</div>
+            <div class="mc-pro"><div class="mc-pro-dot"></div>Prevents catastrophic single-stock concentration</div>
+            <div class="mc-pro"><div class="mc-pro-dot"></div>More precise — only rebalances when needed</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hybrid -->
+      <div class="method-card rv d4">
+        <div class="mc-hd mch-hybrid">
+          <div class="mc-hd-inner">
+            <span class="mc-ico">⚖️</span>
+            <div class="mc-name">Hybrid Rebalancing</div>
+            <div class="mc-sub">Calendar review + threshold triggers — the best of both</div>
+          </div>
+        </div>
+        <div class="mc-body">
+          <div class="mc-desc">The hybrid approach combines both: conduct a scheduled annual review (April/October) AND rebalance any time a position drifts beyond ±7–8% from target during the year. This gives the discipline of calendar-based rebalancing while catching extreme outliers before the annual review date. This is the most commonly recommended approach for long-term Indian equity investors — it balances tax efficiency with risk control.</div>
+          <div class="mc-rule mcr-a">⚖️ <strong>Rule:</strong> Annual April review (always). Plus immediate trigger if any position exceeds target by ±8% at any monthly check. Prioritise directing new SIP money to underweight positions before selling overweight ones.</div>
+          <div class="mc-pros">
+            <div class="mc-pro"><div class="mc-pro-dot"></div>Best balance of simplicity and precision</div>
+            <div class="mc-pro"><div class="mc-pro-dot"></div>Annual review catches thesis changes too</div>
+            <div class="mc-pro"><div class="mc-pro-dot"></div>Emergency trigger prevents extreme concentration</div>
+            <div class="mc-pro"><div class="mc-pro-dot"></div>Recommended for most long-term investors</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Portfolio drift visual -->
+    <div class="drift-wrap rv d4" style="margin-top:clamp(28px,4vw,44px);">
+      <div class="dw-hd dwh-p">
+        <div class="dw-title">📊 Portfolio Drift Example — Before &amp; After Rebalancing</div>
+        <div class="dw-sub">A ₹10 lakh portfolio with 10% target weight per stock after 2 years of market movement — showing the drift problem and rebalancing solution</div>
+      </div>
+      <div class="dw-body">
+        <div class="drift-cols">
+          <div>
+            <div class="drift-col-title dct-before">Before Rebalancing — Drifted Portfolio</div>
+            <div class="drift-rows">
+              <div class="drift-row"><div class="dr-top"><div class="dr-name">Bajaj Finance</div><div class="dr-pct drp-over">22% 🔴</div></div><div class="dr-bar-track"><div class="dr-bar-fill dbf-r" style="width:100%;animation-delay:0s;"></div></div><div class="dr-note">Target 10% · Overweight by 12% · Must trim</div></div>
+              <div class="drift-row"><div class="dr-top"><div class="dr-name">Asian Paints</div><div class="dr-pct drp-over">18% 🔴</div></div><div class="dr-bar-track"><div class="dr-bar-fill dbf-r" style="width:81%;animation-delay:.1s;"></div></div><div class="dr-note">Target 10% · Overweight by 8% · Should trim</div></div>
+              <div class="drift-row"><div class="dr-top"><div class="dr-name">TCS</div><div class="dr-pct drp-ok">11% 🟢</div></div><div class="dr-bar-track"><div class="dr-bar-fill dbf-g" style="width:50%;animation-delay:.2s;"></div></div><div class="dr-note">Target 10% · Near target · Hold</div></div>
+              <div class="drift-row"><div class="dr-top"><div class="dr-name">HDFC Bank</div><div class="dr-pct drp-under">8% 🔵</div></div><div class="dr-bar-track"><div class="dr-bar-fill dbf-t" style="width:36%;animation-delay:.3s;"></div></div><div class="dr-note">Target 10% · Underweight · Add more</div></div>
+              <div class="drift-row"><div class="dr-top"><div class="dr-name">Sun Pharma</div><div class="dr-pct drp-under">7% 🔵</div></div><div class="dr-bar-track"><div class="dr-bar-fill dbf-t" style="width:31%;animation-delay:.4s;"></div></div><div class="dr-note">Target 10% · Underweight · Add more</div></div>
+              <div class="drift-row"><div class="dr-top"><div class="dr-name">6 others (all &lt;7%)</div><div class="dr-pct drp-under">34% 🔵</div></div><div class="dr-bar-track"><div class="dr-bar-fill dbf-t" style="width:64%;animation-delay:.5s;"></div></div><div class="dr-note">All below 10% target · Add through new SIPs</div></div>
+            </div>
+          </div>
+          <div>
+            <div class="drift-col-title dct-after">After Rebalancing — Target Portfolio</div>
+            <div class="drift-rows">
+              <div class="drift-row"><div class="dr-top"><div class="dr-name">Bajaj Finance</div><div class="dr-pct drp-ok">10% ✅</div></div><div class="dr-bar-track"><div class="dr-bar-fill dbf-g" style="width:45%;animation-delay:.1s;"></div></div><div class="dr-note">Trimmed from 22% → Booked ₹1.2L LTCG</div></div>
+              <div class="drift-row"><div class="dr-top"><div class="dr-name">Asian Paints</div><div class="dr-pct drp-ok">10% ✅</div></div><div class="dr-bar-track"><div class="dr-bar-fill dbf-g" style="width:45%;animation-delay:.2s;"></div></div><div class="dr-note">Trimmed from 18% → Reinvested in laggards</div></div>
+              <div class="drift-row"><div class="dr-top"><div class="dr-name">TCS</div><div class="dr-pct drp-ok">10% ✅</div></div><div class="dr-bar-track"><div class="dr-bar-fill dbf-g" style="width:45%;animation-delay:.3s;"></div></div><div class="dr-note">No change needed · Already near target</div></div>
+              <div class="drift-row"><div class="dr-top"><div class="dr-name">HDFC Bank</div><div class="dr-pct drp-ok">10% ✅</div></div><div class="dr-bar-track"><div class="dr-bar-fill dbf-g" style="width:45%;animation-delay:.4s;"></div></div><div class="dr-note">Added via SIP redirected from new contributions</div></div>
+              <div class="drift-row"><div class="dr-top"><div class="dr-name">Sun Pharma</div><div class="dr-pct drp-ok">10% ✅</div></div><div class="dr-bar-track"><div class="dr-bar-fill dbf-g" style="width:45%;animation-delay:.5s;"></div></div><div class="dr-note">Added via proceeds from Bajaj Finance trim</div></div>
+              <div class="drift-row"><div class="dr-top"><div class="dr-name">6 others</div><div class="dr-pct drp-ok">50% ✅</div></div><div class="dr-bar-track"><div class="dr-bar-fill dbf-g" style="width:75%;animation-delay:.6s;"></div></div><div class="dr-note">All restored to 10% target via SIP redirects</div></div>
+            </div>
+            <div style="margin-top:12px;padding:10px 14px;background:var(--gpale);border-radius:12px;border:1px solid rgba(22,163,74,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--gbr);line-height:1.6;min-width:0;overflow:hidden;">
+              ✅ <strong>Net result:</strong> Portfolio risk reduced (max position 10% vs 22% before). Tax-efficient execution (booked ₹1.25L LTCG = exactly the exempt limit). Mechanically bought underperformers at relatively cheaper prices. Followed no emotional judgement — just the rules.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 04 — FIVE EXAMPLES ═══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">04 — Five Rebalancing Examples</div>
+    <h2 class="h2 rv d2">Rebalancing <span class="hp">in Practice</span> — Five Investors, Five Real Situations</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Five different investors facing five different rebalancing situations — from the classic drift problem to tax-smart execution to the disciplined annual review process. Each example shows exactly what the investor did, why, and what it achieved.</p>
+
+    <div class="ex-cards">
+
+      <!-- EXAMPLE 1: The Annual Rebalancer -->
+      <div class="ex-card rv d2">
+        <div class="exc-hd exh-p">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3s ease-in-out infinite;">
+              <!-- Calendar visual -->
+              <rect x="8" y="36" width="52" height="52" rx="6" fill="rgba(255,255,255,.22)"/>
+              <rect x="8" y="36" width="52" height="16" rx="6" fill="rgba(255,255,255,.3)"/>
+              <!-- Calendar grid lines -->
+              <rect x="14" y="58" width="6" height="6" rx="1" fill="rgba(255,255,255,.4)"/>
+              <rect x="24" y="58" width="6" height="6" rx="1" fill="rgba(255,255,255,.4)"/>
+              <rect x="34" y="58" width="6" height="6" rx="1" fill="rgba(255,255,255,.4)"/>
+              <rect x="44" y="58" width="6" height="6" rx="1" fill="rgba(255,255,255,.4)"/>
+              <rect x="14" y="68" width="6" height="6" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="24" y="68" width="6" height="6" rx="1" fill="#4ade80" opacity=".8"/>
+              <rect x="34" y="68" width="6" height="6" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="44" y="68" width="6" height="6" rx="1" fill="rgba(255,255,255,.35)"/>
+              <!-- Circular arrows (rebalancing symbol) -->
+              <path d="M60 52 Q68 44 72 52 Q68 60 60 56" stroke="rgba(255,255,255,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <polygon points="60,52 56,58 64,56" fill="rgba(255,255,255,.5)"/>
+              <!-- Investor character -->
+              <circle cx="68" cy="22" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="68" cy="9" rx="12" ry="5" fill="#4c1d95"/>
+              <circle cx="62" cy="19" r="2.2" fill="#3730a3"/>
+              <circle cx="74" cy="19" r="2.2" fill="#3730a3"/>
+              <path d="M62 28 Q68 32 74 28" stroke="#3730a3" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="60" y="35" width="16" height="18" rx="5" fill="#7c3aed"/>
+              <rect x="48" y="39" width="14" height="4" rx="2" fill="#7c3aed" transform="rotate(-15 55 41)"/>
+              <rect x="60" y="51" width="5" height="9" rx="2.5" fill="#4c1d95"/>
+              <rect x="68" y="51" width="5" height="9" rx="2.5" fill="#4c1d95"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 01 · Annual Calendar Rebalancing · ₹15L Portfolio</div>
+            <div class="exc-name">Deepa — The April Rebalancer</div>
+            <div class="exc-tagline">Deepa sets her portfolio calendar every April 1st — after all full-year results are available. She does a comprehensive 1-day review: checks thesis, reviews management execution, and rebalances allocation. Three years in, this discipline has given her a rebalancing bonus of approximately 1.4% per year above what buy-and-hold delivered.</div>
+            <div class="exc-pills"><span class="exc-pill">₹15L portfolio · 12 stocks</span><span class="exc-pill">Annual April review</span><span class="exc-pill">±5% drift threshold</span><span class="exc-pill">LTCG-aware execution</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-p">April 2024 Rebalancing Actions</div>
+              <div class="rebal-list">
+                <div class="rebal-item ri-sell">
+                  <div class="ri-badge rib-sell">TRIM</div>
+                  <div class="ri-body">
+                    <div class="ri-name">Bajaj Finance (22% → 10%)</div>
+                    <div class="ri-detail">Sold ₹1.8L worth. LTCG profit booked = ₹96K (within ₹1.25L exempt limit for FY). Conviction intact but position overweight due to strong run.</div>
+                  </div>
+                  <div class="ri-amt" style="color:var(--red);">−₹1.8L</div>
+                </div>
+                <div class="rebal-item ri-sell">
+                  <div class="ri-badge rib-sell">TRIM</div>
+                  <div class="ri-body">
+                    <div class="ri-name">Asian Paints (17% → 10%)</div>
+                    <div class="ri-detail">Sold ₹1.05L worth. LTCG loss (stock is down from purchase price) — actually nets against gains, reducing tax liability. Thesis intact.</div>
+                  </div>
+                  <div class="ri-amt" style="color:var(--red);">−₹1.05L</div>
+                </div>
+                <div class="rebal-item ri-buy">
+                  <div class="ri-badge rib-buy">ADD</div>
+                  <div class="ri-body">
+                    <div class="ri-name">HDFC Bank (7% → 10%)</div>
+                    <div class="ri-detail">Added ₹45K. Post-merger concerns have created buying opportunity. P/B at decade-low. Thesis unchanged — best private bank in India.</div>
+                  </div>
+                  <div class="ri-amt" style="color:var(--gbr);">+₹45K</div>
+                </div>
+                <div class="rebal-item ri-buy">
+                  <div class="ri-badge rib-buy">ADD</div>
+                  <div class="ri-body">
+                    <div class="ri-name">Sun Pharma (6% → 10%)</div>
+                    <div class="ri-detail">Added ₹60K. US specialty portfolio progress on track. India branded generics growing 15%. Underweight due to flat price, not deteriorating business.</div>
+                  </div>
+                  <div class="ri-amt" style="color:var(--gbr);">+₹60K</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-p">Results After Rebalancing</div>
+              <div style="display:flex;flex-direction:column;gap:10px;min-width:0;overflow:hidden;">
+                <div style="padding:12px 14px;background:var(--pxl);border-radius:12px;border:1px solid rgba(109,40,217,.18);font-size:clamp(11.5px,1.4vw,13px);color:var(--p);line-height:1.6;min-width:0;overflow:hidden;">
+                  💰 <strong>Tax result:</strong> LTCG booked ₹96K profit + LTCL of ₹12K loss = net ₹84K taxable gain. Below ₹1.25L exempt threshold. Zero tax paid on entire rebalancing exercise.
+                </div>
+                <div style="padding:12px 14px;background:var(--gpale);border-radius:12px;border:1px solid rgba(22,163,74,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--gbr);line-height:1.6;min-width:0;overflow:hidden;">
+                  ⚖️ <strong>Risk result:</strong> Maximum single position reduced from 22% to 10%. Portfolio is back to its original diversification profile. No single stock can now cause more than 10% damage in a complete wipeout.
+                </div>
+                <div style="padding:12px 14px;background:var(--apale);border-radius:12px;border:1px solid rgba(217,119,6,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--ambr);line-height:1.6;min-width:0;overflow:hidden;">
+                  🎯 <strong>Thesis check result:</strong> All 12 holdings reviewed. 10 of 12 — thesis intact, hold. 1 stock (small pharma) — management changed, governance concern → exited completely. 1 stock (retail) — thesis evolving, reduced to 5%.
+                </div>
+              </div>
+              <div class="lesson-box lb-p" style="margin-top:12px;">
+                <div class="lb-title lbt-p">💡 Key Lesson — Rebalancing and Thesis Review Are One Combined Process</div>
+                <div class="lb-desc">Deepa's April review combines rebalancing (fixing allocation) with thesis review (checking conviction) in a single annual exercise. This is the most efficient approach — you are already looking at every position, so reviewing the thesis simultaneously costs almost no extra time and prevents holding broken-thesis positions indefinitely.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE 2: SIP-Based Rebalancing (No Selling) -->
+      <div class="ex-card rv d3">
+        <div class="exc-hd exh-g">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.3s ease-in-out infinite .3s;">
+              <!-- SIP / auto-invest visual -->
+              <rect x="8" y="46" width="52" height="42" rx="4" fill="rgba(255,255,255,.18)"/>
+              <rect x="8" y="40" width="52" height="10" rx="3" fill="rgba(255,255,255,.24)"/>
+              <!-- Growing bars (SIP accumulation) -->
+              <rect x="14" y="72" width="8" height="14" rx="1" fill="rgba(255,255,255,.25)"/>
+              <rect x="26" y="64" width="8" height="22" rx="1" fill="rgba(255,255,255,.3)"/>
+              <rect x="38" y="56" width="8" height="30" rx="1" fill="rgba(255,255,255,.4)"/>
+              <rect x="50" y="48" width="8" height="38" rx="1" fill="#4ade80" opacity=".75"/>
+              <!-- Arrow → redirecting -->
+              <path d="M62 70 L70 62 L78 70" stroke="rgba(255,255,255,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <path d="M70 62 L70 82" stroke="rgba(255,255,255,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <!-- Young saver -->
+              <circle cx="68" cy="22" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="68" cy="9" rx="12" ry="5" fill="#15803d"/>
+              <circle cx="62" cy="19" r="2.2" fill="#14532d"/>
+              <circle cx="74" cy="19" r="2.2" fill="#14532d"/>
+              <path d="M62 28 Q68 32 74 28" stroke="#14532d" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="60" y="35" width="16" height="18" rx="5" fill="#16a34a"/>
+              <rect x="48" y="39" width="14" height="4" rx="2" fill="#16a34a" transform="rotate(-15 55 41)"/>
+              <rect x="60" y="51" width="5" height="9" rx="2.5" fill="#14532d"/>
+              <rect x="68" y="51" width="5" height="9" rx="2.5" fill="#14532d"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 02 · SIP-Redirect Rebalancing · Zero Tax Events · ₹5L Portfolio</div>
+            <div class="exc-name">Kiran — The SIP Redirector</div>
+            <div class="exc-tagline">Kiran has a ₹20,000 monthly SIP that goes into direct equity and mutual funds. Instead of selling overweight positions (and triggering tax), she redirects new SIP contributions to underweight positions — achieving the same rebalancing effect without a single taxable event.</div>
+            <div class="exc-pills"><span class="exc-pill">₹20K monthly SIP</span><span class="exc-pill">Zero selling required</span><span class="exc-pill">No tax events</span><span class="exc-pill">Natural rebalancing via inflows</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-g">SIP Redirect Strategy — April to October</div>
+              <div class="rebal-list">
+                <div class="rebal-item ri-hold">
+                  <div class="ri-badge rib-hold">PAUSE</div>
+                  <div class="ri-body">
+                    <div class="ri-name">Bajaj Finance SIP — Paused for 6 months</div>
+                    <div class="ri-detail">Currently at 20% of portfolio (target 10%). Stop new SIP contributions for 6 months to let other positions catch up through their own SIPs and Bajaj Finance's weight naturally dilutes.</div>
+                  </div>
+                  <div class="ri-amt" style="color:var(--p);">₹0/mo</div>
+                </div>
+                <div class="rebal-item ri-buy">
+                  <div class="ri-badge rib-buy">BOOST</div>
+                  <div class="ri-body">
+                    <div class="ri-name">HDFC Bank SIP — Doubled for 6 months</div>
+                    <div class="ri-detail">Currently at 6% (target 10%). Redirected Bajaj Finance SIP to HDFC Bank. ₹6,000/month added on top of existing ₹2,000 → ₹8,000/month for HDFC Bank for 6 months.</div>
+                  </div>
+                  <div class="ri-amt" style="color:var(--gbr);">+₹6K/mo</div>
+                </div>
+                <div class="rebal-item ri-buy">
+                  <div class="ri-badge rib-buy">BOOST</div>
+                  <div class="ri-body">
+                    <div class="ri-name">Sun Pharma SIP — Tripled for 6 months</div>
+                    <div class="ri-detail">Currently at 5% (target 10%). Part of the redirected SIP goes here. Adding ₹4,000/month above existing contribution to bring pharma exposure back to target.</div>
+                  </div>
+                  <div class="ri-amt" style="color:var(--gbr);">+₹4K/mo</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-g">Why This Works Beautifully</div>
+              <div style="display:flex;flex-direction:column;gap:9px;min-width:0;overflow:hidden;">
+                <div style="padding:11px 13px;background:var(--gpale);border-radius:12px;border:1px solid rgba(22,163,74,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--gbr);line-height:1.6;min-width:0;overflow:hidden;">
+                  ✅ <strong>Zero capital gains tax:</strong> No selling. No taxable events. Bajaj Finance continues compounding. HDFC and Sun Pharma receive fresh capital at current (cheaper) prices.
+                </div>
+                <div style="padding:11px 13px;background:var(--gpale);border-radius:12px;border:1px solid rgba(22,163,74,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--gbr);line-height:1.6;min-width:0;overflow:hidden;">
+                  ✅ <strong>No emotional difficulty:</strong> Selling a winner feels wrong. Redirecting new money to laggards feels manageable. Same economic effect — psychologically much easier to execute consistently.
+                </div>
+                <div style="padding:11px 13px;background:var(--gpale);border-radius:12px;border:1px solid rgba(22,163,74,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--gbr);line-height:1.6;min-width:0;overflow:hidden;">
+                  ✅ <strong>Works slowly but surely:</strong> SIP-based rebalancing is slower than selling — takes 6–12 months to meaningfully correct large drift. But for positions only moderately overweight (not extreme), it's the most elegant solution available.
+                </div>
+              </div>
+              <div class="lesson-box lb-g" style="margin-top:12px;">
+                <div class="lb-title lbt-g">✅ Key Lesson — Use New Money to Rebalance Before Selling Old Holdings</div>
+                <div class="lb-desc">Always exhaust the "redirect new SIP money" option before triggering any sales. If the drift is modest (within 10%), SIP redirection over 6–12 months achieves the same outcome with zero tax cost. Only sell existing positions if the drift is extreme (15%+ overweight) and cannot be corrected within 12 months of SIP redirection.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE 3: Threshold Trigger Catch -->
+      <div class="ex-card rv d4">
+        <div class="exc-hd exh-a">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.5s ease-in-out infinite .6s;">
+              <!-- Alert/monitoring screen -->
+              <rect x="6" y="38" width="54" height="50" rx="4" fill="rgba(255,255,255,.18)"/>
+              <rect x="6" y="32" width="54" height="10" rx="3" fill="rgba(255,255,255,.24)"/>
+              <!-- Alert lines on screen -->
+              <rect x="12" y="46" width="8" height="2" rx="1" fill="#4ade80" opacity=".8"/>
+              <rect x="12" y="50" width="16" height="2" rx="1" fill="#4ade80" opacity=".7"/>
+              <rect x="12" y="54" width="6"  height="2" rx="1" fill="#fbbf24" opacity=".9"/>
+              <rect x="12" y="58" width="14" height="2" rx="1" fill="#fbbf24" opacity=".8"/>
+              <rect x="12" y="62" width="10" height="2" rx="1" fill="#f87171" opacity=".9" style="animation:pulse 1.5s ease-in-out infinite;"/>
+              <rect x="12" y="66" width="18" height="2" rx="1" fill="#f87171" opacity=".8" style="animation:pulse 1.5s ease-in-out infinite .2s;"/>
+              <!-- Alert bell -->
+              <path d="M58 42 Q64 36 70 42 L72 52 Q72 56 64 56 Q56 56 56 52 Z" fill="#fbbf24" opacity=".85" style="animation:floatB 2s ease-in-out infinite;"/>
+              <circle cx="64" cy="58" r="2.5" fill="#fbbf24" opacity=".8"/>
+              <!-- Analyst with glasses -->
+              <circle cx="66" cy="22" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="66" cy="9" rx="12" ry="5" fill="#92400e"/>
+              <circle cx="60" cy="19" r="2.2" fill="#78350f"/>
+              <circle cx="72" cy="19" r="2.2" fill="#78350f"/>
+              <path d="M60 28 Q66 32 72 28" stroke="#78350f" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="58" y="35" width="16" height="18" rx="5" fill="#d97706"/>
+              <rect x="58" y="51" width="5" height="9" rx="2.5" fill="#92400e"/>
+              <rect x="66" y="51" width="5" height="9" rx="2.5" fill="#92400e"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 03 · Trigger-Based Rebalancing · Caught Mid-Year Extreme Drift</div>
+            <div class="exc-name">Sameer — The Threshold Watcher</div>
+            <div class="exc-tagline">Sameer checks his portfolio allocation every month (takes 10 minutes with a spreadsheet). In August, his monthly check revealed that Reliance Industries had grown from a 10% to a 20% position after a strong Q1 rally — 10% above target, triggering his pre-set ±8% rule. He acted immediately rather than waiting for his November annual review.</div>
+            <div class="exc-pills"><span class="exc-pill">Monthly 10-min allocation check</span><span class="exc-pill">±8% threshold rule</span><span class="exc-pill">Triggered mid-year</span><span class="exc-pill">Prevented 20%+ concentration risk</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-a">August Trigger — Mid-Year Emergency Rebalance</div>
+              <div class="rebal-list">
+                <div class="rebal-item ri-sell">
+                  <div class="ri-badge rib-sell">TRIGGERED</div>
+                  <div class="ri-body">
+                    <div class="ri-name">Reliance Industries — 20% → 12%</div>
+                    <div class="ri-detail">Rose from 10% to 20% target after 60% rally in 8 months. Threshold = 10% + 8% = 18%. At 20% the rule is triggered. Sold ₹96K worth (held 8 months, not LTCG-eligible — paid 20% STCG on ₹32K profit = ₹6,400 tax. Still worthwhile given risk reduction).</div>
+                  </div>
+                  <div class="ri-amt" style="color:var(--red);">−₹96K</div>
+                </div>
+                <div class="rebal-item ri-buy">
+                  <div class="ri-badge rib-buy">REDIRECTED</div>
+                  <div class="ri-body">
+                    <div class="ri-name">Maruti Suzuki (EV transition dip) — 6% → 10%</div>
+                    <div class="ri-detail">Had fallen to 6% due to EV transition concerns. Conviction intact (42% market share, EV launch pipeline on track). Added ₹48K at depressed prices — classic rebalancing bonus opportunity.</div>
+                  </div>
+                  <div class="ri-amt" style="color:var(--gbr);">+₹48K</div>
+                </div>
+                <div class="rebal-item ri-buy">
+                  <div class="ri-badge rib-buy">REDIRECTED</div>
+                  <div class="ri-body">
+                    <div class="ri-name">Midcap Index Fund — 5% → 10%</div>
+                    <div class="ri-detail">Had drifted down due to mid-cap underperformance. Redirected remaining proceeds to midcap index fund — systematic way to buy the underperforming segment.</div>
+                  </div>
+                  <div class="ri-amt" style="color:var(--gbr);">+₹48K</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-a">The Monthly Monitoring Routine</div>
+              <div style="padding:clamp(12px,2vw,18px);background:var(--apale);border-radius:14px;border:1.5px solid rgba(217,119,6,.2);margin-bottom:14px;min-width:0;overflow:hidden;">
+                <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ambr);margin-bottom:8px;">Sameer's 10-Minute Monthly Check</div>
+                <div style="display:flex;flex-direction:column;gap:6px;min-width:0;overflow:hidden;">
+                  <div style="font-size:clamp(11.5px,1.4vw,13px);color:var(--ts);display:flex;align-items:flex-start;gap:6px;min-width:0;overflow:hidden;"><span style="flex-shrink:0;color:var(--ambr);">1.</span><div>Open portfolio tracker. Note current value of each position.</div></div>
+                  <div style="font-size:clamp(11.5px,1.4vw,13px);color:var(--ts);display:flex;align-items:flex-start;gap:6px;min-width:0;overflow:hidden;"><span style="flex-shrink:0;color:var(--ambr);">2.</span><div>Calculate each position as % of total portfolio value.</div></div>
+                  <div style="font-size:clamp(11.5px,1.4vw,13px);color:var(--ts);display:flex;align-items:flex-start;gap:6px;min-width:0;overflow:hidden;"><span style="flex-shrink:0;color:var(--ambr);">3.</span><div>Compare each position to target weight. Flag any exceeding ±8%.</div></div>
+                  <div style="font-size:clamp(11.5px,1.4vw,13px);color:var(--ts);display:flex;align-items:flex-start;gap:6px;min-width:0;overflow:hidden;"><span style="flex-shrink:0;color:var(--ambr);">4.</span><div>If flag → rebalance within 2 weeks. If no flag → done for the month.</div></div>
+                </div>
+              </div>
+              <div class="lesson-box lb-a">
+                <div class="lb-title lbt-a">⚠️ Key Lesson — Even Short-Term Tax Costs Can Be Worth Paying to Control Risk</div>
+                <div class="lb-desc">Sameer paid ₹6,400 in STCG tax to reduce his Reliance position from 20% to 12%. Was it worth it? Yes — because the alternative was running a 20% concentration in a single stock. If Reliance had then fallen 30% (as it did in a subsequent correction), a 20% position would have cost him ₹60,000. The ₹6,400 tax was insurance against a ₹60,000 potential downside. Sometimes paying tax is the right decision.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ DEMAT BANNER ═══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Rebalance with Discipline</div>
+    <div class="dmh">Set a Date. <span class="dmhs">Rebalance Every Year.</span> Outperform.</div>
+    <div class="dmsub">The investors who rebalance systematically don't need to be smarter than the market. They just need to be more disciplined. Start your rebalancing habit today — it takes one day per year and adds 1–2% per year to your returns.</div>
+    <div class="dmfeats">
+      <div class="dmf">Track portfolio allocation monthly (10 min)</div>
+      <div class="dmf">Set ±8% drift alerts in your tracker</div>
+      <div class="dmf">Annual thesis review every April</div>
+      <div class="dmf">Open your account from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ═══ EXAMPLES 4 & 5 ═══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">04 — Continued</div>
+    <div class="ex-cards">
+
+      <!-- EXAMPLE 4: The Wrong Way (Buying More of Losers Without Checking Thesis) -->
+      <div class="ex-card rv d2">
+        <div class="exc-hd exh-r">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.2s ease-in-out infinite .9s;">
+              <!-- Falling chart -->
+              <rect x="8" y="44" width="52" height="44" rx="4" fill="rgba(255,255,255,.18)"/>
+              <rect x="8" y="38" width="52" height="10" rx="3" fill="rgba(255,255,255,.24)"/>
+              <!-- Downtrend chart with "averaging down" arrows -->
+              <polyline points="14,52 22,54 28,58 36,64 44,70 52,78" stroke="#f87171" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <!-- Down arrows (averaging down mistake) -->
+              <path d="M28 50 L28 60" stroke="rgba(255,255,255,.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <polygon points="24,58 28,64 32,58" fill="rgba(255,255,255,.4)"/>
+              <path d="M40 56 L40 68" stroke="rgba(255,255,255,.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <polygon points="36,66 40,72 44,66" fill="rgba(255,255,255,.4)"/>
+              <!-- Warning sign -->
+              <path d="M60 44 L70 60 L50 60 Z" fill="#fbbf24" opacity=".9"/>
+              <rect x="64" y="48" width="2.5" height="7" rx="1.25" fill="#78350f"/>
+              <!-- Worried investor -->
+              <circle cx="66" cy="22" r="14" fill="rgba(255,255,255,.9)"/>
+              <ellipse cx="66" cy="9" rx="12" ry="5" fill="#991b1b"/>
+              <circle cx="60" cy="19" r="2" fill="#7f1d1d"/>
+              <circle cx="72" cy="19" r="2" fill="#7f1d1d"/>
+              <path d="M60 29 Q66 25 72 29" stroke="#7f1d1d" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <rect x="58" y="35" width="16" height="18" rx="5" fill="#dc2626"/>
+              <rect x="58" y="51" width="5" height="9" rx="2.5" fill="#991b1b"/>
+              <rect x="66" y="51" width="5" height="9" rx="2.5" fill="#991b1b"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 04 · The Wrong Rebalancing · Cautionary Tale</div>
+            <div class="exc-name">Ravi — The Thesis-Blind Rebalancer</div>
+            <div class="exc-tagline">Ravi understood rebalancing mechanically but made the most dangerous mistake: he applied the "buy underweight positions" rule to a holding whose thesis had fundamentally broken — effectively averaging down into a deteriorating business. Rebalancing without checking the thesis first is not discipline; it is automated value destruction.</div>
+            <div class="exc-pills"><span class="exc-pill">Rebalanced without thesis check</span><span class="exc-pill">Added to broken-thesis stock</span><span class="exc-pill">Lost ₹1.8L over 2 years</span><span class="exc-pill">Critical lesson for all investors</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-r">What Went Wrong — Step by Step</div>
+              <div class="rebal-list">
+                <div class="rebal-item ri-sell" style="background:rgba(220,38,38,.05);border-color:rgba(220,38,38,.2);">
+                  <div class="ri-badge rib-sell">ERROR 1</div>
+                  <div class="ri-body">
+                    <div class="ri-name">Vodafone Idea at 12% → fell to 6% of portfolio</div>
+                    <div class="ri-detail">Ravi's original 10% position had fallen to 6% as Vodafone Idea stock dropped 40% due to Supreme Court AGR ruling. His rebalancing rule said "add to underweight positions." He should have first asked: is the thesis intact?</div>
+                  </div>
+                  <div class="ri-amt" style="color:var(--red);">⚠️</div>
+                </div>
+                <div class="rebal-item ri-sell" style="background:rgba(220,38,38,.05);border-color:rgba(220,38,38,.2);">
+                  <div class="ri-badge rib-sell">ERROR 2</div>
+                  <div class="ri-body">
+                    <div class="ri-name">Added ₹90K without checking thesis — "rebalancing rule says buy"</div>
+                    <div class="ri-detail">He added ₹90K to bring Vodafone Idea back to 10%. But the thesis was broken: the AGR ruling had created ₹50,000+ crore of dues that made the company structurally unviable. This was not a temporary dip — it was a business death sentence. The rebalancing rule should have been suspended pending thesis check.</div>
+                  </div>
+                  <div class="ri-amt" style="color:var(--red);">−₹90K</div>
+                </div>
+                <div class="rebal-item ri-sell" style="background:rgba(220,38,38,.05);border-color:rgba(220,38,38,.2);">
+                  <div class="ri-badge rib-sell">RESULT</div>
+                  <div class="ri-body">
+                    <div class="ri-name">Vodafone Idea fell another 70% — total loss ₹1.8 lakh</div>
+                    <div class="ri-detail">The ₹90K he added plus the original position lost 70% of value. Total loss: ₹1.8 lakh. This was entirely avoidable — a 10-minute thesis check would have revealed the AGR ruling made the original bull case impossible.</div>
+                  </div>
+                  <div class="ri-amt" style="color:var(--red);">−₹1.8L</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-r">The Correct Process (What Should Have Happened)</div>
+              <div style="padding:clamp(12px,2vw,16px);background:var(--gpale);border-radius:14px;border:1.5px solid rgba(22,163,74,.2);margin-bottom:12px;min-width:0;overflow:hidden;">
+                <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:8px;">The Right Rebalancing Sequence (Always)</div>
+                <div style="display:flex;flex-direction:column;gap:6px;min-width:0;overflow:hidden;">
+                  <div style="font-size:clamp(11.5px,1.4vw,13px);color:var(--ts);display:flex;align-items:flex-start;gap:6px;min-width:0;overflow:hidden;"><span style="color:var(--gbr);font-weight:800;flex-shrink:0;">Step 1</span><div>A position is underweight → <strong>pause before adding.</strong></div></div>
+                  <div style="font-size:clamp(11.5px,1.4vw,13px);color:var(--ts);display:flex;align-items:flex-start;gap:6px;min-width:0;overflow:hidden;"><span style="color:var(--gbr);font-weight:800;flex-shrink:0;">Step 2</span><div>Read the latest concall transcript + check what has changed since you bought.</div></div>
+                  <div style="font-size:clamp(11.5px,1.4vw,13px);color:var(--ts);display:flex;align-items:flex-start;gap:6px;min-width:0;overflow:hidden;"><span style="color:var(--gbr);font-weight:800;flex-shrink:0;">Step 3</span><div>Ask: <strong>Is the original thesis still intact?</strong> If yes → add as rebalancing rule says. If no → exit the position entirely, don't add.</div></div>
+                  <div style="font-size:clamp(11.5px,1.4vw,13px);color:var(--ts);display:flex;align-items:flex-start;gap:6px;min-width:0;overflow:hidden;"><span style="color:var(--gbr);font-weight:800;flex-shrink:0;">Step 4</span><div>Only after thesis confirmed → execute the rebalancing trade.</div></div>
+                </div>
+              </div>
+              <div class="lesson-box lb-r">
+                <div class="lb-title lbt-r">🚨 Key Lesson — Rebalancing Rules Are NOT a Substitute for Thesis Review</div>
+                <div class="lb-desc">Mechanical rebalancing without thesis review is dangerous. "Buy the underweight position" is correct only when the original thesis is intact. When a stock has fallen because the business has fundamentally changed — not because of temporary market noise — the correct action is to exit, not to add. Always check thesis before adding to any underweight position. The sequence is: (1) thesis check, (2) rebalancing rule. Never the reverse.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE 5: The Full Annual Review Checklist -->
+      <div class="ex-card rv d3">
+        <div class="exc-hd exh-t">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.5s ease-in-out infinite 1.2s;">
+              <!-- Clipboard / checklist -->
+              <rect x="10" y="30" width="46" height="58" rx="5" fill="rgba(255,255,255,.22)"/>
+              <rect x="14" y="26" width="38" height="10" rx="3" fill="rgba(255,255,255,.3)"/>
+              <!-- Check items -->
+              <circle cx="18" cy="46" r="3" fill="#4ade80" opacity=".85"/>
+              <rect x="24" y="44" width="24" height="3" rx="1.5" fill="rgba(255,255,255,.5)"/>
+              <circle cx="18" cy="56" r="3" fill="#4ade80" opacity=".85"/>
+              <rect x="24" y="54" width="20" height="3" rx="1.5" fill="rgba(255,255,255,.5)"/>
+              <circle cx="18" cy="66" r="3" fill="#4ade80" opacity=".85"/>
+              <rect x="24" y="64" width="26" height="3" rx="1.5" fill="rgba(255,255,255,.5)"/>
+              <circle cx="18" cy="76" r="3" fill="#fbbf24" opacity=".9" style="animation:pulse 2s ease-in-out infinite;"/>
+              <rect x="24" y="74" width="18" height="3" rx="1.5" fill="rgba(255,255,255,.4)"/>
+              <!-- Pen writing -->
+              <rect x="52" y="72" width="4" height="16" rx="2" fill="rgba(255,255,255,.4)" transform="rotate(-30 54 80)"/>
+              <!-- Portfolio manager -->
+              <circle cx="66" cy="22" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="66" cy="9" rx="12" ry="5" fill="#0891b2"/>
+              <circle cx="60" cy="19" r="2.2" fill="#0e7490"/>
+              <circle cx="72" cy="19" r="2.2" fill="#0e7490"/>
+              <path d="M60 28 Q66 32 72 28" stroke="#0e7490" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="58" y="35" width="16" height="18" rx="5" fill="#0891b2"/>
+              <rect x="46" y="39" width="14" height="4" rx="2" fill="#0891b2" transform="rotate(-15 53 41)"/>
+              <rect x="58" y="51" width="5" height="9" rx="2.5" fill="#0e7490"/>
+              <rect x="66" y="51" width="5" height="9" rx="2.5" fill="#0e7490"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 05 · Complete Annual Review Framework · The Full Checklist</div>
+            <div class="exc-name">The Complete Annual Portfolio Review</div>
+            <div class="exc-tagline">A comprehensive step-by-step annual review process that combines thesis review, allocation rebalancing, and tax planning into a single structured annual exercise. This is the complete playbook for how serious long-term investors review their portfolios once per year.</div>
+            <div class="exc-pills"><span class="exc-pill">Full-day annual review</span><span class="exc-pill">Thesis + allocation + tax</span><span class="exc-pill">April (post full-year results)</span><span class="exc-pill">Comprehensive playbook</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-t">Morning Session — Thesis Review (3–4 Hours)</div>
+              <div style="display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden;">
+                <div style="padding:10px 13px;background:var(--tealpale);border-radius:12px;border:1px solid rgba(8,145,178,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--teal);line-height:1.6;min-width:0;overflow:hidden;">
+                  <strong>9:00 AM — Pull up all portfolio holdings</strong><br/>List every stock with: purchase date, purchase price, current price, target weight, current weight.
+                </div>
+                <div style="padding:10px 13px;background:var(--tealpale);border-radius:12px;border:1px solid rgba(8,145,178,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--teal);line-height:1.6;min-width:0;overflow:hidden;">
+                  <strong>10:00 AM — Thesis check for each holding</strong><br/>For each stock: read the most recent annual report chairman's message + Q4 concall transcript. Rate thesis: Strong / Intact / Weakening / Broken.
+                </div>
+                <div style="padding:10px 13px;background:var(--tealpale);border-radius:12px;border:1px solid rgba(8,145,178,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--teal);line-height:1.6;min-width:0;overflow:hidden;">
+                  <strong>12:00 PM — Exit decisions</strong><br/>Any "Broken" thesis → exit immediately. Any "Weakening" → reduce to half position and set 2-quarter watchlist. "Strong/Intact" → proceed to afternoon session.
+                </div>
+              </div>
+              <div class="exc-sec-title est-t" style="margin-top:16px;">Afternoon Session — Rebalancing &amp; Tax Plan (2–3 Hours)</div>
+              <div style="display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden;">
+                <div style="padding:10px 13px;background:var(--tealpale);border-radius:12px;border:1px solid rgba(8,145,178,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--teal);line-height:1.6;min-width:0;overflow:hidden;">
+                  <strong>2:00 PM — Allocation drift analysis</strong><br/>Calculate each position's current weight vs target. Flag any deviating by more than 5%. Prioritise using SIP redirection before selling.
+                </div>
+                <div style="padding:10px 13px;background:var(--tealpale);border-radius:12px;border:1px solid rgba(8,145,178,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--teal);line-height:1.6;min-width:0;overflow:hidden;">
+                  <strong>3:00 PM — Tax-efficient execution plan</strong><br/>List any required sales. Check holding period for LTCG qualification. Net gains against losses. Target staying below ₹1.25L LTCG for the year.
+                </div>
+                <div style="padding:10px 13px;background:var(--tealpale);border-radius:12px;border:1px solid rgba(8,145,178,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--teal);line-height:1.6;min-width:0;overflow:hidden;">
+                  <strong>4:30 PM — New investment ideas</strong><br/>Any capital freed from exits → identify 1–2 replacement candidates. Only from your research watchlist. No impulse decisions on annual review day.
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-t">Output — What You Leave the Review With</div>
+              <div style="display:flex;flex-direction:column;gap:9px;min-width:0;overflow:hidden;">
+                <div style="padding:11px 13px;background:var(--tealpale);border-radius:12px;border:1px solid rgba(8,145,178,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--teal);line-height:1.6;min-width:0;overflow:hidden;">
+                  📋 <strong>Updated thesis document</strong> for every current holding — 1 paragraph per stock stating current thesis status.
+                </div>
+                <div style="padding:11px 13px;background:var(--gpale);border-radius:12px;border:1px solid rgba(22,163,74,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--gbr);line-height:1.6;min-width:0;overflow:hidden;">
+                  📊 <strong>12-month SIP redirection plan</strong> — which positions get new SIP money over the next year to correct drift.
+                </div>
+                <div style="padding:11px 13px;background:var(--pxl);border-radius:12px;border:1px solid rgba(109,40,217,.18);font-size:clamp(11.5px,1.4vw,13px);color:var(--p);line-height:1.6;min-width:0;overflow:hidden;">
+                  💰 <strong>Tax plan for FY</strong> — list of any positions to sell, in what order, netting gains vs losses to stay within ₹1.25L LTCG exemption.
+                </div>
+                <div style="padding:11px 13px;background:var(--apale);border-radius:12px;border:1px solid rgba(217,119,6,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--ambr);line-height:1.6;min-width:0;overflow:hidden;">
+                  👁️ <strong>Watchlist</strong> — 2–3 positions on 2-quarter monitoring due to weakening thesis. Specific metrics to track each quarter.
+                </div>
+                <div style="padding:11px 13px;background:var(--gpale);border-radius:12px;border:1px solid rgba(22,163,74,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--gbr);line-height:1.6;min-width:0;overflow:hidden;">
+                  🗓️ <strong>Next review date</strong> set — either November (semi-annual) or next April. Calendar blocked.
+                </div>
+              </div>
+              <div class="lesson-box lb-t" style="margin-top:12px;">
+                <div class="lb-title lbt-t">✅ Key Lesson — One Day Per Year Is All It Takes</div>
+                <div class="lb-desc">This comprehensive annual review takes 6–7 hours, once per year. In exchange, you get a fully aligned portfolio, tax-optimised rebalancing, thesis validation for every holding, and the psychological clarity of knowing exactly where you stand. The investors who do this consistently — regardless of market conditions — outperform those who react to daily news by a significant margin over 10+ years. Block the day in your calendar right now.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ NEXT CHAPTER ═══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue building your portfolio framework →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+
+<!-- ═══ DISCLAIMER ═══ -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);overflow:hidden;">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">All rebalancing examples, tax calculations, and portfolio frameworks are for educational illustration only. Tax treatment depends on individual circumstances, holding period, and applicable tax laws which may change. The ₹1.25 lakh LTCG exemption is subject to government policy changes. All equity investments carry risk of loss. Rebalancing does not guarantee superior returns. Please consult a SEBI-registered investment advisor and a qualified tax professional before making investment or tax decisions.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(el => {
+    if (el.isIntersecting) { el.target.classList.add('on'); io.unobserve(el.target); }
+  });
+}, { threshold: 0.04, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+document.addEventListener('touchstart', () => {}, { passive: true });
+document.addEventListener('touchmove',  () => {}, { passive: true });
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.rv').forEach(el => el.classList.add('on'));
+}
+</script>
+</body>
+</html>

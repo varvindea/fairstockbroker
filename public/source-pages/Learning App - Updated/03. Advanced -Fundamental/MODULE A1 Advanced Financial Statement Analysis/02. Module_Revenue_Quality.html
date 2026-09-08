@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Revenue Quality Tests">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Revenue Quality Tests – Channel Stuffing, Bill &amp; Hold · Advanced Financial Statement Analysis · FA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes truckRoll{0%{transform:translateX(-8px)}50%{transform:translateX(8px)}100%{transform:translateX(-8px)}}
+
+/* ── LAYOUT ── */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(220,38,38,.06);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(26px,6.5vw,82px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:14px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--red) 0%,#f87171 50%,var(--red) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(12px,2.8vw,36px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:920px;}
+.hsi{padding:clamp(10px,1.8vw,20px) clamp(8px,1.8vw,16px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:76px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(9px,1.3vw,13px);font-weight:900;letter-spacing:-.3px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(7px,.85vw,9px);font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+
+/* ── KLO ── */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.09);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+
+/* ── INFOGRAPHIC ── */
+.infographic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.infographic-svg{width:100%;max-width:640px;margin:0 auto;animation:floatB 4.5s ease-in-out infinite;}
+.infographic-cap{font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;max-width:560px;margin:0 auto;}
+
+/* ── TECHNIQUE CARDS ── */
+.technique-card{border-radius:22px;overflow:hidden;border:2px solid;box-shadow:var(--shp);margin-bottom:clamp(24px,4vw,40px);}
+.tc-r{border-color:rgba(220,38,38,.3);}
+.tc-a{border-color:rgba(217,119,6,.28);}
+.tc-p{border-color:rgba(109,40,217,.28);}
+.tch{display:flex;align-items:center;gap:clamp(14px,2.5vw,22px);padding:clamp(16px,2.5vw,28px);flex-wrap:wrap;}
+.tch-r{background:linear-gradient(135deg,var(--rpale),#fff5f5);}
+.tch-a{background:linear-gradient(135deg,var(--apale),#fffcf0);}
+.tch-p{background:linear-gradient(135deg,var(--pxs),var(--pxl));}
+.tc-icon{width:66px;height:66px;min-width:66px;border-radius:17px;display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;box-shadow:0 6px 20px rgba(0,0,0,.13);animation:floatB 4s ease-in-out infinite;}
+.tci-r{background:linear-gradient(135deg,var(--red),#f87171);}
+.tci-a{background:linear-gradient(135deg,var(--ambr),var(--amb));}
+.tci-p{background:linear-gradient(135deg,var(--p),var(--ph));}
+.tc-meta{flex:1;min-width:0;}
+.tc-label{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:4px;}
+.tcl-r{color:var(--red);}
+.tcl-a{color:var(--ambr);}
+.tcl-p{color:var(--p);}
+.tc-name{font-size:clamp(18px,3vw,28px);font-weight:900;letter-spacing:-1px;line-height:1.05;margin-bottom:5px;color:var(--tx);}
+.tc-tagline{font-size:clamp(12px,1.5vw,14px);color:var(--ts);line-height:1.55;}
+.tc-badge{display:inline-flex;padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;margin-top:8px;}
+.tcb-r{background:rgba(220,38,38,.1);color:var(--red);}
+.tcb-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.tcb-p{background:rgba(109,40,217,.1);color:var(--p);}
+.tc-body{padding:clamp(14px,2.5vw,28px);background:var(--wh);}
+.tc-explain{font-size:clamp(12.5px,1.45vw,14.5px);color:var(--ts);line-height:1.72;margin-bottom:18px;}
+.tc-two-col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,20px);margin-bottom:18px;}
+.tc-wrong{border-radius:14px;padding:clamp(12px,2vw,18px);background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);}
+.tc-right{border-radius:14px;padding:clamp(12px,2vw,18px);background:var(--gpale);border:1.5px solid rgba(22,163,74,.22);}
+.tcwr-title{font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.tcwr-title.r{color:var(--red);}
+.tcwr-title.g{color:var(--gbr);}
+.tcwr-item{font-size:clamp(11.5px,1.35vw,13px);color:var(--ts);line-height:1.5;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.75);margin-bottom:6px;}
+.tc-signals{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.5vw,14px);margin-bottom:16px;}
+.tc-sig{border-radius:12px;padding:clamp(10px,1.8vw,14px);border:1.5px solid;}
+.tcs-r{border-color:rgba(220,38,38,.22);background:rgba(220,38,38,.04);}
+.tcs-a{border-color:rgba(217,119,6,.2);background:rgba(217,119,6,.04);}
+.tcs-p{border-color:rgba(109,40,217,.18);background:rgba(109,40,217,.04);}
+.sig-ico{font-size:clamp(18px,2.5vw,24px);margin-bottom:6px;animation:floatB 3.8s ease-in-out infinite;}
+.sig-name{font-size:clamp(11px,1.3vw,13px);font-weight:800;color:var(--tx);margin-bottom:3px;}
+.sig-desc{font-size:clamp(10px,1.1vw,11.5px);color:var(--ts);line-height:1.45;}
+.tc-fix{background:linear-gradient(135deg,var(--gpale),#ecfdf5);border-radius:14px;padding:clamp(12px,2vw,18px);border:1.5px solid rgba(22,163,74,.25);}
+.tcfix-title{font-size:12px;font-weight:800;color:var(--gbr);letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:7px;}
+.tcfix-item{display:flex;align-items:flex-start;gap:9px;font-size:clamp(11.5px,1.35vw,13px);color:var(--ts);line-height:1.5;margin-bottom:7px;}
+.tcfix-dot{width:22px;height:22px;min-width:22px;border-radius:5px;background:linear-gradient(135deg,var(--gbr),var(--gh));display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:900;flex-shrink:0;margin-top:1px;}
+
+/* ── TESTS GRID ── */
+.tests-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,18px);margin-bottom:36px;}
+.test-card{border-radius:16px;padding:clamp(14px,2.5vw,20px);border:1.5px solid;transition:transform .2s;}
+.test-card:hover{transform:translateY(-2px);box-shadow:var(--shp);}
+.test-p{border-color:rgba(109,40,217,.22);background:linear-gradient(158deg,var(--pxs),#fdfcff);}
+.test-g{border-color:rgba(22,163,74,.22);background:linear-gradient(158deg,var(--gpale),#f9fff9);}
+.test-a{border-color:rgba(217,119,6,.2);background:linear-gradient(158deg,var(--apale),#fffcf0);}
+.test-r{border-color:rgba(220,38,38,.2);background:linear-gradient(158deg,var(--rpale),#fff8f8);}
+.test-ico{font-size:clamp(22px,3.5vw,28px);margin-bottom:8px;animation:floatB 4s ease-in-out infinite;}
+.test-name{font-size:clamp(13px,1.7vw,15px);font-weight:900;color:var(--tx);margin-bottom:4px;}
+.test-badge{display:inline-flex;padding:3px 9px;border-radius:7px;font-size:10px;font-weight:800;margin-bottom:8px;}
+.tb-p{background:rgba(109,40,217,.1);color:var(--p);}
+.tb-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.tb-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.tb-r{background:rgba(220,38,38,.1);color:var(--red);}
+.test-body{font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.6;}
+.test-formula{background:rgba(255,255,255,.7);border-radius:8px;padding:7px 10px;font-family:monospace;font-size:11.5px;color:var(--p);margin-top:8px;border:1px solid var(--bd);}
+
+/* ── SCREENER MOCK ── */
+.screener-mock{background:var(--wh);border:2px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);margin-bottom:36px;}
+.sm-bar{background:linear-gradient(135deg,#f0f0f0,#e8e8e8);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bd);}
+.sm-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.sm-url{flex:1;background:var(--wh);border:1px solid var(--bd);border-radius:8px;padding:5px 12px;font-size:10.5px;color:var(--tl);font-family:monospace;}
+.sm-body{padding:clamp(14px,2.5vw,22px);}
+.sm-header-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--bd);flex-wrap:wrap;}
+.sm-tabs{display:flex;gap:2px;margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px;}
+.sm-tab{padding:6px 14px;border-radius:8px;font-size:11px;font-weight:700;white-space:nowrap;border:1px solid var(--bd);cursor:pointer;}
+.sm-tab.active{background:var(--p);color:#fff;border-color:var(--p);}
+.sm-tab:not(.active){background:var(--sf);color:var(--ts);}
+.sm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,12px);margin-bottom:14px;}
+.sm-metric{background:var(--sf);border-radius:10px;padding:10px 12px;border:1px solid var(--bd);}
+.smm-label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--tl);margin-bottom:4px;}
+.smm-val{font-size:clamp(13px,1.8vw,16px);font-weight:900;color:var(--tx);}
+.smm-sub{font-size:9px;color:var(--tl);margin-top:2px;}
+.sm-alerts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.sma{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;}
+.sma-g{background:var(--gpale);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.sma-r{background:var(--rpale);color:var(--red);border:1px solid rgba(220,38,38,.2);}
+.sma-a{background:var(--apale);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.sm-caption{font-size:10.5px;color:var(--tl);text-align:center;margin-top:12px;font-style:italic;}
+
+/* ── COMPANY EXAMPLE BLOCKS ── */
+.ex-block{border-radius:20px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);margin-bottom:clamp(22px,3.5vw,30px);}
+.eb-header{display:flex;align-items:center;justify-content:space-between;padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,24px);flex-wrap:wrap;gap:10px;}
+.ebh-g{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.ebh-r{background:linear-gradient(135deg,var(--rpale),#fff5f5);}
+.ebh-a{background:linear-gradient(135deg,var(--apale),#fffdf5);}
+.ebh-p{background:linear-gradient(135deg,var(--pxs),var(--pxl));}
+.eb-co{display:flex;align-items:center;gap:12px;}
+.eb-logo{width:46px;height:46px;min-width:46px;border-radius:11px;font-size:21px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.eb-name{font-size:clamp(13px,1.8vw,17px);font-weight:900;color:var(--tx);line-height:1.2;}
+.eb-sub{font-size:10.5px;color:var(--tl);margin-top:2px;}
+.eb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.ebb{padding:3px 9px;border-radius:100px;font-size:10px;font-weight:700;}
+.ebb-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.ebb-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.ebb-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.ebb-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.eb-body{padding:clamp(14px,2.5vw,22px) clamp(14px,2.5vw,24px);}
+.eb-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,14px);margin-bottom:14px;}
+.em-box{background:var(--sf);border-radius:12px;padding:clamp(9px,1.5vw,14px);border:1px solid var(--bd);}
+.em-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tl);margin-bottom:4px;}
+.em-val{font-size:clamp(13px,1.9vw,18px);font-weight:900;color:var(--tx);line-height:1.1;}
+.em-sub{font-size:9px;color:var(--tl);margin-top:2px;}
+.rq-pill{display:inline-flex;padding:4px 12px;border-radius:8px;font-size:12px;font-weight:900;}
+.rqp-g{background:rgba(22,163,74,.12);color:var(--gbr);}
+.rqp-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.rqp-r{background:rgba(220,38,38,.1);color:var(--red);}
+.eb-flags{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.erf{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border-radius:10px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.48;}
+.erf-good{background:rgba(22,163,74,.05);border-left:3px solid var(--gbr);}
+.erf-bad{background:rgba(220,38,38,.05);border-left:3px solid var(--red);}
+.erf-amb{background:rgba(217,119,6,.05);border-left:3px solid var(--amb);}
+.erf-ico{font-size:14px;flex-shrink:0;margin-top:1px;}
+.eb-insight{padding:10px 14px;font-size:11.5px;color:var(--ts);line-height:1.55;border-top:1px solid var(--bd);}
+.ei-g{background:rgba(22,163,74,.04);border-left:3px solid var(--gbr);}
+.ei-r{background:rgba(220,38,38,.04);border-left:3px solid var(--red);}
+.ei-a{background:rgba(217,119,6,.04);border-left:3px solid var(--amb);}
+.ei-p{background:rgba(109,40,217,.04);border-left:3px solid var(--p);}
+
+/* ── SECTION DIVIDER ── */
+.section-divider{display:flex;align-items:center;gap:16px;margin:clamp(28px,4vw,44px) 0;}
+.sd-line{flex:1;height:1px;background:var(--bd);}
+.sd-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tl);white-space:nowrap;}
+
+/* ── CAVEAT ── */
+.caveat-box{margin-top:32px;background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:16px;}
+.caveat-icon{width:44px;height:44px;min-width:44px;border-radius:13px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(109,40,217,.28);}
+.caveat-body{flex:1;min-width:0;}
+.caveat-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.caveat-title{font-size:clamp(13px,1.5vw,15px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.caveat-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+
+/* ── DEMAT BANNER ── */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* ── NEXT ── */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-banner::after{content:'';position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;display:inline-block;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+
+/* ═══ RESPONSIVE — 11 BREAKPOINTS ═══ */
+img,svg{max-width:100%;height:auto;display:block;}
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.tests-grid{grid-template-columns:1fr 1fr;}.tc-signals{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){
+  .tests-grid{grid-template-columns:1fr 1fr;}
+  .tc-signals{grid-template-columns:1fr 1fr;}
+  .tc-two-col{grid-template-columns:1fr;}
+  .eb-metrics{grid-template-columns:repeat(2,1fr);}
+  .infographic-svg{max-width:420px;}
+  .sm-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .hst{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .tch{flex-wrap:wrap;gap:12px;}
+  .tc-icon{width:52px;height:52px;min-width:52px;font-size:24px;animation:none;}
+  .tc-two-col{grid-template-columns:1fr;}
+  .tests-grid{grid-template-columns:1fr 1fr;}
+  .tc-signals{grid-template-columns:1fr 1fr;}
+  .caveat-box{flex-direction:column;gap:12px;}
+  .caveat-icon{width:40px;height:40px;min-width:40px;font-size:20px;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;}
+  .dmfeats{gap:10px 20px;}
+  svg{overflow:visible;max-width:100%;}
+  .eb-header{flex-direction:column;align-items:flex-start;}
+  .eb-badges{margin-top:4px;}
+  .sm-grid{grid-template-columns:repeat(2,1fr);}
+  .sig-ico{animation:none;}
+  .test-ico{animation:none;}
+}
+@media(max-width:640px){
+  .tests-grid{grid-template-columns:1fr;}
+  .tc-signals{grid-template-columns:1fr 1fr;}
+  .eb-metrics{grid-template-columns:1fr 1fr;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .infographic-svg{max-width:100%;}
+}
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.2px;}.hdesc{font-size:13px;}.hsub{font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .h2{letter-spacing:-1px;}.lead{font-size:13.5px;}
+  .tests-grid{grid-template-columns:1fr;}
+  .tc-signals{grid-template-columns:1fr 1fr;}
+  .eb-metrics{grid-template-columns:1fr 1fr;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .tc-body{padding:12px 14px;}
+  .eb-name{font-size:13px;}.eb-logo{width:38px;height:38px;min-width:38px;font-size:17px;}
+  .caveat-title{font-size:13px;}.caveat-desc{font-size:12.5px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+}
+@media(max-width:360px){
+  .w{padding:26px 12px;}.hh1{font-size:clamp(22px,8.5vw,36px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}.hsi:nth-last-child(-n+2){border-bottom:1px solid var(--bd) !important;}.hsi:last-child{border-bottom:none !important;}
+  .kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}.nxt-btn{font-size:12px;padding:10px 14px;}
+  .tests-grid{grid-template-columns:1fr;}
+  .tc-signals{grid-template-columns:1fr;}
+  .eb-metrics{grid-template-columns:1fr 1fr;}
+}
+
+/* TOUCH */
+@media(hover:none) and (pointer:coarse){
+  .technique-card:hover,.test-card:hover,.ex-block:hover{transform:none !important;box-shadow:var(--shc) !important;}
+  .technique-card:active,.test-card:active{transform:scale(.99);transition:transform .08s;}
+  .dmbtn:active{transform:scale(.97);}.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn,.technique-card,.test-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,.tc-name,.test-name{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.lead,.caveat-desc,.tc-explain,.tcwr-item,.tcfix-item,.eb-insight{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+}
+
+/* iOS */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.hsv,.hsv.g,.h2 .hp,.h2 .hg{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn,.technique-card,.test-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .sm-tabs{-webkit-overflow-scrolling:touch;}
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+}
+
+/* ANDROID HiDPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .technique-card,.test-card,.ex-block,.caveat-box,.screener-mock{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .infographic-svg,.klo-icon{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}.infographic-svg,.klo-icon,.tc-icon,.test-ico,.sig-ico{animation:none !important;}
+}
+
+/* PRINT */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}.rv{opacity:1;transform:none;}
+  body{color:#000;}.w{padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="vbadge">Advanced Financial Statement Analysis · FA</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Revenue Quality Tests — Channel Stuffing · Bill &amp; Hold</div>
+  <h1 class="hh1">
+    <span class="line1">Is That Revenue</span>
+    <span class="line2">Real or a Mirage?</span>
+    <span class="line3">Distinguishing Genuine Sales From Inflated Revenue Streams</span>
+  </h1>
+  <div class="hsub">Channel Stuffing · Bill &amp; Hold · Deferred Revenue · DSO · Receivables Quality · Revenue Recognition</div>
+  <p class="hdesc">Companies can book millions in "revenue" that customers never asked for, will never pay for, and will return next quarter. Revenue quality analysis exposes the difference between money actually earned and accounting entries that merely look like money.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv">Channel Stuffing</div><div class="hsl">Forced to Channel</div></div>
+    <div class="hsi"><div class="hsv r" style="color:var(--red);">Bill &amp; Hold</div><div class="hsl">Sold Without Delivery</div></div>
+    <div class="hsi"><div class="hsv g">5 Good</div><div class="hsl">Clean Revenue</div></div>
+    <div class="hsi"><div class="hsv r" style="color:var(--red);">5 Bad</div><div class="hsl">Inflated Revenue</div></div>
+    <div class="hsi"><div class="hsv">7 Tests</div><div class="hsl">Detect Manipulation</div></div>
+  </div>
+</section>
+
+
+<!-- ══ 01 — KLO ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Why Revenue <span class="hp">Can Lie — Even in Audited Accounts</span></h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">🔍</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">Revenue is the most manipulated line in any income statement because it is the first line that analysts, media, and investors look at — and because accounting standards allow revenue to be "recognised" (recorded) before cash actually arrives, before customers confirm they want the goods, and sometimes before goods even leave the factory.</div>
+        <div class="klo-desc">Imagine you run a water bottle factory. Your sales quota for December is ₹10 crore. It's December 28th and you've only sold ₹6 crore. So you call your biggest distributor and say: "Take 200,000 extra bottles today. We'll give you special payment terms — pay us in April. And if they don't sell, we'll take them back quietly." The distributor agrees. You ship the bottles on December 30th. Your P&L for the year shows ₹10 crore in revenue. The auditors tick it off — goods left the factory, an invoice was raised, the distributor signed the purchase order.<br><br>But did you actually "earn" ₹4 crore? No. The distributor didn't want those bottles. They'll return 80% of them in January. Your next quarter's revenue will mysteriously fall. Your receivables will blow up because the distributor isn't paying. This is channel stuffing — and it happens in pharmaceuticals, FMCG, auto ancillaries, and technology companies across India and globally.<br><br>Bill and Hold is even simpler: you raise an invoice for goods that are still sitting in your own warehouse. The customer "agreed" to buy them but hasn't arranged storage yet. Revenue is recognised because there's a signed contract — but the goods never moved. These two techniques represent the most common forms of revenue manipulation in public markets, and both leave specific, detectable fingerprints in financial data available free on Screener.in.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-r">🚛 Channel stuffing = forced selling</span>
+          <span class="kpill kpill-a">🏭 Bill &amp; Hold = undelivered invoice</span>
+          <span class="kpill kpill-p">📈 Receivables spike = red flag</span>
+          <span class="kpill kpill-g">✅ CFO/PAT &gt;0.9× = clean revenue</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 02 — INFOGRAPHIC + TWO TECHNIQUE CARDS ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — The Two Revenue Inflation Techniques Explained</div>
+    <h2 class="h2 rv d2">How Management <span class="hp">Inflates the Top Line</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Both techniques exploit a gap in accounting rules: revenue can be recognised when "risks and rewards" transfer — but management has enormous discretion over when that moment is deemed to have occurred. Understanding the mechanics reveals why the fingerprints are always predictable.</p>
+
+    <!-- SVG Infographic -->
+    <div class="rv d3" style="margin-bottom:36px;">
+      <div class="infographic-wrap">
+        <svg class="infographic-svg" viewBox="0 0 640 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="640" height="480" rx="20" fill="#f5f3ff"/>
+          <rect x="14" y="10" width="612" height="34" rx="11" fill="#6d28d9"/>
+          <text x="320" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="white">Revenue Quality — Real Sales vs Inflated Revenue</text>
+
+          <!-- LEFT: Factory (Real Revenue) -->
+          <!-- Building -->
+          <rect x="20" y="60" width="120" height="90" rx="8" fill="#6d28d9" opacity=".85"/>
+          <rect x="20" y="46" width="120" height="14" rx="4" fill="#4c1d95"/>
+          <rect x="36" y="76" width="22" height="16" rx="3" fill="#c4b5fd" opacity=".6"/>
+          <rect x="66" y="76" width="22" height="16" rx="3" fill="#c4b5fd" opacity=".6"/>
+          <rect x="96" y="76" width="22" height="16" rx="3" fill="#c4b5fd" opacity=".6"/>
+          <rect x="42" y="108" width="56" height="24" rx="4" fill="#3b0e8c"/>
+          <!-- Chimney -->
+          <rect x="28" y="34" width="12" height="26" rx="3" fill="#4c1d95"/>
+          <rect x="110" y="34" width="12" height="26" rx="3" fill="#4c1d95"/>
+          <text x="80" y="168" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#4c1d95">🏭 Factory</text>
+          <text x="80" y="180" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6e6994">produces goods</text>
+
+          <!-- Truck (moving) -->
+          <rect x="164" y="130" width="72" height="36" rx="6" fill="#15803d" opacity=".88"/>
+          <rect x="228" y="118" width="32" height="48" rx="5" fill="#15803d" opacity=".72"/>
+          <circle cx="178" cy="166" r="10" fill="#0f0a2e"/>
+          <circle cx="178" cy="166" r="6" fill="#e5e1fb"/>
+          <circle cx="248" cy="166" r="10" fill="#0f0a2e"/>
+          <circle cx="248" cy="166" r="6" fill="#e5e1fb"/>
+          <text x="200" y="148" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="white">✅ REAL ORDER</text>
+          <text x="200" y="159" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="rgba(255,255,255,.8)">Customer wanted it</text>
+          <!-- Arrow -->
+          <path d="M140 150 L162 150" stroke="#15803d" stroke-width="2" marker-end="url(#ag1)"/>
+          <defs>
+            <marker id="ag1" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#15803d"/></marker>
+            <marker id="ag2" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#dc2626"/></marker>
+            <marker id="ag3" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#6d28d9"/></marker>
+          </defs>
+
+          <!-- Happy customer (real) -->
+          <circle cx="338" cy="142" r="22" fill="#f0fdf4"/>
+          <circle cx="330" cy="137" r="3" fill="#15803d"/>
+          <circle cx="346" cy="137" r="3" fill="#15803d"/>
+          <path d="M330 155 Q338 163 346 155" stroke="#15803d" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <rect x="324" y="164" width="28" height="24" rx="5" fill="#16a34a"/>
+          <rect x="296" y="172" width="28" height="7" rx="3" fill="#16a34a" transform="rotate(-15 310 175)"/>
+          <rect x="352" y="172" width="28" height="7" rx="3" fill="#16a34a" transform="rotate(15 366 175)"/>
+          <rect x="326" y="188" width="10" height="18" rx="3" fill="#15803d"/>
+          <rect x="342" y="188" width="10" height="18" rx="3" fill="#15803d"/>
+          <rect x="308" y="108" width="60" height="16" rx="7" fill="#f0fdf4"/>
+          <text x="338" y="120" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#15803d">😊 Real Customer</text>
+          <path d="M260 150 L314 142" stroke="#15803d" stroke-width="2" marker-end="url(#ag1)"/>
+
+          <!-- Cash arrow down -->
+          <path d="M338 212 L338 236" stroke="#15803d" stroke-width="2.5" stroke-dasharray="4,3" marker-end="url(#ag1)"/>
+          <rect x="296" y="236" width="84" height="22" rx="7" fill="#15803d" opacity=".88"/>
+          <text x="338" y="251" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="900" fill="white">💰 Cash Arrives ✅</text>
+
+          <!-- DIVIDER -->
+          <line x1="400" y1="50" x2="400" y2="290" stroke="#e5e1fb" stroke-width="2" stroke-dasharray="8,4"/>
+          <text x="400" y="280" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6e6994">vs</text>
+
+          <!-- RIGHT: Channel Stuffing scenario -->
+          <rect x="420" y="60" width="120" height="90" rx="8" fill="#4c1d95" opacity=".85"/>
+          <rect x="420" y="46" width="120" height="14" rx="4" fill="#3b0e8c"/>
+          <rect x="436" y="76" width="22" height="16" rx="3" fill="#c4b5fd" opacity=".6"/>
+          <rect x="466" y="76" width="22" height="16" rx="3" fill="#c4b5fd" opacity=".6"/>
+          <rect x="496" y="76" width="22" height="16" rx="3" fill="#c4b5fd" opacity=".6"/>
+          <rect x="442" y="108" width="56" height="24" rx="4" fill="#3b0e8c"/>
+          <rect x="428" y="34" width="12" height="26" rx="3" fill="#4c1d95"/>
+          <rect x="510" y="34" width="12" height="26" rx="3" fill="#4c1d95"/>
+          <text x="480" y="168" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#4c1d95">🏭 Factory</text>
+          <text x="480" y="180" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6e6994">forces goods out</text>
+          <!-- Sad forced truck -->
+          <rect x="420" y="130" width="72" height="36" rx="6" fill="#dc2626" opacity=".88"/>
+          <circle cx="432" cy="166" r="10" fill="#0f0a2e"/>
+          <circle cx="432" cy="166" r="6" fill="#fef2f2"/>
+          <circle cx="464" cy="166" r="10" fill="#0f0a2e"/>
+          <circle cx="464" cy="166" r="6" fill="#fef2f2"/>
+          <text x="454" y="148" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="white">🚨 STUFFED!</text>
+          <text x="454" y="159" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="rgba(255,255,255,.8)">Distributor forced</text>
+
+          <!-- Unhappy distributor -->
+          <circle cx="560" cy="142" r="22" fill="#fef2f2"/>
+          <circle cx="552" cy="136" r="3" fill="#dc2626"/>
+          <circle cx="568" cy="136" r="3" fill="#dc2626"/>
+          <path d="M553 155 Q560 149 567 155" stroke="#dc2626" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <rect x="546" y="164" width="28" height="24" rx="5" fill="#dc2626"/>
+          <rect x="518" y="172" width="28" height="7" rx="3" fill="#dc2626" transform="rotate(-15 532 175)"/>
+          <rect x="574" y="172" width="28" height="7" rx="3" fill="#dc2626" transform="rotate(15 588 175)"/>
+          <rect x="548" y="188" width="10" height="18" rx="3" fill="#b91c1c"/>
+          <rect x="564" y="188" width="10" height="18" rx="3" fill="#b91c1c"/>
+          <rect x="522" y="108" width="76" height="16" rx="7" fill="#fef2f2"/>
+          <text x="560" y="120" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#dc2626">😠 Forced Distributor</text>
+          <path d="M492" y="150" x2="536" y2="142" stroke="#dc2626" stroke-width="2" marker-end="url(#ag2)"/>
+          <line x1="492" y1="150" x2="536" y2="142" stroke="#dc2626" stroke-width="2"/>
+          <polygon points="530,139 537,142 530,145" fill="#dc2626"/>
+
+          <!-- Returns arrow -->
+          <path d="M540 216 Q480 240 480 236" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="5,3"/>
+          <polygon points="476,233 484,236 476,239" fill="#dc2626"/>
+          <rect x="482" y="236" width="120" height="22" rx="7" fill="#dc2626" opacity=".88"/>
+          <text x="542" y="251" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="900" fill="white">📦 Returns next quarter</text>
+
+          <!-- Bottom row: fingerprints -->
+          <rect x="14" y="298" width="612" height="92" rx="13" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="320" y="318" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#4c1d95">🔍 Three Fingerprints That Reveal Inflated Revenue on Screener.in</text>
+          <rect x="26" y="326" width="184" height="52" rx="9" fill="#fef2f2" stroke="#fecaca" stroke-width="1.2"/>
+          <text x="118" y="344" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="#dc2626">📈 Receivables spike</text>
+          <text x="118" y="358" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">DSO rising while revenue</text>
+          <text x="118" y="370" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">also rising = suspicious</text>
+          <rect x="222" y="326" width="192" height="52" rx="9" fill="#fefce8" stroke="#fde68a" stroke-width="1.2"/>
+          <text x="318" y="344" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="#92400e">💰 CFO &lt; PAT</text>
+          <text x="318" y="358" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">If revenue is real, cash</text>
+          <text x="318" y="370" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">follows. CFO/PAT &lt;0.7×</text>
+          <rect x="426" y="326" width="186" height="52" rx="9" fill="#fef2f2" stroke="#fecaca" stroke-width="1.2"/>
+          <text x="519" y="344" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="#dc2626">📦 Q1 revenue collapses</text>
+          <text x="519" y="358" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Channel stuffing shows as</text>
+          <text x="519" y="370" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Q4 spike + Q1 crash</text>
+
+          <!-- Label row -->
+          <rect x="14" y="400" width="612" height="68" rx="13" fill="#f5f3ff" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="320" y="420" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="#4c1d95">🖥️ Where to check on Screener.in</text>
+          <text x="320" y="436" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Financials → Quarterly results (look for Q4 spike vs Q1 crash) | Ratios tab → Debtor Days trend (5-year)</text>
+          <text x="320" y="450" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">Cash Flow tab → CFO/PAT ratio | Balance Sheet → Receivables vs Revenue over 5 years</text>
+          <text x="320" y="463" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">Free, complete, updated each quarter. All the data you need is there.</text>
+        </svg>
+        <p class="infographic-cap">Real revenue: a customer places an order, goods are delivered, the customer pays. Three signals confirm quality — receivables stable, CFO tracks PAT, and quarterly revenue is smooth. Inflated revenue: goods are forced into the distribution channel (channel stuffing) or invoiced without delivery (bill and hold). Three fingerprints always appear — receivables spike, CFO falls below PAT, and Q1 revenue mysteriously disappoints after a strong Q4.</p>
+      </div>
+    </div>
+
+    <!-- TECHNIQUE 1: Channel Stuffing -->
+    <div class="technique-card tc-r rv d3">
+      <div class="tch tch-r">
+        <div class="tc-icon tci-r">🚛</div>
+        <div class="tc-meta">
+          <div class="tc-label tcl-r">Technique #1 — Most Common in FMCG, Pharma, Auto</div>
+          <div class="tc-name">Channel Stuffing</div>
+          <div class="tc-tagline">Forcing products into the distribution channel — retailers, distributors, dealers — beyond their actual sales capacity, to inflate quarterly revenue. The goods sit in the channel unsold, creating returns, receivables, and next-quarter revenue collapse.</div>
+          <div class="tc-badge tcb-r">🚨 High Frequency · Quarter-End Pressure · Leaves Receivable Fingerprint</div>
+        </div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-explain">Picture a pharmaceutical company with 45 regional distributors. The company's quarterly revenue quota is ₹180 crore. By March 27th, actual sell-through (products actually purchased by patients at pharmacies) is only ₹130 crore. So the company calls its distributors: "Take ₹50 crore of additional inventory today. We'll extend your payment terms to 90 days (instead of the usual 30), and give you a 5% year-end discount. If it doesn't move, we'll adjust next quarter."<br><br>The distributors comply because they depend on the company for their business. The company ships ₹50 crore of goods, raises invoices, and books ₹180 crore in quarterly revenue. The auditor sees shipped goods, signed invoices, and purchase orders from distributors. Revenue is recognised under IND-AS 115. But the goods pile up in distributor warehouses. In Q1 of next year, distributors don't place new orders because their shelves are still full. Q1 revenue "disappoints." Meanwhile, receivables are ₹50 crore higher because distributors haven't paid for goods they don't really want.<br><br>This cycle was repeated by Enron's broadband division, various pharma companies, and several Indian FMCG brands. The pattern is always identical — Q4 revenue spike, Q1 revenue miss, rising receivables, declining CFO/PAT ratio.</div>
+        <div style="margin-bottom:16px;">
+          <div class="tcwr-title r">🔴 How Channel Stuffing Looks in the Data</div>
+          <div class="tc-signals">
+            <div class="tc-sig tcs-r">
+              <div class="sig-ico">📈</div>
+              <div class="sig-name">Q4 Revenue Spike + Q1 Miss</div>
+              <div class="sig-desc">Quarterly Financials on Screener: Q4 revenue 30–50% above Q1–Q3 average, followed by Q1 below trend. Not seasonal if other companies in sector don't show the same pattern.</div>
+            </div>
+            <div class="tc-sig tcs-r">
+              <div class="sig-ico">📋</div>
+              <div class="sig-name">Receivables Growing Faster Than Revenue</div>
+              <div class="sig-desc">Screener Ratios tab → Debtor Days: rising from 40 to 80+ days over 4 quarters while management claims revenue is growing. The unpaid invoices pile up in receivables.</div>
+            </div>
+            <div class="tc-sig tcs-r">
+              <div class="sig-ico">💰</div>
+              <div class="sig-name">CFO / PAT Below 0.7×</div>
+              <div class="sig-desc">Screener Cash Flow tab: Net profit growing but operating cash stagnant. The revenue was booked but distributors didn't pay (extended credit terms). CFO/PAT below 0.7× for 2+ years = serious signal.</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-fix">
+          <div class="tcfix-title">✅ How to Detect Channel Stuffing — 4-Step Screener.in Check</div>
+          <div class="tcfix-item"><div class="tcfix-dot">1</div><div><strong>Quarterly revenue smoothness:</strong> Go to Screener.in → Quarterly Results. Plot Q1/Q2/Q3/Q4 for 3 years. Genuine demand creates reasonably smooth revenue across quarters. A 40%+ Q4 spike vs Q1–Q3 that doesn't occur at peers is a channel stuffing signal.</div></div>
+          <div class="tcfix-item"><div class="tcfix-dot">2</div><div><strong>Debtor Days trend:</strong> Screener Ratios tab → Debtor Days (also called DSO). A company growing revenue at 15% per year should show stable DSO. If DSO rises from 40 to 90 days over 5 years while revenue also grows — revenue recognition is running ahead of cash collection.</div></div>
+          <div class="tcfix-item"><div class="tcfix-dot">3</div><div><strong>Inventory at distributor level:</strong> Management concall transcripts (available via Screener → Documents → Concalls). Ask: does management discuss "channel inventory levels" separately from their own inventory? Companies with channel stuffing often avoid discussing distributor inventory specifically.</div></div>
+          <div class="tcfix-item"><div class="tcfix-dot">4</div><div><strong>CFO/PAT 5-year trend:</strong> If the ratio falls below 0.7× for 2+ consecutive years with no CapEx expansion explanation, revenue is being recognised faster than cash arrives — consistent with extended distributor credit to facilitate channel stuffing.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECHNIQUE 2: Bill & Hold -->
+    <div class="technique-card tc-a rv d4">
+      <div class="tch tch-a">
+        <div class="tc-icon tci-a">🏭</div>
+        <div class="tc-meta">
+          <div class="tc-label tcl-a">Technique #2 — Common in Industrial, Construction, IT Equipment</div>
+          <div class="tc-name">Bill and Hold</div>
+          <div class="tc-tagline">Raising invoices for goods that are still sitting in the seller's own warehouse or factory — because the buyer claims they don't have space yet, or "delivery arrangements" haven't been finalised. Revenue is recognised before the customer physically receives anything.</div>
+          <div class="tc-badge tcb-a">⚠️ Hard to Detect · Requires Annual Report Reading · IND-AS 115 Addresses It</div>
+        </div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-explain">A capital goods company makes industrial boilers. It gets an order in Q3 for delivery in Q1 next year. The CFO wants to book the revenue in Q3. So the company arranges a "bill and hold" arrangement: the customer signs a purchase order acknowledging they've bought the equipment. The company raises an invoice. Revenue is recognised. But the boiler sits in the factory. Delivery happens next quarter.<br><br>Under IND-AS 115, bill and hold is only permitted if four conditions are met: (1) the reason for the arrangement must be substantive — the customer actually requested it, not the seller; (2) the goods must be separately identified as belonging to the customer; (3) the goods must be ready for delivery; (4) the entity cannot use the goods or redirect them. In practice, management has enormous discretion in judging whether conditions (1) and (2) are met.<br><br>Bill and hold is harder to detect than channel stuffing because it appears in the notes to accounts rather than in headline financials. But the fingerprints are similar: inventory doesn't decline (goods haven't moved), receivables increase without a proportionate cash receipt, and the notes to accounts explicitly describe "bill and hold" arrangements that can be read by any investor willing to look at page 140 of the annual report.</div>
+        <div style="margin-bottom:16px;">
+          <div class="tcwr-title r">🔴 How Bill &amp; Hold Looks in the Data</div>
+          <div class="tc-signals">
+            <div class="tc-sig tcs-a">
+              <div class="sig-ico">📦</div>
+              <div class="sig-name">Revenue Rising But Inventory Not Falling</div>
+              <div class="sig-desc">If revenue is genuine, goods leave the warehouse and inventory declines. If inventory stays high while revenue rises, goods haven't moved. Screener Balance Sheet: track Inventory Days alongside Revenue growth.</div>
+            </div>
+            <div class="tc-sig tcs-a">
+              <div class="sig-ico">📋</div>
+              <div class="sig-name">Notes to Accounts Disclosure</div>
+              <div class="sig-desc">IND-AS 115 requires disclosure of bill and hold arrangements in the annual report. Annual report (BSE filing) → Notes to Accounts → Revenue Recognition Policy. If company discloses bill and hold — read the exact conditions and verify they're met.</div>
+            </div>
+            <div class="tc-sig tcs-a">
+              <div class="sig-ico">💸</div>
+              <div class="sig-name">Revenue Backloaded to Quarter End</div>
+              <div class="sig-desc">A company doing legitimate bill and hold has contracts to show. If revenue is unusually concentrated on the last 3–5 days of a quarter (visible from delivery/despatch records in annual reports), it suggests transactions were structured specifically to make the quarter.</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-fix">
+          <div class="tcfix-title">✅ How to Detect Bill &amp; Hold — 3-Step Annual Report Check</div>
+          <div class="tcfix-item"><div class="tcfix-dot">1</div><div><strong>Revenue recognition policy:</strong> Annual report (BSE/NSE filing via Screener Documents tab) → Notes to Financial Statements → Note 1 or Note 2: Significant Accounting Policies → Revenue Recognition. Does the company mention bill and hold? If yes, read the exact conditions they claim to meet.</div></div>
+          <div class="tcfix-item"><div class="tcfix-dot">2</div><div><strong>Inventory days vs revenue growth:</strong> Screener Ratios tab → Inventory Turnover Days. For a company reporting 20% revenue growth, inventory days should decline or stay stable (more sales with same stock = better turnover). Rising inventory days alongside rising revenue = goods aren't moving despite invoices being raised.</div></div>
+          <div class="tcfix-item"><div class="tcfix-dot">3</div><div><strong>Contract asset/liability balance:</strong> Balance Sheet → look for "Contract Assets" (revenue recognised but not billed) and "Contract Liabilities" (cash received but revenue not yet recognised). A rapidly growing Contract Assets balance — especially near year end — suggests aggressive revenue pull-forward that may reverse next period.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECHNIQUE 3: Other Revenue Inflation -->
+    <div class="technique-card tc-p rv d5">
+      <div class="tch tch-p">
+        <div class="tc-icon tci-p">📊</div>
+        <div class="tc-meta">
+          <div class="tc-label tcl-p">Technique #3 — Software, Services, Subscription Businesses</div>
+          <div class="tc-name">Aggressive Revenue Recognition</div>
+          <div class="tc-tagline">Recognising multi-year contracts as current-year revenue, booking milestone payments before milestones are achieved, or recognising subscription revenue upfront instead of rateably over the contract period. Creates revenue today that will need to reverse tomorrow.</div>
+          <div class="tc-badge tcb-p">🔍 Screener: Deferred Revenue + Contract Liabilities Trend</div>
+        </div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-explain">A software company signs a 3-year contract worth ₹90 crore with a large enterprise client. Under proper revenue recognition (IND-AS 115), the company should recognise ₹30 crore per year. But the CFO argues that the performance obligation was "substantially fulfilled" upfront (setting up the software), so they recognise ₹70 crore in year 1 and only ₹10 crore each in years 2 and 3.<br><br>The result: Year 1 revenue looks spectacular. Year 2 and Year 3 are weak "for reasons we're working through." The management's discretion in determining when a "performance obligation is satisfied" creates enormous room for revenue timing manipulation. The tell-tale sign: a rapidly declining deferred revenue balance (or a Contract Liabilities balance that shrinks while new contracts are being signed) suggests revenue is being pulled forward aggressively.</div>
+        <div class="tc-signals">
+          <div class="tc-sig tcs-p">
+            <div class="sig-ico">📉</div>
+            <div class="sig-name">Falling Deferred Revenue</div>
+            <div class="sig-desc">Screener Balance Sheet: if Deferred Revenue (advance payments from customers not yet earned) is declining while total revenue is growing, revenue recognition is accelerating — sometimes aggressively so.</div>
+          </div>
+          <div class="tc-sig tcs-p">
+            <div class="sig-ico">📈</div>
+            <div class="sig-name">Contract Assets Growing</div>
+            <div class="sig-desc">Contract Assets = revenue recognised but customer hasn't been billed yet. Growing Contract Assets means revenue is being recognised before invoices are raised — aggressive timing. Balance Sheet → Other Current Assets → Contract Assets.</div>
+          </div>
+          <div class="tc-sig tcs-p">
+            <div class="sig-ico">🔄</div>
+            <div class="sig-name">Backlog / Remaining Performance Obligations</div>
+            <div class="sig-desc">IND-AS 115 Note disclosure: "remaining performance obligations" shows revenue contracted but not yet recognised. If this declines faster than new bookings arrive, the company is burning through its revenue backlog — not growing.</div>
+          </div>
+        </div>
+        <div class="tc-fix" style="margin-top:14px;">
+          <div class="tcfix-title">✅ Key Ratios to Track for All Three Techniques</div>
+          <div class="tcfix-item"><div class="tcfix-dot">1</div><div><strong>DSO (Debtor Days):</strong> Receivables ÷ (Revenue/365). Rising DSO = customers taking longer to pay = either credit extension (channel stuffing) or bill and hold unpaid. Screener Ratios tab → Debtor Days — compare 5-year trend.</div></div>
+          <div class="tcfix-item"><div class="tcfix-dot">2</div><div><strong>CFO/PAT ratio:</strong> Operating Cash Flow ÷ Net Profit. Should be above 0.85× for most businesses. Below 0.7× for 2+ years = revenue recognition outrunning cash reality. Cash Flow tab on Screener.</div></div>
+          <div class="tcfix-item"><div class="tcfix-dot">3</div><div><strong>Revenue per day in Q4 vs rest of year:</strong> Quarterly Results tab → (Q4 revenue ÷ 90 days) vs (Q1+Q2+Q3 revenue ÷ 275 days). If Q4 daily revenue is 40%+ above the rest-of-year average for 2+ consecutive years, investigate channel stuffing or end-of-year revenue pushing.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 DETECTION TESTS -->
+    <div class="tag rv d5" style="margin-bottom:12px;">7 Revenue Quality Tests — Run These on Any Company</div>
+    <div class="tests-grid rv d5">
+      <div class="test-card test-p">
+        <div class="test-ico">📈</div>
+        <div class="test-name">Test 1: DSO Trend (5-Year)</div>
+        <div class="test-badge tb-p">Screener → Ratios</div>
+        <div class="test-body">Debtor Days should be stable or falling as a company scales. Rising DSO while revenue also rises = collecting cash gets harder as revenue grows. Warning above 90 days in FMCG, above 120 days in B2B manufacturing.</div>
+        <div class="test-formula">DSO = (Receivables ÷ Revenue) × 365</div>
+      </div>
+      <div class="test-card test-r">
+        <div class="test-ico">💰</div>
+        <div class="test-name">Test 2: CFO / PAT Ratio</div>
+        <div class="test-badge tb-r">Screener → Cash Flow</div>
+        <div class="test-body">The gold standard. Real revenue generates real cash. CFO/PAT below 0.7× for 2+ years = revenue is not converting to cash. Calculate: Operating CFO ÷ Net Profit after tax. Target: above 0.9× for quality companies.</div>
+        <div class="test-formula">CFO/PAT = Operating Cash Flow ÷ Net Profit</div>
+      </div>
+      <div class="test-card test-a">
+        <div class="test-ico">📊</div>
+        <div class="test-name">Test 3: Q4/Q1 Revenue Ratio</div>
+        <div class="test-badge tb-a">Screener → Quarterly</div>
+        <div class="test-body">Q4 revenue ÷ Q1 revenue of same fiscal year. Above 1.5× consistently for 3+ years without seasonal explanation = channel stuffing signal. Compare with peers in same sector — if only one company shows this pattern, it's suspicious.</div>
+        <div class="test-formula">Q4/Q1 ratio = Q4 Revenue ÷ Q1 Revenue</div>
+      </div>
+      <div class="test-card test-g">
+        <div class="test-ico">📦</div>
+        <div class="test-name">Test 4: Inventory Turnover Days</div>
+        <div class="test-badge tb-g">Screener → Ratios</div>
+        <div class="test-body">If revenue grows 20% but inventory days rise from 45 to 70 — goods are not moving despite invoices being raised. This is the bill and hold fingerprint. Inventory Days rising while revenue also rising = investigate immediately.</div>
+        <div class="test-formula">Inventory Days = (Inventory ÷ COGS) × 365</div>
+      </div>
+      <div class="test-card test-p">
+        <div class="test-ico">📋</div>
+        <div class="test-name">Test 5: Revenue vs Receivables Growth</div>
+        <div class="test-badge tb-p">Screener → Balance Sheet</div>
+        <div class="test-body">Revenue and receivables should grow at approximately the same rate for a stable business. If receivables grow 40% while revenue grows 15%, credit is being extended — either to enable channel stuffing or because customers can't pay. Simple 5-year trend check.</div>
+        <div class="test-formula">Receivables Growth Rate vs Revenue Growth Rate</div>
+      </div>
+      <div class="test-card test-a">
+        <div class="test-ico">🔍</div>
+        <div class="test-name">Test 6: Revenue Recognition Policy</div>
+        <div class="test-badge tb-a">Annual Report → Notes</div>
+        <div class="test-body">Read the Note on Revenue Recognition in the Annual Report (BSE filing via Screener Documents). Any mention of "bill and hold," "extended credit terms," "right of return provisions," or "variable consideration" requires deeper investigation of the underlying transactions.</div>
+        <div class="test-formula">Annual Report → Significant Accounting Policies</div>
+      </div>
+      <div class="test-card test-r">
+        <div class="test-ico">💸</div>
+        <div class="test-name">Test 7: Bad Debt / Provision Trend</div>
+        <div class="test-badge tb-r">P&amp;L + Balance Sheet</div>
+        <div class="test-body">Channel stuffing always eventually produces bad debts — distributors who can't pay for goods they didn't want. A rising "provision for doubtful debts" in the P&L, especially appearing 1–2 years after a revenue spike, is the retrospective confirmation of earlier channel stuffing.</div>
+        <div class="test-formula">Provision for bad debts ÷ Total Receivables %</div>
+      </div>
+    </div>
+
+    <!-- Screener.in Mock -->
+    <div class="tag rv d5" style="margin-bottom:12px;">Reading Revenue Quality Signals on Screener.in</div>
+    <div class="screener-mock rv d5">
+      <div class="sm-bar">
+        <div class="sm-dot" style="background:#ef4444;"></div>
+        <div class="sm-dot" style="background:#f59e0b;"></div>
+        <div class="sm-dot" style="background:#22c55e;"></div>
+        <div class="sm-url">🔒 screener.in/company/NESTLEIND/consolidated/ → Ratios tab</div>
+      </div>
+      <div class="sm-body">
+        <div class="sm-header-row">
+          <div>
+            <div style="font-size:clamp(14px,2vw,18px);font-weight:900;color:var(--tx);">Nestle India Ltd — Revenue Quality Ratios</div>
+            <div style="font-size:11px;color:var(--tl);">NESTLEIND · Consumer Food · Model of Clean Revenue Recognition</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <span style="font-size:clamp(16px,2.5vw,22px);font-weight:900;color:var(--p);">₹2,240</span>
+            <span style="background:var(--gpale);color:var(--gbr);font-size:11px;font-weight:700;padding:4px 10px;border-radius:7px;">▲ +1.2%</span>
+          </div>
+        </div>
+        <div class="sm-tabs">
+          <div class="sm-tab">Overview</div>
+          <div class="sm-tab">Financials</div>
+          <div class="sm-tab">Quarterly</div>
+          <div class="sm-tab active">Ratios</div>
+          <div class="sm-tab">Cash Flow</div>
+          <div class="sm-tab">Balance Sheet</div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--p);margin-bottom:10px;letter-spacing:.5px;">🔍 Revenue Quality Tests — pulled directly from Screener.in Ratios + Cash Flow + Quarterly tabs:</div>
+        <div class="sm-grid">
+          <div class="sm-metric"><div class="smm-label">Debtor Days (DSO)</div><div class="smm-val" style="color:var(--gbr);">5 days</div><div class="smm-sub">✅ World-class. Retailers pay in days.</div></div>
+          <div class="sm-metric"><div class="smm-label">CFO / PAT (5-yr avg)</div><div class="smm-val" style="color:var(--gbr);">1.11×</div><div class="smm-sub">✅ Cash exceeds profit. Elite quality.</div></div>
+          <div class="sm-metric"><div class="smm-label">Q4/Q1 Revenue Ratio</div><div class="smm-val" style="color:var(--gbr);">1.08×</div><div class="smm-sub">✅ Very smooth. No Q4 stuffing.</div></div>
+          <div class="sm-metric"><div class="smm-label">Inventory Turnover Days</div><div class="smm-val" style="color:var(--gbr);">44 days</div><div class="smm-sub">✅ Stable — goods are actually moving.</div></div>
+          <div class="sm-metric"><div class="smm-label">Receivables 5-yr Growth</div><div class="smm-val" style="color:var(--gbr);">12% CAGR</div><div class="smm-sub">✅ Matches revenue growth — no stuffing.</div></div>
+          <div class="sm-metric"><div class="smm-label">Bad Debt Provision</div><div class="smm-val" style="color:var(--gbr);">Negligible</div><div class="smm-sub">✅ Virtually zero write-offs in 10 years.</div></div>
+          <div class="sm-metric"><div class="smm-label">Revenue Growth 5-yr CAGR</div><div class="smm-val" style="color:var(--gbr);">14%</div><div class="smm-sub">✅ Genuine — backed by volume data.</div></div>
+          <div class="sm-metric"><div class="smm-label">Working Capital Days</div><div class="smm-val" style="color:var(--gbr);">Negative</div><div class="smm-sub">✅ Retailers pay before Nestle pays suppliers.</div></div>
+        </div>
+        <div class="sm-alerts">
+          <div class="sma sma-g">✅ DSO 5 days — structurally impossible to channel stuff</div>
+          <div class="sma sma-g">✅ CFO/PAT 1.11× — cash confirmation of every rupee of revenue</div>
+          <div class="sma sma-g">✅ No Q4/Q1 revenue seasonality anomaly vs peers</div>
+          <div class="sma sma-g">✅ Negative working capital model prevents revenue inflation</div>
+        </div>
+        <div class="sm-caption">Navigation guide: screener.in → Search company → Ratios tab (DSO, Inventory Days, Working Capital) | Cash Flow tab (CFO) → calculate CFO/PAT | Quarterly tab (check Q4 vs Q1 pattern). All free, updated each quarter.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ QUICK DETECTION TRICKS ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">⚡ Quick Tricks</div>
+    <h2 class="h2 rv d2">The 10-Minute <span class="hp">Revenue Quality Cheat Sheet</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">No spreadsheets. No financial models. These are fast, visual, one-glance tricks that any investor can do in under 10 minutes on Screener.in and the BSE website — spotting channel stuffing and bill & hold before reading a single word of the annual report.</p>
+
+    <!-- TRICK CARDS -->
+    <div style="display:flex;flex-direction:column;gap:clamp(14px,2.5vw,20px);margin-bottom:40px;">
+
+      <!-- TRICK 1 -->
+      <div class="rv d3" style="border-radius:18px;overflow:hidden;border:2px solid rgba(109,40,217,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--pxs),var(--pxl));padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(109,40,217,.3);">⚡</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:3px;">Trick #1 — 60 Seconds · Screener.in Ratios Tab</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "DSO Straight Line" Trick</div>
+          </div>
+          <div style="background:rgba(109,40,217,.1);color:var(--p);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">Takes 60 sec</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Go to Screener.in → Search any company → Click <strong>Ratios</strong> tab → Find <strong>"Debtor Days"</strong> row → Look at 5 years of numbers from left to right.<br><br>Draw an imaginary straight line through those 5 numbers in your head. If the line goes <strong>upward</strong> (DSO rising year on year while revenue also rises) — that's the channel stuffing fingerprint. If the line is <strong>flat or falling</strong> — revenue quality is clean for this test.<br><br>The ideal: a company growing revenue 15% per year whose DSO stays flat or falls. That means customers are paying faster (or the same) even as the company sells more. This is only possible if the revenue is real and customers actually want the goods.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.5vw,16px);">
+            <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.22);border-radius:12px;padding:12px 14px;">
+              <div style="font-size:10px;font-weight:800;color:var(--gbr);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">✅ Safe Pattern</div>
+              <div style="font-family:monospace;font-size:13px;color:var(--tx);font-weight:700;">FY20: 38 · FY21: 36 · FY22: 40 · FY23: 37 · FY24: 35</div>
+              <div style="font-size:11px;color:var(--ts);margin-top:6px;line-height:1.5;">Flat / slightly falling DSO despite revenue growing = customers paying normally. No credit being extended to push inventory.</div>
+            </div>
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:12px;padding:12px 14px;">
+              <div style="font-size:10px;font-weight:800;color:var(--red);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">🚨 Warning Pattern</div>
+              <div style="font-family:monospace;font-size:13px;color:var(--tx);font-weight:700;">FY20: 42 · FY21: 58 · FY22: 79 · FY23: 112 · FY24: 143</div>
+              <div style="font-size:11px;color:var(--ts);margin-top:6px;line-height:1.5;">Rising DSO every year = distributor channel filling up with goods that aren't moving. The receivables are piling up because nobody's paying. Run the next tricks immediately.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICK 2 -->
+      <div class="rv d4" style="border-radius:18px;overflow:hidden;border:2px solid rgba(22,163,74,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--gpale),#ecfdf5);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--gbr),var(--gh));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(22,163,74,.3);">📊</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:3px;">Trick #2 — 90 Seconds · Cash Flow Tab</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Two Number" CFO/PAT Trick</div>
+          </div>
+          <div style="background:rgba(22,163,74,.1);color:var(--gbr);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">Takes 90 sec</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Screener.in → Cash Flow tab → Find two numbers: <strong>"Net Profit"</strong> and <strong>"Cash from Operations"</strong> for the same year → Divide Cash from Operations by Net Profit → That's your CFO/PAT ratio. Do this for 3 years.<br><br><strong>Rule: above 0.85× = safe. Below 0.7× for 2+ years = investigate immediately.</strong><br><br>Why it works: real revenue always converts to real cash within 30–90 days. If profit is ₹100 Cr but cash generated is only ₹30 Cr — those other ₹70 Cr of "profit" are sitting as unpaid receivables (channel stuffing) or undelivered invoices (bill and hold). You don't need to know anything else — just these two numbers divided.</div>
+          <div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:12px;">
+            <div style="font-size:10px;font-weight:700;color:var(--p);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">📱 Exactly Where to Find These Numbers on Screener.in</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--ts);line-height:1.5;"><span style="width:22px;height:22px;min-width:22px;border-radius:5px;background:var(--p);color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">1</span>Click <strong>Cash Flow</strong> tab (next to Balance Sheet in top nav)</div>
+              <div style="display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--ts);line-height:1.5;"><span style="width:22px;height:22px;min-width:22px;border-radius:5px;background:var(--p);color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">2</span>Row 1 shows <strong>"Cash from Operations"</strong> — this is CFO. Note the latest 3 years.</div>
+              <div style="display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--ts);line-height:1.5;"><span style="width:22px;height:22px;min-width:22px;border-radius:5px;background:var(--p);color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">3</span>Click <strong>Financials</strong> tab → Find <strong>"Net Profit"</strong> — same 3 years.</div>
+              <div style="display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--ts);line-height:1.5;"><span style="width:22px;height:22px;min-width:22px;border-radius:5px;background:var(--p);color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">4</span>Divide CFO ÷ Net Profit for each year. Above 0.85 every year? ✅ Pass. Below 0.7 for 2 years? 🚨 Investigate.</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+            <div style="text-align:center;background:var(--gpale);border:1.5px solid rgba(22,163,74,.22);border-radius:10px;padding:10px;">
+              <div style="font-size:11px;color:var(--gbr);font-weight:700;margin-bottom:4px;">✅ Elite</div>
+              <div style="font-size:20px;font-weight:900;color:var(--gbr);">&gt;1.0×</div>
+              <div style="font-size:10px;color:var(--tl);margin-top:3px;">Cash exceeds profit. Nestle-level quality.</div>
+            </div>
+            <div style="text-align:center;background:var(--apale);border:1.5px solid rgba(217,119,6,.22);border-radius:10px;padding:10px;">
+              <div style="font-size:11px;color:var(--ambr);font-weight:700;margin-bottom:4px;">⚠️ Watch</div>
+              <div style="font-size:20px;font-weight:900;color:var(--ambr);">0.7–0.85×</div>
+              <div style="font-size:10px;color:var(--tl);margin-top:3px;">Borderline. Check 5-year trend direction.</div>
+            </div>
+            <div style="text-align:center;background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:10px;padding:10px;">
+              <div style="font-size:11px;color:var(--red);font-weight:700;margin-bottom:4px;">🚨 Danger</div>
+              <div style="font-size:20px;font-weight:900;color:var(--red);">&lt;0.7×</div>
+              <div style="font-size:10px;color:var(--tl);margin-top:3px;">2+ years below this = deep dive or exit.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICK 3 -->
+      <div class="rv d5" style="border-radius:18px;overflow:hidden;border:2px solid rgba(220,38,38,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--rpale),#fff5f5);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--red),#f87171);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(220,38,38,.3);">📅</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:3px;">Trick #3 — 2 Minutes · Quarterly Tab</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Q4 Spike / Q1 Crash" Chart Trick</div>
+          </div>
+          <div style="background:rgba(220,38,38,.1);color:var(--red);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">Takes 2 min</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Screener.in → Quarterly tab → Look at the bar chart of revenue (or just the numbers) → <strong>Compare Q3 and Q4 to Q1 of the next year.</strong> Channel stuffing always shows the same visual pattern: a jump in Q4 followed by a dip in Q1. It looks like a wave — up, then crash, then recover.<br><br>The key question: does the <strong>peer group show the same pattern?</strong> If all paint companies show higher Q4 revenue (due to pre-monsoon season), that's legitimate seasonality. If only one company shows a 45% Q4 spike while peers are flat — that one company is the stuffing suspect.<br><br><strong>One-sentence rule: if Q4 revenue is 35%+ above the Q1–Q3 quarterly average for 3+ years running, and the sector doesn't show the same pattern — channel stuffing is happening.</strong></div>
+          <!-- Mini chart visual -->
+          <div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:12px;">
+            <div style="font-size:10px;font-weight:700;color:var(--p);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">📊 What Channel Stuffing Looks Like in Quarterly Revenue</div>
+            <div style="display:flex;align-items:flex-end;gap:6px;height:80px;padding:0 4px;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
+                <div style="width:100%;background:rgba(109,40,217,.35);border-radius:3px 3px 0 0;" style="height:52px;"></div>
+                <div style="font-size:9px;color:var(--tl);">Q1</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
+                <div style="width:100%;background:rgba(109,40,217,.35);border-radius:3px 3px 0 0;height:56px;"></div>
+                <div style="font-size:9px;color:var(--tl);">Q2</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
+                <div style="width:100%;background:rgba(109,40,217,.35);border-radius:3px 3px 0 0;height:54px;"></div>
+                <div style="font-size:9px;color:var(--tl);">Q3</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
+                <div style="width:100%;background:rgba(220,38,38,.7);border-radius:3px 3px 0 0;height:76px;"></div>
+                <div style="font-size:9px;color:var(--red);font-weight:700;">Q4 🚨</div>
+              </div>
+              <div style="width:1.5px;background:var(--bd);height:80px;flex-shrink:0;"></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
+                <div style="width:100%;background:rgba(220,38,38,.4);border-radius:3px 3px 0 0;height:32px;"></div>
+                <div style="font-size:9px;color:var(--red);font-weight:700;">Q1 📉</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
+                <div style="width:100%;background:rgba(109,40,217,.35);border-radius:3px 3px 0 0;height:52px;"></div>
+                <div style="font-size:9px;color:var(--tl);">Q2</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
+                <div style="width:100%;background:rgba(109,40,217,.35);border-radius:3px 3px 0 0;height:54px;"></div>
+                <div style="font-size:9px;color:var(--tl);">Q3</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
+                <div style="width:100%;background:rgba(220,38,38,.7);border-radius:3px 3px 0 0;height:76px;"></div>
+                <div style="font-size:9px;color:var(--red);font-weight:700;">Q4 🚨</div>
+              </div>
+            </div>
+            <div style="font-size:10.5px;color:var(--ts);margin-top:8px;text-align:center;">Q4 spike → Q1 crash → Q4 spike → Q1 crash = channel stuffing pattern repeating annually. The visual is unmistakable once you know what to look for.</div>
+          </div>
+          <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:10px;padding:10px 14px;font-size:12.5px;color:var(--ts);line-height:1.5;"><strong style="color:var(--red);">Peer comparison shortcut:</strong> Open two Screener.in tabs — suspect company + closest peer. Compare their Q4/Q1 patterns side by side. If one zigzags and the other is smooth — you have your answer in under 2 minutes.</div>
+        </div>
+      </div>
+
+      <!-- TRICK 4 -->
+      <div class="rv d6" style="border-radius:18px;overflow:hidden;border:2px solid rgba(217,119,6,.26);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--apale),#fffcf0);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--ambr),var(--amb));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.3);">🔎</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ambr);margin-bottom:3px;">Trick #4 — 3 Minutes · Annual Report PDF (BSE Filing)</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Ctrl+F Bill and Hold" Trick</div>
+          </div>
+          <div style="background:rgba(217,119,6,.1);color:var(--ambr);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">Takes 3 min</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Screener.in → Documents tab → Download the latest Annual Report PDF → Press <strong>Ctrl+F</strong> (or Cmd+F on Mac / search icon on mobile) → Search these exact phrases one by one. If any appear — read that section immediately:<br><br>This trick works because IND-AS 115 requires companies to disclose their revenue recognition judgements. Any company using bill and hold, right of return, or extended payment must describe it. Most investors never read Notes to Accounts — which is exactly why finding these terms gives you an information edge.</div>
+          <!-- Search term cards -->
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(8px,1.5vw,12px);margin-bottom:14px;">
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:10px;padding:10px 12px;">
+              <div style="font-family:monospace;font-size:13px;font-weight:700;color:var(--red);margin-bottom:4px;">"bill and hold"</div>
+              <div style="font-size:11px;color:var(--ts);">If found → company has undelivered goods billed as revenue. Read the specific note to see if the 4 IND-AS 115 conditions are met.</div>
+            </div>
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:10px;padding:10px 12px;">
+              <div style="font-family:monospace;font-size:13px;font-weight:700;color:var(--red);margin-bottom:4px;">"right of return"</div>
+              <div style="font-size:11px;color:var(--ts);">If found → distributors can return goods. Revenue should be estimated net of expected returns. Are returns being understated?</div>
+            </div>
+            <div style="background:var(--apale);border:1.5px solid rgba(217,119,6,.2);border-radius:10px;padding:10px 12px;">
+              <div style="font-family:monospace;font-size:13px;font-weight:700;color:var(--ambr);margin-bottom:4px;">"extended credit"</div>
+              <div style="font-size:11px;color:var(--ts);">If found → company gave customers more time to pay. Why? Legitimate business reason, or to enable channel stuffing in the current quarter?</div>
+            </div>
+            <div style="background:var(--apale);border:1.5px solid rgba(217,119,6,.2);border-radius:10px;padding:10px 12px;">
+              <div style="font-family:monospace;font-size:13px;font-weight:700;color:var(--ambr);margin-bottom:4px;">"variable consideration"</div>
+              <div style="font-size:11px;color:var(--ts);">Revenue where the amount isn't fixed yet (rebates, price adjustments). Companies can underestimate constraints and recognise more revenue now.</div>
+            </div>
+            <div style="background:var(--pxl);border:1.5px solid rgba(109,40,217,.18);border-radius:10px;padding:10px 12px;">
+              <div style="font-family:monospace;font-size:13px;font-weight:700;color:var(--p);margin-bottom:4px;">"contract assets"</div>
+              <div style="font-size:11px;color:var(--ts);">Revenue recognised before the invoice is raised. Growing Contract Assets = aggressive recognition. Check Balance Sheet for this line item.</div>
+            </div>
+            <div style="background:var(--pxl);border:1.5px solid rgba(109,40,217,.18);border-radius:10px;padding:10px 12px;">
+              <div style="font-family:monospace;font-size:13px;font-weight:700;color:var(--p);margin-bottom:4px;">"significant financing"</div>
+              <div style="font-size:11px;color:var(--ts);">Revenue from contracts with payment terms &gt;12 months must be adjusted for financing. A tell-tale sign of bill and hold with very long payment terms.</div>
+            </div>
+          </div>
+          <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:10px;padding:10px 14px;font-size:12.5px;color:var(--ts);line-height:1.5;"><strong style="color:var(--gbr);">Zero hits = best outcome.</strong> A Note on Revenue Recognition that is 2–3 paragraphs long and mentions only "point-in-time recognition on delivery" = clean, simple, low-risk revenue model. A note that is 8 paragraphs long with multiple conditions, estimates, and judgements = higher complexity = higher manipulation surface area.</div>
+        </div>
+      </div>
+
+      <!-- TRICK 5 -->
+      <div class="rv d7" style="border-radius:18px;overflow:hidden;border:2px solid rgba(2,132,199,.24);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--skypale),#e0f2fe);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--sky),#38bdf8);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(2,132,199,.3);">🏆</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--sky);margin-bottom:3px;">Trick #5 — The Master Check · 10 Minutes Total</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Traffic Light" System — 3 Colours, 3 Minutes Each</div>
+          </div>
+          <div style="background:rgba(2,132,199,.1);color:var(--sky);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">Complete check</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:16px;">Combine the four tricks above into a single traffic-light system. Run them in order. Stop as soon as you get a <strong>Red</strong> — that's your signal to dig deeper or avoid. If all three are Green, you have high confidence in revenue quality without reading the full annual report.</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--gpale);border:1.5px solid rgba(22,163,74,.22);border-radius:13px;padding:14px 16px;">
+              <div style="width:36px;height:36px;min-width:36px;border-radius:50%;background:var(--gbr);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🟢</div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:13px;font-weight:800;color:var(--gbr);margin-bottom:3px;">GREEN — 3 Minutes on Screener Ratios + Cash Flow</div>
+                <div style="font-size:12.5px;color:var(--ts);line-height:1.5;">Check DSO (Debtor Days): flat or falling 5-year trend ✅ AND CFO/PAT above 0.85× for last 3 years ✅. Both pass → move to Yellow check. One fails → revenue quality concern, go deeper.</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--apale);border:1.5px solid rgba(217,119,6,.22);border-radius:13px;padding:14px 16px;">
+              <div style="width:36px;height:36px;min-width:36px;border-radius:50%;background:var(--amb);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🟡</div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:13px;font-weight:800;color:var(--ambr);margin-bottom:3px;">YELLOW — 4 Minutes on Quarterly Tab + vs Peer</div>
+                <div style="font-size:12.5px;color:var(--ts);line-height:1.5;">Q4/Q1 pattern: no consistent Q4 spike compared to the sector ✅ AND receivables growing at ≤ same rate as revenue ✅. Both pass → move to Red check. One fails → channel stuffing risk, run Ctrl+F trick.</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:13px;padding:14px 16px;">
+              <div style="width:36px;height:36px;min-width:36px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔴</div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:13px;font-weight:800;color:var(--red);margin-bottom:3px;">RED — 3 Minutes Ctrl+F in Annual Report PDF</div>
+                <div style="font-size:12.5px;color:var(--ts);line-height:1.5;">Search for "bill and hold," "right of return," "extended credit," "variable consideration." Zero hits ✅ = Revenue recognition policy clean. Any hit → read the specific note and decide if the explanation is satisfactory.</div>
+              </div>
+            </div>
+            <div style="background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:13px;padding:14px 16px;">
+              <div style="font-size:12.5px;font-weight:800;color:var(--tx);margin-bottom:5px;">🏆 All Three Green = High Revenue Quality Confidence</div>
+              <div style="font-size:12px;color:var(--ts);line-height:1.55;">You've just done more revenue quality analysis in 10 minutes than 95% of retail investors do in a year — using only free tools (Screener.in + BSE annual report). This 10-minute routine, applied quarterly to every holding, is what separates investors from gamblers.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BONUS: One-line cheat sheet -->
+    <div class="caveat-box rv d7">
+      <div class="caveat-icon">⚡</div>
+      <div class="caveat-body">
+        <div class="caveat-label">The One-Line Cheat Sheet</div>
+        <div class="caveat-title">If DSO is Rising AND CFO/PAT is Falling — Exit or Investigate. Every Time. No Exceptions.</div>
+        <div class="caveat-desc">Every major revenue quality failure in the last 20 years — Manpasand, Enron's bandwidth division, Wirecard, WorldCom, Satyam, multiple Indian pharma companies — showed both signals simultaneously: DSO rising (customers not paying) and CFO/PAT falling (cash not tracking profit). The two signals reinforce each other because they measure the same underlying problem from two different angles. DSO measures whether collections are slowing. CFO/PAT measures whether the gap between profit and cash is widening. When both deteriorate together, the probability of genuine revenue inflation is very high.<br><br>You don't need to understand IND-AS 115, read 200-page annual reports, or build a financial model. Open Screener.in for 5 minutes. Check DSO trend (Ratios tab). Check CFO/PAT (Cash Flow tab ÷ Net Profit). If both are going in the right direction — high confidence, move on. If both are going wrong — stop, investigate, and don't let a compelling business story override what the numbers are telling you. The story can be true and the revenue can still be inflated.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ DEMAT BANNER ══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Start Investing Today</div>
+    <div class="dmh">Invest Only in Companies With <span class="dmhs">Real Revenue</span></div>
+    <div class="dmsub">Before buying any stock, spend 15 minutes on Screener.in checking DSO trend, CFO/PAT ratio, and Q4/Q1 revenue pattern. Companies with clean revenue quality rarely disappoint — companies with inflated revenue always eventually do.</div>
+    <div class="dmfeats">
+      <div class="dmf">DSO, CFO/PAT free on Screener.in</div>
+      <div class="dmf">Quarterly results show Q4/Q1 pattern</div>
+      <div class="dmf">Annual report notes reveal bill &amp; hold</div>
+      <div class="dmf">Start investing from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ══ GOOD EXAMPLES ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">03 — Five Companies With Genuine, High-Quality Revenue</div>
+    <h2 class="h2 rv d2">✅ <span class="hg">Good Examples</span> — Revenue That Converts to Cash</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five companies demonstrate textbook revenue quality — low DSO, CFO tracking PAT, smooth quarterly patterns, and accounting policies that conservatively recognise revenue only when genuinely earned.</p>
+
+    <!-- GOOD 1: Nestle -->
+    <div class="ex-block rv d3">
+      <div class="eb-header ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);">🍫</div>
+          <div><div class="eb-name">Nestle India — Structural Impossibility of Revenue Inflation</div><div class="eb-sub">NSE: NESTLEIND · Consumer Food · FMCG · 5-day DSO makes channel stuffing mechanically impossible</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ DSO: 5 days</span>
+          <span class="ebb ebb-g">✅ CFO/PAT: 1.11×</span>
+          <span class="ebb ebb-g">✅ Negative working capital</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-label">Debtor Days (DSO)</div><div class="em-val" style="color:var(--gbr);">5 days</div><div class="em-sub">Retailers pay in &lt;1 week</div></div>
+          <div class="em-box"><div class="em-label">CFO / PAT</div><div class="em-val" style="color:var(--gbr);">1.11×</div><div class="em-sub">Cash exceeds reported profit</div></div>
+          <div class="em-box"><div class="em-label">Q4/Q1 Ratio</div><div class="em-val" style="color:var(--gbr);">1.08×</div><div class="em-sub">Virtually no seasonality</div></div>
+          <div class="em-box"><div class="em-label">Revenue Quality</div><div class="em-val"><span class="rq-pill rqp-g">Elite ✅</span></div><div class="em-sub">10-year track record</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>Why channel stuffing is structurally impossible:</strong> Nestle's retail network pays within 3–5 days. DSO of 5 days means revenue and cash arrive simultaneously. No matter how much Nestle wanted to stuff the channel, retailers simply don't carry 60–90 days of Maggi inventory — the working capital constraint prevents it. Negative working capital (Nestle collects from retailers before paying its own suppliers) is the best possible revenue quality structure.</div>
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>CFO 1.11× PAT (5-year average):</strong> Every rupee of reported profit actually arrives as cash — and then some (the extra 11% comes from non-cash charges like depreciation). The absence of any accruals gap means there is nothing to investigate further. Cash confirms revenue.</div>
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>Revenue recognition policy:</strong> Standard IND-AS 15 retail point-of-sale recognition. No bill and hold, no right of return provisions, no variable consideration arrangements. Annual report Note on Revenue Recognition is 2 paragraphs long — a sign of simplicity, not complexity.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>Revenue quality verdict:</strong> Nestle India's revenue quality is structurally exceptional. The 5-day DSO, 1.11× CFO/PAT, and negative working capital model collectively mean that any revenue manipulation would immediately show up in a catastrophic cash flow miss — making sustained manipulation economically impossible. Use Nestle as your benchmark for what "safe zone" revenue quality looks like.</div>
+    </div>
+
+    <!-- GOOD 2: TCS -->
+    <div class="ex-block rv d4">
+      <div class="eb-header ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe);">💻</div>
+          <div><div class="eb-name">TCS — IT Services Revenue Quality Is Structurally Verifiable</div><div class="eb-sub">NSE: TCS · IT Services · Long-term contracts with milestone billing — conservative recognition</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ DSO: ~68 days</span>
+          <span class="ebb ebb-g">✅ CFO/PAT: 1.05×</span>
+          <span class="ebb ebb-g">✅ Attrition = demand proxy</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-label">Debtor Days (DSO)</div><div class="em-val" style="color:var(--gbr);">68 days</div><div class="em-sub">Normal for enterprise IT billing</div></div>
+          <div class="em-box"><div class="em-label">CFO / PAT</div><div class="em-val" style="color:var(--gbr);">1.05×</div><div class="em-sub">Strong cash conversion</div></div>
+          <div class="em-box"><div class="em-label">Q4/Q1 Ratio</div><div class="em-val" style="color:var(--gbr);">1.06×</div><div class="em-sub">Very smooth</div></div>
+          <div class="em-box"><div class="em-label">Revenue Quality</div><div class="em-val"><span class="rq-pill rqp-g">Elite ✅</span></div><div class="em-sub">20+ year consistency</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>IT services have a natural verifiability advantage:</strong> TCS can't "channel stuff" software services — there is no physical inventory to force into a channel. Revenue is based on time-and-material billing (hours worked × rate) or fixed-fee milestones, both of which are independently verifiable from the client's own internal records. Any revenue inflation would require the client's CFO to confirm a false invoice — almost impossible at TCS's scale (330,000 employees billing 3,000+ clients).</div>
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>Headcount as revenue proxy:</strong> TCS adds or reduces headcount in direct proportion to billable demand. When headcount grows 8%, you'd expect revenue to grow roughly 8–12% (accounting for rate increases). TCS's revenue-per-employee and revenue-per-delivery-centre are public enough to triangulate — making fiction essentially impossible at scale.</div>
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>Order Book as leading indicator:</strong> TCS discloses its total contract value (TCV) of new deals each quarter. Revenue recognition from TCV takes 3–12 months. A falling TCV with rising current revenue = potential early recognition red flag. TCS shows growing TCV backing growing revenue — the correct causality.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>Revenue quality verdict:</strong> TCS's service-based model, headcount-verifiable billing, and multi-year client relationships make revenue manipulation structurally very difficult. CFO/PAT consistently above 1.0× across economic cycles confirms that reported earnings are genuine. TCS's quarterly revenue is among the most predictable and cash-backed of any large Indian company.</div>
+    </div>
+
+    <!-- GOOD 3: Asian Paints -->
+    <div class="ex-block rv d5">
+      <div class="eb-header ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">🎨</div>
+          <div><div class="eb-name">Asian Paints — B2B + B2C Mix With Strong Collection Discipline</div><div class="eb-sub">NSE: ASIANPAINT · Paints · Dealer network with strong cash collection norms — DSO controlled</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ DSO: ~38 days</span>
+          <span class="ebb ebb-g">✅ CFO/PAT: 0.88× avg</span>
+          <span class="ebb ebb-g">✅ FY25 CFO positive despite -27% PAT</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-label">Debtor Days</div><div class="em-val" style="color:var(--gbr);">38 days</div><div class="em-sub">Stable 5-year trend</div></div>
+          <div class="em-box"><div class="em-label">CFO / PAT</div><div class="em-val" style="color:var(--gbr);">0.88×</div><div class="em-sub">5-year average</div></div>
+          <div class="em-box"><div class="em-label">Q4/Q1 Ratio</div><div class="em-val" style="color:var(--gbr);">1.18×</div><div class="em-sub">Mild seasonal, consistent</div></div>
+          <div class="em-box"><div class="em-label">FY25 CFO</div><div class="em-val" style="color:var(--gbr);">₹2,232 Cr</div><div class="em-sub">Positive despite PAT -27%</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>The definitive FY25 quality test:</strong> Asian Paints' PAT fell 27% in FY25 as Birla Opus entered the market and forced price competition. If Asian Paints had been inflating revenue, a PAT decline would have exposed it — but CFO was ₹2,232 Cr (positive). PAT followed CFO down together, confirming the revenue was always real. Genuine earnings quality survives adverse business conditions; inflated earnings collapse catastrophically.</div>
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>DSO stability:</strong> 38-day DSO has been stable within 35–45 days for 5 years despite 15%+ annual revenue growth. If Asian Paints were channel stuffing, DSO would be rising — extending more credit to push more product. Stable DSO = dealers are buying what they can actually sell.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>Revenue quality verdict:</strong> Asian Paints' FY25 is a masterclass in revenue quality validation. When business gets tough (Birla Opus competition), genuine revenue declines transparently — it doesn't collapse in a restatement. CFO tracking PAT downward proves both were real. Stable DSO over 5 years confirms no channel stuffing.</div>
+    </div>
+
+    <!-- GOOD 4: Maruti -->
+    <div class="ex-block rv d6">
+      <div class="eb-header ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🚗</div>
+          <div><div class="eb-name">Maruti Suzuki — Wholesale vs Retail Distinction Kept Honest</div><div class="eb-sub">NSE: MARUTI · Automobiles · Wholesale (to dealers) vs retail (to end customers) clearly separated</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ DSO: ~8 days</span>
+          <span class="ebb ebb-g">✅ CFO/PAT: 0.97×</span>
+          <span class="ebb ebb-g">✅ Retail data tracked separately</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-label">Debtor Days</div><div class="em-val" style="color:var(--gbr);">8 days</div><div class="em-sub">Dealers pay before delivery</div></div>
+          <div class="em-box"><div class="em-label">CFO / PAT</div><div class="em-val" style="color:var(--gbr);">0.97×</div><div class="em-sub">Near-perfect 5-yr avg</div></div>
+          <div class="em-box"><div class="em-label">Dealer Inventory</div><div class="em-val" style="color:var(--gbr);">~25 days</div><div class="em-sub">Disclosed quarterly</div></div>
+          <div class="em-box"><div class="em-label">Q4/Q1 Ratio</div><div class="em-val" style="color:var(--gbr);">1.14×</div><div class="em-sub">March year-end mild bump</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>Wholesale vs retail tracking:</strong> Maruti is one of very few Indian manufacturers that explicitly discloses both wholesale volumes (sold to dealers) and retail sales (sold to end customers) separately in every quarterly concall. When wholesale volumes exceed retail sales for 2+ consecutive quarters, channel inventory builds — and Maruti publicly acknowledges this rather than hiding it. This transparency is the opposite of channel stuffing.</div>
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>DSO of 8 days:</strong> Maruti's dealers pay for vehicles before or at the time of delivery — dealers finance their inventory through working capital loans, not through extended credit from Maruti. This 8-day DSO is structurally similar to Nestle's 5 days — making sustained channel stuffing through credit extension impossible.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>Revenue quality verdict:</strong> Maruti's transparent disclosure of both wholesale and retail volumes, combined with 8-day DSO and near-perfect CFO/PAT, makes revenue quality exceptionally high. When channel inventory temporarily builds (as in FY22 due to semiconductor shortage distorting wholesale-retail gap), management discloses it explicitly. This transparency is the hallmark of high-quality revenue reporting.</div>
+    </div>
+
+    <!-- GOOD 5: Polycab -->
+    <div class="ex-block rv d7">
+      <div class="eb-header ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🔌</div>
+          <div><div class="eb-name">Polycab India — B2B Manufacturing With Recovering Revenue Quality</div><div class="eb-sub">NSE: POLYCAB · Wires &amp; Cables · FY24 CFO/PAT 0.90× — structural commodity cycle explained</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ DSO: ~62 days</span>
+          <span class="ebb ebb-g">✅ CFO/PAT: 0.90×</span>
+          <span class="ebb ebb-a">FY22 copper spike explained</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-label">DSO (Debtor Days)</div><div class="em-val" style="color:var(--gbr);">62 days</div><div class="em-sub">Normal for B2B cable co</div></div>
+          <div class="em-box"><div class="em-label">CFO / PAT</div><div class="em-val" style="color:var(--gbr);">0.90×</div><div class="em-sub">FY24 — recovering from FY22</div></div>
+          <div class="em-box"><div class="em-label">FY22 CFO/PAT</div><div class="em-val" style="color:var(--ambr);">0.47×</div><div class="em-sub">Copper spike WC build — explained</div></div>
+          <div class="em-box"><div class="em-label">Revenue Growth</div><div class="em-val" style="color:var(--gbr);">18% CAGR</div><div class="em-sub">Backed by volume data</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>FY22 CFO/PAT 0.47× — structural, not manipulation:</strong> Polycab's CFO/PAT fell dramatically in FY22 when copper prices surged 40%. The company had to build higher-cost raw material inventory to maintain production. Working capital swelled, suppressing operating cash flow. This is the textbook "commodity company WC cycle" — not revenue inflation. By FY24, as copper prices normalised, CFO/PAT recovered to 0.90×. The explanation was verifiable: LME copper prices in public data.</div>
+          <div class="erf erf-good"><div class="erf-ico">✅</div><strong>DSO stability at 62 days:</strong> B2B cable customers (infrastructure companies, real estate developers, industrial clients) typically have 60–90 day payment cycles. Polycab's 62-day DSO has been stable for 5 years — not growing despite revenue growth — confirming no credit extension to push channel inventory.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>Revenue quality verdict:</strong> Polycab's FY22 CFO/PAT dip was correctly diagnosed as a commodity-driven working capital cycle, not revenue manipulation — because the explanation (LME copper price data) was independently verifiable and DSO remained stable. By FY24, CFO/PAT recovery to 0.90× confirms the underlying revenue quality was always genuine. This is how to distinguish temporary cash flow weakness from structural revenue inflation.</div>
+    </div>
+
+    <!-- SECTION DIVIDER -->
+    <div class="section-divider rv d3">
+      <div class="sd-line"></div>
+      <div class="sd-label">🚨 Now the Bad Examples — Revenue That Wasn't Real</div>
+      <div class="sd-line"></div>
+    </div>
+
+    <div class="tag rv d1" style="color:var(--red);">04 — Five Companies With Revenue Quality Problems</div>
+    <h2 class="h2 rv d2">🚨 <span style="background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Bad Examples</span> — Inflated or Structurally Problematic Revenue</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five cases — including historical Indian and global examples — show the exact patterns that revenue quality tests detect. In every case, the signals were visible in financial data months or years before public disclosure.</p>
+
+    <!-- BAD 1: Manpasand Beverages -->
+    <div class="ex-block rv d3">
+      <div class="eb-header ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🥤</div>
+          <div><div class="eb-name">Manpasand Beverages — Channel Stuffing + Fake Revenue (2019)</div><div class="eb-sub">NSE: MANPASAND · Beverages · Deloitte resigned citing unobtainable audit evidence · Stock fell 90%</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 DSO: 300+ days</span>
+          <span class="ebb ebb-r">🚨 CFO/PAT: 0.28×</span>
+          <span class="ebb ebb-r">Revenue: partially fictitious</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-label">Debtor Days</div><div class="em-val" style="color:var(--red);">300+ days</div><div class="em-sub">🚨 Distributors not paying</div></div>
+          <div class="em-box"><div class="em-label">CFO / PAT</div><div class="em-val" style="color:var(--red);">0.28×</div><div class="em-sub">🚨 Only 28p cash per ₹1 profit</div></div>
+          <div class="em-box"><div class="em-label">Revenue Growth</div><div class="em-val" style="color:var(--red);">38% CAGR</div><div class="em-sub">🚨 Not backed by cash</div></div>
+          <div class="em-box"><div class="em-label">Revenue Quality</div><div class="em-val"><span class="rq-pill rqp-r">Collapse 🚨</span></div><div class="em-sub">Auditor resigned 2019</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>DSO 300+ days — extreme channel stuffing signal:</strong> Manpasand reported 38% annual revenue growth for 4 consecutive years — but receivables grew at 80% per year. Distributors were being forced to take Manpasand products they couldn't sell. By 2018, the company was extending 300+ day credit to distributors — essentially lending money to distributors to "buy" product they didn't want. This is textbook channel stuffing taken to its extreme conclusion.</div>
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>CFO/PAT 0.28× for 4 years:</strong> Revenue was being "recognised" but only 28 paise of cash was arriving for every rupee of reported profit. The 72 paise gap represents receivables that distributors would never pay — either because the goods were eventually returned, or because the transactions were entirely fictitious. Screener's Cash Flow tab showed this clearly for every year 2015–2018.</div>
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Deloitte resigned in 2018:</strong> Manpasand's auditor Deloitte resigned citing inability to obtain sufficient appropriate audit evidence. This is the clearest possible forensic signal — when your Big-4 auditor cannot verify revenues, the revenues are suspect. SEBI investigation confirmed widespread accounting irregularities. Stock fell from ₹400 to below ₹30.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>What the tests showed years before collapse:</strong> DSO rising from 120 to 300+ days (Test 1 trigger: &gt;90 days in FMCG), CFO/PAT falling from 0.65× to 0.28× (Test 2 trigger: &lt;0.7×), receivables growing at 2× the rate of revenue (Test 5 trigger). All three tests failed simultaneously by 2016. Investors who ran these three Screener.in checks in 2016 had 3 years of warning before Deloitte resigned.</div>
+    </div>
+
+    <!-- BAD 2: Gitanjali Gems -->
+    <div class="ex-block rv d4">
+      <div class="eb-header ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">💎</div>
+          <div><div class="eb-name">Gitanjali Gems — PNB Fraud Enabled by Revenue Fiction (2018)</div><div class="eb-sub">BSE: 532715 · Gems &amp; Jewellery · Nirav Modi / Mehul Choksi fraud · ₹13,500 Cr PNB fraud</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 DSO: 180+ days</span>
+          <span class="ebb ebb-r">🚨 Revenue: partially fictitious</span>
+          <span class="ebb ebb-r">₹13,500 Cr fraud</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-label">Debtor Days</div><div class="em-val" style="color:var(--red);">180+ days</div><div class="em-sub">🚨 Export "customers" not paying</div></div>
+          <div class="em-box"><div class="em-label">Export Revenue %</div><div class="em-val" style="color:var(--red);">70%+</div><div class="em-sub">🚨 To related offshore entities</div></div>
+          <div class="em-box"><div class="em-label">LOUs (Letters of Undertaking)</div><div class="em-val" style="color:var(--red);">₹13,500 Cr</div><div class="em-sub">🚨 Fraudulent bank guarantees</div></div>
+          <div class="em-box"><div class="em-label">Revenue Quality</div><div class="em-val"><span class="rq-pill rqp-r">Fraud 🚨</span></div><div class="em-sub">Fraudulent export revenue</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Circular revenue through related offshore entities:</strong> Gitanjali Gems and Nirav Modi companies created circular revenue flows — selling jewellery to offshore entities (on paper), recognising export revenue, then using fraudulent bank LOUs (Letters of Undertaking from PNB) to finance the "receivables" from these offshore buyers. The offshore entities then sent money back through complex routes, which was used to repay old LOUs and create new ones. The entire revenue stream was circular — goods may never have actually been exported to genuine third-party customers.</div>
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>DSO 180+ days on "export" revenue:</strong> Genuine export customers in gem & jewellery typically pay within 60–90 days. When DSO crosses 150+ days for export receivables — the "customers" are either not real or are related entities with no intention of paying independently. This is a visible signal on any balance sheet analysis.</div>
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Related party export percentage:</strong> Revenue quality analysis requires checking what % of revenue comes from related parties. Notes to Accounts → Related Party Transactions: if a significant portion of "export revenue" flows to promoter-affiliated overseas entities at below-market terms, it is potentially circular and inflated.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The revenue quality fingerprints were visible:</strong> DSO rising to 180+ days (Test 1), CFO well below PAT (Test 2), and most tellingly — Related Party Transactions Note (Test 6) showing large "export sales" to offshore entities that should have triggered immediate questions about arm's length pricing and genuine economic substance. The revenue was partly real (some legitimate exports existed) but substantially inflated by circular related-party transactions.</div>
+    </div>
+
+    <!-- BAD 3: HFCL -->
+    <div class="ex-block rv d5">
+      <div class="eb-header ebh-a">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef9c3,#fde68a);">📡</div>
+          <div><div class="eb-name">HFCL — B2G Revenue That Never Converts to Cash</div><div class="eb-sub">NSE: HFCL · Telecom Manufacturing · Government receivables aging beyond 300 days · Structural revenue quality problem</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 DSO: 343 days</span>
+          <span class="ebb ebb-r">🚨 CFO/PAT: −2.95×</span>
+          <span class="ebb ebb-a">Structural, not fraud</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-label">Debtor Days</div><div class="em-val" style="color:var(--red);">343 days</div><div class="em-sub">🚨 Gov't not paying on time</div></div>
+          <div class="em-box"><div class="em-label">CFO / PAT</div><div class="em-val" style="color:var(--red);">−2.95×</div><div class="em-sub">🚨 Consuming cash vs generating</div></div>
+          <div class="em-box"><div class="em-label">Outstanding Receivables</div><div class="em-val" style="color:var(--red);">₹4,016 Cr</div><div class="em-sub">🚨 On ₹4,268 Cr revenue</div></div>
+          <div class="em-box"><div class="em-label">Revenue Quality</div><div class="em-val"><span class="rq-pill rqp-r">Structural 🚨</span></div><div class="em-sub">B2G payment delay risk</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>343-day DSO — the revenue is booked but cash isn't arriving:</strong> HFCL recognises revenue when it completes telecom infrastructure milestones for government entities (BSNL, BharatNet). Under accounting standards, this is permissible — the performance obligation is complete. But the government hasn't paid. With 343-day DSO, HFCL effectively has nearly a full year of revenue sitting in receivables unpaid. The income statement looks fine; the cash flow statement is deeply negative.</div>
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Revenue may be technically "real" but economically problematic:</strong> Unlike Manpasand where revenue was likely fictitious, HFCL's revenue represents real work actually completed on real government projects. The problem is economic viability — a company earning revenue it cannot collect is not a profitable business. The P&L shows ₹200+ Cr profit; the operating reality is ₹400+ Cr of cash being consumed each year to fund receivables that government hasn't paid.</div>
+          <div class="erf erf-bad"><div class="erf-ico">⚠️</div><strong>Revenue quality test outcome:</strong> All four key tests fail simultaneously — DSO 343 days (Test 1: far above any threshold), CFO negative (Test 2: worst possible outcome), receivables growing faster than revenue (Test 5), and bad debt provisions rising (Test 7: government receivables aging beyond 2 years begin to require provisions). Whether you call this "fraud" or "structural business model failure" — the investor outcome is the same: capital destruction.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-a">⚠️ <strong>Revenue quality lesson:</strong> Not all revenue quality problems are fraud — some are structural business model problems where revenue is real but uncollectable. HFCL demonstrates that 343-day DSO is equally dangerous whether caused by channel stuffing (fraud) or government payment delays (structural). The revenue quality tests don't distinguish the cause — they simply flag the risk. In either case, the investor response is the same: exit or avoid until DSO normalises below 180 days.</div>
+    </div>
+
+    <!-- BAD 4: Café Coffee Day -->
+    <div class="ex-block rv d6">
+      <div class="eb-header ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">☕</div>
+          <div><div class="eb-name">Café Coffee Day — Revenue Used to Mask Promoter Debt (2019)</div><div class="eb-sub">NSE: COFFEEDAY · Hospitality · V.G. Siddhartha's letter revealed hidden debt — ₹9,000 Cr promoter liability</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 Related party loans</span>
+          <span class="ebb ebb-r">🚨 Promoter pledge: 100%</span>
+          <span class="ebb ebb-r">₹9,000 Cr hidden debt</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-label">Listed Company Revenue</div><div class="em-val" style="color:var(--ambr);">₹1,500 Cr</div><div class="em-sub">CCD standalone</div></div>
+          <div class="em-box"><div class="em-label">Group Debt (Hidden)</div><div class="em-val" style="color:var(--red);">₹9,000 Cr</div><div class="em-sub">🚨 Off-listed-entity books</div></div>
+          <div class="em-box"><div class="em-label">Promoter Pledge</div><div class="em-val" style="color:var(--red);">100%</div><div class="em-sub">🚨 All shares pledged</div></div>
+          <div class="em-box"><div class="em-label">Revenue Quality</div><div class="em-val"><span class="rq-pill rqp-r">Obscured 🚨</span></div><div class="em-sub">Complexity hid debt</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Revenue used to fund debt servicing hidden in group structure:</strong> CCD's listed entity (Coffee Day Enterprises) had a complex holding structure with 40+ subsidiaries. Revenue from the café chain funded interest payments on promoter-level debt (₹9,000 Cr) that appeared in unlisted SPVs rather than the consolidated listed entity. Related party transactions in the Annual Report showed significant inter-company cash flows — a forensic signal that cash was being extracted from the operating business to fund the promoter's private debt.</div>
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>100% promoter pledge — the most visible warning signal:</strong> BSE Shareholding Pattern filing (Reg 31) showed 100% of promoter shares pledged to lenders. A promoter who has pledged every share they own to lenders is under extreme financial distress. This creates intense pressure to maintain or inflate reported revenue — because any stock price decline triggers lender margin calls that force share sales, which drives the price down further in a spiral. The pledge was visible to any investor checking the quarterly shareholding data.</div>
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>V.G. Siddhartha's letter confirmed the revenue pressure:</strong> In his final letter, Siddhartha wrote that he was under pressure from lenders and private equity investors to maintain revenue growth metrics. This externally-confirmed what the balance sheet structure strongly suggested: revenue targets were being maintained to service debt rather than to reflect genuine business growth.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The multi-layered warning system:</strong> CCD showed three simultaneous signals: (1) 100% promoter pledge (BSE shareholding data — Test equivalent), (2) Complex related party structure (Annual Report — Test 6), (3) Revenue growth not translating to equity value creation (CFO/PAT pressure). All three were visible before Siddhartha's disappearance in July 2019. Revenue quality analysis requires looking not just at the P&L but at what the revenue is actually financing — sometimes it's growth, sometimes it's a promoter's hidden debt.</div>
+    </div>
+
+    <!-- BAD 5: Wirecard (global historical) -->
+    <div class="ex-block rv d7">
+      <div class="eb-header ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">💳</div>
+          <div><div class="eb-name">Wirecard AG — €1.9 Bn Revenue That Simply Didn't Exist (2020)</div><div class="eb-sub">Germany: WDI · Payments · Revenue from "Third Party Acquirers" in Asia fabricated · €1.9 Bn cash missing</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 Revenue: partially fabricated</span>
+          <span class="ebb ebb-r">€1.9 Bn cash never existed</span>
+          <span class="ebb ebb-r">DAX30 company · EY auditor</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-label">Fabricated Cash</div><div class="em-val" style="color:var(--red);">€1.9 Bn</div><div class="em-sub">🚨 Didn't exist in any bank</div></div>
+          <div class="em-box"><div class="em-label">Third Party Revenue %</div><div class="em-val" style="color:var(--red);">60%+</div><div class="em-sub">🚨 Via unverifiable partners</div></div>
+          <div class="em-box"><div class="em-label">CFO/PAT (actual)</div><div class="em-val" style="color:var(--red);">Near zero</div><div class="em-sub">🚨 Adjusted vs reported differed</div></div>
+          <div class="em-box"><div class="em-label">Revenue Quality</div><div class="em-val"><span class="rq-pill rqp-r">Fraud 🚨</span></div><div class="em-sub">€1.9 Bn never existed</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Revenue through unverifiable "Third Party Acquirers":</strong> Wirecard processed payments through partners in Asia (called TPAs — Third Party Acquirers) in markets where it claimed not to have a direct licence. These TPAs supposedly held billions in cash on Wirecard's behalf. The revenue from these partners was real on paper — contracts existed, invoices were raised, Wirecard consolidated the revenue. But the underlying cash didn't exist. The €1.9 Bn that EY was trying to confirm in trust accounts at a Filipino bank had never been there. The bank's confirmation letter was forged.</div>
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>The signals investors could see:</strong> Wirecard's reported revenue grew 40%+ annually for 5 years — but FCF (Free Cash Flow) was consistently weak relative to EBIT. Short-sellers (Dan McCrum/FT) noted that the company needed to raise equity capital repeatedly despite reporting strong profitability — suggesting real cash generation was far below reported earnings. A company that reports ₹1,000 Cr profit but needs to raise ₹1,200 Cr in fresh equity every 2 years is consuming more cash than it generates.</div>
+          <div class="erf erf-bad"><div class="erf-ico">🚨</div><strong>Concentration of revenue in opaque geography:</strong> Revenue quality analysis should flag concentration risk in geographies where verification is difficult (Southeast Asia, Middle East via opaque partners). When 60%+ of a company's revenue comes through partners that the auditor cannot independently verify — that concentration itself is a risk factor requiring investigation, not acceptance.</div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The universal Wirecard lesson for Indian investors:</strong> Wirecard was in the DAX30, covered by dozens of sell-side analysts, audited by EY for 12 years. None of this prevented the fraud. The lesson for Indian investors: institutional coverage is not a substitute for your own revenue quality tests. The signals — weak FCF vs strong EBIT, repeated equity raises despite reported profitability, revenue concentration in opaque geographies — were visible. The question was whether anyone was looking.</div>
+    </div>
+
+    <div class="caveat-box rv d7">
+      <div class="caveat-icon">💡</div>
+      <div class="caveat-body">
+        <div class="caveat-label">The Revenue Quality Master Rule</div>
+        <div class="caveat-title">Revenue That Doesn't Convert to Cash Within 90–120 Days Is Risk, Not Profit</div>
+        <div class="caveat-desc">Every example in the "bad" section had the same underlying characteristic: revenue was recognised on the income statement long before cash arrived — and in many cases, the cash never arrived at all. The accounting rules allow this gap. Revenue quality analysis exists to close it.<br><br>The practical rule: for any company you own or are considering, check CFO/PAT on Screener.in for the last 5 years. If it is consistently above 0.85×, the revenue quality is likely genuine. If it has been below 0.7× for 2+ years, investigate the specific cause — is it a commodity working capital cycle (like Polycab's copper year), a legitimate deferred revenue model, or are receivables building because customers aren't paying?<br><br>The second check is DSO trend. A company with genuinely increasing customer demand does not need to extend credit terms to make sales. Stable or declining DSO alongside growing revenue is the revenue quality hallmark. Rising DSO alongside rising revenue is the channel stuffing fingerprint that preceded every major FMCG, pharma, and industrial revenue fraud in the last 20 years — from Manpasand to Enron's bandwidth trading desk.<br><br>Run these two checks — CFO/PAT and DSO trend — on every holding in your portfolio every quarter. Both numbers are free on Screener.in. It takes 10 minutes per stock. It's the difference between owning businesses and owning accounting entries.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ NEXT CHAPTER ══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue your learning journey →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">For educational purposes only. Revenue quality metrics cited are illustrative approximations for teaching. Always verify from official BSE/NSE filings and Annual Reports. Revenue quality concerns are risk indicators, not proof of fraud — always investigate before concluding. Historical cases cited are based on publicly reported SEBI/court proceedings. All equity investments carry market risk. Consult a SEBI-registered investment advisor before making investment decisions.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+    },{threshold:.04,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  } else{els.forEach(function(el){el.classList.add('on');});}
+})();
+document.addEventListener('touchstart',function(){},{passive:true});
+document.addEventListener('touchmove',function(){},{passive:true});
+document.addEventListener('touchend',function(){},{passive:true});
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('on');});
+}
+document.body.style.overscrollBehavior='none';
+if(document.fonts&&document.fonts.ready){
+  document.fonts.ready.then(function(){
+    document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});
+  });
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('a,button,.dmbtn,.nxt-btn,.technique-card,.test-card,.ex-block').forEach(function(el){
+    el.style.touchAction='manipulation';
+  });
+});
+</script>
+</body>
+</html>

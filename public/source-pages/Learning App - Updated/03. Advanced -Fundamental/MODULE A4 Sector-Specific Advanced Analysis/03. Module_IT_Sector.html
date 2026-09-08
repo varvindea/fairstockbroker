@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="IT Sector Analysis">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>IT Sector – Revenue Levers, Attrition, Deal TCV, Currency Hedging · Sector-Specific Advanced Analysis · FA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* ── LAYOUT ── */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(26px,6.5vw,82px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:14px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(12px,2.8vw,36px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:1000px;}
+.hsi{padding:clamp(10px,1.8vw,18px) clamp(8px,1.8vw,14px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:80px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(9px,1.2vw,13px);font-weight:900;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.r{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(7px,.8vw,9px);font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+
+/* ── KLO ── */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.09);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+
+/* ── METRIC CARDS ── */
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,20px);margin-bottom:36px;}
+.metric-card{border-radius:18px;padding:clamp(16px,2.5vw,26px);border:1.5px solid;transition:transform .2s,box-shadow .2s;}
+.metric-card:hover{transform:translateY(-3px);box-shadow:var(--shp);}
+.mc-p{border-color:rgba(109,40,217,.22);background:linear-gradient(158deg,var(--pxs),#fdfcff);}
+.mc-g{border-color:rgba(22,163,74,.22);background:linear-gradient(158deg,var(--gpale),#f9fff9);}
+.mc-r{border-color:rgba(220,38,38,.2);background:linear-gradient(158deg,var(--rpale),#fff8f8);}
+.mc-a{border-color:rgba(217,119,6,.2);background:linear-gradient(158deg,var(--apale),#fffcf0);}
+.mc-sky{border-color:rgba(2,132,199,.2);background:linear-gradient(158deg,var(--skypale),#fafeff);}
+.mc-ico{font-size:clamp(26px,3.5vw,36px);margin-bottom:10px;animation:floatB 4s ease-in-out infinite;}
+.mc-abbr{font-size:clamp(18px,2.5vw,26px);font-weight:900;letter-spacing:-.5px;margin-bottom:5px;line-height:1;}
+.mc-full{font-size:clamp(11px,1.2vw,13px);font-weight:700;color:var(--ts);margin-bottom:8px;}
+.mc-badge{display:inline-flex;padding:3px 10px;border-radius:7px;font-size:10px;font-weight:800;margin-bottom:10px;}
+.cbp{background:rgba(109,40,217,.1);color:var(--p);}
+.cbg{background:rgba(22,163,74,.1);color:var(--gbr);}
+.cbr{background:rgba(220,38,38,.1);color:var(--red);}
+.cba{background:rgba(217,119,6,.1);color:var(--ambr);}
+.cbsky{background:rgba(2,132,199,.1);color:var(--sky);}
+.mc-body{font-size:clamp(12px,1.3vw,13.5px);color:var(--ts);line-height:1.62;}
+.mc-threshold{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px;}
+.mt-good{background:rgba(22,163,74,.08);border:1px solid rgba(22,163,74,.18);border-radius:8px;padding:6px 10px;text-align:center;}
+.mt-bad{background:rgba(220,38,38,.07);border:1px solid rgba(220,38,38,.16);border-radius:8px;padding:6px 10px;text-align:center;}
+.mt-val{font-size:12px;font-weight:900;display:block;line-height:1.2;}
+.mt-lbl{font-size:9px;font-weight:700;display:block;margin-top:2px;letter-spacing:.5px;}
+
+/* ── SCREENER MOCK ── */
+.screener-mock{background:var(--wh);border:2px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);margin-bottom:36px;}
+.sm-bar{background:linear-gradient(135deg,#f0f0f0,#e8e8e8);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bd);}
+.sm-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.sm-url{flex:1;background:var(--wh);border:1px solid var(--bd);border-radius:8px;padding:5px 12px;font-size:10.5px;color:var(--tl);font-family:'DM Sans',sans-serif;}
+.sm-body{padding:clamp(14px,2.5vw,22px);}
+.sm-hr{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--bd);flex-wrap:wrap;}
+.sm-tabs{display:flex;gap:2px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px;}
+.sm-tab{padding:6px 14px;border-radius:8px;font-size:11px;font-weight:700;white-space:nowrap;border:1px solid var(--bd);}
+.sm-tab.active{background:var(--p);color:#fff;border-color:var(--p);}
+.sm-tab:not(.active){background:var(--sf);color:var(--ts);}
+.pnl-table{width:100%;border-collapse:collapse;font-size:clamp(10.5px,1.2vw,12.5px);}
+.pnl-table thead th{background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:8px 12px;font-size:9.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:right;}
+.pnl-table thead th:first-child{text-align:left;}
+.pnl-table td{padding:7px 12px;border-bottom:1px solid rgba(109,40,217,.05);color:var(--ts);font-variant-numeric:tabular-nums;text-align:right;}
+.pnl-table td:first-child{text-align:left;font-weight:600;color:var(--tx);}
+.pnl-table tr.sec-row td{background:rgba(109,40,217,.03);font-weight:700;color:var(--tx);}
+.pnl-table tr.hl-g td{background:rgba(22,163,74,.04);}
+.pnl-table tr.hl-r td{background:rgba(220,38,38,.04);}
+.pnl-table tr.hl-a td{background:rgba(217,119,6,.04);}
+.pnl-table tr.total-row td{font-weight:900;color:var(--tx);border-top:1.5px solid var(--bd);border-bottom:1.5px solid var(--bd);}
+.pos{color:var(--gbr);font-weight:700;}.neg{color:var(--red);font-weight:700;}
+.label-pill{display:inline-flex;padding:1px 7px;border-radius:4px;font-size:8.5px;font-weight:800;margin-left:5px;vertical-align:middle;}
+.pill-g{background:rgba(22,163,74,.12);color:var(--gbr);}
+.pill-r{background:rgba(220,38,38,.1);color:var(--red);}
+.pill-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.pill-p{background:rgba(109,40,217,.1);color:var(--p);}
+.pnl-note{font-size:10px;color:var(--tl);margin-top:10px;line-height:1.5;font-style:italic;border-top:1px solid var(--bd);padding-top:8px;}
+.sm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,12px);margin-bottom:14px;}
+.sm-m{background:var(--sf);border-radius:10px;padding:10px 12px;border:1px solid var(--bd);}
+.smm-l{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--tl);margin-bottom:4px;}
+.smm-v{font-size:clamp(13px,1.8vw,16px);font-weight:900;color:var(--tx);}
+.smm-s{font-size:9px;color:var(--tl);margin-top:2px;}
+.sm-alerts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.sma{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;}
+.sma-g{background:var(--gpale);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.sma-r{background:var(--rpale);color:var(--red);border:1px solid rgba(220,38,38,.2);}
+.sma-a{background:var(--apale);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+
+/* ── EXAMPLES ── */
+.ex-block{border-radius:20px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);margin-bottom:clamp(22px,3.5vw,30px);}
+.eb-head{display:flex;align-items:center;justify-content:space-between;padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,24px);flex-wrap:wrap;gap:10px;}
+.ebh-g{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.ebh-r{background:linear-gradient(135deg,var(--rpale),#fff5f5);}
+.ebh-a{background:linear-gradient(135deg,var(--apale),#fffdf5);}
+.ebh-p{background:linear-gradient(135deg,var(--pxs),var(--pxl));}
+.eb-co{display:flex;align-items:center;gap:12px;}
+.eb-logo{width:46px;height:46px;min-width:46px;border-radius:11px;font-size:21px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.eb-name{font-size:clamp(13px,1.8vw,17px);font-weight:900;color:var(--tx);line-height:1.2;}
+.eb-sub{font-size:10.5px;color:var(--tl);margin-top:2px;}
+.eb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.ebb{padding:3px 9px;border-radius:100px;font-size:10px;font-weight:700;}
+.ebb-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.ebb-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.ebb-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.ebb-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.eb-body{padding:clamp(14px,2.5vw,22px) clamp(14px,2.5vw,24px);}
+.eb-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,14px);margin-bottom:14px;}
+.em-box{background:var(--sf);border-radius:12px;padding:clamp(9px,1.5vw,14px);border:1px solid var(--bd);}
+.em-l{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tl);margin-bottom:4px;}
+.em-v{font-size:clamp(13px,1.9vw,18px);font-weight:900;color:var(--tx);line-height:1.1;}
+.em-s{font-size:9px;color:var(--tl);margin-top:2px;}
+.eb-flags{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.erf{border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:5px;}
+.erf-good{background:rgba(22,163,74,.05);border-left:3px solid var(--gbr);}
+.erf-bad{background:rgba(220,38,38,.05);border-left:3px solid var(--red);}
+.erf-amb{background:rgba(217,119,6,.05);border-left:3px solid var(--amb);}
+.erf-row{display:flex;align-items:flex-start;gap:10px;}
+.erf-ico{font-size:14px;flex-shrink:0;margin-top:1px;}
+.erf-lbl{font-size:clamp(12px,1.35vw,13.5px);font-weight:800;color:var(--tx);line-height:1.4;}
+.erf-txt{padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;}
+.eb-insight{padding:10px 14px;font-size:11.5px;color:var(--ts);line-height:1.55;border-top:1px solid var(--bd);}
+.ei-g{background:rgba(22,163,74,.04);border-left:3px solid var(--gbr);}
+.ei-r{background:rgba(220,38,38,.04);border-left:3px solid var(--red);}
+.ei-a{background:rgba(217,119,6,.04);border-left:3px solid var(--amb);}
+.ei-p{background:rgba(109,40,217,.04);border-left:3px solid var(--p);}
+
+/* ── SECTION DIVIDER ── */
+.section-divider{display:flex;align-items:center;gap:16px;margin:clamp(28px,4vw,44px) 0;}
+.sd-line{flex:1;height:1px;background:var(--bd);}
+.sd-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tl);white-space:nowrap;}
+
+/* ── CAVEAT ── */
+.caveat-box{margin-top:32px;background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:16px;}
+.caveat-icon{width:44px;height:44px;min-width:44px;border-radius:13px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(109,40,217,.28);}
+.caveat-body{flex:1;min-width:0;}
+.caveat-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.caveat-title{font-size:clamp(13px,1.5vw,15px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.caveat-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+
+/* ── DEMAT BANNER ── */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* ── NEXT ── */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-banner::after{content:'';position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+
+/* ═══ 11 RESPONSIVE BREAKPOINTS ═══ */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.metric-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){
+  .metric-grid{grid-template-columns:1fr 1fr;}
+  .eb-metrics{grid-template-columns:repeat(2,1fr);}
+  .sm-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .hst{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .metric-grid{grid-template-columns:1fr 1fr;}
+  .metric-card:hover{transform:none;}
+  .eb-head{flex-direction:column;align-items:flex-start;}
+  .eb-badges{margin-top:4px;}
+  .caveat-box{flex-direction:column;gap:12px;}
+  .caveat-icon{width:40px;height:40px;min-width:40px;font-size:20px;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;}
+  .dmfeats{gap:10px 20px;}
+  svg{overflow:visible;max-width:100%;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .mc-ico{animation:none;}
+}
+@media(max-width:640px){
+  .metric-grid{grid-template-columns:1fr;}
+  .eb-metrics{grid-template-columns:1fr 1fr;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+}
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.2px;}.hdesc{font-size:13px;}.hsub{font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .h2{letter-spacing:-1px;}.lead{font-size:13.5px;}
+  .metric-grid{grid-template-columns:1fr;}
+  .eb-metrics{grid-template-columns:1fr 1fr;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+}
+@media(max-width:360px){
+  .w{padding:26px 12px;}.hh1{font-size:clamp(22px,8.5vw,36px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:1px solid var(--bd) !important;}
+  .hsi:last-child{border-bottom:none !important;}
+  .kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}.nxt-btn{font-size:12px;padding:10px 14px;}
+}
+/* TOUCH */
+@media(hover:none) and (pointer:coarse){
+  .metric-card:hover,.ex-block:hover{transform:none !important;box-shadow:var(--shc) !important;}
+  .metric-card:active{transform:scale(.99);transition:transform .08s;}
+  .dmbtn:active{transform:scale(.97);}.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn,.metric-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,.mc-abbr{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.lead,.caveat-desc,.mc-body,.erf-txt,.eb-insight{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+}
+/* iOS */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.hsv,.hsv.g,.hsv.r,.h2 .hp,.h2 .hg{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn,.metric-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .sm-tabs{-webkit-overflow-scrolling:touch;}
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+}
+/* ANDROID HiDPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .metric-card,.ex-block,.caveat-box,.screener-mock{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .klo-icon{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}.klo-icon,.mc-ico{animation:none !important;}
+}
+/* PRINT */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}.rv{opacity:1;transform:none;}
+  body{color:#000;}.w{padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="vbadge">Sector-Specific Advanced Analysis · FA</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>IT Sector · Revenue Levers · Attrition · Deal TCV · Currency Hedging</div>
+  <h1 class="hh1">
+    <span class="line1">IT Is a</span>
+    <span class="line2">People Business</span>
+    <span class="line3">Modelling IT Companies and Assessing Deal Pipeline Quality from Scratch</span>
+  </h1>
+  <div class="hsub">Revenue Mix · Volume × Realisation · Attrition · Deal TCV · Currency Hedge · EBIT Margin · Headcount · Utilisation</div>
+  <p class="hdesc">An IT company's revenue is simply: number of billable employees × billing rate × utilisation. Its future revenue is its deal pipeline. Its biggest risk is people leaving. Understanding these four levers — revenue composition, attrition, deal TCV, and currency hedging — gives you a complete model for any Indian IT company in under an hour.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv">Revenue Mix</div><div class="hsl">Service Lines</div></div>
+    <div class="hsi"><div class="hsv r">Attrition</div><div class="hsl">People Risk</div></div>
+    <div class="hsi"><div class="hsv g">Deal TCV</div><div class="hsl">Pipeline Quality</div></div>
+    <div class="hsi"><div class="hsv">USD Hedge</div><div class="hsl">Currency Cover</div></div>
+    <div class="hsi"><div class="hsv g">5 Good</div><div class="hsl">Quality IT Cos</div></div>
+    <div class="hsi"><div class="hsv r">5 Bad</div><div class="hsl">Stressed Cases</div></div>
+  </div>
+</section>
+
+
+<!-- ══ 01 — KLO ══ -->
+<section>
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Why IT Analysis Is Really About <span class="hp">People, Pipelines, and Pricing Power</span></h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">💻</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">An IT company sells one thing: human intellectual effort delivered as software, infrastructure management, or consulting. Revenue = Headcount × Utilisation Rate × Billing Rate. Everything else in IT analysis flows from understanding how these three drivers change — and what the deal pipeline says about where they're going next.</div>
+        <div class="klo-desc">Think of an IT company as a professional services firm with thousands of employees. Each employee is a "billing unit." The company makes money when: (1) those employees are working on client projects (high utilisation — the equivalent of a hotel's occupancy rate), (2) clients pay higher rates over time (pricing power — the equivalent of Revenue Per Available Room), and (3) the company wins new contracts to replace expiring ones (deal wins — the equivalent of advance bookings).<br><br><strong>Revenue Levers</strong> are the drivers of IT revenue growth: volume growth (more headcount and higher utilisation) and pricing growth (billing rate increases, mix shift toward higher-value services like cloud, AI, and consulting). Volume × Realisation growth analysis tells you whether revenue growth is real (pricing power) or just hiring more people cheaply.<br><br><strong>Attrition</strong> is the percentage of employees who leave voluntarily each year. In a people-intensive business, high attrition destroys value: it increases training costs, disrupts client relationships, forces continuous hiring at market rates, and signals that competitors are paying more. Post-COVID attrition of 25–30% forced IT companies to hire at inflated rates and then fire — destroying margins when demand slowed in FY24.<br><br><strong>Deal TCV (Total Contract Value)</strong> is the pipeline indicator. When a client signs a 5-year ₹500 crore IT outsourcing contract, the TCV is ₹500 crore. Tracking TCV wins quarterly tells you whether the company is building or depleting its future revenue backlog. Large deal TCV wins (above $50M per deal) signal competitive wins, often at the expense of a competitor. Weak deal TCV is the earliest warning of a revenue growth problem — 6–9 months before it shows in revenue.<br><br><strong>Currency Hedging</strong> matters because 70–85% of IT revenue is in USD/EUR/GBP, while costs are predominantly in INR. Every ₹1 depreciation against USD adds approximately 0.3–0.5% to EBIT margins. Companies with forward hedges lock in an exchange rate for 12–18 months, smoothing out currency volatility. Companies without hedges have inherently volatile margins — good when rupee depreciates, catastrophic when rupee strengthens.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-p">📊 Revenue = Volume × Realisation</span>
+          <span class="kpill kpill-r">🚨 Attrition &gt;20% = cost spike</span>
+          <span class="kpill kpill-g">💼 Deal TCV = future revenue signal</span>
+          <span class="kpill kpill-a">💱 Hedge ratio shields margins</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 02 — INFOGRAPHIC + METRICS ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — How IT Revenue Works</div>
+    <h2 class="h2 rv d2">The IT Company as a <span class="hp">Talent Factory</span> — Four Levers That Drive Everything</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Unlike a product company that sells widgets, an IT company's entire output is human effort organised into billable projects. Once you understand the factory metaphor — machines (people) × occupancy (utilisation) × price (billing rate) — every IT metric clicks into place.</p>
+
+    <!-- SVG INFOGRAPHIC -->
+    <div class="rv d3" style="margin-bottom:36px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+      <svg style="width:100%;max-width:680px;margin:0 auto;" viewBox="0 0 680 490" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="680" height="490" rx="20" fill="#f5f3ff"/>
+        <rect x="14" y="10" width="652" height="34" rx="11" fill="#6d28d9"/>
+        <text x="340" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="white">The IT Talent Factory — How Revenue, Attrition, Deals and Currency All Connect</text>
+
+        <!-- FACTORY BUILDING -->
+        <rect x="220" y="62" width="240" height="160" rx="10" fill="#4c1d95" opacity=".85"/>
+        <rect x="234" y="76" width="44" height="38" rx="4" fill="#ede9fe" opacity=".5"/>
+        <rect x="290" y="76" width="44" height="38" rx="4" fill="#ede9fe" opacity=".5"/>
+        <rect x="346" y="76" width="44" height="38" rx="4" fill="#ede9fe" opacity=".5"/>
+        <rect x="234" y="126" width="44" height="38" rx="4" fill="#ede9fe" opacity=".5"/>
+        <rect x="290" y="126" width="44" height="38" rx="4" fill="#22c55e" opacity=".6"/>
+        <rect x="346" y="126" width="44" height="38" rx="4" fill="#22c55e" opacity=".6"/>
+        <!-- DOOR -->
+        <rect x="316" y="185" width="48" height="37" rx="5" fill="#6d28d9"/>
+        <text x="340" y="208" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="white">TALENT</text>
+        <text x="340" y="219" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="white">FACTORY</text>
+        <!-- CHIMNEY / OUTPUT PIPE -->
+        <rect x="380" y="44" width="24" height="22" rx="4" fill="#4c1d95" opacity=".7"/>
+        <text x="392" y="82" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#a78bfa" font-weight="700">Code</text>
+        <text x="392" y="93" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#a78bfa" font-weight="700">output</text>
+        <!-- FACTORY LABEL -->
+        <text x="340" y="152" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="white">Revenue = People × Utilisation</text>
+        <text x="340" y="166" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#c4b5fd">× Billing Rate</text>
+
+        <!-- DEVELOPER CHARACTER (left of factory) -->
+        <circle cx="150" cy="110" r="20" fill="#ede9fe"/>
+        <circle cx="143" cy="104" r="3" fill="#4c1d95"/>
+        <circle cx="157" cy="104" r="3" fill="#4c1d95"/>
+        <path d="M143 116 Q150 122 157 116" stroke="#4c1d95" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <!-- laptop -->
+        <rect x="134" y="128" width="32" height="20" rx="5" fill="#4c1d95"/>
+        <rect x="137" y="131" width="26" height="14" rx="3" fill="#6d28d9"/>
+        <rect x="129" y="148" width="42" height="3" rx="2" fill="#4c1d95"/>
+        <!-- body -->
+        <rect x="136" y="130" width="28" height="22" rx="6" fill="none"/>
+        <line x1="136" y1="137" x2="118" y2="143" stroke="#4c1d95" stroke-width="3" stroke-linecap="round"/>
+        <line x1="164" y1="137" x2="182" y2="143" stroke="#4c1d95" stroke-width="3" stroke-linecap="round"/>
+        <text x="150" y="167" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#4c1d95" font-weight="700">Developer</text>
+        <text x="150" y="178" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="#6e6994">(Billable Unit)</text>
+
+        <!-- ATTRITION ARROW (employee leaving) -->
+        <path d="M200 222 L110 260" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrR)"/>
+        <defs>
+          <marker id="arrR" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#dc2626"/></marker>
+          <marker id="arrG" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#16a34a"/></marker>
+          <marker id="arrP" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#6d28d9"/></marker>
+        </defs>
+        <rect x="14" y="256" width="180" height="78" rx="11" fill="#dc2626" opacity=".88"/>
+        <text x="104" y="278" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">🚪 ATTRITION</text>
+        <text x="104" y="295" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">% of workforce leaving annually</text>
+        <rect x="26" y="302" width="156" height="18" rx="6" fill="rgba(255,255,255,.15)"/>
+        <text x="104" y="315" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="white">Below 15% = healthy · Above 22% = costly</text>
+        <text x="104" y="328" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#fca5a5">Raises hiring + training costs → margins ↓</text>
+
+        <!-- DEAL WINS ARROW (into factory) -->
+        <path d="M480 90 L476 90" stroke="#16a34a" stroke-width="2" marker-end="url(#arrG)"/>
+        <rect x="486" y="62" width="180" height="98" rx="11" fill="#15803d" opacity=".88"/>
+        <text x="576" y="84" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">💼 DEAL TCV</text>
+        <text x="576" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">Total Contract Value of new wins</text>
+        <rect x="498" y="107" width="156" height="18" rx="6" fill="rgba(255,255,255,.18)"/>
+        <text x="576" y="120" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="white">Large deal &gt;$50M = competitive win</text>
+        <text x="576" y="138" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#4ade80">Revenue backlog visible 12–18 months out</text>
+        <text x="576" y="152" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#bbf7d0">Weak TCV = revenue growth warning 6M ahead</text>
+
+        <!-- CURRENCY HEDGE -->
+        <rect x="486" y="176" width="180" height="78" rx="11" fill="#6d28d9" opacity=".88"/>
+        <text x="576" y="198" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">💱 CURRENCY HEDGE</text>
+        <text x="576" y="214" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">Forward cover on USD/EUR revenue</text>
+        <rect x="498" y="221" width="156" height="18" rx="6" fill="rgba(255,255,255,.15)"/>
+        <text x="576" y="234" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="white">70–85% revenue in foreign currency</text>
+        <text x="576" y="248" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#c4b5fd">Hedge locks rate for 12–18 months</text>
+
+        <!-- REVENUE LEVER BOX (below factory) -->
+        <rect x="220" y="268" width="240" height="90" rx="11" fill="#4c1d95" opacity=".9"/>
+        <text x="340" y="289" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">📊 REVENUE LEVERS</text>
+        <rect x="232" y="296" width="100" height="22" rx="6" fill="rgba(255,255,255,.15)"/>
+        <text x="282" y="311" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="white">Volume Growth</text>
+        <rect x="348" y="296" width="100" height="22" rx="6" fill="rgba(22,163,74,.3)"/>
+        <text x="398" y="311" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="white">Realisation Growth</text>
+        <text x="282" y="330" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="rgba(255,255,255,.75)">More people + utilisation</text>
+        <text x="398" y="330" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="#4ade80">Higher billing rates + mix</text>
+        <text x="340" y="350" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="#c4b5fd">Best IT cos grow both simultaneously</text>
+
+        <!-- BOTTOM: THREE QUALITY SIGNALS -->
+        <rect x="14" y="376" width="652" height="102" rx="13" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+        <text x="340" y="397" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="#4c1d95">Three Investor-Level Quality Signals to Track Every Quarter</text>
+        <rect x="26" y="406" width="192" height="60" rx="9" fill="#f5f3ff" stroke="#e5e1fb" stroke-width="1.2"/>
+        <text x="122" y="423" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#4c1d95">EBIT Margin Trend</text>
+        <text x="122" y="437" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Reflects attrition cost, utilisation,</text>
+        <text x="122" y="449" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">pricing power combined</text>
+        <text x="122" y="462" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="#15803d" font-weight="700">Strong: above 18% · Excellent: 24%+</text>
+        <rect x="234" y="406" width="212" height="60" rx="9" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
+        <text x="340" y="423" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#15803d">Deal Win Rate + TCV Mix</text>
+        <text x="340" y="437" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Large deal wins = competitive strength</text>
+        <text x="340" y="449" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">Small deal skew = execution risk</text>
+        <text x="340" y="462" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="#15803d" font-weight="700">Track ≥$50M deals per quarter</text>
+        <rect x="462" y="406" width="200" height="60" rx="9" fill="#fef2f2" stroke="#fecaca" stroke-width="1.2"/>
+        <text x="562" y="423" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#dc2626">Attrition LTM Trend</text>
+        <text x="562" y="437" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">LTM attrition rising = cost pressure</text>
+        <text x="562" y="449" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#3d3868">building 2 quarters ahead of margins</text>
+        <text x="562" y="462" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7.5" fill="#dc2626" font-weight="700">Above 22% LTM = monitor closely</text>
+      </svg>
+      <p style="font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;max-width:560px;margin:0 auto;">The IT talent factory: each developer is a billable unit. Revenue = headcount × utilisation × billing rate. Attrition drains the factory of trained workers. Deal TCV fills the order book for future quarters. Currency hedges protect the factory's margins from exchange rate swings. All four levers must be tracked together.</p>
+    </div>
+
+    <!-- FOUR CONCEPT CARDS -->
+    <div class="tag rv d4" style="margin-bottom:14px;">The Four Core IT Metrics — Explained for Non-Tech Readers</div>
+    <div class="metric-grid rv d4">
+      <!-- REVENUE LEVERS -->
+      <div class="metric-card mc-p">
+        <div class="mc-ico">📊</div>
+        <div class="mc-abbr" style="background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Rev Levers</div>
+        <div class="mc-full">Revenue = Volume × Realisation</div>
+        <div class="mc-badge cbp">Core Revenue Driver</div>
+        <div class="mc-body">Every quarter, IT companies disclose constant currency revenue growth. Decompose it: Volume growth = more billable headcount + better utilisation. Realisation growth = higher billing rates + service mix shift toward cloud, AI, consulting (which bill higher than legacy IT maintenance).<br><br>Quality IT companies grow both: 8–10% volume + 3–5% realisation = 11–15% USD revenue growth. Warning sign: revenue growing only through headcount (volume) without realisation means pricing power is eroding — margin pressure follows. Best signal: realisation growing even when volume is flat = pricing power intact.</div>
+        <div class="mc-threshold">
+          <div class="mt-good"><span class="mt-val" style="color:var(--gbr);">Vol+Real Both</span><span class="mt-lbl" style="color:var(--gbr);">✅ Quality Growth</span></div>
+          <div class="mt-bad"><span class="mt-val" style="color:var(--red);">Vol Only / -Real</span><span class="mt-lbl" style="color:var(--red);">🚨 Price Erosion</span></div>
+        </div>
+      </div>
+      <!-- ATTRITION -->
+      <div class="metric-card mc-r">
+        <div class="mc-ico">🚪</div>
+        <div class="mc-abbr" style="background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Attrition</div>
+        <div class="mc-full">Voluntary Employee Turnover (LTM %)</div>
+        <div class="mc-badge cbr">People Risk Indicator</div>
+        <div class="mc-body">Attrition % is the percentage of employees who voluntarily resigned in the last 12 months (LTM — Last Twelve Months). It is the single most important people metric in IT. High attrition forces companies to: (1) pay premium salaries to attract replacements, (2) spend 3–6 months training new hires before they're productive, (3) disrupt client relationships when experienced staff leave mid-project.<br><br>Post-COVID peak attrition (25–30% in FY23) forced IT companies to hire 50,000–100,000 people at inflated salaries — and then reduce headcount when demand slowed in FY24, causing massive margin compression and restructuring charges.</div>
+        <div class="mc-threshold">
+          <div class="mt-good"><span class="mt-val" style="color:var(--gbr);">&lt;15% LTM</span><span class="mt-lbl" style="color:var(--gbr);">✅ Stable Workforce</span></div>
+          <div class="mt-bad"><span class="mt-val" style="color:var(--red);">&gt;22% LTM</span><span class="mt-lbl" style="color:var(--red);">🚨 Cost Spiral Risk</span></div>
+        </div>
+      </div>
+      <!-- DEAL TCV -->
+      <div class="metric-card mc-g">
+        <div class="mc-ico">💼</div>
+        <div class="mc-abbr" style="background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Deal TCV</div>
+        <div class="mc-full">Total Contract Value — Order Book</div>
+        <div class="mc-badge cbg">Pipeline Visibility</div>
+        <div class="mc-body">TCV is the total value of new contracts signed during the quarter. A ₹500 crore, 5-year contract has a TCV of ₹500 crore — but only ₹100 crore will convert to annual revenue. TCV is the IT company's order book — it tells you future revenue 12–24 months out.<br><br>Key signals: (1) Large deal TCV (individual contracts above $50M) = competitive wins, often displacing an existing vendor. (2) TCV growth rate above revenue growth rate = future acceleration. (3) Total contract duration matters — a 5-year deal is higher quality than five 1-year deals at the same TCV. Track "deal wins" in the quarterly earnings call — it's the closest thing IT has to a forward-looking revenue signal.</div>
+        <div class="mc-threshold">
+          <div class="mt-good"><span class="mt-val" style="color:var(--gbr);">TCV &gt; Revenue×4</span><span class="mt-lbl" style="color:var(--gbr);">✅ Strong Backlog</span></div>
+          <div class="mt-bad"><span class="mt-val" style="color:var(--red);">TCV declining</span><span class="mt-lbl" style="color:var(--red);">🚨 Revenue Risk</span></div>
+        </div>
+      </div>
+      <!-- CURRENCY -->
+      <div class="metric-card mc-a">
+        <div class="mc-ico">💱</div>
+        <div class="mc-abbr" style="background:linear-gradient(135deg,var(--ambr),var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">FX Hedge</div>
+        <div class="mc-full">Currency Hedging — Margin Shield</div>
+        <div class="mc-badge cba">Margin Stability</div>
+        <div class="mc-body">IT companies earn 70–85% of revenue in USD, EUR, GBP, and AUD — but pay 60–70% of costs in INR (employee salaries, office rentals, domestic infrastructure). Every rupee that depreciates against USD adds approximately 0.3–0.5% to EBIT margins. Conversely, rupee appreciation hurts margins.<br><br>Hedging strategy: companies use forward contracts and options to lock in exchange rates for 6–18 months. The hedge ratio (% of forecast foreign revenue hedged) determines how protected the company is from near-term currency moves. TCS/Infosys typically hedge 65–80% of near-term exposure. Under-hedged companies have more volatile margins — which can be positive (rupee depreciating) or negative (rupee strengthening).</div>
+        <div class="mc-threshold">
+          <div class="mt-good"><span class="mt-val" style="color:var(--gbr);">60–80% hedged</span><span class="mt-lbl" style="color:var(--gbr);">✅ Margin Stable</span></div>
+          <div class="mt-bad"><span class="mt-val" style="color:var(--red);">&lt;30% hedged</span><span class="mt-lbl" style="color:var(--red);">🚨 Volatile Margins</span></div>
+        </div>
+      </div>
+      <!-- EBIT MARGIN -->
+      <div class="metric-card mc-g">
+        <div class="mc-ico">📈</div>
+        <div class="mc-abbr" style="background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">EBIT%</div>
+        <div class="mc-full">EBIT Margin — Operating Profitability</div>
+        <div class="mc-badge cbg">Efficiency Metric</div>
+        <div class="mc-body">EBIT margin is the percentage of revenue left after paying all operating costs — employee costs, subcontracting, technology, admin, and depreciation. In IT, EBIT margin reflects: (1) attrition-driven salary cost, (2) utilisation rate (idle benched employees reduce margins), (3) pricing power vs competition, and (4) currency tailwind/headwind.<br><br>Margin band: Tier-1 IT (TCS, Infosys) target 23–26% EBIT. Mid-tier IT (LTIM, Persistent) target 16–20%. Margin below 12% signals structural problems — over-hiring at inflated costs, pricing concessions to retain clients, or major project losses. Improving EBIT Margin over 3 years = operational leverage; declining margin = cost pressure without pricing offsets.</div>
+        <div class="mc-threshold">
+          <div class="mt-good"><span class="mt-val" style="color:var(--gbr);">20%+ (Tier-1)</span><span class="mt-lbl" style="color:var(--gbr);">✅ Operational Leverage</span></div>
+          <div class="mt-bad"><span class="mt-val" style="color:var(--red);">&lt;12%</span><span class="mt-lbl" style="color:var(--red);">🚨 Structural Concern</span></div>
+        </div>
+      </div>
+      <!-- UTILISATION -->
+      <div class="metric-card mc-sky">
+        <div class="mc-ico">⚙️</div>
+        <div class="mc-abbr" style="background:linear-gradient(135deg,var(--sky),#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Utilisation</div>
+        <div class="mc-full">Billable Utilisation Rate — Bench Size</div>
+        <div class="mc-badge cbsky">Efficiency Indicator</div>
+        <div class="mc-body">Utilisation rate is the percentage of total employees who are working on billable client projects (vs sitting "on the bench" waiting for project assignment). It is the IT equivalent of a hotel's occupancy rate or a plane's seat load factor. High utilisation = low bench = high revenue efficiency. Low utilisation = large bench = revenue being lost on unproductive employees.<br><br>Typical range: 80–85% utilisation = healthy. Below 75% = over-hiring relative to project demand. Above 87% = risk of project quality issues (no slack capacity) and high attrition (employees are over-utilised and burnt out). Watch for utilisation declining 2–3 quarters before margin compression appears in P&amp;L.</div>
+        <div class="mc-threshold">
+          <div class="mt-good"><span class="mt-val" style="color:var(--gbr);">80–86%</span><span class="mt-lbl" style="color:var(--gbr);">✅ Optimal Range</span></div>
+          <div class="mt-bad"><span class="mt-val" style="color:var(--red);">&lt;75%</span><span class="mt-lbl" style="color:var(--red);">🚨 Bench Too Large</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREENER P&L MOCK -->
+    <div class="tag rv d5" style="margin-bottom:12px;">Reading an IT Company's P&amp;L on Screener.in — Infosys Illustration</div>
+    <div class="screener-mock rv d5">
+      <div class="sm-bar">
+        <div class="sm-dot" style="background:#ef4444;"></div>
+        <div class="sm-dot" style="background:#f59e0b;"></div>
+        <div class="sm-dot" style="background:#22c55e;"></div>
+        <div class="sm-url">🔒 screener.in/company/INFY/consolidated/ → Profit &amp; Loss Statement</div>
+      </div>
+      <div class="sm-body">
+        <div class="sm-hr">
+          <div>
+            <div style="font-size:clamp(14px,2vw,18px);font-weight:900;color:var(--tx);">Infosys — IT Company P&amp;L Structure (₹ Crore, illustrative)</div>
+            <div style="font-size:11px;color:var(--tl);">NSE: INFY · IT Services · Revenue $18.6B FY25 · EBIT Margin 21.1% · Attrition 13.7% · TCV $11B+ FY25</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <span style="font-size:16px;font-weight:900;color:var(--p);">₹1,589</span>
+            <span style="background:var(--gpale);color:var(--gbr);font-size:11px;font-weight:700;padding:4px 10px;border-radius:7px;">▲ +4.2%</span>
+          </div>
+        </div>
+        <div class="sm-tabs">
+          <div class="sm-tab">Overview</div>
+          <div class="sm-tab active">Profit &amp; Loss</div>
+          <div class="sm-tab">Balance Sheet</div>
+          <div class="sm-tab">Ratios</div>
+          <div class="sm-tab">Quarters</div>
+        </div>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:12px;">
+        <table class="pnl-table">
+          <thead>
+            <tr>
+              <th>P&amp;L Line Item</th>
+              <th>FY2023</th>
+              <th>FY2024</th>
+              <th>FY2025</th>
+              <th>YoY%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="sec-row"><td>REVENUE</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr class="hl-g">
+              <td>Revenue from Operations <span class="label-pill pill-g">USD + INR mix</span></td>
+              <td>1,46,767</td><td>1,53,670</td><td>1,59,720</td><td class="pos">+3.9%</td>
+            </tr>
+            <tr class="sec-row"><td>EXPENSES</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr class="hl-r">
+              <td>Employee Benefit Expense <span class="label-pill pill-r">60–65% of revenue</span></td>
+              <td>98,410</td><td>99,624</td><td>1,01,822</td><td class="neg">+2.2%</td>
+            </tr>
+            <tr class="hl-a">
+              <td>Subcontracting Costs <span class="label-pill pill-a">Variable cost lever</span></td>
+              <td>8,224</td><td>9,180</td><td>8,962</td><td class="pos">-2.4%</td>
+            </tr>
+            <tr>
+              <td>Technology and Communication</td>
+              <td>4,602</td><td>5,018</td><td>5,244</td><td class="neg">+4.5%</td>
+            </tr>
+            <tr>
+              <td>Selling &amp; Marketing Expenses</td>
+              <td>3,814</td><td>4,092</td><td>4,318</td><td class="neg">+5.5%</td>
+            </tr>
+            <tr>
+              <td>General &amp; Admin Expenses</td>
+              <td>3,612</td><td>3,784</td><td>3,928</td><td class="neg">+3.8%</td>
+            </tr>
+            <tr class="total-row"><td>Total Expenses</td><td>1,18,662</td><td>1,21,698</td><td>1,24,274</td><td class="neg">+2.1%</td></tr>
+            <tr class="sec-row"><td>PROFITABILITY</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr class="hl-g">
+              <td>EBIT <span class="label-pill pill-g">Key Margin Metric</span></td>
+              <td>28,105</td><td>31,972</td><td>35,446</td><td class="pos">+10.9%</td>
+            </tr>
+            <tr class="hl-g">
+              <td>EBIT Margin %</td>
+              <td class="pos">19.15%</td><td class="pos">20.80%</td><td class="pos">22.19%</td><td class="pos">+139bps</td>
+            </tr>
+            <tr>
+              <td>Other Income (forex + investments)</td>
+              <td>3,246</td><td>3,616</td><td>3,992</td><td class="pos">+10.4%</td>
+            </tr>
+            <tr class="hl-g" style="background:rgba(22,163,74,.07);">
+              <td><strong>Net Profit (PAT)</strong></td>
+              <td><strong>24,108</strong></td><td><strong>26,248</strong></td><td><strong>29,662</strong></td><td class="pos"><strong>+13.0%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="pnl-note">📊 How to read an IT P&amp;L: (1) Employee Benefit Expense is 60–65% of revenue — any meaningful margin improvement requires this line to grow slower than revenue. (2) Subcontracting Costs are a variable lever — cutting subcontractors improves margins but may signal demand softness. (3) EBIT Margin is the single most important P&amp;L metric for IT — watch the trajectory. (4) "Other Income" in IT includes forex gains/losses from hedging — review the annual report's hedging disclosure to understand whether currency is helping or hurting. (5) Constant Currency (CC) revenue growth (disclosed in earnings calls) removes currency effects — always compare USD CC growth to INR P&amp;L growth to understand the real operational performance.</div>
+        <div class="sm-grid" style="margin-top:14px;">
+          <div class="sm-m"><div class="smm-l">EBIT Margin FY25</div><div class="smm-v" style="color:var(--gbr);">22.19%</div><div class="smm-s">✅ +139bps YoY</div></div>
+          <div class="sm-m"><div class="smm-l">Attrition LTM</div><div class="smm-v" style="color:var(--gbr);">13.7%</div><div class="smm-s">✅ Normalised</div></div>
+          <div class="sm-m"><div class="smm-l">USD CC Growth</div><div class="smm-v" style="color:var(--ambr);">+4.2%</div><div class="smm-s">⚠️ Modest recovery</div></div>
+          <div class="sm-m"><div class="smm-l">Deal TCV FY25</div><div class="smm-v" style="color:var(--gbr);">$11B+</div><div class="smm-s">✅ Record wins</div></div>
+          <div class="sm-m"><div class="smm-l">Headcount</div><div class="smm-v" style="color:var(--ambr);">316,964</div><div class="smm-s">⚠️ Down from peak</div></div>
+          <div class="sm-m"><div class="smm-l">Utilisation Rate</div><div class="smm-v" style="color:var(--gbr);">~83%</div><div class="smm-s">✅ Healthy range</div></div>
+          <div class="sm-m"><div class="smm-l">Hedge Ratio</div><div class="smm-v" style="color:var(--gbr);">~70%</div><div class="smm-s">✅ Protected</div></div>
+          <div class="sm-m"><div class="smm-l">Large Deal Mix</div><div class="smm-v" style="color:var(--gbr);">45%+ of TCV</div><div class="smm-s">✅ Competitive wins</div></div>
+        </div>
+        <div class="sm-alerts">
+          <div class="sma sma-g">✅ EBIT Margin expanding 139bps — employee cost growing slower than revenue</div>
+          <div class="sma sma-g">✅ Record TCV $11B+ signals revenue acceleration into FY26</div>
+          <div class="sma sma-a">⚠️ CC growth only 4.2% — demand recovery gradual, not sharp rebound</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ DEMAT BANNER ══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Start Investing Today</div>
+    <div class="dmh">Invest in <span class="dmhs">Quality IT Companies</span> With Confidence</div>
+    <div class="dmsub">Before buying any IT stock, check four numbers in the quarterly earnings call: constant currency revenue growth rate, LTM attrition, large deal TCV wins, and EBIT margin trend. These four metrics predict the next 4–6 quarters of performance better than any analyst report.</div>
+    <div class="dmfeats">
+      <div class="dmf">Attrition and TCV in quarterly earnings call</div>
+      <div class="dmf">EBIT Margin on Screener Ratios tab</div>
+      <div class="dmf">Hedge ratio in annual report notes</div>
+      <div class="dmf">Start investing from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ══ GOOD EXAMPLES ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">03 — Five IT Companies With Strong Fundamentals</div>
+    <h2 class="h2 rv d2">✅ <span class="hg">Good Examples</span> — What a Structurally Sound IT Company Looks Like</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five companies demonstrate quality across the four core IT metrics — revenue composition, attrition management, deal pipeline strength, and currency discipline. Each is a case study in a specific dimension of IT quality.</p>
+
+    <!-- GOOD 1: TCS -->
+    <div class="ex-block rv d3">
+      <div class="eb-head ebh-p">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pmd));">🌐</div>
+          <div><div class="eb-name">TCS — Consistent EBIT Margin 24–26%, Best-in-Class Attrition, Record Large Deal Wins</div><div class="eb-sub">NSE: TCS · IT Services · $29B+ revenue · EBIT Margin 24–25% · Attrition 12.5% LTM · TCV $30B+ FY25 · Widest service breadth in Indian IT</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ EBIT 24–25%</span>
+          <span class="ebb ebb-g">✅ Attrition 12.5%</span>
+          <span class="ebb ebb-g">✅ TCV $30B+ FY25</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">EBIT Margin</div><div class="em-v" style="color:var(--gbr);">24–25%</div><div class="em-s">✅ Sector-leading</div></div>
+          <div class="em-box"><div class="em-l">Attrition LTM</div><div class="em-v" style="color:var(--gbr);">12.5%</div><div class="em-s">✅ Best among Tier-1</div></div>
+          <div class="em-box"><div class="em-l">Deal TCV FY25</div><div class="em-v" style="color:var(--gbr);">$30B+</div><div class="em-s">✅ Record pipeline</div></div>
+          <div class="em-box"><div class="em-l">Revenue Scale</div><div class="em-v" style="color:var(--p);">$29B+</div><div class="em-s">Largest Indian IT</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">EBIT Margin 24–25% sustained through multiple demand cycles — operational excellence at scale</div></div>
+            <div class="erf-txt">TCS has maintained EBIT margins of 24–26% through demand slowdowns (FY24 BFSI freeze), high attrition years (FY23 post-COVID), and USD currency headwinds — demonstrating that its margin is structural, not cyclical. The key drivers: (1) Industry-low attrition (12.5% vs sector average 15–18%) means lower replacement hiring costs. (2) Strong utilisation management — the company rapidly moves bench employees to new project allocations across its diversified client base. (3) Revenue mix increasingly toward higher-margin services (AI, cloud transformation) offsetting commoditised application maintenance. EBIT margin sustained above 24% for 15+ consecutive years is TCS's primary quality proof point.</div>
+          </div>
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">$30B+ TCV in FY25 — the largest annual deal win in TCS's history signals strong FY26 visibility</div></div>
+            <div class="erf-txt">TCS's FY25 deal TCV of $30B+ (including several mega-deals above $1B each) means the company has signed contracts that will convert to revenue over the next 3–5 years. The mix is equally important: large deals above $50M accounted for approximately 60% of TCV — indicating competitive wins at the expense of rivals, not just small renewals. Mega-deals also have longer contract durations (5–7 years), providing multi-year revenue visibility. For investors: when a company's TCV run rate is significantly above its annualised revenue ($29B), it signals future revenue acceleration — a leading indicator available 12–18 months before actual revenue growth shows up.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-p">✅ <strong>IT quality verdict:</strong> TCS is the reference standard for Indian IT. EBIT margin 24–25% + attrition 12.5% + TCV $30B+ + $29B revenue scale = the best risk-adjusted IT franchise in India. The margin stability across cycles demonstrates operational excellence; the TCV run rate provides multi-year revenue visibility. Use TCS as the benchmark when evaluating all other Indian IT companies.</div>
+    </div>
+
+    <!-- GOOD 2: Infosys -->
+    <div class="ex-block rv d4">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--gpale),#dcfce7);">💻</div>
+          <div><div class="eb-name">Infosys — Margin Recovery Story + Record TCV + Cobalt Cloud Framework Driving Realisation</div><div class="eb-sub">NSE: INFY · IT Services · EBIT Margin recovering to 22%+ · TCV $11B+ FY25 · AI and cloud mix shift driving realisation growth</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ EBIT recovering to 22%+</span>
+          <span class="ebb ebb-g">✅ Attrition normalised</span>
+          <span class="ebb ebb-p">AI-led realisation growth</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">EBIT Margin FY25</div><div class="em-v" style="color:var(--gbr);">22.19%</div><div class="em-s">✅ +139bps YoY</div></div>
+          <div class="em-box"><div class="em-l">Attrition LTM</div><div class="em-v" style="color:var(--gbr);">13.7%</div><div class="em-s">✅ Back to pre-COVID</div></div>
+          <div class="em-box"><div class="em-l">TCV FY25</div><div class="em-v" style="color:var(--gbr);">$11B+</div><div class="em-s">✅ Large deal rich</div></div>
+          <div class="em-box"><div class="em-l">Revenue CC Growth</div><div class="em-v" style="color:var(--ambr);">4.2%</div><div class="em-s">⚠️ Recovering pace</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">Margin recovery from 20.1% (FY23) to 22.19% (FY25) as attrition normalised and hiring discipline restored</div></div>
+            <div class="erf-txt">Infosys's margin compression in FY23 was driven by post-COVID attrition (24%+ LTM) forcing expensive replacement hiring, salary increases to retain employees, and subcontractor cost inflation. As attrition normalised to 13.7% by FY25, the margin recovery became a structural story — not just a cyclical bounce. The key driver: employee cost per employee growing slower than billing rate per employee. When billing rates grow faster than costs (a positive "spread") margins expand. Infosys's AI-driven services command higher billing rates (15–20% premium over legacy services), supporting the realisation component of revenue growth.</div>
+          </div>
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">Cobalt cloud + AI framework generating premium-priced projects — realisation growth, not just volume</div></div>
+            <div class="erf-txt">Infosys's Cobalt cloud framework and its AI-powered services (Topaz AI suite) command higher billing rates than legacy application maintenance work. When a client moves from legacy application management (billing rate $40/hour) to cloud transformation or AI implementation ($80–120/hour), Infosys's revenue per employee doubles without adding headcount. This realisation-driven growth is the highest-quality revenue growth in IT — it expands margins, requires less capital, and is harder for competitors to replicate quickly. Track the revenue mix disclosure in earnings calls: the percentage of revenue from digital, cloud, and AI services growing quarter over quarter is the proxy for realisation improvement.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>IT quality verdict:</strong> Infosys's FY23→FY25 journey is the textbook IT recovery case: attrition peak → normalisation → margin expansion → revenue acceleration through deal wins. The AI/cloud mix shift supporting realisation growth is the most important forward signal. Track: (1) Large deal TCV mix (above $50M), (2) EBIT margin trajectory quarterly, (3) Digital revenue as % of total.</div>
+    </div>
+
+    <!-- GOOD 3: Persistent Systems -->
+    <div class="ex-block rv d5">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">⚡</div>
+          <div><div class="eb-name">Persistent Systems — 30%+ Revenue CAGR, EBIT Margin Expansion, Product Engineering Niche Moat</div><div class="eb-sub">NSE: PERSISTENT · IT Services · $1.4B+ revenue FY25 · 30%+ revenue CAGR 5 years · EBIT Margin 15–17% and expanding · ISV product engineering niche</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ 30%+ Revenue CAGR</span>
+          <span class="ebb ebb-g">✅ Margin expanding</span>
+          <span class="ebb ebb-p">ISV niche moat</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Revenue CAGR (5yr)</div><div class="em-v" style="color:var(--gbr);">30%+</div><div class="em-s">✅ Fastest growing mid-tier</div></div>
+          <div class="em-box"><div class="em-l">EBIT Margin</div><div class="em-v" style="color:var(--gbr);">15–17%</div><div class="em-s">✅ Expanding trajectory</div></div>
+          <div class="em-box"><div class="em-l">Attrition</div><div class="em-v" style="color:var(--gbr);">11–14%</div><div class="em-s">✅ Very low for mid-tier</div></div>
+          <div class="em-box"><div class="em-l">Niche Focus</div><div class="em-v" style="color:var(--p);">ISV + SaaS</div><div class="em-s">Product engineering moat</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">ISV (Independent Software Vendor) product engineering niche — billing rates 20–30% above legacy IT</div></div>
+            <div class="erf-txt">Persistent Systems specialises in building and maintaining software products for ISVs and SaaS companies — Salesforce, TIBCO, SAP ecosystem, and healthcare software companies. This niche is structurally superior to generic IT outsourcing because: (1) ISV product engineering requires specialised skills that fewer IT companies can offer, giving Persistent higher billing power. (2) When a SaaS company signs Persistent to build features into its product, the relationship is deep and multi-year — switching costs are extremely high because Persistent engineers know the client's codebase intimately. (3) AI-native product engineering (building AI features into SaaS products) is Persistent's fastest-growing segment — commanding the highest billing rates in the mid-tier IT space.</div>
+          </div>
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">Consistent quarterly deal wins in structured quarterly execution — rare in mid-tier IT</div></div>
+            <div class="erf-txt">Persistent's $1.4B+ revenue base growing at 30% CAGR is supported by consistent quarterly deal wins and negligible client concentration (no single client above 8% of revenue). This distribution across 100+ clients in the ISV/SaaS space provides stability — if one client reduces spending, the impact on total revenue is limited. Contrast with IT companies where a single large banking client (like Wipro's BFSI concentration) can cause a 300bps revenue growth deceleration when that one client freezes IT spending.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>IT quality verdict:</strong> Persistent demonstrates that mid-tier IT can outperform Tier-1 through niche specialisation. ISV product engineering + SaaS company focus + AI-native capabilities = a structural pricing moat that Tier-1 generalists cannot easily replicate. The 30%+ revenue CAGR with expanding margins is the combination every IT investor looks for. Key risk: client concentration in technology sector — if SaaS funding dries up, Persistent feels it first.</div>
+    </div>
+
+    <!-- GOOD 4: HCL Tech -->
+    <div class="ex-block rv d6">
+      <div class="eb-head ebh-p">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🖥️</div>
+          <div><div class="eb-name">HCL Technologies — Products + Services Mix Provides Counter-Cyclical Revenue Buffer</div><div class="eb-sub">NSE: HCLTECH · IT Services + Products · 20–22% EBIT Margin · Products revenue (HCL Software) provides 15–18% of revenue at 30%+ margins · Diversified service lines</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ Products buffer</span>
+          <span class="ebb ebb-g">✅ EBIT 20–22%</span>
+          <span class="ebb ebb-p">ER&amp;D + software moat</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">EBIT Margin</div><div class="em-v" style="color:var(--gbr);">20–22%</div><div class="em-s">✅ Stable band</div></div>
+          <div class="em-box"><div class="em-l">Products Revenue</div><div class="em-v" style="color:var(--gbr);">15–18%</div><div class="em-s">✅ High-margin buffer</div></div>
+          <div class="em-box"><div class="em-l">Attrition</div><div class="em-v" style="color:var(--gbr);">14–16%</div><div class="em-s">✅ Managed</div></div>
+          <div class="em-box"><div class="em-l">ER&amp;D Mix</div><div class="em-v" style="color:var(--p);">Growing</div><div class="em-s">High realisation segment</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">HCL Software (products) provides 15–18% of revenue at 30%+ margins — unique among large Indian IT companies</div></div>
+            <div class="erf-txt">HCL Technologies is the only large Indian IT company with a significant software products business — HCL Software (formerly IBM-acquired products like Lotus Notes, BigFix, Unica). Software products have fundamentally different economics from services: once built, the marginal cost of an additional license is near zero, making software margins 30–40% vs IT services margins of 18–22%. When IT services demand softens (as in FY24 BFSI freeze), HCL's software products revenue — which is primarily subscription/maintenance-based — provides counter-cyclical stability. This is the closest any Indian IT company comes to a "recurring revenue" model similar to SaaS.</div>
+          </div>
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">Engineering R&amp;D (ER&amp;D) services — highest billing rate segment in the IT sector, growing 20%+ annually</div></div>
+            <div class="erf-txt">HCL's ER&amp;D (Engineering Research & Development) services — helping semiconductor companies, automotive OEMs, and industrial companies build next-generation products — bill at significantly higher rates than traditional IT services. An embedded software engineer working on an EV software stack (Tesla, BMW) or a semiconductor design engineer working on chip design commands $60–120/hour vs $25–40/hour for a legacy IT maintenance programmer. HCL's ER&amp;D capability, built through the acquisition of companies like Actian and Sankalp Semiconductor, is a structural realisation driver that peers without dedicated engineering capabilities cannot replicate quickly.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-p">✅ <strong>IT quality verdict:</strong> HCL's products + services + ER&amp;D combination creates a more diversified and resilient IT business than pure-services players. The software products providing counter-cyclical revenue is the unique quality differentiator. Track: software products revenue growth vs total revenue growth — if software products outperform in down cycles and underperform in up cycles, the business model is working as designed.</div>
+    </div>
+
+    <!-- GOOD 5: Coforge -->
+    <div class="ex-block rv d7">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);">✈️</div>
+          <div><div class="eb-name">Coforge — Vertical Niche Strategy: Travel + BFSI Deep Expertise Driving Superior Deal Win Rate</div><div class="eb-sub">NSE: COFORGE · IT Services · $1B+ revenue · Travel/Airlines vertical specialist · 25%+ revenue CAGR · EBIT Margin 14–16% and expanding through inorganic strategy</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ 25%+ Revenue CAGR</span>
+          <span class="ebb ebb-g">✅ Vertical niche moat</span>
+          <span class="ebb ebb-p">Inorganic M&amp;A strategy</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Revenue CAGR (3yr)</div><div class="em-v" style="color:var(--gbr);">25%+</div><div class="em-s">✅ Consistent execution</div></div>
+          <div class="em-box"><div class="em-l">Deal Win Rate</div><div class="em-v" style="color:var(--gbr);">Above sector</div><div class="em-s">✅ Niche expertise wins</div></div>
+          <div class="em-box"><div class="em-l">EBIT Margin</div><div class="em-v" style="color:var(--gbr);">14–16%</div><div class="em-s">Expanding trajectory</div></div>
+          <div class="em-box"><div class="em-l">Vertical Focus</div><div class="em-v" style="color:var(--p);">Travel + BFSI</div><div class="em-s">Deep domain expertise</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">Travel vertical specialisation — Coforge's airline/GDS expertise means clients cannot easily switch</div></div>
+            <div class="erf-txt">Coforge (formerly NIIT Technologies) built deep expertise in the travel technology sector — airlines, Global Distribution Systems (GDS like Amadeus, Sabre), travel management companies, and hospitality technology. Travel IT systems are notoriously complex (flight inventory management, pricing engines, loyalty programs) and deeply integrated into client operations. A travel company's IT vendor that has implemented their reservation system over 7 years, migrated their loyalty platform, and built their mobile app is nearly impossible to replace without 2–3 years of pain. This switching cost moat means Coforge's client retention in travel is structurally high — and new wins come with multi-year commitments.</div>
+          </div>
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">Inorganic M&amp;A strategy adding capabilities without diluting margins — rare execution quality in mid-tier IT</div></div>
+            <div class="erf-txt">Coforge has consistently acquired niche technology companies (SLK Software for BFSI, Xceltrait for specific capabilities) and successfully integrated them without the margin dilution that typically follows mid-tier IT acquisitions. The acquisition discipline — buying capability complements rather than revenue for its own sake — is demonstrated by EBIT margins expanding even through the acquisition phase. For investors, an IT company that can grow 25%+ organically + inorganically while maintaining and expanding margins represents rare capital allocation quality in the mid-tier IT space.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>IT quality verdict:</strong> Coforge demonstrates that vertical niche specialisation beats horizontal breadth for mid-tier IT companies. Deep travel + BFSI expertise creates switching-cost moats, drives above-sector deal win rates, and supports premium billing rates vs generalist IT. The 25%+ CAGR with expanding margins confirms the strategy is generating genuine operating leverage, not just inorganic revenue buying.</div>
+    </div>
+
+    <!-- SECTION DIVIDER -->
+    <div class="section-divider rv d3">
+      <div class="sd-line"></div>
+      <div class="sd-label">🚨 Bad Examples — IT Companies with Structural Problems</div>
+      <div class="sd-line"></div>
+    </div>
+
+    <div class="tag rv d1" style="color:var(--red);">04 — Five IT Cases With Structural Weaknesses</div>
+    <h2 class="h2 rv d2">🚨 <span style="background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Bad Examples</span> — When IT Metrics Signal Deep Problems</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five cases show how specific IT metric failures — high attrition with margin collapse, weak TCV, revenue concentration, or currency mismanagement — translated into investor losses or structural deterioration.</p>
+
+    <!-- BAD 1: Wipro (relative underperformance) -->
+    <div class="ex-block rv d3">
+      <div class="eb-head ebh-a">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--apale),#fde68a);">💼</div>
+          <div><div class="eb-name">Wipro — Decade of Revenue Market Share Loss: Weak Deal Wins + Fragmented Go-To-Market Strategy</div><div class="eb-sub">NSE: WIPRO · IT Services · Revenue CAGR lagging TCS/Infosys by 400–600bps annually for 8 years · Strategic restructuring multiple times · Deal wins inconsistent</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-a">⚠️ Revenue CAGR below peers</span>
+          <span class="ebb ebb-a">Multiple strategy pivots</span>
+          <span class="ebb ebb-a">Deal win inconsistency</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Revenue CAGR vs Peers</div><div class="em-v" style="color:var(--ambr);">-400bps gap</div><div class="em-s">⚠️ vs TCS/Infy for 8yr</div></div>
+          <div class="em-box"><div class="em-l">EBIT Margin</div><div class="em-v" style="color:var(--ambr);">16–18%</div><div class="em-s">⚠️ Below Tier-1 peers</div></div>
+          <div class="em-box"><div class="em-l">Large Deal TCV</div><div class="em-v" style="color:var(--ambr);">Inconsistent</div><div class="em-s">⚠️ Lumpy quarter-to-quarter</div></div>
+          <div class="em-box"><div class="em-l">Strategy Changes</div><div class="em-v" style="color:var(--red);">3+ pivots</div><div class="em-s">🚨 Organisational churn</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-amb">
+            <div class="erf-row"><div class="erf-ico">⚠️</div><div class="erf-lbl">400–600bps revenue growth gap vs TCS/Infosys sustained for 8+ years — market share loss, not cyclical</div></div>
+            <div class="erf-txt">Wipro's revenue growth consistently lagged TCS and Infosys by 400–600 basis points per year for nearly a decade. This is not a cyclical problem — the gap persisted through good (FY22 +26%) and bad (FY24 +1.5%) IT demand environments. A persistent multi-year growth gap against comparable peers is the clearest signal of structural market share loss. The root causes: fragmented organisational structure (multiple P&amp;L silos competing internally rather than presenting a unified front to clients), inconsistent deal pursuit strategy, and go-to-market structure that was reorganised multiple times (Strategic Market Units, then Global Business Lines, then back to SBUs) without resolving the underlying execution gaps.</div>
+          </div>
+          <div class="erf erf-amb">
+            <div class="erf-row"><div class="erf-ico">⚠️</div><div class="erf-lbl">Multiple CEO changes + strategy pivots = organisational instability that top clients and top talent avoid</div></div>
+            <div class="erf-txt">Large enterprise clients (Fortune 500 companies) building multi-year IT outsourcing relationships with Wipro needed consistent leadership, consistent delivery methodology, and consistent strategic vision from their vendor. When Wipro changed its strategy multiple times and brought in a new CEO (Thierry Delaporte in 2020, then succeeded by Srinivas Pallia in 2024), each transition triggered re-evaluation of client relationships, portfolio prioritisation, and talent management. Top IT talent — the actual delivery resource — prefers employers with visible growth trajectories and stable culture. Wipro's inconsistency created a self-reinforcing cycle: strategic uncertainty → talent uncertainty → delivery risk → client confidence erosion → slower deal wins.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-a">⚠️ <strong>Wipro structural lesson:</strong> Revenue CAGR gap vs sector peers is the most important IT metric for relative quality assessment. If a company grows 8% CC while TCS grows 13% and Infosys grows 12% in the same demand environment — year after year — it is losing market share. This is the IT equivalent of GNPA rising in banking. The investor lesson: compare IT company revenue growth to its closest peer cohort, not to absolute benchmarks. Consistent underperformance vs peers = structural issue, not bad luck.</div>
+    </div>
+
+    <!-- BAD 2: Tech Mahindra (FY24 collapse) -->
+    <div class="ex-block rv d4">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">📡</div>
+          <div><div class="eb-name">Tech Mahindra — Telecom Vertical Concentration + Margin Collapse From -60% to 6% (FY24)</div><div class="eb-sub">NSE: TECHM · IT Services · EBIT Margin collapsed from 11% to ~5% (FY24) · Telecom vertical 35%+ of revenue · Project-specific losses · CEO transition mid-crisis</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 EBIT collapsed to 5%</span>
+          <span class="ebb ebb-r">Telecom 35%+ concentration</span>
+          <span class="ebb ebb-r">Project losses disclosed</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">EBIT Margin FY24</div><div class="em-v" style="color:var(--red);">~5–6%</div><div class="em-s">🚨 From 11% in FY23</div></div>
+          <div class="em-box"><div class="em-l">Telecom Concentration</div><div class="em-v" style="color:var(--red);">35%+ revenue</div><div class="em-s">🚨 Single vertical risk</div></div>
+          <div class="em-box"><div class="em-l">Revenue CC Growth</div><div class="em-v" style="color:var(--red);">Negative</div><div class="em-s">🚨 Absolute decline</div></div>
+          <div class="em-box"><div class="em-l">Attrition Peak</div><div class="em-v" style="color:var(--red);">24%+</div><div class="em-s">🚨 Above sector peak</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">Telecom vertical at 35%+ of revenue — when telco capex spending froze globally, Tech Mahindra had no hedge</div></div>
+            <div class="erf-txt">Tech Mahindra built its IT services business heavily around telecom clients — AT&T, Verizon, Deutsche Telekom, and telecom OEMs (Nokia, Ericsson ecosystem). This was a logical strategy when 5G investment cycles were accelerating (FY21–22). But when global telco capex froze in FY23–24 (rising interest rates making debt-funded network investment uneconomical), Tech Mahindra's concentrated telecom exposure became a structural liability. 35% of revenue from a single vertical that simultaneously cut IT spending = revenue absolute decline and margin collapse. The lesson for IT investors: single-vertical concentration above 25–30% of revenue is a structural risk that becomes existential when that vertical enters a capex downcycle.</div>
+          </div>
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">EBIT margin collapse from 11% to 5% in one year — project-specific losses and revenue decline combined</div></div>
+            <div class="erf-txt">Tech Mahindra's FY24 margin collapse had two components: (1) Revenue decline from telecom vertical reducing fixed-cost absorption — when revenue falls but employee costs and infrastructure costs are fixed, margins compress mechanically. (2) Project-specific losses on large fixed-price contracts that were bid aggressively at thin margins and then suffered cost overruns. Fixed-price IT projects are inherently riskier than time-and-material (T&M) because the IT company absorbs cost overruns. When attrition was 24%+ and replacement hiring costs surged, projects bid at 2021 attrition assumptions became loss-making at 2022–23 attrition reality. The combination of revenue decline + project losses = EBIT margin collapse from 11% to 5%.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>Tech Mahindra lesson:</strong> Track vertical concentration in every IT company's revenue mix disclosure. More than 30% in any single vertical = elevated cyclicality. Tech Mahindra's telecom + Verizon concentration was visible in every quarterly segmental disclosure for 5 years before the FY24 collapse. Combined with high attrition (24%+) and fixed-price contract exposure, the margin risk was computable in advance — not hindsight.</div>
+    </div>
+
+    <!-- BAD 3: IT companies during COVID attrition (generic) -->
+    <div class="ex-block rv d5">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">📈</div>
+          <div><div class="eb-name">Mid-Tier IT Over-Hiring FY22–23 — Attrition 28%+ + Over-Hiring = FY24 Headcount Reduction Across Sector</div><div class="eb-sub">Multiple IT Companies · Attrition peaked 25–30% LTM in FY23 · Companies hired 200,000+ collectively · Demand slowed FY24 → mass bench, headcount reduction, margin collapse</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 Attrition 25–30%</span>
+          <span class="ebb ebb-r">Over-hiring at peak</span>
+          <span class="ebb ebb-r">Utilisation fell to 72%</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Peak Attrition (FY23)</div><div class="em-v" style="color:var(--red);">25–30%</div><div class="em-s">🚨 Sector-wide phenomenon</div></div>
+          <div class="em-box"><div class="em-l">Net Headcount Added</div><div class="em-v" style="color:var(--red);">200,000+</div><div class="em-s">🚨 All five large IT cos</div></div>
+          <div class="em-box"><div class="em-l">Utilisation Drop</div><div class="em-v" style="color:var(--red);">72–76%</div><div class="em-s">🚨 From 85% in FY22</div></div>
+          <div class="em-box"><div class="em-l">Salary Cost Inflation</div><div class="em-v" style="color:var(--red);">12–18%</div><div class="em-s">🚨 To retain + replace</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">28%+ LTM attrition forced hiring 300,000+ fresh graduates at inflated salaries across the sector in FY23</div></div>
+            <div class="erf-txt">Post-COVID demand surge (FY22: Infosys +19.7% CC, TCS +15.4% CC) combined with a hot labour market as tech companies globally competed for the same talent pool pushed LTM attrition to 25–30% across Indian IT. To replace departing employees and service accelerating demand, companies hired 300,000+ employees collectively — many at 30–50% salary premiums vs pre-COVID. These hires had: (1) 3–6 month ramp-up time before billing, (2) higher base salaries than incumbents, and (3) project allocation challenges as demand began slowing in late FY23. The result: by FY24, utilisation fell from 85% to 72–76% across mid-tier IT — creating a massive bench of unbillable employees on inflated salaries. This was the single largest margin compression event in Indian IT history.</div>
+          </div>
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">The attrition signal was visible 6–9 months before margin compression — investors who tracked LTM attrition could see it coming</div></div>
+            <div class="erf-txt">LTM attrition rising from 14% (FY21) to 20% (Q2 FY22) to 28% (Q4 FY23) was disclosed in every quarterly earnings call. The margin impact was computable: each 1% increase in attrition requires approximately 1.5% additional salary spend for replacement hiring, training, and retention bonuses. At 28% LTM attrition vs 14% baseline, the incremental salary cost was 21% of the payroll base above normal — or approximately 12–15% of total revenue in salary cost inflation. This was a 250–350bps margin headwind visible 6 months before it appeared in P&amp;L. Companies reporting rising attrition in Q1 FY23 saw margin compression in Q3 FY23 and Q4 FY23 — investors who reduced exposure on the attrition signal avoided the margin compression trade.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The attrition-to-margin lead-lag lesson:</strong> Rising LTM attrition → 2–3 quarter lag → margin compression. This lead-lag relationship is one of the most reliable forward indicators in IT analysis. When LTM attrition rises more than 3 percentage points in a single quarter, model in a 150–250bps EBIT margin headwind over the following 6 months. The reverse is equally reliable: declining LTM attrition → 2–3 quarter lag → margin recovery. This is why attrition is the most important number to track in every IT earnings call.</div>
+    </div>
+
+    <!-- BAD 4: Mphasis (EBIT compression + customer concentration) -->
+    <div class="ex-block rv d6">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">🏛️</div>
+          <div><div class="eb-name">Mphasis — DXC/HP Concentration Risk: Single Client 45% of Revenue Created Structural Dependency</div><div class="eb-sub">NSE: MPHASIS · IT Services · DXC (HP/Hewlett Packard) channel at 45%+ revenue historically · Revenue declined when DXC renegotiated · Diversification journey still ongoing</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 DXC channel 45%+ revenue</span>
+          <span class="ebb ebb-a">Structural dependency</span>
+          <span class="ebb ebb-a">Diversification ongoing</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">DXC Channel (peak)</div><div class="em-v" style="color:var(--red);">45%+ revenue</div><div class="em-s">🚨 Structural dependency</div></div>
+          <div class="em-box"><div class="em-l">Direct Revenue Growth</div><div class="em-v" style="color:var(--gbr);">Recovering</div><div class="em-s">Diversification working</div></div>
+          <div class="em-box"><div class="em-l">EBIT Margin Range</div><div class="em-v" style="color:var(--ambr);">14–17%</div><div class="em-s">⚠️ Below Tier-1</div></div>
+          <div class="em-box"><div class="em-l">Customer Concentration</div><div class="em-v" style="color:var(--red);">High historically</div><div class="em-s">🚨 Declining but still material</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">Single customer channel (DXC) at 45%+ revenue — the opposite of deal TCV diversification</div></div>
+            <div class="erf-txt">Mphasis historically derived 40–45% of its revenue through the DXC Technology (formerly HP Enterprise Services, then CSC + HPE merger) channel — effectively acting as a subcontractor to DXC for IT services delivered to DXC's clients. This is structurally different from and worse than having 45% revenue from a single direct client. In the DXC channel model: (1) Mphasis has no direct client relationship — DXC is the intermediary. (2) DXC retains pricing power — it negotiates rates with Mphasis, not Mphasis with end clients. (3) DXC can substitute Mphasis with other vendors (including its own captive capacity) without the end client's approval. When DXC itself went through financial stress (2018–2020) and renegotiated vendor contracts aggressively, Mphasis's DXC channel revenue declined — and Mphasis had little recourse because it had no direct end-client relationships to preserve.</div>
+          </div>
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">No customer concentration above 10% should be a mandatory pre-investment check for any IT company</div></div>
+            <div class="erf-txt">Mphasis's DXC dependency is the most extreme example of customer concentration risk in Indian IT — but it's not unique. Several mid-tier IT companies have historical dependencies on single clients or channel partners. The investor check: look at the top 5 and top 10 client revenue disclosure (provided in annual reports) and calculate: (1) if the top client reduced spending by 20%, what is the revenue impact as % of total? (2) What is the mechanism — direct relationship or channel? (3) Is the concentration declining over time? Mphasis's direct revenue (ex-DXC) has been growing faster than DXC revenue for several years — the diversification is working. But the DXC dependency took over a decade of patient effort to reduce from 60%+ to below 30%.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>Customer concentration lesson:</strong> Any single client or channel partner above 20% of IT revenue is a structural risk. Above 30% = alarm. Above 40% = the company's fate is tied to a single decision-maker at a single client. Always read the "Revenue Concentration" section in the annual report (required disclosure for listed companies). Check if top-client revenue is growing or declining as % of total — sustained decline = healthy diversification in progress.</div>
+    </div>
+
+    <!-- BAD 5: Currency mismanagement -->
+    <div class="ex-block rv d7">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">💱</div>
+          <div><div class="eb-name">Unhedged IT Companies — Rupee Strengthening Events Expose Margin Volatility (2012–13, 2017)</div><div class="eb-sub">Multiple IT Companies · Rupee strengthening by 4–8% in short periods has caused 200–400bps EBIT margin swings for under-hedged IT companies</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 Rupee strengthened 8% in 2012</span>
+          <span class="ebb ebb-r">Unhedged = 300bps margin hit</span>
+          <span class="ebb ebb-a">Forward cover is essential</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Currency Sensitivity</div><div class="em-v" style="color:var(--red);">0.4–0.5% margin</div><div class="em-s">Per 1 INR vs USD move</div></div>
+          <div class="em-box"><div class="em-l">Rupee Strength Event</div><div class="em-v" style="color:var(--red);">8% in 6 months</div><div class="em-s">🚨 FY13 and FY17 examples</div></div>
+          <div class="em-box"><div class="em-l">Unhedged Margin Hit</div><div class="em-v" style="color:var(--red);">300–400bps</div><div class="em-s">🚨 In a single year</div></div>
+          <div class="em-box"><div class="em-l">Hedge Cover (best)</div><div class="em-v" style="color:var(--gbr);">70–80%</div><div class="em-s">✅ TCS/Infosys standard</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">Rupee strengthening 8% in a year = 300–400bps EBIT margin hit for an unhedged IT company</div></div>
+            <div class="erf-txt">In 2012–13, the Indian rupee strengthened against the USD by approximately 8% over 6 months (partially reversing the post-2008 depreciation). IT companies with low hedge ratios — under 30% of forward revenue covered — saw EBIT margins compress by 300–400bps in a single fiscal year purely from currency movement, with no change in their operational performance. The mechanics: if 80% of revenue is in USD and USD weakens against INR by 8%, INR revenue from USD sources falls 6.4% (80% × 8%) even with flat operational performance. With costs mostly in INR (fixed), the margin compression is direct and immediate. Companies with 70–80% forward cover locked in rates before the rupee strengthened — their margins were insulated for 12–18 months.</div>
+          </div>
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">Currency as a profit lever (not managing it) = management quality signal</div></div>
+            <div class="erf-txt">Some mid-tier IT companies historically used currency depreciation as a margin "free lunch" — when the rupee depreciated, margins expanded nicely, and management claimed "operational improvement." When the rupee strengthened, margins compressed, and management cited "currency headwinds" as an excuse. Disciplined management (TCS, Infosys, HCL) maintains consistent hedge ratios regardless of currency direction — because their goal is to show investors that EBIT margins reflect genuine operational performance, not random currency movements. An IT company that credits "rupee depreciation" for margin improvement in a good year and blames "rupee appreciation" for margin decline in a bad year has not built a genuine operational business — it has been speculating on currency. Check the annual report's hedging footnote: stable hedge ratios = management discipline; fluctuating hedge ratios = gambling on currency direction.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>Currency hedging lesson:</strong> The investor check for hedging quality: (1) Annual report → Notes to Accounts → "Derivative Financial Instruments" — find the outstanding forward cover in USD/EUR/GBP. (2) Divide outstanding hedge value by quarterly revenue × 4 to get approximate hedge ratio. (3) Compare this to 60–80% benchmark. (4) Check if hedge ratio is consistent year over year (disciplined policy) or fluctuating (gambling on currency). Under-hedged IT companies look like heroes when rupee depreciates and victims when it appreciates — but neither reflects management quality. Hedge consistently and let operations drive margins.</div>
+    </div>
+
+
+    <!-- ══ QUICK TRICKS ══ -->
+    <div class="section-divider rv d3">
+      <div class="sd-line"></div>
+      <div class="sd-label">⚡ Quick Tricks — Analyse Any IT Company in 8 Minutes</div>
+      <div class="sd-line"></div>
+    </div>
+
+    <div class="tag rv d1">⚡ Quick Tricks</div>
+    <h2 class="h2 rv d2">The 8-Minute <span class="hp">IT Quality Cheat Sheet</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Five fast checks — using only earnings call transcripts, Screener.in, and the annual report — that give you the complete IT quality picture in under 8 minutes. Run these every quarter on every IT company you own or monitor.</p>
+
+    <div style="display:flex;flex-direction:column;gap:clamp(14px,2.5vw,20px);margin-bottom:40px;">
+
+      <!-- TRICK A -->
+      <div class="rv d3" style="border-radius:18px;overflow:hidden;border:2px solid rgba(109,40,217,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--pxs),var(--pxl));padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(109,40,217,.3);">📊</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:3px;">Trick A — 60 Seconds · Screener Ratios Tab</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "IT Quality Scorecard" — Five Numbers, Instant Pass or Fail</div>
+          </div>
+          <div style="background:rgba(109,40,217,.1);color:var(--p);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">60 seconds</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Screener.in → search IT company → Ratios tab. Find EBIT Margin (%), Revenue Growth (CC%), Attrition (from earnings call), Deal TCV growth, and headcount trend. Any company failing 2+ of these deserves investigation before investment.</div>
+          <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+          <table style="width:100%;border-collapse:collapse;font-size:clamp(11px,1.3vw,12.5px);min-width:480px;">
+            <thead><tr style="background:linear-gradient(135deg,rgba(109,40,217,.08),rgba(109,40,217,.03));">
+              <th style="padding:8px 12px;font-size:10px;font-weight:700;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:left;">Metric</th>
+              <th style="padding:8px 12px;font-size:10px;font-weight:700;text-transform:uppercase;color:var(--gbr);border-bottom:1.5px solid var(--bd);text-align:left;">✅ Pass</th>
+              <th style="padding:8px 12px;font-size:10px;font-weight:700;text-transform:uppercase;color:var(--red);border-bottom:1.5px solid var(--bd);text-align:left;">🚨 Fail</th>
+              <th style="padding:8px 12px;font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ts);border-bottom:1.5px solid var(--bd);text-align:left;">Where to find</th>
+            </tr></thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(109,40,217,.05);"><td style="padding:8px 12px;font-weight:700;color:var(--tx);">EBIT Margin</td><td style="padding:8px 12px;color:var(--gbr);font-weight:700;">Tier-1: 20%+ / Mid-tier: 15%+</td><td style="padding:8px 12px;color:var(--red);font-weight:700;">&lt;12% — structural concern</td><td style="padding:8px 12px;color:var(--tl);">Screener → Ratios → EBIT%</td></tr>
+              <tr style="background:rgba(109,40,217,.02);border-bottom:1px solid rgba(109,40,217,.05);"><td style="padding:8px 12px;font-weight:700;color:var(--tx);">CC Revenue Growth</td><td style="padding:8px 12px;color:var(--gbr);font-weight:700;">8%+ YoY (demand recovery)</td><td style="padding:8px 12px;color:var(--red);font-weight:700;">Negative or &lt;2%</td><td style="padding:8px 12px;color:var(--tl);">Earnings call / press release</td></tr>
+              <tr style="border-bottom:1px solid rgba(109,40,217,.05);"><td style="padding:8px 12px;font-weight:700;color:var(--tx);">LTM Attrition</td><td style="padding:8px 12px;color:var(--gbr);font-weight:700;">&lt;15% — stable workforce</td><td style="padding:8px 12px;color:var(--red);font-weight:700;">&gt;22% — cost spiral building</td><td style="padding:8px 12px;color:var(--tl);">Earnings call Q&amp;A section</td></tr>
+              <tr style="background:rgba(109,40,217,.02);border-bottom:1px solid rgba(109,40,217,.05);"><td style="padding:8px 12px;font-weight:700;color:var(--tx);">Deal TCV</td><td style="padding:8px 12px;color:var(--gbr);font-weight:700;">Growing QoQ; large deals &gt;50%</td><td style="padding:8px 12px;color:var(--red);font-weight:700;">Declining 3 consecutive Qs</td><td style="padding:8px 12px;color:var(--tl);">Earnings release — deal wins slide</td></tr>
+              <tr><td style="padding:8px 12px;font-weight:700;color:var(--tx);">Client Concentration</td><td style="padding:8px 12px;color:var(--gbr);font-weight:700;">No client &gt;15% of revenue</td><td style="padding:8px 12px;color:var(--red);font-weight:700;">Any client &gt;25%</td><td style="padding:8px 12px;color:var(--tl);">Annual report — client disclosure</td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICK B -->
+      <div class="rv d4" style="border-radius:18px;overflow:hidden;border:2px solid rgba(220,38,38,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--rpale),#fff5f5);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--red),#f87171);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(220,38,38,.3);">🚪</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:3px;">Trick B — 90 Seconds · Earnings Call + 3-Quarter Trend</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Attrition Lead-Lag" — Rising Attrition Today = Margin Compression in 2–3 Quarters</div>
+          </div>
+          <div style="background:rgba(220,38,38,.1);color:var(--red);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">90 seconds</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Pull LTM attrition from the last 4 earnings calls. Write down 4 quarters of attrition data. Is it rising or falling? The lead-lag relationship is one of the most reliable signals in IT: attrition moves first, margins follow 2–3 quarters later.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.5vw,16px);">
+            <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.22);border-radius:11px;padding:12px 14px;">
+              <div style="font-size:10px;font-weight:800;color:var(--gbr);margin-bottom:6px;">✅ Attrition falling → Margin recovery ahead</div>
+              <div style="font-size:12.5px;color:var(--ts);line-height:1.6;">22% → 19% → 16% → 13% LTM (4 quarters)<br>Employee cost inflation slowing. Replacement hiring at lower rates. Utilisation improving. Margin expansion in next 2 quarters: model +100–200bps EBIT margin ahead.</div>
+            </div>
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:11px;padding:12px 14px;">
+              <div style="font-size:10px;font-weight:800;color:var(--red);margin-bottom:6px;">🚨 Attrition rising → Margin compression ahead</div>
+              <div style="font-size:12.5px;color:var(--ts);line-height:1.6;">13% → 16% → 19% → 23% LTM (4 quarters)<br>Salary inflation building. Replacement hiring at premium. Bench growing. Margin compression in next 2–3 quarters: model -150–250bps EBIT margin ahead. Reduce exposure now.</div>
+            </div>
+          </div>
+          <div style="margin-top:10px;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:9px 13px;font-size:12px;color:var(--tl);">💡 Each 1% increase in LTM attrition above 14% = approximately 0.15% EBIT margin headwind per quarter. At 28% attrition (peak FY23): (28−14) × 0.15% = 2.1% additional annual EBIT margin headwind from attrition alone.</div>
+        </div>
+      </div>
+
+      <!-- TRICK C -->
+      <div class="rv d5" style="border-radius:18px;overflow:hidden;border:2px solid rgba(22,163,74,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--gpale),#ecfdf5);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--gbr),var(--gh));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(22,163,74,.3);">💼</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:3px;">Trick C — 2 Minutes · Quarterly Earnings Press Release</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "TCV Quality Check" — Large Deals as % of Total TCV</div>
+          </div>
+          <div style="background:rgba(22,163,74,.1);color:var(--gbr);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">2 minutes</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Earnings press release → find "Deal Wins" or "New Contract Value" section. Note: (1) Total TCV for the quarter, (2) Number and value of "large deals" (above $50M or $100M), (3) TCV trend over 4 quarters. TCV quality matters as much as TCV quantity.</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:12px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">✅</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--gbr);margin-bottom:2px;">High-quality TCV: $1.5B with 3 deals above $100M each = 60% large deal concentration</div><div style="font-size:12px;color:var(--ts);">Large deals signal competitive wins — displacing a rival. Multi-year duration (5–7 years) provides long-term revenue visibility. The fact that a client trusts you with a $100M+ engagement means they view you as a strategic partner, not a commodity supplier.</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:12px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">🚨</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--red);margin-bottom:2px;">Low-quality TCV: $1.5B from 120 deals averaging $12.5M each = pure renewal activity</div><div style="font-size:12px;color:var(--ts);">Small deal-dominated TCV is primarily contract renewals at existing clients — not competitive wins. It provides less revenue backlog per deal (shorter durations), signals no competitive gain, and is much more vulnerable to client attrition. High volume, low average deal size = maintenance, not transformation.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICK D -->
+      <div class="rv d6" style="border-radius:18px;overflow:hidden;border:2px solid rgba(217,119,6,.26);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--apale),#fffcf0);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--ambr),var(--amb));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.3);">💱</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ambr);margin-bottom:3px;">Trick D — 60 Seconds · Annual Report Hedging Note</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Currency Hedge Ratio" — Is Margin Protected or Exposed?</div>
+          </div>
+          <div style="background:rgba(217,119,6,.1);color:var(--ambr);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">60 seconds</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Annual Report → Notes to Accounts → "Derivative Financial Instruments" or "Hedge Accounting." Find the outstanding forward contracts in USD/EUR/GBP. Calculate: <strong>Hedge Cover = Outstanding Forward Contracts Value ÷ (Annualised Quarterly Revenue in USD × 4)</strong>. Target: 60–80%. Then check if the hedge rate (the rate the forward is locked at) is above or below current spot rate — if it's significantly above spot, the company will book hedge gains; if significantly below, hedge losses.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.5vw,16px);">
+            <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:11px;padding:12px 14px;">
+              <div style="font-size:10px;font-weight:800;color:var(--gbr);margin-bottom:5px;">✅ 65–80% hedged = margin stable</div>
+              <div style="font-size:12.5px;color:var(--ts);">TCS/Infosys standard: 65–75% hedged at any point. If USD/INR moves 5%, only 25–35% of revenue (unhedged portion) is exposed → total EBIT margin impact is 0.5–0.7% (manageable). Focus on operations, not currency.</div>
+            </div>
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:11px;padding:12px 14px;">
+              <div style="font-size:10px;font-weight:800;color:var(--red);margin-bottom:5px;">🚨 Below 30% hedged = currency casino</div>
+              <div style="font-size:12.5px;color:var(--ts);">If USD/INR moves 8% (as in 2012–13): 70% unhedged revenue × 8% = 5.6% of revenue impacted. On 18% EBIT margin → margin falls to 12.4%. Not an operational deterioration — pure currency gambling. Management is not protecting shareholder value.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICK E -->
+      <div class="rv d7" style="border-radius:18px;overflow:hidden;border:2px solid rgba(109,40,217,.28);box-shadow:var(--shp);">
+        <div style="background:linear-gradient(135deg,var(--pxl),var(--pmd));padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--pl),var(--p));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(109,40,217,.3);">🏆</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:3px;">Trick E — The Master Check · 8-Minute Complete Verdict</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The Complete IT Quality Score — 8 Minutes, 5 Points, Free Data</div>
+          </div>
+          <div style="background:rgba(109,40,217,.1);color:var(--p);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">8 minutes</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:16px;">Score 1 point per metric that passes. <strong style="color:var(--gbr);">5/5</strong> = high conviction (TCS, Persistent type). <strong style="color:var(--ambr);">3–4/5</strong> = investable with monitoring. <strong style="color:var(--red);">Below 3/5</strong> = avoid until fundamentals improve.</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--pxl);border:1.5px solid rgba(109,40,217,.2);border-radius:12px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">1️⃣</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--p);margin-bottom:2px;">EBIT Margin above threshold + stable or expanding (60s)</div><div style="font-size:12px;color:var(--ts);">Screener Ratios → EBIT% for 3 years → above 20% Tier-1, 15% mid-tier, AND trending flat or up → Score 1</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:12px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">2️⃣</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--red);margin-bottom:2px;">LTM Attrition below 18% AND declining (30s)</div><div style="font-size:12px;color:var(--ts);">Earnings call → "attrition" → 4-quarter trend → below 18% and falling → Score 1. Rising attrition above 20% → Score 0, model margin compression ahead</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:12px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">3️⃣</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--gbr);margin-bottom:2px;">Deal TCV growing with large deal mix above 40% (90s)</div><div style="font-size:12px;color:var(--ts);">Earnings press release → Deal wins section → TCV growing QoQ AND large deals ($50M+) above 40% of total TCV → Score 1</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--apale);border:1.5px solid rgba(217,119,6,.2);border-radius:12px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">4️⃣</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--ambr);margin-bottom:2px;">CC Revenue growth above 8% (or improving trajectory) (30s)</div><div style="font-size:12px;color:var(--ts);">Earnings press release → CC growth rate → above 8% or improving each quarter for 3 quarters → Score 1</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--pxl);border:1.5px solid rgba(109,40,217,.2);border-radius:12px;padding:11px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">5️⃣</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--p);margin-bottom:2px;">No client above 20% + hedge ratio 60%+ (60s)</div><div style="font-size:12px;color:var(--ts);">Annual report → client concentration + hedging note → no single client above 20% AND forward cover 60%+ → Score 1</div></div>
+            </div>
+          </div>
+          <div style="background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:12px;padding:12px 16px;">
+            <div style="font-size:12.5px;font-weight:800;color:var(--tx);margin-bottom:5px;">🏆 The Complete 8-Minute IT Sequence</div>
+            <div style="font-size:12px;color:var(--ts);line-height:1.65;">
+              <strong>60s — Trick A:</strong> Screener Ratios → 5-metric scorecard → pass or fail?<br>
+              <strong>90s — Trick B:</strong> 4 quarters of attrition → rising or falling? → margin forecast?<br>
+              <strong>2min — Trick C:</strong> Deal TCV → total amount + large deal % → quality or just renewals?<br>
+              <strong>60s — Trick D:</strong> Annual report hedging note → hedge ratio → protected or exposed?<br>
+              <strong>3min — Trick E:</strong> Full 5-point score → 5/5 or below 3/5?<br>
+              <strong>Total: 8 minutes. Earnings call + Screener + Annual report. All free.</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- STANDALONE QUICK TRICKS -->
+    <div class="section-divider rv d3">
+      <div class="sd-line"></div>
+      <div class="sd-label">⚡ Quick Tricks — Find IT Quality in 8 Minutes</div>
+      <div class="sd-line"></div>
+    </div>
+
+    <div class="tag rv d1">⚡ Quick Tricks — At a Glance</div>
+    <h2 class="h2 rv d2">Five Fast Checks to <span class="hp">Analyse Any IT Company</span> Before You Invest</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">All data free. All checks under 8 minutes. Run these every quarter on every IT stock you own or plan to buy — before looking at any P/E, EV/EBITDA, or analyst price target.</p>
+
+    <div style="display:flex;flex-direction:column;gap:clamp(14px,2.5vw,18px);margin-bottom:40px;">
+
+      <!-- TRICK 1: Attrition Lead-Lag -->
+      <div class="rv d3" style="border-radius:18px;overflow:hidden;border:2px solid rgba(220,38,38,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--rpale),#fff5f5);padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,22px);display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div style="width:42px;height:42px;min-width:42px;border-radius:12px;background:linear-gradient(135deg,var(--red),#f87171);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 4px 14px rgba(220,38,38,.3);">🚪</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:2px;">Trick 1 — 90 Seconds · Quarterly Earnings Call</div>
+            <div style="font-size:clamp(14px,1.9vw,17px);font-weight:900;color:var(--tx);">Attrition → Margin in 2–3 Quarters: The Most Reliable IT Lead Indicator</div>
+          </div>
+          <div style="background:rgba(220,38,38,.1);color:var(--red);padding:3px 11px;border-radius:7px;font-size:10px;font-weight:800;white-space:nowrap;">90 sec</div>
+        </div>
+        <div style="padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,22px);background:var(--wh);">
+          <div style="font-size:clamp(12.5px,1.4vw,14px);color:var(--ts);line-height:1.7;margin-bottom:12px;"><strong>How:</strong> Pull LTM attrition from the last 4 earnings calls (search the transcript for "attrition"). Write down four quarterly figures. Draw a mental line. Direction is everything — absolute level matters less than trend.<br><br><strong>The formula:</strong> Each 1% LTM attrition above 14% baseline ≈ 0.15% additional EBIT margin headwind. At 22% attrition: (22−14) × 0.15% = 1.2% annual margin drag above baseline costs.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1.5vw,14px);">
+            <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:10px;padding:11px 13px;">
+              <div style="font-size:10px;font-weight:800;color:var(--gbr);margin-bottom:4px;">✅ Attrition falling → Buy signal</div>
+              <div style="font-size:12px;color:var(--ts);">22%→18%→15%→12% (4 quarters)<br>Margin expansion coming in 2–3 quarters. Model +150–200bps EBIT. Reduce exposure ahead of attrition confirmation if you missed the trough.</div>
+            </div>
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:10px;padding:11px 13px;">
+              <div style="font-size:10px;font-weight:800;color:var(--red);margin-bottom:4px;">🚨 Attrition rising → Sell signal</div>
+              <div style="font-size:12px;color:var(--ts);">14%→17%→20%→24% (4 quarters)<br>Margin compression in 2–3 quarters. Model −150–250bps EBIT. Reduce position now — before the margin miss shows in P&amp;L and stock reacts.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICK 2: TCV Quality -->
+      <div class="rv d4" style="border-radius:18px;overflow:hidden;border:2px solid rgba(22,163,74,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--gpale),#ecfdf5);padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,22px);display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div style="width:42px;height:42px;min-width:42px;border-radius:12px;background:linear-gradient(135deg,var(--gbr),var(--gh));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 4px 14px rgba(22,163,74,.3);">💼</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:2px;">Trick 2 — 2 Minutes · Earnings Press Release</div>
+            <div style="font-size:clamp(14px,1.9vw,17px);font-weight:900;color:var(--tx);">TCV Quantity + Quality: Is the Pipeline Growing AND Winning New Ground?</div>
+          </div>
+          <div style="background:rgba(22,163,74,.1);color:var(--gbr);padding:3px 11px;border-radius:7px;font-size:10px;font-weight:800;white-space:nowrap;">2 min</div>
+        </div>
+        <div style="padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,22px);background:var(--wh);">
+          <div style="font-size:clamp(12.5px,1.4vw,14px);color:var(--ts);line-height:1.7;margin-bottom:12px;"><strong>How:</strong> Quarterly earnings press release → "Deal Wins" section. Note: (1) Total TCV this quarter vs last 4 quarters, (2) Count of deals above $50M, (3) Whether TCV is described as "large deal driven" or just "broad-based." The size mix tells you whether the company is winning new ground or just renewing.</div>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="display:flex;align-items:flex-start;gap:12px;background:var(--gpale);border:1px solid rgba(22,163,74,.18);border-radius:10px;padding:10px 13px;">
+              <span style="font-size:18px;flex-shrink:0;">✅</span>
+              <div style="font-size:12px;color:var(--ts);"><strong style="color:var(--gbr);">Quality signal:</strong> "$2.1B TCV with 5 deals above $100M = 60% large deal concentration" → competitive wins, 5–7 year revenue visibility, strategic client trust. Revenue acceleration in 3–6 quarters.</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;background:var(--rpale);border:1px solid rgba(220,38,38,.18);border-radius:10px;padding:10px 13px;">
+              <span style="font-size:18px;flex-shrink:0;">🚨</span>
+              <div style="font-size:12px;color:var(--ts);"><strong style="color:var(--red);">Volume-only signal:</strong> "$2.1B TCV from 200 small deals averaging $10.5M" → renewal activity only. Short durations, no competitive wins, no revenue acceleration signal. TCV quantity is misleading.</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;background:var(--rpale);border:1px solid rgba(220,38,38,.18);border-radius:10px;padding:10px 13px;">
+              <span style="font-size:18px;flex-shrink:0;">⚠️</span>
+              <div style="font-size:12px;color:var(--ts);"><strong style="color:var(--ambr);">Red flag:</strong> TCV declining 3 consecutive quarters while management talks about "strong pipeline." Declining bookings is a 6-month leading indicator of revenue deceleration — act before the revenue miss.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICK 3: EBIT Margin Decomposition -->
+      <div class="rv d5" style="border-radius:18px;overflow:hidden;border:2px solid rgba(109,40,217,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--pxs),var(--pxl));padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,22px);display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div style="width:42px;height:42px;min-width:42px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 4px 14px rgba(109,40,217,.3);">📈</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:2px;">Trick 3 — 60 Seconds · Screener Ratios + P&amp;L</div>
+            <div style="font-size:clamp(14px,1.9vw,17px);font-weight:900;color:var(--tx);">EBIT Margin Decomposition: Is Improvement From Operations or Just Currency?</div>
+          </div>
+          <div style="background:rgba(109,40,217,.1);color:var(--p);padding:3px 11px;border-radius:7px;font-size:10px;font-weight:800;white-space:nowrap;">60 sec</div>
+        </div>
+        <div style="padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,22px);background:var(--wh);">
+          <div style="font-size:clamp(12.5px,1.4vw,14px);color:var(--ts);line-height:1.7;margin-bottom:12px;"><strong>How:</strong> Screener → Ratios → EBIT% for 5 years. Note the trend. Then cross-check: in the earnings call, does management attribute margin improvement to "operational efficiency" or to "currency tailwind"? Currency-driven margin is not durable. Operations-driven margin compounds.</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(7px,1.2vw,12px);">
+            <div style="background:var(--gpale);border:1px solid rgba(22,163,74,.18);border-radius:10px;padding:10px 12px;text-align:center;">
+              <div style="font-size:10px;font-weight:800;color:var(--gbr);margin-bottom:5px;">✅ Operations-driven</div>
+              <div style="font-size:12px;color:var(--ts);">Attrition down + utilisation up + realisation improving = genuine leverage. Durable and compounding.</div>
+            </div>
+            <div style="background:var(--apale);border:1px solid rgba(217,119,6,.18);border-radius:10px;padding:10px 12px;text-align:center;">
+              <div style="font-size:10px;font-weight:800;color:var(--ambr);margin-bottom:5px;">⚠️ Currency-driven</div>
+              <div style="font-size:12px;color:var(--ts);">Rupee depreciated, lifting INR margins. Will reverse when rupee recovers. Not a business quality improvement.</div>
+            </div>
+            <div style="background:var(--rpale);border:1px solid rgba(220,38,38,.18);border-radius:10px;padding:10px 12px;text-align:center;">
+              <div style="font-size:10px;font-weight:800;color:var(--red);margin-bottom:5px;">🚨 Declining band</div>
+              <div style="font-size:12px;color:var(--ts);">Falling 3 years straight, currency neutral = structural problem. Competition, over-hiring, or pricing erosion.</div>
+            </div>
+          </div>
+          <div style="margin-top:10px;background:var(--sf);border:1px solid var(--bd);border-radius:9px;padding:8px 13px;font-size:11.5px;color:var(--tl);">💡 <strong style="color:var(--p);">Quick test:</strong> Compare CC revenue growth % vs INR revenue growth %. If INR growth is 5% higher than CC growth, currency did all the work this year. Subtract that gap from EBIT margin improvement to see operational margin improvement alone.</div>
+        </div>
+      </div>
+
+      <!-- TRICK 4: Vertical Concentration Check -->
+      <div class="rv d6" style="border-radius:18px;overflow:hidden;border:2px solid rgba(217,119,6,.26);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--apale),#fffcf0);padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,22px);display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div style="width:42px;height:42px;min-width:42px;border-radius:12px;background:linear-gradient(135deg,var(--ambr),var(--amb));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.3);">⚠️</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ambr);margin-bottom:2px;">Trick 4 — 60 Seconds · Annual Report Revenue Segment</div>
+            <div style="font-size:clamp(14px,1.9vw,17px);font-weight:900;color:var(--tx);">Vertical Concentration Check: No Single Industry Above 30% of Revenue</div>
+          </div>
+          <div style="background:rgba(217,119,6,.1);color:var(--ambr);padding:3px 11px;border-radius:7px;font-size:10px;font-weight:800;white-space:nowrap;">60 sec</div>
+        </div>
+        <div style="padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,22px);background:var(--wh);">
+          <div style="font-size:clamp(12.5px,1.4vw,14px);color:var(--ts);line-height:1.7;margin-bottom:12px;"><strong>How:</strong> Annual report → Revenue by Vertical (industry segment breakdown). All IT companies disclose revenue by BFSI, Manufacturing, Hi-Tech/Telecom, Healthcare, Retail, Energy. Write down the largest segment %. Then ask: what happens to this IT company's revenue if that one sector freezes IT spend for 12 months?</div>
+          <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+          <table style="width:100%;border-collapse:collapse;font-size:clamp(11px,1.2vw,12.5px);min-width:440px;">
+            <thead><tr style="background:linear-gradient(135deg,rgba(109,40,217,.07),rgba(109,40,217,.02));">
+              <th style="padding:7px 12px;font-size:9.5px;font-weight:700;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:left;">Single Vertical %</th>
+              <th style="padding:7px 12px;font-size:9.5px;font-weight:700;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:left;">Signal</th>
+              <th style="padding:7px 12px;font-size:9.5px;font-weight:700;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:left;">Real Example</th>
+            </tr></thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(109,40,217,.05);"><td style="padding:7px 12px;color:var(--gbr);font-weight:700;">&lt;20%</td><td style="padding:7px 12px;color:var(--gbr);">✅ Well diversified</td><td style="padding:7px 12px;color:var(--tl);">TCS: BFSI 31%, Manufacturing 18%, Tech 18%, Retail 16% — no vertical dominates</td></tr>
+              <tr style="background:rgba(109,40,217,.02);border-bottom:1px solid rgba(109,40,217,.05);"><td style="padding:7px 12px;color:var(--ambr);font-weight:700;">20–30%</td><td style="padding:7px 12px;color:var(--ambr);">⚠️ Monitor closely</td><td style="padding:7px 12px;color:var(--tl);">Acceptable if vertical is structurally growing (e.g. Healthcare) — watch for sector-specific spending freeze</td></tr>
+              <tr><td style="padding:7px 12px;color:var(--red);font-weight:700;">&gt;35%</td><td style="padding:7px 12px;color:var(--red);">🚨 Structural risk</td><td style="padding:7px 12px;color:var(--tl);">Tech Mahindra: Telecom 35%+ → when telco capex froze globally → revenue absolute decline + EBIT collapsed to 5%</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <div style="margin-top:10px;background:var(--sf);border:1px solid var(--bd);border-radius:9px;padding:8px 13px;font-size:11.5px;color:var(--tl);">💡 Also check <strong style="color:var(--ambr);">top client concentration</strong>: annual report → "Revenue from Top Clients" note. Single client above 15% of revenue = yellow flag. Above 25% = structural dependency (Mphasis-DXC pattern).</div>
+        </div>
+      </div>
+
+      <!-- TRICK 5: Revenue per Employee (Realisation Proxy) -->
+      <div class="rv d7" style="border-radius:18px;overflow:hidden;border:2px solid rgba(109,40,217,.28);box-shadow:var(--shp);">
+        <div style="background:linear-gradient(135deg,var(--pxl),var(--pmd));padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,22px);display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div style="width:42px;height:42px;min-width:42px;border-radius:12px;background:linear-gradient(135deg,var(--pl),var(--p));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 4px 14px rgba(109,40,217,.3);">🏆</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:2px;">Trick 5 — The Master Check · Screener + Earnings Call</div>
+            <div style="font-size:clamp(14px,1.9vw,17px);font-weight:900;color:var(--tx);">Revenue per Employee: The Simplest Realisation Proxy Available Free on Screener</div>
+          </div>
+          <div style="background:rgba(109,40,217,.1);color:var(--p);padding:3px 11px;border-radius:7px;font-size:10px;font-weight:800;white-space:nowrap;">3 min</div>
+        </div>
+        <div style="padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,22px);background:var(--wh);">
+          <div style="font-size:clamp(12.5px,1.4vw,14px);color:var(--ts);line-height:1.7;margin-bottom:14px;"><strong>How:</strong> Screener.in → search IT company → Quarterly → Revenue ÷ Headcount for each quarter. Chart this quarterly over 8–12 quarters. This is your billing rate proxy — even without knowing the actual USD/hour billing rate, you can see whether the company is generating more or less revenue per person over time.<br><br>Rising Revenue/Employee = realisation growth (higher billing rates, better utilisation, or premium service mix). Flat or falling = pricing power absent.</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;">
+            <div style="display:flex;align-items:flex-start;gap:12px;background:var(--gpale);border:1px solid rgba(22,163,74,.18);border-radius:10px;padding:10px 13px;">
+              <span style="font-size:18px;flex-shrink:0;">✅</span>
+              <div><div style="font-size:12.5px;font-weight:800;color:var(--gbr);margin-bottom:2px;">Revenue/Employee rising consistently → pricing power confirmed</div><div style="font-size:12px;color:var(--ts);">Persistent: Revenue/Employee grew from ~₹18L/quarter to ₹28L/quarter over 3 years — pure realisation improvement as ISV and AI work commands premium rates. The fastest indicator of whether the IT company is successfully migrating to higher-value services.</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;background:var(--rpale);border:1px solid rgba(220,38,38,.18);border-radius:10px;padding:10px 13px;">
+              <span style="font-size:18px;flex-shrink:0;">🚨</span>
+              <div><div style="font-size:12.5px;font-weight:800;color:var(--red);margin-bottom:2px;">Revenue/Employee flat for 3+ years → pricing power absent</div><div style="font-size:12px;color:var(--ts);">If the company is growing revenue only by adding more headcount but Revenue/Employee is flat, margins will eventually compress as salary costs inflate faster than billing rates. This signals commoditised service delivery — very hard to escape without a portfolio transformation.</div></div>
+            </div>
+          </div>
+          <div style="background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:12px;padding:12px 16px;">
+            <div style="font-size:12.5px;font-weight:800;color:var(--tx);margin-bottom:5px;">🏆 The Complete 8-Minute IT Checklist</div>
+            <div style="font-size:12px;color:var(--ts);line-height:1.7;">
+              <strong>90s — Trick 1:</strong> LTM Attrition trend (4 quarters) → rising or falling? → model margin change 2–3 quarters out<br>
+              <strong>2min — Trick 2:</strong> TCV from press release → total amount + large deal % → quality or renewal-only?<br>
+              <strong>60s — Trick 3:</strong> EBIT Margin trend (Screener) → operations or currency driven? → compare CC vs INR growth<br>
+              <strong>60s — Trick 4:</strong> Vertical concentration (annual report) → largest vertical above 30%? → cyclical risk?<br>
+              <strong>3min — Trick 5:</strong> Revenue ÷ Headcount quarterly (Screener) → rising? → realisation improving?<br>
+              <strong>Total: under 8 minutes. All free data. No Bloomberg needed.</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- GLOSSARY -->
+    <div class="section-divider rv d3">
+      <div class="sd-line"></div>
+      <div class="sd-label">Reference Glossary — IT Sector Terms</div>
+      <div class="sd-line"></div>
+    </div>
+
+    <div class="tag rv d1">Reference Glossary</div>
+    <h2 class="h2 rv d2">IT &amp; Technology Sector <span class="hp">Glossary</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Every IT-specific term used in this chapter — defined in plain language so you never need to look anything up mid-analysis.</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:16px;border:1.5px solid var(--bd);box-shadow:var(--shc);margin-bottom:36px;" class="rv d3">
+      <table style="width:100%;border-collapse:collapse;font-size:clamp(12px,1.3vw,13.5px);min-width:560px;">
+        <thead>
+          <tr>
+            <th style="background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:12px 18px;font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--p);border-bottom:2px solid var(--bd);text-align:left;white-space:nowrap;width:26%;">Term</th>
+            <th style="background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:12px 18px;font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--p);border-bottom:2px solid var(--bd);text-align:left;">What It Means in Simple Words</th>
+            <th style="background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:12px 18px;font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--p);border-bottom:2px solid var(--bd);text-align:left;white-space:nowrap;width:18%;">Key Point</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);"><td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--p);">CC Revenue / Constant Currency</strong></td><td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Revenue growth calculated using the same exchange rates as the prior period — removing currency fluctuation from the comparison. CC growth shows the actual operational growth of the business. Always use CC growth to compare IT companies — raw INR revenue growth includes currency movements that are not operational. Infosys CC growth of 4.2% vs INR growth of 3.9% indicates a slightly positive currency tailwind in that period.</td><td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(109,40,217,.1);color:var(--p);">Real growth metric</span></td></tr>
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);background:rgba(109,40,217,.015);"><td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--p);">LTM Attrition</strong></td><td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Last Twelve Months attrition — the percentage of employees who voluntarily resigned in the past 12 months. LTM normalises for seasonal quarterly variations. IT companies disclose "annualised quarterly attrition" and "LTM attrition" — always use LTM for trend analysis. Pre-COVID benchmark: 12–15% LTM. Post-COVID peak: 25–30%. Current normalised: 12–16%.</td><td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(220,38,38,.1);color:var(--red);">Below 15% = healthy</span></td></tr>
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);"><td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--gbr);">Deal TCV</strong></td><td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Total Contract Value — the total value of all contracts signed during the quarter, including new wins and renewals. TCV is the most important forward-looking metric for IT revenue. A $1B TCV in a quarter, with average contract duration of 3 years, implies approximately $333M of new annual revenue being added to the backlog. TCV above 4× quarterly revenue = healthy bookings pace.</td><td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(22,163,74,.1);color:var(--gbr);">Revenue leading indicator</span></td></tr>
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);background:rgba(22,163,74,.02);"><td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--gbr);">Large Deal</strong></td><td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">An individual contract above $50M or $100M in TCV (threshold varies by company). Large deals typically involve multi-year outsourcing engagements (5–7 years), multiple service lines, and often represent a competitive displacement of an existing vendor. Large deal wins signal competitive strength — clients don't give $100M engagements to vendors they don't deeply trust. Large deal mix above 40% of total TCV = quality deal pipeline.</td><td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(22,163,74,.1);color:var(--gbr);">Competitive win signal</span></td></tr>
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);"><td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--p);">Utilisation Rate</strong></td><td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">The percentage of total headcount working on billable client projects. Employees not on projects are "on the bench" — they generate costs but no revenue. Optimal range: 82–86%. Below 75% = over-hiring relative to project demand (margin compressor). Above 88% = delivery risk and attrition driver (overworked employees leave). Utilisation × headcount × billing rate = revenue per quarter.</td><td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(109,40,217,.1);color:var(--p);">Efficiency × Revenue</span></td></tr>
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);background:rgba(217,119,6,.02);"><td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--ambr);">Realisation / Billing Rate</strong></td><td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">The average hourly or daily rate billed to clients. Rising realisation = pricing power (clients paying more per hour without volume growth). Realisation improvement comes from: mix shift to higher-value services (cloud, AI, consulting vs legacy maintenance), passing wage inflation to clients, or winning more senior-level engagements. Revenue per employee is the proxy metric available on Screener — divide revenue by headcount quarterly and track the trend.</td><td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(217,119,6,.12);color:var(--ambr);">Pricing power signal</span></td></tr>
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);"><td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--p);">EBIT Margin (IT)</strong></td><td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Earnings Before Interest and Tax as % of Revenue. The primary IT profitability metric — reflects the combined effect of attrition, utilisation, pricing power, currency, and operating leverage. Tier-1 IT (TCS, Infosys): 20–26% EBIT target band. Mid-tier IT: 14–18%. Below 12% = structural concern. EBIT margin expanding over 3 years = genuine operating leverage; declining = cost pressure without pricing offsets.</td><td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(109,40,217,.1);color:var(--p);">Core profitability</span></td></tr>
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);background:rgba(109,40,217,.015);"><td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--ambr);">Hedge Ratio / Forward Cover</strong></td><td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">The percentage of upcoming foreign currency revenue that is locked in using forward contracts at a predetermined rate. A 70% hedge ratio means 70% of the next 12 months' USD revenue is contracted at a fixed INR rate — insulating those revenues from spot rate movements. Find in Annual Report: Notes to Accounts → Derivative Financial Instruments. Target: 60–80%. Below 30% = speculative currency exposure.</td><td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(217,119,6,.12);color:var(--ambr);">Margin shield</span></td></tr>
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);"><td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--gbr);">ISV — Independent Software Vendor</strong></td><td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">A company that develops software products sold to end customers — like Salesforce, SAP, TIBCO, Microsoft. IT companies like Persistent build products for ISVs — building new features, migrating platforms, building mobile apps. ISV product engineering has higher billing rates than generic IT services because of required specialisation, and generates high switching costs because the vendor's engineers know the client's codebase intimately.</td><td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(22,163,74,.1);color:var(--gbr);">High billing rate niche</span></td></tr>
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);background:rgba(109,40,217,.015);"><td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--p);">ER&amp;D — Engineering R&amp;D Services</strong></td><td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Engineering services helping product companies (automotive, semiconductor, aerospace, medical devices) develop next-generation hardware and software products. ER&amp;D billing rates are 40–80% higher than traditional IT services because they require specialised domain knowledge (VLSI design, embedded systems, AUTOSAR for automotive). HCL Tech, KPIT Technologies, and Tata Elxsi are India's leading ER&amp;D pure-plays.</td><td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(109,40,217,.1);color:var(--p);">Highest billing rates</span></td></tr>
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);"><td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--red);">Revenue Concentration Risk</strong></td><td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">The risk from having a large % of revenue from a single client, geography, or vertical. IT companies disclose top-5 and top-10 client revenue concentration in annual reports. Above 20% from one client = yellow flag. Above 30% = red flag. Above 40% from one channel (like Mphasis-DXC) = structural risk. Always check vertical concentration too — Tech Mahindra's 35%+ telecom concentration was the root cause of its FY24 collapse.</td><td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(220,38,38,.1);color:var(--red);">Critical risk check</span></td></tr>
+          <tr style="border-bottom:1px solid rgba(109,40,217,.06);background:rgba(22,163,74,.02);"><td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--gbr);">T&amp;M vs Fixed-Price Contracts</strong></td><td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">Time-and-Material (T&amp;M) contracts bill the client for actual hours worked at an agreed rate — the IT company bears no cost overrun risk. Fixed-price contracts have a predetermined total price regardless of hours taken — the IT company absorbs cost overruns. Fixed-price contracts can be very profitable (if delivered efficiently) or deeply loss-making (if requirements expand or attrition drives up costs). High fixed-price mix + high attrition = margin collapse risk (Tech Mahindra FY24 case).</td><td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(22,163,74,.1);color:var(--gbr);">Risk structure metric</span></td></tr>
+          <tr><td style="padding:13px 18px;vertical-align:top;"><strong style="color:var(--sky);">Digital Revenue %</strong></td><td style="padding:13px 18px;color:var(--ts);line-height:1.65;vertical-align:top;">The percentage of revenue from cloud, AI, automation, analytics, and digital transformation services — as opposed to legacy application maintenance and infrastructure management. Digital services command 30–60% higher billing rates than legacy work. Rising digital % = realisation improvement + margin expansion potential. Infosys, TCS, and Wipro all disclose "digital revenue" as a standalone metric in quarterly earnings. Target: 50%+ of revenue from digital = premium billing rate portfolio.</td><td style="padding:13px 18px;vertical-align:top;"><span style="display:inline-flex;padding:4px 11px;border-radius:7px;font-size:10px;font-weight:800;background:rgba(2,132,199,.1);color:var(--sky);">Realisation driver</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="padding:14px 18px;background:var(--sf);border-radius:12px;border:1px solid var(--bd);font-size:11.5px;color:var(--tl);line-height:1.6;margin-bottom:40px;" class="rv d4">
+      <strong style="color:var(--p);">Where to find these metrics:</strong> CC growth, LTM attrition, large deal TCV → Quarterly earnings press release (BSE corporate filings → Results → Presentation). EBIT Margin → Screener.in → Ratios tab. Hedge ratio → Annual report → Notes to Accounts → Derivative Instruments. Client concentration → Annual report → Revenue Concentration note. Digital revenue % → Earnings call transcript (search "digital" in the Q&amp;A). Utilisation rate → Earnings call or supplementary data sheet (published alongside quarterly results on company website).
+    </div>
+
+    <div class="caveat-box rv d7">
+      <div class="caveat-icon">⚡</div>
+      <div class="caveat-body">
+        <div class="caveat-label">The One-Line IT Analysis Rule</div>
+        <div class="caveat-title">Revenue = Headcount × Utilisation × Billing Rate. Attrition Predicts Margin. TCV Predicts Revenue. Hedge Ratio Predicts Margin Volatility. Four Levers, Eight Minutes, Free Data.</div>
+        <div class="caveat-desc">IT analysis is simpler than it appears. Ignore the technology jargon, the service line names, and the marketing buzzwords. Ask four questions every quarter: (1) Is attrition rising or falling — and what does that say about margins 2 quarters from now? (2) Is large deal TCV growing — and what does that say about revenue 4–6 quarters from now? (3) Is EBIT margin expanding or contracting — and is it driven by operations or currency? (4) What is the hedge ratio — is this year's margin protected from currency volatility?<br><br>These four questions, answered with public data from earnings calls and Screener.in, give you a more accurate picture of an IT company's near-term trajectory than most analyst research reports — because they focus on leading indicators (attrition, TCV) rather than lagging ones (quarterly revenue, annual margin).<br><br>The attrition lead-lag is the most actionable: when LTM attrition rises from 14% to 22% in two quarters, model 200bps margin compression in the next two quarters. When it falls from 22% to 14%, model 200bps margin expansion. This single signal, tracked consistently, would have told you to reduce IT exposure in Q2 FY22 and rebuild it in Q2 FY24 — capturing the full cycle.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ NEXT CHAPTER ══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue your learning journey →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">For educational purposes only. Figures cited for TCS, Infosys, Persistent, HCL Tech, Coforge, Wipro, Tech Mahindra, Mphasis are illustrative approximations based on publicly available data — always verify from official quarterly results, BSE/NSE filings, and annual reports. IT sector analysis involves judgment about deal quality, attrition trajectory, and currency assumptions. All equity investments carry market risk. Past financial performance does not guarantee future results. Consult a SEBI-registered investment advisor before making investment decisions.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+    },{threshold:.04,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  } else{els.forEach(function(el){el.classList.add('on');});}
+})();
+document.addEventListener('touchstart',function(){},{passive:true});
+document.addEventListener('touchmove',function(){},{passive:true});
+document.addEventListener('touchend',function(){},{passive:true});
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('on');});
+}
+document.body.style.overscrollBehavior='none';
+if(document.fonts&&document.fonts.ready){
+  document.fonts.ready.then(function(){
+    document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});
+  });
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('a,button,.dmbtn,.nxt-btn,.metric-card,.ex-block').forEach(function(el){
+    el.style.touchAction='manipulation';
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DDM · FA">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>DDM – Gordon Growth Model · Fundamental Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;--gring:#bbf7d0;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shg:0 4px 22px rgba(22,163,74,.11);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes coinDrop{0%{opacity:0;transform:translateY(-20px)}60%{opacity:1;transform:translateY(4px)}100%{transform:translateY(0)}}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(32px,8vw,92px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:12px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(15px,3.5vw,42px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:860px;}
+.hsi{padding:clamp(12px,2vw,22px) clamp(10px,2.5vw,24px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:88px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(11px,1.8vw,19px);font-weight:900;letter-spacing:-.5px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(8px,1vw,10px);font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+
+/* ── KLO ── */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.09);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.klo-hi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;}
+.klo-hi{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--shc);}
+.klo-hi-ico{font-size:22px;margin-bottom:6px;}
+.klo-hi-val{font-size:clamp(13px,2vw,18px);font-weight:900;letter-spacing:-.3px;}
+.klo-hi-val.purple{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.green{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.amber{color:var(--amb);}
+.klo-hi-lbl{font-size:10px;color:var(--tl);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:3px;}
+
+/* ── FORMULA CARD ── */
+.formula-card{background:linear-gradient(135deg,var(--pl) 0%,var(--p) 55%,var(--ph) 100%);border-radius:20px;padding:clamp(20px,3.5vw,36px);color:#fff;position:relative;overflow:hidden;text-align:center;}
+.formula-card::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+.formula-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:6px;}
+.formula-sub{font-size:11px;color:rgba(255,255,255,.5);margin-bottom:16px;}
+.formula-big{font-size:clamp(16px,3vw,28px);font-weight:900;color:#fff;margin-bottom:14px;line-height:1.3;}
+.formula-big .frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 6px;}
+.formula-big .frac-num{border-bottom:2px solid rgba(255,255,255,.6);padding-bottom:3px;min-width:40px;text-align:center;}
+.formula-big .frac-den{padding-top:3px;min-width:40px;text-align:center;}
+.formula-big .sub1{font-size:.55em;vertical-align:sub;}
+.formula-note{background:rgba(255,255,255,.1);border-radius:12px;padding:12px 16px;text-align:left;margin-top:14px;}
+.fn-row{display:flex;gap:8px;font-size:11.5px;padding:3px 0;align-items:center;}
+.fn-sym{font-weight:900;color:#4ade80;min-width:28px;font-size:13px;}
+.fn-txt{color:rgba(255,255,255,.82);}
+
+/* ── CONCEPT GRID ── */
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:start;}
+.step-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:16px;padding:18px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:var(--shc);transition:border-color .25s,box-shadow .25s;}
+.step-card:hover{border-color:rgba(109,40,217,.3);box-shadow:var(--shp);}
+.step-num{width:36px;height:36px;min-width:36px;border-radius:10px;background:linear-gradient(135deg,var(--p),var(--ph));color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-body h4{font-size:14px;font-weight:800;color:var(--tx);margin-bottom:4px;}
+.step-body p{font-size:12.5px;color:var(--ts);line-height:1.58;}
+
+/* ── INFOGRAPHIC ── */
+.infographic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.infographic-svg{width:100%;max-width:430px;animation:floatB 4.5s ease-in-out infinite;}
+.infographic-cap{font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;}
+
+/* ── WORKED EXAMPLE BOX ── */
+.worked-box{background:var(--pxs);border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,28px);}
+.wb-title{font-size:13px;font-weight:800;color:var(--tx);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.wb-rows{display:flex;flex-direction:column;gap:8px;}
+.wb-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 14px;background:var(--wh);border-radius:10px;border:1px solid var(--bd);}
+.wb-label{font-size:12px;font-weight:700;color:var(--ts);}
+.wb-val{font-size:clamp(13px,2vw,16px);font-weight:900;}
+.wb-val.p{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.wb-val.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.wb-val.a{color:var(--amb);}
+.wb-sep{height:1px;background:var(--bd);}
+.wb-result{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:linear-gradient(135deg,var(--p),var(--ph));border-radius:12px;gap:8px;}
+.wb-result-lbl{font-size:12px;font-weight:800;color:rgba(255,255,255,.8);}
+.wb-result-val{font-size:clamp(20px,3.5vw,28px);font-weight:900;color:#4ade80;letter-spacing:-1px;}
+
+/* ── SENSITIVITY BAR CHART ── */
+.sens-chart{background:var(--pxs);border:1.5px solid var(--bd);border-radius:18px;padding:clamp(16px,3vw,26px);}
+.sens-title{font-size:13px;font-weight:800;color:var(--tx);margin-bottom:16px;}
+.sens-rows{display:flex;flex-direction:column;gap:10px;}
+.sens-row{display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:10px;}
+.sens-lbl{font-size:12px;font-weight:700;color:var(--ts);}
+.sens-track{height:28px;background:rgba(109,40,217,.08);border-radius:8px;overflow:hidden;position:relative;}
+.sens-fill{height:100%;border-radius:8px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:800;color:#fff;white-space:nowrap;transition:width 1.2s ease;}
+.sf-low{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.sf-mid{background:linear-gradient(90deg,var(--p),var(--ph));}
+.sf-high{background:linear-gradient(90deg,var(--gbr),var(--gh));}
+.sens-val{font-size:12px;font-weight:800;color:var(--ts);text-align:right;white-space:nowrap;}
+
+/* ── GOOD / POOR GRID ── */
+.gp-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3.5vw,40px);}
+.gp-box{border-radius:18px;padding:clamp(18px,3vw,28px);}
+.gp-good{background:linear-gradient(135deg,var(--gpale),#ecfdf5);border:1.5px solid rgba(22,163,74,.25);}
+.gp-poor{background:linear-gradient(135deg,var(--apale),#fffdf5);border:1.5px solid rgba(217,119,6,.22);}
+.gp-title{font-size:clamp(15px,2vw,19px);font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.gp-title.g{color:var(--gbr);}
+.gp-title.a{color:var(--ambr);}
+.gp-items{display:flex;flex-direction:column;gap:9px;}
+.gp-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.75);border-radius:12px;padding:11px 13px;}
+.gp-dot{width:26px;height:26px;min-width:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.gp-dot.g{background:rgba(22,163,74,.14);}
+.gp-dot.a{background:rgba(217,119,6,.14);}
+.gp-text h4{font-size:12.5px;font-weight:800;color:var(--tx);margin-bottom:2px;}
+.gp-text p{font-size:11.5px;color:var(--ts);line-height:1.5;}
+
+/* ── BENCH LIST ── */
+.bench-list{display:flex;flex-direction:column;gap:10px;}
+.bl-row{display:flex;align-items:center;gap:14px;background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:14px 18px;box-shadow:var(--shc);transition:border-color .25s,box-shadow .25s;}
+.bl-row:hover{border-color:rgba(109,40,217,.28);box-shadow:var(--shp);}
+.bl-ico{font-size:20px;flex-shrink:0;}
+.bl-head{font-size:clamp(12px,1.5vw,15px);font-weight:800;color:var(--tx);margin-bottom:3px;}
+.bl-body{flex:1;min-width:0;}
+.bl-body p{font-size:12px;color:var(--ts);line-height:1.55;}
+
+/* ── SUSTAINABILITY BOX ── */
+.sustain-box{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,28px);}
+.sb-title{font-size:clamp(16px,2.2vw,20px);font-weight:900;color:var(--tx);margin-bottom:8px;}
+.sb-formula{font-size:clamp(20px,3.5vw,30px);font-weight:900;background:linear-gradient(135deg,var(--p),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:12px 0;}
+.sb-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.sb-worked{margin-top:14px;background:var(--wh);border:1px solid var(--bd);border-radius:12px;padding:12px 16px;}
+.sb-wr{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;color:var(--ts);}
+.sb-wr span:last-child{font-weight:800;color:var(--p);}
+.sb-total{display:flex;justify-content:space-between;font-size:13px;font-weight:900;padding:8px 0 0;border-top:1px solid var(--bd);margin-top:5px;color:var(--tx);}
+.sb-total span:last-child{color:var(--g);}
+
+/* ── SECTOR TABLE ── */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:18px;}
+.cmp-table{width:100%;min-width:440px;border-collapse:separate;border-spacing:0;border-radius:18px;overflow:hidden;box-shadow:var(--shc);border:1.5px solid var(--bd);}
+.cmp-table th{background:linear-gradient(135deg,var(--pl),var(--p));color:#fff;padding:clamp(10px,2vw,16px) clamp(10px,2vw,18px);font-size:clamp(9px,1.1vw,12px);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:left;}
+.cmp-table td{padding:clamp(11px,2vw,16px) clamp(10px,2vw,18px);font-size:clamp(11px,1.4vw,14px);color:var(--ts);border-bottom:1px solid var(--bd);font-weight:500;vertical-align:middle;}
+.cmp-table tr:last-child td{border-bottom:none;}
+.cmp-table tr:nth-child(even) td{background:rgba(109,40,217,.025);}
+.cmp-table tr:hover td{background:var(--pxs);}
+.cmp-co{font-weight:800;color:var(--tx);}
+.ddm-pill{display:inline-flex;align-items:center;padding:4px 12px;border-radius:100px;font-size:11px;font-weight:800;}
+.dp-g{background:rgba(22,163,74,.12);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.dp-p{background:rgba(109,40,217,.12);color:var(--p);border:1px solid rgba(109,40,217,.2);}
+.dp-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.dp-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+
+/* ── EXAMPLE CARDS ── */
+.ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.5vw,24px);}
+.ex-card{border-radius:20px;border:1.5px solid var(--bd);background:var(--wh);padding:clamp(16px,3vw,26px);box-shadow:var(--shc);transition:border-color .25s,box-shadow .25s,transform .25s;position:relative;overflow:hidden;}
+.ex-card:hover{border-color:rgba(109,40,217,.3);box-shadow:var(--shp);transform:translateY(-3px);}
+.ex-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.ex-under::before{background:linear-gradient(90deg,var(--g),var(--gh));}
+.ex-fair::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.ex-over::before{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.ex-poor::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.ex-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:8px;}
+.ex-company{display:flex;align-items:center;gap:11px;}
+.ex-logo{width:46px;height:46px;min-width:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.ex-name h3{font-size:clamp(13px,1.7vw,16px);font-weight:900;color:var(--tx);line-height:1.1;}
+.ex-name span{font-size:11px;color:var(--tl);font-weight:500;}
+.ex-iv-badge{text-align:right;flex-shrink:0;}
+.ex-iv-num{font-size:clamp(18px,3vw,30px);font-weight:900;letter-spacing:-1px;line-height:1;}
+.iv-green{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.iv-purple{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.iv-amber{color:var(--amb);}
+.iv-red{color:var(--red);}
+.ex-iv-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tl);margin-top:1px;}
+.ex-mini-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;}
+.ex-mini{background:var(--pxs);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700;color:var(--ts);}
+.ex-mini span{color:var(--p);font-weight:900;}
+.ex-compare{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap;}
+.ex-cmp{flex:1;min-width:80px;border-radius:10px;padding:8px 10px;text-align:center;}
+.ec-market{background:rgba(109,40,217,.08);border:1px solid rgba(109,40,217,.15);}
+.ec-intrinsic{background:rgba(22,163,74,.08);border:1px solid rgba(22,163,74,.15);}
+.ec-label{font-size:9px;font-weight:700;color:var(--tl);text-transform:uppercase;letter-spacing:.7px;}
+.ec-val{font-size:clamp(13px,2vw,18px);font-weight:900;margin-top:2px;}
+.ec-val.p{color:var(--p);}
+.ec-val.g{color:var(--gbr);}
+.ex-verdict{padding:6px 12px;border-radius:8px;font-size:11px;font-weight:800;text-align:center;margin-top:4px;}
+.ev-under{background:rgba(22,163,74,.12);color:var(--gbr);}
+.ev-fair{background:rgba(109,40,217,.1);color:var(--p);}
+.ev-over{background:rgba(217,119,6,.1);color:var(--ambr);}
+.ev-na{background:rgba(220,38,38,.08);color:var(--red);}
+.ex-desc{font-size:12.5px;color:var(--ts);line-height:1.6;margin-top:10px;border-top:1px solid var(--bd);padding-top:10px;}
+.ex-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:100px;font-size:10px;font-weight:700;margin-top:8px;}
+.et-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.et-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.2);}
+.et-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.et-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.2);}
+.ex-full{grid-column:1/-1;}
+
+/* ── USE CARDS ── */
+.use-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,20px);}
+.use-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:18px;padding:clamp(16px,2.5vw,26px);box-shadow:var(--shc);transition:border-color .25s,box-shadow .25s,transform .25s;text-align:center;}
+.use-card:hover{border-color:rgba(109,40,217,.28);box-shadow:var(--shp);transform:translateY(-3px);}
+.uc-ico{font-size:clamp(28px,5vw,44px);margin-bottom:12px;display:block;animation:floatB 3.5s ease-in-out infinite;}
+.uc-title{font-size:clamp(13px,1.7vw,16px);font-weight:800;color:var(--tx);margin-bottom:7px;}
+.uc-desc{font-size:12.5px;color:var(--ts);line-height:1.6;}
+
+/* ── CAVEAT ── */
+.caveat-box{margin-top:32px;background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:16px;}
+.caveat-icon{width:44px;height:44px;min-width:44px;border-radius:13px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(109,40,217,.28);}
+.caveat-body{flex:1;min-width:0;}
+.caveat-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.caveat-title{font-size:clamp(13px,1.5vw,15px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.caveat-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+
+/* ── DEMAT BANNER ── */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* ── NEXT CHAPTER ── */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-banner::after{content:'';position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 10px 36px rgba(34,197,94,.55);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;display:inline-block;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+
+/* ═══ RESPONSIVE — 11 breakpoints ═══ */
+img,svg{max-width:100%;height:auto;display:block;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:18px;}
+.table-scroll .cmp-table{min-width:440px;}
+
+@media(min-width:1280px){.w{padding:80px 72px;}}
+
+@media(max-width:1100px){
+  .use-cards{grid-template-columns:1fr 1fr;}
+}
+
+@media(max-width:900px){
+  .concept-grid{grid-template-columns:1fr;}
+  .gp-grid{grid-template-columns:1fr;}
+  .ex-grid{grid-template-columns:1fr;}
+  .ex-full{grid-column:auto;}
+  .infographic-svg{max-width:380px;margin:0 auto;}
+  .klo-hi-row{grid-template-columns:repeat(3,1fr);}
+  .use-cards{grid-template-columns:1fr 1fr;}
+  .sens-row{grid-template-columns:72px 1fr auto;}
+}
+
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .hst{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .klo-hi-row{grid-template-columns:1fr 1fr;}
+  .caveat-box{flex-direction:column;gap:12px;}
+  .caveat-icon{width:40px;height:40px;min-width:40px;font-size:20px;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;}
+  .dmfeats{gap:10px 20px;}
+  svg{overflow:visible;max-width:100%;}
+}
+
+@media(max-width:640px){
+  .use-cards{grid-template-columns:1fr;}
+  .klo-hi-row{grid-template-columns:1fr;}
+  .formula-big{font-size:clamp(14px,4vw,20px);}
+  .table-scroll .cmp-table{min-width:380px;}
+  .cmp-table th{font-size:9px;letter-spacing:.7px;padding:9px 10px;}
+  .cmp-table td{font-size:11px;padding:10px 10px;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .infographic-svg{max-width:100%;}
+  .sens-row{grid-template-columns:64px 1fr auto;gap:6px;}
+  .sens-fill{font-size:9.5px;padding:0 6px;}
+}
+
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.2px;}.hdesc{font-size:13px;}.hsub{letter-spacing:2.5px;font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .klo-title{font-size:14px;}.klo-desc{font-size:12px;}.kpill{font-size:9px;padding:4px 9px;}.klo-hi{padding:12px 10px;}
+  .h2{letter-spacing:-1px;}.lead{font-size:13.5px;}.tag{letter-spacing:2px;}
+  .step-num{width:30px;height:30px;min-width:30px;font-size:12px;}.step-body h4{font-size:13px;}.step-body p{font-size:11.5px;}.step-card{padding:13px 14px;gap:11px;}
+  .bl-row{padding:12px 13px;flex-wrap:wrap;gap:8px;}.bl-head{font-size:12px;}.bl-body p{font-size:11.5px;}
+  .ex-card{padding:13px;}.ex-name h3{font-size:13px;}.ex-iv-num{font-size:clamp(16px,6vw,24px);}
+  .ex-mini{font-size:10px;padding:4px 8px;}.ex-desc{font-size:12px;}.ex-top{gap:6px;}
+  .gp-item{padding:10px 12px;}.gp-text h4{font-size:12px;}.gp-text p{font-size:11px;}
+  .use-card{padding:16px 14px;}.uc-ico{animation:none;}
+  .caveat-title{font-size:13px;}.caveat-desc{font-size:12.5px;}.caveat-icon{width:40px;height:40px;min-width:40px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .dmh{letter-spacing:-1px;}.dmsub{font-size:13px;}.dmfeats{align-items:flex-start;}
+  .nxt-banner{padding:12px 14px;}.nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}.nxt-sub{font-size:12px;}.nxt-label{letter-spacing:2.5px;}
+  .formula-card{padding:18px 14px;}.formula-label{font-size:9px;}
+  .wb-row,.wb-result{padding:9px 12px;}.wb-result-val{font-size:clamp(17px,5vw,24px);}
+  .sustain-box{padding:14px;}.sb-formula{font-size:clamp(18px,5.5vw,26px);}
+  .sens-row{grid-template-columns:60px 1fr auto;}
+  .worked-box,.sens-chart{padding:14px;}
+}
+
+@media(max-width:360px){
+  .w{padding:26px 12px;}.hh1{font-size:clamp(26px,10vw,40px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}.hsi:nth-last-child(-n+2){border-bottom:1px solid var(--bd) !important;}.hsi:last-child{border-bottom:none !important;}
+  .use-cards{grid-template-columns:1fr;}.kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}.nxt-btn{font-size:12px;padding:10px 14px;}
+  .ex-iv-num{font-size:clamp(15px,7vw,22px);}
+}
+
+/* TOUCH */
+@media(hover:none) and (pointer:coarse){
+  .ex-card:hover,.use-card:hover,.step-card:hover,.bl-row:hover,.gp-item:hover{
+    transform:none !important;box-shadow:var(--shc) !important;border-color:var(--bd) !important;}
+  .ex-card:active{transform:scale(.98);transition:transform .08s;}
+  .use-card:active{transform:scale(.97);transition:transform .08s;}
+  .step-card:active{transform:scale(.99);transition:transform .08s;}
+  .bl-row:active{transform:scale(.99);transition:transform .08s;}
+  .dmbtn:active{transform:scale(.97);}.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn,.ex-card,.use-card,.step-card,.bl-row,.kpill{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.hsv,.ex-iv-num,.tag,.klo-label,.eyebrow{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.ex-desc,.lead,.uc-desc,.caveat-desc,.gp-text p,.bl-body p,.step-body p,.sb-desc{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+}
+
+/* iOS SAFARI */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.hsv,.hsv.g,
+  .iv-green,.iv-purple,.wb-val.p,.wb-val.g,.klo-hi-val.purple,.klo-hi-val.green,
+  .bl-range-p,.sb-formula,.h2 .hp,.h2 .hg{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn,.ex-card,.use-card,.step-card,.bl-row,.kpill{-webkit-tap-highlight-color:transparent;}
+  .table-scroll{-webkit-overflow-scrolling:touch;}
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+}
+
+/* ANDROID HIGH-DPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .ex-card,.use-card,.klobanner,.formula-card,.step-card,
+  .bl-row,.caveat-box,.worked-box,.sens-chart,.sustain-box{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .infographic-svg,.klo-icon{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}.infographic-svg,.klo-icon,.uc-ico{animation:none !important;}
+}
+
+/* PRINT */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}.rv{opacity:1;transform:none;}
+  body{color:#000;}.w{padding:20px;}.table-scroll{overflow:visible;}.cmp-table{min-width:0;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="vbadge">Fundamental Analysis · Valuation Methods</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>DDM · Gordon Growth Model · Intrinsic Valuation</div>
+  <h1 class="hh1">
+    <span class="line1">Dividend</span>
+    <span class="line2">Discount Model</span>
+    <span class="line3">What Is a Dividend Stream Worth Today?</span>
+  </h1>
+  <div class="hsub">Fundamental Analysis · Intrinsic Value · Dividend Investing · Gordon Growth</div>
+  <p class="hdesc">Every dividend a company pays is a real cash transfer to shareholders. DDM asks: if a company will pay growing dividends forever, what should you pay for it today? It's the only valuation method built entirely on money that actually lands in your bank account.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv">DDM / GGM</div><div class="hsl">The Model</div></div>
+    <div class="hsi"><div class="hsv">D₁ ÷ (r−g)</div><div class="hsl">Formula</div></div>
+    <div class="hsi"><div class="hsv g">₹176.67</div><div class="hsl">Example Value</div></div>
+    <div class="hsi"><div class="hsv">Stable Firms</div><div class="hsl">Best Use</div></div>
+    <div class="hsi"><div class="hsv g">r &gt; g Always</div><div class="hsl">Key Rule</div></div>
+  </div>
+</section>
+
+
+<!-- ══ 01 — KLO ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">A Stock Is Worth the <span class="hp">Sum of Its Future Dividends</span></h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">💰</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">The DDM (Gordon Growth Model) calculates a stock's intrinsic value by treating it as the present value of all future dividends growing at a constant rate — giving you a mathematically derived "fair price" to compare against the market price.</div>
+        <div class="klo-desc">Imagine you own a mango orchard. Every year the orchard pays you ₹1,000 in mangoes. Next year ₹1,060 (6% growth). Then ₹1,124. Then ₹1,191… forever, growing 6% each year. How much is that stream of mango payments worth to you today? If you want a 12% annual return on your investment, the Gordon Growth Model says: the orchard is worth ₹1,060 ÷ (12%−6%) = ₹17,667. That's the DDM in action. Replace "mangoes" with "dividends" and "orchard" with "company" — and you have one of the most fundamental valuation tools in finance. The key insight: a dividend-paying company is essentially a perpetuity — a machine that produces growing cash flows. DDM tells you what that machine is worth based on your return expectations and the company's growth rate.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-p">💰 Dividend-Based Valuation</span>
+          <span class="kpill kpill-g">📈 Constant Growth Assumed</span>
+          <span class="kpill kpill-a">⚖️ Intrinsic Value Focus</span>
+          <span class="kpill kpill-r">⚠️ Requires Stable Dividends</span>
+        </div>
+        <div class="klo-hi-row">
+          <div class="klo-hi"><div class="klo-hi-ico">📐</div><div class="klo-hi-val purple">D₁ ÷ (r−g)</div><div class="klo-hi-lbl">Formula</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">🎯</div><div class="klo-hi-val green">Intrinsic Value</div><div class="klo-hi-lbl">Output</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">🏛️</div><div class="klo-hi-val amber">Stable Firms</div><div class="klo-hi-lbl">Best For</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 02 — FORMULA + INFOGRAPHIC ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — The Gordon Growth Formula</div>
+    <h2 class="h2 rv d2">Breaking Down <span class="hp">D₁ ÷ (r − g)</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">The Gordon Growth Model has just three inputs — but each one requires careful estimation. Small errors in any input, especially the growth rate g, can dramatically shift the intrinsic value. Understanding what each symbol means is the foundation of using DDM correctly.</p>
+
+    <div class="concept-grid">
+      <!-- SVG Infographic -->
+      <div class="rv d3">
+        <div class="infographic-wrap">
+          <!-- viewBox 0 0 420 460, all coords verified ≤420 x ≤460 -->
+          <svg class="infographic-svg" viewBox="0 0 420 580" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="420" height="580" rx="20" fill="#f5f3ff"/>
+
+            <!-- ── TITLE BAR ── -->
+            <rect x="14" y="10" width="392" height="36" rx="11" fill="#6d28d9"/>
+            <text x="210" y="33" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="white">DDM: Intrinsic Value = D₁ ÷ (r − g)</text>
+
+            <!-- ══ LEFT COLUMN: Tree + Dividend Coins ══ (x: 14–182) -->
+            <!-- Tree trunk -->
+            <rect x="89" y="198" width="16" height="54" rx="4" fill="#92400e"/>
+            <!-- Foliage circles -->
+            <circle cx="97" cy="175" r="38" fill="#16a34a" opacity=".72"/>
+            <circle cx="74" cy="192" r="24" fill="#16a34a" opacity=".62"/>
+            <circle cx="122" cy="188" r="26" fill="#16a34a" opacity=".65"/>
+            <!-- Mangoes -->
+            <circle cx="80"  cy="166" r="7" fill="#f59e0b"/>
+            <circle cx="100" cy="153" r="7" fill="#f59e0b"/>
+            <circle cx="116" cy="170" r="6" fill="#f59e0b"/>
+            <circle cx="86"  cy="183" r="5" fill="#d97706"/>
+            <!-- Ground strip -->
+            <rect x="30" y="250" width="136" height="9" rx="5" fill="#bbf7d0"/>
+            <!-- Company label -->
+            <rect x="14" y="268" width="168" height="38" rx="10" fill="#6d28d9"/>
+            <text x="98" y="284" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="white">🏭 Dividend-Paying</text>
+            <text x="98" y="298" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,.78)">Stable Company</text>
+
+            <!-- Dashed arrow down from company label -->
+            <path d="M98 308 L98 316" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3,2"/>
+
+            <!-- Dividend coins stacked vertically -->
+            <circle cx="98" cy="330" r="13" fill="#f59e0b"/>
+            <text x="98" y="334" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="#052e16">₹D₁</text>
+
+            <circle cx="98" cy="364" r="12" fill="#d97706"/>
+            <text x="98" y="368" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="white">₹D₂</text>
+
+            <circle cx="98" cy="396" r="11" fill="#b45309"/>
+            <text x="98" y="400" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="900" fill="white">₹D₃</text>
+
+            <text x="98" y="426" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="18" font-weight="900" fill="#6e6994">∞</text>
+            <text x="98" y="442" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6e6994">forever…</text>
+
+            <!-- Vertical divider -->
+            <line x1="198" y1="60" x2="198" y2="455" stroke="#e5e1fb" stroke-width="1" stroke-dasharray="4,3"/>
+
+            <!-- ══ RIGHT COLUMN: Analyst + Formula + Inputs ══ (x: 210–406) -->
+
+            <!-- Thought bubble (formula box) — top right -->
+            <rect x="212" y="60" width="194" height="74" rx="14" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+            <text x="309" y="82" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="#4c1d95">Intrinsic Value =</text>
+            <text x="309" y="103" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="17" font-weight="900" fill="#6d28d9">D₁ ÷ (r − g)</text>
+            <text x="309" y="122" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6e6994">Present value of all future dividends</text>
+            <!-- Bubble tail dots -->
+            <circle cx="224" cy="138" r="5" fill="#e5e1fb"/>
+            <circle cx="218" cy="149" r="3" fill="#e5e1fb"/>
+
+            <!-- Analyst character (centred in right col, below bubble) -->
+            <!-- Head -->
+            <circle cx="309" cy="175" r="24" fill="#ddd6fe"/>
+            <circle cx="301" cy="171" r="2.5" fill="#4c1d95"/>
+            <circle cx="317" cy="171" r="2.5" fill="#4c1d95"/>
+            <path d="M302 183 Q309 190 316 183" stroke="#4c1d95" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <!-- Body -->
+            <rect x="295" y="199" width="28" height="30" rx="7" fill="#6d28d9"/>
+            <!-- Arms -->
+            <rect x="274" y="206" width="22" height="7" rx="4" fill="#6d28d9" transform="rotate(-18 285 209)"/>
+            <rect x="325" y="206" width="22" height="7" rx="4" fill="#6d28d9" transform="rotate(18 336 209)"/>
+            <!-- Legs -->
+            <rect x="290" y="228" width="18" height="30" rx="4" fill="#4c1d95"/>
+            <rect x="313" y="228" width="18" height="30" rx="4" fill="#4c1d95"/>
+            <!-- Analyst label -->
+            <rect x="274" y="262" width="70" height="16" rx="6" fill="#ede9fe"/>
+            <text x="309" y="274" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">FA Analyst 🔍</text>
+
+            <!-- ── INPUT BOXES: D1, r, g ── -->
+            <!-- D1 box -->
+            <rect x="212" y="296" width="194" height="54" rx="11" fill="#6d28d9"/>
+            <text x="309" y="317" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="rgba(255,255,255,.9)">D₁ = Next Dividend</text>
+            <text x="309" y="338" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="900" fill="#4ade80">= D₀ × (1 + g)</text>
+
+            <!-- r box -->
+            <rect x="212" y="362" width="90" height="46" rx="9" fill="#dc2626" opacity=".88"/>
+            <text x="257" y="380" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="white">r = Required</text>
+            <text x="257" y="397" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,.85)">Return</text>
+
+            <!-- g box -->
+            <rect x="316" y="362" width="90" height="46" rx="9" fill="#16a34a" opacity=".9"/>
+            <text x="361" y="380" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="white">g = Growth</text>
+            <text x="361" y="397" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,.85)">Rate</text>
+
+            <!-- r > g warning badge -->
+            <rect x="242" y="420" width="134" height="36" rx="18" fill="#fef2f2" stroke="#fecaca" stroke-width="1.5"/>
+            <text x="309" y="434" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#dc2626">⚠️ r must be &gt; g</text>
+            <text x="309" y="449" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#dc2626">otherwise formula is undefined!</text>
+
+            <!-- ── BOTTOM RESULT BAR ── (full width) -->
+            <rect x="14" y="473" width="392" height="36" rx="12" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+            <text x="210" y="487" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#4c1d95">Example: D₁=₹10.6 | r=12% | g=6%</text>
+            <rect x="100" y="492" width="220" height="12" rx="6" fill="#ede9fe"/>
+            <text x="210" y="502" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="#6d28d9">Intrinsic Value = ₹10.6 ÷ 0.06 = ₹176.67 ✅</text>
+
+            <!-- ── HORIZONTAL FLOW ARROW ── -->
+            <path d="M186 355 Q198 355 212 355" stroke="#6d28d9" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowDDM)"/>
+            <defs>
+              <marker id="arrowDDM" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <polygon points="0 0,8 3,0 6" fill="#6d28d9"/>
+              </marker>
+            </defs>
+            <text x="192" y="350" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6d28d9">value</text>
+
+            <!-- Horizontal bottom label strip -->
+            <rect x="14" y="523" width="186" height="44" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
+            <text x="107" y="540" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="#15803d">✅ Best Candidates</text>
+            <text x="107" y="557" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#15803d">Utilities · FMCG · Blue-chips</text>
+
+            <rect x="220" y="523" width="186" height="44" rx="10" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.2"/>
+            <text x="313" y="540" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="#c2410c">⚠️ Poor Candidates</text>
+            <text x="313" y="557" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#c2410c">Startups · Loss-making · Cyclicals</text>
+          </svg>
+          <p class="infographic-cap">The company (mango orchard) pays D₁ next year, then D₂, D₃… forever. The investor uses D₁ ÷ (r−g) to find the present value of this infinite stream. r must always exceed g.</p>
+        </div>
+      </div>
+
+      <!-- Right: Formula + worked example -->
+      <div class="rv d4">
+        <div class="formula-card" style="margin-bottom:22px;">
+          <div class="formula-label">Gordon Growth Model — GGM</div>
+          <div class="formula-big">
+            V = <span class="frac"><span class="frac-num">D<span class="sub1">1</span></span><span class="frac-den">r − g</span></span>
+          </div>
+          <div class="formula-note">
+            <div class="fn-row"><div class="fn-sym">D₁</div><div class="fn-txt">Expected dividend next year = D₀ × (1 + g)</div></div>
+            <div class="fn-row"><div class="fn-sym">r</div><div class="fn-txt">Required rate of return (your expected return)</div></div>
+            <div class="fn-row"><div class="fn-sym">g</div><div class="fn-txt">Constant perpetual dividend growth rate</div></div>
+            <div class="fn-row"><div class="fn-sym">!</div><div class="fn-txt" style="color:#f87171;">r must be greater than g — always</div></div>
+          </div>
+        </div>
+
+        <div class="worked-box" style="margin-bottom:18px;">
+          <div class="wb-title">📊 Step-by-Step Worked Example</div>
+          <div class="wb-rows">
+            <div class="wb-row"><div class="wb-label">Current Dividend (D₀)</div><div class="wb-val p">₹10</div></div>
+            <div class="wb-row"><div class="wb-label">Growth Rate (g)</div><div class="wb-val g">6%</div></div>
+            <div class="wb-row"><div class="wb-label">Required Return (r)</div><div class="wb-val a">12%</div></div>
+            <div class="wb-sep"></div>
+            <div class="wb-row"><div class="wb-label">D₁ = ₹10 × 1.06</div><div class="wb-val p">₹10.60</div></div>
+            <div class="wb-row"><div class="wb-label">r − g = 12% − 6%</div><div class="wb-val a">6% = 0.06</div></div>
+            <div class="wb-sep"></div>
+            <div class="wb-result">
+              <div class="wb-result-lbl">Intrinsic Value = ₹10.60 ÷ 0.06</div>
+              <div class="wb-result-val">₹176.67</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:11px;">
+          <div class="step-card">
+            <div class="step-num">D₁</div>
+            <div class="step-body">
+              <h4>Expected Next-Year Dividend — The Numerator</h4>
+              <p>D₁ = D₀ × (1 + g). If a company paid ₹10 this year (D₀) and grows dividends at 6% annually, D₁ = ₹10.60. This is the first of an infinite stream of growing dividends. The whole valuation rests on the assumption that this growth continues forever at a constant rate — which is only realistic for truly stable, mature businesses.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--red),#f87171);font-size:12px;">r−g</div>
+            <div class="step-body">
+              <h4>The Denominator — Why (r − g) Is So Sensitive</h4>
+              <p>The denominator r − g is the most critical part of the formula. A tiny change here causes enormous swings in value. If r = 12% and g = 6%, the denominator is 6% = 0.06. If g rises to 8%, denominator falls to 4% = 0.04 and the value jumps from ₹177 to ₹265 — a 50% increase from a 2% change in g. This sensitivity is why careful, conservative growth estimation is essential.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 03 — SENSITIVITY + GROWTH ESTIMATION ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — Sensitivity & Growth Estimation</div>
+    <h2 class="h2 rv d2">Why Small Changes in <span class="hp">Growth Rate</span> Change Everything</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">The DDM's greatest strength is also its greatest vulnerability. Because growth rate g is in the denominator as (r−g), even a 1–2% shift in g dramatically changes the output. This is why disciplined, conservative growth estimation is the most important skill in DDM analysis.</p>
+
+    <div class="concept-grid">
+      <div class="rv d3">
+        <div class="sens-chart">
+          <div class="sens-title">📊 Sensitivity to Growth Rate (Same Stock: D₁=₹10.6, r=12%)</div>
+          <div class="sens-rows">
+            <div class="sens-row">
+              <div class="sens-lbl">g = 4%</div>
+              <div class="sens-track"><div class="sens-fill sf-low" style="width:33%;">₹132</div></div>
+              <div class="sens-val">₹132</div>
+            </div>
+            <div class="sens-row">
+              <div class="sens-lbl">g = 5%</div>
+              <div class="sens-track"><div class="sens-fill sf-low" style="width:44%;">₹151</div></div>
+              <div class="sens-val">₹151</div>
+            </div>
+            <div class="sens-row">
+              <div class="sens-lbl">g = 6%</div>
+              <div class="sens-track"><div class="sens-fill sf-mid" style="width:56%;">₹177</div></div>
+              <div class="sens-val">₹177</div>
+            </div>
+            <div class="sens-row">
+              <div class="sens-lbl">g = 7%</div>
+              <div class="sens-track"><div class="sens-fill sf-mid" style="width:72%;">₹212</div></div>
+              <div class="sens-val">₹212</div>
+            </div>
+            <div class="sens-row">
+              <div class="sens-lbl">g = 8%</div>
+              <div class="sens-track"><div class="sens-fill sf-high" style="width:88%;">₹265</div></div>
+              <div class="sens-val">₹265</div>
+            </div>
+            <div class="sens-row">
+              <div class="sens-lbl">g = 9%</div>
+              <div class="sens-track"><div class="sens-fill sf-high" style="width:96%;">₹354</div></div>
+              <div class="sens-val">₹354</div>
+            </div>
+          </div>
+          <div style="margin-top:12px;font-size:11px;color:var(--ts);background:rgba(220,38,38,.08);border-radius:8px;padding:8px 12px;border-left:3px solid var(--red);">
+            ⚠️ Growing g from 4% to 9% triples the intrinsic value — from ₹132 to ₹354. A 1% change in g changes value by 15–40%. This is why conservative g estimates protect investors from overpaying.
+          </div>
+        </div>
+      </div>
+
+      <!-- Sustainable growth estimation -->
+      <div class="rv d4">
+        <div class="sustain-box">
+          <div class="sb-title">📐 How to Estimate Sustainable Growth Rate</div>
+          <div class="sb-formula">g = ROE × Retention Ratio</div>
+          <div class="sb-desc">Rather than guessing g, finance theory gives us a formula. The sustainable growth rate is what a company can grow its dividends at indefinitely, funded by its own earnings — no additional debt or equity issuance. ROE (Return on Equity) measures how efficiently the company earns on shareholders' money. Retention Ratio (= 1 − Dividend Payout Ratio) measures how much of earnings is reinvested back into the business to fuel future growth. The product of these two tells you the maximum sustainable growth rate grounded in financial reality.</div>
+          <div class="sb-worked">
+            <div class="sb-wr"><span>ROE</span><span>18%</span></div>
+            <div class="sb-wr"><span>Dividend Payout Ratio</span><span>40%</span></div>
+            <div class="sb-wr"><span>Retention Ratio (1 − 40%)</span><span>60%</span></div>
+            <div class="sb-total">
+              <span>Sustainable g = 18% × 60%</span>
+              <span>= 10.8%</span>
+            </div>
+          </div>
+          <div style="margin-top:12px;font-size:11.5px;color:var(--ts);">⚠️ Always use a <strong>long-run sustainable g</strong>, not recent peak growth. If the last 2 years were exceptional due to a commodity boom or one-time contract, those rates won't be sustainable forever. Use 5-year average ROE and a normalised payout ratio for a more defensible estimate.</div>
+        </div>
+
+        <div class="step-card" style="margin-top:16px;">
+          <div class="step-num" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">r</div>
+          <div class="step-body">
+            <h4>How to Set the Required Return (r)</h4>
+            <p>r represents what you demand as a minimum annual return for investing in this stock instead of a risk-free alternative. Common approaches: CAPM (Risk-Free Rate + Beta × Market Risk Premium), historical equity return expectations (~12–14% for Indian equities), or cost of equity from the WACC framework. For dividend-income investors, r is often set at 10–14% depending on the risk level of the company. Higher risk company = higher r = lower DDM value.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 04 — BEST & POOR CANDIDATES ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">04 — When DDM Works (and When It Doesn't)</div>
+    <h2 class="h2 rv d2">The Right Companies for <span class="hp">DDM Valuation</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">DDM is one of the most elegant valuation models — but it has very specific requirements. Applying it to the wrong kind of company produces meaningless results. Understanding when to use it is as important as knowing how to calculate it.</p>
+
+    <div class="gp-grid">
+      <div class="rv d3">
+        <div class="gp-box gp-good">
+          <div class="gp-title g">✅ Excellent DDM Candidates</div>
+          <div class="gp-items">
+            <div class="gp-item"><div class="gp-dot g">⚡</div><div class="gp-text"><h4>Utility Companies (Power, Water, Gas)</h4><p>Regulated monopolies with captive customer bases. Revenue is predictable, earnings are stable, and dividend payout ratios are high and consistent. The dividend stream is as close to perpetuity as any real business can be. NTPC, Power Grid, GAIL — classic DDM candidates with predictable, growing dividends backed by long-term government contracts.</p></div></div>
+            <div class="gp-item"><div class="gp-dot g">🧴</div><div class="gp-text"><h4>Established FMCG Companies</h4><p>Companies like HUL, Nestlé India, and Britannia have paid and grown dividends consistently for decades. Their brand moats protect earnings from competitive disruption. Dividend growth is supported by steady revenue growth and high-quality cash conversion. DDM works well here because the "constant growth forever" assumption is the most realistic it can be.</p></div></div>
+            <div class="gp-item"><div class="gp-dot g">🏛️</div><div class="gp-text"><h4>Blue-Chip Banks with Stable Payout Policies</h4><p>Private sector banks with strong capital adequacy, consistent ROE above 15%, and transparent dividend policies are good DDM candidates. HDFC Bank has grown its dividend steadily for over 20 years. The key is stable earnings — a bank with volatile NPA cycles makes dividend forecasting unreliable. High-quality private sector banks with conservative lending culture fit well.</p></div></div>
+            <div class="gp-item"><div class="gp-dot g">💊</div><div class="gp-text"><h4>Mature Pharma / Healthcare Companies</h4><p>Established generic pharma companies with branded product portfolios and international licensing revenue have predictable cash flows. Companies like Abbott India or Pfizer India — mature, profitable, consistent dividend payers — fit the DDM framework reasonably well when their dividend payout ratios are stable over multiple years.</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv d4">
+        <div class="gp-box gp-poor">
+          <div class="gp-title a">⚠️ Poor DDM Candidates</div>
+          <div class="gp-items">
+            <div class="gp-item"><div class="gp-dot a">🚀</div><div class="gp-text"><h4>Tech Startups and New-Age Companies</h4><p>Zomato, Paytm, Nykaa pay zero dividends. Their value comes entirely from future growth and eventual profitability — not current cash distributions. Applying DDM gives a value of zero (or undefined) — which is mathematically correct but commercially useless. Use P/S or EV/Revenue instead for these companies.</p></div></div>
+            <div class="gp-item"><div class="gp-dot a">🔩</div><div class="gp-text"><h4>Cyclical Industries (Metals, Commodities)</h4><p>Steel, aluminium, and commodity companies pay large dividends at earnings peaks and cut them sharply during downturns. The "constant growth forever" assumption is violated every 3–5 years when the commodity cycle turns. Plugging peak dividends into DDM produces wildly optimistic values right before the crash.</p></div></div>
+            <div class="gp-item"><div class="gp-dot a">🌱</div><div class="gp-text"><h4>High-Reinvestment Growth Businesses</h4><p>Companies that reinvest almost all earnings for growth (like D-Mart, Page Industries in growth phases) pay negligible dividends not because they can't afford them but because they've found better uses for capital internally. DDM undervalues these companies dramatically — it would have told you D-Mart was worth almost nothing when it was actually compounding at 30%+ annually.</p></div></div>
+            <div class="gp-item"><div class="gp-dot a">📉</div><div class="gp-text"><h4>Loss-Making or Irregular Dividend Payers</h4><p>Companies with inconsistent or no dividend history — including most PSU companies that pay special dividends only when government needs fiscal revenue — cannot be reliably valued with DDM. Irregular dividends mean the growth rate assumption is meaningless. Use P/B (for PSU banks) or EV/EBITDA (for infrastructure PSUs) instead.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ DEMAT BANNER ══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Start Investing Today</div>
+    <div class="dmh">Invest in <span class="dmhs">Dividend-Growing Companies</span></div>
+    <div class="dmsub">Track dividend history, payout ratios, and dividend growth rates for every listed company. Find stable dividend-payers trading below their DDM intrinsic value.</div>
+    <div class="dmfeats">
+      <div class="dmf">Track 10-year dividend history per stock</div>
+      <div class="dmf">Screen by dividend yield and payout ratio</div>
+      <div class="dmf">Compare DDM intrinsic value to market price</div>
+      <div class="dmf">Start investing from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ══ 05 — 5 REAL EXAMPLES ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">05 — Real Company Examples</div>
+    <h2 class="h2 rv d2">5 Companies — DDM <span class="hp">Applied in Practice</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five examples show DDM applied to real Indian companies — from textbook-perfect candidates to instructive cases where DDM breaks down and teaches us why model selection matters.</p>
+
+    <div class="ex-grid">
+
+      <!-- ITC — Classic DDM candidate -->
+      <div class="ex-card ex-under rv d3">
+        <div class="ex-top">
+          <div class="ex-company">
+            <div class="ex-logo" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0);">🚬</div>
+            <div class="ex-name"><h3>ITC Limited</h3><span>FMCG / Tobacco · NSE: ITC</span></div>
+          </div>
+          <div class="ex-iv-badge"><div class="ex-iv-num iv-green">~₹420</div><div class="ex-iv-label">Est. DDM Value</div></div>
+        </div>
+        <div class="ex-mini-row">
+          <div class="ex-mini">D₀ <span>~₹9</span></div>
+          <div class="ex-mini">g <span>~7%</span></div>
+          <div class="ex-mini">r <span>~12%</span></div>
+          <div class="ex-mini">Yield <span>~3.5%</span></div>
+        </div>
+        <div class="ex-compare">
+          <div class="ex-cmp ec-market"><div class="ec-label">Market Price</div><div class="ec-val p">~₹450</div></div>
+          <div class="ex-cmp ec-intrinsic"><div class="ec-label">DDM Value</div><div class="ec-val g">~₹420</div></div>
+        </div>
+        <div class="ex-verdict ev-over">⚠️ Slight Premium to DDM — Near Fair Value</div>
+        <div class="ex-desc">ITC is one of the most natural DDM candidates in the Indian market. The company has paid consistently growing dividends for 20+ years, generates enormous free cash flow (cigarette business with near-zero capex), and has been increasing its payout ratio over time. With D₀ ≈ ₹9, sustainable growth of ~7% (ROE ~25% × Retention ~28%), and r = 12%, DDM gives approximately ₹420 intrinsic value. This is a real, usable number — not an academic exercise. The market price trading close to this DDM value suggests ITC is fairly valued for pure dividend income investors. Note: DDM here misses the value of ITC's hotel and FMCG expansion optionality — for growth-oriented investors, a multi-stage DDM would give a higher estimate.</div>
+        <span class="ex-tag et-g">✅ Excellent DDM Fit — Consistent, Growing Dividends</span>
+      </div>
+
+      <!-- Power Grid — Utility DDM -->
+      <div class="ex-card ex-under rv d4">
+        <div class="ex-top">
+          <div class="ex-company">
+            <div class="ex-logo" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe);">⚡</div>
+            <div class="ex-name"><h3>Power Grid Corporation</h3><span>Utilities · NSE: POWERGRID</span></div>
+          </div>
+          <div class="ex-iv-badge"><div class="ex-iv-num iv-purple">~₹260</div><div class="ex-iv-label">Est. DDM Value</div></div>
+        </div>
+        <div class="ex-mini-row">
+          <div class="ex-mini">D₀ <span>~₹10</span></div>
+          <div class="ex-mini">g <span>~5%</span></div>
+          <div class="ex-mini">r <span>~10%</span></div>
+          <div class="ex-mini">Yield <span>~4%</span></div>
+        </div>
+        <div class="ex-compare">
+          <div class="ex-cmp ec-market"><div class="ec-label">Market Price</div><div class="ec-val p">~₹280</div></div>
+          <div class="ex-cmp ec-intrinsic"><div class="ec-label">DDM Value</div><div class="ec-val g">~₹260</div></div>
+        </div>
+        <div class="ex-verdict ev-over">⚠️ Slightly Above DDM — Priced for Stability Premium</div>
+        <div class="ex-desc">Power Grid is a textbook utility DDM candidate. It operates India's inter-state power transmission network — a regulated monopoly with revenue determined by a government-set tariff. This means earnings and dividends are extraordinarily predictable. Growth is stable (~5% as the grid expands), and dividend payout is consistently high (70%+). The DDM value of ~₹260 uses a lower required return of ~10% (reflecting the near-bond-like safety of regulated utility cash flows). The slight market premium reflects investors valuing Power Grid's government backing and the energy sector tailwind from India's power infrastructure expansion. For income-oriented investors, this stability makes DDM the most reliable primary valuation tool.</div>
+        <span class="ex-tag et-p">⚡ Strong DDM Fit — Regulated Utility with Predictable Dividends</span>
+      </div>
+
+      <!-- HUL — Multi-Stage DDM needed -->
+      <div class="ex-card ex-fair rv d3">
+        <div class="ex-top">
+          <div class="ex-company">
+            <div class="ex-logo" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">🧴</div>
+            <div class="ex-name"><h3>Hindustan Unilever (HUL)</h3><span>FMCG · NSE: HINDUNILVR</span></div>
+          </div>
+          <div class="ex-iv-badge"><div class="ex-iv-num iv-purple">Multi-Stage</div><div class="ex-iv-label">DDM Approach</div></div>
+        </div>
+        <div class="ex-mini-row">
+          <div class="ex-mini">Dividend <span>Growing</span></div>
+          <div class="ex-mini">Payout <span>~90%+</span></div>
+          <div class="ex-mini">DDM Fit <span>Good</span></div>
+        </div>
+        <div class="ex-verdict ev-fair" style="margin-top:8px;">Multi-Stage DDM More Appropriate Here</div>
+        <div class="ex-desc">HUL is an interesting DDM case study. The single-stage Gordon Growth Model technically works (stable dividend growth, massive free cash flow, high payout ratio). However, it can undervalue HUL because the company goes through distinct growth phases — higher growth periods when launching new categories, then maturing into stable growth. A multi-stage DDM (3–5 years of higher growth, then terminal constant growth) gives a more accurate intrinsic value. The single-stage DDM using g = 9–10% works but is very sensitive to small changes in g. This is exactly when professional analysts switch to multi-stage DDM: when the company is transitioning between growth phases rather than firmly in perpetual stable growth mode.</div>
+        <span class="ex-tag et-a">📊 Multi-Stage DDM Preferred — Growth Not Fully Constant Yet</span>
+      </div>
+
+      <!-- NTPC — Good DDM, PSU dividend stable -->
+      <div class="ex-card ex-fair rv d4">
+        <div class="ex-top">
+          <div class="ex-company">
+            <div class="ex-logo" style="background:linear-gradient(135deg,#ecfdf5,#a7f3d0);">🔌</div>
+            <div class="ex-name"><h3>NTPC Limited</h3><span>Power Generation · NSE: NTPC</span></div>
+          </div>
+          <div class="ex-iv-badge"><div class="ex-iv-num iv-green">~₹210</div><div class="ex-iv-label">Est. DDM Value</div></div>
+        </div>
+        <div class="ex-mini-row">
+          <div class="ex-mini">D₀ <span>~₹4</span></div>
+          <div class="ex-mini">g <span>~6%</span></div>
+          <div class="ex-mini">r <span>~10%</span></div>
+          <div class="ex-mini">ROE <span>~12%</span></div>
+        </div>
+        <div class="ex-compare">
+          <div class="ex-cmp ec-market"><div class="ec-label">Market Price</div><div class="ec-val p">~₹340</div></div>
+          <div class="ex-cmp ec-intrinsic"><div class="ec-label">DDM Value</div><div class="ec-val g">~₹210</div></div>
+        </div>
+        <div class="ex-verdict ev-over">🟡 Market Significant Premium — RE Optionality Priced In</div>
+        <div class="ex-desc">NTPC illustrates a crucial DDM limitation: the model only captures value from stable dividends — it cannot price future strategic transformation. Pure DDM on NTPC's current dividends gives ~₹210. But the market prices NTPC at ~₹340 because investors are also pricing NTPC's massive renewable energy (RE) expansion pipeline — solar and wind capacity that could dramatically increase future earnings and dividends well beyond current growth estimates. DDM is backward-looking about what the company currently pays; the market is forward-looking about what it could pay. For companies undergoing significant strategic transformation, DDM significantly undervalues the stock. Supplement with EV/EBITDA and a DCF incorporating new business projections.</div>
+        <span class="ex-tag et-a">⚡ DDM Undervalues — RE Transformation Creates Optionality Gap</span>
+      </div>
+
+      <!-- Zomato — DDM Fails, full width -->
+      <div class="ex-card ex-poor ex-full rv d5">
+        <div class="ex-top">
+          <div class="ex-company">
+            <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🍔</div>
+            <div class="ex-name"><h3>Zomato / New-Age Tech — Why DDM Completely Fails</h3><span>Food Tech · Illustrative Example</span></div>
+          </div>
+          <div class="ex-iv-badge"><div class="ex-iv-num iv-red">₹0</div><div class="ex-iv-label">DDM Value</div></div>
+        </div>
+        <div class="ex-mini-row">
+          <div class="ex-mini">Dividend <span style="color:var(--red);">₹0</span></div>
+          <div class="ex-mini">DDM Value <span style="color:var(--red);">Undefined</span></div>
+          <div class="ex-mini">Correct Model <span>P/S or EV/Rev</span></div>
+        </div>
+        <div class="ex-verdict ev-na">❌ DDM Not Applicable — No Dividends, Model Returns ₹0 or Undefined</div>
+        <div class="ex-desc">Zomato is the most instructive anti-example for DDM. Zomato has never paid a dividend — D₀ = ₹0. Therefore D₁ = ₹0 × (1+g) = ₹0. And ₹0 ÷ (r−g) = ₹0. DDM says Zomato is worth zero. But Zomato's market cap is tens of thousands of crores. This apparent contradiction teaches the fundamental lesson about DDM's scope: the model values the cash flow that goes to shareholders today and in the near future. Zomato's entire value is speculative — locked in future profits that haven't arrived yet, funded by current cash burn. This isn't wrong; it's simply outside what DDM is designed to measure. The correct valuation models for Zomato are EV/Revenue (revenue-based relative valuation), DCF with terminal value (projecting eventual profitability), and TAM-based analysis (what share of the food delivery market it can capture and what margins that implies). The broader lesson: model selection is itself a critical analytical skill. Using DDM for Zomato doesn't make DDM wrong — it makes using DDM for Zomato wrong. Always match the valuation model to the company's financial stage and dividend policy.</div>
+        <span class="ex-tag et-r">🚨 Model Mismatch — Use EV/Revenue or DCF for Loss-Making Growth Companies</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 06 — ADVANTAGES + LIMITATIONS ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">06 — Strengths and Limitations</div>
+    <h2 class="h2 rv d2">When DDM <span class="hg">Shines</span> and When It <span class="hp">Misleads</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">No valuation model is universally correct. DDM has specific strengths that make it irreplaceable for dividend-income investors — and specific weaknesses that make it dangerous when misapplied.</p>
+
+    <div class="bench-list rv d4">
+      <div class="bl-row">
+        <div class="bl-ico">✅</div>
+        <div class="bl-body">
+          <div class="bl-head">Strength 1: Focuses on Actual Cash Returned to Shareholders</div>
+          <p>Unlike P/E (which uses accounting earnings) or EV/EBITDA (which uses operating profit), DDM focuses exclusively on money that actually transfers from the company to shareholders — dividends. You can't fake a cash payment the way you can adjust accounting earnings. For income-oriented investors, this focus on real cash is DDM's most important advantage.</p>
+        </div>
+      </div>
+      <div class="bl-row">
+        <div class="bl-ico">✅</div>
+        <div class="bl-body">
+          <div class="bl-head">Strength 2: Simple, Transparent, and Theoretically Sound</div>
+          <p>The Gordon Growth Model has three inputs and one output. Every assumption is explicit and examinable. Compare this to DCF, which requires 10-year cash flow projections and a terminal value calculation that can be manipulated almost arbitrarily. DDM's simplicity makes it easier to identify when inputs are unrealistic — a key advantage for retail investors who lack access to detailed management forecasts.</p>
+        </div>
+      </div>
+      <div class="bl-row">
+        <div class="bl-ico">⚠️</div>
+        <div class="bl-body">
+          <div class="bl-head">Limitation 1: Extreme Sensitivity to Growth Rate Assumption</div>
+          <p>As the sensitivity analysis shows, a 2% change in g can change the intrinsic value by 50% or more. This means DDM valuations should never be presented as a single "correct" number — always as a range based on conservative, base, and optimistic growth scenarios. An analyst saying "DDM gives ₹350" without showing the sensitivity range is providing false precision.</p>
+        </div>
+      </div>
+      <div class="bl-row">
+        <div class="bl-ico">⚠️</div>
+        <div class="bl-body">
+          <div class="bl-head">Limitation 2: Assumes Constant Growth Forever — Rarely True</div>
+          <p>The "g is constant forever" assumption is mathematically necessary but commercially unrealistic for most businesses. Companies go through cycles — periods of faster and slower growth. The single-stage GGM works best for utility companies and mature FMCG businesses where earnings and dividend growth genuinely are close to a constant low rate. For all others, multi-stage DDM (high growth phase → stable growth phase) is more appropriate but requires more assumptions.</p>
+        </div>
+      </div>
+      <div class="bl-row">
+        <div class="bl-ico">❌</div>
+        <div class="bl-body">
+          <div class="bl-head">Limitation 3: Inapplicable to Most Indian Listed Companies</div>
+          <p>Of the 5,000+ NSE/BSE listed companies, only a small fraction pay consistent, growing dividends suitable for DDM analysis. Most Indian companies — particularly PSUs that pay irregular dividends based on government fiscal needs, growth companies that reinvest all earnings, cyclicals with volatile payouts, and new-age companies that pay nothing — cannot be valued using DDM. This limits DDM's practical utility as a primary valuation tool to a specific subset of large-cap, mature, dividend-paying businesses.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 07 — HOW TO APPLY DDM ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">07 — Practical Application Framework</div>
+    <h2 class="h2 rv d2">3 Steps to Apply <span class="hp">DDM Correctly</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">DDM is powerful when applied disciplinarily — with conservative inputs, sensitivity analysis, and cross-verification against other valuation methods.</p>
+
+    <div class="use-cards">
+      <div class="use-card rv d3">
+        <span class="uc-ico">🔍</span>
+        <div class="uc-title">Step 1: Qualify the Company</div>
+        <div class="uc-desc">Before applying DDM, check: (1) Does the company have 5+ consecutive years of dividend payments? (2) Has the dividend grown at a stable rate over this period? (3) Is the payout ratio consistent (not wildly fluctuating)? (4) Is the business model stable enough for the "constant growth forever" assumption to be reasonable? Only proceed with DDM if all four questions are answered yes. If a company skipped dividends even once in the past 5 years, treat DDM results with high scepticism.</div>
+      </div>
+      <div class="use-card rv d4">
+        <span class="uc-ico">📐</span>
+        <div class="uc-title">Step 2: Use Sustainable g, Not Recent Growth</div>
+        <div class="uc-desc">Calculate g using ROE × Retention Ratio — not the most recent dividend growth rate, which may have been artificially high. Use 5-year average ROE for stability. Check whether the retention ratio is sustainable (a company paying out 95% of earnings has almost nothing left to reinvest — its g must be very low). Then run sensitivity: calculate DDM value at g−2%, g, and g+2%. The range this produces is your honest valuation band, not a single point estimate.</div>
+      </div>
+      <div class="use-card rv d5">
+        <span class="uc-ico">⚖️</span>
+        <div class="uc-title">Step 3: Cross-Verify with P/E and P/B</div>
+        <div class="uc-desc">DDM gives the best signal when it aligns with other valuation methods. If DDM says ₹250, P/E-based value says ₹270, and P/B says ₹230 — the convergence around ₹250 provides high confidence. If DDM says ₹250 but P/E says ₹400 — investigate why: either the dividend is extremely conservative (company paying out very little despite high earnings) or the growth expectations priced by the market are much higher than what you've used in g. Multi-method convergence is far more reliable than any single model.</div>
+      </div>
+    </div>
+
+    <div class="caveat-box rv d6">
+      <div class="caveat-icon">💡</div>
+      <div class="caveat-body">
+        <div class="caveat-label">Key Investor Insight</div>
+        <div class="caveat-title">High Dividend Yield ≠ Good DDM Stock. Low Dividend Yield ≠ Bad DDM Stock.</div>
+        <div class="caveat-desc">A company paying 8% dividend yield with zero dividend growth has a DDM value = D₁ ÷ (r − 0) = D₁ ÷ r — meaning you value it purely on current income with no growth premium. If r = 12%, the stock is overvalued unless the dividend yield exceeds 12%. Conversely, a company paying 1% yield but growing dividends at 15% annually will compound magnificently over 20 years — DDM assigns it a high intrinsic value despite the modest current yield. The DDM insight that great dividend-growth investing is not about today's yield but about the trajectory of future payments is one of the most powerful concepts in income investing. A stock paying ₹5 today growing at 15% will pay ₹82 in 20 years — your dividend yield on original cost becomes extraordinary even if the initial yield appeared unimpressive.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ NEXT CHAPTER ══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue your learning journey →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+
+<!-- ══ DISCLAIMER ══ -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">This page is for educational purposes only. All DDM values, dividend data, and company figures are approximate illustrative estimates — not real-time investment data. Intrinsic values from DDM change with every dividend announcement and analyst estimate revision. The fifth example is a hypothetical composite. Always verify from official annual reports and SEBI-registered platforms. DDM is one of many valuation methods — never use in isolation. All equity investments carry market risk. Consult a SEBI-registered investment advisor before investing.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+    },{threshold:.05,rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  } else{els.forEach(function(el){el.classList.add('on');});}
+})();
+document.addEventListener('touchstart',function(){},{passive:true});
+document.addEventListener('touchmove',function(){},{passive:true});
+document.addEventListener('touchend',function(){},{passive:true});
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('on');});
+}
+document.body.style.overscrollBehavior='none';
+if(document.fonts&&document.fonts.ready){
+  document.fonts.ready.then(function(){
+    document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});
+  });
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('a,button,.dmbtn,.nxt-btn,.ex-card,.use-card,.step-card,.bl-row').forEach(function(el){
+    el.style.touchAction='manipulation';
+  });
+});
+(function(){
+  var sensFills=document.querySelectorAll('.sens-fill');
+  if(!('IntersectionObserver' in window)){sensFills.forEach(function(f){});return;}
+  var sensCon=document.querySelector('.sens-chart');
+  if(!sensCon)return;
+  var sio=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(!entry.isIntersecting)return;
+      sensFills.forEach(function(fill){
+        var tw=fill.style.width;fill.style.width='0%';
+        requestAnimationFrame(function(){setTimeout(function(){fill.style.width=tw;},200);});
+      });
+      sio.unobserve(entry.target);
+    });
+  },{threshold:.2});
+  sio.observe(sensCon);
+})();
+</script>
+</body>
+</html>

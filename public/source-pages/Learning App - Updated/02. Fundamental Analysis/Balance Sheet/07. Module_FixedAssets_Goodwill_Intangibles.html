@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-title" content="Fixed Assets Goodwill">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no,address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Fixed Assets, Goodwill &amp; Intangibles &middot; Balance Sheet Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#fff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.13s}.d3{transition-delay:.20s}.d4{transition-delay:.27s}.d5{transition-delay:.34s}.d6{transition-delay:.42s}
+@keyframes fsd{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes gearSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes gearSpinR{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff,#f0fdf4 55%,#fdfcff);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.chip::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rule{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:36px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff,#f0fdf4 40%,#fdfcff 70%,#eef4ff);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(32px,7.5vw,88px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:14px;animation:fsu .88s ease .12s both;}
+.hh1 .l1{display:block;background:linear-gradient(135deg,var(--pl),var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .l2{display:block;background:linear-gradient(135deg,var(--gbr),var(--g),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .l3{display:block;font-size:clamp(13px,3vw,38px);background:linear-gradient(135deg,var(--p),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:620px;line-height:1.72;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hstat{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.78);backdrop-filter:blur(12px);animation:fsu .9s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:900px;}
+.hsi{padding:clamp(12px,2vw,22px) clamp(10px,2.5vw,24px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:80px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(11px,1.8vw,18px);font-weight:900;letter-spacing:-.4px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.a{background:linear-gradient(135deg,var(--ambr),var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(8px,1vw,10px);font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+/* KLO */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3.5vw,42px);display:flex;align-items:flex-start;gap:20px;box-shadow:var(--shc);}
+.klo-icon{width:62px;height:62px;min-width:62px;border-radius:18px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;box-shadow:0 8px 26px rgba(109,40,217,.32);animation:floatA 4s ease-in-out infinite;}
+.klo-tag{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.klo-title{font-size:clamp(14px,2vw,19px);font-weight:900;color:var(--tx);margin-bottom:8px;line-height:1.3;}
+.klo-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px;}
+.kp{display:inline-flex;align-items:center;gap:5px;padding:5px 13px;border-radius:100px;font-size:10px;font-weight:700;}
+.kp-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kp-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kp-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.kp-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+/* ASSET TYPE CARDS */
+.at-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.5vw,26px);margin-bottom:44px;}
+.at-card{border-radius:22px;padding:clamp(20px,2.8vw,30px);border:2px solid;transition:transform .28s,box-shadow .28s;}
+.at-card:hover{transform:translateY(-5px);box-shadow:var(--shp);}
+.at-fa{background:linear-gradient(158deg,var(--pxs),#fdfcff);border-color:rgba(109,40,217,.22);}
+.at-gw{background:linear-gradient(158deg,var(--rpale),#fff5f5);border-color:rgba(220,38,38,.22);}
+.at-ia{background:linear-gradient(158deg,var(--gpale),#fafffe);border-color:rgba(22,163,74,.22);}
+.at-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px;animation:floatB 3.8s ease-in-out infinite;box-shadow:0 6px 18px rgba(0,0,0,.1);}
+.ai-fa{background:linear-gradient(135deg,var(--p),var(--ph));}
+.ai-gw{background:linear-gradient(135deg,var(--red),#f87171);}
+.ai-ia{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.at-tag{font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:5px;}
+.att-fa{color:var(--p);}
+.att-gw{color:var(--red);}
+.att-ia{color:var(--gbr);}
+.at-title{font-size:clamp(16px,2vw,22px);font-weight:900;color:var(--tx);margin-bottom:10px;letter-spacing:-.3px;}
+.at-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;margin-bottom:12px;}
+.at-formula{background:rgba(255,255,255,.85);border:1.5px solid rgba(0,0,0,.06);border-radius:12px;padding:11px 14px;margin-bottom:12px;}
+.at-fm{font-size:clamp(12px,1.4vw,14px);font-weight:800;color:var(--tx);margin-bottom:3px;}
+.at-fs{font-size:11.5px;color:var(--ts);line-height:1.55;}
+.at-bench{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.ab{padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;}
+.ab-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.ab-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.ab-r{background:rgba(220,38,38,.1);color:var(--red);}
+.at-ana{margin-top:12px;padding:10px 13px;border-radius:10px;font-size:12.5px;font-weight:600;line-height:1.6;}
+.aa-fa{background:rgba(109,40,217,.07);color:var(--pl);border-left:3px solid var(--p);}
+.aa-gw{background:rgba(220,38,38,.06);color:var(--red);border-left:3px solid var(--red);}
+.aa-ia{background:rgba(22,163,74,.07);color:var(--gbr);border-left:3px solid var(--g);}
+/* CAPEX STRIP */
+.capex-strip{background:linear-gradient(135deg,var(--pl),var(--p) 38%,var(--ph) 62%,#065f46);border-radius:22px;padding:clamp(28px,4vw,52px);color:#fff;position:relative;overflow:hidden;box-shadow:var(--shp);margin-bottom:44px;}
+.capex-strip::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;}
+.cs-inner{position:relative;z-index:1;}
+.cs-badge{display:inline-flex;padding:4px 14px;border-radius:100px;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);margin-bottom:14px;}
+.cs-formula{font-size:clamp(15px,3vw,36px);font-weight:900;letter-spacing:-.5px;line-height:1.2;margin-bottom:12px;}
+.cs-note{font-size:clamp(12px,1.4vw,14px);opacity:.82;line-height:1.68;max-width:600px;margin:0 auto 24px;}
+.cs-metrics{display:flex;justify-content:center;gap:clamp(10px,2vw,24px);flex-wrap:wrap;}
+.cs-metric{background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.24);border-radius:14px;padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,24px);text-align:center;}
+.csm-v{font-size:clamp(13px,2vw,20px);font-weight:900;line-height:1.1;}
+.csm-l{font-size:9px;font-weight:600;opacity:.72;text-transform:uppercase;letter-spacing:1px;margin-top:5px;}
+/* SCREENER TABLE */
+.scr-wrap{background:#fff;border:1.5px solid var(--bd);border-radius:22px;overflow:hidden;box-shadow:var(--shp);margin-bottom:32px;}
+.scr-hdr{background:linear-gradient(135deg,var(--pl),var(--p));padding:clamp(16px,2.8vw,24px) clamp(18px,3vw,28px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.sh-title{font-size:clamp(15px,2.2vw,21px);font-weight:900;color:#fff;}
+.sh-sub{font-size:11px;color:rgba(255,255,255,.7);margin-top:3px;}
+.sh-bdgs{display:flex;gap:7px;flex-wrap:wrap;}
+.sh-bdg{padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.22);}
+.scr-guide{padding:10px clamp(18px,3vw,28px);background:var(--pxs);border-bottom:1px solid var(--bd);font-size:12px;color:var(--ts);display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.sg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;display:inline-block;}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.bstbl{width:100%;border-collapse:collapse;min-width:760px;}
+.bstbl th{background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:10px 13px;font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:right;white-space:nowrap;}
+.bstbl th:first-child{text-align:left;min-width:160px;}
+.bstbl td{padding:10px 13px;font-size:12.5px;color:var(--ts);border-bottom:1px solid rgba(109,40,217,.06);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.bstbl td:first-child{text-align:left;font-weight:700;color:var(--tx);}
+.bstbl tr:last-child td{border-bottom:none;}
+.bstbl tr.shdr td{background:rgba(109,40,217,.05);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);padding:10px 13px 5px;}
+.bstbl tr.hi-r td{color:var(--p);font-weight:800;}
+.bstbl tr.g-r td:first-child{color:var(--gbr);}
+.bstbl tr:not(.shdr):hover td{background:var(--pxs);}
+.up{color:var(--gbr);font-weight:800;}.dn{color:var(--red);font-weight:800;}
+.ann{display:inline-flex;padding:1px 7px;border-radius:5px;font-size:9px;font-weight:700;margin-left:5px;}
+.an-p{background:rgba(109,40,217,.09);color:var(--p);}
+.an-g{background:rgba(22,163,74,.08);color:var(--gbr);}
+.an-r{background:rgba(220,38,38,.08);color:var(--red);}
+.an-a{background:rgba(217,119,6,.08);color:var(--ambr);}
+/* INSIGHT */
+.insight{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:20px;padding:clamp(20px,3vw,32px);display:flex;align-items:flex-start;gap:18px;box-shadow:var(--shc);}
+.ins-ico{width:48px;height:48px;min-width:48px;border-radius:14px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 6px 20px rgba(109,40,217,.28);}
+.ins-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.ins-title{font-size:clamp(13px,1.6vw,16px);font-weight:800;color:var(--tx);margin-bottom:7px;}
+.ins-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;}
+.ins-desc strong{color:var(--tx);}
+/* GOOD/BAD */
+.gbh{display:flex;align-items:center;gap:14px;margin-bottom:22px;padding:18px 22px;border-radius:18px;border:1.5px solid var(--bd);}
+.gbh-g{background:linear-gradient(135deg,var(--gpale),#ecfdf5);}
+.gbh-r{background:linear-gradient(135deg,var(--rpale),#fff5f5);}
+.gbh-ico{width:46px;height:46px;min-width:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.gi-g{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.gi-r{background:linear-gradient(135deg,var(--red),#f87171);}
+.gbh-title{font-size:clamp(16px,2vw,22px);font-weight:900;color:var(--tx);}
+.gbh-sub{font-size:12.5px;color:var(--ts);margin-top:3px;}
+/* EXAMPLE CARDS */
+.exgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.5vw,24px);margin-bottom:44px;}
+.excard{border-radius:22px;border:1.5px solid var(--bd);background:#fff;padding:clamp(18px,3vw,28px);box-shadow:var(--shc);transition:border-color .26s,box-shadow .26s,transform .26s;position:relative;overflow:hidden;}
+.excard:hover{border-color:rgba(109,40,217,.28);box-shadow:var(--shp);transform:translateY(-4px);}
+.excard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.eg1::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.eg2::before{background:linear-gradient(90deg,var(--g),var(--gh));}
+.eg3::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.eg4::before{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.eg5::before{background:linear-gradient(90deg,#0d9488,#2dd4bf);}
+.eb1::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.eb2::before{background:linear-gradient(90deg,#b91c1c,#fca5a5);}
+.eb3::before{background:linear-gradient(90deg,var(--amb),#fbbf24);}
+.eb4::before{background:linear-gradient(90deg,#7c3aed,var(--red));}
+.eb5::before{background:linear-gradient(90deg,var(--red),var(--amb));}
+.ex-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.ex-logo{width:48px;height:48px;min-width:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.ex-name{font-size:clamp(13px,1.7vw,16px);font-weight:900;color:var(--tx);line-height:1.15;}
+.ex-sec{font-size:11px;color:var(--tl);font-weight:500;margin-top:2px;}
+.vrd{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-size:10px;font-weight:800;margin-bottom:13px;}
+.vg{background:rgba(22,163,74,.12);color:var(--gbr);border:1px solid rgba(22,163,74,.24);}
+.vr{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.22);}
+.enums{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px;}
+.en{border-radius:11px;padding:10px 11px;text-align:center;}
+.en-p{background:rgba(109,40,217,.07);border:1px solid rgba(109,40,217,.14);}
+.en-g{background:rgba(22,163,74,.07);border:1px solid rgba(22,163,74,.13);}
+.en-r{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.13);}
+.en-a{background:rgba(217,119,6,.07);border:1px solid rgba(217,119,6,.14);}
+.en-lbl{font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--tl);margin-bottom:3px;}
+.en-val{font-size:clamp(12px,1.8vw,15px);font-weight:900;}
+.ev-p{color:var(--p);}.ev-g{color:var(--gbr);}.ev-r{color:var(--red);}.ev-a{color:var(--ambr);}
+.ex-why{font-size:clamp(12px,1.35vw,13.5px);color:var(--ts);line-height:1.68;margin-bottom:10px;}
+.ex-why strong{color:var(--tx);}
+.sigs{display:flex;flex-direction:column;gap:6px;margin-top:10px;}
+.sig{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;color:var(--ts);line-height:1.52;}
+.sdot{width:7px;height:7px;min-width:7px;border-radius:50%;margin-top:4px;flex-shrink:0;}
+.sd-g{background:var(--g);}.sd-r{background:var(--red);}
+.sig-hl{margin-top:8px;padding:9px 12px;border-radius:9px;font-size:11.5px;line-height:1.55;}
+.shl-g{background:rgba(22,163,74,.07);border-left:3px solid var(--g);}
+.shl-r{background:rgba(220,38,38,.06);border-left:3px solid var(--red);}
+.exfull{grid-column:1/-1;}
+.ex-inner{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+/* SUMMARY TABLE */
+.sumwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:18px;box-shadow:var(--shc);margin-bottom:32px;}
+.sumtbl{width:100%;border-collapse:collapse;min-width:580px;}
+.sumtbl thead th{background:linear-gradient(135deg,var(--p),var(--ph));color:#fff;padding:12px 15px;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:left;}
+.sumtbl tbody td{padding:12px 15px;font-size:12.5px;color:var(--ts);border-bottom:1px solid var(--bd);vertical-align:middle;line-height:1.5;}
+.sumtbl tbody td:first-child{font-weight:800;color:var(--tx);}
+.sumtbl tbody tr:last-child td{border-bottom:none;}
+.sumtbl tbody tr:nth-child(even) td{background:var(--pxs);}
+.tb{display:inline-flex;padding:2px 9px;border-radius:100px;font-size:10px;font-weight:700;}
+.tb-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.tb-r{background:rgba(220,38,38,.1);color:var(--red);}
+.tb-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+/* TRICKS */
+.tricks-sec{background:linear-gradient(158deg,#f5f3ff,#f0fdf4 55%,#fdfcff);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.tgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2.5vw,24px);margin-bottom:44px;}
+.tc{border-radius:22px;border:2px solid;padding:clamp(20px,3vw,30px);position:relative;overflow:hidden;transition:transform .28s,box-shadow .28s;}
+.tc:hover{transform:translateY(-5px);box-shadow:var(--shp);}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.tc1{background:linear-gradient(158deg,var(--pxs),#fdfcff);border-color:rgba(109,40,217,.2);}
+.tc1::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.tc2{background:linear-gradient(158deg,var(--gpale),#fafffe);border-color:rgba(22,163,74,.2);}
+.tc2::before{background:linear-gradient(90deg,var(--g),var(--gh));}
+.tc3{background:linear-gradient(158deg,var(--rpale),#fff5f5);border-color:rgba(220,38,38,.2);}
+.tc3::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.tc4{background:linear-gradient(158deg,var(--apale),#fffbeb);border-color:rgba(217,119,6,.2);}
+.tc4::before{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.tc5{background:linear-gradient(158deg,var(--skypale),#f0f9ff);border-color:rgba(2,132,199,.2);grid-column:1/-1;}
+.tc5::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.tn{display:inline-flex;width:36px;height:36px;border-radius:11px;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;margin-bottom:14px;}
+.tn1{background:linear-gradient(135deg,var(--p),var(--ph));}
+.tn2{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.tn3{background:linear-gradient(135deg,var(--red),#f87171);}
+.tn4{background:linear-gradient(135deg,var(--amb),#f59e0b);}
+.tn5{background:linear-gradient(135deg,var(--sky),#38bdf8);}
+.tc-sub{font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:6px;}
+.ts1{color:var(--p);}.ts2{color:var(--gbr);}.ts3{color:var(--red);}.ts4{color:var(--ambr);}.ts5{color:var(--sky);}
+.tc-title{font-size:clamp(15px,1.9vw,20px);font-weight:900;color:var(--tx);margin-bottom:10px;letter-spacing:-.3px;}
+.tc-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;margin-bottom:14px;}
+.tc-desc strong{color:var(--tx);}
+.tc-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.ts{display:flex;align-items:flex-start;gap:10px;padding:9px 13px;border-radius:10px;font-size:12.5px;color:var(--ts);line-height:1.52;}
+.ts-p{background:rgba(109,40,217,.07);border-left:3px solid var(--p);}
+.ts-g{background:rgba(22,163,74,.07);border-left:3px solid var(--g);}
+.ts-r{background:rgba(220,38,38,.06);border-left:3px solid var(--red);}
+.ts-a{background:rgba(217,119,6,.06);border-left:3px solid var(--amb);}
+.ts-s{background:rgba(2,132,199,.07);border-left:3px solid var(--sky);}
+.ts-arr{font-weight:900;min-width:18px;flex-shrink:0;}
+.tc-res{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;}
+.tcr-g{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.22);}
+.tcr-a{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(217,119,6,.09);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.tcr-r{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(220,38,38,.08);color:var(--red);border:1px solid rgba(220,38,38,.2);}
+.tc5-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,22px);margin-top:14px;}
+/* CHEAT SHEET */
+.cheat{background:linear-gradient(135deg,var(--p),var(--ph),#059669);border-radius:22px;padding:clamp(22px,3.5vw,44px);color:#fff;position:relative;overflow:hidden;margin-bottom:44px;box-shadow:var(--shp);}
+.cheat::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;}
+.cheat-inner{position:relative;z-index:1;}
+.cheat-badge{display:inline-flex;padding:4px 14px;border-radius:100px;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);margin-bottom:14px;}
+.cheat-title{font-size:clamp(17px,2.5vw,30px);font-weight:900;letter-spacing:-.5px;line-height:1.15;margin-bottom:18px;}
+.cheat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.8vw,16px);}
+.ci{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.2);border-radius:14px;padding:clamp(12px,1.8vw,18px);}
+.ci-num{font-size:10px;font-weight:700;opacity:.65;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.ci-name{font-size:clamp(12px,1.5vw,15px);font-weight:900;margin-bottom:5px;}
+.ci-val{font-size:clamp(10px,1.2vw,12px);opacity:.8;line-height:1.52;}
+.ci-good{border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.1);}
+.ci-warn{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.08);}
+.ci-bad{border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.1);}
+/* DEMAT */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240,#4c1d95 35%,#6d28d9 60%,#059669);padding:clamp(44px,7vw,80px) clamp(22px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:680px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:560px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(14px,2.8vw,30px);flex-wrap:wrap;margin-top:18px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'\2713';color:#4ade80;font-weight:900;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:28px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 52px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:52px;touch-action:manipulation;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:7px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.5);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.4);margin-top:6px;}
+/* NEXT + DISC */
+.nxt{background:linear-gradient(100deg,#3b0e8c,#6d28d9 40%,#7c3aed 70%,#8b5cf6);padding:clamp(18px,3vw,30px) clamp(22px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:26px 26px;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-lbl{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.7vw,15px);color:rgba(255,255,255,.75);font-weight:600;margin-top:2px;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;padding:14px 30px;min-height:50px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:13px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s;white-space:nowrap;flex-shrink:0;touch-action:manipulation;}
+.nxt-btn:hover{transform:translateY(-2px);}
+.nxt-arr{font-size:18px;transition:transform .22s;}
+.nxt-btn:hover .nxt-arr{transform:translateX(4px);}
+.disc{background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);}
+.disc-inner{max-width:1240px;margin:0 auto;padding:clamp(22px,4vw,44px) clamp(18px,5vw,56px);display:flex;align-items:flex-start;gap:18px;}
+.disc-ico{width:46px;height:46px;min-width:46px;border-radius:13px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.disc-lbl{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;}
+.disc-txt{font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;}
+/* RESPONSIVE */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.at-grid{grid-template-columns:1fr 1fr;}.tgrid{grid-template-columns:1fr 1fr;}.tc5{grid-column:1/-1;}.cheat-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){.at-grid{grid-template-columns:1fr;}.exgrid{grid-template-columns:1fr;}.exfull{grid-column:auto;}.ex-inner{grid-template-columns:1fr;gap:0;}.klobanner{flex-direction:column;}.klo-icon{animation:none;}.insight{flex-direction:column;gap:12px;}.gbh{flex-direction:column;gap:10px;}.cs-metrics{flex-direction:column;align-items:center;}.tgrid{grid-template-columns:1fr;}.tc5{grid-column:auto;}.tc5-inner{grid-template-columns:1fr;gap:12px;}.cheat-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,30px);}.hstat{flex-direction:column;}.hsi{border-right:none !important;border-bottom:1px solid var(--bd);}.hsi:last-child{border-bottom:none;}.dmfeats{flex-direction:column;align-items:flex-start;gap:9px;}.nxt{flex-direction:column;align-items:flex-start;}.nxt-btn{align-self:stretch;width:100%;justify-content:center;}.disc-inner{flex-direction:column;gap:12px;}.scr-hdr{flex-direction:column;align-items:flex-start;}.sh-bdgs{flex-wrap:wrap;}.enums{grid-template-columns:1fr 1fr;}.tgrid{grid-template-columns:1fr;}.tc5{grid-column:auto;}.tc5-inner{grid-template-columns:1fr;gap:12px;}.tc-res{flex-direction:column;align-items:flex-start;}.tcr-g,.tcr-a,.tcr-r{width:100%;}.cheat-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:640px){.bstbl{min-width:640px;}.sumtbl{min-width:500px;}.at-grid{grid-template-columns:1fr;}.tgrid{grid-template-columns:1fr;}.tc5-inner{grid-template-columns:1fr;}.cheat-grid{grid-template-columns:1fr;}.tc-res{flex-direction:column;align-items:flex-start;}}
+@media(max-width:480px){.w{padding:28px 14px;}.hh1{letter-spacing:-1.2px;}.hstat{flex-wrap:wrap;}.hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}.hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}.vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}.dmbtn{width:100%;justify-content:center;padding:15px 20px;}.nxt-btn{font-size:13px;padding:12px 16px;}.enums{grid-template-columns:1fr 1fr;}.tgrid{grid-template-columns:1fr;}.tc{padding:18px 16px;}.tc-title{font-size:15px;}.tc5-inner{grid-template-columns:1fr;}.cheat-grid{grid-template-columns:1fr;}.tc-res{flex-direction:column;align-items:flex-start;}.tcr-g,.tcr-a,.tcr-r{width:100%;font-size:10px;}.ts{font-size:12px;padding:8px 11px;}.cheat-title{font-size:17px;}.ci{padding:12px 10px;}.ci-name{font-size:12px;}.ci-val{font-size:10px;}}
+@media(max-width:360px){.w{padding:22px 12px;}.hh1{font-size:clamp(26px,10vw,38px);letter-spacing:-1px;}.dmbtn{font-size:14px;}.enums{grid-template-columns:1fr;}.tc{padding:16px 14px;}.ts{padding:7px 10px;font-size:11.5px;}.cheat-grid{grid-template-columns:1fr;}}
+@media(hover:none) and (pointer:coarse){.excard:hover,.at-card:hover,.tc:hover{transform:none !important;box-shadow:var(--shc) !important;}.excard:active,.at-card:active,.tc:active{transform:scale(.98);transition:transform .08s;}.dmbtn:active,.nxt-btn:active{transform:scale(.97);}.dmbtn,.nxt-btn{min-height:52px;}::-webkit-scrollbar{display:none;}.excard,.at-card,.tc,.klobanner,.insight,.cheat{-webkit-backface-visibility:hidden;backface-visibility:hidden;}a,button,.dmbtn,.nxt-btn,.excard,.at-card,.tc{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}.tscroll,.sumwrap{-webkit-overflow-scrolling:touch;}.hh1,.h2,.chip,.eyebrow,.vbadge,.tc-title,.tn{-webkit-user-select:none;user-select:none;}.tc-desc,.ts,.ci-val,.ins-desc,.klo-desc{-webkit-user-select:text;user-select:text;}}
+@supports(-webkit-touch-callout:none){body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}.hero{min-height:100svh;min-height:-webkit-fill-available;padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}.vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}.w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}.nxt{padding-bottom:max(18px,env(safe-area-inset-bottom));}.dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}.tscroll,.sumwrap{-webkit-overflow-scrolling:touch;overflow-x:auto;}.hp,.hg,.hh1 .l1,.hh1 .l2,.hh1 .l3,.hsv,.hsv.g,.hsv.a{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}.orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}a,button,.dmbtn,.nxt-btn,.excard,.at-card,.tc{-webkit-tap-highlight-color:transparent;}}
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){.dmbtn,.nxt-btn{min-height:52px;}.excard,.at-card,.tc,.klobanner,.insight,.cheat{-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0);transform:translateZ(0);}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}.rv{opacity:1;transform:none;}.at-icon,.klo-icon{animation:none !important;}}
+@media print{.dmbanner,.orb,.nxt{display:none;}.rv{opacity:1;transform:none;}body{color:#000;}.w{padding:20px;}.tscroll,.sumwrap{overflow:visible;}.bstbl,.sumtbl{min-width:0;}section,.tc,.tgrid{break-inside:avoid;}.tgrid{grid-template-columns:1fr 1fr;}.cheat-grid{grid-template-columns:1fr 1fr;}.cheat{background:#4c1d95 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<!-- HERO -->
+<section class="hero">
+  <div class="vbadge">Financial Statement Analysis &middot; Balance Sheet</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Module 05 &mdash; Fixed Assets, Goodwill &amp; Intangibles</div>
+  <h1 class="hh1">
+    <span class="l1">Assets</span>
+    <span class="l2">Decoded</span>
+    <span class="l3">Fixed Assets &middot; Goodwill &middot; Intangibles &mdash; Simplified</span>
+  </h1>
+  <p class="hsub">Balance Sheet Analysis &middot; Capex Intensity &middot; Asset Quality &middot; Screener.in Data</p>
+  <p class="hdesc">What a company owns on its books &mdash; factories, brand value, patents, and goodwill from acquisitions &mdash; determines whether it can grow sustainably or whether it is sitting on inflated numbers that will eventually hurt investors.</p>
+  <div class="hstat">
+    <div class="hsi"><div class="hsv">Fixed Assets</div><div class="hsl">Tangible PPE</div></div>
+    <div class="hsi"><div class="hsv a">Goodwill</div><div class="hsl">Acquisition Premium</div></div>
+    <div class="hsi"><div class="hsv g">Intangibles</div><div class="hsl">Patents &amp; Brands</div></div>
+    <div class="hsi"><div class="hsv">Capex Intensity</div><div class="hsl">Key Ratio</div></div>
+    <div class="hsi"><div class="hsv">10 Companies</div><div class="hsl">Good vs Bad</div></div>
+  </div>
+</section>
+
+<!-- 01 KLO -->
+<section style="background:#fff;">
+  <div class="w">
+    <div class="chip rv d1">01 &mdash; Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Evaluate Capex Intensity &amp; <span class="hp">Asset Quality</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">By the end of this module you will open any company on Screener.in, read the non-current assets section, evaluate whether the company is investing wisely in real productive assets &mdash; or inflating its balance sheet with goodwill and intangibles that may require painful write-offs later.</p>
+    <div class="klobanner rv d4">
+      <div class="klo-icon">&#127981;</div>
+      <div>
+        <div class="klo-tag">Your Core Takeaway &mdash; Not All Assets Are Equal</div>
+        <div class="klo-title">A factory that makes real products is a real asset. Goodwill paid in a bad acquisition is an invisible liability waiting to be written off. The balance sheet treats both identically &mdash; but they are completely different in reality.</div>
+        <div class="klo-desc">Imagine two companies, each showing &#8377;10,000 Cr of non-current assets on their balance sheet. Company A: &#8377;10,000 Cr in modern factories, machines, and solar plants generating &#8377;3,000 Cr of annual profit. Company B: &#8377;7,000 Cr goodwill from acquiring a company that is now losing money + &#8377;3,000 Cr in old, depreciated factories. Company A&rsquo;s assets are <em>producing</em> wealth. Company B&rsquo;s assets are a future write-off bomb. Looking only at the total non-current asset figure and ignoring the composition is one of the most expensive mistakes retail investors make. Screener.in shows every component &mdash; you just need to know where to look.</div>
+        <div class="klo-pills">
+          <span class="kp kp-p">&#127981; Fixed Assets = Real, Depreciable, Productive</span>
+          <span class="kp kp-r">&#9888; Goodwill = Acquisition Risk, Watch for Impairment</span>
+          <span class="kp kp-g">&#128200; Intangibles = Brands &amp; Patents = Can Be Real Moats</span>
+        </div>
+      </div>
+    </div>
+    <!-- Factory vs acquisition infographic FIXED -->
+    <div style="margin-top:40px;" class="rv d5">
+      <svg viewBox="0 0 740 300" style="max-width:740px;width:100%;margin:0 auto;display:block;border-radius:20px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background -->
+        <rect width="740" height="300" rx="20" fill="#f5f3ff"/>
+        <rect width="740" height="300" rx="20" stroke="#e5e1fb" stroke-width="1.5"/>
+
+        <!-- LEFT panel: Company A green -->
+        <rect x="14" y="14" width="334" height="260" rx="14" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+        <!-- Header label -->
+        <rect x="22" y="22" width="220" height="22" rx="6" fill="#15803d"/>
+        <text x="32" y="36" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="white">&#10004; COMPANY A — Real Productive Assets</text>
+
+        <!-- Factory building body -->
+        <rect x="30" y="56" width="148" height="106" rx="4" fill="#dcfce7" stroke="#15803d" stroke-width="1.8"/>
+        <!-- Roof triangle -->
+        <polygon points="22,58 186,58 178,36 30,36" fill="#15803d"/>
+        <!-- FACTORY label on roof -->
+        <text x="104" y="52" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="white">FACTORY</text>
+        <!-- Windows / columns -->
+        <rect x="40"  y="72" width="16" height="44" rx="2" fill="#15803d" opacity=".35"/>
+        <rect x="62"  y="72" width="16" height="44" rx="2" fill="#15803d" opacity=".35"/>
+        <rect x="84"  y="72" width="16" height="44" rx="2" fill="#15803d" opacity=".35"/>
+        <rect x="106" y="72" width="16" height="44" rx="2" fill="#15803d" opacity=".35"/>
+        <rect x="128" y="72" width="16" height="44" rx="2" fill="#15803d" opacity=".35"/>
+        <rect x="150" y="72" width="16" height="44" rx="2" fill="#15803d" opacity=".35"/>
+        <!-- Door -->
+        <rect x="80" y="126" width="48" height="36" rx="3" fill="#14532d" opacity=".7"/>
+        <!-- Chimney smoke -->
+        <rect x="38" y="30" width="10" height="28" rx="3" fill="#15803d"/>
+        <rect x="56" y="30" width="10" height="28" rx="3" fill="#15803d"/>
+        <ellipse cx="43" cy="28" rx="8" ry="5" fill="#bbf7d0" opacity=".8"/>
+        <ellipse cx="61" cy="26" rx="7" ry="4.5" fill="#bbf7d0" opacity=".8"/>
+        <!-- Gear icon -->
+        <circle cx="162" cy="102" r="16" fill="#15803d" opacity=".18" stroke="#15803d" stroke-width="1.5"/>
+        <text x="162" y="107" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="17">&#9881;</text>
+
+        <!-- Engineer (happy) -->
+        <!-- body -->
+        <rect x="218" y="112" width="24" height="32" rx="8" fill="#15803d"/>
+        <!-- arms -->
+        <rect x="202" y="118" width="16" height="8" rx="4" fill="#15803d"/>
+        <rect x="242" y="118" width="16" height="8" rx="4" fill="#15803d"/>
+        <!-- legs -->
+        <rect x="221" y="144" width="9" height="20" rx="4" fill="#14532d"/>
+        <rect x="234" y="144" width="9" height="20" rx="4" fill="#14532d"/>
+        <!-- head -->
+        <circle cx="230" cy="100" r="18" fill="#fde8cc"/>
+        <!-- hair/hat -->
+        <ellipse cx="230" cy="85" rx="17" ry="6" fill="#1e1b4b"/>
+        <!-- eyes -->
+        <circle cx="224" cy="101" r="2.5" fill="#1e1b4b"/>
+        <circle cx="236" cy="101" r="2.5" fill="#1e1b4b"/>
+        <!-- smile -->
+        <path d="M224 109 Q230 115 236 109" stroke="#1e1b4b" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+        <!-- Result box -->
+        <rect x="22" y="178" width="318" height="86" rx="10" fill="white" stroke="#86efac" stroke-width="1"/>
+        <text x="181" y="200" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#15803d">&#8377;10,000 Cr Fixed Assets</text>
+        <text x="181" y="220" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="14" font-weight="900" fill="#15803d">Generates &#8377;3,000 Cr annual profit</text>
+        <text x="181" y="238" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#6e6994">Asset Turnover: 0.3&#215; — real, productive, depreciable</text>
+
+        <!-- VS badge -->
+        <circle cx="370" cy="150" r="24" fill="#6d28d9"/>
+        <text x="370" y="156" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="900" fill="white">VS</text>
+
+        <!-- RIGHT panel: Company B red -->
+        <rect x="392" y="14" width="334" height="260" rx="14" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+        <!-- Header label -->
+        <rect x="400" y="22" width="230" height="22" rx="6" fill="#dc2626"/>
+        <text x="410" y="36" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="white">&#9888; COMPANY B — Inflated Balance Sheet</text>
+
+        <!-- Goodwill bomb circle -->
+        <circle cx="510" cy="110" r="68" fill="#fecaca" stroke="#dc2626" stroke-width="2.5"/>
+        <text x="510" y="86"  text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="800" fill="#dc2626">GOODWILL</text>
+        <text x="510" y="110" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="22" font-weight="900" fill="#dc2626">&#8377;7,000 Cr</text>
+        <text x="510" y="130" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#991b1b" font-weight="600">Paid in 2018 acquisition</text>
+        <text x="510" y="148" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#991b1b">Acquired company now losing money</text>
+
+        <!-- Stressed CFO -->
+        <!-- body -->
+        <rect x="632" y="112" width="24" height="32" rx="8" fill="#dc2626"/>
+        <!-- arms -->
+        <rect x="616" y="118" width="16" height="8" rx="4" fill="#dc2626"/>
+        <rect x="656" y="118" width="16" height="8" rx="4" fill="#dc2626"/>
+        <!-- legs -->
+        <rect x="635" y="144" width="9" height="20" rx="4" fill="#b91c1c"/>
+        <rect x="648" y="144" width="9" height="20" rx="4" fill="#b91c1c"/>
+        <!-- head -->
+        <circle cx="644" cy="100" r="18" fill="#fde8cc"/>
+        <!-- hair -->
+        <ellipse cx="644" cy="85" rx="17" ry="6" fill="#374151"/>
+        <!-- eyes (worried) -->
+        <circle cx="638" cy="101" r="2.5" fill="#1e1b4b"/>
+        <circle cx="650" cy="101" r="2.5" fill="#1e1b4b"/>
+        <!-- frown -->
+        <path d="M638 112 Q644 108 650 112" stroke="#1e1b4b" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <!-- sweat drops -->
+        <path d="M662 90 Q669 100 665 108" stroke="#bae6fd" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M656 82 Q660 90 657 96" stroke="#bae6fd" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+        <!-- Result box -->
+        <rect x="400" y="178" width="318" height="86" rx="10" fill="white" stroke="#fca5a5" stroke-width="1"/>
+        <text x="559" y="200" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#dc2626">&#8377;10,000 Cr shown on Balance Sheet</text>
+        <text x="559" y="220" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="900" fill="#dc2626">&#8377;7,000 Cr goodwill = future write-off risk</text>
+        <text x="559" y="238" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#6e6994">Same balance sheet total — completely different quality</text>
+
+        <!-- Bottom note strip -->
+        <rect x="14" y="280" width="712" height="16" rx="6" fill="white" opacity=".9"/>
+        <text x="370" y="292" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#4c1d95">Both show &#8377;10,000 Cr non-current assets on Screener.in — but asset quality is completely different. Always look inside the number!</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 02 THREE ASSET TYPES -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="chip rv d1">02 &mdash; Three Types of Long-Term Assets</div>
+    <h2 class="h2 rv d2">Fixed Assets, Goodwill &amp; <span class="hg">Intangibles &mdash; Explained</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">The Non-Current Assets section of every balance sheet contains three very different types of assets. Understanding each one &mdash; how it is created, how it is measured, and what its presence signals about management quality &mdash; is essential for evaluating any company.</p>
+    <div class="at-grid rv d3">
+      <!-- FIXED ASSETS -->
+      <div class="at-card at-fa">
+        <div class="at-icon ai-fa">&#127981;</div>
+        <div class="at-tag att-fa">Type 1 &mdash; Tangible, Real</div>
+        <div class="at-title">Fixed Assets (PPE)</div>
+        <div class="at-desc">Property, Plant and Equipment (PPE) are the physical assets a company uses to produce goods or services &mdash; factories, machines, land, buildings, vehicles, computers, and equipment. These are <strong>real, depreciable, productive assets</strong> that generate revenue. They appear at historical cost minus accumulated depreciation (Net Block on Screener.in). The Gross Block shows original cost; Net Block shows current book value after depreciation.</div>
+        <div class="at-formula">
+          <div class="at-fm">Net Block = Gross Block &minus; Accumulated Depreciation</div>
+          <div class="at-fs">Capex Intensity = Capex &divide; Revenue. Asset Turnover = Revenue &divide; Net Block. Both are visible on Screener.in Ratios tab.</div>
+        </div>
+        <div class="at-bench">
+          <span class="ab ab-g">High asset turnover: &gt;2&times; (efficient)</span>
+          <span class="ab ab-a">Moderate: 0.5&ndash;2&times;</span>
+          <span class="ab ab-r">Low: &lt;0.5&times; (capital-intensive)</span>
+        </div>
+        <div class="at-ana aa-fa">&#128161; <strong>Real analogy:</strong> Your home loan buys a house (fixed asset) that you live in and generate rental income from. Every year the house depreciates on the books (even if the actual market value rises). The Net Block of a factory = what the factory is worth on the books today. A factory bought for &#8377;100 Cr in 2005, depreciated &#8377;60 Cr by now, shows as &#8377;40 Cr Net Block &mdash; but is producing &#8377;500 Cr of revenue. Excellent asset turnover!</div>
+      </div>
+      <!-- GOODWILL -->
+      <div class="at-card at-gw">
+        <div class="at-icon ai-gw">&#128561;</div>
+        <div class="at-tag att-gw">Type 2 &mdash; Riskiest, Watch Carefully</div>
+        <div class="at-title">Goodwill</div>
+        <div class="at-desc">Goodwill arises only when a company <strong>acquires another company at a price above its book value</strong>. The premium paid over book value is called goodwill and sits on the balance sheet indefinitely &mdash; unless an impairment test shows it is overvalued, at which point it gets written down, hitting profits directly. Goodwill is never depreciated (unlike fixed assets), which means it stays on the balance sheet at original cost until an impairment is forced. High goodwill = past acquisitions, not current operations.</div>
+        <div class="at-formula">
+          <div class="at-fm">Goodwill = Acquisition Price &minus; Net Assets of Acquired Company</div>
+          <div class="at-fs">Example: Paid &#8377;5,000 Cr for a company whose books show &#8377;3,000 Cr of net assets. Goodwill = &#8377;2,000 Cr on your balance sheet. If the acquired company struggles, this &#8377;2,000 Cr gets impaired (written off).</div>
+        </div>
+        <div class="at-bench">
+          <span class="ab ab-g">Good: No goodwill (organic growth)</span>
+          <span class="ab ab-a">Moderate: Goodwill &lt;20% of equity</span>
+          <span class="ab ab-r">Risk: Goodwill &gt;50% of equity</span>
+        </div>
+        <div class="at-ana aa-gw">&#9888; <strong>Warning sign:</strong> Large goodwill + acquired company underperforming = future impairment write-off that will hit profits hard. This is what happened with Tata Steel&rsquo;s Corus acquisition (2007), Hindalco&rsquo;s Novelis, and dozens of telecom acquisitions worldwide. Always check: is goodwill growing? Is it larger than net worth? Has it been impaired before?</div>
+      </div>
+      <!-- INTANGIBLES -->
+      <div class="at-card at-ia">
+        <div class="at-icon ai-ia">&#127381;</div>
+        <div class="at-tag att-ia">Type 3 &mdash; Can Be Real Moats</div>
+        <div class="at-title">Intangible Assets</div>
+        <div class="at-desc">Intangible assets are non-physical assets with economic value &mdash; patents, trademarks, brand names, software, licences, customer relationships, and non-compete agreements. Unlike goodwill, intangibles can be <strong>amortised</strong> (gradually expensed over their useful life). Internally generated intangibles like a brand or internally developed software are generally NOT capitalised under Indian GAAP &mdash; only acquired or externally developed intangibles appear on the balance sheet. This creates an important asymmetry: companies like HUL with enormous brand value show zero brand asset on the balance sheet!</div>
+        <div class="at-formula">
+          <div class="at-fm">Amortisation = Intangible Cost &divide; Useful Life (years)</div>
+          <div class="at-fs">Patents, licences, and customer contracts are amortised. Spectrum licences (telecom companies) are the largest intangible in Indian markets. Software companies capitalise R&amp;D costs differently.</div>
+        </div>
+        <div class="at-bench">
+          <span class="ab ab-g">Productive: Patents generating revenue</span>
+          <span class="ab ab-a">Monitor: Large capitalised software</span>
+          <span class="ab ab-r">Red flag: Overstated customer relationships</span>
+        </div>
+        <div class="at-ana aa-ia">&#128161; <strong>Important nuance:</strong> A telecom company with &#8377;50,000 Cr of spectrum licences as intangibles is perfectly normal &mdash; those licences generate real revenue. A company that capitalises &#8377;500 Cr of &ldquo;customer acquisition costs&rdquo; as intangibles to avoid hitting P&amp;L is engaged in earnings management. Context and sector matter enormously when analysing intangibles.</div>
+      </div>
+    </div>
+    <!-- Capex metrics strip -->
+    <div class="capex-strip rv d5">
+      <div class="cs-inner">
+        <div class="cs-badge">Key Ratios to Evaluate Capex Intensity &amp; Asset Quality</div>
+        <div class="cs-formula">Asset Turnover = Revenue &divide; Net Fixed Assets &nbsp;&bull;&nbsp; Capex Intensity = Capex &divide; Revenue</div>
+        <div class="cs-note">These two ratios tell you how hard the company&rsquo;s assets are working and how much new capital is being invested to grow. Both are visible on Screener.in&rsquo;s Ratios tab. A company with high asset turnover and low capex intensity is capital-efficient &mdash; the ideal combination.</div>
+        <div class="cs-metrics">
+          <div class="cs-metric"><div class="csm-v">&gt;2&times;</div><div class="csm-l">Excellent Asset Turnover</div></div>
+          <div class="cs-metric"><div class="csm-v">&lt;5%</div><div class="csm-l">Low Capex Intensity</div></div>
+          <div class="cs-metric"><div class="csm-v">Falling</div><div class="csm-l">Goodwill Trend = Good</div></div>
+          <div class="cs-metric"><div class="csm-v">Zero</div><div class="csm-l">Goodwill Ideal (organic)</div></div>
+          <div class="cs-metric"><div class="csm-v">Rising</div><div class="csm-l">Net Block Trend = Growth</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 SCREENER.IN REAL DATA -->
+<section style="background:#fff;">
+  <div class="w">
+    <div class="chip rv d1">03 &mdash; Real Data from Screener.in</div>
+    <h2 class="h2 rv d2">How to Read <span class="hp">Non-Current Assets on Screener.in</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">The Balance Sheet tab on Screener.in shows all non-current assets in detail &mdash; Gross Block, Net Block, Goodwill, and Intangibles as separate line items. Here is exactly what each row means and how to evaluate it across different companies.</p>
+    <div class="scr-wrap rv d4">
+      <div class="scr-hdr">
+        <div><div class="sh-title">Non-Current Assets &mdash; Screener.in Balance Sheet Rows</div><div class="sh-sub">How to read Fixed Assets, Goodwill &amp; Intangibles &middot; All figures in &#8377; Crores (illustrative)</div></div>
+        <div class="sh-bdgs"><span class="sh-bdg">Balance Sheet Tab</span><span class="sh-bdg">Non-Current Assets</span><span class="sh-bdg">Ratios Tab</span></div>
+      </div>
+      <div class="scr-guide">
+        <span><span class="sg-dot" style="background:var(--p);"></span> Purple = Fixed Asset rows (Net Block, Gross Block, Capex)</span>
+        <span><span class="sg-dot" style="background:var(--red);"></span> Red = Goodwill / risk rows</span>
+        <span><span class="sg-dot" style="background:var(--gbr);"></span> Green = Intangibles &amp; ratios</span>
+      </div>
+      <div class="tscroll">
+        <table class="bstbl">
+          <thead><tr><th style="text-align:left;">Balance Sheet Row</th><th>What It Means</th><th>Good Sign</th><th>Red Flag</th><th>Where on Screener</th></tr></thead>
+          <tbody>
+            <tr class="shdr"><td colspan="5">── FIXED ASSETS (PPE) ──</td></tr>
+            <tr class="hi-r"><td>Gross Block <span class="ann an-p">Historical cost</span></td><td>Total cost of all assets ever bought</td><td>Rising steadily (growth)</td><td>Flat for years (no investment)</td><td>Balance Sheet &rarr; Non-Current Assets</td></tr>
+            <tr><td>Accumulated Depreciation</td><td>Total depreciation charged to date</td><td>Should match asset age</td><td>Too low vs age = underreported</td><td>Balance Sheet (expand Gross Block)</td></tr>
+            <tr class="hi-r"><td>Net Block <span class="ann an-p">Book value today</span></td><td>Gross Block minus Depreciation</td><td>Rising = new capex</td><td>Declining fast = ageing assets</td><td>Balance Sheet &rarr; Net Block</td></tr>
+            <tr class="g-r"><td>Capital Work in Progress <span class="ann an-g">CWIP</span></td><td>Capex spent but asset not yet active</td><td>Reduces when asset goes live</td><td>Rising for years = project delays</td><td>Balance Sheet (CWIP row)</td></tr>
+            <tr class="shdr"><td colspan="5">── GOODWILL ──</td></tr>
+            <tr><td>Goodwill <span class="ann an-r">Acquisition premium</span></td><td>Paid above book value in acquisitions</td><td>Zero (organic growth)</td><td>&gt;50% of equity &amp; rising</td><td>Balance Sheet &rarr; Goodwill</td></tr>
+            <tr><td>Goodwill Impairment</td><td>Write-down when acquisition fails</td><td>Never impaired = good acquisitions</td><td>Impairment = past mistakes visible</td><td>P&amp;L &rarr; Exceptional Items</td></tr>
+            <tr class="shdr"><td colspan="5">── INTANGIBLES ──</td></tr>
+            <tr class="g-r"><td>Intangible Assets <span class="ann an-g">Patents, brands</span></td><td>Patents, licences, software, trademarks</td><td>Productive (spectrum, patents)</td><td>Rapidly growing without revenue</td><td>Balance Sheet &rarr; Intangibles</td></tr>
+            <tr class="shdr"><td colspan="5">── KEY RATIOS (Ratios Tab) ──</td></tr>
+            <tr class="hi-r"><td>Asset Turnover Ratio <span class="ann an-p">Efficiency</span></td><td>Revenue earned per rupee of assets</td><td>&gt;2&times; (capital-light)</td><td>&lt;0.3&times; (capital trap)</td><td>Ratios Tab &rarr; Asset Turnover</td></tr>
+            <tr class="g-r"><td>Capex to Sales <span class="ann an-g">Intensity</span></td><td>% of revenue reinvested in assets</td><td>&lt;5% (capital-light)</td><td>&gt;30% (heavy capex)</td><td>Cash Flow Tab &rarr; Capital Expenditure</td></tr>
+            <tr><td>Depreciation Rate</td><td>Depreciation &divide; Gross Block</td><td>5&ndash;15% (consistent)</td><td>Falling = understating wear</td><td>P&amp;L &rarr; Depreciation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- What to look for -->
+    <div class="rv d5" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,22px);margin-bottom:32px;">
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--pxs),#fdfcff);border:1.5px solid rgba(109,40,217,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:7px;">&#127981; How to Evaluate Fixed Assets on Screener.in</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>Step 1:</strong> Open Balance Sheet &rarr; find Net Block row &rarr; read 10-year trend. Is it rising or flat? Rising Net Block = company is investing in growth. <strong>Step 2:</strong> Ratios tab &rarr; Asset Turnover Ratio &rarr; click chart. Rising asset turnover = company using assets more efficiently. Falling = new assets not yet generating revenue (okay during buildout) or old assets underperforming (bad). <strong>Step 3:</strong> Cash Flow tab &rarr; Capital Expenditure row &rarr; compare Capex vs Depreciation. If Capex &gt; Depreciation every year = company is expanding. If Capex &lt; Depreciation for 5+ years = assets ageing and no replacement (concerning).</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--rpale),#fff5f5);border:1.5px solid rgba(220,38,38,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:7px;">&#9888; The Goodwill Trap &mdash; How to Spot it Instantly</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>Step 1:</strong> Balance Sheet &rarr; find Goodwill row. Is it zero? Great (organic growth). Is it large? <strong>Step 2:</strong> Calculate Goodwill as % of total equity (Reserves + Share Capital). If Goodwill &gt; 30% of equity, the company has made major acquisitions and may be carrying inflated assets. <strong>Step 3:</strong> Check the P&amp;L for past impairment charges (look under &ldquo;Exceptional Items&rdquo;). Any impairment = the company previously overpaid for an acquisition. <strong>Step 4:</strong> Find the acquired company in the Annual Report &rsquo;s subsidiary list and check if it is profitable or loss-making. If loss-making, goodwill impairment may be coming.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--gpale),#fafffe);border:1.5px solid rgba(22,163,74,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:7px;">&#128161; Why Great Brands Are Invisible on the Balance Sheet</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>One of the most important accounting facts:</strong> Internally created brands, customer loyalty, and internally developed technology are NOT shown as intangible assets under Indian accounting standards. This means Hindustan Unilever&rsquo;s Surf Excel, Lux, and Dove brands &mdash; worth tens of thousands of crores &mdash; show as &#8377;0 on the balance sheet. This is why P/BV ratios of 50&ndash;80&times; make sense for FMCG companies: the real value is in invisible brand assets not on the books. When a company <em>acquires</em> a brand (like Tata buying Tetley), the brand then appears as an intangible asset at the acquisition cost.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--apale),#fffbeb);border:1.5px solid rgba(217,119,6,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ambr);margin-bottom:7px;">&#9201; The Capex vs Depreciation Trick</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>The single fastest asset quality check:</strong> Open the Cash Flow Statement on Screener.in &rarr; find &ldquo;Capital Expenditure&rdquo; (Cash Flow from Investing, negative number) and compare with Depreciation (P&amp;L). <strong>Capex &gt; Depreciation:</strong> Company is investing more than it replaces &mdash; growing asset base, building future capacity. <strong>Capex &asymp; Depreciation:</strong> Company is maintaining existing assets, not growing. <strong>Capex &lt; Depreciation for 3+ years:</strong> Company is shrinking its asset base, possibly milking assets without reinvestment &mdash; concerning if also growing revenue (unsustainable).</p>
+      </div>
+    </div>
+    <div class="insight rv d6">
+      <div class="ins-ico">&#128269;</div>
+      <div>
+        <div class="ins-tag">The 4-Number Asset Quality Check on Screener.in</div>
+        <div class="ins-title">Four Numbers Reveal Asset Quality in Under 3 Minutes</div>
+        <div class="ins-desc">1. <strong>Goodwill</strong> (Balance Sheet) &mdash; should be zero or very small relative to equity. 2. <strong>Net Block trend</strong> (Balance Sheet) &mdash; rising = investing in growth. 3. <strong>Asset Turnover</strong> (Ratios tab) &mdash; should be rising or stable. 4. <strong>Capex vs Depreciation</strong> (Cash Flow) &mdash; Capex &gt; Depreciation = growing. All four pass = excellent asset quality. Goodwill &gt;30% of equity = investigate acquisitions. CWIP rising for 3+ years = project execution risk.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMAT BANNER -->
+<section class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Analyse Asset Quality on Real Stocks</div>
+    <div class="dmh">Open a Free Demat Account &amp;<br><span class="dmhs">Start Evaluating Assets Today.</span></div>
+    <div class="dmsub">Open Screener.in, check Goodwill, Net Block trend, and Asset Turnover for any company in under 3 minutes. Invest with real understanding of what the company actually owns.</div>
+    <div class="dmfeats"><div class="dmf">&#8377;0 Account Opening Fee</div><div class="dmf">Real-Time Screener.in Data</div><div class="dmf">Zero Brokerage on Delivery</div><div class="dmf">SEBI Regulated &amp; Trusted</div></div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn">&#128640;&nbsp; Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmrating">4.8 &middot; Trusted by 1 Crore+ Investors</span></div>
+    <div class="dmnote">No spam. No hidden charges. SEBI registered broker.</div>
+  </div>
+</section>
+
+<!-- 04 GOOD vs BAD -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="chip rv d1">04 &mdash; Good vs Bad Asset Structures</div>
+    <h2 class="h2 rv d2">Asset Quality <span class="hp">in Real Companies</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">The best way to master asset quality evaluation is through real companies. Here are 5 with excellent asset structures (productive, real, and capital-efficient) and 5 where assets are inflated, impaired, or mismanaged &mdash; all from Screener.in and public disclosures.</p>
+
+    <div class="gbh rv d2 gbh-g">
+      <div class="gbh-ico gi-g">&#10004;</div>
+      <div><div class="gbh-title">5 Companies With Excellent Asset Quality</div><div class="gbh-sub">Zero or minimal goodwill &middot; High asset turnover &middot; Capex funded from profits &middot; Capital-efficient growth</div></div>
+    </div>
+    <div class="exgrid">
+      <div class="excard eg1 rv d2">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pmd));">&#128202;</div><div><div class="ex-name">CDSL</div><div class="ex-sec">Depository Services &middot; NSE: CDSL</div></div></div>
+        <div class="vrd vg">&#10004; Asset-Light Model &mdash; No Goodwill, Minimal Fixed Assets</div>
+        <div class="enums">
+          <div class="en en-g"><div class="en-lbl">Net Block</div><div class="en-val ev-g">~&#8377;85 Cr</div></div>
+          <div class="en en-g"><div class="en-lbl">Goodwill</div><div class="en-val ev-g">&#8377;0</div></div>
+          <div class="en en-p"><div class="en-lbl">Asset Turnover</div><div class="en-val ev-p">&gt;8&times;</div></div>
+          <div class="en en-g"><div class="en-lbl">Capex Intensity</div><div class="en-val ev-g">&lt;3%</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s exceptional:</strong> CDSL&rsquo;s entire balance sheet has just ~&#8377;85 Cr of fixed assets (servers, data centres, office equipment) but generates &#8377;2,000+ Cr of annual revenue. Asset turnover exceeds 8&times; &mdash; among the highest in Indian listed markets. Zero goodwill (CDSL grew organically, never made a major acquisition). Zero intangibles beyond software. Every rupee of fixed asset earns &#8377;8+ of revenue. This is the capital efficiency that makes CDSL&rsquo;s return on capital so extraordinary.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Net Block only ~&#8377;85 Cr for a &#8377;2,000+ Cr revenue company</div>
+          <div class="sig"><div class="sdot sd-g"></div>Asset turnover &gt;8&times; &mdash; top decile in Indian markets</div>
+          <div class="sig"><div class="sdot sd-g"></div>Zero goodwill &mdash; pure organic growth, no acquisition risk</div>
+          <div class="sig"><div class="sdot sd-g"></div>Capex &lt;3% of revenue &mdash; servers and software, not factories</div>
+        </div>
+      </div>
+      <div class="excard eg2 rv d3">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--gpale),#d1fae5);">&#128293;</div><div><div class="ex-name">Pidilite Industries</div><div class="ex-sec">Adhesives &middot; NSE: PIDILITIND &middot; Fevicol, Dr. Fixit</div></div></div>
+        <div class="vrd vg">&#10004; Low Goodwill, Strong Asset Turnover, Brand Moat Hidden</div>
+        <div class="enums">
+          <div class="en en-g"><div class="en-lbl">Net Block</div><div class="en-val ev-g">&#8377;1,800 Cr</div></div>
+          <div class="en en-g"><div class="en-lbl">Goodwill</div><div class="en-val ev-g">Very Small</div></div>
+          <div class="en en-p"><div class="en-lbl">Asset Turnover</div><div class="en-val ev-p">~1.8&times;</div></div>
+          <div class="en en-g"><div class="en-lbl">Capex Intensity</div><div class="en-val ev-g">~5&ndash;8%</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s great:</strong> Pidilite has modest fixed assets for a company of its revenue size because its moat is invisible on the balance sheet &mdash; the Fevicol brand, trusted for 60+ years. The brand does not appear as an intangible asset because it was internally built, not acquired. Asset turnover of ~1.8&times; is strong for specialty chemicals. Goodwill is minimal because Pidilite grows primarily organically and makes only small acquisitions of product lines, not whole companies.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Brand value (Fevicol, Dr. Fixit) not on balance sheet &mdash; creates P/BV premium</div>
+          <div class="sig"><div class="sdot sd-g"></div>Asset turnover ~1.8&times; &mdash; strong for specialty chemicals manufacturing</div>
+          <div class="sig"><div class="sdot sd-g"></div>Capex funded from operating cash flows &mdash; no debt needed</div>
+          <div class="sig"><div class="sdot sd-g"></div>Very low goodwill &mdash; acquisitions are small, well-priced, and strategic</div>
+        </div>
+      </div>
+      <div class="excard eg3 rv d4">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--skypale),#e0f2fe);">&#128187;</div><div><div class="ex-name">TCS</div><div class="ex-sec">IT Services &middot; NSE: TCS</div></div></div>
+        <div class="vrd vg">&#10004; Ultra Asset-Light &mdash; People Are the Assets</div>
+        <div class="enums">
+          <div class="en en-g"><div class="en-lbl">Net Block</div><div class="en-val ev-g">~&#8377;8,000 Cr</div></div>
+          <div class="en en-g"><div class="en-lbl">Goodwill</div><div class="en-val ev-g">~&#8377;4,200 Cr</div></div>
+          <div class="en en-p"><div class="en-lbl">Asset Turnover</div><div class="en-val ev-p">&gt;6&times;</div></div>
+          <div class="en en-g"><div class="en-lbl">Capex Intensity</div><div class="en-val ev-g">&lt;4%</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s great:</strong> TCS generates &#8377;2.4 lakh crore of annual revenue with just &#8377;8,000 Cr of fixed assets &mdash; an extraordinary asset turnover. The real assets are the 6 lakh employees whose skills and client relationships generate all the value. These human assets do not appear on the balance sheet at all. The modest goodwill of &#8377;4,200 Cr is from past acquisitions and manageable relative to TCS&rsquo;s &#8377;2+ lakh crore equity market cap. Capex intensity below 4% means TCS barely needs physical assets to grow.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Asset turnover &gt;6&times; &mdash; 6 lakh employees generate all real value</div>
+          <div class="sig"><div class="sdot sd-g"></div>Goodwill manageable at ~&#8377;4,200 Cr vs &#8377;2L Cr+ market cap</div>
+          <div class="sig"><div class="sdot sd-g"></div>Capex &lt;4% of revenue &mdash; mostly offices and laptops, not factories</div>
+          <div class="sig"><div class="sdot sd-g"></div>95%+ of net profit converts to free cash &mdash; no capex trap</div>
+        </div>
+      </div>
+      <div class="excard eg4 rv d5">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--apale),#fef3c7);">&#9917;</div><div><div class="ex-name">Polycab India</div><div class="ex-sec">Wires &amp; Cables &middot; NSE: POLYCAB</div></div></div>
+        <div class="vrd vg">&#10004; High Capex, But Productive &amp; Growing Asset Turnover</div>
+        <div class="enums">
+          <div class="en en-p"><div class="en-lbl">Net Block</div><div class="en-val ev-p">~&#8377;4,500 Cr</div></div>
+          <div class="en en-g"><div class="en-lbl">Goodwill</div><div class="en-val ev-g">~Zero</div></div>
+          <div class="en en-p"><div class="en-lbl">Asset Turnover</div><div class="en-val ev-p">~3&times;</div></div>
+          <div class="en en-g"><div class="en-lbl">Capex Growth</div><div class="en-val ev-g">Productive</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s great:</strong> Polycab is a capital-intensive manufacturer (wire factories require significant machinery and equipment) but manages high asset turnover of ~3&times; &mdash; meaning every rupee of factory generates &#8377;3 of revenue. Zero goodwill because Polycab has grown 100% organically &mdash; building factories, not buying companies. Capex is consistently productive: each new factory adds to revenue within 12&ndash;18 months. This is the ideal model for manufacturing: high capex, but high-return, organic, with a rising asset turnover trend.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Asset turnover ~3&times; despite being a capital-intensive manufacturer</div>
+          <div class="sig"><div class="sdot sd-g"></div>Zero goodwill &mdash; 100% organic growth, factories built from scratch</div>
+          <div class="sig"><div class="sdot sd-g"></div>Capex returns materialise quickly (12&ndash;18 months for wire factories)</div>
+          <div class="sig"><div class="sdot sd-g"></div>Net Block rising every year &mdash; consistent expansion of capacity</div>
+        </div>
+      </div>
+      <!-- GOOD 5 FULL WIDTH -->
+      <div class="excard eg5 exfull rv d6">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#ffe4e6);">&#128241;</div><div><div class="ex-name">Reliance Jio &mdash; Massive Capex, But Generating Explosive Returns</div><div class="ex-sec">Telecom &middot; Part of Reliance Industries &middot; NSE: RELIANCE</div></div></div>
+        <div class="vrd vg">&#10004; Very High Capex, Justified by Monopolistic Network Returns</div>
+        <div class="ex-inner">
+          <div>
+            <div class="enums">
+              <div class="en en-p"><div class="en-lbl">Spectrum Intangibles</div><div class="en-val ev-p">&#8377;1.5L+ Cr</div></div>
+              <div class="en en-p"><div class="en-lbl">Net Block (Towers)</div><div class="en-val ev-p">&#8377;80,000 Cr</div></div>
+              <div class="en en-g"><div class="en-lbl">Subscriber Revenue</div><div class="en-val ev-g">45 Cr subs</div></div>
+              <div class="en en-g"><div class="en-lbl">Asset Trend</div><div class="en-val ev-g">ROI Rising</div></div>
+            </div>
+            <div class="ex-why" style="margin-top:12px;"><strong>Why it&rsquo;s great despite huge assets:</strong> Reliance Jio&rsquo;s balance sheet shows enormous intangibles (&#8377;1.5 lakh crore+ of spectrum licences) and massive fixed assets (towers, fibre, data centres). This looks alarming on the surface. But these assets now serve 45+ crore subscribers generating &#8377;25,000+ Cr annual EBITDA &mdash; a return on invested assets that is rising every year as the network reaches full utilisation. The capex was front-loaded (2016&ndash;2020); the returns are back-loaded (2021 onwards). This is the classic infrastructure investment pattern.</div>
+          </div>
+          <div>
+            <div class="sigs" style="margin-top:0;">
+              <div class="sig"><div class="sdot sd-g"></div>Spectrum licences = productive intangibles generating real revenue</div>
+              <div class="sig"><div class="sdot sd-g"></div>Asset utilisation rising as subscriber base grows toward 50 crore</div>
+              <div class="sig"><div class="sdot sd-g"></div>Capex phase largely complete &mdash; now entering cash generation phase</div>
+              <div class="sig"><div class="sdot sd-g"></div>EBITDA/Asset ratio improving every year &mdash; assets earning more</div>
+              <div class="sig-hl shl-g"><strong>Key lesson:</strong> Large intangibles or fixed assets are not automatically bad. The question is: are these assets generating rising cash flows? Is the return on assets trending up? For Jio, both answers are yes &mdash; making the massive asset base a strength, not a weakness. Compare with Vodafone Idea: similar assets, but subscriber loss means return on assets is falling, not rising.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 BAD -->
+    <div class="gbh rv d2 gbh-r" style="margin-top:44px;">
+      <div class="gbh-ico gi-r">&#9888;</div>
+      <div><div class="gbh-title">5 Companies With Problematic Asset Structures</div><div class="gbh-sub">Excessive goodwill &middot; Failed acquisitions &middot; Overvalued intangibles &middot; Ageing assets not replaced &middot; CWIP delays</div></div>
+    </div>
+    <div class="exgrid">
+      <div class="excard eb1 rv d2">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">&#127942;</div><div><div class="ex-name">Tata Steel (Post-Corus Acquisition 2007)</div><div class="ex-sec">Steel &middot; NSE: TATASTEEL &middot; Historical Case Study</div></div></div>
+        <div class="vrd vr">&#128680; Massive Goodwill From Overpriced Acquisition</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Corus Price Paid</div><div class="en-val ev-r">$13.5 Bn</div></div>
+          <div class="en en-r"><div class="en-lbl">Goodwill Peak</div><div class="en-val ev-r">Very Large</div></div>
+          <div class="en en-r"><div class="en-lbl">Debt Taken On</div><div class="en-val ev-r">&#8377;70,000 Cr</div></div>
+          <div class="en en-r"><div class="en-lbl">Impairments</div><div class="en-val ev-r">Multiple</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it was problematic:</strong> Tata Steel acquired Corus (UK steel company) in 2007 for $13.5 billion at the top of the steel cycle &mdash; paying a massive premium that created enormous goodwill. When the global financial crisis hit and steel prices collapsed, Corus&rsquo;s cash flows could not justify the acquisition price. Tata Steel had to take multiple impairment charges over the years, directly hitting reported profits. The acquisition also loaded Tata Steel with &#8377;70,000+ Cr of debt. Eventually, much of Corus/Tata Steel Europe was shut or sold after a decade of struggles.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>Paid 2&times; book value at cyclical peak &mdash; goodwill created instantly became questionable</div>
+          <div class="sig"><div class="sdot sd-r"></div>European steel assets were capital-intensive with low margins in structural decline</div>
+          <div class="sig"><div class="sdot sd-r"></div>Multiple goodwill impairments over 10+ years &mdash; each hit reported profits</div>
+          <div class="sig"><div class="sdot sd-r"></div>Final resolution: much of Corus sold or shuttered at a fraction of acquisition cost</div>
+        </div>
+      </div>
+      <div class="excard eb2 rv d3">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fee2e2);">&#128241;</div><div><div class="ex-name">Vodafone Idea</div><div class="ex-sec">Telecom &middot; NSE: IDEA &middot; Spectrum + Write-offs</div></div></div>
+        <div class="vrd vr">&#128680; Same Assets as Jio, But Subscriber Loss = Falling Returns</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Spectrum Intangibles</div><div class="en-val ev-r">&#8377;90,000+ Cr</div></div>
+          <div class="en en-r"><div class="en-lbl">Network Assets</div><div class="en-val ev-r">Declining</div></div>
+          <div class="en en-r"><div class="en-lbl">Asset Utilisation</div><div class="en-val ev-r">Falling</div></div>
+          <div class="en en-r"><div class="en-lbl">Return on Assets</div><div class="en-val ev-r">Negative</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s dangerous:</strong> Vodafone Idea has &#8377;90,000+ Cr of spectrum licences (intangibles) and massive network assets on its balance sheet &mdash; similar in scale to Jio. But subscriber count has been falling from 30 crore to under 20 crore as customers migrate to Jio and Airtel. The assets exist but utilisation is declining. Revenue per asset is falling every year. The company cannot justify maintaining these assets from its own cash flows. Unlike Jio where asset ROI is rising, Vi&rsquo;s asset ROI is collapsing &mdash; making the large intangibles a liability, not a strength.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>Similar asset base as Jio but subscriber count falling, not rising</div>
+          <div class="sig"><div class="sdot sd-r"></div>Spectrum licences (intangibles) produce less revenue each year</div>
+          <div class="sig"><div class="sdot sd-r"></div>Cannot fund network capex from operations &mdash; assets ageing without replacement</div>
+          <div class="sig"><div class="sdot sd-r"></div>Return on assets negative &mdash; assets destroying value rather than creating it</div>
+        </div>
+      </div>
+      <div class="excard eb3 rv d4">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--apale),#fef3c7);">&#127981;</div><div><div class="ex-name">Over-Capitalising Software / R&amp;D</div><div class="ex-sec">Pattern: Some IT &amp; pharma cos. &middot; Earnings management via capitalisation</div></div></div>
+        <div class="vrd vr">&#128680; Intangibles Growing Without Revenue Impact</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Intangibles Growth</div><div class="en-val ev-r">40%+ CAGR</div></div>
+          <div class="en en-r"><div class="en-lbl">Revenue Growth</div><div class="en-val ev-r">12% CAGR</div></div>
+          <div class="en en-r"><div class="en-lbl">Amortisation</div><div class="en-val ev-r">Below capex</div></div>
+          <div class="en en-r"><div class="en-lbl">Earnings Impact</div><div class="en-val ev-r">Overstated</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s dangerous:</strong> Some companies capitalise software development costs or R&amp;D as intangible assets instead of expensing them immediately to the P&amp;L. This artificially boosts reported profits (cost not hitting P&amp;L) while inflating the balance sheet with intangibles. If intangibles are growing 40%+ per year while revenue grows only 12%, and the capitalised software/R&amp;D is not producing proportional revenue, the intangibles are effectively deferred losses that will eventually need to be written off. This is a form of earnings management visible by comparing intangibles growth vs revenue growth on Screener.in.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>Intangibles growing much faster than revenue &mdash; value not being created</div>
+          <div class="sig"><div class="sdot sd-r"></div>Amortisation rates deliberately kept low to minimise P&amp;L impact</div>
+          <div class="sig"><div class="sdot sd-r"></div>Cash flow from operations below reported profit &mdash; capitalisation inflating earnings</div>
+          <div class="sig"><div class="sdot sd-r"></div>Compare: operating cash flow vs reported PAT &mdash; large divergence is warning</div>
+        </div>
+      </div>
+      <div class="excard eb4 rv d5">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,#faf5ff,#ede9fe);">&#128679;</div><div><div class="ex-name">CWIP Rising for 3+ Years (Project Delays)</div><div class="ex-sec">Pattern: Large infra, power, manufacturing projects &middot; Serious risk indicator</div></div></div>
+        <div class="vrd vr">&#128680; Capital Tied Up in Assets That Generate No Revenue</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">CWIP (Year 1)</div><div class="en-val ev-r">&#8377;2,000 Cr</div></div>
+          <div class="en en-r"><div class="en-lbl">CWIP (Year 4)</div><div class="en-val ev-r">&#8377;8,000 Cr</div></div>
+          <div class="en en-r"><div class="en-lbl">Interest Incurred</div><div class="en-val ev-r">&#8377;1,200 Cr</div></div>
+          <div class="en en-r"><div class="en-lbl">Revenue Impact</div><div class="en-val ev-r">Zero yet</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it&rsquo;s dangerous:</strong> Capital Work in Progress (CWIP) represents money spent on assets not yet operational &mdash; a factory under construction, a power plant being built. While CWIP is normal and expected during construction phases, a CWIP balance that keeps rising year after year without converting into Net Block (commissioned assets) is a serious warning signal. It means the company is spending money, incurring interest on construction loans, but generating zero revenue from those assets. Common causes: regulatory delays, environmental clearances, technology problems, or simply poor project management.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>CWIP quadrupled in 4 years &mdash; capital tied up generating zero revenue</div>
+          <div class="sig"><div class="sdot sd-r"></div>Interest on construction loans capitalised &mdash; inflating CWIP further</div>
+          <div class="sig"><div class="sdot sd-r"></div>No conversion to Net Block &mdash; plant still not commissioned</div>
+          <div class="sig"><div class="sdot sd-r"></div>Visible clearly on Screener.in Balance Sheet CWIP row &mdash; rising for 3+ years</div>
+        </div>
+      </div>
+      <!-- BAD 5 FULL WIDTH -->
+      <div class="excard eb5 exfull rv d6">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fee2e2);">&#128200;</div><div><div class="ex-name">Infrastructure / Asset-Heavy Companies With Falling Asset Turnover</div><div class="ex-sec">Pattern visible in: Power generation, airports, steel, cement &middot; The capex trap</div></div></div>
+        <div class="vrd vr">&#128680; The Capex Trap &mdash; Investing More and Earning Less Per Rupee</div>
+        <div class="ex-inner">
+          <div>
+            <div class="enums">
+              <div class="en en-r"><div class="en-lbl">Asset Turnover Yr1</div><div class="en-val ev-r">0.6&times;</div></div>
+              <div class="en en-r"><div class="en-lbl">Asset Turnover Yr5</div><div class="en-val ev-r">0.35&times;</div></div>
+              <div class="en en-r"><div class="en-lbl">Capex Intensity</div><div class="en-val ev-r">25&ndash;35%</div></div>
+              <div class="en en-r"><div class="en-lbl">Return on Assets</div><div class="en-val ev-r">Declining</div></div>
+            </div>
+            <div class="ex-why" style="margin-top:12px;"><strong>The capex trap explained:</strong> A company whose asset turnover is falling over 5 years while simultaneously spending heavily on capex is in the capex trap. Each new asset commissioned earns less per rupee than existing assets. This happens in sectors with structural overcapacity (steel, power, cement). The company keeps investing because it believes in future demand, but returns on new assets are below cost of capital &mdash; every new factory actually destroys value. On Screener.in, this appears as Net Block rising while Revenue/Net Block falls. The combination of rising capex intensity and falling asset turnover is one of the most reliable value-destruction patterns in Indian markets.</div>
+          </div>
+          <div>
+            <div class="sigs" style="margin-top:0;">
+              <div class="sig"><div class="sdot sd-r"></div>Asset turnover falling year-on-year despite massive new capex</div>
+              <div class="sig"><div class="sdot sd-r"></div>Return on new assets below weighted average cost of capital (WACC)</div>
+              <div class="sig"><div class="sdot sd-r"></div>Capex intensity 25&ndash;35% of revenue &mdash; requires constant external funding</div>
+              <div class="sig"><div class="sdot sd-r"></div>Visible on Screener.in: Net Block rising, Revenue/Net Block falling, debt rising</div>
+              <div class="sig-hl shl-r"><strong>How to spot on Screener.in:</strong> Ratios tab &rarr; Asset Turnover chart (10-year). If the line is consistently declining while the Balance Sheet shows Net Block rising &mdash; the company is investing more per rupee of revenue earned. Cross-check with D/E ratio: if debt is also rising, the company is funding declining-return assets with expensive debt &mdash; a dangerous combination. Best avoided until management explains clearly why returns will improve.</div>
+              <div class="sig-hl shl-g" style="margin-top:8px;"><strong>Exception:</strong> Asset turnover temporarily falling during a major capacity expansion is normal and expected (new factories need time to ramp up). The concern is when it keeps falling 3+ years after capex is complete &mdash; meaning demand never materialised or pricing has deteriorated.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary table -->
+    <p class="rv d6" style="font-size:clamp(17px,2.2vw,24px);font-weight:900;color:var(--tx);margin-bottom:22px;">&#128202; All 10 Companies &mdash; Asset Quality at a Glance</p>
+    <div class="sumwrap rv d6">
+      <table class="sumtbl">
+        <thead><tr><th>Company</th><th>Net Block</th><th>Goodwill</th><th>Asset Turnover</th><th>Capex Intensity</th><th>Key Strength/Risk</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>CDSL</td><td>~&#8377;85 Cr</td><td>Zero</td><td>&gt;8&times;</td><td>&lt;3%</td><td>Asset-light monopoly model</td><td><span class="tb tb-g">&#10004; Best-in-Class</span></td></tr>
+          <tr><td>Pidilite</td><td>~&#8377;1,800 Cr</td><td>Very Low</td><td>~1.8&times;</td><td>5&ndash;8%</td><td>Invisible brand moat not on books</td><td><span class="tb tb-g">&#10004; Excellent</span></td></tr>
+          <tr><td>TCS</td><td>~&#8377;8,000 Cr</td><td>~&#8377;4,200 Cr</td><td>&gt;6&times;</td><td>&lt;4%</td><td>People assets, minimal physical capex</td><td><span class="tb tb-g">&#10004; Asset-Light</span></td></tr>
+          <tr><td>Polycab</td><td>~&#8377;4,500 Cr</td><td>Zero</td><td>~3&times;</td><td>10&ndash;15%</td><td>Organic growth, productive factories</td><td><span class="tb tb-g">&#10004; Productive</span></td></tr>
+          <tr><td>Reliance Jio</td><td>&#8377;80,000 Cr+</td><td>Low</td><td>Rising</td><td>High (past)</td><td>Front-loaded capex, returns accelerating</td><td><span class="tb tb-g">&#10004; Maturing</span></td></tr>
+          <tr><td>Tata Steel Corus</td><td>Large</td><td>Very Large</td><td>Low</td><td>Very High</td><td>Overpriced acquisition, impairments followed</td><td><span class="tb tb-r">&#128680; Risk</span></td></tr>
+          <tr><td>Vodafone Idea</td><td>&#8377;90k Cr intang.</td><td>Low</td><td>Falling</td><td>Cannot fund</td><td>Assets under-utilised, subscribers leaving</td><td><span class="tb tb-r">&#128680; Critical</span></td></tr>
+          <tr><td>Capitalising Intangibles</td><td>Normal</td><td>Low</td><td>Normal</td><td>Low</td><td>Intangibles growing 3&times; faster than revenue</td><td><span class="tb tb-r">&#128680; Earnings Risk</span></td></tr>
+          <tr><td>CWIP Delays (pattern)</td><td>Rising</td><td>None</td><td>Falling</td><td>Very High</td><td>Capital tied up, zero revenue from new assets</td><td><span class="tb tb-a">&#9888; Monitor</span></td></tr>
+          <tr><td>Capex Trap</td><td>Rising fast</td><td>Low</td><td>Falling fast</td><td>25&ndash;35%</td><td>New assets earn less than old &mdash; value destruction</td><td><span class="tb tb-r">&#128680; Avoid</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight rv d6">
+      <div class="ins-ico">&#127919;</div>
+      <div>
+        <div class="ins-tag">The Golden Rule for Asset Quality</div>
+        <div class="ins-title">Good Assets Generate Rising Returns. Bad Assets Consume Capital While Returns Fall.</div>
+        <div class="ins-desc">Open any company on <strong>Screener.in &rarr; Ratios tab &rarr; Asset Turnover chart</strong>. If the line is flat or rising over 5 years while Net Block also rises &mdash; assets are productive. Check Goodwill (Balance Sheet) &mdash; zero is ideal, more than 30% of equity needs investigation. Check CWIP (Balance Sheet) &mdash; should not be rising for 3+ years without new capacity going live. These three checks take 3 minutes and cover 90% of asset quality analysis for non-financial companies.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 TRICKS -->
+<section class="tricks-sec">
+  <div class="w">
+    <div class="chip rv d1">05 &mdash; Tricks to Find Asset Quality Instantly</div>
+    <h2 class="h2 rv d2">5 Screener.in Shortcuts Every <span class="hp">Investor Must Know</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">These are field-tested tricks to evaluate Fixed Assets, Goodwill, and Intangibles in under 5 minutes &mdash; no annual report reading required. All data is free on Screener.in.</p>
+
+    <div class="tgrid rv d3">
+      <div class="tc tc1">
+        <div class="tn tn1">1</div>
+        <div class="tc-sub ts1">Screener.in &mdash; Ratios Tab</div>
+        <div class="tc-title">The &ldquo;Asset Turnover Trend&rdquo; Trick</div>
+        <div class="tc-desc">Asset Turnover (Revenue &divide; Net Fixed Assets) is the most important single ratio for evaluating fixed asset quality. Go to the <strong>Ratios tab</strong> and find &ldquo;Asset Turnover Ratio&rdquo; &rarr; click the chart icon to see the 10-year trend. Rising asset turnover = each rupee of assets earns more revenue every year (excellent). Falling asset turnover = new assets underperforming or existing assets under-utilised (warning). Compare with 2&ndash;3 sector peers to benchmark efficiently.</div>
+        <div class="tc-steps">
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Screener.in &rarr; any company &rarr; Ratios tab</div>
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Find &ldquo;Asset Turnover Ratio&rdquo; &rarr; click the chart &#128200; icon</div>
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Is the trend rising or falling over 5 years? Compare with 2 peers.</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; Rising turnover = Assets earning more</span>
+          <span class="tcr-a">&#9888; Flat = Maintaining, not improving</span>
+          <span class="tcr-r">&#10007; Falling = Capital being deployed poorly</span>
+        </div>
+      </div>
+
+      <div class="tc tc2">
+        <div class="tn tn2">2</div>
+        <div class="tc-sub ts2">Screener.in &mdash; Balance Sheet Tab</div>
+        <div class="tc-title">The &ldquo;Goodwill as % of Equity&rdquo; Trick</div>
+        <div class="tc-desc">Open the Balance Sheet tab and find two numbers: <strong>Goodwill</strong> (Non-Current Assets section) and <strong>Total Equity</strong> (Share Capital + Reserves). Calculate Goodwill &divide; Total Equity. If this percentage is under 10% &mdash; goodwill is manageable. If it exceeds 30% &mdash; a meaningful portion of equity exists only because of past acquisition premiums, not real business assets. Also check if Goodwill has changed year-on-year: a sudden increase = new acquisition made; a decrease = impairment taken (write-off).</div>
+        <div class="tc-steps">
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> Balance Sheet &rarr; Non-Current Assets &rarr; find Goodwill row</div>
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> Balance Sheet &rarr; find Total Equity (Reserves + Share Capital)</div>
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> Calculate: Goodwill &divide; Equity &times; 100. Is it &lt;10%? &gt;30%?</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; Goodwill = 0% of equity = organic growth</span>
+          <span class="tcr-a">&#9888; Goodwill 10&ndash;30% of equity = monitor</span>
+          <span class="tcr-r">&#10007; Goodwill &gt;30% of equity = acquisition risk, check subsidiaries</span>
+        </div>
+      </div>
+
+      <div class="tc tc3">
+        <div class="tn tn3">3</div>
+        <div class="tc-sub ts3">Screener.in &mdash; Cash Flow Tab</div>
+        <div class="tc-title">The &ldquo;Capex vs Depreciation&rdquo; Trick</div>
+        <div class="tc-desc">Open the Cash Flow Statement &rarr; find <strong>Capital Expenditure</strong> (negative number in Cash Flow from Investing) and compare with <strong>Depreciation</strong> (add-back in Cash Flow from Operations). This tells you whether the company is growing its asset base or just maintaining it. Capex &gt; Depreciation = investing in growth. Capex &asymp; Depreciation = maintenance mode. Capex &lt; Depreciation for 3+ years = assets ageing without replacement (the &ldquo;melting ice cube&rdquo; problem). Trend matters more than any single year.</div>
+        <div class="tc-steps">
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Cash Flow tab &rarr; find &ldquo;Capital Expenditure&rdquo; (investing section)</div>
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Cash Flow tab &rarr; find &ldquo;Depreciation&rdquo; (operating section add-back)</div>
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Compare for 3&ndash;5 years. Which is consistently higher?</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; Capex &gt; Depreciation = Investing in growth</span>
+          <span class="tcr-a">&#9888; Capex &asymp; Depreciation = Maintenance only</span>
+          <span class="tcr-r">&#10007; Capex &lt; Depreciation 3+ years = Assets shrinking</span>
+        </div>
+      </div>
+
+      <div class="tc tc4">
+        <div class="tn tn4">4</div>
+        <div class="tc-sub ts4">Screener.in &mdash; Balance Sheet CWIP Row</div>
+        <div class="tc-title">The &ldquo;CWIP Trend&rdquo; Trick</div>
+        <div class="tc-desc">Capital Work in Progress (CWIP) is money spent on assets under construction &mdash; not yet operational, not yet earning revenue. Normal CWIP is fine (all factories take time to build). The <strong>trick: watch CWIP as % of Net Block across 3&ndash;5 years on Screener.in</strong>. If CWIP keeps rising year after year without converting to Net Block (commissioned assets), the project is delayed. Delayed projects mean interest is being capitalised (hidden in CWIP), cash is trapped, and revenue projections are not materialising. This is one of the earliest visible signals of project execution risk.</div>
+        <div class="tc-steps">
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Balance Sheet &rarr; find &ldquo;Capital Work in Progress&rdquo; (CWIP) row</div>
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Read the 5-year trend: rising or flat or converting to Net Block?</div>
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Calculate CWIP &divide; Net Block &times; 100. Rising % = project delays</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; CWIP falling = projects commissioned on time</span>
+          <span class="tcr-a">&#9888; CWIP stable = large ongoing project, expected</span>
+          <span class="tcr-r">&#10007; CWIP rising 3+ years = delays, capital trapped, investigate</span>
+        </div>
+      </div>
+
+      <!-- TRICK 5 FULL WIDTH -->
+      <div class="tc tc5">
+        <div class="tn tn5">5</div>
+        <div class="tc-sub ts5">Screener.in &mdash; The Invisible Asset Trick</div>
+        <div class="tc-title">The &ldquo;P/BV vs ROE&rdquo; Trick &mdash; Find Hidden Intangible Assets</div>
+        <div class="tc-desc">Great brands, customer loyalty, and internally developed technology never appear on the balance sheet &mdash; but they drive enormous profits. The trick to identify companies with massive off-balance-sheet intangibles is to compare <strong>P/BV (Price-to-Book Value) with ROE (Return on Equity)</strong>. A company trading at 50&times; Book Value with 80% ROE has enormous invisible assets &mdash; the market is valuing what the balance sheet does not show. Use this to find quality businesses where the accounting understates real value.</div>
+        <div class="tc5-inner">
+          <div>
+            <div class="tc-steps">
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Ratios tab &rarr; find &ldquo;Price to Book Value (P/BV)&rdquo; &rarr; note current value</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Ratios tab &rarr; find &ldquo;Return on Equity (ROE)&rdquo; &rarr; note 5-year average</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> If P/BV &gt;10&times; and ROE &gt;25% &mdash; company has invisible off-balance-sheet assets</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Examples: HUL (P/BV ~60&times;, ROE 200%+), Nestle (P/BV ~80&times;, ROE 100%+)</div>
+            </div>
+          </div>
+          <div>
+            <div class="tc-steps">
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> High P/BV + Low ROE = Overvalued, book value inflated (possible goodwill)</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Low P/BV + Low ROE = Value trap, poor business quality (avoid)</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> High P/BV + High ROE = Invisible moat (brand, patents, relationships)</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Low P/BV + High ROE = Hidden gem &mdash; market undervaluing the business</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-res" style="margin-top:14px;">
+          <span class="tcr-g">&#10004; High P/BV + High ROE = Invisible moat worth paying for</span>
+          <span class="tcr-a">&#9888; High P/BV + Moderate ROE = Premium pricing, justify carefully</span>
+          <span class="tcr-r">&#10007; High P/BV + Low/falling ROE = Goodwill inflating book value, overpriced</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cheat Sheet -->
+    <div class="cheat rv d5">
+      <div class="cheat-inner">
+        <div class="cheat-badge">90-Second Asset Quality Cheat Sheet</div>
+        <div class="cheat-title">Open Screener.in &rarr; 5 Checks &rarr; Pass / Fail &rarr; Done</div>
+        <div class="cheat-grid">
+          <div class="ci ci-good">
+            <div class="ci-num">Check 1 &mdash; Ratios Tab</div>
+            <div class="ci-name">Asset Turnover Trend</div>
+            <div class="ci-val">&#10004; Rising or stable over 5 years<br>&#10007; Falling while Net Block rises</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Check 2 &mdash; Balance Sheet</div>
+            <div class="ci-name">Goodwill % of Equity</div>
+            <div class="ci-val">&#10004; Zero or &lt;10% of equity<br>&#10007; &gt;30% &amp; acquired company struggling</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Check 3 &mdash; Cash Flow Tab</div>
+            <div class="ci-name">Capex vs Depreciation</div>
+            <div class="ci-val">&#10004; Capex &gt; Depreciation (growing)<br>&#10007; Capex &lt; Depreciation 3+ years</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Check 4 &mdash; Balance Sheet</div>
+            <div class="ci-name">CWIP Trend</div>
+            <div class="ci-val">&#10004; Falling &mdash; projects commissioned<br>&#10007; Rising 3+ years = project delays</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Check 5 &mdash; Ratios Tab</div>
+            <div class="ci-name">P/BV vs ROE</div>
+            <div class="ci-val">&#10004; High P/BV justified by high ROE<br>&#10007; High P/BV + goodwill inflation + low ROE</div>
+          </div>
+          <div class="ci ci-warn">
+            <div class="ci-num">Special Cases</div>
+            <div class="ci-name">Sector Exceptions</div>
+            <div class="ci-val">Telecom: spectrum intangibles are normal &bull; IT: zero fixed assets normal &bull; FMCG: high P/BV normal if ROE &gt;50% &bull; Banks: use capital adequacy, not asset turnover &bull; Infra: CWIP may be large by design (concession agreements)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight rv d6">
+      <div class="ins-ico">&#127919;</div>
+      <div>
+        <div class="ins-tag">The One-Line Asset Filter</div>
+        <div class="ins-title">If Asset Turnover Is Rising and Goodwill Is Zero &mdash; Asset Quality Is Probably Excellent</div>
+        <div class="ins-desc">Rising asset turnover means assets are becoming more productive over time. Zero goodwill means the company grew organically without overpaying for acquisitions. These two conditions together &mdash; found in 60 seconds on Screener.in&rsquo;s Ratios tab and Balance Sheet &mdash; identify the highest-quality asset bases in Indian markets. CDSL, Pidilite, Polycab, and Bajaj Auto all pass this test. Tata Steel Corus acquisition, Vodafone Idea, and capex-trapped companies fail it. Start here before any other analysis.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT CHAPTER -->
+<div class="nxt">
+  <div class="nxt-left">
+    <div class="nxt-lbl">Up Next &middot; Module 06</div>
+    <div class="nxt-sub">Revenue Recognition &amp; Profit Quality &mdash; When Is a Sale Really a Sale?</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arr">&#8594;</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section class="disc">
+  <div class="disc-inner">
+    <div class="disc-ico">&#9888;&#65039;</div>
+    <div>
+      <div class="disc-lbl">Important Disclaimer</div>
+      <div class="disc-txt">This page is for educational purposes only. All figures shown for CDSL, Pidilite Industries, TCS, Polycab India, Reliance Jio, Tata Steel, Vodafone Idea, and other companies are approximate illustrative values sourced from publicly available disclosures and Screener.in. Asset Turnover, Goodwill figures, CWIP, and Capex Intensity values are approximate. Actual audited numbers may differ. Verify all figures from official SEBI filings and annual reports before making any investment decision. All equity investments carry market risk. Past performance does not guarantee future returns. This module is not investment advice. Consult a SEBI-registered investment advisor before investing.</div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{threshold:.05,rootMargin:'0px 0px -36px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  }else{els.forEach(function(el){el.classList.add('on');});}
+  ['touchstart','touchmove','touchend','touchcancel'].forEach(function(evt){document.addEventListener(evt,function(){},{passive:true});});
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){els.forEach(function(el){el.classList.add('on');});}
+  document.body.style.overscrollBehavior='none';
+  function setVH(){document.documentElement.style.setProperty('--vh',window.innerHeight*.01+'px');}
+  setVH();
+  window.addEventListener('resize',setVH,{passive:true});
+  window.addEventListener('orientationchange',function(){setTimeout(setVH,300);setTimeout(function(){document.querySelectorAll('.rv:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<window.innerHeight*.95){el.classList.add('on');}});},400);},{passive:true});
+  document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('a,button,.dmbtn,.nxt-btn,.excard,.at-card,.tc,.kp').forEach(function(el){el.style.touchAction='manipulation';});
+    document.querySelectorAll('.tscroll,.sumwrap').forEach(function(el){el.style.webkitOverflowScrolling='touch';});
+    if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});});}
+  });
+})();
+</script>
+</body>
+</html>

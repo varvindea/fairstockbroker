@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<meta name="color-scheme" content="light"/>
+<title>Stock Market Learning Portal — Master</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet"/>
+<style>
+/* ── TOKENS ──────────────────────────── */
+:root{
+  --p600:#4c1eb0;--p500:#6c3de4;--p400:#8f65f0;
+  --p300:#bda3f8;--p200:#ddd0fc;--p100:#f4f0fe;--p50:#faf8ff;
+  --g700:#0f5c30;--g600:#157a3e;--g500:#1ea851;
+  --g200:#b8f0cf;--g100:#e0f8eb;--g50:#f3fdf6;
+  --amber:#c47c10;--amber-bg:#fffaec;--amber-border:#f9d98a;
+  --red:#e03c3c;--red-bg:#fff0f0;--red-border:#fbc8c8;
+  --ink:#100428;--ink2:#32205a;--ink3:#7b6598;--ink4:#b8a8d4;
+  --white:#fff;--surf1:#faf8ff;--surf2:#f4f0fe;
+  --border:#e0d8f8;
+  --sh1:0 1px 6px rgba(108,61,228,.07);
+  --sh2:0 4px 20px rgba(108,61,228,.11);
+  --sh3:0 12px 44px rgba(108,61,228,.16);
+  --r-xl:24px;--r-lg:20px;--r-md:14px;
+  --font:'DM Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:var(--font);background:#faf8ff;color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ── ANIMATIONS ──────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* ── HERO ────────────────────────────── */
+.hero{
+  background:var(--white);border-bottom:1px solid var(--border);
+  padding:44px 0 40px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(224,216,248,.45)1px,transparent 1px),
+    linear-gradient(90deg,rgba(224,216,248,.45)1px,transparent 1px);
+  background-size:48px 48px;pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;top:-140px;right:-100px;
+  width:640px;height:640px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(108,61,228,.08),transparent 65%);
+  pointer-events:none;
+}
+.hero-inner{
+  position:relative;z-index:2;max-width:1340px;margin:0 auto;
+  padding:0 max(28px,env(safe-area-inset-left));
+  display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+
+/* left copy */
+.hero-copy{max-width:600px}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--p100);border:1.5px solid var(--p200);border-radius:100px;
+  padding:5px 14px;font-size:11.5px;font-weight:700;color:var(--p600);
+  margin-bottom:16px;
+}
+.hero-eyebrow-dot{width:7px;height:7px;border-radius:50%;background:var(--p500);animation:pulse 2s infinite}
+.hero h1{
+  font-size:clamp(26px,4vw,44px);font-weight:900;color:var(--ink);
+  letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px;
+}
+.hero h1 .grad{
+  background:linear-gradient(90deg,var(--p600),var(--p400),var(--g500));
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:gradShift 4s ease infinite;
+}
+.hero-sub{font-size:14.5px;color:var(--ink3);line-height:1.75;max-width:520px;margin-bottom:28px}
+
+/* stat pills */
+.hero-stats{display:flex;gap:12px;flex-wrap:wrap}
+.hstat{
+  display:flex;align-items:center;gap:9px;
+  padding:10px 18px;border-radius:14px;
+  background:var(--white);border:1.5px solid var(--border);box-shadow:var(--sh1);
+}
+.hstat-icon{
+  width:34px;height:34px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;
+}
+.hstat-val{font-size:18px;font-weight:900;color:var(--ink);line-height:1}
+.hstat-lbl{font-size:10.5px;color:var(--ink3);font-weight:600;margin-top:1px}
+
+/* resume card */
+.hero-resume{
+  background:linear-gradient(135deg,var(--p500),var(--p600),#4c1d95);
+  border-radius:var(--r-xl);padding:24px 28px;color:#fff;
+  min-width:270px;max-width:340px;flex-shrink:0;
+  box-shadow:var(--sh3);cursor:pointer;transition:transform .2s;
+  animation:fadeUp .5s .15s both;
+}
+.hero-resume:hover{transform:translateY(-3px)}
+.hr-label{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;
+  opacity:.7;margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.hr-label::before{content:'';width:14px;height:2px;background:rgba(255,255,255,.5);border-radius:2px}
+.hr-module{font-size:16px;font-weight:800;margin-bottom:4px}
+.hr-topic{font-size:13px;opacity:.8;margin-bottom:20px}
+.hr-prog-bar{height:6px;background:rgba(255,255,255,.2);border-radius:100px;overflow:hidden;margin-bottom:10px}
+.hr-prog-fill{height:100%;width:35%;background:linear-gradient(90deg,#fff,var(--g300));border-radius:100px}
+.hr-foot{display:flex;align-items:center;justify-content:space-between;font-size:12px;opacity:.8}
+.hr-cta{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);
+  border-radius:100px;padding:5px 14px;font-size:12px;font-weight:700;transition:.18s;
+}
+.hr-cta:hover{background:rgba(255,255,255,.32)}
+
+/* ── FILTER BAR ──────────────────────── */
+.filter-bar{
+  max-width:1340px;margin:0 auto;
+  padding:18px max(28px,env(safe-area-inset-left));
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.filter-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 18px;border-radius:100px;
+  font-size:13px;font-weight:600;cursor:pointer;transition:.18s;
+  background:var(--white);border:1.5px solid var(--border);color:var(--ink3);
+}
+.filter-btn:hover{border-color:var(--p300);color:var(--p600);background:var(--p50)}
+.filter-btn.active{background:var(--p500);border-color:var(--p500);color:#fff;box-shadow:0 3px 12px rgba(108,61,228,.28)}
+.filter-dot{width:7px;height:7px;border-radius:50%}
+.filter-sep{flex:1}
+.sort-btn{
+  display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:10px;
+  font-size:12.5px;font-weight:600;color:var(--ink3);
+  background:var(--white);border:1.5px solid var(--border);cursor:pointer;transition:.18s;
+}
+.sort-btn:hover{border-color:var(--p300);color:var(--p600)}
+
+/* ── GRID ────────────────────────────── */
+.modules-section{
+  max-width:1340px;margin:0 auto;
+  padding:4px max(28px,env(safe-area-inset-left)) 72px;
+}
+.modules-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+  gap:22px;
+}
+@media(max-width:640px){.modules-grid{grid-template-columns:1fr}}
+
+/* ── MODULE CARD ─────────────────────── */
+.mod-card{
+  background:var(--white);border-radius:var(--r-xl);
+  border:1.5px solid var(--border);box-shadow:var(--sh1);
+  overflow:hidden;cursor:pointer;
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,border-color .25s;
+  animation:fadeUp .45s ease both;
+  will-change:transform,opacity;backface-visibility:hidden;
+}
+.mod-card:nth-child(1){animation-delay:.00s}
+.mod-card:nth-child(2){animation-delay:.05s}
+.mod-card:nth-child(3){animation-delay:.10s}
+.mod-card:nth-child(4){animation-delay:.15s}
+.mod-card:nth-child(5){animation-delay:.20s}
+.mod-card:nth-child(6){animation-delay:.25s}
+.mod-card:nth-child(7){animation-delay:.30s}
+.mod-card:nth-child(8){animation-delay:.35s}
+.mod-card:nth-child(9){animation-delay:.40s}
+.mod-card:nth-child(10){animation-delay:.45s}
+.mod-card:hover{transform:translateY(-7px);box-shadow:var(--sh3);border-color:var(--p300)}
+
+/* header */
+.mod-card-header{
+  padding:26px 22px 20px;position:relative;overflow:hidden;
+}
+.mod-card-header::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+}
+.mod-deco{position:absolute;top:-24px;right:-24px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.1);pointer-events:none}
+.mod-deco2{position:absolute;bottom:-35px;left:-14px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.07);pointer-events:none}
+
+.mod-badge{
+  position:absolute;top:16px;right:16px;
+  background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.28);
+  border-radius:100px;padding:3px 11px;
+  font-size:10px;font-weight:800;color:rgba(255,255,255,.92);
+  z-index:1;text-transform:uppercase;letter-spacing:.5px;
+}
+.mod-icon-wrap{
+  width:54px;height:54px;border-radius:17px;
+  background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.28);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin-bottom:16px;position:relative;z-index:1;
+}
+.mod-title{font-size:16.5px;font-weight:800;color:#fff;margin-bottom:5px;position:relative;z-index:1;line-height:1.3}
+.mod-desc{font-size:12px;color:rgba(255,255,255,.82);position:relative;z-index:1;line-height:1.6}
+
+/* body */
+.mod-card-body{padding:18px 20px 16px}
+.mod-levels{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.level-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 11px;border-radius:100px;font-size:10.5px;font-weight:700;border:1.5px solid;
+}
+.lc-beg{background:var(--g50);border-color:var(--g200);color:var(--g700)}
+.lc-int{background:var(--amber-bg);border-color:var(--amber-border);color:var(--amber)}
+.lc-adv{background:var(--red-bg);border-color:var(--red-border);color:var(--red)}
+
+.mod-meta{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.mod-meta-item{display:flex;align-items:center;gap:4px;font-size:11.5px;color:var(--ink3);font-weight:500}
+
+.mod-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:14px;border-top:1px solid var(--border);
+}
+.mod-topics-count{font-size:11.5px;color:var(--ink4);font-weight:600}
+.mod-cta{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:8px 16px;border-radius:10px;font-size:12.5px;font-weight:700;
+  background:var(--p50);border:1.5px solid var(--p200);color:var(--p600);transition:.2s;
+}
+.mod-card:hover .mod-cta{background:var(--p500);border-color:var(--p500);color:#fff}
+
+/* colour variants */
+.mc-purple .mod-card-header{background:linear-gradient(135deg,#5b21b6,#7c3aed,#8b5cf6)}
+.mc-green  .mod-card-header{background:linear-gradient(135deg,#065f46,#059669,#10b981)}
+.mc-indigo .mod-card-header{background:linear-gradient(135deg,#312e81,#4338ca,#6366f1)}
+.mc-teal   .mod-card-header{background:linear-gradient(135deg,#134e4a,#0f766e,#2dd4bf)}
+.mc-violet .mod-card-header{background:linear-gradient(135deg,#4c1d95,#6d28d9,#a78bfa)}
+.mc-amber  .mod-card-header{background:linear-gradient(135deg,#92400e,#d97706,#fbbf24)}
+.mc-rose   .mod-card-header{background:linear-gradient(135deg,#881337,#be123c,#fb7185)}
+.mc-emerald .mod-card-header{background:linear-gradient(135deg,#064e3b,#047857,#34d399)}
+.mc-sky     .mod-card-header{background:linear-gradient(135deg,#0c4a6e,#0369a1,#38bdf8)}
+.mc-fuchsia .mod-card-header{background:linear-gradient(135deg,#701a75,#a21caf,#e879f9)}
+
+/* ── RESPONSIVE ──────────────────────── */
+@media(max-width:900px){
+  .hero-inner{flex-direction:column}
+  .hero-resume{max-width:100%}
+}
+@media(max-width:768px){
+  .hero{padding:28px 0 24px}
+  .modules-section,.filter-bar{padding-left:16px;padding-right:16px}
+}
+@media(max-width:480px){
+  .modules-grid{gap:14px}
+  .mod-card-header{padding:20px 18px 16px}
+  .hstat{padding:8px 14px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     HERO
+══════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-inner">
+
+    <!-- left copy -->
+    <div class="hero-copy">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-dot"></div>
+        📚 Stock Market Learning Portal
+      </div>
+      <h1>Master the <span class="grad">Stock Market</span><br>Step by Step</h1>
+      <p class="hero-sub">10 comprehensive modules across Beginner → Intermediate → Advanced. Learn at your own pace with real-world examples, interactive quizzes &amp; tools.</p>
+
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-icon" style="background:var(--p100)">📚</div>
+          <div><div class="hstat-val">10</div><div class="hstat-lbl">Modules</div></div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-icon" style="background:var(--g100)">🎯</div>
+          <div><div class="hstat-val">120+</div><div class="hstat-lbl">Topics</div></div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-icon" style="background:var(--amber-bg)">⏱️</div>
+          <div><div class="hstat-val">40+ hrs</div><div class="hstat-lbl">Content</div></div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-icon" style="background:var(--blue-bg,#eff6ff)">🧩</div>
+          <div><div class="hstat-val">200+</div><div class="hstat-lbl">Quiz Questions</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- resume card -->
+    <div class="hero-resume">
+      <div class="hr-label">Continue Learning</div>
+      <div class="hr-module">Introduction to Stock Market</div>
+      <div class="hr-topic">How Markets Work &amp; Price Discovery</div>
+      <div class="hr-prog-bar"><div class="hr-prog-fill"></div></div>
+      <div class="hr-foot">
+        <span>35% complete · Beginner</span>
+        <div class="hr-cta">Resume →</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     FILTER BAR
+══════════════════════════════════ -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCards('all',this)">
+    <span class="filter-dot" style="background:var(--p500)"></span>All Modules
+  </button>
+  <button class="filter-btn" onclick="filterCards('beginner',this)">
+    <span class="filter-dot" style="background:var(--g500)"></span>Beginner
+  </button>
+  <button class="filter-btn" onclick="filterCards('intermediate',this)">
+    <span class="filter-dot" style="background:var(--amber)"></span>Intermediate
+  </button>
+  <button class="filter-btn" onclick="filterCards('advanced',this)">
+    <span class="filter-dot" style="background:var(--red)"></span>Advanced
+  </button>
+  <button class="filter-btn" onclick="filterCards('bookmarked',this)">🔖 Bookmarked</button>
+  <div class="filter-sep"></div>
+  <div class="sort-btn">Sort: Popular ▾</div>
+</div>
+
+<!-- ══════════════════════════════════
+     MODULE CARDS
+══════════════════════════════════ -->
+<div class="modules-section">
+  <div class="modules-grid" id="modules-grid">
+
+    <!-- 1 · Introduction to Stock Market -->
+    <div class="mod-card mc-purple" data-levels="beginner intermediate advanced">
+      <div class="mod-card-header">
+        <div class="mod-deco"></div><div class="mod-deco2"></div>
+        <div class="mod-badge">Foundational</div>
+        <div class="mod-icon-wrap">📊</div>
+        <div class="mod-title">Introduction to Stock Market</div>
+        <div class="mod-desc">Understand how markets work, exchanges, and your first trade</div>
+      </div>
+      <div class="mod-card-body">
+        <div class="mod-levels">
+          <span class="level-chip lc-beg">🟢 Beginner</span>
+          <span class="level-chip lc-int">🟡 Inter</span>
+          <span class="level-chip lc-adv">🔴 Advanced</span>
+        </div>
+        <div class="mod-meta">
+          <span class="mod-meta-item">⏱️ 8 hrs</span>
+          <span class="mod-meta-item">📖 24 topics</span>
+          <span class="mod-meta-item">🧩 45 quizzes</span>
+        </div>
+        <div class="mod-footer">
+          <div class="mod-topics-count">8/24 topics complete</div>
+          <div class="mod-cta">Continue →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 · Fundamental Analysis -->
+    <div class="mod-card mc-green" data-levels="beginner intermediate advanced">
+      <div class="mod-card-header">
+        <div class="mod-deco"></div><div class="mod-deco2"></div>
+        <div class="mod-badge">Popular</div>
+        <div class="mod-icon-wrap">🔍</div>
+        <div class="mod-title">Fundamental Analysis</div>
+        <div class="mod-desc">Read financial statements, valuations &amp; identify quality stocks</div>
+      </div>
+      <div class="mod-card-body">
+        <div class="mod-levels">
+          <span class="level-chip lc-beg">🟢 Beginner</span>
+          <span class="level-chip lc-int">🟡 Inter</span>
+          <span class="level-chip lc-adv">🔴 Advanced</span>
+        </div>
+        <div class="mod-meta">
+          <span class="mod-meta-item">⏱️ 10 hrs</span>
+          <span class="mod-meta-item">📖 30 topics</span>
+          <span class="mod-meta-item">🧩 60 quizzes</span>
+        </div>
+        <div class="mod-footer">
+          <div class="mod-topics-count">0/30 topics complete</div>
+          <div class="mod-cta">Start →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 · Technical Analysis -->
+    <div class="mod-card mc-indigo" data-levels="beginner intermediate advanced">
+      <div class="mod-card-header">
+        <div class="mod-deco"></div><div class="mod-deco2"></div>
+        <div class="mod-badge">Trending</div>
+        <div class="mod-icon-wrap">📉</div>
+        <div class="mod-title">Technical Analysis</div>
+        <div class="mod-desc">Charts, patterns, indicators &amp; price action strategies</div>
+      </div>
+      <div class="mod-card-body">
+        <div class="mod-levels">
+          <span class="level-chip lc-beg">🟢 Beginner</span>
+          <span class="level-chip lc-int">🟡 Inter</span>
+          <span class="level-chip lc-adv">🔴 Advanced</span>
+        </div>
+        <div class="mod-meta">
+          <span class="mod-meta-item">⏱️ 12 hrs</span>
+          <span class="mod-meta-item">📖 36 topics</span>
+          <span class="mod-meta-item">🧩 72 quizzes</span>
+        </div>
+        <div class="mod-footer">
+          <div class="mod-topics-count">22/36 topics complete</div>
+          <div class="mod-cta">Continue →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 · Futures & Options Theory -->
+    <div class="mod-card mc-teal" data-levels="intermediate advanced">
+      <div class="mod-card-header">
+        <div class="mod-deco"></div><div class="mod-deco2"></div>
+        <div class="mod-badge">Advanced</div>
+        <div class="mod-icon-wrap">📜</div>
+        <div class="mod-title">Futures &amp; Options Theory</div>
+        <div class="mod-desc">F&amp;O basics, contracts, pricing models &amp; hedging</div>
+      </div>
+      <div class="mod-card-body">
+        <div class="mod-levels">
+          <span class="level-chip lc-int">🟡 Inter</span>
+          <span class="level-chip lc-adv">🔴 Advanced</span>
+        </div>
+        <div class="mod-meta">
+          <span class="mod-meta-item">⏱️ 14 hrs</span>
+          <span class="mod-meta-item">📖 28 topics</span>
+          <span class="mod-meta-item">🧩 55 quizzes</span>
+        </div>
+        <div class="mod-footer">
+          <div class="mod-topics-count">0/28 topics complete</div>
+          <div class="mod-cta">Start →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 · Option Strategies -->
+    <div class="mod-card mc-violet" data-levels="intermediate advanced">
+      <div class="mod-card-header">
+        <div class="mod-deco"></div><div class="mod-deco2"></div>
+        <div class="mod-badge">Expert</div>
+        <div class="mod-icon-wrap">⚡</div>
+        <div class="mod-title">Option Strategies</div>
+        <div class="mod-desc">Spreads, straddles, iron condors &amp; Greeks mastery</div>
+      </div>
+      <div class="mod-card-body">
+        <div class="mod-levels">
+          <span class="level-chip lc-int">🟡 Inter</span>
+          <span class="level-chip lc-adv">🔴 Advanced</span>
+        </div>
+        <div class="mod-meta">
+          <span class="mod-meta-item">⏱️ 16 hrs</span>
+          <span class="mod-meta-item">📖 32 topics</span>
+          <span class="mod-meta-item">🧩 64 quizzes</span>
+        </div>
+        <div class="mod-footer">
+          <div class="mod-topics-count">0/32 topics complete</div>
+          <div class="mod-cta">Start →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 · Commodity Trading -->
+    <div class="mod-card mc-amber" data-levels="beginner intermediate advanced">
+      <div class="mod-card-header">
+        <div class="mod-deco"></div><div class="mod-deco2"></div>
+        <div class="mod-badge">Specialised</div>
+        <div class="mod-icon-wrap">🛢️</div>
+        <div class="mod-title">Commodity Trading</div>
+        <div class="mod-desc">Gold, crude oil, agri commodities &amp; MCX strategies</div>
+      </div>
+      <div class="mod-card-body">
+        <div class="mod-levels">
+          <span class="level-chip lc-beg">🟢 Beginner</span>
+          <span class="level-chip lc-int">🟡 Inter</span>
+          <span class="level-chip lc-adv">🔴 Advanced</span>
+        </div>
+        <div class="mod-meta">
+          <span class="mod-meta-item">⏱️ 9 hrs</span>
+          <span class="mod-meta-item">📖 22 topics</span>
+          <span class="mod-meta-item">🧩 40 quizzes</span>
+        </div>
+        <div class="mod-footer">
+          <div class="mod-topics-count">2/22 topics complete</div>
+          <div class="mod-cta">Continue →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 · Risk Management & Psychology -->
+    <div class="mod-card mc-rose" data-levels="beginner intermediate advanced">
+      <div class="mod-card-header">
+        <div class="mod-deco"></div><div class="mod-deco2"></div>
+        <div class="mod-badge">Must Read</div>
+        <div class="mod-icon-wrap">🧠</div>
+        <div class="mod-title">Risk Management &amp; Psychology</div>
+        <div class="mod-desc">Position sizing, stop-losses &amp; trader mindset mastery</div>
+      </div>
+      <div class="mod-card-body">
+        <div class="mod-levels">
+          <span class="level-chip lc-beg">🟢 Beginner</span>
+          <span class="level-chip lc-int">🟡 Inter</span>
+          <span class="level-chip lc-adv">🔴 Advanced</span>
+        </div>
+        <div class="mod-meta">
+          <span class="mod-meta-item">⏱️ 7 hrs</span>
+          <span class="mod-meta-item">📖 18 topics</span>
+          <span class="mod-meta-item">🧩 36 quizzes</span>
+        </div>
+        <div class="mod-footer">
+          <div class="mod-topics-count">0/18 topics complete</div>
+          <div class="mod-cta">Start →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 · Personal Finance – Mutual Funds -->
+    <div class="mod-card mc-emerald" data-levels="beginner intermediate advanced">
+      <div class="mod-card-header">
+        <div class="mod-deco"></div><div class="mod-deco2"></div>
+        <div class="mod-badge">Personal Finance</div>
+        <div class="mod-icon-wrap">💰</div>
+        <div class="mod-title">Personal Finance – Mutual Funds</div>
+        <div class="mod-desc">SIP, fund types, NAV, returns &amp; portfolio building</div>
+      </div>
+      <div class="mod-card-body">
+        <div class="mod-levels">
+          <span class="level-chip lc-beg">🟢 Beginner</span>
+          <span class="level-chip lc-int">🟡 Inter</span>
+          <span class="level-chip lc-adv">🔴 Advanced</span>
+        </div>
+        <div class="mod-meta">
+          <span class="mod-meta-item">⏱️ 8 hrs</span>
+          <span class="mod-meta-item">📖 20 topics</span>
+          <span class="mod-meta-item">🧩 40 quizzes</span>
+        </div>
+        <div class="mod-footer">
+          <div class="mod-topics-count">16/20 topics complete</div>
+          <div class="mod-cta">Continue →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 · Personal Finance – Insurance -->
+    <div class="mod-card mc-sky" data-levels="beginner intermediate">
+      <div class="mod-card-header">
+        <div class="mod-deco"></div><div class="mod-deco2"></div>
+        <div class="mod-badge">Personal Finance</div>
+        <div class="mod-icon-wrap">🛡️</div>
+        <div class="mod-title">Personal Finance – Insurance</div>
+        <div class="mod-desc">Term, health, ULIP &amp; smart insurance planning</div>
+      </div>
+      <div class="mod-card-body">
+        <div class="mod-levels">
+          <span class="level-chip lc-beg">🟢 Beginner</span>
+          <span class="level-chip lc-int">🟡 Inter</span>
+        </div>
+        <div class="mod-meta">
+          <span class="mod-meta-item">⏱️ 6 hrs</span>
+          <span class="mod-meta-item">📖 16 topics</span>
+          <span class="mod-meta-item">🧩 30 quizzes</span>
+        </div>
+        <div class="mod-footer">
+          <div class="mod-topics-count">0/16 topics complete</div>
+          <div class="mod-cta">Start →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 · Sector Analysis -->
+    <div class="mod-card mc-fuchsia" data-levels="beginner intermediate advanced">
+      <div class="mod-card-header">
+        <div class="mod-deco"></div><div class="mod-deco2"></div>
+        <div class="mod-badge">Analytical</div>
+        <div class="mod-icon-wrap">🏭</div>
+        <div class="mod-title">Sector Analysis</div>
+        <div class="mod-desc">IT, BFSI, pharma, auto — sector cycles &amp; rotation</div>
+      </div>
+      <div class="mod-card-body">
+        <div class="mod-levels">
+          <span class="level-chip lc-beg">🟢 Beginner</span>
+          <span class="level-chip lc-int">🟡 Inter</span>
+          <span class="level-chip lc-adv">🔴 Advanced</span>
+        </div>
+        <div class="mod-meta">
+          <span class="mod-meta-item">⏱️ 11 hrs</span>
+          <span class="mod-meta-item">📖 26 topics</span>
+          <span class="mod-meta-item">🧩 50 quizzes</span>
+        </div>
+        <div class="mod-footer">
+          <div class="mod-topics-count">0/26 topics complete</div>
+          <div class="mod-cta">Start →</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /modules-grid -->
+</div><!-- /modules-section -->
+
+<script>
+/* ── FILTER ─── */
+function filterCards(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.querySelectorAll('.mod-card').forEach(card => {
+    if (type === 'all') {
+      card.style.display = '';
+      return;
+    }
+    if (type === 'bookmarked') {
+      /* no bookmarks in this standalone page — show all */
+      card.style.display = '';
+      return;
+    }
+    const levels = card.dataset.levels || '';
+    card.style.display = levels.includes(type) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

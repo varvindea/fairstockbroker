@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cash Flow Red Flags">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Cash Flow Red Flags &amp; Working Capital Manipulation · Advanced Financial Statement Analysis · FA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes drip{0%,100%{transform:scaleY(1) translateY(0);opacity:1}50%{transform:scaleY(1.08) translateY(2px);opacity:.85}}
+
+/* ── LAYOUT ── */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(220,38,38,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(26px,6.5vw,82px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:14px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,#b91c1c 0%,var(--red) 50%,#f87171 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(12px,2.8vw,36px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:920px;}
+.hsi{padding:clamp(10px,1.8vw,20px) clamp(8px,1.8vw,16px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:76px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(9px,1.3vw,13px);font-weight:900;letter-spacing:-.3px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.r{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(7px,.85vw,9px);font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+
+/* ── KLO ── */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.09);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+
+/* ── CFO ANATOMY CARD ── */
+.cfo-anatomy{border-radius:20px;overflow:hidden;border:2px solid rgba(109,40,217,.25);box-shadow:var(--shp);margin-bottom:36px;}
+.cfo-head{background:linear-gradient(135deg,var(--pxs),var(--pxl));padding:clamp(14px,2vw,22px) clamp(16px,2.5vw,26px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.cfo-icon{width:52px;height:52px;min-width:52px;border-radius:14px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;box-shadow:0 5px 18px rgba(109,40,217,.28);animation:floatB 4s ease-in-out infinite;}
+.cfo-meta{flex:1;min-width:0;}
+.cfo-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:4px;}
+.cfo-title{font-size:clamp(16px,2.2vw,22px);font-weight:900;color:var(--tx);margin-bottom:4px;}
+.cfo-sub{font-size:clamp(12px,1.4vw,13.5px);color:var(--ts);line-height:1.55;}
+.cfo-body{padding:clamp(14px,2.5vw,26px);background:var(--wh);}
+.cfo-explain{font-size:clamp(12.5px,1.45vw,14.5px);color:var(--ts);line-height:1.72;margin-bottom:18px;}
+.wc-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,20px);margin-bottom:18px;}
+.wc-good{border-radius:14px;padding:clamp(12px,2vw,18px);background:var(--gpale);border:1.5px solid rgba(22,163,74,.22);}
+.wc-bad{border-radius:14px;padding:clamp(12px,2vw,18px);background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);}
+.wc-title{font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.wc-title.g{color:var(--gbr);}
+.wc-title.r{color:var(--red);}
+.wc-item{font-size:clamp(11.5px,1.35vw,13px);color:var(--ts);line-height:1.5;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.75);margin-bottom:6px;}
+
+/* ── RED FLAG CARDS ── */
+.redflag-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,18px);margin-bottom:36px;}
+.rf-card{border-radius:16px;padding:clamp(14px,2.5vw,20px);border:1.5px solid;transition:transform .2s,box-shadow .2s;}
+.rf-card:hover{transform:translateY(-2px);box-shadow:var(--shp);}
+.rf-r{border-color:rgba(220,38,38,.22);background:linear-gradient(158deg,var(--rpale),#fff8f8);}
+.rf-a{border-color:rgba(217,119,6,.2);background:linear-gradient(158deg,var(--apale),#fffcf0);}
+.rf-p{border-color:rgba(109,40,217,.2);background:linear-gradient(158deg,var(--pxs),#fdfcff);}
+.rf-ico{font-size:clamp(22px,3vw,28px);margin-bottom:8px;animation:floatB 4s ease-in-out infinite;}
+.rf-name{font-size:clamp(13px,1.7vw,15px);font-weight:900;color:var(--tx);margin-bottom:4px;}
+.rf-badge{display:inline-flex;padding:3px 9px;border-radius:7px;font-size:10px;font-weight:800;margin-bottom:8px;}
+.rfbr{background:rgba(220,38,38,.1);color:var(--red);}
+.rfba{background:rgba(217,119,6,.1);color:var(--ambr);}
+.rfbp{background:rgba(109,40,217,.1);color:var(--p);}
+.rf-body{font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.6;}
+.rf-formula{background:rgba(255,255,255,.7);border-radius:8px;padding:7px 10px;font-family:'DM Sans',sans-serif;font-size:11.5px;color:var(--p);margin-top:8px;border:1px solid var(--bd);}
+
+/* ── SCREENER MOCK ── */
+.screener-mock{background:var(--wh);border:2px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);margin-bottom:36px;}
+.sm-bar{background:linear-gradient(135deg,#f0f0f0,#e8e8e8);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bd);}
+.sm-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.sm-url{flex:1;background:var(--wh);border:1px solid var(--bd);border-radius:8px;padding:5px 12px;font-size:10.5px;color:var(--tl);font-family:'DM Sans',sans-serif;}
+.sm-body{padding:clamp(14px,2.5vw,22px);}
+.sm-hr{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--bd);flex-wrap:wrap;}
+.sm-tabs{display:flex;gap:2px;margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px;}
+.sm-tab{padding:6px 14px;border-radius:8px;font-size:11px;font-weight:700;white-space:nowrap;border:1px solid var(--bd);}
+.sm-tab.active{background:var(--p);color:#fff;border-color:var(--p);}
+.sm-tab:not(.active){background:var(--sf);color:var(--ts);}
+.sm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,12px);margin-bottom:14px;}
+.sm-m{background:var(--sf);border-radius:10px;padding:10px 12px;border:1px solid var(--bd);}
+.smm-l{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--tl);margin-bottom:4px;}
+.smm-v{font-size:clamp(13px,1.8vw,16px);font-weight:900;color:var(--tx);}
+.smm-s{font-size:9px;color:var(--tl);margin-top:2px;}
+.sm-alerts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.sma{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;}
+.sma-g{background:var(--gpale);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.sma-r{background:var(--rpale);color:var(--red);border:1px solid rgba(220,38,38,.2);}
+.sma-a{background:var(--apale);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.sm-cap{font-size:10.5px;color:var(--tl);text-align:center;margin-top:12px;font-style:italic;}
+
+/* ── EXAMPLE BLOCKS ── */
+.ex-block{border-radius:20px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);margin-bottom:clamp(22px,3.5vw,30px);}
+.eb-head{display:flex;align-items:center;justify-content:space-between;padding:clamp(12px,2vw,18px) clamp(14px,2.5vw,24px);flex-wrap:wrap;gap:10px;}
+.ebh-g{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.ebh-r{background:linear-gradient(135deg,var(--rpale),#fff5f5);}
+.ebh-a{background:linear-gradient(135deg,var(--apale),#fffdf5);}
+.ebh-p{background:linear-gradient(135deg,var(--pxs),var(--pxl));}
+.eb-co{display:flex;align-items:center;gap:12px;}
+.eb-logo{width:46px;height:46px;min-width:46px;border-radius:11px;font-size:21px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.eb-name{font-size:clamp(13px,1.8vw,17px);font-weight:900;color:var(--tx);line-height:1.2;}
+.eb-sub{font-size:10.5px;color:var(--tl);margin-top:2px;}
+.eb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.ebb{padding:3px 9px;border-radius:100px;font-size:10px;font-weight:700;}
+.ebb-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.ebb-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.ebb-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.ebb-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.eb-body{padding:clamp(14px,2.5vw,22px) clamp(14px,2.5vw,24px);}
+.eb-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.5vw,14px);margin-bottom:14px;}
+.em-box{background:var(--sf);border-radius:12px;padding:clamp(9px,1.5vw,14px);border:1px solid var(--bd);}
+.em-l{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tl);margin-bottom:4px;}
+.em-v{font-size:clamp(13px,1.9vw,18px);font-weight:900;color:var(--tx);line-height:1.1;}
+.em-s{font-size:9px;color:var(--tl);margin-top:2px;}
+.cf-pill{display:inline-flex;padding:4px 12px;border-radius:8px;font-size:12px;font-weight:900;}
+.cfp-g{background:rgba(22,163,74,.12);color:var(--gbr);}
+.cfp-r{background:rgba(220,38,38,.1);color:var(--red);}
+.cfp-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.eb-flags{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.erf{border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:5px;}
+.erf-good{background:rgba(22,163,74,.05);border-left:3px solid var(--gbr);}
+.erf-bad{background:rgba(220,38,38,.05);border-left:3px solid var(--red);}
+.erf-amb{background:rgba(217,119,6,.05);border-left:3px solid var(--amb);}
+.erf-row{display:flex;align-items:flex-start;gap:10px;}
+.erf-ico{font-size:14px;flex-shrink:0;margin-top:1px;}
+.erf-lbl{font-size:clamp(12px,1.35vw,13.5px);font-weight:800;color:var(--tx);line-height:1.4;}
+.erf-txt{padding-left:24px;font-size:clamp(11.5px,1.3vw,13px);color:var(--ts);line-height:1.55;}
+.eb-insight{padding:10px 14px;font-size:11.5px;color:var(--ts);line-height:1.55;border-top:1px solid var(--bd);}
+.ei-g{background:rgba(22,163,74,.04);border-left:3px solid var(--gbr);}
+.ei-r{background:rgba(220,38,38,.04);border-left:3px solid var(--red);}
+.ei-a{background:rgba(217,119,6,.04);border-left:3px solid var(--amb);}
+.ei-p{background:rgba(109,40,217,.04);border-left:3px solid var(--p);}
+
+/* ── SECTION DIVIDER ── */
+.section-divider{display:flex;align-items:center;gap:16px;margin:clamp(28px,4vw,44px) 0;}
+.sd-line{flex:1;height:1px;background:var(--bd);}
+.sd-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tl);white-space:nowrap;}
+
+/* ── CAVEAT ── */
+.caveat-box{margin-top:32px;background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:16px;}
+.caveat-icon{width:44px;height:44px;min-width:44px;border-radius:13px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(109,40,217,.28);}
+.caveat-body{flex:1;min-width:0;}
+.caveat-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.caveat-title{font-size:clamp(13px,1.5vw,15px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.caveat-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+
+/* ── DEMAT BANNER ── */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* ── NEXT ── */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-banner::after{content:'';position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+
+/* ═══ RESPONSIVE — 11 BREAKPOINTS ═══ */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.redflag-grid{grid-template-columns:1fr 1fr;}.wc-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){
+  .redflag-grid{grid-template-columns:1fr 1fr;}
+  .wc-grid{grid-template-columns:1fr;}
+  .eb-metrics{grid-template-columns:repeat(2,1fr);}
+  .sm-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .hst{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .redflag-grid{grid-template-columns:1fr 1fr;}
+  .rf-card:hover{transform:none;}
+  .wc-grid{grid-template-columns:1fr;}
+  .eb-head{flex-direction:column;align-items:flex-start;}
+  .eb-badges{margin-top:4px;}
+  .caveat-box{flex-direction:column;gap:12px;}
+  .caveat-icon{width:40px;height:40px;min-width:40px;font-size:20px;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;}
+  .dmfeats{gap:10px 20px;}
+  svg{overflow:visible;max-width:100%;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .cfo-head{flex-wrap:wrap;gap:12px;}
+  .cfo-icon{animation:none;}
+  .rf-ico{animation:none;}
+}
+@media(max-width:640px){
+  .redflag-grid{grid-template-columns:1fr;}
+  .wc-grid{grid-template-columns:1fr;}
+  .eb-metrics{grid-template-columns:1fr 1fr;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+}
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.2px;}.hdesc{font-size:13px;}.hsub{font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .h2{letter-spacing:-1px;}.lead{font-size:13.5px;}
+  .redflag-grid{grid-template-columns:1fr;}
+  .eb-metrics{grid-template-columns:1fr 1fr;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+}
+@media(max-width:360px){
+  .w{padding:26px 12px;}.hh1{font-size:clamp(22px,8.5vw,36px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:1px solid var(--bd) !important;}
+  .hsi:last-child{border-bottom:none !important;}
+  .kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}.nxt-btn{font-size:12px;padding:10px 14px;}
+}
+/* TOUCH */
+@media(hover:none) and (pointer:coarse){
+  .rf-card:hover,.ex-block:hover{transform:none !important;box-shadow:var(--shc) !important;}
+  .rf-card:active{transform:scale(.99);transition:transform .08s;}
+  .dmbtn:active{transform:scale(.97);}.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn,.rf-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,.rf-name,.cfo-title{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.lead,.caveat-desc,.cfo-explain,.rf-body,.erf-txt,.eb-insight{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+}
+/* iOS */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.hsv,.hsv.g,.hsv.r,.h2 .hp,.h2 .hg{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn,.rf-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .sm-tabs{-webkit-overflow-scrolling:touch;}
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+}
+/* ANDROID HiDPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .rf-card,.ex-block,.caveat-box,.screener-mock,.cfo-anatomy{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .klo-icon,.cfo-icon{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}.klo-icon,.cfo-icon,.rf-ico{animation:none !important;}
+}
+/* PRINT */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}.rv{opacity:1;transform:none;}
+  body{color:#000;}.w{padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="vbadge">Advanced Financial Statement Analysis · FA</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Cash Flow Red Flags · Working Capital Manipulation · CFO Quality</div>
+  <h1 class="hh1">
+    <span class="line1">When Cash Flow</span>
+    <span class="line2">Lies to You</span>
+    <span class="line3">Detecting Non-Operating Sources Inflating CFO &amp; Working Capital Tricks</span>
+  </h1>
+  <div class="hsub">CFO/PAT · Receivables · Inventory · Payables · Accruals · Working Capital Days · Cash Conversion Cycle</div>
+  <p class="hdesc">A company can report growing operating cash flow while its actual business deteriorates — by stretching payables, squeezing suppliers, factoring receivables, or reclassifying investing activities. This chapter teaches you to see through the numbers to the economic reality underneath.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv">CFO/PAT</div><div class="hsl">Cash Quality Test</div></div>
+    <div class="hsi"><div class="hsv.r" style="background:linear-gradient(135deg,#dc2626,#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:clamp(9px,1.3vw,13px);font-weight:900;">WC Tricks</div><div class="hsl">Payables Stretch</div></div>
+    <div class="hsi"><div class="hsv g">5 Good</div><div class="hsl">Clean Cash Flow</div></div>
+    <div class="hsi"><div class="hsv r">5 Bad</div><div class="hsl">Inflated CFO</div></div>
+    <div class="hsi"><div class="hsv">7 Red Flags</div><div class="hsl">Detect Instantly</div></div>
+  </div>
+</section>
+
+
+<!-- ══ 01 — KLO ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Why <span class="hp">Operating Cash Flow</span> Can Be Manipulated Just Like Profit</h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">💰</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">Most investors believe that "cash flow doesn't lie" — that unlike profit (which uses accounting estimates), cash is real. This is partly true. But operating cash flow (CFO) can be artificially inflated through working capital manipulation, reclassification of cash flows, and non-operating sources — making a deteriorating business look healthy long enough to fool investors.</div>
+        <div class="klo-desc">Imagine a manufacturing company that is losing market share and whose customers are taking longer to pay. Its profit looks fine because revenue is still being booked. But CFO should be declining — as receivables pile up, the gap between profit and cash should widen.<br><br>Now imagine the management team knows this and wants to maintain the illusion of a healthy business. They have several tools: they can <strong>stretch payables</strong> (delay paying suppliers — which releases cash temporarily), <strong>reduce inventory</strong> aggressively (sell off stock built over prior years — releasing cash that won't be replaced), <strong>factor receivables</strong> (sell receivables to a bank at a discount — cash comes in now but future receivables are already "spent"), or <strong>reclassify interest payments</strong> from CFO to CFF (financing activities — improving apparent CFO).<br><br>Each of these techniques produces cash in the current quarter — allowing CFO to look strong even as the business deteriorates. But each leaves a forensic fingerprint: payables days rising abnormally, inventory days falling suspiciously, receivables factored appearing in Notes, or interest reclassified in the cash flow reconciliation. This chapter teaches you to find all four fingerprints — and spot the difference between genuine cash generation and manufactured CFO.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-r">🚨 Payables stretch = fake CFO boost</span>
+          <span class="kpill kpill-a">⚠️ Inventory dump = unsustainable</span>
+          <span class="kpill kpill-p">📋 Receivables factoring = hidden cash cost</span>
+          <span class="kpill kpill-g">✅ CFO/PAT &gt;0.9× = quality signal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 02 — ANATOMY + INFOGRAPHIC + RED FLAGS ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — How Cash Flow Gets Manufactured</div>
+    <h2 class="h2 rv d2">The Four Ways <span class="hp">CFO Gets Inflated</span> Without Real Business Improvement</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Understanding the mechanics of CFO manipulation is the first step to detecting it. Each technique leaves a specific fingerprint in the financial data — all visible on Screener.in in under 5 minutes.</p>
+
+    <!-- SVG Infographic -->
+    <div class="rv d3" style="margin-bottom:36px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+      <svg style="width:100%;max-width:680px;margin:0 auto;" viewBox="0 0 680 490" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="680" height="490" rx="20" fill="#f5f3ff"/>
+        <rect x="14" y="10" width="652" height="34" rx="11" fill="#6d28d9"/>
+        <text x="340" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="white">Cash Flow Manufacturing — How CFO Gets Inflated Without Real Business Growth</text>
+
+        <!-- FACTORY BUILDING -->
+        <rect x="260" y="56" width="160" height="100" rx="10" fill="#4c1d95" opacity=".9"/>
+        <rect x="260" y="46" width="160" height="10" rx="4" fill="#3b0e8c"/>
+        <rect x="274" y="72" width="26" height="18" rx="4" fill="#c4b5fd" opacity=".55"/>
+        <rect x="308" y="72" width="26" height="18" rx="4" fill="#c4b5fd" opacity=".55"/>
+        <rect x="342" y="72" width="26" height="18" rx="4" fill="#c4b5fd" opacity=".55"/>
+        <rect x="290" y="106" width="60" height="30" rx="5" fill="#3b0e8c"/>
+        <!-- Chimney -->
+        <rect x="268" y="30" width="14" height="28" rx="3" fill="#4c1d95"/>
+        <rect x="396" y="30" width="14" height="28" rx="3" fill="#4c1d95"/>
+        <!-- Smoke -->
+        <ellipse cx="275" cy="26" rx="7" ry="5" fill="#e5e1fb" opacity=".6"/>
+        <ellipse cx="403" cy="26" rx="7" ry="5" fill="#e5e1fb" opacity=".6"/>
+        <!-- Manager on roof -->
+        <circle cx="340" cy="48" r="12" fill="#ede9fe"/>
+        <circle cx="336" cy="44" r="2" fill="#4c1d95"/>
+        <circle cx="344" cy="44" r="2" fill="#4c1d95"/>
+        <path d="M336 52 Q340 56 344 52" stroke="#4c1d95" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <text x="340" y="186" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#4c1d95">🏭 Manufacturing Co.</text>
+        <text x="340" y="197" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6e6994">Business deteriorating</text>
+
+        <!-- 4 TECHNIQUE BOXES around the factory -->
+        <!-- Payables Stretch (top-left) -->
+        <rect x="14" y="56" width="220" height="88" rx="11" fill="#dc2626" opacity=".88"/>
+        <text x="124" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">🚨 Payables Stretch</text>
+        <text x="124" y="93" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">Delay paying suppliers 30→90 days</text>
+        <text x="124" y="107" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">Cash stays in → CFO looks better</text>
+        <text x="124" y="121" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#fca5a5">Fingerprint: Payable Days rising fast</text>
+        <text x="124" y="134" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#fde68a">Screener → Ratios → Creditor Days</text>
+        <path d="M234 100 L258 100" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="5,3"/>
+
+        <!-- Inventory Dump (bottom-left) -->
+        <rect x="14" y="200" width="220" height="88" rx="11" fill="#d97706" opacity=".88"/>
+        <text x="124" y="222" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">⚠️ Inventory Dump</text>
+        <text x="124" y="237" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">Liquidate inventory built over years</text>
+        <text x="124" y="251" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">Cash in now — won't repeat next year</text>
+        <text x="124" y="265" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#fde68a">Fingerprint: Inventory Days collapse</text>
+        <text x="124" y="278" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#fef3c7">Screener → Ratios → Inventory Days</text>
+        <path d="M234 244 L258 175" stroke="#d97706" stroke-width="1.8" stroke-dasharray="5,3"/>
+
+        <!-- Receivables Factoring (top-right) -->
+        <rect x="446" y="56" width="220" height="88" rx="11" fill="#7c3aed" opacity=".88"/>
+        <text x="556" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">📋 Receivables Factoring</text>
+        <text x="556" y="93" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">Sell future receivables to bank now</text>
+        <text x="556" y="107" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">Cash inflow inflates CFO today</text>
+        <text x="556" y="121" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#c4b5fd">Fingerprint: Notes → "factored receivables"</text>
+        <text x="556" y="134" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#e9d5ff">Annual Report → Notes to CFS</text>
+        <path d="M446 100 L422 100" stroke="#7c3aed" stroke-width="1.8" stroke-dasharray="5,3"/>
+
+        <!-- Capex Reclassification (bottom-right) -->
+        <rect x="446" y="200" width="220" height="88" rx="11" fill="#0284c7" opacity=".88"/>
+        <text x="556" y="222" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="white">🔀 CapEx Reclassification</text>
+        <text x="556" y="237" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">Capitalise operating costs as assets</text>
+        <text x="556" y="251" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.85)">Expense out of CFO, into CFI</text>
+        <text x="556" y="265" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#93c5fd">Fingerprint: Rising assets, low depreciation</text>
+        <text x="556" y="278" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#bfdbfe">Screener → Balance Sheet → Intangibles</text>
+        <path d="M446 244 L422 175" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="5,3"/>
+
+        <!-- THE MANUFACTURED CFO RESULT -->
+        <rect x="50" y="310" width="580" height="62" rx="13" fill="#6d28d9" opacity=".9"/>
+        <text x="340" y="335" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">📊 MANUFACTURED RESULT — CFO looks strong. Business is actually deteriorating.</text>
+        <text x="340" y="353" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(255,255,255,.85)">Payables stretch adds ₹X · Inventory dump adds ₹Y · Factoring adds ₹Z · Capitalisation adds ₹W → Total CFO inflated</text>
+        <text x="340" y="366" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#4ade80">Each source is a one-time boost that reverses next year — unless repeated at escalating scale</text>
+
+        <!-- Lines to central result -->
+        <line x1="130" y1="288" x2="160" y2="310" stroke="#dc2626" stroke-width="1.5"/>
+        <line x1="130" y1="288" x2="160" y2="310" stroke="#dc2626" stroke-width="1.5"/>
+        <line x1="556" y1="288" x2="520" y2="310" stroke="#0284c7" stroke-width="1.5"/>
+
+        <!-- FORENSIC FINGERPRINTS row -->
+        <rect x="14" y="388" width="652" height="92" rx="13" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+        <text x="340" y="408" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="900" fill="#4c1d95">🔍 Four Forensic Fingerprints — All Visible Free on Screener.in in 5 Minutes</text>
+        <rect x="26" y="416" width="144" height="52" rx="9" fill="#fef2f2" stroke="#fecaca" stroke-width="1.2"/>
+        <text x="98" y="434" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="800" fill="#dc2626">Creditor Days Rising</text>
+        <text x="98" y="447" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Screener → Ratios tab</text>
+        <text x="98" y="460" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">&gt;20 days YoY jump</text>
+        <rect x="178" y="416" width="144" height="52" rx="9" fill="#fefce8" stroke="#fde68a" stroke-width="1.2"/>
+        <text x="250" y="434" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="800" fill="#92400e">Inventory Days Collapse</text>
+        <text x="250" y="447" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Screener → Ratios tab</text>
+        <text x="250" y="460" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Sudden 30%+ fall</text>
+        <rect x="330" y="416" width="154" height="52" rx="9" fill="#f5f3ff" stroke="#e5e1fb" stroke-width="1.2"/>
+        <text x="407" y="434" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="800" fill="#4c1d95">"Factored receivables"</text>
+        <text x="407" y="447" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Annual Report CFS Note</text>
+        <text x="407" y="460" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Ctrl+F in PDF</text>
+        <rect x="492" y="416" width="154" height="52" rx="9" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.2"/>
+        <text x="569" y="434" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="800" fill="#0284c7">Rising Intangibles / CWIP</text>
+        <text x="569" y="447" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Screener → Balance Sheet</text>
+        <text x="569" y="460" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#3d3868">Growing without earnings</text>
+      </svg>
+      <p style="font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;max-width:560px;margin:0 auto;">Each CFO manipulation technique — payables stretch, inventory dump, receivables factoring, capex reclassification — releases cash in the current period but is unsustainable. The forensic fingerprints are specific and all visible on Screener.in or in the annual report PDF. Understanding the mechanism makes the detection trivial.</p>
+    </div>
+
+    <!-- CFO ANATOMY CARD -->
+    <div class="cfo-anatomy rv d3">
+      <div class="cfo-head">
+        <div class="cfo-icon">📊</div>
+        <div class="cfo-meta">
+          <div class="cfo-label">The Mechanics — How Working Capital Manipulation Actually Works</div>
+          <div class="cfo-title">Operating Cash Flow = PAT + Non-Cash Items − Working Capital Increase</div>
+          <div class="cfo-sub">The formula shows exactly where manipulation lives. Non-cash items (depreciation, provisions) are difficult to manipulate directly. But working capital — receivables, inventory, payables — is entirely under management's influence. Squeeze it from all three sides simultaneously and CFO looks stellar even as the business burns.</div>
+        </div>
+      </div>
+      <div class="cfo-body">
+        <div class="cfo-explain">The Cash Flow from Operations (CFO) statement is calculated indirectly from PAT using adjustments. The three working capital components that management can manipulate are:<br><br><strong>Receivables:</strong> Collect faster (good) or factor receivables (appears good but costs money) → Receivables declining = CFO boost<br><strong>Inventory:</strong> Reduce inventory (may be genuine efficiency or unsustainable liquidation) → Inventory declining = CFO boost<br><strong>Payables:</strong> Pay suppliers slower (payables increasing = CFO boost, but strains relationships and may indicate cash stress)<br><br>The key insight: if receivables decline, inventory declines, AND payables increase all at the same time — three working capital components all moving in the "favorable" direction simultaneously — the probability that this is organic improvement vs manufactured CFO is very low. Genuine business improvement rarely produces all three simultaneously.</div>
+        <div class="wc-grid">
+          <div class="wc-good">
+            <div class="wc-title g">✅ Genuine CFO Quality Signals</div>
+            <div class="wc-item">CFO/PAT consistently above 0.9× for 5+ years — profit is converting to cash every year</div>
+            <div class="wc-item">Working capital improvement accompanied by revenue growth — faster collections on more sales</div>
+            <div class="wc-item">Payables stable or declining — company strong enough to NOT stretch suppliers</div>
+            <div class="wc-item">Inventory days stable or gently declining — genuine supply chain efficiency, not dumping</div>
+            <div class="wc-item">CFO exceeds capex (positive FCF) for multiple years — business self-funds its growth</div>
+          </div>
+          <div class="wc-bad">
+            <div class="wc-title r">🚨 Working Capital Manipulation Warning Signs</div>
+            <div class="wc-item">Payables days rising 20+ days in a single year while revenue is flat or falling</div>
+            <div class="wc-item">Inventory days falling 30%+ while revenue isn't growing — inventory being dumped</div>
+            <div class="wc-item">Receivables factoring disclosed in Notes — CFO inflated by "selling" future cash</div>
+            <div class="wc-item">All three: receivables down + inventory down + payables up in the same year</div>
+            <div class="wc-item">CFO strong but FCF (CFO minus capex) negative — cash generated but immediately spent</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 RED FLAG CARDS -->
+    <div class="tag rv d4" style="margin-bottom:12px;">7 Cash Flow Red Flags — Check These on Every Company</div>
+    <div class="redflag-grid rv d4">
+      <div class="rf-card rf-r">
+        <div class="rf-ico">📈</div>
+        <div class="rf-name">Red Flag 1: CFO/PAT Below 0.7×</div>
+        <div class="rf-badge rfbr">Screener → Cash Flow Tab</div>
+        <div class="rf-body">The single most important cash quality ratio. Divide Operating Cash Flow by Net Profit. Below 0.7× for 2+ years = profit is not converting to cash. Either working capital is consuming cash (receivables/inventory building) or earnings are partially fictitious. Calculate for 5 years — the trend matters more than any single year.</div>
+        <div class="rf-formula">CFO/PAT = Cash from Operations ÷ Net Profit after Tax</div>
+      </div>
+      <div class="rf-card rf-r">
+        <div class="rf-ico">⏰</div>
+        <div class="rf-name">Red Flag 2: Payables Days Rising Fast</div>
+        <div class="rf-badge rfbr">Screener → Ratios Tab</div>
+        <div class="rf-body">Creditor Days (payables days) rising 20+ days in a year while revenue is flat = management is delaying supplier payments to conserve cash. This inflates CFO temporarily. But it strains supplier relationships, may attract interest penalties, and must eventually reverse — at which point CFO will crater. Compare to sector peers.</div>
+        <div class="rf-formula">Payables Days = (Payables ÷ COGS) × 365</div>
+      </div>
+      <div class="rf-card rf-a">
+        <div class="rf-ico">📦</div>
+        <div class="rf-name">Red Flag 3: Inventory Days Sudden Collapse</div>
+        <div class="rf-badge rfba">Screener → Ratios Tab</div>
+        <div class="rf-body">Inventory Days falling 30%+ in one year without a corresponding revenue surge = inventory is being liquidated, not sold through normal operations. Cash from inventory liquidation inflates CFO — but next year there is no inventory to liquidate. A one-time boost masquerading as operational efficiency. Check if gross margin also declined (sold at discounts).</div>
+        <div class="rf-formula">Inventory Days = (Inventory ÷ COGS) × 365</div>
+      </div>
+      <div class="rf-card rf-a">
+        <div class="rf-ico">📋</div>
+        <div class="rf-name">Red Flag 4: Receivables Factoring in Notes</div>
+        <div class="rf-badge rfba">Annual Report → CFS Note</div>
+        <div class="rf-body">Companies can "factor" (sell) their receivables to banks, receiving cash immediately and removing receivables from the balance sheet. This inflates current CFO but is effectively borrowing against future receivables. Ind AS requires disclosure in Notes to Cash Flow Statement. Ctrl+F "factored" or "discounted bills" in the annual report PDF. Growing factoring = growing disguised debt.</div>
+        <div class="rf-formula">Annual Report → Ctrl+F "factored" / "discounted"</div>
+      </div>
+      <div class="rf-card rf-r">
+        <div class="rf-ico">🔀</div>
+        <div class="rf-name">Red Flag 5: CapEx Classified as OpEx — or Vice Versa</div>
+        <div class="rf-badge rfbr">Balance Sheet vs P&amp;L</div>
+        <div class="rf-body">If a company capitalises operating costs as assets (e.g., software development costs, brand-building expenses recognised as intangibles), these costs are removed from the P&L (improving PAT) and appear as CapEx in the investing section (worsening CFI but not CFO). Result: CFO looks better than underlying operations. Signal: rapidly rising intangible assets or CWIP without matching revenue growth.</div>
+        <div class="rf-formula">Check: Intangible Assets growth vs Revenue growth</div>
+      </div>
+      <div class="rf-card rf-p">
+        <div class="rf-ico">📉</div>
+        <div class="rf-name">Red Flag 6: FCF ≪ CFO (CapEx Absorbing All Cash)</div>
+        <div class="rf-badge rfbp">Screener → Cash Flow</div>
+        <div class="rf-body">Free Cash Flow = CFO minus Maintenance CapEx. If CFO is consistently strong but FCF is near-zero or negative — every rupee of operating cash is being immediately reinvested in fixed assets. This may be legitimate growth investment — or may indicate the business requires constant asset replacement (asset-heavy industries) or is sustaining operations through continuous capex that should be maintenance, not growth.</div>
+        <div class="rf-formula">FCF = CFO − Capital Expenditure (Investing Activities)</div>
+      </div>
+      <div class="rf-card rf-p">
+        <div class="rf-ico">💱</div>
+        <div class="rf-name">Red Flag 7: Interest Reclassified from CFO to CFF</div>
+        <div class="rf-badge rfbp">Cash Flow Statement</div>
+        <div class="rf-body">Under Ind AS, companies can choose to classify interest paid either in CFO or CFF (financing activities). A company that switches from CFO classification to CFF classification for interest payments immediately improves reported CFO — without any real change in the business. Compare year-over-year classification. Any reclassification of interest payments should be disclosed and should trigger a recalculation of comparable CFO.</div>
+        <div class="rf-formula">Check: Interest paid in CFO vs CFF — any reclassification?</div>
+      </div>
+    </div>
+
+    <!-- SCREENER MOCK -->
+    <div class="tag rv d5" style="margin-bottom:12px;">Reading Cash Flow Quality on Screener.in</div>
+    <div class="screener-mock rv d5">
+      <div class="sm-bar">
+        <div class="sm-dot" style="background:#ef4444;"></div>
+        <div class="sm-dot" style="background:#f59e0b;"></div>
+        <div class="sm-dot" style="background:#22c55e;"></div>
+        <div class="sm-url">🔒 screener.in/company/NESTLEIND/consolidated/ → Cash Flow + Ratios tabs</div>
+      </div>
+      <div class="sm-body">
+        <div class="sm-hr">
+          <div>
+            <div style="font-size:clamp(14px,2vw,18px);font-weight:900;color:var(--tx);">Nestle India — The Benchmark for Cash Flow Quality</div>
+            <div style="font-size:11px;color:var(--tl);">NESTLEIND · Consumer Food · FMCG · CFO/PAT consistently above 1.0× — the gold standard</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <span style="font-size:16px;font-weight:900;color:var(--p);">₹2,240</span>
+            <span style="background:var(--gpale);color:var(--gbr);font-size:11px;font-weight:700;padding:4px 10px;border-radius:7px;">▲ +0.8%</span>
+          </div>
+        </div>
+        <div class="sm-tabs">
+          <div class="sm-tab">Overview</div>
+          <div class="sm-tab active">Cash Flow</div>
+          <div class="sm-tab">Ratios</div>
+          <div class="sm-tab">Balance Sheet</div>
+          <div class="sm-tab">Financials</div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--p);margin-bottom:10px;letter-spacing:.5px;">📊 Cash Flow Quality Metrics — Nestle India (illustrative based on public data):</div>
+        <div class="sm-grid">
+          <div class="sm-m"><div class="smm-l">CFO / PAT (5-yr avg)</div><div class="smm-v" style="color:var(--gbr);">1.11×</div><div class="smm-s">✅ Cash exceeds profit</div></div>
+          <div class="sm-m"><div class="smm-l">Payables Days</div><div class="smm-v" style="color:var(--gbr);">58 days</div><div class="smm-s">✅ Stable — not stretched</div></div>
+          <div class="sm-m"><div class="smm-l">Inventory Days</div><div class="smm-v" style="color:var(--gbr);">44 days</div><div class="smm-s">✅ Stable — not dumped</div></div>
+          <div class="sm-m"><div class="smm-l">Debtor Days (DSO)</div><div class="smm-v" style="color:var(--gbr);">5 days</div><div class="smm-s">✅ Retailers pay instantly</div></div>
+          <div class="sm-m"><div class="smm-l">FCF (CFO − CapEx)</div><div class="smm-v" style="color:var(--gbr);">₹2,100+ Cr</div><div class="smm-s">✅ Strong free cash flow</div></div>
+          <div class="sm-m"><div class="smm-l">Receivables Factoring</div><div class="smm-v" style="color:var(--gbr);">None disclosed</div><div class="smm-s">✅ No hidden debt</div></div>
+          <div class="sm-m"><div class="smm-l">WC Days (total)</div><div class="smm-v" style="color:var(--gbr);">Negative</div><div class="smm-s">✅ Negative WC model</div></div>
+          <div class="sm-m"><div class="smm-l">Interest reclassified</div><div class="smm-v" style="color:var(--gbr);">No change</div><div class="smm-s">✅ Consistent treatment</div></div>
+        </div>
+        <div class="sm-alerts">
+          <div class="sma sma-g">✅ CFO/PAT 1.11× — every rupee of profit arrives as cash + more</div>
+          <div class="sma sma-g">✅ Negative working capital — structurally impossible to inflate CFO via WC tricks</div>
+          <div class="sma sma-g">✅ Payable, inventory, DSO all stable across 5 years</div>
+        </div>
+        <div class="sm-cap">Navigation: screener.in → Company → Cash Flow tab (CFO line + Net Profit = CFO/PAT) | Ratios tab (Debtor Days, Inventory Days, Creditor Days) | Balance Sheet tab (Intangibles, CWIP trend). Annual report PDF for factoring disclosure.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ DEMAT BANNER ══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Start Investing Today</div>
+    <div class="dmh">Invest in Companies With <span class="dmhs">Real Cash Flow</span></div>
+    <div class="dmsub">Before buying any stock, check CFO/PAT on Screener.in Cash Flow tab and Payables Days on Ratios tab. Companies with genuine cash generation rarely disappoint. Companies with manufactured CFO always eventually reveal themselves.</div>
+    <div class="dmfeats">
+      <div class="dmf">CFO/PAT free on Screener Cash Flow tab</div>
+      <div class="dmf">Payables &amp; Inventory Days on Ratios tab</div>
+      <div class="dmf">Factoring disclosed in Annual Report Notes</div>
+      <div class="dmf">Start investing from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ══ GOOD EXAMPLES ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">03 — Five Companies With Genuine, High-Quality Cash Flow</div>
+    <h2 class="h2 rv d2">✅ <span class="hg">Good Examples</span> — CFO That Reflects Real Business Economics</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five companies demonstrate cash flow quality that is structurally genuine — not manufactured through working capital tricks. Their CFO/PAT ratios, stable working capital days, and FCF profiles confirm that reported earnings are backed by real cash.</p>
+
+    <!-- GOOD 1: Nestle -->
+    <div class="ex-block rv d3">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);">🍫</div>
+          <div><div class="eb-name">Nestle India — Negative Working Capital Makes CFO Manipulation Structurally Impossible</div><div class="eb-sub">NSE: NESTLEIND · Consumer Food · Retailers pay in 5 days; Nestle pays suppliers in 58 days — cash comes before costs</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ CFO/PAT 1.11×</span>
+          <span class="ebb ebb-g">✅ Negative WC</span>
+          <span class="ebb ebb-g">✅ DSO 5 days</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">CFO / PAT (5-yr)</div><div class="em-v" style="color:var(--gbr);">1.11×</div><div class="em-s">✅ Cash exceeds profit</div></div>
+          <div class="em-box"><div class="em-l">Payables Days</div><div class="em-v" style="color:var(--gbr);">58 days</div><div class="em-s">✅ Stable, not stretched</div></div>
+          <div class="em-box"><div class="em-l">DSO (Debtor Days)</div><div class="em-v" style="color:var(--gbr);">5 days</div><div class="em-s">✅ Retailers pay instantly</div></div>
+          <div class="em-box"><div class="em-l">Working Capital</div><div class="em-v" style="color:var(--gbr);">Negative</div><div class="em-s">✅ Business model moat</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">Negative working capital = CFO structurally above PAT</div></div>
+            <div class="erf-txt">Nestle collects cash from retailers within 5 days but pays suppliers in 58 days. This means Nestle has already received cash before it incurs most of its costs — making the business model generate more cash than profit by construction. CFO/PAT above 1.0× is not a sign of accounting quality; it's a consequence of business model superiority. No payables stretching possible — they're already maxed at 58 days from a position of strength.</div>
+          </div>
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">Working capital days stable for 10 consecutive years</div></div>
+            <div class="erf-txt">Nestle's payables (58 days), inventory (44 days), and DSO (5 days) have been remarkably stable across a decade — across multiple economic cycles, input cost spikes, and competitive pressures. Stability of working capital days is the definitive proof that CFO quality is structural, not manufactured. A company manufacturing CFO via WC tricks will show volatile working capital days — genuine businesses show stable ones.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>Cash flow quality verdict:</strong> Nestle India is the benchmark for genuine CFO quality in Indian FMCG. The negative working capital model converts every rupee of profit into more than a rupee of cash — consistently, across cycles, without tricks. Use Nestle as the reference point: what does a company with clean, structural, non-manipulable cash flow look like? It looks exactly like this.</div>
+    </div>
+
+    <!-- GOOD 2: TCS -->
+    <div class="ex-block rv d4">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe);">💻</div>
+          <div><div class="eb-name">TCS — Service Business CFO Structurally Tracks PAT With No WC Manipulation Possible</div><div class="eb-sub">NSE: TCS · IT Services · T&amp;M billing eliminates inventory risk; upfront milestone payments eliminate extended receivables</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ CFO/PAT 1.05×</span>
+          <span class="ebb ebb-g">✅ No inventory</span>
+          <span class="ebb ebb-p">DSO ~68 days (normal B2B)</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">CFO / PAT (5-yr)</div><div class="em-v" style="color:var(--gbr);">1.05×</div><div class="em-s">✅ Strong conversion</div></div>
+          <div class="em-box"><div class="em-l">Inventory Days</div><div class="em-v" style="color:var(--gbr);">Zero</div><div class="em-s">✅ Service business — no inventory</div></div>
+          <div class="em-box"><div class="em-l">Payables Days</div><div class="em-v" style="color:var(--gbr);">Minimal</div><div class="em-s">✅ No supplier manipulation</div></div>
+          <div class="em-box"><div class="em-l">FCF yield</div><div class="em-v" style="color:var(--gbr);">4–5%</div><div class="em-s">✅ Large absolute FCF</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">No inventory = no inventory manipulation possible</div></div>
+            <div class="erf-txt">IT service businesses don't carry inventory — there is no ₹X crore of stock to liquidate to boost CFO. The absence of inventory eliminates one of the four primary CFO manipulation vectors entirely. TCS's CFO is determined by: employee costs (90%+ of costs, paid monthly — not manipulable), client billing terms (30–90 days — broadly stable), and capex (low for a people-business). The simplicity of the cash flow structure is itself a quality indicator.</div>
+          </div>
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">Large absolute FCF confirms the quality — not just ratios</div></div>
+            <div class="erf-txt">TCS generates ₹40,000+ crore annually in FCF (CFO minus capex). This is not a small number that could be manufactured through accounting tricks without detection. At this scale, the cash is either in bank accounts (verifiable via balance sheet — Cash and Cash Equivalents + Investments), paid as dividends (verifiable via Cash Flow Financing section), or deployed as buybacks (also visible in CFF). Following the cash from CFO through to its destination confirms it's real.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>Cash flow quality verdict:</strong> TCS's service model eliminates inventory manipulation, minimises payables manipulation (no significant physical supply chain), and generates CFO that flows directly into verifiable bank accounts and dividends. The 1.05× CFO/PAT over 5 years, combined with stable DSO and large absolute FCF that shows up in declared dividends, makes TCS one of the cleanest cash flow profiles in Indian large-cap.</div>
+    </div>
+
+    <!-- GOOD 3: Asian Paints -->
+    <div class="ex-block rv d5">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">🎨</div>
+          <div><div class="eb-name">Asian Paints — Working Capital Efficiency Improved Through Genuine Business Investments</div><div class="eb-sub">NSE: ASIANPAINT · Paints · Distribution network investment → genuine DSO improvement, not factoring</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ CFO/PAT 0.88×</span>
+          <span class="ebb ebb-g">✅ DSO improved organically</span>
+          <span class="ebb ebb-g">✅ FY25 PAT down, CFO up</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">CFO / PAT (5-yr)</div><div class="em-v" style="color:var(--gbr);">0.88×</div><div class="em-s">✅ Strong quality</div></div>
+          <div class="em-box"><div class="em-l">Debtor Days (DSO)</div><div class="em-v" style="color:var(--gbr);">38 days</div><div class="em-s">✅ Stable 5-year trend</div></div>
+          <div class="em-box"><div class="em-l">Payables Days</div><div class="em-v" style="color:var(--gbr);">Stable</div><div class="em-s">✅ Not stretched</div></div>
+          <div class="em-box"><div class="em-l">FY25 CFO vs PAT</div><div class="em-v" style="color:var(--gbr);">CFO positive</div><div class="em-s">✅ Cash quality validated</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">FY25 stress test: PAT fell 27%, CFO stayed positive — proves cash quality</div></div>
+            <div class="erf-txt">When Birla Opus entered the paints market in FY25 and forced pricing pressure, Asian Paints' PAT fell 27%. If Asian Paints had been manufacturing CFO through working capital tricks, this stress event would have exposed it — payables would have been stretched to the limit already, inventory already dumped, no more tricks left. Instead, CFO remained positive at ₹2,232 Cr. PAT and CFO fell together — confirming both were always real. This is the definitive cash quality test: does CFO hold up when business gets genuinely difficult?</div>
+          </div>
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">DSO improvement through distribution investment, not factoring</div></div>
+            <div class="erf-txt">Asian Paints' DSO improvement over the past decade came from genuine investment in its dealer network — technology-enabled ordering systems that allowed dealers to pay faster. This is organic working capital improvement, not receivables factoring. The key distinction: organic DSO improvement comes with investment in systems or relationships; factoring improvement comes with a disclosure in the Notes to Accounts. Asian Paints shows no factoring disclosures — confirming the improvement is real.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>Cash flow quality verdict:</strong> Asian Paints' FY25 is the single best validation of cash flow quality in recent Indian FMCG history. A 27% PAT decline that left CFO positive confirms the business was always generating real cash. Stable DSO, stable payables, and no factoring disclosures complete the picture. Asian Paints is a textbook example of why genuine cash generation survives business adversity while manufactured CFO collapses.</div>
+    </div>
+
+    <!-- GOOD 4: Maruti Suzuki -->
+    <div class="ex-block rv d6">
+      <div class="eb-head ebh-g">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🚗</div>
+          <div><div class="eb-name">Maruti Suzuki — Manufacturing CFO Quality Anchored by Prepaid Dealer Model</div><div class="eb-sub">NSE: MARUTI · Automobiles · Dealers pay before vehicle delivery — DSO 8 days; automotive industry-leading cash conversion</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-g">✅ CFO/PAT 0.97×</span>
+          <span class="ebb ebb-g">✅ DSO 8 days</span>
+          <span class="ebb ebb-p">Semiconductor FY22 anomaly explained</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">CFO / PAT (5-yr)</div><div class="em-v" style="color:var(--gbr);">0.97×</div><div class="em-s">✅ Near-perfect conversion</div></div>
+          <div class="em-box"><div class="em-l">DSO (Dealer Days)</div><div class="em-v" style="color:var(--gbr);">8 days</div><div class="em-s">✅ Prepaid model</div></div>
+          <div class="em-box"><div class="em-l">FY22 Inventory Days</div><div class="em-v" style="color:var(--ambr);">Elevated</div><div class="em-s">⚠️ Semiconductor shortage — explained</div></div>
+          <div class="em-box"><div class="em-l">FCF (CFO − CapEx)</div><div class="em-v" style="color:var(--gbr);">Consistently positive</div><div class="em-s">✅ Self-funding growth</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">8-day DSO is structural — dealers finance their own inventory</div></div>
+            <div class="erf-txt">Maruti requires dealers to pay for vehicles at or before delivery. Dealers finance their own inventory through working capital loans from banks — not from Maruti's balance sheet. This 8-day DSO is the same structural advantage as Nestle's 5-day DSO — cash arrives almost simultaneously with revenue recognition. The DSO has been 7–10 days for 5+ years, confirming it's structural rather than manufactured through short-term receivables acceleration.</div>
+          </div>
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">FY22 inventory spike: semiconductor shortage, not manipulation — verifiable externally</div></div>
+            <div class="erf-txt">In FY2022, Maruti's inventory days elevated as semiconductor shortages created vehicle inventory with missing chips — finished vehicles that couldn't be sold. This caused a working capital buildup and CFO/PAT temporarily below 0.7×. This is the correct way to distinguish manipulation from genuine business disruption: external event (global semiconductor shortage, verifiable in industry data and every other automaker's reports) + Maruti disclosed the impact explicitly in management commentary. By FY2023, inventory normalised and CFO/PAT recovered. Genuine disruption reverses when the cause resolves.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-g">✅ <strong>Cash flow quality verdict:</strong> Maruti's 0.97× CFO/PAT over 5 years and 8-day DSO confirm that automobile manufacturing with prepaid dealer models can generate near-perfect cash quality. The FY22 semiconductor anomaly — externally verifiable, disclosed by management, and fully reversed in FY23 — demonstrates that temporary CFO/PAT weakness from genuine external events should be distinguished from structural manipulation.</div>
+    </div>
+
+    <!-- GOOD 5: Bajaj Finance -->
+    <div class="ex-block rv d7">
+      <div class="eb-head ebh-p">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pmd));">💳</div>
+          <div><div class="eb-name">Bajaj Finance — NBFC CFO Quality Validated by ECL Coverage and Disbursement Tracking</div><div class="eb-sub">NSE: BAJFINANCE · NBFC · Lending business: CFO interpretation requires adjusting for loan disbursals and collections</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-p">✅ ECL coverage conservative</span>
+          <span class="ebb ebb-g">✅ Disbursal growth tracked</span>
+          <span class="ebb ebb-g">✅ Collection efficiency &gt;99%</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Collection Efficiency</div><div class="em-v" style="color:var(--gbr);">&gt;99%</div><div class="em-s">✅ Loans actually being repaid</div></div>
+          <div class="em-box"><div class="em-l">ECL Coverage</div><div class="em-v" style="color:var(--gbr);">Conservative</div><div class="em-s">✅ Not under-provisioned</div></div>
+          <div class="em-box"><div class="em-l">Gross NPA</div><div class="em-v" style="color:var(--gbr);">~1.1%</div><div class="em-s">✅ Clean loan book</div></div>
+          <div class="em-box"><div class="em-l">AUM Growth vs Disbursals</div><div class="em-v" style="color:var(--gbr);">Consistent</div><div class="em-s">✅ Disbursals = real new loans</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">CFO for NBFCs: interpret differently — loan disbursals are "investing" in the business</div></div>
+            <div class="erf-txt">For NBFCs, CFO includes loan disbursals (cash out) and repayments (cash in). A growing NBFC will have negative CFO in the traditional sense — because it's deploying more capital as new loans than it collects from old loans. The relevant metric is not CFO/PAT but "collection efficiency" — what % of scheduled repayments are actually collected. Bajaj Finance's collection efficiency above 99% confirms that its reported income from loans is actually arriving as cash — the NBFC equivalent of CFO/PAT above 1.0×.</div>
+          </div>
+          <div class="erf erf-good">
+            <div class="erf-row"><div class="erf-ico">✅</div><div class="erf-lbl">Conservative ECL provisioning = earnings quality confirmed</div></div>
+            <div class="erf-txt">Bajaj Finance maintains ECL coverage ratios above sector peers, uses conservative macroeconomic scenario weightings, and discloses Stage 2 and Stage 3 loan details. Conservative provisioning means that reported PAT has already absorbed more than the minimum required credit losses — the earnings are conservative, not inflated. Compare to NBFCs that use optimistic ECL assumptions: their PAT looks better but the quality is lower because future credit losses have not been adequately reserved.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-p">✅ <strong>Cash flow quality verdict for NBFCs:</strong> Traditional CFO/PAT is not the right metric for lending businesses. The equivalent tests are collection efficiency (above 99%), ECL coverage (conservative vs peers), and Stage 2 + Stage 3 loan disclosure (transparent). Bajaj Finance passes all three definitively. When analysing NBFCs for cash quality, replace CFO/PAT with collection efficiency as the primary metric — the underlying principle (does reported income actually arrive as cash?) is identical.</div>
+    </div>
+
+    <!-- SECTION DIVIDER -->
+    <div class="section-divider rv d3">
+      <div class="sd-line"></div>
+      <div class="sd-label">🚨 Bad Examples — Manufactured Cash Flow</div>
+      <div class="sd-line"></div>
+    </div>
+
+    <div class="tag rv d1" style="color:var(--red);">04 — Five Cases of Problematic Cash Flow</div>
+    <h2 class="h2 rv d2">🚨 <span style="background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Bad Examples</span> — CFO Inflated Through Working Capital Tricks</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five cases show specific working capital manipulation techniques — payables stretching, inventory dumping, receivables factoring, and capex reclassification — each leaving the exact forensic fingerprints described above.</p>
+
+    <!-- BAD 1: IL&FS / Infrastructure - Payables stretch -->
+    <div class="ex-block rv d3">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">🏗️</div>
+          <div><div class="eb-name">Infrastructure Companies — Payables Stretching to Manufacture Short-Term CFO</div><div class="eb-sub">Multiple Infra · Construction · Chronically delayed supplier payments inflated CFO; reversed when suppliers refused to supply</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 Payables Days 180+ days</span>
+          <span class="ebb ebb-r">CFO manufactured</span>
+          <span class="ebb ebb-a">Reversed catastrophically</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Payables Days</div><div class="em-v" style="color:var(--red);">180+ days</div><div class="em-s">🚨 6-month delays to suppliers</div></div>
+          <div class="em-box"><div class="em-l">CFO/PAT during stretch</div><div class="em-v" style="color:var(--ambr);">Appeared strong</div><div class="em-s">🚨 Payables inflating CFO</div></div>
+          <div class="em-box"><div class="em-l">CFO after reversal</div><div class="em-v" style="color:var(--red);">Collapsed</div><div class="em-s">🚨 Suppliers demanded payment</div></div>
+          <div class="em-box"><div class="em-l">Cash Flow Quality</div><div class="em-v"><span class="cf-pill cfp-r">Fake 🚨</span></div><div class="em-s">WC manufactured</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">Payables stretched to 180+ days — infrastructure sector pattern</div></div>
+            <div class="erf-txt">Multiple Indian infrastructure companies (including several IL&FS subsidiaries) maintained payables days of 180–360 days — effectively paying subcontractors and material suppliers 6–12 months after work was completed. In the CFO statement, rising payables appears as a positive adjustment to CFO (payables increase = cash released = CFO improves). When payables are stretched from 30 to 180 days over 3 years, the cumulative CFO inflation can be massive — equal to 5 months of COGS in additional apparent cash generation. But this is borrowed time. The moment suppliers refuse further credit or demand payment — the payables must be settled and CFO collapses.</div>
+          </div>
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">The Screener detection: Creditor Days rising every year while revenue is flat</div></div>
+            <div class="erf-txt">Screener.in → Ratios tab → Creditor Days for 5 consecutive years. If Creditor Days rises from 45 to 60 to 80 to 120 to 180 over 5 years — this is the payables stretching fingerprint. Each year the company delays payments by another month — "borrowing" one month of COGS from suppliers. The 5-year chart on Screener reveals this pattern instantly. Compare to sector peers: if the company's Creditor Days are 3× the industry average — investigate immediately.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The payables reversal catastrophe:</strong> When IL&FS collapsed in 2018, one of the immediate effects was that subcontractors who had been waiting 6–12 months for payment received notices that payment was suspended. This triggered a cascade — subcontractors stopped work, projects stalled, lenders called default, and the group collapsed. The payables stretching that had inflated CFO for years became the mechanism of operational collapse. The Screener Creditor Days chart would have shown this building for 5 years.</div>
+    </div>
+
+    <!-- BAD 2: Jet Airways inventory / working capital -->
+    <div class="ex-block rv d4">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">✈️</div>
+          <div><div class="eb-name">Jet Airways — All Three Working Capital Levers Pulled Simultaneously Before Collapse (2019)</div><div class="eb-sub">BSE: 532617 · Aviation · Payables to airports, suppliers, lessors all stretched; inventory of spare parts reduced; CFO briefly inflated</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 Triple WC manipulation</span>
+          <span class="ebb ebb-r">Payables + Inventory + Receivables</span>
+          <span class="ebb ebb-a">CFO temporarily inflated</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Airport dues delayed</div><div class="em-v" style="color:var(--red);">₹600+ Cr</div><div class="em-s">🚨 DGCA intervention needed</div></div>
+          <div class="em-box"><div class="em-l">Lessor payments delayed</div><div class="em-v" style="color:var(--red);">Multiple</div><div class="em-s">🚨 Fleets at risk</div></div>
+          <div class="em-box"><div class="em-l">Spare parts inventory</div><div class="em-v" style="color:var(--red);">Reduced</div><div class="em-s">🚨 Maintenance risk</div></div>
+          <div class="em-box"><div class="em-l">True FCF</div><div class="em-v" style="color:var(--red);">Deeply negative</div><div class="em-s">🚨 Chronic cash burn</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">All three working capital levers pulled simultaneously — the strongest possible signal</div></div>
+            <div class="erf-txt">In Jet Airways' final years, the company delayed payments to airports (trade payables rising), delayed payments to aircraft lessors (lease payables — visible under Ind AS 116 after 2019 adoption), and reduced spare parts inventory (releasing cash from the maintenance stores). All three moved in the "CFO-favorable" direction simultaneously. This is the clearest possible working capital manipulation signal — organic business improvement never moves all three in the same direction at the same time. When all three move together, it is definitionally manufactured CFO.</div>
+          </div>
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">Public data confirmed the manipulation months before bankruptcy</div></div>
+            <div class="erf-txt">DGCA (aviation regulator) published data showing Jet Airways had delayed payments to Airports Authority of India. Lessor communications (reported in financial press) showed aircraft being grounded for non-payment of lease rentals. Jet's own management conference calls showed escalating "creditors" in the working capital discussion. The combination of Screener's Creditor Days rising + public regulatory data + press reports + management commentary all pointing the same direction was unmistakable. No forensic skill was needed — just reading what was available.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The triple manipulation collapse:</strong> Jet Airways ran out of payables-stretching capacity first — airports and lessors simply stopped accepting further delays. When all three WC levers are at their limits simultaneously (you can't delay payables any further, there's no more inventory to liquidate, receivables have already been factored) — the company has no more manufactured CFO to generate. The collapse from apparent cash flow stability to operational failure was almost instant once the limits were reached in early 2019.</div>
+    </div>
+
+    <!-- BAD 3: Manpasand - CFO/PAT extreme gap -->
+    <div class="ex-block rv d5">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">🥤</div>
+          <div><div class="eb-name">Manpasand Beverages — CFO/PAT 0.28× for 4 Years — Profit Was Never Converted to Cash (2019)</div><div class="eb-sub">NSE: MANPASAND · Beverages · Deloitte resigned; 300+ day DSO; only 28p cash per ₹1 reported profit for 4 years</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 CFO/PAT 0.28×</span>
+          <span class="ebb ebb-r">DSO 300+ days</span>
+          <span class="ebb ebb-r">Deloitte resigned 2018</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">CFO / PAT (4 years)</div><div class="em-v" style="color:var(--red);">0.28×</div><div class="em-s">🚨 72p per ₹1 profit = fiction</div></div>
+          <div class="em-box"><div class="em-l">DSO (Debtor Days)</div><div class="em-v" style="color:var(--red);">300+ days</div><div class="em-s">🚨 Distributors not paying</div></div>
+          <div class="em-box"><div class="em-l">Revenue Growth</div><div class="em-v" style="color:var(--red);">38% CAGR</div><div class="em-s">🚨 Not backed by cash</div></div>
+          <div class="em-box"><div class="em-l">Receivables Growth</div><div class="em-v" style="color:var(--red);">80% CAGR</div><div class="em-s">🚨 Receivables 2× revenue growth</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">CFO/PAT 0.28× is the definitive signal — visible on Screener in 30 seconds</div></div>
+            <div class="erf-txt">For four consecutive years (FY2015–FY2018), Manpasand Beverages reported strong revenue and profit growth — but only 28 paise of cash arrived for every rupee of reported profit. This 72 paise gap represented receivables building up (distributors not paying for goods they couldn't sell — classic channel stuffing). The DSO rose from 60 days to 300+ days over this period. Every year of CFO/PAT below 0.7× was a signal. Four consecutive years below 0.3× was a definitive fraud signal. This was visible on Screener's Cash Flow tab for any investor who looked.</div>
+          </div>
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">Receivables grew at 80% CAGR vs revenue at 38% — the forensic ratio that exposes everything</div></div>
+            <div class="erf-txt">Screener Balance Sheet → Trade Receivables grew at 80% CAGR while Revenue grew at 38% CAGR. Receivables growing at 2× the rate of revenue means credit extension is growing much faster than the business — a direct indicator of channel stuffing. The combination of 80% receivables growth + 0.28× CFO/PAT + 300+ day DSO is impossible to explain by any legitimate business reason. Investors who calculated any one of these three metrics had the fraud signal years before Deloitte resigned.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The Manpasand CFO lesson:</strong> The three Screener checks that would have caught this fraud: (1) CFO/PAT on Cash Flow tab — 0.28× for 4 years, (2) DSO on Ratios tab — 300+ days, (3) Receivables growth rate vs Revenue growth rate on Balance Sheet — 80% vs 38%. All three visible, all three free, all three screaming fraud for 4 years before Deloitte resigned. The information existed; it simply wasn't being read.</div>
+    </div>
+
+    <!-- BAD 4: Satyam - CFO fabrication -->
+    <div class="ex-block rv d6">
+      <div class="eb-head ebh-r">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">💻</div>
+          <div><div class="eb-name">Satyam Computer — Fake Cash Balance and Fabricated CFO via Fictitious Revenue (2009)</div><div class="eb-sub">BSE: 500376 · IT Services · ₹7,136 Cr fake cash; CFO fabricated through fake client invoices; balance sheet fictitious</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 ₹7,136 Cr fake cash</span>
+          <span class="ebb ebb-r">CFO fabricated</span>
+          <span class="ebb ebb-r">Revenue partly fictitious</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Reported Cash (fake)</div><div class="em-v" style="color:var(--red);">₹5,040 Cr</div><div class="em-s">🚨 Never existed</div></div>
+          <div class="em-box"><div class="em-l">Actual Cash</div><div class="em-v" style="color:var(--red);">₹321 Cr</div><div class="em-s">🚨 93.6% of reported was fake</div></div>
+          <div class="em-box"><div class="em-l">Implied CFO/Revenue</div><div class="em-v" style="color:var(--ambr);">Suspicious</div><div class="em-s">🚨 Too clean for IT services</div></div>
+          <div class="em-box"><div class="em-l">Cash Flow Quality</div><div class="em-v"><span class="cf-pill cfp-r">Fabricated 🚨</span></div><div class="em-s">Entirely fictitious</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">Cash balance was fabricated — the most extreme form of CFO manipulation</div></div>
+            <div class="erf-txt">Satyam's CFO appeared strong because revenue was fictitious — fake invoices to fake clients created revenue on the P&L, which produced fake profit, which required fake cash to exist to maintain the fiction. The "cash" sat in fake bank accounts confirmed by forged bank certificates. This is CFO manipulation taken to its logical extreme: instead of manipulating the components that generate cash, Satyam simply invented the cash itself. The forensic signal: when revenue per employee and revenue per delivery centre were compared to Infosys/TCS/Wipro peers — Satyam's implied productivity was implausibly high. Revenue quality analysis (DSO check, CFO per employee vs peers) would have flagged this.</div>
+          </div>
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">Interest income on "cash" that didn't exist was too low — a subtle forensic signal</div></div>
+            <div class="erf-txt">Satyam reported ₹5,040 Cr of cash and fixed deposits. At a 6–7% interest rate, this should have generated ₹300–350 Cr of interest income annually. But Satyam's reported interest income was far below this implied amount — because the cash didn't actually exist and couldn't generate real interest. An analyst cross-checking: "Cash balance × prevailing interest rate = implied interest income → compare to reported interest income in P&L" would have identified this inconsistency. This forensic check works on any company where reported cash seems very high — is the interest income proportionate?</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-r">🚨 <strong>The Satyam cash verification test:</strong> For any company with large reported cash balances, cross-check: (1) Interest income on P&L ÷ Average cash balance on Balance Sheet = implied interest rate. Should be 5–8% for Indian fixed deposits. If significantly below — cash may not exist or may be restricted. (2) Cash in bank reconciliation should match bank statements — confirmed by independent auditor bank confirmations. Satyam's auditor (PwC) failed to confirm the bank balances independently — a catastrophic audit failure.</div>
+    </div>
+
+    <!-- BAD 5: CG Power / DHFL - capex reclassification + WC -->
+    <div class="ex-block rv d7">
+      <div class="eb-head ebh-a">
+        <div class="eb-co">
+          <div class="eb-logo" style="background:linear-gradient(135deg,var(--apale),#fde68a);">⚡</div>
+          <div><div class="eb-name">CG Power — Rising Intangibles + Declining CFO/PAT = CapEx Reclassification Red Flag (2019)</div><div class="eb-sub">NSE: CGPOWER · Electricals · Costs capitalised as intangibles while operational cash flow deteriorated; ₹2,800+ Cr fraud</div></div>
+        </div>
+        <div class="eb-badges">
+          <span class="ebb ebb-r">🚨 Intangibles rising</span>
+          <span class="ebb ebb-a">CFO/PAT declining</span>
+          <span class="ebb ebb-r">₹2,800+ Cr undisclosed</span>
+        </div>
+      </div>
+      <div class="eb-body">
+        <div class="eb-metrics">
+          <div class="em-box"><div class="em-l">Intangible Assets Trend</div><div class="em-v" style="color:var(--red);">Rising</div><div class="em-s">🚨 Costs being capitalised</div></div>
+          <div class="em-box"><div class="em-l">CFO / PAT trend</div><div class="em-v" style="color:var(--red);">Declining</div><div class="em-s">🚨 Cash quality worsening</div></div>
+          <div class="em-box"><div class="em-l">Other Current Assets</div><div class="em-v" style="color:var(--red);">Growing rapidly</div><div class="em-s">🚨 Related party advances</div></div>
+          <div class="em-box"><div class="em-l">Cash Flow Quality</div><div class="em-v"><span class="cf-pill cfp-r">Compromised 🚨</span></div><div class="em-s">Multiple red flags</div></div>
+        </div>
+        <div class="eb-flags">
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">Intangible assets rising while CFO/PAT declining — classic CapEx reclassification signal</div></div>
+            <div class="erf-txt">CG Power's balance sheet showed rising "Intangible Assets Under Development" alongside declining CFO/PAT over multiple years before the fraud discovery. When a company capitalises operating costs as intangible assets: (1) The cost doesn't appear in the P&L → PAT looks better, (2) The cost appears as CapEx in the Cash Flow Investing section → CFO is not charged, (3) The intangible asset grows on the balance sheet. The forensic check: compare intangible asset growth to revenue growth. If intangibles are growing 40% per year while revenue grows 8% — the company is likely capitalising costs that should be expensed. Screener Balance Sheet → Intangible Assets trend.</div>
+          </div>
+          <div class="erf erf-bad">
+            <div class="erf-row"><div class="erf-ico">🚨</div><div class="erf-lbl">CFO/PAT declining for 3 years while management claimed business was improving</div></div>
+            <div class="erf-txt">CG Power's CFO/PAT ratio declined consistently for 3 years before the board's forensic audit revealed ₹2,800+ crore of unauthorised transactions. Declining CFO/PAT while management narrative remains positive is a specific red flag because it suggests cash is leaving the business through channels not reflected in the reported P&L. In CG Power's case, advances to related parties through subsidiary routes were consuming cash — showing up as declining CFO quality before the transactions were discovered. The Screener Cash Flow tab would have shown this deterioration clearly.</div>
+          </div>
+          <div class="erf erf-amb">
+            <div class="erf-row"><div class="erf-ico">⚠️</div><div class="erf-lbl">Growing "Other Current Assets" — advances to related parties hiding in plain sight</div></div>
+            <div class="erf-txt">Screener Balance Sheet → "Other Current Assets" grew significantly faster than revenue for multiple years before the CG Power fraud was disclosed. This line item often contains advances to subsidiaries, loans to related parties, and inter-company receivables — all the instruments used to extract cash through subsidiary routes. When Other Current Assets grows faster than revenue for 2+ consecutive years, open the Annual Report and check what's inside it. In CG Power's case, it contained advances to entities connected to the promoter group.</div>
+          </div>
+        </div>
+      </div>
+      <div class="eb-insight ei-a">⚠️ <strong>The combined CG Power cash quality signal:</strong> Three simultaneous signals — (1) Intangibles growing faster than revenue (CapEx reclassification), (2) CFO/PAT declining while management narrative was positive (cash leaving through non-P&L channels), (3) Other Current Assets growing faster than revenue (advances to related parties). Any single signal is a yellow flag. All three together is a definitive red flag. The Screener Balance Sheet and Cash Flow tabs would have revealed all three in under 5 minutes, years before the forensic audit.</div>
+    </div>
+
+    <!-- QUICK TRICKS -->
+    <div class="section-divider rv d3">
+      <div class="sd-line"></div>
+      <div class="sd-label">⚡ Quick Tricks — Detect Cash Flow Red Flags in 8 Minutes</div>
+      <div class="sd-line"></div>
+    </div>
+
+    <div class="tag rv d1">⚡ Quick Tricks</div>
+    <h2 class="h2 rv d2">The 8-Minute <span class="hp">Cash Flow Quality Cheat Sheet</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Five fast checks — all free on Screener.in and annual report PDFs — that give you the complete cash flow quality picture in under 8 minutes. Run them before analysing any company's profitability.</p>
+
+    <div style="display:flex;flex-direction:column;gap:clamp(14px,2.5vw,20px);margin-bottom:40px;">
+
+      <!-- TRICK 1 -->
+      <div class="rv d3" style="border-radius:18px;overflow:hidden;border:2px solid rgba(109,40,217,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--pxs),var(--pxl));padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(109,40,217,.3);">💰</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:3px;">Trick #1 — 60 Seconds · Screener Cash Flow Tab</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Two Number" CFO/PAT Test — The Most Important Cash Quality Check</div>
+          </div>
+          <div style="background:rgba(109,40,217,.1);color:var(--p);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">60 seconds</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Screener.in → Cash Flow tab → Find <strong>"Cash from Operations"</strong> (CFO) → Screener Financials tab → Find <strong>"Net Profit"</strong> (PAT). Divide CFO ÷ PAT. Do this for 5 years. Draw the trend in your head. This single ratio tells you whether profit is real or manufactured.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(8px,1.5vw,12px);">
+            <div style="text-align:center;background:var(--gpale);border:1.5px solid rgba(22,163,74,.22);border-radius:11px;padding:12px;">
+              <div style="font-size:11px;color:var(--gbr);font-weight:700;margin-bottom:4px;">✅ Elite</div>
+              <div style="font-size:22px;font-weight:900;color:var(--gbr);">&gt;1.0×</div>
+              <div style="font-size:10px;color:var(--tl);margin-top:4px;">Cash exceeds profit. Nestle 1.11×, TCS 1.05×</div>
+            </div>
+            <div style="text-align:center;background:var(--apale);border:1.5px solid rgba(217,119,6,.22);border-radius:11px;padding:12px;">
+              <div style="font-size:11px;color:var(--ambr);font-weight:700;margin-bottom:4px;">⚠️ Watch</div>
+              <div style="font-size:22px;font-weight:900;color:var(--ambr);">0.7–0.9×</div>
+              <div style="font-size:10px;color:var(--tl);margin-top:4px;">Borderline. Check WC days trend.</div>
+            </div>
+            <div style="text-align:center;background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:11px;padding:12px;">
+              <div style="font-size:11px;color:var(--red);font-weight:700;margin-bottom:4px;">🚨 Investigate</div>
+              <div style="font-size:22px;font-weight:900;color:var(--red);">&lt;0.7×</div>
+              <div style="font-size:10px;color:var(--tl);margin-top:4px;">For 2+ years: Manpasand 0.28×, exit.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICK 2 -->
+      <div class="rv d4" style="border-radius:18px;overflow:hidden;border:2px solid rgba(220,38,38,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--rpale),#fff5f5);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--red),#f87171);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(220,38,38,.3);">📊</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:3px;">Trick #2 — 90 Seconds · Screener Ratios Tab</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Three WC Days Straight Lines" — Find Manipulation in the Trend</div>
+          </div>
+          <div style="background:rgba(220,38,38,.1);color:var(--red);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">90 seconds</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Screener.in → Ratios tab → Find three rows: <strong>Debtor Days</strong>, <strong>Inventory Days</strong>, <strong>Creditor Days</strong>. Look at 5 years. Draw a mental straight line through each.<br><br>The manipulation signal: <strong>All three moving in the CFO-favorable direction simultaneously</strong> — Debtor Days down + Inventory Days down + Creditor Days up — all in the same year. Legitimate business improvement rarely moves all three at once. This triple movement is the working capital manipulation fingerprint.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.5vw,16px);">
+            <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.22);border-radius:11px;padding:12px 14px;">
+              <div style="font-size:10px;font-weight:800;color:var(--gbr);margin-bottom:5px;">✅ Organic Pattern</div>
+              <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--tx);margin-bottom:6px;">Debtor Days: stable or gently improving<br>Inventory Days: stable or gently declining<br>Creditor Days: stable or slightly improving</div>
+              <div style="font-size:11.5px;color:var(--ts);">Each metric moves gradually in one direction over 3–5 years. Business improvement happens slowly.</div>
+            </div>
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.22);border-radius:11px;padding:12px 14px;">
+              <div style="font-size:10px;font-weight:800;color:var(--red);margin-bottom:5px;">🚨 Manipulation Pattern</div>
+              <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--tx);margin-bottom:6px;">Debtor Days: ↓ suddenly 25%<br>Inventory Days: ↓ suddenly 30%<br>Creditor Days: ↑ suddenly 40 days</div>
+              <div style="font-size:11.5px;color:var(--ts);">All three in one year. Too convenient. Manufactured CFO.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICK 3 -->
+      <div class="rv d5" style="border-radius:18px;overflow:hidden;border:2px solid rgba(217,119,6,.26);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--apale),#fffcf0);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--ambr),var(--amb));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.3);">🔎</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ambr);margin-bottom:3px;">Trick #3 — 2 Minutes · Annual Report PDF Ctrl+F</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Ctrl+F Factoring" — Find Hidden Debt Disguised as Operating Cash</div>
+          </div>
+          <div style="background:rgba(217,119,6,.1);color:var(--ambr);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">2 minutes</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Download Annual Report PDF from Screener Documents tab → press <strong>Ctrl+F</strong> → search these exact terms. Ind AS requires disclosure of receivables factoring and bill discounting in the Notes to the Cash Flow Statement — it's mandatory, but buried.</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(8px,1.5vw,12px);">
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:10px;padding:10px 12px;"><div style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:var(--red);margin-bottom:4px;">"factored"</div><div style="font-size:11.5px;color:var(--ts);">Receivables sold to bank. CFO inflated by proceeds. Growing factoring = growing disguised debt.</div></div>
+            <div style="background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:10px;padding:10px 12px;"><div style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:var(--red);margin-bottom:4px;">"discounted bills"</div><div style="font-size:11.5px;color:var(--ts);">Bills of exchange discounted with bank. Same economic effect as factoring — selling future receivables now.</div></div>
+            <div style="background:var(--apale);border:1.5px solid rgba(217,119,6,.2);border-radius:10px;padding:10px 12px;"><div style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:var(--ambr);margin-bottom:4px;">"securitised"</div><div style="font-size:11.5px;color:var(--ts);">Receivables pooled and sold as securities. Common in auto finance companies — check if volume rising.</div></div>
+            <div style="background:var(--apale);border:1.5px solid rgba(217,119,6,.2);border-radius:10px;padding:10px 12px;"><div style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:var(--ambr);margin-bottom:4px;">"recourse"</div><div style="font-size:11.5px;color:var(--red);">Factored with recourse = if customer doesn't pay, company pays bank back. Hidden contingent liability.</div></div>
+            <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:10px;padding:10px 12px;"><div style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:var(--gbr);margin-bottom:4px;">"interest paid in CFO"</div><div style="font-size:11.5px;color:var(--ts);">Check if interest is in CFO or CFF. Any reclassification from CFO to CFF artificially improves CFO.</div></div>
+            <div style="background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:10px;padding:10px 12px;"><div style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:var(--gbr);margin-bottom:4px;">Zero hits = best outcome</div><div style="font-size:11.5px;color:var(--ts);">No factoring, no bill discounting, no reclassifications = CFO is what it appears to be. Clean.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICK 4 -->
+      <div class="rv d6" style="border-radius:18px;overflow:hidden;border:2px solid rgba(109,40,217,.28);box-shadow:var(--shc);">
+        <div style="background:linear-gradient(135deg,var(--pxs),var(--pxl));padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(109,40,217,.3);">📈</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:3px;">Trick #4 — 60 Seconds · Screener Balance Sheet</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Intangibles vs Revenue" Growth Ratio — CapEx Reclassification Signal</div>
+          </div>
+          <div style="background:rgba(109,40,217,.1);color:var(--p);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">60 seconds</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:14px;">Screener → Balance Sheet → Find <strong>"Intangible Assets"</strong> and <strong>"Capital Work in Progress (CWIP)"</strong>. Compare their 3-year growth rate to Revenue's 3-year growth rate.<br><br><strong>Rule: If Intangibles or CWIP grow 3× faster than revenue over 3 years — costs are being capitalised to inflate CFO.</strong> When operating expenses are capitalised as assets, they leave the P&L (improving PAT) and become CapEx (leaving CFO intact, hitting CFI). Both P&L and CFO look better — but balance sheet quality deteriorates.</div>
+          <div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;font-size:12.5px;color:var(--ts);line-height:1.6;"><strong style="color:var(--p);">The cross-check:</strong> If Intangibles are growing fast, check whether the company is disclosing them as "software development costs," "product development costs," or "brand development costs" in the Notes. These may be legitimate R&amp;D capitalisation — but they require the costs to meet strict recognition criteria (probable future economic benefits, technical feasibility). If the intangibles are not generating revenue growth — the capitalisation criteria may not be met. Rising intangibles + flat revenue = red flag.</div>
+        </div>
+      </div>
+
+      <!-- TRICK 5 -->
+      <div class="rv d7" style="border-radius:18px;overflow:hidden;border:2px solid rgba(22,163,74,.28);box-shadow:var(--shp);">
+        <div style="background:linear-gradient(135deg,var(--gpale),#ecfdf5);padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,var(--gbr),var(--gh));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(22,163,74,.3);">🏆</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:3px;">Trick #5 — 3 Minutes · The Complete Cash Flow Quality Verdict</div>
+            <div style="font-size:clamp(15px,2vw,18px);font-weight:900;color:var(--tx);">The "Cash Corroboration" Master Check — Follow the Cash to Its Destination</div>
+          </div>
+          <div style="background:rgba(22,163,74,.1);color:var(--gbr);padding:4px 12px;border-radius:8px;font-size:10px;font-weight:800;white-space:nowrap;">3 minutes</div>
+        </div>
+        <div style="padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);background:var(--wh);">
+          <div style="font-size:clamp(13px,1.5vw,14.5px);color:var(--ts);line-height:1.7;margin-bottom:16px;">Real CFO must go somewhere verifiable. Follow the cash from its source (CFO) to its destination (dividends, buybacks, debt repayment, capex, or bank balance growth). If CFO is strong but none of the destinations reflect it — the CFO isn't real.</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--pxl);border:1.5px solid rgba(109,40,217,.2);border-radius:12px;padding:12px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">1️⃣</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--p);margin-bottom:3px;">Cash from Operations (Screener Cash Flow tab)</div><div style="font-size:12px;color:var(--ts);line-height:1.5;">Note the CFO for the last 3 years. This is the starting point. Sum = total operating cash generated over 3 years.</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);border-radius:12px;padding:12px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">2️⃣</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--gbr);margin-bottom:3px;">Trace to Destinations (Cash Flow Investing + Financing sections)</div><div style="font-size:12px;color:var(--ts);line-height:1.5;">Capex paid (CFI) + Dividends paid (CFF) + Debt repaid (CFF) + Buybacks (CFF) + Cash balance increase (Balance Sheet) = should approximately equal CFO over the same 3 years.</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);border-radius:12px;padding:12px 14px;">
+              <span style="font-size:20px;flex-shrink:0;">3️⃣</span>
+              <div><div style="font-size:13px;font-weight:800;color:var(--red);margin-bottom:3px;">If Destinations Don't Match CFO — Find the Leak</div><div style="font-size:12px;color:var(--ts);line-height:1.5;">If CFO of ₹300 Cr over 3 years but capex + dividends + debt repayment + cash increase = only ₹120 Cr — where did ₹180 Cr go? This is the "unaccounted cash" signal. Check: Other Current Assets, Advances to subsidiaries, related party transactions. The cash went somewhere — find it.</div></div>
+            </div>
+            <div style="background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:12px;padding:12px 14px;">
+              <div style="font-size:12.5px;font-weight:800;color:var(--tx);margin-bottom:5px;">🏆 Complete 8-Minute Cash Flow Quality Checklist</div>
+              <div style="font-size:12px;color:var(--ts);line-height:1.65;"><strong>60s:</strong> CFO ÷ PAT for 5 years → flag below 0.7×<br><strong>90s:</strong> Ratios tab → Debtor/Inventory/Creditor Days 5-year trend → flag triple-movement in same year<br><strong>2min:</strong> Annual Report Ctrl+F → "factored" + "discounted" + "interest paid" classification<br><strong>60s:</strong> Balance Sheet → Intangibles growth vs Revenue growth → flag 3× faster<br><strong>3min:</strong> Follow CFO to destinations → flag unexplained gaps<br><strong>Result: Complete cash flow quality verdict in 8 minutes using only free tools.</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caveat-box rv d7">
+      <div class="caveat-icon">⚡</div>
+      <div class="caveat-body">
+        <div class="caveat-label">The One-Line Cash Flow Rule</div>
+        <div class="caveat-title">Cash Flow Doesn't Lie — But Manufactured CFO Deceives Just as Effectively as Fake Profits. Know the Difference.</div>
+        <div class="caveat-desc">The belief that "cash doesn't lie" is dangerous if taken too literally. Cash flow from operations is an accounting construct — not a bank statement. It uses the same indirect method (PAT + adjustments) as earnings, and the adjustments are as manipulable as any P&L line. Payables stretching, inventory dumping, receivables factoring, and capex reclassification are all legal, all common, and all distort the picture of business health that CFO is supposed to provide.<br><br>The five checks above take 8 minutes and are completely free. CFO/PAT ratio tells you whether profit is converting to cash. Working capital days (all three, for 5 years) tell you whether that conversion is structural or manufactured. Ctrl+F for factoring tells you whether receivables have been sold. Intangibles growth tells you whether costs are being capitalised. And cash corroboration tells you whether the CFO is going anywhere real.<br><br>Every major Indian cash flow manipulation — Manpasand (0.28× CFO/PAT), IL&FS (payables 180+ days), Jet Airways (triple WC manipulation), CG Power (intangibles rising + CFO declining), Satyam (fake cash — cross-check interest income) — left exactly these fingerprints. The data was free. The checks were simple. The failures were entirely preventable with 8 minutes of analysis.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ NEXT CHAPTER ══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue your learning journey →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">For educational purposes only. Figures cited are illustrative approximations for teaching. Always verify from official Annual Reports and BSE/NSE filings. Cash flow analysis techniques described are indicative — actual forensic analysis requires professional judgment. Historical cases (Satyam, Jet Airways, Manpasand, IL&FS, CG Power) are based on publicly reported SEBI/court proceedings. All equity investments carry market risk. Consult a SEBI-registered investment advisor before making investment decisions.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+    },{threshold:.04,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  } else{els.forEach(function(el){el.classList.add('on');});}
+})();
+document.addEventListener('touchstart',function(){},{passive:true});
+document.addEventListener('touchmove',function(){},{passive:true});
+document.addEventListener('touchend',function(){},{passive:true});
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('on');});
+}
+document.body.style.overscrollBehavior='none';
+if(document.fonts&&document.fonts.ready){
+  document.fonts.ready.then(function(){
+    document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});
+  });
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('a,button,.dmbtn,.nxt-btn,.rf-card,.ex-block').forEach(function(el){
+    el.style.touchAction='manipulation';
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SOTP Valuation">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no,address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Sum-of-the-Parts (SOTP) Valuation · Advanced Valuation · Module 10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet"><style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;overflow-x:hidden;overscroll-behavior-y:none;}
+a{-webkit-tap-highlight-color:transparent;}button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+/* LAYOUT */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hr{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(28px,7.5vw,84px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:12px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(13px,3.2vw,38px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;box-shadow:var(--shc);width:100%;max-width:860px;}
+.hsi{padding:clamp(12px,2vw,22px) clamp(10px,2.5vw,24px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:80px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(11px,1.8vw,18px);font-weight:900;letter-spacing:-.5px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.r{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.a{background:linear-gradient(135deg,var(--ambr),var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(8px,1vw,10px);font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+/* KLO */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.kpill-s{background:rgba(2,132,199,.1);color:var(--sky);border:1px solid rgba(2,132,199,.18);}
+.klo-hi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;}
+.klo-hi{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--shc);}
+.klo-hi-ico{font-size:22px;margin-bottom:6px;}
+.klo-hi-val{font-size:clamp(12px,1.8vw,15px);font-weight:900;letter-spacing:-.3px;}
+.klo-hi-val.purple{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.green{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.amber{color:var(--ambr);}
+.klo-hi-lbl{font-size:10px;color:var(--tl);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:3px;}
+/* CONCEPT GRID */
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:start;}
+.step-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:16px;padding:18px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:var(--shc);transition:border-color .25s,box-shadow .25s;}
+.step-card:hover{border-color:rgba(109,40,217,.3);box-shadow:var(--shp);}
+.step-num{width:36px;height:36px;min-width:36px;border-radius:10px;color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-body h4{font-size:14px;font-weight:800;color:var(--tx);margin-bottom:4px;}
+.step-body p{font-size:12.5px;color:var(--ts);line-height:1.58;}
+.infographic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.infographic-svg{width:100%;max-width:430px;animation:floatB 4.5s ease-in-out infinite;}
+.infographic-cap{font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;}
+/* SOTP SEGMENT CARDS — Module-specific */
+.seg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,18px);margin-bottom:24px;}
+.seg-card{border-radius:18px;padding:clamp(14px,2.5vw,24px);border:1.5px solid;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;}
+.seg-card:hover{transform:translateY(-3px);box-shadow:var(--shp);}
+.seg-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:4px 4px 0 0;}
+/* Segment colour system */
+.sc-oil{background:linear-gradient(158deg,rgba(109,40,217,.06),rgba(109,40,217,.02));border-color:rgba(109,40,217,.22);}
+.sc-oil::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.sc-retail{background:linear-gradient(158deg,rgba(2,132,199,.06),rgba(2,132,199,.02));border-color:rgba(2,132,199,.2);}
+.sc-retail::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.sc-telecom{background:linear-gradient(158deg,rgba(22,163,74,.06),rgba(22,163,74,.02));border-color:rgba(22,163,74,.2);}
+.sc-telecom::before{background:linear-gradient(90deg,var(--gbr),var(--gh));}
+.sc-fmcg{background:linear-gradient(158deg,rgba(217,119,6,.06),rgba(217,119,6,.02));border-color:rgba(217,119,6,.2);}
+.sc-fmcg::before{background:linear-gradient(90deg,var(--ambr),var(--amb));}
+.sc-hotel{background:linear-gradient(158deg,rgba(220,38,38,.06),rgba(220,38,38,.02));border-color:rgba(220,38,38,.18);}
+.sc-hotel::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.sc-infra{background:linear-gradient(158deg,rgba(109,40,217,.04),rgba(22,163,74,.04));border-color:rgba(109,40,217,.15);}
+.sc-infra::before{background:linear-gradient(90deg,var(--p),var(--gbr));}
+.seg-ico{font-size:clamp(24px,4vw,36px);margin-bottom:8px;}
+.seg-tag{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.seg-name{font-size:clamp(13px,1.8vw,17px);font-weight:900;color:var(--tx);margin-bottom:6px;}
+.seg-val{font-size:clamp(16px,2.5vw,24px);font-weight:900;letter-spacing:-1px;margin-bottom:3px;}
+.seg-sub{font-size:10px;color:var(--tl);font-weight:600;line-height:1.4;margin-bottom:8px;}
+.seg-desc{font-size:clamp(11px,1.3vw,12.5px);color:var(--ts);line-height:1.6;}
+.seg-method{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;margin-top:8px;}
+/* SOTP WATERFALL TABLE */
+.sotp-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);}
+.sotp-hdr{background:linear-gradient(135deg,var(--pl),var(--p));padding:clamp(14px,2.5vw,22px) clamp(16px,3vw,26px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.sotp-hdr-title{font-size:clamp(15px,2.2vw,20px);font-weight:900;color:#fff;}
+.sotp-hdr-sub{font-size:12px;color:rgba(255,255,255,.7);margin-top:2px;}
+.sotp-legend{padding:10px clamp(14px,3vw,22px);background:var(--pxs);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--ts);}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+.sotp-table{width:100%;border-collapse:collapse;min-width:800px;}
+.sotp-table th{background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:clamp(9px,1.4vw,13px) clamp(8px,1.5vw,14px);font-size:clamp(9px,1vw,11px);font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:2px solid var(--bd);text-align:right;white-space:nowrap;}
+.sotp-table th:first-child,.sotp-table th:nth-child(2){text-align:left;}
+.sotp-table td{padding:clamp(9px,1.4vw,13px) clamp(8px,1.5vw,14px);font-size:clamp(11px,1.2vw,13px);color:var(--ts);border-bottom:1px solid rgba(109,40,217,.06);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.sotp-table td:first-child{text-align:left;font-weight:700;color:var(--tx);}
+.sotp-table td:nth-child(2){text-align:left;font-size:11px;}
+.sotp-table tr.total-row td{font-weight:900;color:var(--p);background:linear-gradient(135deg,rgba(109,40,217,.07),rgba(109,40,217,.03));border-top:2px solid var(--pmd);}
+.sotp-table tr.net-row td{font-weight:900;color:var(--gbr);background:rgba(22,163,74,.06);border-top:1.5px solid rgba(22,163,74,.2);}
+.sotp-table tr.conglom-row td{font-weight:900;color:var(--ambr);background:rgba(217,119,6,.06);border-top:1.5px solid rgba(217,119,6,.2);}
+.sotp-table tr:hover td{background:var(--pxs);}
+.sotp-table tr.total-row:hover td,.sotp-table tr.net-row:hover td,.sotp-table tr.conglom-row:hover td{background:inherit;}
+.flag-cell{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:2px 6px;border-radius:6px;}
+.flag-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.flag-r{background:rgba(220,38,38,.1);color:var(--red);}
+.flag-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.flag-p{background:var(--pxl);color:var(--p);}
+.flag-s{background:rgba(2,132,199,.1);color:var(--sky);}
+/* SOTP WATERFALL BAR CHART */
+.sotp-bars{background:var(--sf);border:1.5px solid var(--bd);border-radius:16px;padding:clamp(16px,2.5vw,24px);margin-top:20px;}
+.sb-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--p);margin-bottom:16px;}
+.sb-row{display:grid;grid-template-columns:clamp(120px,20vw,200px) 1fr auto;align-items:center;gap:12px;padding:8px 0;border-bottom:1px dashed rgba(109,40,217,.07);}
+.sb-row:last-child{border-bottom:none;}
+.sb-label{font-size:clamp(11.5px,1.4vw,13px);font-weight:700;color:var(--tx);}
+.sb-bar-bg{height:20px;background:rgba(0,0,0,.05);border-radius:5px;overflow:hidden;}
+.sb-bar{height:100%;border-radius:5px;}
+.sb-val{font-size:clamp(11px,1.5vw,13px);font-weight:900;text-align:right;white-space:nowrap;}
+/* CONGLOMERATE DISCOUNT VISUAL */
+.disc-visual{background:var(--sf);border:1.5px solid var(--bd);border-radius:16px;padding:clamp(16px,2.5vw,24px);margin-bottom:24px;}
+.dv-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--p);margin-bottom:14px;}
+.dv-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed rgba(109,40,217,.07);flex-wrap:wrap;}
+.dv-row:last-child{border-bottom:none;}
+.dv-lbl{font-size:12px;font-weight:700;color:var(--tx);flex:1;}
+.dv-bar-wrap{flex:2;min-width:120px;}
+.dv-bar-bg{height:14px;background:rgba(0,0,0,.05);border-radius:4px;overflow:hidden;position:relative;}
+.dv-bar-fill{height:100%;border-radius:4px;position:absolute;left:0;top:0;}
+.dv-val{font-size:12px;font-weight:800;min-width:80px;text-align:right;}
+/* COMPANY BLOCKS */
+.company-block{border-radius:18px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);margin-bottom:28px;}
+.cb-header{display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,24px);gap:12px;flex-wrap:wrap;}
+.cb-good{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.cb-bad{background:linear-gradient(135deg,#fef2f2,#fff5f5);}
+.cb-co{display:flex;align-items:center;gap:12px;}
+.cb-name{font-size:clamp(14px,2vw,18px);font-weight:900;color:var(--tx);line-height:1.2;}
+.cb-sub{font-size:11px;color:var(--tl);margin-top:3px;}
+.cb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.cb-badge{padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;}
+.cb-b-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.cb-b-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.cb-b-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.cb-b-s{background:rgba(2,132,199,.1);color:var(--sky);border:1px solid rgba(2,132,199,.2);}
+.cb-insight{padding:14px 18px;font-size:12px;color:var(--ts);line-height:1.65;margin:0;}
+.cb-insight-g{background:rgba(22,163,74,.06);border-top:1px solid rgba(22,163,74,.15);border-left:3px solid var(--gbr);}
+.cb-insight-r{background:rgba(220,38,38,.05);border-top:1px solid rgba(220,38,38,.15);border-left:3px solid var(--red);}
+.ex-logo{width:48px;height:48px;min-width:48px;border-radius:12px;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+/* TRICK SECTION */
+.trick-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:24px;overflow:hidden;box-shadow:var(--shp);}
+.trick-hdr{background:linear-gradient(135deg,#1a0a3c,var(--pl),var(--p));padding:clamp(20px,3.5vw,36px) clamp(20px,4vw,40px);display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.trick-hdr::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:24px 24px;}
+.th-left{flex:1;min-width:0;position:relative;z-index:1;}
+.th-supertag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.th-supertag::before{content:'';width:16px;height:2px;background:#4ade80;border-radius:2px;}
+.th-title{font-size:clamp(17px,3vw,26px);font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1.2;margin-bottom:8px;}
+.th-sub{font-size:clamp(12px,1.5vw,14px);color:rgba(255,255,255,.68);line-height:1.65;}
+.th-right{display:flex;flex-shrink:0;position:relative;z-index:1;}
+.th-timer{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:14px 20px;text-align:center;}
+.th-timer-num{font-size:clamp(26px,4vw,40px);font-weight:900;color:#fff;line-height:1;}
+.th-timer-lbl{font-size:10px;color:rgba(255,255,255,.55);font-weight:600;margin-top:2px;}
+/* QUICK REF */
+.trick-qref{padding:clamp(16px,3vw,28px) clamp(18px,4vw,36px);background:linear-gradient(158deg,#f5f3ff,#f0fdf4);border-bottom:1px solid var(--bd);}
+.qr-title{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.qr-title::before{content:'';width:18px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.sn-strip{background:var(--pxs);border:1px solid var(--pmd);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.sn-lbl{font-size:10px;font-weight:700;color:var(--p);flex-shrink:0;}
+.sn-num{width:18px;height:18px;border-radius:50%;background:var(--p);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sn-txt{font-size:10px;font-weight:700;color:var(--ts);}
+.sn-arr{font-size:10px;color:var(--tl);}
+/* Segment method chips */
+.seg-chips{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(6px,1.5vw,10px);margin-bottom:14px;}
+.sc-chip{border-radius:12px;padding:clamp(10px,2vw,14px);text-align:center;border:1.5px solid;}
+.scc-pe{background:rgba(109,40,217,.06);border-color:rgba(109,40,217,.2);}
+.scc-ev{background:rgba(2,132,199,.06);border-color:rgba(2,132,199,.18);}
+.scc-dcf{background:rgba(22,163,74,.08);border-color:rgba(22,163,74,.2);}
+.scc-disc{background:rgba(220,38,38,.06);border-color:rgba(220,38,38,.18);}
+.sc-chip-lbl{font-size:clamp(12px,1.8vw,16px);font-weight:900;letter-spacing:-.3px;margin-bottom:2px;}
+.sc-chip-name{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--tl);margin-bottom:5px;}
+.sc-chip-formula{font-size:9px;font-weight:600;color:var(--ts);line-height:1.4;border-top:1px dashed rgba(0,0,0,.08);padding-top:5px;}
+/* SOTP calculator strips */
+.sotp-calc{background:var(--wh);border:1px solid var(--bd);border-radius:14px;padding:clamp(14px,2.5vw,22px);margin-bottom:12px;}
+.sc-calc-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--p);margin-bottom:12px;}
+.sc-row{display:grid;grid-template-columns:32px 1fr auto;align-items:center;gap:0 14px;padding:8px 0;border-bottom:1px dashed rgba(109,40,217,.07);}
+.sc-row:last-child{border-bottom:none;}
+.sc-op{font-size:22px;font-weight:900;color:var(--tl);text-align:center;line-height:1;}
+.sc-label{font-size:clamp(11px,1.4vw,13px);font-weight:700;color:var(--tx);}
+.sc-sub{font-size:9.5px;color:var(--tl);font-weight:500;margin-top:2px;}
+.sc-val{font-size:clamp(12px,1.6vw,15px);font-weight:900;text-align:right;white-space:nowrap;}
+.sc-total{background:linear-gradient(135deg,rgba(22,163,74,.1),rgba(22,163,74,.04));border:1.5px solid rgba(22,163,74,.22);border-radius:10px;padding:12px 14px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.sc-total-lbl{font-size:clamp(12px,1.5vw,14px);font-weight:800;color:var(--gbr);}
+.sc-total-val{font-size:clamp(16px,2.5vw,22px);font-weight:900;color:var(--gbr);white-space:nowrap;}
+/* Discount danger meter */
+.disc-meter{background:var(--wh);border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin-bottom:12px;}
+.dm-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--p);margin-bottom:10px;}
+.dm-track{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;}
+.dm-zone{border-radius:8px;padding:8px 4px;text-align:center;}
+.dm-val{font-size:clamp(10px,1.4vw,12px);font-weight:900;margin-bottom:2px;}
+.dm-lbl{font-size:8px;font-weight:600;color:var(--tl);}
+/* Free data sources */
+.data-strip{background:var(--pxs);border:1px solid var(--pmd);border-radius:12px;padding:clamp(10px,2vw,16px);margin-bottom:12px;}
+.ds-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:10px;}
+.ds-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.ds-item{background:var(--wh);border:1px solid var(--bd);border-radius:10px;padding:10px;display:flex;align-items:flex-start;gap:8px;}
+.ds-ico{font-size:16px;flex-shrink:0;}
+.ds-name{font-size:10px;font-weight:800;color:var(--tx);margin-bottom:2px;}
+.ds-desc{font-size:9px;color:var(--tl);line-height:1.4;}
+/* TRICK STEPS */
+.trick-steps-body{padding:clamp(20px,4vw,36px) clamp(18px,4vw,36px);border-bottom:1px solid var(--bd);}
+.trick-step{display:flex;gap:clamp(12px,2.5vw,20px);padding-bottom:clamp(18px,3vw,28px);position:relative;}
+.trick-step:last-child{padding-bottom:0;}
+.ts-connector{position:absolute;left:clamp(17px,3vw,22px);top:clamp(40px,5vw,48px);bottom:0;width:2px;background:linear-gradient(180deg,var(--pmd),rgba(109,40,217,.06));border-radius:2px;}
+.trick-step:last-child .ts-connector{display:none;}
+.ts-num{width:clamp(36px,5vw,44px);height:clamp(36px,5vw,44px);border-radius:12px;color:#fff;font-size:clamp(14px,2vw,18px);font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(109,40,217,.28);flex-shrink:0;position:relative;z-index:1;}
+.ts-body{flex:1;min-width:0;padding-top:6px;}
+.ts-nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.ts-site{font-size:10px;font-weight:800;color:var(--p);background:var(--pxs);padding:4px 10px;border-radius:8px;border:1px solid var(--pmd);}
+.ts-arrow{font-size:12px;color:var(--tl);}
+.ts-tab{font-size:10px;font-weight:700;color:var(--ts);background:var(--sf);padding:4px 10px;border-radius:8px;border:1px solid var(--bd);}
+.ts-tab.purple{background:var(--pxl);color:var(--p);border-color:var(--pmd);}
+.ts-tab.green{background:rgba(22,163,74,.08);color:var(--gbr);border-color:rgba(22,163,74,.2);}
+.ts-tab.amber{background:rgba(217,119,6,.08);color:var(--ambr);border-color:rgba(217,119,6,.2);}
+.ts-tab.sky{background:rgba(2,132,199,.08);color:var(--sky);border-color:rgba(2,132,199,.2);}
+.ts-tab.red{background:rgba(220,38,38,.08);color:var(--red);border-color:rgba(220,38,38,.2);}
+.ts-action{font-size:clamp(12px,1.5vw,13.5px);color:var(--ts);line-height:1.68;margin-bottom:10px;}
+.ts-formula{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:clamp(12px,2vw,18px);margin-bottom:10px;}
+.ts-f-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.ts-f-lbl{font-size:12px;font-weight:800;color:var(--tx);}
+.ts-f-eq{font-size:18px;font-weight:700;color:var(--tl);}
+.ts-f-item{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;}
+.ts-fi-p{background:var(--pxl);color:var(--p);}
+.ts-fi-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.ts-fi-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.ts-fi-s{background:rgba(2,132,199,.1);color:var(--sky);}
+.ts-fi-r{background:rgba(220,38,38,.1);color:var(--red);}
+.ts-f-guide{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:11px;font-weight:600;}
+.ts-shortcut{background:linear-gradient(135deg,var(--pxl),#f0fdf4);border:1px solid var(--pmd);border-radius:10px;padding:12px 14px;margin-top:8px;}
+.ts-sc-lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.ts-sc-text{font-size:12px;color:var(--ts);line-height:1.6;}
+.ts-outcomes{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.ts-out{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.5;padding:9px 12px;border-radius:10px;}
+.ts-out-g{background:rgba(22,163,74,.07);color:var(--gbr);border:1px solid rgba(22,163,74,.14);}
+.ts-out-r{background:rgba(220,38,38,.06);color:var(--red);border:1px solid rgba(220,38,38,.14);}
+.ts-out-n{background:var(--pxs);color:var(--p);border:1px solid var(--pmd);}
+/* BONUS & FLOWCHART */
+.trick-bonus{padding:clamp(18px,3.5vw,32px) clamp(18px,4vw,36px);background:linear-gradient(158deg,#f5f3ff,#f0fdf4);border-bottom:1px solid var(--bd);}
+.bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,16px);}
+.bonus-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:clamp(12px,2vw,18px);box-shadow:var(--shc);position:relative;overflow:hidden;}
+.bonus-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.bc-p::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.bc-s::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.bc-a::before{background:linear-gradient(90deg,var(--ambr),var(--amb));}
+.bc-g::before{background:linear-gradient(90deg,var(--gbr),var(--gh));}
+.bonus-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;color:#fff;font-size:13px;font-weight:900;margin-bottom:8px;}
+.bonus-title{font-size:clamp(12px,1.5vw,13px);font-weight:800;color:var(--tx);margin-bottom:5px;}
+.bonus-desc{font-size:clamp(11px,1.2vw,12px);color:var(--ts);line-height:1.55;}
+.flow-wrap{padding:clamp(18px,3.5vw,32px) clamp(18px,4vw,36px);}
+.flow-label{font-size:12px;font-weight:700;color:var(--p);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.flow-chain{display:flex;flex-direction:column;gap:8px;}
+.flow-node{border-radius:12px;padding:10px 14px;font-size:clamp(11px,1.4vw,12.5px);font-weight:700;display:flex;align-items:center;gap:8px;line-height:1.4;}
+.fn-q{background:var(--pxl);border:1.5px solid var(--pmd);color:var(--pl);}
+.fn-qlbl{font-size:10px;font-weight:800;background:var(--p);color:#fff;border-radius:6px;padding:2px 7px;flex-shrink:0;}
+.fn-txt{flex:1;}
+.flow-branch{display:flex;flex-direction:column;gap:8px;padding-left:clamp(12px,3vw,24px);border-left:2px dashed var(--pmd);margin-left:18px;}
+.fb-yes,.fb-no{display:flex;flex-direction:column;gap:6px;}
+.fb-lbl{font-size:10px;font-weight:800;padding:2px 8px;border-radius:6px;width:fit-content;}
+.fb-yes>.fb-lbl{background:rgba(22,163,74,.12);color:var(--gbr);}
+.fb-no>.fb-lbl{background:rgba(220,38,38,.1);color:var(--red);}
+.fn-g{background:rgba(22,163,74,.1);border:1.5px solid rgba(22,163,74,.25);color:var(--gbr);font-size:clamp(11px,1.3vw,13px);}
+.fn-a{background:rgba(217,119,6,.08);border:1.5px solid rgba(217,119,6,.22);color:var(--ambr);font-size:clamp(11px,1.3vw,13px);}
+.fn-r{background:rgba(220,38,38,.07);border:1.5px solid rgba(220,38,38,.2);color:var(--red);font-size:clamp(11px,1.3vw,13px);}
+/* GLOSSARY */
+.glos-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);}
+.glos-table{width:100%;border-collapse:collapse;}
+.glos-table thead th{background:linear-gradient(135deg,var(--pxl),var(--pxs));padding:clamp(10px,2vw,15px) clamp(12px,2.5vw,20px);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--p);text-align:left;border-bottom:1.5px solid var(--bd);}
+.glos-table tbody tr{border-bottom:1px solid rgba(109,40,217,.05);transition:background .2s;}
+.glos-table tbody tr:last-child{border-bottom:none;}
+.glos-table tbody tr:hover{background:var(--pxs);}
+.gt-term{padding:clamp(11px,2vw,16px) clamp(12px,2.5vw,20px);font-size:clamp(11px,1.4vw,13px);font-weight:800;color:var(--p);white-space:nowrap;vertical-align:top;}
+.gt-desc{padding:clamp(11px,2vw,16px) clamp(12px,2.5vw,20px);font-size:clamp(11px,1.3vw,13px);color:var(--ts);line-height:1.65;vertical-align:top;}
+.gt-risk{padding:clamp(11px,2vw,16px) clamp(10px,2vw,16px);vertical-align:top;text-align:center;}
+/* DEMAT BANNER */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:"\\2713";color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+/* NEXT BANNER */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-arrow{font-size:18px;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+/* ═══════════════════════════════════════════════════════════════════
+   UNIFIED RESPONSIVE SYSTEM · Module 10 · SOTP Valuation
+   Segment Cards · SOTP Table · Bars · Conglomerate Discount
+   Desktop · Tablet · Mobile · iOS · Android · Touch · A11y · Print
+   ═══════════════════════════════════════════════════════════════════ */
+img,svg{max-width:100%;height:auto;display:block;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.seg-grid{grid-template-columns:1fr 1fr;}.seg-chips{grid-template-columns:1fr 1fr;}.bonus-grid{grid-template-columns:1fr 1fr;}.sb-row{grid-template-columns:clamp(100px,18vw,160px) 1fr auto;}.ds-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){.concept-grid{grid-template-columns:1fr;}.infographic-svg{max-width:380px;margin:0 auto;}.klo-hi-row{grid-template-columns:repeat(3,1fr);}.flow-branch{padding-left:12px;margin-left:12px;}.sb-row{grid-template-columns:clamp(90px,16vw,140px) 1fr auto;}.seg-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.w{padding:clamp(32px,6vw,56px) clamp(14px,5vw,28px);}.hst{flex-direction:column;}.hsi{border-right:none !important;border-bottom:1px solid var(--bd);}.hsi:last-child{border-bottom:none;}.klobanner{flex-direction:column;}.klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}.klo-hi-row{grid-template-columns:1fr 1fr;}.disc-inner{flex-direction:column;gap:12px;}.nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(14px,4vw,24px);}.nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;min-height:52px;}.dmfeats{gap:10px 20px;}.sotp-hdr{flex-direction:column;align-items:flex-start;}.cb-header{flex-direction:column;align-items:flex-start;}.cb-badges{margin-top:4px;flex-wrap:wrap;}.trick-hdr{flex-direction:column;gap:14px;}.ts-outcomes{grid-template-columns:1fr;}.flow-branch{padding-left:10px;margin-left:10px;}.bonus-grid{grid-template-columns:1fr 1fr;}.sn-strip{flex-wrap:wrap;gap:4px;}.seg-chips{grid-template-columns:1fr 1fr;}.sb-row{grid-template-columns:80px 1fr auto;gap:8px;}.dv-row{flex-direction:column;align-items:flex-start;gap:6px;}.dv-bar-wrap{width:100%;flex:unset;}.classify-3col{grid-template-columns:1fr !important;}.sotp-ps-row{grid-template-columns:22px 1fr auto !important;gap:0 8px !important;}body{overscroll-behavior-y:contain;}}
+@media(max-width:640px){.seg-grid{grid-template-columns:1fr;}.klo-hi-row{grid-template-columns:1fr;}.dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}.infographic-svg{max-width:100%;}.sotp-table{min-width:800px;}.glos-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:520px;}.bonus-grid{grid-template-columns:1fr;}.trick-steps-body,.trick-bonus,.flow-wrap{padding:16px;}.ts-f-row{flex-wrap:wrap;gap:4px 8px;}.ts-f-guide{flex-direction:column;gap:4px;}.seg-chips{grid-template-columns:1fr 1fr;}.sb-row{grid-template-columns:70px 1fr auto;gap:6px;}.ds-grid{grid-template-columns:1fr;}.dm-track{grid-template-columns:repeat(3,1fr) !important;gap:3px;}.sn-strip{flex-wrap:wrap;gap:4px;}}
+@media(max-width:480px){.w{padding:28px 12px;}.hh1{letter-spacing:-1.2px;}.hdesc{font-size:13px;}.hst{flex-wrap:wrap;}.hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}.hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}.hsi:nth-last-child(-n+2){border-bottom:none !important;}.vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}.h2{letter-spacing:-1px;}.lead{font-size:13.5px;}.tag{letter-spacing:2px;}.klo-title{font-size:14px;}.kpill{font-size:9px;padding:4px 9px;}.dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}.dmh{letter-spacing:-1px;}.dmsub{font-size:13px;}.nxt-banner{padding:12px 14px;}.nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}.sotp-hdr{padding:12px;}.sotp-hdr-title{font-size:14px;}.th-timer{display:none;}.ts-outcomes{grid-template-columns:1fr;}.ts-num{width:32px;height:32px;font-size:13px;}.flow-branch{padding-left:6px;margin-left:8px;}.trick-steps-body,.trick-bonus,.flow-wrap{padding:14px;}.bonus-card{padding:14px;}.sn-strip{flex-direction:column;align-items:flex-start;}.seg-chips{grid-template-columns:1fr 1fr;}.sb-row{grid-template-columns:60px 1fr auto;gap:4px;}.trick-qref{padding:14px;}.seg-card{padding:14px;}.sotp-calc{padding:12px;}.disc-meter{padding:10px 12px;}.data-strip{padding:10px 12px;}.sc-row{grid-template-columns:24px 1fr auto;gap:0 8px;}.classify-3col{grid-template-columns:1fr !important;}.sotp-ps-row{grid-template-columns:20px 1fr auto !important;gap:0 6px !important;}}
+@media(max-width:360px){.w{padding:22px 10px;}.hh1{font-size:clamp(26px,10vw,40px);letter-spacing:-1px;}.hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}.hsi:nth-child(odd){border-right:none !important;}.hsi:last-child{border-bottom:none !important;}.kpill{font-size:8.5px;padding:3px 8px;}.dmbtn{font-size:14px;padding:13px 16px;}.nxt-btn{font-size:12px;padding:10px 14px;}.ts-nav{flex-direction:column;align-items:flex-start;gap:3px;}.trick-steps-body,.trick-bonus,.flow-wrap{padding:12px;}.seg-grid{grid-template-columns:1fr;}.sb-row{grid-template-columns:50px 1fr auto;}.seg-chips{grid-template-columns:1fr 1fr;}}
+@media(hover:none) and (pointer:coarse){.seg-card:hover,.step-card:hover,.company-block:hover,.bonus-card:hover{transform:none !important;box-shadow:var(--shc) !important;border-color:var(--bd) !important;}.seg-card:active{transform:scale(.98);transition:transform .08s;}.step-card:active{transform:scale(.99);transition:transform .08s;}.bonus-card:active{transform:scale(.98);transition:transform .08s;}.dmbtn:active,.nxt-btn:active{transform:scale(.97);transition:transform .08s;}.dmbtn,.nxt-btn{min-height:52px;}.kpill{min-height:36px;padding-top:8px;padding-bottom:8px;}.ts-num{min-width:44px;min-height:44px;}.bonus-badge{min-width:36px;min-height:36px;}.seg-card{min-height:auto;}.sc-chip{min-height:60px;display:flex;flex-direction:column;justify-content:center;}.dm-zone{min-height:40px;}.ds-item{min-height:36px;}::-webkit-scrollbar{display:none;}scrollbar-width:none;a,button,.dmbtn,.nxt-btn,.seg-card,.step-card,.kpill,.company-block,.bonus-card,.trick-wrap,.flow-node,.sc-chip{-webkit-tap-highlight-color:transparent;touch-action:manipulation;-webkit-touch-callout:none;}.hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,.th-title,.th-supertag,.ts-nav,.flow-label,.sotp-hdr-title,.seg-name,.seg-tag,.qr-title,.sc-chip-lbl,.sc-chip-name,.dm-title,.sb-title,.dv-title{-webkit-user-select:none;user-select:none;}p,.klo-desc,.lead,.cb-insight,.ts-action,.ts-sc-text,.bonus-desc,.ts-out,.step-body p,.sc-chip-formula,.seg-desc,.dm-lbl,.ds-desc,.sc-sub{-webkit-user-select:text;user-select:text;}.klo-icon,.infographic-svg,.seg-card{animation:none !important;}.table-scroll,.glos-wrap{-webkit-overflow-scrolling:touch;}}
+@supports(-webkit-touch-callout:none){body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}.hero{min-height:100svh;min-height:-webkit-fill-available;padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}.vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}.w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}.nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}.dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}.hp,.hg,.hr,.hh1 .line1,.hh1 .line2,.hh1 .line3,.hsv,.hsv.g,.hsv.r,.hsv.a,.klo-hi-val.purple,.klo-hi-val.green,.klo-hi-val.amber,.h2 .hp,.h2 .hg,.h2 .hr{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}a,button,.dmbtn,.nxt-btn,.seg-card,.step-card,.kpill,.company-block,.bonus-card,.trick-wrap,.sc-chip{-webkit-tap-highlight-color:transparent;}.table-scroll,.glos-wrap{-webkit-overflow-scrolling:touch;}.orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}}
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){.dmbtn,.nxt-btn{min-height:52px;}.seg-card,.step-card,.sotp-wrap,.company-block,.bonus-card,.trick-wrap{-webkit-backface-visibility:hidden;backface-visibility:hidden;}.infographic-svg,.klo-icon{-webkit-transform:translateZ(0);transform:translateZ(0);}body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}.rv{opacity:1;transform:none;}.infographic-svg,.klo-icon,.seg-card{animation:none !important;}}
+@media print{.dmbanner,.orb,.nxt-banner,.trick-hdr{display:none;}.rv{opacity:1;transform:none;}body{color:#000;background:#fff;}.w{padding:20px;}.table-scroll{overflow:visible;}.sotp-table{min-width:0;}.company-block,.step-card,.bonus-card,.trick-step,.seg-card{break-inside:avoid;}.seg-grid{grid-template-columns:1fr 1fr;}.seg-chips{grid-template-columns:1fr 1fr 1fr 1fr;}.sotp-table .total-row td,.sotp-table .net-row td{background:#f0fdf4 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<!-- HERO -->
+<section class="hero">
+  <div class="vbadge">Advanced Valuation · Module 10 · SOTP</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>SOTP · Conglomerate Valuation · Reliance · ITC · L&T · Segment Multiples</div>
+  <h1 class="hh1">
+    <span class="line1">Sum-of-the-Parts</span>
+    <span class="line2">Valuation</span>
+    <span class="line3">Value Each Business · Add Them Up · Find Hidden Worth</span>
+  </h1>
+  <div class="hsub">Advanced Valuation · Conglomerate Analysis · Segment Multiples · SOTP</div>
+  <p class="hdesc">When one P/E ratio cannot possibly describe a company that runs petrol stations, designs semiconductors, runs the world's largest telecom network, and operates the biggest retail chain in India — you need Sum-of-the-Parts valuation. SOTP breaks the conglomerate into individual businesses, values each using the most appropriate method, and adds them up to find the total intrinsic value.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv">Segment Split</div><div class="hsl">Identify each business</div></div>
+    <div class="hsi"><div class="hsv a">Right Method</div><div class="hsl">P/E · EV/EBITDA · DCF</div></div>
+    <div class="hsi"><div class="hsv g">Add Up</div><div class="hsl">SOTP = Σ segment values</div></div>
+    <div class="hsi"><div class="hsv">Conglom. Disc.</div><div class="hsl">Subtract 10–25%</div></div>
+    <div class="hsi"><div class="hsv g">5 Good · 5 Bad</div><div class="hsl">Real examples</div></div>
+  </div>
+</section>
+
+<!-- 01 KLO -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Value Conglomerates by Segment: <span class="hp">Reliance · ITC · L&T</span></h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">🏢</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">Reliance Industries is not one company. It is six businesses living under one stock symbol: an O2C (oil-to-chemicals) refinery, Jio Platforms (telecom + digital), Reliance Retail (biggest Indian retailer), Reliance New Energy (green energy), financial services, and media/entertainment. Valuing Reliance with a single P/E ratio — as if it were Nestlé or TCS — produces a wildly inaccurate number. SOTP solves this: value each segment using the multiple or method most appropriate for that type of business, then add the segment values together.</div>
+        <div class="klo-desc">Think of a conglomerate as a thali plate: biryani, dal makhani, gulab jamun, and raita — all in one plate. You wouldn't price the whole thali using only the price-per-gram of biryani. The biryani is high-margin, the dal is lower-margin, the gulab jamun is sweet (premium), and the raita is commoditised. Each dish has its own pricing logic. Similarly, each segment of a conglomerate deserves its own valuation method. Adding up the per-dish prices gives you the true value of the thali.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-p">🏢 Step 1: Identify all business segments</span>
+          <span class="kpill kpill-a">📊 Step 2: Assign right method to each segment</span>
+          <span class="kpill kpill-g">✅ Step 3: Value each segment independently</span>
+          <span class="kpill kpill-s">📐 Step 4: Sum all segment values</span>
+          <span class="kpill kpill-r">🔻 Step 5: Apply conglomerate discount (10–25%)</span>
+        </div>
+        <div class="klo-hi-row">
+          <div class="klo-hi"><div class="klo-hi-ico">🔢</div><div class="klo-hi-val purple">Segment Values</div><div class="klo-hi-lbl">Each business valued separately</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">➕</div><div class="klo-hi-val amber">SOTP Total</div><div class="klo-hi-lbl">Sum of all segment values</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">🔻</div><div class="klo-hi-val green">Fair Value</div><div class="klo-hi-lbl">SOTP minus conglomerate discount</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 HOW SOTP WORKS + INFOGRAPHIC -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — How SOTP Works</div>
+    <h2 class="h2 rv d2">Why One Multiple Can't <span class="hp">Value a Conglomerate</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Reliance Industries' O2C business deserves a 6–8× EV/EBITDA (commodity business). Jio Platforms deserves 18–22× EV/EBITDA (telecom + digital). Reliance Retail deserves 35–50× P/E (high-growth retail). Using any single multiple for the whole group either overvalues the commodities or undervalues the high-growth segments.</p>
+
+    <div class="concept-grid rv d3">
+      <div class="infographic-wrap">
+        <svg class="infographic-svg" viewBox="0 0 420 580" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="420" height="580" rx="20" fill="#f5f3ff"/>
+          <rect x="10" y="10" width="400" height="32" rx="10" fill="#6d28d9"/>
+          <text x="210" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">SOTP Valuation — How to Value a Conglomerate</text>
+          <!-- Conglomerate building -->
+          <rect x="145" y="52" width="130" height="72" rx="8" fill="#4c1d95" opacity=".85"/>
+          <rect x="158" y="62" width="18" height="14" rx="3" fill="#a78bfa"/>
+          <rect x="182" y="62" width="18" height="14" rx="3" fill="#a78bfa"/>
+          <rect x="206" y="62" width="18" height="14" rx="3" fill="#a78bfa"/>
+          <rect x="230" y="62" width="18" height="14" rx="3" fill="#a78bfa"/>
+          <rect x="158" y="82" width="18" height="14" rx="3" fill="#a78bfa"/>
+          <rect x="182" y="82" width="18" height="14" rx="3" fill="#a78bfa"/>
+          <rect x="206" y="82" width="18" height="14" rx="3" fill="#a78bfa"/>
+          <rect x="230" y="82" width="18" height="14" rx="3" fill="#a78bfa"/>
+          <rect x="190" y="100" width="40" height="24" rx="5" fill="#7c3aed"/>
+          <text x="210" y="47" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#6d28d9">RELIANCE INDUSTRIES</text>
+          <!-- Split arrows -->
+          <line x1="152" y1="128" x2="60" y2="165" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <line x1="178" y1="130" x2="147" y2="165" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <line x1="210" y1="130" x2="210" y2="165" stroke="#15803d" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <line x1="242" y1="130" x2="273" y2="165" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <line x1="268" y1="128" x2="360" y2="165" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <!-- Segment boxes -->
+          <rect x="10" y="165" width="90" height="52" rx="8" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1.5"/>
+          <text x="55" y="183" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="800" fill="#4c1d95">O2C Refinery</text>
+          <text x="55" y="196" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6e6994">6–8× EBITDA</text>
+          <text x="55" y="208" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#4c1d95">₹5.6L Cr</text>
+          <rect x="110" y="165" width="85" height="52" rx="8" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.5"/>
+          <text x="152" y="183" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="800" fill="#0284c7">Jio Platforms</text>
+          <text x="152" y="196" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6e6994">20× EBITDA</text>
+          <text x="152" y="208" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#0284c7">₹8.2L Cr</text>
+          <rect x="168" y="165" width="84" height="52" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+          <text x="210" y="183" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="800" fill="#15803d">Retail</text>
+          <text x="210" y="196" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6e6994">40× P/E</text>
+          <text x="210" y="208" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#15803d">₹6.8L Cr</text>
+          <rect x="262" y="165" width="86" height="52" rx="8" fill="#fefce8" stroke="#fde68a" stroke-width="1.5"/>
+          <text x="305" y="183" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="800" fill="#92400e">New Energy</text>
+          <text x="305" y="196" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6e6994">DCF</text>
+          <text x="305" y="208" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#92400e">₹1.2L Cr</text>
+          <rect x="320" y="165" width="90" height="52" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+          <text x="365" y="183" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="800" fill="#dc2626">Media + FS</text>
+          <text x="365" y="196" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6e6994">P/B · P/S</text>
+          <text x="365" y="208" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#dc2626">₹0.9L Cr</text>
+          <!-- Plus signs -->
+          <text x="103" y="196" font-family="DM Sans,sans-serif" font-size="16" font-weight="900" fill="#6d28d9">+</text>
+          <text x="257" y="196" font-family="DM Sans,sans-serif" font-size="16" font-weight="900" fill="#6d28d9">+</text>
+          <text x="353" y="196" font-family="DM Sans,sans-serif" font-size="16" font-weight="900" fill="#6d28d9">+</text>
+          <!-- Arrow to sum -->
+          <line x1="210" y1="220" x2="210" y2="244" stroke="#15803d" stroke-width="2.5"/>
+          <polygon points="205,242 210,252 215,242" fill="#15803d"/>
+          <!-- SOTP Sum box -->
+          <rect x="50" y="252" width="320" height="42" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+          <text x="210" y="271" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#15803d">SOTP GROSS VALUE = ₹22.7 Lakh Crore</text>
+          <text x="210" y="285" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">₹5.6+₹8.2+₹6.8+₹1.2+₹0.9 = ₹22.7 L Cr</text>
+          <!-- Arrow -->
+          <line x1="210" y1="294" x2="210" y2="312" stroke="#6d28d9" stroke-width="2.5"/>
+          <polygon points="205,310 210,320 215,310" fill="#6d28d9"/>
+          <!-- Conglomerate discount -->
+          <rect x="80" y="320" width="260" height="38" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+          <text x="210" y="337" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="#dc2626">Minus Conglomerate Discount ~15%</text>
+          <text x="210" y="350" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#dc2626">−₹3.4 Lakh Crore (complexity + holding discount)</text>
+          <!-- Arrow -->
+          <line x1="210" y1="358" x2="210" y2="376" stroke="#6d28d9" stroke-width="2.5"/>
+          <polygon points="205,374 210,384 215,374" fill="#6d28d9"/>
+          <!-- Final value -->
+          <rect x="40" y="384" width="340" height="48" rx="12" fill="#6d28d9"/>
+          <text x="210" y="404" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">SOTP FAIR VALUE = ₹19.3 Lakh Crore</text>
+          <text x="210" y="422" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#ddd6fe">Per Share (674 Cr shares) = ~₹2,864/share</text>
+          <!-- Human analyst character -->
+          <circle cx="56" cy="508" r="14" fill="#fbbf24"/>
+          <ellipse cx="56" cy="497" rx="14" ry="7" fill="#4c1d95"/>
+          <circle cx="51" cy="507" r="2.2" fill="white"/><circle cx="51.5" cy="508" r="1.4" fill="#1f2937"/>
+          <circle cx="61" cy="507" r="2.2" fill="white"/><circle cx="61.5" cy="508" r="1.4" fill="#1f2937"/>
+          <path d="M51 515 Q56 519 61 515" stroke="#92400e" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <path d="M42,521 Q38,531 36,521" stroke="#fbbf24" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M70,521 Q74,531 76,521" stroke="#fbbf24" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M42,521 Q45,528 56,528 Q67,528 70,521 Q66,517 61,519 Q56,522 51,519 Q46,517 42,521Z" fill="#3d1fa3"/>
+          <rect x="82" y="497" width="282" height="36" rx="8" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="223" y="512" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="900" fill="#4c1d95">SOTP: Σ(Segment Values) − Conglomerate Discount</text>
+          <text x="223" y="526" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#15803d">Each segment gets its own method — not one P/E for all</text>
+          <polygon points="83,515 76,511 76,519" fill="white" stroke="#e5e1fb" stroke-width="1" stroke-linejoin="round"/>
+          <!-- Factory chimneys for O2C -->
+          <rect x="20" y="462" width="5" height="22" fill="#6d28d9" opacity=".4"/>
+          <rect x="30" y="470" width="4" height="14" fill="#6d28d9" opacity=".3"/>
+          <ellipse cx="22.5" cy="462" rx="5" ry="3" fill="#a78bfa" opacity=".5"/>
+          <ellipse cx="32" cy="470" rx="4" ry="2.5" fill="#a78bfa" opacity=".4"/>
+          <!-- Antenna for Jio -->
+          <line x1="152" y1="462" x2="152" y2="484" stroke="#0284c7" stroke-width="2.5"/>
+          <line x1="145" y1="470" x2="159" y2="470" stroke="#0284c7" stroke-width="1.5"/>
+          <line x1="148" y1="466" x2="156" y2="466" stroke="#0284c7" stroke-width="1.5"/>
+          <!-- Shopping bag for Retail -->
+          <rect x="204" y="462" width="14" height="18" rx="3" fill="#15803d" opacity=".7"/>
+          <path d="M206,462 Q206,457 211,457 Q216,457 216,462" stroke="#15803d" stroke-width="1.8" fill="none"/>
+        </svg>
+        <p class="infographic-cap">🏢 Reliance Industries split into 5 segments. Each segment gets its own valuation method — O2C gets EV/EBITDA 6–8×, Jio gets 20×, Retail gets 40× P/E. Sum them up, subtract 15% conglomerate discount = ₹19.3 Lakh Crore SOTP fair value.</p>
+      </div>
+
+      <div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--p),var(--ph));">1</div>
+            <div class="step-body">
+              <h4>What is the Conglomerate Discount — and Why Does It Exist?</h4>
+              <p>The conglomerate discount (typically 10–25%) is the gap between SOTP value and the actual market cap. It exists because: (1) Investors can't cleanly track each segment — one annual report covers all businesses, creating opacity. (2) Capital allocation risk — management may invest profits from the good business into the bad one. (3) Complexity premium — analysts require a return for the extra work. (4) Holding company structure — the parent often holds subsidiaries through intermediate holdcos, creating tax drag. Reliance consistently trades at 10–20% below its SOTP value.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">2</div>
+            <div class="step-body">
+              <h4>Which Valuation Method for Which Segment?</h4>
+              <p>Rule of thumb: Asset-heavy commodities (oil, steel, cement) → EV/EBITDA 5–10×. Consumer/FMCG → P/E 25–50×. Telecom → EV/EBITDA 12–20×. Banking/NBFC → P/B 1–4×. Technology/SaaS → P/E 30–60× or EV/Revenue 5–15×. Real estate → NAV (Net Asset Value). Pre-revenue businesses → DCF. Using the wrong method for a segment — like applying a commodity multiple to a high-growth digital segment — is the single biggest source of SOTP error.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">3</div>
+            <div class="step-body">
+              <h4>How to Find Segment EBITDA/PAT on Screener.in</h4>
+              <p>Most conglomerates file consolidated + standalone results. For SOTP: go to the company's Annual Report → "Segment Information" note — this is a mandatory Ind AS 108 disclosure. It shows revenue, EBIT, and assets per segment. On Screener.in, the P&L shows consolidated numbers — use the annual report segment note for the breakdown. Some companies (Reliance, ITC, L&T) also publish detailed segment-level disclosures in investor presentations, which are easier to use.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">4</div>
+            <div class="step-body">
+              <h4>Calculating the Right Conglomerate Discount</h4>
+              <p>The discount varies by transparency and holding structure: Clean holdco (Bajaj Finserv — financial services only, transparent) → 5–10% discount. Mixed conglomerate (ITC — tobacco + FMCG + hotels + agri + paperboards) → 15–25% discount. Opaque conglomerate (complex holdco chains, related-party transactions) → 25–40% discount. The discount narrows when management announces demergers or separate listings — any news of "unlocking value" via demerger causes the stock to re-rate toward SOTP value.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 RELIANCE SOTP TABLE -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — Live SOTP Analysis: Reliance Industries</div>
+    <h2 class="h2 rv d2">Reliance Industries <span class="hp">Segment-by-Segment SOTP · FY25</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Reliance Industries is India's most complex conglomerate — one P/E ratio makes no sense for a business that spans oil refining, digital telecom, retail, green energy, media, and financial services. Here is how professional analysts value it using SOTP.</p>
+
+    <!-- Segment cards -->
+    <div class="seg-grid rv d3">
+      <div class="seg-card sc-oil">
+        <div class="seg-ico">🛢️</div>
+        <div class="seg-tag" style="color:var(--p);">O2C — Oil-to-Chemicals</div>
+        <div class="seg-name">Petrochemicals &amp; Refining</div>
+        <div class="seg-val" style="color:var(--p);">₹5.6L Cr</div>
+        <div class="seg-sub">EBITDA ~₹70,000 Cr · EV/EBITDA 8×</div>
+        <div class="seg-desc">The original business — one of the world's largest refinery-petrochemical integrated complexes at Jamnagar. Commodity business with cyclical margins. Valued at 6–8× EV/EBITDA — same as global refining peers (Aramco, Sinopec refining segment). GRM (Gross Refining Margin) drives this segment's profitability.</div>
+        <span class="seg-method" style="background:var(--pxl);color:var(--p);">Method: EV/EBITDA 8×</span>
+      </div>
+      <div class="seg-card sc-retail">
+        <div class="seg-ico">📡</div>
+        <div class="seg-tag" style="color:var(--sky);">Jio Platforms</div>
+        <div class="seg-name">Telecom + Digital Services</div>
+        <div class="seg-val" style="color:var(--sky);">₹8.2L Cr</div>
+        <div class="seg-sub">EBITDA ~₹41,000 Cr · EV/EBITDA 20×</div>
+        <div class="seg-desc">India's largest telecom with 450M+ subscribers. High growth (ARPU expansion), digital services (JioSaavn, JioCinema), enterprise cloud. Deserves a premium telecom multiple of 18–22× EV/EBITDA — significantly higher than commodity telecom peers (5–8×) due to digital revenue optionality.</div>
+        <span class="seg-method" style="background:var(--skypale);color:var(--sky);">Method: EV/EBITDA 20×</span>
+      </div>
+      <div class="seg-card sc-telecom">
+        <div class="seg-ico">🛍️</div>
+        <div class="seg-tag" style="color:var(--gbr);">Reliance Retail</div>
+        <div class="seg-name">Organised Retail (India #1)</div>
+        <div class="seg-val" style="color:var(--gbr);">₹6.8L Cr</div>
+        <div class="seg-sub">PAT ~₹6,000 Cr FY25E · P/E 40–50×</div>
+        <div class="seg-desc">India's largest retailer by revenue and stores — grocery, fashion, electronics, wholesale. High growth justifies 40–50× P/E. Comparable: DMart trades at 85× P/E; Future Retail was at 25× before collapse. Reliance Retail's scale, multi-format strategy, and new commerce integration support a premium multiple.</div>
+        <span class="seg-method" style="background:var(--gpale);color:var(--gbr);">Method: P/E 40–50×</span>
+      </div>
+      <div class="seg-card sc-fmcg">
+        <div class="seg-ico">⚡</div>
+        <div class="seg-tag" style="color:var(--ambr);">Reliance New Energy</div>
+        <div class="seg-name">Green Hydrogen · Solar · Battery</div>
+        <div class="seg-val" style="color:var(--ambr);">₹1.2L Cr</div>
+        <div class="seg-sub">Pre-revenue · DCF-based · Option value</div>
+        <div class="seg-desc">Ambition to become the world's largest green energy company — solar gigafactory, green hydrogen, battery storage. Currently pre-revenue (FY25). Valued using DCF with high terminal value assumptions, or as a real option on the energy transition. High uncertainty — estimates range ₹0.5L to ₹3L Cr depending on assumptions.</div>
+        <span class="seg-method" style="background:var(--apale);color:var(--ambr);">Method: DCF / Real Options</span>
+      </div>
+      <div class="seg-card sc-hotel">
+        <div class="seg-ico">📺</div>
+        <div class="seg-tag" style="color:var(--red);">Media &amp; Entertainment</div>
+        <div class="seg-name">Network18 · JioCinema · Viacom18</div>
+        <div class="seg-val" style="color:var(--red);">₹0.5L Cr</div>
+        <div class="seg-sub">Revenue ~₹12,000 Cr · P/S 0.4×</div>
+        <div class="seg-desc">News (CNN-News18, NDTV), entertainment (Colors, MTV India), OTT (JioCinema with IPL rights). Currently loss-making due to aggressive content investment. Valued on P/S or EV/Revenue — comparable to other Indian media companies (Sun TV, Zee, Sony India). Content + distribution convergence is the long-term value thesis.</div>
+        <span class="seg-method" style="background:var(--rpale);color:var(--red);">Method: EV/Revenue</span>
+      </div>
+      <div class="seg-card sc-infra">
+        <div class="seg-ico">🏦</div>
+        <div class="seg-tag" style="color:var(--p);">Financial Services</div>
+        <div class="seg-name">Jio Financial Services</div>
+        <div class="seg-val" style="color:var(--p);">₹0.4L Cr</div>
+        <div class="seg-sub">Book Value ₹1.1L Cr · P/B 0.4×</div>
+        <div class="seg-desc">Demerged from Reliance Industries in August 2023. NBFC + insurance + payments ambition. Currently holding company with cash and financial assets — valued at a discount to book value (P/B 0.3–0.5×) because business model is still being built. Separate listing gives price discovery — now trades at ~₹230/share independently.</div>
+        <span class="seg-method" style="background:var(--pxl);color:var(--p);">Method: P/B</span>
+      </div>
+    </div>
+
+    <!-- SOTP Table -->
+    <div class="sotp-wrap rv d4">
+      <div class="sotp-hdr">
+        <div>
+          <div class="sotp-hdr-title">Reliance Industries — SOTP Valuation Table · FY25 Estimates</div>
+          <div class="sotp-hdr-sub">All values in ₹ Lakh Crore (₹ L Cr) · Illustrative educational estimates · Verify from analyst reports</div>
+        </div>
+      </div>
+      <div class="sotp-legend">
+        <div class="legend-dot" style="background:var(--p);"></div><strong>Purple</strong> = SOTP gross total &nbsp;
+        <div class="legend-dot" style="background:var(--gbr);"></div><strong>Green</strong> = Net equity value per share &nbsp;
+        <div class="legend-dot" style="background:var(--ambr);"></div><strong>Amber</strong> = Conglomerate discount
+      </div>
+      <div class="table-scroll">
+        <table class="sotp-table">
+          <thead><tr>
+            <th>Segment</th>
+            <th>Valuation Basis</th>
+            <th>Key Metric</th>
+            <th>Multiple</th>
+            <th>EV / Value (₹ L Cr)</th>
+            <th>Implied Weight</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>🛢️ O2C (Refining + Petrochem)</td><td>EV/EBITDA</td><td>EBITDA ₹70,000 Cr</td><td>8×</td><td>5.60</td><td><span class="flag-cell flag-p">25%</span></td></tr>
+            <tr><td>📡 Jio Platforms (Telecom + Digital)</td><td>EV/EBITDA</td><td>EBITDA ₹41,000 Cr</td><td>20×</td><td>8.20</td><td><span class="flag-cell flag-s">36%</span></td></tr>
+            <tr><td>🛍️ Reliance Retail</td><td>P/E</td><td>PAT ₹6,000 Cr</td><td>45×</td><td>2.70</td><td><span class="flag-cell flag-g">12%</span></td></tr>
+            <tr><td>🏗️ Reliance Retail EV adjustment</td><td>EV basis (incl. debt)</td><td>EV-based cross check</td><td>—</td><td>4.10</td><td><span class="flag-cell flag-g">18%</span></td></tr>
+            <tr><td>⚡ New Energy</td><td>DCF / Option value</td><td>CapEx ₹75,000 Cr plan</td><td>—</td><td>1.20</td><td><span class="flag-cell flag-a">5%</span></td></tr>
+            <tr><td>📺 Media (Network18/Viacom)</td><td>EV/Revenue</td><td>Revenue ₹12,000 Cr</td><td>0.4×</td><td>0.50</td><td><span class="flag-cell flag-r">2%</span></td></tr>
+            <tr><td>🏦 Jio Financial Services</td><td>P/B</td><td>Book Value ₹1.1L Cr</td><td>0.4×</td><td>0.44</td><td><span class="flag-cell flag-r">2%</span></td></tr>
+            <tr class="total-row"><td>SOTP GROSS VALUE</td><td>—</td><td>—</td><td>—</td><td>22.74</td><td><span class="flag-cell flag-p">100%</span></td></tr>
+            <tr class="conglom-row"><td>Less: Net Debt at Holdco</td><td>Balance sheet adjustment</td><td>Consolidated Net Debt</td><td>—</td><td>-1.40</td><td>—</td></tr>
+            <tr class="conglom-row"><td>Less: Conglomerate Discount (15%)</td><td>Complexity + opacity haircut</td><td>Applied to gross SOTP</td><td>15%</td><td>-3.20</td><td>—</td></tr>
+            <tr class="net-row"><td>✅ SOTP NET EQUITY VALUE</td><td>—</td><td>Shares: 674 Cr</td><td>—</td><td>18.14</td><td><span class="flag-cell flag-g">₹2,692/share</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="padding:12px 18px;background:var(--pxs);border-top:1px solid var(--bd);font-size:11px;color:var(--ts);">
+        <strong style="color:var(--p);">How to use:</strong> If Reliance trades at ₹2,400/share vs SOTP of ₹2,692/share → 11% potential upside vs SOTP. This spread narrows when Reliance announces segment demergers or listings (like Jio Financial Services listing in 2023). All estimates are illustrative and for educational purposes only — verify from Motilal Oswal, Kotak, or Jefferies SOTP research notes.
+      </div>
+    </div>
+
+    <!-- SOTP Waterfall bars -->
+    <div class="sotp-bars rv d5">
+      <div class="sb-title">📊 Segment Contribution to SOTP Value — ₹ Lakh Crore</div>
+      <div class="sb-row">
+        <div class="sb-label">📡 Jio Platforms</div>
+        <div class="sb-bar-bg"><div class="sb-bar" style="width:100%;background:linear-gradient(90deg,var(--sky),#38bdf8);"></div></div>
+        <div class="sb-val" style="color:var(--sky);">₹8.2L Cr (36%)</div>
+      </div>
+      <div class="sb-row">
+        <div class="sb-label">🛢️ O2C Refining</div>
+        <div class="sb-bar-bg"><div class="sb-bar" style="width:68%;background:linear-gradient(90deg,var(--p),var(--ph));"></div></div>
+        <div class="sb-val" style="color:var(--p);">₹5.6L Cr (25%)</div>
+      </div>
+      <div class="sb-row">
+        <div class="sb-label">🛍️ Retail (EV)</div>
+        <div class="sb-bar-bg"><div class="sb-bar" style="width:50%;background:linear-gradient(90deg,var(--gbr),var(--gh));"></div></div>
+        <div class="sb-val" style="color:var(--gbr);">₹4.1L Cr (18%)</div>
+      </div>
+      <div class="sb-row">
+        <div class="sb-label">⚡ New Energy</div>
+        <div class="sb-bar-bg"><div class="sb-bar" style="width:15%;background:linear-gradient(90deg,var(--ambr),var(--amb));"></div></div>
+        <div class="sb-val" style="color:var(--ambr);">₹1.2L Cr (5%)</div>
+      </div>
+      <div class="sb-row">
+        <div class="sb-label">📺 Media + FS</div>
+        <div class="sb-bar-bg"><div class="sb-bar" style="width:8%;background:linear-gradient(90deg,var(--red),#f87171);"></div></div>
+        <div class="sb-val" style="color:var(--red);">₹0.94L Cr (4%)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMAT BANNER -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Research Conglomerates on Screener.in</div>
+    <div class="dmh">All Segment Data for <span class="dmhs">SOTP Valuation — Free</span></div>
+    <div class="dmsub">Screener.in shows consolidated P&L for Reliance, ITC, L&T, and every Indian conglomerate. Cross-check with annual report segment notes to build your SOTP. Invest in conglomerates at a discount to their SOTP with a free demat account.</div>
+    <div class="dmfeats">
+      <div class="dmf">Free consolidated P&L for all Indian conglomerates</div>
+      <div class="dmf">10-year segment revenue and profit trends</div>
+      <div class="dmf">Market cap vs SOTP discount tracking</div>
+      <div class="dmf">Compare conglomerates across segments</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated</div>
+  </div>
+</div>
+
+<!-- 04 FIVE GOOD SOTP -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">04 — SOTP Done Right</div>
+    <h2 class="h2 rv d2">5 Conglomerates Where <span class="hg">SOTP Works Perfectly</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These conglomerates have clear segment boundaries, transparent disclosures, and business units that are genuinely comparable to standalone listed peers — making SOTP the ideal valuation framework.</p>
+
+    <div class="company-block rv d3">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pxs));">🛢️</div>
+          <div><div class="cb-name">Reliance Industries — SOTP Clarity Champion</div><div class="cb-sub">O2C · Jio · Retail · New Energy · Media · Financial Services — each comparable to listed peers</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ Segment-level investor disclosures</span>
+          <span class="cb-badge cb-b-g">✅ Jio Financial already listed</span>
+          <span class="cb-badge cb-b-s">📌 Discount narrows on demerger news</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Reliance's SOTP is the most analysed and most debated in Indian equity research — and for good reason.</strong> Every major brokerage (Motilal Oswal, Kotak, UBS, Jefferies) publishes an SOTP model for Reliance, and they all produce slightly different answers based on which multiple they use for Retail and New Energy. The discipline of the SOTP framework forces analysts to justify their assumptions for each segment explicitly. When Jio Financial Services was listed separately in August 2023, it gave investors direct price discovery for one segment — reducing the SOTP uncertainty and contributing to Reliance's stock re-rating. The SOTP approach correctly captures the multi-faceted value of this business in a way no single P/E ratio ever could.</div>
+    </div>
+
+    <div class="company-block rv d4">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fefce8,#fef9c3);">🚬</div>
+          <div><div class="cb-name">ITC Limited — Multi-Segment SOTP Classic</div><div class="cb-sub">Cigarettes · FMCG · Hotels · Agribusiness · Paperboards · Each a different multiple</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ Transparent segment P&L in AR</span>
+          <span class="cb-badge cb-b-g">✅ Hotels demerger unlocking value</span>
+          <span class="cb-badge cb-b-g">✅ FMCG segment = fastest growing</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>ITC is the textbook SOTP stock in India — every analyst covers it using SOTP because its segments couldn't be more different from each other.</strong> Cigarettes: near-monopoly, 80%+ EBIT margin, valued at 20–25× EBIT. FMCG (Sunfeast, Bingo, Classmate): high-growth, 8–12% EBIT margin, valued at 50–70× EBIT. Hotels (ITC Hotels): asset-heavy hospitality, valued at EV/EBITDA 18–22×. Agribusiness: commodity, EV/EBITDA 8–10×. Paperboards: packaging, EV/EBITDA 8–12×. Each segment's EBIT and appropriate multiple can be directly pulled from ITC's Annual Report. The SOTP for ITC typically shows the cigarette business alone is worth more than the company's total market cap — which explains why ITC has historically traded at a discount (cigarette regulatory risk creates the conglomerate discount).</div>
+    </div>
+
+    <div class="company-block rv d5">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0);">⚙️</div>
+          <div><div class="cb-name">L&T (Larsen &amp; Toubro) — Engineering + Financial Services SOTP</div><div class="cb-sub">Infrastructure · Defence · Technology · Financial Services · Hydrocarbon · Realty</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ Order book visibility → DCF accuracy</span>
+          <span class="cb-badge cb-b-g">✅ L&T Finance listed separately</span>
+          <span class="cb-badge cb-b-s">📌 Defence segment getting premium</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>L&T's SOTP perfectly captures the diversity of a world-class engineering conglomerate that cannot be valued with a single multiple.</strong> Infrastructure (roads, metros, buildings): valued on EV/EBITDA 12–16×. Defence (missiles, submarines): valued at P/E 35–50× (government visibility, high barriers). Technology (LTIMindtree: listed at its own market cap — use that directly as the listed price). Financial Services (L&T Finance: listed separately). Hydrocarbon: EV/EBITDA 10–14×. The genius of L&T's SOTP is that two major segments (LTIMindtree and L&T Finance) are already listed, giving precise price discovery without any estimation uncertainty. L&T's SOTP is almost the ideal case study for why conglomerate SOTP works — transparent segments, listed subsidiaries as anchors, and a clear parent holding discount.</div>
+    </div>
+
+    <div class="company-block rv d6">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fff7ed,#fed7aa);">🏦</div>
+          <div><div class="cb-name">Bajaj Finserv — Financial Services SOTP Model</div><div class="cb-sub">Bajaj Finance · Bajaj Allianz Life · Bajaj Allianz General — each with its own valuation</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ Bajaj Finance listed — direct price</span>
+          <span class="cb-badge cb-b-g">✅ Insurance valued on EV (embedded value)</span>
+          <span class="cb-badge cb-b-g">✅ Minimal conglomerate discount (5–10%)</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Bajaj Finserv's SOTP is one of the cleaner ones in India — because the primary business (Bajaj Finance) is listed, giving exact market price discovery for the largest segment.</strong> Bajaj Finance stake (52.49%): just multiply the listed market cap of Bajaj Finance by Bajaj Finserv's stake — no estimation needed. Bajaj Allianz Life Insurance: valued using Embedded Value (EV) methodology — a standard actuarial method for life insurance that estimates the present value of future policyholder profits. Bajaj Allianz General Insurance: valued at P/B 3–5× or EV/GWP (Gross Written Premium) 2–3×. The holding company discount for Bajaj Finserv is typically only 5–10% because of the clean structure and listed anchor. When Bajaj Finance's stock price moves, Bajaj Finserv's SOTP mechanically adjusts — making it easy to track whether the discount is widening or narrowing.</div>
+    </div>
+
+    <div class="company-block rv d7" style="margin-bottom:8px;">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🏗️</div>
+          <div><div class="cb-name">Tata Sons / Tata Group (Unlisted Holdco Context)</div><div class="cb-sub">TCS · Titan · Tata Motors · Tata Steel · Indian Hotels — all separately listed</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ All subsidiaries listed → direct prices</span>
+          <span class="cb-badge cb-b-g">✅ Holdco discount historically 30–50%</span>
+          <span class="cb-badge cb-b-a">⚠️ Not directly investable (unlisted)</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">✅ <strong>Tata Sons is the purest SOTP case study in India — all major subsidiaries are separately listed, making the SOTP essentially a portfolio of known market caps.</strong> TCS (68.19% stake × TCS market cap), Titan (25% stake × Titan market cap), Tata Motors (46% stake × Tata Motors market cap), Tata Steel (33% stake × Tata Steel market cap), Indian Hotels (38% stake × IHCL market cap). The Tata Sons SOTP at any given time = Σ(Tata Sons stake % × listed subsidiary market cap). The holding company discount (30–50% below SOTP) reflects the fact that Tata Sons is unlisted, making investors' exit difficult. If Tata Sons ever lists (rumoured periodically), the stock would re-rate dramatically toward SOTP value — one of India's biggest potential unlocking events.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 FIVE BAD SOTP -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">05 — SOTP Valuation Errors</div>
+    <h2 class="h2 rv d2">5 Ways SOTP Analysis <span class="hr">Goes Wrong</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">SOTP fails when segment data is unavailable, when wrong multiples are used for each segment, or when the conglomerate discount is ignored. Each error produces a systematically wrong valuation.</p>
+
+    <div class="company-block rv d3">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">❓</div>
+          <div><div class="cb-name">No Segment Disclosure — Opaque Conglomerates</div><div class="cb-sub">Some conglomerates don't disclose segment EBIT clearly — makes SOTP impossible without estimates</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Estimated segments = estimated SOTP</span>
+          <span class="cb-badge cb-b-r">🚨 Wide error range</span>
+          <span class="cb-badge cb-b-r">🚨 SOTP is directional only</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>When a conglomerate doesn't clearly disclose segment-level EBIT or EBITDA, the SOTP becomes a guessing exercise — and guessing produces wrong valuations with high confidence.</strong> Some Indian holding companies disclose only consolidated P&L without clean segment breakdowns. In this case, analysts attempt to "reverse-engineer" segment profitability from management commentary, investor day slides, and channel checks. The result is SOTP estimates that can differ by 30–50% between analysts. The lesson: if you can't reliably identify segment-level EBITDA or PAT from the Annual Report's Segment Note (Ind AS 108), be very conservative about trusting any SOTP model for that company. Wide confidence intervals in SOTP inputs produce extremely wide output ranges — often useless for investment decisions.</div>
+    </div>
+
+    <div class="company-block rv d4">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">📊</div>
+          <div><div class="cb-name">Applying Same Multiple to All Segments (Conglomerate P/E Trap)</div><div class="cb-sub">Using one P/E for a company with both commodity and high-growth segments</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Undervalues growth segments</span>
+          <span class="cb-badge cb-b-r">🚨 Overvalues commodity segments</span>
+          <span class="cb-badge cb-b-r">🚨 P/E of 20× for oil is too high</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>The most common beginner SOTP error: assigning the same P/E or EV/EBITDA multiple to every segment just because it's convenient.</strong> Example: Valuing Reliance's O2C business at 25× P/E (same as Reliance Retail) massively overvalues a commodity refining business that should be at 6–8× EV/EBITDA. Conversely, valuing Jio Platforms at 8× EV/EBITDA (same as the refinery) massively undervalues one of India's most valuable digital infrastructure businesses. The whole point of SOTP is to use the RIGHT multiple for each segment. Rule: look at what standalone listed comparables trade at for that specific business type. Refining → look at HPCL/BPCL/IOC. Digital telecom → look at Bharti Airtel. Retail → look at DMart/Trent. Use those trading multiples for each segment, not one blended multiple.</div>
+    </div>
+
+    <div class="company-block rv d5">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🔻</div>
+          <div><div class="cb-name">Ignoring the Conglomerate Discount Entirely</div><div class="cb-sub">Adding up segments and claiming that is the market cap — ignores structural holding discount</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Gross SOTP ≠ Market Cap</span>
+          <span class="cb-badge cb-b-r">🚨 Discount is 10–40% structurally</span>
+          <span class="cb-badge cb-b-r">🚨 Overestimates fair value</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>Taking the SOTP gross total and declaring it the fair market cap of the conglomerate is a systematic overvaluation that ignores how conglomerates actually trade.</strong> Conglomerates always trade at a discount to their SOTP sum for structural reasons: opacity, capital allocation risk, higher taxes at the holdco level (dividend distribution tax on dividends received from subsidiaries), management overhead, and investor preference for pure-play exposure. Historical data: Indian conglomerates have traded at 15–35% below their SOTP on average. For ITC, the discount has historically been 20–30% due to cigarette regulatory risk contaminating the perception of the FMCG and Hotels businesses. Always apply a segment-appropriate discount: clean holdcos (Bajaj Finserv) → 5–10%; complex industrial conglomerates (L&T, Reliance) → 15–25%; opaque conglomerates → 25–40%.</div>
+    </div>
+
+    <div class="company-block rv d6">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">💸</div>
+          <div><div class="cb-name">Ignoring Holdco Net Debt and Cross-Holdings</div><div class="cb-sub">SOTP gives enterprise value of segments — must deduct holdco debt to get equity value</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Gross EV ≠ Equity value</span>
+          <span class="cb-badge cb-b-r">🚨 Missing net debt deduction</span>
+          <span class="cb-badge cb-b-r">🚨 Per-share value overstated</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>SOTP gives you the Enterprise Value of each segment — but investors own the equity, not the EV.</strong> To arrive at equity value per share: SOTP Gross EV − Holdco Net Debt (debt at the parent company level, not at subsidiaries) + Cash at Holdco − Cross-holdings eliminated. Example: If Reliance SOTP = ₹22.7L Cr and Reliance holds ₹1.4L Cr net debt at the holdco level, the equity value = ₹21.3L Cr. Divide by 674 Cr shares = ₹3,160/share BEFORE conglomerate discount. Missing the net debt step inflates per-share SOTP by 5–10%. Additionally: cross-holdings (where Company A holds Company B which also holds Company A) must be eliminated to avoid double-counting — this is more common in complex family business structures.</div>
+    </div>
+
+    <div class="company-block rv d7" style="margin-bottom:8px;">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🌱</div>
+          <div><div class="cb-name">Overvaluing Pre-Revenue Segments (New Energy, Startups)</div><div class="cb-sub">Assigning large DCF values to businesses with no revenue creates SOTP inflation</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 DCF assumptions are everything</span>
+          <span class="cb-badge cb-b-r">🚨 Terminal value drives 80% of DCF</span>
+          <span class="cb-badge cb-b-r">🚨 Scenario analysis is essential</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">🚨 <strong>Assigning aggressive DCF values to pre-revenue segments (Reliance New Energy, startup subsidiaries, early-stage ventures) systematically inflates SOTP without any market cross-check.</strong> When Reliance New Energy is valued at ₹3L Cr using optimistic green hydrogen price assumptions and aggressive market share projections, it adds 13% to the total SOTP — based entirely on assumptions that may not materialise. The discipline: for pre-revenue segments, use scenario analysis (bear/base/bull cases) and weight them by probability. Present the SOTP range (₹16L Cr to ₹28L Cr) rather than a single point estimate. Single-point SOTP with an aggressive pre-revenue segment is not a valuation — it's optimism dressed as analysis. Professional equity research always presents SOTP sensitivity tables showing how the output changes with ±10% change in each segment's multiple.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 TRICK SECTION -->
+<section class="sec-white" style="position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-100px;right:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(109,40,217,.05) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-80px;left:-60px;width:360px;height:360px;background:radial-gradient(circle,rgba(22,163,74,.04) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div class="w" style="position:relative;z-index:1;">
+    <div class="tag rv d1">06 — The Investor's Shortcut</div>
+    <h2 class="h2 rv d2">Build a Full SOTP in <span class="hp">20 Minutes on Screener.in</span></h2>
+    <div class="rul rv d2"></div>
+    <p class="lead rv d3">Every segment's EBITDA and PAT is in the Annual Report's Segment Note. The peer multiples are on Screener.in. Here's the exact sequence to build a complete SOTP model for any Indian conglomerate.</p>
+
+    <div class="rv d3">
+      <div class="trick-wrap">
+        <div class="trick-hdr">
+          <div class="th-left">
+            <div class="th-supertag">🎯 SOTP Valuation Mastery</div>
+            <div class="th-title">5-Step SOTP on Screener.in + Annual Report</div>
+            <div class="th-sub">Open Screener.in and the target company's Annual Report. Follow these five steps. You'll have a complete SOTP with segment values, gross SOTP, conglomerate discount applied, and a per-share fair value range in under 20 minutes.</div>
+          </div>
+          <div class="th-right">
+            <div class="th-timer"><div class="th-timer-num">20</div><div class="th-timer-lbl">minutes<br>full SOTP</div></div>
+          </div>
+        </div>
+
+        <div class="trick-qref">
+          <div class="qr-title">⚡ Quick Reference — Method by Segment Type</div>
+          <div class="sn-strip">
+            <span class="sn-lbl">📍 Data path:</span>
+            <div class="sn-num">1</div><span class="sn-txt">Annual Report → Segment Note</span>
+            <span class="sn-arr">→</span>
+            <div class="sn-num">2</div><span class="sn-txt">Get EBIT/EBITDA per segment</span>
+            <span class="sn-arr">→</span>
+            <div class="sn-num">3</div><span class="sn-txt">Screener.in → find sector peers</span>
+            <span class="sn-arr">→</span>
+            <div class="sn-num">4</div><span class="sn-txt">Apply peer multiples to each segment</span>
+            <span class="sn-arr">→</span>
+            <div class="sn-num">5</div><span class="sn-txt">Sum up → apply discount → per share</span>
+          </div>
+          <div class="seg-chips">
+            <div class="sc-chip scc-pe">
+              <div class="sc-chip-lbl" style="color:var(--p);">P/E</div>
+              <div class="sc-chip-name">Consumer/FMCG</div>
+              <div class="sc-chip-formula">High-growth branded<br>Segment PAT × Peer P/E<br>ITC FMCG: 50–70× P/E</div>
+            </div>
+            <div class="sc-chip scc-ev">
+              <div class="sc-chip-lbl" style="color:var(--sky);">EV/EBITDA</div>
+              <div class="sc-chip-name">Telecom/Infra</div>
+              <div class="sc-chip-formula">Capital intensive<br>Segment EBITDA × multiple<br>Telecom: 12–22×</div>
+            </div>
+            <div class="sc-chip scc-dcf">
+              <div class="sc-chip-lbl" style="color:var(--gbr);">P/B</div>
+              <div class="sc-chip-name">Banks/NBFC</div>
+              <div class="sc-chip-formula">Book-value based<br>Segment BV × Peer P/B<br>NBFC: 1.5–5× P/B</div>
+            </div>
+            <div class="sc-chip scc-disc">
+              <div class="sc-chip-lbl" style="color:var(--red);">DCF</div>
+              <div class="sc-chip-name">Pre-Revenue</div>
+              <div class="sc-chip-formula">Future cash flows<br>Use bear/base/bull<br>Discount rate WACC</div>
+            </div>
+          </div>
+
+          <!-- Conglomerate discount danger meter -->
+          <div class="disc-meter">
+            <div class="dm-title">🔻 Conglomerate Discount by Structure Type</div>
+            <div class="dm-track">
+              <div class="dm-zone" style="background:rgba(22,163,74,.12);border:1px solid rgba(22,163,74,.25);">
+                <div class="dm-val" style="color:var(--gbr);">5–10%</div>
+                <div class="dm-lbl">Clean holdco ✅</div>
+              </div>
+              <div class="dm-zone" style="background:rgba(22,163,74,.07);border:1px solid rgba(22,163,74,.18);">
+                <div class="dm-val" style="color:var(--gbr);">10–15%</div>
+                <div class="dm-lbl">Listed subs ✓</div>
+              </div>
+              <div class="dm-zone" style="background:rgba(217,119,6,.08);border:1px solid rgba(217,119,6,.2);">
+                <div class="dm-val" style="color:var(--ambr);">15–25%</div>
+                <div class="dm-lbl">Mixed conglom ⚠️</div>
+              </div>
+              <div class="dm-zone" style="background:rgba(220,38,38,.07);border:1px solid rgba(220,38,38,.18);">
+                <div class="dm-val" style="color:var(--red);">25–35%</div>
+                <div class="dm-lbl">Opaque ❌</div>
+              </div>
+              <div class="dm-zone" style="background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.25);">
+                <div class="dm-val" style="color:var(--red);">35%+</div>
+                <div class="dm-lbl">Complex holdco 🚨</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SOTP calculator strip — ITC example -->
+          <div class="sotp-calc">
+            <div class="sc-calc-title">🧮 SOTP Sum Calculator — ITC Example (Illustrative)</div>
+            <div class="sc-row">
+              <div class="sc-op" style="color:var(--tl);"> </div>
+              <div><div class="sc-label">Cigarettes segment · EBIT ₹21,000 Cr × 22× EBIT multiple</div><div class="sc-sub">Near-monopoly, high barrier · Comparable: ITC standalone cigarette EBIT peers</div></div>
+              <div class="sc-val" style="color:var(--p);">₹4.62L Cr</div>
+            </div>
+            <div class="sc-row">
+              <div class="sc-op" style="color:var(--gbr);">+</div>
+              <div><div class="sc-label">FMCG (Sunfeast, Bingo, Classmate) · EBIT ₹3,200 Cr × 60× P/E equiv</div><div class="sc-sub">High-growth branded consumer · Comparable: HUL, Britannia P/E multiples</div></div>
+              <div class="sc-val" style="color:var(--gbr);">₹1.92L Cr</div>
+            </div>
+            <div class="sc-row">
+              <div class="sc-op" style="color:var(--sky);">+</div>
+              <div><div class="sc-label">Hotels · EBITDA ₹2,800 Cr × 20× EV/EBITDA</div><div class="sc-sub">Asset-heavy hospitality · Comparable: Indian Hotels (Taj), EIH</div></div>
+              <div class="sc-val" style="color:var(--sky);">₹0.56L Cr</div>
+            </div>
+            <div class="sc-row">
+              <div class="sc-op" style="color:var(--ambr);">+</div>
+              <div><div class="sc-label">Agribusiness + Paperboards · EBIT ₹2,100 Cr × 12× </div><div class="sc-sub">Commodity + packaging · EV/EBITDA peers in agri/packaging</div></div>
+              <div class="sc-val" style="color:var(--ambr);">₹0.25L Cr</div>
+            </div>
+            <div class="sc-total">
+              <div class="sc-total-lbl">✅ SOTP Gross Value (before discount &amp; debt)</div>
+              <div class="sc-total-val">~₹7.35L Cr</div>
+            </div>
+          </div>
+
+          <!-- Data sources -->
+          <!-- NEW: Segment Method Classify Table -->
+          <div style="background:var(--wh);border:1px solid var(--bd);border-radius:14px;padding:clamp(12px,2vw,18px);margin-bottom:12px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--p);margin-bottom:12px;display:flex;align-items:center;gap:8px;"><span style="width:16px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;display:inline-block;"></span>🗂️ Classify Any Segment → Pick the Right Method in 5 Seconds</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.5vw,12px);" class="classify-3col">
+              <div style="border-radius:12px;padding:clamp(10px,2vw,16px);background:rgba(109,40,217,.06);border:1.5px solid rgba(109,40,217,.2);">
+                <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--p);margin-bottom:8px;">📊 Use P/E — Earnings Based</div>
+                <div style="font-size:11px;color:var(--ts);display:flex;flex-direction:column;gap:5px;">
+                  <span>🧴 Consumer / FMCG (HUL, ITC FMCG)</span>
+                  <span>💊 Branded Pharma (domestic formulations)</span>
+                  <span>🛍️ Retail / e-Commerce (Reliance Retail)</span>
+                  <span>💡 Technology / IT services</span>
+                  <span>📱 Media / OTT (profitable)</span>
+                </div>
+                <div style="margin-top:10px;font-size:10px;font-weight:700;background:var(--pxl);color:var(--p);padding:4px 8px;border-radius:6px;display:inline-block;">Typical: 25–60× P/E</div>
+              </div>
+              <div style="border-radius:12px;padding:clamp(10px,2vw,16px);background:rgba(2,132,199,.06);border:1.5px solid rgba(2,132,199,.2);">
+                <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--sky);margin-bottom:8px;">📡 Use EV/EBITDA — Asset Based</div>
+                <div style="font-size:11px;color:var(--ts);display:flex;flex-direction:column;gap:5px;">
+                  <span>🛢️ Oil refining / Petrochemicals (O2C)</span>
+                  <span>📡 Telecom infrastructure (Jio, Airtel)</span>
+                  <span>⚙️ Engineering / EPC (L&T, infrastructure)</span>
+                  <span>🏭 Cement / Steel (capital intensive)</span>
+                  <span>✈️ Aviation / Hospitality (EBITDA visible)</span>
+                </div>
+                <div style="margin-top:10px;font-size:10px;font-weight:700;background:var(--skypale);color:var(--sky);padding:4px 8px;border-radius:6px;display:inline-block;">Typical: 5–25× EV/EBITDA</div>
+              </div>
+              <div style="border-radius:12px;padding:clamp(10px,2vw,16px);background:rgba(22,163,74,.07);border:1.5px solid rgba(22,163,74,.2);">
+                <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--gbr);margin-bottom:8px;">🏦 Use P/B / Embedded Value</div>
+                <div style="font-size:11px;color:var(--ts);display:flex;flex-direction:column;gap:5px;">
+                  <span>🏦 Banks / NBFC (Bajaj Finance, HDFC)</span>
+                  <span>🛡️ Life Insurance (Embedded Value × multiple)</span>
+                  <span>🏠 Real estate (NAV of land bank)</span>
+                  <span>💰 Investment holding companies</span>
+                  <span>⚡ Pre-revenue → DCF or real option</span>
+                </div>
+                <div style="margin-top:10px;font-size:10px;font-weight:700;background:var(--gpale);color:var(--gbr);padding:4px 8px;border-radius:6px;display:inline-block;">Bank: 1.5–5× P/B · Life: 1.5–4× EV</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NEW: SOTP Per-Share Final Calculator -->
+          <div style="background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:clamp(12px,2vw,18px);margin-bottom:12px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--p);margin-bottom:12px;display:flex;align-items:center;gap:8px;"><span style="width:16px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;display:inline-block;"></span>🎯 SOTP → Per-Share Value — The Complete Formula (ITC Example)</div>
+            <div style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:0 14px;padding:8px 0;border-bottom:1px dashed rgba(109,40,217,.08);" class="sotp-ps-row">
+              <div style="font-size:20px;font-weight:900;color:var(--tl);text-align:center;line-height:1;"> </div>
+              <div><div style="font-size:clamp(11px,1.4vw,13px);font-weight:700;color:var(--tx);">SOTP Gross Value (from ITC segment sum above)</div><div style="font-size:9.5px;color:var(--tl);font-weight:500;margin-top:2px;">Sum of all 4 segment values: ₹4.62+₹1.92+₹0.56+₹0.25 L Cr</div></div>
+              <div style="font-size:clamp(12px,1.5vw,15px);font-weight:900;text-align:right;white-space:nowrap;color:var(--p);">₹7.35L Cr</div>
+            </div>
+            <div style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:0 14px;padding:8px 0;border-bottom:1px dashed rgba(109,40,217,.08);" class="sotp-ps-row">
+              <div style="font-size:20px;font-weight:900;color:var(--red);text-align:center;line-height:1;">−</div>
+              <div><div style="font-size:clamp(11px,1.4vw,13px);font-weight:700;color:var(--tx);">ITC Net Debt at Holdco Level</div><div style="font-size:9.5px;color:var(--tl);font-weight:500;margin-top:2px;">ITC is nearly debt-free — minimal deduction (₹0.04L Cr net cash positive)</div></div>
+              <div style="font-size:clamp(12px,1.5vw,15px);font-weight:900;text-align:right;white-space:nowrap;color:var(--red);">₹0.04L Cr</div>
+            </div>
+            <div style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:0 14px;padding:8px 0;border-bottom:1px dashed rgba(109,40,217,.08);" class="sotp-ps-row">
+              <div style="font-size:20px;font-weight:900;color:var(--red);text-align:center;line-height:1;">−</div>
+              <div><div style="font-size:clamp(11px,1.4vw,13px);font-weight:700;color:var(--tx);">Conglomerate Discount at 20% (mixed conglomerate)</div><div style="font-size:9.5px;color:var(--tl);font-weight:500;margin-top:2px;">₹7.35L Cr × 20% = ₹1.47L Cr discount for cigarette risk + complexity</div></div>
+              <div style="font-size:clamp(12px,1.5vw,15px);font-weight:900;text-align:right;white-space:nowrap;color:var(--red);">₹1.47L Cr</div>
+            </div>
+            <div style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:0 14px;padding:8px 0;" class="sotp-ps-row">
+              <div style="font-size:20px;font-weight:900;color:var(--tl);text-align:center;line-height:1;">÷</div>
+              <div><div style="font-size:clamp(11px,1.4vw,13px);font-weight:700;color:var(--tx);">Shares Outstanding</div><div style="font-size:9.5px;color:var(--tl);font-weight:500;margin-top:2px;">ITC has ~1,247 Crore shares outstanding (from Screener.in → Shares)</div></div>
+              <div style="font-size:clamp(12px,1.5vw,15px);font-weight:900;text-align:right;white-space:nowrap;color:var(--tl);">1,247 Cr</div>
+            </div>
+            <div style="background:linear-gradient(135deg,rgba(22,163,74,.1),rgba(22,163,74,.04));border:1.5px solid rgba(22,163,74,.22);border-radius:10px;padding:12px 14px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+              <div style="font-size:clamp(12px,1.5vw,14px);font-weight:800;color:var(--gbr);">✅ ITC SOTP per Share = (₹7.35 − ₹0.04 − ₹1.47) L Cr ÷ 1,247 Cr shares</div>
+              <div style="font-size:clamp(16px,2.5vw,22px);font-weight:900;color:var(--gbr);white-space:nowrap;">≈ ₹470/share</div>
+            </div>
+          </div>
+
+          <!-- Data sources -->
+          <div class="data-strip">
+            <div class="ds-title">📋 Where to Find Segment Data — Free Sources</div>
+            <div class="ds-grid">
+              <div class="ds-item">
+                <div class="ds-ico">📄</div>
+                <div><div class="ds-name">Annual Report → Segment Note</div><div class="ds-desc">Ind AS 108 requires segment revenue, EBIT, assets. Search "Segment Information" in the AR PDF. This is the authoritative source.</div></div>
+              </div>
+              <div class="ds-item">
+                <div class="ds-ico">📊</div>
+                <div><div class="ds-name">Screener.in → Sector Peers</div><div class="ds-desc">Find the standalone listed pure-play in each segment. Their P/E, EV/EBITDA on Screener = your benchmark multiple for that segment.</div></div>
+              </div>
+              <div class="ds-item">
+                <div class="ds-ico">📈</div>
+                <div><div class="ds-name">Investor Presentations</div><div class="ds-desc">ITC, Reliance, L&T all publish detailed segment investor decks. Often has cleaner segment EBITDA than the formal AR note.</div></div>
+              </div>
+              <div class="ds-item">
+                <div class="ds-ico">📰</div>
+                <div><div class="ds-name">Brokerage SOTP Reports</div><div class="ds-desc">Motilal, Kotak, UBS, Jefferies publish SOTP models for major conglomerates. "ITC SOTP Kotak" on Google finds these. Use as cross-check.</div></div>
+              </div>
+              <div class="ds-item">
+                <div class="ds-ico">🏛️</div>
+                <div><div class="ds-name">BSE/NSE Filings</div><div class="ds-desc">Quarterly results sometimes include segment-level revenue and EBIT disclosures — useful for more current data than the annual report.</div></div>
+              </div>
+              <div class="ds-item">
+                <div class="ds-ico">🔍</div>
+                <div><div class="ds-name">Subsidiary Annual Reports</div><div class="ds-desc">Each listed subsidiary (LTIMindtree, Bajaj Finance, Titan) has its own Screener page — use that market cap directly as the segment value.</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEPS -->
+        <div class="trick-steps-body">
+
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--p),var(--ph));">1</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">Annual Report</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab purple">Find "Segment Information" note (Ind AS 108)</span>
+              </div>
+              <div class="ts-action">Download the company's Annual Report from BSE/NSE filings page. Open the PDF and search for <strong>"Segment Information"</strong> or <strong>"Segment Reporting"</strong> — this is a mandatory Ind AS 108 note that discloses revenue, EBIT, and total assets for each reportable segment. Write down: Segment Name, Segment Revenue, Segment EBIT (or EBITDA if provided). Also note any inter-segment eliminations — these must not be double-counted.</div>
+              <div class="ts-outcomes" style="grid-template-columns:1fr;">
+                <div class="ts-out ts-out-n">📋 Goal: A table of all segments with their EBIT or EBITDA. If only revenue is given, estimate EBIT by applying each segment's approximate margin from management commentary. Segments with less than 10% of total revenue can be grouped as "Others."</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">2</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">Screener.in</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab sky">Find pure-play peers for each segment</span>
+              </div>
+              <div class="ts-action">For each segment, find the closest listed pure-play comparable. Go to Screener.in → search for a company that does ONLY that business. For ITC's Hotels segment: search "Indian Hotels" (Taj) on Screener → note its EV/EBITDA. For ITC's FMCG segment: search "Britannia" and "HUL" → note their P/E. These listed pure-plays trade at the "undiscounted" standalone value — their multiples are your segment benchmarks. If a subsidiary is itself listed (e.g., Tata Motors' subsidiary Jaguar Land Rover contributes — but JLR isn't listed; use BMW/Audi as proxies with India discount).</div>
+              <div class="ts-formula">
+                <div class="ts-f-row">
+                  <span class="ts-f-lbl">Segment Value</span><span class="ts-f-eq">=</span>
+                  <span class="ts-f-item ts-fi-p">Segment EBITDA</span>
+                  <span class="ts-f-eq">×</span>
+                  <span class="ts-f-item ts-fi-g">Pure-Play Peer EV/EBITDA</span>
+                </div>
+                <div class="ts-f-row" style="border-top:1px dashed rgba(0,0,0,.07);padding-top:8px;">
+                  <span class="ts-f-lbl">OR: Segment Value</span><span class="ts-f-eq">=</span>
+                  <span class="ts-f-item ts-fi-a">Segment PAT</span>
+                  <span class="ts-f-eq">×</span>
+                  <span class="ts-f-item ts-fi-s">Pure-Play Peer P/E</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">3</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">Spreadsheet</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab green">Calculate each segment EV → sum to SOTP Gross</span>
+              </div>
+              <div class="ts-action">Create a simple table: Segment | Metric (EBITDA/PAT) | Value | Multiple | Segment EV. Multiply each metric by its multiple to get segment EV. Sum all segment EVs = <strong>SOTP Gross Value</strong>. If any segment is already listed (e.g., Bajaj Finance within Bajaj Finserv) — just use that listed company's market cap × parent's stake — no multiple calculation needed.</div>
+              <div class="ts-shortcut">
+                <div class="ts-sc-lbl">💡 Listed subsidiary shortcut</div>
+                <div class="ts-sc-text">If a subsidiary is independently listed on NSE/BSE, go to Screener.in, find the subsidiary's current market cap, multiply by the parent's ownership percentage = that segment's contribution to SOTP. No guesswork about multiples — the market has already priced it. This applies to: L&T → LTIMindtree (73%); Bajaj Finserv → Bajaj Finance (52%); Reliance → Jio Financial Services (6.1% directly).</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">4</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">Adjust</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab amber">Deduct holdco net debt + apply conglomerate discount</span>
+              </div>
+              <div class="ts-action">From the SOTP Gross Value, deduct: (1) <strong>Holdco-level net debt</strong> (debt at the parent company, separate from subsidiary-level debt already in EV calculations). (2) <strong>Conglomerate discount</strong> — 5–10% for clean holdcos, 15–25% for complex conglomerates, 25–40% for opaque structures. The result is SOTP Net Equity Value. Divide by total shares outstanding = SOTP per-share value. Compare this to current market price — if trading at a significant discount (15%+), investigate why.</div>
+              <div class="ts-formula">
+                <div class="ts-f-row">
+                  <span class="ts-f-lbl">SOTP Equity</span><span class="ts-f-eq">=</span>
+                  <span class="ts-f-item ts-fi-p">SOTP Gross</span>
+                  <span class="ts-f-eq">−</span>
+                  <span class="ts-f-item ts-fi-r">Holdco Net Debt</span>
+                  <span class="ts-f-eq">−</span>
+                  <span class="ts-f-item ts-fi-a">Conglomerate Discount %</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trick-step" style="padding-bottom:0;">
+            <div class="ts-num" style="background:linear-gradient(135deg,#e11d48,#f43f5e);">5</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">Sanity check</span>
+                <span class="ts-arrow">→</span>
+                <span class="ts-tab red">Per-share SOTP vs current price → discount/premium %</span>
+              </div>
+              <div class="ts-action">Calculate: <strong>SOTP Discount % = (SOTP per share − Current Price) ÷ SOTP per share × 100</strong>. If stock trades at 20% below SOTP → conglomerate discount is within historical range (acceptable). If stock trades at 40% below SOTP → either your SOTP is too optimistic OR there is genuine hidden value. Cross-check by looking at whether the discount has been widening or narrowing over time — a narrowing discount suggests market is beginning to value segments properly (often driven by demerger news or investor day presentations).</div>
+              <div class="ts-outcomes">
+                <div class="ts-out ts-out-g">✅ Discount 10–25% = typical conglomerate discount. No obvious mispricing — stock may close this discount gradually over time. Monitor for demerger news as catalyst.</div>
+                <div class="ts-out ts-out-r">🚨 Discount below 5% = trading near SOTP, already fully priced in. Or discount above 35% = either your SOTP is too aggressive or deep structural issues. Re-examine each segment's multiple.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- BONUS -->
+        <div class="trick-bonus">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <span style="font-size:22px;">⚡</span>
+            <span style="font-size:clamp(13px,1.8vw,16px);font-weight:800;color:var(--tx);">4 Advanced SOTP Tricks</span>
+          </div>
+          <div class="bonus-grid">
+            <div class="bonus-card bc-p">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--p),var(--ph));">A</div>
+              <div class="bonus-title">The "Demerger Catalyst" Trade</div>
+              <div class="bonus-desc">When a conglomerate announces a demerger or separate listing of a subsidiary, the conglomerate discount on that segment immediately narrows toward zero for the demerging unit. Watch for demerger announcements: ITC Hotels demerger, Reliance's listing plans, Tata Sons IPO discussions. Buy the parent before the demerger is announced; sell after the listing as the discount closes. The per-share SOTP value doesn't change — but the market price moves toward it as the discount narrows.</div>
+            </div>
+            <div class="bonus-card bc-s">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">B</div>
+              <div class="bonus-title">The "Sensitivity Table" Rule</div>
+              <div class="bonus-desc">Always present SOTP with a 2×2 sensitivity table: rows = two key segment multiples at ±10%, columns = conglomerate discount at ±5%. This shows the per-share SOTP range. Example: Reliance SOTP ranges from ₹2,200 to ₹3,400 across the sensitivity table — that's the honest range of uncertainty. Presenting a single-point SOTP of ₹2,800 as "the" value ignores the inherent uncertainty in every multiple assumption.</div>
+            </div>
+            <div class="bonus-card bc-a">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">C</div>
+              <div class="bonus-title">The "Cigarette Test" for ITC</div>
+              <div class="bonus-desc">A quick ITC SOTP sanity check: ITC's cigarette business alone generates ~₹21,000 Cr EBIT. At 22× EBIT (reasonable for a near-monopoly consumer staple): cigarettes = ₹4.62L Cr. ITC's total market cap is ~₹5.5L Cr. This means the entire FMCG portfolio (₹12,000 Cr revenue, high-growth), Hotels (₹2,000+ Cr EBIT), Agri, and Paperboards are collectively valued at just ₹0.9L Cr — probably a massive undervaluation of these segments. This "cigarette test" immediately flags whether ITC is cheap or not.</div>
+            </div>
+            <div class="bonus-card bc-g">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">D</div>
+              <div class="bonus-title">Tracking SOTP Discount Over Time</div>
+              <div class="bonus-desc">Build a simple tracker: every quarter, recalculate SOTP using latest segment EBITDA from quarterly results and current peer multiples. Plot SOTP vs market price over time. When the gap widens beyond historical average → contrarian buy signal (subject to checking why discount widened). When gap narrows to historical minimum → take profits. For Reliance, this discount has ranged from 5% (Jan 2020) to 30% (Mar 2023). This dynamic tracking approach makes SOTP a living investment tool, not just a one-time calculation.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FLOWCHART -->
+        <div class="flow-wrap">
+          <div class="flow-label">🔀 SOTP Quality Decision Flowchart — 4 Questions · 60 Seconds</div>
+          <div class="flow-chain">
+            <div class="flow-node fn-q"><div class="fn-qlbl">Q1</div><div class="fn-txt">Can you find clear segment EBIT/EBITDA from the Annual Report's Segment Note (Ind AS 108)?</div></div>
+            <div class="flow-branch">
+              <div class="fb-yes">
+                <span class="fb-lbl">YES ✅</span>
+                <div class="flow-node fn-q"><div class="fn-qlbl">Q2</div><div class="fn-txt">Have you used different, appropriate multiples for each segment (not one P/E for all)?</div></div>
+                <div class="flow-branch">
+                  <div class="fb-yes">
+                    <span class="fb-lbl">YES ✅</span>
+                    <div class="flow-node fn-q"><div class="fn-qlbl">Q3</div><div class="fn-txt">Did you deduct holdco-level net debt and apply the right conglomerate discount?</div></div>
+                    <div class="flow-branch">
+                      <div class="fb-yes">
+                        <span class="fb-lbl">YES ✅</span>
+                        <div class="flow-node fn-q"><div class="fn-qlbl">Q4</div><div class="fn-txt">Does your SOTP per-share value differ from market price by more than 25%?</div></div>
+                        <div class="flow-branch">
+                          <div class="fb-yes">
+                            <span class="fb-lbl">YES ✅</span>
+                            <div class="flow-node fn-g">✅ POTENTIAL MISPRICING — Either your SOTP is too aggressive or the market is undervaluing the segments. Cross-check with 2 brokerage SOTP models. If all agree, investigate the reason for the discount — demerger catalyst or structural issues.</div>
+                          </div>
+                          <div class="fb-no">
+                            <span class="fb-lbl">NO ⚠️</span>
+                            <div class="flow-node fn-a">⚠️ FAIRLY PRICED — SOTP and market price are broadly aligned. The discount is within normal range. Monitor for demerger catalysts or segment-level rerating events that could narrow the discount further.</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="fb-no">
+                        <span class="fb-lbl">NO 🚨</span>
+                        <div class="flow-node fn-a">⚠️ INCOMPLETE SOTP — Recalculate: SOTP Equity = Gross SOTP − Holdco Net Debt − Conglomerate Discount. Ignoring either inflates per-share value by 15–35%. Redo the calculation with proper adjustments.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="fb-no">
+                    <span class="fb-lbl">NO 🚨</span>
+                    <div class="flow-node fn-r">❌ METHODOLOGY ERROR — Using one multiple for all segments defeats the purpose of SOTP. Assign appropriate methods: commodity → EV/EBITDA 5–10×; consumer → P/E 25–50×; banking → P/B 1–4×. Redo with segment-specific multiples.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="fb-no">
+                <span class="fb-lbl">NO 🚨</span>
+                <div class="flow-node fn-r">❌ INSUFFICIENT DATA — Cannot do reliable SOTP without segment EBIT. Acknowledge limitation. Use total consolidated EBITDA and a blended peer multiple as a rough proxy — but present it as a consolidated valuation, NOT an SOTP.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 GLOSSARY -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">07 — Reference Glossary</div>
+    <h2 class="h2 rv d2">SOTP &amp; Conglomerate <span class="hp">Glossary</span></h2>
+    <div class="rul rv d3"></div>
+    <div class="glos-wrap rv d3">
+      <div class="table-scroll">
+        <table class="glos-table">
+          <thead><tr>
+            <th style="min-width:180px;">Term</th>
+            <th style="min-width:300px;">What It Means</th>
+            <th style="min-width:100px;text-align:center;">Key Point</th>
+          </tr></thead>
+          <tbody>
+            <tr><td class="gt-term">SOTP Valuation</td><td class="gt-desc">Sum-of-the-Parts: valuing each business segment of a diversified company separately, using the most appropriate valuation method for each, then adding the individual values to arrive at total company value. The opposite of using a single P/E or EV/EBITDA for the whole group. Most appropriate for conglomerates, holding companies, and diversified industrial groups.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-p">Core method</span></td></tr>
+            <tr><td class="gt-term">Conglomerate Discount</td><td class="gt-desc">The percentage by which a conglomerate's market cap typically trades below its SOTP value. Ranges from 5–10% for clean holding companies to 25–40% for complex, opaque groups. Caused by investor preference for pure-play exposure, capital allocation risk, opacity, and structural tax drags. Narrows when demergers or subsidiary listings are announced.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-r">15–25% typical</span></td></tr>
+            <tr><td class="gt-term">Ind AS 108 Segment Note</td><td class="gt-desc">Mandatory accounting disclosure under Indian Accounting Standard 108 (Operating Segments). Every listed Indian company must disclose revenue, EBIT, and total assets for each "reportable segment" (any segment exceeding 10% of total revenue or assets). This note in the Annual Report is the primary data source for SOTP — without it, segment-level SOTP is estimation, not analysis.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Primary data</span></td></tr>
+            <tr><td class="gt-term">Embedded Value (EV)</td><td class="gt-desc">An actuarial valuation method specific to life insurance companies. EV = Adjusted Net Worth + Present Value of Future Profits from in-force policies. The standard method for valuing insurance subsidiaries within SOTP. Indian life insurers (LIC, HDFC Life, SBI Life) publish their EV annually. EV/EV multiples (market cap ÷ EV) are the standard comparison for life insurers — typically 1.5–4× for growth insurers.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-s">Insurance</span></td></tr>
+            <tr><td class="gt-term">NAV (Net Asset Value)</td><td class="gt-desc">For real estate development companies within a conglomerate: NAV = market value of all land parcels + inventory − debt. The primary valuation method for real estate. Applying P/E or EV/EBITDA to real estate companies severely misstates value because real estate income can be lumpy and land bank value doesn't show up in EBITDA. NAV gives the per-share "break-up value" of the real estate business.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-a">Real estate</span></td></tr>
+            <tr><td class="gt-term">Holdco Discount</td><td class="gt-desc">The additional discount applied to a holding company (parent) that owns stakes in listed subsidiaries. Even after applying the conglomerate discount to SOTP, pure holding companies (that own stakes but don't operate businesses themselves) trade at an extra 20–40% below the market value of their stakes — because investors can't extract the value easily (taxes on dividends, lack of liquidity, governance concerns).</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-r">Unlisted holdco</span></td></tr>
+            <tr><td class="gt-term">Demerger Catalyst</td><td class="gt-desc">A corporate event where a conglomerate separates one or more subsidiaries into independently listed entities. The demerger causes the conglomerate discount on the demerging subsidiary to close toward zero — because investors can now buy that specific business directly. Historical examples: ITC Hotels demerger announcement (2024), Reliance Jio Financial Services listing (2023). Buying conglomerates ahead of demerger announcements is a well-known investment strategy.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Unlocking event</span></td></tr>
+            <tr><td class="gt-term">Pure-Play Comparable</td><td class="gt-desc">A listed company that operates in exactly one business segment — used as the benchmark multiple for that segment in SOTP. ITC FMCG segment → Britannia, HUL as pure-play comparables. ITC Hotels → Indian Hotels (Taj). The pure-play's P/E or EV/EBITDA is the "undiscounted" price for that business, which is then applied to the conglomerate's segment earnings to derive segment value.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-s">Segment anchor</span></td></tr>
+            <tr><td class="gt-term">Inter-Segment Elimination</td><td class="gt-desc">Transactions between different segments of the same company that are included in both segments' revenues but must be cancelled out in the consolidated accounts. Example: if Reliance's O2C sells petroleum products to Reliance Retail at an arm's length price, this revenue appears in O2C segment and as cost in Retail — in SOTP, it must not be double-counted. Always check the Annual Report's "Inter-Segment Revenue" line and ensure it's excluded from both segment valuations.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-r">Avoid duplication</span></td></tr>
+            <tr><td class="gt-term">SOTP Sensitivity Table</td><td class="gt-desc">A 2×2 or 3×3 table showing how SOTP per-share value changes as key inputs vary. Rows: different multiple assumptions for the most uncertain segment (e.g., New Energy EBITDA multiple from 10× to 20×). Columns: conglomerate discount from 10% to 25%. Each cell shows the resulting per-share value. Standard in professional equity research — displays the honest range of uncertainty rather than a false single-point precision.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Range analysis</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT CHAPTER -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next · Module 11</div>
+    <div class="nxt-sub">Discounted Cash Flow (DCF) — The Intrinsic Value Framework →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">&#8594;</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:justify-content:center;font-size:22px;flex-shrink:0;">&#9888;&#65039;</div>
+    <div><div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+    <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">This page is for educational purposes only. All SOTP estimates for Reliance Industries, ITC, L&T, Bajaj Finserv, and Tata Group mentioned are approximate, illustrative, and for educational demonstration only — they are NOT investment recommendations. All segment EBITDA, PAT, and valuation multiples are simplified estimates. Actual analyst SOTP models (Motilal Oswal, Kotak, Jefferies) will differ based on proprietary estimates. Verify all figures from official annual reports and SEBI filings before any investment decision. All equity investments carry market risk. Consult a SEBI-registered investment advisor before making investment decisions.</div></div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  'use strict';
+  var passOpts={passive:true};
+  var revEls=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var revIO=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');revIO.unobserve(e.target);}});},{threshold:.05,rootMargin:'0px 0px -28px 0px'});
+    revEls.forEach(function(el){revIO.observe(el);});
+  } else {revEls.forEach(function(el){el.classList.add('on');});}
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){revEls.forEach(function(el){el.classList.add('on');});}
+  document.addEventListener('touchstart',function(){},passOpts);
+  document.addEventListener('touchmove',function(){},passOpts);
+  document.addEventListener('touchend',function(){},passOpts);
+  document.body.style.overscrollBehavior='none';
+  function setVH(){document.documentElement.style.setProperty('--vh',window.innerHeight*0.01+'px');}
+  setVH();
+  window.addEventListener('resize',setVH,passOpts);
+  window.addEventListener('orientationchange',function(){setTimeout(setVH,150);setTimeout(function(){document.querySelectorAll('.rv:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<window.innerHeight-20){el.classList.add('on');}});},320);},passOpts);
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});});}
+  function applyTouchActions(){
+    var sel='a,button,.dmbtn,.nxt-btn,.seg-card,.step-card,.kpill,.company-block,.bonus-card,.trick-wrap,.flow-node,.sc-chip';
+    document.querySelectorAll(sel).forEach(function(el){el.style.touchAction='manipulation';});
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',applyTouchActions);}else{applyTouchActions();}
+  document.querySelectorAll('.table-scroll,.glos-wrap').forEach(function(el){el.style.webkitOverflowScrolling='touch';});
+  document.addEventListener('visibilitychange',function(){if(!document.hidden){document.querySelectorAll('.rv:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<window.innerHeight){el.classList.add('on');}});}});
+  document.querySelectorAll('a[href="#"]').forEach(function(a){a.addEventListener('touchend',function(e){e.preventDefault();},passOpts);});
+  if(window.matchMedia('(hover:none) and (pointer:coarse)').matches){
+    var segMap=[{cls:'sc-oil',bg:'rgba(109,40,217,.06)'},{cls:'sc-retail',bg:'rgba(2,132,199,.06)'},{cls:'sc-telecom',bg:'rgba(22,163,74,.06)'},{cls:'sc-fmcg',bg:'rgba(217,119,6,.06)'},{cls:'sc-hotel',bg:'rgba(220,38,38,.05)'},{cls:'sc-infra',bg:'rgba(109,40,217,.04)'}];
+    segMap.forEach(function(m){document.querySelectorAll('.'+m.cls).forEach(function(card){card.addEventListener('touchstart',function(){this.style.background=m.bg;this.style.transition='background .08s';},passOpts);card.addEventListener('touchend',function(){var s=this;setTimeout(function(){s.style.background='';},200);},passOpts);});});
+  }
+})();
+</script>
+</body>
+</html>

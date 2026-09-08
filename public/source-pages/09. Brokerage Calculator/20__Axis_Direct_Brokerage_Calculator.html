@@ -1,0 +1,2287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover, interactive-widget=resizes-visual"/>
+<meta name="theme-color" content="#A31E55"/>
+<meta name="color-scheme" content="light"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="HandheldFriendly" content="true"/>
+<meta name="MobileOptimized" content="width"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<title>Axis Direct Brokerage Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════════════════
+   DESIGN TOKENS  (from 12_money_rules)
+══════════════════════════════════════════ */
+:root{
+  --purple-deep:#5B21B6;
+  --purple-primary:#7C3AED;
+  --purple-medium:#8B5CF6;
+  --purple-light:#A78BFA;
+  --purple-pale:#EDE9FE;
+  --purple-ultra-pale:#F5F3FF;
+  --green-primary:#059669;
+  --green-medium:#10B981;
+  --green-light:#34D399;
+  --green-pale:#D1FAE5;
+  --green-ultra-pale:#ECFDF5;
+  --gold:#F59E0B;
+  --gold-light:#FCD34D;
+  --red:#DC2626;--red-pale:#FEE2E2;
+  --white:#FFFFFF;
+  --text-dark:#1E1B4B;
+  --text-medium:#4C1D95;
+  --text-light:#6D28D9;
+  --muted:#4B5563;
+  --card-bg:#FFFFFF;
+  --body-bg:#FAF9FF;
+  --border:rgba(167,139,250,.18);
+  --sh1:0 4px 20px rgba(91,33,182,.08),0 1px 4px rgba(91,33,182,.05);
+  --sh2:0 8px 32px rgba(91,33,182,.13),0 2px 8px rgba(91,33,182,.06);
+  --sh3:0 16px 48px rgba(91,33,182,.18);
+  --rc:20px;--rsm:14px;--rxs:10px;
+  --vh:1vh; /* overridden by JS for iOS 100vh fix */
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:transparent;color-scheme:light}
+body{font-family:'DM Sans',sans-serif;background:var(--body-bg);color:var(--text-dark);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+/* ══════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════ */
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes liveBlip{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.65)}}
+
+/* ══════════════════════════════════════════
+   HEADER — light purple/green, no dark theme
+══════════════════════════════════════════ */
+.header{
+  background:var(--body-bg);
+  padding:clamp(22px,3.5vw,40px) clamp(16px,4vw,48px);
+  position:relative;overflow:hidden;
+  border-bottom:2px solid var(--purple-pale);
+}
+/* subtle grid texture */
+.header::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--purple-pale) 1px,transparent 1px),
+    linear-gradient(90deg,var(--purple-pale) 1px,transparent 1px);
+  background-size:44px 44px;opacity:.5;pointer-events:none;
+}
+/* large soft glow top-right purple, bottom-left green */
+.header::after{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:500px;height:500px;
+  background:radial-gradient(ellipse,rgba(124,58,237,.08),transparent 65%);
+  pointer-events:none;
+}
+.header-dots{
+  position:absolute;bottom:-50px;left:-40px;
+  width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(5,150,105,.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+/* ── single horizontal row ── */
+.header-inner{
+  position:relative;z-index:1;
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:center;
+  gap:clamp(16px,3vw,32px);
+}
+/* large logo square — solid purple */
+.header-mark{
+  width:clamp(68px,9vw,100px);
+  height:clamp(68px,9vw,100px);
+  flex-shrink:0;
+  background:linear-gradient(135deg,var(--purple-primary),var(--purple-deep));
+  border-radius:clamp(14px,2vw,22px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(30px,4.5vw,48px);font-weight:900;color:#fff;
+  box-shadow:0 8px 28px rgba(91,33,182,.28),inset 0 1.5px 0 rgba(255,255,255,.15);
+  border:2px solid var(--purple-pale);
+  align-self:center;
+}
+/* stacked broker name + calculator title */
+.header-text{
+  display:flex;flex-direction:column;gap:0;
+  flex-shrink:0;
+}
+.header-brand-name{
+  font-size:clamp(26px,4.5vw,52px);
+  font-weight:800;color:var(--text-dark);letter-spacing:-1.5px;line-height:1;
+}
+.header-title{
+  font-size:clamp(20px,3.5vw,40px);
+  font-weight:800;line-height:1.05;letter-spacing:-.8px;margin:0;
+}
+.header-title .brand-part{color:var(--purple-primary)}
+.header-title .calc-part{
+  background:linear-gradient(90deg,var(--green-primary),var(--green-medium));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+/* divider between identity and descriptor */
+.header-divider{
+  width:1.5px;height:clamp(60px,8vw,88px);
+  background:linear-gradient(180deg,transparent,var(--purple-pale),transparent);
+  flex-shrink:0;align-self:center;
+}
+/* right: badge + tagline + sub + pillars */
+.header-right{flex:1;min-width:0}
+.header-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  background:#fff;border:1.5px solid var(--purple-pale);border-radius:100px;
+  padding:4px 13px;font-size:10.5px;font-weight:700;
+  letter-spacing:1.4px;color:var(--purple-primary);
+  text-transform:uppercase;margin-bottom:8px;
+  box-shadow:0 2px 8px rgba(91,33,182,.08);
+}
+.header-badge .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--green-primary);display:inline-block;animation:pulse 2s infinite}
+.header-brand-tagline{
+  font-size:11px;font-weight:600;
+  color:var(--muted);letter-spacing:.8px;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.header-sub{
+  font-size:clamp(11.5px,1.4vw,13.5px);
+  color:var(--muted);line-height:1.62;
+  margin-bottom:13px;max-width:380px;
+}
+.header-pillars{display:flex;gap:7px;flex-wrap:wrap}
+.pillar{
+  background:#fff;border:1.5px solid var(--purple-pale);
+  border-radius:8px;padding:6px 13px;
+  display:flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:600;color:var(--purple-deep);
+  box-shadow:0 1px 4px rgba(91,33,182,.07);
+}
+.pillar .icon{font-size:13px}
+/* hidden legacy */
+.header-brand-row{display:none}
+.header-kpi-block{display:none}
+
+/* ══════════════════════════════════════════
+   SEGMENT TABS
+══════════════════════════════════════════ */
+.tabs-bar{
+  background:#fff;
+  border-bottom:2px solid var(--purple-pale);
+  position:sticky;top:0;z-index:200;
+  box-shadow:0 2px 16px rgba(91,33,182,.08);
+}
+.tabs-scroll{
+  max-width:1100px;margin:0 auto;
+  padding:0 clamp(12px,4vw,48px);
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.tabs-scroll::-webkit-scrollbar{display:none}
+.tabs{display:flex;align-items:center;gap:3px;padding:7px 0;white-space:nowrap}
+.tab-sep{width:1px;height:22px;background:var(--purple-pale);margin:0 5px;flex-shrink:0}
+.tab-grp{font-size:9px;font-weight:800;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;padding:0 4px;flex-shrink:0}
+.tab{
+  display:flex;align-items:center;gap:5px;
+  padding:7px 13px;border-radius:var(--rxs);
+  font-size:12.5px;font-weight:600;cursor:pointer;
+  border:1.5px solid transparent;color:var(--muted);
+  background:transparent;transition:all .15s;
+  font-family:'DM Sans',sans-serif;white-space:nowrap;
+  touch-action:manipulation;min-height:38px;
+}
+.tab:hover{background:var(--purple-ultra-pale);color:var(--purple-primary);border-color:var(--purple-pale)}
+.tab.active{background:var(--purple-primary);border-color:var(--purple-primary);color:#fff;box-shadow:0 3px 12px rgba(124,58,237,.3)}
+.tab-ico{font-size:12px}
+
+/* ══════════════════════════════════════════
+   PLAN SWITCHER BAR (HDFC Securities Standard & Value)
+══════════════════════════════════════════ */
+.gender-bar{
+  background:#fff;border-bottom:2px solid var(--purple-pale);
+  position:sticky;top:52px;z-index:190;
+  box-shadow:0 2px 10px rgba(91,33,182,.06);
+}
+.gender-bar-inner{
+  max-width:1100px;margin:0 auto;
+  padding:7px clamp(12px,4vw,48px);
+  display:flex;align-items:center;gap:10px;
+  flex-wrap:wrap;
+}
+.gender-bar-label{
+  font-size:10px;font-weight:800;color:var(--muted);
+  letter-spacing:1.4px;text-transform:uppercase;
+  white-space:nowrap;flex-shrink:0;
+}
+.gender-pills{display:flex;gap:5px;flex-shrink:0}
+.gender-btn{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:20px;
+  font-size:12px;font-weight:700;
+  cursor:pointer;border:1.5px solid var(--border);
+  color:var(--muted);background:#fff;
+  font-family:'DM Sans',sans-serif;
+  transition:all .15s;touch-action:manipulation;min-height:36px;
+}
+.gender-btn:hover{border-color:var(--purple-pale);color:var(--purple-primary);background:var(--purple-ultra-pale)}
+.gender-btn.active.male{background:var(--purple-primary);border-color:var(--purple-primary);color:#fff;box-shadow:0 2px 10px rgba(124,58,237,.28)}
+.gender-btn.active.female{background:var(--green-primary);border-color:var(--green-primary);color:#fff;box-shadow:0 2px 10px rgba(5,150,105,.28)}
+.gender-bar-note{
+  font-size:10.5px;color:var(--muted);font-weight:500;
+  display:flex;align-items:center;gap:5px;flex:1;min-width:160px;
+}
+.gender-bar-note .note-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--green-ultra-pale);border:1px solid var(--green-pale);
+  color:var(--green-primary);font-size:9.5px;font-weight:800;
+  padding:2px 8px;border-radius:20px;white-space:nowrap;
+}
+.gender-bar-note .note-badge.male-badge{
+  background:var(--purple-ultra-pale);border-color:var(--purple-pale);color:var(--purple-primary);
+}
+@media(max-width:430px){
+  .gender-bar-label{font-size:9px}
+  .gender-btn{padding:5px 11px;font-size:11.5px}
+  .gender-bar-note{font-size:10px;min-width:120px}
+}
+
+/* plan info card — HDFC Securities */
+.plan-info-card{
+  background:linear-gradient(135deg,var(--green-ultra-pale),#FFF);
+  border:1.5px solid var(--green-pale);border-radius:var(--rsm);
+  padding:11px 14px;margin-bottom:14px;
+  display:flex;align-items:flex-start;gap:9px;
+  position:relative;z-index:1;
+}
+.pic-icon{font-size:20px;flex-shrink:0}
+.pic-body{}
+.pic-name{font-size:12.5px;font-weight:800;color:var(--green-primary);margin-bottom:2px}
+.pic-desc{font-size:11px;color:var(--green-medium);font-weight:500;line-height:1.5}
+.pic-fee{
+  margin-left:auto;flex-shrink:0;
+  font-size:11px;font-weight:700;padding:3px 9px;
+  border-radius:20px;background:var(--green-ultra-pale);color:var(--green-primary);
+  align-self:center;white-space:nowrap;border:1px solid var(--green-pale);
+}
+
+/* ══════════════════════════════════════════
+   MAIN WRAP
+══════════════════════════════════════════ */
+.main{max-width:1100px;margin:0 auto;padding:clamp(14px,2.5vw,28px) clamp(14px,4vw,48px) clamp(40px,6vw,64px)}
+
+/* section divider — already centered via flex */
+.section-divider{
+  display:flex;align-items:center;gap:14px;
+  margin:0 0 20px;
+}
+.section-divider span{
+  font-size:11px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:var(--purple-light);white-space:nowrap;
+}
+.section-divider::before,.section-divider::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(167,139,250,.35),transparent);
+}
+
+/* ══════════════════════════════════════════
+   CARD BASE  (from template)
+══════════════════════════════════════════ */
+.card{
+  background:var(--card-bg);
+  border-radius:var(--rc);
+  position:relative;overflow:hidden;
+  box-shadow:var(--sh1);
+  border:1.5px solid var(--border);
+  transition:transform .22s ease,box-shadow .22s ease;
+}
+.card:hover{transform:translateY(-3px);box-shadow:var(--sh2)}
+/* top accent bar */
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;
+  height:4px;border-radius:var(--rc) var(--rc) 0 0;
+}
+.card.purple::before{background:linear-gradient(90deg,var(--purple-primary),var(--purple-light))}
+.card.green::before{background:linear-gradient(90deg,var(--green-primary),var(--green-light))}
+.card.gold::before{background:linear-gradient(90deg,var(--gold),var(--gold-light))}
+.card.mixed::before{background:linear-gradient(90deg,var(--purple-primary),var(--green-medium))}
+/* corner glow */
+.card::after{
+  content:'';position:absolute;top:-20px;right:-20px;
+  width:80px;height:80px;border-radius:50%;opacity:.06;pointer-events:none;
+}
+.card.purple::after{background:var(--purple-primary)}
+.card.green::after{background:var(--green-primary)}
+.card.gold::after{background:var(--gold)}
+.card.mixed::after{background:var(--purple-light)}
+
+.card-body-inner{padding:22px 20px 20px}
+
+/* card icon */
+.card-icon-wrap{
+  width:48px;height:48px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin-bottom:12px;position:relative;z-index:1;flex-shrink:0;
+}
+.card.purple .card-icon-wrap{background:var(--purple-pale)}
+.card.green  .card-icon-wrap{background:var(--green-pale)}
+.card.gold   .card-icon-wrap{background:#FEF3C7}
+.card.mixed  .card-icon-wrap{background:linear-gradient(135deg,var(--purple-pale),var(--green-pale))}
+
+/* card label */
+.card-label{font-size:9.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:5px;position:relative;z-index:1}
+.card.purple .card-label{color:var(--purple-medium)}
+.card.green  .card-label{color:var(--green-primary)}
+.card.gold   .card-label{color:#B45309}
+.card.mixed  .card-label{color:var(--purple-medium)}
+
+/* card title */
+.card-title{font-size:15px;font-weight:800;color:var(--text-dark);line-height:1.2;margin-bottom:10px;position:relative;z-index:1}
+
+/* stat box */
+.stat-box{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:9px 13px;border-radius:11px;margin-top:10px;
+  position:relative;z-index:1;
+}
+.card.purple .stat-box{background:var(--purple-ultra-pale);border:1px solid rgba(167,139,250,.25)}
+.card.green  .stat-box{background:var(--green-ultra-pale);border:1px solid rgba(52,211,153,.25)}
+.card.gold   .stat-box{background:#FFFBEB;border:1px solid rgba(245,158,11,.2)}
+.card.mixed  .stat-box{background:var(--purple-ultra-pale);border:1px solid rgba(167,139,250,.25)}
+.stat-box .s-label{font-size:10.5px;font-weight:500;color:var(--muted)}
+.stat-box .s-val{font-size:15px;font-weight:800}
+.card.purple .stat-box .s-val{color:var(--purple-primary)}
+.card.green  .stat-box .s-val{color:var(--green-primary)}
+.card.gold   .stat-box .s-val{color:var(--gold)}
+.card.mixed  .stat-box .s-val{color:var(--purple-primary)}
+
+/* divider */
+.card-divider{height:1px;background:rgba(167,139,250,.12);margin:10px 0;position:relative;z-index:1}
+
+/* formula pill */
+.formula{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 12px;border-radius:9px;
+  font-size:12px;font-weight:700;margin-bottom:9px;
+  position:relative;z-index:1;
+}
+.card.purple .formula{background:var(--purple-pale);color:var(--purple-deep)}
+.card.green  .formula{background:var(--green-pale);color:var(--green-primary)}
+.card.mixed  .formula{background:var(--purple-pale);color:var(--purple-deep)}
+
+/* bar rows */
+.bar-rows{display:flex;flex-direction:column;gap:6px;position:relative;z-index:1}
+.bar-row{display:flex;align-items:center;gap:8px}
+.bar-label{font-size:11px;font-weight:600;color:#374151;width:60px;flex-shrink:0}
+.bar-track{flex:1;height:8px;background:#F3F4F6;border-radius:99px;overflow:hidden}
+.bar-fill{height:100%;border-radius:99px}
+.bar-pct{font-size:11px;font-weight:700;color:var(--text-dark);width:28px;text-align:right;flex-shrink:0}
+
+/* ══════════════════════════════════════════
+   FRAME 1 — CALCULATOR + RESULTS
+══════════════════════════════════════════ */
+.frame1{
+  display:grid;grid-template-columns:1fr 340px;
+  gap:20px;margin-bottom:24px;align-items:start;
+}
+
+/* ── CALC CARD ── */
+.calc-card{animation:fadeInUp .45s ease both}
+.calc-header{
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;
+  padding:16px 20px 14px;
+  border-bottom:1.5px solid var(--purple-pale);
+  position:relative;z-index:1;
+}
+.calc-ico{
+  width:42px;height:42px;border-radius:12px;flex-shrink:0;
+  background:var(--purple-pale);display:flex;align-items:center;justify-content:center;font-size:19px;
+}
+.calc-ttl{font-size:14px;font-weight:800;color:var(--text-dark);letter-spacing:-.2px;text-align:center}
+.calc-sub{font-size:11px;color:var(--muted);margin-top:0;font-weight:500;text-align:center}
+
+.plan-note{
+  display:flex;align-items:flex-start;gap:8px;
+  background:var(--purple-ultra-pale);border:1.5px solid var(--purple-pale);
+  border-radius:var(--rxs);padding:10px 12px;margin-bottom:14px;
+  font-size:11.5px;color:var(--purple-deep);font-weight:500;line-height:1.5;
+  position:relative;z-index:1;
+}
+
+/* commodity picker */
+.comm-section{display:none}
+.comm-section.show{display:block}
+.comm-cat-tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:11px;position:relative;z-index:1}
+.ccat{
+  padding:5px 11px;border-radius:20px;font-size:11.5px;font-weight:700;
+  cursor:pointer;border:1.5px solid var(--border);color:var(--muted);
+  background:#fff;transition:all .14s;font-family:'DM Sans',sans-serif;
+  touch-action:manipulation;
+}
+.ccat:hover{border-color:var(--purple-pale);color:var(--purple-primary);background:var(--purple-ultra-pale)}
+.ccat.active{background:var(--purple-primary);border-color:var(--purple-primary);color:#fff;box-shadow:0 2px 8px rgba(124,58,237,.25)}
+.comm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:11px;position:relative;z-index:1}
+.comm-card{
+  background:#fff;border:1.5px solid var(--border);border-radius:var(--rxs);
+  padding:8px 5px 7px;cursor:pointer;transition:all .13s;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:2px;min-height:44px;touch-action:manipulation;
+}
+.comm-card:hover{border-color:var(--purple-light);background:var(--purple-ultra-pale)}
+.comm-card.active{border-color:var(--purple-primary);background:var(--purple-ultra-pale);box-shadow:0 0 0 2px rgba(167,139,250,.35)}
+.comm-card-icon{font-size:16px;line-height:1;margin-bottom:2px}
+.comm-card-name{font-size:9.5px;font-weight:800;color:var(--text-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%}
+.comm-card-size{font-size:8px;color:var(--purple-primary);font-weight:700}
+.comm-info-box{
+  background:var(--purple-ultra-pale);border:1.5px solid var(--purple-pale);
+  border-radius:var(--rsm);padding:10px 12px;margin-bottom:12px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:6px;position:relative;z-index:1;
+}
+.cib-lbl{font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px}
+.cib-val{font-size:14px;font-weight:800;color:var(--text-dark)}
+.cib-unit{font-size:9px;color:var(--muted);font-weight:500}
+
+/* inputs */
+.field{margin-bottom:12px;position:relative;z-index:1}
+.field-lbl{
+  font-size:10.5px;font-weight:800;color:var(--purple-deep);
+  letter-spacing:.3px;text-transform:uppercase;
+  margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;
+}
+.field-hint{font-weight:500;color:var(--muted);text-transform:none;letter-spacing:0;font-size:10.5px}
+.iw{position:relative}
+.ipfx{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-weight:800;font-size:13px;color:var(--purple-primary);pointer-events:none}
+input[type=number],select{
+  width:100%;height:44px;
+  border:1.5px solid var(--purple-pale);border-radius:var(--rsm);
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;
+  color:var(--text-dark);background:#fafbff;
+  padding:0 11px;outline:none;appearance:none;-webkit-appearance:none;
+  transition:border-color .14s,box-shadow .14s;touch-action:manipulation;
+}
+input.pfx{padding-left:24px}
+input[type=number]:focus,select:focus{
+  border-color:var(--purple-primary);
+  box-shadow:0 0 0 3px rgba(124,58,237,.1);background:#fff;
+}
+input[type=number]::-webkit-inner-spin-button{display:none}
+input[type=number]{-moz-appearance:textfield}
+select{cursor:pointer;padding-right:30px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%237C3AED' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+input[type=range]{
+  width:100%;height:5px;appearance:none;-webkit-appearance:none;
+  background:var(--purple-pale);border-radius:3px;cursor:pointer;outline:none;border:none;padding:0;margin-top:7px;
+}
+input[type=range]::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:20px;height:20px;background:var(--purple-primary);border-radius:50%;box-shadow:0 2px 8px rgba(124,58,237,.35);cursor:pointer;border:2.5px solid #fff}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;background:var(--purple-primary);border-radius:50%;cursor:pointer;border:2.5px solid #fff}
+.range-lbl{display:flex;justify-content:space-between;font-size:9.5px;color:var(--muted);margin-top:4px;font-weight:600}
+
+/* toggle */
+.tog-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 13px;background:var(--purple-ultra-pale);
+  border-radius:var(--rsm);margin-top:12px;border:1.5px solid var(--purple-pale);
+  position:relative;z-index:1;
+}
+.tog-info{font-size:12px;font-weight:700;color:var(--text-dark)}
+.tog-desc{font-size:10px;color:var(--muted);margin-top:2px}
+.toggle{position:relative;display:inline-block;width:36px;height:20px;flex-shrink:0;align-self:center}
+.toggle input{display:none}
+.tslider{position:absolute;inset:0;border-radius:10px;background:var(--purple-pale);cursor:pointer;transition:.2s}
+.tslider::before{content:'';position:absolute;width:14px;height:14px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.toggle input:checked+.tslider{background:var(--purple-primary)}
+.toggle input:checked+.tslider::before{transform:translateX(16px)}
+
+/* ── RESULTS PANE ── */
+.results-pane{
+  background:var(--green-ultra-pale);
+  border-radius:var(--rc);border:1.5px solid var(--green-pale);
+  box-shadow:var(--sh1);overflow:hidden;
+  animation:fadeInUp .5s .07s ease both;
+}
+.rp-header{
+  padding:14px 18px 12px;
+  background:linear-gradient(135deg,var(--green-ultra-pale),#fff);
+  border-bottom:2px solid var(--green-pale);
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.rp-ttl{color:var(--green-primary);font-size:13px;font-weight:800}
+.rp-live{display:flex;align-items:center;gap:5px;background:var(--green-pale);border:1.5px solid var(--green-light);color:var(--green-primary);font-size:9.5px;font-weight:800;padding:3px 9px;border-radius:20px;letter-spacing:.4px}
+.rp-live-dot{width:5px;height:5px;background:var(--green-medium);border-radius:50%;animation:liveBlip 1.4s infinite;flex-shrink:0}
+.rp-body{padding:14px;display:flex;flex-direction:column;gap:11px}
+
+/* net pnl hero */
+.net-pnl-hero{border-radius:var(--rsm);padding:16px;text-align:center;position:relative;overflow:hidden;border:2px solid}
+.net-pnl-hero.pos{background:linear-gradient(135deg,var(--green-ultra-pale),#d1fae5);border-color:var(--green-pale)}
+.net-pnl-hero.neg{background:linear-gradient(135deg,var(--red-pale),#fecaca);border-color:rgba(220,38,38,.2)}
+.net-pnl-hero::before{content:'';position:absolute;top:-18px;right:-18px;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,.12) 0%,transparent 65%)}
+.net-pnl-hero.neg::before{background:radial-gradient(circle,rgba(220,38,38,.08) 0%,transparent 65%)}
+.nph-eyebrow{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px}
+.nph-eyebrow.pos{color:var(--green-primary)}.nph-eyebrow.neg{color:var(--red)}
+.nph-val{font-size:34px;font-weight:800;letter-spacing:-1.5px;line-height:1;margin-bottom:3px}
+.nph-val.pos{color:#065F46}.nph-val.neg{color:var(--red)}
+.nph-sub{font-size:10.5px;font-weight:600;opacity:.7}
+.nph-sub.pos{color:var(--green-primary)}.nph-sub.neg{color:var(--red)}
+
+/* total charges */
+.big-total{
+  background:var(--purple-ultra-pale);border:2px solid var(--purple-pale);
+  border-radius:var(--rsm);padding:14px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  position:relative;overflow:hidden;
+}
+.big-total::before{content:'';position:absolute;top:-14px;right:-14px;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.1) 0%,transparent 65%)}
+.bt-icon{font-size:22px;margin-bottom:4px;position:relative;z-index:1}
+.bt-content{position:relative;z-index:1;text-align:center}
+.bt-lbl{color:var(--purple-medium);font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:2px}
+.bt-val{color:var(--purple-deep);font-size:24px;font-weight:800;letter-spacing:-.8px;line-height:1}
+.bt-pct{color:var(--purple-medium);font-size:10px;margin-top:3px;font-weight:600;opacity:.75}
+
+/* pnl block */
+.pnl-block{background:#fff;border:1.5px solid var(--green-pale);border-radius:var(--rsm);overflow:hidden}
+.pnl-row{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-bottom:1px solid var(--green-ultra-pale)}
+.pnl-row:last-child{border-bottom:none}
+.pnl-lbl{color:var(--muted);font-size:11px;font-weight:500}
+.pnl-val{font-size:13px;font-weight:800}
+.c-ink{color:var(--text-dark)}.c-g{color:var(--green-primary)}.c-r{color:var(--red)}
+
+/* donut */
+.donut-wrap2{display:flex;align-items:center;gap:11px;background:var(--green-ultra-pale);border:1.5px solid var(--green-pale);border-radius:var(--rsm);padding:12px}
+.donut-container{position:relative;flex-shrink:0;width:86px;height:86px}
+.donut-container svg{overflow:visible}
+.donut-ctr{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
+.dc-val{color:#065F46;font-size:11px;font-weight:800;line-height:1}
+.dc-lbl{color:var(--green-primary);font-size:8px;margin-top:2px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;opacity:.75}
+.legend-list{flex:1;min-width:0}
+.li{display:flex;align-items:center;gap:5px;padding:3px 0;border-bottom:1px solid rgba(16,185,129,.1)}
+.li:last-child{border-bottom:none}
+.li-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.li-name{color:#374151;font-size:10.5px;flex:1;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.li-val{color:#065F46;font-size:10.5px;font-weight:800;flex-shrink:0}
+
+/* breakeven */
+.be-box{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;text-align:center;
+  background:var(--purple-ultra-pale);border:1.5px solid var(--purple-pale);
+  border-radius:var(--rsm);padding:12px;
+}
+.be-ico{font-size:20px}
+.be-lbl{color:var(--purple-medium);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px}
+.be-val{color:var(--purple-deep);font-size:16px;font-weight:800;letter-spacing:-.3px}
+
+/* ══════════════════════════════════════════
+   FRAME 2 — ANALYTICS  (template card style)
+══════════════════════════════════════════ */
+.frame2{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:24px}
+.analytics-card{animation:fadeInUp .45s ease both}
+.analytics-card:nth-child(1){animation-delay:.08s}
+.analytics-card:nth-child(2){animation-delay:.14s}
+.analytics-card:nth-child(3){animation-delay:.20s}
+.ac-body{padding:18px 18px 16px}
+.ac-ttl{font-size:13px;font-weight:800;color:var(--text-dark);letter-spacing:-.1px;margin-bottom:2px;text-align:center}
+.ac-sub{font-size:10px;color:var(--muted);font-weight:500;text-align:center}
+.ac-header-inner{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;margin-bottom:14px}
+
+/* turnover */
+.turn-item{margin-bottom:12px;text-align:center}
+.turn-item:last-child{margin-bottom:0}
+.turn-label-row{display:flex;flex-direction:column;align-items:center;gap:2px;margin-bottom:7px}
+.turn-side{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:flex;align-items:center;gap:5px;justify-content:center}
+.turn-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.turn-val{font-size:18px;font-weight:800;color:var(--text-dark);letter-spacing:-.3px;margin-top:2px}
+.turn-sub{font-size:9.5px;color:var(--muted);font-weight:500;margin-top:1px}
+.turn-bar-track{height:7px;background:#F3F4F6;border-radius:99px;overflow:hidden;margin-top:5px}
+.turn-bar-fill{height:100%;border-radius:99px;transition:width .5s ease}
+.turn-divider{height:1px;background:rgba(167,139,250,.12);margin:12px 0}
+.total-turnover-box{
+  background:var(--purple-ultra-pale);border:1.5px solid var(--purple-pale);
+  border-radius:var(--rsm);padding:10px 12px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px;
+}
+.ttb-lbl{font-size:9.5px;font-weight:700;color:var(--purple-medium);text-transform:uppercase;letter-spacing:.6px}
+.ttb-val{font-size:18px;font-weight:800;color:var(--purple-deep)}
+
+/* charge tiles */
+.charge-tiles-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px}
+.ct{
+  background:var(--purple-ultra-pale);border:1.5px solid var(--purple-pale);
+  border-radius:var(--rsm);padding:10px 8px;text-align:center;
+  position:relative;overflow:hidden;transition:transform .16s,box-shadow .16s;
+}
+.ct::before{content:'';position:absolute;top:-8px;right:-8px;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle,var(--purple-pale) 0%,transparent 70%)}
+.ct:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.ct-icon{font-size:18px;margin-bottom:4px;display:block}
+.ct-lbl{font-size:8.5px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.ct-val{font-size:13.5px;font-weight:800;color:var(--text-dark);margin-top:2px;letter-spacing:-.2px}
+.ct-bar-track{height:2.5px;background:var(--purple-pale);border-radius:2px;margin-top:5px;overflow:hidden}
+.ct-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--purple-primary),var(--purple-light));transition:width .5s}
+.ct-pct{font-size:8.5px;font-weight:800;color:var(--purple-primary);margin-top:3px}
+
+/* mini bars */
+.mini-bars-wrap{margin-top:2px}
+.mb-row{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.mb-row:last-child{margin-bottom:0}
+.mb-lbl{color:var(--muted);font-size:9.5px;font-weight:600;width:56px;flex-shrink:0;text-align:center}
+.mb-track{flex:1;height:5px;background:#F3F4F6;border-radius:3px;overflow:hidden}
+.mb-fill{height:100%;border-radius:3px;transition:width .5s}
+.mb-val{color:var(--text-dark);font-size:9.5px;font-weight:700;width:44px;flex-shrink:0;text-align:center}
+
+/* trade flow */
+.flow-nodes-wrap{display:flex;flex-direction:column;gap:7px}
+.flow-node-card{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:5px;padding:12px 14px;border-radius:var(--rsm);
+  border:1.5px solid;text-align:center;
+  transition:transform .14s;
+}
+.flow-node-card:hover{transform:translateY(-2px)}
+.flow-node-card.buy{background:var(--purple-ultra-pale);border-color:var(--purple-pale)}
+.flow-node-card.charges{background:#FFF5F5;border-color:rgba(220,38,38,.15)}
+.flow-node-card.sell{background:var(--purple-ultra-pale);border-color:var(--purple-pale)}
+.flow-node-card.pnl-pos{background:var(--green-ultra-pale);border-color:var(--green-pale)}
+.flow-node-card.pnl-neg{background:var(--red-pale);border-color:rgba(220,38,38,.2)}
+.fn-circle{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.fn-circle.buy-bg{background:var(--purple-pale)}
+.fn-circle.charges-bg{background:#FEE2E2}
+.fn-circle.sell-bg{background:var(--purple-pale)}
+.fn-circle.pnl-bg{background:var(--green-pale)}
+.fn-circle.pnl-neg-bg{background:#FEE2E2}
+.fn-lbl-new{font-size:9.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+.fn-val-new{font-size:15px;font-weight:800;color:var(--text-dark);letter-spacing:-.3px;margin-top:2px}
+.fn-tag-new{font-size:8.5px;font-weight:700;padding:2px 7px;border-radius:9px;display:inline-block;margin-top:3px}
+.flow-connector{display:flex;align-items:center;justify-content:center;height:14px;position:relative}
+.flow-connector::before{content:'';position:absolute;left:50%;width:1.5px;height:100%;background:linear-gradient(180deg,var(--purple-pale),var(--purple-light));transform:translateX(-50%)}
+.flow-connector-dot{width:7px;height:7px;border-radius:50%;background:var(--purple-light);border:2px solid #fff;z-index:1;box-shadow:0 0 0 1.5px var(--purple-pale)}
+
+/* ══════════════════════════════════════════
+   FRAME 3 — REFERENCE (template card grid)
+══════════════════════════════════════════ */
+.frame3{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}
+
+/* segment ref tiles */
+.seg-ref-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px}
+.seg-tile{
+  border-radius:var(--rsm);border:1.5px solid;padding:13px 11px;
+  position:relative;overflow:hidden;transition:transform .18s,box-shadow .18s;
+  display:flex;flex-direction:column;gap:0;
+  text-align:center;align-items:center;
+}
+.seg-tile:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.seg-tile.t-free{background:var(--green-ultra-pale);border-color:var(--green-pale)}
+.seg-tile.t-flat{background:var(--purple-ultra-pale);border-color:var(--purple-pale)}
+.seg-tile::before{content:'';position:absolute;top:-12px;right:-12px;width:40px;height:40px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.6) 0%,transparent 70%)}
+.st-top{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:9px;width:100%}
+.st-icon-wrap{
+  width:36px;height:36px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;
+}
+.t-free .st-icon-wrap{background:var(--green-pale);border:1.5px solid var(--green-pale)}
+.t-flat .st-icon-wrap{background:var(--purple-pale);border:1.5px solid var(--purple-pale)}
+.st-badge{font-size:8.5px;font-weight:800;padding:2px 7px;border-radius:20px;letter-spacing:.4px}
+.t-free .st-badge{background:var(--green-pale);color:var(--green-primary);border:1px solid var(--green-pale)}
+.t-flat .st-badge{background:var(--purple-pale);color:var(--purple-deep);border:1px solid var(--purple-pale)}
+.st-seg{font-size:11.5px;font-weight:800;color:var(--text-dark);margin-bottom:2px;letter-spacing:-.1px;text-align:center;width:100%}
+.st-exch{font-size:9.5px;color:var(--muted);font-weight:500;margin-bottom:7px;text-align:center;width:100%}
+.st-divider{height:1px;margin-bottom:7px;width:100%}
+.t-free .st-divider{background:var(--green-pale)}.t-flat .st-divider{background:var(--purple-pale)}
+.st-fee-row{display:flex;align-items:baseline;justify-content:center;gap:4px;margin-bottom:2px}
+.st-fee-val{font-size:19px;font-weight:800;letter-spacing:-.5px;line-height:1}
+.t-free .st-fee-val{color:var(--green-primary)}.t-flat .st-fee-val{color:var(--purple-primary)}
+.st-fee-lbl{font-size:9.5px;font-weight:600;color:var(--muted)}
+.st-note{font-size:9px;color:var(--muted);font-weight:500;margin-top:2px;text-align:center;width:100%}
+.st-chips{display:flex;gap:3px;flex-wrap:wrap;margin-top:7px;justify-content:center;width:100%}
+.st-chip{font-size:8.5px;font-weight:700;padding:2px 6px;border-radius:9px}
+.t-free .st-chip{background:rgba(5,150,105,.1);color:var(--green-primary)}
+.t-flat .st-chip{background:rgba(124,58,237,.1);color:var(--purple-primary)}
+
+/* commodity reference table */
+.comm-compare-table{width:100%;border-collapse:collapse;font-size:11px}
+.comm-compare-table th{
+  text-align:left;padding:8px 10px;font-weight:800;
+  background:var(--purple-ultra-pale);color:var(--purple-deep);
+  border-bottom:2px solid var(--purple-pale);font-size:9px;
+  letter-spacing:.5px;text-transform:uppercase;white-space:nowrap;
+}
+.comm-compare-table td{padding:8px 10px;border-bottom:1px solid var(--purple-ultra-pale);color:var(--text-dark);font-weight:500;vertical-align:middle;white-space:nowrap}
+.comm-compare-table tr:last-child td{border-bottom:none}
+.comm-compare-table .active-row td{background:var(--purple-ultra-pale);font-weight:700}
+.comm-compare-table .active-row td:first-child{border-left:3px solid var(--purple-primary)}
+.ctag{display:inline-block;padding:2px 7px;border-radius:7px;font-size:8.5px;font-weight:800}
+.ctag-bull{background:#fef9c3;color:#854d0e}
+.ctag-ener{background:var(--red-pale);color:var(--red)}
+.ctag-metal{background:#dbeafe;color:#1d4ed8}
+
+/* ══════════════════════════════════════════
+   DISCLAIMER  (card style)
+══════════════════════════════════════════ */
+.disclaimer{
+  background:var(--card-bg);border-radius:var(--rc);
+  border:1.5px solid var(--border);box-shadow:var(--sh1);overflow:hidden;
+  animation:fadeInUp .45s .28s ease both;
+}
+.disclaimer-header{
+  display:flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px;
+  background:linear-gradient(135deg,var(--purple-ultra-pale),#fff);
+  border-bottom:1.5px solid var(--purple-pale);
+  text-align:center;
+}
+.disclaimer-icon{font-size:18px}
+.disclaimer-ttl{font-size:13px;font-weight:800;color:var(--purple-deep);text-align:center}
+.disclaimer-sub{font-size:10px;color:var(--muted);margin-top:1px;text-align:center}
+.disclaimer-body{padding:14px 16px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.disc-item{display:flex;align-items:flex-start;gap:7px;padding:8px 10px;border-radius:var(--rxs);background:var(--purple-ultra-pale);border:1px solid var(--purple-pale)}
+.disc-dot{width:5px;height:5px;border-radius:50%;background:var(--purple-medium);flex-shrink:0;margin-top:5px}
+.disc-text{font-size:11px;color:#374151;line-height:1.5;font-weight:500}
+.disc-text strong{font-weight:800;color:var(--purple-deep)}
+
+/* footer (from template) */
+.footer{
+  background:linear-gradient(135deg,var(--purple-deep) 0%,#4C1D95 100%);
+  padding:clamp(18px,2.5vw,28px) clamp(16px,4vw,48px);
+  position:relative;overflow:hidden;margin-top:0;
+}
+.footer::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:20px 20px;
+}
+.footer-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:1;flex-wrap:wrap;gap:14px;
+}
+.footer-pillars{display:flex;gap:clamp(16px,3vw,32px);flex-wrap:wrap}
+.fp{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:rgba(255,255,255,.88)}
+.fp .icon{font-size:18px}
+.footer-note{font-size:11.5px;color:rgba(255,255,255,.45);font-weight:400}
+
+/* ══════════════════════════════════════════
+   PLATFORM — iOS & Android base fixes
+══════════════════════════════════════════ */
+/* Force light mode — never allow dark-mode OS override */
+html{color-scheme:light only}
+/* iOS font size inflation prevention */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* Remove 300ms tap delay everywhere */
+*{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+/* iOS momentum scroll on scrollable containers */
+.tabs-scroll{-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+/* Smooth scroll on iOS */
+html{scroll-behavior:smooth}
+/* Prevent horizontal overflow on all platforms */
+html,body{overflow-x:hidden;max-width:100vw}
+/* Force webkit font smoothing */
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+/* Number inputs — suppress spinners on all platforms */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield;appearance:textfield}
+/* Focus ring — accessibility without native glow */
+:focus-visible{outline:2px solid var(--purple-primary);outline-offset:2px}
+input:focus,select:focus{outline:none}
+/* Prevent callout on long press (iOS) */
+img,button,.tab,.ccat,.comm-card{-webkit-touch-callout:none}
+/* Android ripple suppression */
+button,select,.tab,.ccat,.comm-card,.gender-btn{touch-action:manipulation}
+/* 44px Apple HIG minimum touch targets — toggle excluded (tog-row provides area) */
+.tab,.ccat,.gender-btn,.comm-card{min-height:44px}
+input[type=number],select{min-height:44px}
+input[type=range]{min-height:32px;cursor:pointer}
+/* toggle — compact pill, vertically centred, 44px tap area via padding on tog-row */
+.toggle{position:relative;display:inline-block;width:36px;height:20px;flex-shrink:0;align-self:center}
+.toggle input{display:none}
+.tslider{position:absolute;inset:0;border-radius:10px;background:var(--purple-pale);cursor:pointer;transition:.2s}
+.tslider::before{content:'';position:absolute;width:14px;height:14px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.toggle input:checked+.tslider{background:var(--purple-primary)}
+.toggle input:checked+.tslider::before{transform:translateX(16px)}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — Desktop · Tablet · Mobile
+   Breakpoints:
+     ≥1200px  Desktop large
+     ≤1100px  Laptop / small desktop
+     ≤900px   Tablet landscape / iPad landscape
+     ≤768px   Tablet portrait / iPad mini
+     ≤600px   Mobile L / large phones
+     ≤480px   Mobile M (iPhone 15 Pro, Galaxy S24)
+     ≤390px   Mobile S (iPhone SE, small Android)
+     ≤320px   Mobile XS (legacy small)
+══════════════════════════════════════════ */
+
+/* ── Desktop large (≥1200px) ── */
+@media(min-width:1200px){
+  .frame1{grid-template-columns:1fr 360px}
+  .frame2{grid-template-columns:1fr 1fr 1fr}
+  .frame2 .analytics-card:last-child{grid-column:auto}
+  .flow-connector{display:flex}
+  .flow-nodes-wrap{display:flex;flex-direction:column;gap:7px}
+  .seg-ref-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+/* ── Laptop / small desktop (≤1100px) ── */
+@media(max-width:1100px){
+  .frame1{grid-template-columns:1fr 300px;gap:16px}
+  .frame2{grid-template-columns:1fr 1fr;gap:14px}
+  .frame2 .analytics-card:last-child{grid-column:1/-1}
+  .flow-nodes-wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+  .flow-connector{display:none}
+  .seg-ref-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+/* ── Tablet landscape / iPad landscape (≤900px) ── */
+@media(max-width:900px){
+  .frame1{grid-template-columns:1fr;gap:14px}
+  .results-pane{position:static}
+  /* Results body: 2-col grid on wide tablet */
+  .rp-body{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .net-pnl-hero{grid-column:1/-1}
+  .big-total{grid-column:1/-1}
+  .donut-wrap2{grid-column:1/-1}
+  .pnl-block{grid-column:1}
+  .be-box{grid-column:2;align-self:start}
+  /* Analytics: 2-col */
+  .frame2{grid-template-columns:1fr 1fr;gap:14px}
+  .frame2 .analytics-card:last-child{grid-column:1/-1}
+  .flow-nodes-wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+  .flow-connector{display:none}
+  /* Reference: single col */
+  .frame3{grid-template-columns:1fr}
+  .seg-ref-grid{grid-template-columns:repeat(3,1fr)}
+  /* Commodity grid: wider on tablet landscape */
+  .comm-grid{grid-template-columns:repeat(4,1fr)}
+}
+
+/* ── iPad portrait / Tablet portrait (≤768px) ── */
+@media(max-width:768px){
+  .header-inner{flex-wrap:wrap;gap:12px}
+  .header-divider{display:none}
+  .header-text{flex-shrink:0}
+  .header-right{
+    width:100%;padding-top:12px;
+    border-top:1.5px solid var(--purple-pale);
+  }
+  .header-pillars{flex-wrap:wrap;gap:6px}
+  /* Results: single column */
+  .rp-body{display:flex;flex-direction:column;gap:10px}
+  .net-pnl-hero,.big-total,.donut-wrap2{grid-column:auto}
+  .pnl-block,.be-box{grid-column:auto}
+  /* Analytics: single column */
+  .frame2{grid-template-columns:1fr;gap:12px}
+  .frame2 .analytics-card:last-child{grid-column:auto}
+  .flow-nodes-wrap{display:flex;flex-direction:column;gap:7px}
+  .flow-connector{display:flex}
+  /* Reference tiles: 2-col */
+  .seg-ref-grid{grid-template-columns:1fr 1fr}
+  .disclaimer-body{grid-template-columns:1fr}
+  /* Commodity: 3-col */
+  .comm-grid{grid-template-columns:repeat(3,1fr)}
+  /* Gender bar wraps */
+  .gender-bar-inner{flex-wrap:wrap;gap:8px}
+  .gender-bar-note{min-width:100%;order:3}
+  /* Footer: center */
+  .footer-inner{flex-direction:column;align-items:center;text-align:center;gap:12px}
+  .footer-pillars{justify-content:center;gap:clamp(12px,2.5vw,24px)}
+}
+
+/* ── Mobile L / Large phones (≤600px) ── */
+@media(max-width:600px){
+  .header{padding:16px clamp(12px,4vw,18px) 18px}
+  .header-brand-name{font-size:clamp(22px,6vw,30px)}
+  .header-title{font-size:clamp(17px,4.5vw,24px)}
+  .header-sub{font-size:12px;margin-bottom:10px}
+  .pillar{padding:5px 10px;font-size:11.5px}
+  .header-pillars{gap:5px}
+  .main{padding:12px clamp(10px,4vw,16px) clamp(52px,8vw,72px)}
+  .section-divider{margin-bottom:14px}
+  .calc-header{padding:13px 15px 12px;gap:10px}
+  .calc-ico{width:38px;height:38px;font-size:17px}
+  .calc-ttl{font-size:13px}
+  .card-body-inner{padding:15px}
+  .row2{grid-template-columns:1fr 1fr;gap:9px}
+  input[type=number],select{height:46px;font-size:14px}
+  /* Commodity */
+  .comm-grid{grid-template-columns:repeat(2,1fr);gap:4px}
+  .comm-info-box{grid-template-columns:repeat(3,1fr)}
+  /* Tiles */
+  .frame3{grid-template-columns:1fr}
+  .seg-ref-grid{grid-template-columns:1fr 1fr;padding:12px;gap:8px}
+  .disclaimer-body{grid-template-columns:1fr}
+  /* Tabs */
+  .tab-grp{display:none}
+  .tab-sep{margin:0 3px}
+  .tab{padding:6px 10px;font-size:12px;min-height:40px}
+  /* Analytics */
+  .frame2{gap:11px}
+  .ac-body{padding:14px}
+  .flow-nodes-wrap{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .flow-connector{display:none}
+  .charge-tiles-grid{grid-template-columns:1fr 1fr;gap:6px}
+  /* Results */
+  .nph-val{font-size:30px}
+  .bt-val{font-size:22px}
+  .rp-body{padding:12px;gap:10px}
+  /* Gender bar compact */
+  .gender-bar-inner{padding:6px clamp(10px,4vw,16px);gap:7px}
+  .gender-bar-label{font-size:9.5px}
+  /* Toggle row */
+  .tog-row{padding:9px 11px}
+  .tog-info{font-size:11.5px}
+  /* Donut layout */
+  .donut-wrap2{gap:9px;padding:10px}
+}
+
+/* ── Mobile M — iPhone 15/14/13, Galaxy S24 (≤480px) ── */
+@media(max-width:480px){
+  .tab-text{display:none}
+  .tab{padding:7px 10px;min-width:36px;justify-content:center;min-height:42px}
+  .tab-ico{font-size:14px}
+  .header{padding:14px 13px 16px}
+  .header-mark{width:54px;height:54px;font-size:25px;border-radius:14px}
+  .header-brand-name{font-size:20px;letter-spacing:-1px}
+  .header-title{font-size:16px}
+  .header-brand-tagline{font-size:10px}
+  .header-sub{font-size:11.5px}
+  .pillar{padding:4px 9px;font-size:11px}
+  /* Stack inputs on small phones */
+  .row2{grid-template-columns:1fr}
+  .calc-header{padding:11px 13px 10px}
+  .card-body-inner{padding:13px}
+  /* Commodity */
+  .comm-grid{grid-template-columns:repeat(2,1fr);gap:3px}
+  .comm-card-name{font-size:9px}
+  .ccat{padding:5px 9px;font-size:11px;min-height:36px}
+  /* Analytics */
+  .frame2{gap:9px}
+  .ac-body{padding:12px}
+  .charge-tiles-grid{gap:5px}
+  /* Reference tiles */
+  .seg-ref-grid{grid-template-columns:1fr 1fr;padding:10px;gap:7px}
+  .st-seg{font-size:10.5px}
+  .st-fee-val{font-size:17px}
+  /* Results */
+  .nph-val{font-size:26px}
+  .bt-val{font-size:20px}
+  .rp-body{padding:10px;gap:9px}
+  .pnl-lbl{font-size:10.5px}
+  .pnl-val{font-size:12px}
+  /* Flow nodes: single col */
+  .flow-nodes-wrap{grid-template-columns:1fr;max-width:none;margin:0;width:100%}
+  .be-box{max-width:none;margin:0;width:100%}
+  /* Gender bar */
+  .gender-bar-inner{gap:6px}
+  .gender-btn{padding:5px 11px;font-size:11.5px;min-height:38px}
+  /* donut compact */
+  .donut-wrap2{flex-direction:column;align-items:stretch;text-align:center}
+  .donut-container{margin:0 auto}
+  .legend-list{width:100%}
+  /* Footer */
+  .fp{font-size:12px}
+  .footer-pillars{gap:10px}
+}
+
+/* ── Mobile S — iPhone SE / small Android (≤390px) ── */
+@media(max-width:390px){
+  .header{padding:12px 11px 14px}
+  .header-mark{width:48px;height:48px;font-size:22px;border-radius:12px}
+  .header-brand-name{font-size:18px}
+  .header-title{font-size:14.5px}
+  .header-sub{font-size:11px}
+  .pillar{padding:4px 8px;font-size:10.5px;gap:4px}
+  .main{padding:10px 10px clamp(52px,8vw,68px)}
+  .card-body-inner{padding:11px}
+  .comm-grid{gap:3px}
+  .comm-card{padding:7px 4px 6px}
+  .comm-card-name{font-size:8.5px}
+  .frame2{gap:8px}
+  .seg-ref-grid{padding:9px;gap:6px}
+  .nph-val{font-size:24px}
+  .bt-val{font-size:18px}
+  .tab{padding:6px 8px;min-width:32px}
+  .gender-btn{padding:5px 10px;font-size:11px;min-height:36px}
+  .gender-bar-inner{padding:5px 10px}
+  .section-divider span{font-size:10px}
+}
+
+/* ── Mobile XS — 320px legacy (≤320px) ── */
+@media(max-width:320px){
+  .header-mark{width:40px;height:40px;font-size:18px}
+  .header-brand-name{font-size:16px}
+  .header-title{font-size:13px}
+  .header-sub{font-size:10.5px}
+  .pillar{padding:3px 7px;font-size:10px}
+  .header-pillars{gap:4px}
+  .main{padding:9px 9px clamp(48px,8vw,64px)}
+  .card-body-inner{padding:10px}
+  .nph-val{font-size:22px}
+  .bt-val{font-size:17px}
+  input[type=number],select{height:42px;font-size:13px}
+  .tab{padding:5px 7px;min-width:28px}
+  .st-fee-val{font-size:15px}
+}
+
+/* ══════════════════════════════════════════
+   iOS SAFE AREA — notch, Dynamic Island, home bar
+══════════════════════════════════════════ */
+@supports(padding:max(0px)){
+  /* Fixed sticky bars — push inward on notch sides */
+  .tabs-bar{
+    padding-left:max(0px,env(safe-area-inset-left));
+    padding-right:max(0px,env(safe-area-inset-right));
+  }
+  .gender-bar{
+    padding-left:max(0px,env(safe-area-inset-left));
+    padding-right:max(0px,env(safe-area-inset-right));
+  }
+  .tabs-scroll{
+    padding-left:max(clamp(10px,3vw,48px),env(safe-area-inset-left));
+    padding-right:max(clamp(10px,3vw,48px),env(safe-area-inset-right));
+  }
+  /* Header, main, footer side padding + left/right notch */
+  .header{
+    padding-left:max(clamp(16px,4vw,48px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,4vw,48px),env(safe-area-inset-right));
+  }
+  .main{
+    padding-left:max(clamp(14px,4vw,48px),env(safe-area-inset-left));
+    padding-right:max(clamp(14px,4vw,48px),env(safe-area-inset-right));
+    /* Home bar + bottom inset clearance */
+    padding-bottom:max(clamp(40px,6vw,64px),env(safe-area-inset-bottom));
+  }
+  .footer{
+    padding-left:max(clamp(16px,4vw,48px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,4vw,48px),env(safe-area-inset-right));
+    padding-bottom:max(clamp(18px,2.5vw,28px),env(safe-area-inset-bottom));
+  }
+}
+
+/* ══════════════════════════════════════════
+   LANDSCAPE PHONE — e.g. iPhone in landscape
+══════════════════════════════════════════ */
+@media(max-height:500px) and (orientation:landscape){
+  .header{padding:10px clamp(12px,5vw,24px) 10px}
+  .header-sub{display:none}
+  .header-pillars{display:none}
+  .header-inner{gap:10px}
+  .header-mark{width:42px;height:42px;font-size:19px}
+  .header-brand-name{font-size:17px}
+  .header-title{font-size:14px}
+  .tabs-bar{position:sticky;top:0}
+  .gender-bar{position:sticky;top:52px}
+  .main{padding-top:10px}
+  /* Two-col layout even on small landscape */
+  .frame1{grid-template-columns:1fr 1fr;gap:12px}
+  .results-pane{position:static}
+  .rp-body{display:flex;flex-direction:column;gap:8px;padding:10px}
+  .nph-val{font-size:22px}
+  .bt-val{font-size:18px}
+}
+
+/* ══════════════════════════════════════════
+   HIGH-DPI / RETINA — crisp borders
+══════════════════════════════════════════ */
+@media(-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){
+  .card,.results-pane,.tabs-bar,.gender-bar{border-width:0.5px}
+  input[type=number],select{border-width:0.5px}
+}
+
+/* ══════════════════════════════════════════
+   FORCED COLORS — Windows High Contrast
+══════════════════════════════════════════ */
+@media(forced-colors:active){
+  .tab.active,.ccat.active,.gender-btn.active{forced-color-adjust:none}
+  :focus-visible{outline:3px solid ButtonText}
+}
+
+/* ══════════════════════════════════════════
+   CROSS-PLATFORM ENHANCEMENTS v2
+   Mobile · Tablet · Desktop · iOS · Android · Mobile Web
+══════════════════════════════════════════ */
+
+/* ── 1. BASE RESETS & RENDERING ── */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  touch-action: pan-y;
+  overscroll-behavior-y: contain;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* ── 2. TOUCH TARGETS — min 44×44px (WCAG 2.5.5) ── */
+button, .tab, .gender-btn, .ccat, .comm-card,
+select, .tog-row, [role="button"] {
+  min-height: 44px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+input[type=range] {
+  height: 28px;
+  padding: 6px 0;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb { width: 24px; height: 24px; }
+input[type=range]::-moz-range-thumb     { width: 24px; height: 24px; }
+
+/* ── 3. iOS INPUT ZOOM FIX — must be ≥16px ── */
+input[type=number], select {
+  font-size: max(16px, 14px) !important;
+  height: 48px;
+}
+
+/* ── 4. SAFE-AREA — notch · Dynamic Island · home bar ── */
+@supports (padding: max(0px)) {
+  .header {
+    padding-top: max(clamp(22px,3.5vw,40px), env(safe-area-inset-top));
+    padding-left: max(clamp(16px,4vw,48px), env(safe-area-inset-left));
+    padding-right: max(clamp(16px,4vw,48px), env(safe-area-inset-right));
+  }
+  .tabs-bar {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+  .gender-bar {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+  .main {
+    padding-left: max(clamp(14px,4vw,48px), env(safe-area-inset-left));
+    padding-right: max(clamp(14px,4vw,48px), env(safe-area-inset-right));
+    padding-bottom: max(clamp(40px,6vw,64px), env(safe-area-inset-bottom));
+  }
+  .footer {
+    padding-left: max(clamp(16px,4vw,48px), env(safe-area-inset-left));
+    padding-right: max(clamp(16px,4vw,48px), env(safe-area-inset-right));
+    padding-bottom: max(clamp(18px,2.5vw,28px), env(safe-area-inset-bottom));
+  }
+}
+
+/* ── 5. TABLET PORTRAIT — iPad Mini/Air/Galaxy Tab (≤834px) ── */
+@media (max-width: 834px) {
+  .frame1 { grid-template-columns: 1fr; gap: 14px; }
+  .results-pane { position: static; }
+  .rp-body { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .net-pnl-hero { grid-column: 1 / -1; }
+  .big-total    { grid-column: 1 / -1; }
+  .donut-wrap2  { grid-column: 1 / -1; }
+  .frame2 { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .frame2 .analytics-card:last-child { grid-column: 1 / -1; }
+  .seg-ref-grid { grid-template-columns: repeat(3,1fr); }
+  .comm-grid { grid-template-columns: repeat(4,1fr); }
+}
+
+/* ── 6. TABLET LANDSCAPE — iPad Pro 11" / Galaxy Tab landscape (≤1024px) ── */
+@media (min-width: 835px) and (max-width: 1024px) {
+  .frame1 { grid-template-columns: 1fr 320px; gap: 16px; }
+  .frame2 { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .frame2 .analytics-card:last-child { grid-column: 1 / -1; }
+  .seg-ref-grid { grid-template-columns: repeat(3,1fr); }
+}
+
+/* ── 7. MOBILE LANDSCAPE ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .header { padding: 8px clamp(12px,5vw,24px); }
+  .header-sub, .header-pillars { display: none; }
+  .header-inner { gap: 8px; flex-wrap: nowrap; }
+  .tabs-bar { position: sticky; top: 0; z-index: 200; }
+  .gender-bar { position: sticky; top: 50px; z-index: 190; }
+  .main { padding-top: 8px; }
+  .frame1 { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .results-pane { position: static; }
+  .rp-body { flex-direction: column; gap: 8px; padding: 10px; }
+  .nph-val { font-size: 22px; }
+  .bt-val  { font-size: 18px; }
+}
+
+/* ── 8. SMALL PHONES — 360–430px ── */
+@media (max-width: 430px) {
+  .header { padding: 14px 13px 16px; }
+  .header-inner { flex-wrap: wrap; gap: 10px; }
+  .header-divider { display: none; }
+  .header-right { width: 100%; padding-top: 10px; border-top: 1.5px solid var(--purple-pale); }
+  .frame1 { grid-template-columns: 1fr; gap: 12px; }
+  .row2 { grid-template-columns: 1fr; gap: 8px; }
+  .rp-body { flex-direction: column; }
+  .seg-ref-grid { grid-template-columns: 1fr 1fr; padding: 10px; gap: 7px; }
+  .comm-grid { grid-template-columns: repeat(2,1fr); gap: 4px; }
+  .frame2 { grid-template-columns: 1fr; gap: 10px; }
+  .frame2 .analytics-card:last-child { grid-column: auto; }
+  .flow-nodes-wrap { grid-template-columns: 1fr; max-width: none; width: 100%; }
+  .flow-connector { display: none; }
+  .donut-wrap2 { flex-direction: column; align-items: stretch; text-align: center; }
+  .donut-container { margin: 0 auto; }
+  .legend-list { width: 100%; }
+  .nph-val { font-size: 28px; }
+  .bt-val  { font-size: 20px; }
+  .tab-text { display: none; }
+  .tab { padding: 7px 10px; min-width: 36px; justify-content: center; }
+  input[type=number], select { height: 48px; }
+}
+
+/* ── 9. VERY SMALL — ≤375px (iPhone SE, Galaxy A-series) ── */
+@media (max-width: 375px) {
+  .header-brand-name { font-size: 17px; }
+  .header-title { font-size: 13.5px; }
+  .header-sub { font-size: 10.5px; }
+  .pillar { padding: 4px 8px; font-size: 10px; }
+  .card-body-inner { padding: 11px; }
+  .nph-val { font-size: 24px; }
+  .bt-val  { font-size: 17px; }
+  .tab { padding: 6px 8px; min-width: 30px; }
+  .comm-card-name { font-size: 8.5px; }
+  .seg-ref-grid { grid-template-columns: 1fr 1fr; padding: 8px; gap: 6px; }
+}
+
+/* ── 10. LEGACY SMALL — 320px ── */
+@media (max-width: 320px) {
+  .header-mark { width: 38px !important; height: 38px !important; border-radius: 10px !important; }
+  .header-brand-name { font-size: 15px; }
+  .header-title { font-size: 12px; }
+  .nph-val { font-size: 20px; }
+  .bt-val  { font-size: 15px; }
+  input[type=number], select { height: 44px; font-size: 14px !important; }
+  .tab { padding: 5px 6px; min-width: 26px; }
+}
+
+/* ── 11. HIGH-DPI RETINA — hairline borders ── */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .card, .results-pane, .tabs-bar, .gender-bar,
+  input[type=number], select { border-width: 0.5px; }
+  .header { border-bottom-width: 0.5px; }
+}
+
+/* ── 12. LARGE SCREENS ≥1440px ── */
+@media (min-width: 1440px) {
+  .main, .header-inner, .gender-bar-inner, .footer-inner { max-width: 1280px; }
+  .frame1 { grid-template-columns: 1fr 380px; gap: 24px; }
+  .frame2 { grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+}
+
+/* ── 13. PRINT ── */
+@media print {
+  .tabs-bar, .gender-bar, .footer, #stt { display: none !important; }
+  .main { padding: 0; }
+  .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+  .header { border-bottom: 2px solid #eee; background: #fff; }
+  body { background: #fff; }
+}
+
+/* ── 14. FORCED COLORS — Windows High Contrast ── */
+@media (forced-colors: active) {
+  .tab.active, .ccat.active, .gender-btn.active { forced-color-adjust: none; }
+  :focus-visible { outline: 3px solid ButtonText; }
+  .card::before, .card::after { display: none; }
+}
+
+/* ── 15. REDUCED MOTION — accessibility ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── 16. MOBILE WEB BROWSER FIXES ── */
+.main { min-height: calc(100dvh - 120px); }
+html, body { max-width: 100vw; overflow-x: hidden; }
+* { -webkit-text-size-adjust: 100%; }
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-thumb { background: var(--purple-pale); border-radius: 4px; }
+a, button, input, select, textarea, label, .tab, .ccat, .comm-card, .gender-btn {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+}
+.tabs-scroll {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+.tabs-scroll::-webkit-scrollbar { display: none; }
+
+/* ── 17. FOCUS STYLES — keyboard nav ── */
+:focus-visible {
+  outline: 2.5px solid var(--purple-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+button:focus:not(:focus-visible),
+.tab:focus:not(:focus-visible),
+.gender-btn:focus:not(:focus-visible) { outline: none; }
+
+/* ── 18. LOGO IN HEADER-MARK ── */
+.header-mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
+@media (max-width: 480px) { .header-mark { width: 52px !important; height: 52px !important; } }
+@media (max-width: 375px) { .header-mark { width: 44px !important; height: 44px !important; } }
+@media (max-width: 320px) { .header-mark { width: 36px !important; height: 36px !important; } }
+
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ══════════════════════════ -->
+<div class="header">
+  <div class="header-dots"></div>
+  <div class="header-inner">
+
+    <!-- 1. Large logo square -->
+    <div class="header-mark" style="background:white;padding:4px;"><img src="data:image/png;base64,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" alt="logo" style="width:100%;height:100%;object-fit:contain;border-radius:inherit;"></div>
+
+    <!-- 2. HDFC Securities name + Brokerage Calculator stacked -->
+    <div class="header-text">
+      <div class="header-brand-name">Axis Direct</div>
+      <div class="header-title">
+        <span class="brand-part">Brokerage </span><span class="calc-part">Calculator</span>
+      </div>
+    </div>
+
+    <!-- 3. Thin vertical divider -->
+    <div class="header-divider"></div>
+
+    <!-- 4. Badge + tagline + sub + pillars -->
+    <div class="header-right">
+      <div class="header-badge"><span class="badge-dot"></span>Fee Structure 2026</div>
+      <div class="header-brand-tagline">Axis Direct Platform · NSE · BSE · MCX</div>
+      <p class="header-sub">Calculate Axis Direct brokerage across Classic &amp; Trade@20 plans — STT/CTT, GST, exchange charges &amp; net P&amp;L. Backed by Axis Bank. 3-in-1 account facility.</p>
+      <div class="header-pillars">
+        <div class="pillar"><span class="icon">📈</span> Equity · F&O</div>
+        <div class="pillar"><span class="icon">🏦</span> 2 Plans</div>
+        <div class="pillar"><span class="icon">🔗</span> 3-in-1 Account</div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ═══ SEGMENT TABS ════════════════════ -->
+<div class="tabs-bar">
+  <div class="tabs-scroll">
+    <div class="tabs" role="tablist">
+      <span class="tab-grp">Equity</span>
+      <button class="tab active" onclick="setSegment('equity_intraday')"><span class="tab-ico">📈</span><span class="tab-text">Intraday</span></button>
+      <button class="tab" onclick="setSegment('equity_delivery')"><span class="tab-ico">📦</span><span class="tab-text">Delivery</span></button>
+      <div class="tab-sep"></div>
+      <span class="tab-grp">F&amp;O</span>
+      <button class="tab" onclick="setSegment('futures')"><span class="tab-ico">🔮</span><span class="tab-text">Futures</span></button>
+      <button class="tab" onclick="setSegment('options')"><span class="tab-ico">⚡</span><span class="tab-text">Options</span></button>
+      <div class="tab-sep"></div>
+      <button class="tab" onclick="setSegment('currency')"><span class="tab-ico">💱</span><span class="tab-text">Currency</span></button>
+      <div class="tab-sep"></div>
+      <button class="tab" onclick="setSegment('commodity')"><span class="tab-ico">🌾</span><span class="tab-text">Commodity</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PLAN SWITCHER BAR ════════════════ -->
+<div class="gender-bar">
+  <div class="gender-bar-inner">
+    <span class="gender-bar-label">Plan:</span>
+    <div class="gender-pills">
+      <button class="gender-btn active male"   id="planStandard" onclick="setPlan('classic')">📊 Classic</button>
+      <button class="gender-btn female"         id="planValue"    onclick="setPlan('trade20')">⚡ Trade@20</button>
+    </div>
+    <div class="gender-bar-note" id="genderNote">
+      <span class="note-badge male-badge" id="genderBadge">Standard Plan</span>
+      <span id="genderText">Delivery 0.50% · Intraday 0.05% · Futures 0.05% · Options 1%/₹100 per lot (min ₹25)</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ BUDGET 2026 NOTICE ═══════════════ -->
+<div id="budgetBanner" style="background:linear-gradient(90deg,#FEF3C7,#FFFBEB);border-bottom:2px solid #FCD34D;padding:8px clamp(12px,4vw,48px);display:flex;align-items:center;gap:9px;flex-wrap:wrap;">
+  <span style="font-size:15px">📢</span>
+  <span style="font-size:11px;font-weight:700;color:#92400E;flex:1;min-width:200px">
+    <strong>Budget 2026 Update (Effective 1 Apr 2026):</strong> Futures STT raised to <strong>0.05%</strong> (from 0.02%) · Options STT raised to <strong>0.15%</strong> (from 0.10%) on sell premium. Calculator already reflects new rates.
+  </span>
+  <button onclick="document.getElementById('budgetBanner').style.display='none'" style="font-size:14px;background:none;border:none;color:#B45309;cursor:pointer;padding:2px 6px;font-weight:800;flex-shrink:0" aria-label="Dismiss notice">✕</button>
+</div>
+
+<!-- ═══ MAIN ════════════════════════════ -->
+<div class="main">
+
+  <!-- section label -->
+  <div class="section-divider" style="margin-top:4px"><span>Calculator &amp; Results</span></div>
+
+  <!-- ═ FRAME 1: Calculator + Results ═ -->
+  <div class="frame1">
+
+    <!-- LEFT: CALCULATOR CARD -->
+    <div class="card purple calc-card">
+      <div class="calc-header">
+        <div class="calc-ico" id="cardIco">📈</div>
+        <div>
+          <div class="calc-ttl" id="cardTitle">Equity Intraday Calculator</div>
+          <div class="calc-sub" id="cardSub">NSE / BSE · ₹20 or 0.03% whichever is lower</div>
+        </div>
+      </div>
+      <div class="card-body-inner">
+
+        <!-- Axis Direct plan note -->
+        <div id="planInfoWrap" style="display:none">
+          <div class="plan-info-card" id="planNote"><div class="pic-icon">💡</div><div class="pic-body"><div class="pic-name">Axis Direct — Classic Plan</div><div class="pic-desc">Classic: Delivery 0.50% · Intraday 0.05% · Futures 0.05% · Options ₹20/lot · Trade@20: Flat ₹20/order all equity segments</div></div><div class="pic-fee">% or ₹20</div></div>
+        </div>
+        </div>
+
+        <!-- Commodity picker -->
+        <div class="comm-section" id="commSection">
+          <div style="font-size:9.5px;font-weight:800;color:var(--muted);letter-spacing:1.4px;text-transform:uppercase;margin-bottom:9px;position:relative;z-index:1">🏷️ Select Category</div>
+          <div class="comm-cat-tabs" id="commCatTabs">
+            <button class="ccat active" onclick="filterComm('bullion')">🥇 Bullion</button>
+            <button class="ccat" onclick="filterComm('energy')">🛢️ Energy</button>
+            <button class="ccat" onclick="filterComm('metal')">🔩 Metals</button>
+            <button class="ccat" onclick="filterComm('all')">🌐 All</button>
+          </div>
+          <div class="comm-grid" id="commGrid"></div>
+          <div class="comm-info-box" id="commInfoBox">
+            <div><div class="cib-lbl">Lot Size</div><div class="cib-val" id="cibLotSize">—</div><div class="cib-unit" id="cibUnit">—</div></div>
+            <div><div class="cib-lbl">Tick Size</div><div class="cib-val" id="cibTick">—</div><div class="cib-unit">per unit</div></div>
+            <div><div class="cib-lbl">CTT Rate</div><div class="cib-val" id="cibCtt">0.01%</div><div class="cib-unit">sell side</div></div>
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label class="field-lbl">Buy Price <span class="field-hint" id="priceUnit">per share</span></label>
+            <div class="iw"><span class="ipfx">₹</span><input type="number" id="buyPrice" class="pfx" value="1000" min="0.01" step="0.05" inputmode="decimal" oninput="calculate()"/></div>
+          </div>
+          <div class="field">
+            <label class="field-lbl">Sell Price <span class="field-hint" id="priceUnit2">per share</span></label>
+            <div class="iw"><span class="ipfx">₹</span><input type="number" id="sellPrice" class="pfx" value="1020" min="0.01" step="0.05" inputmode="decimal" oninput="calculate()"/></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-lbl">Quantity <span class="field-hint" id="qtyHint">shares</span></label>
+          <div class="iw"><input type="number" id="qty" value="100" min="1" step="1" inputmode="numeric" oninput="syncSlider();calculate()"/></div>
+          <input type="range" id="qtyRange" min="1" max="10000" value="100" oninput="syncQty();calculate()"/>
+          <div class="range-lbl" id="rangeLbl"><span>1</span><span>2,500</span><span>5,000</span><span>7,500</span><span>10,000</span></div>
+        </div>
+
+        <div id="optFields" style="display:none">
+          <div class="row2">
+            <div class="field">
+              <label class="field-lbl">Strike Price</label>
+              <div class="iw"><span class="ipfx">₹</span><input type="number" id="strikePrice" class="pfx" value="500" min="1" inputmode="decimal" oninput="calculate()"/></div>
+            </div>
+            <div class="field">
+              <label class="field-lbl">Option Type</label>
+              <select id="optType" onchange="calculate()">
+                <option value="CE">📈 Call (CE)</option>
+                <option value="PE">📉 Put (PE)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="tog-row">
+          <div><div class="tog-info">🗺️ State (Stamp Duty)</div><div class="tog-desc" id="stateVal">Maharashtra — 0.015% on buy side</div></div>
+          <label class="toggle"><input type="checkbox" id="stateToggle" onchange="toggleState()"/><span class="tslider"></span></label>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: RESULTS PANE -->
+    <div class="results-pane">
+      <div class="rp-header">
+        <div class="rp-ttl">📊 Calculation Results</div>
+        <div class="rp-live"><div class="rp-live-dot"></div>LIVE</div>
+      </div>
+      <div class="rp-body">
+        <div class="net-pnl-hero pos" id="netPnlHero">
+          <div class="nph-eyebrow pos" id="nphEyebrow">Net P&amp;L</div>
+          <div class="nph-val pos" id="netPnl">—</div>
+          <div class="nph-sub pos" id="nphSub">After all charges &amp; taxes</div>
+        </div>
+        <div class="big-total">
+          <div class="bt-icon">💸</div>
+          <div class="bt-content">
+            <div class="bt-lbl">Total Charges</div>
+            <div class="bt-val" id="totalCharges">₹0.00</div>
+            <div class="bt-pct" id="chargesPct">0.0000% of turnover</div>
+          </div>
+        </div>
+        <div class="pnl-block">
+          <div class="pnl-row"><span class="pnl-lbl">Gross P&amp;L</span><span class="pnl-val c-ink" id="grossPnl">—</span></div>
+          <div class="pnl-row"><span class="pnl-lbl">— Total Charges</span><span class="pnl-val c-r" id="pnlCharges">—</span></div>
+        </div>
+        <div class="donut-wrap2">
+          <div class="donut-container">
+            <svg id="donutSvg" width="86" height="86" viewBox="0 0 86 86"></svg>
+            <div class="donut-ctr"><div class="dc-val" id="donutCenter">—</div><div class="dc-lbl">Net P&amp;L</div></div>
+          </div>
+          <div class="legend-list" id="legend"></div>
+        </div>
+        <div class="be-box">
+          <div class="be-ico">🎯</div>
+          <div class="be-lbl">Break-even Price</div>
+          <div class="be-val" id="breakeven">—</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- END FRAME 1 -->
+
+  <!-- ═ FRAME 2: Analytics ═ -->
+  <div class="section-divider"><span>Trade Analytics</span></div>
+  <div class="frame2">
+
+    <!-- TURNOVER -->
+    <div class="card purple analytics-card">
+      <div class="card-body-inner">
+        <div class="ac-header-inner">
+          <div class="card-icon-wrap">📊</div>
+          <div><div class="ac-ttl">Turnover Summary</div><div class="ac-sub">Buy · Sell · Total</div></div>
+        </div>
+        <div class="turn-item">
+          <div class="turn-label-row">
+            <div class="turn-side"><div class="turn-dot" style="background:var(--purple-primary)"></div>Buy Side</div>
+            <div class="turn-val" id="buyTov">₹0</div>
+            <div class="turn-sub" id="buyTovSub">—</div>
+          </div>
+          <div class="turn-bar-track"><div class="turn-bar-fill" id="buyProg" style="background:linear-gradient(90deg,var(--purple-primary),var(--purple-light));width:0%"></div></div>
+        </div>
+        <div class="turn-divider"></div>
+        <div class="turn-item">
+          <div class="turn-label-row">
+            <div class="turn-side"><div class="turn-dot" style="background:var(--green-primary)"></div>Sell Side</div>
+            <div class="turn-val" id="sellTov">₹0</div>
+            <div class="turn-sub" id="sellTovSub">—</div>
+          </div>
+          <div class="turn-bar-track"><div class="turn-bar-fill" id="sellProg" style="background:linear-gradient(90deg,var(--green-primary),var(--green-light));width:0%"></div></div>
+        </div>
+        <div class="turn-divider"></div>
+        <div class="total-turnover-box">
+          <span class="ttb-lbl">Total Turnover</span>
+          <span class="ttb-val" id="totalTov">₹0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHARGES BREAKDOWN -->
+    <div class="card green analytics-card">
+      <div class="card-body-inner">
+        <div class="ac-header-inner">
+          <div class="card-icon-wrap">💸</div>
+          <div><div class="ac-ttl">Charges Breakdown</div><div class="ac-sub">All applicable charges</div></div>
+        </div>
+        <div class="charge-tiles-grid" id="chargeTiles"></div>
+        <div class="mini-bars-wrap" id="miniBars"></div>
+      </div>
+    </div>
+
+    <!-- TRADE FLOW -->
+    <div class="card mixed analytics-card">
+      <div class="card-body-inner">
+        <div class="ac-header-inner">
+          <div class="card-icon-wrap">🔄</div>
+          <div><div class="ac-ttl">Trade Flow</div><div class="ac-sub">Value → Charges → P&amp;L</div></div>
+        </div>
+        <div class="flow-nodes-wrap" id="flowNodes"></div>
+      </div>
+    </div>
+
+  </div>
+  <!-- END FRAME 2 -->
+
+  <!-- ═ FRAME 3: Reference ═ -->
+  <div class="section-divider"><span>Segment Reference</span></div>
+  <div class="frame3">
+    <div class="card purple" style="grid-column:1/-1">
+      <div class="card-body-inner" style="padding-bottom:4px">
+        <div class="ac-header-inner">
+          <div class="card-icon-wrap">📋</div>
+          <div><div class="ac-ttl">All Segments — Axis Direct Charge Reference</div><div class="ac-sub">Brokerage, STT/CTT, and key charge details</div></div>
+        </div>
+      </div>
+      <div class="seg-ref-grid" id="compareGrid"></div>
+      <div style="padding:10px 16px 14px;font-size:10px;color:var(--muted);font-weight:500;text-align:center">
+        ★ Budget 2026 rates eff. 1 Apr 2026 · Rates vary by plan — verify at axisdirect.in/pricing
+      </div>
+    </div>
+    <div class="card green" id="commRefCard" style="display:none;grid-column:1/-1">
+      <div class="card-body-inner" style="padding-bottom:8px">
+        <div class="ac-header-inner">
+          <div class="card-icon-wrap">🌾</div>
+          <div><div class="ac-ttl">MCX Charges Reference</div><div class="ac-sub">All commodity contracts</div></div>
+        </div>
+      </div>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+        <table class="comm-compare-table" id="commCompareTable"></table>
+      </div>
+    </div>
+  </div>
+  <!-- END FRAME 3 -->
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <div class="disclaimer-header">
+      <div class="disclaimer-icon">⚠️</div>
+      <div>
+        <div class="disclaimer-ttl">Important Disclaimer</div>
+        <div class="disclaimer-sub">Please read before using this calculator</div>
+      </div>
+    </div>
+    <div class="disclaimer-body">
+      <div class="disc-item"><div class="disc-dot"></div><div class="disc-text"><strong>Reference Only:</strong> Based on Axis Direct's published fee structure 2026 (axisdirect.in). Actual charges may vary.</div></div>
+      <div class="disc-item"><div class="disc-dot"></div><div class="disc-text"><strong>Equity Delivery:</strong> Classic: 0.50% (min ₹25) · Trade@20: ₹20 flat. STT 0.1% both sides. DP 0.04% on sell (min ₹25).</div></div>
+      <div class="disc-item"><div class="disc-dot"></div><div class="disc-text"><strong>Equity Intraday:</strong> Classic: 0.05% · Trade@20: ₹20 flat. STT 0.025% sell side. NSE exchange 0.00307%.</div></div>
+      <div class="disc-item"><div class="disc-dot"></div><div class="disc-text"><strong>Futures:</strong> Classic: 0.05% · Trade@20: ₹20 flat. STT 0.05% sell side (Budget 2026). NSE exchange 0.00183%.</div></div>
+      <div class="disc-item"><div class="disc-dot"></div><div class="disc-text"><strong>Options:</strong> Classic: ₹20/lot · Trade@20: ₹20 flat. STT 0.15% on sell premium (Budget 2026). NSE exchange 0.03553%.</div></div>
+      <div class="disc-item"><div class="disc-dot"></div><div class="disc-text"><strong>Currency:</strong> Classic: 0.05% · Trade@20: ₹20. No STT. NSE exchange 0.00035%.</div></div>
+      <div class="disc-item"><div class="disc-dot"></div><div class="disc-text"><strong>Commodity (MCX):</strong> Classic: 0.05% · Trade@20: ₹20. CTT 0.01% sell side.</div></div>
+      <div class="disc-item"><div class="disc-dot"></div><div class="disc-text"><strong>GST &amp; SEBI:</strong> GST 18% on brokerage + exchange + SEBI charges. SEBI ₹10 per crore turnover.</div></div>
+    </div>
+
+</div><!-- END MAIN -->
+
+<!-- ═══ SCROLL TO TOP ════════════════════ -->
+<button id="stt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top"
+  style="position:fixed;bottom:clamp(16px,4vw,28px);right:clamp(14px,4vw,28px);z-index:999;
+  width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--purple-primary);color:#fff;font-size:18px;
+  box-shadow:0 4px 18px rgba(91,33,182,.35);
+  display:none;align-items:center;justify-content:center;
+  transition:opacity .2s,transform .2s;touch-action:manipulation">↑</button>
+
+<!-- ═══ FOOTER ════════════════════════ -->
+<div class="footer">
+  <div class="footer-inner">
+    <div class="footer-pillars">
+      <div class="fp"><span class="icon">📈</span> NSE · BSE · MCX Certified</div>
+      <div class="fp"><span class="icon">🛡️</span> SEBI Registered Broker</div>
+      <div class="fp"><span class="icon">🏦</span> HDFC Bank Subsidiary</div>
+    </div>
+    <div class="footer-note">© Axis Direct Brokerage Calculator · For reference only</div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════
+   COMMODITIES DATA (MCX) — HDFC Securities
+   Source: axisdirect.in/pricing (March 2026)
+══════════════════════════════════════════ */
+const COMMODITIES={
+  gold:     {name:'Gold',       symbol:'GOLD',       icon:'🥇',cat:'bullion',catLabel:'Bullion',    lotSize:100,  lotUnit:'g',    priceUnit:'per 10g', tickSize:1,   ctt:0.0001,excTxnFut:0.000021,excTxnOpt:0.000418,sebi:0.0000001,stamp:0.00002,stampOpt:0.00003},
+  goldm:    {name:'Gold Mini',  symbol:'GOLDM',      icon:'🥇',cat:'bullion',catLabel:'Bullion',    lotSize:10,   lotUnit:'g',    priceUnit:'per 10g', tickSize:1,   ctt:0.0001,excTxnFut:0.000021,excTxnOpt:0.000418,sebi:0.0000001,stamp:0.00002,stampOpt:0.00003},
+  silver:   {name:'Silver',     symbol:'SILVER',     icon:'🪙',cat:'bullion',catLabel:'Bullion',    lotSize:30,   lotUnit:'kg',   priceUnit:'per kg',  tickSize:1,   ctt:0.0001,excTxnFut:0.000021,excTxnOpt:0.000418,sebi:0.0000001,stamp:0.00002,stampOpt:0.00003},
+  silverm:  {name:'Silver Mini',symbol:'SILVERM',    icon:'🪙',cat:'bullion',catLabel:'Bullion',    lotSize:5,    lotUnit:'kg',   priceUnit:'per kg',  tickSize:1,   ctt:0.0001,excTxnFut:0.000021,excTxnOpt:0.000418,sebi:0.0000001,stamp:0.00002,stampOpt:0.00003},
+  crudeoil: {name:'Crude Oil',  symbol:'CRUDEOIL',   icon:'🛢️',cat:'energy', catLabel:'Energy',     lotSize:100,  lotUnit:'bbl',  priceUnit:'per bbl', tickSize:1,   ctt:0.0001,excTxnFut:0.000021,excTxnOpt:0.000418,sebi:0.0000001,stamp:0.00002,stampOpt:0.00003},
+  crudeoilm:{name:'Crude Mini', symbol:'CRUDEOILM',  icon:'🛢️',cat:'energy', catLabel:'Energy',     lotSize:10,   lotUnit:'bbl',  priceUnit:'per bbl', tickSize:1,   ctt:0.0001,excTxnFut:0.000021,excTxnOpt:0.000418,sebi:0.0000001,stamp:0.00002,stampOpt:0.00003},
+  natgas:   {name:'Natural Gas',symbol:'NATURALGAS', icon:'🔥',cat:'energy', catLabel:'Energy',     lotSize:1250, lotUnit:'mmBtu',priceUnit:'per mmBtu',tickSize:0.1, ctt:0.0001,excTxnFut:0.000021,excTxnOpt:0.000418,sebi:0.0000001,stamp:0.00002,stampOpt:0.00003},
+  natgasm:  {name:'NatGas Mini',symbol:'NATGASMINI', icon:'🔥',cat:'energy', catLabel:'Energy',     lotSize:250,  lotUnit:'mmBtu',priceUnit:'per mmBtu',tickSize:0.1, ctt:0.0001,excTxnFut:0.000021,excTxnOpt:0.000418,sebi:0.0000001,stamp:0.00002,stampOpt:0.00003},
+  copper:   {name:'Copper',     symbol:'COPPER',     icon:'🔶',cat:'metal',  catLabel:'Base Metal', lotSize:2500, lotUnit:'kg',   priceUnit:'per kg',  tickSize:0.05,ctt:0.0001,excTxnFut:0.000021,excTxnOpt:0.000418,sebi:0.0000001,stamp:0.00002,stampOpt:0.00003},
+  zinc:     {name:'Zinc',       symbol:'ZINC',       icon:'🔷',cat:'metal',  catLabel:'Base Metal', lotSize:5000, lotUnit:'kg',   priceUnit:'per kg',  tickSize:0.05,ctt:0.0001,excTxnFut:0.000021,excTxnOpt:0.000418,sebi:0.0000001,stamp:0.00002,stampOpt:0.00003},
+  nickel:   {name:'Nickel',     symbol:'NICKEL',     icon:'⚙️',cat:'metal',  catLabel:'Base Metal', lotSize:250,  lotUnit:'kg',   priceUnit:'per kg',  tickSize:0.1, ctt:0.0001,excTxnFut:0.000021,excTxnOpt:0.000418,sebi:0.0000001,stamp:0.00002,stampOpt:0.00003},
+  aluminium:{name:'Aluminium',  symbol:'ALUMINIUM',  icon:'🔩',cat:'metal',  catLabel:'Base Metal', lotSize:5000, lotUnit:'kg',   priceUnit:'per kg',  tickSize:0.05,ctt:0.0001,excTxnFut:0.000021,excTxnOpt:0.000418,sebi:0.0000001,stamp:0.00002,stampOpt:0.00003},
+  lead:     {name:'Lead',       symbol:'LEAD',       icon:'🔧',cat:'metal',  catLabel:'Base Metal', lotSize:5000, lotUnit:'kg',   priceUnit:'per kg',  tickSize:0.05,ctt:0.0001,excTxnFut:0.000021,excTxnOpt:0.000418,sebi:0.0000001,stamp:0.00002,stampOpt:0.00003},
+};
+
+/* ══ HDFC SECURITIES PLAN DEFINITIONS ═══════════════════
+   Validated from axisdirect.in/pricing (March 2026)
+   ────────────────────────────────────────────────────
+   PLANS (2):
+   1. Standard (default, full-service):
+      Delivery:  0.50%, min ₹25, max 2.5%
+      Intraday:  0.05%, min ₹25, max 2.5%
+      Futures:   0.05%, min ₹25
+      Options:   higher of 1% premium or ₹100/lot — here ₹100/order approx
+      Currency F: ₹23/contract (approx ₹23/order)
+      Currency O: ₹20/contract
+      Commodity: 0.025%, min ₹25
+
+   2. Value Plan (₹199–₹5,999/year subscription):
+      Delivery:  0.10%
+      Intraday:  0.010%
+      Futures:   ₹20 flat
+      Options:   ₹20 flat
+      Currency:  ₹20 flat
+      Commodity: ₹20 flat
+
+   All plans:
+      NSE equity exchange: 0.00307%
+      NSE futures exchange: 0.00183%
+      NSE options exchange: 0.03553% on premium
+      Currency futures NSE: 0.00035%
+      STT Futures: 0.05% sell (Budget 2026, eff. 1 Apr 2026)
+      STT Options: 0.15% sell premium (Budget 2026)
+      DP: 0.04% of value, min ₹20 per debit instruction (EASIEST)
+      AMC: ₹750/year
+════════════════════════════════════════════════════════ */
+
+const PLANS = {
+  classic: {id:'classic', label:'Classic', badge:'Classic Plan', note:'Classic Plan: Delivery 0.50% · Intraday 0.05% · Futures 0.05% · Options ₹20/lot'},
+  trade20: {id:'trade20', label:'Trade@20', badge:'Trade@20 Plan', note:'Trade@20 Plan: Flat ₹20/order on all Equity segments (Delivery/Intraday/Futures/Options)'}
+};
+let curPlan = PLANS.classic;
+function bkrDel(t){ return curPlan.id==='classic' ? Math.max(25,t*.005) : 20 }
+function bkrIntra(t){ return curPlan.id==='classic' ? t*.0005 : 20 }
+function bkrFut(t){ return curPlan.id==='classic' ? t*.0005 : 20 }
+function bkrOpt(){ return 20 }  /* ₹20/lot classic, ₹20 flat trade20 */
+function bkrComm(t){ return curPlan.id==='classic' ? t*.0005 : 20 }
+
+/* Brokerage helpers */
+function bkrDelivery(t){
+  if(curPlan.id==='standard') return Math.max(25, Math.min(t*.0050, t*.025)); /* 0.50%, min ₹25, max 2.5% */
+  return t*.001;   /* Value: 0.10% */
+}
+function bkrIntraday(t){
+  if(curPlan.id==='standard') return Math.max(25, Math.min(t*.0005, t*.025)); /* 0.05%, min ₹25 */
+  return t*.0001;  /* Value: 0.010% */
+}
+function bkrFutures(t){
+  if(curPlan.id==='standard') return Math.max(25, t*.0005); /* 0.05%, min ₹25 */
+  return 20;        /* Value: ₹20 flat */
+}
+function bkrOptions(){
+  if(curPlan.id==='standard') return 100; /* ~₹100/lot per order (Higher of 1%/₹100) */
+  return 20;         /* Value: ₹20 flat */
+}
+function bkrCurrency(){
+  if(curPlan.id==='standard') return 23; /* ₹23/contract */
+  return 20;          /* Value: ₹20 flat */
+}
+function bkrCommodity(t){
+  if(curPlan.id==='standard') return Math.max(25, t*.00025); /* 0.025%, min ₹25 */
+  return 20;           /* Value: ₹20 flat */
+}
+
+const SEG={
+  equity_intraday:{label:'Equity Intraday',ico:'📈',sub:'NSE / BSE · Classic: 0.05% · Trade@20: ₹20 flat',qtyHint:'shares',priceUnit:'per share',showOpts:false,showInfo:true,showComm:false,rangeMax:10000,rangeLbl:['1','2,500','5,000','7,500','10,000'],defaultBuy:1000,defaultSell:1020,defaultQty:100,getBrokerage:t=>bkrIntra(t),stt:(b,s,q)=>s*q*.00025,exch:t=>t*.0000307,stamp:(b,q)=>b*q*.00003,sebi:t=>t*.000001,dp:()=>0,ctt:()=>0},
+  equity_delivery:{label:'Equity Delivery',ico:'📦',sub:'NSE / BSE · Classic: 0.50% (min ₹25) · Trade@20: ₹20 flat · DP 0.04% on sell',qtyHint:'shares',priceUnit:'per share',showOpts:false,showInfo:false,showComm:false,rangeMax:10000,rangeLbl:['1','2,500','5,000','7,500','10,000'],defaultBuy:1500,defaultSell:1600,defaultQty:50,getBrokerage:t=>bkrDel(t),stt:(b,s,q)=>b*q*.001+s*q*.001,exch:t=>t*.0000307,stamp:(b,q)=>b*q*.00015,sebi:t=>t*.000001,dp:(sp,qty)=>Math.max(25,sp*qty*.0004),ctt:()=>0},
+  futures:{label:'Futures (F&O)',ico:'🔮',sub:'NSE / BSE · Classic: 0.05% · Trade@20: ₹20 flat',qtyHint:'per lot',priceUnit:'per lot',showOpts:false,showInfo:false,showComm:false,rangeMax:500,rangeLbl:['1','125','250','375','500'],defaultBuy:22000,defaultSell:22150,defaultQty:1,getBrokerage:t=>bkrFut(t),stt:(b,s,q)=>s*q*.0005,exch:t=>t*.0000183,stamp:(b,q)=>b*q*.00002,sebi:t=>t*.000001,dp:()=>0,ctt:()=>0},
+  options:{label:'Options (F&O)',ico:'⚡',sub:'NSE / BSE · ₹20 per lot (Classic) or ₹20 flat (Trade@20)',qtyHint:'per lot',priceUnit:'per lot',showOpts:true,showInfo:false,showComm:false,rangeMax:500,rangeLbl:['1','125','250','375','500'],defaultBuy:150,defaultSell:180,defaultQty:1,getBrokerage:()=>bkrOpt(),stt:(b,s,q)=>s*q*.0015,exch:t=>t*.0003553,stamp:(b,q)=>b*q*.00003,sebi:t=>t*.000001,dp:()=>0,ctt:()=>0},
+  currency:{label:'Currency',ico:'💱',sub:'NSE · Classic: 0.05% · Trade@20: ₹20 · No STT',qtyHint:'per lot',priceUnit:'per lot',showOpts:false,showInfo:false,showComm:false,rangeMax:500,rangeLbl:['1','125','250','375','500'],defaultBuy:84.50,defaultSell:84.75,defaultQty:1,getBrokerage:t=>bkrIntra(t),stt:()=>0,exch:t=>t*.0000035,stamp:(b,q)=>b*q*.000001,sebi:t=>t*.000001,dp:()=>0,ctt:()=>0},
+  commodity:{label:'Commodity (MCX)',ico:'🌾',sub:'MCX · Classic: 0.05% · Trade@20: ₹20 · Select commodity below',qtyHint:'lots',priceUnit:'per unit',showOpts:false,showInfo:false,showComm:true,rangeMax:100,rangeLbl:['1','25','50','75','100'],defaultBuy:7500,defaultSell:7550,defaultQty:1,getBrokerage:(t)=>bkrComm(t),stt:()=>0,ctt:(s,q,c,isOpt)=>isOpt?s*q*c.lotSize*.0005:s*q*c.lotSize*c.ctt,exch:(t,c,isOpt)=>isOpt?t*c.excTxnOpt:t*c.excTxnFut,stamp:(b,q,c,isOpt)=>b*q*c.lotSize*(isOpt?c.stampOpt:c.stamp),sebi:(t,c)=>t*c.sebi,dp:()=>0}
+};
+
+const COLORS=['#7c3aed','#059669','#a78bfa','#10b981','#5b21b6','#34d399','#f59e0b'];
+
+/* ── CMP REFERENCE — dynamic per plan ── */
+function getCMP(){const p=curPlan,isCls=p.id==='classic';return [{seg:'Equity Delivery',ico:'📦',exch:'NSE/BSE',fee:isCls?'0.50%':'₹20',note:isCls?'min ₹25 per order':'flat per order',stt:'0.1% both sides',type:'t-flat',bl:p.label,chips:['STT Applies','DP 0.04%','GST 18%']},{seg:'Equity Intraday',ico:'📈',exch:'NSE/BSE',fee:isCls?'0.05%':'₹20',note:isCls?'of turnover':'flat per order',stt:'0.025% sell side',type:'t-flat',bl:p.label,chips:['Per Order','STT Applies','GST 18%']},{seg:'Futures (F&O)',ico:'🔮',exch:'NSE/BSE',fee:isCls?'0.05%':'₹20',note:isCls?'of turnover':'flat per order',stt:'0.05% sell side ★',type:'t-flat',bl:p.label,chips:['Per Order','STT Applies','GST 18%']},{seg:'Options (F&O)',ico:'⚡',exch:'NSE/BSE',fee:'₹20',note:isCls?'per lot':'flat per order',stt:'0.15% on premium ★',type:'t-flat',bl:p.label,chips:['Per Lot','STT Applies','GST 18%']},{seg:'Currency',ico:'💱',exch:'NSE',fee:isCls?'0.05%':'₹20',note:'per order · no STT',stt:'No STT',type:'t-flat',bl:p.label,chips:['Per Order','No STT','GST 18%']},{seg:'MCX Commodity',ico:'🌾',exch:'MCX',fee:isCls?'0.05%':'₹20',note:'per order',stt:'CTT 0.01%',type:'t-flat',bl:p.label,chips:['Per Order','CTT Applies','GST 18%']}];}
+
+
+let curSeg='equity_intraday',useOtherState=false;
+let curComm=COMMODITIES.gold,commCat='bullion',isCommOpt=false;
+
+/* ── SET PLAN ── */
+function setPlan(planId){
+  curPlan = PLANS[planId];
+  const isStd = planId==='classic';
+  const btnStd = document.getElementById('planStandard');
+  const btnVal = document.getElementById('planValue');
+  btnStd.classList.toggle('active',isStd); btnStd.classList.toggle('male',isStd); btnStd.classList.toggle('female',!isStd);
+  btnVal.classList.toggle('active',!isStd); btnVal.classList.toggle('male',!isStd); btnVal.classList.toggle('female',isStd);
+  const gb=document.getElementById('genderBadge');const gt=document.getElementById('genderText');
+  if(gb) gb.textContent=curPlan.badge; if(gt) gt.textContent=curPlan.note;
+  const pn = document.getElementById('planNote');
+  if(pn) pn.innerHTML = '💡 <strong>Axis Direct — '+curPlan.label+' Plan:</strong> '+curPlan.note;
+  const c = SEG[curSeg];
+  if(c) document.getElementById('cardSub').textContent = c.sub;
+  renderCompareGrid();
+  calculate();
+}
+
+/* ── RENDER COMPARE GRID ── */
+function renderCompareGrid(){
+  document.getElementById('compareGrid').innerHTML=getCMP().map(d=>`
+    <div class="seg-tile ${d.type}">
+      <div class="st-top"><div class="st-icon-wrap">${d.ico}</div><span class="st-badge">${d.bl}</span></div>
+      <div class="st-seg">${d.seg}</div><div class="st-exch">${d.exch}</div>
+      <div class="st-divider"></div>
+      <div class="st-fee-row"><span class="st-fee-val">${d.fee}</span><span class="st-fee-lbl">/ order</span></div>
+      <div class="st-note">${d.note}</div>
+      <div class="st-note" style="margin-top:2px;font-weight:600">${d.stt}</div>
+      <div class="st-chips">${d.chips.map(c=>`<span class="st-chip">${c}</span>`).join('')}</div>
+    </div>`).join('');
+}
+renderCompareGrid();
+
+/* ── COMMODITY GRID ── */
+function buildCommGrid(cat){
+  const items=Object.entries(COMMODITIES).filter(([k,v])=>cat==='all'||v.cat===cat);
+  document.getElementById('commGrid').innerHTML=items.map(([k,v])=>`
+    <div class="comm-card ${v===curComm?'active':''}" onclick="selectComm('${k}')">
+      <span class="comm-card-icon">${v.icon}</span>
+      <span class="comm-card-name">${v.name}</span>
+      <span class="comm-card-size">${v.lotSize} ${v.lotUnit}/lot</span>
+    </div>`).join('');
+}
+function buildCommTable(){
+  document.getElementById('commCompareTable').innerHTML=`
+    <thead><tr><th>Commodity</th><th>Category</th><th>Lot Size</th><th>CTT</th><th>Exch Txn</th><th>Stamp</th><th>Tick</th></tr></thead>
+    <tbody>${Object.entries(COMMODITIES).map(([k,v])=>`
+      <tr class="${v===curComm?'active-row':''}">
+        <td>${v.icon} <strong>${v.name}</strong></td>
+        <td><span class="ctag ${v.cat==='bullion'?'ctag-bull':v.cat==='energy'?'ctag-ener':'ctag-metal'}">${v.catLabel}</span></td>
+        <td><strong>${v.lotSize}</strong> ${v.lotUnit}</td>
+        <td>${(v.ctt*100).toFixed(2)}%</td><td>${(v.excTxnFut*100).toFixed(4)}%</td>
+        <td>${(v.stamp*100).toFixed(3)}%</td><td>₹${v.tickSize}</td>
+      </tr>`).join('')}</tbody>`;
+}
+function filterComm(cat){
+  commCat=cat;
+  const map={bullion:'Bullion',energy:'Energy',metal:'Metals',all:'All'};
+  document.querySelectorAll('.ccat').forEach(b=>b.classList.toggle('active',b.textContent.includes(map[cat])||cat==='all'&&b.textContent.includes('All')));
+  buildCommGrid(cat);
+}
+function selectComm(key){curComm=COMMODITIES[key];buildCommGrid(commCat);buildCommTable();updateCommInfo();calculate()}
+function updateCommInfo(){
+  document.getElementById('cibLotSize').textContent=curComm.lotSize;
+  document.getElementById('cibUnit').textContent=curComm.lotUnit;
+  document.getElementById('cibTick').textContent='₹'+curComm.tickSize;
+  document.getElementById('cibCtt').textContent=(curComm.ctt*100).toFixed(2)+'%';
+  document.getElementById('priceUnit').textContent=curComm.priceUnit;
+  document.getElementById('priceUnit2').textContent=curComm.priceUnit;
+  document.getElementById('qtyHint').textContent='lots';
+}
+function setSegment(seg){
+  curSeg=seg;
+  const keys=Object.keys(SEG);
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',keys[i]===seg));
+  const c=SEG[seg];
+  document.getElementById('cardIco').textContent=c.ico;
+  document.getElementById('cardTitle').textContent=c.label+' Calculator';
+  document.getElementById('cardSub').textContent=c.sub;
+  document.getElementById('qtyHint').textContent=c.qtyHint;
+  document.getElementById('priceUnit').textContent=c.priceUnit;
+  document.getElementById('priceUnit2').textContent=c.priceUnit;
+  document.getElementById('optFields').style.display=c.showOpts?'':'none';
+  document.getElementById('planInfoWrap').style.display=c.showInfo?'':'none';
+  document.getElementById('commSection').classList.toggle('show',c.showComm);
+  document.getElementById('commRefCard').style.display=c.showComm?'':'none';
+  const r=document.getElementById('qtyRange');
+  r.max=c.rangeMax;r.value=Math.min(c.defaultQty,c.rangeMax);
+  document.getElementById('rangeLbl').innerHTML=c.rangeLbl.map(l=>`<span>${l}</span>`).join('');
+  document.getElementById('buyPrice').value=c.defaultBuy;
+  document.getElementById('sellPrice').value=c.defaultSell;
+  document.getElementById('qty').value=c.defaultQty;
+  if(c.showComm){buildCommGrid(commCat);buildCommTable();updateCommInfo()}
+  calculate();
+}
+function syncSlider(){document.getElementById('qtyRange').value=Math.min(+document.getElementById('qty').value,+document.getElementById('qtyRange').max);updateRange()}
+function syncQty(){document.getElementById('qty').value=document.getElementById('qtyRange').value;updateRange()}
+function toggleState(){useOtherState=document.getElementById('stateToggle').checked;document.getElementById('stateVal').textContent=useOtherState?'Other State — 0.003% on buy side':'Maharashtra — 0.015% on buy side';calculate()}
+function updateRange(){
+  const r=document.getElementById('qtyRange');
+  const p=((+r.value-+r.min)/(+r.max-+r.min)*100).toFixed(1);
+  r.style.background=`linear-gradient(90deg,var(--purple-primary) ${p}%,var(--purple-pale) ${p}%)`;
+}
+
+/* ── DONUT ── */
+function drawDonut(items){
+  const svg=document.getElementById('donutSvg');svg.innerHTML='';
+  const cx=43,cy=43,r=32,sw=8;
+  const total=items.reduce((s,d)=>s+d.val,0);if(!total)return;
+  let sa=-Math.PI/2;const circ=2*Math.PI*r;
+  const bg=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  bg.setAttribute('cx',cx);bg.setAttribute('cy',cy);bg.setAttribute('r',r);
+  bg.setAttribute('fill','none');bg.setAttribute('stroke','rgba(16,185,129,.1)');bg.setAttribute('stroke-width',sw);
+  svg.appendChild(bg);
+  items.forEach(d=>{
+    const pct=d.val/total;
+    const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',cx);c.setAttribute('cy',cy);c.setAttribute('r',r);
+    c.setAttribute('fill','none');c.setAttribute('stroke',d.color);c.setAttribute('stroke-width',sw);
+    c.setAttribute('stroke-dasharray',(pct*circ)+' '+circ);
+    c.setAttribute('stroke-dashoffset',-((sa+Math.PI/2)/(2*Math.PI))*circ);
+    c.setAttribute('transform',`rotate(-90 ${cx} ${cy})`);
+    c.style.transition='stroke-dasharray .5s ease';svg.appendChild(c);
+    sa+=pct*2*Math.PI;
+  });
+}
+
+/* ── FORMATTERS ── */
+function fmt(n){return Math.abs(n)<.005?'0.00':Math.abs(n).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function sfmt(n){const a=Math.abs(n);if(a>=1e7)return(n/1e7).toFixed(2)+'Cr';if(a>=1e5)return(n/1e5).toFixed(2)+'L';if(a>=1e3)return(n/1e3).toFixed(2)+'K';return n.toFixed(2)}
+
+/* ── CALCULATE ── */
+function calculate(){
+  updateRange();
+  const cfg=SEG[curSeg];
+  const bp=+document.getElementById('buyPrice').value||0;
+  const sp=+document.getElementById('sellPrice').value||0;
+  const qty=+document.getElementById('qty').value||0;
+  let bt,st,tt,brokerage,sttVal,cttVal,exch,stamp,sebi,dp;
+  if(curSeg==='commodity'){
+    const ls=curComm.lotSize;
+    bt=bp*ls*qty;st=sp*ls*qty;tt=bt+st;
+    const commBrokerBuy =bp>0?cfg.getBrokerage(bp*ls*qty):0;
+    const commBrokerSell=sp>0?cfg.getBrokerage(sp*ls*qty):0;
+    brokerage=commBrokerBuy+commBrokerSell;
+    sttVal=0;cttVal=cfg.ctt(sp,qty,curComm,isCommOpt);
+    exch=cfg.exch(tt,curComm,isCommOpt);
+    stamp=cfg.stamp(bp,qty,curComm,isCommOpt);
+    sebi=cfg.sebi(tt,curComm);dp=0;
+  } else {
+    bt=bp*qty;st=sp*qty;tt=bt+st;
+    const buyLegT=bp>0?bp*qty:0;const sellLegT=sp>0?sp*qty:0;
+    const brokerageBuy =bp>0?cfg.getBrokerage(buyLegT):0;
+    const brokerageSell=sp>0?cfg.getBrokerage(sellLegT):0;
+    brokerage=brokerageBuy+brokerageSell;
+    sttVal=cfg.stt(bp,sp,qty);cttVal=0;
+    exch=cfg.exch(tt);stamp=cfg.stamp(bp,qty,useOtherState);
+    sebi=cfg.sebi(tt);
+    dp=typeof cfg.dp==='function'?cfg.dp(sp,qty):0;
+  }
+  const gst=(brokerage+exch+sebi)*.18;
+  const total=brokerage+sttVal+cttVal+exch+stamp+sebi+dp+gst;
+  const gPnl=curSeg==='commodity'?(sp-bp)*curComm.lotSize*qty:(sp-bp)*qty;
+  const nPnl=gPnl-total;
+  const pct=tt>0?total/tt*100:0;
+  const be=curSeg==='commodity'&&qty>0?bp+(total/(qty*curComm.lotSize)):qty>0?bp+(total/qty):0;
+
+  const maxT=Math.max(bt,st,1);
+  const qSub=curSeg==='commodity'?`${qty} lots × ₹${bp} × ${curComm.lotSize}${curComm.lotUnit}`:`${qty} × ₹${bp}`;
+  document.getElementById('buyTov').textContent='₹'+sfmt(bt);
+  document.getElementById('buyTovSub').textContent=qSub;
+  document.getElementById('buyProg').style.width=Math.min(bt/maxT*100,100)+'%';
+  document.getElementById('sellTov').textContent='₹'+sfmt(st);
+  document.getElementById('sellTovSub').textContent=curSeg==='commodity'?`${qty} lots × ₹${sp} × ${curComm.lotSize}${curComm.lotUnit}`:`${qty} × ₹${sp}`;
+  document.getElementById('sellProg').style.width=Math.min(st/maxT*100,100)+'%';
+  document.getElementById('totalTov').textContent='₹'+sfmt(tt);
+
+  const nphHero=document.getElementById('netPnlHero');
+  const isPos=nPnl>=0;
+  nphHero.className='net-pnl-hero '+(isPos?'pos':'neg');
+  const nphEy=document.getElementById('nphEyebrow');nphEy.className='nph-eyebrow '+(isPos?'pos':'neg');nphEy.textContent='Net P&L';
+  const npEl=document.getElementById('netPnl');npEl.className='nph-val '+(isPos?'pos':'neg');
+  npEl.textContent=(isPos?'+':'')+'₹'+fmt(Math.abs(nPnl));
+  const nphSb=document.getElementById('nphSub');nphSb.className='nph-sub '+(isPos?'pos':'neg');nphSb.textContent='After all charges & taxes';
+  document.getElementById('totalCharges').textContent='₹'+fmt(total);
+  document.getElementById('chargesPct').textContent=pct.toFixed(4)+'% of turnover';
+  document.getElementById('breakeven').textContent=qty>0?'₹'+be.toFixed(2):'—';
+  const gpEl=document.getElementById('grossPnl');
+  gpEl.textContent=(gPnl>=0?'+':'')+'₹'+fmt(Math.abs(gPnl));
+  gpEl.className='pnl-val '+(gPnl>=0?'c-g':'c-r');
+  document.getElementById('pnlCharges').textContent='-₹'+fmt(total);
+  const dcEl=document.getElementById('donutCenter');
+  dcEl.textContent=(nPnl>=0?'+':'')+sfmt(nPnl);
+  dcEl.style.color=nPnl>=0?'#065F46':'var(--red)';
+
+  const taxLbl=curSeg==='commodity'?'CTT':'STT';
+  const taxVal=curSeg==='commodity'?cttVal:sttVal;
+  const items=[
+    {name:'Brokerage',val:brokerage,color:COLORS[0],icon:'🏦',alwaysShow:true},
+    {name:taxLbl,     val:taxVal,   color:COLORS[1],icon:'📊',alwaysShow:false},
+    {name:'GST (18%)',val:gst,      color:COLORS[2],icon:'🧾',alwaysShow:false},
+    {name:'Exchange', val:exch,     color:COLORS[3],icon:'🔄',alwaysShow:false},
+    {name:'Stamp',    val:stamp,    color:COLORS[4],icon:'🏛️',alwaysShow:false},
+    {name:'SEBI+DP',  val:sebi+dp,  color:COLORS[5],icon:'📋',alwaysShow:false},
+  ].filter(i=>i.alwaysShow||i.val>0);
+
+  drawDonut(items);
+  document.getElementById('legend').innerHTML=items.map(i=>`
+    <div class="li"><div class="li-dot" style="background:${i.color}"></div>
+    <span class="li-name">${i.name}</span><span class="li-val">₹${fmt(i.val)}</span></div>`).join('');
+  document.getElementById('chargeTiles').innerHTML=items.map(i=>`
+    <div class="ct">
+      <span class="ct-icon">${i.icon}</span>
+      <div class="ct-lbl">${i.name}</div>
+      <div class="ct-val">₹${fmt(i.val)}</div>
+      <div class="ct-bar-track"><div class="ct-bar-fill" style="width:${total>0?Math.min(i.val/total*100,100):0}%"></div></div>
+      <div class="ct-pct">${total>0?(i.val/total*100).toFixed(1)+'% of total':'—'}</div>
+    </div>`).join('');
+  const maxV=items.reduce((m,i)=>Math.max(m,i.val),0)||1;
+  document.getElementById('miniBars').innerHTML=items.map(i=>`
+    <div class="mb-row">
+      <span class="mb-lbl">${i.name}</span>
+      <div class="mb-track"><div class="mb-fill" style="width:${Math.min(i.val/maxV*100,100)}%;background:${i.color}"></div></div>
+      <span class="mb-val">₹${fmt(i.val)}</span>
+    </div>`).join('');
+  const flows=[
+    {ico:'💰',lbl:'Buy Value',  val:'₹'+sfmt(bt),            tag:null,                    cls:'buy',     cirCls:'buy-bg'},
+    {ico:'💸',lbl:'Charges',    val:'-₹'+sfmt(total),        tag:pct.toFixed(2)+'% of T', cls:'charges', cirCls:'charges-bg'},
+    {ico:'💹',lbl:'Sell Value', val:'₹'+sfmt(st),            tag:null,                    cls:'sell',    cirCls:'sell-bg'},
+    {ico:nPnl>=0?'🟢':'🔴',lbl:'Net P&L',val:(nPnl>=0?'+':'')+sfmt(nPnl),tag:null,cls:nPnl>=0?'pnl-pos':'pnl-neg',cirCls:nPnl>=0?'pnl-bg':'pnl-neg-bg'},
+  ];
+  document.getElementById('flowNodes').innerHTML=flows.map((n,i)=>`
+    ${i>0?'<div class="flow-connector"><div class="flow-connector-dot"></div></div>':''}
+    <div class="flow-node-card ${n.cls}">
+      <div class="fn-circle ${n.cirCls}">${n.ico}</div>
+      <div class="fn-lbl-new">${n.lbl}</div>
+      <div class="fn-val-new">${n.val}</div>
+      ${n.tag?`<span class="fn-tag-new" style="background:rgba(220,38,38,.1);color:var(--red)">${n.tag}</span>`:''}
+    </div>`).join('');
+}
+
+/* ── BOOT ── */
+buildCommGrid('bullion');buildCommTable();updateRange();
+document.getElementById('buyPrice').value=SEG.equity_intraday.defaultBuy;
+document.getElementById('sellPrice').value=SEG.equity_intraday.defaultSell;
+document.getElementById('qty').value=SEG.equity_intraday.defaultQty;
+setPlan('classic');
+/* ── SCROLL TO TOP ── */
+(function(){
+  const btn=document.getElementById('stt');
+  let ticking=false;
+  window.addEventListener('scroll',function(){
+    if(!ticking){requestAnimationFrame(function(){btn.style.display=window.scrollY>320?'flex':'none';ticking=false;});ticking=true;}
+  },{passive:true});
+})();
+
+/* ── iOS VIEWPORT HEIGHT FIX ── */
+(function(){
+  function setVH(){document.documentElement.style.setProperty('--vh',window.innerHeight*.01+'px')}
+  setVH();
+  window.addEventListener('resize',setVH,{passive:true});
+  window.addEventListener('orientationchange',function(){setTimeout(setVH,120)},{passive:true});
+})();
+
+/* ── DISMISS KEYBOARD ON ENTER ── */
+document.querySelectorAll('input[type=number]').forEach(function(el){
+  el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key==='Done')el.blur();});
+});
+
+/* ── PREVENT DOUBLE-TAP ZOOM on iOS buttons ── */
+(function(){
+  var t=0;
+  document.addEventListener('touchend',function(e){
+    var now=Date.now();
+    if(now-t<300&&e.target.tagName!=='INPUT'&&e.target.tagName!=='SELECT')e.preventDefault();
+    t=now;
+  },{passive:false});
+})();
+
+/* ── CROSS-PLATFORM JS ENHANCEMENTS ── */
+
+/* A. Dynamic viewport height — fixes iOS Safari / Chrome Android 100vh bug */
+(function() {
+  function setDVH() {
+    var dvh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--dvh', dvh + 'px');
+    document.documentElement.style.setProperty('--vh', dvh + 'px');
+  }
+  setDVH();
+  window.addEventListener('resize', setDVH, { passive: true });
+  window.addEventListener('orientationchange', function() {
+    setTimeout(setDVH, 200);
+  }, { passive: true });
+  // Visual Viewport API for keyboard-aware layout (Android Chrome)
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', setDVH, { passive: true });
+    window.visualViewport.addEventListener('scroll', setDVH, { passive: true });
+  }
+})();
+
+/* B. Prevent iOS double-tap zoom on interactive elements */
+(function() {
+  var lastTouch = 0;
+  document.addEventListener('touchend', function(e) {
+    var now = Date.now();
+    if (now - lastTouch < 350 && e.target.tagName !== 'INPUT' && e.target.tagName !== 'SELECT') {
+      e.preventDefault();
+    }
+    lastTouch = now;
+  }, { passive: false });
+})();
+
+/* C. iOS input zoom prevention — scroll back after focus */
+(function() {
+  if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) return;
+  document.querySelectorAll('input, select').forEach(function(el) {
+    el.addEventListener('focus', function() {
+      document.querySelector('meta[name=viewport]').setAttribute(
+        'content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
+      );
+    });
+    el.addEventListener('blur', function() {
+      document.querySelector('meta[name=viewport]').setAttribute(
+        'content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover'
+      );
+    });
+  });
+})();
+
+/* D. Android keyboard pushes layout — keep input visible */
+(function() {
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', function() {
+      var activeEl = document.activeElement;
+      if (activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'SELECT')) {
+        setTimeout(function() { activeEl.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 100);
+      }
+    }, { passive: true });
+  }
+})();
+
+/* E. Dismiss keyboard on Enter/Done — iOS & Android */
+document.querySelectorAll('input[type=number]').forEach(function(el) {
+  el.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === 'Done' || e.keyCode === 13) {
+      el.blur();
+      e.preventDefault();
+    }
+  });
+});
+
+/* F. Touch-friendly range slider — fire input on touchmove (Android fix) */
+document.querySelectorAll('input[type=range]').forEach(function(slider) {
+  slider.addEventListener('touchmove', function(e) {
+    e.stopPropagation();
+  }, { passive: true });
+});
+
+/* G. Detect platform and add class to body for targeted CSS */
+(function() {
+  var ua = navigator.userAgent;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /Android/.test(ua);
+  var isSafari = /^((?!chrome|android).)*safari/i.test(ua);
+  var isMobile = /Mobi|Android|iPhone|iPad/.test(ua);
+  var isTablet = /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(ua.toLowerCase());
+  if (isIOS) document.body.classList.add('is-ios');
+  if (isAndroid) document.body.classList.add('is-android');
+  if (isSafari) document.body.classList.add('is-safari');
+  if (isMobile) document.body.classList.add('is-mobile');
+  if (isTablet) document.body.classList.add('is-tablet');
+})();
+
+/* H. Network-aware font loading fallback */
+(function() {
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function() {
+      document.body.classList.add('fonts-loaded');
+    });
+  } else {
+    document.body.classList.add('fonts-loaded');
+  }
+})();
+
+/* I. Scroll-to-top button — passive scroll listener for mobile perf */
+(function() {
+  var btn = document.getElementById('stt');
+  if (!btn) return;
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
+
+/* ── CROSS-PLATFORM JS ENHANCEMENTS v2 ── */
+
+/* A. Dynamic Viewport Height — fixes iOS Safari / Chrome Android 100vh bug */
+(function() {
+  function setDVH() {
+    var dvh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--dvh', dvh + 'px');
+    document.documentElement.style.setProperty('--vh',  dvh + 'px');
+  }
+  setDVH();
+  window.addEventListener('resize', setDVH, { passive: true });
+  window.addEventListener('orientationchange', function() { setTimeout(setDVH, 200); }, { passive: true });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', setDVH, { passive: true });
+    window.visualViewport.addEventListener('scroll', setDVH, { passive: true });
+  }
+})();
+
+/* B. iOS double-tap zoom prevention */
+(function() {
+  var lastTouch = 0;
+  document.addEventListener('touchend', function(e) {
+    var now = Date.now();
+    if (now - lastTouch < 350 && e.target.tagName !== 'INPUT' && e.target.tagName !== 'SELECT') {
+      e.preventDefault();
+    }
+    lastTouch = now;
+  }, { passive: false });
+})();
+
+/* C. iOS input zoom prevention — lock viewport on focus, restore on blur */
+(function() {
+  if (!/iPad|iPhone|iPod/.test(navigator.userAgent)) return;
+  document.querySelectorAll('input, select').forEach(function(el) {
+    el.addEventListener('focus', function() {
+      document.querySelector('meta[name=viewport]').setAttribute(
+        'content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
+      );
+    });
+    el.addEventListener('blur', function() {
+      document.querySelector('meta[name=viewport]').setAttribute(
+        'content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover'
+      );
+    });
+  });
+})();
+
+/* D. Android keyboard — scroll active input into view */
+(function() {
+  if (!window.visualViewport) return;
+  window.visualViewport.addEventListener('resize', function() {
+    var el = document.activeElement;
+    if (el && (el.tagName === 'INPUT' || el.tagName === 'SELECT')) {
+      setTimeout(function() { el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 100);
+    }
+  }, { passive: true });
+})();
+
+/* E. Enter/Done key dismisses keyboard */
+document.querySelectorAll('input[type=number]').forEach(function(el) {
+  el.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === 'Done' || e.keyCode === 13) { el.blur(); e.preventDefault(); }
+  });
+});
+
+/* F. Range slider touchmove — Android fix */
+document.querySelectorAll('input[type=range]').forEach(function(slider) {
+  slider.addEventListener('touchmove', function(e) { e.stopPropagation(); }, { passive: true });
+});
+
+/* G. Platform detection — body classes for targeted CSS */
+(function() {
+  var ua = navigator.userAgent;
+  if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) document.body.classList.add('is-ios');
+  if (/Android/.test(ua)) document.body.classList.add('is-android');
+  if (/^((?!chrome|android).)*safari/i.test(ua)) document.body.classList.add('is-safari');
+  if (/Mobi|Android|iPhone|iPad/.test(ua)) document.body.classList.add('is-mobile');
+  if (/(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk)/i.test(ua))
+    document.body.classList.add('is-tablet');
+})();
+
+/* H. Font loading detection */
+(function() {
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function() { document.body.classList.add('fonts-loaded'); });
+  } else { document.body.classList.add('fonts-loaded'); }
+})();
+
+/* I. Scroll-to-top button — passive scroll listener */
+(function() {
+  var btn = document.getElementById('stt');
+  if (!btn) return;
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
+</script>
+</body>
+</html>

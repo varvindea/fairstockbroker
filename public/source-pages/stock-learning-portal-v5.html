@@ -1,0 +1,2847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta name="color-scheme" content="light"/>
+<title>StockIQ Academy — Stock Market Learning Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════ */
+:root{
+  --p950:#0a021e;--p900:#150438;--p800:#21085a;
+  --p700:#331280;--p600:#4c1eb0;--p500:#6c3de4;
+  --p400:#8f65f0;--p300:#bda3f8;--p200:#ddd0fc;
+  --p150:#ece5fd;--p100:#f4f0fe;--p50:#faf8ff;
+
+  --g700:#0f5c30;--g600:#157a3e;--g500:#1ea851;
+  --g400:#3dc96e;--g300:#79dfa0;--g200:#b8f0cf;
+  --g100:#e0f8eb;--g50:#f3fdf6;
+
+  --amber:#c47c10;--amber-bg:#fffaec;--amber-border:#f9d98a;
+  --red:#e03c3c;--red-bg:#fff0f0;--red-border:#fbc8c8;
+  --blue:#2563eb;--blue-bg:#eff6ff;--blue-border:#bfdbfe;
+
+  --ink:#100428;--ink2:#32205a;--ink3:#7b6598;--ink4:#b8a8d4;
+  --white:#fff;--surf1:#faf8ff;--surf2:#f4f0fe;--surf3:#ece5fd;
+  --border:#e0d8f8;--border2:#cfc3f2;
+
+  --sh1:0 1px 6px rgba(108,61,228,.07);
+  --sh2:0 4px 20px rgba(108,61,228,.11);
+  --sh3:0 12px 44px rgba(108,61,228,.16);
+  --sh4:0 24px 72px rgba(108,61,228,.22);
+
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:24px;
+  --font:'DM Sans',sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;font-size:16px}
+body{font-family:var(--font);background:#faf8ff;color:var(--ink);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font-family:var(--font);cursor:pointer;border:none;-webkit-appearance:none;touch-action:manipulation}
+ul{list-style:none}
+img{max-width:100%;display:block}
+
+/* ══════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes floatBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes barGrow{from{width:0}to{width:var(--w)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+.anim{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);will-change:opacity,transform;backface-visibility:hidden}
+.anim.in{opacity:1;transform:translateY(0);will-change:auto}
+.anim-d1{transition-delay:.07s}.anim-d2{transition-delay:.14s}
+.anim-d3{transition-delay:.21s}.anim-d4{transition-delay:.28s}
+.anim-d5{transition-delay:.35s}.anim-d6{transition-delay:.42s}
+
+/* ══════════════════════════════════════
+   NAV
+══════════════════════════════════════ */
+.nav-wrap{
+  position:sticky;top:0;z-index:500;
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 2px 16px rgba(108,61,228,.07);
+  padding-top:env(safe-area-inset-top);
+}
+.nav{
+  height:60px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 max(24px,env(safe-area-inset-left));
+  max-width:1320px;margin:0 auto;
+}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.nav-logo-mark{
+  width:36px;height:36px;border-radius:11px;
+  background:linear-gradient(135deg,var(--p500),var(--g500));
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:900;color:#fff;
+  box-shadow:0 3px 12px rgba(108,61,228,.35);
+}
+.nav-logo-text{font-size:19px;font-weight:900;color:var(--ink);letter-spacing:-.6px}
+.nav-logo-text b{color:var(--p500)}
+.nav-center{display:flex;align-items:center;gap:4px}
+@media(max-width:900px){.nav-center{display:none}}
+.nav-link{
+  padding:7px 14px;border-radius:9px;font-size:13px;font-weight:600;
+  color:var(--ink3);transition:.18s;cursor:pointer;
+}
+.nav-link:hover{background:var(--p100);color:var(--p600)}
+.nav-link.active{background:var(--p100);color:var(--p600);font-weight:700}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-search{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:10px;
+  background:var(--surf1);border:1.5px solid var(--border);
+  font-size:13px;color:var(--ink3);cursor:pointer;
+  transition:.18s;min-width:180px;
+}
+@media(max-width:768px){.nav-search{min-width:auto}.nav-search span{display:none}}
+.nav-search:hover{border-color:var(--p300);background:var(--p50)}
+.nav-search svg{opacity:.5;flex-shrink:0}
+.nav-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--p400),var(--g400));
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:800;color:#fff;cursor:pointer;
+  box-shadow:0 2px 8px rgba(108,61,228,.25);flex-shrink:0;
+}
+.streak-badge{
+  display:flex;align-items:center;gap:5px;
+  padding:6px 12px;border-radius:100px;
+  background:var(--amber-bg);border:1.5px solid var(--amber-border);
+  font-size:12px;font-weight:700;color:var(--amber);
+  cursor:pointer;
+}
+@media(max-width:600px){.streak-badge{display:none}}
+
+/* ══════════════════════════════════════
+   VIEWS
+══════════════════════════════════════ */
+.view{display:none}
+.view.active{display:block;animation:fadeIn .3s ease}
+
+/* ══════════════════════════════════════
+   HERO — DASHBOARD
+══════════════════════════════════════ */
+.hero{
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  padding:36px 0 32px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(224,216,248,.4) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(224,216,248,.4) 1px,transparent 1px);
+  background-size:48px 48px;pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;top:-120px;right:-80px;
+  width:600px;height:600px;
+  background:radial-gradient(ellipse,rgba(108,61,228,.08),transparent 65%);
+  pointer-events:none;
+}
+.hero-inner{
+  position:relative;z-index:2;max-width:1320px;margin:0 auto;
+  padding:0 max(24px,env(safe-area-inset-left));
+}
+.hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.hero-text{}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--p100);border:1.5px solid var(--p200);border-radius:100px;
+  padding:5px 14px;font-size:11.5px;font-weight:700;color:var(--p600);
+  margin-bottom:14px;
+}
+.hero h1{
+  font-size:clamp(24px,3.5vw,40px);font-weight:900;
+  color:var(--ink);letter-spacing:-1.5px;line-height:1.1;margin-bottom:10px;
+  animation:fadeUp .5s ease both;
+}
+.hero h1 .grad{
+  background:linear-gradient(90deg,var(--p600),var(--p400),var(--g500));
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:gradShift 4s ease infinite;
+}
+.hero-sub{
+  font-size:14.5px;color:var(--ink3);line-height:1.7;max-width:560px;
+  animation:fadeUp .5s .08s ease both;
+}
+.hero-stats-row{
+  display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;
+  animation:fadeUp .5s .14s ease both;
+}
+.hstat-pill{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:14px;
+  background:var(--white);border:1.5px solid var(--border);
+  box-shadow:var(--sh1);
+}
+.hsp-icon{
+  width:32px;height:32px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-size:15px;
+}
+.hsp-num{font-size:17px;font-weight:900;color:var(--ink)}
+.hsp-label{font-size:10.5px;color:var(--ink3);font-weight:600}
+.hero-resume{
+  animation:fadeUp .5s .18s ease both;
+  background:linear-gradient(135deg,var(--p500),var(--p700));
+  border-radius:var(--r-xl);padding:22px 26px;color:#fff;
+  min-width:280px;max-width:340px;flex-shrink:0;
+  box-shadow:var(--sh3);cursor:pointer;transition:transform .2s;
+}
+.hero-resume:hover{transform:translateY(-3px)}
+.hr-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;opacity:.7;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.hr-label::before{content:'';width:12px;height:2px;background:rgba(255,255,255,.5);border-radius:2px}
+.hr-module{font-size:16px;font-weight:800;margin-bottom:4px}
+.hr-topic{font-size:13px;opacity:.8;margin-bottom:16px}
+.hr-prog-bar{height:6px;background:rgba(255,255,255,.2);border-radius:100px;overflow:hidden;margin-bottom:8px}
+.hr-prog-fill{height:100%;background:linear-gradient(90deg,#fff,var(--g300));border-radius:100px;width:35%}
+.hr-foot{display:flex;align-items:center;justify-content:space-between;font-size:12px;opacity:.8}
+.hr-cta{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);
+  border-radius:100px;padding:5px 14px;font-size:12px;font-weight:700;
+  transition:.18s;
+}
+.hr-cta:hover{background:rgba(255,255,255,.3)}
+
+/* Filter bar */
+.filter-bar{
+  max-width:1320px;margin:0 auto;
+  padding:16px max(24px,env(safe-area-inset-left));
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.filter-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 16px;border-radius:100px;
+  font-size:13px;font-weight:600;
+  background:var(--white);border:1.5px solid var(--border);
+  color:var(--ink3);cursor:pointer;transition:.18s;
+}
+.filter-btn:hover{border-color:var(--p300);color:var(--p600);background:var(--p50)}
+.filter-btn.active{background:var(--p500);border-color:var(--p500);color:#fff;box-shadow:0 3px 12px rgba(108,61,228,.3)}
+.filter-dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.filter-sep{flex:1}
+.sort-btn{
+  display:flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:9px;
+  font-size:12.5px;font-weight:600;color:var(--ink3);
+  background:var(--white);border:1.5px solid var(--border);cursor:pointer;
+  transition:.18s;
+}
+.sort-btn:hover{border-color:var(--p300);color:var(--p600)}
+
+/* ══════════════════════════════════════
+   MODULE CARDS GRID
+══════════════════════════════════════ */
+.modules-section{
+  max-width:1320px;margin:0 auto;
+  padding:8px max(24px,env(safe-area-inset-left)) 60px;
+}
+.modules-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:20px;
+}
+@media(max-width:640px){.modules-grid{grid-template-columns:1fr}}
+
+.mod-card{
+  background:var(--white);border-radius:var(--r-xl);
+  border:1.5px solid var(--border);
+  box-shadow:var(--sh1);overflow:hidden;cursor:pointer;
+  transition:transform .25s,box-shadow .25s,border-color .25s;
+  position:relative;
+}
+.mod-card:hover{transform:translateY(-6px);box-shadow:var(--sh3);border-color:var(--p300)}
+
+.mod-card-header{
+  padding:24px 22px 20px;
+  position:relative;overflow:hidden;
+}
+.mod-card-header::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
+}
+.mod-deco{
+  position:absolute;top:-20px;right:-20px;width:120px;height:120px;
+  border-radius:50%;background:rgba(255,255,255,.1);pointer-events:none;
+}
+.mod-deco2{
+  position:absolute;bottom:-30px;left:-10px;width:80px;height:80px;
+  border-radius:50%;background:rgba(255,255,255,.07);pointer-events:none;
+}
+.mod-icon-wrap{
+  width:52px;height:52px;border-radius:16px;
+  background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;margin-bottom:14px;position:relative;z-index:1;
+}
+.mod-badge{
+  position:absolute;top:16px;right:16px;
+  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);
+  border-radius:100px;padding:3px 10px;
+  font-size:10px;font-weight:800;color:rgba(255,255,255,.9);
+  z-index:1;text-transform:uppercase;letter-spacing:.5px;
+}
+.mod-title{font-size:16px;font-weight:800;color:#fff;margin-bottom:4px;position:relative;z-index:1;line-height:1.3}
+.mod-desc{font-size:12px;color:rgba(255,255,255,.8);position:relative;z-index:1;line-height:1.55}
+
+.mod-card-body{padding:18px 20px 16px}
+.mod-levels{display:flex;gap:6px;margin-bottom:16px}
+.level-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 10px;border-radius:100px;
+  font-size:10.5px;font-weight:700;border:1.5px solid;
+}
+.lc-beg{background:var(--g50);border-color:var(--g200);color:var(--g700)}
+.lc-int{background:var(--amber-bg);border-color:var(--amber-border);color:var(--amber)}
+.lc-adv{background:var(--red-bg);border-color:var(--red-border);color:var(--red)}
+
+.mod-meta{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.mod-meta-item{display:flex;align-items:center;gap:4px;font-size:11.5px;color:var(--ink3);font-weight:500}
+.mod-meta-item svg{opacity:.6}
+
+.mod-progress{margin-bottom:14px}
+.mp-label{display:flex;justify-content:space-between;font-size:11px;font-weight:600;color:var(--ink3);margin-bottom:6px}
+.mp-bar{height:6px;background:var(--surf2);border-radius:100px;overflow:hidden}
+.mp-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--p500),var(--g500));transition:width .6s ease}
+
+.mod-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:12px;border-top:1px solid var(--border);
+}
+.mod-topics-count{font-size:11.5px;color:var(--ink4);font-weight:600}
+.mod-cta{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:7px 14px;border-radius:9px;
+  font-size:12px;font-weight:700;
+  background:var(--p50);border:1.5px solid var(--p200);color:var(--p600);
+  transition:.2s;
+}
+.mod-card:hover .mod-cta{background:var(--p500);border-color:var(--p500);color:#fff}
+
+/* Module color variants */
+.mc-purple .mod-card-header{background:linear-gradient(135deg,#5b21b6,#7c3aed,#8b5cf6)}
+.mc-green .mod-card-header{background:linear-gradient(135deg,#065f46,#059669,#10b981)}
+.mc-indigo .mod-card-header{background:linear-gradient(135deg,#312e81,#4338ca,#6366f1)}
+.mc-teal .mod-card-header{background:linear-gradient(135deg,#134e4a,#0f766e,#2dd4bf)}
+.mc-violet .mod-card-header{background:linear-gradient(135deg,#4c1d95,#6d28d9,#a78bfa)}
+.mc-emerald .mod-card-header{background:linear-gradient(135deg,#064e3b,#047857,#34d399)}
+.mc-rose .mod-card-header{background:linear-gradient(135deg,#881337,#be123c,#fb7185)}
+.mc-amber .mod-card-header{background:linear-gradient(135deg,#92400e,#d97706,#fbbf24)}
+.mc-sky .mod-card-header{background:linear-gradient(135deg,#0c4a6e,#0369a1,#38bdf8)}
+.mc-fuchsia .mod-card-header{background:linear-gradient(135deg,#701a75,#a21caf,#e879f9)}
+
+/* ══════════════════════════════════════
+   MODULE PAGE
+══════════════════════════════════════ */
+.mod-page{max-width:1320px;margin:0 auto;padding:0 max(24px,env(safe-area-inset-left)) 60px}
+
+/* Module hero */
+.mod-hero{
+  border-radius:var(--r-xl);padding:36px 40px;margin-bottom:36px;
+  position:relative;overflow:hidden;
+  animation:fadeUp .4s ease both;
+}
+.mod-hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle at 15% 85%,rgba(255,255,255,.18),transparent 50%),
+  radial-gradient(circle at 85% 15%,rgba(255,255,255,.12),transparent 50%);
+}
+.mh-nav{display:flex;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+.back-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 16px 8px 12px;
+  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);
+  border-radius:100px;font-size:13px;font-weight:700;color:#fff;
+  cursor:pointer;transition:.18s;
+}
+.back-btn:hover{background:rgba(255,255,255,.3)}
+.mh-breadcrumb{display:flex;align-items:center;gap:7px;font-size:12.5px;color:rgba(255,255,255,.7)}
+.mh-breadcrumb .sep{opacity:.5}
+.mh-breadcrumb .current{font-weight:800;color:#fff}
+.mh-content{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end}
+@media(max-width:700px){.mh-content{grid-template-columns:1fr}}
+.mh-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);
+  border-radius:100px;padding:5px 14px;font-size:11.5px;font-weight:700;
+  color:#fff;margin-bottom:12px;
+}
+.mh-title{font-size:clamp(22px,3.5vw,36px);font-weight:900;color:#fff;margin-bottom:10px;letter-spacing:-1px;line-height:1.1}
+.mh-desc{font-size:14px;color:rgba(255,255,255,.85);line-height:1.75;max-width:580px}
+.mh-pills{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.mh-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
+  border-radius:100px;padding:5px 12px;font-size:11.5px;font-weight:600;color:#fff;
+}
+.mh-stats{display:flex;flex-direction:column;gap:10px;min-width:180px}
+@media(max-width:700px){.mh-stats{flex-direction:row;flex-wrap:wrap}}
+.mh-stat{
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);
+  border-radius:12px;padding:12px 16px;text-align:center;
+}
+.mh-stat-num{font-size:20px;font-weight:900;color:#fff}
+.mh-stat-lbl{font-size:10.5px;color:rgba(255,255,255,.75);font-weight:600}
+
+/* ── Level Cards Grid (NEW) ── */
+.level-cards-section{margin-bottom:36px}
+.level-cards-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:18px;display:flex;align-items:center;gap:10px;
+}
+.level-cards-label::before{content:'';width:20px;height:2.5px;background:linear-gradient(90deg,var(--p600),var(--g500));border-radius:2px;flex-shrink:0}
+.level-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:900px){.level-cards-grid{grid-template-columns:1fr}}
+
+/* Individual level card */
+.lv-card{
+  background:var(--white);border-radius:var(--r-xl);
+  border:2px solid var(--border);box-shadow:var(--sh1);
+  overflow:hidden;cursor:pointer;
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,border-color .25s;
+  display:flex;flex-direction:column;
+}
+.lv-card:hover{transform:translateY(-8px);box-shadow:var(--sh3)}
+.lv-card-top{padding:28px 26px 22px;position:relative;overflow:hidden}
+.lv-card-top::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent)}
+.lv-deco{position:absolute;top:-30px;right:-30px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.1);pointer-events:none}
+.lv-deco2{position:absolute;bottom:-40px;left:-20px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.07);pointer-events:none}
+.lv-level-num{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);
+  border-radius:100px;padding:4px 12px;font-size:10.5px;font-weight:800;
+  color:#fff;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px;
+  position:relative;z-index:1;
+}
+.lv-icon-big{font-size:40px;margin-bottom:12px;position:relative;z-index:1;display:block;
+  animation:floatBob 4s ease-in-out infinite}
+.lv-card:nth-child(2) .lv-icon-big{animation-delay:.8s}
+.lv-card:nth-child(3) .lv-icon-big{animation-delay:1.6s}
+.lv-title{font-size:20px;font-weight:900;color:#fff;margin-bottom:6px;position:relative;z-index:1;line-height:1.2}
+.lv-subtitle{font-size:12.5px;color:rgba(255,255,255,.82);position:relative;z-index:1;line-height:1.55}
+
+/* Beginner gradient */
+.lv-beg .lv-card-top{background:linear-gradient(135deg,#0f5c30,#1ea851,#3dc96e)}
+.lv-beg{border-color:var(--g200)}
+.lv-beg:hover{border-color:var(--g400)}
+/* Intermediate gradient */
+.lv-int .lv-card-top{background:linear-gradient(135deg,#92400e,#d97706,#f59e0b)}
+.lv-int{border-color:var(--amber-border)}
+.lv-int:hover{border-color:var(--amber)}
+/* Advanced gradient */
+.lv-adv .lv-card-top{background:linear-gradient(135deg,#5b21b6,#7c3aed,#8b5cf6)}
+.lv-adv{border-color:var(--p200)}
+.lv-adv:hover{border-color:var(--p400)}
+
+.lv-card-body{padding:20px 24px;flex:1;display:flex;flex-direction:column;gap:14px}
+
+/* Stats row inside card */
+.lv-stats{display:flex;gap:0;border:1.5px solid var(--border);border-radius:12px;overflow:hidden}
+.lv-stat-item{flex:1;padding:11px 10px;text-align:center;border-right:1px solid var(--border)}
+.lv-stat-item:last-child{border-right:none}
+.lv-stat-val{font-size:15px;font-weight:900;color:var(--ink);display:block}
+.lv-stat-lbl{font-size:10px;font-weight:600;color:var(--ink3);margin-top:1px;display:block}
+
+/* Progress inside card */
+.lv-prog-wrap{}
+.lv-prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.lv-prog-label{font-size:11.5px;font-weight:700;color:var(--ink3)}
+.lv-prog-pct{font-size:12px;font-weight:900;color:var(--ink)}
+.lv-prog-bar{height:8px;border-radius:100px;overflow:hidden;background:var(--surf2)}
+.lv-prog-fill{height:100%;border-radius:100px;transition:width .7s cubic-bezier(.34,1.56,.64,1)}
+
+/* Topic chips preview */
+.lv-topics-preview{display:flex;flex-direction:column;gap:7px}
+.lv-topic-chip{
+  display:flex;align-items:center;gap:9px;
+  padding:8px 12px;border-radius:10px;border:1.5px solid var(--border);background:var(--surf1);
+  font-size:12.5px;font-weight:600;color:var(--ink3);
+}
+.lv-topic-chip .chip-ico{font-size:14px;flex-shrink:0}
+.lv-topic-chip .chip-name{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lv-topic-chip .chip-done{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:100px}
+.chip-done-yes{background:var(--g100);color:var(--g700)}
+.chip-done-no{background:var(--surf2);color:var(--ink4)}
+.chip-done-prog{background:var(--amber-bg);color:var(--amber)}
+.lv-more{font-size:12px;font-weight:700;color:var(--ink3);text-align:center;padding:4px 0}
+
+/* Card CTA footer */
+.lv-card-footer{
+  padding:16px 24px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.lv-footer-left{font-size:12px;font-weight:700;color:var(--ink3)}
+.lv-cta-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:9px 20px;border-radius:10px;font-size:13px;font-weight:800;
+  cursor:pointer;transition:.2s;border:none;
+}
+.lv-beg .lv-cta-btn{background:var(--g500);color:#fff;box-shadow:0 3px 12px rgba(30,168,81,.3)}
+.lv-beg .lv-cta-btn:hover{background:var(--g600);box-shadow:0 5px 18px rgba(30,168,81,.4)}
+.lv-int .lv-cta-btn{background:var(--amber);color:#fff;box-shadow:0 3px 12px rgba(196,124,16,.3)}
+.lv-int .lv-cta-btn:hover{background:#b06b0b;box-shadow:0 5px 18px rgba(196,124,16,.4)}
+.lv-adv .lv-cta-btn{background:var(--p500);color:#fff;box-shadow:0 3px 12px rgba(108,61,228,.3)}
+.lv-adv .lv-cta-btn:hover{background:var(--p600);box-shadow:0 5px 18px rgba(108,61,228,.4)}
+
+/* Lock state for locked levels */
+.lv-card.locked{opacity:.72;cursor:not-allowed}
+.lv-card.locked:hover{transform:none;box-shadow:var(--sh1)}
+.lv-lock-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
+  border-radius:100px;padding:4px 12px;font-size:11px;font-weight:700;color:#fff;
+  position:absolute;top:16px;right:16px;z-index:2;
+}
+
+/* ── Tools Section (NEW — Platform Available) ── */
+.tools-section{margin-bottom:20px}
+.tools-section-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;flex-wrap:wrap;gap:12px;
+}
+.tools-section-title{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--ink3);display:flex;align-items:center;gap:10px;
+}
+.tools-section-title::before{content:'';width:20px;height:2.5px;background:linear-gradient(90deg,var(--p600),var(--g500));border-radius:2px;flex-shrink:0}
+.platform-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:linear-gradient(90deg,var(--p100),var(--g100));
+  border:1.5px solid var(--p200);border-radius:100px;
+  padding:6px 16px;font-size:11.5px;font-weight:800;color:var(--p700);
+}
+.platform-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--p500);animation:pulse 2s infinite}
+
+.tools-grid-full{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:900px){.tools-grid-full{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.tools-grid-full{grid-template-columns:1fr 1fr}}
+
+.tool-card-full{
+  background:var(--white);border-radius:var(--r-lg);
+  border:1.5px solid var(--border);box-shadow:var(--sh1);
+  padding:20px;position:relative;overflow:hidden;
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+}
+.tool-card-full::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r-lg) var(--r-lg) 0 0;
+}
+.tcf-purple::before{background:linear-gradient(90deg,var(--p600),var(--p400))}
+.tcf-green::before{background:linear-gradient(90deg,var(--g600),var(--g400))}
+.tcf-amber::before{background:linear-gradient(90deg,#b45309,#f59e0b)}
+.tcf-blue::before{background:linear-gradient(90deg,#1d4ed8,#60a5fa)}
+.tcf-teal::before{background:linear-gradient(90deg,#0f766e,#2dd4bf)}
+.tcf-rose::before{background:linear-gradient(90deg,#be123c,#fb7185)}
+.tcf-indigo::before{background:linear-gradient(90deg,#4338ca,#818cf8)}
+.tcf-fuchsia::before{background:linear-gradient(90deg,#a21caf,#e879f9)}
+
+.tcf-icon{font-size:28px;margin-bottom:12px;display:block}
+.tcf-name{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.tcf-desc{font-size:12px;color:var(--ink3);line-height:1.55;margin-bottom:14px}
+.tcf-status{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 12px;border-radius:100px;font-size:11px;font-weight:700;
+  background:var(--surf2);border:1.5px solid var(--border);color:var(--ink3);
+}
+.tcf-status-dot{width:6px;height:6px;border-radius:50%;background:var(--amber);animation:pulse 2s infinite}
+.tcf-deco{
+  position:absolute;bottom:-24px;right:-24px;width:80px;height:80px;
+  border-radius:50%;opacity:.06;
+}
+.tcf-purple .tcf-deco{background:var(--p500)}
+.tcf-green .tcf-deco{background:var(--g500)}
+.tcf-amber .tcf-deco{background:var(--amber)}
+.tcf-blue .tcf-deco{background:#2563eb}
+
+/* Topics list (kept for View 3 nav) */
+.topics-list{display:flex;flex-direction:column;gap:12px}
+.topic-item{
+  background:var(--white);border-radius:var(--r-lg);
+  border:1.5px solid var(--border);box-shadow:var(--sh1);
+  padding:18px 22px;cursor:pointer;
+  display:flex;align-items:center;gap:16px;
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+}
+.topic-item:hover{transform:translateX(6px);box-shadow:var(--sh2);border-color:var(--p300)}
+.topic-item.completed{border-color:var(--g200);background:var(--g50)}
+.ti-icon{
+  width:44px;height:44px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;font-size:19px;
+  flex-shrink:0;background:var(--surf2);border:1.5px solid var(--border);
+}
+.topic-item.completed .ti-icon{background:var(--g100);border-color:var(--g200)}
+.ti-body{flex:1;min-width:0}
+.ti-name{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.ti-meta{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--ink3)}
+.ti-meta-dot{width:4px;height:4px;border-radius:50%;background:var(--border2)}
+.ti-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+.ti-time{font-size:11.5px;font-weight:600;color:var(--ink3)}
+.ti-status{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700;
+}
+.tis-new{background:var(--p100);color:var(--p600)}
+.tis-done{background:var(--g100);color:var(--g700)}
+.tis-progress{background:var(--amber-bg);color:var(--amber)}
+.ti-arrow{font-size:14px;color:var(--ink4);transition:.18s}
+.topic-item:hover .ti-arrow{color:var(--p500);transform:translateX(3px)}
+
+/* ══════════════════════════════════════
+   CONTENT PAGE
+══════════════════════════════════════ */
+.content-page{max-width:1320px;margin:0 auto;padding:0 max(24px,env(safe-area-inset-left)) 60px}
+.content-layout{display:grid;grid-template-columns:240px 1fr 260px;gap:24px;align-items:start}
+@media(max-width:1100px){.content-layout{grid-template-columns:1fr}}
+
+/* Left sidebar */
+.content-sidebar{position:sticky;top:76px}
+.cs-card{
+  background:var(--white);border-radius:var(--r-lg);
+  border:1.5px solid var(--border);box-shadow:var(--sh1);
+  overflow:hidden;margin-bottom:14px;
+}
+.cs-head{
+  padding:14px 16px;border-bottom:1px solid var(--border);
+  font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--ink3);
+  display:flex;align-items:center;gap:8px;
+}
+.cs-head-icon{font-size:15px}
+.cs-list{padding:8px 0}
+.cs-item{
+  display:flex;align-items:center;gap:9px;
+  padding:8px 16px;cursor:pointer;transition:.15s;
+  font-size:13px;font-weight:600;color:var(--ink3);
+  border-left:3px solid transparent;
+}
+.cs-item:hover{background:var(--p50);color:var(--p600);border-left-color:var(--p300)}
+.cs-item.active{background:var(--p100);color:var(--p700);border-left-color:var(--p600);font-weight:700}
+.cs-item-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);flex-shrink:0}
+.cs-item.active .cs-item-dot{background:var(--p500)}
+.cs-item.done{color:var(--g600)}
+.cs-item.done .cs-item-dot{background:var(--g400)}
+
+/* Content main */
+.content-main{min-width:0}
+
+/* Content hero */
+.content-hero{
+  background:var(--white);border-radius:var(--r-xl);
+  border:1.5px solid var(--border);box-shadow:var(--sh1);
+  overflow:hidden;margin-bottom:22px;
+  animation:fadeUp .4s ease both;
+}
+.ch-top{padding:28px 32px 24px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.ch-top::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--p600),var(--p400),var(--g500));
+}
+.ch-breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink3);margin-bottom:12px;flex-wrap:wrap}
+.ch-bc-item{font-weight:600;cursor:pointer;transition:.15s}
+.ch-bc-item:hover{color:var(--p600)}
+.ch-bc-sep{opacity:.5;font-size:10px}
+.ch-bc-current{font-weight:800;color:var(--p600)}
+.ch-title{font-size:clamp(18px,3vw,28px);font-weight:900;color:var(--ink);margin-bottom:8px;letter-spacing:-.8px;line-height:1.2}
+.ch-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ch-tag{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 12px;border-radius:100px;font-size:11.5px;font-weight:700;border:1.5px solid;
+}
+.ch-actions{padding:16px 32px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.btn-bookmark{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:9px 18px;border-radius:10px;font-size:13px;font-weight:700;
+  background:var(--surf1);border:1.5px solid var(--border);color:var(--ink3);
+  cursor:pointer;transition:.18s;
+}
+.btn-bookmark:hover{border-color:var(--p300);color:var(--p600);background:var(--p50)}
+.btn-bookmark.active{background:var(--amber-bg);border-color:var(--amber-border);color:var(--amber)}
+.btn-complete{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:9px 22px;border-radius:10px;font-size:13px;font-weight:700;
+  background:var(--g500);color:#fff;cursor:pointer;transition:.18s;
+  box-shadow:0 3px 12px rgba(30,168,81,.3);
+}
+.btn-complete:hover{background:var(--g600);box-shadow:0 5px 16px rgba(30,168,81,.4)}
+.btn-complete.done{background:var(--g100);color:var(--g700);box-shadow:none;border:1.5px solid var(--g200)}
+.btn-quiz{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:9px 18px;border-radius:10px;font-size:13px;font-weight:700;
+  background:var(--p50);border:1.5px solid var(--p200);color:var(--p600);
+  cursor:pointer;transition:.18s;margin-left:auto;
+}
+.btn-quiz:hover{background:var(--p500);border-color:var(--p500);color:#fff}
+
+/* Content sections */
+.content-sections{display:flex;flex-direction:column;gap:20px}
+
+/* Info card */
+.info-card{
+  background:var(--white);border-radius:var(--r-lg);
+  border:1.5px solid var(--border);box-shadow:var(--sh1);overflow:hidden;
+  animation:fadeUp .4s ease both;
+}
+.info-card-head{
+  padding:16px 22px 14px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+.ich-icon{
+  width:38px;height:38px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
+}
+.ich-title{font-size:15px;font-weight:800;color:var(--ink)}
+.ich-sub{font-size:11.5px;color:var(--ink3);margin-top:2px}
+.info-card-body{padding:22px}
+
+/* Text content */
+.content-text{font-size:14px;color:var(--ink2);line-height:1.85}
+.content-text p{margin-bottom:14px}
+.content-text p:last-child{margin-bottom:0}
+.content-text strong{color:var(--ink);font-weight:700}
+
+/* Accordion */
+.accordion-item{
+  border:1.5px solid var(--border);border-radius:13px;overflow:hidden;
+  margin-bottom:10px;transition:border-color .2s;
+}
+.accordion-item:hover{border-color:var(--p300)}
+.accordion-item.open{border-color:var(--p400)}
+.acc-head{
+  display:flex;align-items:center;gap:12px;
+  padding:15px 18px;cursor:pointer;background:var(--surf1);
+  transition:background .18s;
+}
+.accordion-item.open .acc-head{background:var(--p50)}
+.acc-num{
+  width:26px;height:26px;border-radius:8px;
+  background:var(--surf2);border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:900;color:var(--ink3);flex-shrink:0;transition:.18s;
+}
+.accordion-item.open .acc-num{background:var(--p500);border-color:var(--p600);color:#fff}
+.acc-title{font-size:13.5px;font-weight:700;color:var(--ink);flex:1}
+.acc-arrow{font-size:12px;color:var(--ink4);transition:.25s}
+.accordion-item.open .acc-arrow{transform:rotate(180deg);color:var(--p500)}
+.acc-body{
+  display:none;padding:0 18px 16px;
+  font-size:13px;color:var(--ink3);line-height:1.75;
+  border-top:1px solid var(--border);padding-top:14px;
+}
+.accordion-item.open .acc-body{display:block}
+
+/* Infographic: Candlestick chart */
+.chart-container{border-radius:14px;background:var(--surf1);border:1.5px solid var(--border);padding:20px;overflow-x:auto}
+.chart-inner{min-width:320px}
+.chart-title{font-size:12px;font-weight:800;color:var(--ink3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.chart-legend{display:flex;gap:14px;flex-wrap:wrap}
+.cl-item{display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:var(--ink3)}
+.cl-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+
+/* Infographic: Stats row */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.stats-row{grid-template-columns:1fr 1fr}}
+.stat-box{
+  padding:18px 16px;border-radius:14px;border:1.5px solid;text-align:center;
+  transition:transform .2s;cursor:default;
+}
+.stat-box:hover{transform:translateY(-3px)}
+.sb-icon{font-size:24px;margin-bottom:8px}
+.sb-val{font-size:22px;font-weight:900;margin-bottom:4px;letter-spacing:-.5px}
+.sb-label{font-size:11px;font-weight:600;color:var(--ink3);line-height:1.4}
+.sb-purple{background:var(--p50);border-color:var(--p200)}.sb-purple .sb-val{color:var(--p700)}
+.sb-green{background:var(--g50);border-color:var(--g200)}.sb-green .sb-val{color:var(--g700)}
+.sb-amber{background:var(--amber-bg);border-color:var(--amber-border)}.sb-amber .sb-val{color:var(--amber)}
+
+/* Process flow */
+.process-flow{display:flex;flex-direction:column;gap:0}
+.pf-step{display:flex;gap:14px;align-items:flex-start;padding:14px 0;position:relative}
+.pf-step:not(:last-child)::after{
+  content:'';position:absolute;left:17px;top:50px;bottom:0;width:2px;
+  background:linear-gradient(180deg,var(--p300),var(--g300));border-radius:2px;
+}
+.pf-dot{
+  width:36px;height:36px;min-width:36px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;color:#fff;flex-shrink:0;
+  box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+.pf-body{flex:1;padding-top:5px}
+.pf-title{font-size:13.5px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.pf-desc{font-size:12.5px;color:var(--ink3);line-height:1.65}
+
+/* Highlight box */
+.highlight-box{
+  border-radius:14px;padding:20px 22px;border:1.5px solid;position:relative;overflow:hidden;
+}
+.highlight-box::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0;
+}
+.hb-purple{background:linear-gradient(135deg,var(--p50),#fff);border-color:var(--p200)}
+.hb-purple::before{background:linear-gradient(90deg,var(--p700),var(--p400))}
+.hb-green{background:linear-gradient(135deg,var(--g50),#fff);border-color:var(--g200)}
+.hb-green::before{background:linear-gradient(90deg,var(--g700),var(--g400))}
+.hb-amber{background:linear-gradient(135deg,var(--amber-bg),#fff);border-color:var(--amber-border)}
+.hb-amber::before{background:linear-gradient(90deg,#b45309,var(--amber))}
+.hb-title{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.hb-text{font-size:13px;color:var(--ink3);line-height:1.75}
+
+/* Example scenario */
+.example-card{
+  background:linear-gradient(135deg,var(--ink),var(--p800));
+  border-radius:var(--r-lg);padding:22px 24px;
+  border:1.5px solid var(--p700);
+}
+.ec-label{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);
+  border-radius:100px;padding:4px 12px;font-size:10.5px;font-weight:700;
+  color:rgba(255,255,255,.85);margin-bottom:12px;
+}
+.ec-title{font-size:15px;font-weight:800;color:#fff;margin-bottom:10px}
+.ec-text{font-size:13px;color:rgba(255,255,255,.8);line-height:1.75}
+.ec-result{
+  margin-top:14px;padding:12px 16px;
+  background:rgba(30,168,81,.2);border:1px solid rgba(30,168,81,.3);
+  border-radius:10px;font-size:13px;font-weight:700;
+  color:var(--g300);display:flex;align-items:center;gap:8px;
+}
+
+/* Right sidebar - Quiz / Tools */
+.right-sidebar{position:sticky;top:76px}
+@media(max-width:1100px){.right-sidebar{display:none}}
+.rs-card{
+  background:var(--white);border-radius:var(--r-xl);
+  border:1.5px solid var(--border);box-shadow:var(--sh1);
+  overflow:hidden;margin-bottom:16px;
+}
+.rs-head{
+  padding:16px 18px;border-bottom:1px solid var(--border);
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--ink3);
+  display:flex;align-items:center;gap:8px;
+}
+.rs-head-icon{font-size:16px}
+.quiz-card{padding:18px}
+.quiz-q{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:16px;line-height:1.55}
+.quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.quiz-opt{
+  padding:10px 14px;border-radius:10px;font-size:13px;font-weight:600;
+  background:var(--surf1);border:1.5px solid var(--border);
+  cursor:pointer;transition:.18s;color:var(--ink3);
+}
+.quiz-opt:hover{border-color:var(--p300);background:var(--p50);color:var(--p600)}
+.quiz-opt.correct{background:var(--g50);border-color:var(--g300);color:var(--g700)}
+.quiz-opt.wrong{background:var(--red-bg);border-color:var(--red-border);color:var(--red)}
+.quiz-btn{
+  width:100%;padding:10px;border-radius:10px;font-size:13px;font-weight:700;
+  background:var(--p500);color:#fff;cursor:pointer;transition:.18s;
+  box-shadow:0 3px 10px rgba(108,61,228,.3);
+}
+.quiz-btn:hover{background:var(--p600)}
+.quiz-explain{
+  margin-top:12px;padding:12px;border-radius:10px;
+  background:var(--p50);border:1.5px solid var(--p200);
+  font-size:12.5px;color:var(--p700);line-height:1.65;display:none;
+}
+
+/* Badge widget */
+.badge-widget{padding:18px;text-align:center}
+.badge-icon-big{font-size:52px;margin-bottom:10px}
+.badge-name{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.badge-desc{font-size:12px;color:var(--ink3);margin-bottom:14px;line-height:1.6}
+.badge-progress{margin-bottom:10px}
+.bp-label{display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:var(--ink3);margin-bottom:5px}
+.bp-bar{height:7px;background:var(--surf2);border-radius:100px;overflow:hidden}
+.bp-fill{height:100%;background:linear-gradient(90deg,var(--p500),var(--g400));border-radius:100px;width:35%}
+.bp-hint{font-size:11px;color:var(--ink4)}
+
+/* Tools section */
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:14px}
+.tool-card{
+  padding:14px;border-radius:13px;border:1.5px solid var(--border);
+  background:var(--surf1);cursor:pointer;transition:.2s;text-align:center;
+}
+.tool-card:hover{border-color:var(--p300);background:var(--p50);transform:translateY(-2px)}
+.tool-icon{font-size:26px;margin-bottom:8px}
+.tool-name{font-size:12px;font-weight:700;color:var(--ink)}
+.tool-desc{font-size:10.5px;color:var(--ink3);margin-top:2px;line-height:1.4}
+
+/* ══════════════════════════════════════
+   QUIZ MODAL
+══════════════════════════════════════ */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(16,4,40,.6);backdrop-filter:blur(6px);
+  z-index:1000;align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay.open{display:flex}
+.modal-box{
+  background:var(--white);border-radius:var(--r-xl);
+  max-width:500px;width:100%;padding:32px;
+  box-shadow:0 30px 80px rgba(16,4,40,.3);
+  animation:fadeUp .35s ease both;
+  position:relative;max-height:90vh;overflow-y:auto;
+}
+.modal-close{
+  position:absolute;top:16px;right:16px;
+  width:32px;height:32px;border-radius:9px;
+  background:var(--surf2);border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;cursor:pointer;color:var(--ink3);
+  transition:.18s;
+}
+.modal-close:hover{background:var(--red-bg);border-color:var(--red-border);color:var(--red)}
+.modal-title{font-size:20px;font-weight:900;color:var(--ink);margin-bottom:6px}
+.modal-sub{font-size:13.5px;color:var(--ink3);margin-bottom:24px}
+.quiz-progress{
+  display:flex;align-items:center;gap:10px;margin-bottom:20px;
+}
+.qp-num{font-size:12px;font-weight:700;color:var(--ink3);white-space:nowrap}
+.qp-bar{flex:1;height:5px;background:var(--surf2);border-radius:100px;overflow:hidden}
+.qp-fill{height:100%;background:linear-gradient(90deg,var(--p500),var(--g500));border-radius:100px;transition:width .3s}
+.modal-q{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:16px;line-height:1.5}
+.modal-opts{display:flex;flex-direction:column;gap:9px;margin-bottom:20px}
+.mopt{
+  padding:13px 16px;border-radius:12px;font-size:13.5px;font-weight:600;
+  background:var(--surf1);border:1.5px solid var(--border);
+  cursor:pointer;transition:.18s;color:var(--ink3);text-align:left;
+  display:flex;align-items:center;gap:10px;
+}
+.mopt:hover{border-color:var(--p300);background:var(--p50);color:var(--p600)}
+.mopt.correct{background:var(--g50);border-color:var(--g300);color:var(--g700)}
+.mopt.wrong{background:var(--red-bg);border-color:var(--red-border);color:var(--red)}
+.mopt-letter{
+  width:26px;height:26px;border-radius:8px;background:var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11.5px;font-weight:900;color:var(--ink3);flex-shrink:0;transition:.18s;
+}
+.mopt.correct .mopt-letter{background:var(--g300);color:var(--g700)}
+.mopt.wrong .mopt-letter{background:var(--red-border);color:var(--red)}
+.modal-next{
+  width:100%;padding:13px;border-radius:12px;font-size:14px;font-weight:700;
+  background:var(--p500);color:#fff;cursor:pointer;transition:.18s;
+  box-shadow:0 4px 14px rgba(108,61,228,.35);
+}
+.modal-next:hover{background:var(--p600)}
+.quiz-result{text-align:center;padding:16px 0}
+.qr-emoji{font-size:52px;margin-bottom:14px}
+.qr-title{font-size:22px;font-weight:900;color:var(--ink);margin-bottom:6px}
+.qr-score{font-size:36px;font-weight:900;color:var(--p500);margin-bottom:10px}
+.qr-desc{font-size:14px;color:var(--ink3);line-height:1.65;margin-bottom:24px}
+
+/* Search overlay */
+.search-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(16,4,40,.7);backdrop-filter:blur(8px);
+  z-index:600;align-items:flex-start;justify-content:center;
+  padding:80px 20px;
+}
+.search-overlay.open{display:flex}
+.search-box{
+  background:var(--white);border-radius:var(--r-xl);
+  width:100%;max-width:600px;overflow:hidden;
+  box-shadow:0 40px 100px rgba(16,4,40,.3);
+  animation:fadeUp .2s ease both;
+}
+.search-input-wrap{
+  display:flex;align-items:center;gap:12px;padding:18px 22px;
+  border-bottom:1px solid var(--border);
+}
+.search-input{
+  flex:1;font-size:16px;font-family:var(--font);font-weight:500;
+  color:var(--ink);border:none;outline:none;background:none;
+}
+.search-input::placeholder{color:var(--ink4)}
+.search-close{font-size:16px;color:var(--ink3);cursor:pointer;padding:4px;transition:.15s}
+.search-close:hover{color:var(--red)}
+.search-results{padding:12px 0;max-height:400px;overflow-y:auto}
+.sr-group-label{
+  padding:8px 22px;font-size:10px;font-weight:800;
+  text-transform:uppercase;letter-spacing:1px;color:var(--ink4);
+}
+.sr-item{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 22px;cursor:pointer;transition:.15s;
+}
+.sr-item:hover{background:var(--p50)}
+.sr-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--surf2);border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;
+}
+.sr-text{}
+.sr-name{font-size:13.5px;font-weight:700;color:var(--ink)}
+.sr-meta{font-size:11.5px;color:var(--ink3)}
+.sr-kbd{
+  margin-left:auto;padding:3px 8px;border-radius:5px;
+  background:var(--surf2);border:1px solid var(--border);
+  font-size:11px;font-weight:700;color:var(--ink3);flex-shrink:0;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media(max-width:1100px){
+  .content-layout{grid-template-columns:1fr}
+  .content-sidebar{display:none}
+}
+@media(max-width:900px){
+  .level-cards-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .hero{padding:24px 0 20px}
+  .hero-top{flex-direction:column}
+  .hero-resume{max-width:100%}
+  .mod-hero{padding:24px 24px}
+  .mh-content{grid-template-columns:1fr}
+  .mh-stats{flex-direction:row}
+  .mod-page,.content-page,.modules-section{padding-left:16px;padding-right:16px}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .tools-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .modules-grid{gap:14px}
+  .mod-card-header{padding:20px 18px 16px}
+  .stats-row{grid-template-columns:1fr}
+  .level-header{flex-direction:column;align-items:flex-start}
+}
+
+/* ══════════════════════════════════════
+   MISC
+══════════════════════════════════════ */
+.sec-eyebrow{
+  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--p600);margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.sec-eyebrow::before{content:'';width:20px;height:2.5px;background:linear-gradient(90deg,var(--p600),var(--g500));border-radius:2px;flex-shrink:0}
+.sec-title{font-size:clamp(20px,3vw,28px);font-weight:900;color:var(--ink);line-height:1.2;margin-bottom:6px}
+.sec-desc{font-size:14px;color:var(--ink3);line-height:1.7;max-width:660px}
+
+.divider{height:1px;background:var(--border);margin:24px 0}
+
+/* ══════════════════════════════════════
+   VIEW 3 — LEVEL OUTLINE PAGE (RICH)
+══════════════════════════════════════ */
+@keyframes ringFill{from{stroke-dashoffset:var(--from)}to{stroke-dashoffset:var(--to)}}
+@keyframes heroFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1deg)}}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
+
+.outline-page{margin:0 auto;padding:0;padding-bottom:80px}
+.outline-wrap{display:flex;flex-direction:column;gap:0}
+
+/* ── Full-bleed level hero ── */
+.ol-hero{
+  position:relative;overflow:hidden;
+  padding:48px max(32px,env(safe-area-inset-left)) 52px;
+  margin-bottom:0;
+}
+.ol-hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:44px 44px;pointer-events:none;
+}
+.ol-hero-orb1{
+  position:absolute;top:-80px;right:-80px;width:420px;height:420px;
+  border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18),transparent 65%);
+  pointer-events:none;
+}
+.ol-hero-orb2{
+  position:absolute;bottom:-100px;left:-60px;width:300px;height:300px;
+  border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.1),transparent 65%);
+  pointer-events:none;
+}
+.ol-hero-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto}
+
+.ol-hero-nav{display:flex;align-items:center;gap:12px;margin-bottom:32px;flex-wrap:wrap}
+.ol-back{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 18px 8px 14px;border-radius:100px;
+  background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.3);
+  font-size:13px;font-weight:700;color:#fff;cursor:pointer;transition:.2s;
+}
+.ol-back:hover{background:rgba(255,255,255,.28)}
+.ol-breadcrumb{display:flex;align-items:center;gap:6px;font-size:12.5px;color:rgba(255,255,255,.65);flex-wrap:wrap}
+.ol-bc-link{font-weight:600;cursor:pointer;transition:.15s;color:rgba(255,255,255,.65)}
+.ol-bc-link:hover{color:#fff}
+.ol-bc-sep{opacity:.4}
+.ol-bc-cur{font-weight:800;color:#fff}
+
+.ol-hero-body{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
+@media(max-width:860px){.ol-hero-body{grid-template-columns:1fr}}
+
+.ol-hero-text{}
+.ol-level-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.28);
+  border-radius:100px;padding:6px 16px;
+  font-size:11.5px;font-weight:800;color:#fff;letter-spacing:.5px;
+  margin-bottom:18px;
+}
+.ol-level-eyebrow-dot{width:7px;height:7px;border-radius:50%;background:#fff;animation:pulse 2s infinite}
+.ol-hero-h1{
+  font-size:clamp(28px,4.5vw,48px);font-weight:900;color:#fff;
+  letter-spacing:-1.5px;line-height:1.08;margin-bottom:14px;
+}
+.ol-hero-desc{font-size:15px;color:rgba(255,255,255,.82);line-height:1.75;max-width:560px;margin-bottom:26px}
+
+.ol-hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.ol-hp{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.22);
+  border-radius:100px;padding:7px 16px;font-size:12px;font-weight:700;color:#fff;
+}
+
+/* Hero progress bar full-width */
+.ol-hero-prog{
+  background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.2);
+  border-radius:16px;padding:18px 22px;max-width:520px;
+}
+.ol-hp-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.ol-hp-label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.75)}
+.ol-hp-nums{font-size:14px;font-weight:900;color:#fff}
+.ol-hp-bar{height:10px;background:rgba(255,255,255,.18);border-radius:100px;overflow:hidden;margin-bottom:10px}
+.ol-hp-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,rgba(255,255,255,.9),rgba(255,255,255,.6));transition:width .8s cubic-bezier(.34,1.56,.64,1)}
+.ol-hp-unlock{font-size:11.5px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:6px}
+.ol-hp-unlock strong{color:#fff}
+
+/* Right side: illustrated stat cards */
+.ol-hero-stats{display:flex;flex-direction:column;gap:12px;min-width:200px}
+@media(max-width:860px){.ol-hero-stats{flex-direction:row;flex-wrap:wrap}}
+.ol-hstat{
+  background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.22);
+  border-radius:16px;padding:16px 20px;
+  display:flex;align-items:center;gap:12px;
+  transition:background .2s;
+}
+.ol-hstat:hover{background:rgba(255,255,255,.22)}
+.ol-hstat-ico{font-size:22px;flex-shrink:0}
+.ol-hstat-val{font-size:20px;font-weight:900;color:#fff;display:block;line-height:1}
+.ol-hstat-lbl{font-size:10.5px;font-weight:600;color:rgba(255,255,255,.7);display:block;margin-top:2px}
+
+/* ── Level switcher tabs (below hero) ── */
+.ol-level-switcher{
+  display:flex;gap:0;
+  background:var(--white);border-bottom:1.5px solid var(--border);
+  padding:0 max(32px,env(safe-area-inset-left));
+  position:sticky;top:60px;z-index:100;
+  box-shadow:var(--sh1);overflow-x:auto;
+}
+.ol-lvl-tab{
+  display:flex;align-items:center;gap:8px;
+  padding:16px 24px;font-size:13px;font-weight:700;color:var(--ink3);
+  cursor:pointer;border-bottom:3px solid transparent;
+  transition:.18s;white-space:nowrap;flex-shrink:0;
+}
+.ol-lvl-tab:hover{color:var(--ink);background:var(--surf1)}
+.ol-lvl-tab.active-tab{color:var(--p600);border-bottom-color:var(--p500)}
+.ol-lvl-tab.active-tab.beg-tab{color:var(--g700);border-bottom-color:var(--g500)}
+.ol-lvl-tab.active-tab.int-tab{color:var(--amber);border-bottom-color:var(--amber)}
+.ol-lvl-tab.active-tab.adv-tab{color:var(--p600);border-bottom-color:var(--p500)}
+.ol-tab-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ol-tab-count{
+  padding:2px 8px;border-radius:100px;font-size:10.5px;font-weight:800;
+  background:var(--surf2);color:var(--ink3);margin-left:2px;
+}
+.ol-lvl-tab.active-tab .ol-tab-count{background:var(--p100);color:var(--p700)}
+.ol-lvl-tab.active-tab.beg-tab .ol-tab-count{background:var(--g100);color:var(--g700)}
+.ol-lvl-tab.active-tab.int-tab .ol-tab-count{background:var(--amber-bg);color:var(--amber)}
+
+/* ── Topics container ── */
+.ol-topics-area{max-width:1280px;margin:0 auto;padding:32px max(24px,env(safe-area-inset-left)) 0}
+.ol-topics-container{display:flex;flex-direction:column;gap:16px}
+
+/* ── Topic card (rich) ── */
+.ol-topic-card{
+  background:var(--white);border-radius:var(--r-xl);
+  border:2px solid var(--border);box-shadow:var(--sh1);
+  overflow:hidden;cursor:pointer;
+  transition:box-shadow .25s,border-color .25s,transform .25s;
+  animation:fadeUp .4s ease both;
+}
+.ol-topic-card:nth-child(2){animation-delay:.05s}
+.ol-topic-card:nth-child(3){animation-delay:.10s}
+.ol-topic-card:nth-child(4){animation-delay:.15s}
+.ol-topic-card:nth-child(5){animation-delay:.20s}
+.ol-topic-card:nth-child(6){animation-delay:.25s}
+.ol-topic-card:nth-child(7){animation-delay:.30s}
+.ol-topic-card:nth-child(8){animation-delay:.35s}
+.ol-topic-card:hover{box-shadow:var(--sh3);transform:translateY(-2px)}
+.ol-topic-card.done-card{border-color:var(--g200)}
+.ol-topic-card.done-card:hover{border-color:var(--g400)}
+.ol-topic-card.inprog-card{border-color:var(--amber-border)}
+.ol-topic-card.inprog-card:hover{border-color:var(--amber)}
+.ol-topic-card.open-card .ol-tc-head{border-bottom:2px solid var(--border)}
+.ol-topic-card.done-card.open-card .ol-tc-head{border-bottom-color:var(--g200)}
+.ol-topic-card.inprog-card.open-card .ol-tc-head{border-bottom-color:var(--amber-border)}
+
+/* Topic card colored top accent */
+.ol-tc-accent{height:4px;width:100%;background:linear-gradient(90deg,var(--p400),var(--g400))}
+.done-card .ol-tc-accent{background:linear-gradient(90deg,var(--g500),var(--g300))}
+.inprog-card .ol-tc-accent{background:linear-gradient(90deg,var(--amber),#f59e0b)}
+
+/* Topic card header */
+.ol-tc-head{
+  display:grid;grid-template-columns:auto 1fr auto auto;
+  gap:18px;align-items:center;
+  padding:20px 24px;transition:background .18s;
+}
+.ol-tc-head:hover{background:var(--surf1)}
+.done-card .ol-tc-head:hover{background:var(--g50)}
+.inprog-card .ol-tc-head:hover{background:var(--amber-bg)}
+
+/* Progress ring */
+.ol-tc-ring{position:relative;width:52px;height:52px;flex-shrink:0}
+.ol-tc-ring svg{transform:rotate(-90deg)}
+.ol-tc-ring-bg{stroke:var(--border);fill:none;stroke-width:4}
+.ol-tc-ring-fill{fill:none;stroke-width:4;stroke-linecap:round;transition:stroke-dashoffset .8s cubic-bezier(.34,1.56,.64,1)}
+.ol-tc-ring-icon{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+}
+.ol-tc-ring-pct{
+  position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+  font-size:10px;font-weight:900;color:var(--ink);
+}
+
+.ol-tc-text{min-width:0}
+.ol-tc-num{
+  font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;
+  color:var(--ink4);margin-bottom:4px;display:flex;align-items:center;gap:6px;
+}
+.ol-tc-num::before{content:'';width:14px;height:1.5px;background:var(--border);border-radius:2px;display:inline-block}
+.ol-tc-name{font-size:16px;font-weight:900;color:var(--ink);line-height:1.25;margin-bottom:5px}
+.done-card .ol-tc-name{color:var(--g700)}
+.inprog-card .ol-tc-name{color:var(--ink)}
+.ol-tc-desc{font-size:12.5px;color:var(--ink3);line-height:1.6}
+.ol-tc-tags{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+.ol-tc-tag{
+  padding:3px 9px;border-radius:100px;font-size:10.5px;font-weight:700;
+  background:var(--surf2);border:1px solid var(--border);color:var(--ink4);
+}
+.done-card .ol-tc-tag{background:var(--g100);border-color:var(--g200);color:var(--g700)}
+.inprog-card .ol-tc-tag{background:var(--amber-bg);border-color:var(--amber-border);color:var(--amber)}
+
+/* Right meta column */
+.ol-tc-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+.ol-tc-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:5px 12px;border-radius:100px;font-size:11px;font-weight:800;
+}
+.olb-done{background:var(--g100);color:var(--g700)}
+.olb-prog{background:var(--amber-bg);color:var(--amber)}
+.olb-new{background:var(--p100);color:var(--p600)}
+.ol-tc-time{font-size:11px;font-weight:600;color:var(--ink4)}
+.ol-tc-sub-count{font-size:11px;font-weight:700;color:var(--ink3)}
+
+/* Chevron */
+.ol-tc-chevron{
+  width:32px;height:32px;border-radius:10px;flex-shrink:0;
+  background:var(--surf2);border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:var(--ink4);
+  transition:transform .25s,background .2s,border-color .2s,color .2s;
+}
+.ol-topic-card.open-card .ol-tc-chevron{
+  transform:rotate(180deg);background:var(--p500);border-color:var(--p600);color:#fff;
+}
+.done-card.open-card .ol-tc-chevron{background:var(--g500);border-color:var(--g600)}
+.inprog-card.open-card .ol-tc-chevron{background:var(--amber);border-color:var(--amber)}
+
+/* ── Sub-topics panel ── */
+.ol-tc-subtopics{display:none;background:var(--surf1);border-top:2px solid var(--border)}
+.done-card .ol-tc-subtopics{background:var(--g50);border-top-color:var(--g200)}
+.inprog-card .ol-tc-subtopics{background:var(--amber-bg);border-top-color:var(--amber-border)}
+.ol-topic-card.open-card .ol-tc-subtopics{display:block}
+
+.ol-sts-inner{padding:16px 24px 20px}
+
+/* Sub-topic item row */
+.ol-st-row{
+  display:flex;align-items:center;gap:0;
+  margin-bottom:8px;border-radius:14px;overflow:hidden;
+  border:1.5px solid var(--border);background:var(--white);
+  transition:box-shadow .2s,border-color .2s,transform .2s;
+  cursor:pointer;
+}
+.ol-st-row:hover{box-shadow:var(--sh2);border-color:var(--p300);transform:translateX(5px)}
+.ol-st-row.st-done{border-color:var(--g200);background:linear-gradient(90deg,var(--g50),var(--white))}
+.ol-st-row.st-done:hover{border-color:var(--g400)}
+.ol-st-row.st-prog{border-color:var(--amber-border);background:linear-gradient(90deg,var(--amber-bg),var(--white))}
+.ol-st-row.st-prog:hover{border-color:var(--amber)}
+.ol-st-row:last-child{margin-bottom:0}
+
+/* Left colour bar on subtopic */
+.ol-st-bar{width:4px;min-height:60px;flex-shrink:0;background:var(--border);align-self:stretch}
+.st-done .ol-st-bar{background:linear-gradient(180deg,var(--g500),var(--g400))}
+.st-prog .ol-st-bar{background:linear-gradient(180deg,var(--amber),#f59e0b)}
+.ol-st-row:hover .ol-st-bar{background:linear-gradient(180deg,var(--p500),var(--p400))}
+.st-done:hover .ol-st-bar{background:linear-gradient(180deg,var(--g600),var(--g500))}
+
+/* Sub-topic number bubble */
+.ol-st-num{
+  width:28px;height:28px;border-radius:9px;flex-shrink:0;margin:0 14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:900;color:var(--ink3);
+  background:var(--surf2);border:1.5px solid var(--border);
+  transition:.18s;
+}
+.st-done .ol-st-num{background:var(--g500);border-color:var(--g600);color:#fff}
+.st-prog .ol-st-num{background:var(--amber);border-color:var(--amber);color:#fff}
+.ol-st-row:not(.st-done):not(.st-prog):hover .ol-st-num{background:var(--p500);border-color:var(--p600);color:#fff}
+
+.ol-st-body{flex:1;min-width:0;padding:14px 0}
+.ol-st-name{font-size:13.5px;font-weight:800;color:var(--ink);margin-bottom:5px;line-height:1.35}
+.st-done .ol-st-name{color:var(--g800,var(--g700))}
+.ol-st-chips{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px}
+.ol-st-chip{
+  padding:2px 9px;border-radius:100px;font-size:10px;font-weight:700;
+  background:var(--surf2);border:1px solid var(--border);color:var(--ink4);
+}
+.st-done .ol-st-chip{background:var(--g100);border-color:var(--g200);color:var(--g700)}
+.st-prog .ol-st-chip{background:var(--amber-bg);border-color:var(--amber-border);color:var(--amber)}
+
+/* Page URL row */
+.ol-st-url{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:600;color:var(--ink4);
+  background:var(--surf1);border:1px solid var(--border);
+  border-radius:100px;padding:2px 10px 2px 7px;
+  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  transition:.18s;
+}
+.ol-st-row:hover .ol-st-url{color:var(--p600);background:var(--p50);border-color:var(--p200)}
+.ol-st-url-icon{font-size:9px;flex-shrink:0}
+
+/* Right action area */
+.ol-st-right{
+  display:flex;flex-direction:column;align-items:flex-end;
+  gap:6px;padding:14px 16px 14px 12px;flex-shrink:0;
+}
+.ol-st-time{font-size:11px;font-weight:700;color:var(--ink4);white-space:nowrap}
+.ol-st-status{
+  font-size:10.5px;font-weight:800;padding:4px 11px;border-radius:100px;white-space:nowrap;
+}
+.sst-done{background:var(--g100);color:var(--g700)}
+.sst-new{background:var(--p100);color:var(--p600)}
+.sst-prog{background:var(--amber-bg);color:var(--amber)}
+
+/* CTA button on subtopic */
+.ol-st-cta{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:6px 14px;border-radius:9px;
+  font-size:11.5px;font-weight:800;
+  background:var(--p500);color:#fff;
+  transition:.2s;white-space:nowrap;flex-shrink:0;
+  box-shadow:0 2px 8px rgba(108,61,228,.25);
+  opacity:0;transform:scale(.9);
+}
+.ol-st-row:hover .ol-st-cta{opacity:1;transform:scale(1)}
+.st-done .ol-st-cta{background:var(--g500);box-shadow:0 2px 8px rgba(30,168,81,.25)}
+@media(max-width:768px){.ol-st-cta{opacity:1;transform:scale(1);padding:5px 10px;font-size:10.5px}}
+
+/* ── Section dividers in subtopic area ── */
+.ol-sts-divider{
+  display:flex;align-items:center;gap:10px;
+  font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;
+  color:var(--ink4);margin:14px 0 10px;
+}
+.ol-sts-divider::before,.ol-sts-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── Level hero colours ── */
+.ol-hero-beg{background:linear-gradient(135deg,#065f46 0%,#059669 40%,#1ea851 70%,#34d399 100%)}
+.ol-hero-int{background:linear-gradient(135deg,#78350f 0%,#b45309 40%,#d97706 70%,#f59e0b 100%)}
+.ol-hero-adv{background:linear-gradient(135deg,#1e1b4b 0%,#4c1d95 35%,#7c3aed 70%,#8b5cf6 100%)}
+
+/* ── Responsive ── */
+@media(max-width:860px){.ol-hero{padding:36px 20px 40px}}
+@media(max-width:640px){
+  .ol-tc-head{grid-template-columns:auto 1fr auto;gap:12px}
+  .ol-tc-meta{display:none}
+  .ol-tc-ring{width:42px;height:42px}
+  .ol-tc-name{font-size:14.5px}
+  .ol-sts-inner{padding:12px 14px 16px}
+  .ol-st-row{flex-wrap:wrap}
+  .ol-st-right{flex-direction:row;padding:10px 14px;width:100%;border-top:1px solid var(--border)}
+  .ol-st-cta{opacity:1;transform:none;margin-left:auto}
+  .ol-level-switcher{padding:0 16px}
+  .ol-topics-area{padding:20px 14px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav">
+    <div class="nav-logo" onclick="goHome()">
+      <div class="nav-logo-mark">📈</div>
+      <div class="nav-logo-text">Stock<b>IQ</b></div>
+    </div>
+    <div class="nav-center">
+      <div class="nav-link active" onclick="goHome()">Learn</div>
+      <div class="nav-link">Practice</div>
+      <div class="nav-link">Community</div>
+      <div class="nav-link">Tools</div>
+    </div>
+    <div class="nav-right">
+      <div class="streak-badge">🔥 7 day streak</div>
+      <div class="nav-search" onclick="openSearch()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <span>Search topics...</span>
+        <span style="margin-left:auto;font-size:11px;background:var(--surf2);padding:2px 7px;border-radius:5px;font-weight:700;color:var(--ink4)">⌘K</span>
+      </div>
+      <div class="nav-avatar">RS</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     VIEW 1: DASHBOARD
+════════════════════════════════════ -->
+<div id="view-home" class="view active">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-top">
+        <div class="hero-text">
+          <div class="hero-eyebrow">📚 Stock Market Learning Portal</div>
+          <h1>Master the <span class="grad">Stock Market</span><br>Step by Step</h1>
+          <div class="hero-sub">10 comprehensive modules across Beginner → Intermediate → Advanced. Learn at your own pace with real-world examples, interactive quizzes & tools.</div>
+          <div class="hero-stats-row">
+            <div class="hstat-pill">
+              <div class="hsp-icon" style="background:var(--p100)">📚</div>
+              <div>
+                <div class="hsp-num">10</div>
+                <div class="hsp-label">Modules</div>
+              </div>
+            </div>
+            <div class="hstat-pill">
+              <div class="hsp-icon" style="background:var(--g100)">🎯</div>
+              <div>
+                <div class="hsp-num">120+</div>
+                <div class="hsp-label">Topics</div>
+              </div>
+            </div>
+            <div class="hstat-pill">
+              <div class="hsp-icon" style="background:var(--amber-bg)">⏱️</div>
+              <div>
+                <div class="hsp-num">40+ hrs</div>
+                <div class="hsp-label">Content</div>
+              </div>
+            </div>
+            <div class="hstat-pill">
+              <div class="hsp-icon" style="background:var(--blue-bg)">🧩</div>
+              <div>
+                <div class="hsp-num">200+</div>
+                <div class="hsp-label">Quiz Questions</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resume card -->
+        <div class="hero-resume" onclick="openModule(0)">
+          <div class="hr-label">Continue Learning</div>
+          <div class="hr-module">Introduction to Stock Market</div>
+          <div class="hr-topic">How Markets Work & Price Discovery</div>
+          <div class="hr-prog-bar"><div class="hr-prog-fill"></div></div>
+          <div class="hr-foot">
+            <span>35% complete · Beginner</span>
+            <div class="hr-cta">Resume →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <div class="filter-btn active" onclick="filterModules('all',this)"><span class="filter-dot"></span> All Modules</div>
+    <div class="filter-btn" onclick="filterModules('beginner',this)" style="--dot-color:#16a34a"><span class="filter-dot" style="background:#16a34a"></span> Beginner</div>
+    <div class="filter-btn" onclick="filterModules('intermediate',this)" style="--dot-color:var(--amber)"><span class="filter-dot" style="background:var(--amber)"></span> Intermediate</div>
+    <div class="filter-btn" onclick="filterModules('advanced',this)" style="--dot-color:var(--red)"><span class="filter-dot" style="background:var(--red)"></span> Advanced</div>
+    <div class="filter-btn" onclick="filterModules('bookmarked',this)">🔖 Bookmarked</div>
+    <div class="filter-sep"></div>
+    <div class="sort-btn">Sort: Popular ▾</div>
+  </div>
+
+  <!-- Modules grid -->
+  <div class="modules-section">
+    <div class="modules-grid" id="modules-grid">
+
+      <!-- Card 1 -->
+      <div class="mod-card mc-purple anim" onclick="openModule(0)">
+        <div class="mod-card-header">
+          <div class="mod-deco"></div><div class="mod-deco2"></div>
+          <div class="mod-badge">Foundational</div>
+          <div class="mod-icon-wrap">📊</div>
+          <div class="mod-title">Introduction to Stock Market</div>
+          <div class="mod-desc">Understand how markets work, exchanges, and your first trade</div>
+        </div>
+        <div class="mod-card-body">
+          <div class="mod-levels">
+            <span class="level-chip lc-beg">🟢 Beginner</span>
+            <span class="level-chip lc-int">🟡 Inter</span>
+            <span class="level-chip lc-adv">🔴 Advanced</span>
+          </div>
+          <div class="mod-meta">
+            <div class="mod-meta-item">⏱️ 8 hrs</div>
+            <div class="mod-meta-item">📖 24 topics</div>
+            <div class="mod-meta-item">🧩 45 quizzes</div>
+          </div>
+          <div class="mod-progress">
+            <div class="mp-label"><span>Progress</span><span>35%</span></div>
+            <div class="mp-bar"><div class="mp-fill" style="--w:35%;width:35%"></div></div>
+          </div>
+          <div class="mod-footer">
+            <div class="mod-topics-count">8/24 topics complete</div>
+            <div class="mod-cta">Continue →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="mod-card mc-green anim anim-d1" onclick="openModule(1)">
+        <div class="mod-card-header">
+          <div class="mod-deco"></div><div class="mod-deco2"></div>
+          <div class="mod-badge">Popular</div>
+          <div class="mod-icon-wrap">🔍</div>
+          <div class="mod-title">Fundamental Analysis</div>
+          <div class="mod-desc">Read financial statements, valuations & identify quality stocks</div>
+        </div>
+        <div class="mod-card-body">
+          <div class="mod-levels">
+            <span class="level-chip lc-beg">🟢 Beginner</span>
+            <span class="level-chip lc-int">🟡 Inter</span>
+            <span class="level-chip lc-adv">🔴 Advanced</span>
+          </div>
+          <div class="mod-meta">
+            <div class="mod-meta-item">⏱️ 10 hrs</div>
+            <div class="mod-meta-item">📖 30 topics</div>
+            <div class="mod-meta-item">🧩 60 quizzes</div>
+          </div>
+          <div class="mod-progress">
+            <div class="mp-label"><span>Progress</span><span>0%</span></div>
+            <div class="mp-bar"><div class="mp-fill" style="width:0%"></div></div>
+          </div>
+          <div class="mod-footer">
+            <div class="mod-topics-count">0/30 topics complete</div>
+            <div class="mod-cta">Start →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="mod-card mc-indigo anim anim-d2" onclick="openModule(2)">
+        <div class="mod-card-header">
+          <div class="mod-deco"></div><div class="mod-deco2"></div>
+          <div class="mod-badge">Trending</div>
+          <div class="mod-icon-wrap">📉</div>
+          <div class="mod-title">Technical Analysis</div>
+          <div class="mod-desc">Charts, patterns, indicators & price action strategies</div>
+        </div>
+        <div class="mod-card-body">
+          <div class="mod-levels">
+            <span class="level-chip lc-beg">🟢 Beginner</span>
+            <span class="level-chip lc-int">🟡 Inter</span>
+            <span class="level-chip lc-adv">🔴 Advanced</span>
+          </div>
+          <div class="mod-meta">
+            <div class="mod-meta-item">⏱️ 12 hrs</div>
+            <div class="mod-meta-item">📖 36 topics</div>
+            <div class="mod-meta-item">🧩 72 quizzes</div>
+          </div>
+          <div class="mod-progress">
+            <div class="mp-label"><span>Progress</span><span>60%</span></div>
+            <div class="mp-bar"><div class="mp-fill" style="width:60%"></div></div>
+          </div>
+          <div class="mod-footer">
+            <div class="mod-topics-count">22/36 topics complete</div>
+            <div class="mod-cta">Continue →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="mod-card mc-teal anim anim-d3" onclick="openModule(3)">
+        <div class="mod-card-header">
+          <div class="mod-deco"></div><div class="mod-deco2"></div>
+          <div class="mod-badge">Advanced</div>
+          <div class="mod-icon-wrap">📜</div>
+          <div class="mod-title">Futures & Options Theory</div>
+          <div class="mod-desc">F&O basics, contracts, pricing models & hedging</div>
+        </div>
+        <div class="mod-card-body">
+          <div class="mod-levels">
+            <span class="level-chip lc-int">🟡 Inter</span>
+            <span class="level-chip lc-adv">🔴 Advanced</span>
+          </div>
+          <div class="mod-meta">
+            <div class="mod-meta-item">⏱️ 14 hrs</div>
+            <div class="mod-meta-item">📖 28 topics</div>
+            <div class="mod-meta-item">🧩 55 quizzes</div>
+          </div>
+          <div class="mod-progress">
+            <div class="mp-label"><span>Progress</span><span>0%</span></div>
+            <div class="mp-bar"><div class="mp-fill" style="width:0%"></div></div>
+          </div>
+          <div class="mod-footer">
+            <div class="mod-topics-count">0/28 topics complete</div>
+            <div class="mod-cta">Start →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="mod-card mc-violet anim anim-d4" onclick="openModule(4)">
+        <div class="mod-card-header">
+          <div class="mod-deco"></div><div class="mod-deco2"></div>
+          <div class="mod-badge">Expert</div>
+          <div class="mod-icon-wrap">⚡</div>
+          <div class="mod-title">Option Strategies</div>
+          <div class="mod-desc">Spreads, straddles, iron condors & Greeks mastery</div>
+        </div>
+        <div class="mod-card-body">
+          <div class="mod-levels">
+            <span class="level-chip lc-int">🟡 Inter</span>
+            <span class="level-chip lc-adv">🔴 Advanced</span>
+          </div>
+          <div class="mod-meta">
+            <div class="mod-meta-item">⏱️ 16 hrs</div>
+            <div class="mod-meta-item">📖 32 topics</div>
+            <div class="mod-meta-item">🧩 64 quizzes</div>
+          </div>
+          <div class="mod-progress">
+            <div class="mp-label"><span>Progress</span><span>0%</span></div>
+            <div class="mp-bar"><div class="mp-fill" style="width:0%"></div></div>
+          </div>
+          <div class="mod-footer">
+            <div class="mod-topics-count">0/32 topics complete</div>
+            <div class="mod-cta">Start →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="mod-card mc-amber anim anim-d5" onclick="openModule(5)">
+        <div class="mod-card-header">
+          <div class="mod-deco"></div><div class="mod-deco2"></div>
+          <div class="mod-badge">Specialised</div>
+          <div class="mod-icon-wrap">🛢️</div>
+          <div class="mod-title">Commodity Trading</div>
+          <div class="mod-desc">Gold, crude oil, agri commodities & MCX strategies</div>
+        </div>
+        <div class="mod-card-body">
+          <div class="mod-levels">
+            <span class="level-chip lc-beg">🟢 Beginner</span>
+            <span class="level-chip lc-int">🟡 Inter</span>
+            <span class="level-chip lc-adv">🔴 Advanced</span>
+          </div>
+          <div class="mod-meta">
+            <div class="mod-meta-item">⏱️ 9 hrs</div>
+            <div class="mod-meta-item">📖 22 topics</div>
+            <div class="mod-meta-item">🧩 40 quizzes</div>
+          </div>
+          <div class="mod-progress">
+            <div class="mp-label"><span>Progress</span><span>10%</span></div>
+            <div class="mp-bar"><div class="mp-fill" style="width:10%"></div></div>
+          </div>
+          <div class="mod-footer">
+            <div class="mod-topics-count">2/22 topics complete</div>
+            <div class="mod-cta">Continue →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="mod-card mc-rose anim" onclick="openModule(6)">
+        <div class="mod-card-header">
+          <div class="mod-deco"></div><div class="mod-deco2"></div>
+          <div class="mod-badge">Must Read</div>
+          <div class="mod-icon-wrap">🧠</div>
+          <div class="mod-title">Risk Management & Psychology</div>
+          <div class="mod-desc">Position sizing, stop-losses & trader mindset mastery</div>
+        </div>
+        <div class="mod-card-body">
+          <div class="mod-levels">
+            <span class="level-chip lc-beg">🟢 Beginner</span>
+            <span class="level-chip lc-int">🟡 Inter</span>
+            <span class="level-chip lc-adv">🔴 Advanced</span>
+          </div>
+          <div class="mod-meta">
+            <div class="mod-meta-item">⏱️ 7 hrs</div>
+            <div class="mod-meta-item">📖 18 topics</div>
+            <div class="mod-meta-item">🧩 36 quizzes</div>
+          </div>
+          <div class="mod-progress">
+            <div class="mp-label"><span>Progress</span><span>0%</span></div>
+            <div class="mp-bar"><div class="mp-fill" style="width:0%"></div></div>
+          </div>
+          <div class="mod-footer">
+            <div class="mod-topics-count">0/18 topics complete</div>
+            <div class="mod-cta">Start →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="mod-card mc-emerald anim anim-d1" onclick="openModule(7)">
+        <div class="mod-card-header">
+          <div class="mod-deco"></div><div class="mod-deco2"></div>
+          <div class="mod-badge">Personal Finance</div>
+          <div class="mod-icon-wrap">💰</div>
+          <div class="mod-title">Personal Finance – Mutual Funds</div>
+          <div class="mod-desc">SIP, fund types, NAV, returns & portfolio building</div>
+        </div>
+        <div class="mod-card-body">
+          <div class="mod-levels">
+            <span class="level-chip lc-beg">🟢 Beginner</span>
+            <span class="level-chip lc-int">🟡 Inter</span>
+            <span class="level-chip lc-adv">🔴 Advanced</span>
+          </div>
+          <div class="mod-meta">
+            <div class="mod-meta-item">⏱️ 8 hrs</div>
+            <div class="mod-meta-item">📖 20 topics</div>
+            <div class="mod-meta-item">🧩 40 quizzes</div>
+          </div>
+          <div class="mod-progress">
+            <div class="mp-label"><span>Progress</span><span>80%</span></div>
+            <div class="mp-bar"><div class="mp-fill" style="width:80%"></div></div>
+          </div>
+          <div class="mod-footer">
+            <div class="mod-topics-count">16/20 topics complete</div>
+            <div class="mod-cta">Continue →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 9 -->
+      <div class="mod-card mc-sky anim anim-d2" onclick="openModule(8)">
+        <div class="mod-card-header">
+          <div class="mod-deco"></div><div class="mod-deco2"></div>
+          <div class="mod-badge">Personal Finance</div>
+          <div class="mod-icon-wrap">🛡️</div>
+          <div class="mod-title">Personal Finance – Insurance</div>
+          <div class="mod-desc">Term, health, ULIP & smart insurance planning</div>
+        </div>
+        <div class="mod-card-body">
+          <div class="mod-levels">
+            <span class="level-chip lc-beg">🟢 Beginner</span>
+            <span class="level-chip lc-int">🟡 Inter</span>
+          </div>
+          <div class="mod-meta">
+            <div class="mod-meta-item">⏱️ 6 hrs</div>
+            <div class="mod-meta-item">📖 16 topics</div>
+            <div class="mod-meta-item">🧩 30 quizzes</div>
+          </div>
+          <div class="mod-progress">
+            <div class="mp-label"><span>Progress</span><span>0%</span></div>
+            <div class="mp-bar"><div class="mp-fill" style="width:0%"></div></div>
+          </div>
+          <div class="mod-footer">
+            <div class="mod-topics-count">0/16 topics complete</div>
+            <div class="mod-cta">Start →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 10 -->
+      <div class="mod-card mc-fuchsia anim anim-d3" onclick="openModule(9)">
+        <div class="mod-card-header">
+          <div class="mod-deco"></div><div class="mod-deco2"></div>
+          <div class="mod-badge">Analytical</div>
+          <div class="mod-icon-wrap">🏭</div>
+          <div class="mod-title">Sector Analysis</div>
+          <div class="mod-desc">IT, BFSI, pharma, auto — sector cycles & rotation</div>
+        </div>
+        <div class="mod-card-body">
+          <div class="mod-levels">
+            <span class="level-chip lc-beg">🟢 Beginner</span>
+            <span class="level-chip lc-int">🟡 Inter</span>
+            <span class="level-chip lc-adv">🔴 Advanced</span>
+          </div>
+          <div class="mod-meta">
+            <div class="mod-meta-item">⏱️ 11 hrs</div>
+            <div class="mod-meta-item">📖 26 topics</div>
+            <div class="mod-meta-item">🧩 50 quizzes</div>
+          </div>
+          <div class="mod-progress">
+            <div class="mp-label"><span>Progress</span><span>0%</span></div>
+            <div class="mp-bar"><div class="mp-fill" style="width:0%"></div></div>
+          </div>
+          <div class="mod-footer">
+            <div class="mod-topics-count">0/26 topics complete</div>
+            <div class="mod-cta">Start →</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     VIEW 2: MODULE PAGE
+════════════════════════════════════ -->
+<div id="view-module" class="view">
+  <div class="mod-page" style="padding-top:28px">
+
+    <!-- Module Hero -->
+    <div class="mod-hero" id="mod-hero-area" style="background:linear-gradient(135deg,#5b21b6,#7c3aed,#8b5cf6)">
+      <div class="mh-nav">
+        <div class="back-btn" onclick="goHome()">← Back to Modules</div>
+        <div class="mh-breadcrumb">
+          <span onclick="goHome()" style="cursor:pointer">All Modules</span>
+          <span class="sep">›</span>
+          <span class="current" id="mod-breadcrumb-title">Introduction to Stock Market</span>
+        </div>
+      </div>
+      <div class="mh-content">
+        <div>
+          <div class="mh-badge"><span id="mod-hero-icon">📊</span> <span id="mod-hero-cat">Foundational</span></div>
+          <div class="mh-title" id="mod-hero-title">Introduction to Stock Market</div>
+          <div class="mh-desc" id="mod-hero-desc">Build a strong foundation in equity markets — from how the BSE/NSE work to placing your first trade with confidence.</div>
+          <div class="mh-pills">
+            <div class="mh-pill" id="mh-pill-hrs">⏱️ 8 hrs total</div>
+            <div class="mh-pill" id="mh-pill-topics">📖 24 topics</div>
+            <div class="mh-pill" id="mh-pill-quiz">🧩 45 quizzes</div>
+            <div class="mh-pill">🏆 3 badges</div>
+          </div>
+        </div>
+        <div class="mh-stats">
+          <div class="mh-stat"><div class="mh-stat-num" id="mh-stat-pct">35%</div><div class="mh-stat-lbl">Complete</div></div>
+          <div class="mh-stat"><div class="mh-stat-num" id="mh-stat-done">8/24</div><div class="mh-stat-lbl">Topics Done</div></div>
+          <div class="mh-stat"><div class="mh-stat-num">🥉</div><div class="mh-stat-lbl">Earned Badge</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LEVEL CARDS ── -->
+    <div class="level-cards-section anim">
+      <div class="level-cards-label">Choose Your Learning Level</div>
+      <div class="level-cards-grid">
+
+        <!-- Beginner Card -->
+        <div class="lv-card lv-beg anim" onclick="openLevelContent('beginner')">
+          <div class="lv-card-top">
+            <div class="lv-deco"></div><div class="lv-deco2"></div>
+            <div class="lv-level-num">🌱 Level 1</div>
+            <span class="lv-icon-big">🎓</span>
+            <div class="lv-title">Beginner</div>
+            <div class="lv-subtitle">Foundation of Stock Markets — start from zero with clear, simple explanations</div>
+          </div>
+          <div class="lv-card-body">
+            <div class="lv-stats">
+              <div class="lv-stat-item">
+                <span class="lv-stat-val">8</span>
+                <span class="lv-stat-lbl">Topics</span>
+              </div>
+              <div class="lv-stat-item">
+                <span class="lv-stat-val">2.5 hrs</span>
+                <span class="lv-stat-lbl">Duration</span>
+              </div>
+              <div class="lv-stat-item">
+                <span class="lv-stat-val">✅ Easy</span>
+                <span class="lv-stat-lbl">Difficulty</span>
+              </div>
+            </div>
+            <div class="lv-prog-wrap">
+              <div class="lv-prog-top">
+                <span class="lv-prog-label">Your Progress</span>
+                <span class="lv-prog-pct">62%</span>
+              </div>
+              <div class="lv-prog-bar">
+                <div class="lv-prog-fill" style="width:62%;background:linear-gradient(90deg,var(--g600),var(--g400))"></div>
+              </div>
+            </div>
+            <div class="lv-topics-preview">
+              <div class="lv-topic-chip"><span class="chip-ico">💹</span><span class="chip-name">What is the Stock Market?</span><span class="chip-done chip-done-yes">✓ Done</span></div>
+              <div class="lv-topic-chip"><span class="chip-ico">👥</span><span class="chip-name">Key Market Participants</span><span class="chip-done chip-done-yes">✓ Done</span></div>
+              <div class="lv-topic-chip"><span class="chip-ico">💡</span><span class="chip-name">How Price Discovery Works</span><span class="chip-done chip-done-prog">In Progress</span></div>
+              <div class="lv-topic-chip"><span class="chip-ico">📋</span><span class="chip-name">Types of Stocks & Securities</span><span class="chip-done chip-done-no">New</span></div>
+            </div>
+            <div class="lv-more">+4 more topics →</div>
+          </div>
+          <div class="lv-card-footer">
+            <div class="lv-footer-left">5 / 8 topics complete</div>
+            <button class="lv-cta-btn" onclick="openLevelContent('beginner');event.stopPropagation()">Continue →</button>
+          </div>
+        </div>
+
+        <!-- Intermediate Card -->
+        <div class="lv-card lv-int anim anim-d2" onclick="openLevelContent('intermediate')">
+          <div class="lv-card-top">
+            <div class="lv-deco"></div><div class="lv-deco2"></div>
+            <div class="lv-level-num">🚀 Level 2</div>
+            <span class="lv-icon-big">📈</span>
+            <div class="lv-title">Intermediate</div>
+            <div class="lv-subtitle">Market Mechanics & Indices — go deeper with real market dynamics</div>
+          </div>
+          <div class="lv-card-body">
+            <div class="lv-stats">
+              <div class="lv-stat-item">
+                <span class="lv-stat-val">10</span>
+                <span class="lv-stat-lbl">Topics</span>
+              </div>
+              <div class="lv-stat-item">
+                <span class="lv-stat-val">3.5 hrs</span>
+                <span class="lv-stat-lbl">Duration</span>
+              </div>
+              <div class="lv-stat-item">
+                <span class="lv-stat-val">⚙️ Moderate</span>
+                <span class="lv-stat-lbl">Difficulty</span>
+              </div>
+            </div>
+            <div class="lv-prog-wrap">
+              <div class="lv-prog-top">
+                <span class="lv-prog-label">Your Progress</span>
+                <span class="lv-prog-pct">0%</span>
+              </div>
+              <div class="lv-prog-bar">
+                <div class="lv-prog-fill" style="width:0%;background:linear-gradient(90deg,var(--amber),#f59e0b)"></div>
+              </div>
+            </div>
+            <div class="lv-topics-preview">
+              <div class="lv-topic-chip"><span class="chip-ico">📊</span><span class="chip-name">NIFTY & SENSEX Explained</span><span class="chip-done chip-done-no">New</span></div>
+              <div class="lv-topic-chip"><span class="chip-ico">🏢</span><span class="chip-name">Corporate Actions</span><span class="chip-done chip-done-no">New</span></div>
+              <div class="lv-topic-chip"><span class="chip-ico">⚖️</span><span class="chip-name">T+1 Settlement & SEBI Rules</span><span class="chip-done chip-done-no">New</span></div>
+              <div class="lv-topic-chip"><span class="chip-ico">⚡</span><span class="chip-name">Market Circuits & Volatility</span><span class="chip-done chip-done-no">New</span></div>
+            </div>
+            <div class="lv-more">+6 more topics →</div>
+          </div>
+          <div class="lv-card-footer">
+            <div class="lv-footer-left">0 / 10 topics complete</div>
+            <button class="lv-cta-btn" onclick="openLevelContent('intermediate');event.stopPropagation()">Start →</button>
+          </div>
+        </div>
+
+        <!-- Advanced Card -->
+        <div class="lv-card lv-adv anim anim-d4" onclick="openLevelContent('advanced')">
+          <div class="lv-card-top">
+            <div class="lv-deco"></div><div class="lv-deco2"></div>
+            <div class="lv-level-num">🏆 Level 3</div>
+            <span class="lv-icon-big">🔥</span>
+            <div class="lv-title">Advanced</div>
+            <div class="lv-subtitle">Market Structure & Macro Linkages — master professional-grade concepts</div>
+          </div>
+          <div class="lv-card-body">
+            <div class="lv-stats">
+              <div class="lv-stat-item">
+                <span class="lv-stat-val">6</span>
+                <span class="lv-stat-lbl">Topics</span>
+              </div>
+              <div class="lv-stat-item">
+                <span class="lv-stat-val">2 hrs</span>
+                <span class="lv-stat-lbl">Duration</span>
+              </div>
+              <div class="lv-stat-item">
+                <span class="lv-stat-val">🔥 Hard</span>
+                <span class="lv-stat-lbl">Difficulty</span>
+              </div>
+            </div>
+            <div class="lv-prog-wrap">
+              <div class="lv-prog-top">
+                <span class="lv-prog-label">Your Progress</span>
+                <span class="lv-prog-pct">0%</span>
+              </div>
+              <div class="lv-prog-bar">
+                <div class="lv-prog-fill" style="width:0%;background:linear-gradient(90deg,var(--p600),var(--p400))"></div>
+              </div>
+            </div>
+            <div class="lv-topics-preview">
+              <div class="lv-topic-chip"><span class="chip-ico">🌐</span><span class="chip-name">Global Macro & Indian Markets</span><span class="chip-done chip-done-no">New</span></div>
+              <div class="lv-topic-chip"><span class="chip-ico">🤖</span><span class="chip-name">Algorithmic Trading Basics</span><span class="chip-done chip-done-no">New</span></div>
+              <div class="lv-topic-chip"><span class="chip-ico">💱</span><span class="chip-name">FII/DII Flow Analysis</span><span class="chip-done chip-done-no">New</span></div>
+              <div class="lv-topic-chip"><span class="chip-ico">🧬</span><span class="chip-name">Advanced Order Types</span><span class="chip-done chip-done-no">New</span></div>
+            </div>
+            <div class="lv-more">+2 more topics →</div>
+          </div>
+          <div class="lv-card-footer">
+            <div class="lv-footer-left">0 / 6 topics complete</div>
+            <button class="lv-cta-btn" onclick="openLevelContent('advanced');event.stopPropagation()">Start →</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── TOOLS & RESOURCES — PLATFORM AVAILABLE ── -->
+    <div class="tools-section anim anim-d2">
+      <div class="tools-section-head">
+        <div class="tools-section-title">Tools & Resources</div>
+        <div class="platform-badge">
+          <div class="platform-badge-dot"></div>
+          Platform Available — Coming with Website Launch
+        </div>
+      </div>
+
+      <!-- Info banner -->
+      <div style="background:linear-gradient(135deg,var(--p50),var(--g50));border:1.5px solid var(--p200);border-radius:var(--r-lg);padding:16px 22px;margin-bottom:22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+        <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--p500),var(--g500));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🛠️</div>
+        <div style="flex:1;min-width:220px">
+          <div style="font-size:13.5px;font-weight:800;color:var(--ink);margin-bottom:3px">Powerful tools to complement your learning</div>
+          <div style="font-size:12.5px;color:var(--ink3);line-height:1.6">These interactive tools will be integrated into the platform as part of the full website launch. Each tool is designed to reinforce what you learn in this module.</div>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:100px;background:var(--p500);color:#fff;font-size:12.5px;font-weight:700;flex-shrink:0">
+          🔔 Notify Me
+        </div>
+      </div>
+
+      <div class="tools-grid-full">
+
+        <div class="tool-card-full tcf-purple anim">
+          <div class="tcf-deco"></div>
+          <span class="tcf-icon">🧮</span>
+          <div class="tcf-name">Brokerage Calculator</div>
+          <div class="tcf-desc">Calculate exact brokerage, STT, GST and other charges before placing any trade. Compare across brokers.</div>
+          <div class="tcf-status"><div class="tcf-status-dot"></div> Coming Soon</div>
+        </div>
+
+        <div class="tool-card-full tcf-green anim anim-d1">
+          <div class="tcf-deco"></div>
+          <span class="tcf-icon">📊</span>
+          <div class="tcf-name">SIP & Returns Calculator</div>
+          <div class="tcf-desc">Simulate SIP growth, lump sum returns and CAGR across different timeframes and market scenarios.</div>
+          <div class="tcf-status"><div class="tcf-status-dot"></div> Coming Soon</div>
+        </div>
+
+        <div class="tool-card-full tcf-amber anim anim-d2">
+          <div class="tcf-deco"></div>
+          <span class="tcf-icon">🔎</span>
+          <div class="tcf-name">Stock Screener</div>
+          <div class="tcf-desc">Filter stocks by P/E, ROE, debt-to-equity, market cap, sector and 50+ other fundamental parameters.</div>
+          <div class="tcf-status"><div class="tcf-status-dot"></div> Coming Soon</div>
+        </div>
+
+        <div class="tool-card-full tcf-blue anim anim-d3">
+          <div class="tcf-deco"></div>
+          <span class="tcf-icon">📉</span>
+          <div class="tcf-name">Live Chart Practice</div>
+          <div class="tcf-desc">Practice reading candlestick charts, drawing trend lines and spotting patterns on historical price data.</div>
+          <div class="tcf-status"><div class="tcf-status-dot"></div> Coming Soon</div>
+        </div>
+
+        <div class="tool-card-full tcf-teal anim">
+          <div class="tcf-deco"></div>
+          <span class="tcf-icon">⚡</span>
+          <div class="tcf-name">Option Strategy Builder</div>
+          <div class="tcf-desc">Build multi-leg option strategies visually and see the payoff diagram, max profit/loss and breakevens.</div>
+          <div class="tcf-status"><div class="tcf-status-dot"></div> Coming Soon</div>
+        </div>
+
+        <div class="tool-card-full tcf-rose anim anim-d1">
+          <div class="tcf-deco"></div>
+          <span class="tcf-icon">🎯</span>
+          <div class="tcf-name">Risk Calculator</div>
+          <div class="tcf-desc">Calculate ideal position size, stop-loss levels and risk-reward ratio for any trade setup automatically.</div>
+          <div class="tcf-status"><div class="tcf-status-dot"></div> Coming Soon</div>
+        </div>
+
+        <div class="tool-card-full tcf-indigo anim anim-d2">
+          <div class="tcf-deco"></div>
+          <span class="tcf-icon">📘</span>
+          <div class="tcf-name">Market Glossary</div>
+          <div class="tcf-desc">300+ financial terms explained in plain language with context, examples and cross-references.</div>
+          <div class="tcf-status"><div class="tcf-status-dot"></div> Coming Soon</div>
+        </div>
+
+        <div class="tool-card-full tcf-fuchsia anim anim-d3">
+          <div class="tcf-deco"></div>
+          <span class="tcf-icon">🏦</span>
+          <div class="tcf-name">Portfolio Simulator</div>
+          <div class="tcf-desc">Build a virtual portfolio with paper trading, track performance and learn risk management without real money.</div>
+          <div class="tcf-status"><div class="tcf-status-dot"></div> Coming Soon</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     VIEW 3: LEVEL OUTLINE PAGE (RICH)
+════════════════════════════════════ -->
+<div id="view-content" class="view">
+  <div class="outline-page">
+    <div class="outline-wrap">
+
+      <!-- ── FULL-BLEED HERO ── -->
+      <div class="ol-hero ol-hero-beg" id="ol-hero">
+        <div class="ol-hero-grid"></div>
+        <div class="ol-hero-orb1"></div>
+        <div class="ol-hero-orb2"></div>
+        <div class="ol-hero-inner">
+
+          <!-- Nav row -->
+          <div class="ol-hero-nav">
+            <div class="ol-back" onclick="goModule()">← Back</div>
+            <div class="ol-breadcrumb">
+              <span class="ol-bc-link" onclick="goHome()">All Modules</span>
+              <span class="ol-bc-sep">›</span>
+              <span class="ol-bc-link" onclick="goModule()" id="ol-module-name">Intro to Stock Market</span>
+              <span class="ol-bc-sep">›</span>
+              <span class="ol-bc-cur" id="ol-level-name">Beginner Level</span>
+            </div>
+          </div>
+
+          <!-- Body grid -->
+          <div class="ol-hero-body">
+            <div class="ol-hero-text">
+              <div class="ol-level-eyebrow">
+                <div class="ol-level-eyebrow-dot"></div>
+                <span id="ol-eyebrow-text">Level 1 · Beginner</span>
+              </div>
+              <h1 class="ol-hero-h1" id="ol-hero-h1">Foundation of<br>Stock Markets</h1>
+              <p class="ol-hero-desc" id="ol-hero-desc">Start from scratch. Learn how markets work, who the key players are, and how to place your very first trade — with confidence.</p>
+              <div class="ol-hero-pills" id="ol-hero-pills">
+                <div class="ol-hp" id="ol-pill-topics">📖 8 Main Topics</div>
+                <div class="ol-hp" id="ol-pill-time">⏱️ 2.5 hrs</div>
+                <div class="ol-hp" id="ol-pill-diff">✅ Beginner Friendly</div>
+                <div class="ol-hp">🧩 24 Quizzes</div>
+              </div>
+              <div class="ol-hero-prog">
+                <div class="ol-hp-head">
+                  <div class="ol-hp-label">Level Progress</div>
+                  <div class="ol-hp-nums"><span id="ol-done-count">5</span> / <span id="ol-total-count">8</span> topics done</div>
+                </div>
+                <div class="ol-hp-bar"><div class="ol-hp-fill" id="ol-hp-fill" style="width:62%"></div></div>
+                <div class="ol-hp-unlock">🔓 Complete to unlock <strong id="ol-next-level">Intermediate Level</strong></div>
+              </div>
+            </div>
+
+            <!-- Right stats -->
+            <div class="ol-hero-stats">
+              <div class="ol-hstat">
+                <span class="ol-hstat-ico">📊</span>
+                <div>
+                  <span class="ol-hstat-val" id="ol-stat-topics">8</span>
+                  <span class="ol-hstat-lbl">Main Topics</span>
+                </div>
+              </div>
+              <div class="ol-hstat">
+                <span class="ol-hstat-ico">🔗</span>
+                <div>
+                  <span class="ol-hstat-val" id="ol-stat-subtopics">28</span>
+                  <span class="ol-hstat-lbl">Sub-topics / Pages</span>
+                </div>
+              </div>
+              <div class="ol-hstat">
+                <span class="ol-hstat-ico">⏱️</span>
+                <div>
+                  <span class="ol-hstat-val" id="ol-stat-time">2.5 hrs</span>
+                  <span class="ol-hstat-lbl">Total Duration</span>
+                </div>
+              </div>
+              <div class="ol-hstat">
+                <span class="ol-hstat-ico">🏅</span>
+                <div>
+                  <span class="ol-hstat-val" id="ol-stat-badge">Beginner</span>
+                  <span class="ol-hstat-lbl">Badge Earned</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── LEVEL SWITCHER TABS ── -->
+      <div class="ol-level-switcher">
+        <div class="ol-lvl-tab beg-tab active-tab" onclick="switchOutlineLevel('beginner',this)">
+          <div class="ol-tab-dot" style="background:var(--g500)"></div>
+          🌱 Beginner
+          <span class="ol-tab-count">8 topics</span>
+        </div>
+        <div class="ol-lvl-tab int-tab" onclick="switchOutlineLevel('intermediate',this)">
+          <div class="ol-tab-dot" style="background:var(--amber)"></div>
+          🚀 Intermediate
+          <span class="ol-tab-count">10 topics</span>
+        </div>
+        <div class="ol-lvl-tab adv-tab" onclick="switchOutlineLevel('advanced',this)">
+          <div class="ol-tab-dot" style="background:var(--p500)"></div>
+          🏆 Advanced
+          <span class="ol-tab-count">6 topics</span>
+        </div>
+      </div>
+
+      <!-- ── TOPICS AREA ── -->
+      <div class="ol-topics-area">
+        <div class="ol-topics-container" id="ol-topics-container">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     QUIZ MODAL
+════════════════════════════════════ -->
+<div class="modal-overlay" id="quiz-modal" onclick="closeQuiz(event)">
+  <div class="modal-box">
+    <div class="modal-close" onclick="closeQuizDirect()">✕</div>
+    <div id="quiz-content">
+      <div class="modal-title">Topic Quiz 🧩</div>
+      <div class="modal-sub">How Price Discovery Works — Test your understanding</div>
+      <div class="quiz-progress">
+        <div class="qp-num" id="qp-num">Q 1 of 4</div>
+        <div class="qp-bar"><div class="qp-fill" id="qp-bar" style="width:25%"></div></div>
+      </div>
+      <div class="modal-q" id="modal-q"></div>
+      <div class="modal-opts" id="modal-opts"></div>
+      <button class="modal-next" id="modal-next" onclick="nextQuestion()" style="display:none">Next Question →</button>
+    </div>
+    <div id="quiz-result-screen" style="display:none" class="quiz-result">
+      <div class="qr-emoji" id="qr-emoji">🎉</div>
+      <div class="qr-title" id="qr-title">Excellent!</div>
+      <div class="qr-score" id="qr-score">4/4</div>
+      <div class="qr-desc" id="qr-desc">You've mastered price discovery concepts. Mark the topic complete and move to the next one!</div>
+      <button class="modal-next" onclick="closeQuizDirect()">Continue Learning →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="search-overlay" onclick="closeSearch(event)">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7b6598" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="search-input" id="search-input" placeholder="Search modules, topics, concepts..." autofocus oninput="handleSearch(this.value)"/>
+      <div class="search-close" onclick="closeSearchDirect()">✕</div>
+    </div>
+    <div class="search-results" id="search-results">
+      <div class="sr-group-label">MODULES</div>
+      <div class="sr-item" onclick="openModule(0);closeSearchDirect()">
+        <div class="sr-icon">📊</div>
+        <div class="sr-text">
+          <div class="sr-name">Introduction to Stock Market</div>
+          <div class="sr-meta">8 hrs · 24 topics · In Progress</div>
+        </div>
+        <div class="sr-kbd">Enter</div>
+      </div>
+      <div class="sr-item" onclick="openModule(2);closeSearchDirect()">
+        <div class="sr-icon">📉</div>
+        <div class="sr-text">
+          <div class="sr-name">Technical Analysis</div>
+          <div class="sr-meta">12 hrs · 36 topics · 60% Complete</div>
+        </div>
+      </div>
+      <div class="sr-group-label">TOPICS</div>
+      <div class="sr-item" onclick="openContent('How Price Discovery Works');closeSearchDirect()">
+        <div class="sr-icon" style="background:var(--p100);border-color:var(--p200)">💡</div>
+        <div class="sr-text">
+          <div class="sr-name">How Price Discovery Works</div>
+          <div class="sr-meta">Intro to Stock Market · Beginner</div>
+        </div>
+      </div>
+      <div class="sr-item" onclick="closeSearchDirect()">
+        <div class="sr-icon" style="background:var(--g100);border-color:var(--g200)">📈</div>
+        <div class="sr-text">
+          <div class="sr-name">RSI & MACD Indicators</div>
+          <div class="sr-meta">Technical Analysis · Intermediate</div>
+        </div>
+      </div>
+      <div class="sr-item" onclick="closeSearchDirect()">
+        <div class="sr-icon" style="background:var(--amber-bg);border-color:var(--amber-border)">⚡</div>
+        <div class="sr-text">
+          <div class="sr-name">Call & Put Options Basics</div>
+          <div class="sr-meta">F&O Theory · Intermediate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS MODAL -->
+<div class="modal-overlay" id="tool-modal" onclick="closeTool(event)">
+  <div class="modal-box" style="max-width:560px">
+    <div class="modal-close" onclick="closeToolDirect()">✕</div>
+    <div id="tool-content">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════
+   STATE
+═══════════════════════════════════════ */
+let currentView = 'home';
+let currentModule = 0;
+let currentLevel = 'beginner';
+
+const modules = [
+  {title:'Introduction to Stock Market',icon:'📊',cat:'Foundational',color:'linear-gradient(135deg,#5b21b6,#7c3aed,#8b5cf6)',desc:'Build a strong foundation in equity markets — from how the BSE/NSE work to placing your first trade with confidence.'},
+  {title:'Fundamental Analysis',icon:'🔍',cat:'Most Popular',color:'linear-gradient(135deg,#065f46,#059669,#10b981)',desc:'Read balance sheets, income statements, and valuation ratios to identify fundamentally strong stocks.'},
+  {title:'Technical Analysis',icon:'📉',cat:'Trending',color:'linear-gradient(135deg,#312e81,#4338ca,#6366f1)',desc:'Master chart patterns, candlesticks, indicators and price action to time your entries and exits.'},
+  {title:'Futures & Options Theory',icon:'📜',cat:'Advanced',color:'linear-gradient(135deg,#134e4a,#0f766e,#2dd4bf)',desc:'Understand derivatives contracts, pricing models (Black-Scholes), Greeks and hedging strategies.'},
+  {title:'Option Strategies',icon:'⚡',cat:'Expert',color:'linear-gradient(135deg,#4c1d95,#6d28d9,#a78bfa)',desc:'Build complex multi-leg option strategies including spreads, straddles, iron condors and butterflies.'},
+  {title:'Commodity Trading',icon:'🛢️',cat:'Specialised',color:'linear-gradient(135deg,#92400e,#d97706,#fbbf24)',desc:'Trade gold, crude oil, silver and agricultural commodities on MCX using futures contracts.'},
+  {title:'Risk Management & Psychology',icon:'🧠',cat:'Must Read',color:'linear-gradient(135deg,#881337,#be123c,#fb7185)',desc:'Master position sizing, stop-loss discipline, risk-reward ratios and the trader mindset.'},
+  {title:'Personal Finance – Mutual Funds',icon:'💰',cat:'Personal Finance',color:'linear-gradient(135deg,#064e3b,#047857,#34d399)',desc:'Understand SIP, NAV, fund categories, ELSS, direct vs regular plans and long-term wealth creation.'},
+  {title:'Personal Finance – Insurance',icon:'🛡️',cat:'Personal Finance',color:'linear-gradient(135deg,#0c4a6e,#0369a1,#38bdf8)',desc:'Learn about term plans, health insurance, ULIP vs term, claim ratios and smart insurance planning.'},
+  {title:'Sector Analysis',icon:'🏭',cat:'Analytical',color:'linear-gradient(135deg,#701a75,#a21caf,#e879f9)',desc:'Understand sector cycles, rotation strategies, and how to analyze IT, BFSI, pharma and auto sectors.'},
+];
+
+/* ═══════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════ */
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  currentView = id;
+}
+
+function goHome(){ showView('view-home'); setTimeout(triggerAnims,100); }
+
+function openModule(idx){
+  currentModule = idx;
+  const m = modules[idx];
+  document.getElementById('mod-breadcrumb-title').textContent = m.title;
+  document.getElementById('mod-hero-icon').textContent = m.icon;
+  document.getElementById('mod-hero-cat').textContent = m.cat;
+  document.getElementById('mod-hero-title').textContent = m.title;
+  document.getElementById('mod-hero-desc').textContent = m.desc;
+  document.getElementById('mod-hero-area').style.background = m.color;
+  showView('view-module');
+  setTimeout(triggerAnims, 100);
+}
+
+function goModule(){ showView('view-module'); }
+
+function openLevelContent(level){
+  currentLevel = level;
+  buildOutlinePage(level);
+  showView('view-content');
+  setTimeout(triggerAnims, 80);
+}
+
+function switchOutlineLevel(level, tab){
+  currentLevel = level;
+  document.querySelectorAll('.ol-lvl-tab').forEach(t=>t.classList.remove('active-tab'));
+  tab.classList.add('active-tab');
+  buildOutlinePage(level);
+  document.getElementById('ol-topics-container').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function buildOutlinePage(level){
+  const m = modules[currentModule];
+  const cfg = {
+    beginner:{
+      eyebrow:'Level 1 · Beginner', h1:'Foundation of\nStock Markets',
+      desc:'Start from scratch. Learn how markets work, who the key players are, and how to place your very first trade — with confidence.',
+      topics:'8 Main Topics', time:'2.5 hrs', diff:'✅ Beginner Friendly',
+      nextLevel:'Intermediate Level 🚀', done:5, total:8, pct:62,
+      heroClass:'ol-hero-beg', badge:'Beginner 🌱',
+      statTopics:'8', statSubs:'28', statTime:'2.5 hrs',
+      data: beginnerTopics
+    },
+    intermediate:{
+      eyebrow:'Level 2 · Intermediate', h1:'Market Mechanics\n& Indices',
+      desc:'Go deeper into how indices are built, how corporate actions affect prices, and how SEBI rules shape every trade you make.',
+      topics:'10 Main Topics', time:'3.5 hrs', diff:'⚙️ Moderate',
+      nextLevel:'Advanced Level 🏆', done:0, total:10, pct:0,
+      heroClass:'ol-hero-int', badge:'Analyst 🚀',
+      statTopics:'10', statSubs:'34', statTime:'3.5 hrs',
+      data: intermediateTopics
+    },
+    advanced:{
+      eyebrow:'Level 3 · Advanced', h1:'Market Structure\n& Macro',
+      desc:'Master global macro linkages, institutional flow analysis, and the algorithmic strategies that move markets professionally.',
+      topics:'6 Main Topics', time:'2 hrs', diff:'🔥 Advanced',
+      nextLevel:'Pro Trader Badge 🏅', done:0, total:6, pct:0,
+      heroClass:'ol-hero-adv', badge:'Pro Trader 🏆',
+      statTopics:'6', statSubs:'20', statTime:'2 hrs',
+      data: advancedTopics
+    }
+  };
+  const c = cfg[level];
+  const hero = document.getElementById('ol-hero');
+  hero.className = 'ol-hero ' + c.heroClass;
+  document.getElementById('ol-module-name').textContent = m.title;
+  document.getElementById('ol-level-name').textContent = c.eyebrow.split('·')[1].trim() + ' Level';
+  document.getElementById('ol-eyebrow-text').textContent = c.eyebrow;
+  document.getElementById('ol-hero-h1').innerHTML = c.h1.replace('\n','<br>');
+  document.getElementById('ol-hero-desc').textContent = c.desc;
+  document.getElementById('ol-pill-topics').textContent = '📖 ' + c.topics;
+  document.getElementById('ol-pill-time').textContent = '⏱️ ' + c.time;
+  document.getElementById('ol-pill-diff').textContent = c.diff;
+  document.getElementById('ol-done-count').textContent = c.done;
+  document.getElementById('ol-total-count').textContent = c.total;
+  document.getElementById('ol-hp-fill').style.width = c.pct + '%';
+  document.getElementById('ol-next-level').textContent = c.nextLevel;
+  document.getElementById('ol-stat-topics').textContent = c.statTopics;
+  document.getElementById('ol-stat-subtopics').textContent = c.statSubs;
+  document.getElementById('ol-stat-time').textContent = c.statTime;
+  document.getElementById('ol-stat-badge').textContent = c.badge;
+  document.querySelectorAll('.ol-lvl-tab').forEach(t=>t.classList.remove('active-tab'));
+  const tabMap={beginner:0,intermediate:1,advanced:2};
+  document.querySelectorAll('.ol-lvl-tab')[tabMap[level]].classList.add('active-tab');
+  renderTopics(c.data, m, level);
+}
+
+function renderTopics(topics, mod, level){
+  const container = document.getElementById('ol-topics-container');
+  container.innerHTML = '';
+  const RING_R=20, RING_C=26, circ=2*Math.PI*RING_R;
+  function ringHTML(pct,color,icon){
+    const offset=circ*(1-pct/100);
+    return `<svg width="52" height="52" viewBox="0 0 52 52"><circle class="ol-tc-ring-bg" cx="${RING_C}" cy="${RING_C}" r="${RING_R}" stroke-width="4"/><circle class="ol-tc-ring-fill" cx="${RING_C}" cy="${RING_C}" r="${RING_R}" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${offset}" style="transform-origin:26px 26px;transform:rotate(-90deg)"/></svg><div class="ol-tc-ring-icon">${icon}</div>`;
+  }
+  const lvlColor={beginner:'#1ea851',intermediate:'#d97706',advanced:'#7c3aed'};
+  const ringColor=lvlColor[level]||'#7c3aed';
+
+  topics.forEach((topic,ti)=>{
+    const doneSubs=topic.subtopics.filter(s=>s.status==='done').length;
+    const totalSubs=topic.subtopics.length;
+    const pct=totalSubs?Math.round(doneSubs/totalSubs*100):0;
+    const cardClass=topic.status==='done'?'done-card':topic.status==='inprog'?'inprog-card':'';
+    const badge=topic.status==='done'?'<span class="ol-tc-badge olb-done">✓ Completed</span>':topic.status==='inprog'?'<span class="ol-tc-badge olb-prog">▶ In Progress</span>':'<span class="ol-tc-badge olb-new">✦ New</span>';
+    const slugBase=mod.title.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+    const subHTML=topic.subtopics.map((st,si)=>{
+      const stClass=st.status==='done'?'st-done':st.status==='inprog'?'st-prog':'';
+      const stStatus=st.status==='done'?'<span class="ol-st-status sst-done">✓ Done</span>':st.status==='inprog'?'<span class="ol-st-status sst-prog">▶ In Progress</span>':'<span class="ol-st-status sst-new">New</span>';
+      const stNum=st.status==='done'?'✓':si+1;
+      const urlSlug=st.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/-$/,'');
+      const pageUrl=`/learn/${slugBase}/${level}/${urlSlug}`;
+      const chips=st.tags.map(t=>`<span class="ol-st-chip">${t}</span>`).join('');
+      return `<div class="ol-st-row ${stClass}" onclick="handleSubtopicClick('${st.name.replace(/'/g,"\\'")}','${pageUrl}')"><div class="ol-st-bar"></div><div class="ol-st-num">${stNum}</div><div class="ol-st-body"><div class="ol-st-name">${st.name}</div><div class="ol-st-chips">${chips}</div><div class="ol-st-url"><span class="ol-st-url-icon">🔗</span><span>${pageUrl}</span></div></div><div class="ol-st-right"><span class="ol-st-time">⏱ ${st.time}</span>${stStatus}<div class="ol-st-cta">Open Page →</div></div></div>`;
+    }).join('');
+    const isAutoOpen=topic.status==='inprog'||(ti===0);
+    const openClass=isAutoOpen?'open-card':'';
+    const card=document.createElement('div');
+    card.className=`ol-topic-card ${cardClass} ${openClass}`;
+    card.innerHTML=`<div class="ol-tc-accent"></div><div class="ol-tc-head" onclick="toggleTopicCard(this.parentElement)"><div class="ol-tc-ring">${ringHTML(pct,ringColor,topic.icon)}</div><div class="ol-tc-text"><div class="ol-tc-num">Topic ${ti+1}</div><div class="ol-tc-name">${topic.name}</div><div class="ol-tc-desc">${topic.desc}</div><div class="ol-tc-tags">${(topic.tags||[]).map(t=>`<span class="ol-tc-tag">${t}</span>`).join('')}</div></div><div class="ol-tc-meta">${badge}<span class="ol-tc-time">⏱ ${topic.time}</span><span class="ol-tc-sub-count">🔗 ${totalSubs} sub-topics</span></div><div class="ol-tc-chevron">▾</div></div><div class="ol-tc-subtopics"><div class="ol-sts-inner"><div class="ol-sts-divider">${totalSubs} Sub-topics — Individual Page Links</div>${subHTML}</div></div>`;
+    container.appendChild(card);
+  });
+}
+
+function toggleTopicCard(card){ card.classList.toggle('open-card'); }
+
+function handleSubtopicClick(name,url){ showPageLinkToast(name,url); }
+
+function showPageLinkToast(name,url){
+  let toast=document.getElementById('page-link-toast');
+  if(!toast){
+    toast=document.createElement('div');
+    toast.id='page-link-toast';
+    toast.style.cssText='position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;border-radius:16px;padding:14px 20px;font-family:var(--font);font-size:13px;font-weight:600;line-height:1.5;box-shadow:0 12px 40px rgba(0,0,0,.35);z-index:900;transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;max-width:min(520px,92vw);display:flex;align-items:center;gap:12px;';
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML=`<span style="font-size:18px;flex-shrink:0">🔗</span><div style="min-width:0"><div style="font-weight:800;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${name}</div><div style="font-size:10.5px;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">fairstockbrokers.com${url}</div></div><button onclick="copyPageLink('${url}')" style="background:var(--p400);padding:7px 14px;border-radius:9px;font-size:12px;font-weight:800;cursor:pointer;color:#fff;border:none;font-family:var(--font);flex-shrink:0;white-space:nowrap">Copy Link</button><button onclick="document.getElementById('page-link-toast').style.opacity=0" style="background:rgba(255,255,255,.12);width:26px;height:26px;border-radius:8px;font-size:14px;cursor:pointer;color:#fff;border:none;flex-shrink:0">✕</button>`;
+  toast.style.opacity='1';
+  toast.style.transform='translateX(-50%) translateY(0)';
+  clearTimeout(toast._timer);
+  toast._timer=setTimeout(()=>{toast.style.opacity='0';toast.style.transform='translateX(-50%) translateY(80px)';},5000);
+}
+
+function copyPageLink(url){
+  navigator.clipboard?.writeText('https://fairstockbrokers.com'+url).catch(()=>{});
+  const t=document.getElementById('page-link-toast');
+  if(t){t.style.opacity='0';t.style.transform='translateX(-50%) translateY(80px)';}
+}
+
+function openContent(title){}
+
+/* ═══════════════════════════════════════
+   OUTLINE DATA — BEGINNER
+═══════════════════════════════════════ */
+const beginnerTopics = [
+  {
+    name:'What is the Stock Market?', icon:'💹', time:'20 min', status:'done',
+    desc:'Understand markets, exchanges, and how equity ownership works',
+    subtopics:[
+      {name:'Introduction to Equity Markets', time:'5 min', status:'done', tags:['Basics','BSE','NSE']},
+      {name:'How Stock Exchanges Work', time:'6 min', status:'done', tags:['BSE','NSE','SEBI']},
+      {name:'Primary vs Secondary Market', time:'5 min', status:'done', tags:['IPO','Trading']},
+      {name:'Market Participants Overview', time:'4 min', status:'done', tags:['Retail','FIIs','MFs']},
+    ]
+  },
+  {
+    name:'Key Market Participants', icon:'👥', time:'15 min', status:'done',
+    desc:'SEBI, brokers, FIIs, DIIs, retail investors and their roles',
+    subtopics:[
+      {name:'Role of SEBI as Regulator', time:'5 min', status:'done', tags:['SEBI','Regulation']},
+      {name:'FIIs & DIIs Explained', time:'5 min', status:'done', tags:['Foreign Investors','MFs']},
+      {name:'Retail vs Institutional Investors', time:'5 min', status:'done', tags:['Retail','HNI']},
+    ]
+  },
+  {
+    name:'How Price Discovery Works', icon:'💡', time:'25 min', status:'inprog',
+    desc:'Demand-supply dynamics, order matching and how prices are set',
+    subtopics:[
+      {name:'Demand & Supply in Markets', time:'5 min', status:'done', tags:['Economics','Basics']},
+      {name:'Order Book & Bid-Ask Spread', time:'6 min', status:'done', tags:['Order Book','Spread']},
+      {name:'Market vs Limit Orders', time:'6 min', status:'inprog', tags:['Orders','Execution']},
+      {name:'Pre-Open Call Auction Session', time:'5 min', status:'new', tags:['NSE','Opening Price']},
+      {name:'Price Circuits & Volatility Bands', time:'3 min', status:'new', tags:['Circuits','VIX']},
+    ]
+  },
+  {
+    name:'Types of Stocks & Securities', icon:'📋', time:'20 min', status:'new',
+    desc:'Equity, preference shares, bonds, ETFs and derivatives explained',
+    subtopics:[
+      {name:'Equity Shares & Ownership Rights', time:'5 min', status:'new', tags:['Equity','Voting Rights']},
+      {name:'Preference Shares & Dividends', time:'5 min', status:'new', tags:['Preference','Dividends']},
+      {name:'Bonds & Debentures Basics', time:'5 min', status:'new', tags:['Debt','Bonds']},
+      {name:'ETFs & Index Funds', time:'5 min', status:'new', tags:['ETF','Passive Investing']},
+    ]
+  },
+  {
+    name:'Reading a Stock Quote', icon:'📰', time:'15 min', status:'new',
+    desc:'Open, High, Low, Close, Volume — decode every data point',
+    subtopics:[
+      {name:'OHLCV Data Explained', time:'6 min', status:'new', tags:['OHLC','Volume','Price']},
+      {name:'52-Week High & Low', time:'4 min', status:'new', tags:['Range','Sentiment']},
+      {name:'Market Cap & Free Float', time:'5 min', status:'new', tags:['Market Cap','Liquidity']},
+    ]
+  },
+  {
+    name:'IPO & Primary Markets', icon:'🏦', time:'30 min', status:'new',
+    desc:'How companies raise capital, DRHP, allotment and listing process',
+    subtopics:[
+      {name:'What is an IPO?', time:'6 min', status:'new', tags:['IPO','Capital Raising']},
+      {name:'Understanding the DRHP', time:'7 min', status:'new', tags:['DRHP','Documents']},
+      {name:'IPO Allotment Process', time:'6 min', status:'new', tags:['Allotment','Registrar']},
+      {name:'Listing Day Dynamics', time:'6 min', status:'new', tags:['Listing','GMP','Grey Market']},
+      {name:'SME vs Mainboard IPOs', time:'5 min', status:'new', tags:['SME','NSE Emerge']},
+    ]
+  },
+  {
+    name:'Opening a Demat Account', icon:'📂', time:'15 min', status:'new',
+    desc:'KYC process, choosing a broker, account types and charges',
+    subtopics:[
+      {name:'Demat vs Trading vs Bank Account', time:'5 min', status:'new', tags:['Demat','DP','CDSL']},
+      {name:'KYC & Account Opening Steps', time:'5 min', status:'new', tags:['KYC','NSDL','CDSL']},
+      {name:'Choosing the Right Broker', time:'5 min', status:'new', tags:['Discount Broker','Full Service']},
+    ]
+  },
+  {
+    name:'Placing Your First Trade', icon:'🎯', time:'20 min', status:'new',
+    desc:'Market, limit, stop-loss orders — understand every order type',
+    subtopics:[
+      {name:'Market Orders Explained', time:'5 min', status:'new', tags:['Market Order','Slippage']},
+      {name:'Limit Orders & Price Control', time:'5 min', status:'new', tags:['Limit Order','Execution']},
+      {name:'Stop-Loss & Stop-Limit Orders', time:'5 min', status:'new', tags:['Stop-Loss','Risk']},
+      {name:'CNC vs MIS — Delivery vs Intraday', time:'5 min', status:'new', tags:['CNC','MIS','BTST']},
+    ]
+  }
+];
+
+const intermediateTopics = [
+  {
+    name:'NIFTY & SENSEX Explained', icon:'📈', time:'25 min', status:'new',
+    desc:'Index construction, constituent weights, rebalancing and usage',
+    subtopics:[
+      {name:'How NIFTY 50 is Constructed', time:'7 min', status:'new', tags:['NIFTY','Free Float']},
+      {name:'Index Weights & Rebalancing', time:'6 min', status:'new', tags:['Rebalancing','Weights']},
+      {name:'Sectoral & Thematic Indices', time:'6 min', status:'new', tags:['Bank Nifty','MidCap']},
+      {name:'Using Indices for Market Reading', time:'6 min', status:'new', tags:['Breadth','Market Mood']},
+    ]
+  },
+  {
+    name:'Corporate Actions', icon:'🏢', time:'30 min', status:'new',
+    desc:'Dividends, bonus issues, stock splits, rights issues & buybacks',
+    subtopics:[
+      {name:'Dividend & Ex-Dividend Date', time:'6 min', status:'new', tags:['Dividend','Record Date']},
+      {name:'Bonus Issue & Stock Split', time:'6 min', status:'new', tags:['Bonus','Split']},
+      {name:'Rights Issue Explained', time:'6 min', status:'new', tags:['Rights','Dilution']},
+      {name:'Share Buyback Mechanics', time:'6 min', status:'new', tags:['Buyback','EPS']},
+      {name:'Mergers & Acquisitions Impact', time:'6 min', status:'new', tags:['M&A','Corporate Event']},
+    ]
+  },
+  {
+    name:'T+1 Settlement & SEBI Rules', icon:'⚖️', time:'20 min', status:'new',
+    desc:'Clearing cycle, margins, BTST trading and regulatory framework',
+    subtopics:[
+      {name:'T+1 Settlement Explained', time:'7 min', status:'new', tags:['Settlement','NSCCL']},
+      {name:'Margin Requirements & Types', time:'7 min', status:'new', tags:['SPAN','Exposure Margin']},
+      {name:'BTST & Short Selling Rules', time:'6 min', status:'new', tags:['BTST','Short Selling']},
+    ]
+  },
+  {
+    name:'Market Circuits & Volatility', icon:'⚡', time:'20 min', status:'new',
+    desc:'Upper/lower circuits, India VIX, trading halts and safeguards',
+    subtopics:[
+      {name:'Circuit Breakers on Indices', time:'7 min', status:'new', tags:['Circuit Breaker','SEBI']},
+      {name:'Stock-Level Price Bands', time:'6 min', status:'new', tags:['Price Band','20% Circuit']},
+      {name:'India VIX — Fear Gauge', time:'7 min', status:'new', tags:['VIX','Options','Volatility']},
+    ]
+  }
+];
+
+const advancedTopics = [
+  {
+    name:'Global Macro & Indian Markets', icon:'🌐', time:'25 min', status:'new',
+    desc:'Fed policy, DXY, crude oil, global risk-on/off impact on India',
+    subtopics:[
+      {name:'How US Fed Policy Impacts India', time:'6 min', status:'new', tags:['Fed','Interest Rates','FII']},
+      {name:'Dollar Index (DXY) & Rupee', time:'5 min', status:'new', tags:['DXY','INR','Currency']},
+      {name:'Crude Oil & Indian Economy', time:'6 min', status:'new', tags:['Crude','CAD','Inflation']},
+      {name:'FII Flow Analysis & Impact', time:'5 min', status:'new', tags:['FII','Equity Flows']},
+      {name:'Global Risk-On / Risk-Off Framework', time:'3 min', status:'new', tags:['Risk-On','Global']},
+    ]
+  },
+  {
+    name:'Algorithmic Trading Basics', icon:'🤖', time:'30 min', status:'new',
+    desc:'HFT, API trading, strategy types and algo regulation in India',
+    subtopics:[
+      {name:'What is Algorithmic Trading?', time:'7 min', status:'new', tags:['Algo','Automation']},
+      {name:'HFT vs Systematic Trading', time:'8 min', status:'new', tags:['HFT','Co-location']},
+      {name:'API-Based Order Execution', time:'8 min', status:'new', tags:['API','Broker SDK']},
+      {name:'SEBI Algo Trading Regulations', time:'7 min', status:'new', tags:['SEBI','Compliance']},
+    ]
+  },
+  {
+    name:'FII/DII Flow Analysis', icon:'💱', time:'20 min', status:'new',
+    desc:'Read daily institutional flow data to gauge market direction',
+    subtopics:[
+      {name:'How to Read FII/DII Data', time:'7 min', status:'new', tags:['FII','DII','NSE Data']},
+      {name:'Derivative FII Positions (COT)', time:'7 min', status:'new', tags:['COT','F&O','OI']},
+      {name:'Sector-Level Institutional Flow', time:'6 min', status:'new', tags:['Sector Rotation','FII']},
+    ]
+  }
+];
+
+
+/* ═══════════════════════════════════════
+   INTERACTIONS
+═══════════════════════════════════════ */
+function filterModules(type, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ═══════════════════════════════════════
+   QUIZ MODAL
+═══════════════════════════════════════ */
+const quizData = [
+  {q:'What is the term for the difference between the highest buy price and lowest sell price in the market?',opts:['Market premium','Bid-ask spread','Price gap','Settlement rate'],correct:1},
+  {q:'Which system does NSE use for order matching?',opts:['BOLT','CTCL','NEAT','ODIN'],correct:2},
+  {q:'A limit order guarantees:',opts:['Immediate execution','Execution at your specified price or better','The best market price','Settlement in T+0'],correct:1},
+  {q:'During the pre-open session, what determines the opening price?',opts:['RBI announcement','The last closing price','Equilibrium price maximizing trade volume','First order received'],correct:2},
+];
+let currentQ = 0;
+let score = 0;
+let answered = false;
+
+function openQuiz(){
+  currentQ = 0; score = 0; answered = false;
+  document.getElementById('quiz-content').style.display='block';
+  document.getElementById('quiz-result-screen').style.display='none';
+  document.getElementById('quiz-modal').classList.add('open');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = quizData[currentQ];
+  document.getElementById('qp-num').textContent = `Q ${currentQ+1} of ${quizData.length}`;
+  document.getElementById('qp-bar').style.width = `${((currentQ+1)/quizData.length)*100}%`;
+  document.getElementById('modal-q').textContent = q.q;
+  const optsEl = document.getElementById('modal-opts');
+  optsEl.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  q.opts.forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'mopt';
+    btn.innerHTML = `<span class="mopt-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = ()=>answerQuiz(i,q.correct,btn);
+    optsEl.appendChild(btn);
+  });
+  document.getElementById('modal-next').style.display = 'none';
+  answered = false;
+}
+
+function answerQuiz(idx, correct, el){
+  if(answered) return;
+  answered = true;
+  if(idx===correct){ el.classList.add('correct'); el.querySelector('.mopt-letter').style.background='var(--g300)'; score++; }
+  else {
+    el.classList.add('wrong'); el.querySelector('.mopt-letter').style.background='var(--red-border)';
+    document.querySelectorAll('.mopt')[correct].classList.add('correct');
+  }
+  document.querySelectorAll('.mopt').forEach(o=>{ o.onclick=null; o.style.cursor='default'; });
+  document.getElementById('modal-next').style.display='block';
+  if(currentQ===quizData.length-1) document.getElementById('modal-next').textContent='See Results 🎉';
+}
+
+function nextQuestion(){
+  currentQ++;
+  if(currentQ>=quizData.length){
+    showQuizResult(); return;
+  }
+  renderQuestion();
+}
+
+function showQuizResult(){
+  document.getElementById('quiz-content').style.display='none';
+  const rs = document.getElementById('quiz-result-screen');
+  rs.style.display='block';
+  const pct = score/quizData.length;
+  document.getElementById('qr-emoji').textContent = pct>=0.75?'🎉':pct>=0.5?'👍':'📚';
+  document.getElementById('qr-title').textContent = pct>=0.75?'Excellent!':pct>=0.5?'Good job!':'Keep learning!';
+  document.getElementById('qr-score').textContent = `${score}/${quizData.length}`;
+  document.getElementById('qr-desc').textContent = pct>=0.75?
+    "You've mastered this topic! Mark it complete and move on.":
+    pct>=0.5?"Good understanding. Review the concepts you missed and try again.":
+    "Take some time to re-read the content, then retake the quiz.";
+}
+
+function closeQuiz(e){ if(e.target.id==='quiz-modal') closeQuizDirect(); }
+function closeQuizDirect(){ document.getElementById('quiz-modal').classList.remove('open'); }
+
+/* ═══════════════════════════════════════
+   SEARCH
+═══════════════════════════════════════ */
+function openSearch(){
+  document.getElementById('search-overlay').classList.add('open');
+  setTimeout(()=>document.getElementById('search-input').focus(),100);
+}
+function closeSearch(e){ if(e.target.id==='search-overlay') closeSearchDirect(); }
+function closeSearchDirect(){ document.getElementById('search-overlay').classList.remove('open'); }
+function handleSearch(val){
+  // Demo: just show results, real implementation would filter
+}
+document.addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key==='k'){ e.preventDefault(); openSearch(); }
+  if(e.key==='Escape'){ closeSearchDirect(); closeQuizDirect(); closeToolDirect(); }
+});
+
+/* ═══════════════════════════════════════
+   TOOLS
+═══════════════════════════════════════ */
+const toolContent = {
+  calculator: `
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-size:36px;margin-bottom:8px">🧮</div>
+      <div style="font-size:20px;font-weight:900;color:var(--ink);margin-bottom:4px">SIP Calculator</div>
+      <div style="font-size:13px;color:var(--ink3)">Calculate your SIP returns and final corpus</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div>
+        <label style="font-size:12px;font-weight:700;color:var(--ink3);display:block;margin-bottom:5px">Monthly SIP Amount (₹)</label>
+        <input type="number" value="5000" id="sip-amount" oninput="calcSIP()" style="width:100%;padding:10px 14px;border-radius:10px;border:1.5px solid var(--border);font-size:14px;font-weight:700;color:var(--ink);font-family:var(--font);outline:none;background:var(--surf1)"/>
+      </div>
+      <div>
+        <label style="font-size:12px;font-weight:700;color:var(--ink3);display:block;margin-bottom:5px">Expected Annual Return (%)</label>
+        <input type="number" value="12" id="sip-rate" oninput="calcSIP()" style="width:100%;padding:10px 14px;border-radius:10px;border:1.5px solid var(--border);font-size:14px;font-weight:700;color:var(--ink);font-family:var(--font);outline:none;background:var(--surf1)"/>
+      </div>
+      <div>
+        <label style="font-size:12px;font-weight:700;color:var(--ink3);display:block;margin-bottom:5px">Investment Period (Years)</label>
+        <input type="number" value="10" id="sip-years" oninput="calcSIP()" style="width:100%;padding:10px 14px;border-radius:10px;border:1.5px solid var(--border);font-size:14px;font-weight:700;color:var(--ink);font-family:var(--font);outline:none;background:var(--surf1)"/>
+      </div>
+      <div id="sip-result" style="background:linear-gradient(135deg,var(--p50),var(--g50));border:1.5px solid var(--p200);border-radius:14px;padding:18px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;text-align:center">
+        <div><div id="sip-invested" style="font-size:18px;font-weight:900;color:var(--p700)">₹6L</div><div style="font-size:10.5px;color:var(--ink3);font-weight:600">Invested</div></div>
+        <div><div id="sip-gains" style="font-size:18px;font-weight:900;color:var(--g700)">₹5.5L</div><div style="font-size:10.5px;color:var(--ink3);font-weight:600">Est. Gains</div></div>
+        <div><div id="sip-corpus" style="font-size:18px;font-weight:900;color:var(--ink)">₹11.5L</div><div style="font-size:10.5px;color:var(--ink3);font-weight:600">Total Corpus</div></div>
+      </div>
+    </div>`,
+  screener: `
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-size:36px;margin-bottom:8px">🔎</div>
+      <div style="font-size:20px;font-weight:900;color:var(--ink);margin-bottom:4px">Stock Screener</div>
+      <div style="font-size:13px;color:var(--ink3)">Filter stocks by fundamental criteria (Demo)</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+      <div style="padding:14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surf1)">
+        <div style="font-size:10px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Max P/E Ratio</div>
+        <input type="number" value="25" style="width:100%;border:none;background:none;font-size:16px;font-weight:800;color:var(--p700);font-family:var(--font);outline:none"/>
+      </div>
+      <div style="padding:14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surf1)">
+        <div style="font-size:10px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Min ROE (%)</div>
+        <input type="number" value="15" style="width:100%;border:none;background:none;font-size:16px;font-weight:800;color:var(--g700);font-family:var(--font);outline:none"/>
+      </div>
+      <div style="padding:14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surf1)">
+        <div style="font-size:10px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Market Cap</div>
+        <select style="width:100%;border:none;background:none;font-size:13px;font-weight:700;color:var(--ink);font-family:var(--font);outline:none"><option>Large Cap</option><option>Mid Cap</option><option>Small Cap</option></select>
+      </div>
+      <div style="padding:14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surf1)">
+        <div style="font-size:10px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Sector</div>
+        <select style="width:100%;border:none;background:none;font-size:13px;font-weight:700;color:var(--ink);font-family:var(--font);outline:none"><option>All Sectors</option><option>BFSI</option><option>IT</option><option>Pharma</option></select>
+      </div>
+    </div>
+    <div style="background:var(--p50);border:1.5px solid var(--p200);border-radius:12px;padding:14px;font-size:13px;color:var(--p700);text-align:center;font-weight:600">
+      🔒 Full screener available after completing Fundamental Analysis module
+    </div>`,
+  glossary:`
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-size:36px;margin-bottom:8px">📘</div>
+      <div style="font-size:20px;font-weight:900;color:var(--ink);margin-bottom:4px">Market Glossary</div>
+      <div style="font-size:13px;color:var(--ink3)">300+ financial terms explained simply</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      ${[['Bid-Ask Spread','The difference between the highest buy price and lowest sell price'],['Bull Market','A market trending upward with rising prices over an extended period'],['Circuit Breaker','A regulatory mechanism that halts trading when price moves beyond a set %'],['Derivatives','Financial contracts that derive their value from an underlying asset'],['EPS','Earnings Per Share — company net profit divided by total outstanding shares']].map(([t,d])=>`
+      <div style="padding:12px 16px;border-radius:11px;border:1.5px solid var(--border);background:var(--surf1)">
+        <div style="font-size:13.5px;font-weight:800;color:var(--p700);margin-bottom:3px">${t}</div>
+        <div style="font-size:12.5px;color:var(--ink3);line-height:1.6">${d}</div>
+      </div>`).join('')}
+    </div>`
+};
+
+function openTool(id){
+  document.getElementById('tool-content').innerHTML = toolContent[id] || '<p>Tool coming soon!</p>';
+  document.getElementById('tool-modal').classList.add('open');
+  if(id==='calculator') setTimeout(calcSIP, 50);
+}
+
+function calcSIP(){
+  const amt = parseFloat(document.getElementById('sip-amount')?.value)||5000;
+  const rate = parseFloat(document.getElementById('sip-rate')?.value)||12;
+  const years = parseFloat(document.getElementById('sip-years')?.value)||10;
+  const n = years*12;
+  const r = (rate/100)/12;
+  const corpus = amt * ((Math.pow(1+r,n)-1)/r) * (1+r);
+  const invested = amt*n;
+  const gains = corpus-invested;
+  const fmt = v=>{
+    if(v>=10000000) return '₹'+(v/10000000).toFixed(1)+'Cr';
+    if(v>=100000) return '₹'+(v/100000).toFixed(1)+'L';
+    return '₹'+Math.round(v).toLocaleString('en-IN');
+  };
+  const el = id=>document.getElementById(id);
+  if(el('sip-invested')){
+    el('sip-invested').textContent=fmt(invested);
+    el('sip-gains').textContent=fmt(gains);
+    el('sip-corpus').textContent=fmt(corpus);
+  }
+}
+
+function closeTool(e){ if(e.target.id==='tool-modal') closeToolDirect(); }
+function closeToolDirect(){ document.getElementById('tool-modal').classList.remove('open'); }
+
+/* ═══════════════════════════════════════
+   SCROLL ANIMATIONS
+═══════════════════════════════════════ */
+/* Single persistent observer — never removes .in, never re-fires on scroll */
+const _animObs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      _animObs.unobserve(e.target); /* fire once, stop watching */
+    }
+  });
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+
+function triggerAnims(){
+  document.querySelectorAll('.anim:not(.in)').forEach(el=>_animObs.observe(el));
+}
+
+document.addEventListener('DOMContentLoaded',()=>{ triggerAnims(); });
+</script>
+</body>
+</html>

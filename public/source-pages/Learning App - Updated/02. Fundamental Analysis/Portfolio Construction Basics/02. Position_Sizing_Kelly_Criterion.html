@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Position Sizing · Portfolio Framework">
+<meta name="theme-color" content="#6d28d9">
+<meta name="format-detection" content="telephone=no">
+<title>Position Sizing – Kelly Criterion &amp; Equal Weight — Build a Balanced Portfolio Framework</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;--gring:#bbf7d0;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --teal:#0891b2;--tealpale:#ecfeff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shg:0 4px 22px rgba(22,163,74,.11);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+*{word-break:break-word;overflow-wrap:break-word;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--sf);}
+::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes growY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* LAYOUT */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+
+/* TYPE */
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;min-width:0;overflow:hidden;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;flex-shrink:0;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(26px,6.5vw,82px);font-weight:900;letter-spacing:-2.5px;line-height:.92;margin-bottom:12px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(13px,2.8vw,38px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:660px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hero-pills{position:relative;z-index:2;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;animation:fsu .88s ease .44s both;min-width:0;overflow:hidden;}
+.hero-pill{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:100px;font-size:clamp(10px,1.3vw,12px);font-weight:800;min-width:0;max-width:100%;}
+.hp-p{background:var(--pxl);color:var(--p);border:1.5px solid rgba(109,40,217,.2);}
+.hp-g{background:var(--gpale);color:var(--gbr);border:1.5px solid rgba(22,163,74,.2);}
+.hp-a{background:var(--apale);color:var(--ambr);border:1.5px solid rgba(217,119,6,.2);}
+.hp-r{background:var(--rpale);color:var(--red);border:1.5px solid rgba(220,38,38,.2);}
+.hp-t{background:var(--tealpale);color:var(--teal);border:1.5px solid rgba(8,145,178,.2);}
+
+/* KLO BANNER */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;min-width:0;overflow:hidden;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;overflow:hidden;}
+.klo-body>*{min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:8px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;min-width:0;overflow:hidden;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;min-height:28px;max-width:100%;overflow:hidden;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.klo-hi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;min-width:0;overflow:hidden;}
+.klo-hi{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--shc);min-width:0;overflow:hidden;}
+.klo-hi-ico{font-size:22px;margin-bottom:6px;}
+.klo-hi-val{font-size:clamp(12px,2vw,16px);font-weight:900;letter-spacing:-.3px;word-break:normal;line-height:1.1;min-width:0;overflow:hidden;}
+.klo-hi-val.purple{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.green{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-lbl{font-size:10px;color:var(--tl);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:3px;min-width:0;overflow:hidden;}
+
+/* ══════════════════════════════════════
+   METHOD CARDS (Kelly vs Equal Weight)
+══════════════════════════════════════ */
+.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.5vw,26px);min-width:0;overflow:hidden;}
+.method-card{border-radius:22px;overflow:hidden;min-width:0;box-shadow:var(--shp);transition:transform .25s;}
+.method-card:hover{transform:translateY(-4px);}
+.mc-hd{padding:clamp(18px,3vw,28px);position:relative;overflow:hidden;}
+.mc-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.08) 1px,transparent 1px);background-size:18px 18px;pointer-events:none;}
+.mch-p{background:linear-gradient(135deg,var(--pl),var(--p),var(--ph));}
+.mch-g{background:linear-gradient(135deg,#052e16,var(--gbr),var(--g));}
+.mc-hd-inner{position:relative;z-index:1;min-width:0;overflow:hidden;}
+.mc-ico{font-size:clamp(32px,5vw,46px);display:block;margin-bottom:10px;animation:floatB 3.5s ease-in-out infinite;flex-shrink:0;}
+.mc-title{font-size:clamp(18px,2.8vw,26px);font-weight:900;color:#fff;letter-spacing:-.3px;margin-bottom:4px;min-width:0;overflow:hidden;}
+.mc-sub{font-size:clamp(11px,1.4vw,13px);color:rgba(255,255,255,.72);min-width:0;overflow:hidden;}
+.mc-body{background:var(--wh);padding:clamp(16px,2.5vw,26px);min-width:0;overflow:hidden;}
+.mc-desc{font-size:clamp(12.5px,1.5vw,14px);color:var(--ts);line-height:1.72;margin-bottom:16px;min-width:0;overflow:hidden;}
+.mc-formula{border-radius:14px;padding:clamp(12px,2vw,18px);margin-bottom:16px;min-width:0;overflow:hidden;}
+.mcf-p{background:var(--pxl);border:1.5px solid rgba(109,40,217,.2);}
+.mcf-g{background:var(--gpale);border:1.5px solid rgba(22,163,74,.2);}
+.formula-label{font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;min-width:0;overflow:hidden;}
+.fl-p{color:var(--p);}
+.fl-g{color:var(--gbr);}
+.formula-main{font-size:clamp(14px,2vw,18px);font-weight:900;letter-spacing:-.2px;min-width:0;overflow:hidden;}
+.fm-p{color:var(--p);}
+.fm-g{color:var(--gbr);}
+.formula-note{font-size:clamp(11px,1.3vw,12.5px);color:var(--ts);margin-top:6px;line-height:1.55;min-width:0;overflow:hidden;}
+.mc-pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:10px;min-width:0;overflow:hidden;}
+.mpc-col{min-width:0;overflow:hidden;}
+.mpc-title{font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:5px;min-width:0;overflow:hidden;}
+.mpc-title::before{content:'';width:10px;height:2px;border-radius:1px;flex-shrink:0;}
+.mpct-p::before{background:var(--g);}
+.mpct-p{color:var(--gbr);}
+.mpct-c::before{background:var(--red);}
+.mpct-c{color:var(--red);}
+.mpc-items{display:flex;flex-direction:column;gap:5px;min-width:0;overflow:hidden;}
+.mpc-item{font-size:clamp(11px,1.3vw,12.5px);color:var(--ts);line-height:1.5;display:flex;align-items:flex-start;gap:5px;min-width:0;overflow:hidden;}
+.mpc-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.mpcd-g{background:var(--g);}
+.mpcd-r{background:var(--red);}
+
+/* ══════════════════════════════════════
+   KELLY FORMULA EXPLAINER (step-by-step)
+══════════════════════════════════════ */
+.kelly-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;min-width:0;overflow:hidden;position:relative;}
+.kelly-steps::after{content:'';position:absolute;left:12.5%;right:12.5%;top:28px;height:2px;background:linear-gradient(90deg,var(--p),var(--g));opacity:.3;border-radius:1px;}
+.kelly-step{background:var(--wh);border-radius:14px;padding:clamp(12px,2vw,18px);border:1.5px solid var(--bd);text-align:center;min-width:0;overflow:hidden;box-shadow:var(--shc);position:relative;z-index:1;margin:4px;}
+.ks-num{width:36px;height:36px;min-width:36px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;margin:0 auto 8px;box-shadow:0 4px 12px rgba(109,40,217,.3);overflow:hidden;}
+.ks-ico{font-size:clamp(18px,3vw,26px);display:block;margin-bottom:6px;animation:floatB 3s ease-in-out infinite;flex-shrink:0;}
+.ks-title{font-size:clamp(11px,1.5vw,13px);font-weight:900;color:var(--tx);margin-bottom:4px;min-width:0;overflow:hidden;}
+.ks-desc{font-size:clamp(10.5px,1.2vw,12px);color:var(--ts);line-height:1.5;min-width:0;overflow:hidden;}
+
+/* ══════════════════════════════════════
+   CONVICTION SCALE
+══════════════════════════════════════ */
+.conviction-wrap{border-radius:22px;overflow:hidden;border:1.5px solid var(--bd);min-width:0;box-shadow:var(--shp);}
+.cw-hd{padding:clamp(14px,2.5vw,22px) clamp(18px,3vw,32px);position:relative;overflow:hidden;}
+.cw-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:20px 20px;pointer-events:none;}
+.cwh-p{background:linear-gradient(135deg,var(--pl),var(--p));}
+.cw-title{font-size:clamp(14px,2vw,18px);font-weight:900;color:#fff;position:relative;z-index:1;margin-bottom:3px;min-width:0;overflow:hidden;}
+.cw-sub{font-size:11px;color:rgba(255,255,255,.65);position:relative;z-index:1;min-width:0;overflow:hidden;}
+.cw-body{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 100%);padding:clamp(16px,2.5vw,24px);min-width:0;overflow:hidden;}
+.conviction-rows{display:flex;flex-direction:column;gap:10px;min-width:0;overflow:hidden;}
+.conv-row{display:flex;align-items:center;gap:14px;padding:clamp(14px,2vw,20px) clamp(14px,2.5vw,22px);border-radius:14px;border:1.5px solid var(--bd);background:var(--wh);min-width:0;overflow:hidden;transition:box-shadow .2s,transform .2s;}
+.conv-row:hover{box-shadow:var(--shp);}
+.cr-badge{padding:6px 14px;border-radius:100px;font-size:clamp(10px,1.3vw,12px);font-weight:900;white-space:nowrap;min-width:70px;text-align:center;flex-shrink:0;letter-spacing:.5px;}
+.crb-h{background:linear-gradient(135deg,var(--p),var(--ph));color:#fff;}
+.crb-m{background:linear-gradient(135deg,var(--gbr),var(--g));color:#fff;}
+.crb-l{background:linear-gradient(135deg,var(--ambr),var(--amb));color:#fff;}
+.crb-n{background:var(--pxl);color:var(--p);}
+.cr-body{flex:1;min-width:0;overflow:hidden;display:flex;flex-direction:column;gap:3px;}
+.cr-title{font-size:clamp(12.5px,1.7vw,15px);font-weight:900;color:var(--tx);margin-bottom:0;min-width:0;overflow:hidden;}
+.cr-desc{font-size:clamp(11.5px,1.4vw,13px);color:var(--tl);line-height:1.6;min-width:0;overflow:hidden;}
+.cr-pct{font-size:clamp(17px,2.8vw,26px);font-weight:900;word-break:normal;flex-shrink:0;text-align:right;letter-spacing:-.5px;line-height:1;}
+.crp-h{color:var(--p);}
+.crp-m{color:var(--gbr);}
+.crp-l{color:var(--ambr);}
+.crp-n{color:var(--tl);}
+
+/* ══════════════════════════════════════
+   POSITION BAR CHART
+══════════════════════════════════════ */
+.pos-chart{border-radius:18px;background:var(--pxs);padding:clamp(16px,2.5vw,24px);border:1.5px solid var(--bd);min-width:0;overflow:hidden;}
+.pos-bars{display:flex;align-items:flex-end;gap:clamp(6px,1.5vw,14px);height:clamp(100px,15vw,160px);min-width:0;overflow:hidden;}
+.pos-bar-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;min-width:0;overflow:hidden;}
+.pos-bar{width:100%;border-radius:6px 6px 0 0;transform-origin:bottom;animation:growY 1s ease both;min-width:0;}
+.pb-p{background:linear-gradient(180deg,var(--ph),var(--p));}
+.pb-g{background:linear-gradient(180deg,var(--gh),var(--g));}
+.pb-a{background:linear-gradient(180deg,var(--amb),var(--ambr));}
+.pb-t{background:linear-gradient(180deg,#22d3ee,var(--teal));}
+.pb-r{background:linear-gradient(180deg,#f87171,var(--red));}
+.pos-pct{font-size:clamp(10px,1.5vw,13px);font-weight:900;word-break:normal;min-width:0;overflow:hidden;}
+.pos-name{font-size:clamp(9px,1.2vw,11px);color:var(--ts);text-align:center;word-break:break-all;overflow:hidden;max-width:100%;}
+
+/* ══════════════════════════════════════
+   EXAMPLE CARDS
+══════════════════════════════════════ */
+.ex-cards{display:flex;flex-direction:column;gap:clamp(28px,5vw,48px);min-width:0;overflow:hidden;}
+.ex-card{border-radius:24px;overflow:hidden;min-width:0;box-shadow:var(--shp);}
+.exc-hd{padding:clamp(18px,3vw,28px) clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:clamp(14px,2.5vw,22px);position:relative;overflow:hidden;}
+.exc-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+.exh-p{background:linear-gradient(135deg,#1e1b4b,var(--pl),var(--p),#a78bfa);}
+.exh-g{background:linear-gradient(135deg,#052e16,var(--gbr),var(--g),#86efac);}
+.exh-a{background:linear-gradient(135deg,#451a03,var(--ambr),var(--amb),#fde68a);}
+.exh-t{background:linear-gradient(135deg,#0c4a6e,var(--teal),#22d3ee);}
+.exh-r{background:linear-gradient(135deg,#450a0a,var(--red),#f87171);}
+.exc-char{flex-shrink:0;position:relative;z-index:1;}
+.exc-h-text{flex:1;min-width:0;overflow:hidden;position:relative;z-index:1;}
+.exc-badge{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:5px;min-width:0;overflow:hidden;}
+.exc-name{font-size:clamp(18px,3.5vw,34px);font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1;margin-bottom:5px;min-width:0;overflow:hidden;}
+.exc-tagline{font-size:clamp(11.5px,1.6vw,14px);color:rgba(255,255,255,.78);line-height:1.5;margin-bottom:10px;min-width:0;overflow:hidden;}
+.exc-pills{display:flex;gap:7px;flex-wrap:wrap;min-width:0;overflow:hidden;}
+.exc-pill{display:inline-flex;align-items:center;padding:4px 11px;border-radius:100px;font-size:9.5px;font-weight:700;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.25);white-space:nowrap;max-width:100%;overflow:hidden;}
+.exc-body{background:var(--wh);padding:clamp(18px,3vw,28px);min-width:0;overflow:hidden;}
+.exc-2col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,32px);align-items:start;min-width:0;overflow:hidden;}
+.exc-sec-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tl);margin-bottom:12px;display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden;}
+.exc-sec-title::before{content:'';width:14px;height:2px;border-radius:1px;flex-shrink:0;}
+.est-p::before{background:var(--p);}
+.est-g::before{background:var(--g);}
+.est-a::before{background:var(--amb);}
+.est-t::before{background:var(--teal);}
+.est-r::before{background:var(--red);}
+
+/* Position allocation list */
+.pos-list{display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden;}
+.pl-item{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border-radius:12px;border:1px solid var(--bd);background:var(--pxs);min-width:0;overflow:hidden;transition:box-shadow .2s;}
+.pl-item:hover{box-shadow:var(--shp);}
+.pli-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+.plid-p{background:var(--p);}
+.plid-g{background:var(--g);}
+.plid-a{background:var(--amb);}
+.plid-t{background:var(--teal);}
+.plid-r{background:var(--red);}
+.pli-body{flex:1;min-width:0;overflow:hidden;}
+.pli-name{font-size:clamp(12px,1.6vw,14px);font-weight:800;color:var(--tx);min-width:0;overflow:hidden;}
+.pli-reason{font-size:clamp(11px,1.3vw,12px);color:var(--ts);line-height:1.5;min-width:0;overflow:hidden;}
+.pli-pct{font-size:clamp(15px,2.2vw,20px);font-weight:900;word-break:normal;flex-shrink:0;}
+.kelly-calc{margin-top:10px;padding:10px 13px;border-radius:12px;font-size:clamp(11px,1.3vw,12.5px);line-height:1.6;min-width:0;overflow:hidden;}
+.kc-p{background:var(--pxl);border:1px solid rgba(109,40,217,.18);color:var(--p);}
+.kc-g{background:var(--gpale);border:1px solid rgba(22,163,74,.18);color:var(--gbr);}
+.kc-a{background:var(--apale);border:1px solid rgba(217,119,6,.18);color:var(--ambr);}
+.kc-r{background:var(--rpale);border:1px solid rgba(220,38,38,.18);color:var(--red);}
+
+/* Lesson box */
+.lesson-box{border-radius:14px;padding:clamp(12px,2vw,18px);min-width:0;overflow:hidden;}
+.lb-p{background:linear-gradient(135deg,var(--pxl),var(--pxs));border:1.5px solid rgba(109,40,217,.2);}
+.lb-g{background:linear-gradient(135deg,var(--gpale),#fafffe);border:1.5px solid rgba(22,163,74,.25);}
+.lb-a{background:linear-gradient(135deg,var(--apale),#fffdf5);border:1.5px solid rgba(217,119,6,.2);}
+.lb-t{background:linear-gradient(135deg,var(--tealpale),#f0feff);border:1.5px solid rgba(8,145,178,.2);}
+.lb-r{background:linear-gradient(135deg,var(--rpale),#fff9f9);border:1.5px solid rgba(220,38,38,.2);}
+.lb-title{font-size:clamp(12px,1.7vw,14px);font-weight:900;margin-bottom:6px;min-width:0;overflow:hidden;}
+.lbt-p{color:var(--p);}
+.lbt-g{color:var(--gbr);}
+.lbt-a{color:var(--ambr);}
+.lbt-t{color:var(--teal);}
+.lbt-r{color:var(--red);}
+.lb-desc{font-size:clamp(11.5px,1.4vw,13px);color:var(--ts);line-height:1.68;min-width:0;overflow:hidden;}
+
+/* DEMAT BANNER */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;min-width:0;overflow:hidden;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* NEXT CHAPTER */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left,0px));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right,0px));}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;min-width:0;overflow:hidden;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);min-width:0;overflow:hidden;}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;min-width:0;overflow:hidden;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;display:inline-block;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;min-width:0;overflow:hidden;}
+
+/* ═══ RESPONSIVE ═══ */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){
+  .kelly-steps{grid-template-columns:repeat(2,1fr);}
+  .kelly-steps::after{display:none;}
+}
+@media(max-width:900px){
+  .method-grid{grid-template-columns:1fr;}
+  .mc-pros-cons{grid-template-columns:1fr 1fr;}
+  .kelly-steps{grid-template-columns:repeat(2,1fr);}
+  .kelly-steps::after{display:none;}
+  .exc-2col{grid-template-columns:1fr;}
+  .klo-hi-row{grid-template-columns:1fr 1fr 1fr;}
+}
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .method-grid{grid-template-columns:1fr;}
+  .kelly-steps{grid-template-columns:repeat(2,1fr);}
+  .kelly-steps::after{display:none;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{font-size:14px;padding:12px 20px;}
+  .dmfeats{gap:10px 20px;}
+  .exc-hd{gap:12px;}
+  .exc-name{font-size:clamp(16px,4vw,28px);}
+  .exc-body{padding:clamp(16px,2.5vw,22px);}
+  .exc-char svg{width:clamp(54px,8vw,72px);height:auto;}
+  .hero-pills{gap:6px;}
+  .hero-pill{font-size:10px;padding:6px 11px;}
+  .mc-ico{animation:none;}
+  .ks-ico{animation:none;}
+}
+@media(max-width:640px){
+  .method-grid{grid-template-columns:1fr;}
+  .kelly-steps{grid-template-columns:1fr 1fr;}
+  .kelly-steps::after{display:none;}
+  .mc-pros-cons{grid-template-columns:1fr 1fr;}
+  .exc-hd{flex-direction:column;gap:10px;}
+  .exc-char{align-self:flex-start;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .klo-hi-row{grid-template-columns:1fr 1fr 1fr;}
+  .hero-pills{gap:5px;}
+  .hero-pill{font-size:10px;padding:5px 9px;}
+  .pos-bars{gap:clamp(4px,1.2vw,8px);}
+}
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.5px;}
+  .hdesc{font-size:13px;}
+  .hsub{letter-spacing:2px;font-size:9px;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .h2{letter-spacing:-1px;}
+  .lead{font-size:13.5px;}
+  .tag{letter-spacing:2px;}
+  .klo-title{font-size:14px;}
+  .klo-desc{font-size:12px;}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .klo-hi{padding:10px 8px;}
+  .klo-hi-val{font-size:clamp(10px,3.5vw,13px);}
+  .klo-hi-ico{font-size:18px;}
+  .klo-hi-row{grid-template-columns:1fr 1fr 1fr !important;}
+  .mc-ico{font-size:clamp(26px,5vw,38px);animation:none;}
+  .mc-title{font-size:clamp(16px,4.5vw,22px);}
+  .mc-desc{font-size:12px;}
+  .mc-pros-cons{grid-template-columns:1fr 1fr;}
+  .mpc-item{font-size:11px;}
+  .formula-main{font-size:clamp(13px,3.5vw,16px);}
+  .formula-note{font-size:11px;}
+  .kelly-steps{grid-template-columns:1fr 1fr;}
+  .kelly-steps::after{display:none;}
+  .ks-num{width:30px;height:30px;min-width:30px;font-size:13px;}
+  .ks-ico{font-size:clamp(16px,4vw,22px);animation:none;}
+  .ks-title{font-size:11px;}
+  .ks-desc{font-size:10px;}
+  .cr-badge{font-size:10px;padding:4px 9px;min-width:52px;}
+  .cr-title{font-size:11.5px;}
+  .cr-desc{font-size:11px;}
+  .cr-pct{font-size:clamp(14px,3.5vw,18px);}
+  .pli-name{font-size:12px;}
+  .pli-reason{font-size:11px;}
+  .pli-pct{font-size:clamp(14px,3.5vw,18px);}
+  .kelly-calc{font-size:11px;}
+  .conv-row{align-items:flex-start;gap:10px;padding:12px 13px;}
+  .cr-badge{min-width:60px;font-size:9px;padding:5px 10px;}
+  .cr-pct{font-size:clamp(15px,4vw,20px);}
+  .cr-title{font-size:12px;}
+  .cr-desc{font-size:11px;}
+  .exc-hd{padding:clamp(14px,3vw,20px) clamp(12px,3vw,18px);}
+  .exc-name{font-size:clamp(15px,5.5vw,24px);}
+  .exc-tagline{font-size:11.5px;}
+  .exc-pill{font-size:9px;padding:3px 9px;}
+  .exc-body{padding:13px 12px;}
+  .exc-2col{gap:14px;}
+  .exc-sec-title{font-size:9px;letter-spacing:1px;margin-bottom:8px;}
+  .lb-title{font-size:12.5px;}
+  .lb-desc{font-size:11.5px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .dmh{letter-spacing:-1px;}
+  .dmsub{font-size:13px;}
+  .nxt-banner{padding:12px 14px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+  .hero-pill{font-size:9px;padding:5px 8px;}
+  .exc-char svg{width:clamp(44px,9vw,60px);height:auto;}
+  .pos-bars{height:clamp(80px,14vw,120px);}
+}
+@media(max-width:360px){
+  .w{padding:26px 12px;}
+  .hh1{font-size:clamp(22px,9vw,34px);letter-spacing:-1px;}
+  .lead{font-size:13px;}
+  .h2{font-size:clamp(18px,8vw,26px);}
+  .klo-hi-row{grid-template-columns:1fr 1fr !important;}
+  .kelly-steps{grid-template-columns:1fr 1fr;}
+  .exc-hd{padding:11px 10px;}
+  .exc-name{font-size:clamp(13px,6vw,20px);}
+  .pli-name{font-size:11px;}
+  .lb-desc{font-size:11px;}
+  .exc-char svg{width:clamp(36px,9vw,48px);height:auto;}
+  .nxt-btn{font-size:12px;padding:10px 13px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}
+  .hero-pill{font-size:8.5px;padding:4px 7px;}
+  .ks-num{width:26px;height:26px;min-width:26px;font-size:11px;}
+  .cr-pct{font-size:clamp(13px,4vw,16px);}
+}
+
+/* Touch */
+@media(hover:none) and (pointer:coarse){
+  .method-card:hover,.conv-row:hover,.pl-item:hover,.ex-card:hover{transform:none!important;box-shadow:var(--shc)!important;}
+  .method-card:active,.conv-row:active,.pl-item:active{transform:scale(.98);transition:transform .08s;}
+  .dmbtn:active,.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.tag,.eyebrow,.klo-label{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.lead,.mc-desc,.ks-desc,.cr-desc,.pli-reason,.lb-desc{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+  .klo-icon,.mc-ico,.ks-ico{animation:none;}
+}
+
+/* iOS Safari */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top) + 72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom) + 32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top) + 8px));right:max(22px,calc(env(safe-area-inset-right) + 8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.klo-hi-val.purple,.klo-hi-val.green,.h2 .hp,.h2 .hg{
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn{-webkit-tap-highlight-color:transparent;}
+}
+
+/* Android high-DPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .method-card,.ex-card,.klobanner,.conviction-wrap{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .exc-char svg{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
+  .rv{opacity:1;transform:none;}
+  .klo-icon,.mc-ico,.ks-ico{animation:none!important;}
+  .pos-bar{animation:none;transform:scaleY(1);}
+  .kelly-steps::after{display:none;}
+}
+
+/* Print */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}
+  .rv{opacity:1;transform:none;}
+  body{color:#000;}
+  .w{padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="vbadge">Portfolio Framework · Position Sizing</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Kelly Criterion · Equal Weight · Conviction-Based Sizing</div>
+  <h1 class="hh1">
+    <span class="line1">Position Sizing</span>
+    <span class="line2">Done Right</span>
+    <span class="line3">Allocate Capital Proportional to Your Conviction</span>
+  </h1>
+  <div class="hsub">Portfolio Framework · Capital Allocation · Risk Management</div>
+  <p class="hdesc">Knowing which stock to buy is only half the job. Knowing how much of your capital to put in each position is just as important — and almost no retail investor thinks about it systematically. Position sizing is what separates investors who survive bear markets from those who don't.</p>
+  <div class="hero-pills">
+    <span class="hero-pill hp-p">📐 Kelly Criterion</span>
+    <span class="hero-pill hp-g">⚖️ Equal Weight</span>
+    <span class="hero-pill hp-a">💡 Conviction Scale</span>
+    <span class="hero-pill hp-t">🎯 Max 10% Rule</span>
+    <span class="hero-pill hp-r">🚫 Over-concentration</span>
+  </div>
+</section>
+
+
+<!-- ═══ 01 — KLO ═══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Why <span class="hp">How Much You Invest</span> Matters as Much as What You Invest In</h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">📐</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">Even if you pick the right stocks, poor position sizing can destroy your portfolio. An investor who puts 40% of their money in one stock — even if they're right about the company — is one bad quarter away from catastrophic loss. The goal of position sizing is to ensure that no single mistake kills your wealth, while no single correct decision is wasted because you sized it too small.</div>
+        <div class="klo-desc">Imagine you are a cricket captain picking your batting order. You have 11 batsmen. Some are world-class (Virat Kohli — you send them to bat early and let them play a long innings). Some are good but unproven (you give them a reasonable opportunity). Some are tail-enders (you don't waste the most important overs on them). Position sizing in investing works exactly the same way. Your highest-conviction, most-researched ideas get the most capital — but with a hard cap so that even if they're wrong, you survive. Your exploratory positions get smaller allocations so that if they work, you benefit, and if they don't, you're not devastated. This is called conviction-based position sizing. The mathematical framework that supports this — the Kelly Criterion — tells you precisely what fraction of your capital to risk on any investment based on your estimated probability of being right and the expected reward. In practice, most investors use a modified, more conservative version. Understanding both Kelly and equal-weight sizing helps you build a portfolio that is both smart about conviction and safe against overconfidence.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-p">📐 Kelly Criterion</span>
+          <span class="kpill kpill-g">⚖️ Equal weight</span>
+          <span class="kpill kpill-a">💡 Half-Kelly (safer)</span>
+          <span class="kpill kpill-r">🚫 No stock &gt;10%</span>
+        </div>
+        <div class="klo-hi-row">
+          <div class="klo-hi"><div class="klo-hi-ico">🎯</div><div class="klo-hi-val purple">High Conviction</div><div class="klo-hi-lbl">6–10% allocation</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">⚖️</div><div class="klo-hi-val green">Medium Conv.</div><div class="klo-hi-lbl">3–5% allocation</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">🔍</div><div class="klo-hi-val purple">Exploratory</div><div class="klo-hi-lbl">1–2% allocation</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 02 — TWO METHODS ═══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — Two Sizing Methods</div>
+    <h2 class="h2 rv d2"><span class="hp">Kelly Criterion</span> vs <span class="hg">Equal Weight</span> — Which One Should You Use?</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">There are two main approaches to position sizing. Equal weight is simple, safe, and surprisingly effective. The Kelly Criterion is mathematically optimal but requires accurate probability estimates. Understanding both lets you choose the right tool for each situation.</p>
+
+    <div class="method-grid">
+
+      <!-- KELLY -->
+      <div class="method-card rv d2">
+        <div class="mc-hd mch-p">
+          <div class="mc-hd-inner">
+            <span class="mc-ico">📐</span>
+            <div class="mc-title">Kelly Criterion</div>
+            <div class="mc-sub">Mathematically optimal capital allocation based on conviction probability</div>
+          </div>
+        </div>
+        <div class="mc-body">
+          <div class="mc-desc">The Kelly Criterion was invented by a Bell Labs physicist named John Kelly in 1956 to optimise bet sizing for information transmission — but investors quickly realised it worked perfectly for portfolio sizing too. The core idea: the fraction of your capital you should put into any investment is determined by how likely you are to be right and how much you gain when right versus how much you lose when wrong. Kelly gives you the mathematically optimal size that maximises long-term wealth growth. In practice, most professional investors use "Half-Kelly" — half the mathematically optimal position — because real-world probability estimates are uncertain and full Kelly is extremely aggressive. Even Half-Kelly requires honest self-assessment of your conviction level, which is its greatest discipline-building benefit.</div>
+          <div class="mc-formula mcf-p">
+            <div class="formula-label fl-p">Kelly Formula</div>
+            <div class="formula-main fm-p">f* = (b × p − q) ÷ b</div>
+            <div class="formula-note">Where: <strong>f*</strong> = fraction of capital to invest · <strong>p</strong> = probability of winning (your conviction %) · <strong>q</strong> = probability of losing (1 − p) · <strong>b</strong> = ratio of expected gain to expected loss</div>
+          </div>
+          <div class="mc-pros-cons">
+            <div class="mpc-col">
+              <div class="mpc-title mpct-p">Advantages</div>
+              <div class="mpc-items">
+                <div class="mpc-item"><div class="mpc-dot mpcd-g"></div>Forces you to quantify conviction</div>
+                <div class="mpc-item"><div class="mpc-dot mpcd-g"></div>Mathematically maximises wealth</div>
+                <div class="mpc-item"><div class="mpc-dot mpcd-g"></div>Adjusts for risk/reward ratio</div>
+                <div class="mpc-item"><div class="mpc-dot mpcd-g"></div>Prevents overconfident oversizing</div>
+              </div>
+            </div>
+            <div class="mpc-col">
+              <div class="mpc-title mpct-c">Challenges</div>
+              <div class="mpc-items">
+                <div class="mpc-item"><div class="mpc-dot mpcd-r"></div>Requires probability estimates</div>
+                <div class="mpc-item"><div class="mpc-dot mpcd-r"></div>Full Kelly is very aggressive</div>
+                <div class="mpc-item"><div class="mpc-dot mpcd-r"></div>Complex for beginners</div>
+                <div class="mpc-item"><div class="mpc-dot mpcd-r"></div>Sensitive to input errors</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EQUAL WEIGHT -->
+      <div class="method-card rv d3">
+        <div class="mc-hd mch-g">
+          <div class="mc-hd-inner">
+            <span class="mc-ico">⚖️</span>
+            <div class="mc-title">Equal Weight</div>
+            <div class="mc-sub">Divide capital equally across all positions — simple, robust, and surprisingly powerful</div>
+          </div>
+        </div>
+        <div class="mc-body">
+          <div class="mc-desc">Equal weighting is exactly what it sounds like: if you own 15 stocks, each gets 6.67% of your portfolio. No stock is "bigger" than another. This approach is surprisingly effective because it removes the human bias of over-concentrating in your "favourites" — which are often the positions you are most emotionally attached to, not necessarily the ones with the best risk-reward going forward. Research consistently shows that equal-weight portfolios beat cap-weighted portfolios over long periods. For most retail investors — especially those with less than 5 years of investing experience — equal weight is the recommended starting approach. It forces you to be right on most of your stock picks, rather than betting heavily on just one or two. It also makes portfolio management simple: rebalance when any position grows beyond 15% of portfolio.</div>
+          <div class="mc-formula mcf-g">
+            <div class="formula-label fl-g">Equal Weight Formula</div>
+            <div class="formula-main fm-g">Position % = 100% ÷ Number of Stocks</div>
+            <div class="formula-note">Example: 20 stocks → 5% each · 15 stocks → 6.67% each · 10 stocks → 10% each · Rebalance when any position drifts beyond ±5% of target weight</div>
+          </div>
+          <div class="mc-pros-cons">
+            <div class="mpc-col">
+              <div class="mpc-title mpct-p">Advantages</div>
+              <div class="mpc-items">
+                <div class="mpc-item"><div class="mpc-dot mpcd-g"></div>Extremely simple to implement</div>
+                <div class="mpc-item"><div class="mpc-dot mpcd-g"></div>Removes emotional bias</div>
+                <div class="mpc-item"><div class="mpc-dot mpcd-g"></div>Consistently outperforms cap-wt</div>
+                <div class="mpc-item"><div class="mpc-dot mpcd-g"></div>Easy rebalancing rules</div>
+              </div>
+            </div>
+            <div class="mpc-col">
+              <div class="mpc-title mpct-c">Challenges</div>
+              <div class="mpc-items">
+                <div class="mpc-item"><div class="mpc-dot mpcd-r"></div>Ignores conviction differences</div>
+                <div class="mpc-item"><div class="mpc-dot mpcd-r"></div>Best ideas don't compound harder</div>
+                <div class="mpc-item"><div class="mpc-dot mpcd-r"></div>Requires more stocks for diversification</div>
+                <div class="mpc-item"><div class="mpc-dot mpcd-r"></div>Frequent rebalancing creates tax events</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 03 — KELLY STEP BY STEP ═══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — Kelly in Practice</div>
+    <h2 class="h2 rv d2">How to Apply the <span class="hp">Kelly Criterion</span> — Step by Step with Real Numbers</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">The Kelly formula looks intimidating but becomes intuitive once you see it applied to a real investment decision. Let's walk through it using a specific Indian stock example so you can replicate this thinking for any investment you evaluate.</p>
+
+    <div class="kelly-steps rv d2">
+      <div class="kelly-step">
+        <div class="ks-num">1</div>
+        <span class="ks-ico">🎯</span>
+        <div class="ks-title">Estimate Your Win Probability (p)</div>
+        <div class="ks-desc">How confident are you the stock will outperform over 2–3 years? After deep research on Asian Paints — studying moat, SWOT, management, financials — you estimate 70% probability of 2× return. So p = 0.70, q = 0.30. Be honest. Overconfidence is the #1 Kelly mistake.</div>
+      </div>
+      <div class="kelly-step">
+        <div class="ks-num">2</div>
+        <span class="ks-ico">📊</span>
+        <div class="ks-title">Estimate Win/Loss Ratio (b)</div>
+        <div class="ks-desc">If right: you expect +100% gain (stock doubles). If wrong: you expect −35% loss (stock falls on negative surprise). Win/loss ratio b = 100% ÷ 35% = 2.86. This is the reward-to-risk ratio of your specific investment thesis.</div>
+      </div>
+      <div class="kelly-step">
+        <div class="ks-num">3</div>
+        <span class="ks-ico">🧮</span>
+        <div class="ks-title">Apply the Kelly Formula</div>
+        <div class="ks-desc">f* = (b × p − q) ÷ b = (2.86 × 0.70 − 0.30) ÷ 2.86 = (2.002 − 0.30) ÷ 2.86 = 1.702 ÷ 2.86 = <strong>0.595 = 59.5%</strong> of your portfolio. Full Kelly says invest 59.5% in Asian Paints. This is why Full Kelly is dangerous — overconfidence inflates p.</div>
+      </div>
+      <div class="kelly-step">
+        <div class="ks-num">4</div>
+        <span class="ks-ico">✂️</span>
+        <div class="ks-title">Apply Half-Kelly Safety Factor</div>
+        <div class="ks-desc">Divide Kelly output by 2 for safety: 59.5% ÷ 2 = <strong>29.75% ≈ 30%</strong>. Still too high? Most investors cap individual stocks at 10%. Apply your portfolio maximum: min(Half-Kelly, your max cap) = min(30%, 10%) = <strong>10% final allocation</strong>.</div>
+      </div>
+    </div>
+
+    <!-- Conviction scale -->
+    <div class="conviction-wrap rv d4" style="margin-top:clamp(28px,4vw,44px);">
+      <div class="cw-hd cwh-p">
+        <div class="cw-title">💡 Practical Conviction Scale — Simplified Kelly for Every Investor</div>
+        <div class="cw-sub">Use this instead of the full formula if you find Kelly math complex — it captures the same logic in a framework anyone can apply</div>
+      </div>
+      <div class="cw-body">
+        <div class="conviction-rows">
+          <div class="conv-row">
+            <div class="cr-badge crb-h">🔥 HIGH</div>
+            <div class="cr-body">
+              <div class="cr-title">High Conviction — Deeply Researched, Multi-Year Thesis</div>
+              <div class="cr-desc">You have read 10 years of annual reports, spoken to customers or distributors, understand the competitive moat completely, and have a specific reason why this stock will outperform over 3–5 years that the market hasn't fully priced. The risk-reward is compelling and the downside is clearly limited.</div>
+            </div>
+            <div class="cr-pct crp-h">7–10%</div>
+          </div>
+          <div class="conv-row">
+            <div class="cr-badge crb-m">✅ MEDIUM</div>
+            <div class="cr-body">
+              <div class="cr-title">Medium Conviction — Good Research, Reasonable Thesis</div>
+              <div class="cr-desc">You understand the business well, the valuation seems reasonable, the sector tailwind is real, but you haven't done the deepest possible research. The thesis could be right or wrong — you're moderately confident. No single factor clearly makes this stock a must-own.</div>
+            </div>
+            <div class="cr-pct crp-m">3–6%</div>
+          </div>
+          <div class="conv-row">
+            <div class="cr-badge crb-l">🔍 LOW</div>
+            <div class="cr-body">
+              <div class="cr-title">Low Conviction — Exploratory, Speculative, Early Research</div>
+              <div class="cr-desc">You're intrigued by the story but haven't done thorough research. Or it's a speculative bet on an emerging theme. You want exposure without significant risk. If it 10×, great. If it goes to zero, it barely affects your portfolio. This is your "lottery ticket" sizing.</div>
+            </div>
+            <div class="cr-pct crp-l">1–2%</div>
+          </div>
+          <div class="conv-row">
+            <div class="cr-badge crb-n">🚫 NONE</div>
+            <div class="cr-body">
+              <div class="cr-title">No Allocation — Below Conviction Threshold</div>
+              <div class="cr-desc">If you cannot clearly articulate why this stock will outperform over 3 years — in one sentence — then your conviction doesn't justify any allocation. The Kelly Criterion mathematically produces zero or negative allocation for positions where your edge is unclear. That's your signal to keep researching or skip entirely.</div>
+            </div>
+            <div class="cr-pct crp-n">0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 04 — FIVE EXAMPLES ═══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">04 — Five Position Sizing Examples</div>
+    <h2 class="h2 rv d2">Position Sizing <span class="hp">in Practice</span> — Five Real Investor Approaches</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Five different investors applying position sizing principles to real stock portfolios — from the pure equal-weight beginner to the conviction-weighted professional. Each example shows the specific reasoning behind each position size and the overall portfolio architecture that results.</p>
+
+    <div class="ex-cards">
+
+      <!-- EXAMPLE 1: Equal Weight Beginner -->
+      <div class="ex-card rv d2">
+        <div class="exc-hd exh-g">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3s ease-in-out infinite;">
+              <!-- Balance scale visual -->
+              <rect x="36" y="44" width="6" height="44" rx="3" fill="rgba(255,255,255,.35)"/>
+              <!-- Scale arm -->
+              <rect x="12" y="44" width="54" height="5" rx="2.5" fill="rgba(255,255,255,.4)"/>
+              <!-- Left pan -->
+              <ellipse cx="22" cy="60" rx="14" ry="4" fill="rgba(255,255,255,.3)"/>
+              <path d="M14 44 Q14 58 8 60 Q14 62 22 62 Q30 62 36 60 Q30 58 26 44" fill="rgba(255,255,255,.2)"/>
+              <!-- Right pan -->
+              <ellipse cx="56" cy="60" rx="14" ry="4" fill="rgba(255,255,255,.3)"/>
+              <path d="M62 44 Q62 58 68 60 Q62 62 56 62 Q48 62 42 60 Q48 58 52 44" fill="rgba(255,255,255,.2)"/>
+              <!-- Equal coins on both pans -->
+              <circle cx="18" cy="58" r="4" fill="#fbbf24" opacity=".7"/>
+              <circle cx="26" cy="58" r="4" fill="#fbbf24" opacity=".7"/>
+              <circle cx="52" cy="58" r="4" fill="#fbbf24" opacity=".7"/>
+              <circle cx="60" cy="58" r="4" fill="#fbbf24" opacity=".7"/>
+              <!-- Stand base -->
+              <ellipse cx="39" cy="90" rx="18" ry="4" fill="rgba(255,255,255,.25)"/>
+              <!-- Beginner investor -->
+              <circle cx="68" cy="22" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="68" cy="9" rx="12" ry="5" fill="#15803d"/>
+              <circle cx="62" cy="19" r="2.2" fill="#14532d"/>
+              <circle cx="74" cy="19" r="2.2" fill="#14532d"/>
+              <path d="M62 28 Q68 32 74 28" stroke="#14532d" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="60" y="35" width="16" height="18" rx="5" fill="#16a34a"/>
+              <rect x="48" y="39" width="14" height="4" rx="2" fill="#16a34a" transform="rotate(-15 55 41)"/>
+              <rect x="60" y="51" width="5" height="9" rx="2.5" fill="#14532d"/>
+              <rect x="68" y="51" width="5" height="9" rx="2.5" fill="#14532d"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 01 · Equal Weight · Beginner · ₹2 Lakh Portfolio</div>
+            <div class="exc-name">Kavitha — The Equal-Weight Beginner</div>
+            <div class="exc-tagline">Just started investing with ₹2 lakh. Has done decent research on 10 companies but doesn't yet feel confident enough to weight any of them more than another. Equal weight is the right approach — it removes the overconfidence of betting heavily on any single idea before she has a multi-year track record.</div>
+            <div class="exc-pills"><span class="exc-pill">₹2L portfolio · 10 stocks</span><span class="exc-pill">Equal weight 10% each</span><span class="exc-pill">Auto-rebalanced quarterly</span><span class="exc-pill">0–2 yr experience</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-g">Position Sizing — 10 Stocks × 10% Each</div>
+              <div class="pos-list">
+                <div class="pl-item"><div class="pli-dot plid-g"></div><div class="pli-body"><div class="pli-name">HDFC Bank</div><div class="pli-reason">India's best private bank · ₹20,000 invested</div></div><div class="pli-pct" style="color:var(--gbr);">10%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-g"></div><div class="pli-body"><div class="pli-name">TCS</div><div class="pli-reason">IT services leader · ₹20,000 invested</div></div><div class="pli-pct" style="color:var(--gbr);">10%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-g"></div><div class="pli-body"><div class="pli-name">Asian Paints</div><div class="pli-reason">Consumer brand moat · ₹20,000 invested</div></div><div class="pli-pct" style="color:var(--gbr);">10%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-g"></div><div class="pli-body"><div class="pli-name">Sun Pharma</div><div class="pli-reason">Pharma + defensive · ₹20,000 invested</div></div><div class="pli-pct" style="color:var(--gbr);">10%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-g"></div><div class="pli-body"><div class="pli-name">6 more stocks</div><div class="pli-reason">Remaining 6 sectors · ₹20,000 each</div></div><div class="pli-pct" style="color:var(--gbr);">10%</div></div>
+              </div>
+              <div class="kelly-calc kc-g" style="margin-top:10px;">
+                ✅ <strong>Rebalancing rule:</strong> If any stock grows to &gt;15%, sell the excess and distribute to underweight positions. If any stock falls to &lt;5%, review the thesis — add if conviction is intact, exit if not.
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-g">Why Equal Weight is Right for Kavitha</div>
+              <!-- Visual bar chart -->
+              <div class="pos-chart">
+                <div class="pos-bars">
+                  <div class="pos-bar-wrap"><div class="pos-bar pb-g" style="height:60%;animation-delay:0s;"></div><div class="pos-pct" style="color:var(--gbr);">10%</div><div class="pos-name">HDFC</div></div>
+                  <div class="pos-bar-wrap"><div class="pos-bar pb-g" style="height:60%;animation-delay:.1s;"></div><div class="pos-pct" style="color:var(--gbr);">10%</div><div class="pos-name">TCS</div></div>
+                  <div class="pos-bar-wrap"><div class="pos-bar pb-g" style="height:60%;animation-delay:.2s;"></div><div class="pos-pct" style="color:var(--gbr);">10%</div><div class="pos-name">AP</div></div>
+                  <div class="pos-bar-wrap"><div class="pos-bar pb-g" style="height:60%;animation-delay:.3s;"></div><div class="pos-pct" style="color:var(--gbr);">10%</div><div class="pos-name">Sun</div></div>
+                  <div class="pos-bar-wrap"><div class="pos-bar pb-g" style="height:60%;animation-delay:.4s;"></div><div class="pos-pct" style="color:var(--gbr);">10%</div><div class="pos-name">+6</div></div>
+                </div>
+              </div>
+              <div class="lesson-box lb-g" style="margin-top:14px;">
+                <div class="lb-title lbt-g">✅ Key Lesson — Equal Weight is the Best Starting Point</div>
+                <div class="lb-desc">Research by MSCI shows equal-weight indices outperform cap-weighted indices by 1–2% per year over long periods. For a new investor who hasn't yet developed the track record to know whose conviction to trust, equal weight removes the dangerous overconfidence of over-sizing any single idea. After 3 years of investing and tracking your own conviction accuracy, you can graduate to conviction-based sizing.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE 2: Conviction-Based Experienced Investor -->
+      <div class="ex-card rv d3">
+        <div class="exc-hd exh-p">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.3s ease-in-out infinite .3s;">
+              <!-- Investment dashboard / research desk -->
+              <rect x="6" y="48" width="56" height="40" rx="4" fill="rgba(255,255,255,.2)"/>
+              <rect x="6" y="42" width="56" height="10" rx="3" fill="rgba(255,255,255,.26)"/>
+              <!-- Multiple chart screens -->
+              <rect x="10" y="52" width="22" height="16" rx="2" fill="rgba(255,255,255,.25)"/>
+              <polyline points="12,64 16,60 20,62 24,57 28,56 30,57" stroke="#4ade80" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <rect x="36" y="52" width="22" height="16" rx="2" fill="rgba(255,255,255,.25)"/>
+              <rect x="38" y="60" width="4" height="7" rx="1" fill="#a78bfa" opacity=".8"/>
+              <rect x="44" y="56" width="4" height="11" rx="1" fill="#7c3aed" opacity=".8"/>
+              <rect x="50" y="58" width="4" height="9" rx="1" fill="#a78bfa" opacity=".8"/>
+              <!-- Notes -->
+              <rect x="10" y="72" width="26" height="10" rx="2" fill="rgba(255,255,255,.3)"/>
+              <rect x="12" y="74" width="16" height="2" rx="1" fill="rgba(255,255,255,.5)"/>
+              <rect x="12" y="77" width="20" height="2" rx="1" fill="rgba(255,255,255,.4)"/>
+              <!-- Experienced investor -->
+              <circle cx="68" cy="22" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="68" cy="9" rx="12" ry="5" fill="#4c1d95"/>
+              <circle cx="62" cy="19" r="2.2" fill="#3730a3"/>
+              <circle cx="74" cy="19" r="2.2" fill="#3730a3"/>
+              <path d="M62 28 Q68 32 74 28" stroke="#3730a3" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="60" y="35" width="16" height="18" rx="5" fill="#7c3aed"/>
+              <polygon points="68,35 66,43 68,45 70,43" fill="#a78bfa" opacity=".7"/>
+              <rect x="48" y="39" width="14" height="4" rx="2" fill="#7c3aed" transform="rotate(-15 55 41)"/>
+              <rect x="60" y="51" width="5" height="9" rx="2.5" fill="#4c1d95"/>
+              <rect x="68" y="51" width="5" height="9" rx="2.5" fill="#4c1d95"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 02 · Conviction-Based · Experienced · ₹25 Lakh Portfolio</div>
+            <div class="exc-name">Rohit — The Conviction-Weighted Analyst</div>
+            <div class="exc-tagline">5 years of investing experience, tracks 30 companies closely, invests in 12 at any time. Has developed a reliable track record of his own conviction accuracy — when he rates a stock as "high conviction," he has historically been right 65–70% of the time. Uses the simplified Kelly conviction scale systematically.</div>
+            <div class="exc-pills"><span class="exc-pill">₹25L portfolio · 12 stocks</span><span class="exc-pill">Kelly-based weighting</span><span class="exc-pill">3 conviction tiers</span><span class="exc-pill">5-yr track record</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-p">Position Sizing — Conviction-Based</div>
+              <div class="pos-list">
+                <div class="pl-item"><div class="pli-dot plid-p"></div><div class="pli-body"><div class="pli-name">Asian Paints — 10% (₹2.5L)</div><div class="pli-reason">🔥 HIGH CONVICTION: 50-yr moat, Birla Opus threat manageable, ROCE 28%+ sustained</div></div><div class="pli-pct" style="color:var(--p);">10%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-p"></div><div class="pli-body"><div class="pli-name">Bajaj Finance — 10% (₹2.5L)</div><div class="pli-reason">🔥 HIGH CONVICTION: Data moat, 90M+ customers, India credit underpenetrated</div></div><div class="pli-pct" style="color:var(--p);">10%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-g"></div><div class="pli-body"><div class="pli-name">Infosys — 5% (₹1.25L)</div><div class="pli-reason">✅ MEDIUM: Good governance, cloud exposure, but GenAI uncertainty remains</div></div><div class="pli-pct" style="color:var(--gbr);">5%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-g"></div><div class="pli-body"><div class="pli-name">Sun Pharma — 5% (₹1.25L)</div><div class="pli-reason">✅ MEDIUM: India moat excellent, US specialty still proving itself</div></div><div class="pli-pct" style="color:var(--gbr);">5%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-a"></div><div class="pli-body"><div class="pli-name">Zomato — 2% (₹50K)</div><div class="pli-reason">🔍 LOW: Network moat promising but ONDC remains an open question</div></div><div class="pli-pct" style="color:var(--ambr);">2%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-a"></div><div class="pli-body"><div class="pli-name">7 more stocks</div><div class="pli-reason">Mix of medium (5%) and exploratory (2%) positions</div></div><div class="pli-pct" style="color:var(--ambr);">58%</div></div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-p">Visual Allocation Map</div>
+              <div class="pos-chart">
+                <div class="pos-bars">
+                  <div class="pos-bar-wrap"><div class="pos-bar pb-p" style="height:100%;animation-delay:0s;"></div><div class="pos-pct" style="color:var(--p);">10%</div><div class="pos-name">AP</div></div>
+                  <div class="pos-bar-wrap"><div class="pos-bar pb-p" style="height:100%;animation-delay:.1s;"></div><div class="pos-pct" style="color:var(--p);">10%</div><div class="pos-name">BFin</div></div>
+                  <div class="pos-bar-wrap"><div class="pos-bar pb-g" style="height:50%;animation-delay:.2s;"></div><div class="pos-pct" style="color:var(--gbr);">5%</div><div class="pos-name">Infy</div></div>
+                  <div class="pos-bar-wrap"><div class="pos-bar pb-g" style="height:50%;animation-delay:.3s;"></div><div class="pos-pct" style="color:var(--gbr);">5%</div><div class="pos-name">Sun</div></div>
+                  <div class="pos-bar-wrap"><div class="pos-bar pb-a" style="height:20%;animation-delay:.4s;"></div><div class="pos-pct" style="color:var(--ambr);">2%</div><div class="pos-name">Zmt</div></div>
+                </div>
+              </div>
+              <div class="kelly-calc kc-p" style="margin-top:10px;">
+                📐 <strong>Kelly verification:</strong> Asian Paints — p=0.70, b=2.5, f*=(2.5×0.70−0.30)÷2.5=0.58 (58% full Kelly). Half-Kelly=29%. Portfolio cap=10%. Final: 10% ✓
+              </div>
+              <div class="lesson-box lb-p" style="margin-top:10px;">
+                <div class="lb-title lbt-p">💡 Key Lesson — Conviction-Based Only Works If You Track Your Accuracy</div>
+                <div class="lb-desc">Rohit's approach works because he has 5 years of data on when his "high conviction" calls were right and wrong. If you don't have this track record yet, equal weight is safer. The most dangerous investor is one who uses conviction-based sizing without having earned the right to trust their own conviction.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE 3: The Over-Sized Mistake -->
+      <div class="ex-card rv d4">
+        <div class="exc-hd exh-r">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3s ease-in-out infinite .6s;">
+              <!-- Imbalanced scale — one side too heavy -->
+              <rect x="36" y="50" width="6" height="38" rx="3" fill="rgba(255,255,255,.3)"/>
+              <!-- Tilted scale arm -->
+              <rect x="12" y="48" width="54" height="5" rx="2.5" fill="rgba(255,255,255,.35)" transform="rotate(12 39 50)"/>
+              <!-- Heavy left pan (tilted down) -->
+              <ellipse cx="20" cy="70" rx="13" ry="4" fill="rgba(255,255,255,.3)"/>
+              <circle cx="14" cy="68" r="5" fill="#fbbf24" opacity=".9"/>
+              <circle cx="20" cy="66" r="5" fill="#fbbf24" opacity=".9"/>
+              <circle cx="26" cy="68" r="5" fill="#fbbf24" opacity=".9"/>
+              <!-- Light right pan -->
+              <ellipse cx="58" cy="52" rx="13" ry="4" fill="rgba(255,255,255,.2)"/>
+              <circle cx="58" cy="50" r="3" fill="rgba(255,255,255,.4)"/>
+              <!-- Warning signal -->
+              <path d="M62 30 L72 48 L52 48 Z" fill="#fbbf24" opacity=".9"/>
+              <rect x="66" y="34" width="2.5" height="8" rx="1.25" fill="#78350f"/>
+              <circle cx="67.25" cy="45.5" r="1.5" fill="#78350f"/>
+              <!-- Worried investor -->
+              <circle cx="66" cy="20" r="14" fill="rgba(255,255,255,.9)"/>
+              <ellipse cx="66" cy="7" rx="12" ry="5" fill="#991b1b"/>
+              <circle cx="60" cy="17" r="2.2" fill="#7f1d1d"/>
+              <circle cx="72" cy="17" r="2.2" fill="#7f1d1d"/>
+              <path d="M60 27 Q66 23 72 27" stroke="#7f1d1d" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+              <rect x="58" y="33" width="16" height="18" rx="5" fill="#dc2626"/>
+              <rect x="58" y="49" width="5" height="9" rx="2.5" fill="#991b1b"/>
+              <rect x="66" y="49" width="5" height="9" rx="2.5" fill="#991b1b"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 03 · Classic Mistake · Over-Concentration · Cautionary Tale</div>
+            <div class="exc-name">Manish — The Over-Concentrated Investor</div>
+            <div class="exc-tagline">An enthusiastic investor who put 40% of his ₹5 lakh portfolio in a single small-cap stock he was "very confident" about — then watched it fall 60% due to a promoter governance issue he hadn't researched. His ₹2 lakh position became ₹80,000. A textbook lesson in why position sizing rules exist.</div>
+            <div class="exc-pills"><span class="exc-pill">40% in 1 stock</span><span class="exc-pill">−60% on that position</span><span class="exc-pill">−24% total portfolio</span><span class="exc-pill">Rule: max 10%</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-r">Manish's Actual Portfolio (Before)</div>
+              <div class="pos-list">
+                <div class="pl-item"><div class="pli-dot plid-r"></div><div class="pli-body"><div class="pli-name">XYZ Small Cap — THE mistake</div><div class="pli-reason">💀 40% allocation: "My best idea, absolutely certain it will 3×" — no governance check done</div></div><div class="pli-pct" style="color:var(--red);">40%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-p"></div><div class="pli-body"><div class="pli-name">HDFC Bank</div><div class="pli-reason">Safe allocation to balance the "risky" bet</div></div><div class="pli-pct" style="color:var(--p);">25%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-g"></div><div class="pli-body"><div class="pli-name">TCS</div><div class="pli-reason">Another safe allocation</div></div><div class="pli-pct" style="color:var(--gbr);">20%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-a"></div><div class="pli-body"><div class="pli-name">2 other stocks</div><div class="pli-reason">Remaining capital, random selection</div></div><div class="pli-pct" style="color:var(--ambr);">15%</div></div>
+              </div>
+              <div class="kelly-calc kc-r" style="margin-top:10px;">
+                🚨 <strong>What happened:</strong> XYZ fell 60% → ₹2L became ₹80K. Total portfolio: ₹5L → ₹3.8L (−24%). HDFC and TCS both went up 15% in the same period — but couldn't offset the massive single-stock loss.
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-r">What Proper Sizing Would Have Done</div>
+              <div class="pos-chart">
+                <div class="pos-bars">
+                  <div class="pos-bar-wrap"><div class="pos-bar pb-r" style="height:100%;animation-delay:0s;"></div><div class="pos-pct" style="color:var(--red);">40%</div><div class="pos-name">XYZ<br/>(actual)</div></div>
+                  <div class="pos-bar-wrap"><div class="pos-bar pb-a" style="height:25%;animation-delay:.2s;"></div><div class="pos-pct" style="color:var(--ambr);">10%</div><div class="pos-name">XYZ<br/>(correct)</div></div>
+                </div>
+              </div>
+              <div style="margin-top:12px;padding:11px 13px;border-radius:12px;background:var(--rpale);border:1px solid rgba(220,38,38,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--red);line-height:1.6;min-width:0;overflow:hidden;">
+                🧮 <strong>If 10% rule applied:</strong> XYZ at 10% → fell 60% → loss = 6% of portfolio. Total portfolio would have fallen only 6% instead of 24%. HDFC + TCS gains (3.5% + 3%) would have nearly offset. Net: nearly flat instead of −24%.
+              </div>
+              <div class="lesson-box lb-r" style="margin-top:10px;">
+                <div class="lb-title lbt-r">🚨 Key Lesson — The 10% Rule is Non-Negotiable</div>
+                <div class="lb-desc">No matter how confident you are, no single stock should exceed 10% of your portfolio. Your maximum individual stock loss is then capped at 10% × 100% = 10% of portfolio in a complete wipeout. Position sizing is not about limiting upside — it's about ensuring you survive to keep compounding. Manish's portfolio could have continued growing if his conviction was wrong at a 10% size. At 40%, his mistake set him back years.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ DEMAT BANNER ═══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Size Your Positions Right</div>
+    <div class="dmh">Invest with <span class="dmhs">Conviction-Based Discipline</span></div>
+    <div class="dmsub">The best investors are right more often than wrong — and when they're wrong, the position size limits the damage. Start building your portfolio with proper position sizing from day one.</div>
+    <div class="dmfeats">
+      <div class="dmf">Track conviction accuracy over time</div>
+      <div class="dmf">Set automatic position size limits</div>
+      <div class="dmf">Rebalance quarterly with discipline</div>
+      <div class="dmf">Open your account from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ═══ EXAMPLES 4 & 5 ═══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">04 — Continued</div>
+    <div class="ex-cards">
+
+      <!-- EXAMPLE 4: Portfolio Rebalancing -->
+      <div class="ex-card rv d2">
+        <div class="exc-hd exh-a">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.5s ease-in-out infinite .9s;">
+              <!-- Rebalancing circular arrows visual -->
+              <circle cx="34" cy="62" r="24" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+              <!-- Circular arrows suggesting rebalancing -->
+              <path d="M18 52 Q24 40 36 42 Q48 44 50 56" stroke="rgba(255,255,255,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <path d="M50 72 Q44 84 32 82 Q20 80 18 68" stroke="rgba(255,255,255,.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <polygon points="48,50 54,58 44,58" fill="rgba(255,255,255,.5)"/>
+              <polygon points="20,70 14,62 24,62" fill="rgba(255,255,255,.5)"/>
+              <!-- Center pie-like segments -->
+              <path d="M34 62 L34 44 A18 18 0 0 1 50 68 Z" fill="rgba(255,255,255,.25)"/>
+              <path d="M34 62 L50 68 A18 18 0 0 1 26 78 Z" fill="rgba(255,255,255,.18)"/>
+              <path d="M34 62 L26 78 A18 18 0 0 1 18 52 Z" fill="rgba(255,255,255,.12)"/>
+              <path d="M34 62 L18 52 A18 18 0 0 1 34 44 Z" fill="rgba(255,255,255,.2)"/>
+              <!-- Fund manager character -->
+              <circle cx="68" cy="22" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="68" cy="9" rx="12" ry="5" fill="#92400e"/>
+              <circle cx="62" cy="19" r="2.2" fill="#78350f"/>
+              <circle cx="74" cy="19" r="2.2" fill="#78350f"/>
+              <path d="M62 28 Q68 32 74 28" stroke="#78350f" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="60" y="35" width="16" height="18" rx="5" fill="#d97706"/>
+              <rect x="48" y="39" width="14" height="4" rx="2" fill="#d97706" transform="rotate(-15 55 41)"/>
+              <rect x="60" y="51" width="5" height="9" rx="2.5" fill="#92400e"/>
+              <rect x="68" y="51" width="5" height="9" rx="2.5" fill="#92400e"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 04 · Rebalancing · Drift Management · Annual Review</div>
+            <div class="exc-name">Ananya — The Disciplined Rebalancer</div>
+            <div class="exc-tagline">A 3-year investor who started with equal weight but now deals with the reality of portfolio drift: some positions have grown to 18–20% of portfolio after strong runs, while others have shrunk to 3–4%. She follows a systematic rebalancing discipline that forces her to take profits on winners and add to underweight positions.</div>
+            <div class="exc-pills"><span class="exc-pill">₹8L portfolio</span><span class="exc-pill">Annual rebalancing</span><span class="exc-pill">Max position = 15%</span><span class="exc-pill">Drift management</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-a">Before vs After Rebalancing</div>
+              <div class="pos-list">
+                <div class="pl-item"><div class="pli-dot plid-r"></div><div class="pli-body"><div class="pli-name">Bajaj Finance — BEFORE: 22% → AFTER: 10%</div><div class="pli-reason">Grew from 10% to 22% after a strong 2-year run. Sold ₹96K of overweight position — not because conviction changed, but to maintain sizing discipline. Trimmed ≠ exited.</div></div><div class="pli-pct" style="color:var(--red);">−12%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-r"></div><div class="pli-body"><div class="pli-name">Asian Paints — BEFORE: 18% → AFTER: 10%</div><div class="pli-reason">Also grew beyond target. Sold ₹64K to bring back to target. Both stocks still held — just at their correct sizes.</div></div><div class="pli-pct" style="color:var(--red);">−8%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-g"></div><div class="pli-body"><div class="pli-name">Sun Pharma — BEFORE: 4% → AFTER: 8%</div><div class="pli-reason">Had underperformed and shrunk. Conviction intact — added ₹32K to bring back to target. Rebalancing forces buying low, selling high systematically.</div></div><div class="pli-pct" style="color:var(--gbr);">+4%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-g"></div><div class="pli-body"><div class="pli-name">Maruti — BEFORE: 3% → AFTER: 7%</div><div class="pli-reason">Underperformed due to EV concerns. Conviction unchanged — still a 42% market share company. Added to underweight position.</div></div><div class="pli-pct" style="color:var(--gbr);">+4%</div></div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-a">The Rebalancing Calendar</div>
+              <div style="display:flex;flex-direction:column;gap:10px;min-width:0;overflow:hidden;">
+                <div style="padding:11px 13px;border-radius:12px;background:var(--apale);border:1.5px solid rgba(217,119,6,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--ambr);line-height:1.6;min-width:0;overflow:hidden;">
+                  📅 <strong>Annual review (April, post-results):</strong> Check if any position has drifted beyond ±5% of target weight. If so, rebalance. Coincides with full-year results season for Indian companies.
+                </div>
+                <div style="padding:11px 13px;border-radius:12px;background:var(--pxl);border:1.5px solid rgba(109,40,217,.18);font-size:clamp(11.5px,1.4vw,13px);color:var(--p);line-height:1.6;min-width:0;overflow:hidden;">
+                  📊 <strong>Trigger-based review:</strong> Any position reaching 15%+ or falling to 3%− triggers an immediate conviction check. If conviction intact, rebalance to target. If conviction has changed, review exit.
+                </div>
+                <div style="padding:11px 13px;border-radius:12px;background:var(--gpale);border:1.5px solid rgba(22,163,74,.18);font-size:clamp(11.5px,1.4vw,13px);color:var(--gbr);line-height:1.6;min-width:0;overflow:hidden;">
+                  💡 <strong>Tax efficiency:</strong> Ananya holds rebalancing trades in same financial year where possible to net gains against losses. Uses long-term capital gains tax advantage (equity held &gt;1 year: 10% above ₹1L).
+                </div>
+              </div>
+              <div class="lesson-box lb-a" style="margin-top:12px;">
+                <div class="lb-title lbt-a">✅ Key Lesson — Rebalancing Forces Disciplined Profit-Taking</div>
+                <div class="lb-desc">Ananya's rebalancing rule is counter-intuitive but mathematically proven: selling winners to buy laggards systematically exploits mean reversion. Studies show that equal-weight rebalanced portfolios outperform buy-and-hold by 1.5–2% per year in the long run. Rebalancing also prevents the emotional "ride the winner forever" bias that makes portfolios dangerously concentrated over time.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE 5: Professional Fund Manager -->
+      <div class="ex-card rv d3">
+        <div class="exc-hd exh-t">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.2s ease-in-out infinite 1.2s;">
+              <!-- Professional office / fund management -->
+              <rect x="6" y="40" width="56" height="48" rx="4" fill="rgba(255,255,255,.18)"/>
+              <rect x="6" y="34" width="56" height="10" rx="3" fill="rgba(255,255,255,.24)"/>
+              <!-- Multiple screens showing data -->
+              <rect x="10" y="44" width="20" height="14" rx="2" fill="rgba(255,255,255,.25)"/>
+              <rect x="34" y="44" width="20" height="14" rx="2" fill="rgba(255,255,255,.25)"/>
+              <polyline points="12,54 16,50 20,52 24,48 26,49" stroke="#22d3ee" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <polyline points="36,54 40,48 44,50 48,46 50,47" stroke="#4ade80" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <!-- Risk model visual -->
+              <rect x="10" y="62" width="44" height="18" rx="2" fill="rgba(255,255,255,.2)"/>
+              <rect x="12" y="64" width="8"  height="12" rx="1" fill="#0891b2" opacity=".7"/>
+              <rect x="22" y="66" width="8"  height="10" rx="1" fill="#22c55e" opacity=".7"/>
+              <rect x="32" y="62" width="8"  height="14" rx="1" fill="#7c3aed" opacity=".7"/>
+              <rect x="42" y="65" width="8"  height="11" rx="1" fill="#d97706" opacity=".7"/>
+              <!-- Fund manager with suit -->
+              <circle cx="68" cy="22" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="68" cy="9" rx="12" ry="5" fill="#0891b2"/>
+              <circle cx="62" cy="19" r="2.2" fill="#0e7490"/>
+              <circle cx="74" cy="19" r="2.2" fill="#0e7490"/>
+              <path d="M62 28 Q68 32 74 28" stroke="#0e7490" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="60" y="35" width="16" height="18" rx="5" fill="#0891b2"/>
+              <rect x="60" y="35" width="16" height="6" rx="0" fill="#0e7490" opacity=".4"/>
+              <polygon points="68,35 66,43 68,45 70,43" fill="#22d3ee" opacity=".7"/>
+              <rect x="48" y="39" width="14" height="4" rx="2" fill="#0891b2" transform="rotate(-15 55 41)"/>
+              <rect x="60" y="51" width="5" height="9" rx="2.5" fill="#0e7490"/>
+              <rect x="68" y="51" width="5" height="9" rx="2.5" fill="#0e7490"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 05 · Professional Fund Manager · Full Kelly Framework</div>
+            <div class="exc-name">Vikram — The Full Kelly Professional</div>
+            <div class="exc-tagline">A seasoned fund manager running a concentrated equity PMS with 12 stocks. Uses a rigorous modified Kelly framework with explicit probability estimates drawn from 10+ years of conviction accuracy data. Runs a structured position sizing model for every new investment decision — the professional-grade approach that retail investors can adapt and simplify.</div>
+            <div class="exc-pills"><span class="exc-pill">₹5 Cr PMS</span><span class="exc-pill">12-stock concentrated</span><span class="exc-pill">Modified Half-Kelly</span><span class="exc-pill">Explicit prob. estimates</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-t">Position Sizing with Full Kelly Model</div>
+              <div class="pos-list">
+                <div class="pl-item"><div class="pli-dot plid-t"></div><div class="pli-body"><div class="pli-name">HDFC Bank — 12% (₹60L)</div><div class="pli-reason">p=0.75, b=2.0. Full Kelly=62.5%, Half=31.25%, capped at 12% max</div></div><div class="pli-pct" style="color:var(--teal);">12%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-t"></div><div class="pli-body"><div class="pli-name">Asian Paints — 12% (₹60L)</div><div class="pli-reason">p=0.70, b=2.5. Full Kelly=58%, Half=29%, capped at 12%</div></div><div class="pli-pct" style="color:var(--teal);">12%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-g"></div><div class="pli-body"><div class="pli-name">TCS — 8% (₹40L)</div><div class="pli-reason">p=0.65, b=1.8. Full Kelly=33.3%, Half=16.7%, capped at 8%</div></div><div class="pli-pct" style="color:var(--gbr);">8%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-g"></div><div class="pli-body"><div class="pli-name">Bajaj Finance — 8% (₹40L)</div><div class="pli-reason">p=0.65, b=2.0. Full Kelly=40%, Half=20%, capped at 8%</div></div><div class="pli-pct" style="color:var(--gbr);">8%</div></div>
+                <div class="pl-item"><div class="pli-dot plid-a"></div><div class="pli-body"><div class="pli-name">8 more stocks at 5–7% each</div><div class="pli-reason">All with Kelly output above threshold. Below-threshold ideas excluded.</div></div><div class="pli-pct" style="color:var(--ambr);">60%</div></div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-t">The Professional Decision Framework</div>
+              <div style="display:flex;flex-direction:column;gap:10px;min-width:0;overflow:hidden;">
+                <div style="padding:11px 13px;border-radius:12px;background:var(--tealpale);border:1.5px solid rgba(8,145,178,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--teal);line-height:1.6;min-width:0;overflow:hidden;">
+                  📋 <strong>Step 1 — Thesis document:</strong> Before any investment, write a 1-page investment thesis with explicit probability estimate (p), expected upside if right (b numerator), and expected downside if wrong (b denominator).
+                </div>
+                <div style="padding:11px 13px;border-radius:12px;background:var(--pxl);border:1.5px solid rgba(109,40,217,.18);font-size:clamp(11.5px,1.4vw,13px);color:var(--p);line-height:1.6;min-width:0;overflow:hidden;">
+                  📐 <strong>Step 2 — Kelly calculation:</strong> Apply f* = (b×p−q)÷b. If output &lt;5%, idea doesn't meet bar. If output ≥5%, apply Half-Kelly and cap at 12%. Position enters portfolio.
+                </div>
+                <div style="padding:11px 13px;border-radius:12px;background:var(--gpale);border:1.5px solid rgba(22,163,74,.18);font-size:clamp(11.5px,1.4vw,13px);color:var(--gbr);line-height:1.6;min-width:0;overflow:hidden;">
+                  🔄 <strong>Step 3 — Quarterly review:</strong> Re-estimate probability each quarter after results. If thesis is playing out as expected, maintain position. If key assumption has changed, re-size or exit immediately.
+                </div>
+              </div>
+              <div class="lesson-box lb-t" style="margin-top:12px;">
+                <div class="lb-title lbt-t">💡 Key Lesson — The Process Matters More Than the Formula</div>
+                <div class="lb-desc">The most valuable part of Vikram's approach is not the Kelly formula itself — it's the discipline of writing an explicit thesis with quantified probability estimates before every investment. This forces intellectual honesty. Many "high conviction" ideas fail the Kelly test because when you actually quantify p and b, the output is surprisingly modest. The formula acts as a reality check on overconfidence — which is the investor's biggest enemy in position sizing.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ NEXT CHAPTER ═══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue building your portfolio framework →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+
+<!-- ═══ DISCLAIMER ═══ -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);overflow:hidden;">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">All position sizing examples, Kelly Criterion calculations, and portfolio frameworks presented here are for educational illustration only. The Kelly Criterion requires accurate probability estimates which are inherently uncertain in real-world investing. Past conviction accuracy does not guarantee future performance. All equity investments carry the risk of total loss. Position sizing frameworks should be adapted to your personal risk tolerance, financial situation, and investment goals. Please consult a SEBI-registered investment advisor before making any investment decision.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(el => {
+    if (el.isIntersecting) { el.target.classList.add('on'); io.unobserve(el.target); }
+  });
+}, { threshold: 0.04, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+document.addEventListener('touchstart', () => {}, { passive: true });
+document.addEventListener('touchmove',  () => {}, { passive: true });
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.rv').forEach(el => el.classList.add('on'));
+}
+</script>
+</body>
+</html>

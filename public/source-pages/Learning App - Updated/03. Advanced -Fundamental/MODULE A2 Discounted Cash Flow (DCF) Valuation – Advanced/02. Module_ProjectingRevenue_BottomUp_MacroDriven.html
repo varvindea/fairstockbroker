@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-title" content="Revenue Projection">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no,address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Projecting Revenue – Bottom-Up vs Macro-Driven · DCF Valuation Advanced</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#fff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.13s}.d3{transition-delay:.20s}.d4{transition-delay:.27s}.d5{transition-delay:.34s}.d6{transition-delay:.42s}
+@keyframes fsd{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff,#f0fdf4 55%,#fdfcff);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.chip::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rule{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:36px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff,#f0fdf4 40%,#fdfcff 70%,#eef4ff);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(30px,7vw,84px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:14px;animation:fsu .88s ease .12s both;}
+.hh1 .l1{display:block;background:linear-gradient(135deg,var(--pl),var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .l2{display:block;background:linear-gradient(135deg,var(--gbr),var(--g),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .l3{display:block;font-size:clamp(13px,2.8vw,36px);background:linear-gradient(135deg,var(--p),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:620px;line-height:1.72;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hstat{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.78);backdrop-filter:blur(12px);animation:fsu .9s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:900px;}
+.hsi{padding:clamp(12px,2vw,22px) clamp(10px,2.5vw,24px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:80px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(11px,1.8vw,18px);font-weight:900;letter-spacing:-.4px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.a{background:linear-gradient(135deg,var(--ambr),var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(8px,1vw,10px);font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+/* KLO */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3.5vw,42px);display:flex;align-items:flex-start;gap:20px;box-shadow:var(--shc);}
+.klo-icon{width:62px;height:62px;min-width:62px;border-radius:18px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;box-shadow:0 8px 26px rgba(109,40,217,.32);animation:floatA 4s ease-in-out infinite;}
+.klo-tag{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.klo-title{font-size:clamp(14px,2vw,19px);font-weight:900;color:var(--tx);margin-bottom:8px;line-height:1.3;}
+.klo-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px;}
+.kp{display:inline-flex;align-items:center;gap:5px;padding:5px 13px;border-radius:100px;font-size:10px;font-weight:700;}
+.kp-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kp-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kp-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kp-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+/* APPROACH CARDS */
+.app-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.5vw,26px);margin-bottom:44px;}
+.app-card{border-radius:22px;padding:clamp(20px,2.8vw,30px);border:2px solid;transition:transform .28s,box-shadow .28s;}
+.app-card:hover{transform:translateY(-5px);box-shadow:var(--shp);}
+.ac-bu{background:linear-gradient(158deg,var(--pxs),#fdfcff);border-color:rgba(109,40,217,.22);}
+.ac-md{background:linear-gradient(158deg,var(--gpale),#fafffe);border-color:rgba(22,163,74,.22);}
+.ac-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px;animation:floatB 3.8s ease-in-out infinite;box-shadow:0 6px 18px rgba(0,0,0,.1);}
+.ai-bu{background:linear-gradient(135deg,var(--p),var(--ph));}
+.ai-md{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.ac-tag{font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:5px;}
+.at-bu{color:var(--p);}
+.at-md{color:var(--gbr);}
+.ac-title{font-size:clamp(16px,2vw,22px);font-weight:900;color:var(--tx);margin-bottom:10px;letter-spacing:-.3px;}
+.ac-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;margin-bottom:12px;}
+.ac-steps{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.ac-step{display:flex;align-items:flex-start;gap:8px;padding:8px 12px;border-radius:10px;font-size:12.5px;color:var(--ts);line-height:1.5;}
+.as-p{background:rgba(109,40,217,.07);border-left:3px solid var(--p);}
+.as-g{background:rgba(22,163,74,.07);border-left:3px solid var(--g);}
+.ac-bench{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.ab{padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;}
+.ab-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.ab-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.ab-r{background:rgba(220,38,38,.1);color:var(--red);}
+.ac-ana{margin-top:12px;padding:10px 13px;border-radius:10px;font-size:12.5px;font-weight:600;line-height:1.6;}
+.aa-bu{background:rgba(109,40,217,.07);color:var(--pl);border-left:3px solid var(--p);}
+.aa-md{background:rgba(22,163,74,.07);color:var(--gbr);border-left:3px solid var(--g);}
+/* SEGMENT TABLE */
+.seg-wrap{background:#fff;border:1.5px solid var(--bd);border-radius:22px;overflow:hidden;box-shadow:var(--shp);margin-bottom:32px;}
+.seg-hdr{background:linear-gradient(135deg,var(--pl),var(--p));padding:clamp(16px,2.8vw,24px) clamp(18px,3vw,28px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.sh-title{font-size:clamp(15px,2.2vw,21px);font-weight:900;color:#fff;}
+.sh-sub{font-size:11px;color:rgba(255,255,255,.7);margin-top:3px;}
+.sh-bdgs{display:flex;gap:7px;flex-wrap:wrap;}
+.sh-bdg{padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.22);}
+.scr-guide{padding:10px clamp(18px,3vw,28px);background:var(--pxs);border-bottom:1px solid var(--bd);font-size:12px;color:var(--ts);display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.sg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;display:inline-block;}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.bstbl{width:100%;border-collapse:collapse;min-width:680px;}
+.bstbl th{background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:10px 13px;font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:right;white-space:nowrap;}
+.bstbl th:first-child{text-align:left;min-width:160px;}
+.bstbl td{padding:10px 13px;font-size:12.5px;color:var(--ts);border-bottom:1px solid rgba(109,40,217,.06);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.bstbl td:first-child{text-align:left;font-weight:700;color:var(--tx);}
+.bstbl tr:last-child td{border-bottom:none;}
+.bstbl tr.shdr td{background:rgba(109,40,217,.05);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);padding:10px 13px 5px;}
+.bstbl tr.hi-r td{color:var(--p);font-weight:800;}
+.bstbl tr.g-r td:first-child{color:var(--gbr);}
+.bstbl tr:not(.shdr):hover td{background:var(--pxs);}
+.up{color:var(--gbr);font-weight:800;}.dn{color:var(--red);font-weight:800;}
+.ann{display:inline-flex;padding:1px 7px;border-radius:5px;font-size:9px;font-weight:700;margin-left:5px;}
+.an-p{background:rgba(109,40,217,.09);color:var(--p);}
+.an-g{background:rgba(22,163,74,.08);color:var(--gbr);}
+.an-a{background:rgba(217,119,6,.08);color:var(--ambr);}
+.an-r{background:rgba(220,38,38,.08);color:var(--red);}
+/* INSIGHT */
+.insight{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:20px;padding:clamp(20px,3vw,32px);display:flex;align-items:flex-start;gap:18px;box-shadow:var(--shc);}
+.ins-ico{width:48px;height:48px;min-width:48px;border-radius:14px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 6px 20px rgba(109,40,217,.28);}
+.ins-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.ins-title{font-size:clamp(13px,1.6vw,16px);font-weight:800;color:var(--tx);margin-bottom:7px;}
+.ins-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;}
+.ins-desc strong{color:var(--tx);}
+/* GOOD/BAD */
+.gbh{display:flex;align-items:center;gap:14px;margin-bottom:22px;padding:18px 22px;border-radius:18px;border:1.5px solid var(--bd);}
+.gbh-g{background:linear-gradient(135deg,var(--gpale),#ecfdf5);}
+.gbh-r{background:linear-gradient(135deg,var(--rpale),#fff5f5);}
+.gbh-ico{width:46px;height:46px;min-width:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.gi-g{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.gi-r{background:linear-gradient(135deg,var(--red),#f87171);}
+.gbh-title{font-size:clamp(16px,2vw,22px);font-weight:900;color:var(--tx);}
+.gbh-sub{font-size:12.5px;color:var(--ts);margin-top:3px;}
+.exgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.5vw,24px);margin-bottom:44px;}
+.excard{border-radius:22px;border:1.5px solid var(--bd);background:#fff;padding:clamp(18px,3vw,28px);box-shadow:var(--shc);transition:border-color .26s,box-shadow .26s,transform .26s;position:relative;overflow:hidden;}
+.excard:hover{border-color:rgba(109,40,217,.28);box-shadow:var(--shp);transform:translateY(-4px);}
+.excard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.eg1::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.eg2::before{background:linear-gradient(90deg,var(--g),var(--gh));}
+.eg3::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.eg4::before{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.eg5::before{background:linear-gradient(90deg,#0d9488,#2dd4bf);}
+.eb1::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.eb2::before{background:linear-gradient(90deg,#b91c1c,#fca5a5);}
+.eb3::before{background:linear-gradient(90deg,var(--amb),#fbbf24);}
+.eb4::before{background:linear-gradient(90deg,#7c3aed,var(--red));}
+.eb5::before{background:linear-gradient(90deg,var(--red),var(--amb));}
+.ex-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.ex-logo{width:48px;height:48px;min-width:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.ex-name{font-size:clamp(13px,1.7vw,16px);font-weight:900;color:var(--tx);line-height:1.15;}
+.ex-sec{font-size:11px;color:var(--tl);font-weight:500;margin-top:2px;}
+.vrd{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-size:10px;font-weight:800;margin-bottom:13px;}
+.vg{background:rgba(22,163,74,.12);color:var(--gbr);border:1px solid rgba(22,163,74,.24);}
+.vr{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.22);}
+.enums{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px;}
+.en{border-radius:11px;padding:10px 11px;text-align:center;}
+.en-p{background:rgba(109,40,217,.07);border:1px solid rgba(109,40,217,.14);}
+.en-g{background:rgba(22,163,74,.07);border:1px solid rgba(22,163,74,.13);}
+.en-r{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.13);}
+.en-a{background:rgba(217,119,6,.07);border:1px solid rgba(217,119,6,.14);}
+.en-lbl{font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--tl);margin-bottom:3px;}
+.en-val{font-size:clamp(12px,1.8vw,15px);font-weight:900;}
+.ev-p{color:var(--p);}.ev-g{color:var(--gbr);}.ev-r{color:var(--red);}.ev-a{color:var(--ambr);}
+.ex-why{font-size:clamp(12px,1.35vw,13.5px);color:var(--ts);line-height:1.68;margin-bottom:10px;}
+.ex-why strong{color:var(--tx);}
+.sigs{display:flex;flex-direction:column;gap:6px;margin-top:10px;}
+.sig{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;color:var(--ts);line-height:1.52;}
+.sdot{width:7px;height:7px;min-width:7px;border-radius:50%;margin-top:4px;flex-shrink:0;}
+.sd-g{background:var(--g);}.sd-r{background:var(--red);}
+.sig-hl{margin-top:8px;padding:9px 12px;border-radius:9px;font-size:11.5px;line-height:1.55;}
+.shl-g{background:rgba(22,163,74,.07);border-left:3px solid var(--g);}
+.shl-r{background:rgba(220,38,38,.06);border-left:3px solid var(--red);}
+.exfull{grid-column:1/-1;}
+.ex-inner{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+/* SUMMARY TABLE */
+.sumwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:18px;box-shadow:var(--shc);margin-bottom:32px;}
+.sumtbl{width:100%;border-collapse:collapse;min-width:560px;}
+.sumtbl thead th{background:linear-gradient(135deg,var(--p),var(--ph));color:#fff;padding:12px 15px;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:left;}
+.sumtbl tbody td{padding:12px 15px;font-size:12.5px;color:var(--ts);border-bottom:1px solid var(--bd);vertical-align:middle;line-height:1.5;}
+.sumtbl tbody td:first-child{font-weight:800;color:var(--tx);}
+.sumtbl tbody tr:last-child td{border-bottom:none;}
+.sumtbl tbody tr:nth-child(even) td{background:var(--pxs);}
+.tb{display:inline-flex;padding:2px 9px;border-radius:100px;font-size:10px;font-weight:700;}
+.tb-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.tb-r{background:rgba(220,38,38,.1);color:var(--red);}
+.tb-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+/* TRICKS */
+.tricks-sec{background:linear-gradient(158deg,#f5f3ff,#f0fdf4 55%,#fdfcff);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.tgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2.5vw,24px);margin-bottom:44px;}
+.tc{border-radius:22px;border:2px solid;padding:clamp(20px,3vw,30px);position:relative;overflow:hidden;transition:transform .28s,box-shadow .28s;}
+.tc:hover{transform:translateY(-5px);box-shadow:var(--shp);}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.tc1{background:linear-gradient(158deg,var(--pxs),#fdfcff);border-color:rgba(109,40,217,.2);}
+.tc1::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.tc2{background:linear-gradient(158deg,var(--gpale),#fafffe);border-color:rgba(22,163,74,.2);}
+.tc2::before{background:linear-gradient(90deg,var(--g),var(--gh));}
+.tc3{background:linear-gradient(158deg,var(--rpale),#fff5f5);border-color:rgba(220,38,38,.2);}
+.tc3::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.tc4{background:linear-gradient(158deg,var(--apale),#fffbeb);border-color:rgba(217,119,6,.2);}
+.tc4::before{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.tc5{background:linear-gradient(158deg,var(--skypale),#f0f9ff);border-color:rgba(2,132,199,.2);grid-column:1/-1;}
+.tc5::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.tn{display:inline-flex;width:36px;height:36px;border-radius:11px;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;margin-bottom:14px;}
+.tn1{background:linear-gradient(135deg,var(--p),var(--ph));}
+.tn2{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.tn3{background:linear-gradient(135deg,var(--red),#f87171);}
+.tn4{background:linear-gradient(135deg,var(--amb),#f59e0b);}
+.tn5{background:linear-gradient(135deg,var(--sky),#38bdf8);}
+.tc-sub{font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:6px;}
+.ts1{color:var(--p);}.ts2{color:var(--gbr);}.ts3{color:var(--red);}.ts4{color:var(--ambr);}.ts5{color:var(--sky);}
+.tc-title{font-size:clamp(15px,1.9vw,20px);font-weight:900;color:var(--tx);margin-bottom:10px;letter-spacing:-.3px;}
+.tc-desc{font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;margin-bottom:14px;}
+.tc-desc strong{color:var(--tx);}
+.tc-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.ts{display:flex;align-items:flex-start;gap:10px;padding:9px 13px;border-radius:10px;font-size:12.5px;color:var(--ts);line-height:1.52;}
+.ts-p{background:rgba(109,40,217,.07);border-left:3px solid var(--p);}
+.ts-g{background:rgba(22,163,74,.07);border-left:3px solid var(--g);}
+.ts-r{background:rgba(220,38,38,.06);border-left:3px solid var(--red);}
+.ts-a{background:rgba(217,119,6,.06);border-left:3px solid var(--amb);}
+.ts-s{background:rgba(2,132,199,.07);border-left:3px solid var(--sky);}
+.ts-arr{font-weight:900;min-width:18px;flex-shrink:0;}
+.tc-res{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;}
+.tcr-g{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.22);}
+.tcr-a{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(217,119,6,.09);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.tcr-r{display:inline-flex;padding:5px 12px;border-radius:100px;font-size:10.5px;font-weight:700;background:rgba(220,38,38,.08);color:var(--red);border:1px solid rgba(220,38,38,.2);}
+.tc5-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,22px);margin-top:14px;}
+/* CHEAT */
+.cheat{background:linear-gradient(135deg,var(--p),var(--ph),#059669);border-radius:22px;padding:clamp(22px,3.5vw,44px);color:#fff;position:relative;overflow:hidden;margin-bottom:44px;box-shadow:var(--shp);}
+.cheat::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;}
+.cheat-inner{position:relative;z-index:1;}
+.cheat-badge{display:inline-flex;padding:4px 14px;border-radius:100px;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);margin-bottom:14px;}
+.cheat-title{font-size:clamp(17px,2.5vw,30px);font-weight:900;letter-spacing:-.5px;line-height:1.15;margin-bottom:18px;}
+.cheat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.8vw,16px);}
+.ci{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.2);border-radius:14px;padding:clamp(12px,1.8vw,18px);}
+.ci-num{font-size:10px;font-weight:700;opacity:.65;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.ci-name{font-size:clamp(12px,1.5vw,15px);font-weight:900;margin-bottom:5px;}
+.ci-val{font-size:clamp(10px,1.2vw,12px);opacity:.8;line-height:1.52;}
+.ci-good{border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.1);}
+.ci-warn{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.08);}
+/* DEMAT */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240,#4c1d95 35%,#6d28d9 60%,#059669);padding:clamp(44px,7vw,80px) clamp(22px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:680px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:560px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(14px,2.8vw,30px);flex-wrap:wrap;margin-top:18px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'\2713';color:#4ade80;font-weight:900;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:28px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 52px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:52px;touch-action:manipulation;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:7px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.5);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.4);margin-top:6px;}
+/* NEXT CHAPTER v2 */
+.nxt2{position:relative;overflow:hidden;background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 35%,#7c3aed 60%,#8b5cf6 85%,#a78bfa 100%);padding:clamp(18px,3vw,32px) clamp(22px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:22px;min-height:clamp(72px,10vw,90px);}
+.nxt2::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:26px 26px;pointer-events:none;}
+.nxt2::after{content:'';position:absolute;right:-80px;top:-80px;width:260px;height:260px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.nxt2-left{position:relative;z-index:1;display:flex;flex-direction:column;gap:4px;}
+.nxt2-lbl{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt2-sub{font-size:clamp(14px,1.9vw,18px);color:rgba(255,255,255,.88);font-weight:600;line-height:1.35;}
+.nxt2-arr-txt{font-size:clamp(12px,1.4vw,14px);color:rgba(255,255,255,.5);font-weight:500;margin-top:2px;}
+.nxt2-btn{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;padding:14px clamp(22px,3vw,36px);min-height:52px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:clamp(14px,1.6vw,16px);font-weight:900;border-radius:14px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.48);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;touch-action:manipulation;}
+.nxt2-btn:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(34,197,94,.6);}
+.nxt2-btn:active{transform:scale(.97);}
+.nxt2-btn-arr{font-size:17px;transition:transform .22s;}
+.nxt2-btn:hover .nxt2-btn-arr{transform:translateX(4px);}
+/* DISC */
+.disc{background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);}
+.disc-inner{max-width:1240px;margin:0 auto;padding:clamp(22px,4vw,44px) clamp(18px,5vw,56px);display:flex;align-items:flex-start;gap:18px;}
+.disc-ico{width:46px;height:46px;min-width:46px;border-radius:13px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.disc-lbl{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;}
+.disc-txt{font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;}
+/* ═══ RESPONSIVE ═══ */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.app-grid{grid-template-columns:1fr 1fr;}.tgrid{grid-template-columns:1fr 1fr;}.tc5{grid-column:1/-1;}.cheat-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){.app-grid{grid-template-columns:1fr;}.exgrid{grid-template-columns:1fr;}.exfull{grid-column:auto;}.ex-inner{grid-template-columns:1fr;gap:0;}.klobanner{flex-direction:column;}.klo-icon{animation:none;}.insight{flex-direction:column;gap:12px;}.gbh{flex-direction:column;gap:10px;}.tgrid{grid-template-columns:1fr;}.tc5{grid-column:auto;}.tc5-inner{grid-template-columns:1fr;gap:12px;}.cheat-grid{grid-template-columns:1fr 1fr;}.nxt2{flex-direction:column;align-items:flex-start;}.nxt2-btn{align-self:stretch;width:100%;justify-content:center;}}
+@media(max-width:768px){.w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,30px);}.hstat{flex-direction:column;}.hsi{border-right:none !important;border-bottom:1px solid var(--bd);}.hsi:last-child{border-bottom:none;}.dmfeats{flex-direction:column;align-items:flex-start;gap:9px;}.disc-inner{flex-direction:column;gap:12px;}.seg-hdr{flex-direction:column;align-items:flex-start;}.sh-bdgs{flex-wrap:wrap;}.enums{grid-template-columns:1fr 1fr;}.tgrid{grid-template-columns:1fr;}.tc5{grid-column:auto;}.tc5-inner{grid-template-columns:1fr;gap:12px;}.tc-res{flex-direction:column;align-items:flex-start;}.tcr-g,.tcr-a,.tcr-r{width:100%;}.cheat-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:640px){.bstbl{min-width:620px;}.sumtbl{min-width:500px;}.app-grid{grid-template-columns:1fr;}.tgrid{grid-template-columns:1fr;}.tc5-inner{grid-template-columns:1fr;}.cheat-grid{grid-template-columns:1fr;}.tc-res{flex-direction:column;align-items:flex-start;}}
+@media(max-width:480px){.w{padding:28px 14px;}.hh1{letter-spacing:-1.2px;}.hstat{flex-wrap:wrap;}.hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}.hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}.vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}.dmbtn{width:100%;justify-content:center;padding:15px 20px;}.nxt2-btn{font-size:14px;padding:13px 18px;}.enums{grid-template-columns:1fr 1fr;}.tgrid{grid-template-columns:1fr;}.tc{padding:18px 16px;}.tc-title{font-size:15px;}.tc5-inner{grid-template-columns:1fr;}.cheat-grid{grid-template-columns:1fr;}.tc-res{flex-direction:column;align-items:flex-start;}.tcr-g,.tcr-a,.tcr-r{width:100%;font-size:10px;}.ts{font-size:12px;padding:8px 11px;}.cheat-title{font-size:17px;}.ci{padding:12px 10px;}.ci-name{font-size:12px;}.ci-val{font-size:10px;}}
+@media(max-width:360px){.w{padding:22px 12px;}.hh1{font-size:clamp(26px,10vw,38px);letter-spacing:-1px;}.dmbtn{font-size:14px;}.enums{grid-template-columns:1fr;}.tc{padding:16px 14px;}.ts{padding:7px 10px;font-size:11.5px;}.cheat-grid{grid-template-columns:1fr;}}
+@media(hover:none) and (pointer:coarse){.excard:hover,.app-card:hover,.tc:hover{transform:none !important;box-shadow:var(--shc) !important;}.excard:active,.app-card:active,.tc:active{transform:scale(.98);transition:transform .08s;}.dmbtn:active,.nxt2-btn:active{transform:scale(.97);}.dmbtn,.nxt2-btn{min-height:52px;}::-webkit-scrollbar{display:none;}.excard,.app-card,.tc,.klobanner,.insight,.cheat{-webkit-backface-visibility:hidden;backface-visibility:hidden;}a,button,.dmbtn,.nxt2-btn,.excard,.app-card,.tc{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}.tscroll,.sumwrap{-webkit-overflow-scrolling:touch;}.hh1,.h2,.chip,.eyebrow,.vbadge,.tc-title,.tn{-webkit-user-select:none;user-select:none;}.tc-desc,.ts,.ci-val,.ins-desc,.klo-desc{-webkit-user-select:text;user-select:text;}}
+@supports(-webkit-touch-callout:none){body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}.hero{min-height:100svh;min-height:-webkit-fill-available;padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}.vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}.w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}.nxt2{padding-bottom:max(18px,env(safe-area-inset-bottom));}.dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}.tscroll,.sumwrap{-webkit-overflow-scrolling:touch;overflow-x:auto;}.hp,.hg,.hh1 .l1,.hh1 .l2,.hh1 .l3,.hsv,.hsv.g,.hsv.a{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}.orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}a,button,.dmbtn,.nxt2-btn,.excard,.app-card,.tc{-webkit-tap-highlight-color:transparent;}}
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){.dmbtn,.nxt2-btn{min-height:52px;}.excard,.app-card,.tc,.klobanner,.insight,.cheat{-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0);transform:translateZ(0);}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}.rv{opacity:1;transform:none;}.ac-icon,.klo-icon{animation:none !important;}}
+@media print{.dmbanner,.orb,.nxt2{display:none;}.rv{opacity:1;transform:none;}body{color:#000;}.w{padding:20px;}.tscroll,.sumwrap{overflow:visible;}.bstbl,.sumtbl{min-width:0;}section,.tc,.tgrid{break-inside:avoid;}.tgrid{grid-template-columns:1fr 1fr;}.cheat-grid{grid-template-columns:1fr 1fr;}.cheat{background:#4c1d95 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<!-- HERO -->
+<section class="hero">
+  <div class="vbadge">DCF Valuation &middot; Advanced</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Module 10 &mdash; Revenue Projection</div>
+  <h1 class="hh1">
+    <span class="l1">Projecting</span>
+    <span class="l2">Revenue</span>
+    <span class="l3">Bottom-Up &middot; Macro-Driven &middot; Segment-by-Segment</span>
+  </h1>
+  <p class="hsub">DCF Valuation Advanced &middot; Granular Revenue Models &middot; Screener.in P&amp;L Data</p>
+  <p class="hdesc">Revenue is the engine of every DCF model. Project it wrong and your entire valuation is wrong. This module teaches you to build granular, segment-level revenue models that stand up to scrutiny &mdash; the way equity analysts do it at top investment banks.</p>
+  <div class="hstat">
+    <div class="hsi"><div class="hsv">Bottom-Up</div><div class="hsl">Units &times; Price</div></div>
+    <div class="hsi"><div class="hsv g">Macro-Driven</div><div class="hsl">GDP &times; Market Share</div></div>
+    <div class="hsi"><div class="hsv a">By Segment</div><div class="hsl">Product / Geography</div></div>
+    <div class="hsi"><div class="hsv">Screener.in</div><div class="hsl">P&amp;L Data Source</div></div>
+    <div class="hsi"><div class="hsv">10 Examples</div><div class="hsl">Good vs Bad</div></div>
+  </div>
+</section>
+
+<!-- 01 KLO -->
+<section style="background:#fff;">
+  <div class="w">
+    <div class="chip rv d1">01 &mdash; Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Build <span class="hp">Granular Revenue Models</span> by Segment and Product</h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">By the end of this module you will be able to open a company&rsquo;s P&amp;L on Screener.in, identify its revenue segments, choose the right projection approach for each segment, and build a model that captures the true drivers of that business &mdash; not just a generic growth rate.</p>
+    <div class="klobanner rv d4">
+      <div class="klo-icon">&#128200;</div>
+      <div>
+        <div class="klo-tag">Your Core Takeaway &mdash; Revenue is Not Just One Number</div>
+        <div class="klo-title">A company&rsquo;s total revenue is the sum of many different businesses. Modelling it as one blended growth rate hides the real story &mdash; and makes the model dangerously inaccurate when one segment accelerates or collapses.</div>
+        <div class="klo-desc">Imagine projecting ITC&rsquo;s revenue as a single 10% growth rate. But ITC has cigarettes (stable, high-margin, slow-growth), FMCG (growing fast, low-margin), hotels (highly cyclical), agri-business (weather-dependent), and paperboards (industrial, capex-driven). Each segment has a completely different growth driver, margin profile, and risk. Blending them into one number produces a projection that is right for none of them. The Bottom-Up approach models each segment using its own specific driver &mdash; volume, price, capacity utilisation, market share &mdash; and then sums them up. The Macro-Driven approach starts with the total market size (GDP, sector growth) and applies a company-specific market share assumption. Both approaches are more accurate than a simple historical CAGR applied blindly.</div>
+        <div class="klo-pills">
+          <span class="kp kp-p">&#128202; Bottom-Up: Volume &times; Price per segment</span>
+          <span class="kp kp-g">&#127758; Macro: GDP &times; Penetration &times; Market Share</span>
+          <span class="kp kp-a">&#128203; Hybrid: Bottom-Up for known + Macro for new</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Infographic: analyst explaining two approaches -->
+    <div style="margin-top:40px;" class="rv d5">
+      <svg viewBox="0 0 740 280" style="max-width:740px;width:100%;margin:0 auto;display:block;border-radius:20px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="740" height="280" rx="20" fill="#f5f3ff"/>
+        <rect width="740" height="280" rx="20" stroke="#e5e1fb" stroke-width="1.5"/>
+        <!-- Analyst character centre -->
+        <circle cx="370" cy="100" r="22" fill="#fde8cc"/>
+        <ellipse cx="370" cy="82" rx="19" ry="7" fill="#1e1b4b"/>
+        <circle cx="363" cy="101" r="3" fill="#1e1b4b"/><circle cx="377" cy="101" r="3" fill="#1e1b4b"/>
+        <path d="M363 111 Q370 118 377 111" stroke="#1e1b4b" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <rect x="357" y="122" width="26" height="36" rx="8" fill="#6d28d9"/>
+        <rect x="337" y="128" width="20" height="9" rx="4" fill="#6d28d9"/>
+        <rect x="383" y="128" width="20" height="9" rx="4" fill="#6d28d9"/>
+        <rect x="360" y="158" width="10" height="22" rx="4" fill="#4c1d95"/>
+        <rect x="373" y="158" width="10" height="22" rx="4" fill="#4c1d95"/>
+        <!-- speech bubble left -->
+        <rect x="14" y="14" width="290" height="180" rx="14" fill="white" stroke="#6d28d9" stroke-width="2"/>
+        <polygon points="290,80 320,100 290,108" fill="white" stroke="#6d28d9" stroke-width="2"/>
+        <rect x="14" y="14" width="290" height="36" rx="14" fill="#6d28d9"/>
+        <rect x="14" y="36" width="290" height="14" fill="#6d28d9"/>
+        <text x="159" y="36" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">&#128200; BOTTOM-UP APPROACH</text>
+        <text x="28" y="68" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#4c1d95">Start from the PRODUCT level</text>
+        <text x="28" y="86" font-family="DM Sans,sans-serif" font-size="9.5" fill="#3d3868">Segment A: 1,00,000 units &times; &#8377;500 = &#8377;5 Cr</text>
+        <text x="28" y="103" font-family="DM Sans,sans-serif" font-size="9.5" fill="#3d3868">Segment B: 50,000 units &times; &#8377;800 = &#8377;4 Cr</text>
+        <text x="28" y="120" font-family="DM Sans,sans-serif" font-size="9.5" fill="#3d3868">Segment C: 20,000 subs &times; &#8377;1,200 = &#8377;2.4 Cr</text>
+        <line x1="28" y1="128" x2="290" y2="128" stroke="#e5e1fb" stroke-width="1"/>
+        <text x="28" y="144" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#6d28d9">Total Revenue = &#8377;11.4 Cr</text>
+        <text x="28" y="162" font-family="DM Sans,sans-serif" font-size="9" fill="#6e6994">Granular, high confidence, more work</text>
+        <text x="28" y="178" font-family="DM Sans,sans-serif" font-size="9" fill="#6e6994">Best for: consumer, manufacturing, SaaS</text>
+        <!-- speech bubble right -->
+        <rect x="436" y="14" width="290" height="180" rx="14" fill="white" stroke="#15803d" stroke-width="2"/>
+        <polygon points="436,80 410,100 436,108" fill="white" stroke="#15803d" stroke-width="2"/>
+        <rect x="436" y="14" width="290" height="36" rx="14" fill="#15803d"/>
+        <rect x="436" y="36" width="290" height="14" fill="#15803d"/>
+        <text x="581" y="36" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">&#127758; MACRO-DRIVEN APPROACH</text>
+        <text x="450" y="68" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#14532d">Start from the MARKET level</text>
+        <text x="450" y="86" font-family="DM Sans,sans-serif" font-size="9.5" fill="#3d3868">Total market size: &#8377;50,000 Cr</text>
+        <text x="450" y="103" font-family="DM Sans,sans-serif" font-size="9.5" fill="#3d3868">Market growth (GDP+2%): 9% p.a.</text>
+        <text x="450" y="120" font-family="DM Sans,sans-serif" font-size="9.5" fill="#3d3868">Company market share: 18% &rarr; 21%</text>
+        <line x1="450" y1="128" x2="712" y2="128" stroke="#e5e1fb" stroke-width="1"/>
+        <text x="450" y="144" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#15803d">Revenue = &#8377;50,000 &times; 21% = &#8377;10,500 Cr</text>
+        <text x="450" y="162" font-family="DM Sans,sans-serif" font-size="9" fill="#6e6994">Market-based, faster, needs sector data</text>
+        <text x="450" y="178" font-family="DM Sans,sans-serif" font-size="9" fill="#6e6994">Best for: banks, telecom, new sectors</text>
+        <!-- Bottom note -->
+        <rect x="14" y="206" width="712" height="60" rx="10" fill="white" opacity=".88"/>
+        <text x="370" y="228" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="#6d28d9">&#9889; THE HYBRID APPROACH (Best Practice)</text>
+        <text x="370" y="246" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#3d3868">Use Bottom-Up for existing, well-understood segments (high confidence)</text>
+        <text x="370" y="262" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#3d3868">Use Macro-Driven for new business lines, emerging segments, or markets with limited data</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 02 TWO APPROACHES -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="chip rv d1">02 &mdash; Two Approaches, One Goal</div>
+    <h2 class="h2 rv d2">Bottom-Up vs Macro-Driven &mdash; <span class="hg">How Each Works</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">Both approaches aim to project future revenue accurately, but they start from different places and suit different types of businesses. Understanding when to use each &mdash; and when to combine both &mdash; is the mark of a professional analyst.</p>
+    <div class="app-grid rv d3">
+      <!-- BOTTOM-UP -->
+      <div class="app-card ac-bu">
+        <div class="ac-icon ai-bu">&#127981;</div>
+        <div class="ac-tag at-bu">Approach 1 &mdash; Granular &amp; Precise</div>
+        <div class="ac-title">Bottom-Up Revenue Model</div>
+        <div class="ac-desc">The Bottom-Up approach builds total revenue from the smallest unit of the business &mdash; a single product, service tier, store, customer, or geographic region. You model each segment individually using its own specific drivers (volume, price, capacity, subscribers, stores) and then sum them to get total revenue. This approach is <strong>more work but far more accurate</strong> because it forces you to understand the real mechanics of each part of the business.</div>
+        <div class="ac-steps">
+          <div class="ac-step as-p"><strong>Step 1: Identify all revenue segments</strong> &mdash; from Screener.in Annual Report or segment disclosures (product, geography, customer type).</div>
+          <div class="ac-step as-p"><strong>Step 2: Find the unit driver</strong> for each segment &mdash; volume (units, subscribers, stores, beds) &times; price (ASP, ARPU, rate per unit).</div>
+          <div class="ac-step as-p"><strong>Step 3: Project volume and price separately</strong> &mdash; volume from capacity/market share, price from inflation + mix + pricing power.</div>
+          <div class="ac-step as-p"><strong>Step 4: Sum segments</strong> &mdash; total revenue = sum of all segment revenues. Check against historical Screener.in P&amp;L data for sanity.</div>
+          <div class="ac-step as-p"><strong>Step 5: Sensitivity test</strong> &mdash; which segment drives 80% of total revenue? That is where assumption accuracy matters most.</div>
+        </div>
+        <div class="ac-bench">
+          <span class="ab ab-g">Best for: Consumer, FMCG, Manufacturing, SaaS</span>
+          <span class="ab ab-g">Also: Hospitals, Hotels, Retail chains</span>
+          <span class="ab ab-a">Output: Segment revenue &times; number of segments</span>
+        </div>
+        <div class="ac-ana aa-bu">&#128161; <strong>Real analogy:</strong> Think of it like planning a restaurant&rsquo;s monthly revenue: 200 lunch covers &times; &#8377;400 average bill + 150 dinner covers &times; &#8377;700 average bill + 50 catering orders &times; &#8377;2,000 = &#8377;2,78,000/month. You built the total from the parts &mdash; that is Bottom-Up. If you just said &ldquo;restaurant revenue grows 15% p.a.&rdquo; you would miss that dinner is growing 30% while lunch is flat.</div>
+      </div>
+      <!-- MACRO-DRIVEN -->
+      <div class="app-card ac-md">
+        <div class="ac-icon ai-md">&#127758;</div>
+        <div class="ac-tag at-md">Approach 2 &mdash; Market-Anchored</div>
+        <div class="ac-title">Macro-Driven Revenue Model</div>
+        <div class="ac-desc">The Macro-Driven approach starts with the total addressable market (TAM) and works down: TAM &times; company&rsquo;s market share = company revenue. The TAM itself is projected using macro drivers: GDP growth, sector-specific growth rates, population trends, regulatory tailwinds, or penetration rates. This approach is <strong>faster to build and more useful for emerging markets</strong> or businesses where individual product-level data is unavailable or unreliable.</div>
+        <div class="ac-steps">
+          <div class="ac-step as-g"><strong>Step 1: Define the total addressable market (TAM)</strong> &mdash; e.g., India&rsquo;s mutual fund AUM, total credit card spend, total telecom subscribers.</div>
+          <div class="ac-step as-g"><strong>Step 2: Project TAM growth</strong> &mdash; use GDP growth &times; sector multiplier, or historical sector CAGR from AMFI, SEBI, RBI, TRAI data.</div>
+          <div class="ac-step as-g"><strong>Step 3: Project market share</strong> &mdash; company&rsquo;s current share + historical trend + management guidance on share gain or loss.</div>
+          <div class="ac-step as-g"><strong>Step 4: Revenue = TAM &times; Market Share</strong> &mdash; simple multiplication gives projected revenue for each year.</div>
+          <div class="ac-step as-g"><strong>Step 5: Cross-check with bottom-up</strong> &mdash; does the Macro result match what a Bottom-Up approach would give? Large gaps = investigation needed.</div>
+        </div>
+        <div class="ac-bench">
+          <span class="ab ab-g">Best for: Banks, NBFCs, Telecom, Insurance</span>
+          <span class="ab ab-g">Also: New sectors, Fintech, EV ecosystem</span>
+          <span class="ab ab-a">Output: TAM &times; Market Share = Revenue</span>
+        </div>
+        <div class="ac-ana aa-md">&#128161; <strong>Real analogy:</strong> India&rsquo;s mutual fund industry AUM is &#8377;60 lakh crore and growing at 18% p.a. HDFC AMC has 11% market share, stable to rising. So projected HDFC AMC AUM in 3 years = &#8377;60L Cr &times; (1.18)^3 &times; 11% = &#8377;9.7 lakh crore. Revenue = AUM &times; Expense Ratio (0.38%). This Macro-Driven model is far more useful than trying to bottom-up model each fund&rsquo;s individual inflows.</div>
+      </div>
+    </div>
+
+    <!-- Segment model example strip -->
+    <div style="background:linear-gradient(135deg,var(--pl),var(--p) 38%,var(--ph) 62%,#065f46);border-radius:22px;padding:clamp(26px,4vw,48px);color:#fff;position:relative;overflow:hidden;margin-bottom:44px;box-shadow:var(--shp);" class="rv d5">
+      <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;"></div>
+      <div style="position:relative;z-index:1;">
+        <div style="display:inline-flex;padding:4px 14px;border-radius:100px;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);margin-bottom:14px;">The 3-Segment Rule &mdash; 80% of Revenue Explained by 20% of Drivers</div>
+        <div style="font-size:clamp(16px,2.5vw,28px);font-weight:900;letter-spacing:-.5px;line-height:1.2;margin-bottom:10px;">Every Company Has a Primary Driver, a Growth Segment, and a Tail.</div>
+        <div style="font-size:clamp(12px,1.4vw,14px);opacity:.82;line-height:1.68;max-width:680px;margin:0 auto 24px;">In any revenue model, one segment typically drives 60&ndash;70% of total revenue and deserves 70% of your modelling effort. A second segment is the &ldquo;growth engine&rdquo; that will change the revenue mix over time. The rest are tail segments that can be modelled with simpler assumptions. Identify which is which before building the model.</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.5vw,16px);">
+          <div style="background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.24);border-radius:14px;padding:clamp(12px,2vw,18px);text-align:center;">
+            <div style="font-size:10px;font-weight:700;opacity:.7;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Core Segment</div>
+            <div style="font-size:clamp(11px,1.5vw,14px);font-weight:900;margin-bottom:4px;">60&ndash;70% of Revenue</div>
+            <div style="font-size:10px;opacity:.72;line-height:1.5;">Stable, mature, predictable. Model with historical CAGR + price inflation. E.g., ITC Cigarettes, Nestle Maggi</div>
+          </div>
+          <div style="background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.24);border-radius:14px;padding:clamp(12px,2vw,18px);text-align:center;">
+            <div style="font-size:10px;font-weight:700;opacity:.7;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Growth Engine</div>
+            <div style="font-size:clamp(11px,1.5vw,14px);font-weight:900;margin-bottom:4px;">20&ndash;30% of Revenue</div>
+            <div style="font-size:10px;opacity:.72;line-height:1.5;">Fast-growing, changing mix, needs Bottom-Up model. E.g., ITC FMCG, Polycab FMEG, TCS new tech</div>
+          </div>
+          <div style="background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.24);border-radius:14px;padding:clamp(12px,2vw,18px);text-align:center;">
+            <div style="font-size:10px;font-weight:700;opacity:.7;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Tail Segments</div>
+            <div style="font-size:clamp(11px,1.5vw,14px);font-weight:900;margin-bottom:4px;">5&ndash;15% of Revenue</div>
+            <div style="font-size:10px;opacity:.72;line-height:1.5;">Small, volatile, or new. Use Macro-Driven or simple flat growth. Too small to justify deep modelling</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 SCREENER DATA -->
+<section style="background:#fff;">
+  <div class="w">
+    <div class="chip rv d1">03 &mdash; Reading Revenue Data on Screener.in</div>
+    <h2 class="h2 rv d2">How to Extract <span class="hp">Segment Revenue from Screener.in P&amp;L</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">Screener.in&rsquo;s P&amp;L tab shows total consolidated revenue. For segment-level revenue, you need to go deeper &mdash; here is exactly how, using ITC as an example of a multi-segment business.</p>
+    <div class="seg-wrap rv d4">
+      <div class="seg-hdr">
+        <div><div class="sh-title">ITC Ltd &mdash; Segment Revenue Model on Screener.in</div><div class="sh-sub">Multi-business conglomerate &middot; 5 distinct revenue segments &middot; All &#8377; Crores</div></div>
+        <div class="sh-bdgs"><span class="sh-bdg">P&amp;L Tab</span><span class="sh-bdg">Annual Report</span><span class="sh-bdg">Bottom-Up</span></div>
+      </div>
+      <div class="scr-guide">
+        <span><span class="sg-dot" style="background:var(--p);"></span> Purple = High margin, stable core</span>
+        <span><span class="sg-dot" style="background:var(--gbr);"></span> Green = Fast-growing segments</span>
+        <span><span class="sg-dot" style="background:var(--ambr);"></span> Amber = Cyclical / lower margin</span>
+      </div>
+      <div class="tscroll">
+        <table class="bstbl">
+          <thead><tr><th style="text-align:left;">Segment</th><th>Revenue Driver</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25E</th><th>Growth</th><th>Approach</th></tr></thead>
+          <tbody>
+            <tr class="shdr"><td colspan="8">── ITCLTD &mdash; SEGMENT REVENUE (&#8377; Cr) ──</td></tr>
+            <tr class="hi-r"><td>Cigarettes <span class="ann an-p">Core</span></td><td>Volume &times; Net Realisation/stick</td><td>24,560</td><td>27,880</td><td>30,420</td><td class="up">33,000</td><td>+10% p.a.</td><td>Bottom-Up (Vol+Price)</td></tr>
+            <tr class="g-r"><td>FMCG &mdash; Others <span class="ann an-g">Growth</span></td><td>Distribution reach &times; per-outlet offtake</td><td>14,350</td><td>17,420</td><td>20,190</td><td class="up">23,800</td><td>+18% p.a.</td><td>Bottom-Up (SKU-level)</td></tr>
+            <tr><td>Agri Business <span class="ann an-a">Cyclical</span></td><td>Crop prices &times; procurement volumes</td><td>12,800</td><td>16,540</td><td>13,900</td><td>15,200</td><td>Variable</td><td>Macro (crop cycle)</td></tr>
+            <tr><td>Paperboards &amp; Packaging <span class="ann an-p">Stable</span></td><td>Capacity utilisation &times; realisation/tonne</td><td>6,650</td><td>7,890</td><td>8,230</td><td class="up">8,900</td><td>+8% p.a.</td><td>Bottom-Up (Capacity)</td></tr>
+            <tr class="g-r"><td>Hotels <span class="ann an-g">Recovery</span></td><td>Room count &times; ARR &times; Occupancy</td><td>1,350</td><td>2,090</td><td>2,580</td><td class="up">3,100</td><td>+20% p.a.</td><td>Bottom-Up (RevPAR)</td></tr>
+            <tr class="hi-r"><td>Total Revenue</td><td>Sum of all segments</td><td>59,710</td><td>71,820</td><td>75,320</td><td class="up">84,000</td><td>+11.5%</td><td>Blended</td></tr>
+            <tr class="shdr"><td colspan="8">── BOTTOM-UP DRIVERS (per segment) ──</td></tr>
+            <tr><td>Cigarettes: Volume (bn sticks)</td><td>Industry vol + ITC share</td><td>290</td><td>300</td><td>308</td><td>316</td><td>+2.5%</td><td>Market share stable ~77%</td></tr>
+            <tr><td>Cigarettes: Net Realisation (&#8377;/stick)</td><td>Price hike + mix upgrade</td><td>0.847</td><td>0.929</td><td>0.988</td><td class="up">1.044</td><td>+5.6%</td><td>Price &times; Volume = Revenue</td></tr>
+            <tr class="g-r"><td>FMCG: Distribution reach (towns)</td><td>Active urban + rural outlets</td><td>38L</td><td>42L</td><td>46L</td><td class="up">52L</td><td>+11%</td><td>Outlet &times; offtake rate</td></tr>
+            <tr><td>Hotels: ARR (&#8377;)</td><td>Rate &times; occupancy recovery</td><td>5,200</td><td>7,100</td><td>8,900</td><td class="up">9,800</td><td>Rising fast</td><td>RevPAR formula</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="rv d5" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,22px);margin-bottom:32px;">
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--pxs),#fdfcff);border:1.5px solid rgba(109,40,217,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:7px;">&#128202; Where to Find Segment Revenue on Screener.in</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>Step 1:</strong> Screener.in &rarr; P&amp;L tab shows <em>total</em> consolidated revenue only. <strong>Step 2:</strong> Click the Annual Report link on Screener.in &rarr; open the PDF &rarr; search &ldquo;Segment Revenue&rdquo; or &ldquo;Segment Information&rdquo; (Note 35&ndash;45 in most reports). <strong>Step 3:</strong> Copy the segment-wise revenue table for 3&ndash;5 years. Build a separate tab in your model for each segment. <strong>Step 4:</strong> Sum segments to match total P&amp;L revenue as a cross-check. If they match, your segment model is consistent with the reported consolidated figure.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--gpale),#fafffe);border:1.5px solid rgba(22,163,74,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:7px;">&#128200; The Segment Driver Formula</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>Every revenue segment has a natural unit driver.</strong> Consumer: Volume (units/kg) &times; Realisation (&#8377;/unit). B2B: Capacity (tonnes/MW) &times; Utilisation% &times; Price/unit. Subscription: Subscribers &times; ARPU. Retail: Stores &times; SSSG (Same-Store Sales Growth). Financial Services: AUM/Loan Book &times; Fee Rate/NIM. Hotel: Rooms &times; ARR &times; Occupancy. Find the natural unit for your segment, project volume and price separately, and multiply. This gives a more defensible projection than a single growth rate.</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--apale),#fffbeb);border:1.5px solid rgba(217,119,6,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ambr);margin-bottom:7px;">&#9201; How to Project Volume vs Price Separately</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>Volume drivers:</strong> market growth rate (industry CAGR), capacity additions (management guidance), distribution expansion, penetration rate increase, competitive share gain/loss. <strong>Price drivers:</strong> historical price hike CAGR (5&ndash;10 year average), commodity cost pass-through, product mix upgrading (premiumisation), regulatory price controls. Projecting both separately lets you model scenarios: &ldquo;Bear: volume flat, price +3%&rdquo; vs &ldquo;Bull: volume +8%, price +5%&rdquo; &mdash; much more nuanced than &ldquo;revenue +8% or +13%.&rdquo;</p>
+      </div>
+      <div style="border-radius:18px;padding:clamp(16px,2.5vw,24px);background:linear-gradient(158deg,var(--rpale),#fff5f5);border:1.5px solid rgba(220,38,38,.2);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:7px;">&#9888; The Revenue Model Red Flags</div>
+        <p style="font-size:clamp(12.5px,1.35vw,14px);color:var(--ts);line-height:1.72;"><strong>1. Using only total revenue CAGR:</strong> Hides segment-level divergence. One segment may be declining while another masks it. <strong>2. No cross-check with capacity:</strong> If revenue growth implies capacity utilisation &gt;100%, the model is wrong. <strong>3. Ignoring mix shift:</strong> Revenue grows but margins compress = lower-margin segments growing faster. <strong>4. Using competitor&rsquo;s growth rate:</strong> #2 in a market may have different share dynamics than #1. <strong>5. Projecting volume and price together:</strong> Locks you into one scenario and hides the real drivers.</p>
+      </div>
+    </div>
+    <div class="insight rv d6">
+      <div class="ins-ico">&#128269;</div>
+      <div>
+        <div class="ins-tag">The Revenue Model Sanity Check</div>
+        <div class="ins-title">Three Cross-Checks Every Revenue Model Must Pass Before You Use It</div>
+        <div class="ins-desc">1. <strong>Capacity check:</strong> Does projected revenue require capacity utilisation above 90%? If yes, model a capacity expansion (Capex) or reduce the growth assumption. 2. <strong>Market share check:</strong> Does projected market share exceed a plausible level for the company&rsquo;s competitive position? No company sustains &gt;50% market share growth for 5 consecutive years. 3. <strong>Price vs inflation check:</strong> Are you assuming price hikes above inflation for 5 years? That requires demonstrable pricing power (brand, switching costs, regulation). If the company doesn&rsquo;t have it, use inflation-level price growth.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMAT BANNER -->
+<section class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Build Revenue Models with Real Company Data</div>
+    <div class="dmh">Open a Free Demat Account &amp;<br><span class="dmhs">Access Segment Revenue Data Today.</span></div>
+    <div class="dmsub">Screener.in and company annual reports provide 10 years of segment-level revenue data for every Indian listed company. Open a Demat account and start building granular models.</div>
+    <div class="dmfeats"><div class="dmf">&#8377;0 Account Opening Fee</div><div class="dmf">Segment P&amp;L Data</div><div class="dmf">Zero Brokerage on Delivery</div><div class="dmf">SEBI Regulated &amp; Trusted</div></div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn">&#128640;&nbsp; Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmrating">4.8 &middot; Trusted by 1 Crore+ Investors</span></div>
+    <div class="dmnote">No spam. No hidden charges. SEBI registered broker.</div>
+  </div>
+</section>
+
+<!-- 04 GOOD vs BAD -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="chip rv d1">04 &mdash; Good vs Bad Revenue Models</div>
+    <h2 class="h2 rv d2">Revenue Model Quality <span class="hp">in Real Companies</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">Here are 5 companies whose revenue structure models cleanly with specific segment drivers, and 5 situations where revenue modelling is unreliable or misleading &mdash; all grounded in real Indian market examples.</p>
+
+    <div class="gbh rv d2 gbh-g">
+      <div class="gbh-ico gi-g">&#10004;</div>
+      <div><div class="gbh-title">5 Companies That Model Revenue Well &mdash; Clear Drivers, Transparent Segments</div><div class="gbh-sub">Natural unit drivers &middot; Segment disclosures in Annual Report &middot; Stable or improving mix &middot; Cross-checks pass</div></div>
+    </div>
+    <div class="exgrid">
+      <div class="excard eg1 rv d2">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pmd));">&#127850;</div><div><div class="ex-name">Asian Paints</div><div class="ex-sec">Decorative Paints &middot; NSE: ASIANPAINT</div></div></div>
+        <div class="vrd vg">&#10004; Volume &times; Price Model &mdash; Textbook Bottom-Up</div>
+        <div class="enums">
+          <div class="en en-g"><div class="en-lbl">Volume CAGR</div><div class="en-val ev-g">~8% p.a.</div></div>
+          <div class="en en-g"><div class="en-lbl">Price Growth</div><div class="en-val ev-g">~5% p.a.</div></div>
+          <div class="en en-p"><div class="en-lbl">Segments</div><div class="en-val ev-p">Dec + Ind</div></div>
+          <div class="en en-g"><div class="en-lbl">Mix Trend</div><div class="en-val ev-g">Premiumising</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it models well:</strong> Asian Paints discloses volume (in litres) and value growth separately every quarter. Volume grows at 7&ndash;9% driven by housing construction + repainting cycles. Price grows 4&ndash;6% from input cost inflation pass-through + premiumisation (higher-value emulsions replacing distemper). Decorative (domestic) and Industrial (B2B) segments have separate growth rates and margin profiles. The model is simply: Decorative Volume &times; Decorative ASP + Industrial Volume &times; Industrial ASP. Cross-check: does revenue imply capacity utilisation &lt;90%? Yes (multiple plants). Does share growth make sense? Yes (55% market share, stable).</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Quarterly volume + value disclosures make model verification easy</div>
+          <div class="sig"><div class="sdot sd-g"></div>Premiumisation trend is visible: ASP rising faster than volume &rarr; better mix</div>
+          <div class="sig"><div class="sdot sd-g"></div>Industrial segment separately modelled at different margin/growth</div>
+          <div class="sig"><div class="sdot sd-g"></div>Capacity utilisation cross-check passes: multiple plants, no bottleneck</div>
+        </div>
+      </div>
+      <div class="excard eg2 rv d3">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--gpale),#d1fae5);">&#127963;&#65039;</div><div><div class="ex-name">Indian Hotels (IHCL / Taj)</div><div class="ex-sec">Hospitality &middot; NSE: INDHOTEL &middot; RevPAR model</div></div></div>
+        <div class="vrd vg">&#10004; RevPAR Model &mdash; The Cleanest Hotel Revenue Formula</div>
+        <div class="enums">
+          <div class="en en-g"><div class="en-lbl">Model Driver</div><div class="en-val ev-g">RevPAR</div></div>
+          <div class="en en-p"><div class="en-lbl">Rooms (FY25)</div><div class="en-val ev-p">~22,000</div></div>
+          <div class="en en-g"><div class="en-lbl">ARR Growth</div><div class="en-val ev-g">+12% p.a.</div></div>
+          <div class="en en-g"><div class="en-lbl">Occupancy</div><div class="en-val ev-g">~68%+</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it models well:</strong> Hotels have the cleanest Bottom-Up formula in any industry: Revenue = Rooms &times; ARR (Average Room Rate) &times; Occupancy%. IHCL discloses all three quarterly. RevPAR (Revenue per Available Room) = ARR &times; Occupancy is the single metric that drives valuation. India&rsquo;s hotel sector is in a multi-year upcycle: ARR recovering to pre-COVID levels and beyond (+12% p.a.), occupancy rising toward 70%. Adding room count from new hotel openings (IHCL guides 2&ndash;3 hotels per quarter) gives a precise 3-year revenue projection without any macro assumption needed.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>RevPAR = ARR &times; Occupancy &mdash; one formula explains 85% of revenue</div>
+          <div class="sig"><div class="sdot sd-g"></div>Room addition guidance gives volume growth without assumptions</div>
+          <div class="sig"><div class="sdot sd-g"></div>Management provides ARR and occupancy guidance &rarr; model almost builds itself</div>
+          <div class="sig"><div class="sdot sd-g"></div>F&amp;B and other revenues modelled as % of room revenue (historically stable at 55%)</div>
+        </div>
+      </div>
+      <div class="excard eg3 rv d4">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--skypale),#e0f2fe);">&#127968;</div><div><div class="ex-name">Titan Company</div><div class="ex-sec">Watches + Jewellery + Eyewear &middot; NSE: TITAN</div></div></div>
+        <div class="vrd vg">&#10004; Multi-Segment Bottom-Up &mdash; Each Segment Has Its Own Driver</div>
+        <div class="enums">
+          <div class="en en-p"><div class="en-lbl">Jewellery</div><div class="en-val ev-p">75% Revenue</div></div>
+          <div class="en en-g"><div class="en-lbl">Watches</div><div class="en-val ev-g">17% Revenue</div></div>
+          <div class="en en-g"><div class="en-lbl">Eyewear + Other</div><div class="en-val ev-g">8% Revenue</div></div>
+          <div class="en en-g"><div class="en-lbl">Store CAGR</div><div class="en-val ev-g">+12% p.a.</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it models well:</strong> Titan discloses revenue by segment (Jewellery, Watches, Eyewear, Others) in every quarterly result. Each has a distinct driver: Jewellery = Gold price &times; Volume (gram sales) + studded share (higher margin); Watches = Stores &times; SSSG + international; Eyewear = Same-store sales + store additions. The model builds: (a) Jewellery: gold price assumption &times; volume CAGR + studded mix %; (b) Watches: store count &times; per-store revenue; (c) Eyewear: revenue per store &times; store count. This granular approach predicted that Titan&rsquo;s revenue would accelerate as gold prices rose &mdash; something a blended CAGR model would have missed.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>Jewellery segment linked to gold price + volume &rarr; separate sensitivity</div>
+          <div class="sig"><div class="sdot sd-g"></div>Watches: stores &times; per-store revenue &rarr; matches Titan&rsquo;s quarterly store count</div>
+          <div class="sig"><div class="sdot sd-g"></div>Studded share (diamonds) trending up &rarr; positive mix effect on margins</div>
+          <div class="sig"><div class="sdot sd-g"></div>Eyewear: nascent segment modelled as Macro (Eyewear TAM &times; Titan share)</div>
+        </div>
+      </div>
+      <div class="excard eg4 rv d5">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--apale),#fef3c7);">&#127968;</div><div><div class="ex-name">Polycab India</div><div class="ex-sec">Wires &amp; Cables + FMEG &middot; NSE: POLYCAB</div></div></div>
+        <div class="vrd vg">&#10004; Capacity &times; Price Model &mdash; Manufacturing Precision</div>
+        <div class="enums">
+          <div class="en en-p"><div class="en-lbl">W&amp;C Revenue</div><div class="en-val ev-p">85% share</div></div>
+          <div class="en en-g"><div class="en-lbl">FMEG Growth</div><div class="en-val ev-g">+35% p.a.</div></div>
+          <div class="en en-p"><div class="en-lbl">Copper price</div><div class="en-val ev-p">Key driver</div></div>
+          <div class="en en-g"><div class="en-lbl">Model Type</div><div class="en-val ev-g">Bottom-Up</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it models well:</strong> Polycab has two distinct segments: Wires &amp; Cables (W&amp;C, 85% of revenue) and FMEG &mdash; fans, lights, switches (15% and growing). W&amp;C is modelled as: Volume (km of cable) &times; Copper price &times; Conversion premium. Copper price (an LME commodity) is easily available and creates a price sensitivity table. FMEG is modelled as: Distribution reach (towns) &times; Category penetration &times; Market share. Polycab separately discloses W&amp;C and FMEG revenue in quarterly results, making model verification straightforward. Capacity utilisation (currently ~70%) sets a natural upper bound on near-term volume growth.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-g"></div>W&amp;C: Volume (km) &times; Copper LME price &times; premium &mdash; copper is observable</div>
+          <div class="sig"><div class="sdot sd-g"></div>FMEG: separate fast-growth segment &mdash; modelled with distribution-led bottom-up</div>
+          <div class="sig"><div class="sdot sd-g"></div>Capacity utilisation at 70% &rarr; 2&ndash;3 years of volume growth without new capex</div>
+          <div class="sig"><div class="sdot sd-g"></div>Quarterly segment disclosures allow quarterly model tracking and adjustment</div>
+        </div>
+      </div>
+      <!-- GOOD 5 FULL -->
+      <div class="excard eg5 exfull rv d6">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,#f0fdf4,#d1fae5);">&#127968;</div><div><div class="ex-name">HDFC AMC &mdash; Macro-Driven AUM Model Done Right</div><div class="ex-sec">Asset Management &middot; NSE: HDFCAMC &middot; Revenue = AUM &times; Expense Ratio</div></div></div>
+        <div class="vrd vg">&#10004; TAM &times; Market Share Macro Model &mdash; Elegant and Accurate</div>
+        <div class="ex-inner">
+          <div>
+            <div class="enums">
+              <div class="en en-p"><div class="en-lbl">India MF AUM (FY25)</div><div class="en-val ev-p">&#8377;60L Cr</div></div>
+              <div class="en en-g"><div class="en-lbl">AUM CAGR</div><div class="en-val ev-g">~18% p.a.</div></div>
+              <div class="en en-g"><div class="en-lbl">HDFC AMC Share</div><div class="en-val ev-g">~11%</div></div>
+              <div class="en en-p"><div class="en-lbl">Avg Expense Ratio</div><div class="en-val ev-p">~0.38%</div></div>
+            </div>
+            <div class="ex-why" style="margin-top:12px;"><strong>Why it models beautifully:</strong> HDFC AMC&rsquo;s entire revenue model collapses to 3 lines: India MF AUM &times; HDFC Market Share &times; Expense Ratio. The TAM (India MF AUM) grows at ~18% p.a. driven by GDP growth, financialisation of savings, and SIP penetration rising from 4% of households to 15%. HDFC AMC&rsquo;s market share is ~11%, stable to slightly declining as the sector becomes more competitive. Expense ratio is regulated and declining slowly. Revenue = AUM &times; 0.38% &mdash; simple, transparent, directly verifiable from AMFI monthly data (freely available). This is Macro-Driven modelling at its most elegant.</div>
+          </div>
+          <div>
+            <div class="sigs" style="margin-top:0;">
+              <div class="sig"><div class="sdot sd-g"></div>India MF AUM data: freely available monthly from AMFI website</div>
+              <div class="sig"><div class="sdot sd-g"></div>HDFC AMC market share: directly from AMFI data each month</div>
+              <div class="sig"><div class="sdot sd-g"></div>Expense ratio: disclosed quarterly in investor presentation</div>
+              <div class="sig"><div class="sdot sd-g"></div>Revenue = AUM &times; Expense Ratio &rarr; 3-line model, highly accurate</div>
+              <div class="sig-hl shl-g"><strong>Model formula:</strong> India MF AUM (FY25) &#8377;60L Cr &times; (1.18)^3 = &#8377;99L Cr by FY28E. HDFC AMC share 11% = AUM &#8377;10.9L Cr. Expense ratio 0.36% (declining slowly) = Revenue &#8377;3,924 Cr FY28E. Compare with Screener.in&rsquo;s P&amp;L FY25 revenue &rarr; does the model extrapolation look reasonable? Yes: FY25 revenue was ~&#8377;2,700 Cr. FY28E at &#8377;3,924 Cr implies ~13% CAGR &mdash; lower than AUM growth (18%) due to expense ratio compression. Exactly the pattern analysts project.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 BAD -->
+    <div class="gbh rv d2 gbh-r" style="margin-top:44px;">
+      <div class="gbh-ico gi-r">&#9888;</div>
+      <div><div class="gbh-title">5 Revenue Modelling Failures &mdash; When the Model Misleads</div><div class="gbh-sub">No segment detail &middot; Capacity ignored &middot; Price not separated &middot; Cyclical ignored &middot; Unrealistic market share</div></div>
+    </div>
+    <div class="exgrid">
+      <div class="excard eb1 rv d2">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fecaca);">&#128165;</div><div><div class="ex-name">Applying Single CAGR to Multi-Segment Business</div><div class="ex-sec">Pattern: ITC, Reliance &mdash; blended CAGR hides segment divergence</div></div></div>
+        <div class="vrd vr">&#128680; Revenue Growth Hides That Core Segment Is Declining</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Blended CAGR</div><div class="en-val ev-r">+10%</div></div>
+          <div class="en en-r"><div class="en-lbl">Core Segment</div><div class="en-val ev-r">-3% volume</div></div>
+          <div class="en en-r"><div class="en-lbl">Growth Segment</div><div class="en-val ev-r">+28%</div></div>
+          <div class="en en-r"><div class="en-lbl">Model Error</div><div class="en-val ev-r">Margin wrong</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it misleads:</strong> A conglomerate reports 10% revenue growth. You apply 10% CAGR to the total and call it done. But segment data shows: Core Segment (60% of revenue, 35% EBITDA margin) grew only 5% as volumes fell 3% and price covered the gap. Growth Segment (30% of revenue, 8% EBITDA margin) grew 28%. The blended revenue looks fine, but the margin mix has shifted badly: more revenue is coming from the low-margin segment. Your model projects 10% revenue growth and stable margins &mdash; but actual EBITDA margins fall 2&ndash;3 percentage points as mix shifts. This is one of the most common revenue model errors in sell-side research.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>Blended CAGR applied to all segments &rarr; misses margin mix deterioration</div>
+          <div class="sig"><div class="sdot sd-r"></div>Revenue looks fine; EBITDA undershoots by 15&ndash;20% from mix shift</div>
+          <div class="sig"><div class="sdot sd-r"></div>Analyst projects flat margins; actual margins compress 200&ndash;300 bps</div>
+          <div class="sig"><div class="sdot sd-r"></div>Fix: always model each segment separately with its own margin profile</div>
+        </div>
+      </div>
+      <div class="excard eb2 rv d3">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fee2e2);">&#127981;</div><div><div class="ex-name">Ignoring Capacity Constraints in Manufacturing</div><div class="ex-sec">Pattern: Steel, Cement, Power &mdash; capacity utilisation ignored</div></div></div>
+        <div class="vrd vr">&#128680; Revenue Projection Requires &gt;100% Capacity Utilisation</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Projected Revenue</div><div class="en-val ev-r">+15% CAGR</div></div>
+          <div class="en en-r"><div class="en-lbl">Current Util.</div><div class="en-val ev-r">88%</div></div>
+          <div class="en en-r"><div class="en-lbl">Implied Util. Yr3</div><div class="en-val ev-r">113%</div></div>
+          <div class="en en-r"><div class="en-lbl">Model Validity</div><div class="en-val ev-r">Invalid</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it misleads:</strong> A cement company has installed capacity of 50 million tonnes and current utilisation of 88% (= 44 MTPA volume). An analyst projects 15% revenue CAGR for 3 years: revenue Year 3 implies volume of 67 MTPA &mdash; which is 134% utilisation. Physically impossible without new capacity. But the analyst did not check the capacity math. In reality, revenue cannot grow faster than volume growth that capacity allows, plus price. Unless new capacity is being added (capex-driven), a manufacturing revenue model must check: does implied volume stay within installed capacity? If not, either reduce revenue growth or model a capacity expansion separately.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>Revenue CAGR implying &gt;100% capacity utilisation &mdash; physically impossible</div>
+          <div class="sig"><div class="sdot sd-r"></div>No capacity expansion modelled &rarr; model is internally inconsistent</div>
+          <div class="sig"><div class="sdot sd-r"></div>Fix: Installed capacity &times; Utilisation rate = Max volume &rarr; apply this cap</div>
+          <div class="sig"><div class="sdot sd-r"></div>If volume exceeds capacity &rarr; add capex expansion schedule to model</div>
+        </div>
+      </div>
+      <div class="excard eb3 rv d4">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--apale),#fef3c7);">&#127758;</div><div><div class="ex-name">Projecting Cyclical Revenue in a Straight Line</div><div class="ex-sec">Pattern: Commodity companies &mdash; steel, fertilisers, chemicals</div></div></div>
+        <div class="vrd vr">&#128680; Revenue Model Ignores the Commodity Cycle</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Revenue FY24</div><div class="en-val ev-r">Peak cycle</div></div>
+          <div class="en en-r"><div class="en-lbl">Model Projection</div><div class="en-val ev-r">+10% straight</div></div>
+          <div class="en en-r"><div class="en-lbl">Actual Yr2</div><div class="en-val ev-r">-25%</div></div>
+          <div class="en en-r"><div class="en-lbl">Model Error</div><div class="en-val ev-r">Catastrophic</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it misleads:</strong> A fertiliser company had exceptional revenue in FY24 (global supply disruptions drove urea prices to 3&times; normal). An analyst models 10% CAGR from this elevated FY24 base. But fertiliser prices are mean-reverting &mdash; they always return toward the long-run average. By FY26, global supply normalises and urea prices fall 40%. The company&rsquo;s revenue drops 25% while the model showed +10%. The error: using a cyclical peak as the starting point for a straight-line projection. Cyclical companies must be modelled using mid-cycle normalised revenues, not last year&rsquo;s revenue. The correct starting point is the 5-year average price &times; sustainable volume &mdash; not the peak.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>FY24 peak revenue used as straight-line base &rarr; mean reversion ignored</div>
+          <div class="sig"><div class="sdot sd-r"></div>Commodity price assumed constant &rarr; correct only at the top of the cycle</div>
+          <div class="sig"><div class="sdot sd-r"></div>Model projects +10%; actual is -25% as cycle turns</div>
+          <div class="sig"><div class="sdot sd-r"></div>Fix: Use 5-year average commodity price as base; model revenue at normalised margin</div>
+        </div>
+      </div>
+      <div class="excard eb4 rv d5">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,#faf5ff,#ede9fe);">&#128200;</div><div><div class="ex-name">Assuming Unrealistic Market Share Gains</div><div class="ex-sec">Pattern: Macro-Driven models &mdash; market share assumptions not grounded</div></div></div>
+        <div class="vrd vr">&#128680; Market Share Assumption Has No Basis in Competitive Reality</div>
+        <div class="enums">
+          <div class="en en-r"><div class="en-lbl">Current Share</div><div class="en-val ev-r">8%</div></div>
+          <div class="en en-r"><div class="en-lbl">Assumed Yr3</div><div class="en-val ev-r">22%</div></div>
+          <div class="en en-r"><div class="en-lbl">No. 1 Player Share</div><div class="en-val ev-r">55% (stable)</div></div>
+          <div class="en en-r"><div class="en-lbl">Model Basis</div><div class="en-val ev-r">None</div></div>
+        </div>
+        <div class="ex-why"><strong>Why it misleads:</strong> In a Macro-Driven model, an analyst projects a small EV charging network company going from 8% market share to 22% in 3 years &mdash; on the basis that &ldquo;EV is the future.&rdquo; But the market leader has 55% share, massive capital, and government partnership. There is no reason to believe the #5 player will leap from 8% to 22% in 3 years. The Macro model (TAM growing fast) creates the illusion that the company will capture disproportionate growth. Market share assumptions must be grounded in: competitive dynamics, historical share trend, management track record, capital available, and regulatory environment. &ldquo;EV is the future&rdquo; is not a market share assumption.</div>
+        <div class="sigs">
+          <div class="sig"><div class="sdot sd-r"></div>8% &rarr; 22% share in 3 years with no structural competitive advantage</div>
+          <div class="sig"><div class="sdot sd-r"></div>Market leader at 55% stable &rarr; who gives up share? The model doesn&rsquo;t say</div>
+          <div class="sig"><div class="sdot sd-r"></div>Sector tailwind (EV growth) ≠ company-specific share gain</div>
+          <div class="sig"><div class="sdot sd-r"></div>Fix: Start from current share &plusmn; 1&ndash;2% per year based on competitive evidence</div>
+        </div>
+      </div>
+      <!-- BAD 5 FULL -->
+      <div class="excard eb5 exfull rv d6">
+        <div class="ex-top"><div class="ex-logo" style="background:linear-gradient(135deg,var(--rpale),#fee2e2);">&#128219;</div><div><div class="ex-name">Revenue from Related Party Transactions &mdash; Not Arm&rsquo;s Length</div><div class="ex-sec">Pattern: Group companies &mdash; inter-company transactions inflating reported revenue</div></div></div>
+        <div class="vrd vr">&#128680; Revenue Partly Driven by Non-Arm&rsquo;s-Length Related Party Deals</div>
+        <div class="ex-inner">
+          <div>
+            <div class="enums">
+              <div class="en en-r"><div class="en-lbl">RPT % of Revenue</div><div class="en-val ev-r">&gt;25%</div></div>
+              <div class="en en-r"><div class="en-lbl">Market Revenue</div><div class="en-val ev-r">75% only</div></div>
+              <div class="en en-r"><div class="en-lbl">Model Risk</div><div class="en-val ev-r">Very High</div></div>
+              <div class="en en-a"><div class="en-lbl">Check Required</div><div class="en-val ev-a">RPT note</div></div>
+            </div>
+            <div class="ex-why" style="margin-top:12px;"><strong>Why it misleads:</strong> Some conglomerate subsidiaries book a large portion of their revenue from sister companies within the same group (inter-company sales). When consolidation removes these at the group level, the revenue disappears &mdash; but at the subsidiary level, the &ldquo;revenue CAGR&rdquo; looks impressive. An analyst models 15% revenue CAGR on a subsidiary&rsquo;s historical data without checking that 25% of revenue came from the parent group at potentially non-arm&rsquo;s-length prices. If the group restructures or the inter-company deal changes, 25% of projected revenue vanishes instantly. Check the RPT note in the annual report before projecting any company with high related-party revenue.</div>
+          </div>
+          <div>
+            <div class="sigs" style="margin-top:0;">
+              <div class="sig"><div class="sdot sd-r"></div>25%+ revenue from group companies &rarr; not reflective of true market demand</div>
+              <div class="sig"><div class="sdot sd-r"></div>Pricing of RPTs may be above or below market &rarr; margins distorted</div>
+              <div class="sig"><div class="sdot sd-r"></div>Group restructuring can eliminate RPT revenue overnight</div>
+              <div class="sig"><div class="sdot sd-r"></div>Historical CAGR driven by RPTs may not repeat if group reduces support</div>
+              <div class="sig-hl shl-r"><strong>How to check:</strong> Annual Report &rarr; Notes &rarr; Related Party Transactions &rarr; look at &ldquo;Sale of goods/services to related parties&rdquo; row. If this is &gt;10% of total revenue, investigate further. Is the pricing arm&rsquo;s length? Does the related party have a strong reason to continue buying? Could the revenue move to a third party? If not &mdash; subtract the RPT revenue from your projection base and model only the arm&rsquo;s-length portion as the sustainable growth foundation.</div>
+              <div class="sig-hl shl-g" style="margin-top:8px;"><strong>Safe pattern:</strong> RPT revenue is fine if it is at demonstrably arm&rsquo;s-length terms (same price as third-party sales), the related party has a long-term contractual obligation, and the quantum is below 10% of total revenue. Above 10%, model the RPT portion conservatively with a scenario where it reduces to 0 within 3 years.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary table -->
+    <p class="rv d6" style="font-size:clamp(17px,2.2vw,24px);font-weight:900;color:var(--tx);margin-bottom:22px;">&#128202; Revenue Model Quality &mdash; All 10 at a Glance</p>
+    <div class="sumwrap rv d6">
+      <table class="sumtbl">
+        <thead><tr><th>Company / Type</th><th>Approach</th><th>Unit Driver</th><th>Segment Disclosure</th><th>Key Risk</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Asian Paints</td><td>Bottom-Up</td><td>Volume &times; ASP</td><td>Quarterly vol+value</td><td>Commodity cost pass-through timing</td><td><span class="tb tb-g">&#10004; Textbook Model</span></td></tr>
+          <tr><td>Indian Hotels (IHCL)</td><td>Bottom-Up</td><td>RevPAR &times; Rooms</td><td>Quarterly ARR+Occ</td><td>Occupancy plateau post-recovery</td><td><span class="tb tb-g">&#10004; Cleanest Formula</span></td></tr>
+          <tr><td>Titan Company</td><td>Bottom-Up (Multi)</td><td>Segment-specific</td><td>Quarterly by segment</td><td>Gold price sensitivity on Jewellery</td><td><span class="tb tb-g">&#10004; Multi-Segment</span></td></tr>
+          <tr><td>Polycab India</td><td>Bottom-Up</td><td>Vol &times; Copper price</td><td>Quarterly W&amp;C + FMEG</td><td>Copper price volatility</td><td><span class="tb tb-g">&#10004; Manufacturing</span></td></tr>
+          <tr><td>HDFC AMC</td><td>Macro-Driven</td><td>AUM &times; Exp. Ratio</td><td>Monthly AMFI data</td><td>Expense ratio compression</td><td><span class="tb tb-g">&#10004; Elegant Macro</span></td></tr>
+          <tr><td>Blended CAGR on Multi-Seg</td><td>Single CAGR</td><td>None (blended)</td><td>Not used</td><td>Mix shift destroys margin forecast</td><td><span class="tb tb-r">&#128680; Wrong Approach</span></td></tr>
+          <tr><td>Capacity ignored</td><td>Bottom-Up (partial)</td><td>Volume only</td><td>Partial</td><td>Model projects &gt;100% utilisation</td><td><span class="tb tb-r">&#128680; Invalid Model</span></td></tr>
+          <tr><td>Cyclical straight-line</td><td>Historical CAGR</td><td>None</td><td>N/A</td><td>Cycle turns; revenue falls 25%</td><td><span class="tb tb-r">&#128680; Cycle-Blind</span></td></tr>
+          <tr><td>Unrealistic market share</td><td>Macro-Driven</td><td>TAM &times; Share</td><td>N/A</td><td>Share gain has no competitive basis</td><td><span class="tb tb-r">&#128680; Unfounded</span></td></tr>
+          <tr><td>High RPT revenue</td><td>Historical CAGR</td><td>None</td><td>N/A</td><td>RPT reduction removes 25% revenue</td><td><span class="tb tb-r">&#128680; Investigate First</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight rv d6">
+      <div class="ins-ico">&#127919;</div>
+      <div>
+        <div class="ins-tag">The Golden Rule of Revenue Modelling</div>
+        <div class="ins-title">Never Apply a Single Growth Rate to a Multi-Segment Business. Always Model Volume and Price Separately. Always Check the Capacity Math.</div>
+        <div class="ins-desc">These three rules eliminate 80% of revenue model errors. Segment-level modelling catches mix shifts. Volume &times; Price separation enables better scenario analysis. Capacity math catches physically impossible projections. All three require 20&ndash;30 extra minutes of work per company &mdash; but produce projections that are 5&times; more reliable. The data to do all three is on Screener.in P&amp;L tab and in the Annual Report notes &mdash; freely available for every Indian listed company.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 TRICKS -->
+<section class="tricks-sec">
+  <div class="w">
+    <div class="chip rv d1">05 &mdash; Tricks to Project Revenue Fast</div>
+    <h2 class="h2 rv d2">5 Screener.in Shortcuts to <span class="hp">Build Revenue Models Faster</span></h2>
+    <div class="rule rv d3"></div>
+    <p class="lead rv d3">These are field-tested tricks to build accurate segment revenue models in under 30 minutes &mdash; all using Screener.in and freely available data.</p>
+    <div class="tgrid rv d3">
+      <div class="tc tc1">
+        <div class="tn tn1">1</div>
+        <div class="tc-sub ts1">Screener.in &mdash; P&amp;L Tab</div>
+        <div class="tc-title">The &ldquo;Revenue per Employee&rdquo; Cross-Check</div>
+        <div class="tc-desc">For service companies (IT, consulting, staffing), revenue is largely headcount-driven. <strong>Revenue per Employee = Total Revenue &divide; Total Headcount.</strong> If your Bottom-Up model shows revenue growing 20% while headcount grows only 5%, you are implicitly assuming revenue/employee productivity improves 14% p.a. Is that realistic? For IT companies, productivity improvements of 8&ndash;12% are normal (automation + AI). Above 15% is aggressive. Use this cross-check to validate any service company&rsquo;s revenue model. Screener.in P&amp;L tab shows revenue; employee count is in the Annual Report or BSE filings.</div>
+        <div class="tc-steps">
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> P&amp;L tab &rarr; Total Revenue &divide; employee count = Revenue per Head</div>
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Compare 5-year historical trend: rising = productivity gain</div>
+          <div class="ts ts-p"><span class="ts-arr">&#8594;</span> Your projected Revenue/Head growth = model&rsquo;s implicit productivity assumption</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; &lt;10% productivity improvement = realistic</span>
+          <span class="tcr-a">&#9888; 10&ndash;15% = ambitious but possible</span>
+          <span class="tcr-r">&#10007; &gt;15% = investigate what drives this</span>
+        </div>
+      </div>
+      <div class="tc tc2">
+        <div class="tn tn2">2</div>
+        <div class="tc-sub ts2">Annual Report &mdash; Segment Notes</div>
+        <div class="tc-title">The &ldquo;Segment Revenue to Total Revenue&rdquo; Mix Check</div>
+        <div class="tc-desc">Before projecting, <strong>calculate each segment&rsquo;s % of total revenue for the last 5 years</strong> and check whether it is stable, rising, or falling. A segment&rsquo;s share rising = it is growing faster than the total. A segment&rsquo;s share falling = it is growing slower (or declining). Your projected segment growth rates must be consistent with projected mix shifts. If you project all segments at the same growth rate, the mix is stable &mdash; is that realistic? If you project the low-margin segment faster, margins will compress. Force yourself to justify each segment&rsquo;s mix trajectory before finalising revenue assumptions.</div>
+        <div class="tc-steps">
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> Annual Report &rarr; Segment Note &rarr; copy segment revenue 5 years</div>
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> Calculate each segment % of total for FY21, FY22, FY23, FY24, FY25</div>
+          <div class="ts ts-g"><span class="ts-arr">&#8594;</span> Is the mix trending? Your projected mix in Year 5 must be defensible</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; Mix stable = same growth rates acceptable</span>
+          <span class="tcr-a">&#9888; Mix shifting = different growth rates needed per segment</span>
+          <span class="tcr-r">&#10007; Mix diverging rapidly = your margin assumption will be wrong</span>
+        </div>
+      </div>
+      <div class="tc tc3">
+        <div class="tn tn2">3</div>
+        <div class="tc-sub ts3">Screener.in Ratios + Annual Report</div>
+        <div class="tc-title">The &ldquo;Asset Turnover as Revenue Ceiling&rdquo; Trick</div>
+        <div class="tc-desc">For asset-heavy businesses (manufacturing, infrastructure), revenue is ultimately constrained by asset base. <strong>Asset Turnover = Revenue &divide; Net Fixed Assets.</strong> If historical asset turnover is 1.8&times; and you project revenue growing 20% without any capex increase, you are implicitly assuming asset turnover rises to 2.2&times; in 3 years. Is that feasible? Check the historical range. For most capital-intensive businesses, asset turnover has a natural ceiling (maximum capacity utilisation). If your revenue projection breaches the ceiling, you must either add capex or reduce revenue growth. Screener.in Ratios tab shows asset turnover directly.</div>
+        <div class="tc-steps">
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Ratios tab &rarr; Asset Turnover Ratio &rarr; note 5-year range</div>
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Revenue projection &divide; Net Block = Implied asset turnover in Year 3</div>
+          <div class="ts ts-r"><span class="ts-arr">&#8594;</span> Implied turnover &gt; historical max &rarr; revenue projection too aggressive</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; Implied turnover within historical range = feasible</span>
+          <span class="tcr-a">&#9888; Slightly above historical max = aggressive but arguable</span>
+          <span class="tcr-r">&#10007; Far above historical max = impossible without new assets</span>
+        </div>
+      </div>
+      <div class="tc tc4">
+        <div class="tn tn4">4</div>
+        <div class="tc-sub ts4">Quarterly Results + Industry Data</div>
+        <div class="tc-title">The &ldquo;Volume vs Price Decomposition&rdquo; Trick</div>
+        <div class="tc-desc">Every quarterly result for a consumer/industrial company contains management commentary on volume growth vs price growth. Note both separately for the last 8 quarters. <strong>Calculate volume CAGR and price CAGR independently.</strong> For your model: project volume using capacity/market-share logic and project price using inflation + pricing power assessment. Then revenue = volume &times; price. This produces two independent levers for scenario analysis. Bear case: volume flat, price +2%. Base: volume +7%, price +4%. Bull: volume +10%, price +6%. Each scenario has a specific economic narrative rather than &ldquo;revenue +6/11/16%.&rdquo;</div>
+        <div class="tc-steps">
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Quarterly results PDF &rarr; find volume growth and value growth commentary</div>
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Implied price growth = Value growth &minus; Volume growth (approximately)</div>
+          <div class="ts ts-a"><span class="ts-arr">&#8594;</span> Project volume and price separately &rarr; multiply for revenue</div>
+        </div>
+        <div class="tc-res">
+          <span class="tcr-g">&#10004; Volume+Price separately = nuanced scenario analysis</span>
+          <span class="tcr-a">&#9888; Only total revenue CAGR = less precise</span>
+          <span class="tcr-r">&#10007; Projecting both together = hides what is really driving growth</span>
+        </div>
+      </div>
+      <div class="tc tc5">
+        <div class="tn tn5">5</div>
+        <div class="tc-sub ts5">Screener.in + AMFI / TRAI / RBI / SEBI Data &mdash; Macro Cross-Check</div>
+        <div class="tc-title">The &ldquo;Market Share Sanity Test&rdquo; &mdash; Most Important Revenue Model Check</div>
+        <div class="tc-desc">For Macro-Driven models, the single most important check is: <strong>Is the projected market share plausible given competitive dynamics?</strong> After building your model, extract the implied market share in Year 5. Then ask: who is losing share as your company gains? Is that plausible? Strong incumbents rarely lose more than 1&ndash;2% share per year to a new entrant. Gaining from 8% to 22% in 3 years requires the market leader to simultaneously drop from 55% to 41% &mdash; for which there must be a specific, demonstrable reason.</div>
+        <div class="tc5-inner">
+          <div>
+            <div class="tc-steps">
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Find industry TAM data: AMFI (MF), TRAI (Telecom), SEBI (Broking), RBI (Banking)</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Calculate company&rsquo;s current market share: Revenue &divide; TAM</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Your projected revenue &divide; projected TAM = implied Year 5 market share</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Is the implied share gain realistic? Who loses? Why?</div>
+            </div>
+          </div>
+          <div>
+            <div class="tc-steps">
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> &#10004; Share gain: +1&ndash;2% p.a. = realistic if strong product/service advantage</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> &#9888; Share gain: +3&ndash;5% p.a. = aggressive, needs specific justification</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> &#10007; Share gain: &gt;5% p.a. = exceptional, only during disruption events</div>
+              <div class="ts ts-s"><span class="ts-arr">&#8594;</span> Historical share trend from sector data = best anchor for assumption</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-res" style="margin-top:14px;">
+          <span class="tcr-g">&#10004; Share gain consistent with historical trend = defensible</span>
+          <span class="tcr-a">&#9888; Share gain above trend = needs specific competitive catalyst</span>
+          <span class="tcr-r">&#10007; Share gain far above trend &amp; no catalyst = unfounded model</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cheat Sheet -->
+    <div class="cheat rv d5">
+      <div class="cheat-inner">
+        <div class="cheat-badge">Revenue Model Cheat Sheet &mdash; 5-Minute Approach Selector</div>
+        <div class="cheat-title">Open Screener.in &rarr; Pick Approach &rarr; Find Driver &rarr; Project Volume &times; Price</div>
+        <div class="cheat-grid">
+          <div class="ci ci-good">
+            <div class="ci-num">Consumer / FMCG</div>
+            <div class="ci-name">Bottom-Up (Vol &times; Price)</div>
+            <div class="ci-val">Volume = distribution reach &times; offtake rate &bull; Price = inflation + premium mix &bull; Check: ASP trend from quarterly results &bull; Examples: Nestle, Pidilite, Asian Paints</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Manufacturing / Industrial</div>
+            <div class="ci-name">Bottom-Up (Capacity &times; Price)</div>
+            <div class="ci-val">Volume = Capacity &times; Utilisation% &bull; Price = commodity price + conversion premium &bull; Check: Does volume stay &lt;95% utilisation? &bull; Examples: Polycab, Tata Steel, Ultratech</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Financial Services</div>
+            <div class="ci-name">Macro (AUM/Loan &times; Rate)</div>
+            <div class="ci-val">AUM/Loan Book = TAM &times; Market Share &bull; Revenue = AUM/Loan &times; Yield/Expense Ratio &bull; Data: AMFI, RBI, SEBI &bull; Examples: HDFC AMC, Bajaj Finance, ICICI Bank</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Technology / SaaS</div>
+            <div class="ci-name">Bottom-Up (Subs &times; ARPU)</div>
+            <div class="ci-val">Subscribers = Total users &times; Conversion% &bull; ARPU = monthly fee &times; annual plan mix &bull; Check: Churn rate &times; subscriber base &bull; Examples: TCS, Infosys (by service line)</div>
+          </div>
+          <div class="ci ci-good">
+            <div class="ci-num">Hotels / Retail</div>
+            <div class="ci-name">Bottom-Up (Unit &times; Rate &times; Fill)</div>
+            <div class="ci-val">Hotels: Rooms &times; ARR &times; Occupancy% = RevPAR &bull; Retail: Stores &times; SSSG + new store revenue &bull; Check: Occupancy ceiling, store maturity curve &bull; Examples: IHCL, Westlife, Trent</div>
+          </div>
+          <div class="ci ci-warn">
+            <div class="ci-num">The 3 Checks (Always Run)</div>
+            <div class="ci-name">Model Validation</div>
+            <div class="ci-val">&#10004; Capacity check: utilisation &lt;95%? &bull; &#10004; Market share check: gain realistic? &bull; &#10004; Volume &times; Price decomposed? &bull; &#10004; RPT revenue excluded from base? &bull; &#10004; Cyclical peak or trough as base?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="insight rv d6">
+      <div class="ins-ico">&#127919;</div>
+      <div>
+        <div class="ins-tag">The One-Line Revenue Rule</div>
+        <div class="ins-title">If You Can&rsquo;t Explain the Revenue Assumption as &ldquo;X Units &times; Y Price&rdquo; or &ldquo;Z% of TAM at W% Share,&rdquo; You Don&rsquo;t Have a Revenue Model &mdash; You Have a Guess.</div>
+        <div class="ins-desc">Every defensible revenue projection reduces to one of two formulas: <strong>Volume &times; Price</strong> (Bottom-Up) or <strong>TAM &times; Market Share</strong> (Macro-Driven). If your model cannot be expressed as either, you are probably using a historical CAGR applied blindly &mdash; which is fine as a starting point but dangerous as a final assumption. The data to express it properly is in Screener.in P&amp;L, the Annual Report segment notes, and freely available sector regulatory data (AMFI, TRAI, RBI, SEBI). Professional equity analysts can defend every revenue assumption with a specific number from a specific source. That is the standard to aim for.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT CHAPTER -->
+<div class="nxt2">
+  <div class="nxt2-left">
+    <div class="nxt2-lbl">Up Next &middot; Module 11</div>
+    <div class="nxt2-sub">Building a DCF Valuation &mdash; From Free Cash Flow to Intrinsic Value</div>
+    <div class="nxt2-arr-txt">Continue your learning journey &nbsp;&rarr;</div>
+  </div>
+  <a href="#" class="nxt2-btn">Next Chapter <span class="nxt2-btn-arr">&#8594;</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section class="disc">
+  <div class="disc-inner">
+    <div class="disc-ico">&#9888;&#65039;</div>
+    <div>
+      <div class="disc-lbl">Important Disclaimer</div>
+      <div class="disc-txt">This page is for educational purposes only. All revenue figures and segment data shown for ITC, Asian Paints, Indian Hotels (IHCL), Titan Company, Polycab India, HDFC AMC, and all other companies are approximate illustrative values for modelling demonstration. Actual audited financials may differ materially. Revenue projection methodologies described are standard equity research practices &mdash; not guarantees of accuracy. Financial projections are inherently uncertain. This module is not investment advice. Consult a SEBI-registered investment advisor before investing. All equity investments carry market risk.</div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{threshold:.05,rootMargin:'0px 0px -36px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  }else{els.forEach(function(el){el.classList.add('on');});}
+  ['touchstart','touchmove','touchend','touchcancel'].forEach(function(evt){document.addEventListener(evt,function(){},{passive:true});});
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){els.forEach(function(el){el.classList.add('on');});}
+  document.body.style.overscrollBehavior='none';
+  function setVH(){document.documentElement.style.setProperty('--vh',window.innerHeight*.01+'px');}
+  setVH();
+  window.addEventListener('resize',setVH,{passive:true});
+  window.addEventListener('orientationchange',function(){setTimeout(setVH,300);setTimeout(function(){document.querySelectorAll('.rv:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<window.innerHeight*.95){el.classList.add('on');}});},400);},{passive:true});
+  document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('a,button,.dmbtn,.nxt2-btn,.excard,.app-card,.tc,.kp').forEach(function(el){el.style.touchAction='manipulation';});
+    document.querySelectorAll('.tscroll,.sumwrap').forEach(function(el){el.style.webkitOverflowScrolling='touch';});
+    if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});});}
+  });
+})();
+</script>
+</body>
+</html>

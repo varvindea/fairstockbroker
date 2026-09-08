@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Liabilities & Equity · BS">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>Liabilities & Shareholders' Equity · Balance Sheet · FA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* LAYOUT */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+
+/* TYPE */
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(28px,7vw,88px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:12px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(13px,3vw,40px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:920px;}
+.hsi{padding:clamp(10px,1.8vw,20px) clamp(8px,2vw,18px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:72px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(9px,1.4vw,15px);font-weight:900;letter-spacing:-.3px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.r{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(7px,.85vw,9px);font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+
+/* KLO */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.09);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+
+/* 5-COMPONENT DEEP DIVE */
+.comp-stack{display:flex;flex-direction:column;gap:clamp(20px,3.5vw,32px);}
+.comp-card{border-radius:22px;border:2px solid;padding:clamp(20px,3.5vw,32px);position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;}
+.comp-card:hover{transform:translateY(-3px);box-shadow:var(--shp);}
+.cc-cl{border-color:rgba(220,38,38,.28);background:linear-gradient(158deg,#fef2f2,#fff8f8);}
+.cc-lt{border-color:rgba(217,119,6,.28);background:linear-gradient(158deg,var(--apale),#fffcf0);}
+.cc-dt{border-color:rgba(2,132,199,.22);background:linear-gradient(158deg,#f0f9ff,#f8fcff);}
+.cc-eq{border-color:rgba(109,40,217,.28);background:linear-gradient(158deg,var(--pxs),#fdfcff);}
+.cc-re{border-color:rgba(22,163,74,.28);background:linear-gradient(158deg,var(--gpale),#f9fff9);}
+.comp-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px;}
+.comp-ico{font-size:clamp(28px,5vw,42px);animation:floatB 3.8s ease-in-out infinite;flex-shrink:0;}
+.comp-head-text{flex:1;min-width:0;}
+.comp-title{font-size:clamp(17px,2.8vw,26px);font-weight:900;line-height:1.1;margin-bottom:4px;}
+.ct-red{color:var(--red);}
+.ct-amb{color:var(--ambr);}
+.ct-sky{color:#0284c7;}
+.ct-p{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ct-g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.comp-sub{font-size:11px;font-weight:600;color:var(--tl);}
+.comp-badge{display:inline-flex;padding:4px 12px;border-radius:100px;font-size:10px;font-weight:700;margin-bottom:12px;}
+.badge-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.2);}
+.badge-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.badge-s{background:rgba(2,132,199,.1);color:#0284c7;border:1px solid rgba(2,132,199,.2);}
+.badge-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.2);}
+.badge-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.comp-body{font-size:clamp(13px,1.5vw,15px);color:var(--ts);line-height:1.72;margin-bottom:14px;}
+.comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.5vw,14px);margin-top:4px;}
+.comp-stat{background:rgba(255,255,255,.8);border-radius:12px;padding:10px 12px;text-align:center;border:1px solid rgba(0,0,0,.06);}
+.cs-val{font-size:clamp(13px,2vw,18px);font-weight:900;margin-bottom:3px;}
+.cs-lbl{font-size:9px;font-weight:600;color:var(--tl);text-transform:uppercase;letter-spacing:.8px;}
+.comp-formula{background:rgba(255,255,255,.85);border-radius:14px;padding:12px 16px;margin-top:12px;border:1px solid rgba(0,0,0,.07);}
+.cf-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tl);margin-bottom:5px;}
+.cf-eq{font-size:clamp(12px,1.8vw,16px);font-weight:900;color:var(--tx);}
+.comp-flag{font-size:12px;margin-top:10px;padding:8px 12px;border-radius:10px;font-weight:600;line-height:1.5;}
+.flag-r{background:rgba(220,38,38,.07);color:var(--red);border-left:3px solid var(--red);}
+.flag-g{background:rgba(22,163,74,.07);color:var(--gbr);border-left:3px solid var(--gbr);}
+.flag-a{background:rgba(217,119,6,.07);color:var(--ambr);border-left:3px solid var(--amb);}
+
+/* INFOGRAPHIC */
+.infographic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.infographic-svg{width:100%;max-width:430px;animation:floatB 4.5s ease-in-out infinite;}
+.infographic-cap{font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;}
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:start;}
+
+/* FORMULA BOX */
+.formula-box{border-radius:16px;padding:clamp(14px,2.5vw,22px);position:relative;overflow:hidden;}
+.fb-purple{background:linear-gradient(135deg,var(--pl),var(--p));color:#fff;}
+.fb-green{background:linear-gradient(135deg,var(--gbr),var(--gh));color:#fff;}
+.fb-red{background:linear-gradient(135deg,#991b1b,var(--red));color:#fff;}
+.fb-amber{background:linear-gradient(135deg,var(--ambr),var(--amb));color:#fff;}
+.fb-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:5px;}
+.fb-formula{font-size:clamp(13px,2vw,18px);font-weight:900;color:#fff;margin-bottom:5px;line-height:1.25;}
+.fb-note{font-size:11px;color:rgba(255,255,255,.72);line-height:1.5;}
+
+/* SIGNAL GRID */
+.signal-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,28px);}
+.sig-box{border-radius:18px;padding:clamp(18px,3vw,28px);}
+.sig-good{background:linear-gradient(135deg,var(--gpale),#ecfdf5);border:1.5px solid rgba(22,163,74,.25);}
+.sig-bad{background:linear-gradient(135deg,var(--rpale),#fff5f5);border:1.5px solid rgba(220,38,38,.22);}
+.sig-title{font-size:clamp(14px,1.9vw,18px);font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.sig-title.g{color:var(--gbr);}
+.sig-title.r{color:var(--red);}
+.sig-list{display:flex;flex-direction:column;gap:9px;}
+.sig-item{display:flex;align-items:flex-start;gap:11px;background:rgba(255,255,255,.74);border-radius:11px;padding:11px 13px;}
+.sig-dot{width:26px;height:26px;min-width:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.sig-dot.g{background:rgba(22,163,74,.15);}
+.sig-dot.r{background:rgba(220,38,38,.12);}
+.sig-text h4{font-size:12.5px;font-weight:800;color:var(--tx);margin-bottom:2px;}
+.sig-text p{font-size:11.5px;color:var(--ts);line-height:1.5;}
+
+/* COMPANY BLOCK */
+.company-block{border-radius:18px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);margin-bottom:clamp(22px,3.5vw,32px);}
+.cb-header{display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,24px);gap:12px;flex-wrap:wrap;}
+.cb-good{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.cb-bad{background:linear-gradient(135deg,#fef2f2,#fff5f5);}
+.cb-co{display:flex;align-items:center;gap:12px;}
+.cb-logo{width:48px;height:48px;min-width:48px;border-radius:12px;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cb-name{font-size:clamp(13px,1.8vw,17px);font-weight:900;color:var(--tx);line-height:1.2;}
+.cb-sub{font-size:11px;color:var(--tl);margin-top:3px;}
+.cb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.cb-badge{padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;}
+.cb-b-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.cb-b-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.cb-b-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.cb-insight{padding:12px 16px;font-size:12px;color:var(--ts);line-height:1.6;}
+.ci-good{background:rgba(22,163,74,.05);border-top:1px solid rgba(22,163,74,.15);border-left:3px solid var(--gbr);}
+.ci-bad{background:rgba(220,38,38,.04);border-top:1px solid rgba(220,38,38,.12);border-left:3px solid var(--red);}
+.ci-amb{background:rgba(217,119,6,.05);border-top:1px solid rgba(217,119,6,.15);border-left:3px solid var(--amb);}
+
+/* TABLE */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.ab-table{width:100%;border-collapse:collapse;min-width:620px;}
+.ab-table th{background:linear-gradient(135deg,rgba(109,40,217,.07),rgba(109,40,217,.03));padding:9px 14px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:1.5px solid var(--bd);text-align:right;white-space:nowrap;}
+.ab-table th:first-child{text-align:left;}
+.ab-table td{padding:9px 14px;font-size:12px;color:var(--ts);border-bottom:1px solid rgba(109,40,217,.05);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.ab-table td:first-child{text-align:left;font-weight:700;color:var(--tx);}
+.ab-table tr:last-child td{border-bottom:none;}
+.ab-table tr.total-row td{font-weight:900;background:rgba(109,40,217,.04);border-top:1.5px solid var(--bd);}
+.ab-table tr.eq-row td:first-child{color:var(--p);}
+.ab-table tr.li-row td:first-child{color:var(--red);}
+.ab-table tr.lt-row td:first-child{color:var(--ambr);}
+.ab-table tr.re-row td:first-child{color:var(--gbr);}
+.ab-table tr.section-header td{background:rgba(109,40,217,.04);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);padding:8px 14px 4px;}
+.ab-table tr:hover td{background:var(--pxs);}
+.col-sticky{position:sticky;left:0;background:var(--wh);z-index:2;box-shadow:2px 0 5px rgba(109,40,217,.05);}
+.ab-table tr.total-row .col-sticky{background:rgba(109,40,217,.04);}
+.ab-table tr.section-header .col-sticky{background:rgba(109,40,217,.04);}
+
+/* CAVEAT */
+.caveat-box{margin-top:32px;background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:16px;}
+.caveat-icon{width:44px;height:44px;min-width:44px;border-radius:13px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(109,40,217,.28);}
+.caveat-body{flex:1;min-width:0;}
+.caveat-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:6px;}
+.caveat-title{font-size:clamp(13px,1.5vw,15px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.caveat-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+
+/* DEMAT BANNER */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* NEXT */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-banner::after{content:'';position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;display:inline-block;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+
+/* ═══ RESPONSIVE — 11 breakpoints ═══ */
+img,svg{max-width:100%;height:auto;display:block;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.table-scroll .ab-table{min-width:620px;}
+
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.comp-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){
+  .concept-grid{grid-template-columns:1fr;}
+  .signal-grid{grid-template-columns:1fr;}
+  .infographic-svg{max-width:380px;margin:0 auto;}
+  .comp-grid{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .hst{flex-direction:column;}
+  .hsi{border-right:none !important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .caveat-box{flex-direction:column;gap:12px;}
+  .caveat-icon{width:40px;height:40px;min-width:40px;font-size:20px;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;}
+  .dmfeats{gap:10px 20px;}
+  svg{overflow:visible;max-width:100%;}
+  .cb-header{flex-direction:column;align-items:flex-start;}
+  .cb-badges{margin-top:4px;}
+  .comp-card{padding:18px;}
+}
+@media(max-width:640px){
+  .signal-grid{grid-template-columns:1fr;}
+  .comp-grid{grid-template-columns:1fr 1fr;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .infographic-svg{max-width:100%;}
+  .ab-table{min-width:540px;}
+  .ab-table th,.ab-table td{padding:7px 10px;font-size:10.5px;}
+}
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.2px;}.hdesc{font-size:13px;}.hsub{letter-spacing:2.5px;font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  .hsi:nth-last-child(-n+2){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .klo-title{font-size:14px;}.klo-desc{font-size:12px;}.kpill{font-size:9px;padding:4px 9px;}
+  .h2{letter-spacing:-1px;}.lead{font-size:13.5px;}.tag{letter-spacing:2px;}
+  .comp-card{padding:14px;}.comp-ico{animation:none;font-size:28px;}
+  .comp-title{font-size:18px;}.comp-body{font-size:12.5px;}
+  .comp-grid{grid-template-columns:1fr 1fr;}
+  .sig-item{padding:10px 12px;}.sig-text h4{font-size:12px;}.sig-text p{font-size:11px;}
+  .cb-name{font-size:13px;}.cb-logo{width:40px;height:40px;min-width:40px;font-size:18px;}
+  .caveat-title{font-size:13px;}.caveat-desc{font-size:12.5px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .dmh{letter-spacing:-1px;}.dmsub{font-size:13px;}.dmfeats{align-items:flex-start;}
+  .nxt-banner{padding:12px 14px;}.nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+  .fb-formula{font-size:clamp(12px,3.5vw,16px);}
+}
+@media(max-width:360px){
+  .w{padding:26px 12px;}.hh1{font-size:clamp(24px,9vw,38px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}.hsi:nth-last-child(-n+2){border-bottom:1px solid var(--bd) !important;}.hsi:last-child{border-bottom:none !important;}
+  .kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}.nxt-btn{font-size:12px;padding:10px 14px;}
+  .comp-grid{grid-template-columns:1fr;}
+}
+
+/* TOUCH */
+@media(hover:none) and (pointer:coarse){
+  .comp-card:hover,.sig-item:hover,.company-block:hover{
+    transform:none !important;box-shadow:var(--shc) !important;}
+  .comp-card:active{transform:scale(.98);transition:transform .08s;}
+  .dmbtn:active{transform:scale(.97);}.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn,.comp-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,.comp-title{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.lead,.caveat-desc,.sig-text p,.comp-body,.cb-insight{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+}
+
+/* iOS */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top)+8px));right:max(22px,calc(env(safe-area-inset-right)+8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.hsv,.hsv.g,.hsv.r,
+  .comp-title.ct-p,.comp-title.ct-g,.h2 .hp,.h2 .hg{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn,.comp-card,.kpill{-webkit-tap-highlight-color:transparent;}
+  .table-scroll{-webkit-overflow-scrolling:touch;}
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+}
+
+/* ANDROID HiDPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .comp-card,.company-block,.caveat-box,.formula-box{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .infographic-svg,.klo-icon{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}.infographic-svg,.klo-icon,.comp-ico{animation:none !important;}
+}
+
+/* PRINT */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}.rv{opacity:1;transform:none;}
+  body{color:#000;}.w{padding:20px;}.table-scroll{overflow:visible;}.ab-table{min-width:0;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="vbadge">Balance Sheet · Fundamental Analysis</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Liabilities & Shareholders' Equity · Balance Sheet Deep Dive</div>
+  <h1 class="hh1">
+    <span class="line1">Liabilities &amp;</span>
+    <span class="line2">Shareholders' Equity</span>
+    <span class="line3">How a Company Funds Itself — Decoded</span>
+  </h1>
+  <div class="hsub">Balance Sheet · Current Liabilities · Long-term Debt · Deferred Tax · Equity · Retained Earnings</div>
+  <p class="hdesc">Every rupee in a company's asset base came from somewhere — either borrowed from lenders (liabilities) or contributed by owners (equity). Understanding the right side of the balance sheet tells you whether a company is financially safe, dangerously leveraged, or brilliantly self-funded.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv r">Current Liab.</div><div class="hsl">≤12 months</div></div>
+    <div class="hsi"><div class="hsv r">Long-term Debt</div><div class="hsl">&gt;12 months</div></div>
+    <div class="hsi"><div class="hsv" style="color:var(--sky)">Deferred Tax</div><div class="hsl">Timing Diff.</div></div>
+    <div class="hsi"><div class="hsv">Equity</div><div class="hsl">Owners' Fund</div></div>
+    <div class="hsi"><div class="hsv g">Retained Earn.</div><div class="hsl">Reinvested Profit</div></div>
+    <div class="hsi"><div class="hsv g">WC = CA − CL</div><div class="hsl">Golden Formula</div></div>
+  </div>
+</section>
+
+
+<!-- ══ 01 — KLO ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Liabilities &amp; Equity Are the <span class="hp">Funding Side</span> of the Balance Sheet</h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">💳</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">Every asset a company owns was funded from one of two sources: liabilities (borrowed money — must be repaid with interest) or equity (owners' money — no repayment obligation). The mix, quality, and trend of these funding sources determines financial resilience.</div>
+        <div class="klo-desc">Imagine building a factory worth ₹100 crore. You could fund it with ₹40 Cr from shareholders (equity) and ₹60 Cr bank loan (liability). The bank loan is cheaper in good times but dangerous in a recession — interest must be paid even if the factory sits idle. Shareholder equity has no fixed payment obligation. Current liabilities are money owed within 12 months — trade payables to suppliers, short-term loans, advance deposits from customers. Long-term debt is money borrowed for 3–20 years — bonds, term loans from banks. Deferred tax is a timing adjustment. Retained earnings are the accumulation of all profits the company reinvested back rather than distributing as dividends — growing retained earnings is the single best sign of a self-funding, profitable business. A manufacturing company that funds 70%+ of assets from equity and retained earnings, keeps current liabilities manageable, and maintains Net Debt/EBITDA below 2× is in excellent financial health.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-r">💳 Liabilities = Borrowed Funds</span>
+          <span class="kpill kpill-p">🏛️ Equity = Owners' Funds</span>
+          <span class="kpill kpill-g">📈 Retained Earnings = Self-Funding</span>
+          <span class="kpill kpill-a">⚖️ Net Debt/EBITDA &lt;3× Target</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 02 — 5 COMPONENT DEEP DIVE ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — The Five Funding Components</div>
+    <h2 class="h2 rv d2">What Each Line Item <span class="hp">Actually Means</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Five components fund every company's asset base. Each has distinct characteristics, risk profiles, and signals that matter differently for manufacturing companies versus financial services or technology firms.</p>
+
+    <div class="concept-grid" style="margin-bottom:48px;">
+      <!-- LEFT: SVG infographic -->
+      <div class="rv d3">
+        <div class="infographic-wrap">
+          <svg class="infographic-svg" viewBox="0 0 420 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="420" height="560" rx="20" fill="#f5f3ff"/>
+            <!-- Title -->
+            <rect x="14" y="10" width="392" height="34" rx="10" fill="#6d28d9"/>
+            <text x="210" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="900" fill="white">How a Factory Funds Itself</text>
+
+            <!-- Factory building -->
+            <rect x="150" y="60" width="120" height="90" rx="10" fill="#6d28d9" opacity=".88"/>
+            <rect x="162" y="74" width="20" height="16" rx="4" fill="#c4b5fd" opacity=".5"/>
+            <rect x="190" y="74" width="20" height="16" rx="4" fill="#c4b5fd" opacity=".5"/>
+            <rect x="218" y="74" width="20" height="16" rx="4" fill="#c4b5fd" opacity=".5"/>
+            <rect x="176" y="120" width="48" height="30" rx="5" fill="#4c1d95"/>
+            <polygon points="138,60 210,20 282,60" fill="#7c3aed" opacity=".9"/>
+            <rect x="144" y="28" width="10" height="32" rx="3" fill="#4c1d95"/>
+            <circle cx="149" cy="22" r="6" fill="#a78bfa" opacity=".6"/>
+            <!-- Factory label -->
+            <rect x="158" y="162" width="104" height="18" rx="7" fill="#6d28d9"/>
+            <text x="210" y="175" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="white">🏭 Manufacturing Plant</text>
+
+            <!-- ANALYST character (right) -->
+            <circle cx="355" cy="105" r="22" fill="#ddd6fe"/>
+            <circle cx="348" cy="101" r="2.2" fill="#4c1d95"/>
+            <circle cx="362" cy="101" r="2.2" fill="#4c1d95"/>
+            <path d="M349 112 Q355 118 361 112" stroke="#4c1d95" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <rect x="344" y="127" width="22" height="22" rx="6" fill="#6d28d9"/>
+            <rect x="331" y="134" width="14" height="6" rx="3" fill="#6d28d9" transform="rotate(-18 338 137)"/>
+            <rect x="368" y="134" width="14" height="6" rx="3" fill="#6d28d9" transform="rotate(18 375 137)"/>
+            <rect x="344" y="148" width="10" height="20" rx="3" fill="#4c1d95"/>
+            <rect x="360" y="148" width="10" height="20" rx="3" fill="#4c1d95"/>
+            <rect x="318" y="84" width="72" height="14" rx="6" fill="#ede9fe"/>
+            <text x="354" y="95" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#6d28d9">FA Analyst 🔍</text>
+
+            <!-- CURRENT LIABILITIES (red, bottom-left) -->
+            <rect x="14" y="200" width="118" height="70" rx="11" fill="#dc2626" opacity=".88"/>
+            <text x="73" y="220" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="white">💳 CURRENT LIAB.</text>
+            <text x="73" y="235" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.8)">Trade Payables</text>
+            <text x="73" y="248" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.8)">Short-term Loans</text>
+            <text x="73" y="262" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#fde68a">≤12 months due</text>
+
+            <!-- LONG-TERM DEBT (amber, top-left) -->
+            <rect x="14" y="284" width="118" height="70" rx="11" fill="#d97706" opacity=".88"/>
+            <text x="73" y="304" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="white">📋 LONG-TERM DEBT</text>
+            <text x="73" y="319" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.8)">Bonds · Debentures</text>
+            <text x="73" y="332" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.8)">Bank Term Loans</text>
+            <text x="73" y="346" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#fde68a">&gt;12 months · Fixed rate</text>
+
+            <!-- DEFERRED TAX (sky, centre) -->
+            <rect x="151" y="200" width="118" height="70" rx="11" fill="#0284c7" opacity=".88"/>
+            <text x="210" y="220" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="white">🧮 DEFERRED TAX</text>
+            <text x="210" y="235" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.8)">DTL: Tax deferred</text>
+            <text x="210" y="248" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.8)">DTA: Tax prepaid</text>
+            <text x="210" y="262" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#bae6fd">Timing differences</text>
+
+            <!-- EQUITY (purple, top-right) -->
+            <rect x="288" y="200" width="118" height="70" rx="11" fill="#6d28d9" opacity=".9"/>
+            <text x="347" y="220" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="white">🏛️ EQUITY</text>
+            <text x="347" y="235" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.8)">Paid-up Capital</text>
+            <text x="347" y="248" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.8)">Share Premium</text>
+            <text x="347" y="262" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#c4b5fd">Owners' permanent fund</text>
+
+            <!-- RETAINED EARNINGS (green, bottom-right) -->
+            <rect x="288" y="284" width="118" height="70" rx="11" fill="#16a34a" opacity=".9"/>
+            <text x="347" y="304" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="900" fill="white">📈 RETAINED EARN.</text>
+            <text x="347" y="319" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.8)">Cumulative profits</text>
+            <text x="347" y="332" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(255,255,255,.8)">not paid as dividend</text>
+            <text x="347" y="346" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#4ade80">Self-funding engine ✅</text>
+
+            <!-- Arrows from boxes to factory -->
+            <path d="M132 230 L152 180" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#a1)"/>
+            <path d="M132 314 L152 188" stroke="#d97706" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#a2)"/>
+            <path d="M210 198 L210 168" stroke="#0284c7" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#a3)"/>
+            <path d="M288 230 L268 180" stroke="#6d28d9" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#a4)"/>
+            <path d="M288 314 L268 188" stroke="#16a34a" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#a5)"/>
+            <defs>
+              <marker id="a1" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#dc2626"/></marker>
+              <marker id="a2" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#d97706"/></marker>
+              <marker id="a3" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#0284c7"/></marker>
+              <marker id="a4" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#6d28d9"/></marker>
+              <marker id="a5" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#16a34a"/></marker>
+            </defs>
+
+            <!-- Working capital formula -->
+            <rect x="14" y="370" width="392" height="52" rx="12" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+            <text x="210" y="391" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#4c1d95">Working Capital = Current Assets − Current Liabilities</text>
+            <rect x="70" y="399" width="280" height="15" rx="7" fill="#ede9fe"/>
+            <text x="210" y="411" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="800" fill="#6d28d9">Negative WC = Suppliers fund business (Amazon/Nestle model) ✅</text>
+
+            <!-- Book value formula -->
+            <rect x="14" y="432" width="188" height="52" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
+            <text x="108" y="452" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="800" fill="#15803d">Book Value/Share</text>
+            <text x="108" y="467" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">= Total Equity ÷ Shares Outstanding</text>
+            <text x="108" y="479" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#15803d">Floor value in asset-heavy industries</text>
+
+            <!-- Net Debt formula -->
+            <rect x="218" y="432" width="188" height="52" rx="12" fill="#fef2f2" stroke="#fecaca" stroke-width="1.2"/>
+            <text x="312" y="452" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="800" fill="#dc2626">Net Debt / EBITDA</text>
+            <text x="312" y="467" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">= (Total Debt − Cash) ÷ EBITDA</text>
+            <text x="312" y="479" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="700" fill="#dc2626">Target: &lt;3× for most manufacturers</text>
+
+            <!-- Bottom rule -->
+            <rect x="14" y="494" width="392" height="52" rx="12" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+            <text x="210" y="514" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="900" fill="#4c1d95">Liabilities fund assets → Equity protects solvency</text>
+            <text x="210" y="532" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#3d3868">High equity % = safe · High debt % = risky · Balance = sustainable</text>
+          </svg>
+          <p class="infographic-cap">All five funding sources (Current Liabilities, Long-term Debt, Deferred Tax, Equity, Retained Earnings) flow into the same factory. The mix determines financial safety. Equity and retained earnings are the safest; current liabilities must be carefully managed.</p>
+        </div>
+      </div>
+
+      <!-- RIGHT: Formula cards stacked -->
+      <div class="rv d4" style="display:flex;flex-direction:column;gap:14px;">
+        <div class="formula-box fb-red">
+          <div class="fb-label">Working Capital — Liquidity Health</div>
+          <div class="fb-formula">Working Capital = Current Assets − Current Liabilities</div>
+          <div class="fb-note">Positive = company funds day-ops from own assets. Negative = suppliers fund operations (powerful advantage). Crisis: WC declining fast + current ratio below 1.</div>
+        </div>
+        <div class="formula-box fb-amber">
+          <div class="fb-label">Net Debt Ratio — Debt Safety Check</div>
+          <div class="fb-formula">Net Debt/EBITDA = (Total Debt − Cash) ÷ EBITDA</div>
+          <div class="fb-note">Below 2× = comfortable. 2–3× = moderate. Above 3× = elevated risk. Above 5× = financial distress zone for most manufacturers.</div>
+        </div>
+        <div class="formula-box fb-purple">
+          <div class="fb-label">Book Value Per Share — Equity Floor</div>
+          <div class="fb-formula">BVPS = Total Shareholders' Equity ÷ Shares Outstanding</div>
+          <div class="fb-note">P/B ratio = Market Price ÷ BVPS. P/B below 1 = market values company below book (distressed or undervalued). P/B above 3 = market rewards quality/moat.</div>
+        </div>
+        <div class="formula-box fb-green">
+          <div class="fb-label">Retained Earnings Growth — Self-Funding Power</div>
+          <div class="fb-formula">RE = Previous RE + Net Profit − Dividends Paid</div>
+          <div class="fb-note">Growing retained earnings = company is profitably compounding equity without new share issuance. Declining RE = losses eroding equity base — existential risk if multi-year.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 Component deep-dive cards -->
+    <div class="comp-stack">
+      <!-- CURRENT LIABILITIES -->
+      <div class="comp-card cc-cl rv d3">
+        <div class="comp-header">
+          <span class="comp-ico">💳</span>
+          <div class="comp-head-text">
+            <div class="comp-title ct-red">Current Liabilities</div>
+            <div class="comp-sub">Obligations due within 12 months · Operational funding · WC management</div>
+          </div>
+        </div>
+        <span class="comp-badge badge-r">Time Horizon: ≤12 months · Must be repaid or rolled over</span>
+        <div class="comp-body">Current liabilities are the short-term obligations that a company must settle within one year. They include four main items: <strong>Trade Payables</strong> — money the company owes to its raw material suppliers. <strong>Short-term borrowings</strong> — working capital loans from banks, overdraft facilities. <strong>Advance payments received</strong> — customer deposits paid before goods are delivered (e.g., real estate bookings, capital equipment orders). <strong>Accrued expenses</strong> — salaries payable, utilities billed but not yet paid.<br><br>The most important metric derived from current liabilities is <strong>Working Capital = Current Assets − Current Liabilities</strong>. A manufacturing company's working capital tells you how efficiently the business manages its cash cycle. <strong>Positive Working Capital</strong> means the company uses its own assets to fund operations — normal for most manufacturers. <strong>Negative Working Capital</strong> is a competitive superpower: companies like Nestle India and Asian Paints collect cash from retailers before paying their raw material suppliers — meaning suppliers effectively provide free financing to the business.<br><br>High trade payables relative to cost of goods sold = company has strong bargaining power over suppliers and is using supplier credit efficiently. Watch: if short-term borrowings are rising rapidly without revenue growth, the company may be using expensive working capital loans to fund losses — a serious early warning.</div>
+        <div class="comp-grid">
+          <div class="comp-stat"><div class="cs-val" style="color:var(--red);">Current Ratio</div><div class="cs-lbl">CA ÷ CL · Target &gt;1.2</div></div>
+          <div class="comp-stat"><div class="cs-val" style="color:var(--ambr);">Quick Ratio</div><div class="cs-lbl">(CA−Inventory) ÷ CL</div></div>
+          <div class="comp-stat"><div class="cs-val" style="color:var(--gbr);">Neg. WC</div><div class="cs-lbl">Suppliers Fund Biz ✅</div></div>
+        </div>
+        <div class="comp-flag flag-r">🚨 Red Flag: Current ratio below 1 + rising short-term borrowings = the company cannot meet near-term obligations from existing assets alone. Watch also for advances received declining — customers are cancelling orders.</div>
+      </div>
+
+      <!-- LONG-TERM DEBT -->
+      <div class="comp-card cc-lt rv d4">
+        <div class="comp-header">
+          <span class="comp-ico">📋</span>
+          <div class="comp-head-text">
+            <div class="comp-title ct-amb">Long-Term Debt</div>
+            <div class="comp-sub">Bonds · Debentures · Term loans · Due beyond 12 months</div>
+          </div>
+        </div>
+        <span class="comp-badge badge-a">Fixed interest obligation · Independent of profitability</span>
+        <div class="comp-body">Long-term debt is money borrowed for periods exceeding 12 months — typically bank term loans (3–10 years), Non-Convertible Debentures (NCDs), bonds, and external commercial borrowings (ECBs). The critical difference from equity: <strong>interest on debt must be paid regardless of whether the company makes a profit</strong>. If EBITDA falls and the company cannot cover interest payments, it enters financial distress.<br><br>For manufacturing companies, long-term debt is often necessary and appropriate — a steel plant costs ₹10,000 Cr and generates returns over 30 years, so borrowing to build it makes financial sense. The question is always: is the debt level sustainable relative to earnings? <strong>Net Debt/EBITDA</strong> is the primary metric: below 2× is comfortable for most manufacturers, 2–3× is manageable, above 3× demands close monitoring, and above 5× is the danger zone where any EBITDA decline can trigger covenant breaches or credit downgrades.<br><br>The <strong>Interest Coverage Ratio (EBIT ÷ Interest Expense)</strong> is equally important: above 5× is excellent, 2–4× is moderate, below 1.5× means the company is barely covering its interest from operations — one bad year could push it into default. Capital-intensive sectors like steel, cement, and power have historically comfortable with higher debt due to their tangible asset collateral and stable long-term demand, but all investors should track debt trend over 3–5 years, not just the current year snapshot.</div>
+        <div class="comp-grid">
+          <div class="comp-stat"><div class="cs-val" style="color:var(--ambr);">Net D/EBITDA</div><div class="cs-lbl">Target &lt;3× safe</div></div>
+          <div class="comp-stat"><div class="cs-val" style="color:var(--p);">Int. Coverage</div><div class="cs-lbl">EBIT ÷ Interest</div></div>
+          <div class="comp-stat"><div class="cs-val" style="color:var(--gbr);">D/E Ratio</div><div class="cs-lbl">Debt ÷ Equity</div></div>
+        </div>
+        <div class="comp-flag flag-a">⚠️ Watch: Debt rising while EBITDA is flat or falling = Net Debt/EBITDA expanding rapidly. This is the most common precursor to financial distress in manufacturing companies. Also check: are new borrowings being used for growth capex (good) or to pay interest on existing debt (very bad — debt spiral).</div>
+      </div>
+
+      <!-- DEFERRED TAX -->
+      <div class="comp-card cc-dt rv d5">
+        <div class="comp-header">
+          <span class="comp-ico">🧮</span>
+          <div class="comp-head-text">
+            <div class="comp-title" style="color:#0284c7;">Deferred Tax Liability / Asset</div>
+            <div class="comp-sub">Timing differences between accounting profit and taxable profit</div>
+          </div>
+        </div>
+        <span class="comp-badge badge-s">Non-cash item · Timing adjustment · Complex but essential</span>
+        <div class="comp-body">Deferred tax arises because accounting rules (IndAS/GAAP) and income tax rules treat certain items differently — specifically the timing of when income is recognized and when expenses are deducted.<br><br><strong>Deferred Tax Liability (DTL)</strong> arises when tax payment is deferred to a future period. The most common example: a company uses <strong>accelerated depreciation</strong> for tax purposes (claiming larger depreciation deductions early) but straight-line depreciation for its accounts. The result: lower taxable income today (lower tax now), higher taxable income later. The difference is a DTL — tax owed but not yet paid. DTL is a liability on the balance sheet.<br><br><strong>Deferred Tax Asset (DTA)</strong> arises when the company has already paid taxes on income or expenses that haven't been recognized in accounting yet, OR when it has losses that can be carried forward to offset future taxes. Manufacturing companies with losses often build up large DTAs — but a DTA is only valuable if the company is expected to be profitable in the future to actually utilise those tax savings. An impaired DTA (written off because future profits are uncertain) is a bad sign.<br><br>For most analysts, deferred tax is a secondary concern — but when net profit margins are unusually high or low compared to EBITDA margins, check whether the difference includes large deferred tax movements. A company reporting ₹500 Cr PAT but paying only ₹20 Cr actual tax while carrying a growing DTL may have lower "true" PAT than the headline suggests.</div>
+        <div class="comp-flag flag-a">⚠️ Key check: Operating Cash Flow vs PAT. If OCF consistently much lower than PAT, and a growing DTL exists, some reported profit may reverse as tax becomes payable in future periods. DTL doesn't mean fraud — but it does mean some "profit" is timing-based rather than permanently earned.</div>
+      </div>
+
+      <!-- SHAREHOLDERS' EQUITY -->
+      <div class="comp-card cc-eq rv d6">
+        <div class="comp-header">
+          <span class="comp-ico">🏛️</span>
+          <div class="comp-head-text">
+            <div class="comp-title ct-p">Shareholders' Equity</div>
+            <div class="comp-sub">Paid-up capital · Share premium · Retained earnings · Other reserves</div>
+          </div>
+        </div>
+        <span class="comp-badge badge-p">No repayment obligation · Permanent capital · Real ownership stake</span>
+        <div class="comp-body">Shareholders' equity is the residual claim on a company's assets after all liabilities have been deducted: <strong>Equity = Total Assets − Total Liabilities</strong>. It consists of four components:<br><br><strong>Paid-up Capital</strong> — face value (₹1 or ₹10) of all shares issued and subscribed. This changes only when new shares are issued (IPO, rights issue, ESOP) or shares are bought back.<br><br><strong>Share Premium (Securities Premium)</strong> — the amount received above face value when shares were issued. If a company issued shares at ₹500 per share with face value ₹10, the ₹490 excess goes into share premium. This is a permanent reserve — not distributable as dividend.<br><br><strong>Retained Earnings</strong> — cumulative net profits reinvested in the business over all years. The largest component of equity for mature profitable companies.<br><br><strong>Other Reserves</strong> — general reserve, capital redemption reserve, foreign currency translation reserve.<br><br><strong>Book Value Per Share = Total Equity ÷ Shares Outstanding</strong>. Book value is especially important for asset-heavy companies (steel, cement, power, banking). P/B ratio below 1 means the market values the company below what its net assets are worth on paper — either the company is genuinely cheap or the assets are overvalued on the books. P/B above 3–5× indicates the market recognises significant intangible value (brand, technology, franchise) beyond book value.</div>
+        <div class="comp-grid">
+          <div class="comp-stat"><div class="cs-val" style="color:var(--p);">BVPS</div><div class="cs-lbl">Equity ÷ Shares</div></div>
+          <div class="comp-stat"><div class="cs-val" style="color:var(--p);">ROE</div><div class="cs-lbl">PAT ÷ Equity</div></div>
+          <div class="comp-stat"><div class="cs-val" style="color:var(--gbr);">P/B Ratio</div><div class="cs-lbl">Price ÷ BVPS</div></div>
+        </div>
+        <div class="comp-flag flag-g">✅ Growing equity + rising ROE = the company is efficiently compounding shareholder wealth. For manufacturing, ROE above 15% is good; above 25% is excellent. ROE consistently above 20% with modest debt = one of the strongest quality signals available from the balance sheet.</div>
+      </div>
+
+      <!-- RETAINED EARNINGS -->
+      <div class="comp-card cc-re rv d7">
+        <div class="comp-header">
+          <span class="comp-ico">📈</span>
+          <div class="comp-head-text">
+            <div class="comp-title ct-g">Retained Earnings</div>
+            <div class="comp-sub">Cumulative net profits reinvested · The self-funding growth engine</div>
+          </div>
+        </div>
+        <span class="comp-badge badge-g">= Cumulative (Net Profit − Dividends) since inception</span>
+        <div class="comp-body">Retained earnings (also called "Reserves and Surplus" on Indian balance sheets) represent the total of all net profits the company has earned since its founding, minus all dividends paid to shareholders. This single line item tells you more about the quality of a business than almost any other number.<br><br><strong>Formula: RE = Previous Year RE + Current Year Net Profit − Dividends Paid</strong><br><br>For a manufacturing company established in 1990 with ₹10 Cr initial capital and consistent 15% ROE over 30 years with 40% payout ratio: retained earnings could have compounded to ₹800+ Cr — creating a business that is now largely self-funding and has no need to issue new equity or borrow heavily for maintenance and moderate growth.<br><br><strong>Growing Retained Earnings</strong> is the most powerful signal of a self-funding, profitable business. Asian Paints grew its reserves from ₹8,752 Cr (FY2020) to ₹15,180 Cr (FY2025) — entirely from retained profits, with zero new equity issuance and zero meaningful debt. That's the definition of compounding retained earnings.<br><br><strong>Declining Retained Earnings</strong> is the opposite signal — and one of the most dangerous patterns on a balance sheet. When a company consistently reports net losses, those losses are charged against retained earnings: RE shrinks. If losses continue and RE turns negative (accumulated deficit), total equity shrinks. If equity approaches zero or turns negative, the company is technically insolvent — its total liabilities exceed total assets. Vodafone Idea, Jaiprakash Associates, and MTNL all show this pattern — massive negative reserves representing decades of cumulative losses.</div>
+        <div class="comp-flag flag-g">✅ The single most important long-term signal: growing retained earnings + growing revenue + stable or declining debt = a company compounding its value organically. No analyst shortcut replaces checking this 10-year retained earnings trend on Screener.in.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 03 — SIGNALS ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — What to Look For</div>
+    <h2 class="h2 rv d2"><span class="hg">Healthy Signals</span> vs <span class="hp">Red Flags</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Two minutes of liability and equity analysis separates safe manufacturing investments from financial landmines. These signals apply across all manufacturing sub-sectors.</p>
+
+    <div class="signal-grid">
+      <div class="rv d3">
+        <div class="sig-box sig-good">
+          <div class="sig-title g">✅ Healthy Funding Signals</div>
+          <div class="sig-list">
+            <div class="sig-item"><div class="sig-dot g">📈</div><div class="sig-text"><h4>Retained Earnings Growing Faster Than Revenue</h4><p>When reserves compound at 15%+ annually without new equity dilution, the business is self-funding its growth from profits. This is the most powerful positive signal available from the liability/equity section — it means no new debt and no dilution are needed to sustain expansion.</p></div></div>
+            <div class="sig-item"><div class="sig-dot g">⚖️</div><div class="sig-text"><h4>Net Debt/EBITDA Stable or Declining</h4><p>Even if a company carries debt, declining Net Debt/EBITDA over 3–5 years signals that cash generation is outpacing debt accumulation. The company is growing into its debt — exactly what should happen post a major capacity expansion. Best-in-class: reaching Net Debt/EBITDA below 1× signals near debt-free status.</p></div></div>
+            <div class="sig-item"><div class="sig-dot g">💳</div><div class="sig-text"><h4>Trade Payables &gt; Trade Receivables (Negative Working Capital)</h4><p>When a manufacturer owes more to suppliers than customers owe to it, suppliers are effectively providing free financing. This negative working capital model — exemplified by Nestle India, Asian Paints, and Hindustan Lever — allows the company to operate with minimal capital and generate extraordinary returns on equity.</p></div></div>
+            <div class="sig-item"><div class="sig-dot g">🏛️</div><div class="sig-text"><h4>ROE Consistently Above 15–20% Without Leverage</h4><p>High ROE (return on equity) with low debt means the business genuinely earns superior returns on its capital base — not just financial engineering through leverage. This is the most reliable profitability signal from the equity section: quality businesses compound equity at high rates without excessive borrowing risk.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="rv d4">
+        <div class="sig-box sig-bad">
+          <div class="sig-title r">🚨 Liability / Equity Red Flags</div>
+          <div class="sig-list">
+            <div class="sig-item"><div class="sig-dot r">📉</div><div class="sig-text"><h4>Retained Earnings Declining / Turning Negative</h4><p>Negative reserves (accumulated deficit) means cumulative losses have exceeded all historical profits. This is the clearest sign of a deeply distressed company. When combined with still-high borrowings, the company's total liabilities can exceed total assets — technical insolvency. Vodafone Idea's -₹1.88 lakh Cr reserves is the most extreme current example.</p></div></div>
+            <div class="sig-item"><div class="sig-dot r">📋</div><div class="sig-text"><h4>Net Debt/EBITDA Above 4–5× and Rising</h4><p>Debt growing faster than EBITDA is the classic pre-distress signal. When interest payments consume 40%+ of EBITDA, even a minor revenue decline can push a company into covenant breach. Watch for EBITDA declining while debt stays constant — that's equivalent to debt rising on a relative basis. Multiple credit rating downgrades often follow.</p></div></div>
+            <div class="sig-item"><div class="sig-dot r">🔄</div><div class="sig-text"><h4>Short-Term Borrowings Funding Long-Term Assets</h4><p>Using short-term (1-year) loans to build infrastructure that earns returns over 15 years is an asset-liability mismatch — one of the most dangerous balance sheet patterns. If the short-term loans cannot be renewed at a critical moment (credit crunch, rate spike), the company faces a liquidity crisis even if it's technically solvent. IL&amp;FS collapsed due to exactly this mismatch.</p></div></div>
+            <div class="sig-item"><div class="sig-dot r">💸</div><div class="sig-text"><h4>Equity Capital Growing Without Revenue Growth</h4><p>Repeated equity dilution (rights issues, preferential allotments) without proportional revenue or profit growth means existing shareholders are being diluted while the company continues to struggle. Each new share issued reduces earnings per share for existing investors. Vodafone Idea has issued massive equity multiple times, yet losses continue — dilution without recovery.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ DEMAT BANNER ══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Start Investing Today</div>
+    <div class="dmh">Track <span class="dmhs">Debt Levels &amp; Equity Quality</span> on Screener.in</div>
+    <div class="dmsub">Monitor retained earnings trend, Net Debt/EBITDA, working capital, and book value growth for every listed manufacturing company — free, with 10-year history.</div>
+    <div class="dmfeats">
+      <div class="dmf">Track retained earnings over 10 years instantly</div>
+      <div class="dmf">Screen by Net Debt/EBITDA across sector peers</div>
+      <div class="dmf">Monitor working capital cycle and current ratio</div>
+      <div class="dmf">Start investing from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ══ 04 — GOOD COMPANIES ══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">04 — Good Liability &amp; Equity Examples</div>
+    <h2 class="h2 rv d2">5 Manufacturing Companies with <span class="hg">Strong Funding Structures</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five manufacturers show ideal funding structures — equity-dominant balance sheets, growing retained earnings, manageable or zero debt, and healthy working capital management.</p>
+
+    <!-- GOOD 1: Asian Paints -->
+    <div class="company-block rv d3">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">🎨</div>
+          <div><div class="cb-name">Asian Paints</div><div class="cb-sub">Paints Manufacturing · NSE: ASIANPAINT · Consolidated · Rs. Crores</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ Zero Debt FY21–25</span>
+          <span class="cb-badge cb-b-g">✅ Negative Working Capital</span>
+          <span class="cb-badge cb-b-g">✅ RE Growing 15%+ CAGR</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="ab-table">
+          <thead><tr>
+            <th class="col-sticky">Line Item</th>
+            <th>FY2020</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● CURRENT LIABILITIES</td></tr>
+            <tr class="li-row"><td class="col-sticky">Trade Payables</td><td>2,756</td><td>2,908</td><td>4,148</td><td>4,508</td><td>4,716</td><td>4,844</td></tr>
+            <tr class="li-row"><td class="col-sticky">Short-term Borrowings</td><td>41</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr class="li-row"><td class="col-sticky">Other Current Liabilities</td><td>872</td><td>828</td><td>1,032</td><td>1,424</td><td>1,026</td><td>820</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Current Liabilities</td><td>3,669</td><td>3,736</td><td>5,180</td><td>5,932</td><td>5,742</td><td>5,664</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● LONG-TERM DEBT</td></tr>
+            <tr class="lt-row"><td class="col-sticky">Long-term Borrowings</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● SHAREHOLDERS' EQUITY</td></tr>
+            <tr class="eq-row"><td class="col-sticky">Equity Capital</td><td>96</td><td>96</td><td>96</td><td>96</td><td>96</td><td>96</td></tr>
+            <tr class="re-row"><td class="col-sticky">Retained Earnings / Reserves</td><td>8,752</td><td>9,902</td><td>11,392</td><td>12,882</td><td>14,258</td><td>15,180</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Equity</td><td>8,848</td><td>9,998</td><td>11,488</td><td>12,978</td><td>14,354</td><td>15,276</td></tr>
+            <tr class="total-row"><td class="col-sticky">Working Capital (CA−CL)</td><td style="color:var(--red);font-weight:900;">−3,069</td><td style="color:var(--red);font-weight:900;">−2,556</td><td style="color:var(--red);font-weight:900;">−2,440</td><td style="color:var(--red);font-weight:900;">−3,004</td><td style="color:var(--red);font-weight:900;">−2,458</td><td style="color:var(--red);font-weight:900;">−2,356</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-good">✅ <strong>Negative working capital every single year</strong> — Asian Paints owes suppliers ₹4,844 Cr while collecting cash from 70,000+ dealers almost immediately. This means suppliers provide free financing of ~₹2,356 Cr annually. Zero long-term borrowings since FY2021. Retained earnings grew from ₹8,752 Cr to ₹15,180 Cr — compounding at 12% CAGR entirely from profits, with zero dilution. ROE consistently 25%+. This is the gold standard of manufacturing balance sheet quality: no debt, no dilution, supplier-funded operations, compounding retained earnings.</div>
+    </div>
+
+    <!-- GOOD 2: Maruti Suzuki -->
+    <div class="company-block rv d4">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);">🚗</div>
+          <div><div class="cb-name">Maruti Suzuki India</div><div class="cb-sub">Automobiles · NSE: MARUTI · Standalone · Rs. Crores</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ Near Debt-Free</span>
+          <span class="cb-badge cb-b-g">✅ RE Compounding Steadily</span>
+          <span class="cb-badge cb-b-g">✅ Strong Equity Base</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="ab-table">
+          <thead><tr>
+            <th class="col-sticky">Line Item</th>
+            <th>FY2020</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● CURRENT LIABILITIES</td></tr>
+            <tr class="li-row"><td class="col-sticky">Trade Payables</td><td>5,124</td><td>4,976</td><td>6,348</td><td>7,032</td><td>8,164</td><td>9,212</td></tr>
+            <tr class="li-row"><td class="col-sticky">Short-term Borrowings</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr class="li-row"><td class="col-sticky">Other Current Liabilities</td><td>4,612</td><td>4,348</td><td>5,488</td><td>6,024</td><td>7,116</td><td>8,048</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Current Liabilities</td><td>9,736</td><td>9,324</td><td>11,836</td><td>13,056</td><td>15,280</td><td>17,260</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● LONG-TERM DEBT</td></tr>
+            <tr class="lt-row"><td class="col-sticky">Long-term Borrowings</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● SHAREHOLDERS' EQUITY</td></tr>
+            <tr class="eq-row"><td class="col-sticky">Equity Capital</td><td>302</td><td>302</td><td>302</td><td>302</td><td>302</td><td>302</td></tr>
+            <tr class="re-row"><td class="col-sticky">Retained Earnings / Reserves</td><td>23,162</td><td>24,726</td><td>25,486</td><td>30,278</td><td>39,796</td><td>49,243</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Equity</td><td>23,464</td><td>25,028</td><td>25,788</td><td>30,580</td><td>40,098</td><td>49,545</td></tr>
+            <tr class="total-row"><td class="col-sticky">Net Debt / EBITDA</td><td colspan="6" style="text-align:center;color:var(--gbr);font-weight:900;">Net Cash (Negative Debt) — Zero borrowings, large cash pool</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-good">✅ <strong>Retained earnings grew from ₹23,162 Cr to ₹49,243 Cr in 5 years — a 2.1× increase</strong>, driven by surging profits as Maruti's SUV segment soared. Zero long-term borrowings across all six years — the company is entirely equity funded. Equity capital unchanged at ₹302 Cr means no dilution ever. Trade payables growing alongside revenue = healthy supplier relationships. Net cash position: Maruti holds more cash than it has ever borrowed. ROE rising from ~12% (FY20 pandemic year) to ~20%+ (FY25). This is one of India's cleanest large-cap manufacturing balance sheets.</div>
+    </div>
+
+    <!-- GOOD 3: Nestle India -->
+    <div class="company-block rv d5">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);">🍫</div>
+          <div><div class="cb-name">Nestle India</div><div class="cb-sub">Food Manufacturing · NSE: NESTLEIND · Standalone · Rs. Crores</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ Extreme Negative WC</span>
+          <span class="cb-badge cb-b-g">✅ ROE 100%+</span>
+          <span class="cb-badge cb-b-g">✅ Zero Long-term Debt</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="ab-table">
+          <thead><tr>
+            <th class="col-sticky">Line Item</th>
+            <th>FY2020</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● CURRENT LIABILITIES</td></tr>
+            <tr class="li-row"><td class="col-sticky">Trade Payables</td><td>948</td><td>1,076</td><td>1,412</td><td>1,584</td><td>1,748</td><td>1,876</td></tr>
+            <tr class="li-row"><td class="col-sticky">Short-term Borrowings</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr class="li-row"><td class="col-sticky">Other Current Liabilities</td><td>1,160</td><td>1,168</td><td>1,212</td><td>1,428</td><td>1,568</td><td>1,672</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Current Liabilities</td><td>2,108</td><td>2,244</td><td>2,624</td><td>3,012</td><td>3,316</td><td>3,548</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● LONG-TERM DEBT</td></tr>
+            <tr class="lt-row"><td class="col-sticky">Long-term Borrowings</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● SHAREHOLDERS' EQUITY</td></tr>
+            <tr class="eq-row"><td class="col-sticky">Equity Capital</td><td>96</td><td>96</td><td>96</td><td>96</td><td>96</td><td>96</td></tr>
+            <tr class="re-row"><td class="col-sticky">Retained Earnings / Reserves</td><td>2,272</td><td>2,625</td><td>3,095</td><td>3,590</td><td>4,028</td><td>4,432</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Equity</td><td>2,368</td><td>2,721</td><td>3,191</td><td>3,686</td><td>4,124</td><td>4,528</td></tr>
+            <tr class="total-row"><td class="col-sticky">Working Capital (CA−CL)</td><td style="color:var(--red);font-weight:900;">−168</td><td style="color:var(--red);font-weight:900;">−120</td><td style="color:var(--red);font-weight:900;">−92</td><td style="color:var(--red);font-weight:900;">−456</td><td style="color:var(--red);font-weight:900;">−740</td><td style="color:var(--red);font-weight:900;">−804</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-good">✅ <strong>Negative working capital deepening — from −₹168 Cr to −₹804 Cr</strong> — Nestle's suppliers are funding an ever-larger portion of operations. Trade payables of ₹1,876 Cr vs total current assets of ₹2,744 Cr. Zero debt of any kind. Yet Nestle generates ₹3,000+ Cr annual PAT on just ₹4,528 Cr equity = ROE above 70%. How? The negative working capital model means Nestle needs almost no incremental capital to grow — every rupee of retained earnings (growing from ₹2,272 to ₹4,432 Cr) creates self-funded growth. This is the most capital-efficient funding structure possible for a manufacturer.</div>
+    </div>
+
+    <!-- GOOD 4: Pidilite -->
+    <div class="company-block rv d6">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe);">🔧</div>
+          <div><div class="cb-name">Pidilite Industries</div><div class="cb-sub">Adhesives & Chemicals · NSE: PIDILITIND · Standalone · Rs. Crores</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ Near Debt-Free</span>
+          <span class="cb-badge cb-b-g">✅ RE Compounding</span>
+          <span class="cb-badge cb-b-g">✅ ROE 25%+</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="ab-table">
+          <thead><tr>
+            <th class="col-sticky">Line Item</th>
+            <th>FY2020</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● CURRENT LIABILITIES</td></tr>
+            <tr class="li-row"><td class="col-sticky">Trade Payables</td><td>464</td><td>512</td><td>716</td><td>632</td><td>596</td><td>648</td></tr>
+            <tr class="li-row"><td class="col-sticky">Short-term Borrowings</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr class="li-row"><td class="col-sticky">Other Current Liabilities</td><td>568</td><td>572</td><td>748</td><td>804</td><td>804</td><td>844</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Current Liabilities</td><td>1,032</td><td>1,084</td><td>1,464</td><td>1,436</td><td>1,400</td><td>1,492</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● LONG-TERM DEBT</td></tr>
+            <tr class="lt-row"><td class="col-sticky">Long-term Borrowings</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● SHAREHOLDERS' EQUITY</td></tr>
+            <tr class="eq-row"><td class="col-sticky">Equity Capital</td><td>51</td><td>51</td><td>51</td><td>51</td><td>51</td><td>51</td></tr>
+            <tr class="re-row"><td class="col-sticky">Retained Earnings / Reserves</td><td>4,044</td><td>4,476</td><td>5,076</td><td>5,660</td><td>6,452</td><td>7,136</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Equity</td><td>4,095</td><td>4,527</td><td>5,127</td><td>5,711</td><td>6,503</td><td>7,187</td></tr>
+            <tr class="total-row"><td class="col-sticky">Working Capital (CA−CL)</td><td style="color:var(--gbr);font-weight:900;">+1,984</td><td style="color:var(--gbr);font-weight:900;">+2,288</td><td style="color:var(--gbr);font-weight:900;">+2,416</td><td style="color:var(--gbr);font-weight:900;">+2,212</td><td style="color:var(--gbr);font-weight:900;">+2,912</td><td style="color:var(--gbr);font-weight:900;">+3,376</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-good">✅ <strong>Retained earnings compounded from ₹4,044 Cr to ₹7,136 Cr — a 76% increase in 5 years entirely from profits.</strong> Equity capital unchanged at ₹51 Cr since FY2020 — zero dilution. Zero long-term borrowings for 6 consecutive years. Working capital consistently positive (Pidilite distributes through independent dealers who pay on credit rather than through dominant retailers like Nestle's supermarket channel — so positive WC is normal and healthy here). ROE of 25%+. The entire Pidilite balance sheet is funded by accumulated profits — no bank ever needs to be called.</div>
+    </div>
+
+    <!-- GOOD 5: Page Industries -->
+    <div class="company-block rv d7">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0);">👔</div>
+          <div><div class="cb-name">Page Industries (Jockey India)</div><div class="cb-sub">Garments · NSE: PAGEIND · Standalone · Rs. Crores</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">✅ Asset-Light Franchise</span>
+          <span class="cb-badge cb-b-g">✅ High ROE</span>
+          <span class="cb-badge cb-b-g">✅ Small Equity Base</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="ab-table">
+          <thead><tr>
+            <th class="col-sticky">Line Item</th>
+            <th>FY2020</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● CURRENT LIABILITIES</td></tr>
+            <tr class="li-row"><td class="col-sticky">Trade Payables</td><td>316</td><td>288</td><td>444</td><td>516</td><td>488</td><td>452</td></tr>
+            <tr class="li-row"><td class="col-sticky">Short-term Borrowings</td><td>148</td><td>76</td><td>156</td><td>244</td><td>152</td><td>96</td></tr>
+            <tr class="li-row"><td class="col-sticky">Other Current Liabilities</td><td>354</td><td>336</td><td>448</td><td>532</td><td>568</td><td>596</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Current Liabilities</td><td>818</td><td>700</td><td>1,048</td><td>1,292</td><td>1,208</td><td>1,144</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● LONG-TERM DEBT</td></tr>
+            <tr class="lt-row"><td class="col-sticky">Long-term Borrowings</td><td>28</td><td>12</td><td>8</td><td>4</td><td>0</td><td>0</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● SHAREHOLDERS' EQUITY</td></tr>
+            <tr class="eq-row"><td class="col-sticky">Equity Capital</td><td>11</td><td>11</td><td>11</td><td>11</td><td>11</td><td>11</td></tr>
+            <tr class="re-row"><td class="col-sticky">Retained Earnings / Reserves</td><td>994</td><td>1,132</td><td>1,536</td><td>1,528</td><td>1,776</td><td>2,032</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Equity</td><td>1,005</td><td>1,143</td><td>1,547</td><td>1,539</td><td>1,787</td><td>2,043</td></tr>
+            <tr class="total-row"><td class="col-sticky">Net Debt / EBITDA</td><td>0.3×</td><td>0.1×</td><td>0.2×</td><td>0.3×</td><td style="color:var(--gbr);font-weight:900;">0.0×</td><td style="color:var(--gbr);font-weight:900;">0.0×</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-good">✅ <strong>Long-term borrowings fully repaid by FY2024 — reached zero.</strong> Equity capital at ₹11 Cr (unchanged for 6 years) generating ₹4,900+ Cr revenue = extraordinary asset-and-equity efficiency. Retained earnings doubled from ₹994 Cr to ₹2,032 Cr despite paying substantial dividends every year — the business generates more than it distributes. Short-term borrowings used only for seasonal working capital peaks, always small relative to revenue. ROE consistently 40%+. Net Debt/EBITDA reached zero — Page is now fully self-funded. The Jockey licence model + lean manufacturing = minimal capital required to sustain a premium consumer brand franchise.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 05 — BAD COMPANIES ══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">05 — Stressed Liability &amp; Equity Examples</div>
+    <h2 class="h2 rv d2">5 Manufacturing Companies with <span class="hp">Funding Structure Red Flags</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These five companies show what deteriorating liabilities and equity look like in manufacturing — negative reserves, extreme debt loads, asset-liability mismatches, and equity erosion from repeated losses.</p>
+
+    <!-- BAD 1: Vodafone Idea -->
+    <div class="company-block rv d3">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">📱</div>
+          <div><div class="cb-name">Vodafone Idea (Vi)</div><div class="cb-sub">Telecom Manufacturing/Services · NSE: IDEA · Consolidated · Rs. Crores</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Negative Equity</span>
+          <span class="cb-badge cb-b-r">🚨 RE = −₹1.88 lakh Cr</span>
+          <span class="cb-badge cb-b-r">🚨 Debt ₹2.1 L Cr</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="ab-table">
+          <thead><tr>
+            <th class="col-sticky">Line Item</th>
+            <th>FY2020</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr></thead>
+          <tbody>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● CURRENT LIABILITIES</td></tr>
+            <tr class="li-row"><td class="col-sticky">Trade Payables</td><td>7,648</td><td>6,804</td><td>5,976</td><td>6,424</td><td>7,092</td><td>7,848</td></tr>
+            <tr class="li-row"><td class="col-sticky">Short-term Borrowings</td><td>38,448</td><td>42,812</td><td>44,824</td><td>48,396</td><td>52,284</td><td>56,712</td></tr>
+            <tr class="li-row"><td class="col-sticky">Other Current Liabilities</td><td>12,680</td><td>11,244</td><td>9,936</td><td>10,748</td><td>11,436</td><td>12,024</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Current Liabilities</td><td>58,776</td><td>60,860</td><td>60,736</td><td>65,568</td><td>70,812</td><td>76,584</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● LONG-TERM DEBT</td></tr>
+            <tr class="lt-row"><td class="col-sticky">Long-term Borrowings</td><td>80,573</td><td>1,51,407</td><td>1,50,871</td><td>1,60,303</td><td>1,57,356</td><td>1,56,132</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● SHAREHOLDERS' EQUITY</td></tr>
+            <tr class="eq-row"><td class="col-sticky">Equity Capital</td><td>2,844</td><td>2,845</td><td>2,847</td><td>2,849</td><td>5,017</td><td>6,648</td></tr>
+            <tr class="re-row"><td class="col-sticky" style="color:var(--red);">Retained Earnings (Deficit)</td><td style="color:var(--red);font-weight:800;">−63,918</td><td style="color:var(--red);font-weight:800;">−1,04,148</td><td style="color:var(--red);font-weight:800;">−1,25,484</td><td style="color:var(--red);font-weight:800;">−1,48,558</td><td style="color:var(--red);font-weight:800;">−1,73,220</td><td style="color:var(--red);font-weight:800;">−1,88,434</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Equity (Negative)</td><td style="color:var(--red);">−61,074</td><td style="color:var(--red);">−1,01,303</td><td style="color:var(--red);">−1,22,637</td><td style="color:var(--red);">−1,45,709</td><td style="color:var(--red);">−1,68,203</td><td style="color:var(--red);">−1,81,786</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-bad">🚨 <strong>Retained earnings deficit of −₹1,88,434 Cr — the largest accumulated loss in Indian corporate history.</strong> Every year of losses adds another ₹25,000–30,000 Cr to this number. Equity is deeply negative (−₹1.81 lakh Cr) — technically insolvent by any balance sheet standard. Yet the company continues to exist solely because the government cannot afford to let India's third telecom player collapse and create a duopoly. Long-term debt of ₹1.56 lakh Cr at interest rates of 8–11% = annual interest burden of ~₹15,000–17,000 Cr — more than the company's entire EBITDA, making genuine debt repayment mathematically impossible without external rescue.</div>
+    </div>
+
+    <!-- BAD 2: Jaiprakash Associates -->
+    <div class="company-block rv d4">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">🏗️</div>
+          <div><div class="cb-name">Jaiprakash Associates (Jaypee)</div><div class="cb-sub">Infrastructure / Cement · NSE: JPASSOCIAT · Consolidated · Rs. Crores</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Negative Reserves</span>
+          <span class="cb-badge cb-b-r">🚨 D/E Extreme</span>
+          <span class="cb-badge cb-b-r">🚨 NCLT Proceedings</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="ab-table">
+          <thead><tr>
+            <th class="col-sticky">Line Item</th>
+            <th>FY2019</th><th>FY2020</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th>
+          </tr></thead>
+          <tbody>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● CURRENT LIABILITIES</td></tr>
+            <tr class="li-row"><td class="col-sticky">Trade Payables</td><td>2,648</td><td>2,284</td><td>1,956</td><td>1,648</td><td>1,412</td><td>1,228</td></tr>
+            <tr class="li-row"><td class="col-sticky">Short-term Borrowings</td><td>5,456</td><td>5,048</td><td>4,724</td><td>4,488</td><td>4,980</td><td>5,376</td></tr>
+            <tr class="li-row"><td class="col-sticky">Other Current Liabilities</td><td>4,168</td><td>3,672</td><td>3,164</td><td>2,724</td><td>2,372</td><td>2,024</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Current Liabilities</td><td>12,272</td><td>11,004</td><td>9,844</td><td>8,860</td><td>8,764</td><td>8,628</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● LONG-TERM DEBT</td></tr>
+            <tr class="lt-row"><td class="col-sticky">Long-term Borrowings</td><td>24,348</td><td>23,868</td><td>23,420</td><td>23,120</td><td>23,944</td><td>24,736</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● SHAREHOLDERS' EQUITY</td></tr>
+            <tr class="eq-row"><td class="col-sticky">Equity Capital</td><td>2,154</td><td>2,154</td><td>2,154</td><td>2,154</td><td>2,154</td><td>2,154</td></tr>
+            <tr class="re-row"><td class="col-sticky" style="color:var(--red);">Retained Earnings (Deficit)</td><td style="color:var(--red);font-weight:800;">−8,936</td><td style="color:var(--red);font-weight:800;">−15,128</td><td style="color:var(--red);font-weight:800;">−18,952</td><td style="color:var(--red);font-weight:800;">−22,804</td><td style="color:var(--red);font-weight:800;">−25,346</td><td style="color:var(--red);font-weight:800;">−26,918</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Equity</td><td style="color:var(--red);">−6,782</td><td style="color:var(--red);">−12,974</td><td style="color:var(--red);">−16,798</td><td style="color:var(--red);">−20,650</td><td style="color:var(--red);">−23,192</td><td style="color:var(--red);">−24,764</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-bad">🚨 <strong>Accumulated deficit deepens from −₹8,936 Cr to −₹26,918 Cr over 5 years without stopping.</strong> Long-term debt of ₹24,736 Cr against negative equity = Debt/Equity is technically infinite (can't divide by negative). The interest on ₹24,736 Cr at 10% = ~₹2,474 Cr annually — but the company barely generates ₹1,000–1,200 Cr EBITDA. Net Debt/EBITDA above 20×. Every year of loss deepens the deficit. Short-term borrowings stuck around ₹5,000 Cr as banks refuse to increase exposure. This balance sheet represents a company in permanent financial distress — NCLT proceedings reflect creditors trying to recover whatever value remains.</div>
+    </div>
+
+    <!-- BAD 3: Suzlon Energy (peak debt) -->
+    <div class="company-block rv d5">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#fef9c3,#fde68a);">🌀</div>
+          <div><div class="cb-name">Suzlon Energy (FY2019–2022 Stress Phase)</div><div class="cb-sub">Wind Energy Manufacturing · NSE: SUZLON · Consolidated · Rs. Crores</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Negative Equity FY19–21</span>
+          <span class="cb-badge cb-b-a">⚠️ Debt Restructured</span>
+          <span class="cb-badge cb-b-g">✅ Now Recovered</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="ab-table">
+          <thead><tr>
+            <th class="col-sticky">Line Item</th>
+            <th>FY2019</th><th>FY2020</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th>
+          </tr></thead>
+          <tbody>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● CURRENT LIABILITIES</td></tr>
+            <tr class="li-row"><td class="col-sticky">Trade Payables</td><td>2,176</td><td>1,832</td><td>1,648</td><td>1,744</td><td>2,148</td><td>2,748</td></tr>
+            <tr class="li-row"><td class="col-sticky">Short-term Borrowings</td><td>5,924</td><td>2,848</td><td>4,076</td><td>1,948</td><td>924</td><td>0</td></tr>
+            <tr class="li-row"><td class="col-sticky">Other Current Liabilities</td><td>2,648</td><td>2,124</td><td>1,944</td><td>1,884</td><td>2,376</td><td>2,984</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Current Liabilities</td><td>10,748</td><td>6,804</td><td>7,668</td><td>5,576</td><td>5,448</td><td>5,732</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● LONG-TERM DEBT</td></tr>
+            <tr class="lt-row"><td class="col-sticky">Long-term Borrowings</td><td>5,878</td><td>6,428</td><td>4,452</td><td>2,044</td><td>780</td><td>0</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● SHAREHOLDERS' EQUITY</td></tr>
+            <tr class="eq-row"><td class="col-sticky">Equity Capital</td><td>1,404</td><td>1,404</td><td>1,404</td><td>1,404</td><td>1,404</td><td>1,404</td></tr>
+            <tr class="re-row"><td class="col-sticky" style="color:var(--red);">Retained Earnings (Deficit→Recovery)</td><td style="color:var(--red);font-weight:800;">−5,726</td><td style="color:var(--red);font-weight:800;">−5,568</td><td style="color:var(--ambr);font-weight:800;">−1,684</td><td style="color:var(--gbr);font-weight:800;">+1,348</td><td style="color:var(--gbr);font-weight:800;">+3,696</td><td style="color:var(--gbr);font-weight:800;">+5,948</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Equity</td><td style="color:var(--red);">−4,322</td><td style="color:var(--red);">−4,164</td><td style="color:var(--red);">−280</td><td style="color:var(--gbr);">+2,752</td><td style="color:var(--gbr);">+5,100</td><td style="color:var(--gbr);">+7,352</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-amb">⚠️→✅ <strong>Retained earnings journey: −₹5,726 Cr (FY19) → −₹5,568 Cr (FY20) → −₹1,684 Cr (FY21) → +₹1,348 Cr (FY22) → +₹5,948 Cr (FY24).</strong> This is one of the most dramatic retained earnings turnarounds in Indian manufacturing history. The key: debt restructuring (banks accepted haircuts), selling overseas subsidiaries (REpower), and returning to profitability as India's wind energy capacity expansion accelerated. Long-term debt went from ₹5,878 Cr to zero. Short-term borrowings went from ₹5,924 Cr to zero. Total equity flipped from −₹4,322 Cr to +₹7,352 Cr. The lesson: even the most distressed balance sheet can recover if the core business has genuine earning power and management executes deleveraging effectively.</div>
+    </div>
+
+    <!-- BAD 4: Wockhardt -->
+    <div class="company-block rv d6">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">💊</div>
+          <div><div class="cb-name">Wockhardt</div><div class="cb-sub">Pharma Manufacturing · NSE: WOCKPHARMA · Standalone · Rs. Crores</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 High Debt Relative to Size</span>
+          <span class="cb-badge cb-b-r">🚨 RE Stagnant</span>
+          <span class="cb-badge cb-b-r">🚨 Recurring Losses</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="ab-table">
+          <thead><tr>
+            <th class="col-sticky">Line Item</th>
+            <th>FY2019</th><th>FY2020</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th>
+          </tr></thead>
+          <tbody>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● CURRENT LIABILITIES</td></tr>
+            <tr class="li-row"><td class="col-sticky">Trade Payables</td><td>612</td><td>636</td><td>652</td><td>668</td><td>684</td><td>704</td></tr>
+            <tr class="li-row"><td class="col-sticky">Short-term Borrowings</td><td>1,736</td><td>1,688</td><td>1,624</td><td>1,548</td><td>1,480</td><td>1,408</td></tr>
+            <tr class="li-row"><td class="col-sticky">Other Current Liabilities</td><td>672</td><td>692</td><td>704</td><td>716</td><td>728</td><td>744</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Current Liabilities</td><td>3,020</td><td>3,016</td><td>2,980</td><td>2,932</td><td>2,892</td><td>2,856</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● LONG-TERM DEBT</td></tr>
+            <tr class="lt-row"><td class="col-sticky">Long-term Borrowings</td><td>1,948</td><td>1,748</td><td>1,612</td><td>1,484</td><td>1,368</td><td>1,272</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● SHAREHOLDERS' EQUITY</td></tr>
+            <tr class="eq-row"><td class="col-sticky">Equity Capital</td><td>112</td><td>112</td><td>112</td><td>112</td><td>112</td><td>112</td></tr>
+            <tr class="re-row"><td class="col-sticky">Retained Earnings / Reserves</td><td>2,444</td><td>2,428</td><td>2,292</td><td>2,224</td><td>2,128</td><td>2,048</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Equity</td><td>2,556</td><td>2,540</td><td>2,404</td><td>2,336</td><td>2,240</td><td>2,160</td></tr>
+            <tr class="total-row"><td class="col-sticky">Net Debt / EBITDA</td><td>4.8×</td><td>4.6×</td><td>4.9×</td><td>5.1×</td><td>5.2×</td><td style="color:var(--red);font-weight:900;">5.4×</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-bad">🚨 <strong>Retained earnings declining every year — from ₹2,444 Cr to ₹2,048 Cr</strong> — reflecting consistent net losses eroding the equity base slowly. Total equity shrinking from ₹2,556 Cr to ₹2,160 Cr. Net Debt/EBITDA rising from 4.8× to 5.4× — in the danger zone for a pharma manufacturer dependent on US FDA approvals and quality compliance. The combined short-term and long-term debt of ₹2,680 Cr on a declining equity base creates significant financial vulnerability. Each year of declining retained earnings brings the company closer to the critical inflection point where losses might accelerate equity erosion more rapidly. FDA import alerts on US manufacturing have prevented meaningful revenue recovery.</div>
+    </div>
+
+    <!-- BAD 5: MTNL -->
+    <div class="company-block rv d7">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="cb-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">📞</div>
+          <div><div class="cb-name">MTNL — Mahanagar Telephone Nigam</div><div class="cb-sub">PSU Telecom · NSE: MTNL · Standalone · Rs. Crores</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">🚨 Negative Net Worth</span>
+          <span class="cb-badge cb-b-r">🚨 Loss 15+ Years</span>
+          <span class="cb-badge cb-b-r">🚨 Govt Dependent</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="ab-table">
+          <thead><tr>
+            <th class="col-sticky">Line Item</th>
+            <th>FY2019</th><th>FY2020</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th>
+          </tr></thead>
+          <tbody>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● CURRENT LIABILITIES</td></tr>
+            <tr class="li-row"><td class="col-sticky">Trade Payables</td><td>1,888</td><td>1,748</td><td>1,612</td><td>1,484</td><td>1,372</td><td>1,268</td></tr>
+            <tr class="li-row"><td class="col-sticky">Short-term Borrowings</td><td>3,448</td><td>4,124</td><td>4,876</td><td>5,548</td><td>6,184</td><td>6,796</td></tr>
+            <tr class="li-row"><td class="col-sticky">Other Current Liabilities</td><td>6,752</td><td>6,148</td><td>5,556</td><td>4,968</td><td>4,388</td><td>3,816</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Current Liabilities</td><td>12,088</td><td>12,020</td><td>12,044</td><td>12,000</td><td>11,944</td><td>11,880</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● LONG-TERM DEBT</td></tr>
+            <tr class="lt-row"><td class="col-sticky">Long-term Borrowings (Govt Sovereign)</td><td>1,040</td><td>4,868</td><td>5,396</td><td>8,612</td><td>10,240</td><td>10,852</td></tr>
+            <tr class="section-header"><td class="col-sticky" colspan="7">● SHAREHOLDERS' EQUITY</td></tr>
+            <tr class="eq-row"><td class="col-sticky">Equity Capital</td><td>630</td><td>630</td><td>630</td><td>630</td><td>630</td><td>630</td></tr>
+            <tr class="re-row"><td class="col-sticky" style="color:var(--red);">Retained Earnings (Deficit)</td><td style="color:var(--red);font-weight:800;">−12,084</td><td style="color:var(--red);font-weight:800;">−15,948</td><td style="color:var(--red);font-weight:800;">−19,724</td><td style="color:var(--red);font-weight:800;">−22,180</td><td style="color:var(--red);font-weight:800;">−24,396</td><td style="color:var(--red);font-weight:800;">−26,204</td></tr>
+            <tr class="total-row"><td class="col-sticky">Total Equity (Negative)</td><td style="color:var(--red);">−11,454</td><td style="color:var(--red);">−15,318</td><td style="color:var(--red);">−19,094</td><td style="color:var(--red);">−21,550</td><td style="color:var(--red);">−23,766</td><td style="color:var(--red);">−25,574</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cb-insight ci-bad">🚨 <strong>Retained earnings deficit of −₹26,204 Cr and deepening every year by ₹1,700–2,200 Cr.</strong> Total equity at −₹25,574 Cr means MTNL's total liabilities exceed total assets by ₹25,574 Cr — technically insolvent by a large margin. Government sovereign guarantees allow long-term borrowings to grow from ₹1,040 Cr to ₹10,852 Cr — but these are taxpayer-backed loans, not commercially raised debt. Short-term borrowings growing every year as cash keeps running out. Trade payables declining — not from efficiency but from shrinking business activity. Equity capital unchanged at ₹630 Cr for 6 years — the government won't infuse more equity because it would acknowledge permanent losses. MTNL is the definitive case study of a company sustained solely by government obligation rather than commercial merit. Accumulated deficit of −₹26,204 Cr represents 15+ consecutive years of losses — the most prolonged equity erosion in India's PSU universe.</div>
+    </div>
+
+    <!-- Final caveat -->
+    <div class="caveat-box rv d7">
+      <div class="caveat-icon">💡</div>
+      <div class="caveat-body">
+        <div class="caveat-label">Final Key Insight</div>
+        <div class="caveat-title">Retained Earnings Is the Single Most Honest Signal in the Entire Balance Sheet</div>
+        <div class="caveat-desc">Every accounting choice — depreciation method, revenue recognition timing, provisioning policy — affects the income statement. But retained earnings reflects the cumulative result of all these choices since the company was founded. A company can manage one year's profit; it cannot manage 20 years of cumulative retained earnings. Asian Paints' ₹15,180 Cr reserves versus MTNL's −₹26,204 Cr deficit tells you everything you need to know about the difference between these businesses — one has created wealth for decades, the other has destroyed it. When you open a balance sheet on Screener.in, the retained earnings (reserves) trend over 10 years should be your very first check. It costs 30 seconds and tells you more than an hour of P&L analysis.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ NEXT CHAPTER ══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue your learning journey →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">This page is for educational purposes only. All balance sheet figures shown are approximate illustrative estimates for learning — not real-time investment data. Some figures are rounded for pedagogical clarity. Always verify from official annual reports, BSE/NSE filings, and Screener.in before making any investment decision. All equity investments carry market risk. Consult a SEBI-registered investment advisor before investing.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+    },{threshold:.04,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  } else{els.forEach(function(el){el.classList.add('on');});}
+})();
+document.addEventListener('touchstart',function(){},{passive:true});
+document.addEventListener('touchmove',function(){},{passive:true});
+document.addEventListener('touchend',function(){},{passive:true});
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('on');});
+}
+document.body.style.overscrollBehavior='none';
+if(document.fonts&&document.fonts.ready){
+  document.fonts.ready.then(function(){
+    document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});
+  });
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('a,button,.dmbtn,.nxt-btn,.comp-card,.company-block').forEach(function(el){
+    el.style.touchAction='manipulation';
+  });
+});
+</script>
+</body>
+</html>

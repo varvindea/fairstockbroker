@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Sentiment Events · Module 4">
+<meta name="theme-color" content="#6d28d9">
+<meta name="format-detection" content="telephone=no">
+<title>Market Sentiment Events · Introduction to Stock Markets & Investing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;--gring:#bbf7d0;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;--rdark:#991b1b;--rring:#fecaca;
+  --sky:#0369a1;--skypale:#f0f9ff;
+  --gold:#b45309;--goldpale:#fef3c7;--goldring:#fde68a;
+  --pink:#be185d;--pinkpale:#fdf2f8;--pinkring:#fbcfe8;
+  --teal:#0d9488;--tealpale:#f0fdfa;--tealring:#99f6e4;
+  --wh:#ffffff;--off:#fafafa;--sf:#f8f7ff;
+  --bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shg:0 4px 22px rgba(22,163,74,.11);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+  --sha:0 4px 22px rgba(217,119,6,.13);
+  --shr:0 4px 22px rgba(220,38,38,.11);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}
+::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}
+.d7{transition-delay:.42s}.d8{transition-delay:.48s}
+
+/* KEYFRAMES */
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes growW{from{width:0}to{width:var(--tw,100%)}}
+100%{transform:translateX(-50%)}}
+@keyframes heartbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.18)}28%{transform:scale(1)}42%{transform:scale(1.12)}70%{transform:scale(1)}}
+@keyframes fearPulse{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.4)}70%{box-shadow:0 0 0 16px rgba(220,38,38,0)}}
+@keyframes greedPulse{0%,100%{box-shadow:0 0 0 0 rgba(22,163,74,.4)}70%{box-shadow:0 0 0 16px rgba(22,163,74,0)}}
+@keyframes wave{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes rocketUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes crashDown{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@keyframes viralSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes zoomIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+@keyframes slideCount{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+
+/* LAYOUT */
+.w{max-width:1240px;margin:0 auto;padding:clamp(40px,7vw,96px) clamp(16px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+
+/* TYPE */
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(24px,4.2vw,52px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:42px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 36%,#fdfcff 65%,#fdf2f8 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(56px,7vw,90px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(190,24,93,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(22,163,74,.06);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(36px,8.5vw,96px);font-weight:900;letter-spacing:-3px;line-height:.93;margin-bottom:10px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(20px,4.5vw,54px);background:linear-gradient(135deg,var(--pink) 0%,var(--p) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:620px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;flex-wrap:wrap;box-shadow:var(--shc);width:100%;max-width:1000px;}
+.hsi{padding:clamp(10px,2vw,22px) clamp(10px,2.5vw,24px);text-align:center;border-right:1px solid var(--bd);flex:1 1 auto;min-width:90px;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(11px,1.8vw,20px);font-weight:900;letter-spacing:-.5px;line-height:1.1;white-space:nowrap;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.green{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.red{background:linear-gradient(135deg,var(--rdark),var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.pink{background:linear-gradient(135deg,var(--pink),#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(8px,1vw,10px);font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:nowrap;}
+
+/* TICKER */
+/* KLO */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(20px,3vw,36px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap;}
+.klo-icon{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);}
+.klo-body{flex:1;min-width:200px;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.62;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.09);color:var(--red);border:1px solid rgba(220,38,38,.16);}
+.kpill-pk{background:rgba(190,24,93,.09);color:var(--pink);border:1px solid rgba(190,24,93,.16);}
+
+/* FEAR-GREED METER (unique visual) */
+.fg-meter-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:22px;padding:clamp(20px,3.5vw,36px);box-shadow:var(--shp);display:flex;flex-direction:column;align-items:center;gap:16px;position:relative;overflow:hidden;}
+.fg-meter-wrap::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.04) 1px,transparent 1px);background-size:20px 20px;}
+.fg-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--tl);position:relative;}
+/* Semicircle gauge */
+.gauge-container{position:relative;width:200px;height:106px;overflow:hidden;}
+.gauge-svg{width:200px;height:106px;}
+.gauge-bg{fill:none;stroke:var(--sf);stroke-width:18;}
+.gauge-fill{fill:none;stroke-width:18;stroke-linecap:round;transition:stroke-dashoffset 2s ease;transform-origin:100px 100px;transform:rotate(180deg);}
+.gauge-fill-fear{stroke:url(#fearGrad);}
+.gauge-fill-greed{stroke:url(#greedGrad);}
+.gauge-needle{position:absolute;bottom:0;left:50%;width:3px;height:78px;background:linear-gradient(180deg,var(--tx),rgba(15,10,46,.3));border-radius:2px;transform-origin:bottom center;transform:translateX(-50%) rotate(var(--needle-deg,-90deg));transition:transform 2s cubic-bezier(.34,1.56,.64,1);}
+.gauge-center-dot{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:var(--tx);border:3px solid var(--wh);}
+.gauge-num{font-size:clamp(28px,5vw,42px);font-weight:900;letter-spacing:-2px;line-height:1;}
+.gauge-state{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
+.fg-scale{display:flex;justify-content:space-between;width:100%;max-width:280px;}
+.fg-scale-item{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+
+/* SENTIMENT EVENT NAV */
+.sent-nav{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(8px,1.5vw,14px);margin-bottom:clamp(24px,4vw,40px);}
+.sent-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:clamp(12px,2vw,18px) 10px;border-radius:16px;border:2px solid;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:clamp(10px,1.2vw,12px);font-weight:700;transition:all .28s;-webkit-tap-highlight-color:transparent;min-height:80px;justify-content:center;text-align:center;position:relative;overflow:hidden;}
+.sb-panic{border-color:rgba(220,38,38,.22);color:var(--red);background:var(--rpale);}
+.sb-panic.active,.sb-panic:hover{background:linear-gradient(158deg,#fef2f2,#fecaca);border-color:var(--red);box-shadow:var(--shr);}
+.sb-fomo{border-color:rgba(22,163,74,.22);color:var(--gbr);background:var(--gpale);}
+.sb-fomo.active,.sb-fomo:hover{background:linear-gradient(158deg,#f0fdf4,#bbf7d0);border-color:var(--gbr);box-shadow:var(--shg);}
+.sb-spec{border-color:rgba(217,119,6,.22);color:var(--ambr);background:var(--apale);}
+.sb-spec.active,.sb-spec:hover{background:linear-gradient(158deg,#fefce8,#fde68a);border-color:var(--ambr);box-shadow:var(--sha);}
+.sb-social{border-color:rgba(190,24,93,.2);color:var(--pink);background:var(--pinkpale);}
+.sb-social.active,.sb-social:hover{background:linear-gradient(158deg,#fdf2f8,#fbcfe8);border-color:var(--pink);box-shadow:0 4px 22px rgba(190,24,93,.2);}
+.sb-rumor{border-color:rgba(109,40,217,.22);color:var(--p);background:var(--pxs);}
+.sb-rumor.active,.sb-rumor:hover{background:linear-gradient(158deg,#ede9fe,#ddd6fe);border-color:var(--p);box-shadow:var(--shp);}
+.sb-ico{font-size:clamp(22px,3.5vw,30px);}
+
+/* SENTIMENT PANELS */
+.sent-panels{position:relative;}
+.sent-panel{display:none;flex-direction:column;gap:clamp(22px,3.5vw,36px);}
+.sent-panel.active{display:flex;}
+
+/* SENTIMENT HERO */
+.shero{border-radius:22px;padding:clamp(22px,3.5vw,44px);position:relative;overflow:hidden;display:flex;gap:clamp(20px,3.5vw,40px);align-items:flex-start;flex-wrap:wrap;}
+.shero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.55) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+.sh-panic{background:linear-gradient(135deg,#fff5f5 0%,#fecaca 100%);border:1.5px solid var(--rring);}
+.sh-fomo{background:linear-gradient(135deg,#f0fdf4 0%,#bbf7d0 100%);border:1.5px solid var(--gring);}
+.sh-spec{background:linear-gradient(135deg,#fefce8 0%,#fde68a 100%);border:1.5px solid var(--goldring);}
+.sh-social{background:linear-gradient(135deg,#fdf2f8 0%,#fbcfe8 100%);border:1.5px solid var(--pinkring);}
+.sh-rumor{background:linear-gradient(135deg,#f5f3ff 0%,#ddd6fe 100%);border:1.5px solid var(--bd);}
+.shero-ico{width:clamp(64px,10vw,90px);height:clamp(64px,10vw,90px);border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:clamp(30px,5.5vw,46px);flex-shrink:0;position:relative;z-index:1;}
+.shi-panic{background:linear-gradient(135deg,var(--rdark),var(--red));box-shadow:0 8px 28px rgba(220,38,38,.32);animation:fearPulse 2.5s ease-in-out infinite;}
+.shi-fomo{background:linear-gradient(135deg,var(--gbr),var(--gh));box-shadow:0 8px 28px rgba(22,163,74,.28);animation:greedPulse 2.5s ease-in-out infinite;}
+.shi-spec{background:linear-gradient(135deg,var(--ambr),var(--amb));box-shadow:0 8px 28px rgba(217,119,6,.28);animation:rocketUp 2s ease-in-out infinite;}
+.shi-social{background:linear-gradient(135deg,var(--pink),#db2777);box-shadow:0 8px 28px rgba(190,24,93,.28);animation:heartbeat 1.8s ease-in-out infinite;}
+.shi-rumor{background:linear-gradient(135deg,var(--p),var(--ph));box-shadow:0 8px 28px rgba(109,40,217,.28);animation:float 3s ease-in-out infinite;}
+.shero-body{flex:1;min-width:220px;position:relative;z-index:1;}
+.sh-eyebrow{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:6px;}
+.she-r{color:var(--red);}.she-g{color:var(--gbr);}.she-a{color:var(--ambr);}.she-pk{color:var(--pink);}.she-p{color:var(--p);}
+.sh-title{font-size:clamp(20px,3.2vw,34px);font-weight:900;color:var(--tx);letter-spacing:-1px;line-height:1.05;margin-bottom:8px;}
+.sh-desc{font-size:clamp(13px,1.5vw,15px);color:var(--ts);line-height:1.72;max-width:700px;}
+.sh-desc strong{color:var(--tx);}
+.shero-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;position:relative;z-index:1;}
+.sh-stat{border-radius:12px;padding:10px 14px;text-align:center;flex:1;min-width:80px;}
+.sh-stat-val{font-size:clamp(14px,2vw,20px);font-weight:900;letter-spacing:-.5px;line-height:1;}
+.sh-stat-lbl{font-size:9px;font-weight:600;color:var(--tl);text-transform:uppercase;letter-spacing:1px;margin-top:3px;}
+
+/* PHASE PROGRESSION VISUAL */
+.phase-steps{display:flex;flex-direction:column;gap:0;}
+.phase-step{display:flex;gap:14px;align-items:flex-start;position:relative;}
+.phase-step:not(:last-child)::after{content:'';position:absolute;left:20px;top:42px;bottom:-8px;width:2px;background:linear-gradient(180deg,var(--bd),transparent);border-radius:2px;}
+.ps-dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;margin-top:2px;}
+.psd-r{background:linear-gradient(135deg,var(--rdark),var(--red));}
+.psd-a{background:linear-gradient(135deg,var(--ambr),var(--amb));}
+.psd-g{background:linear-gradient(135deg,var(--gbr),var(--gh));}
+.psd-p{background:linear-gradient(135deg,var(--p),var(--ph));}
+.psd-pk{background:linear-gradient(135deg,var(--pink),#db2777);}
+.ps-content{flex:1;padding:10px 14px;border-radius:12px;margin-bottom:8px;}
+.psc-r{background:var(--rpale);border:1px solid var(--rring);}
+.psc-a{background:var(--apale);border:1px solid var(--goldring);}
+.psc-g{background:var(--gpale);border:1px solid var(--gring);}
+.psc-p{background:var(--pxs);border:1px solid var(--bd);}
+.psc-pk{background:var(--pinkpale);border:1px solid var(--pinkring);}
+.ps-title{font-size:13px;font-weight:800;color:var(--tx);margin-bottom:3px;}
+.ps-body{font-size:12px;color:var(--ts);line-height:1.62;}
+.ps-body strong{color:var(--tx);}
+
+/* SECTOR ROWS */
+.sector-divider{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+.sd-line{flex:1;height:1px;background:var(--bd);}
+.sd-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--tl);white-space:nowrap;}
+
+.impact-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,20px);}
+.impact-col{border-radius:14px;padding:clamp(14px,2.5vw,22px);border:1.5px solid;display:flex;flex-direction:column;gap:8px;}
+.ic-fear{border-color:var(--rring);background:linear-gradient(158deg,var(--rpale),#fff9f9);}
+.ic-greed{border-color:var(--gring);background:linear-gradient(158deg,var(--gpale),#f9fff9);}
+.ic-warning{border-color:var(--goldring);background:linear-gradient(158deg,var(--apale),#fffdf5);}
+.ic-neutral{border-color:var(--bd);background:var(--pxs);}
+.icol-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.icl-r{color:var(--red);}.icl-g{color:var(--gbr);}.icl-a{color:var(--ambr);}.icl-p{color:var(--p);}
+.icol-title{font-size:14px;font-weight:800;color:var(--tx);margin-bottom:6px;}
+.icol-body{font-size:12.5px;color:var(--ts);line-height:1.7;}
+.icol-body strong{color:var(--tx);}
+.icol-stocks{display:flex;flex-direction:column;gap:4px;margin-top:8px;}
+.ics-row{display:flex;justify-content:space-between;align-items:center;padding:5px 9px;border-radius:7px;}
+.icsr-r{background:rgba(220,38,38,.09);}
+.icsr-g{background:rgba(22,163,74,.09);}
+.icsr-a{background:rgba(217,119,6,.09);}
+.ics-name{font-size:12px;font-weight:700;color:var(--tx);}
+.ics-move{font-size:11px;font-weight:700;}
+.icsm-g{color:var(--gbr);}.icsm-r{color:var(--red);}.icsm-a{color:var(--ambr);}
+
+/* METER BARS */
+.meter-section{display:flex;flex-direction:column;gap:10px;}
+.meter-row{display:flex;align-items:center;gap:12px;}
+.meter-label{font-size:12px;font-weight:700;color:var(--tx);min-width:clamp(90px,16vw,180px);}
+.meter-track{flex:1;height:10px;background:var(--sf);border-radius:5px;overflow:hidden;}
+.meter-fill{height:100%;border-radius:5px;--tw:0%;width:0%;animation:growW 1.4s ease .5s forwards;}
+.mf-bull{background:linear-gradient(90deg,var(--gbr),var(--gh));}
+.mf-bear{background:linear-gradient(90deg,var(--rdark),var(--red));}
+.mf-neut{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.meter-tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:100px;min-width:52px;text-align:center;}
+.mt-bull{background:var(--gpale);color:var(--gbr);}
+.mt-bear{background:var(--rpale);color:var(--red);}
+.mt-neut{background:var(--apale);color:var(--ambr);}
+
+/* EXAMPLES */
+.ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.ex-card{border-radius:12px;padding:12px 14px;border:1.5px solid;}
+.ex-bull{border-color:rgba(22,163,74,.2);background:var(--gpale);}
+.ex-bear{border-color:rgba(220,38,38,.18);background:var(--rpale);}
+.ex-neutral{border-color:var(--bd);background:var(--pxs);}
+.ex-mixed{border-color:rgba(217,119,6,.18);background:var(--apale);}
+.ex-pink{border-color:rgba(190,24,93,.18);background:var(--pinkpale);}
+.ex-event{font-size:11px;font-weight:700;color:var(--tx);margin-bottom:3px;}
+.ex-detail{font-size:11px;color:var(--ts);line-height:1.5;}
+.ex-result{font-size:11.5px;font-weight:700;margin-top:5px;}
+.er-g{color:var(--gbr);}.er-r{color:var(--red);}.er-a{color:var(--ambr);}.er-pk{color:var(--pink);}
+
+/* MASTER TABLE */
+.master-table-wrap{border:1.5px solid var(--bd);border-radius:18px;overflow:hidden;box-shadow:var(--shc);}
+.master-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.master-table{width:100%;border-collapse:collapse;min-width:620px;}
+.master-table th{padding:10px 12px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:left;border-bottom:1.5px solid var(--bd);background:var(--sf);color:var(--ts);}
+.master-table th:first-child{background:var(--pxs);color:var(--p);}
+.master-table tr:nth-child(even){background:var(--off);}
+.master-table td{padding:10px 12px;font-size:11.5px;color:var(--ts);border-bottom:1px solid var(--bd);line-height:1.5;vertical-align:top;}
+.master-table tr:last-child td{border-bottom:none;}
+.master-table td:first-child{font-weight:800;color:var(--tx);font-size:12px;}
+.mpill{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:100px;font-size:10px;font-weight:700;margin:1px;}
+.mp-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.mp-r{background:rgba(220,38,38,.09);color:var(--red);}
+.mp-n{background:rgba(217,119,6,.1);color:var(--ambr);}
+.mp-p{background:rgba(109,40,217,.1);color:var(--p);}
+.mp-pk{background:rgba(190,24,93,.09);color:var(--pink);}
+
+/* LK-GRID */
+.lk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,22px);}
+.lk-card{border-radius:18px;padding:clamp(14px,2.5vw,24px);border:1px solid var(--bd);background:var(--wh);box-shadow:var(--shc);position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s;}
+.lk-card:hover{transform:translateY(-4px);}
+.lk-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.lk-card:nth-child(1)::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.lk-card:nth-child(2)::before{background:linear-gradient(90deg,var(--g),var(--gh));}
+.lk-card:nth-child(3)::before{background:linear-gradient(90deg,var(--amb),#f59e0b);}
+.lk-card:nth-child(4)::before{background:linear-gradient(90deg,var(--pink),#db2777);}
+.lk-card:nth-child(5)::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.lk-card:nth-child(6)::before{background:linear-gradient(90deg,var(--p),var(--g));}
+.lk-card:nth-child(1):hover{box-shadow:var(--shr);}
+.lk-card:nth-child(2):hover{box-shadow:var(--shg);}
+.lk-card:nth-child(3):hover{box-shadow:var(--sha);}
+.lk-card:nth-child(4):hover{box-shadow:0 4px 22px rgba(190,24,93,.2);}
+.lk-card:nth-child(5):hover,.lk-card:nth-child(6):hover{box-shadow:var(--shp);}
+.lk-ico{font-size:25px;margin-bottom:10px;}
+.lk-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ts);margin-bottom:5px;}
+.lk-title{font-size:14px;font-weight:800;color:var(--tx);margin-bottom:7px;}
+.lk-body{font-size:12.5px;color:var(--ts);line-height:1.62;}
+
+/* TWAYS */
+.tways{display:flex;flex-direction:column;gap:12px;}
+.twi{display:flex;align-items:flex-start;gap:13px;padding:14px 16px;background:var(--wh);border:1px solid var(--bd);border-radius:14px;transition:border-color .25s,box-shadow .25s;box-shadow:var(--shc);}
+.twi:hover{border-color:rgba(109,40,217,.22);box-shadow:var(--shp);}
+.twico{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.twg{background:var(--gpale);}.twp{background:var(--pxl);}.twb{background:#fef9c3;}.twa{background:var(--apale);}.twr{background:var(--rpale);}.twpk{background:var(--pinkpale);}
+.twtext{font-size:12.5px;color:var(--ts);line-height:1.62;}
+.twtext strong{color:var(--tx);}
+
+/* DEMAT */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* ═══ NEXT CHAPTER BANNER ═══ */
+.nxt-banner{background:linear-gradient(135deg,var(--pl),var(--p),var(--ph));padding:clamp(28px,5vw,56px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:4px;position:relative;}
+.nxt-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.6);}
+.nxt-sub{font-size:13px;color:rgba(255,255,255,.65);margin-top:2px;}
+.nxt-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:16px 32px;min-height:52px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:14px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+@media(hover:hover){.nxt-btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 10px 36px rgba(34,197,94,.55);}}
+@media(hover:none){.nxt-btn:active{transform:scale(0.97);opacity:0.92;}}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+
+/* ═══ RESPONSIVE ═══ */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.sent-nav{grid-template-columns:repeat(3,1fr);}.lk-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){
+  .sent-nav{grid-template-columns:repeat(3,1fr);}
+  .impact-cols{grid-template-columns:1fr;}
+  .ex-grid{grid-template-columns:1fr;}
+  .lk-grid{grid-template-columns:1fr 1fr;}
+  .hst{flex-direction:column;}
+  .hsi{border-right:none!important;border-bottom:1px solid var(--bd);}
+  .hsi:last-child{border-bottom:none;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;padding:clamp(24px,5vw,40px) clamp(16px,5vw,32px);}
+  .nxt-btn{align-self:stretch;width:100%;}
+  .disc-inner{flex-direction:column;gap:12px;}
+}
+@media(max-width:480px){
+  .sent-nav{grid-template-columns:1fr 1fr;}
+  .sent-btn{font-size:10px;padding:10px 6px;}
+  .sb-ico{font-size:22px;}
+  .lk-grid{grid-template-columns:1fr;}
+  .hh1{letter-spacing:-1.5px;font-size:clamp(38px,11vw,64px);}
+  .w{padding:clamp(40px,6vw,72px) clamp(16px,5vw,28px);}
+  .nxt-label{font-size:9px;letter-spacing:2px;}
+  .nxt-btn{font-size:14px;padding:14px 20px;}
+}
+@media(max-width:360px){.dmbtn{padding:14px 24px;font-size:15px;}}
+@media(hover:none) and (pointer:coarse){
+  .sent-btn:hover,.lk-card:hover,.twi:hover{transform:none;box-shadow:var(--shc);}
+  .dmbtn:active{transform:scale(.97);}
+  .nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  ::-webkit-scrollbar{display:none;}
+}
+
+/* ═══ INLINE GRID — RESPONSIVE ═══ */
+.cs-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,50px);align-items:start;}
+.cs-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.cs-grid-alt{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(28px,4vw,58px);align-items:start;}
+@media(max-width:640px){
+  .cs-grid,.cs-grid-alt{grid-template-columns:1fr !important;}
+  .cs-grid-3{grid-template-columns:1fr 1fr !important;}
+}
+@media(max-width:400px){
+  .cs-grid-3{grid-template-columns:1fr !important;}
+}
+
+/* ═══ SAFE AREA ═══ */
+.hero{padding-bottom:max(clamp(60px,7vw,90px),calc(env(safe-area-inset-bottom) + 40px));}
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;}
+  a,.dmbtn,.nxt-btn{-webkit-tap-highlight-color:transparent;}
+  .hp,.hg,.hsv{-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .nxt-banner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+}
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){.dmbtn,.nxt-btn{min-height:52px;}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important;}.rv{opacity:1;transform:none;}}
+@media print{.dmbanner,.orb{display:none;}.rv{opacity:1;transform:none;}body{color:#000;}}.dmbtn:active{transform:scale(.97);}.nxt-btn:active{transform:scale(.97);}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="vbadge">Market Events Series · Chapter 10</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Introduction to Stock Markets &amp; Investing</div>
+  <h1 class="hh1">
+    <span class="line1">Market</span>
+    <span class="line2">Sentiment</span>
+    <span class="line3">Events</span>
+  </h1>
+  <div class="hsub">Panic · FOMO · Speculation · Social Media · Rumours · Investor Psychology</div>
+  <p class="hdesc">Sometimes stocks move not because of earnings, RBI, or geopolitics — but because millions of investors simultaneously get scared, greedy, or caught in viral hype. Understanding investor psychology is what separates rational wealth-builders from those who repeatedly buy at peaks and sell at bottoms.</p>
+
+  <div class="hst">
+    <div class="hsi"><div class="hsv red">😱 Panic</div><div class="hsl">Fear-driven crash</div></div>
+    <div class="hsi"><div class="hsv green">🚀 FOMO</div><div class="hsl">Greed-driven rally</div></div>
+    <div class="hsi"><div class="hsv amber">💥 Speculative</div><div class="hsl">Bubble behaviour</div></div>
+    <div class="hsi"><div class="hsv pink">📱 Social</div><div class="hsl">Viral market moves</div></div>
+    <div class="hsi"><div class="hsv">🗣️ Rumours</div><div class="hsl">Unverified info</div></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<!-- KLO -->
+<section class="rv">
+  <div class="w">
+    <div class="klobanner rv d1">
+      <div class="klo-icon">🧠</div>
+      <div class="klo-body">
+        <div class="klo-label">Key Learning Outcome</div>
+        <div class="klo-title">Investor psychology drives the most violent short-term market moves — recognising these patterns helps you stay rational when others are panic-selling or euphoria-buying</div>
+        <div class="klo-desc">After this lesson you'll understand all 5 sentiment-driven events (Panic Selling, FOMO Buying, Speculative Rally, Social Media Trends, Rumours), how each manifests in Indian markets, which sectors are most vulnerable, and the most important psychological rule: every sentiment-driven panic has been a buying opportunity in hindsight.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-r">😱 Panic Selling</span>
+          <span class="kpill kpill-g">🚀 FOMO Buying</span>
+          <span class="kpill kpill-a">💥 Speculative Rally</span>
+          <span class="kpill kpill-pk">📱 Social Media</span>
+          <span class="kpill kpill-p">🗣️ Rumours</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 01 — THE FEAR-GREED CYCLE -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">01 — The Foundation</div>
+    <h2 class="h2 rv d2">The Fear-Greed Cycle — <span class="hp">Why Psychology Moves Markets</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Markets are not purely rational. They are collections of millions of human decisions — each influenced by fear, greed, hope, regret, and social pressure. Understanding these emotional cycles is as important as understanding earnings or GDP.</p>
+
+    <div class="cs-grid" class="rv d4">
+      <div>
+        <div style="background:var(--wh);border:1.5px solid var(--bd);border-radius:18px;padding:clamp(18px,3vw,32px);box-shadow:var(--shc);margin-bottom:14px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:14px;">The Emotional Market Cycle</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="padding:8px 12px;border-radius:10px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid var(--gring);display:flex;justify-content:space-between;align-items:center;">
+              <div><div style="font-size:11px;font-weight:800;color:var(--gbr);">1. Optimism → Market rises</div><div style="font-size:11px;color:var(--ts);">"Economy is doing well, I should invest"</div></div><span style="font-size:18px;">😊</span>
+            </div>
+            <div style="padding:8px 12px;border-radius:10px;background:linear-gradient(135deg,#fefce8,#fde68a30);border:1px solid var(--goldring);display:flex;justify-content:space-between;align-items:center;">
+              <div><div style="font-size:11px;font-weight:800;color:var(--ambr);">2. Excitement → Market surges</div><div style="font-size:11px;color:var(--ts);">"My friends are making money! I need to invest more!"</div></div><span style="font-size:18px;">🤩</span>
+            </div>
+            <div style="padding:8px 12px;border-radius:10px;background:linear-gradient(135deg,#fff7ed,#fed7aa30);border:1px solid var(--copperring, #fed7aa);display:flex;justify-content:space-between;align-items:center;">
+              <div><div style="font-size:11px;font-weight:800;color:#9a3412;">3. Euphoria → BUBBLE forms</div><div style="font-size:11px;color:var(--ts);">"This time is different. Prices only go up!"</div></div><span style="font-size:18px;">🤑</span>
+            </div>
+            <div style="padding:8px 12px;border-radius:10px;background:linear-gradient(135deg,#fef2f2,#fecaca30);border:1px solid var(--rring);display:flex;justify-content:space-between;align-items:center;">
+              <div><div style="font-size:11px;font-weight:800;color:var(--red);">4. Panic → CRASH begins</div><div style="font-size:11px;color:var(--ts);">"I can't afford to lose more — sell everything!"</div></div><span style="font-size:18px;">😱</span>
+            </div>
+            <div style="padding:8px 12px;border-radius:10px;background:linear-gradient(135deg,#fff5f5,#fee2e2);border:1px solid #fca5a5;display:flex;justify-content:space-between;align-items:center;">
+              <div><div style="font-size:11px;font-weight:800;color:var(--rdark);">5. Despair → Maximum opportunity</div><div style="font-size:11px;color:var(--ts);">"Markets are broken. I'll never invest again"</div></div><span style="font-size:18px;">😔</span>
+            </div>
+            <div style="padding:8px 12px;border-radius:10px;background:var(--pxs);border:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;">
+              <div><div style="font-size:11px;font-weight:800;color:var(--p);">6. Hope → Next cycle begins</div><div style="font-size:11px;color:var(--ts);">"Maybe the worst is over..." → Cycle restarts</div></div><span style="font-size:18px;">🌱</span>
+            </div>
+          </div>
+          <div style="margin-top:12px;padding:10px 12px;border-radius:10px;background:var(--pxs);font-size:12px;font-weight:700;color:var(--p);">💡 Key Insight: The best time to BUY is during Despair (Step 5). The best time to reduce risk is during Euphoria (Step 3). Most retail investors do the exact opposite.</div>
+        </div>
+      </div>
+
+      <!-- Fear-Greed Meter Visual -->
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="fg-meter-wrap rv d5">
+          <div class="fg-label">Sentiment Meter — Fear &amp; Greed Index</div>
+
+          <!-- SVG Gauge -->
+          <div class="gauge-container">
+            <svg class="gauge-svg" viewBox="0 0 200 106" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="fearGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style="stop-color:#991b1b"/>
+                  <stop offset="40%" style="stop-color:#dc2626"/>
+                  <stop offset="70%" style="stop-color:#d97706"/>
+                  <stop offset="100%" style="stop-color:#16a34a"/>
+                </linearGradient>
+                <linearGradient id="greedGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style="stop-color:#991b1b"/>
+                  <stop offset="40%" style="stop-color:#dc2626"/>
+                  <stop offset="70%" style="stop-color:#d97706"/>
+                  <stop offset="100%" style="stop-color:#16a34a"/>
+                </linearGradient>
+              </defs>
+              <!-- Background arc -->
+              <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#f1f0ff" stroke-width="16" stroke-linecap="round"/>
+              <!-- Coloured arc -->
+              <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#greedGrad)" stroke-width="16" stroke-linecap="round" opacity=".85"/>
+              <!-- Zone markers -->
+              <text x="12" y="100" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#991b1b">FEAR</text>
+              <text x="155" y="100" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#15803d">GREED</text>
+            </svg>
+            <!-- Needle (positioned by CSS variable) -->
+            <div class="gauge-needle" style="--needle-deg:-45deg;" id="gauge-needle"></div>
+            <div class="gauge-center-dot"></div>
+          </div>
+
+          <div id="gauge-num" class="gauge-num" style="color:var(--amb);">62</div>
+          <div id="gauge-state" class="gauge-state" style="color:var(--amb);">GREED</div>
+
+          <div class="fg-scale">
+            <span class="fg-scale-item" style="color:var(--red);">😱 Extreme Fear</span>
+            <span class="fg-scale-item" style="color:var(--amb);">😐 Neutral</span>
+            <span class="fg-scale-item" style="color:var(--gbr);">🤑 Extreme Greed</span>
+          </div>
+
+          <!-- Interactive buttons -->
+          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;width:100%;">
+            <button onclick="setGauge(8,'😱 Extreme Fear','#dc2626',-82)" style="padding:7px 14px;border-radius:10px;border:1.5px solid var(--rring);background:var(--rpale);color:var(--red);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;cursor:pointer;min-height:36px;">😱 Show Panic</button>
+            <button onclick="setGauge(50,'😐 Neutral','#d97706',-1)" style="padding:7px 14px;border-radius:10px;border:1.5px solid var(--goldring);background:var(--apale);color:var(--ambr);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;cursor:pointer;min-height:36px;">😐 Show Neutral</button>
+            <button onclick="setGauge(88,'🤑 Extreme Greed','#15803d',75)" style="padding:7px 14px;border-radius:10px;border:1.5px solid var(--gring);background:var(--gpale);color:var(--gbr);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;cursor:pointer;min-height:36px;">🤑 Show Greed</button>
+          </div>
+          <div style="font-size:11px;color:var(--tl);text-align:center;font-weight:500;">Tap to simulate different market sentiment states</div>
+        </div>
+
+        <div style="background:var(--wh);border:1.5px solid var(--bd);border-radius:16px;padding:clamp(14px,2.5vw,22px);box-shadow:var(--shc);">
+          <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:12px;">The Contrarian Investor's Guide</div>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="padding:8px 11px;border-radius:9px;background:var(--rpale);border:1px solid var(--rring);">
+              <div style="font-size:11px;font-weight:800;color:var(--red);margin-bottom:2px;">😱 Extreme Fear (Index &lt;20)</div>
+              <div style="font-size:11px;color:var(--ts);">Often the BEST time to buy. Quality stocks are on sale because of panic, not fundamentals. Warren Buffett: <em>"Be greedy when others are fearful."</em></div>
+            </div>
+            <div style="padding:8px 11px;border-radius:9px;background:var(--gpale);border:1px solid var(--gring);">
+              <div style="font-size:11px;font-weight:800;color:var(--gbr);margin-bottom:2px;">🤑 Extreme Greed (Index &gt;80)</div>
+              <div style="font-size:11px;color:var(--ts);">Often a warning sign. Markets are priced for perfection. Time to be cautious, take some profits, or stop adding aggressively.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 02 — FIVE SENTIMENT EVENTS -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">02 — All 5 Sentiment Events — Deep Dive</div>
+    <h2 class="h2 rv d2">Click Any Event to See <span class="hp">How It Moves Markets</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Five types of sentiment-driven events create the most emotionally charged market moves. Each follows a recognisable pattern — and understanding each one prevents you from being swept up in the emotion:</p>
+
+    <!-- SENT NAV -->
+    <div class="sent-nav rv d4">
+      <button class="sent-btn sb-panic active" data-sent="panic"><span class="sb-ico">😱</span><span>Panic Selling</span></button>
+      <button class="sent-btn sb-fomo" data-sent="fomo"><span class="sb-ico">🚀</span><span>FOMO Buying</span></button>
+      <button class="sent-btn sb-spec" data-sent="spec"><span class="sb-ico">💥</span><span>Speculative Rally</span></button>
+      <button class="sent-btn sb-social" data-sent="social"><span class="sb-ico">📱</span><span>Social Media Trends</span></button>
+      <button class="sent-btn sb-rumor" data-sent="rumor"><span class="sb-ico">🗣️</span><span>Rumours</span></button>
+    </div>
+
+    <!-- SENTIMENT PANELS -->
+    <div class="sent-panels rv d5">
+
+      <!-- ═══ PANIC SELLING ═══ -->
+      <div class="sent-panel active" id="sp-panic">
+        <div class="shero sh-panic">
+          <div class="shero-ico shi-panic">😱</div>
+          <div class="shero-body">
+            <div class="sh-eyebrow she-r">Fear-Driven · Indiscriminate · Creates Best Buying Opportunities</div>
+            <div class="sh-title">Panic Selling — When Fear Overrides Logic</div>
+            <div class="sh-desc">Panic selling occurs when investors, overwhelmed by fear, sell stocks indiscriminately — regardless of the underlying business quality. <strong>They're not selling because the company became worse</strong>; they're selling because they're terrified of losing more money. This irrational behaviour creates the deepest buying opportunities in markets — COVID crash, 2008 GFC, Kargil war — every panic was followed by the most explosive recoveries. The hard truth: <strong>panic selling almost always happens at the worst possible time</strong>, locking in losses that patient investors avoid completely.</div>
+            <div class="shero-stats">
+              <div class="sh-stat" style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.12);">
+                <div class="sh-stat-val" style="color:var(--red);">−38%</div>
+                <div class="sh-stat-lbl">COVID crash in 40 days</div>
+              </div>
+              <div class="sh-stat" style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.12);">
+                <div class="sh-stat-val" style="color:var(--red);">72 hrs</div>
+                <div class="sh-stat-lbl">Worst panic duration</div>
+              </div>
+              <div class="sh-stat" style="background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.12);">
+                <div class="sh-stat-val" style="color:var(--gbr);">+80%</div>
+                <div class="sh-stat-lbl">12-month recovery</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase breakdown -->
+        <div style="background:var(--wh);border:1.5px solid var(--bd);border-radius:18px;padding:clamp(16px,2.5vw,28px);box-shadow:var(--shc);">
+          <div class="sector-divider"><div class="sd-line"></div><div class="sd-label">How a Panic Selling Episode Unfolds</div><div class="sd-line"></div></div>
+          <div class="phase-steps">
+            <div class="phase-step">
+              <div class="ps-dot psd-a">1</div>
+              <div class="ps-content psc-a"><div class="ps-title">⚡ Trigger Event Hits</div><div class="ps-body">A shocking news event — pandemic, war, bank failure, political shock. The news is unexpected and the magnitude is unknown. Fear begins to spread. Selling starts in global markets overnight before India opens.</div></div>
+            </div>
+            <div class="phase-step">
+              <div class="ps-dot psd-r">2</div>
+              <div class="ps-content psc-r"><div class="ps-title">📉 Gap Down Opening — Cascading Sell Orders</div><div class="ps-body">Nifty opens 3–8% lower. <strong>Stop-loss orders trigger</strong> automatically — forced selling that has nothing to do with individual stock quality. Mutual funds sell to meet redemptions. Margin calls force leveraged investors to sell. The selling feeds on itself.</div></div>
+            </div>
+            <div class="phase-step">
+              <div class="ps-dot psd-r">3</div>
+              <div class="ps-content psc-r"><div class="ps-title">😱 Maximum Fear — "Never Investing Again" Phase</div><div class="ps-body">News headlines scream catastrophe. Social media is full of loss posts and predictions of total collapse. <strong>This is statistically close to the market bottom</strong> — peak fear and peak selling coincide. Retail investors capitulate and sell — institutions begin quietly buying.</div></div>
+            </div>
+            <div class="phase-step">
+              <div class="ps-dot psd-g">4</div>
+              <div class="ps-content psc-g"><div class="ps-title">✅ Stabilisation — Smart Money Enters Quietly</div><div class="ps-body">Selling exhaustion sets in. Institutional investors, FIIs, and long-term investors begin accumulating quality stocks at panic prices. Volume drops. Market stops making new lows even on bad news — a classic technical bottom signal.</div></div>
+            </div>
+            <div class="phase-step">
+              <div class="ps-dot psd-g">5</div>
+              <div class="ps-content psc-g"><div class="ps-title">🎉 V-Shaped Recovery — Panic Sellers Regret</div><div class="ps-body">Recovery is often as fast as the crash — or faster. Investors who sold at the bottom now face the painful choice of buying back at higher prices or missing the recovery. <strong>COVID example: Nifty at 7,500 (Mar 2020) → 18,000 (Dec 2020) in 9 months</strong>. Those who sold at 7,500 needed Nifty at 7,500 to break even — it never returned there.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sector impact -->
+        <div class="impact-cols">
+          <div class="impact-col ic-fear">
+            <div class="icol-label icl-r">Sectors Hit Hardest in Panics</div>
+            <div class="icol-title">High-Beta Sectors Fall First and Fastest</div>
+            <div class="icol-body"><strong>Banking</strong> (largest FII holding) falls most as FIIs sell India first. <strong>Real estate</strong> — leveraged sector, fear of rate hikes and demand collapse. <strong>Aviation</strong> — direct operational impact from any crisis. <strong>Hospitality</strong> — demand collapses immediately in any uncertainty.</div>
+            <div class="icol-stocks">
+              <div class="ics-row icsr-r"><div class="ics-name">Bank Nifty</div><div class="ics-move icsm-r">−40–60% in major panics</div></div>
+              <div class="ics-row icsr-r"><div class="ics-name">Aviation (IndiGo)</div><div class="ics-move icsm-r">−50–75% in COVID</div></div>
+              <div class="ics-row icsr-r"><div class="ics-name">Hotels/Tourism</div><div class="ics-move icsm-r">−60–70% in COVID</div></div>
+              <div class="ics-row icsr-r"><div class="ics-name">Mid/Small Cap</div><div class="ics-move icsm-r">Largest % falls</div></div>
+            </div>
+          </div>
+          <div class="impact-col ic-greed">
+            <div class="icol-label icl-g">Sectors that Hold Best in Panics</div>
+            <div class="icol-title">Defensive Sectors — Where Smart Money Hides</div>
+            <div class="icol-body"><strong>Pharma</strong> — essential, non-discretionary demand. <strong>FMCG</strong> — people still buy soap and toothpaste. <strong>IT/Pharma exporters</strong> — global revenue, INR tailwind during EM panic. <strong>Gold</strong> — ultimate safe haven, always rallies during fear.</div>
+            <div class="icol-stocks">
+              <div class="ics-row icsr-g"><div class="ics-name">Nifty Pharma</div><div class="ics-move icsm-g">Outperforms by 20%+</div></div>
+              <div class="ics-row icsr-g"><div class="ics-name">FMCG (HUL, ITC)</div><div class="ics-move icsm-g">Relative defensive</div></div>
+              <div class="ics-row icsr-g"><div class="ics-name">Gold ETF</div><div class="ics-move icsm-g">+10–40% in panics</div></div>
+              <div class="ics-row icsr-g"><div class="ics-name">IT exporters</div><div class="ics-move icsm-g">Rupee tailwind</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="sector-divider"><div class="sd-line"></div><div class="sd-label">Real Panic Selling Examples</div><div class="sd-line"></div></div>
+          <div class="ex-grid">
+            <div class="ex-card ex-bull"><div class="ex-event">COVID Panic → Best Buying Opportunity</div><div class="ex-detail">Nifty crashed from 12,362 to 7,511 (−38%) in 40 days. Complete panic. Then: +80% in 12 months. Bajaj Finance: −68% in crash → +340% in 12 months from lows. Every panic seller lost massively.</div><div class="ex-result er-g">Bajaj Finance: −68% then +340% from COVID lows</div></div>
+            <div class="ex-card ex-bull"><div class="ex-event">2008 GFC — Sensex −60% → +115%</div><div class="ex-detail">Sensex fell from 21,206 to 8,160. Complete despair. Those who bought at 9,000 earned +130% in 12 months. Those who sold at 9,000 never got back in until 17,000+ — buying at 2× their panic exit.</div><div class="ex-result er-g">Sensex: +115% in 12 months from 2009 lows</div></div>
+            <div class="ex-card ex-bear"><div class="ex-event">Retail Panic During COVID — SEBI Data</div><div class="ex-detail">SEBI data: Over 40 lakh retail demat accounts were inactive in March 2020 (panic seller behavioural pattern). These investors missed the +80% recovery that followed within 12 months.</div><div class="ex-result er-r">40L+ retail investors went inactive at the exact bottom</div></div>
+            <div class="ex-card ex-bull"><div class="ex-event">Adani Panic (Hindenburg) → Opportunity</div><div class="ex-detail">Adani stocks fell 40–60% in 2 days post-Hindenburg report. Those who analysed and bought core Adani businesses (ports, utilities) at panic prices saw significant recovery within 12 months.</div><div class="ex-result er-g">Core Adani businesses recovered 60–80% from panic lows</div></div>
+          </div>
+        </div>
+      </div><!-- /panic -->
+
+
+      <!-- ═══ FOMO BUYING ═══ -->
+      <div class="sent-panel" id="sp-fomo">
+        <div class="shero sh-fomo">
+          <div class="shero-ico shi-fomo">🚀</div>
+          <div class="shero-body">
+            <div class="sh-eyebrow she-g">Fear Of Missing Out · Greed-Driven · Late-Stage Buyers Always Lose</div>
+            <div class="sh-title">FOMO Buying — Chasing Returns Is the Most Expensive Habit</div>
+            <div class="sh-desc"><strong>FOMO (Fear of Missing Out)</strong> is the opposite of panic — it's the urge to buy because everyone else seems to be making money and you're missing the party. <strong>FOMO investors typically enter at the absolute worst time</strong> — near the peak, after the stock has already risen 100–200%, right before the correction that gives back all those gains. The classic FOMO pattern: relative buys stocks after hearing friends made money → stock corrects → they hold hoping for recovery → more correction → panic sell at a loss. <strong>FOMO-driven buying creates the same losses as panic selling, just from the other direction.</strong></div>
+            <div class="shero-stats">
+              <div class="sh-stat" style="background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.12);">
+                <div class="sh-stat-val" style="color:var(--gbr);">FY21</div>
+                <div class="sh-stat-lbl">1Cr new demat accounts</div>
+              </div>
+              <div class="sh-stat" style="background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.12);">
+                <div class="sh-stat-val" style="color:var(--gbr);">SME IPO</div>
+                <div class="sh-stat-lbl">200% listing → 70% crash</div>
+              </div>
+              <div class="sh-stat" style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.12);">
+                <div class="sh-stat-val" style="color:var(--red);">Late FOMO</div>
+                <div class="sh-stat-lbl">Always buys at peak</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--wh);border:1.5px solid var(--bd);border-radius:18px;padding:clamp(16px,2.5vw,28px);box-shadow:var(--shc);">
+          <div class="sector-divider"><div class="sd-line"></div><div class="sd-label">The FOMO Pattern — Recognise Before You're In It</div><div class="sd-line"></div></div>
+          <div class="phase-steps">
+            <div class="phase-step">
+              <div class="ps-dot psd-g">1</div>
+              <div class="ps-content psc-g"><div class="ps-title">📈 Stock rises 30–50% — News starts</div><div class="ps-body">Good fundamentals drive initial move. Only informed, patient investors are in. Media coverage begins. Social media posts appear. Your friend casually mentions a "great stock."</div></div>
+            </div>
+            <div class="phase-step">
+              <div class="ps-dot psd-a">2</div>
+              <div class="ps-content psc-a"><div class="ps-title">🚀 Stock at +80–100% — FOMO begins spreading</div><div class="ps-body"><strong>This is where most retail investors first hear about the stock.</strong> News articles appear. YouTube videos. "Expert" commentary. Social media posts with screenshots of profits. The urge to "not miss out" begins. The stock is already up 100% from value investors' entry.</div></div>
+            </div>
+            <div class="phase-step">
+              <div class="ps-dot psd-a">3</div>
+              <div class="ps-content psc-a"><div class="ps-title">🤑 Stock at +150–200% — Mass FOMO buying</div><div class="ps-body">Everyone's talking about it. Mutual fund managers who missed it start buying to "not look silly" (institutional FOMO is real). <strong>The stock is now priced for perfection</strong> — any disappointment will cause a severe correction. But buying continues because "momentum" seems unstoppable.</div></div>
+            </div>
+            <div class="phase-step">
+              <div class="ps-dot psd-r">4</div>
+              <div class="ps-content psc-r"><div class="ps-title">💥 Correction begins — FOMO buyers panic</div><div class="ps-body">A minor negative — slightly lower guidance, a new competitor, or simply the stock being "expensive" — triggers selling. Smart money that bought early takes profits. <strong>FOMO buyers are now underwater.</strong> They hold hoping for recovery but the stock continues falling.</div></div>
+            </div>
+            <div class="phase-step">
+              <div class="ps-dot psd-r">5</div>
+              <div class="ps-content psc-r"><div class="ps-title">😔 −30–50% correction — FOMO buyers capitulate</div><div class="ps-body">Unable to take the pain, FOMO buyers finally sell at a loss — exactly when patient investors are considering buying again. <strong>The FOMO cycle creates a double loss</strong>: buying near the top AND selling near the next bottom.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="impact-cols">
+          <div class="impact-col ic-warning">
+            <div class="icol-label icl-a">Sectors Most Prone to FOMO</div>
+            <div class="icol-title">High-Growth, High-Hype Sectors</div>
+            <div class="icol-body"><strong>SME IPOs</strong> — small-cap new listings with retail FOMO subscription 200–500×. <strong>EV/New Tech</strong> — narrative-driven, hard to value. <strong>Defence</strong> during policy excitement. <strong>PSU stocks</strong> during disinvestment buzz. <strong>Mid/Small cap</strong> during bull market peaks. These sectors see the most FOMO-driven buying and the sharpest subsequent corrections.</div>
+            <div class="icol-stocks">
+              <div class="ics-row icsr-a"><div class="ics-name">SME IPOs (FY24 peak)</div><div class="ics-move icsm-a">300× subscribed → 60% crash</div></div>
+              <div class="ics-row icsr-a"><div class="ics-name">EV stocks 2021 peak</div><div class="ics-move icsm-a">Paytm IPO example</div></div>
+              <div class="ics-row icsr-a"><div class="ics-name">PSU rally 2024</div><div class="ics-move icsm-a">FOMO at 40× PE then −40%</div></div>
+            </div>
+          </div>
+          <div class="impact-col ic-neutral">
+            <div class="icol-label icl-p">How to Avoid FOMO</div>
+            <div class="icol-title">Rules to Protect Yourself</div>
+            <div class="icol-body"><strong>The 3 FOMO questions:</strong><br>1. Why do I want to buy this stock today?<br>2. Would I have bought it 6 months ago at half the price?<br>3. Is my reason "because others are making money"?<br><br>If your answer to #3 is yes — <strong>don't buy.</strong> You're experiencing FOMO, not making an investment decision. The best antidote is a disciplined SIP that removes emotion from timing entirely.</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="sector-divider"><div class="sd-line"></div><div class="sd-label">Real FOMO Market Examples</div><div class="sd-line"></div></div>
+          <div class="ex-grid">
+            <div class="ex-card ex-bear"><div class="ex-event">Paytm IPO — FOMO at ₹2,150</div><div class="ex-detail">India's largest IPO (₹18,300Cr). FOMO at IPO price ₹2,150. Listed at ₹1,955 (−9%). Fell to ₹440 within 18 months. Classic FOMO at peak — IPO buzz, celebrity endorsement, "can't miss" narrative.</div><div class="ex-result er-r">Paytm: ₹2,150 IPO → ₹440 (-79%)</div></div>
+            <div class="ex-card ex-bear"><div class="ex-event">Adani Rally FOMO — 2022 Peak</div><div class="ex-detail">Adani stocks rose 1,000–2,000% in 2 years. Retail FOMO buying peaked in Jan 2023 near all-time highs. Then Hindenburg report → stocks fell 40–70% in days. FOMO buyers at the top lost 50%+ immediately.</div><div class="ex-result er-r">FOMO buyers Jan 2023: −40 to −70% in weeks</div></div>
+            <div class="ex-card ex-bear"><div class="ex-event">SME IPO Frenzy FY24</div><div class="ex-detail">Multiple SME IPOs subscribed 300–500×. Investors applied for ₹5L allotment to get ₹10,000 worth. Many listed +100–200%, then crashed 50–70%. The FOMO was on listing gain, not the business.</div><div class="ex-result er-r">Average SME IPO FY24: +150% listing → −60% by year end</div></div>
+            <div class="ex-card ex-bear"><div class="ex-event">Crypto FOMO in India — 2021</div><div class="ex-detail">Bitcoin hit $65,000. Indian FOMO buying peaked. WazirX saw 10× user growth. Then Bitcoin fell to $15,000 (−77%). SEBI had repeatedly warned about crypto. FOMO buyers lost 50–80% of investment.</div><div class="ex-result er-r">India crypto FOMO buyers: −60–80% in 2022 correction</div></div>
+          </div>
+        </div>
+      </div><!-- /fomo -->
+
+
+      <!-- ═══ SPECULATIVE RALLY ═══ -->
+      <div class="sent-panel" id="sp-spec">
+        <div class="shero sh-spec">
+          <div class="shero-ico shi-spec">💥</div>
+          <div class="shero-body">
+            <div class="sh-eyebrow she-a">Narrative-Driven · Detached from Fundamentals · Bubbles Always Burst</div>
+            <div class="sh-title">Speculative Rally — When Story Replaces Substance</div>
+            <div class="sh-desc">A speculative rally occurs when stocks rise not because of actual earnings or growth — but because of an exciting <strong>narrative or theme</strong>. The narrative could be true (EVs will replace petrol cars) but the stock price gets so far ahead of reality (100× future earnings) that it becomes unsustainable. <strong>Speculative rallies in India:</strong> the EV theme (2020–21), the defence indigenisation theme (2022–23), the railway/infra theme (2023–24), and small/mid-cap bubbles. The pattern is always the same — a real theme gets extrapolated to impossible valuations, creating a bubble that eventually corrects back to fundamental value.</div>
+            <div class="shero-stats">
+              <div class="sh-stat" style="background:rgba(217,119,6,.1);border:1px solid rgba(217,119,6,.12);">
+                <div class="sh-stat-val" style="color:var(--ambr);">100×</div>
+                <div class="sh-stat-lbl">PE at peak bubbles</div>
+              </div>
+              <div class="sh-stat" style="background:rgba(217,119,6,.1);border:1px solid rgba(217,119,6,.12);">
+                <div class="sh-stat-val" style="color:var(--ambr);">Defence</div>
+                <div class="sh-stat-lbl">2022–23 speculation peak</div>
+              </div>
+              <div class="sh-stat" style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.12);">
+                <div class="sh-stat-val" style="color:var(--red);">−50–70%</div>
+                <div class="sh-stat-lbl">Average bubble correction</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--wh);border:1.5px solid var(--bd);border-radius:18px;padding:clamp(16px,2.5vw,28px);box-shadow:var(--shc);">
+          <div class="sector-divider"><div class="sd-line"></div><div class="sd-label">Warning Signs of a Speculative Rally</div><div class="sd-line"></div></div>
+          <div class="cs-grid-3">
+            <div style="background:var(--rpale);border:1px solid var(--rring);border-radius:12px;padding:14px;">
+              <div style="font-size:18px;margin-bottom:6px;">🚨</div>
+              <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:4px;">PE ratio 80–150×</div>
+              <div style="font-size:11.5px;color:var(--ts);">When P/E exceeds 80× for a non-tech sector stock, the market is pricing in years of perfect execution. Any disappointment = severe correction.</div>
+            </div>
+            <div style="background:var(--rpale);border:1px solid var(--rring);border-radius:12px;padding:14px;">
+              <div style="font-size:18px;margin-bottom:6px;">📰</div>
+              <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:4px;">Every media outlet covers it</div>
+              <div style="font-size:11.5px;color:var(--ts);">When a stock or sector is on front pages of newspapers and financial TV daily — the "smart money" bought months ago. Latecomers are the exit liquidity.</div>
+            </div>
+            <div style="background:var(--rpale);border:1px solid var(--rring);border-radius:12px;padding:14px;">
+              <div style="font-size:18px;margin-bottom:6px;">👥</div>
+              <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:4px;">Non-investors are buying</div>
+              <div style="font-size:11.5px;color:var(--ts);">When your barber, tailor, or auto-rickshaw driver tells you about a "hot stock" — the bubble is near its peak. This is not condescending; it's a historical market indicator.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="impact-cols">
+          <div class="impact-col ic-warning">
+            <div class="icol-label icl-a">India's Recurring Speculative Themes</div>
+            <div class="icol-title">Sectors That Attract Speculation</div>
+            <div class="icol-body">Every market cycle creates a new "theme" that attracts speculative money: <strong>2000:</strong> dot-com, IT. <strong>2007:</strong> Real estate, infra. <strong>2017:</strong> Small cap, midcap. <strong>2021:</strong> EV, tech startups. <strong>2022–23:</strong> Defence, railways. <strong>2024:</strong> SME IPOs, PSU stocks. The companies in each theme may be genuine — but prices get disconnected from any reasonable earning expectation.</div>
+            <div class="icol-stocks">
+              <div class="ics-row icsr-a"><div class="ics-name">Defence (HAL peak PE 65×)</div><div class="ics-move icsm-a">Later corrected −30%</div></div>
+              <div class="ics-row icsr-a"><div class="ics-name">RVNL (PE 100×+ at peak)</div><div class="ics-move icsm-a">Valuation concern flagged</div></div>
+              <div class="ics-row icsr-a"><div class="ics-name">Small cap index 2024</div><div class="ics-move icsm-a">SEBI valuations warning</div></div>
+            </div>
+          </div>
+          <div class="impact-col ic-neutral">
+            <div class="icol-label icl-p">How to Tell Theme from Speculation</div>
+            <div class="icol-title">Fundamental Test vs Story Test</div>
+            <div class="icol-body"><strong>Fundamental test:</strong> At this price, how many years of perfect 30% earnings growth does the stock require to justify the valuation? If the answer is 15+ years — it's speculation, not investment.<br><br><strong>Story test:</strong> Can you explain WHY this stock is worth its current price using actual numbers — not "huge opportunity" or "India's infrastructure boom"? If you can only tell a story, not show the numbers, you're speculating.</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="sector-divider"><div class="sd-line"></div><div class="sd-label">Real Speculative Rally Examples</div><div class="sd-line"></div></div>
+          <div class="ex-grid">
+            <div class="ex-card ex-bull"><div class="ex-event">Defence Speculation — HAL Peak 2024</div><div class="ex-detail">HAL reached PE of 65× — pricing in 20 years of perfect execution. The underlying business is genuinely excellent. But at 65× PE, even good news couldn't push the stock higher. Stock corrected 25–30% without any bad news.</div><div class="ex-result er-a">HAL: PE 65× peak → corrected −25% without bad news</div></div>
+            <div class="ex-card ex-bear"><div class="ex-event">RVNL at 100× PE — Rail Bubble</div><div class="ex-detail">RVNL, a genuine railway infra company, reached PE above 100× in 2024. SEBI flagged small/midcap valuations. RVNL fell 40%+ from peak as investors rotated to reasonably valued stocks.</div><div class="ex-result er-r">RVNL: 100× PE peak → −40% correction</div></div>
+            <div class="ex-card ex-bear"><div class="ex-event">2017–18 Midcap Bubble</div><div class="ex-detail">Nifty Midcap rose 175% from 2016 to 2018 peak. Many midcap stocks traded at 50–80× PE. SEBI introduced "correct categorisation" rules in 2017 — triggered massive selling. Midcap index fell 35% in 2018–19.</div><div class="ex-result er-r">Nifty Midcap: −35% correction 2018–19</div></div>
+            <div class="ex-card ex-bull"><div class="ex-event">EV Stocks — Genuine Theme, Speculative Prices</div><div class="ex-detail">Tata Motors EV narrative was real. Stock tripled in 18 months. But at peak, investors were paying for 20+ years of future EV profits. Correction of 30–40% in 2022 gave more patient investors better entry.</div><div class="ex-result er-a">Tata Motors: Genuine EV story, but speculative peak prices</div></div>
+          </div>
+        </div>
+      </div><!-- /spec -->
+
+
+      <!-- ═══ SOCIAL MEDIA TRENDS ═══ -->
+      <div class="sent-panel" id="sp-social">
+        <div class="shero sh-social">
+          <div class="shero-ico shi-social">📱</div>
+          <div class="shero-body">
+            <div class="sh-eyebrow she-pk">Viral · Twitter/X · YouTube · Telegram Groups · Reddit India</div>
+            <div class="sh-title">Social Media Trends — When Viral Goes Financial</div>
+            <div class="sh-desc">Social media has fundamentally changed market dynamics in India. With 10Cr+ retail investors — many active on Twitter/X, YouTube finance channels, Telegram stock groups, and Instagram — a single viral post or video can move stocks by 5–15% in hours. <strong>The WallStreetBets phenomenon (GameStop in the US) found its Indian equivalent</strong> in Twitter-driven rallies on certain stocks. But social media also spreads misinformation rapidly — distinguishing genuine information from hype or manipulation is the critical skill.</div>
+            <div class="shero-stats">
+              <div class="sh-stat" style="background:rgba(190,24,93,.1);border:1px solid rgba(190,24,93,.12);">
+                <div class="sh-stat-val" style="color:var(--pink);">10Cr+</div>
+                <div class="sh-stat-lbl">India retail investors</div>
+              </div>
+              <div class="sh-stat" style="background:rgba(190,24,93,.1);border:1px solid rgba(190,24,93,.12);">
+                <div class="sh-stat-val" style="color:var(--pink);">Telegram</div>
+                <div class="sh-stat-lbl">10M+ financial groups</div>
+              </div>
+              <div class="sh-stat" style="background:rgba(190,24,93,.1);border:1px solid rgba(190,24,93,.12);">
+                <div class="sh-stat-val" style="color:var(--pink);">±15%</div>
+                <div class="sh-stat-lbl">Viral post stock move</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="impact-cols">
+          <div class="impact-col" style="border-color:var(--pinkring);background:linear-gradient(158deg,var(--pinkpale),#fff);">
+            <div class="icol-label" style="color:var(--pink);">Social Media Market Impact — Positive Triggers</div>
+            <div class="icol-title">Viral Content That Moves Markets Legitimately</div>
+            <div class="icol-body"><strong>CEO tweet about major order win</strong> — Immediate +5–8% stock reaction. <strong>Finance influencer highlights undervalued stock</strong> — retail buying follows, stock rises. <strong>Product goes viral</strong> (a company's product featured positively on social media) — brand value and consumer perception improves, reflected in stock. <strong>Strong quarterly result shared widely</strong> — accelerates institutional attention and stock re-rating.</div>
+            <div class="icol-stocks">
+              <div class="ics-row" style="background:rgba(190,24,93,.07);"><div class="ics-name">CEO LinkedIn/Twitter positive update</div><div class="ics-move" style="color:var(--pink);">+3–8% same day</div></div>
+              <div class="ics-row" style="background:rgba(190,24,93,.07);"><div class="ics-name">SEBI-registered analyst tweet</div><div class="ics-move" style="color:var(--pink);">Retail buying follows</div></div>
+            </div>
+          </div>
+          <div class="impact-col ic-fear">
+            <div class="icol-label icl-r">Social Media — The Dark Side</div>
+            <div class="icol-title">Manipulation, Pump-and-Dump, Fake News</div>
+            <div class="icol-body"><strong>Pump and dump:</strong> Coordinated buying of a penny stock followed by social media promotion → stock rises → promoters sell → stock crashes. SEBI has prosecuted multiple such cases. <strong>Fake screenshots</strong> of "insider tips" circulated on WhatsApp/Telegram. <strong>Unregistered "finfluencers"</strong> promoting stocks they hold without disclosure. Always check: Is the person SEBI-registered? Do they own the stock? Is there a verifiable source?</div>
+            <div class="icol-stocks">
+              <div class="ics-row icsr-r"><div class="ics-name">Penny stock pumps</div><div class="ics-move icsm-r">+200% then −90%</div></div>
+              <div class="ics-row icsr-r"><div class="ics-name">WhatsApp "tips"</div><div class="ics-move icsm-r">Often misleading</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sectors most affected by social media -->
+        <div style="background:linear-gradient(158deg,var(--pinkpale),#fdf2f8);border:1.5px solid var(--pinkring);border-radius:18px;padding:clamp(16px,2.5vw,26px);">
+          <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--pink);margin-bottom:14px;">Sectors Most Moved by Social Media Trends in India</div>
+          <div class="meter-section">
+            <div class="meter-row"><div class="meter-label">SME/Small Cap</div><div class="meter-track"><div class="meter-fill" style="--tw:100%;background:linear-gradient(90deg,var(--pink),#db2777);"></div></div><div class="meter-tag" style="background:var(--pinkpale);color:var(--pink);">Most susceptible</div></div>
+            <div class="meter-row"><div class="meter-label">Defence/Rail PSU</div><div class="meter-track"><div class="meter-fill" style="--tw:80%;background:linear-gradient(90deg,var(--pink),#db2777);"></div></div><div class="meter-tag" style="background:var(--pinkpale);color:var(--pink);">High exposure</div></div>
+            <div class="meter-row"><div class="meter-label">EV / New Tech</div><div class="meter-track"><div class="meter-fill" style="--tw:75%;background:linear-gradient(90deg,var(--pink),#db2777);"></div></div><div class="meter-tag" style="background:var(--pinkpale);color:var(--pink);">Narrative-driven</div></div>
+            <div class="meter-row"><div class="meter-label">IPO stocks</div><div class="meter-track"><div class="meter-fill" style="--tw:70%;background:linear-gradient(90deg,var(--pink),#db2777);"></div></div><div class="meter-tag" style="background:var(--pinkpale);color:var(--pink);">Heavy retail hype</div></div>
+            <div class="meter-row"><div class="meter-label">Large Cap (Nifty 50)</div><div class="meter-track"><div class="meter-fill" style="--tw:25%;background:linear-gradient(90deg,var(--pink),#db2777);"></div></div><div class="meter-tag" style="background:var(--pinkpale);color:var(--pink);">Largely insulated</div></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="sector-divider"><div class="sd-line"></div><div class="sd-label">Real Social Media Market Examples</div><div class="sd-line"></div></div>
+          <div class="ex-grid">
+            <div class="ex-card ex-pink"><div class="ex-event">Zerodha Viral Growth — FY21</div><div class="ex-detail">Zerodha's social media-friendly approach (YouTube, Twitter finance community) helped it acquire 1Cr customers in FY21 — during COVID. Democratised investing for young India. Positive social media for the broader investing ecosystem.</div><div class="ex-result er-pk">India demat accounts: 3.5Cr (2020) → 15Cr (2024)</div></div>
+            <div class="ex-card ex-bear"><div class="ex-event">SEBI Action on Finfluencers 2023</div><div class="ex-detail">SEBI warned and fined multiple financial influencers for promoting stocks without SEBI registration and disclosure. Action against 4 finfluencers with 8M+ combined followers. Stocks they promoted fell 30–60% after SEBI investigation.</div><div class="ex-result er-r">SEBI fined finfluencers · Promoted stocks −30–60%</div></div>
+            <div class="ex-card ex-bull"><div class="ex-event">Honest Earnings Commentary Goes Viral</div><div class="ex-detail">When TCS CEO's confidence in guidance was widely shared on Twitter, it accelerated institutional buying and analyst upgrades. Viral CEO confidence = faster stock re-rating than wait for next quarter results.</div><div class="ex-result er-g">CEO guidance viral sharing → faster institutional action</div></div>
+            <div class="ex-card ex-bear"><div class="ex-event">WhatsApp "Multibagger Tips" Trap</div><div class="ex-detail">SEBI investigated coordinated WhatsApp groups pumping penny stocks. In one case: stock rose 300% from ₹8 to ₹32 in a week on WhatsApp tips — then crashed to ₹4 as pump-and-dump operators exited. Retail investors in the group lost 87.5%.</div><div class="ex-result er-r">Penny stock pump victim: ₹32 → ₹4 (−87.5%)</div></div>
+          </div>
+        </div>
+      </div><!-- /social -->
+
+
+      <!-- ═══ RUMOURS ═══ -->
+      <div class="sent-panel" id="sp-rumor">
+        <div class="shero sh-rumor">
+          <div class="shero-ico shi-rumor">🗣️</div>
+          <div class="shero-body">
+            <div class="sh-eyebrow she-p">Unverified · Two-Way Risk · "Buy the Rumour, Sell the News"</div>
+            <div class="sh-title">Rumours — The Two-Edged Sword of Market Information</div>
+            <div class="sh-desc">Rumours are unverified pieces of information that circulate in markets — about M&amp;A deals, management changes, regulatory decisions, government contracts, or company results. <strong>Rumours cause immediate stock price reactions</strong> before any official confirmation, because markets price probabilities not certainties. The famous market saying <strong>"buy the rumour, sell the news"</strong> captures a real pattern: stocks often rise on a rumour and then fall when the news is officially confirmed — because the good news was already priced in. Acting on rumours without verification is also SEBI-prohibited insider trading if you have actual material non-public information.</div>
+            <div class="shero-stats">
+              <div class="sh-stat" style="background:rgba(109,40,217,.1);border:1px solid rgba(109,40,217,.12);">
+                <div class="sh-stat-val" style="color:var(--p);">±5–15%</div>
+                <div class="sh-stat-lbl">Typical rumour move</div>
+              </div>
+              <div class="sh-stat" style="background:rgba(109,40,217,.1);border:1px solid rgba(109,40,217,.12);">
+                <div class="sh-stat-val" style="color:var(--p);">"Buy rumour"</div>
+                <div class="sh-stat-lbl">Sell news pattern</div>
+              </div>
+              <div class="sh-stat" style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.12);">
+                <div class="sh-stat-val" style="color:var(--red);">Insider trading</div>
+                <div class="sh-stat-lbl">If material non-public info</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--wh);border:1.5px solid var(--bd);border-radius:18px;padding:clamp(16px,2.5vw,28px);box-shadow:var(--shc);">
+          <div class="sector-divider"><div class="sd-line"></div><div class="sd-label">How Rumours Move Stocks — Both Directions</div><div class="sd-line"></div></div>
+          <div class="phase-steps">
+            <div class="phase-step">
+              <div class="ps-dot psd-a">1</div>
+              <div class="ps-content psc-a"><div class="ps-title">🗣️ Rumour Emerges — Stock Moves Immediately</div><div class="ps-body">A WhatsApp forward, Twitter post, or "market source" claims: "Company X is being acquired by Company Y at 40% premium." Stock X immediately rallies 10–15% as traders buy on the possibility. This price movement happens before any official confirmation.</div></div>
+            </div>
+            <div class="phase-step">
+              <div class="ps-dot psd-g">2</div>
+              <div class="ps-content psc-g"><div class="ps-title">✅ Rumour True → "Sell the News"</div><div class="ps-body">If the rumour is confirmed, the stock often <strong>falls back</strong> as traders who bought on the rumour sell into the official announcement — locking in their gains. "Buy the rumour, sell the news" — the confirmation removes the upside optionality, so smart traders exit.</div></div>
+            </div>
+            <div class="phase-step">
+              <div class="ps-dot psd-r">3</div>
+              <div class="ps-content psc-r"><div class="ps-title">❌ Rumour False → Immediate Reversal</div><div class="ps-body">If the company officially denies the rumour (required under SEBI listing obligations), the stock falls back — sometimes below its pre-rumour price as disappointed buyers exit. The investor who bought on the rumour suffers a double loss: bought at the elevated rumour price, sold below the pre-rumour price.</div></div>
+            </div>
+            <div class="phase-step">
+              <div class="ps-dot psd-p">4</div>
+              <div class="ps-content psc-p"><div class="ps-title">⚖️ Legal Risk — SEBI's Insider Trading Rules</div><div class="ps-body">Buying a stock on actual material non-public information (even if received as a "rumour") is <strong>insider trading</strong> — a criminal offence under SEBI regulations. "I heard it on WhatsApp" is not a valid legal defence if the information is later proven material and non-public. SEBI investigates unusual trading volumes before major announcements regularly.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="impact-cols">
+          <div class="impact-col ic-warning">
+            <div class="icol-label icl-a">High Rumour-Prone Sectors</div>
+            <div class="icol-title">Industries Where Rumours Most Frequently Move Stocks</div>
+            <div class="icol-body"><strong>Banking/NBFC</strong> — M&amp;A consolidation rumours, NPA rumours, RBI action rumours. <strong>Telecom</strong> — spectrum auction, merger speculation. <strong>Pharma</strong> — drug approval rumours, USFDA outcome speculation. <strong>PSU</strong> — disinvestment and privatisation rumours. <strong>Real estate</strong> — land acquisition, policy change rumours. These sectors have the most "confirmed" and "false" rumour cycles in Indian markets.</div>
+          </div>
+          <div class="impact-col ic-neutral">
+            <div class="icol-label icl-p">How to Handle Rumours Safely</div>
+            <div class="icol-title">The 5 Rules for Rumour Management</div>
+            <div class="icol-body">1. <strong>Never act on an unverified WhatsApp/Telegram "tip"</strong> — this is both risky and potentially illegal<br>2. <strong>Check BSE/NSE exchange filings</strong> — all material info must be disclosed here first<br>3. <strong>If you're already holding</strong> a stock with a positive rumour, reassess whether your original thesis still holds — not whether the rumour is true<br>4. <strong>Don't chase stocks</strong> already risen on rumours<br>5. <strong>Assume you have last information</strong> — the person spreading the rumour bought before you</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="sector-divider"><div class="sd-line"></div><div class="sd-label">Real Rumour Market Examples</div><div class="sd-line"></div></div>
+          <div class="ex-grid">
+            <div class="ex-card ex-neutral"><div class="ex-event">"Reliance Acquiring X" — Recurring Pattern</div><div class="ex-detail">Multiple times, rumours of Reliance Industries acquiring various companies (banks, media cos) have moved both Reliance and target stocks 5–8% intraday. Some were confirmed, many were denied. BSE sends "rumour verification" queries to companies daily.</div><div class="ex-result er-a">Reliance: Frequent rumour target · Mixed outcomes</div></div>
+            <div class="ex-card ex-bull"><div class="ex-event">Merger Rumour — Yes Bank Rescue</div><div class="ex-detail">Multiple rumours of SBI/other bank rescuing Yes Bank circulated for months. Each rumour rallied Yes Bank 15–25%. When SBI's rescue was officially announced, Yes Bank surged 60%+ in 3 sessions as the rumour was confirmed definitively.</div><div class="ex-result er-g">Yes Bank: +60%+ when SBI rescue confirmed</div></div>
+            <div class="ex-card ex-bear"><div class="ex-event">"SEBI Action Imminent" — False Rumour</div><div class="ex-detail">False rumours of imminent SEBI action on specific brokerages circulated in 2022. Broker stocks fell 8–12% intraday. Companies had to issue denial clarifications. Stocks recovered — but investors who sold on the false rumour locked in real losses.</div><div class="ex-result er-r">Broker stocks: −8–12% intraday on false SEBI rumour</div></div>
+            <div class="ex-card ex-neutral"><div class="ex-event">"Buy the Rumour Sell News" — Classic</div><div class="ex-detail">Many Budget-season stocks: Infra, defence, railways all rally in Jan–Feb on "expected" Budget announcements. When Budget confirms the expected capex push, stocks often fall 2–5% as the expected news was already priced into pre-Budget rally.</div><div class="ex-result er-a">Pre-Budget rally + Budget day sell-off — consistent pattern</div></div>
+          </div>
+        </div>
+      </div><!-- /rumor -->
+
+    </div><!-- /sent-panels -->
+  </div>
+</section>
+
+
+<!-- DEMAT BANNER 1 -->
+<div class="dmbanner rv">
+  <div class="dml">
+    <div class="dmtag">Stay Rational While Others Panic</div>
+    <div class="dmh">COVID Crashed Markets 38%.<br><span class="dmhs">Calm Investors Earned 80% in 12 Months.</span></div>
+    <div class="dmsub">Sentiment events create the best buying opportunities and the worst selling traps. With a demat account, a written investment plan, and the discipline to act on fundamentals — not fear or FOMO — you become the investor who profits from others' emotional mistakes, not the one making them.</div>
+    <div class="dmfeats">
+      <div class="dmf">₹0 Account Opening Fee</div>
+      <div class="dmf">SIP for Emotion-Free Investing</div>
+      <div class="dmf">Fear &amp; Greed Index Alerts</div>
+      <div class="dmf">SEBI Registered · CDSL Linked</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">🚀</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">4.8 · 2M+ Investors · SEBI Registered</span></div>
+    <div class="dmnote">✦ ₹0 Opening Fee &nbsp;·&nbsp; ✦ ₹0 AMC First Year &nbsp;·&nbsp; ✦ Instant KYC &nbsp;·&nbsp; ✦ 10 Min Setup</div>
+  </div>
+</div>
+
+
+<!-- 03 — MASTER TABLE -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">03 — Master Reference</div>
+    <h2 class="h2 rv d2">Sentiment Events × Sector <span class="hp">Impact Quick Reference</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">When any sentiment event strikes — scan this table to know immediately which sectors are most impacted and what the typical investor response should be:</p>
+
+    <div class="master-table-wrap rv d4">
+      <div class="master-scroll">
+        <table class="master-table">
+          <thead>
+            <tr><th>Sentiment Event</th><th>🔴 Most Impacted (Negatively)</th><th>🟢 Relatively Safe / Benefits</th><th>💡 Right Action</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>😱 Panic Selling (broad)</td><td><span class="mpill mp-r">Banking (FII exit)</span><span class="mpill mp-r">Aviation</span><span class="mpill mp-r">Hotels/Tourism</span><span class="mpill mp-r">Midcap</span></td><td><span class="mpill mp-g">Pharma</span><span class="mpill mp-g">FMCG (defensive)</span><span class="mpill mp-g">Gold ETF</span><span class="mpill mp-g">IT exporters</span></td><td><span class="mpill mp-p">Hold / Buy quality on dips</span></td></tr>
+            <tr><td>😱 Sector-Specific Panic</td><td><span class="mpill mp-r">The specific sector in news</span><span class="mpill mp-r">Peers of that sector</span></td><td><span class="mpill mp-g">Unrelated sectors</span></td><td><span class="mpill mp-p">Analyse if fundamental or sentiment</span></td></tr>
+            <tr><td>🚀 FOMO Buying Peak</td><td><span class="mpill mp-r">Future buyers (buying at peak)</span><span class="mpill mp-r">Late retail investors</span></td><td><span class="mpill mp-g">Early buyers (exit liquidity)</span></td><td><span class="mpill mp-p">Don't chase · Evaluate fundamentals</span></td></tr>
+            <tr><td>💥 Speculative Rally (SME/theme)</td><td><span class="mpill mp-r">Latecomers buying at peak PE</span><span class="mpill mp-r">The speculative sector post-peak</span></td><td><span class="mpill mp-g">Value stocks (capital rotates back)</span></td><td><span class="mpill mp-p">Check PE ratio · Avoid &gt;80× PE</span></td></tr>
+            <tr><td>📱 Social Media Positive Viral</td><td>—</td><td><span class="mpill mp-g">The mentioned stock (short-term)</span><span class="mpill mp-g">Retail engagement sectors</span></td><td><span class="mpill mp-p">Verify source · Don't chase</span></td></tr>
+            <tr><td>📱 Social Media Manipulation</td><td><span class="mpill mp-r">Retail investors following "tips"</span><span class="mpill mp-r">Penny stocks post-pump</span></td><td>—</td><td><span class="mpill mp-p">Ignore unregistered finfluencer tips</span></td></tr>
+            <tr><td>🗣️ Positive Rumour (M&amp;A)</td><td>—</td><td><span class="mpill mp-g">Target company (+10–30%)</span><span class="mpill mp-g">Sector peers</span></td><td><span class="mpill mp-p">Wait for official confirmation (BSE)</span></td></tr>
+            <tr><td>🗣️ Negative Rumour (NPA, scam)</td><td><span class="mpill mp-r">Named company (−10–30%)</span><span class="mpill mp-r">Sector peers (contagion)</span></td><td>—</td><td><span class="mpill mp-p">Check exchange filings before acting</span></td></tr>
+            <tr><td>📰 "Buy Rumour Sell News"</td><td><span class="mpill mp-r">Those who buy on the news day</span></td><td><span class="mpill mp-g">Those who bought on the rumour phase</span></td><td><span class="mpill mp-p">Don't buy stocks already reflecting the news</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 04 — INVESTOR PROTECTION STRATEGIES -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">04 — Protect Yourself</div>
+    <h2 class="h2 rv d2">6 Rules for <span class="hp">Sentiment-Proof Investing</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Knowing about sentiment events is only half the battle — the other half is having the systems and rules to prevent your own emotions from making costly decisions. Here are six practical protections:</p>
+
+    <div class="lk-grid rv d4">
+      <div class="lk-card">
+        <div class="lk-ico">📋</div>
+        <div class="lk-label">Rule 1</div>
+        <div class="lk-title">Write Down Your Investment Thesis Before Buying</div>
+        <div class="lk-body">Before buying any stock, write down: why you're buying, what price makes it cheap, and what would make you sell. When panic hits, re-read this before acting. If the facts haven't changed — don't sell. If the facts have changed — sell based on logic, not fear. A written thesis is your emotional anchor during volatility.</div>
+      </div>
+      <div class="lk-card">
+        <div class="lk-ico">🔄</div>
+        <div class="lk-label">Rule 2</div>
+        <div class="lk-title">SIP Removes the Timing Problem Entirely</div>
+        <div class="lk-body">A Systematic Investment Plan (SIP) in mutual funds or ETFs invests a fixed amount every month — regardless of market level. It automatically buys more units when prices are low (panic) and fewer when prices are high (FOMO). SIP makes market volatility work for you instead of against you. The emotion is removed by design.</div>
+      </div>
+      <div class="lk-card">
+        <div class="lk-ico">📵</div>
+        <div class="lk-label">Rule 3</div>
+        <div class="lk-title">Silence the Noise During Market Panics</div>
+        <div class="lk-body">During panic events (−5%+ market drop), reduce your news consumption to once daily maximum. Remove stock apps from your home screen temporarily. The urge to check every 5 minutes during a crash is driven by fear — and fear drives bad decisions. The best action during a panic is often no action. Check your portfolio weekly, not hourly.</div>
+      </div>
+      <div class="lk-card">
+        <div class="lk-ico">🧮</div>
+        <div class="lk-label">Rule 4</div>
+        <div class="lk-title">Value the Business — Not the Stock Price</div>
+        <div class="lk-body">When a stock falls 30%, ask: did the company's earnings fall 30%? Did management change? Did the competitive position worsen? If none of these changed — the stock is just cheaper. This is the Warren Buffett approach: stocks are ownership in businesses, not lottery tickets. If the business is fine, the price drop is a sale, not a disaster.</div>
+      </div>
+      <div class="lk-card">
+        <div class="lk-ico">🚫</div>
+        <div class="lk-label">Rule 5</div>
+        <div class="lk-title">Never Act on WhatsApp/Telegram Stock Tips</div>
+        <div class="lk-body">Every stock tip in an unverified group benefits the person who sent it — not you. They bought before telling you. Always check: (1) Is this person SEBI-registered? (2) Do they hold the stock? (3) Is there an exchange filing confirming this? If not — ignore completely. SEBI-registered research analysts must disclose stock holdings and are legally accountable.</div>
+      </div>
+      <div class="lk-card">
+        <div class="lk-ico">📅</div>
+        <div class="lk-label">Rule 6</div>
+        <div class="lk-title">Rebalance Annually — Not Based on Sentiment</div>
+        <div class="lk-body">Set your target allocation (eg. 70% equity, 20% debt, 10% gold) and rebalance once a year — not every time market sentiment changes. Rebalancing forces you to sell what's expensive (euphoria) and buy what's cheap (panic) systematically. This contrarian action — sell high, buy low — is exactly the opposite of what sentiment drives most investors to do.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- DEMAT BANNER 2 -->
+<div class="dmbanner rv">
+  <div class="dml">
+    <div class="dmtag">Discipline Over Emotion</div>
+    <div class="dmh">The Best Investors Buy When<br><span class="dmhs">Everyone Else Is Panicking.</span></div>
+    <div class="dmsub">The investors who build the most wealth are not the smartest — they're the most disciplined. They buy during panic, avoid FOMO, skip speculative hype, and ignore WhatsApp tips. A demat account, a written plan, and a monthly SIP is all the system you need. The rest is psychology.</div>
+    <div class="dmfeats">
+      <div class="dmf">SIP — Emotion-Free Investing</div>
+      <div class="dmf">Fear &amp; Greed Indicator Alerts</div>
+      <div class="dmf">Verified SEBI Research Only</div>
+      <div class="dmf">Portfolio Rebalancing Tools</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar" style="color:#a78bfa;">★</span><span class="dmstar" style="color:#a78bfa;">★</span><span class="dmstar" style="color:#a78bfa;">★</span><span class="dmstar" style="color:#a78bfa;">★</span><span class="dmstar" style="color:#a78bfa;">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- 05 — SUMMARY -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">05 — Summary</div>
+    <h2 class="h2 rv d2">Key Takeaways at a <span class="hg">Glance</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Five sentiment truths every investor must internalise — not just understand intellectually, but carry into every market decision:</p>
+
+    <div class="cs-grid-alt" class="rv d4">
+      <div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;">MARKET SENTIMENT · ESSENTIALS</div>
+        <h3 style="font-size:clamp(22px,3.5vw,36px);font-weight:900;color:var(--tx);letter-spacing:-1px;line-height:1.08;margin-bottom:14px;">Five truths every investor must <span style="background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">internalise.</span></h3>
+
+        <div style="background:var(--wh);border:1.5px solid var(--bd);border-radius:16px;padding:20px;box-shadow:var(--shc);">
+          <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:12px;">The Contrarian Checklist</div>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="padding:7px 10px;background:var(--rpale);border-radius:8px;font-size:11.5px;font-weight:600;color:var(--red);">😱 Everyone panicking → Best time to BUY quality</div>
+            <div style="padding:7px 10px;background:var(--apale);border-radius:8px;font-size:11.5px;font-weight:600;color:var(--ambr);">🚀 Everyone excited → Time to REVIEW your holdings</div>
+            <div style="padding:7px 10px;background:var(--rpale);border-radius:8px;font-size:11.5px;font-weight:600;color:var(--red);">💥 Everyone talking about a stock → Possibly already peaked</div>
+            <div style="padding:7px 10px;background:var(--pinkpale);border-radius:8px;font-size:11.5px;font-weight:600;color:var(--pink);">📱 WhatsApp tip arrives → Likely a pump, not a tip</div>
+            <div style="padding:7px 10px;background:var(--pxl);border-radius:8px;font-size:11.5px;font-weight:600;color:var(--p);">🗣️ Rumour moves a stock → Check BSE/NSE first</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tways">
+        <div class="twi"><div class="twico twr">😱</div><div class="twtext"><strong>Panic selling is the most expensive mistake retail investors make.</strong> COVID crashed Nifty −38% in 40 days. Those who sold at 7,500 needed Nifty to return to 7,500 to break even — it never came back. Those who held — or bought — earned +80% in 12 months. Every major market panic in history has been a buying opportunity in hindsight. The key is having enough conviction in quality businesses to hold through the storm.</div></div>
+        <div class="twi"><div class="twico twg">🚀</div><div class="twtext"><strong>FOMO is just as dangerous as panic — it's greed misidentified as opportunity.</strong> The investor who buys a stock after hearing friends made money has already missed the opportunity. They're not entering early — they're entering late. FOMO buyers reliably buy near peaks and panic sell near bottoms. An SIP removes FOMO completely by making investing automatic and unemotional.</div></div>
+        <div class="twi"><div class="twico twb">💥</div><div class="twtext"><strong>Speculative rallies are always obvious in hindsight — the hard part is resisting in real-time.</strong> When PE ratios hit 80–100× for non-tech companies, the market is pricing in 15–20 years of perfect execution. Any disappointment causes catastrophic corrections. The valuation discipline rule: if you can't justify the price with realistic 5-year earnings projections, don't buy regardless of how exciting the narrative sounds.</div></div>
+        <div class="twi"><div class="twico twpk">📱</div><div class="twtext"><strong>Social media has democratised investing — but also democratised misinformation.</strong> India's 10Cr+ retail investors are both a strength and a vulnerability for markets. Follow only SEBI-registered research analysts. Any "tip" from an unregistered source benefits them, not you. The Telegram group admin bought before sending you the message. SEBI investigates unusual pre-announcement trading — don't be caught in that net.</div></div>
+        <div class="twi"><div class="twico twp">🗣️</div><div class="twtext"><strong>Rumours create short-term volatility but fundamental value always wins long-term.</strong> "Buy the rumour, sell the news" — but only if you caught the rumour early. Late-stage rumour buying is the same as FOMO. For every confirmed rumour that made money, there are 5 false rumours that lost money. Invest in businesses whose earnings growth you can predict — not in news flow you can't control.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- NEXT CHAPTER -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue your learning journey →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span style="font-size:20px;">→</span></a>
+</div>
+
+<!-- DISCLAIMER -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(12px,1.4vw,13px);color:#78350f;line-height:1.72;">This page is for educational purposes only. All market examples, stock price moves, percentage changes, and sentiment patterns described are illustrative and based on historical events for educational reference — they are not investment advice or recommendations. Past market sentiment patterns do not guarantee future outcomes. Market psychology can lead to irrational price moves in either direction for extended periods. All investments carry market risk. Always consult a SEBI-registered financial advisor before making investment decisions. Never act on unverified information from social media or messaging platforms.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+const io=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('on');io.unobserve(el.target);}});},{threshold:0.05,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+document.addEventListener('touchstart',function(){},{passive:true});
+document.addEventListener('touchmove',function(){},{passive:true});
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelectorAll('.rv').forEach(el=>el.classList.add('on'));}
+
+function setGauge(val,label,col,deg){
+  const n=document.getElementById('gauge-needle');
+  const num=document.getElementById('gauge-num');
+  const state=document.getElementById('gauge-state');
+  if(n){n.style.setProperty('--needle-deg',deg+'deg');n.style.transform=`translateX(-50%) rotate(${deg}deg)`;}
+  if(num){num.textContent=val;num.style.color=col;}
+  if(state){state.textContent=label;state.style.color=col;}
+}
+
+document.querySelectorAll('.sent-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const s=btn.dataset.sent;
+    document.querySelectorAll('.sent-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.sent-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    const panel=document.getElementById('sp-'+s);
+    if(panel)panel.classList.add('active');
+    document.querySelector('.sent-panels').scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+});
+</script>
+</body>
+</html>

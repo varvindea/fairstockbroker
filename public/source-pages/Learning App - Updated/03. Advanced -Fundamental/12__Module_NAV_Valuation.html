@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NAV Valuation">
+<meta name="theme-color" content="#6d28d9">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no,address=no">
+<meta name="msapplication-tap-highlight" content="no">
+<title>NAV-Based Valuation · Advanced Valuation · Module 12</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --sky:#0284c7;--skypale:#f0f9ff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;overflow-x:hidden;overscroll-behavior-y:none;}
+a{-webkit-tap-highlight-color:transparent;}button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--sf);}::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hr{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(28px,7.5vw,84px);font-weight:900;letter-spacing:-3px;line-height:.92;margin-bottom:12px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(13px,3.2vw,38px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:640px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hst{position:relative;z-index:2;display:flex;flex-wrap:wrap;border:1px solid var(--bd);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.76);backdrop-filter:blur(10px);animation:fsu .88s ease .46s both;box-shadow:var(--shc);width:100%;max-width:960px;}
+.hsi{padding:clamp(10px,1.8vw,20px) clamp(8px,1.8vw,18px);text-align:center;border-right:1px solid var(--bd);flex:1 1 0;min-width:0;}
+.hsi:last-child{border-right:none;}
+.hsv{font-size:clamp(10px,1.4vw,15px);font-weight:900;letter-spacing:-.3px;line-height:1.15;white-space:normal;word-break:break-word;background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.g{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.r{background:linear-gradient(135deg,var(--red),#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsv.a{background:linear-gradient(135deg,var(--ambr),var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsl{font-size:clamp(7px,.85vw,9px);font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--ts);margin-top:3px;white-space:normal;word-break:break-word;line-height:1.3;}
+/* KLO */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:6px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.kpill-s{background:rgba(2,132,199,.1);color:var(--sky);border:1px solid rgba(2,132,199,.18);}
+.klo-hi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;}
+.klo-hi{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--shc);}
+.klo-hi-ico{font-size:22px;margin-bottom:6px;}
+.klo-hi-val{font-size:clamp(12px,1.8vw,15px);font-weight:900;letter-spacing:-.3px;}
+.klo-hi-val.purple{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.green{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.amber{color:var(--ambr);}
+.klo-hi-val.red{color:var(--red);}
+.klo-hi-lbl{font-size:10px;color:var(--tl);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:3px;}
+/* CONCEPT GRID */
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:start;}
+.step-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:16px;padding:18px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:var(--shc);transition:border-color .25s,box-shadow .25s;}
+.step-card:hover{border-color:rgba(109,40,217,.3);box-shadow:var(--shp);}
+.step-num{width:36px;height:36px;min-width:36px;border-radius:10px;color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-body h4{font-size:14px;font-weight:800;color:var(--tx);margin-bottom:4px;}
+.step-body p{font-size:12.5px;color:var(--ts);line-height:1.58;}
+.infographic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.infographic-svg{width:100%;max-width:430px;animation:floatB 4.5s ease-in-out infinite;}
+.infographic-cap{font-size:11px;font-weight:600;color:var(--ts);text-align:center;line-height:1.55;}
+/* NAV MODULE-SPECIFIC */
+/* Asset category cards */
+.asset-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,18px);margin-bottom:24px;}
+.asset-card{border-radius:18px;padding:clamp(14px,2.5vw,24px);border:1.5px solid;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;}
+.asset-card:hover{transform:translateY(-3px);box-shadow:var(--shp);}
+.asset-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:4px 4px 0 0;}
+.ac-land{background:linear-gradient(158deg,rgba(109,40,217,.05),rgba(109,40,217,.01));border-color:rgba(109,40,217,.2);}
+.ac-land::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.ac-completed{background:linear-gradient(158deg,rgba(22,163,74,.05),rgba(22,163,74,.01));border-color:rgba(22,163,74,.2);}
+.ac-completed::before{background:linear-gradient(90deg,var(--gbr),var(--gh));}
+.ac-wip{background:linear-gradient(158deg,rgba(217,119,6,.05),rgba(217,119,6,.01));border-color:rgba(217,119,6,.18);}
+.ac-wip::before{background:linear-gradient(90deg,var(--ambr),var(--amb));}
+.ac-invest{background:linear-gradient(158deg,rgba(2,132,199,.05),rgba(2,132,199,.01));border-color:rgba(2,132,199,.18);}
+.ac-invest::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.ac-liab{background:linear-gradient(158deg,rgba(220,38,38,.05),rgba(220,38,38,.01));border-color:rgba(220,38,38,.16);}
+.ac-liab::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.ac-cash{background:linear-gradient(158deg,rgba(109,40,217,.04),rgba(22,163,74,.04));border-color:rgba(109,40,217,.15);}
+.ac-cash::before{background:linear-gradient(90deg,var(--p),var(--gbr));}
+.ac-ico{font-size:clamp(24px,4vw,36px);margin-bottom:8px;}
+.ac-tag{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.ac-title{font-size:clamp(13px,1.8vw,17px);font-weight:900;color:var(--tx);margin-bottom:6px;}
+.ac-val{font-size:clamp(16px,2.5vw,24px);font-weight:900;letter-spacing:-1px;margin-bottom:3px;}
+.ac-sub{font-size:10px;color:var(--tl);font-weight:600;line-height:1.4;margin-bottom:8px;}
+.ac-desc{font-size:clamp(11px,1.3vw,12.5px);color:var(--ts);line-height:1.6;}
+.ac-method{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;margin-top:8px;}
+/* NAV Waterfall Calc */
+.nav-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);}
+.nav-hdr{background:linear-gradient(135deg,var(--pl),var(--p));padding:clamp(14px,2.5vw,22px) clamp(16px,3vw,26px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.nav-hdr-title{font-size:clamp(15px,2.2vw,20px);font-weight:900;color:#fff;}
+.nav-hdr-sub{font-size:12px;color:rgba(255,255,255,.7);margin-top:2px;}
+.nav-legend{padding:10px clamp(14px,3vw,22px);background:var(--pxs);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--ts);}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+.nav-table{width:100%;border-collapse:collapse;min-width:680px;}
+.nav-table th{background:linear-gradient(135deg,rgba(109,40,217,.09),rgba(109,40,217,.04));padding:clamp(9px,1.4vw,13px) clamp(8px,1.5vw,14px);font-size:clamp(9px,1vw,11px);font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);border-bottom:2px solid var(--bd);text-align:right;white-space:nowrap;}
+.nav-table th:first-child,.nav-table th:nth-child(2){text-align:left;}
+.nav-table td{padding:clamp(9px,1.4vw,13px) clamp(8px,1.5vw,14px);font-size:clamp(11px,1.2vw,13px);color:var(--ts);border-bottom:1px solid rgba(109,40,217,.06);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.nav-table td:first-child{text-align:left;font-weight:700;color:var(--tx);}
+.nav-table td:nth-child(2){text-align:left;font-size:11px;}
+.nav-table tr.asset-row td{background:rgba(22,163,74,.03);}
+.nav-table tr.liab-row td{background:rgba(220,38,38,.03);}
+.nav-table tr.nav-gross-row td{font-weight:900;color:var(--p);background:linear-gradient(135deg,rgba(109,40,217,.07),rgba(109,40,217,.03));border-top:2px solid var(--pmd);}
+.nav-table tr.nav-net-row td{font-weight:900;color:var(--gbr);background:rgba(22,163,74,.06);border-top:1.5px solid rgba(22,163,74,.2);}
+.nav-table tr.disc-row td{font-weight:900;color:var(--red);background:rgba(220,38,38,.04);}
+.nav-table tr:hover td{background:var(--pxs);}
+.nav-table tr.nav-gross-row:hover td,.nav-table tr.nav-net-row:hover td,.nav-table tr.disc-row:hover td{background:inherit;}
+.flag-cell{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:2px 6px;border-radius:6px;}
+.flag-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.flag-r{background:rgba(220,38,38,.1);color:var(--red);}
+.flag-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.flag-p{background:var(--pxl);color:var(--p);}
+.flag-s{background:rgba(2,132,199,.1);color:var(--sky);}
+/* Discount Meter */
+.disc-meter-wrap{background:var(--sf);border:1.5px solid var(--bd);border-radius:16px;padding:clamp(16px,2.5vw,24px);margin-top:20px;}
+.dm-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--p);margin-bottom:14px;}
+.dm-row{display:grid;grid-template-columns:clamp(120px,22vw,210px) 1fr auto;align-items:center;gap:12px;padding:8px 0;border-bottom:1px dashed rgba(109,40,217,.07);}
+.dm-row:last-child{border-bottom:none;}
+.dm-label{font-size:clamp(11.5px,1.4vw,13px);font-weight:700;color:var(--tx);}
+.dm-bar-bg{height:18px;background:rgba(0,0,0,.05);border-radius:5px;overflow:hidden;}
+.dm-bar{height:100%;border-radius:5px;}
+.dm-val{font-size:clamp(11px,1.5vw,13px);font-weight:900;text-align:right;white-space:nowrap;}
+/* COMPANY BLOCKS */
+.company-block{border-radius:18px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:var(--shc);margin-bottom:28px;}
+.cb-header{display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,24px);gap:12px;flex-wrap:wrap;}
+.cb-good{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);}
+.cb-bad{background:linear-gradient(135deg,#fef2f2,#fff5f5);}
+.cb-co{display:flex;align-items:center;gap:12px;}
+.cb-name{font-size:clamp(14px,2vw,18px);font-weight:900;color:var(--tx);line-height:1.2;}
+.cb-sub{font-size:11px;color:var(--tl);margin-top:3px;}
+.cb-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.cb-badge{padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;}
+.cb-b-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.2);}
+.cb-b-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.cb-b-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.2);}
+.cb-b-s{background:rgba(2,132,199,.1);color:var(--sky);border:1px solid rgba(2,132,199,.2);}
+.cb-insight{padding:14px 18px;font-size:12px;color:var(--ts);line-height:1.65;margin:0;}
+.cb-insight-g{background:rgba(22,163,74,.06);border-top:1px solid rgba(22,163,74,.15);border-left:3px solid var(--gbr);}
+.cb-insight-r{background:rgba(220,38,38,.05);border-top:1px solid rgba(220,38,38,.15);border-left:3px solid var(--red);}
+.ex-logo{width:48px;height:48px;min-width:48px;border-radius:12px;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+/* TRICK SECTION */
+.trick-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:24px;overflow:hidden;box-shadow:var(--shp);}
+.trick-hdr{background:linear-gradient(135deg,#1a0a3c,var(--pl),var(--p));padding:clamp(20px,3.5vw,36px) clamp(20px,4vw,40px);display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.trick-hdr::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:24px 24px;}
+.th-left{flex:1;min-width:0;position:relative;z-index:1;}
+.th-supertag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.th-supertag::before{content:'';width:16px;height:2px;background:#4ade80;border-radius:2px;}
+.th-title{font-size:clamp(17px,3vw,26px);font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1.2;margin-bottom:8px;}
+.th-sub{font-size:clamp(12px,1.5vw,14px);color:rgba(255,255,255,.68);line-height:1.65;}
+.th-right{display:flex;flex-shrink:0;position:relative;z-index:1;}
+.th-timer{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:14px 20px;text-align:center;}
+.th-timer-num{font-size:clamp(26px,4vw,40px);font-weight:900;color:#fff;line-height:1;}
+.th-timer-lbl{font-size:10px;color:rgba(255,255,255,.55);font-weight:600;margin-top:2px;}
+/* TRICK QUICK REF */
+.trick-qref{padding:clamp(16px,3vw,28px) clamp(18px,4vw,36px);background:linear-gradient(158deg,#f5f3ff,#f0fdf4);border-bottom:1px solid var(--bd);}
+.qr-title{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.qr-title::before{content:'';width:18px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;}
+.sn-strip{background:var(--pxs);border:1px solid var(--pmd);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.sn-lbl{font-size:10px;font-weight:700;color:var(--p);flex-shrink:0;}
+.sn-num{width:18px;height:18px;border-radius:50%;background:var(--p);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sn-txt{font-size:10px;font-weight:700;color:var(--ts);}
+.sn-arr{font-size:10px;color:var(--tl);}
+/* NAV component chips */
+.nav-chips{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(6px,1.5vw,10px);margin-bottom:14px;}
+.nc-chip{border-radius:12px;padding:clamp(10px,2vw,14px);text-align:center;border:1.5px solid;}
+.ncc-land{background:rgba(109,40,217,.06);border-color:rgba(109,40,217,.2);}
+.ncc-bldg{background:rgba(22,163,74,.06);border-color:rgba(22,163,74,.2);}
+.ncc-inv{background:rgba(2,132,199,.06);border-color:rgba(2,132,199,.18);}
+.ncc-debt{background:rgba(220,38,38,.06);border-color:rgba(220,38,38,.18);}
+.nc-chip-lbl{font-size:clamp(12px,1.8vw,16px);font-weight:900;letter-spacing:-.3px;margin-bottom:2px;}
+.nc-chip-name{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--tl);margin-bottom:5px;}
+.nc-chip-formula{font-size:9px;font-weight:600;color:var(--ts);line-height:1.4;border-top:1px dashed rgba(0,0,0,.08);padding-top:5px;}
+/* NAV per-share calc */
+.nav-calc{background:var(--wh);border:1px solid var(--bd);border-radius:14px;padding:clamp(14px,2.5vw,22px);margin-bottom:12px;}
+.nc-calc-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--p);margin-bottom:12px;}
+.nc-row{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:0 14px;padding:8px 0;border-bottom:1px dashed rgba(109,40,217,.07);}
+.nc-row:last-child{border-bottom:none;}
+.nc-op{font-size:22px;font-weight:900;text-align:center;line-height:1;}
+.nc-label{font-size:clamp(11px,1.4vw,13px);font-weight:700;color:var(--tx);}
+.nc-sub{font-size:9.5px;color:var(--tl);font-weight:500;margin-top:2px;}
+.nc-val{font-size:clamp(12px,1.5vw,15px);font-weight:900;text-align:right;white-space:nowrap;}
+.nc-total{border-radius:10px;padding:12px 14px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.nc-total-pos{background:linear-gradient(135deg,rgba(22,163,74,.1),rgba(22,163,74,.04));border:1.5px solid rgba(22,163,74,.22);}
+.nc-total-lbl{font-size:clamp(12px,1.5vw,14px);font-weight:800;}
+.nc-total-val{font-size:clamp(16px,2.5vw,22px);font-weight:900;white-space:nowrap;}
+/* Discount to NAV meter */
+.disc-nav-meter{background:var(--wh);border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin-bottom:12px;}
+.dnm-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--p);margin-bottom:10px;}
+.dnm-track{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;}
+.dnm-zone{border-radius:8px;padding:8px 4px;text-align:center;}
+.dnm-val{font-size:clamp(10px,1.4vw,12px);font-weight:900;margin-bottom:2px;}
+.dnm-lbl{font-size:8px;font-weight:600;color:var(--tl);}
+/* Data sources */
+.data-strip{background:var(--pxs);border:1px solid var(--pmd);border-radius:12px;padding:clamp(10px,2vw,16px);margin-bottom:12px;}
+.ds-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:10px;}
+.ds-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.ds-item{background:var(--wh);border:1px solid var(--bd);border-radius:10px;padding:10px;display:flex;align-items:flex-start;gap:8px;}
+.ds-ico{font-size:16px;flex-shrink:0;}
+.ds-name{font-size:10px;font-weight:800;color:var(--tx);margin-bottom:2px;}
+.ds-desc{font-size:9px;color:var(--tl);line-height:1.4;}
+/* TRICK STEPS */
+.trick-steps-body{padding:clamp(20px,4vw,36px) clamp(18px,4vw,36px);border-bottom:1px solid var(--bd);}
+.trick-step{display:flex;gap:clamp(12px,2.5vw,20px);padding-bottom:clamp(18px,3vw,28px);position:relative;}
+.trick-step:last-child{padding-bottom:0;}
+.ts-connector{position:absolute;left:clamp(17px,3vw,22px);top:clamp(40px,5vw,48px);bottom:0;width:2px;background:linear-gradient(180deg,var(--pmd),rgba(109,40,217,.06));border-radius:2px;}
+.trick-step:last-child .ts-connector{display:none;}
+.ts-num{width:clamp(36px,5vw,44px);height:clamp(36px,5vw,44px);border-radius:12px;color:#fff;font-size:clamp(14px,2vw,18px);font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(109,40,217,.28);flex-shrink:0;position:relative;z-index:1;}
+.ts-body{flex:1;min-width:0;padding-top:6px;}
+.ts-nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.ts-site{font-size:10px;font-weight:800;color:var(--p);background:var(--pxs);padding:4px 10px;border-radius:8px;border:1px solid var(--pmd);}
+.ts-arrow{font-size:12px;color:var(--tl);}
+.ts-tab{font-size:10px;font-weight:700;color:var(--ts);background:var(--sf);padding:4px 10px;border-radius:8px;border:1px solid var(--bd);}
+.ts-tab.purple{background:var(--pxl);color:var(--p);border-color:var(--pmd);}
+.ts-tab.green{background:rgba(22,163,74,.08);color:var(--gbr);border-color:rgba(22,163,74,.2);}
+.ts-tab.amber{background:rgba(217,119,6,.08);color:var(--ambr);border-color:rgba(217,119,6,.2);}
+.ts-tab.sky{background:rgba(2,132,199,.08);color:var(--sky);border-color:rgba(2,132,199,.2);}
+.ts-tab.red{background:rgba(220,38,38,.08);color:var(--red);border-color:rgba(220,38,38,.2);}
+.ts-action{font-size:clamp(12px,1.5vw,13.5px);color:var(--ts);line-height:1.68;margin-bottom:10px;}
+.ts-formula{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:clamp(12px,2vw,18px);margin-bottom:10px;}
+.ts-f-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.ts-f-lbl{font-size:12px;font-weight:800;color:var(--tx);}
+.ts-f-eq{font-size:18px;font-weight:700;color:var(--tl);}
+.ts-f-item{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;}
+.ts-fi-p{background:var(--pxl);color:var(--p);}
+.ts-fi-g{background:rgba(22,163,74,.1);color:var(--gbr);}
+.ts-fi-a{background:rgba(217,119,6,.1);color:var(--ambr);}
+.ts-fi-s{background:rgba(2,132,199,.1);color:var(--sky);}
+.ts-fi-r{background:rgba(220,38,38,.1);color:var(--red);}
+.ts-f-guide{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:11px;font-weight:600;}
+.ts-shortcut{background:linear-gradient(135deg,var(--pxl),#f0fdf4);border:1px solid var(--pmd);border-radius:10px;padding:12px 14px;margin-top:8px;}
+.ts-sc-lbl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.ts-sc-text{font-size:12px;color:var(--ts);line-height:1.6;}
+.ts-outcomes{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.ts-out{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.5;padding:9px 12px;border-radius:10px;}
+.ts-out-g{background:rgba(22,163,74,.07);color:var(--gbr);border:1px solid rgba(22,163,74,.14);}
+.ts-out-r{background:rgba(220,38,38,.06);color:var(--red);border:1px solid rgba(220,38,38,.14);}
+.ts-out-n{background:var(--pxs);color:var(--p);border:1px solid var(--pmd);}
+/* BONUS & FLOWCHART */
+.trick-bonus{padding:clamp(18px,3.5vw,32px) clamp(18px,4vw,36px);background:linear-gradient(158deg,#f5f3ff,#f0fdf4);border-bottom:1px solid var(--bd);}
+.bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,16px);}
+.bonus-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:clamp(12px,2vw,18px);box-shadow:var(--shc);position:relative;overflow:hidden;}
+.bonus-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.bc-p::before{background:linear-gradient(90deg,var(--p),var(--ph));}
+.bc-s::before{background:linear-gradient(90deg,var(--sky),#38bdf8);}
+.bc-a::before{background:linear-gradient(90deg,var(--ambr),var(--amb));}
+.bc-g::before{background:linear-gradient(90deg,var(--gbr),var(--gh));}
+.bonus-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;color:#fff;font-size:13px;font-weight:900;margin-bottom:8px;}
+.bonus-title{font-size:clamp(12px,1.5vw,13px);font-weight:800;color:var(--tx);margin-bottom:5px;}
+.bonus-desc{font-size:clamp(11px,1.2vw,12px);color:var(--ts);line-height:1.55;}
+.flow-wrap{padding:clamp(18px,3.5vw,32px) clamp(18px,4vw,36px);}
+.flow-label{font-size:12px;font-weight:700;color:var(--p);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.flow-chain{display:flex;flex-direction:column;gap:8px;}
+.flow-node{border-radius:12px;padding:10px 14px;font-size:clamp(11px,1.4vw,12.5px);font-weight:700;display:flex;align-items:center;gap:8px;line-height:1.4;}
+.fn-q{background:var(--pxl);border:1.5px solid var(--pmd);color:var(--pl);}
+.fn-qlbl{font-size:10px;font-weight:800;background:var(--p);color:#fff;border-radius:6px;padding:2px 7px;flex-shrink:0;}
+.fn-txt{flex:1;}
+.flow-branch{display:flex;flex-direction:column;gap:8px;padding-left:clamp(12px,3vw,24px);border-left:2px dashed var(--pmd);margin-left:18px;}
+.fb-yes,.fb-no{display:flex;flex-direction:column;gap:6px;}
+.fb-lbl{font-size:10px;font-weight:800;padding:2px 8px;border-radius:6px;width:fit-content;}
+.fb-yes>.fb-lbl{background:rgba(22,163,74,.12);color:var(--gbr);}
+.fb-no>.fb-lbl{background:rgba(220,38,38,.1);color:var(--red);}
+.fn-g{background:rgba(22,163,74,.1);border:1.5px solid rgba(22,163,74,.25);color:var(--gbr);font-size:clamp(11px,1.3vw,13px);}
+.fn-a{background:rgba(217,119,6,.08);border:1.5px solid rgba(217,119,6,.22);color:var(--ambr);font-size:clamp(11px,1.3vw,13px);}
+.fn-r{background:rgba(220,38,38,.07);border:1.5px solid rgba(220,38,38,.2);color:var(--red);font-size:clamp(11px,1.3vw,13px);}
+/* GLOSSARY */
+.glos-wrap{background:var(--wh);border:1.5px solid var(--bd);border-radius:20px;overflow:hidden;box-shadow:var(--shp);}
+.glos-table{width:100%;border-collapse:collapse;}
+.glos-table thead th{background:linear-gradient(135deg,var(--pxl),var(--pxs));padding:clamp(10px,2vw,15px) clamp(12px,2.5vw,20px);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--p);text-align:left;border-bottom:1.5px solid var(--bd);}
+.glos-table tbody tr{border-bottom:1px solid rgba(109,40,217,.05);transition:background .2s;}
+.glos-table tbody tr:last-child{border-bottom:none;}
+.glos-table tbody tr:hover{background:var(--pxs);}
+.gt-term{padding:clamp(11px,2vw,16px) clamp(12px,2.5vw,20px);font-size:clamp(11px,1.4vw,13px);font-weight:800;color:var(--p);white-space:nowrap;vertical-align:top;}
+.gt-desc{padding:clamp(11px,2vw,16px) clamp(12px,2.5vw,20px);font-size:clamp(11px,1.3vw,13px);color:var(--ts);line-height:1.65;vertical-align:top;}
+.gt-risk{padding:clamp(11px,2vw,16px) clamp(10px,2vw,16px);vertical-align:top;text-align:center;}
+/* DEMAT BANNER */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:"\2713";color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+/* NEXT BANNER */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-arrow{font-size:18px;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;}
+/* ═══════════════════════════════════════════════════════════════════
+   UNIFIED RESPONSIVE SYSTEM · Module 12 · NAV-Based Valuation
+   Asset Cards · NAV Table · Discount Meter · Trick Section
+   Desktop · Tablet · Mobile · iOS · Android · Touch · A11y · Print
+   8 Breakpoints · Full Platform Compatibility
+   ═══════════════════════════════════════════════════════════════════ */
+img,svg{max-width:100%;height:auto;display:block;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+
+/* ── LARGE DESKTOP 1280px+ ── */
+@media(min-width:1280px){
+  .w{padding:80px 72px;}
+}
+
+/* ── SMALL DESKTOP / TABLET LANDSCAPE 901–1100px ── */
+@media(max-width:1100px){
+  /* Asset cards: 3→2 col */
+  .asset-grid{grid-template-columns:1fr 1fr;}
+  /* NAV trick chips: 4→2 col */
+  .nav-chips{grid-template-columns:1fr 1fr;}
+  .bonus-grid{grid-template-columns:1fr 1fr;}
+  /* Discount meter label shrinks */
+  .dm-row{grid-template-columns:clamp(100px,18vw,170px) 1fr auto;}
+  .ds-grid{grid-template-columns:1fr 1fr;}
+  /* Asset card title/desc compact */
+  .ac-title{font-size:clamp(13px,1.6vw,15px);}
+  .ac-desc{font-size:12px;}
+  .ac-val{font-size:clamp(15px,2vw,20px);}
+}
+
+/* ── TABLET PORTRAIT 769–900px ── */
+@media(max-width:900px){
+  .concept-grid{grid-template-columns:1fr;}
+  .infographic-svg{max-width:380px;margin:0 auto;}
+  .klo-hi-row{grid-template-columns:repeat(3,1fr);}
+  .flow-branch{padding-left:12px;margin-left:12px;}
+  /* Asset grid stays 2-col through tablet portrait */
+  .asset-grid{grid-template-columns:1fr 1fr;}
+  .dm-row{grid-template-columns:clamp(90px,16vw,140px) 1fr auto;}
+  /* asset card icon shrinks */
+  .ac-ico{font-size:clamp(22px,3.5vw,32px);}
+  .nc-chip-formula{font-size:8.5px;}
+}
+
+/* ── MOBILE LANDSCAPE / LARGE PHONE 601–768px ── */
+@media(max-width:768px){
+  .w{padding:clamp(32px,6vw,56px) clamp(14px,5vw,28px);}
+  /* Hero stats strip — 3 per row wrap */
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 30%;border-right:1px solid var(--bd) !important;border-bottom:1px solid var(--bd);}
+  .hsi:nth-child(3n){border-right:none !important;}
+  .hsi:last-child{border-bottom:1px solid var(--bd);}
+  /* KLO banner */
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .klo-hi-row{grid-template-columns:1fr 1fr;}
+  /* Layout */
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(14px,3vw,22px) clamp(14px,4vw,24px);}
+  .nxt-btn{align-self:stretch;width:100%;justify-content:center;font-size:14px;padding:14px 20px;min-height:52px;}
+  .dmfeats{gap:10px 20px;}
+  svg{overflow:visible;}
+  /* NAV table header */
+  .nav-hdr{flex-direction:column;align-items:flex-start;}
+  .nav-hdr-title{font-size:clamp(15px,2.5vw,18px);}
+  /* Company blocks */
+  .cb-header{flex-direction:column;align-items:flex-start;}
+  .cb-badges{margin-top:4px;flex-wrap:wrap;}
+  /* Trick section */
+  .trick-hdr{flex-direction:column;gap:14px;}
+  .ts-outcomes{grid-template-columns:1fr;}
+  .flow-branch{padding-left:10px;margin-left:10px;}
+  .bonus-grid{grid-template-columns:1fr 1fr;}
+  .sn-strip{flex-wrap:wrap;gap:4px;}
+  /* Module-specific */
+  .nav-chips{grid-template-columns:1fr 1fr;}
+  .dm-row{grid-template-columns:80px 1fr auto;gap:8px;}
+  .dm-label{font-size:11px;}
+  .dm-val{font-size:11px;}
+  /* Asset card compact */
+  .ac-ico{font-size:clamp(20px,3vw,28px);}
+  .ac-title{font-size:13px;}
+  .ac-desc{font-size:11.5px;}
+  .ac-val{font-size:clamp(14px,2.5vw,18px);}
+  body{overscroll-behavior-y:contain;}
+}
+
+/* ── MOBILE PORTRAIT 481–640px ── */
+@media(max-width:640px){
+  /* Asset cards: 2→1 col */
+  .asset-grid{grid-template-columns:1fr;}
+  .klo-hi-row{grid-template-columns:1fr;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .infographic-svg{max-width:100%;}
+  /* Tables scroll */
+  .nav-table{min-width:680px;}
+  .glos-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:520px;}
+  /* Cards */
+  .bonus-grid{grid-template-columns:1fr;}
+  /* Trick steps */
+  .trick-steps-body,.trick-bonus,.flow-wrap{padding:16px;}
+  .ts-f-row{flex-wrap:wrap;gap:4px 8px;}
+  .ts-f-guide{flex-direction:column;gap:4px;}
+  /* Module-specific @640 */
+  .nav-chips{grid-template-columns:1fr 1fr;}
+  .dm-row{grid-template-columns:70px 1fr auto;gap:6px;}
+  .dm-label{font-size:10.5px;}
+  .dnm-track{grid-template-columns:repeat(3,1fr) !important;gap:3px;}
+  .sn-strip{flex-wrap:wrap;gap:4px;}
+  .ds-grid{grid-template-columns:1fr;}
+  /* Asset card compact @640 */
+  .ac-ico{font-size:clamp(22px,4vw,30px);}
+  .ac-desc{font-size:11.5px;}
+  .ac-val{font-size:clamp(15px,3.5vw,20px);}
+  .nc-chip-formula{font-size:8px;line-height:1.35;}
+}
+
+/* ── SMALL MOBILE 361–480px ── */
+@media(max-width:480px){
+  .w{padding:28px 12px;}
+  .hh1{letter-spacing:-1.2px;}
+  .hdesc{font-size:13px;}
+  .hsub{letter-spacing:2.5px;font-size:9px;}
+  .hst{flex-wrap:wrap;}
+  .hsi{flex:1 1 45% !important;border-bottom:1px solid var(--bd) !important;border-right:none !important;}
+  .hsi:nth-child(odd){border-right:1px solid var(--bd) !important;}
+  /* Last row: bottom border off for the final 1-2 items */
+  .hsi:nth-last-child(-n+2):not(:nth-child(odd) ~ *){border-bottom:none !important;}
+  .hsi:last-child{border-bottom:none !important;}
+  .hsi:nth-last-child(2):nth-child(odd){border-bottom:none !important;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .h2{letter-spacing:-1px;}
+  .lead{font-size:13.5px;}
+  .tag{letter-spacing:2px;}
+  .klo-title{font-size:14px;}
+  .klo-desc{font-size:12px;}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .klo-hi{padding:12px 10px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .dmh{letter-spacing:-1px;}
+  .dmsub{font-size:13px;}
+  .nxt-banner{padding:12px 14px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+  /* NAV header */
+  .nav-hdr{padding:12px;}
+  .nav-hdr-title{font-size:14px;}
+  .nav-hdr-sub{font-size:9px;}
+  /* Trick */
+  .th-timer{display:none;}
+  .ts-outcomes{grid-template-columns:1fr;}
+  .ts-num{width:32px;height:32px;font-size:13px;}
+  .flow-branch{padding-left:6px;margin-left:8px;}
+  .trick-steps-body,.trick-bonus,.flow-wrap{padding:14px;}
+  .bonus-card{padding:14px;}
+  /* Module-specific @480 */
+  .sn-strip{flex-direction:column;align-items:flex-start;}
+  .nav-chips{grid-template-columns:1fr 1fr;}
+  .dm-row{grid-template-columns:60px 1fr auto;gap:4px;}
+  .trick-qref{padding:14px;}
+  /* Asset card compact @480 */
+  .asset-card{padding:14px;}
+  .ac-ico{font-size:clamp(20px,4vw,28px);margin-bottom:6px;}
+  .ac-title{font-size:13px;}
+  .ac-val{font-size:clamp(14px,3.5vw,18px);}
+  .ac-desc{font-size:11px;line-height:1.55;}
+  .ac-tag{font-size:8px;}
+  .ac-method{font-size:8px;}
+  /* NAV calc compact */
+  .nav-calc{padding:12px;}
+  .nc-row{grid-template-columns:22px 1fr auto;gap:0 8px;}
+  .nc-label{font-size:11.5px;}
+  .nc-val{font-size:11.5px;}
+  /* Meters compact */
+  .disc-nav-meter{padding:10px 12px;}
+  .data-strip{padding:10px 12px;}
+  .disc-meter-wrap{padding:14px;}
+  .dm-title{font-size:10px;}
+  /* NAV legend */
+  .nav-legend{font-size:10px;padding:8px 12px;}
+}
+
+/* ── EXTRA SMALL 360px and below ── */
+@media(max-width:360px){
+  .w{padding:22px 10px;}
+  .hh1{font-size:clamp(26px,10vw,40px);letter-spacing:-1px;}
+  .hsi{flex:1 1 100% !important;border-right:none !important;border-bottom:1px solid var(--bd) !important;}
+  .hsi:nth-child(odd){border-right:none !important;}
+  .hsi:last-child{border-bottom:none !important;}
+  .kpill{font-size:8.5px;padding:3px 8px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}
+  .nxt-btn{font-size:12px;padding:10px 14px;}
+  .ts-nav{flex-direction:column;align-items:flex-start;gap:3px;}
+  .trick-steps-body,.trick-bonus,.flow-wrap{padding:12px;}
+  .nav-chips{grid-template-columns:1fr 1fr;}
+  .dm-row{grid-template-columns:50px 1fr auto;}
+  .dm-label{font-size:10px;}
+  /* Asset card minimal @360 */
+  .asset-card{padding:12px;}
+  .ac-ico{font-size:20px;margin-bottom:4px;}
+  .ac-title{font-size:12.5px;}
+  .ac-val{font-size:clamp(13px,3vw,16px);}
+  .ac-desc{font-size:10.5px;}
+}
+
+/* ── TOUCH DEVICES (finger input — no hover) ── */
+@media(hover:none) and (pointer:coarse){
+  /* Cancel hover transforms on cards */
+  .asset-card:hover,.step-card:hover,.company-block:hover,.bonus-card:hover{
+    transform:none !important;
+    box-shadow:var(--shc) !important;
+    border-color:var(--bd) !important;
+  }
+  /* Asset card press feedback — per category colour */
+  .ac-land:active{background:rgba(109,40,217,.07) !important;transition:background .08s;}
+  .ac-completed:active{background:rgba(22,163,74,.09) !important;transition:background .08s;}
+  .ac-wip:active{background:rgba(217,119,6,.08) !important;transition:background .08s;}
+  .ac-invest:active{background:rgba(2,132,199,.07) !important;transition:background .08s;}
+  .ac-liab:active{background:rgba(220,38,38,.07) !important;transition:background .08s;}
+  .ac-cash:active{background:rgba(109,40,217,.05) !important;transition:background .08s;}
+  /* Step / bonus / CTA press */
+  .step-card:active{transform:scale(.99);transition:transform .08s;}
+  .bonus-card:active{transform:scale(.98);transition:transform .08s;}
+  .dmbtn:active,.nxt-btn:active{transform:scale(.97);transition:transform .08s;}
+  /* Minimum touch targets — Apple HIG 44px / Material 48px */
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:8px;padding-bottom:8px;}
+  .ts-num{min-width:44px;min-height:44px;}
+  .bonus-badge{min-width:36px;min-height:36px;}
+  .asset-card{min-height:auto;}
+  /* NAV-specific touch targets */
+  .nc-chip{min-height:60px;display:flex;flex-direction:column;justify-content:center;}
+  .dnm-zone{min-height:40px;}
+  .ds-item{min-height:36px;}
+  .nav-table td{min-height:40px;}
+  .dm-row{min-height:40px;}
+  .glos-table td,.glos-table th{min-height:36px;}
+  /* Hide scrollbars on touch */
+  ::-webkit-scrollbar{display:none;}
+  scrollbar-width:none;
+  /* Tap highlight + touch-action on ALL interactive elements */
+  a,button,.dmbtn,.nxt-btn,.asset-card,.step-card,.kpill,
+  .company-block,.bonus-card,.trick-wrap,.flow-node,.nc-chip,
+  .dm-row,.dnm-zone,.ds-item,.nav-table tr{
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+    -webkit-touch-callout:none;
+  }
+  /* UI elements — non-selectable for fluid scroll */
+  .hh1,.h2,.hsv,.tag,.klo-label,.eyebrow,
+  .th-title,.th-supertag,.ts-nav,.flow-label,
+  .nav-hdr-title,.ac-tag,.ac-title,
+  .qr-title,.nc-chip-lbl,.nc-chip-name,
+  .dnm-title,.dm-title,.ds-title,.nc-calc-title,
+  .nav-legend,.ac-method{
+    -webkit-user-select:none;user-select:none;
+  }
+  /* Content — selectable (readable) */
+  p,.klo-desc,.lead,.cb-insight,.ts-action,.ts-sc-text,
+  .bonus-desc,.ts-out,.step-body p,.nc-chip-formula,
+  .ac-desc,.dnm-lbl,.dm-label,.dm-val,.ds-desc,.nc-sub,
+  .nc-label,.gt-desc,.ac-sub{
+    -webkit-user-select:text;user-select:text;
+  }
+  /* Disable decorative animations on touch to save battery */
+  .klo-icon,.infographic-svg{animation:none !important;}
+  /* Momentum scroll on table containers */
+  .table-scroll,.glos-wrap{-webkit-overflow-scrolling:touch;}
+}
+
+/* ── iOS: NOTCH · HOME INDICATOR · ALL 4 SAFE AREAS ── */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+  /* Hero — all 4 sides with notch and home bar awareness */
+  .hero{
+    min-height:100svh;
+    min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top)+72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom)+32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));
+  }
+  /* Badge — respects notch */
+  .vbadge{
+    top:max(22px,calc(env(safe-area-inset-top)+8px));
+    right:max(22px,calc(env(safe-area-inset-right)+8px));
+  }
+  /* Section padding — landscape side notches */
+  .w{
+    padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));
+    padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));
+  }
+  .nxt-banner{
+    padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));
+    padding-bottom:max(18px,env(safe-area-inset-bottom));
+  }
+  .dmbanner{
+    padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));
+    padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));
+  }
+  /* GPU compositing for animated orbs */
+  .orb{-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+  /* Re-apply gradient text — Safari WebKit requirement */
+  .hp,.hg,.hr,
+  .hh1 .line1,.hh1 .line2,.hh1 .line3,
+  .hsv,.hsv.g,.hsv.r,.hsv.a,
+  .klo-hi-val.purple,.klo-hi-val.green,.klo-hi-val.amber,.klo-hi-val.red,
+  .h2 .hp,.h2 .hg,.h2 .hr{
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  /* Tap highlight removal */
+  a,button,.dmbtn,.nxt-btn,.asset-card,.step-card,
+  .kpill,.company-block,.bonus-card,.trick-wrap,.nc-chip{
+    -webkit-tap-highlight-color:transparent;
+  }
+  /* Momentum scroll */
+  .table-scroll,.glos-wrap{-webkit-overflow-scrolling:touch;}
+}
+
+/* ── ANDROID HIGH-DPI 1.5× DPR ── */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  /* Hardware-accelerate card surfaces to prevent GPU jank */
+  .asset-card,.step-card,.nav-wrap,.company-block,
+  .bonus-card,.trick-wrap,.disc-meter-wrap{
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+  }
+  /* GPU layers for animated and SVG elements */
+  .infographic-svg,.klo-icon{
+    -webkit-transform:translateZ(0);
+    transform:translateZ(0);
+  }
+  /* Crisp text on high-DPI Android */
+  body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+}
+
+/* ── ACCESSIBILITY: prefers-reduced-motion ── */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .rv{opacity:1;transform:none;}
+  .infographic-svg,.klo-icon,.asset-card{animation:none !important;}
+}
+
+/* ── PRINT ── */
+@media print{
+  .dmbanner,.orb,.nxt-banner,.trick-hdr{display:none;}
+  .rv{opacity:1;transform:none;}
+  body{color:#000;background:#fff;}
+  .w{padding:20px;}
+  .table-scroll{overflow:visible;}
+  .nav-table{min-width:0;}
+  .company-block,.step-card,.bonus-card,.trick-step,.asset-card{break-inside:avoid;}
+  /* Asset grid 2-col for print */
+  .asset-grid{grid-template-columns:1fr 1fr;}
+  .nav-chips{grid-template-columns:1fr 1fr 1fr 1fr;}
+  /* Print colour fidelity for asset card accent bars */
+  .asset-card::before{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  /* NAV table row colours for print */
+  .nav-table .nav-net-row td{background:#f0fdf4 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .nav-table .nav-gross-row td{background:#ede9fe !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .nav-table .liab-row td{background:#fef2f2 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  /* Asset card backgrounds for print */
+  .ac-land{background:#f5f3ff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .ac-completed{background:#f0fdf4 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .ac-wip{background:#fefce8 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .ac-liab{background:#fef2f2 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+<!-- HERO -->
+<section class="hero">
+  <div class="vbadge">Advanced Valuation · Module 12 · NAV</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>NAV · Real Estate · NBFCs · Holding Companies · Discount to NAV</div>
+  <h1 class="hh1">
+    <span class="line1">Net Asset Value</span>
+    <span class="line2">NAV Valuation</span>
+    <span class="line3">Asset by Asset · Add Up · Subtract Debt · True Worth</span>
+  </h1>
+  <div class="hsub">Advanced Valuation · Real Estate · NBFCs · Holding Companies · NAV Discount</div>
+  <p class="hdesc">For real estate developers, NBFCs, and holding companies, a P/E ratio tells you almost nothing. What matters is what the assets are worth TODAY — land, completed buildings, under-construction projects, loan books, investments — minus all debts. NAV is the asset-by-asset X-ray of a company: the true break-up value that the stock market may be pricing at a significant discount.</p>
+  <div class="hst">
+    <div class="hsi"><div class="hsv">Asset Value</div><div class="hsl">Market price each asset</div></div>
+    <div class="hsi"><div class="hsv a">Minus Debt</div><div class="hsl">All liabilities deducted</div></div>
+    <div class="hsi"><div class="hsv g">NAV/Share</div><div class="hsl">True per-share worth</div></div>
+    <div class="hsi"><div class="hsv r">Discount to NAV</div><div class="hsl">How far below NAV stock trades</div></div>
+    <div class="hsi"><div class="hsv g">5 Good · 5 Bad</div><div class="hsl">Real India examples</div></div>
+  </div>
+</section>
+
+<!-- 01 KLO -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Calculate Net Asset Value &amp; Identify <span class="hp">Discount to NAV</span></h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">&#127959;</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">When Godrej Properties or DLF releases a new project, it doesn't earn revenue immediately — construction takes 2–4 years. A P/E ratio would say the company is "expensive" or "loss-making" because cash hasn't come in yet. But the company already owns the land and has sold apartments at contracted prices. The true value is in the asset base, not in current earnings. NAV captures this: it values every piece of land at today's market price, every under-construction project at its expected realisable value, and subtracts all debt to find what shareholders actually own per share.</div>
+        <div class="klo-desc">Think of a real estate developer like a baker who buys expensive flour today to bake and sell bread next year. P/E says "spending money, not earning" — but NAV says "they own Rs.10 worth of flour that becomes Rs.18 of bread." NAV is the baker's pantry valuation. For NBFCs, NAV values the loan book at fair value minus NPAs. For holding companies, NAV is the sum of stakes in subsidiaries. The approach: value each asset at market price, subtract all liabilities, divide by shares outstanding.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-p">&#127959; Step 1: Identify all assets</span>
+          <span class="kpill kpill-a">&#128176; Step 2: Value each at market price</span>
+          <span class="kpill kpill-g">&#9989; Step 3: Sum all asset values = Gross NAV</span>
+          <span class="kpill kpill-s">&#127974; Step 4: Subtract all debts</span>
+          <span class="kpill kpill-r">&#128202; Step 5: Divide by shares = NAV per share</span>
+        </div>
+        <div class="klo-hi-row">
+          <div class="klo-hi"><div class="klo-hi-ico">&#127968;</div><div class="klo-hi-val purple">Gross NAV</div><div class="klo-hi-lbl">Sum of all asset market values</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">&#128179;</div><div class="klo-hi-val red">Minus Net Debt</div><div class="klo-hi-lbl">All borrowings minus cash</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">&#128208;</div><div class="klo-hi-val green">NAV per Share</div><div class="klo-hi-lbl">Net NAV divided by shares</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 HOW NAV WORKS -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — How NAV Works</div>
+    <h2 class="h2 rv d2">When P/E Fails — Why Real Estate <span class="hp">Needs NAV Valuation</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">P/E ratio requires profits. But a real estate company buying land and starting construction has minimal current earnings. NAV bypasses the income statement entirely and looks at what the company OWNS — asset by asset — and what it OWES. The difference per share is the true value investors should track.</p>
+    <div class="concept-grid rv d3">
+      <div class="infographic-wrap">
+        <svg class="infographic-svg" viewBox="0 0 420 580" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="420" height="580" rx="20" fill="#f5f3ff"/>
+          <rect x="10" y="10" width="400" height="32" rx="10" fill="#6d28d9"/>
+          <text x="210" y="31" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">NAV = Assets at Market Value minus All Debt</text>
+          <rect x="30" y="58" width="70" height="100" rx="6" fill="#15803d" opacity=".85"/>
+          <rect x="38" y="70" width="14" height="12" rx="2" fill="#bbf7d0"/>
+          <rect x="56" y="70" width="14" height="12" rx="2" fill="#bbf7d0"/>
+          <rect x="74" y="70" width="14" height="12" rx="2" fill="#bbf7d0"/>
+          <rect x="38" y="88" width="14" height="12" rx="2" fill="#bbf7d0"/>
+          <rect x="56" y="88" width="14" height="12" rx="2" fill="#bbf7d0"/>
+          <rect x="74" y="88" width="14" height="12" rx="2" fill="#bbf7d0"/>
+          <rect x="38" y="106" width="14" height="12" rx="2" fill="#bbf7d0"/>
+          <rect x="56" y="106" width="14" height="12" rx="2" fill="#bbf7d0"/>
+          <rect x="74" y="106" width="14" height="12" rx="2" fill="#bbf7d0"/>
+          <rect x="38" y="124" width="14" height="12" rx="2" fill="#bbf7d0"/>
+          <rect x="56" y="124" width="14" height="12" rx="2" fill="#bbf7d0"/>
+          <rect x="74" y="124" width="14" height="12" rx="2" fill="#bbf7d0"/>
+          <rect x="50" y="147" width="30" height="15" rx="3" fill="#166534"/>
+          <text x="65" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#15803d">COMPLETED</text>
+          <text x="65" y="173" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#15803d">Rs.800 Cr</text>
+          <rect x="140" y="88" width="70" height="74" rx="6" fill="#d97706" opacity=".7"/>
+          <rect x="148" y="96" width="12" height="10" rx="2" fill="#fde68a"/>
+          <rect x="164" y="96" width="12" height="10" rx="2" fill="#fde68a"/>
+          <rect x="180" y="96" width="12" height="10" rx="2" fill="#fde68a"/>
+          <rect x="148" y="112" width="12" height="10" rx="2" fill="#fde68a"/>
+          <rect x="164" y="112" width="12" height="10" rx="2" fill="#fde68a"/>
+          <rect x="180" y="112" width="12" height="10" rx="2" fill="#fde68a"/>
+          <line x1="134" y1="84" x2="134" y2="162" stroke="#92400e" stroke-width="2"/>
+          <line x1="218" y1="84" x2="218" y2="162" stroke="#92400e" stroke-width="2"/>
+          <line x1="130" y1="96" x2="222" y2="96" stroke="#92400e" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <line x1="130" y1="110" x2="222" y2="110" stroke="#92400e" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <line x1="130" y1="124" x2="222" y2="124" stroke="#92400e" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <line x1="130" y1="140" x2="222" y2="140" stroke="#92400e" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <text x="175" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#92400e">UNDER CONSTRUCTION</text>
+          <text x="175" y="173" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#92400e">Rs.500 Cr</text>
+          <rect x="280" y="112" width="100" height="50" rx="6" fill="#6d28d9" opacity=".75"/>
+          <line x1="290" y1="127" x2="370" y2="127" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <line x1="290" y1="142" x2="370" y2="142" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <line x1="305" y1="115" x2="305" y2="160" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <line x1="340" y1="115" x2="340" y2="160" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <text x="330" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#6d28d9">LAND BANK</text>
+          <text x="330" y="173" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="800" fill="#6d28d9">Rs.1,200 Cr</text>
+          <line x1="20" y1="162" x2="400" y2="162" stroke="#e5e1fb" stroke-width="2"/>
+          <text x="115" y="140" font-family="DM Sans,sans-serif" font-size="24" font-weight="900" fill="#6d28d9">+</text>
+          <text x="235" y="140" font-family="DM Sans,sans-serif" font-size="24" font-weight="900" fill="#6d28d9">+</text>
+          <line x1="210" y1="183" x2="210" y2="206" stroke="#6d28d9" stroke-width="2.5"/>
+          <polygon points="205,204 210,214 215,204" fill="#6d28d9"/>
+          <rect x="40" y="214" width="340" height="38" rx="10" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1.5"/>
+          <text x="210" y="232" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="#4c1d95">GROSS NAV = Rs.800+Rs.500+Rs.1,200 Cr</text>
+          <text x="210" y="246" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="800" fill="#4c1d95">= Rs.2,500 Crore (total asset value)</text>
+          <line x1="210" y1="252" x2="210" y2="268" stroke="#dc2626" stroke-width="2.5"/>
+          <rect x="80" y="268" width="260" height="36" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+          <text x="210" y="285" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10.5" font-weight="800" fill="#dc2626">Minus Net Debt = Rs.700 Crore</text>
+          <text x="210" y="298" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#dc2626">(Total Loans minus Cash on hand)</text>
+          <line x1="210" y1="304" x2="210" y2="320" stroke="#15803d" stroke-width="2.5"/>
+          <polygon points="205,318 210,328 215,318" fill="#15803d"/>
+          <rect x="40" y="328" width="340" height="48" rx="12" fill="#6d28d9"/>
+          <text x="210" y="348" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="900" fill="white">NAV = Rs.2,500 minus Rs.700 = Rs.1,800 Cr</text>
+          <text x="210" y="365" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#ddd6fe">30 Cr shares outstanding = Rs.600 per share NAV</text>
+          <rect x="30" y="392" width="170" height="52" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+          <text x="115" y="410" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="800" fill="#dc2626">Stock at Rs.420 per share</text>
+          <text x="115" y="425" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#dc2626">30% discount to NAV</text>
+          <text x="115" y="438" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#dc2626">Investigate: why the discount?</text>
+          <rect x="220" y="392" width="170" height="52" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+          <text x="305" y="410" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="800" fill="#15803d">Stock at Rs.720 per share</text>
+          <text x="305" y="425" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#15803d">20% premium to NAV</text>
+          <text x="305" y="438" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#15803d">Market expects NAV growth</text>
+          <circle cx="56" cy="508" r="14" fill="#fbbf24"/>
+          <ellipse cx="56" cy="497" rx="14" ry="7" fill="#4c1d95"/>
+          <circle cx="51" cy="507" r="2.2" fill="white"/><circle cx="51.5" cy="508" r="1.4" fill="#1f2937"/>
+          <circle cx="61" cy="507" r="2.2" fill="white"/><circle cx="61.5" cy="508" r="1.4" fill="#1f2937"/>
+          <path d="M51 515 Q56 519 61 515" stroke="#92400e" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <path d="M42,521 Q38,531 36,521" stroke="#fbbf24" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M70,521 Q74,531 76,521" stroke="#fbbf24" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M42,521 Q45,528 56,528 Q67,528 70,521 Q66,517 61,519 Q56,522 51,519 Q46,517 42,521Z" fill="#3d1fa3"/>
+          <rect x="82" y="492" width="286" height="38" rx="8" fill="white" stroke="#e5e1fb" stroke-width="1.5"/>
+          <text x="225" y="509" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="900" fill="#4c1d95">NAV = What You Own minus What You Owe</text>
+          <text x="225" y="523" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#15803d">Stock at discount to NAV = investigate undervaluation</text>
+          <polygon points="83,511 76,507 76,515" fill="white" stroke="#e5e1fb" stroke-width="1" stroke-linejoin="round"/>
+          <rect x="20" y="553" width="380" height="16" rx="4" fill="#f5f3ff" stroke="#e5e1fb" stroke-width="1"/>
+          <rect x="20" y="553" width="289" height="16" rx="4" fill="#6d28d9" opacity=".15"/>
+          <rect x="20" y="553" width="184" height="16" rx="4" fill="#6d28d9" opacity=".2"/>
+          <text x="30" y="565" font-family="DM Sans,sans-serif" font-size="8" fill="#9ca3af">Rs.0</text>
+          <text x="155" y="565" font-family="DM Sans,sans-serif" font-size="8" fill="#9ca3af">Rs.1,000Cr</text>
+          <text x="293" y="565" font-family="DM Sans,sans-serif" font-size="8" fill="#9ca3af">Rs.2,000Cr (NAV)</text>
+        </svg>
+        <p class="infographic-cap">&#127959; Three assets: Completed Rs.800 Cr + Construction Rs.500 Cr + Land Rs.1,200 Cr = Gross NAV Rs.2,500 Cr. Subtract net debt Rs.700 Cr = Net NAV Rs.1,800 Cr. With 30 Cr shares = Rs.600/share NAV. Stock at Rs.420 = 30% discount to NAV.</p>
+      </div>
+      <div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--p),var(--ph));">1</div>
+            <div class="step-body">
+              <h4>Why P/E Fails for Real Estate, NBFCs, and Holding Companies</h4>
+              <p>Real estate: Revenues are recognised on completion — a company can buy land and start construction for 3 years with zero revenue recognised. P/E in Year 1 = infinity (appears loss-making). But NAV rises each year as construction progresses and apartment prices appreciate. NBFCs: A loan book's value depends on credit quality, not just reported income. Holding companies: Their "earnings" may be tiny dividends from subsidiaries, but the value of those subsidiaries can be enormous. P/E would say the holding company is extremely expensive — NAV shows the true intrinsic value.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">2</div>
+            <div class="step-body">
+              <h4>NAV for Real Estate: Valuing Land, WIP, and Completed Properties</h4>
+              <p>Land bank: valued at current market price per sq ft in that micro-market (from property consultants: JLL, CBRE, Anarock). Under-construction (WIP): value as contracted sales price of sold units + current ASP for unsold units, minus remaining construction cost. Completed unsold inventory: value at current market selling price. Rental assets: value using cap rate = Net Operating Income divided by Market Cap Rate (typically 6-8% for Grade A Indian commercial real estate). Sum all of these to get Gross NAV.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">3</div>
+            <div class="step-body">
+              <h4>NAV for NBFCs: Adjusted Book Value Method</h4>
+              <p>For Housing Finance Companies like LIC Housing Finance, NAV = Adjusted Net Worth = Book Value of Equity minus provisions that may be understated. Compare Adjusted NAV to market cap — if trading below 0.8x Adjusted NAV, either there is deep distress OR a buying opportunity. The key: look at GNPA and NNPA ratios on Screener.in to judge credit quality. NNPA above 3% with rising trend means significant uncertainty in the NAV. Apply the NNPA x 60% rule: subtract this from book value to get a conservative Adjusted NAV.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">4</div>
+            <div class="step-body">
+              <h4>NAV for Holding Companies: Sum of Stakes in Subsidiaries</h4>
+              <p>For listed subsidiaries: Holding Company NAV = Sum of (Parent's stake percentage x Listed subsidiary market cap). For unlisted subsidiaries: estimate using P/E or EV/EBITDA of comparable listed peers. Example: If Bajaj Finserv holds 52.49% of Bajaj Finance (listed), that stake's value = 52.49% x Bajaj Finance market cap. Add all subsidiary stakes to get Gross NAV. Subtract holding company-level debt. Divide by holding company's own shares outstanding. Then apply a holdco structural discount of 20-40% — the holding company always trades below Gross NAV.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 GODREJ PROPERTIES NAV TABLE -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — Live NAV Analysis: Godrej Properties</div>
+    <h2 class="h2 rv d2">Godrej Properties <span class="hp">NAV Breakdown — FY25 Illustrative</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Godrej Properties is India's largest listed real estate developer by pre-sales. A P/E-based analysis misses the asset value of its massive land bank and contracted sales pipeline. Here is how analysts build a NAV model for real estate developers.</p>
+    <div class="asset-grid rv d3">
+      <div class="asset-card ac-land">
+        <div class="ac-ico">&#127757;</div>
+        <div class="ac-tag" style="color:var(--p);">Land Bank</div>
+        <div class="ac-title">Undeveloped Land Reserves</div>
+        <div class="ac-val" style="color:var(--p);">Rs.18,000 Cr</div>
+        <div class="ac-sub">~100M sq ft developable area across 15+ cities</div>
+        <div class="ac-desc">The most valuable long-term asset. Land purchased years ago now worth multiples of cost. Valued at current market price per sq ft in each micro-market — from JLL/CBRE/Anarock data, NOT the book cost on the balance sheet. Godrej has assembled land across Mumbai MMR, NCR, Bangalore, Pune, Hyderabad — all premium growth corridors. Land bank growth is the single most watched metric for real estate developers.</div>
+        <span class="ac-method" style="background:var(--pxl);color:var(--p);">Market price/sq ft x Area</span>
+      </div>
+      <div class="asset-card ac-completed">
+        <div class="ac-ico">&#127970;</div>
+        <div class="ac-tag" style="color:var(--gbr);">Completed Inventory</div>
+        <div class="ac-title">Ready-to-Move Unsold Units</div>
+        <div class="ac-val" style="color:var(--gbr);">Rs.4,200 Cr</div>
+        <div class="ac-sub">Finished apartments and commercial space ready for delivery</div>
+        <div class="ac-desc">Completed projects with unsold inventory are valued at current market selling price (ASP). These are the most liquid real estate assets — can be sold quickly. Revenue recognition happens on completion and possession delivery under Ind AS 115. Unsold inventory in prime locations retains full market value. Cross-check with RERA portal for actual transacted prices in the same project or locality.</div>
+        <span class="ac-method" style="background:var(--gpale);color:var(--gbr);">Units x Current ASP</span>
+      </div>
+      <div class="asset-card ac-wip">
+        <div class="ac-ico">&#128679;</div>
+        <div class="ac-tag" style="color:var(--ambr);">Work-in-Progress</div>
+        <div class="ac-title">Under-Construction Projects</div>
+        <div class="ac-val" style="color:var(--ambr);">Rs.22,000 Cr</div>
+        <div class="ac-sub">~90M sq ft under construction, majority pre-sold at contracted prices</div>
+        <div class="ac-desc">The largest NAV component. WIP is valued as: (Sold units x contracted price) + (Unsold units x current ASP) minus remaining construction cost. Pre-sold inventory de-risks this value — Godrej has Rs.22,000+ Cr in bookings to be collected and recognised over 2–4 years. This contracted future revenue is the backbone of NAV for active developers. Always verify contracted ASP against RERA-registered prices.</div>
+        <span class="ac-method" style="background:var(--apale);color:var(--ambr);">Contracted value minus build cost</span>
+      </div>
+      <div class="asset-card ac-invest">
+        <div class="ac-ico">&#128188;</div>
+        <div class="ac-tag" style="color:var(--sky);">Investments and JVs</div>
+        <div class="ac-title">Joint Ventures and Subsidiaries</div>
+        <div class="ac-val" style="color:var(--sky);">Rs.3,800 Cr</div>
+        <div class="ac-sub">Minority stakes in JV projects and subsidiary companies</div>
+        <div class="ac-desc">Godrej Properties uses JV structures for many projects — contributing land while the JV partner brings construction capital. The developer's share of each JV's NAV is included in the parent's consolidated NAV. Valued using the same asset-based approach: project sales value minus construction cost minus debt, multiplied by ownership percentage. JV stakes can be complex — analyst estimates vary widely. Use the conservative end of estimates.</div>
+        <span class="ac-method" style="background:var(--skypale);color:var(--sky);">Share of JV project NAV</span>
+      </div>
+      <div class="asset-card ac-liab">
+        <div class="ac-ico">&#127974;</div>
+        <div class="ac-tag" style="color:var(--red);">Net Debt</div>
+        <div class="ac-title">Borrowings minus Cash</div>
+        <div class="ac-val" style="color:var(--red);">-Rs.12,500 Cr</div>
+        <div class="ac-sub">Construction finance, NCDs, and bank borrowings net of cash</div>
+        <div class="ac-desc">The single most important liability. Construction finance is unavoidable — projects need capital before sales receipts arrive. Net Debt = Total Borrowings minus Cash and Equivalents (from Screener.in Balance Sheet). High debt is standard in real estate; what matters is the ratio of debt to NAV. Ideally below 40% for a healthy developer. Check Notes to Accounts for off-balance-sheet project SPV debt that may not appear in consolidated borrowings.</div>
+        <span class="ac-method" style="background:var(--rpale);color:var(--red);">Borrowings minus Cash (Screener)</span>
+      </div>
+      <div class="asset-card ac-cash">
+        <div class="ac-ico">&#128176;</div>
+        <div class="ac-tag" style="color:var(--p);">Cash and Receivables</div>
+        <div class="ac-title">Collections Due from Buyers</div>
+        <div class="ac-val" style="color:var(--gbr);">Rs.6,200 Cr</div>
+        <div class="ac-sub">Advance collections and receivables from sold apartments</div>
+        <div class="ac-desc">Customer advances received for under-construction projects reduce effective debt. Receivables (money owed by buyers who have taken possession but not yet paid fully) are included at face value. Together with cash, these assets reduce net debt and improve NAV. Developers with strong collections culture (like Godrej Properties) have better working capital and stronger effective NAV than those with large receivable balances that may not be fully collected.</div>
+        <span class="ac-method" style="background:var(--pxl);color:var(--p);">From Balance Sheet (Screener)</span>
+      </div>
+    </div>
+    <div class="nav-wrap rv d4">
+      <div class="nav-hdr">
+        <div>
+          <div class="nav-hdr-title">Godrej Properties — NAV Calculation · FY25 Illustrative Estimates</div>
+          <div class="nav-hdr-sub">All values Rs. Crore · Educational estimates only · Verify from ICICI Securities / JM Financial RE research</div>
+        </div>
+      </div>
+      <div class="nav-legend">
+        <div class="legend-dot" style="background:var(--gbr);"></div><strong>Green rows</strong> = Assets (add to NAV) &nbsp;
+        <div class="legend-dot" style="background:var(--red);"></div><strong>Red rows</strong> = Liabilities (subtract from NAV) &nbsp; Scroll right on mobile
+      </div>
+      <div class="table-scroll">
+        <table class="nav-table">
+          <thead><tr>
+            <th>Asset / Liability</th>
+            <th>Basis of Valuation</th>
+            <th>Area / Scale</th>
+            <th>Rate / Price</th>
+            <th>Value (Rs. Cr)</th>
+          </tr></thead>
+          <tbody>
+            <tr class="asset-row"><td>&#127757; Land Bank (Undeveloped)</td><td>Market price/sq ft · JLL/CBRE data</td><td>~100M sq ft</td><td>Rs.180/sq ft avg</td><td><span style="color:var(--gbr);font-weight:800;">+18,000</span></td></tr>
+            <tr class="asset-row"><td>&#128679; WIP Projects (Under Construction)</td><td>Contracted sales minus remaining cost</td><td>~90M sq ft</td><td>Rs.2,200-5,000/sq ft ASP</td><td><span style="color:var(--gbr);font-weight:800;">+22,000</span></td></tr>
+            <tr class="asset-row"><td>&#127970; Completed Unsold Inventory</td><td>Current market ASP</td><td>~10M sq ft</td><td>Rs.4,200/sq ft avg</td><td><span style="color:var(--gbr);font-weight:800;">+4,200</span></td></tr>
+            <tr class="asset-row"><td>&#128188; JV Stakes and Subsidiaries</td><td>Share of JV project NAV</td><td>Multiple JVs</td><td>Estimated</td><td><span style="color:var(--gbr);font-weight:800;">+3,800</span></td></tr>
+            <tr class="asset-row"><td>&#128176; Cash and Advance Collections</td><td>Balance sheet · Screener.in</td><td>—</td><td>Face value</td><td><span style="color:var(--gbr);font-weight:800;">+6,200</span></td></tr>
+            <tr class="nav-gross-row"><td>GROSS NAV (Sum of All Assets)</td><td>—</td><td>—</td><td>—</td><td><span style="color:var(--p);font-weight:900;">54,200</span></td></tr>
+            <tr class="liab-row"><td>&#127974; Total Net Debt Deduction</td><td>Borrowings minus Cash (Screener BS)</td><td>—</td><td>—</td><td><span style="color:var(--red);font-weight:900;">-12,500</span></td></tr>
+            <tr class="nav-net-row"><td>&#9989; NET NAV (Equity Value)</td><td>Gross NAV minus Net Debt</td><td>Shares: 277 Cr</td><td>—</td><td><span style="color:var(--gbr);font-weight:900;">41,700 = Rs.1,505/share</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="padding:12px 18px;background:var(--pxs);border-top:1px solid var(--bd);font-size:11px;color:var(--ts);">
+        <strong style="color:var(--p);">NAV Discount interpretation:</strong> If Godrej Properties trades at Rs.2,500/share vs NAV Rs.1,505/share, it is at a 66% PREMIUM — market is pricing in future land bank appreciation and execution quality. A significant discount to NAV would suggest a potential buying opportunity, but always verify balance sheet health and execution track record first. All numbers are illustrative educational estimates only.
+      </div>
+    </div>
+    <div class="disc-meter-wrap rv d5">
+      <div class="dm-title">&#128202; How Indian RE Developers Trade vs NAV — Typical Ranges</div>
+      <div class="dm-row">
+        <div class="dm-label">Godrej Properties</div>
+        <div class="dm-bar-bg"><div class="dm-bar" style="width:95%;background:linear-gradient(90deg,var(--p),var(--ph));"></div></div>
+        <div class="dm-val" style="color:var(--p);">50-80% PREMIUM · Premium brand, execution track record</div>
+      </div>
+      <div class="dm-row">
+        <div class="dm-label">DLF Ltd.</div>
+        <div class="dm-bar-bg"><div class="dm-bar" style="width:80%;background:linear-gradient(90deg,var(--p),var(--ph));"></div></div>
+        <div class="dm-val" style="color:var(--p);">Near NAV to slight premium · Rent-yielding commercial assets</div>
+      </div>
+      <div class="dm-row">
+        <div class="dm-label">Prestige Estates</div>
+        <div class="dm-bar-bg"><div class="dm-bar" style="width:72%;background:linear-gradient(90deg,var(--gbr),var(--gh));"></div></div>
+        <div class="dm-val" style="color:var(--gbr);">Near NAV · South India focus · Strong sales velocity</div>
+      </div>
+      <div class="dm-row">
+        <div class="dm-label">Sobha Developers</div>
+        <div class="dm-bar-bg"><div class="dm-bar" style="width:55%;background:linear-gradient(90deg,var(--ambr),var(--amb));"></div></div>
+        <div class="dm-val" style="color:var(--ambr);">10-25% discount · Higher leverage than peers</div>
+      </div>
+      <div class="dm-row">
+        <div class="dm-label">Stressed Developer</div>
+        <div class="dm-bar-bg"><div class="dm-bar" style="width:28%;background:linear-gradient(90deg,var(--red),#f87171);"></div></div>
+        <div class="dm-val" style="color:var(--red);">50-70% discount · High debt + execution risk</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMAT BANNER -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Find RE Balance Sheet Data Free on Screener.in</div>
+    <div class="dmh">Track NAV and <span class="dmhs">Discount to NAV — All Free</span></div>
+    <div class="dmsub">Screener.in shows borrowings, cash, inventory, and book value for every listed real estate developer and NBFC. Cross-check with company investor presentations for ASP and area data to build your own NAV model and find stocks trading at deep discounts.</div>
+    <div class="dmfeats">
+      <div class="dmf">Free balance sheet for all listed RE developers and NBFCs</div>
+      <div class="dmf">Borrowings, cash, inventory trends over 10 years</div>
+      <div class="dmf">Compare P/BV across real estate companies</div>
+      <div class="dmf">Track collections and cash flow efficiency quarterly</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">&#128188;</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmstar">&#9733;</span><span class="dmrating">Trusted by 2M+ Investors · 4.8 Rated</span></div>
+    <div class="dmnote">&#10022; No Hidden Fees &nbsp;·&nbsp; &#10022; 100% Digital KYC &nbsp;·&nbsp; &#10022; SEBI Regulated</div>
+  </div>
+</div>
+
+<!-- 04 FIVE GOOD NAV EXAMPLES -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">04 — NAV Done Right</div>
+    <h2 class="h2 rv d2">5 Companies Where <span class="hg">NAV Valuation Works Perfectly</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">These companies have clear asset inventories, transparent disclosures, and balance sheets that make NAV the ideal — often the only — reliable valuation framework for analysis.</p>
+    <div class="company-block rv d3">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,var(--pxl),var(--pxs));">&#127795;</div>
+          <div><div class="cb-name">Godrej Properties — Transparent Land Bank and Strong Execution</div><div class="cb-sub">~100M sq ft land bank · Pre-sales driven model · Quarterly project-level disclosures of area sold, ASP, and collections</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">&#9989; Quarterly project-level disclosures</span>
+          <span class="cb-badge cb-b-g">&#9989; Parent Godrej Group land advantage</span>
+          <span class="cb-badge cb-b-s">&#128204; Often 50-80% premium to NAV</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">&#9989; <strong>Godrej Properties is the model for NAV-based real estate valuation in India — exceptional transparency, consistent execution, and a clear asset base make it the benchmark for all RE developer analysis.</strong> Every quarter, Godrej publishes area sold (in million sq ft), average selling price (ASP), total bookings value, and project-wise sales data. This makes NAV calculation straightforward: land bank at market rates from JLL/CBRE data, WIP at contracted prices cross-checked on RERA, completed inventory at current ASP. The company's association with the Godrej brand gives it preferential land access — Vikhroli in Mumbai is a prime example where the group controls thousands of acres. NAV analysis for Godrej consistently shows that the market pays a premium of 50-80% above NAV — reflecting trust in future land bank appreciation and management quality. Even at a premium, NAV is the right framework for monitoring whether that premium is widening (potential sell signal) or narrowing toward NAV (potential buy signal).</div>
+    </div>
+    <div class="company-block rv d4">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fefce8,#fef9c3);">&#127968;</div>
+          <div><div class="cb-name">DLF Ltd. — Rent-Yielding Assets Plus Residential Pipeline = Dual NAV</div><div class="cb-sub">DLF Cyber City commercial assets plus residential land bank · DCCDL JV with GIC gives commercial RE valuation anchor</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">&#9989; Commercial assets valued on cap rate</span>
+          <span class="cb-badge cb-b-g">&#9989; Residential NAV separately modelled</span>
+          <span class="cb-badge cb-b-g">&#9989; GIC transaction anchors Cyber City value</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">&#9989; <strong>DLF's NAV is a masterclass in valuing a hybrid real estate company — part rent-yielding commercial, part residential developer — requiring two different NAV approaches combined.</strong> DLF's commercial business (DLF Cyber City Developers, DCCDL) has GIC Singapore as a 33.34% JV partner. The GIC transaction established the enterprise value of DCCDL at ~Rs.35,700 Cr for DLF's 66.66% stake. This is a market-anchored valuation, not an estimate — making the commercial NAV highly reliable. DLF's residential business uses the standard developer NAV: land bank in Gurgaon, Hyderabad, and other markets valued at market rates, minus remaining construction costs. Commercial NAV (cap rate based on 7% NOI yield for Grade A Gurgaon) plus Residential NAV, minus consolidated net debt = DLF's total NAV. The two-component approach correctly captures how different these businesses are in their asset quality and valuation methodology.</div>
+    </div>
+    <div class="company-block rv d5">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0);">&#127968;</div>
+          <div><div class="cb-name">LIC Housing Finance — Adjusted Book Value NAV for Housing Finance Companies</div><div class="cb-sub">Rs.2.8 lakh Cr loan book · Housing Finance Company · Valued at Adjusted P/BV not P/E ratio</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">&#9989; NAV = Adjusted Book Value</span>
+          <span class="cb-badge cb-b-g">&#9989; GNPA / NNPA disclosed quarterly on Screener</span>
+          <span class="cb-badge cb-b-a">&#9888; Credit quality adjustments are essential</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">&#9989; <strong>For Housing Finance Companies like LIC Housing Finance or Can Fin Homes, NAV is not about real estate assets — it is the Adjusted Net Worth (Adjusted Book Value) of the loan book itself.</strong> Adjusted Book Value = Reported Book Value minus Unrealised losses in stressed loans minus Underprovisioned NPAs. On Screener.in: find Book Value per Share in the Ratios tab, then adjust for NNPA ratio. If NNPA is 1% on a Rs.2.8 lakh Cr book, there is Rs.2,800 Cr of net credit stress — apply 60% haircut = Rs.1,680 Cr adjustment to book value for a conservative Adjusted NAV. HFCs with low GNPA/NNPA deserve to trade near or above Adjusted NAV. Those with rising NPAs deserve a discount. LIC Housing Finance's P/B of 0.8-1.2x reflects this framework — investors track its NAV discount as closely as any real estate stock in the market.</div>
+    </div>
+    <div class="company-block rv d6">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,var(--gpale),#ecfdf5);">&#127970;</div>
+          <div><div class="cb-name">Prestige Estates — South India Focused NAV with Multi-Format Real Estate</div><div class="cb-sub">Bengaluru · Hyderabad · Mumbai expansion · Office + Hotels + Retail malls + Residential all valued separately</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">&#9989; Multi-asset NAV: RE plus hospitality plus retail</span>
+          <span class="cb-badge cb-b-g">&#9989; Embassy transaction anchors office valuations</span>
+          <span class="cb-badge cb-b-g">&#9989; Strong pre-sales pipeline with RERA verification</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">&#9989; <strong>Prestige Estates showcases how a multi-format real estate developer requires a multi-method NAV approach — one size does not fit all asset types.</strong> Residential projects: standard developer NAV (contracted sales value minus build cost). Commercial tech parks: cap rate valuation (NOI at 7-8% market yield for Bengaluru Grade A offices). Hotels (Marriott, Sheraton managed): EV/EBITDA at 15-20x comparable to Indian Hotels or Lemon Tree. Retail malls: cap rate on NOI. All four components add up to the gross NAV, then consolidated net debt is subtracted. Prestige's transparent disclosure of segment-wise performance in quarterly investor presentations makes this NAV model manageable without deep inside access. Its expansion into Mumbai is a significant positive for future NAV growth as Mumbai land values are among the highest in India.</div>
+    </div>
+    <div class="company-block rv d7" style="margin-bottom:8px;">
+      <div class="cb-header cb-good">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fff7ed,#fed7aa);">&#127974;</div>
+          <div><div class="cb-name">Bajaj Finserv — Holding Company NAV with Listed Subsidiaries as Anchor</div><div class="cb-sub">52.5% of Bajaj Finance listed · Bajaj Allianz Life Insurance · Bajaj Allianz General · Minimal holdco discount of 5-10%</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-g">&#9989; Listed subsidiaries give direct NAV pricing</span>
+          <span class="cb-badge cb-b-g">&#9989; Only 5-10% holdco structural discount</span>
+          <span class="cb-badge cb-b-g">&#9989; Insurance valued using Embedded Value methodology</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-g">&#9989; <strong>Bajaj Finserv is the cleanest holdco NAV in India — all primary assets are either listed on exchanges or have well-established actuarial valuations, making NAV calculation precise and verifiable.</strong> Bajaj Finance stake: 52.49% x Bajaj Finance current market cap = exact NAV contribution with zero estimation uncertainty. Bajaj Allianz Life Insurance: valued using EV (Embedded Value) disclosed annually — EV per share times Bajaj Finserv's 74% ownership stake. Bajaj Allianz General Insurance: 74% times estimated market value based on Gross Written Premium multiples from comparable listed peers. The holdco overhead is capitalised at a modest multiple and deducted. Bajaj Finserv's NAV closely tracks Bajaj Finance's stock price since that is 65-70% of NAV. The holdco discount has been consistently narrow (5-10%) because of its clean structure and listed anchor — setting the gold standard for holdco NAV analysis in India.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 FIVE BAD NAV EXAMPLES -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">05 — NAV Valuation Pitfalls</div>
+    <h2 class="h2 rv d2">5 Ways NAV Analysis <span class="hr">Goes Dangerously Wrong</span></h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">NAV is only as good as the asset values and debt figures used. Stale land valuations, understated debt, inflated project assumptions, and opaque disclosures can make a company look cheap on NAV when it is actually overvalued or in distress.</p>
+    <div class="company-block rv d3">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">&#128197;</div>
+          <div><div class="cb-name">Stale Land Valuations — Using 2007 Cost Price as Current Market Value</div><div class="cb-sub">Using land's book value (purchase cost) instead of current market value systematically misstates NAV dramatically in both directions</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">&#128680; Book cost can be 10x away from market value</span>
+          <span class="cb-badge cb-b-r">&#128680; Old cheap land = understated NAV</span>
+          <span class="cb-badge cb-b-r">&#128680; Old expensive land = overstated NAV</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">&#128680; <strong>The most common NAV error: using the land's book value (purchase cost) instead of current market value.</strong> A developer who bought land in Noida in 2005 for Rs.50 Cr would show Rs.50 Cr on the balance sheet — but that land is worth Rs.800 Cr today. Using book value would massively understate NAV. But the reverse trap also exists: a developer who bought land at 2007-08 peak prices (say Rs.500 Cr) for land now worth Rs.200 Cr would overstate NAV by 2.5x using book value. The rule: always use current market price from independent property consultants (JLL, CBRE, Cushman and Wakefield, Knight Frank) — NOT balance sheet book value. This requires access to property consultant reports, which are available through developer investor presentations, RERA filings, and annual reports. Never trust any NAV model that uses gross development value from 2015 for 2024 analysis.</div>
+    </div>
+    <div class="company-block rv d4">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">&#127959;</div>
+          <div><div class="cb-name">Inflated WIP Assumptions — The "Rs.15,000/sq ft will sell" Optimism Problem</div><div class="cb-sub">Using management's hoped-for ASP targets instead of currently achievable contracted prices for under-construction projects</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">&#128680; Aspirational vs achievable ASP gap</span>
+          <span class="cb-badge cb-b-r">&#128680; NAV easily inflated 30-50% this way</span>
+          <span class="cb-badge cb-b-r">&#128680; Cross-check with RERA portal prices always</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">&#128680; <strong>The second most common NAV mistake: using management's aspirational ASP targets for unsold under-construction inventory instead of currently achievable market prices.</strong> If a developer has 10M sq ft of unsold WIP inventory and uses Rs.15,000 per sq ft (aspirational target) instead of the currently achievable Rs.10,000 per sq ft, the NAV gets inflated by Rs.5,000 Cr at just that one project. Several mid-tier developers communicated NAV estimates based on peak-cycle ASP assumptions during 2019-21 that proved grossly optimistic during the COVID slowdown. The rule: for sold inventory with signed agreements, use the actual contracted price (available from RERA). For unsold inventory, use the most recent transacted prices from the RERA portal — not management guidance. RERA portals now publish actual transaction prices project-by-project, making this verification straightforward and free.</div>
+    </div>
+    <div class="company-block rv d5">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">&#128184;</div>
+          <div><div class="cb-name">Missing Off-Balance-Sheet Debt — The Structured Finance Trap</div><div class="cb-sub">Project SPV borrowings and structured NCDs that do not fully consolidate into the parent company's reported net debt</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">&#128680; Effective debt 20-40% higher than stated</span>
+          <span class="cb-badge cb-b-r">&#128680; NAV appears positive, equity near zero</span>
+          <span class="cb-badge cb-b-r">&#128680; Check Notes to Accounts thoroughly</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">&#128680; <strong>Real estate companies have historically used complex financing structures — Non-Convertible Debentures, structured finance, and project SPV borrowings — that may not fully consolidate into the parent company's reported net debt on Screener.in.</strong> This creates a dangerous gap: the NAV model uses reported consolidated debt but the actual economic debt is 20-40% higher once all project-level financing is included. The NBCC crisis, IL and FS connected real estate exposures, and several mid-tier developer collapses during 2018-2022 all involved debt structures not fully visible in consolidated balance sheets. The fix: read the Notes to Accounts carefully — look for Related Party Transactions, Contingent Liabilities, and Project-Specific Borrowings disclosures. Also check credit rating agency reports (CRISIL, ICRA, CARE) — they typically capture the complete debt picture including structured instruments that may not appear on Screener.</div>
+    </div>
+    <div class="company-block rv d6">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">&#127974;</div>
+          <div><div class="cb-name">NBFC NAV Without NPA Adjustment — The Evergreening Trap</div><div class="cb-sub">Using raw book value of loan book without adjusting for embedded but not fully provisioned NPAs</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">&#128680; GNPA often understated through evergreening</span>
+          <span class="cb-badge cb-b-r">&#128680; Yes Bank overvaluation visible in hindsight</span>
+          <span class="cb-badge cb-b-r">&#128680; Apply NNPA x 60% haircut rule always</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">&#128680; <strong>For NBFCs and HFCs, using the reported book value directly as NAV without adjusting for credit quality produces a dangerously optimistic estimate.</strong> Loan book NAV is only valid if provisions are adequate. During 2018-2020 (post IL and FS crisis), multiple smaller NBFCs reported book values implying NAV of Rs.150-200 per share while actual recoverable value after recognising all embedded NPAs was Rs.40-80 per share. The mechanism is "evergreening" — giving fresh loans to stressed borrowers so they can repay original loans, artificially keeping the asset status as Standard (not NPA). The fix on Screener.in: find GNPA% and NNPA% in the Ratios section for all listed NBFCs. NNPA above 3% with rising trend means significant uncertainty in the stated NAV. Apply Adjusted NAV = Book Value minus (NNPA x 60%) as a conservative floor. This rule helped identify Yes Bank's overvaluation in 2018 and also highlighted LIC Housing Finance's genuine discount in 2020 as a buying opportunity.</div>
+    </div>
+    <div class="company-block rv d7" style="margin-bottom:8px;">
+      <div class="cb-header cb-bad">
+        <div class="cb-co">
+          <div class="ex-logo" style="background:linear-gradient(135deg,#fef2f2,#fecaca);">&#128269;</div>
+          <div><div class="cb-name">Holdco NAV Without Structural Discount — The "Just Add Up Stakes" Error</div><div class="cb-sub">Adding subsidiary market caps without applying the structural holdco discount overvalues the parent by 20-45% systematically</div></div>
+        </div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-b-r">&#128680; Gross NAV does not equal holdco market cap</span>
+          <span class="cb-badge cb-b-r">&#128680; Structural discount is 20-45% always</span>
+          <span class="cb-badge cb-b-r">&#128680; Unlisted stakes need 30-50% haircut</span>
+        </div>
+      </div>
+      <div class="cb-insight cb-insight-r">&#128680; <strong>Adding up the current market value of all listed subsidiary stakes and claiming that sum is the fair value of the holding company systematically overvalues the holdco by 20-45% through four structural mechanisms.</strong> Reason 1: Dividend distribution tax creates layers of tax on cash extracted from subsidiaries. Reason 2: Liquidity discount — the holdco cannot sell its large stake at current market price without crashing the subsidiary's stock price. Reason 3: Governance and complexity premium — investors can simply buy the subsidiary directly, avoiding holdco overhead. Reason 4: Capital allocation risk — holding company management may redeploy capital from good businesses into bad ones. Historical data: Indian conglomerates trade at 15-35% below gross NAV on average. For unlisted subsidiaries, the discount should be 30-50% since there is no liquid market exit. Example error: "Holding company owns 70% of XYZ Ltd worth Rs.10,000 Cr, so holdco should be valued at Rs.7,000 Cr." Wrong. Apply 30% holdco discount = Rs.4,900 Cr. Missing this step inflates per-share holdco value by the full discount amount.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 TRICK SECTION -->
+<section class="sec-white" style="position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-100px;right:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(109,40,217,.05) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-80px;left:-60px;width:360px;height:360px;background:radial-gradient(circle,rgba(22,163,74,.04) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div class="w" style="position:relative;z-index:1;">
+    <div class="tag rv d1">06 — The Investor's Shortcut</div>
+    <h2 class="h2 rv d2">Build a NAV Model in <span class="hp">15 Minutes — Any Developer</span></h2>
+    <div class="rul rv d2"></div>
+    <p class="lead rv d3">Quarterly investor presentations have ASP and area data. Screener.in has debt and cash. RERA portals have actual transaction prices. Here is the exact 5-step sequence to calculate NAV and the discount or premium for any Indian real estate or NBFC company.</p>
+    <div class="rv d3">
+      <div class="trick-wrap">
+        <div class="trick-hdr">
+          <div class="th-left">
+            <div class="th-supertag">&#127919; NAV Mastery</div>
+            <div class="th-title">5-Step NAV Calculation — 15 Minutes Flat</div>
+            <div class="th-sub">Open the company's latest investor presentation, Screener.in, and the state RERA portal. Follow these five steps to calculate NAV per share and the discount or premium to current stock price.</div>
+          </div>
+          <div class="th-right">
+            <div class="th-timer"><div class="th-timer-num">15</div><div class="th-timer-lbl">minutes<br>full NAV</div></div>
+          </div>
+        </div>
+        <div class="trick-qref">
+          <div class="qr-title">&#9889; Quick Reference — NAV Components at a Glance</div>
+          <div class="sn-strip">
+            <span class="sn-lbl">&#128205; Data path:</span>
+            <div class="sn-num">1</div><span class="sn-txt">Investor Presentation (ASP + Area)</span>
+            <span class="sn-arr">&#8594;</span>
+            <div class="sn-num">2</div><span class="sn-txt">RERA portal (actual txn prices)</span>
+            <span class="sn-arr">&#8594;</span>
+            <div class="sn-num">3</div><span class="sn-txt">Screener.in (debt + cash + book value)</span>
+            <span class="sn-arr">&#8594;</span>
+            <div class="sn-num">4</div><span class="sn-txt">Calculate Gross NAV</span>
+            <span class="sn-arr">&#8594;</span>
+            <div class="sn-num">5</div><span class="sn-txt">Subtract net debt, divide by shares</span>
+          </div>
+          <div class="nav-chips">
+            <div class="nc-chip ncc-land">
+              <div class="nc-chip-lbl" style="color:var(--p);">Land</div>
+              <div class="nc-chip-name">Undeveloped bank</div>
+              <div class="nc-chip-formula">Area x Market Rs./sq ft<br>JLL/CBRE/Anarock data<br>NOT balance sheet book cost</div>
+            </div>
+            <div class="nc-chip ncc-bldg">
+              <div class="nc-chip-lbl" style="color:var(--gbr);">Buildings</div>
+              <div class="nc-chip-name">Completed + WIP</div>
+              <div class="nc-chip-formula">Completed: Units x ASP<br>WIP: Contracted minus build cost<br>Verify ASP on RERA portal</div>
+            </div>
+            <div class="nc-chip ncc-inv">
+              <div class="nc-chip-lbl" style="color:var(--sky);">Investments</div>
+              <div class="nc-chip-name">Stakes and JVs</div>
+              <div class="nc-chip-formula">Listed: market price x stake %<br>Unlisted: peer P/E or NAV<br>Apply holdco discount 20-40%</div>
+            </div>
+            <div class="nc-chip ncc-debt">
+              <div class="nc-chip-lbl" style="color:var(--red);">Net Debt</div>
+              <div class="nc-chip-name">Deduct all liabilities</div>
+              <div class="nc-chip-formula">Total borrowings minus Cash<br>From Screener Balance Sheet<br>Check Notes for off-BS debt</div>
+            </div>
+          </div>
+          <div class="disc-nav-meter">
+            <div class="dnm-title">&#128202; Discount/Premium to NAV — How to Interpret the Signal Instantly</div>
+            <div class="dnm-track">
+              <div class="dnm-zone" style="background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.28);">
+                <div class="dnm-val" style="color:var(--red);">-50%+</div>
+                <div class="dnm-lbl">Deep distress &#128680;</div>
+              </div>
+              <div class="dnm-zone" style="background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.18);">
+                <div class="dnm-val" style="color:var(--red);">-20 to -50%</div>
+                <div class="dnm-lbl">Discount — investigate &#10060;</div>
+              </div>
+              <div class="dnm-zone" style="background:rgba(217,119,6,.08);border:1px solid rgba(217,119,6,.2);">
+                <div class="dnm-val" style="color:var(--ambr);">+-10%</div>
+                <div class="dnm-lbl">Near NAV &#9888;</div>
+              </div>
+              <div class="dnm-zone" style="background:rgba(22,163,74,.07);border:1px solid rgba(22,163,74,.18);">
+                <div class="dnm-val" style="color:var(--gbr);">+20 to 50%</div>
+                <div class="dnm-lbl">Premium — quality &#10003;</div>
+              </div>
+              <div class="dnm-zone" style="background:rgba(22,163,74,.13);border:1px solid rgba(22,163,74,.28);">
+                <div class="dnm-val" style="color:var(--gbr);">+50%+</div>
+                <div class="dnm-lbl">High premium &#9989;</div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-calc">
+            <div class="nc-calc-title">&#129518; NAV per Share Calculator — Godrej Properties Illustrative</div>
+            <div class="nc-row">
+              <div class="nc-op" style="color:var(--tl);"> </div>
+              <div><div class="nc-label">Land bank (100M sq ft x Rs.180/sq ft current market rate from JLL)</div><div class="nc-sub">NOT book cost on balance sheet — use JLL/CBRE micro-market rates for each city</div></div>
+              <div class="nc-val" style="color:var(--p);">Rs.18,000 Cr</div>
+            </div>
+            <div class="nc-row">
+              <div class="nc-op" style="color:var(--gbr);">+</div>
+              <div><div class="nc-label">WIP projects (contracted sales pipeline minus remaining build cost)</div><div class="nc-sub">From quarterly investor presentation — Rs.22,000 Cr total bookings pipeline</div></div>
+              <div class="nc-val" style="color:var(--gbr);">Rs.22,000 Cr</div>
+            </div>
+            <div class="nc-row">
+              <div class="nc-op" style="color:var(--sky);">+</div>
+              <div><div class="nc-label">Completed inventory + JV stakes + Cash and advances</div><div class="nc-sub">Screener Balance Sheet + Investor presentation combination</div></div>
+              <div class="nc-val" style="color:var(--sky);">Rs.14,200 Cr</div>
+            </div>
+            <div class="nc-row">
+              <div class="nc-op" style="color:var(--red);">-</div>
+              <div><div class="nc-label">Net Debt from Screener Balance Sheet (Total Borrowings minus Cash)</div><div class="nc-sub">Screener.in, Balance Sheet tab, Non-Current Borrowings + Short-Term Borrowings minus Cash</div></div>
+              <div class="nc-val" style="color:var(--red);">Rs.12,500 Cr</div>
+            </div>
+            <div class="nc-row">
+              <div class="nc-op" style="color:var(--tl);">&#247;</div>
+              <div><div class="nc-label">Shares outstanding (from Screener.in Overview section)</div><div class="nc-sub">Godrej Properties has approximately 277 Crore shares outstanding</div></div>
+              <div class="nc-val" style="color:var(--tl);">277 Cr</div>
+            </div>
+            <div class="nc-total nc-total-pos">
+              <div class="nc-total-lbl" style="color:var(--gbr);">&#9989; NAV/share = (Rs.18,000+Rs.22,000+Rs.14,200-Rs.12,500) Cr divided by 277 Cr shares</div>
+              <div class="nc-total-val" style="color:var(--gbr);">= Rs.1,505/share</div>
+            </div>
+          </div>
+          <div class="data-strip">
+            <div class="ds-title">&#128203; Where to Find NAV Inputs — Free Sources</div>
+            <div class="ds-grid">
+              <div class="ds-item">
+                <div class="ds-ico">&#128202;</div>
+                <div><div class="ds-name">Screener.in Balance Sheet</div><div class="ds-desc">Total Borrowings, Cash, Inventory, Book Value. All free. Foundation of the debt side of NAV calculation for all RE companies and NBFCs.</div></div>
+              </div>
+              <div class="ds-item">
+                <div class="ds-ico">&#128203;</div>
+                <div><div class="ds-name">Investor Presentation (BSE/NSE)</div><div class="ds-desc">BSE filings, Investor Presentations tab. Has project-wise area sold, ASP, bookings value, pipeline. Essential for all RE developers.</div></div>
+              </div>
+              <div class="ds-item">
+                <div class="ds-ico">&#127981;</div>
+                <div><div class="ds-name">RERA Portal (State-wise)</div><div class="ds-desc">MahaRERA, RERA Karnataka, Haryana RERA — search project for actual registered transaction prices. Real-time ASP verification, completely free.</div></div>
+              </div>
+              <div class="ds-item">
+                <div class="ds-ico">&#128240;</div>
+                <div><div class="ds-name">Property Consultants</div><div class="ds-desc">JLL, CBRE, Anarock, Knight Frank publish quarterly India real estate reports with micro-market land rates. Some free quarterly reports online.</div></div>
+              </div>
+              <div class="ds-item">
+                <div class="ds-ico">&#128200;</div>
+                <div><div class="ds-name">Brokerage NAV Reports</div><div class="ds-desc">JM Financial, ICICI Securities, Motilal Oswal publish RE developer NAV models. Search "Godrej Properties NAV ICICI" on Google. Cross-check your assumptions.</div></div>
+              </div>
+              <div class="ds-item">
+                <div class="ds-ico">&#128269;</div>
+                <div><div class="ds-name">Annual Report Notes</div><div class="ds-desc">Notes to Accounts — Borrowings project-wise, Contingent Liabilities, Related Party Loans. Critical for catching off-balance-sheet debt structures.</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="trick-steps-body">
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--p),var(--ph));">1</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">BSE / Company website</span>
+                <span class="ts-arrow">&#8594;</span>
+                <span class="ts-tab purple">Investor Presentation &#8594; Project pipeline + ASP data</span>
+              </div>
+              <div class="ts-action">Download the company's latest <strong>Quarterly Investor Presentation</strong> from BSE filings (bseindia.com, Company search, Investor Presentations tab). Look for: (1) Total area sold this quarter in million sq ft, (2) Average Selling Price (ASP per sq ft by city/project), (3) Total bookings value in Rs. Crore, (4) Launch pipeline for next 4 quarters. These three inputs drive the WIP component of NAV. Cross-check the ASP stated in the investor deck against RERA portal transaction data for the same project — if they differ by more than 10%, investigate the reason (mix of sold vs unsold, location premium, or inflated guidance).</div>
+              <div class="ts-outcomes" style="grid-template-columns:1fr;">
+                <div class="ts-out ts-out-n">&#128203; Goal: Total bookings pipeline in Rs. Crore, project-wise ASP per sq ft, and total launch pipeline. These are your primary WIP NAV inputs.</div>
+              </div>
+            </div>
+          </div>
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">2</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">RERA portal</span>
+                <span class="ts-arrow">&#8594;</span>
+                <span class="ts-tab sky">Search project &#8594; verify actual registered transaction prices</span>
+              </div>
+              <div class="ts-action">Go to the relevant state RERA portal — MahaRERA for Maharashtra, RERA Karnataka for Bengaluru, UP RERA for Noida/NCR. Search by developer name or project name. You can see registered transaction prices for sold units, RERA carpet area vs builder quoted area, and project completion timeline from the RERA certificate. This gives you the <strong>ground truth on ASP</strong> — the actual prices buyers are paying today, not the aspirational price from management guidance. If RERA shows Rs.8,500 per sq ft but the investor deck says ASP Rs.12,000 per sq ft, that is a significant red flag requiring investigation.</div>
+              <div class="ts-shortcut">
+                <div class="ts-sc-lbl">&#128161; MahaRERA quick hack for Mumbai developers</div>
+                <div class="ts-sc-text">MahaRERA (maharerait.maharashtra.gov.in) is the most comprehensive RERA portal. Search by Promoter Name to see ALL projects of a developer simultaneously. For Godrej Properties, you can see every Mumbai project's registered transaction prices, carpet areas, and completion status in one search — extremely efficient for NAV verification.</div>
+              </div>
+            </div>
+          </div>
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">3</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">Screener.in</span>
+                <span class="ts-arrow">&#8594;</span>
+                <span class="ts-tab green">Balance Sheet &#8594; Borrowings, Cash, Inventory</span>
+              </div>
+              <div class="ts-action">On Screener.in, open the company's Balance Sheet tab. Note: (1) <strong>Total Borrowings</strong> — combine both Non-Current Borrowings and Short-Term Borrowings, (2) <strong>Cash and Cash Equivalents</strong> — in the current assets section, (3) <strong>Inventories</strong> — book value of WIP (useful as a cross-check of magnitude), (4) <strong>Book Value per Share</strong> from the Ratios tab (this is the starting point for NBFC Adjusted NAV calculation). Net Debt = Total Borrowings minus Cash. This is the number you subtract from Gross Asset NAV to arrive at Net NAV.</div>
+              <div class="ts-formula">
+                <div class="ts-f-row">
+                  <span class="ts-f-lbl">Net Debt</span><span class="ts-f-eq">=</span>
+                  <span class="ts-f-item ts-fi-p">Total Borrowings (Non-Current + Short-Term)</span>
+                  <span class="ts-f-eq">-</span>
+                  <span class="ts-f-item ts-fi-g">Cash and Cash Equivalents</span>
+                </div>
+                <div class="ts-f-guide">
+                  <span style="color:var(--gbr);">Both borrowing rows from Screener Balance Sheet must be combined &#9989;</span>
+                  <span style="color:var(--red);">Check Notes to Accounts for project-level SPV debt not in consolidated &#10060;</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="trick-step">
+            <div class="ts-connector"></div>
+            <div class="ts-num" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">4</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">Calculate</span>
+                <span class="ts-arrow">&#8594;</span>
+                <span class="ts-tab amber">Gross NAV = Land + WIP + Completed + Investments</span>
+              </div>
+              <div class="ts-action">In a spreadsheet, add: (a) Land bank: Area in sq ft x current market price per sq ft by location from JLL/CBRE, (b) WIP: Use total contracted sales pipeline from investor presentation as proxy, minus remaining construction cost (typically 30-40% of total project cost for projects 60-70% complete), (c) Completed unsold: units x current ASP (RERA verified), (d) JV stakes and investments at estimated values. Sum all to get <strong>Gross Asset NAV</strong>. Then: Net NAV = Gross Asset NAV minus Net Debt. NAV per Share = Net NAV divided by Shares Outstanding from Screener.</div>
+              <div class="ts-outcomes">
+                <div class="ts-out ts-out-g">&#9989; NAV higher than market cap by 20%+: investigate as potential opportunity. Always verify debt quality, balance sheet health, and execution track record before concluding undervaluation.</div>
+                <div class="ts-out ts-out-r">&#128680; NAV lower than market cap by 20%+: market pricing in future NAV growth (new launches, land bank appreciation). Justified only if management has strong execution history and pre-sales are accelerating.</div>
+              </div>
+            </div>
+          </div>
+          <div class="trick-step" style="padding-bottom:0;">
+            <div class="ts-num" style="background:linear-gradient(135deg,#e11d48,#f43f5e);">5</div>
+            <div class="ts-body">
+              <div class="ts-nav">
+                <span class="ts-site">Interpret</span>
+                <span class="ts-arrow">&#8594;</span>
+                <span class="ts-tab red">Discount = (Stock Price / NAV per share - 1) x 100</span>
+              </div>
+              <div class="ts-action">Calculate: <strong>Discount % = (Stock Price minus NAV per share) divided by NAV per share x 100</strong>. Negative result = stock trading at a discount to NAV. Positive result = stock trading at a premium to NAV. Compare to the company's historical average discount or premium. If the company normally trades at 20% premium and is now at 40% discount — investigate why without assuming opportunity. Track the discount quarterly — a widening discount without fundamental reason is a potential signal; a narrowing discount or growing premium often signals reducing upside. The three signals together: wider discount + improving balance sheet + accelerating pre-sales = higher probability of undervaluation.</div>
+              <div class="ts-outcomes">
+                <div class="ts-out ts-out-g">&#9989; Discount wider than historical + improving balance sheet + pre-sales accelerating = three signals aligned for potential undervaluation. All three together are more reliable than discount alone.</div>
+                <div class="ts-out ts-out-r">&#128680; Premium above 50% NAV + pre-sales slowing + debt rising = caution. Market may be pricing in growth that is not materialising. Re-examine NAV assumptions and track record.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="trick-bonus">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <span style="font-size:22px;">&#9889;</span>
+            <span style="font-size:clamp(13px,1.8vw,16px);font-weight:800;color:var(--tx);">4 Advanced NAV Tricks</span>
+          </div>
+          <div class="bonus-grid">
+            <div class="bonus-card bc-p">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--p),var(--ph));">A</div>
+              <div class="bonus-title">The Pre-Sales vs Collections Ratio</div>
+              <div class="bonus-desc">For RE developers, pre-sales (bookings) drive future NAV while collections drive current cash flow. The ratio Pre-Sales divided by Collections tells you: if close to 1x, the developer is efficiently converting bookings to cash. If much above 1x (high bookings, low collections), the risk exists that buyers are defaulting or projects are delayed. On Screener.in, track Operating Cash Flow versus reported pre-sales from investor presentations. A developer with 2x pre-sales but only 0.5x collections efficiency has fragile NAV — the pipeline exists on paper but cash is not following. Healthy NAV requires both strong bookings AND strong collections.</div>
+            </div>
+            <div class="bonus-card bc-s">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--sky),#38bdf8);">B</div>
+              <div class="bonus-title">Cap Rate Valuation for Rental Assets</div>
+              <div class="bonus-desc">For commercial real estate (offices, malls), use cap rate valuation: Value = NOI divided by Market Cap Rate. Current Indian market cap rates: Grade A offices in BKC/Gurgaon/Bengaluru = 7-8%. Grade B offices = 8-10%. Retail malls = 8-9%. Hotels = 9-11%. Example: An office with NOI of Rs.500 Cr at 8% cap rate gives Value = Rs.500 divided by 8% = Rs.6,250 Cr. This method applies to DLF's Cyber City portfolio, Prestige's tech parks, and Embassy Office Parks REIT. Always compare your cap rate assumption against recent actual transactions — JLL publishes annual India Cap Rate surveys that are partially available in the public domain.</div>
+            </div>
+            <div class="bonus-card bc-a">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--ambr),var(--amb));">C</div>
+              <div class="bonus-title">Holdco Discount Trigger Watch</div>
+              <div class="bonus-desc">Holding company discounts can close rapidly when a catalyst is announced: (1) Subsidiary listing on exchanges, (2) Dividend policy change increasing payout, (3) Share buyback by the holding company, (4) Strategic review or demerger announcement. Monitor news for any of these four triggers for your holdco investment. The playbook: when the discount is wide AND a catalyst appears approaching, the trade is to buy the holdco. The discount closing means the holdco stock rises while the subsidiary stock stays stable or falls. This spread has worked multiple times in Indian markets including Bajaj Finserv versus Bajaj Finance, Reliance versus listed subsidiaries, and various Tata Group holdco situations.</div>
+            </div>
+            <div class="bonus-card bc-g">
+              <div class="bonus-badge" style="background:linear-gradient(135deg,var(--gbr),var(--gh));">D</div>
+              <div class="bonus-title">The NNPA x 0.6 Rule for NBFC NAV</div>
+              <div class="bonus-desc">Quick NBFC Adjusted NAV formula: Adjusted NAV = Book Value minus (NNPA% x Total Advances x 0.6). The 0.6 factor represents the additional provision you should conservatively apply to net NPAs that may not be fully recovered. Example: NBFC with Book Value Rs.150/share, NNPA 4%, Total Advances Rs.10,000 Cr means Adjusted NAV = Rs.150 minus (4% x Rs.10,000 Cr x 0.6 divided by shares). This gives a conservative floor NAV. If the stock trades below this conservative Adjusted NAV, it may be genuinely cheap or there is undisclosed stress — investigate further. This rule helped identify Yes Bank overvaluation in 2018 and LIC Housing Finance's genuine discount in 2020 as a buying opportunity.</div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-wrap">
+          <div class="flow-label">&#128257; NAV Quality Flowchart — 4 Questions in 60 Seconds</div>
+          <div class="flow-chain">
+            <div class="flow-node fn-q"><div class="fn-qlbl">Q1</div><div class="fn-txt">Is the asset valuation based on current market prices — not balance sheet book cost or aspirational management targets?</div></div>
+            <div class="flow-branch">
+              <div class="fb-yes">
+                <span class="fb-lbl">YES &#9989;</span>
+                <div class="flow-node fn-q"><div class="fn-qlbl">Q2</div><div class="fn-txt">Have you included the complete debt picture — including project SPV borrowings and off-balance-sheet commitments from Notes to Accounts?</div></div>
+                <div class="flow-branch">
+                  <div class="fb-yes">
+                    <span class="fb-lbl">YES &#9989;</span>
+                    <div class="flow-node fn-q"><div class="fn-qlbl">Q3</div><div class="fn-txt">For holding companies: have you applied a structural discount of 20-40% to the gross NAV of all subsidiary stakes?</div></div>
+                    <div class="flow-branch">
+                      <div class="fb-yes">
+                        <span class="fb-lbl">YES &#9989;</span>
+                        <div class="flow-node fn-q"><div class="fn-qlbl">Q4</div><div class="fn-txt">Is the stock trading at a discount or premium to this rigorously calculated NAV?</div></div>
+                        <div class="flow-branch">
+                          <div class="fb-yes">
+                            <span class="fb-lbl">DISCOUNT &#9989;</span>
+                            <div class="flow-node fn-g">&#9989; POTENTIAL OPPORTUNITY — Stock trading below rigorously calculated NAV. Now investigate WHY the discount exists: debt burden? Execution issues? Market sentiment? If discount is due to temporary sentiment and not fundamental deterioration, this could be an undervalued asset play worth deeper research.</div>
+                          </div>
+                          <div class="fb-no">
+                            <span class="fb-lbl">PREMIUM &#9888;</span>
+                            <div class="flow-node fn-a">&#9888; PREMIUM TO NAV — Market is paying above asset value, expecting future NAV growth. Valid for quality developers with strong execution track record like Godrej Properties. Risky for developers with unproven management. Check if the premium is justified by the quality of the launch pipeline.</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="fb-no">
+                        <span class="fb-lbl">NOT APPLIED &#128680;</span>
+                        <div class="flow-node fn-r">&#10060; OVERVALUED NAV CALCULATION — For holdcos, using gross subsidiary market cap without structural discount overstates fair value by 20-45%. Apply the holdco discount based on complexity: clean holdco with listed subsidiaries 10-20%, complex conglomerate 25-40%. Redo the calculation with the appropriate discount applied.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="fb-no">
+                    <span class="fb-lbl">NO &#128680;</span>
+                    <div class="flow-node fn-r">&#10060; UNDERSTATED DEBT — Read Notes to Accounts for project-level SPV borrowings, related party loans to subsidiaries, and contingent liabilities. These often do not appear in consolidated borrowings on Screener. Add them to net debt before calculating NAV. Missing debt systematically overstates NAV and creates false signals of undervaluation.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="fb-no">
+                <span class="fb-lbl">NO &#128680;</span>
+                <div class="flow-node fn-r">&#10060; STALE OR WRONG ASSET VALUES — Using book cost for land, aspirational ASP for WIP, or unverified valuations for unlisted assets is the most common NAV error and the most dangerous. Get current market prices: RERA for RE transaction verification, JLL/CBRE for land market rates, peer multiples for unlisted stakes. Rebuild the asset side entirely using current data before drawing conclusions.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 GLOSSARY -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">07 — Reference Glossary</div>
+    <h2 class="h2 rv d2">NAV and Real Estate Valuation <span class="hp">Glossary</span></h2>
+    <div class="rul rv d3"></div>
+    <div class="glos-wrap rv d3">
+      <div class="table-scroll">
+        <table class="glos-table">
+          <thead><tr>
+            <th style="min-width:170px;">Term</th>
+            <th style="min-width:300px;">What It Means in Simple Words</th>
+            <th style="min-width:100px;text-align:center;">Key Point</th>
+          </tr></thead>
+          <tbody>
+            <tr><td class="gt-term">NAV (Net Asset Value)</td><td class="gt-desc">The per-share value of a company's assets at current market prices, minus all liabilities. Formula: (Gross Asset Value minus Net Debt) divided by Shares Outstanding. Most relevant for real estate developers, NBFCs, and holding companies where assets are the primary value driver rather than current earnings. NAV answers: what does the company own today and what would it be worth if everything were sold and debt repaid?</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-p">Core metric</span></td></tr>
+            <tr><td class="gt-term">Gross Development Value (GDV)</td><td class="gt-desc">The total expected revenue from all units in a real estate project if sold at current market prices. GDV = Total saleable area x Average Selling Price. This is the top-line of project economics before subtracting construction cost, land cost, and financing costs. GDV is the basis for WIP valuation in developer NAV models, but it is not NAV — it must be reduced by all project costs to arrive at the project's contribution to Net Asset Value.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">RE developers</span></td></tr>
+            <tr><td class="gt-term">Cap Rate</td><td class="gt-desc">Capitalisation Rate = Net Operating Income divided by Property Market Value. Used to value income-producing real estate: offices, malls, warehouses, hotels. If an office earns NOI of Rs.100 Cr and the market cap rate is 8%, its value = Rs.100 divided by 8% = Rs.1,250 Cr. Lower cap rates equal higher valuations for the same income stream. Grade A offices in BKC/Gurgaon currently trade at 7-8% cap rates. Cap rates move inversely to property values — rising rates mean falling property values, similar to bond duration mathematics.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-s">Commercial RE</span></td></tr>
+            <tr><td class="gt-term">Average Selling Price (ASP)</td><td class="gt-desc">The per-square-foot price at which a real estate developer is selling units in a project. ASP is the most critical input in developer NAV modelling — small changes in ASP assumption cause large swings in NAV. For sold inventory: use the contracted ASP from the registered sale agreement. For unsold inventory: use current market ASP from RERA data or management guidance cross-checked against RERA transaction prices. Always distinguish between carpet area ASP reported on RERA and built-up or super built-up ASP quoted by developers in their marketing.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-a">Key NAV input</span></td></tr>
+            <tr><td class="gt-term">Holdco Discount</td><td class="gt-desc">The percentage below gross NAV at which a holding company typically trades in the market. Structural discount of 20-45% exists because: dividend distribution creates tax layers, management cannot sell subsidiary stakes without market impact, investors can directly own the subsidiary more efficiently, and capital allocation risk adds uncertainty. Discount narrows when subsidiaries list separately, dividends increase, or demergers are announced. Measuring the current discount vs historical average is the primary investment signal for holding company analysis.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-r">20-45% typical</span></td></tr>
+            <tr><td class="gt-term">Adjusted Book Value (ABV)</td><td class="gt-desc">For NBFCs and banks: ABV = Reported Book Value minus Estimated credit losses not yet provisioned. Quick calculation: ABV = Book Value minus (NNPA% x Total Advances x 60%). This adjustment accounts for the possibility that net NPAs will not be fully recovered even with existing provisions. Companies with high NNPA and poor provision coverage deserve to trade below ABV. Those with low NNPA and adequate provisions deserve to trade at or above ABV. ABV is the NAV equivalent for financial sector companies including HFCs and NBFCs.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-s">NBFCs and HFCs</span></td></tr>
+            <tr><td class="gt-term">Pre-Sales (Bookings)</td><td class="gt-desc">The value of apartments sold — agreements signed and advances paid — but not yet delivered or revenue-recognised under accounting standards. Pre-sales generate deposits that reduce effective working capital needs and provide contracted future revenue visibility. Pre-sales are the leading indicator for a developer's NAV trajectory: strong pre-sales mean the WIP component of NAV is growing. Tracked quarterly in investor presentations. Strong pre-sales with strong collections equals strong NAV momentum; high pre-sales with weak collections signals execution risk.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-p">RE leading indicator</span></td></tr>
+            <tr><td class="gt-term">NNPA (Net Non-Performing Assets)</td><td class="gt-desc">Net NPA = Gross NPA minus Provisions made against those bad loans. Represents the credit risk in an NBFC's loan book not yet covered by provisions. Available on Screener.in Ratios section for all listed NBFCs and banks. NNPA below 1% = excellent credit quality. NNPA 1-3% = acceptable. NNPA above 3% = elevated credit risk. For NAV adjustment: approximately 60% of NNPA may represent unrecoverable loss and should be deducted from book value to arrive at a conservative Adjusted NAV for NBFC valuation.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-r">NBFC credit risk</span></td></tr>
+            <tr><td class="gt-term">RERA</td><td class="gt-desc">Real Estate Regulatory Authority — India's regulatory framework requiring all residential projects above a threshold to be registered before marketing. State RERA portals (MahaRERA for Maharashtra, RERA Karnataka, UP RERA) disclose project completion timelines, actual carpet area measurements, registered transaction prices for completed sales, and escrow account balances. For NAV analysis, RERA is an invaluable free data source to verify ASP assumptions and project completion status — two of the most critical inputs to any real estate developer NAV model.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-g">Free RE data</span></td></tr>
+            <tr><td class="gt-term">Embedded Value (Insurance)</td><td class="gt-desc">An actuarial measure of a life insurance company's current value, representing the present value of future profits from in-force policies plus adjusted net worth. Published annually by listed life insurers. P/EV multiple = Market Cap divided by Embedded Value. Used to value insurance subsidiaries within holding company NAV calculations. A growing EV with high new business margins supports a premium EV multiple. Stagnant EV with low margins supports a discount. India's large life insurers (LIC, HDFC Life, SBI Life) publish EV in their annual disclosures, making holdco NAV calculation for insurance-heavy companies precise and verifiable.</td><td class="gt-risk" style="text-align:center;"><span class="flag-cell flag-s">Insurance companies</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Series Complete</div>
+    <div class="nxt-sub">Advanced Valuation Series complete: DCF, EVA, SOTP, NAV, Trading Comps, Precedent Transactions &#9989;</div>
+  </div>
+  <a href="#" class="nxt-btn">Review Full Series <span class="nxt-arrow">&#8594;</span></a>
+</div>
+
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">&#9888;&#65039;</div>
+    <div><div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+    <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">This page is for educational purposes only. All NAV estimates for Godrej Properties, DLF, LIC Housing Finance, Prestige Estates, and Bajaj Finserv are approximate, illustrative, and for educational demonstration only — NOT investment recommendations. Land bank areas, ASP assumptions, project values, and debt figures are simplified and must be verified from official company disclosures, BSE/NSE filings, RERA portals, and annual reports. NAV models are highly sensitive to ASP and land value assumptions — small changes can cause large swings in NAV per share. Consult a SEBI-registered investment advisor before making investment decisions. All equity investments carry market risk including the risk of loss of entire invested principal.</div></div>
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  'use strict';
+  var passOpts={passive:true};
+
+  /* ── Scroll reveal ── */
+  var revEls=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var revIO=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('on');revIO.unobserve(e.target);}
+      });
+    },{threshold:.05,rootMargin:'0px 0px -28px 0px'});
+    revEls.forEach(function(el){revIO.observe(el);});
+  } else {
+    revEls.forEach(function(el){el.classList.add('on');});
+  }
+
+  /* ── Reduced motion — reveal immediately ── */
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    revEls.forEach(function(el){el.classList.add('on');});
+  }
+
+  /* ── Passive touch — prevent scroll jank ── */
+  document.addEventListener('touchstart',function(){},passOpts);
+  document.addEventListener('touchmove',function(){},passOpts);
+  document.addEventListener('touchend',function(){},passOpts);
+
+  /* ── Overscroll containment ── */
+  document.body.style.overscrollBehavior='none';
+
+  /* ── iOS 100vh fix — dynamic viewport height ── */
+  function setVH(){
+    document.documentElement.style.setProperty('--vh',window.innerHeight*0.01+'px');
+  }
+  setVH();
+  window.addEventListener('resize',setVH,passOpts);
+  window.addEventListener('orientationchange',function(){
+    setTimeout(setVH,150);
+    /* Re-check scroll reveal after orientation settle */
+    setTimeout(function(){
+      document.querySelectorAll('.rv:not(.on)').forEach(function(el){
+        var r=el.getBoundingClientRect();
+        if(r.top<window.innerHeight-20){el.classList.add('on');}
+      });
+    },320);
+  },passOpts);
+
+  /* ── Font repaint — gradient text on iOS ── */
+  if(document.fonts&&document.fonts.ready){
+    document.fonts.ready.then(function(){
+      document.querySelectorAll('.rv.on').forEach(function(el){el.style.opacity='1';});
+    });
+  }
+
+  /* ── touch-action:manipulation on ALL interactive elements ──
+     Covers: asset cards, NAV chips, meter zones, table rows,
+     data-strip items, discount meter rows, flow nodes */
+  function applyTouchActions(){
+    var sel=[
+      'a','button','.dmbtn','.nxt-btn',
+      '.asset-card','.step-card','.kpill',
+      '.company-block','.bonus-card',
+      '.trick-wrap','.flow-node','.nc-chip',
+      '.dm-row','.dnm-zone','.ds-item',
+      '.ts-num','.bonus-badge',
+      '.nav-table tr','.glos-table tr'
+    ].join(',');
+    document.querySelectorAll(sel).forEach(function(el){
+      el.style.touchAction='manipulation';
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',applyTouchActions);
+  } else {
+    applyTouchActions();
+  }
+
+  /* ── Android: momentum scroll on all containers ── */
+  document.querySelectorAll('.table-scroll,.glos-wrap').forEach(function(el){
+    el.style.webkitOverflowScrolling='touch';
+  });
+
+  /* ── Visibility change: re-reveal when tab becomes active ── */
+  document.addEventListener('visibilitychange',function(){
+    if(!document.hidden){
+      document.querySelectorAll('.rv:not(.on)').forEach(function(el){
+        var r=el.getBoundingClientRect();
+        if(r.top<window.innerHeight){el.classList.add('on');}
+      });
+    }
+  });
+
+  /* ── iOS: prevent double-tap zoom on anchor links ── */
+  document.querySelectorAll('a[href="#"]').forEach(function(a){
+    a.addEventListener('touchend',function(e){e.preventDefault();},passOpts);
+  });
+
+  /* ── Asset card and NAV table press feedback on touch ── */
+  if(window.matchMedia('(hover:none) and (pointer:coarse)').matches){
+
+    /* Asset category cards — per-colour press tint */
+    var acMap=[
+      {cls:'ac-land',    bg:'rgba(109,40,217,.07)'},
+      {cls:'ac-completed',bg:'rgba(22,163,74,.09)'},
+      {cls:'ac-wip',     bg:'rgba(217,119,6,.08)'},
+      {cls:'ac-invest',  bg:'rgba(2,132,199,.07)'},
+      {cls:'ac-liab',    bg:'rgba(220,38,38,.07)'},
+      {cls:'ac-cash',    bg:'rgba(109,40,217,.05)'}
+    ];
+    acMap.forEach(function(m){
+      document.querySelectorAll('.'+m.cls).forEach(function(card){
+        card.addEventListener('touchstart',function(){
+          this.style.background=m.bg;
+          this.style.transition='background .08s';
+        },passOpts);
+        card.addEventListener('touchend',function(){
+          var self=this;
+          setTimeout(function(){self.style.background='';},200);
+        },passOpts);
+      });
+    });
+
+    /* NAV table: asset rows (green tint) */
+    document.querySelectorAll('.nav-table tr.asset-row').forEach(function(row){
+      row.addEventListener('touchstart',function(){
+        this.style.background='rgba(22,163,74,.07)';
+      },passOpts);
+      row.addEventListener('touchend',function(){
+        var self=this;
+        setTimeout(function(){self.style.background='';},200);
+      },passOpts);
+    });
+
+    /* NAV table: liability rows (red tint) */
+    document.querySelectorAll('.nav-table tr.liab-row').forEach(function(row){
+      row.addEventListener('touchstart',function(){
+        this.style.background='rgba(220,38,38,.06)';
+      },passOpts);
+      row.addEventListener('touchend',function(){
+        var self=this;
+        setTimeout(function(){self.style.background='';},200);
+      },passOpts);
+    });
+
+    /* Discount meter zones — subtle press */
+    document.querySelectorAll('.dnm-zone').forEach(function(zone){
+      zone.addEventListener('touchstart',function(){
+        this.style.opacity='.8';
+        this.style.transition='opacity .08s';
+      },passOpts);
+      zone.addEventListener('touchend',function(){
+        var self=this;
+        setTimeout(function(){self.style.opacity='';},200);
+      },passOpts);
+    });
+  }
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Buy Hold Sell · Portfolio Construction">
+<meta name="theme-color" content="#6d28d9">
+<meta name="format-detection" content="telephone=no">
+<title>Buy, Hold &amp; Sell Discipline — Portfolio Construction Basics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#6d28d9;--ph:#7c3aed;--pl:#4c1d95;
+  --pxl:#ede9fe;--pxs:#f5f3ff;--pmd:#ddd6fe;
+  --g:#16a34a;--gh:#22c55e;--gpale:#f0fdf4;--gbr:#15803d;--gring:#bbf7d0;
+  --amb:#d97706;--apale:#fefce8;--ambr:#92400e;
+  --red:#dc2626;--rpale:#fef2f2;
+  --teal:#0891b2;--tealpale:#ecfeff;
+  --wh:#ffffff;--sf:#f8f7ff;--bd:#e5e1fb;
+  --tx:#0f0a2e;--ts:#3d3868;--tl:#6e6994;
+  --shp:0 4px 36px rgba(109,40,217,.14);
+  --shg:0 4px 22px rgba(22,163,74,.11);
+  --shc:0 2px 12px rgba(26,18,64,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+*{word-break:break-word;overflow-wrap:break-word;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--wh);color:var(--tx);-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
+img,svg{max-width:100%;height:auto;display:block;}
+a{-webkit-tap-highlight-color:transparent;}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--sf);}
+::-webkit-scrollbar-thumb{background:var(--ph);border-radius:4px;}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}.d7{transition-delay:.44s}
+
+@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes slideRight{from{transform:translateX(-8px);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* LAYOUT */
+.w{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,5vw,56px);}
+.sec-alt{background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 50%,#fdfcff 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sec-white{background:var(--wh);}
+
+/* TYPE */
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:12px;min-width:0;overflow:hidden;}
+.tag::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--p),transparent);border-radius:2px;flex-shrink:0;}
+.h2{font-size:clamp(26px,4.5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.04;color:var(--tx);margin-bottom:14px;}
+.hp{background:linear-gradient(135deg,var(--pl),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hg{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rul{width:46px;height:3px;background:linear-gradient(90deg,var(--p),rgba(109,40,217,.03));border-radius:2px;margin-bottom:40px;}
+.lead{font-size:clamp(14px,1.6vw,16px);color:var(--ts);line-height:1.82;max-width:820px;margin-bottom:36px;}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;background:linear-gradient(158deg,#f5f3ff 0%,#f0fdf4 40%,#fdfcff 70%,#eef4ff 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(90px,14vw,140px) clamp(16px,5vw,64px) clamp(60px,8vw,100px);overflow:hidden;border-bottom:1px solid var(--bd);}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(109,40,217,.06) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 84% 84% at 50% 50%,black 35%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(92px);pointer-events:none;}
+.o1{width:min(700px,120vw);height:min(500px,90vw);background:rgba(109,40,217,.08);top:-110px;left:50%;transform:translateX(-50%);}
+.o2{width:min(350px,70vw);height:min(350px,70vw);background:rgba(22,163,74,.07);bottom:60px;right:-60px;}
+.o3{width:min(280px,60vw);height:min(280px,60vw);background:rgba(109,40,217,.05);bottom:40px;left:-50px;}
+.vbadge{position:absolute;top:max(22px,env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));background:var(--pxl);border:1px solid rgba(109,40,217,.22);color:var(--p);font-size:10px;font-weight:700;padding:4px 13px;border-radius:6px;z-index:3;}
+.eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border:1px solid rgba(109,40,217,.22);border-radius:100px;background:rgba(109,40,217,.055);color:var(--p);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;animation:fsd .8s ease both;}
+.edot{width:6px;height:6px;border-radius:50%;background:var(--p);animation:blink 2.2s ease-in-out infinite;flex-shrink:0;}
+.hh1{position:relative;z-index:2;font-size:clamp(26px,6.5vw,82px);font-weight:900;letter-spacing:-2.5px;line-height:.92;margin-bottom:12px;animation:fsu .88s ease .12s both;}
+.hh1 .line1{display:block;background:linear-gradient(135deg,var(--pl) 0%,var(--p) 42%,var(--ph) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line2{display:block;background:linear-gradient(135deg,var(--gbr) 0%,var(--g) 50%,var(--gh) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hh1 .line3{display:block;font-size:clamp(13px,2.8vw,38px);background:linear-gradient(135deg,var(--p) 0%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{position:relative;z-index:2;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ts);margin-bottom:16px;animation:fsu .88s ease .21s both;}
+.hdesc{position:relative;z-index:2;font-size:clamp(14px,1.7vw,17px);color:var(--ts);max-width:660px;line-height:1.7;animation:fsu .88s ease .3s both;margin-bottom:40px;}
+.hero-pills{position:relative;z-index:2;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;animation:fsu .88s ease .44s both;min-width:0;overflow:hidden;}
+.hero-pill{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:100px;font-size:clamp(10px,1.3vw,12px);font-weight:800;min-width:0;max-width:100%;}
+.hp-p{background:var(--pxl);color:var(--p);border:1.5px solid rgba(109,40,217,.2);}
+.hp-g{background:var(--gpale);color:var(--gbr);border:1.5px solid rgba(22,163,74,.2);}
+.hp-a{background:var(--apale);color:var(--ambr);border:1.5px solid rgba(217,119,6,.2);}
+.hp-r{background:var(--rpale);color:var(--red);border:1.5px solid rgba(220,38,38,.2);}
+.hp-t{background:var(--tealpale);color:var(--teal);border:1.5px solid rgba(8,145,178,.2);}
+
+/* KLO BANNER */
+.klobanner{background:linear-gradient(135deg,var(--pxl),var(--gpale));border:1.5px solid var(--bd);border-radius:22px;padding:clamp(22px,3vw,38px) clamp(18px,3vw,40px);display:flex;align-items:flex-start;gap:18px;min-width:0;overflow:hidden;}
+.klo-icon{width:58px;height:58px;min-width:58px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--ph));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;box-shadow:0 6px 22px rgba(109,40,217,.3);animation:floatA 4s ease-in-out infinite;}
+.klo-body{flex:1;min-width:0;overflow:hidden;}
+.klo-body>*{min-width:0;}
+.klo-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--p);margin-bottom:5px;}
+.klo-title{font-size:clamp(14px,1.9vw,18px);font-weight:800;color:var(--tx);margin-bottom:8px;}
+.klo-desc{font-size:13px;color:var(--ts);line-height:1.65;}
+.klo-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;min-width:0;overflow:hidden;}
+.kpill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;min-height:28px;max-width:100%;overflow:hidden;}
+.kpill-p{background:rgba(109,40,217,.1);color:var(--p);border:1px solid rgba(109,40,217,.18);}
+.kpill-g{background:rgba(22,163,74,.1);color:var(--gbr);border:1px solid rgba(22,163,74,.18);}
+.kpill-a{background:rgba(217,119,6,.1);color:var(--ambr);border:1px solid rgba(217,119,6,.18);}
+.kpill-r{background:rgba(220,38,38,.1);color:var(--red);border:1px solid rgba(220,38,38,.18);}
+.klo-hi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;min-width:0;overflow:hidden;}
+.klo-hi{background:var(--wh);border:1.5px solid var(--bd);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--shc);min-width:0;overflow:hidden;}
+.klo-hi-ico{font-size:22px;margin-bottom:6px;}
+.klo-hi-val{font-size:clamp(12px,2vw,16px);font-weight:900;letter-spacing:-.3px;word-break:normal;line-height:1.1;min-width:0;overflow:hidden;}
+.klo-hi-val.purple{background:linear-gradient(135deg,var(--p),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.green{background:linear-gradient(135deg,var(--gbr),var(--gh));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.klo-hi-val.red{color:var(--red);}
+.klo-hi-lbl{font-size:10px;color:var(--tl);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:3px;min-width:0;overflow:hidden;}
+
+/* ══════════════════════════════════════
+   THREE ACTION CARDS (BUY / HOLD / SELL)
+══════════════════════════════════════ */
+.action-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,24px);min-width:0;overflow:hidden;}
+.action-card{border-radius:22px;overflow:hidden;min-width:0;box-shadow:var(--shp);transition:transform .25s;}
+.action-card:hover{transform:translateY(-4px);}
+.ac-hd{padding:clamp(18px,3vw,28px);position:relative;overflow:hidden;}
+.ac-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.08) 1px,transparent 1px);background-size:18px 18px;pointer-events:none;}
+.ach-buy{background:linear-gradient(135deg,#052e16,var(--gbr),var(--g));}
+.ach-hold{background:linear-gradient(135deg,#1e1b4b,var(--pl),var(--p));}
+.ach-sell{background:linear-gradient(135deg,#450a0a,var(--red),#f87171);}
+.ac-hd-inner{position:relative;z-index:1;min-width:0;overflow:hidden;}
+.ac-ico{font-size:clamp(34px,5vw,48px);display:block;margin-bottom:10px;animation:floatB 3.5s ease-in-out infinite;flex-shrink:0;}
+.ac-label{display:inline-flex;align-items:center;padding:4px 14px;border-radius:100px;font-size:clamp(11px,1.5vw,14px);font-weight:900;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;max-width:100%;overflow:hidden;}
+.acl-buy{background:rgba(255,255,255,.2);color:#fff;}
+.acl-hold{background:rgba(255,255,255,.2);color:#fff;}
+.acl-sell{background:rgba(255,255,255,.2);color:#fff;}
+.ac-title{font-size:clamp(14px,2vw,18px);font-weight:900;color:#fff;line-height:1.2;min-width:0;overflow:hidden;}
+.ac-sub{font-size:clamp(11px,1.3vw,13px);color:rgba(255,255,255,.72);margin-top:4px;min-width:0;overflow:hidden;}
+.ac-body{background:var(--wh);padding:clamp(16px,2.5vw,24px);min-width:0;overflow:hidden;}
+.ac-desc{font-size:clamp(12.5px,1.5vw,14px);color:var(--ts);line-height:1.72;margin-bottom:14px;min-width:0;overflow:hidden;}
+.ac-rules{display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden;}
+.ac-rule{display:flex;align-items:flex-start;gap:8px;padding:9px 12px;border-radius:12px;border:1.5px solid;min-width:0;overflow:hidden;transition:box-shadow .2s;}
+.ac-rule:hover{box-shadow:var(--shp);}
+.acr-buy{background:rgba(22,163,74,.05);border-color:rgba(22,163,74,.2);}
+.acr-hold{background:var(--pxl);border-color:rgba(109,40,217,.18);}
+.acr-sell{background:rgba(220,38,38,.05);border-color:rgba(220,38,38,.2);}
+.acr-ico{font-size:14px;flex-shrink:0;margin-top:1px;}
+.acr-body{min-width:0;overflow:hidden;}
+.acr-title{font-size:clamp(11.5px,1.4vw,13px);font-weight:800;color:var(--tx);margin-bottom:2px;min-width:0;overflow:hidden;}
+.acr-desc{font-size:clamp(11px,1.3vw,12px);color:var(--ts);line-height:1.5;min-width:0;overflow:hidden;}
+
+/* ══════════════════════════════════════
+   VALUATION JOURNEY — PRICE ZONE VISUAL
+══════════════════════════════════════ */
+.val-journey{border-radius:22px;overflow:hidden;border:1.5px solid var(--bd);min-width:0;box-shadow:var(--shp);}
+.vj-hd{padding:clamp(14px,2.5vw,22px) clamp(18px,3vw,32px);position:relative;overflow:hidden;}
+.vj-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:20px 20px;pointer-events:none;}
+.vjh-p{background:linear-gradient(135deg,var(--pl),var(--p));}
+.vj-title{font-size:clamp(14px,2vw,18px);font-weight:900;color:#fff;position:relative;z-index:1;margin-bottom:3px;min-width:0;overflow:hidden;}
+.vj-sub{font-size:11px;color:rgba(255,255,255,.65);position:relative;z-index:1;min-width:0;overflow:hidden;}
+.vj-body{background:var(--wh);padding:clamp(18px,3vw,28px);min-width:0;overflow:hidden;}
+
+/* Price zone bar */
+.zone-bar{border-radius:14px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr 1fr;height:clamp(52px,7vw,72px);margin-bottom:18px;min-width:0;box-shadow:var(--shc);}
+.zone-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;min-width:0;overflow:hidden;}
+.zs-buy{background:linear-gradient(135deg,var(--g),var(--gh));}
+.zs-hold{background:linear-gradient(135deg,var(--p),var(--ph));}
+.zs-sell{background:linear-gradient(135deg,var(--red),#f87171);}
+.zs-label{font-size:clamp(11px,1.8vw,15px);font-weight:900;color:#fff;letter-spacing:.5px;min-width:0;overflow:hidden;}
+.zs-sub{font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.8);min-width:0;overflow:hidden;}
+
+/* Zone descriptions */
+.zone-descs{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,18px);min-width:0;overflow:hidden;}
+.zone-desc{padding:clamp(10px,1.8vw,16px);border-radius:14px;border:1.5px solid;min-width:0;overflow:hidden;}
+.zd-buy{background:rgba(22,163,74,.05);border-color:rgba(22,163,74,.2);}
+.zd-hold{background:var(--pxl);border-color:rgba(109,40,217,.18);}
+.zd-sell{background:rgba(220,38,38,.05);border-color:rgba(220,38,38,.2);}
+.zd-title{font-size:clamp(11.5px,1.5vw,13px);font-weight:800;margin-bottom:5px;min-width:0;overflow:hidden;}
+.zdt-buy{color:var(--gbr);}
+.zdt-hold{color:var(--p);}
+.zdt-sell{color:var(--red);}
+.zd-desc{font-size:clamp(11px,1.3vw,12px);color:var(--ts);line-height:1.55;min-width:0;overflow:hidden;}
+
+/* ══════════════════════════════════════
+   EMOTION VS DISCIPLINE TABLE
+══════════════════════════════════════ */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.5vw,22px);min-width:0;overflow:hidden;}
+.compare-col{border-radius:18px;overflow:hidden;min-width:0;box-shadow:var(--shp);}
+.cc-hd{padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);position:relative;overflow:hidden;}
+.cc-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:18px 18px;pointer-events:none;}
+.cch-bad{background:linear-gradient(135deg,#450a0a,var(--red));}
+.cch-good{background:linear-gradient(135deg,#052e16,var(--gbr));}
+.cc-hd-title{font-size:clamp(13px,1.8vw,16px);font-weight:900;color:#fff;position:relative;z-index:1;margin-bottom:2px;min-width:0;overflow:hidden;}
+.cc-hd-sub{font-size:10.5px;color:rgba(255,255,255,.65);position:relative;z-index:1;min-width:0;overflow:hidden;}
+.cc-body{background:var(--wh);padding:clamp(14px,2vw,20px);min-width:0;overflow:hidden;}
+.cc-items{display:flex;flex-direction:column;gap:7px;min-width:0;overflow:hidden;}
+.cc-item{display:flex;align-items:flex-start;gap:8px;padding:9px 12px;border-radius:11px;border:1px solid;min-width:0;overflow:hidden;}
+.cci-bad{background:rgba(220,38,38,.05);border-color:rgba(220,38,38,.18);}
+.cci-good{background:rgba(22,163,74,.05);border-color:rgba(22,163,74,.18);}
+.cci-ico{font-size:14px;flex-shrink:0;margin-top:1px;}
+.cci-body{min-width:0;overflow:hidden;}
+.cci-title{font-size:clamp(11.5px,1.4vw,13px);font-weight:800;color:var(--tx);margin-bottom:2px;min-width:0;overflow:hidden;}
+.cci-desc{font-size:clamp(11px,1.2vw,12px);color:var(--ts);line-height:1.5;min-width:0;overflow:hidden;}
+
+/* ══════════════════════════════════════
+   EXAMPLE CARDS
+══════════════════════════════════════ */
+.ex-cards{display:flex;flex-direction:column;gap:clamp(28px,5vw,48px);min-width:0;overflow:hidden;}
+.ex-card{border-radius:24px;overflow:hidden;min-width:0;box-shadow:var(--shp);}
+.exc-hd{padding:clamp(18px,3vw,28px) clamp(18px,3vw,32px);display:flex;align-items:flex-start;gap:clamp(14px,2.5vw,22px);position:relative;overflow:hidden;}
+.exc-hd::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+.exh-g{background:linear-gradient(135deg,#052e16,var(--gbr),var(--g),#86efac);}
+.exh-p{background:linear-gradient(135deg,#1e1b4b,var(--p),var(--ph),#a78bfa);}
+.exh-a{background:linear-gradient(135deg,#451a03,var(--ambr),var(--amb),#fde68a);}
+.exh-t{background:linear-gradient(135deg,#0c4a6e,var(--teal),#22d3ee);}
+.exh-r{background:linear-gradient(135deg,#450a0a,var(--red),#f87171);}
+.exc-char{flex-shrink:0;position:relative;z-index:1;}
+.exc-h-text{flex:1;min-width:0;overflow:hidden;position:relative;z-index:1;}
+.exc-badge{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:5px;min-width:0;overflow:hidden;}
+.exc-name{font-size:clamp(18px,3.5vw,34px);font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1;margin-bottom:5px;min-width:0;overflow:hidden;}
+.exc-tagline{font-size:clamp(11.5px,1.6vw,14px);color:rgba(255,255,255,.78);line-height:1.5;margin-bottom:10px;min-width:0;overflow:hidden;}
+.exc-pills{display:flex;gap:7px;flex-wrap:wrap;min-width:0;overflow:hidden;}
+.exc-pill{display:inline-flex;align-items:center;padding:4px 11px;border-radius:100px;font-size:9.5px;font-weight:700;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.25);white-space:nowrap;max-width:100%;overflow:hidden;}
+.exc-body{background:var(--wh);padding:clamp(18px,3vw,28px);min-width:0;overflow:hidden;}
+.exc-2col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,32px);align-items:start;min-width:0;overflow:hidden;}
+.exc-sec-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tl);margin-bottom:12px;display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden;}
+.exc-sec-title::before{content:'';width:14px;height:2px;border-radius:1px;flex-shrink:0;}
+.est-g::before{background:var(--g);}
+.est-r::before{background:var(--red);}
+.est-p::before{background:var(--p);}
+.est-a::before{background:var(--amb);}
+.est-t::before{background:var(--teal);}
+
+/* Decision rows inside example card */
+.decision-rows{display:flex;flex-direction:column;gap:9px;min-width:0;overflow:hidden;}
+.dec-row{display:flex;align-items:center;gap:10px;padding:10px 13px;border-radius:12px;border:1.5px solid;min-width:0;overflow:hidden;transition:box-shadow .2s;}
+.dec-row:hover{box-shadow:var(--shp);}
+.dr-buy{background:rgba(22,163,74,.05);border-color:rgba(22,163,74,.2);}
+.dr-hold{background:var(--pxl);border-color:rgba(109,40,217,.18);}
+.dr-sell{background:rgba(220,38,38,.05);border-color:rgba(220,38,38,.2);}
+.dr-warn{background:var(--apale);border-color:rgba(217,119,6,.2);}
+.dr-badge{padding:4px 11px;border-radius:100px;font-size:10px;font-weight:900;white-space:nowrap;flex-shrink:0;letter-spacing:.5px;}
+.drb-buy{background:var(--g);color:#fff;}
+.drb-hold{background:var(--p);color:#fff;}
+.drb-sell{background:var(--red);color:#fff;}
+.drb-warn{background:var(--amb);color:#fff;}
+.dr-body{flex:1;min-width:0;overflow:hidden;}
+.dr-title{font-size:clamp(12px,1.5vw,13.5px);font-weight:800;color:var(--tx);min-width:0;overflow:hidden;}
+.dr-detail{font-size:clamp(11px,1.3vw,12px);color:var(--ts);line-height:1.5;min-width:0;overflow:hidden;}
+
+/* Metric chips */
+.metric-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;min-width:0;overflow:hidden;}
+.metric-chip{padding:8px 12px;border-radius:12px;border:1.5px solid var(--bd);background:var(--pxs);min-width:0;overflow:hidden;}
+.mc-lbl{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--tl);margin-bottom:2px;min-width:0;overflow:hidden;}
+.mc-val{font-size:clamp(13px,2vw,16px);font-weight:900;word-break:normal;line-height:1.1;min-width:0;overflow:hidden;}
+.mcv-g{color:var(--gbr);}
+.mcv-r{color:var(--red);}
+.mcv-p{color:var(--p);}
+.mcv-a{color:var(--ambr);}
+
+/* Lesson box */
+.lesson-box{border-radius:14px;padding:clamp(12px,2vw,18px);min-width:0;overflow:hidden;}
+.lb-p{background:linear-gradient(135deg,var(--pxl),var(--pxs));border:1.5px solid rgba(109,40,217,.2);}
+.lb-g{background:linear-gradient(135deg,var(--gpale),#fafffe);border:1.5px solid rgba(22,163,74,.25);}
+.lb-a{background:linear-gradient(135deg,var(--apale),#fffdf5);border:1.5px solid rgba(217,119,6,.2);}
+.lb-t{background:linear-gradient(135deg,var(--tealpale),#f0feff);border:1.5px solid rgba(8,145,178,.2);}
+.lb-r{background:linear-gradient(135deg,var(--rpale),#fff9f9);border:1.5px solid rgba(220,38,38,.2);}
+.lb-title{font-size:clamp(12px,1.7vw,14px);font-weight:900;margin-bottom:6px;min-width:0;overflow:hidden;}
+.lbt-p{color:var(--p);}
+.lbt-g{color:var(--gbr);}
+.lbt-a{color:var(--ambr);}
+.lbt-t{color:var(--teal);}
+.lbt-r{color:var(--red);}
+.lb-desc{font-size:clamp(11.5px,1.4vw,13px);color:var(--ts);line-height:1.68;min-width:0;overflow:hidden;}
+
+/* DEMAT BANNER */
+.dmbanner{position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1240 0%,#4c1d95 35%,#6d28d9 60%,#059669 100%);padding:clamp(40px,6vw,76px) clamp(20px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);}
+.dmbanner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;}
+.dmbanner::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none;}
+.dml{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.dmtag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dmtag::before,.dmtag::after{content:'';width:20px;height:2px;background:#4ade80;border-radius:1px;}
+.dmh{font-size:clamp(20px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;max-width:700px;}
+.dmhs{color:#4ade80;}
+.dmsub{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.72);line-height:1.68;max-width:580px;margin:0 auto;}
+.dmfeats{display:flex;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:16px;justify-content:center;min-width:0;overflow:hidden;}
+.dmf{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.82);font-weight:500;}
+.dmf::before{content:'✓';color:#4ade80;font-weight:800;font-size:13px;}
+.dmr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px;width:100%;}
+.dmbtn{display:inline-flex;align-items:center;gap:10px;padding:16px 48px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:900;border-radius:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 36px rgba(34,197,94,.52);transition:transform .22s,box-shadow .22s;white-space:nowrap;min-height:48px;}
+.dmbtn:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(34,197,94,.64);}
+.dmbtn:active{transform:scale(.97);}
+.dmico{font-size:20px;}
+.dmstars{display:flex;align-items:center;gap:3px;justify-content:center;margin-top:6px;}
+.dmstar{font-size:13px;color:#4ade80;}
+.dmrating{font-size:10px;color:rgba(255,255,255,.52);margin-left:5px;}
+.dmnote{font-size:10px;color:rgba(255,255,255,.42);margin-top:5px;}
+
+/* NEXT CHAPTER */
+.nxt-banner{background:linear-gradient(100deg,#3b0e8c 0%,#6d28d9 40%,#7c3aed 70%,#8b5cf6 100%);padding:clamp(18px,3vw,28px) clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left,0px));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right,0px));}
+.nxt-banner::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.nxt-left{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;min-width:0;overflow:hidden;}
+.nxt-label{font-size:9px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.5);min-width:0;overflow:hidden;}
+.nxt-sub{font-size:clamp(13px,1.6vw,15px);color:rgba(255,255,255,.72);font-weight:500;margin-top:1px;min-width:0;overflow:hidden;}
+.nxt-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;min-height:46px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#052e16;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:900;border-radius:12px;text-decoration:none;box-shadow:0 6px 28px rgba(34,197,94,.45);transition:transform .22s,box-shadow .22s;white-space:nowrap;flex-shrink:0;}
+.nxt-btn:hover{transform:translateY(-2px) scale(1.03);}
+.nxt-btn:active{transform:scale(.97);}
+.nxt-arrow{font-size:18px;display:inline-block;transition:transform .22s;}
+.nxt-btn:hover .nxt-arrow{transform:translateX(4px);}
+.disc-inner{display:flex;align-items:flex-start;gap:18px;min-width:0;overflow:hidden;}
+
+/* ═══ RESPONSIVE ═══ */
+@media(min-width:1280px){.w{padding:80px 72px;}}
+@media(max-width:1100px){.action-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){
+  .action-grid{grid-template-columns:1fr 1fr;}
+  .compare-grid{grid-template-columns:1fr 1fr;}
+  .zone-bar{grid-template-columns:1fr 1fr 1fr;}
+  .zone-descs{grid-template-columns:1fr 1fr 1fr;}
+  .exc-2col{grid-template-columns:1fr;}
+  .klo-hi-row{grid-template-columns:1fr 1fr 1fr;}
+}
+@media(max-width:768px){
+  .w{padding:clamp(36px,6vw,60px) clamp(16px,5vw,32px);}
+  .klobanner{flex-direction:column;}
+  .klo-icon{width:48px;height:48px;min-width:48px;font-size:22px;animation:none;}
+  .action-grid{grid-template-columns:1fr 1fr;}
+  .compare-grid{grid-template-columns:1fr 1fr;}
+  .zone-descs{grid-template-columns:1fr 1fr 1fr;}
+  .disc-inner{flex-direction:column;gap:12px;}
+  .nxt-banner{padding:clamp(14px,3vw,22px) clamp(16px,4vw,28px);}
+  .nxt-btn{font-size:14px;padding:12px 20px;}
+  .dmfeats{gap:10px 20px;}
+  .exc-hd{gap:12px;}
+  .exc-name{font-size:clamp(16px,4vw,28px);}
+  .exc-body{padding:clamp(16px,2.5vw,22px);}
+  .exc-char svg{width:clamp(54px,8vw,72px);height:auto;}
+  .hero-pills{gap:6px;}
+  .hero-pill{font-size:10px;padding:6px 11px;}
+  .ac-ico{animation:none;}
+}
+@media(max-width:640px){
+  .action-grid{grid-template-columns:1fr;}
+  .compare-grid{grid-template-columns:1fr;}
+  .zone-descs{grid-template-columns:1fr;}
+  .exc-hd{flex-direction:column;gap:10px;}
+  .exc-char{align-self:flex-start;}
+  .dmfeats{flex-direction:column;align-items:flex-start;gap:8px;}
+  .klo-hi-row{grid-template-columns:1fr 1fr 1fr;}
+  .hero-pills{gap:5px;}
+  .hero-pill{font-size:10px;padding:5px 9px;}
+}
+@media(max-width:480px){
+  .w{padding:32px 14px;}
+  .hh1{letter-spacing:-1.5px;}
+  .hdesc{font-size:13px;}
+  .hsub{letter-spacing:2px;font-size:9px;}
+  .vbadge{font-size:9px;padding:3px 9px;top:max(12px,env(safe-area-inset-top,10px));right:max(12px,env(safe-area-inset-right,10px));}
+  .h2{letter-spacing:-1px;}
+  .lead{font-size:13.5px;}
+  .tag{letter-spacing:2px;}
+  .klo-title{font-size:14px;}
+  .klo-desc{font-size:12px;}
+  .kpill{font-size:9px;padding:4px 9px;}
+  .klo-hi{padding:10px 8px;}
+  .klo-hi-val{font-size:clamp(10px,3.5vw,13px);}
+  .klo-hi-ico{font-size:18px;}
+  .klo-hi-row{grid-template-columns:1fr 1fr 1fr !important;}
+  .ac-ico{font-size:clamp(28px,5vw,40px);animation:none;}
+  .ac-title{font-size:clamp(13px,4vw,17px);}
+  .ac-desc{font-size:12px;}
+  .acr-title{font-size:11.5px;}
+  .acr-desc{font-size:11px;}
+  .zone-bar{height:clamp(44px,7vw,56px);}
+  .zs-label{font-size:clamp(10px,2.5vw,13px);}
+  .zs-sub{font-size:clamp(8px,1.5vw,10px);}
+  .zd-title{font-size:11.5px;}
+  .zd-desc{font-size:11px;}
+  .cc-hd-title{font-size:clamp(12px,3.5vw,15px);}
+  .cci-title{font-size:11.5px;}
+  .cci-desc{font-size:11px;}
+  .exc-hd{padding:clamp(14px,3vw,20px) clamp(12px,3vw,18px);}
+  .exc-name{font-size:clamp(15px,5.5vw,24px);}
+  .exc-tagline{font-size:11.5px;}
+  .exc-pill{font-size:9px;padding:3px 9px;}
+  .exc-body{padding:13px 12px;}
+  .exc-2col{gap:14px;}
+  .exc-sec-title{font-size:9px;letter-spacing:1px;margin-bottom:8px;}
+  .dr-title{font-size:12px;}
+  .dr-detail{font-size:11px;}
+  .dr-badge{font-size:9px;padding:3px 9px;}
+  .mc-val{font-size:clamp(12px,3.5vw,15px);}
+  .lb-title{font-size:12.5px;}
+  .lb-desc{font-size:11.5px;}
+  .dmbtn{width:100%;justify-content:center;padding:15px 20px;font-size:15px;min-height:52px;}
+  .dmh{letter-spacing:-1px;}
+  .dmsub{font-size:13px;}
+  .nxt-banner{padding:12px 14px;}
+  .nxt-btn{font-size:13px;padding:11px 16px;min-height:44px;}
+  .hero-pill{font-size:9px;padding:5px 8px;}
+  .exc-char svg{width:clamp(44px,9vw,60px);height:auto;}
+  .metric-chips{gap:6px;}
+  .metric-chip{padding:7px 10px;}
+}
+@media(max-width:360px){
+  .w{padding:26px 12px;}
+  .hh1{font-size:clamp(22px,9vw,34px);letter-spacing:-1px;}
+  .lead{font-size:13px;}
+  .h2{font-size:clamp(18px,8vw,26px);}
+  .klo-hi-row{grid-template-columns:1fr 1fr !important;}
+  .action-grid{grid-template-columns:1fr;}
+  .exc-hd{padding:11px 10px;}
+  .exc-name{font-size:clamp(13px,6vw,20px);}
+  .dr-title{font-size:11px;}
+  .lb-desc{font-size:11px;}
+  .exc-char svg{width:clamp(36px,9vw,48px);height:auto;}
+  .nxt-btn{font-size:12px;padding:10px 13px;}
+  .dmbtn{font-size:14px;padding:13px 16px;}
+  .hero-pill{font-size:8.5px;padding:4px 7px;}
+  .zone-descs{gap:8px;}
+  .compare-grid{gap:10px;}
+}
+
+/* Touch */
+@media(hover:none) and (pointer:coarse){
+  .action-card:hover,.compare-col:hover,.ac-rule:hover,.dec-row:hover,.ex-card:hover{transform:none!important;box-shadow:var(--shc)!important;}
+  .action-card:active,.ac-rule:active,.dec-row:active{transform:scale(.98);transition:transform .08s;}
+  .dmbtn:active,.nxt-btn:active{transform:scale(.97);}
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .kpill{min-height:36px;padding-top:7px;padding-bottom:7px;}
+  ::-webkit-scrollbar{display:none;}
+  a,button,.dmbtn,.nxt-btn{-webkit-tap-highlight-color:transparent;}
+  .hh1,.h2,.tag,.eyebrow,.klo-label{-webkit-user-select:none;user-select:none;}
+  p,.klo-desc,.lead,.ac-desc,.acr-desc,.zd-desc,.cci-desc,.lb-desc,.dr-detail{-webkit-user-select:text;user-select:text;}
+  .dmbtn,.nxt-btn,a,button{touch-action:manipulation;}
+  .klo-icon,.ac-ico{animation:none;}
+}
+
+/* iOS Safari */
+@supports(-webkit-touch-callout:none){
+  body{-webkit-overflow-scrolling:touch;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+  .hero{min-height:100svh;min-height:-webkit-fill-available;
+    padding-top:max(clamp(90px,14vw,140px),calc(env(safe-area-inset-top) + 72px));
+    padding-bottom:max(clamp(60px,8vw,100px),calc(env(safe-area-inset-bottom) + 32px));
+    padding-left:max(clamp(16px,5vw,64px),env(safe-area-inset-left));
+    padding-right:max(clamp(16px,5vw,64px),env(safe-area-inset-right));}
+  .vbadge{top:max(22px,calc(env(safe-area-inset-top) + 8px));right:max(22px,calc(env(safe-area-inset-right) + 8px));}
+  .nxt-banner{padding-left:max(clamp(16px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(16px,5vw,72px),env(safe-area-inset-right));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .dmbanner{padding-left:max(clamp(20px,5vw,72px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,72px),env(safe-area-inset-right));}
+  .w{padding-left:max(clamp(18px,5vw,56px),env(safe-area-inset-left));padding-right:max(clamp(18px,5vw,56px),env(safe-area-inset-right));}
+  .hp,.hg,.hh1 .line1,.hh1 .line2,.hh1 .line3,.klo-hi-val.purple,.klo-hi-val.green,.h2 .hp,.h2 .hg{
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  a,button,.dmbtn,.nxt-btn{-webkit-tap-highlight-color:transparent;}
+}
+
+/* Android high-DPI */
+@media screen and (-webkit-min-device-pixel-ratio:1.5) and (max-width:960px){
+  .dmbtn,.nxt-btn{min-height:52px;}
+  .action-card,.compare-col,.ex-card,.klobanner,.val-journey{-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .exc-char svg{-webkit-transform:translateZ(0);transform:translateZ(0);}
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
+  .rv{opacity:1;transform:none;}
+  .klo-icon,.ac-ico{animation:none!important;}
+}
+
+/* Print */
+@media print{
+  .dmbanner,.orb,.nxt-banner{display:none;}
+  .rv{opacity:1;transform:none;}
+  body{color:#000;}
+  .w{padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="vbadge">Portfolio Construction · Basics</div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="eyebrow"><div class="edot"></div>Buy · Hold · Sell · Valuation-Based Rules</div>
+  <h1 class="hh1">
+    <span class="line1">Buy, Hold</span>
+    <span class="line2">&amp; Sell</span>
+    <span class="line3">Define Entry &amp; Exit Rules Based on Valuation</span>
+  </h1>
+  <div class="hsub">Portfolio Construction Basics · Investment Discipline · Decision Framework</div>
+  <p class="hdesc">The most successful investors don't make buy and sell decisions based on feelings, tips, or price movements. They have a clear framework — a written set of rules — that tells them exactly when to buy, when to hold patiently, and when to exit. This discipline is what separates wealth builders from wealth destroyers.</p>
+  <div class="hero-pills">
+    <span class="hero-pill hp-g">🟢 When to Buy</span>
+    <span class="hero-pill hp-p">🟣 When to Hold</span>
+    <span class="hero-pill hp-r">🔴 When to Sell</span>
+    <span class="hero-pill hp-a">📐 Valuation Rules</span>
+    <span class="hero-pill hp-t">🎯 Entry &amp; Exit</span>
+  </div>
+</section>
+
+
+<!-- ═══ 01 — KLO ═══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">01 — Key Learning Outcome</div>
+    <h2 class="h2 rv d2">Why <span class="hp">Rules Matter</span> More Than Intelligence in Investing</h2>
+    <div class="rul rv d3"></div>
+    <div class="klobanner rv d3">
+      <div class="klo-icon">📋</div>
+      <div class="klo-body">
+        <div class="klo-label">Your Core Takeaway</div>
+        <div class="klo-title">An investor with a mediocre strategy but iron discipline will outperform a genius with no rules every single time. The market is designed to exploit your emotions — fear makes you sell at the bottom, greed makes you buy at the top. The only defence is a pre-written rulebook that you follow regardless of how you feel in the moment.</div>
+        <div class="klo-desc">Think of a surgeon. Before every operation, a skilled surgeon follows a pre-written checklist — sterilisation, patient identification, instrument count. Not because the surgeon is forgetful or incompetent, but because high-stakes decisions made under pressure are subject to human error. Investing is exactly the same. In a market crash, your heart will tell you to sell everything and run. In a raging bull market, your heart will tell you to take loans and buy more. Neither is correct — and both will destroy wealth. A written investment rulebook — specifying exactly what valuation metrics trigger a buy, what conditions justify holding through pain, and what specific events require an exit — is the surgical checklist of investing. The investors who maintain this discipline over 10–20 years don't just avoid catastrophic losses. They create conditions where compounding can work uninterrupted — which is how ordinary investors build extraordinary wealth.</div>
+        <div class="klo-pills">
+          <span class="kpill kpill-g">🟢 Buy: undervalued</span>
+          <span class="kpill kpill-p">🟣 Hold: thesis intact</span>
+          <span class="kpill kpill-r">🔴 Sell: thesis broken</span>
+          <span class="kpill kpill-a">📝 Write rules first</span>
+        </div>
+        <div class="klo-hi-row">
+          <div class="klo-hi"><div class="klo-hi-ico">📋</div><div class="klo-hi-val purple">Written Rules</div><div class="klo-hi-lbl">Written before investing</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">📐</div><div class="klo-hi-val green">Valuation-Based</div><div class="klo-hi-lbl">Not price-based</div></div>
+          <div class="klo-hi"><div class="klo-hi-ico">🎯</div><div class="klo-hi-val red">Thesis-Driven</div><div class="klo-hi-lbl">Exit when thesis breaks</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 02 — THREE ACTIONS ═══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">02 — The Three Decisions</div>
+    <h2 class="h2 rv d2"><span class="hg">Buy</span> · <span class="hp">Hold</span> · <span style="color:var(--red);">Sell</span> — Exactly When Each Decision is Correct</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Every day you own a stock, you are actually making one of three active decisions: Buy more, Hold what you have, or Sell. There is no neutral. Sitting without a rule is itself a decision — and usually the wrong one. Here is the framework for making each decision correctly.</p>
+
+    <div class="action-grid">
+
+      <!-- BUY -->
+      <div class="action-card rv d2">
+        <div class="ac-hd ach-buy">
+          <div class="ac-hd-inner">
+            <span class="ac-ico">🟢</span>
+            <span class="ac-label acl-buy">BUY</span>
+            <div class="ac-title">Add to Position When the Stock is Undervalued Relative to Its Business Quality</div>
+            <div class="ac-sub">Price is below intrinsic value · Thesis is intact · Valuation is attractive</div>
+          </div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-desc">A BUY decision means you believe the current market price significantly underestimates what the business is actually worth. This can happen because of temporary bad news, sector-wide pessimism, market crashes, or simply that the market hasn't discovered the business yet. The key: the business fundamentals must be healthy — you are buying business quality at a discount, not a bad business that looks cheap.</div>
+          <div class="ac-rules">
+            <div class="ac-rule acr-buy">
+              <span class="acr-ico">📉</span>
+              <div class="acr-body">
+                <div class="acr-title">PE below historical average + peers</div>
+                <div class="acr-desc">Example: Titan normally trades at 60–70× PE. If it falls to 40× during a market correction — and the business thesis is unchanged — that is a BUY signal, not a panic signal.</div>
+              </div>
+            </div>
+            <div class="ac-rule acr-buy">
+              <span class="acr-ico">📊</span>
+              <div class="acr-body">
+                <div class="acr-title">Price-to-book below long-run average for quality banks</div>
+                <div class="acr-desc">HDFC Bank historically trades at 3–4× book value. When it fell to 1.8× book post-merger concerns — business intact, credit quality excellent — that was a BUY opportunity.</div>
+              </div>
+            </div>
+            <div class="ac-rule acr-buy">
+              <span class="acr-ico">💧</span>
+              <div class="acr-body">
+                <div class="acr-title">Earnings yield &gt; long-term bond yield</div>
+                <div class="acr-desc">If a stock's earnings yield (E/P) exceeds the 10-year government bond yield by 2%+, the market is offering you equity at bond-like prices — historically an excellent entry point.</div>
+              </div>
+            </div>
+            <div class="ac-rule acr-buy">
+              <span class="acr-ico">🌧️</span>
+              <div class="acr-body">
+                <div class="acr-title">Sector-wide panic unrelated to specific business</div>
+                <div class="acr-desc">When the entire IT sector falls 35% because of US macro fears — but you've verified that your specific company's client relationships, deal wins, and margins are intact — the sector panic is your entry opportunity.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOLD -->
+      <div class="action-card rv d3">
+        <div class="ac-hd ach-hold">
+          <div class="ac-hd-inner">
+            <span class="ac-ico">🟣</span>
+            <span class="ac-label acl-hold">HOLD</span>
+            <div class="ac-title">Do Nothing When the Business is Performing and the Thesis Remains Valid</div>
+            <div class="ac-sub">Thesis intact · Valuation fair · Business growing as expected</div>
+          </div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-desc">HOLD is the most underappreciated decision in investing. The entire power of compounding requires that you do nothing — that you resist the urge to sell a great business just because the price has doubled, or to panic-sell during a temporary correction. Holding requires more courage and discipline than buying. It means sitting through painful drawdowns knowing that your thesis is intact, and resisting the temptation to book profits when a business is still in the early stages of its growth journey.</div>
+          <div class="ac-rules">
+            <div class="ac-rule acr-hold">
+              <span class="acr-ico">✅</span>
+              <div class="acr-body">
+                <div class="acr-title">Thesis intact after each quarterly result</div>
+                <div class="acr-desc">Read the concall transcript. If management's answers still confirm the original thesis — moat, growth runway, capital allocation — hold, regardless of short-term price movement.</div>
+              </div>
+            </div>
+            <div class="ac-rule acr-hold">
+              <span class="acr-ico">📈</span>
+              <div class="acr-body">
+                <div class="acr-title">Valuation is fair but not extreme</div>
+                <div class="acr-desc">If a stock at 40× PE grows earnings at 25% annually, it reaches 32× PE in just one year without moving. "Expensive" stocks that grow fast often become "reasonably valued" before you realise it. Hold unless valuation is genuinely stretched beyond any reasonable scenario.</div>
+              </div>
+            </div>
+            <div class="ac-rule acr-hold">
+              <span class="acr-ico">⏳</span>
+              <div class="acr-body">
+                <div class="acr-title">Management is executing on stated roadmap</div>
+                <div class="acr-desc">Compare what management said they would do in the last 4 concalls versus what actually happened. If guidance is consistently being met or beaten, hold through market noise — the business is compounding for you.</div>
+              </div>
+            </div>
+            <div class="ac-rule acr-hold">
+              <span class="acr-ico">🌊</span>
+              <div class="acr-body">
+                <div class="acr-title">Short-term correction in a long-term compounder</div>
+                <div class="acr-desc">A 20–30% correction in a high-quality business with a 10-year growth runway is noise. Hold. Asian Paints corrected 40% in 2022 — the business grew 15% that year. Every correction was a hold (or add) opportunity.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SELL -->
+      <div class="action-card rv d4">
+        <div class="ac-hd ach-sell">
+          <div class="ac-hd-inner">
+            <span class="ac-ico">🔴</span>
+            <span class="ac-label acl-sell">SELL</span>
+            <div class="ac-title">Exit When the Thesis Breaks, Not When the Price Falls</div>
+            <div class="ac-sub">Thesis broken · Valuation extreme · Better opportunity available</div>
+          </div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-desc">Selling is the most emotionally difficult decision — and the most misunderstood. Most retail investors sell for the wrong reasons: they panic when price falls, or they take profits too early when price rises. The correct sell trigger is almost never the price. A stock price falling is a reason to re-examine the thesis — not automatically to sell. A stock price rising is never a reason to sell. The only legitimate sell triggers are: the original thesis has broken, valuation has reached an extreme, management has fundamentally changed, or a genuinely better investment opportunity presents itself.</div>
+          <div class="ac-rules">
+            <div class="ac-rule acr-sell">
+              <span class="acr-ico">💔</span>
+              <div class="acr-body">
+                <div class="acr-title">Original thesis has broken irreversibly</div>
+                <div class="acr-desc">You bought Zomato on "network effect moat" thesis. If ONDC genuinely disrupts that network effect and adoption proves sustained — not just a media story — the original thesis is broken. Sell.</div>
+              </div>
+            </div>
+            <div class="ac-rule acr-sell">
+              <span class="acr-ico">📈</span>
+              <div class="acr-body">
+                <div class="acr-title">Valuation has reached unsustainable extreme</div>
+                <div class="acr-desc">A business growing at 15% annually trading at 120× PE requires a 20-year perfect execution to justify the price. At some point, even great businesses become priced for perfection. Trim (don't fully exit) when valuation exceeds your most optimistic reasonable scenario.</div>
+              </div>
+            </div>
+            <div class="ac-rule acr-sell">
+              <span class="acr-ico">👤</span>
+              <div class="acr-body">
+                <div class="acr-title">Management integrity or quality has changed</div>
+                <div class="acr-desc">Any evidence of accounting manipulation, governance issues, large unexplained related-party transactions, or auditor resignation triggers an immediate exit. Management trust, once broken, rarely fully recovers in time to matter.</div>
+              </div>
+            </div>
+            <div class="ac-rule acr-sell">
+              <span class="acr-ico">🔄</span>
+              <div class="acr-body">
+                <div class="acr-title">Better opportunity — capital efficiency</div>
+                <div class="acr-desc">If your current holding is at fair value with 12% expected returns and you've found a high-conviction undervalued business with 25%+ expected returns — it may make sense to sell the former and buy the latter. Capital should always work hardest.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 03 — VALUATION ZONES ═══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">03 — The Valuation Zone Framework</div>
+    <h2 class="h2 rv d2">Where Is the <span class="hp">Stock in the Valuation Spectrum</span> Right Now?</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Every stock — no matter how good the business — has a price at which you should be buying, a range where you hold patiently, and a price at which you should be trimming. Understanding which zone you're in determines the correct action.</p>
+
+    <div class="val-journey rv d2">
+      <div class="vj-hd vjh-p">
+        <div class="vj-title">📐 The Buy–Hold–Sell Price Zone Map</div>
+        <div class="vj-sub">Where the stock is in its valuation spectrum determines the correct investor action — not the news, not the price movement, not the market mood</div>
+      </div>
+      <div class="vj-body">
+        <div class="zone-bar rv d2">
+          <div class="zone-seg zs-buy"><div class="zs-label">🟢 BUY ZONE</div><div class="zs-sub">Below intrinsic value</div></div>
+          <div class="zone-seg zs-hold"><div class="zs-label">🟣 HOLD ZONE</div><div class="zs-sub">Fair value range</div></div>
+          <div class="zone-seg zs-sell"><div class="zs-label">🔴 SELL ZONE</div><div class="zs-sub">Above intrinsic value</div></div>
+        </div>
+        <div class="zone-descs rv d3">
+          <div class="zone-desc zd-buy">
+            <div class="zd-title zdt-buy">🟢 Buy Zone — What Does "Cheap" Actually Mean?</div>
+            <div class="zd-desc">The stock is trading at a meaningful discount to your calculated intrinsic value. For PE-based investors: current PE is below the stock's 5-year average PE by 20%+. For dividend investors: yield is above historical average. For GARP investors: PEG ratio below 1.5. In this zone — if the thesis is intact — add aggressively and buy on every dip. This is when the risk-reward is in your favour.</div>
+          </div>
+          <div class="zone-desc zd-hold">
+            <div class="zd-title zdt-hold">🟣 Hold Zone — When "Expensive" Is Still Fine</div>
+            <div class="zd-desc">The stock is trading within its normal valuation band — neither a screaming bargain nor stretched. Current PE is within ±15% of historical average. This is the most common state for quality stocks. The correct action is to hold patiently and collect compounding. Do not sell because "the stock has risen." Do not add unless the business is growing faster than expected.</div>
+          </div>
+          <div class="zone-desc zd-sell">
+            <div class="zd-title zdt-sell">🔴 Sell/Trim Zone — When Even Great Businesses Are Overpriced</div>
+            <div class="zd-desc">The stock is trading 30%+ above your most optimistic intrinsic value estimate. At this price, even perfect execution may not deliver adequate returns. The correct action: trim to your core position size (don't fully exit a great business — you may not get to buy it back at reasonable prices for years). But reduce the weighting to manage the risk of a valuation correction.</div>
+          </div>
+        </div>
+        <!-- Emotional vs disciplined table -->
+        <div style="margin-top:clamp(20px,3vw,32px);">
+          <div class="compare-grid">
+            <div class="compare-col">
+              <div class="cc-hd cch-bad">
+                <div class="cc-hd-title">😰 Emotional Investor — What They Actually Do</div>
+                <div class="cc-hd-sub">Driven by fear, greed, and tips rather than valuation</div>
+              </div>
+              <div class="cc-body">
+                <div class="cc-items">
+                  <div class="cc-item cci-bad"><span class="cci-ico">😱</span><div class="cci-body"><div class="cci-title">Sells when price falls 20%</div><div class="cci-desc">"I need to cut my losses" — but the business hasn't changed, only the price has. Sells exactly when they should be buying more.</div></div></div>
+                  <div class="cc-item cci-bad"><span class="cci-ico">🤑</span><div class="cci-body"><div class="cci-title">Buys when price rises 40%</div><div class="cci-desc">"This stock is doing great!" — chases momentum at peak valuations, which is exactly when risk is highest.</div></div></div>
+                  <div class="cc-item cci-bad"><span class="cci-ico">📱</span><div class="cci-body"><div class="cci-title">Acts on WhatsApp tips</div><div class="cci-desc">Buys based on a friend's recommendation without ever understanding the business or checking valuation. The tip-giver has usually already bought and is waiting to sell to you.</div></div></div>
+                  <div class="cc-item cci-bad"><span class="cci-ico">🎲</span><div class="cci-body"><div class="cci-title">No pre-defined exit rule</div><div class="cci-desc">Holds a failing business "hoping it will recover" because there's no written rule about when to exit a broken thesis. Hope is not a strategy.</div></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="compare-col">
+              <div class="cc-hd cch-good">
+                <div class="cc-hd-title">😌 Disciplined Investor — What Rules-Based Looks Like</div>
+                <div class="cc-hd-sub">Driven by pre-written valuation rules, not market mood</div>
+              </div>
+              <div class="cc-body">
+                <div class="cc-items">
+                  <div class="cc-item cci-good"><span class="cci-ico">📉</span><div class="cci-body"><div class="cci-title">Checks thesis when price falls</div><div class="cci-desc">When price falls 20%, re-reads the original investment thesis. If thesis intact → add more (it's now cheaper). If thesis broken → exit immediately.</div></div></div>
+                  <div class="cc-item cci-good"><span class="cci-ico">📐</span><div class="cci-body"><div class="cci-title">Trims when valuation is extreme</div><div class="cci-desc">Has a pre-written rule: "Sell 25% of position when PE exceeds 2× my fair value estimate." Executes this regardless of market mood or short-term momentum.</div></div></div>
+                  <div class="cc-item cci-good"><span class="cci-ico">📋</span><div class="cci-body"><div class="cci-title">Written investment thesis for every holding</div><div class="cci-desc">Maintains a 1-page thesis document for each stock: what needs to be true for the thesis to work, what would make it wrong, and what valuation level triggers an exit.</div></div></div>
+                  <div class="cc-item cci-good"><span class="cci-ico">⏳</span><div class="cci-body"><div class="cci-title">Holds great businesses through market noise</div><div class="cci-desc">Holds Bajaj Finance through every RBI action, interest rate cycle, and market crash — because the original thesis (India credit underpenetration + data moat) has not changed in 7 years.</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 04 — FIVE EXAMPLES ═══ -->
+<section class="sec-alt">
+  <div class="w">
+    <div class="tag rv d1">04 — Five Real Examples</div>
+    <h2 class="h2 rv d2">Buy, Hold &amp; Sell <span class="hp">in Practice</span> — Five Real Stocks, Real Decisions</h2>
+    <div class="rul rv d3"></div>
+    <p class="lead rv d3">Five actual Indian companies, each at a different stage of the buy-hold-sell spectrum — with the specific valuation metrics and thesis conditions that determine the correct investor action at each point.</p>
+
+    <div class="ex-cards">
+
+      <!-- EXAMPLE 1: Asian Paints — Strong Hold / Buy on Dips -->
+      <div class="ex-card rv d2">
+        <div class="exc-hd exh-g">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3s ease-in-out infinite;">
+              <!-- Paint factory infographic -->
+              <rect x="4"  y="44" width="60" height="44" rx="4" fill="rgba(255,255,255,.2)"/>
+              <rect x="4"  y="38" width="60" height="10" rx="3" fill="rgba(255,255,255,.28)"/>
+              <rect x="10" y="52" width="9"  height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="25" y="52" width="9"  height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="40" y="52" width="9"  height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <!-- Colourful paint tins -->
+              <circle cx="12" cy="77" r="7" fill="#ef4444" opacity=".75"/>
+              <circle cx="26" cy="77" r="7" fill="#3b82f6" opacity=".75"/>
+              <circle cx="40" cy="77" r="7" fill="#22c55e" opacity=".75"/>
+              <circle cx="54" cy="77" r="7" fill="#f59e0b" opacity=".75"/>
+              <!-- Arrow up (buy zone) -->
+              <path d="M66 86 L66 62 L72 62 L66 50 L60 62 L66 62" fill="#4ade80" opacity=".9" style="animation:floatA 2.5s ease-in-out infinite;"/>
+              <!-- CEO character -->
+              <circle cx="68" cy="24" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="68" cy="11" rx="12" ry="5" fill="#15803d"/>
+              <circle cx="62" cy="21" r="2.2" fill="#14532d"/>
+              <circle cx="74" cy="21" r="2.2" fill="#14532d"/>
+              <path d="M62 30 Q68 34 74 30" stroke="#14532d" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="60" y="37" width="16" height="18" rx="5" fill="#16a34a"/>
+              <rect x="48" y="41" width="14" height="4" rx="2" fill="#16a34a" transform="rotate(-15 55 43)"/>
+              <rect x="72" y="40" width="12" height="4" rx="2" fill="#16a34a" transform="rotate(10 78 42)"/>
+              <rect x="62" y="53" width="5" height="9" rx="2.5" fill="#14532d"/>
+              <rect x="70" y="53" width="5" height="9" rx="2.5" fill="#14532d"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 01 · Strong Hold / Buy on Dips · NSE: ASIANPAINT</div>
+            <div class="exc-name">Asian Paints</div>
+            <div class="exc-tagline">India's strongest consumer brand moat — Birla Opus entry created a 40% correction from peak in 2023–24, offering a textbook buy-on-thesis-intact opportunity for disciplined investors who had pre-written their rules.</div>
+            <div class="exc-pills"><span class="exc-pill">ROCE 28%+ sustained</span><span class="exc-pill">Thesis: 50-yr brand moat</span><span class="exc-pill">Birla Opus = manageable threat</span><span class="exc-pill">3-yr fair PE: 55–65×</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-g">Valuation Metrics &amp; Decision Rules</div>
+              <div class="metric-chips">
+                <div class="metric-chip"><div class="mc-lbl">Current PE</div><div class="mc-val mcv-p">52×</div></div>
+                <div class="metric-chip"><div class="mc-lbl">5-yr Avg PE</div><div class="mc-val mcv-g">68×</div></div>
+                <div class="metric-chip"><div class="mc-lbl">ROCE</div><div class="mc-val mcv-g">28%</div></div>
+                <div class="metric-chip"><div class="mc-lbl">EPS Growth (3yr)</div><div class="mc-val mcv-g">18%</div></div>
+              </div>
+              <div class="decision-rows">
+                <div class="dec-row dr-buy">
+                  <div class="dr-badge drb-buy">BUY</div>
+                  <div class="dr-body">
+                    <div class="dr-title">PE falls below 50× and business is unchanged</div>
+                    <div class="dr-detail">Birla Opus threat is a long-term competitive development — not a quarter-by-quarter execution failure. At 40–50× PE, the 50-year moat is being offered at a discount. Add aggressively.</div>
+                  </div>
+                </div>
+                <div class="dec-row dr-hold">
+                  <div class="dr-badge drb-hold">HOLD</div>
+                  <div class="dr-body">
+                    <div class="dr-title">PE between 50–75× with thesis intact</div>
+                    <div class="dr-detail">Volume growth 8–12%, ROCE above 25%, management executing on décor ecosystem expansion. Hold and collect compounding — this is the most likely scenario for most years.</div>
+                  </div>
+                </div>
+                <div class="dec-row dr-sell">
+                  <div class="dr-badge drb-sell">SELL</div>
+                  <div class="dr-body">
+                    <div class="dr-title">PE above 90× OR Birla Opus takes 5%+ market share</div>
+                    <div class="dr-detail">At 90×+ PE, 25% annual earnings growth for 5 straight years is priced in — any disappointment leads to severe PE compression. Or if Birla Opus genuinely erodes the moat, the thesis breaks.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-g">Thesis Statement &amp; Lesson</div>
+              <div style="padding:clamp(12px,2vw,18px);background:var(--gpale);border-radius:14px;border:1.5px solid rgba(22,163,74,.2);margin-bottom:14px;min-width:0;overflow:hidden;">
+                <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gbr);margin-bottom:6px;">Original Thesis (written before investing)</div>
+                <div style="font-size:clamp(12px,1.5vw,13.5px);color:var(--ts);line-height:1.65;">"Asian Paints has a 50-year brand moat embedded in 65,000+ dealer relationships and the Beauté design ecosystem. Their pricing power is demonstrated by 3–5% annual price increases without market share loss. <strong>This thesis breaks if Birla Opus takes more than 5% market share within 3 years</strong> — I will monitor dealer channel data and quarterly volume market share in concalls."</div>
+              </div>
+              <div class="lesson-box lb-g">
+                <div class="lb-title lbt-g">✅ Key Lesson — The Thesis Sets the Sell Trigger Before You Buy</div>
+                <div class="lb-desc">Disciplined investors write their sell trigger before buying — not while sitting in a loss. When Asian Paints fell 40%, investors who had pre-written "sell if Birla Opus &gt;5% share" could calmly check the data (Birla Opus at ~1–2% share) and add instead of panic-selling. The rule was already there. They just had to execute it.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE 2: HDFC Bank — Classic Buy Signal -->
+      <div class="ex-card rv d3">
+        <div class="exc-hd exh-p">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.3s ease-in-out infinite .3s;">
+              <!-- Bank building -->
+              <rect x="8" y="36" width="52" height="52" rx="4" fill="rgba(255,255,255,.18)"/>
+              <rect x="8" y="30" width="52" height="10" rx="3" fill="rgba(255,255,255,.26)"/>
+              <rect x="14" y="40" width="6" height="48" rx="2" fill="rgba(255,255,255,.25)"/>
+              <rect x="25" y="40" width="6" height="48" rx="2" fill="rgba(255,255,255,.25)"/>
+              <rect x="36" y="40" width="6" height="48" rx="2" fill="rgba(255,255,255,.25)"/>
+              <rect x="47" y="40" width="6" height="48" rx="2" fill="rgba(255,255,255,.25)"/>
+              <!-- PB buy signal arrow -->
+              <path d="M66 80 L66 56 L72 56 L66 44 L60 56 L66 56" fill="#a78bfa" opacity=".9" style="animation:floatA 2.5s ease-in-out infinite;"/>
+              <!-- Banker -->
+              <circle cx="68" cy="22" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="68" cy="9" rx="12" ry="5" fill="#4c1d95"/>
+              <circle cx="62" cy="19" r="2.2" fill="#3730a3"/>
+              <circle cx="74" cy="19" r="2.2" fill="#3730a3"/>
+              <path d="M62 28 Q68 32 74 28" stroke="#3730a3" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="60" y="35" width="16" height="18" rx="5" fill="#7c3aed"/>
+              <rect x="48" y="39" width="14" height="4" rx="2" fill="#7c3aed" transform="rotate(-15 55 41)"/>
+              <rect x="60" y="51" width="5" height="9" rx="2.5" fill="#4c1d95"/>
+              <rect x="68" y="51" width="5" height="9" rx="2.5" fill="#4c1d95"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 02 · Post-Merger Buy Signal · NSE: HDFCBANK</div>
+            <div class="exc-name">HDFC Bank</div>
+            <div class="exc-tagline">The 2023 HDFC Ltd–HDFC Bank merger created a classic buy signal: the bank fell to its lowest price-to-book ratio in a decade as markets worried about deposit growth and NIM compression post-merger. Business quality unchanged. Valuation historically attractive.</div>
+            <div class="exc-pills"><span class="exc-pill">P/B at decade low post-merger</span><span class="exc-pill">NPA quality: best in class</span><span class="exc-pill">Thesis: regulatory moat intact</span><span class="exc-pill">Buy zone: P/B &lt;2.5×</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-p">Valuation Metrics &amp; Decision Rules</div>
+              <div class="metric-chips">
+                <div class="metric-chip"><div class="mc-lbl">P/B Ratio</div><div class="mc-val mcv-p">2.1×</div></div>
+                <div class="metric-chip"><div class="mc-lbl">10-yr Avg P/B</div><div class="mc-val mcv-g">3.5×</div></div>
+                <div class="metric-chip"><div class="mc-lbl">GNPA</div><div class="mc-val mcv-g">1.26%</div></div>
+                <div class="metric-chip"><div class="mc-lbl">ROE</div><div class="mc-val mcv-p">16%</div></div>
+              </div>
+              <div class="decision-rows">
+                <div class="dec-row dr-buy">
+                  <div class="dr-badge drb-buy">BUY</div>
+                  <div class="dr-body">
+                    <div class="dr-title">P/B below 2.5× with credit quality intact</div>
+                    <div class="dr-detail">HDFC Bank at 2.1× P/B with industry-best 1.26% GNPA — trading at a 40% discount to its 10-year average P/B with no deterioration in asset quality. Classic buy signal for a bank with a regulatory moat.</div>
+                  </div>
+                </div>
+                <div class="dec-row dr-hold">
+                  <div class="dr-badge drb-hold">HOLD</div>
+                  <div class="dr-body">
+                    <div class="dr-title">P/B between 2.5–4× with ROE improving</div>
+                    <div class="dr-detail">As merger integration progresses and deposit growth normalises, P/B should re-rate toward historical average. Hold through this process — the fundamentals are compounding while the market catches up.</div>
+                  </div>
+                </div>
+                <div class="dec-row dr-sell">
+                  <div class="dr-badge drb-sell">SELL</div>
+                  <div class="dr-body">
+                    <div class="dr-title">P/B above 5× OR GNPA rises above 2.5% consistently</div>
+                    <div class="dr-detail">At 5×+ P/B, the valuation premium prices in exceptional execution for 5+ years. Trim. Or if credit quality deteriorates materially — HDFC Bank's core value proposition (best credit in India) has been compromised.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-p">Why P/B Works for Banks</div>
+              <div style="padding:clamp(12px,2vw,18px);background:var(--pxl);border-radius:14px;border:1.5px solid rgba(109,40,217,.2);margin-bottom:14px;min-width:0;overflow:hidden;">
+                <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:8px;">Why PE Doesn't Work for Banks — Use P/B Instead</div>
+                <div style="font-size:clamp(12px,1.5vw,13.5px);color:var(--ts);line-height:1.65;">Banks' earnings are highly variable — they can provision more (reducing profits) in bad years and less in good years. PE fluctuates wildly. Price-to-Book (P/B) measures what you're paying for the bank's net assets — its loan book minus liabilities. For a bank with strong credit quality, paying 3–4× book for 18–20% ROE is reasonable. Paying below 2.5× book for the same quality is a rare gift.</div>
+              </div>
+              <div class="lesson-box lb-p">
+                <div class="lb-title lbt-p">💡 Key Lesson — Different Sectors Need Different Valuation Metrics</div>
+                <div class="lb-desc">PE works for consumer companies. P/B works for banks. EV/EBITDA works for capital-intensive businesses. Sales multiples work for early-stage companies. Using the wrong metric for the wrong sector leads to wrong buy/sell decisions. Always match your valuation tool to the sector's specific economics.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE 3: Zomato — Hold With Monitoring -->
+      <div class="ex-card rv d4">
+        <div class="exc-hd exh-a">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.5s ease-in-out infinite .6s;">
+              <!-- Delivery scooter -->
+              <ellipse cx="18" cy="74" rx="10" ry="10" fill="rgba(255,255,255,.2)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
+              <ellipse cx="18" cy="74" rx="5"  ry="5"  fill="rgba(255,255,255,.15)"/>
+              <ellipse cx="54" cy="74" rx="10" ry="10" fill="rgba(255,255,255,.2)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
+              <ellipse cx="54" cy="74" rx="5"  ry="5"  fill="rgba(255,255,255,.15)"/>
+              <path d="M22 60 L28 52 L46 52 L56 62 L58 68 L52 70 L36 68 L22 68 Z" fill="rgba(255,255,255,.28)"/>
+              <rect x="30" y="44" width="20" height="12" rx="2" fill="rgba(255,255,255,.35)"/>
+              <!-- Monitoring eye -->
+              <ellipse cx="68" cy="48" rx="10" ry="7" fill="rgba(255,255,255,.25)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
+              <circle cx="68" cy="48" r="3" fill="rgba(255,255,255,.5)"/>
+              <!-- ONDC concern (small red warning) -->
+              <path d="M62 30 L70 44 L54 44 Z" fill="#fbbf24" opacity=".9" style="animation:pulse 2s ease-in-out infinite;"/>
+              <rect x="65.5" y="33.5" width="2.5" height="6" rx="1.25" fill="#78350f"/>
+              <!-- Founder character -->
+              <circle cx="68" cy="22" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="68" cy="9" rx="12" ry="5" fill="#92400e"/>
+              <circle cx="62" cy="19" r="2.2" fill="#78350f"/>
+              <circle cx="74" cy="19" r="2.2" fill="#78350f"/>
+              <path d="M62 28 Q68 32 74 28" stroke="#78350f" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="60" y="35" width="16" height="18" rx="5" fill="#d97706"/>
+              <rect x="60" y="51" width="5" height="9" rx="2.5" fill="#92400e"/>
+              <rect x="68" y="51" width="5" height="9" rx="2.5" fill="#92400e"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 03 · Hold With Active Monitoring · NSE: ZOMATO</div>
+            <div class="exc-name">Zomato</div>
+            <div class="exc-tagline">Zomato's thesis — network effect moat in food delivery, path to profitability via Blinkit — is playing out. But ONDC creates a genuine strategic threat that must be monitored quarterly. Hold with an explicit metric that would trigger a sell.</div>
+            <div class="exc-pills"><span class="exc-pill">GMV growth 60%+ YoY</span><span class="exc-pill">Adj. EBITDA positive</span><span class="exc-pill">ONDC share = live monitor</span><span class="exc-pill">No traditional valuation</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-a">Thesis Monitoring Framework</div>
+              <div class="decision-rows">
+                <div class="dec-row dr-hold">
+                  <div class="dr-badge drb-hold">HOLD</div>
+                  <div class="dr-body">
+                    <div class="dr-title">GMV growing &gt;40% YoY · ONDC share below 5% of food GMV</div>
+                    <div class="dr-detail">As long as the network effect is proving itself (GMV growth) and ONDC hasn't materially captured restaurant ordering, the thesis is intact. Hold through volatility.</div>
+                  </div>
+                </div>
+                <div class="dec-row dr-warn">
+                  <div class="dr-badge drb-warn">WATCH</div>
+                  <div class="dr-body">
+                    <div class="dr-title">ONDC food GMV exceeds 8% of Zomato's · GMV growth slows below 25%</div>
+                    <div class="dr-detail">These are "amber alert" conditions — thesis is weakening but not broken. Reduce position to minimum and watch for 2 more quarters before deciding to exit.</div>
+                  </div>
+                </div>
+                <div class="dec-row dr-sell">
+                  <div class="dr-badge drb-sell">SELL</div>
+                  <div class="dr-body">
+                    <div class="dr-title">ONDC exceeds 15% of food delivery market consistently</div>
+                    <div class="dr-detail">At 15% ONDC share, the network effect is being structurally undermined. Zomato's platform moat is eroding. The original thesis has broken — exit regardless of current profit/loss position.</div>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top:10px;padding:10px 13px;border-radius:12px;background:var(--apale);border:1px solid rgba(217,119,6,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--ambr);line-height:1.6;min-width:0;overflow:hidden;">
+                ⚠️ <strong>Valuation note:</strong> Zomato cannot be valued on PE — it's growing into profitability. Use GMV multiple (EV/GMV &lt;4× is reasonable for a platform in growth phase) and track the path to operating leverage.
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-a">The Pre-Written Thesis Discipline</div>
+              <div style="padding:clamp(12px,2vw,18px);background:var(--apale);border-radius:14px;border:1.5px solid rgba(217,119,6,.2);margin-bottom:14px;min-width:0;overflow:hidden;">
+                <div style="font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ambr);margin-bottom:8px;">Zomato Investment Thesis</div>
+                <div style="font-size:clamp(12px,1.5vw,13.5px);color:var(--ts);line-height:1.65;">"Zomato is building a food delivery network effect — more restaurants make the platform more attractive to consumers, and vice versa. <strong>This thesis breaks if ONDC permanently disrupts the platform role</strong> or if GMV growth consistently falls below 25% (signalling market saturation). Quarterly review: check ONDC restaurant adoption and Zomato GMV trend."</div>
+              </div>
+              <div class="lesson-box lb-a">
+                <div class="lb-title lbt-a">⚠️ Key Lesson — For High-Growth Companies, Monitor Non-Financial Metrics</div>
+                <div class="lb-desc">Zomato's buy/sell decision cannot be made on PE or P/B — the company doesn't fit traditional valuation frameworks. Instead, monitor the business metrics that prove or disprove the thesis: GMV growth rate (shows network health), ONDC market share (shows competitive threat), and Blinkit dark store count (shows quick commerce thesis progress). The financial metrics follow the business metrics with a 6–12 month lag.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ DEMAT BANNER ═══ -->
+<div class="dmbanner">
+  <div class="dml">
+    <div class="dmtag">Invest With Discipline</div>
+    <div class="dmh">Write Your Rules Before You <span class="dmhs">Buy Any Stock</span></div>
+    <div class="dmsub">The best investors don't decide what to do when the market moves. They decided months ago — through written rules. Build your entry and exit framework before every investment, and the market's noise becomes irrelevant.</div>
+    <div class="dmfeats">
+      <div class="dmf">Write a 1-page investment thesis for every holding</div>
+      <div class="dmf">Pre-define your sell triggers before buying</div>
+      <div class="dmf">Review thesis quarterly — not price daily</div>
+      <div class="dmf">Open your account from just ₹500</div>
+    </div>
+  </div>
+  <div class="dmr">
+    <a href="#" class="dmbtn"><span class="dmico">💼</span> Open Free Demat Account</a>
+    <div class="dmstars"><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmstar">★</span><span class="dmrating">Trusted by 2M+ Investors · 4.8★ Rated</span></div>
+    <div class="dmnote">✦ No Hidden Fees &nbsp;·&nbsp; ✦ 100% Digital KYC &nbsp;·&nbsp; ✦ SEBI Regulated &nbsp;·&nbsp; ✦ CDSL Depository</div>
+  </div>
+</div>
+
+
+<!-- ═══ EXAMPLES 4 & 5 ═══ -->
+<section class="sec-white">
+  <div class="w">
+    <div class="tag rv d1">04 — Continued</div>
+    <div class="ex-cards">
+
+      <!-- EXAMPLE 4: Coal India — Trim/Sell Zone Discipline -->
+      <div class="ex-card rv d2">
+        <div class="exc-hd exh-r">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3.2s ease-in-out infinite .9s;">
+              <!-- Mining operation -->
+              <rect x="4" y="50" width="62" height="38" rx="4" fill="rgba(255,255,255,.18)"/>
+              <rect x="4" y="44" width="62" height="10" rx="3" fill="rgba(255,255,255,.24)"/>
+              <rect x="12" y="36" width="12" height="16" rx="2" fill="rgba(255,255,255,.22)"/>
+              <rect x="30" y="32" width="12" height="20" rx="2" fill="rgba(255,255,255,.22)"/>
+              <rect x="48" y="38" width="12" height="14" rx="2" fill="rgba(255,255,255,.22)"/>
+              <!-- Declining arrow (sell zone) -->
+              <path d="M66 50 L66 74 L72 74 L66 86 L60 74 L66 74" fill="#f87171" opacity=".85" style="animation:floatB 2.5s ease-in-out infinite;"/>
+              <!-- Solar panel threat -->
+              <rect x="10" y="62" width="18" height="10" rx="2" fill="rgba(255,255,255,.22)" transform="rotate(-10 19 67)"/>
+              <line x1="10" y1="65" x2="28" y2="65" stroke="rgba(255,255,255,.4)" stroke-width="1" transform="rotate(-10 19 65)"/>
+              <!-- Mine official character -->
+              <circle cx="66" cy="24" r="14" fill="rgba(255,255,255,.9)"/>
+              <ellipse cx="66" cy="11" rx="12" ry="5" fill="#991b1b"/>
+              <circle cx="60" cy="21" r="2.2" fill="#7f1d1d"/>
+              <circle cx="72" cy="21" r="2.2" fill="#7f1d1d"/>
+              <path d="M60 30 Q66 34 72 30" stroke="#7f1d1d" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+              <rect x="58" y="37" width="16" height="18" rx="5" fill="#dc2626"/>
+              <rect x="58" y="53" width="5" height="9" rx="2.5" fill="#991b1b"/>
+              <rect x="66" y="53" width="5" height="9" rx="2.5" fill="#991b1b"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 04 · Terminal Industry + Trim Discipline · NSE: COALINDIA</div>
+            <div class="exc-name">Coal India</div>
+            <div class="exc-tagline">Coal India offers a fascinating buy/hold/sell discipline test: a genuinely powerful monopoly in a structurally declining industry. The correct discipline is time-horizon specific — it's a 5-year income trade, not a 20-year compounding investment.</div>
+            <div class="exc-pills"><span class="exc-pill">~80% India coal share</span><span class="exc-pill">Dividend yield 5–7%</span><span class="exc-pill">Energy transition risk</span><span class="exc-pill">Harvest, don't compound</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-r">Decision Rules — Time-Horizon Specific</div>
+              <div class="decision-rows">
+                <div class="dec-row dr-buy">
+                  <div class="dr-badge drb-buy">BUY</div>
+                  <div class="dr-body">
+                    <div class="dr-title">PE below 6× AND dividend yield above 6.5% for income-focused investors</div>
+                    <div class="dr-detail">For an investor explicitly seeking income (not long-term compounding), Coal India at 5–6× PE with 6–7% dividend yield offers better risk-adjusted income than bonds. Short-term buy for income investors with 3–5 year horizon.</div>
+                  </div>
+                </div>
+                <div class="dec-row dr-hold">
+                  <div class="dr-badge drb-hold">HOLD</div>
+                  <div class="dr-body">
+                    <div class="dr-title">PE 7–10× while dividend payments are consistent</div>
+                    <div class="dr-detail">Hold as long as dividends are paid as promised, coal demand for India's power sector remains strong (i.e., before 2030 energy transition acceleration), and government doesn't cut regulated prices below cost.</div>
+                  </div>
+                </div>
+                <div class="dec-row dr-sell">
+                  <div class="dr-badge drb-sell">SELL</div>
+                  <div class="dr-body">
+                    <div class="dr-title">PE above 12× OR solar LCOE falls below coal LCOE consistently</div>
+                    <div class="dr-detail">At 12×+ PE, the market is pricing in long-term growth that doesn't exist in a terminal industry. Sell. Or when solar + storage becomes structurally cheaper than coal for power generation — the structural demand cliff arrives.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-r">Why the Same Rules Don't Apply to Every Investment</div>
+              <div class="lesson-box lb-r">
+                <div class="lb-title lbt-r">🚨 Key Lesson — Buy/Hold/Sell Rules Must Match Investment Horizon</div>
+                <div class="lb-desc">Coal India's buy/hold/sell rules are fundamentally different from Asian Paints' because the investment thesis is fundamentally different. Asian Paints is a long-term compounder — hold through all market cycles. Coal India is a time-limited income trade — harvest dividends while the cash flow lasts and have a hard sell rule linked to energy transition data. Applying compounding investor logic (hold forever) to a terminal business thesis (harvest then exit) is one of the most common portfolio mistakes.</div>
+              </div>
+              <div style="margin-top:12px;padding:11px 13px;border-radius:12px;background:var(--rpale);border:1px solid rgba(220,38,38,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--red);line-height:1.6;min-width:0;overflow:hidden;">
+                🕐 <strong>5-year rule for Coal India:</strong> Any Coal India position should have a hard 5-year exit date written into the thesis — not because something will go wrong, but because the opportunity window for income extraction is finite and predictable. This is active portfolio management, not buy-and-forget.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE 5: Small Cap — When to Exit a Broken Thesis -->
+      <div class="ex-card rv d3">
+        <div class="exc-hd exh-t">
+          <div class="exc-char">
+            <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="animation:floatB 3s ease-in-out infinite 1.2s;">
+              <!-- Small specialty company visual -->
+              <rect x="6" y="42" width="54" height="46" rx="4" fill="rgba(255,255,255,.18)"/>
+              <rect x="6" y="36" width="54" height="10" rx="3" fill="rgba(255,255,255,.24)"/>
+              <rect x="12" y="50" width="8" height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="26" y="50" width="8" height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <rect x="40" y="50" width="8" height="7" rx="1" fill="rgba(255,255,255,.35)"/>
+              <!-- Thesis checklist on "screen" -->
+              <rect x="12" y="62" width="38" height="18" rx="2" fill="rgba(255,255,255,.2)"/>
+              <circle cx="16" cy="67" r="2" fill="#4ade80" opacity=".8"/>
+              <rect x="20" y="66" width="16" height="2" rx="1" fill="rgba(255,255,255,.5)"/>
+              <circle cx="16" cy="73" r="2" fill="#4ade80" opacity=".8"/>
+              <rect x="20" y="72" width="22" height="2" rx="1" fill="rgba(255,255,255,.5)"/>
+              <circle cx="16" cy="79" r="2" fill="#f87171" opacity=".9" style="animation:pulse 1.5s ease-in-out infinite;"/>
+              <rect x="20" y="78" width="12" height="2" rx="1" fill="rgba(255,255,255,.4)"/>
+              <!-- Research analyst character -->
+              <circle cx="66" cy="22" r="14" fill="rgba(255,255,255,.92)"/>
+              <ellipse cx="66" cy="9" rx="12" ry="5" fill="#0891b2"/>
+              <circle cx="60" cy="19" r="2.2" fill="#0e7490"/>
+              <circle cx="72" cy="19" r="2.2" fill="#0e7490"/>
+              <path d="M60 28 Q66 32 72 28" stroke="#0e7490" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="58" y="35" width="16" height="18" rx="5" fill="#0891b2"/>
+              <rect x="46" y="39" width="14" height="4" rx="2" fill="#0891b2" transform="rotate(-15 53 41)"/>
+              <rect x="58" y="51" width="5" height="9" rx="2.5" fill="#0e7490"/>
+              <rect x="66" y="51" width="5" height="9" rx="2.5" fill="#0e7490"/>
+            </svg>
+          </div>
+          <div class="exc-h-text">
+            <div class="exc-badge">Example 05 · Quarterly Thesis Review · The 3-Point Checklist</div>
+            <div class="exc-name">The Thesis Review Framework</div>
+            <div class="exc-tagline">Every investor needs a systematic quarterly review process for every holding — not a price check, a thesis check. This framework works for any stock in any sector and is the discipline that prevents the most common investing mistake: holding a broken thesis while "waiting to break even."</div>
+            <div class="exc-pills"><span class="exc-pill">Quarterly review · 3 checks</span><span class="exc-pill">Price-independent decision</span><span class="exc-pill">Prevents averaging down mistakes</span><span class="exc-pill">Works for any sector</span></div>
+          </div>
+        </div>
+        <div class="exc-body">
+          <div class="exc-2col">
+            <div>
+              <div class="exc-sec-title est-t">The 3-Point Quarterly Thesis Review</div>
+              <div class="decision-rows">
+                <div class="dec-row dr-hold">
+                  <div class="dr-badge drb-hold">CHECK 1</div>
+                  <div class="dr-body">
+                    <div class="dr-title">Is the original reason I bought this stock still true?</div>
+                    <div class="dr-detail">Write out in one sentence why you originally bought the stock. Then ask: is this sentence still factually accurate after this quarter's results and concall? If yes → continue. If no → the thesis has broken. Exit regardless of current profit/loss.</div>
+                  </div>
+                </div>
+                <div class="dec-row dr-hold">
+                  <div class="dr-badge drb-hold">CHECK 2</div>
+                  <div class="dr-body">
+                    <div class="dr-title">Has management done what they said they would do?</div>
+                    <div class="dr-detail">Pull out what management said in the Q2 concall about Q3 expectations. Compare it with Q3 actuals. Consistent under-delivery on guidance over 3–4 quarters without explanation is a management quality red flag — even if the business looks okay on paper.</div>
+                  </div>
+                </div>
+                <div class="dec-row dr-hold">
+                  <div class="dr-badge drb-hold">CHECK 3</div>
+                  <div class="dr-body">
+                    <div class="dr-title">Is the valuation still in the hold zone?</div>
+                    <div class="dr-detail">Calculate the stock's current valuation metric (PE, P/B, EV/EBITDA as appropriate for sector). Compare with your pre-defined buy zone, hold zone, and sell zone. If it has drifted into the sell zone — trim according to your pre-written rule, regardless of recent performance.</div>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top:10px;padding:10px 13px;border-radius:12px;background:var(--tealpale);border:1px solid rgba(8,145,178,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--teal);line-height:1.6;min-width:0;overflow:hidden;">
+                📋 <strong>Decision rule:</strong> If all 3 checks pass → HOLD. If Check 1 fails → EXIT immediately (thesis broken). If Checks 2–3 fail but 1 passes → reduce position and monitor for 1 more quarter before deciding.
+              </div>
+            </div>
+            <div>
+              <div class="exc-sec-title est-t">The Most Dangerous Investor Mindset</div>
+              <div style="display:flex;flex-direction:column;gap:10px;min-width:0;overflow:hidden;">
+                <div style="padding:11px 13px;border-radius:12px;background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--red);line-height:1.6;min-width:0;overflow:hidden;">
+                  🚨 <strong>"I'll sell once I'm back to break-even"</strong> — This is the single most wealth-destroying thought in investing. Your purchase price is irrelevant to whether you should hold or sell. The only question is: would you buy this stock today, at this price, if you didn't already own it? If the answer is no, sell — your cost price has nothing to do with it.
+                </div>
+                <div style="padding:11px 13px;border-radius:12px;background:var(--rpale);border:1.5px solid rgba(220,38,38,.2);font-size:clamp(11.5px,1.4vw,13px);color:var(--red);line-height:1.6;min-width:0;overflow:hidden;">
+                  🚨 <strong>"The stock has fallen 50% so the downside is limited"</strong> — A stock that has fallen 50% can fall another 50% from there. A stock at ₹100 that is worth ₹50 is overpriced by 100%. Its past price has no bearing on future performance. Thesis + valuation determine the decision — not price history.
+                </div>
+              </div>
+              <div class="lesson-box lb-t" style="margin-top:12px;">
+                <div class="lb-title lbt-t">💡 Key Lesson — Never Make Decisions Based on Your Cost Price</div>
+                <div class="lb-desc">The most disciplined investors treat every holding as if they had just bought it today. They ask: "If I received this stock as a gift with no cost price, would I keep it or sell it based on current valuation and thesis?" If the answer is sell, they sell — even at a loss. This prevents the twin disasters of averaging down into broken theses and holding losses while "waiting for recovery" that never comes.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ NEXT CHAPTER ═══ -->
+<div class="nxt-banner">
+  <div class="nxt-left">
+    <div class="nxt-label">Up Next</div>
+    <div class="nxt-sub">Continue building your portfolio framework →</div>
+  </div>
+  <a href="#" class="nxt-btn">Next Chapter <span class="nxt-arrow">→</span></a>
+</div>
+
+
+<!-- ═══ DISCLAIMER ═══ -->
+<section style="background:linear-gradient(135deg,#fefce8,#fffbeb);border-top:1px solid rgba(217,119,6,.18);overflow:hidden;">
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(16px,5vw,56px);">
+  <div class="disc-inner">
+    <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(217,119,6,.28);">⚠️</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#92400e;margin-bottom:6px;">Important Disclaimer</div>
+      <div style="font-size:clamp(11px,1.3vw,13px);color:#78350f;line-height:1.72;">All buy, hold, and sell frameworks and company examples are for educational illustration only and do not constitute investment advice or recommendations to buy or sell any specific security. Valuation metrics and thresholds mentioned are illustrative and will vary by company, sector, and market conditions. Past valuation bands are not guaranteed to repeat. All equity investments carry the risk of loss. Please consult a SEBI-registered investment advisor before making any investment decision. Investors should conduct their own research and due diligence.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(el => {
+    if (el.isIntersecting) { el.target.classList.add('on'); io.unobserve(el.target); }
+  });
+}, { threshold: 0.04, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+document.addEventListener('touchstart', () => {}, { passive: true });
+document.addEventListener('touchmove',  () => {}, { passive: true });
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.rv').forEach(el => el.classList.add('on'));
+}
+</script>
+</body>
+</html>
