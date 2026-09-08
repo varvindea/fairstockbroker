@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { CalculatorPageLayout, type CalculatorHeroProps } from '../components/CalculatorPageLayout'
 
 const inr = (value: number) => value >= 10_000_000
   ? `₹${(value / 10_000_000).toFixed(2)} Cr`
@@ -32,17 +33,29 @@ function FixedDepositCalculator() {
   const resetFd = () => { setPrincipal(500_000); setRate(7.5); setYears(5); setFrequency(4) }
 
   return (
-    <>
-      <section className="page-hero-sec">
-        <div className="page-hero-inner">
-          <div className="page-eyebrow">Savings Calculator</div>
-          <h1 className="page-h1">FD Calculator</h1>
-          <p className="page-sub">Calculate your fixed-deposit maturity value, interest earned, and annual growth. Results update as you adjust your investment.</p>
-        </div>
-      </section>
-
-      <section className="sec" style={{ background: 'var(--white)' }}>
-        <div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="fd"
+      hero={{
+        breadcrumbCurrent: 'FD Calculator',
+        titleTop: 'FD Calculator',
+        titleHighlight: 'Fixed Returns,',
+        titleBottom: 'Zero Surprises',
+        subtitle: 'Calculate your Fixed Deposit maturity value with compound interest. Compare FD vs Mutual Funds and plan your safe investment.',
+        pills: ['🏦 FD Maturity Value', '📊 FD vs MF Compare', '🏛️ Tax Impact', '🆓 Free'],
+        panelTitle: 'FD Highlights',
+        stats: [
+          { color: 'purple', icon: '🏦', num: '7.5%', label: 'Avg Bank FD Rate' },
+          { color: 'green', icon: '🔒', num: '₹5L', label: 'DICGC Insurance Cover' },
+          { color: 'amber', icon: '📅', num: '7 days', label: 'Min FD Tenure' },
+          { color: 'blue', icon: '👴', num: '0.5%', label: 'Extra for Senior Citizens' },
+        ],
+        minicharts: [
+          { icon: '💰', iconBg: '#f3e8ff', label: '₹5L @ 7.5% for 5 Years', val: '₹7.19 Lakh', badge: '+43.8%', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '🧾', iconBg: '#fff7ed', label: 'Tax at 30% slab on ₹2.19L gains', val: '₹65,700 Tax', badge: 'TDS @10%', badgeBg: '#fffbeb', badgeColor: '#b45309' },
+          { icon: '📊', iconBg: '#f0fdf4', label: 'Best FD Rate (Small Finance)', val: 'Up to 9.5% p.a.', badge: 'Limited', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+        ],
+      }}
+    >
           <div className="card">
             <div className="card-head"><div className="ch-icon amber">🏦</div><div><div className="ch-title">Enter Your FD Details</div><div className="ch-sub">Results update instantly — try different tenures</div></div></div>
             <div className="card-body">
@@ -96,9 +109,7 @@ function FixedDepositCalculator() {
             </div>
           </div>
           <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-        </div>
-      </section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -114,9 +125,29 @@ function RecurringDepositCalculator() {
   const resetRd = () => { setMonthlyDeposit(10_000); setRate(7.5); setYears(5) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Savings Calculator</div><h1 className="page-h1">RD Calculator</h1><p className="page-sub">Estimate the maturity value and interest earned from regular monthly deposits.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="rd"
+      hero={{
+        breadcrumbCurrent: 'RD Calculator',
+        titleTop: 'RD Calculator',
+        titleHighlight: 'Build Wealth',
+        titleBottom: 'Month by Month',
+        subtitle: 'Calculate your Recurring Deposit maturity value with quarterly compounding. Compare RD vs SIP and find which builds more wealth.',
+        pills: ['🪙 Monthly Deposits', '📊 RD vs SIP Compare', '🏛️ Tax Impact', '🆓 Free'],
+        panelTitle: 'RD Highlights',
+        stats: [
+          { color: 'purple', icon: '🪙', num: '₹5K/mo', label: 'Min to Start' },
+          { color: 'green', icon: '📅', num: '6mo–10yr', label: 'Flexible Tenure' },
+          { color: 'amber', icon: '🏦', num: '6.5–8%', label: 'Typical Rate Range' },
+          { color: 'blue', icon: '🛡️', num: '₹5L', label: 'DICGC Insurance' },
+        ],
+        minicharts: [
+          { icon: '💰', iconBg: '#f3e8ff', label: '₹10K/mo × 5yr @ 7.5%', val: '₹7.27 Lakh', badge: '+21%', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '📊', iconBg: '#f0fdf4', label: 'SIP ₹10K × 5yr @ 12%', val: '₹8.17 Lakh', badge: '+36%', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+          { icon: '🧾', iconBg: '#fff7ed', label: 'RD interest fully taxable', val: 'TDS @10%', badge: 'Plan', badgeBg: '#fffbeb', badgeColor: '#b45309' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon purple">🪙</div><div><div className="ch-title">Enter Your RD Details</div><div className="ch-sub">Results update instantly as you adjust the sliders</div></div></div>
           <div className="card-body">
@@ -155,8 +186,7 @@ function RecurringDepositCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -171,16 +201,52 @@ function InvestmentCalculator({ type }: { type: 'sip' | 'lumpsum' }) {
     ? amount * (((1 + monthlyRate) ** months - 1) / monthlyRate) * (1 + monthlyRate)
     : amount * (1 + rate / 100) ** years
   const invested = type === 'sip' ? amount * months : amount
-  const title = type === 'sip' ? 'SIP Calculator' : 'Lumpsum Calculator'
   const amountLabel = type === 'sip' ? '💰 Monthly Investment' : '💰 Initial Investment'
   const amountMin = type === 'sip' ? 500 : 1000
   const amountPresets = type === 'sip' ? [1000, 5000, 10000, 25000, 50000] : [50000, 100000, 500000, 1000000, 2500000]
   const resetInv = () => { setAmount(type === 'sip' ? 10_000 : 100_000); setRate(12); setYears(10) }
+  const hero: CalculatorHeroProps = type === 'sip' ? {
+    breadcrumbCurrent: 'SIP Calculator',
+    titleTop: 'SIP Calculator',
+    titleHighlight: 'Grow Your Wealth',
+    titleBottom: 'Systematically',
+    subtitle: 'Calculate exactly how much your monthly SIP will grow into. Compare with FD, visualise year-by-year, plan goals.',
+    pills: ['📊 Live Chart', '🎯 Goal Planner', '💰 Tax Guide', '🆓 Free'],
+    panelTitle: 'Platform Highlights',
+    stats: [
+      { color: 'purple', icon: '📈', num: '12%', label: 'AVG EQUITY CAGR' },
+      { color: 'green', icon: '💰', num: '₹1Cr', label: '₹5K/MO×30YR' },
+      { color: 'amber', icon: '🏛️', num: '7.1%', label: 'PPF RATE' },
+      { color: 'blue', icon: '🧾', num: '₹1.25L', label: 'LTCG LIMIT' },
+    ],
+    minicharts: [
+      { icon: '📈', iconBg: '#f3e8ff', label: 'SIP 20yr @ 12%', val: '₹1.76 Cr', badge: '+340%', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+      { icon: '🏠', iconBg: '#fff7ed', label: 'Home Loan EMI ₹50L', val: '₹48,251', badge: '8.5% pa', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+      { icon: '🧾', iconBg: '#f0fdf4', label: 'Tax Saved via 80C', val: '₹46,800', badge: 'New Regime', badgeBg: '#fffbeb', badgeColor: '#b45309' },
+    ],
+  } : {
+    breadcrumbCurrent: 'Lumpsum Calculator',
+    titleTop: 'Lumpsum Calculator',
+    titleHighlight: 'One-Time Investment',
+    titleBottom: 'Made Powerful',
+    subtitle: 'Calculate exactly how much your one-time investment will grow into. Compare with SIP, visualise year-by-year, plan goals.',
+    pills: ['💰 Lumpsum Returns', '📊 vs SIP Compare', '🎯 Goal Planner', '🆓 Free'],
+    panelTitle: 'Platform Highlights',
+    stats: [
+      { color: 'purple', icon: '📈', num: '12×', label: '₹1L→₹12L @12%/20yr' },
+      { color: 'green', icon: '💰', num: '₹15.5L', label: '₹5L×10yr @12%' },
+      { color: 'amber', icon: '📊', num: '15%', label: 'AVG EQUITY CAGR' },
+      { color: 'blue', icon: '⏳', num: '20yr', label: 'IDEAL HORIZON' },
+    ],
+    minicharts: [
+      { icon: '📈', iconBg: '#f3e8ff', label: 'SIP 20yr @ 12%', val: '₹1.76 Cr', badge: '+340%', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+      { icon: '🏠', iconBg: '#fff7ed', label: 'Home Loan EMI ₹50L', val: '₹48,251', badge: '8.5% pa', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+      { icon: '🧾', iconBg: '#f0fdf4', label: 'Tax Saved via 80C', val: '₹46,800', badge: 'New Regime', badgeBg: '#fffbeb', badgeColor: '#b45309' },
+    ],
+  }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Investment Calculator</div><h1 className="page-h1">{title}</h1><p className="page-sub">See how compounding can grow your investment over time. Results update instantly as you adjust the values.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout activeSlug={type} hero={hero}>
         <div className="card">
           <div className="card-head"><div className="ch-icon purple">📊</div><div><div className="ch-title">Enter Your Investment Details</div><div className="ch-sub">Results update instantly as you adjust the sliders</div></div></div>
           <div className="card-body">
@@ -219,8 +285,7 @@ function InvestmentCalculator({ type }: { type: 'sip' | 'lumpsum' }) {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -245,9 +310,29 @@ function StepUpSipCalculator() {
   const resetStepUp = () => { setMonthlySip(10_000); setStepUp(10); setRate(12); setYears(20) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Investment Calculator</div><h1 className="page-h1">Step-Up SIP Calculator</h1><p className="page-sub">See how increasing your SIP every year can strengthen your long-term investment corpus.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="step-up-sip"
+      hero={{
+        breadcrumbCurrent: 'Step-Up SIP',
+        titleTop: 'Step-Up SIP',
+        titleHighlight: 'Grow Faster',
+        titleBottom: 'Every Year',
+        subtitle: 'Increase your SIP every year and multiply your wealth. Step-up 10% annually and outpace flat SIP by 3×.',
+        pills: ['⬆️ Annual Step-Up', '📊 Compare', '🎯 Goal Planner', '🆓 Free'],
+        panelTitle: 'Platform Highlights',
+        stats: [
+          { color: 'purple', icon: '🚀', num: '3×', label: 'VS FLAT SIP' },
+          { color: 'green', icon: '💹', num: '₹2.4Cr', label: '₹5K+10%/YR×20' },
+          { color: 'amber', icon: '⬆️', num: '10%', label: 'STEP-UP PA' },
+          { color: 'blue', icon: '✨', num: '+₹64L', label: 'EXTRA CORPUS' },
+        ],
+        minicharts: [
+          { icon: '⬆️', iconBg: '#f3e8ff', label: 'Step-Up 10%pa (20yr)', val: '₹2.40 Cr', badge: '3× better', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '📊', iconBg: '#f0fdf4', label: 'Flat SIP same period', val: '₹1.76 Cr', badge: 'baseline', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+          { icon: '✨', iconBg: '#fffbeb', label: 'Extra wealth created', val: '₹64 L', badge: '+42% more', badgeBg: '#fff7ed', badgeColor: '#b45309' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon purple">⬆️</div><div><div className="ch-title">Enter Your Step-Up SIP Details</div><div className="ch-sub">Results update instantly as you adjust the sliders</div></div></div>
           <div className="card-body">
@@ -292,8 +377,7 @@ function StepUpSipCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -319,9 +403,29 @@ function SwpCalculator() {
   const resetSwp = () => { setInitialCorpus(5_000_000); setMonthlyWithdrawal(30_000); setRate(10); setYears(20) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Investment Calculator</div><h1 className="page-h1">SWP Calculator</h1><p className="page-sub">Plan systematic withdrawals from your corpus and see how long your money lasts.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="swp"
+      hero={{
+        breadcrumbCurrent: 'SWP Calculator',
+        titleTop: 'SWP Calculator',
+        titleHighlight: 'Withdraw Smartly,',
+        titleBottom: 'Stay Invested',
+        subtitle: 'Plan your Systematic Withdrawal Plan — see exactly how long your corpus lasts and how much you can withdraw monthly without depleting it.',
+        pills: ['💸 Monthly Withdrawals', '📊 Corpus Tracking', '📅 Year-by-Year', '🆓 Free'],
+        panelTitle: 'SWP Highlights',
+        stats: [
+          { color: 'purple', icon: '💰', num: '₹1Cr', label: 'Typical Retirement Corpus' },
+          { color: 'green', icon: '📅', num: '25yr+', label: 'Ideal Duration' },
+          { color: 'amber', icon: '💸', num: '4%', label: 'Safe Withdrawal Rate' },
+          { color: 'blue', icon: '📈', num: '10–12%', label: 'Equity CAGR Expected' },
+        ],
+        minicharts: [
+          { icon: '💰', iconBg: '#f3e8ff', label: '₹50L @ 10%, ₹30K/mo withdraw', val: 'Lasts 25+ Years', badge: 'Safe', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '🛡️', iconBg: '#f0fdf4', label: 'Tax: LTCG only on gains portion', val: '12.5% LTCG', badge: 'Post 1yr', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+          { icon: '📊', iconBg: '#fff7ed', label: 'Corpus: ₹1Cr, ₹40K/mo, 8%', val: 'Depletes in 18yr', badge: 'Caution', badgeBg: '#fffbeb', badgeColor: '#b45309' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon amber">💸</div><div><div className="ch-title">Enter Your SWP Details</div><div className="ch-sub">Results update instantly as you adjust the sliders</div></div></div>
           <div className="card-body">
@@ -366,8 +470,7 @@ function SwpCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -386,9 +489,28 @@ function SipVsLumpsumCalculator() {
   const resetCompare = () => { setTotal(1_200_000); setYears(10); setRate(12); setScenario(2) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Investment Calculator</div><h1 className="page-h1">SIP vs Lumpsum Calculator</h1><p className="page-sub">Compare a monthly SIP against a one-time investment under your selected market-volatility scenario.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="sip-vs-lumpsum"
+      hero={{
+        breadcrumbCurrent: 'SIP vs Lumpsum Calculator',
+        titleTop: 'SIP vs Lumpsum',
+        titleHighlight: 'Head-to-Head Comparison',
+        subtitle: 'Same money, two strategies — discover which investment approach creates more wealth for your specific market conditions and timeline.',
+        pills: ['✓ Same Total Investment', '✓ Market Volatility Analysis', '✓ P/E Timing Guide', '✓ STP Strategy'],
+        panelTitle: 'SIP vs Lumpsum Highlights',
+        stats: [
+          { color: 'purple', icon: '📅', num: '₹12L', label: '12×₹10K = Same as Lumpsum' },
+          { color: 'green', icon: '📈', num: 'Bull Mkt', label: 'Lumpsum wins 2×+' },
+          { color: 'blue', icon: '📉', num: 'Bear Mkt', label: 'SIP wins via averaging' },
+          { color: 'amber', icon: '🔄', num: 'STP', label: 'Best of both worlds' },
+        ],
+        minicharts: [
+          { icon: '⚔️', iconBg: '#dcfce7', label: 'Bull Market Edge', val: 'Lumpsum', badge: 'Full capital day 1', badgeBg: '#f0fdf4', badgeColor: '#15803d' },
+          { icon: '🔄', iconBg: '#f3e8ff', label: 'Volatility Edge', val: 'SIP wins', badge: 'Buys more on dips', badgeBg: '#faf5ff', badgeColor: '#7c3aed' },
+          { icon: '💧', iconBg: '#fffbeb', label: 'STP Strategy', val: 'Park + Transfer', badge: '7% on waiting cash', badgeBg: '#fffbeb', badgeColor: '#b45309' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon purple">🔄</div><div><div className="ch-title">Enter Your Investment Details</div><div className="ch-sub">Results update instantly as you adjust the sliders</div></div></div>
           <div className="card-body">
@@ -431,8 +553,7 @@ function SipVsLumpsumCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -456,9 +577,29 @@ function PpfCalculator() {
   const resetPpf = () => { setAnnualDeposit(150_000); setRate(7.1); setYears(15) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Retirement Calculator</div><h1 className="page-h1">PPF Calculator</h1><p className="page-sub">Calculate your tax-free Public Provident Fund maturity value on annual deposits.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="ppf"
+      hero={{
+        breadcrumbCurrent: 'PPF Calculator',
+        titleTop: 'PPF Calculator',
+        titleHighlight: '7.1% Tax-Free Returns',
+        titleBottom: 'EEE Tax Status',
+        subtitle: 'Calculate PPF maturity with year-by-year schedule. Triple tax exempt — 80C deduction on investment, tax-free interest, and tax-free maturity.',
+        pills: ['🏦 7.1% Tax-Free', '🔐 EEE Status', '💰 ₹1.5L/yr 80C', '⏳ 15yr+', '🆓 Free'],
+        panelTitle: 'PPF Key Highlights',
+        stats: [
+          { color: 'purple', icon: '🏦', num: '7.1%', label: 'Current PPF Rate' },
+          { color: 'green', icon: '🔐', num: 'EEE', label: 'Triple Tax Exempt' },
+          { color: 'amber', icon: '⏳', num: '15 Yrs', label: 'Minimum Tenure' },
+          { color: 'blue', icon: '💰', num: '₹1.5L', label: 'Max Annual Deposit' },
+        ],
+        minicharts: [
+          { icon: '🏦', iconBg: '#f3e8ff', label: '₹1.5L/yr for 15 Years', val: '₹40.68L', badge: '@ 7.1% p.a.', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '🔐', iconBg: '#fff7ed', label: 'Interest Earned (Tax)', val: '₹0', badge: '100% Free', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '📊', iconBg: '#f0fdf4', label: 'Wealth Multiplier', val: '2.81×', badge: 'In 15 Years', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon green">🏛️</div><div><div className="ch-title">Enter Your PPF Details</div><div className="ch-sub">EEE tax-free · 15-year lock-in · Results update instantly</div></div></div>
           <div className="card-body">
@@ -508,8 +649,7 @@ function PpfCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -521,9 +661,29 @@ function NationalSavingsCertificateCalculator() {
   const resetNsc = () => { setPrincipal(100_000); setRate(7.7) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Savings Calculator</div><h1 className="page-h1">NSC Calculator</h1><p className="page-sub">Calculate the maturity value of your National Savings Certificate investment over its 5-year term.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="nsc"
+      hero={{
+        breadcrumbCurrent: 'NSC Calculator',
+        titleTop: 'NSC Calculator',
+        titleHighlight: '7.7% Fixed Returns',
+        titleBottom: 'Government Backed',
+        subtitle: 'Calculate NSC maturity with year-by-year interest accrual. 80C eligible, 5-year fixed tenure, sovereign guarantee — better than most bank FDs.',
+        pills: ['📮 7.7% Compounded', '⏳ 5-Year Tenure', '🏷️ 80C Eligible', '🏛️ Govt Backed', '🆓 Free'],
+        panelTitle: 'NSC Key Highlights',
+        stats: [
+          { color: 'purple', icon: '📮', num: '7.7%', label: 'Annual Interest Rate' },
+          { color: 'green', icon: '⏳', num: '5 Years', label: 'Fixed Tenure' },
+          { color: 'amber', icon: '🏷️', num: '80C', label: 'Tax Deductible' },
+          { color: 'blue', icon: '💎', num: '1.45×', label: 'Wealth Multiplier' },
+        ],
+        minicharts: [
+          { icon: '📮', iconBg: '#f3e8ff', label: '₹1L Grows To (5yr)', val: '₹1,44,903', badge: '@7.7% p.a.', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '🏷️', iconBg: '#fff7ed', label: '80C Tax Saved @30%', val: '₹46,800', badge: 'Per Year', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+          { icon: '📊', iconBg: '#f0fdf4', label: 'NSC vs Bank FD', val: '7.7% vs 7%', badge: 'NSC Wins', badgeBg: '#fffbeb', badgeColor: '#b45309' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon green">🏅</div><div><div className="ch-title">Enter Your NSC Details</div><div className="ch-sub">5-year lock-in · 80C eligible · Results update instantly</div></div></div>
           <div className="card-body">
@@ -556,8 +716,7 @@ function NationalSavingsCertificateCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -577,9 +736,29 @@ function SukanyaCalculator() {
   const resetSukanya = () => { setAnnualDeposit(150_000); setAge(0) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Savings Calculator</div><h1 className="page-h1">Sukanya Samriddhi Calculator</h1><p className="page-sub">Calculate the maturity value of your girl child's Sukanya Samriddhi Yojana account at 8.2% tax-free interest.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="sukanya"
+      hero={{
+        breadcrumbCurrent: 'Sukanya Samriddhi',
+        titleTop: 'Sukanya Samriddhi Yojana',
+        titleHighlight: '8.2% Tax-Free Returns',
+        titleBottom: 'Secure Your Daughter Future',
+        subtitle: 'Calculate SSY maturity amount with 8.2% government-guaranteed tax-free returns. 80C tax benefit on contributions, EEE status, and how to maximise your daughter corpus.',
+        pills: ['👧 Girl Child Only', '📈 8.2% Guaranteed', '🏆 EEE Tax Status', '💰 Max ₹1.5L/yr', '🆓 Free'],
+        panelTitle: 'SSY Highlights',
+        stats: [
+          { color: 'purple', icon: '📈', num: '8.2%', label: 'SSY Interest FY27' },
+          { color: 'green', icon: '🏆', num: 'EEE', label: 'Triple Tax Exempt' },
+          { color: 'amber', icon: '💰', num: '₹1.5L', label: 'Max Annual Invest' },
+          { color: 'blue', icon: '⏳', num: '21 Years', label: 'Account Maturity Age' },
+        ],
+        minicharts: [
+          { icon: '👧', iconBg: '#faf5ff', label: '₹1.5L/yr for 15yr', val: '₹54 Lakh', badge: 'Tax-free at age 21', badgeBg: '#fdf2f8', badgeColor: '#9d174d' },
+          { icon: '📈', iconBg: '#fff7ed', label: 'SSY vs PPF', val: '8.2% vs 7.1%', badge: 'SSY wins', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '💰', iconBg: '#f0fdf4', label: 'Deposit by Apr 5', val: 'Full year int', badge: 'Timing tip', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon purple">💎</div><div><div className="ch-title">Enter Your SSY Details</div><div className="ch-sub">EEE tax-free · Matures at age 21 · Results update instantly</div></div></div>
           <div className="card-body">
@@ -612,8 +791,7 @@ function SukanyaCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -633,9 +811,29 @@ function NpsCalculator() {
   const resetNps = () => { setMonthlyContribution(5_000); setCurrentAge(30); setReturnRate(10); setAnnuityRate(6) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Retirement Calculator</div><h1 className="page-h1">NPS Calculator</h1><p className="page-sub">Estimate your National Pension System corpus, tax-free lump sum, and expected monthly pension at age 60.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="nps"
+      hero={{
+        breadcrumbCurrent: 'NPS Calculator',
+        titleTop: 'NPS Calculator',
+        titleHighlight: '₹50,000 Extra Tax Saving',
+        titleBottom: 'National Pension Scheme',
+        subtitle: 'Calculate your NPS corpus, 60% tax-free lump sum, and monthly pension estimate. Maximise the unique 80CCD(1B) deduction that most Indians overlook.',
+        pills: ['🔐 Tier 1 & 2', '💰 ₹50K Extra 80CCD(1B)', '📊 10–12% Returns', '📅 Monthly Pension', '🆓 Free'],
+        panelTitle: 'NPS Highlights',
+        stats: [
+          { color: 'green', icon: '💰', num: '₹50K', label: 'Extra 80CCD(1B) Deduction' },
+          { color: 'purple', icon: '💎', num: '60%', label: 'Tax-Free Lump Sum' },
+          { color: 'amber', icon: '📊', num: '0.09%', label: 'Lowest Fund Charges' },
+          { color: 'blue', icon: '📈', num: '10–12%', label: 'Equity Tier Return' },
+        ],
+        minicharts: [
+          { icon: '💰', iconBg: '#f0fdf4', label: '₹50K at 30% bracket', val: '₹15.6K Saved', badge: 'Per year in tax', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '🔐', iconBg: '#faf5ff', label: '₹5K/mo for 30yr', val: '₹1.1 Crore', badge: '@ 10% NPS return', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+          { icon: '📅', iconBg: '#fff7ed', label: '40% corpus → Pension', val: '₹18K/mo', badge: '@ 6% annuity', badgeBg: '#f59e0b', badgeColor: '#92400e' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon blue">🔐</div><div><div className="ch-title">Enter Your NPS Details</div><div className="ch-sub">60% tax-free lump sum · 40% mandatory annuity · Results update instantly</div></div></div>
           <div className="card-body">
@@ -680,8 +878,7 @@ function NpsCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -714,9 +911,29 @@ function EpfCalculator() {
   const resetEpf = () => { setBasic(40_000); setEpfAge(30); setIncr(7); setEpfBal(200_000) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Retirement Calculator</div><h1 className="page-h1">EPF Calculator</h1><p className="page-sub">Calculate your EPF corpus at retirement accounting for salary increments and 8.25% guaranteed returns. Understand VPF, EPS pension, and how to maximise your EPF.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="epf"
+      hero={{
+        breadcrumbCurrent: 'EPF Calculator',
+        titleTop: 'EPF Calculator',
+        titleHighlight: '8.25% Tax-Free Retirement Corpus',
+        titleBottom: 'Employee Provident Fund',
+        subtitle: 'Calculate your EPF corpus at retirement accounting for salary increments and 8.25% guaranteed returns. Understand VPF, EPS pension, and how to maximise your EPF.',
+        pills: ['🏛️ 8.25% Guaranteed', '💰 EEE Tax Status', '📊 VPF Option', '📅 EPS Pension', '🆓 Free'],
+        panelTitle: 'EPF Highlights',
+        stats: [
+          { color: 'blue', icon: '📊', num: '8.25%', label: 'EPF INTEREST FY25' },
+          { color: 'green', icon: '🏆', num: 'EEE', label: 'TRIPLE TAX EXEMPT' },
+          { color: 'amber', icon: '💼', num: '12%', label: 'EMPLOYEE CONTRIBUTION' },
+          { color: 'purple', icon: '🏭', num: '3.67%', label: 'EMPLOYER TO EPF' },
+        ],
+        minicharts: [
+          { icon: '🏛️', iconBg: '#faf5ff', label: '₹40K basic, 28yr career', val: '₹2 Crore', badge: 'Tax-free at 58', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '💡', iconBg: '#fff7ed', label: 'VPF vs PPF', val: '8.25% vs 7.1%', badge: 'Same EEE, VPF wins', badgeBg: '#f0fdf4', badgeColor: '#15803d' },
+          { icon: '📊', iconBg: '#f0fdf4', label: 'EPF withdrawal', val: 'Big mistake', badge: 'Transfer, never withdraw', badgeBg: '#fee2e2', badgeColor: '#dc2626' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon blue">🏛️</div><div><div className="ch-title">Calculate Your EPF Corpus at 58</div><div className="ch-sub">Employee + Employer contribution at 8.25% compound interest — fully tax-free</div></div></div>
           <div className="card-body">
@@ -783,8 +1000,7 @@ function EpfCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -798,9 +1014,29 @@ function SeniorCitizenSavingsCalculator() {
   const resetScss = () => { setDepositAmount(1_500_000); setRate(8.2) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Retirement Calculator</div><h1 className="page-h1">Senior Citizen Savings Scheme Calculator</h1><p className="page-sub">Calculate quarterly interest payouts from your SCSS deposit over its 5-year term.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="senior-citizen-savings"
+      hero={{
+        breadcrumbCurrent: 'Senior Citizen Savings',
+        titleTop: 'Senior Citizen Savings',
+        titleHighlight: 'Best Post-Retirement Income Options',
+        titleBottom: 'SCSS · PMVVY · FD · SWP',
+        subtitle: 'Compare all senior citizen income options — SCSS (8.2%), PMVVY (7.4%), Senior FD, and balanced MF SWP. Find the optimal allocation for guaranteed income + inflation protection.',
+        pills: ['🏦 SCSS 8.2%', '🛡️ PMVVY 7.4%', '🏛️ Senior FD', '📈 Balanced SWP', '🆓 Free'],
+        panelTitle: 'Senior Savings Highlights',
+        stats: [
+          { color: 'amber', icon: '🏦', num: '8.2%', label: 'SCSS Interest Rate' },
+          { color: 'purple', icon: '🛡️', num: '7.4%', label: 'PMVVY Rate' },
+          { color: 'blue', icon: '💰', num: '₹30L', label: 'SCSS Max Per Person' },
+          { color: 'green', icon: '🏷️', num: '80TTB', label: '₹50K Interest Deduction' },
+        ],
+        minicharts: [
+          { icon: '🏦', iconBg: '#f59e0b', label: 'SCSS ₹30L @ 8.2%', val: '₹20.5K/quarter', badge: 'Quarterly payout', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '🛡️', iconBg: '#fff7ed', label: 'PMVVY ₹15L @ 7.4%', val: '₹9,250/mo', badge: 'Monthly pension', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+          { icon: '📈', iconBg: '#f0fdf4', label: 'Balanced MF SWP', val: 'Corpus grows', badge: 'Inflation hedge', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon amber">👴</div><div><div className="ch-title">Enter Your SCSS Details</div><div className="ch-sub">5-year term · Quarterly payout · Results update instantly</div></div></div>
           <div className="card-body">
@@ -833,8 +1069,7 @@ function SeniorCitizenSavingsCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -850,9 +1085,29 @@ function SavingsGoalCalculator() {
   const resetGoal = () => { setGoalAmount(2_000_000); setYears(10); setRate(12) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Goal Planning</div><h1 className="page-h1">Savings Goal Calculator</h1><p className="page-sub">Find the monthly SIP you need to reach a specific savings target.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="savings-goal"
+      hero={{
+        breadcrumbCurrent: 'Savings Goal Calculator',
+        titleTop: 'Savings Goal',
+        titleHighlight: 'Calculator',
+        titleBottom: 'Plan Every Goal',
+        subtitle: 'Know exactly how much to save monthly for your dream — house, education, wedding, car or retirement. Precise SIP planning for every milestone.',
+        pills: ['🏠 House Down Payment', '🎓 Education Fund', '💒 Wedding Budget', '🚗 Car Savings'],
+        panelTitle: 'Goal Planning Facts',
+        stats: [
+          { color: 'purple', icon: '🎯', num: '20%', label: 'Ideal Savings Rate' },
+          { color: 'green', icon: '📈', num: '12%', label: 'Equity SIP CAGR' },
+          { color: 'amber', icon: '🏠', num: '25%', label: 'House Down Payment' },
+          { color: 'blue', icon: '🎓', num: '₹50L+', label: 'Avg College Fund' },
+        ],
+        minicharts: [
+          { icon: '🏠', iconBg: '#f3e8ff', label: 'House ₹1Cr, 5yr SIP @12%', val: '₹12,244/mo', badge: 'Achievable', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '🎓', iconBg: '#fff7ed', label: 'Education ₹50L in 15yr', val: '₹9,800/mo', badge: '@12% SIP', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+          { icon: '💒', iconBg: '#f0fdf4', label: 'Wedding ₹20L in 5yr', val: '₹24,500/mo', badge: '@10% Hybrid', badgeBg: '#fffbeb', badgeColor: '#b45309' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon purple">🎯</div><div><div className="ch-title">Enter Your Savings Goal</div><div className="ch-sub">Results update instantly as you adjust the sliders</div></div></div>
           <div className="card-body">
@@ -891,8 +1146,7 @@ function SavingsGoalCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -915,9 +1169,29 @@ function SavingRateCalculator() {
   const resetSavingRate = () => { setMonthlyIncome(80_000); setMonthlyExpenses(50_000); setRate(12) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Personal Finance</div><h1 className="page-h1">Saving Rate Calculator</h1><p className="page-sub">See your savings rate and how it determines your path to financial independence (FIRE).</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="saving-rate"
+      hero={{
+        breadcrumbCurrent: 'Saving Rate Calculator',
+        titleTop: 'Your Savings Rate',
+        titleHighlight: 'Determines Freedom',
+        titleBottom: 'Not Your Income',
+        subtitle: 'Calculate exactly how much of your income you save, find your Financial Independence number, and discover when you can stop working for money.',
+        pills: ['💰 Savings Rate %', '🏖️ FI Number', '⏰ Years to FIRE', '📊 25× Rule', '🚀 FI Journey'],
+        panelTitle: '💰 Savings Rate Snapshot',
+        stats: [
+          { color: 'purple', icon: '💰', num: '20%', label: 'Min Savings Rate' },
+          { color: 'green', icon: '🚀', num: '17yr', label: 'FI at 50% Rate' },
+          { color: 'amber', icon: '🎯', num: '25×', label: 'FI Number Formula' },
+          { color: 'blue', icon: '📊', num: '4%', label: 'Safe Withdrawal' },
+        ],
+        minicharts: [
+          { icon: '💰', iconBg: '#f3e8ff', label: 'Saving 20%', val: 'FI in 37yr', badge: 'Standard', badgeBg: '#faf5ff', badgeColor: '#7c3aed' },
+          { icon: '🚀', iconBg: '#f0fdf4', label: 'Saving 50%', val: 'FI in 17yr', badge: 'FIRE', badgeBg: '#f0fdf4', badgeColor: '#16a34a' },
+          { icon: '🏖️', iconBg: '#fffbeb', label: 'FI Corpus', val: '25× expenses', badge: 'Target', badgeBg: '#fef9c3', badgeColor: '#d97706' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon purple">🐖</div><div><div className="ch-title">Enter Your Income & Expenses</div><div className="ch-sub">Results update instantly as you adjust the sliders</div></div></div>
           <div className="card-body">
@@ -956,8 +1230,7 @@ function SavingRateCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -974,9 +1247,29 @@ function DailySavingsCalculator() {
   const resetDaily = () => { setDailyAmount(100); setYears(10); setRate(12) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Personal Finance</div><h1 className="page-h1">Daily Savings Calculator</h1><p className="page-sub">See how a small daily saving habit compounds into a big goal over time.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="daily-savings"
+      hero={{
+        breadcrumbCurrent: 'Daily Savings Calculator',
+        titleTop: 'Daily Savings',
+        titleHighlight: 'Calculator',
+        titleBottom: 'Small Habits Big Wealth',
+        subtitle: 'Discover the extraordinary power of saving just ₹100 a day. See exactly how daily savings compound into lakhs and crores over time.',
+        pills: ['☕ Latte Factor', '📈 Compounding Power', '🎯 Habit Building', '💰 Crorepati Plan'],
+        panelTitle: 'Daily Habit = Massive Wealth',
+        stats: [
+          { color: 'purple', icon: '☕', num: '₹3.5L', label: '₹100/day × 10yr' },
+          { color: 'green', icon: '📈', num: '₹1.5Cr', label: '₹100/day × 30yr' },
+          { color: 'amber', icon: '⏰', num: '6 yrs', label: 'Doubles @12%' },
+          { color: 'blue', icon: '🚀', num: '₹9.3Cr', label: '₹100/day × 40yr' },
+        ],
+        minicharts: [
+          { icon: '☕', iconBg: '#f3e8ff', label: 'Skip coffee, invest ₹100/day', val: '₹26L in 20yr', badge: '@12% SIP', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '🎯', iconBg: '#fff7ed', label: '₹200/day crorepati target', val: '25 years', badge: '@12% equity', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+          { icon: '📈', iconBg: '#f0fdf4', label: 'Rule of 72 at 12% return', val: 'Doubles every 6yr', badge: 'Compounding', badgeBg: '#fffbeb', badgeColor: '#b45309' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon purple">📆</div><div><div className="ch-title">Enter Your Daily Savings Details</div><div className="ch-sub">Results update instantly as you adjust the sliders</div></div></div>
           <div className="card-body">
@@ -1015,8 +1308,7 @@ function DailySavingsCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -1043,9 +1335,29 @@ function StepUpSwpCalculator() {
   const resetStepSwp = () => { setInitialCorpus(5_000_000); setInitialWithdrawal(25_000); setStepUp(8); setRate(10); setYears(20) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Investment Calculator</div><h1 className="page-h1">Step-Up SWP Calculator</h1><p className="page-sub">Plan growing withdrawals that increase annually — ideal for rising post-retirement expenses.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="step-up-swp"
+      hero={{
+        breadcrumbCurrent: 'Step-Up SWP',
+        titleTop: 'Step-Up SWP',
+        titleHighlight: 'Withdraw Smarter',
+        titleBottom: 'Every Year',
+        subtitle: 'Plan growing withdrawals from your corpus. Know when your money lasts — and how to make it last forever.',
+        pills: ['📉 Withdrawal Planner', '🏦 Corpus Tracker', '⚡ FIRE Planner', '🆓 Free'],
+        panelTitle: 'Platform Highlights',
+        stats: [
+          { color: 'purple', icon: '🔥', num: '25×', label: 'FIRE Rule' },
+          { color: 'green', icon: '🛡️', num: '4%', label: 'Safe Withdrawal' },
+          { color: 'amber', icon: '📋', num: '12.5%', label: 'LTCG Tax' },
+          { color: 'blue', icon: '🗓️', num: '30yr', label: 'Avg Horizon' },
+        ],
+        minicharts: [
+          { icon: '📉', iconBg: '#f3e8ff', label: 'SWP ₹20K/mo (20yr)', val: '₹1.50 Cr', badge: 'sustained', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '🏦', iconBg: '#f0fdf4', label: 'Corpus for FIRE (4%)', val: '₹6 Cr', badge: 'target', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+          { icon: '💰', iconBg: '#fffbeb', label: 'LTCG on MF gains', val: '12.5%', badge: 'Budget 24', badgeBg: '#fff7ed', badgeColor: '#b45309' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon amber">📉</div><div><div className="ch-title">Enter Your Step-Up SWP Details</div><div className="ch-sub">Results update instantly as you adjust the sliders</div></div></div>
           <div className="card-body">
@@ -1096,8 +1408,7 @@ function StepUpSwpCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -1111,9 +1422,29 @@ function CagrCalculator() {
   const resetCagr = () => { setInitialValue(100_000); setFinalValue(250_000); setYears(5) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Analytics Calculator</div><h1 className="page-h1">CAGR Calculator</h1><p className="page-sub">Find the true annualised growth rate between any start and end value.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="cagr"
+      hero={{
+        breadcrumbCurrent: 'CAGR Calculator',
+        titleTop: 'CAGR Calculator',
+        titleHighlight: 'Measure True',
+        titleBottom: 'Investment Growth',
+        subtitle: "Compound Annual Growth Rate tells you exactly how fast your investment grew annually, smoothing out all volatility. The investor's single most important metric.",
+        pills: ['📐 CAGR Formula', '🔄 Reverse CAGR', '📊 Sector Compare', '🆓 Free'],
+        panelTitle: 'CAGR Reference',
+        stats: [
+          { color: 'purple', icon: '📈', num: '15.8%', label: 'Nifty 50 10yr CAGR' },
+          { color: 'green', icon: '🌐', num: '10.7%', label: 'S&P 500 10yr CAGR' },
+          { color: 'amber', icon: '🪙', num: '14.2%', label: 'Gold 10yr CAGR (INR)' },
+          { color: 'blue', icon: '🏦', num: '6.5–7%', label: 'FD CAGR (post-tax)' },
+        ],
+        minicharts: [
+          { icon: '📐', iconBg: '#f3e8ff', label: '₹1L → ₹5L in 10 years', val: 'CAGR = 17.5%', badge: 'Excellent', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '🎯', iconBg: '#f0fdf4', label: '12% CAGR target in 5yr', val: '₹1L → ₹1.76L', badge: 'Achievable', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+          { icon: '🔄', iconBg: '#fff7ed', label: 'Reverse: FD at 7.5% for 10yr', val: '₹1L → ₹2.06L', badge: 'Safe', badgeBg: '#fffbeb', badgeColor: '#b45309' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon purple">📐</div><div><div className="ch-title">Enter Your Investment Values</div><div className="ch-sub">Results update instantly as you adjust the sliders</div></div></div>
           <div className="card-body">
@@ -1152,8 +1483,7 @@ function CagrCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -1169,9 +1499,29 @@ function AnnuityCalculator() {
   const resetAnnuity = () => { setPurchaseAmount(5_000_000); setAnnuityRate(6.4); setPurchaseAge(60) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Retirement Calculator</div><h1 className="page-h1">Annuity Calculator</h1><p className="page-sub">Calculate your guaranteed monthly pension income from an annuity purchase and find your breakeven age.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="annuity"
+      hero={{
+        breadcrumbCurrent: 'Annuity Calculator',
+        titleTop: 'Annuity Calculator',
+        titleHighlight: 'Pension Income',
+        titleBottom: 'Planner India',
+        subtitle: 'Calculate your monthly pension from annuity plans. Compare LIC, SBI Life and HDFC Life rates. Find your breakeven age and total lifetime income instantly.',
+        pills: ['🛡️ Lifetime Income', '🏦 Compare Insurers', '📊 Breakeven Age', '💰 NPS Annuity'],
+        panelTitle: 'Annuity at a Glance',
+        stats: [
+          { color: 'purple', icon: '🛡️', num: '6–7%', label: 'Best Annuity Rate' },
+          { color: 'green', icon: '📅', num: 'Lifetime', label: 'Guaranteed Income' },
+          { color: 'amber', icon: '🎂', num: '65+', label: 'Best Age to Buy' },
+          { color: 'blue', icon: '🏛️', num: '40%', label: 'NPS Mandatory' },
+        ],
+        minicharts: [
+          { icon: '💰', iconBg: '#f3e8ff', label: '₹1Cr purchase @6.4% LIC', val: '₹53,333/mo', badge: 'Lifetime', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '🎂', iconBg: '#fff7ed', label: 'Breakeven age — LIC @65', val: '~81 years', badge: 'Longevity Insurance', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+          { icon: '🏆', iconBg: '#f0fdf4', label: 'Best annuity rate 2026', val: 'LIC Jeevan Akshay', badge: '6.4% pa ⭐', badgeBg: '#fffbeb', badgeColor: '#b45309' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon blue">🛡️</div><div><div className="ch-title">Enter Your Annuity Details</div><div className="ch-sub">Results update instantly as you adjust the sliders</div></div></div>
           <div className="card-body">
@@ -1210,8 +1560,7 @@ function AnnuityCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -1224,9 +1573,29 @@ function RuleOf72Calculator() {
   const resetRule72 = () => setRate(12)
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Analytics Calculator</div><h1 className="page-h1">Rule of 72 Calculator</h1><p className="page-sub">Instantly estimate how long it takes to double your money at any rate.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="rule-of-72"
+      hero={{
+        breadcrumbCurrent: 'Rule of 72',
+        titleTop: 'Rule of 72',
+        titleHighlight: 'How Fast Does',
+        titleBottom: 'Your Money Double?',
+        subtitle: 'The Rule of 72 is the simplest mental math trick in investing — divide 72 by your annual return to find exactly how many years it takes to double your money.',
+        pills: ['⚡ Instant Doubling Time', '🔄 Reverse Calculator', '📊 All Asset Classes', '🆓 Free'],
+        panelTitle: 'Quick Reference',
+        stats: [
+          { color: 'purple', icon: '⚡', num: '72÷12=6', label: 'Years to Double @ 12%' },
+          { color: 'green', icon: '🏦', num: '72÷7=10', label: 'Years to Double via FD' },
+          { color: 'amber', icon: '📉', num: '72÷6=12', label: 'Years for Inflation to Halve Money' },
+          { color: 'blue', icon: '🚀', num: '72÷15=4.8', label: 'Years via Top MF' },
+        ],
+        minicharts: [
+          { icon: '📈', iconBg: '#f0fdf4', label: 'Nifty 50 @ 15.8% CAGR', val: 'Doubles every 4.6yr', badge: 'Fast!', badgeBg: '#dcfce7', badgeColor: '#15803d' },
+          { icon: '🪙', iconBg: '#f3e8ff', label: 'Gold @ 14.2% CAGR', val: 'Doubles every 5.1yr', badge: 'Good', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+          { icon: '🏦', iconBg: '#fff7ed', label: 'FD @ 7.5% → doubles in?', val: '9.6 years', badge: 'Slow', badgeBg: '#fffbeb', badgeColor: '#b45309' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon purple">⚡</div><div><div className="ch-title">Enter Your Expected Return</div><div className="ch-sub">Results update instantly as you adjust the slider</div></div></div>
           <div className="card-body">
@@ -1253,8 +1622,7 @@ function RuleOf72Calculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -1281,9 +1649,29 @@ function MutualFundReturnsCalculator() {
   const resetMf = () => { setInvestmentType('sip'); setAmount(10_000); setYears(10) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Analytics Calculator</div><h1 className="page-h1">Mutual Fund Returns Calculator</h1><p className="page-sub">Compare expected returns across fund categories for your SIP or lumpsum investment.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="mutual-fund-returns"
+      hero={{
+        breadcrumbCurrent: 'Mutual Fund Returns',
+        titleTop: 'Mutual Fund',
+        titleHighlight: 'Returns Calculator',
+        titleBottom: 'Compare & Decide',
+        subtitle: 'Calculate returns across all mutual fund categories — Large-Cap, Mid-Cap, Small-Cap, Flexi-Cap, Debt — and find the best fund for your goal and risk appetite.',
+        pills: ['📈 6 Fund Categories', '💰 Lumpsum vs SIP', '📊 Cross-Category Compare', '📔 Expense Ratio Impact'],
+        panelTitle: 'Mutual Fund Universe',
+        stats: [
+          { color: 'purple', icon: '📈', num: '2,500+', label: 'Active MF schemes in India' },
+          { color: 'green', icon: '💰', num: '₹54T', label: 'AUM as of 2025' },
+          { color: 'amber', icon: '📆', num: '12–18%', label: 'Historical equity CAGR' },
+          { color: 'blue', icon: '🌐', num: '0.1%', label: 'Lowest expense ratio (index)' },
+        ],
+        minicharts: [
+          { icon: '🌟', iconBg: '#f3e8ff', label: 'Large-Cap', val: '14.5%', badge: 'Low Risk', badgeBg: '#f3e8ff', badgeColor: '#7c3aed' },
+          { icon: '🔥', iconBg: '#fff7ed', label: 'Mid-Cap', val: '16.0%', badge: 'Medium Risk', badgeBg: '#fff7ed', badgeColor: '#d97706' },
+          { icon: '⚡', iconBg: '#f0fdf4', label: 'Small-Cap', val: '18.0%', badge: 'High Risk', badgeBg: '#f0fdf4', badgeColor: '#15803d' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon purple">🏆</div><div><div className="ch-title">Enter Your Investment Details</div><div className="ch-sub">Results update instantly as you adjust the sliders</div></div></div>
           <div className="card-body">
@@ -1329,8 +1717,7 @@ function MutualFundReturnsCalculator() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 
@@ -1344,9 +1731,29 @@ function InflationCalculatorPage() {
   const resetInflation = () => { setCurrentAmount(100_000); setInflationRate(6); setYears(10) }
 
   return (
-    <>
-      <section className="page-hero-sec"><div className="page-hero-inner"><div className="page-eyebrow">Personal Finance</div><h1 className="page-h1">Inflation Calculator</h1><p className="page-sub">See what your money will actually be worth after inflation erodes its purchasing power.</p></div></section>
-      <section className="sec" style={{ background: 'var(--white)' }}><div className="sec-inner">
+    <CalculatorPageLayout
+      activeSlug="inflation"
+      hero={{
+        breadcrumbCurrent: 'Inflation Calculator',
+        titleTop: 'Calculate the True',
+        titleHighlight: 'Cost of Inflation',
+        titleBottom: 'On Your Money',
+        subtitle: 'Discover how inflation silently erodes your savings, compare real vs nominal returns, and find exactly how much more you need to maintain your current lifestyle.',
+        pills: ['🔥 Purchasing Power', '📉 Real Returns', '🎓 Education 10%', '🏥 Healthcare 8%', '📊 India CPI 6%'],
+        panelTitle: '🔥 Inflation Reality Check',
+        stats: [
+          { color: 'purple', icon: '🔥', num: '6.2%', label: 'India Avg CPI' },
+          { color: 'green', icon: '💰', num: '₹56K', label: '₹1L in 10yr value' },
+          { color: 'amber', icon: '📉', num: '50%', label: 'Lost in 12yr' },
+          { color: 'blue', icon: '📈', num: '12%', label: 'Equity Beats Inflation' },
+        ],
+        minicharts: [
+          { icon: '🎓', iconBg: '#fef2f2', label: 'Education', val: '10% p.a.', badge: 'Fastest', badgeBg: '#fef2f2', badgeColor: '#dc2626' },
+          { icon: '🏥', iconBg: '#fef9c3', label: 'Healthcare', val: '8% p.a.', badge: 'Rising', badgeBg: '#fef9c3', badgeColor: '#ca8a04' },
+          { icon: '📊', iconBg: '#f0fdf4', label: 'General', val: '6% CPI', badge: 'RBI Target', badgeBg: '#f0fdf4', badgeColor: '#16a34a' },
+        ],
+      }}
+    >
         <div className="card">
           <div className="card-head"><div className="ch-icon amber">🌡️</div><div><div className="ch-title">Enter Your Details</div><div className="ch-sub">Results update instantly as you adjust the sliders</div></div></div>
           <div className="card-body">
@@ -1385,8 +1792,7 @@ function InflationCalculatorPage() {
           </div>
         </div>
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
-      </div></section>
-    </>
+    </CalculatorPageLayout>
   )
 }
 

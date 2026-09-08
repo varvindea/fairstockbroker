@@ -107,6 +107,10 @@ export function isNativeCalculator(name: string) {
   return name in nativeCalculatorSlugs
 }
 
+export function nativeSlugForCalculator(name: string) {
+  return nativeCalculatorSlugs[name]
+}
+
 export function calculatorHref(name: string) {
   const slug = nativeCalculatorSlugs[name]
   if (slug) return `/calculators/${slug}`
