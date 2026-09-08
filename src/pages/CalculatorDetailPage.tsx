@@ -1,6 +1,9 @@
 import { useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { CalculatorPageLayout, type CalculatorHeroProps } from '../components/CalculatorPageLayout'
+import { SectionDivider, InfoTileGrid, WealthPowerTable, TaxCardsGrid, TaxTimeline, LtcgEstimator, TipsGrid, GoalPlanner, FaqAccordion, DematBanner } from '../components/CalculatorContentSections'
+import { SipGuideBook } from '../components/SipGuideBook'
+import { sipInfoTiles, sipPowerConfigs, sipTaxCards, sipTaxTimeline, sipTips, sipGoals, sipFaqs } from '../data/sipContent'
 
 const inr = (value: number) => value >= 10_000_000
   ? `₹${(value / 10_000_000).toFixed(2)} Cr`
@@ -205,6 +208,26 @@ function InvestmentCalculator({ type }: { type: 'sip' | 'lumpsum' }) {
   const amountMin = type === 'sip' ? 500 : 1000
   const amountPresets = type === 'sip' ? [1000, 5000, 10000, 25000, 50000] : [50000, 100000, 500000, 1000000, 2500000]
   const resetInv = () => { setAmount(type === 'sip' ? 10_000 : 100_000); setRate(12); setYears(10) }
+  const calcValueAt = (y: number) => type === 'sip'
+    ? amount * (((1 + monthlyRate) ** (y * 12) - 1) / monthlyRate) * (1 + monthlyRate)
+    : amount * (1 + rate / 100) ** y
+  const investedAt = (y: number) => type === 'sip' ? amount * y * 12 : amount
+  const investedPct = invested / maturity
+  const milestones = [{ label: '5 Years', yrs: 5 }, { label: '10 Years', yrs: 10 }, { label: `${years} Years (Goal)`, yrs: years }]
+    .filter((m, i, arr) => arr.findIndex(x => x.yrs === m.yrs) === i)
+    .map(m => { const v = calcValueAt(Math.min(m.yrs, years)); return { ...m, value: v, pct: Math.round((v / maturity) * 100) } })
+  const fdVal = invested * (1 + 7 / 100 / 4) ** (4 * years)
+  const ppfVal = type === 'sip'
+    ? (() => { let b = 0; for (let i = 0; i < years; i++) b = (b + amount * 12) * (1 + 7.1 / 100); return b })()
+    : amount * (1 + 7.1 / 100) ** years
+  const maxComp = Math.max(maturity, fdVal, ppfVal)
+  const yearRows = Array.from({ length: years }, (_, i) => {
+    const y = i + 1
+    const val = calcValueAt(y)
+    const inv = investedAt(y)
+    const ret = val - inv
+    return { y, inv, ret, val, gainPct: inv > 0 ? Math.round((ret / inv) * 100) : 0 }
+  })
   const hero: CalculatorHeroProps = type === 'sip' ? {
     breadcrumbCurrent: 'SIP Calculator',
     titleTop: 'SIP Calculator',
@@ -247,6 +270,7 @@ function InvestmentCalculator({ type }: { type: 'sip' | 'lumpsum' }) {
 
   return (
     <CalculatorPageLayout activeSlug={type} hero={hero}>
+        <SectionDivider icon="🧮" gradient="linear-gradient(135deg,var(--p600),var(--p400))" title={type === 'sip' ? 'SIP Calculator' : 'Lumpsum Calculator'} subtitle={type === 'sip' ? 'Calculate your mutual fund SIP returns instantly' : 'Calculate your one-time investment returns instantly'} />
         <div className="card">
           <div className="card-head"><div className="ch-icon purple">📊</div><div><div className="ch-title">Enter Your Investment Details</div><div className="ch-sub">Results update instantly as you adjust the sliders</div></div></div>
           <div className="card-body">
@@ -271,19 +295,109 @@ function InvestmentCalculator({ type }: { type: 'sip' | 'lumpsum' }) {
               </div>
             </div>
 
-            <button className="btn-calc" onClick={() => resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })}>✨ Calculate Returns</button>
             <button className="btn-reset" onClick={resetInv}>↺ Reset to defaults</button>
 
             <div className="results-area show" ref={resultsRef}>
-              <div className="stats-grid">
-                <div className="stat-tile purple"><div className="st-label">Estimated Value</div><div className="st-val purple">{inr(maturity)}</div><div className="st-sub">After {years} years</div></div>
-                <div className="stat-tile green"><div className="st-label">Total Invested</div><div className="st-val green">{inr(invested)}</div></div>
-                <div className="stat-tile amber"><div className="st-label">Estimated Returns</div><div className="st-val amber">{inr(maturity - invested)}</div></div>
-                <div className="stat-tile blue"><div className="st-label">Return Multiple</div><div className="st-val blue">{(maturity / invested).toFixed(2)}×</div></div>
+              <div className="results-grid">
+                <div>
+                  <div className="stats-grid">
+                    <div className="stat-tile purple"><div className="st-label">Maturity Value</div><div className="st-val purple">{inr(maturity)}</div><div className="st-sub">At {rate.toFixed(1)}% p.a. for {years} years</div></div>
+                    <div className="stat-tile green"><div className="st-label">Total Invested</div><div className="st-val green">{inr(invested)}</div></div>
+                    <div className="stat-tile amber"><div className="st-label">Wealth Gained</div><div className="st-val amber">{inr(maturity - invested)}</div></div>
+                    <div className="stat-tile blue"><div className="st-label">Return Multiple</div><div className="st-val blue">{(maturity / invested).toFixed(2)}×</div></div>
+                  </div>
+                  <div style={{ background: 'var(--n0)', borderRadius: '14px', border: '1px solid var(--n150)', padding: '18px', boxShadow: 'var(--sh-sm)' }}>
+                    <div style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.6px', color: 'var(--n400)', marginBottom: '14px' }}>Portfolio Breakdown</div>
+                    <div className="donut-row">
+                      <svg className="donut-svg" width="140" height="140" viewBox="0 0 140 140">
+                        <circle cx="70" cy="70" r="54" fill="none" stroke="#f3f4f6" strokeWidth={22} />
+                        <circle cx="70" cy="70" r="54" fill="none" stroke="url(#dg1)" strokeWidth={22} strokeLinecap="round" strokeDasharray="339.3" strokeDashoffset={339.3 * (1 - investedPct)} transform="rotate(-90 70 70)" />
+                        <circle cx="70" cy="70" r="54" fill="none" stroke="url(#dg2)" strokeWidth={22} strokeLinecap="round" strokeDasharray="339.3" strokeDashoffset={339.3 * investedPct} transform="rotate(-90 70 70)" />
+                        <defs>
+                          <linearGradient id="dg1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#6d28d9" /><stop offset="100%" stopColor="#a855f7" /></linearGradient>
+                          <linearGradient id="dg2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#15803d" /><stop offset="100%" stopColor="#22c55e" /></linearGradient>
+                        </defs>
+                        <text x={70} y={65} textAnchor="middle" fontFamily="'DM Sans',sans-serif" fontSize={15} fontWeight={900} fill="#1f2937">{inr(maturity)}</text>
+                        <text x={70} y={82} textAnchor="middle" fontFamily="'DM Sans',sans-serif" fontSize={9.5} fill="#9ca3af">total value</text>
+                      </svg>
+                      <div className="donut-legend">
+                        <div className="dl-item"><div className="dl-dot" style={{ background: 'linear-gradient(135deg,#6d28d9,#a855f7)' }} /><span className="dl-name">Amount Invested</span><div><div className="dl-val">{inr(invested)}</div><div className="dl-pct">{(investedPct * 100).toFixed(0)}% of total</div></div></div>
+                        <div className="dl-item"><div className="dl-dot" style={{ background: 'linear-gradient(135deg,#15803d,#22c55e)' }} /><span className="dl-name">Returns Earned</span><div><div className="dl-val">{inr(maturity - invested)}</div><div className="dl-pct">{(100 - investedPct * 100).toFixed(0)}% of total</div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div style={{ background: 'var(--n0)', borderRadius: '14px', border: '1px solid var(--n150)', padding: '18px', boxShadow: 'var(--sh-sm)', marginBottom: '14px' }}>
+                    <div style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.6px', color: 'var(--n400)', marginBottom: '14px' }}>Wealth Growth by Milestone</div>
+                    {milestones.map(m => (
+                      <div className="bchart-row" key={m.label}>
+                        <div className="bchart-label"><span style={{ color: 'var(--n600)' }}>{m.label}</span><span style={{ color: 'var(--n800)' }}>{inr(m.value)}</span></div>
+                        <div className="bchart-track"><div className="bchart-fill total" style={{ width: `${m.pct}%` }}>{m.pct}%</div></div>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ background: 'var(--n0)', borderRadius: '14px', border: '1px solid var(--n150)', padding: '18px', boxShadow: 'var(--sh-sm)' }}>
+                    <div style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.6px', color: 'var(--n400)', marginBottom: '14px' }}>{type === 'sip' ? 'SIP' : 'Lumpsum'} vs Other Investments</div>
+                    <div className="cbar-row"><div className="cbar-labels"><span className="cbar-name">📊 {type === 'sip' ? 'SIP' : 'Lumpsum'} @ {rate.toFixed(1)}%</span><span className="cbar-amt" style={{ color: 'var(--p700)' }}>{inr(maturity)}</span></div><div className="cbar-track"><div className="cbar-fill" style={{ width: `${Math.round((maturity / maxComp) * 100)}%`, background: 'linear-gradient(90deg,var(--p800),var(--p400))' }} /></div></div>
+                    <div className="cbar-row"><div className="cbar-labels"><span className="cbar-name">🏛️ FD @ 7%</span><span className="cbar-amt" style={{ color: 'var(--amber)' }}>{inr(fdVal)}</span></div><div className="cbar-track"><div className="cbar-fill" style={{ width: `${Math.round((fdVal / maxComp) * 100)}%`, background: 'linear-gradient(90deg,#b45309,#f59e0b)' }} /></div></div>
+                    <div className="cbar-row"><div className="cbar-labels"><span className="cbar-name">📙 PPF @ 7.1%</span><span className="cbar-amt" style={{ color: 'var(--g700)' }}>{inr(ppfVal)}</span></div><div className="cbar-track"><div className="cbar-fill" style={{ width: `${Math.round((ppfVal / maxComp) * 100)}%`, background: 'linear-gradient(90deg,var(--g700),var(--g400))' }} /></div></div>
+                    <div style={{ fontSize: '11px', color: 'var(--n400)', marginTop: '8px', fontWeight: 500 }}>{type === 'sip' ? `Investing ${inr(amount)}/mo for ${years} years` : `Investing ${inr(amount)} for ${years} years`}. FD = quarterly compounding. All returns are pre-tax estimates.</div>
+                  </div>
+                </div>
+              </div>
+              <div className="card" style={{ marginTop: 0 }}>
+                <div className="card-head"><div className="ch-icon green">📅</div><div><div className="ch-title">Year-by-Year Breakdown</div><div className="ch-sub">Watch your wealth compound over time</div></div></div>
+                <div className="card-body" style={{ padding: 0 }}>
+                  <div className="table-scroll">
+                    <table>
+                      <thead><tr><th>Year</th><th>{type === 'sip' ? 'Monthly SIP' : 'Invested'}</th><th>Total Invested</th><th>Est. Returns</th><th>Portfolio Value</th><th>Gain %</th></tr></thead>
+                      <tbody>
+                        {yearRows.map(r => (
+                          <tr key={r.y}>
+                            <td><span style={{ background: 'var(--p50)', color: 'var(--p700)', padding: '2px 8px', borderRadius: '6px', fontWeight: 800, fontSize: '12px' }}>Y{r.y}</span></td>
+                            <td>{inr(amount)}</td>
+                            <td>{inr(r.inv)}</td>
+                            <td className="td-p">{inr(r.ret)}</td>
+                            <td className="td-g td-b">{inr(r.val)}</td>
+                            <td className="td-p">{r.gainPct}%</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        {type === 'sip' && (
+          <>
+            <DematBanner />
+            <SectionDivider icon="📊" gradient="linear-gradient(135deg,#059669,#047857)" title="The Power of SIP" subtitle="Key numbers every investor should know" />
+            <InfoTileGrid tiles={sipInfoTiles} />
+            <div style={{ height: '22px' }} />
+            <WealthPowerTable title="SIP Wealth Calculator — At a Glance" configs={sipPowerConfigs} />
+            <SectionDivider icon="📖" gradient="linear-gradient(135deg,#1d4ed8,#38bdf8)" title="SIP Guide Book" subtitle="Everything you need to know about Systematic Investment Plans" />
+            <SipGuideBook />
+            <SectionDivider icon="🧾" gradient="linear-gradient(135deg,#059669,#0f5c30)" title="SIP Taxation Guide" subtitle="FY 2025–26 · Budget 2024 updated rates" />
+            <div className="card" style={{ marginBottom: '22px' }}>
+              <div className="card-head"><div className="ch-icon green">📋</div><div><div className="ch-title">How SIP Gains are Taxed</div><div className="ch-sub">FIFO basis · Each instalment taxed separately · FY 2025–26</div></div></div>
+              <div className="card-body">
+                <TaxCardsGrid cards={sipTaxCards} />
+                <TaxTimeline title="SIP Tax Computation — FIFO Method" steps={sipTaxTimeline} />
+                <LtcgEstimator />
+              </div>
+            </div>
+            <DematBanner tag="🏆 Top Tip" />
+            <SectionDivider icon="💡" gradient="linear-gradient(135deg,#d97706,#fbbf24)" title="Pro Tips" subtitle="Expert strategies to maximise your SIP returns" />
+            <TipsGrid tips={sipTips} />
+            <SectionDivider icon="🎯" gradient="linear-gradient(135deg,#be185d,#9d174d)" title="Goal Planner" subtitle="Find the right SIP strategy for your financial goals" />
+            <GoalPlanner goals={sipGoals} />
+            <SectionDivider icon="❓" gradient="linear-gradient(135deg,#7c3aed,#5b21b6)" title="Frequently Asked Questions" subtitle="Everything you need to know about SIP investing" />
+            <FaqAccordion faqs={sipFaqs} />
+          </>
+        )}
         <div style={{ textAlign: 'center', marginTop: '36px' }}><Link to="/calculators" className="cta-btn-p">Browse All Calculators</Link></div>
     </CalculatorPageLayout>
   )
